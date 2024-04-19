@@ -12,22 +12,19 @@ class Theme:
         self._conf = config
 
     
-    async def getCompanyLevelThemes(self, search_text=None, request_headers:Dict={}):
-        """Retrieve themes specific to a company.
-        :param search_text : Search Text to match the Theme Names and return the response. : type string
+    async def getCompanyLevelThemes(self, request_headers:Dict={}):
+        """Retrieve a list of themes available for a specific company.
         """
         payload = {}
         
-        if search_text is not None:
-            payload["search_text"] = search_text
 
         # Parameter validation
         schema = ThemeValidator.getCompanyLevelThemes()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/themes", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company to retrieve the themes associated with it.","required":true,"schema":{"type":"integer","example":19243}}],"optional":[{"name":"search_text","in":"query","description":"Search Text to match the Theme Names and return the response.","required":false,"schema":{"type":"string","example":"Astra"}}],"query":[{"name":"search_text","in":"query","description":"Search Text to match the Theme Names and return the response.","required":false,"schema":{"type":"string","example":"Astra"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company to retrieve the themes associated with it.","required":true,"schema":{"type":"integer","example":19243}}]}""", search_text=search_text)
-        query_string = await create_query_string(search_text=search_text)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/themes", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company to retrieve the themes associated with it.","required":true,"schema":{"type":"integer","example":19243}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company to retrieve the themes associated with it.","required":true,"schema":{"type":"integer","example":19243}}]}""", )
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -41,45 +38,12 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v2.0/company/{self._conf.companyId}/themes", search_text=search_text), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        return response
-    
-    async def getCompanyLevelPrivateThemes(self, search_text=None, request_headers:Dict={}):
-        """Retrieve a list of private themes available for a specific company.
-        :param search_text : Search Text to match the Theme Names and return the response. : type string
-        """
-        payload = {}
-        
-        if search_text is not None:
-            payload["search_text"] = search_text
-
-        # Parameter validation
-        schema = ThemeValidator.getCompanyLevelPrivateThemes()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/private_themes", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company to retrieve the themes associated with it.","required":true,"schema":{"type":"integer","example":19243}}],"optional":[{"name":"search_text","in":"query","description":"Search Text to match the Theme Names and return the response.","schema":{"type":"string","example":"Astra"}}],"query":[{"name":"search_text","in":"query","description":"Search Text to match the Theme Names and return the response.","schema":{"type":"string","example":"Astra"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company to retrieve the themes associated with it.","required":true,"schema":{"type":"integer","example":19243}}]}""", search_text=search_text)
-        query_string = await create_query_string(search_text=search_text)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v2.0/company/{self._conf.companyId}/private_themes", search_text=search_text), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v2.0/company/{self._conf.companyId}/themes", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         return response
     
     async def addMarketplaceThemeToCompany(self, body="", request_headers:Dict={}):
-        """Incorporate a marketplace theme into a company's profile.
+        """Add a marketplace theme to a company by providing the theme ID and company ID.
         """
         payload = {}
         
@@ -122,7 +86,7 @@ class Theme:
         return response
     
     async def deleteCompanyTheme(self, theme_id=None, request_headers:Dict={}):
-        """Remove a theme associated with a company.
+        """Delete a specific theme for a company by providing the company ID and theme ID.
         :param theme_id : The ID of the theme. : type string
         """
         payload = {}

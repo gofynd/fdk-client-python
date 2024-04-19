@@ -64,10 +64,6 @@ class PromiseFormatted(BaseSchema):
     pass
 
 
-class PromiseISOFormat(BaseSchema):
-    pass
-
-
 class ShipmentPromise(BaseSchema):
     pass
 
@@ -455,8 +451,6 @@ class AppliedPromotion(BaseSchema):
     
     ownership = fields.Nested(Ownership, required=False)
     
-    currency = fields.Nested(CartCurrency, required=False)
-    
     promotion_group = fields.Str(required=False)
     
 
@@ -603,16 +597,6 @@ class PromiseFormatted(BaseSchema):
     
 
 
-class PromiseISOFormat(BaseSchema):
-    # PosCart swagger.json
-
-    
-    max = fields.Str(required=False)
-    
-    min = fields.Str(required=False)
-    
-
-
 class ShipmentPromise(BaseSchema):
     # PosCart swagger.json
 
@@ -620,8 +604,6 @@ class ShipmentPromise(BaseSchema):
     timestamp = fields.Nested(PromiseTimestamp, required=False)
     
     formatted = fields.Nested(PromiseFormatted, required=False)
-    
-    iso = fields.Nested(PromiseISOFormat, required=False)
     
 
 
@@ -710,8 +692,6 @@ class ProductArticle(BaseSchema):
     product_group_tags = fields.List(fields.Str(required=False), required=False)
     
     is_gift_visible = fields.Boolean(required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -1265,10 +1245,6 @@ class Address(BaseSchema):
     
     city = fields.Str(required=False)
     
-    sector = fields.Str(required=False)
-    
-    state_code = fields.Str(required=False)
-    
     address_type = fields.Str(required=False)
     
     state = fields.Str(required=False)
@@ -1603,7 +1579,7 @@ class CheckCart(BaseSchema):
     
     comment = fields.Str(required=False)
     
-    delivery_charges = fields.Float(required=False)
+    delivery_charges = fields.Int(required=False)
     
     coupon_text = fields.Str(required=False)
     
@@ -1641,7 +1617,7 @@ class CheckCart(BaseSchema):
     
     order_id = fields.Str(required=False)
     
-    cod_charges = fields.Float(required=False)
+    cod_charges = fields.Int(required=False)
     
     delivery_charge_info = fields.Str(required=False)
     

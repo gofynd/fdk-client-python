@@ -12,40 +12,34 @@ class Catalog:
         self._conf = config
 
     
-    async def listCategories(self, level=None, department=None, q=None, page_no=None, page_size=None, uids=None, slug=None, request_headers:Dict={}):
-        """Retrieve a list of meta associated available product categories in the catalog.
+    async def listCategories(self, level=None, departments=None, q=None, page_no=None, page_size=None, request_headers:Dict={}):
+        """This API gets meta associated to product categories.
         :param level : Get category for multiple levels : type string
-        :param department : Get category for multiple departments filtered : type integer
+        :param departments : Get category for multiple departments filtered : type string
         :param q : Get multiple categories filtered by search string : type string
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
-        :param uids : Get multiple categories filtered by category uids. : type array
-        :param slug : Get category by slug : type string
         """
         payload = {}
         
         if level is not None:
             payload["level"] = level
-        if department is not None:
-            payload["department"] = department
+        if departments is not None:
+            payload["departments"] = departments
         if q is not None:
             payload["q"] = q
         if page_no is not None:
             payload["page_no"] = page_no
         if page_size is not None:
             payload["page_size"] = page_size
-        if uids is not None:
-            payload["uids"] = uids
-        if slug is not None:
-            payload["slug"] = slug
 
         # Parameter validation
         schema = CatalogValidator.listCategories()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"Get category for multiple levels","in":"query","name":"level","required":false,"schema":{"type":"string"}},{"description":"Get category for multiple departments filtered","in":"query","name":"department","required":false,"schema":{"type":"integer"}},{"description":"Get multiple categories filtered by search string","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Get multiple categories filtered by category uids.","in":"query","name":"uids","schema":{"type":"array","items":{"type":"integer"},"maxItems":100},"required":false},{"in":"query","name":"slug","description":"Get category by slug","schema":{"type":"string"},"required":false}],"query":[{"description":"Get category for multiple levels","in":"query","name":"level","required":false,"schema":{"type":"string"}},{"description":"Get category for multiple departments filtered","in":"query","name":"department","required":false,"schema":{"type":"integer"}},{"description":"Get multiple categories filtered by search string","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Get multiple categories filtered by category uids.","in":"query","name":"uids","schema":{"type":"array","items":{"type":"integer"},"maxItems":100},"required":false},{"in":"query","name":"slug","description":"Get category by slug","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", level=level, department=department, q=q, page_no=page_no, page_size=page_size, uids=uids, slug=slug)
-        query_string = await create_query_string(level=level, department=department, q=q, page_no=page_no, page_size=page_size, uids=uids, slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"Get category for multiple levels","in":"query","name":"level","required":false,"schema":{"type":"string"}},{"description":"Get category for multiple departments filtered","in":"query","name":"departments","required":false,"schema":{"type":"string"}},{"description":"Get multiple categories filtered by search string","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}}],"query":[{"description":"Get category for multiple levels","in":"query","name":"level","required":false,"schema":{"type":"string"}},{"description":"Get category for multiple departments filtered","in":"query","name":"departments","required":false,"schema":{"type":"string"}},{"description":"Get multiple categories filtered by search string","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", level=level, departments=departments, q=q, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(level=level, departments=departments, q=q, page_no=page_no, page_size=page_size)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -59,7 +53,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", level=level, department=department, q=q, page_no=page_no, page_size=page_size, uids=uids, slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", level=level, departments=departments, q=q, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CategoryResponse
@@ -73,7 +67,7 @@ class Catalog:
         return response
     
     async def createCategories(self, body="", request_headers:Dict={}):
-        """Lets user create product categories on for the seller on the platform.
+        """This API lets user create product categories
         """
         payload = {}
         
@@ -116,7 +110,7 @@ class Catalog:
         return response
     
     async def getCategoryData(self, uid=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific category with the associated meta.
+        """This API gets meta associated to product categories.
         :param uid : Category unique id : type string
         """
         payload = {}
@@ -158,7 +152,7 @@ class Catalog:
         return response
     
     async def updateCategory(self, uid=None, body="", request_headers:Dict={}):
-        """Modify data for an existing category in the catalog.
+        """Update a product category using this api
         :param uid : Category unique id : type string
         """
         payload = {}
@@ -204,7 +198,7 @@ class Catalog:
         return response
     
     async def getSellerInsights(self, seller_app_id=None, request_headers:Dict={}):
-        """Retrieve insights and analytics related to sellers within the catalog.
+        """Analytics data of catalog and inventory that are being cross-selled.
         :param seller_app_id : Id of the seller application which is serving the invetory/catalog of the company : type string
         """
         payload = {}
@@ -245,7 +239,7 @@ class Catalog:
 
         return response
     
-    async def listDepartmentsData(self, page_no=None, item_type=None, page_size=None, name=None, search=None, is_active=None, slug=None, request_headers:Dict={}):
+    async def listDepartmentsData(self, page_no=None, item_type=None, page_size=None, name=None, search=None, is_active=None, request_headers:Dict={}):
         """Allows you to list all departments, also can search using name and filter active and incative departments, and item type.
         :param page_no : The page number to navigate through the given set of results : type integer
         :param item_type : A `item_type` is a type of product eg. set, standard, digital : type string
@@ -253,7 +247,6 @@ class Catalog:
         :param name : Can search departments by passing name. : type string
         :param search : Can search departments by passing name of the department in search parameter. : type string
         :param is_active : Can query for departments based on whether they are active or inactive. : type boolean
-        :param slug : Can filter by slug : type string
         """
         payload = {}
         
@@ -269,16 +262,14 @@ class Catalog:
             payload["search"] = search
         if is_active is not None:
             payload["is_active"] = is_active
-        if slug is not None:
-            payload["slug"] = slug
 
         # Parameter validation
         schema = CatalogValidator.listDepartmentsData()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"A `item_type` is a type of product eg. set, standard, digital","in":"query","name":"item_type","required":false,"schema":{"type":"string"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"description":"Can search departments by passing name.","in":"query","name":"name","required":false,"schema":{"type":"string"}},{"description":"Can search departments by passing name of the department in search parameter.","in":"query","name":"search","required":false,"schema":{"type":"string"}},{"description":"Can query for departments based on whether they are active or inactive.","in":"query","name":"is_active","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"slug","description":"Can filter by slug","schema":{"type":"string"},"required":false}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"A `item_type` is a type of product eg. set, standard, digital","in":"query","name":"item_type","required":false,"schema":{"type":"string"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"description":"Can search departments by passing name.","in":"query","name":"name","required":false,"schema":{"type":"string"}},{"description":"Can search departments by passing name of the department in search parameter.","in":"query","name":"search","required":false,"schema":{"type":"string"}},{"description":"Can query for departments based on whether they are active or inactive.","in":"query","name":"is_active","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"slug","description":"Can filter by slug","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active, slug=slug)
-        query_string = await create_query_string(page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active, slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"A `item_type` is a type of product eg. set, standard, digital","in":"query","name":"item_type","required":false,"schema":{"type":"string"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"description":"Can search departments by passing name.","in":"query","name":"name","required":false,"schema":{"type":"string"}},{"description":"Can search departments by passing name of the department in search parameter.","in":"query","name":"search","required":false,"schema":{"type":"string"}},{"description":"Can query for departments based on whether they are active or inactive.","in":"query","name":"is_active","required":false,"schema":{"type":"boolean"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"A `item_type` is a type of product eg. set, standard, digital","in":"query","name":"item_type","required":false,"schema":{"type":"string"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"description":"Can search departments by passing name.","in":"query","name":"name","required":false,"schema":{"type":"string"}},{"description":"Can search departments by passing name of the department in search parameter.","in":"query","name":"search","required":false,"schema":{"type":"string"}},{"description":"Can query for departments based on whether they are active or inactive.","in":"query","name":"is_active","required":false,"schema":{"type":"boolean"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active)
+        query_string = await create_query_string(page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -292,7 +283,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active, slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", page_no=page_no, item_type=item_type, page_size=page_size, name=name, search=search, is_active=is_active), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import DepartmentsResponse
@@ -306,7 +297,7 @@ class Catalog:
         return response
     
     async def createDepartments(self, body="", request_headers:Dict={}):
-        """Create departments with this resource.
+        """Create departments using the API.
         """
         payload = {}
         
@@ -349,7 +340,7 @@ class Catalog:
         return response
     
     async def getDepartmentData(self, uid=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific department by UID.
+        """Allows you to get department data, by uid.
         :param uid : A `uid` is a unique identifier of a department. : type string
         """
         payload = {}
@@ -391,7 +382,7 @@ class Catalog:
         return response
     
     async def updateDepartment(self, uid=None, body="", request_headers:Dict={}):
-        """Modify the department by their uid using this API.
+        """Update the department by their uid using this API.
         :param uid : A `uid` is a unique identifier of a department. : type string
         """
         payload = {}
@@ -437,7 +428,7 @@ class Catalog:
         return response
     
     async def listTemplateBrandTypeValues(self, filter=None, template_tag=None, item_type=None, request_headers:Dict={}):
-        """Retrieve values related to template brand types. The filter type query parameter defines what type of data to return. The type of query returns the valid values for the same
+        """The filter type query parameter defines what type of data to return. The type of query returns the valid values for the same
         :param filter : A `filter` is the unique identifier of the type of value required. : type string
         :param template_tag : A `template_tag` is the identifier of the type of template required. : type string
         :param item_type : A `item_type` is the identifier of the type of template required. : type string
@@ -485,7 +476,7 @@ class Catalog:
         return response
     
     async def bulkHsnCode(self, body="", request_headers:Dict={}):
-        """Perform bulk updates of HSN codes for products.
+        """Bulk Create or Update Hsn Code.
         """
         payload = {}
         
@@ -528,7 +519,7 @@ class Catalog:
         return response
     
     async def getHsnCode(self, id=None, request_headers:Dict={}):
-        """Retrieve the HSN code for a product.
+        """Fetch Hsn Code.
         :param id : Unique id : type string
         """
         payload = {}
@@ -570,7 +561,7 @@ class Catalog:
         return response
     
     async def updateHsnCode(self, id=None, body="", request_headers:Dict={}):
-        """Modify the HSN code associated with a product.
+        """Update Hsn Code.
         :param id : Unique id : type string
         """
         payload = {}
@@ -616,7 +607,7 @@ class Catalog:
         return response
     
     async def getInventories(self, item_id=None, size=None, page_no=None, page_size=None, q=None, sellable=None, store_ids=None, size_identifier=None, request_headers:Dict={}):
-        """Allows to get Inventories data for particular company.
+        """This API allows get Inventories data for particular company.
         :param item_id : Item code of the product of which size is to be get. : type string
         :param size : Size of which inventory is to get. : type string
         :param page_no : The page number to navigate through the given set of results : type integer
@@ -679,7 +670,7 @@ class Catalog:
         return response
     
     async def getInventoryBulkUploadHistory(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Helps to get bulk Inventory upload jobs data.
+        """This API helps to get bulk Inventory upload jobs data.
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
         """
@@ -724,7 +715,7 @@ class Catalog:
         return response
     
     async def createBulkInventoryJob(self, body="", request_headers:Dict={}):
-        """Helps to create a bulk Inventory upload job.
+        """This API helps to create a bulk Inventory upload job.
         """
         payload = {}
         
@@ -767,7 +758,7 @@ class Catalog:
         return response
     
     async def deleteBulkInventoryJob(self, batch_id=None, request_headers:Dict={}):
-        """Allows to delete bulk Inventory job associated with company.
+        """This API allows to delete bulk Inventory job associated with company.
         :param batch_id : Batch Id of the bulk delete job. : type string
         """
         payload = {}
@@ -809,7 +800,7 @@ class Catalog:
         return response
     
     async def createBulkInventory(self, batch_id=None, body="", request_headers:Dict={}):
-        """Helps to create products in bulk push to kafka for approval/creation.
+        """This API helps to create products in bulk push to kafka for approval/creation.
         :param batch_id : Batch Id of the bulk create job. : type string
         """
         payload = {}
@@ -855,7 +846,7 @@ class Catalog:
         return response
     
     async def getInventoryExport(self, request_headers:Dict={}):
-        """Helps to retrieve Inventory export history.
+        """This API helps to get Inventory export history.
         """
         payload = {}
         
@@ -894,7 +885,7 @@ class Catalog:
         return response
     
     async def createInventoryExportJob(self, body="", request_headers:Dict={}):
-        """Helps to create a Inventory export job.
+        """This API helps to create a Inventory export job.
         """
         payload = {}
         
@@ -937,7 +928,7 @@ class Catalog:
         return response
     
     async def exportInventoryConfig(self, filter_type=None, request_headers:Dict={}):
-        """Retrieve List of different filters like brand, store, and type for inventory export.
+        """This API allows get List of different filters like brand, store, and type for inventory export.
         :param filter_type : filter type from any one of ['brand', 'store', 'type'] : type string
         """
         payload = {}
@@ -979,7 +970,7 @@ class Catalog:
         return response
     
     async def downloadInventoryTemplateView(self, item_type=None, request_headers:Dict={}):
-        """Allows you to download product template data.
+        """Allows you to download product template data
         :param item_type : An `item_type` defines the type of item. : type string
         """
         payload = {}
@@ -1012,7 +1003,7 @@ class Catalog:
         return response
     
     async def validateProductTemplateSchema(self, item_type=None, request_headers:Dict={}):
-        """Allows you to list all product templates validation values for all the fields present in the database.
+        """Allows you to list all product templates validation values for all the fields present in the database
         :param item_type : An `item_type` defines the type of item. The default value is standard. : type string
         """
         payload = {}
@@ -1054,7 +1045,7 @@ class Catalog:
         return response
     
     async def getOptimalLocations(self, body="", request_headers:Dict={}):
-        """Retrieve the most suitable locations based on certain criteria.
+        """
         """
         payload = {}
         
@@ -1229,7 +1220,7 @@ class Catalog:
         return response
     
     async def getCompanyMetrics(self, request_headers:Dict={}):
-        """Allows to view the company metrics, i.e. the status of its brand and stores. Also its allows to view the number of products, company documents & store documents which are verified and unverified.
+        """Get the Company metrics associated with the company ID passed.
         """
         payload = {}
         
@@ -1268,7 +1259,7 @@ class Catalog:
         return response
     
     async def getStoreDetail(self, q=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve the details of the store associated with the company ID passed.
+        """Get the details of the store associated with the company ID passed.
         :param q : The search related the store for the company id. : type string
         :param page_no : The number of page for the company id. : type integer
         :param page_size : Number of records that can be seen on the page for the company id. : type integer
@@ -1362,7 +1353,7 @@ class Catalog:
         return response
     
     async def getProductAttributes(self, category=None, filter=None, request_headers:Dict={}):
-        """List all the attributes by their L3 categories.
+        """This API allows to list all the attributes by their l3_categories.
         :param category : It is the name of the l3 cateogry : type string
         :param filter : If true, returns filtered values, else returns all the attributes : type boolean
         """
@@ -1407,7 +1398,7 @@ class Catalog:
         return response
     
     async def getGenderAttribute(self, attribute_slug=None, request_headers:Dict={}):
-        """Retrieve the gender attribute for catalog listings.
+        """This API allows to view the gender attribute details.
         :param attribute_slug : slug of the attribute for which you want to view the genders : type string
         """
         payload = {}
@@ -1449,7 +1440,7 @@ class Catalog:
         return response
     
     async def getProductBundle(self, q=None, slug=None, request_headers:Dict={}):
-        """Retrieve a list of product bundles available in the catalog.
+        """Get all product bundles for a particular company
         :param q : A search string that is searched with product bundle name. : type string
         :param slug : slugs of bundles to be retrieved. : type array
         """
@@ -1494,7 +1485,7 @@ class Catalog:
         return response
     
     async def createProductBundle(self, body="", request_headers:Dict={}):
-        """Create product bundle in the catalog.
+        """Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
         """
         payload = {}
         
@@ -1537,7 +1528,7 @@ class Catalog:
         return response
     
     async def getProductBundleDetail(self, id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific product bundle.
+        """Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. : type string
         """
         payload = {}
@@ -1579,7 +1570,7 @@ class Catalog:
         return response
     
     async def updateProductBundle(self, id=None, body="", request_headers:Dict={}):
-        """Modify the details of an existing product bundle.
+        """Update a Product Bundle by its id. On successful request, returns the updated product bundle
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. : type string
         """
         payload = {}
@@ -1625,7 +1616,7 @@ class Catalog:
         return response
     
     async def getProductAssetsInBulk(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Helps to retrieve bulk asset jobs data associated to a particular company.
+        """This API helps to get bulk asset jobs data associated to a particular company.
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
         """
@@ -1670,7 +1661,7 @@ class Catalog:
         return response
     
     async def createProductAssetsInBulk(self, body="", request_headers:Dict={}):
-        """Helps to create a bulk asset upload job.
+        """This API helps to create a bulk asset upload job.
         """
         payload = {}
         
@@ -1713,7 +1704,7 @@ class Catalog:
         return response
     
     async def getProductBulkUploadHistory(self, search=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Helps to get bulk product upload jobs data.
+        """This API helps to get bulk product upload jobs data.
         :param search : Search string to filter the results by batch id : type string
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
@@ -1804,7 +1795,7 @@ class Catalog:
         return response
     
     async def deleteProductBulkJob(self, batch_id=None, request_headers:Dict={}):
-        """Allows to delete bulk product job associated with company.
+        """This API allows to delete bulk product job associated with company.
         :param batch_id : Batch Id of the bulk product job to be deleted. : type integer
         """
         payload = {}
@@ -1846,7 +1837,7 @@ class Catalog:
         return response
     
     async def createProductsInBulk(self, batch_id=None, body="", request_headers:Dict={}):
-        """Helps to create products in bulk push to kafka for approval/creation.
+        """This API helps to create products in bulk push to kafka for approval/creation.
         :param batch_id : Batch Id in which assets to be uploaded. : type string
         """
         payload = {}
@@ -1892,7 +1883,7 @@ class Catalog:
         return response
     
     async def listProductTemplateExportDetails(self, request_headers:Dict={}):
-        """Retrieve export details related to product templates. Can view details including trigger data, task id , etc.
+        """Can view details including trigger data, task id , etc.
         """
         payload = {}
         
@@ -1931,7 +1922,7 @@ class Catalog:
         return response
     
     async def listHSNCodes(self, request_headers:Dict={}):
-        """Retrieve a list of Harmonized System Nomenclature (HSN) codes.
+        """Allows you to list all hsn Codes
         """
         payload = {}
         
@@ -1970,7 +1961,7 @@ class Catalog:
         return response
     
     async def getProductTags(self, request_headers:Dict={}):
-        """Retrieve tags data associated to a particular company.
+        """This API helps to get tags data associated to a particular company.
         """
         payload = {}
         
@@ -2009,7 +2000,7 @@ class Catalog:
         return response
     
     async def listProductTemplate(self, department=None, request_headers:Dict={}):
-        """Allows you to list all product templates, also can filter by department.
+        """Allows you to list all product templates, also can filter by department
         :param department : A `department` is the name of a particular department. : type string
         """
         payload = {}
@@ -2051,7 +2042,7 @@ class Catalog:
         return response
     
     async def listProductTemplateCategories(self, departments=None, item_type=None, request_headers:Dict={}):
-        """Allows you to list all product categories values for the departments specified.
+        """Allows you to list all product categories values for the departments specified
         :param departments : A `department` is name of a departments whose category needs to be listed. Can specify multiple departments. : type string
         :param item_type : An `item_type` is the type of item, it can be `set`, `standard`, `digital`, etc. : type string
         """
@@ -2096,7 +2087,7 @@ class Catalog:
         return response
     
     async def downloadProductTemplateViews(self, slug=None, item_type=None, type=None, request_headers:Dict={}):
-        """Allows you to download product template data.
+        """Allows you to download product template data
         :param slug : A `slug` is a unique identifier for a particular template. : type string
         :param item_type : An `item_type` defines the type of item. The default value is standard. : type string
         :param type : Format type of the sample file. The default value is excel. : type string
@@ -2135,7 +2126,7 @@ class Catalog:
         return response
     
     async def validateProductTemplate(self, slug=None, item_type=None, bulk=None, request_headers:Dict={}):
-        """Allows you to list all product templates validation values for all the fields present in the database.
+        """Allows you to list all product templates validation values for all the fields present in the database
         :param slug : A `slug` is a unique identifier for a particular template. : type string
         :param item_type : An `item_type` defines the type of item. The default value is standard. : type string
         :param bulk : This specification determines the schema type to be retrieved. When set to true, it will return the schema for bulk data; when set to false, it will provide the schema for a single product. The default value is false. : type boolean
@@ -2183,7 +2174,7 @@ class Catalog:
         return response
     
     async def getProductValidation(self, request_headers:Dict={}):
-        """Retrieve validation data for a specific product.
+        """This API validates product data.
         """
         payload = {}
         
@@ -2222,7 +2213,7 @@ class Catalog:
         return response
     
     async def getInventoryBySizeIdentifier(self, item_id=None, size_identifier=None, page_no=None, page_size=None, q=None, location_ids=None, request_headers:Dict={}):
-        """Allows to retrieve Inventory data for particular company grouped by size and store.
+        """This API allows get Inventory data for particular company grouped by size and store.
         :param item_id : Item code of the product of which size is to be get. : type integer
         :param size_identifier : Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. : type string
         :param page_no : The page number to navigate through the given set of results : type integer
@@ -2279,7 +2270,7 @@ class Catalog:
         return response
     
     async def getProductSize(self, item_code=None, item_id=None, brand_uid=None, uid=None, request_headers:Dict={}):
-        """Retrieve data associated to a particular product size.
+        """This API helps to get data associated to a particular product size.
         :param item_code : Item code of the product size. : type string
         :param item_id : Item Id of the product size. : type integer
         :param brand_uid : Brand Id of the product size. : type integer
@@ -2330,7 +2321,7 @@ class Catalog:
         return response
     
     async def deleteSize(self, item_id=None, size=None, request_headers:Dict={}):
-        """Allows to delete size associated with product.
+        """This API allows to delete size associated with product.
         :param item_id : Item Id of the product associated with size to be deleted. : type integer
         :param size : size to be deleted. : type string
         """
@@ -2375,7 +2366,7 @@ class Catalog:
         return response
     
     async def getInventoryBySize(self, item_id=None, size=None, page_no=None, page_size=None, q=None, sellable=None, request_headers:Dict={}):
-        """Allows to retrieve Inventory data for particular company grouped by size and store.
+        """This API allows get Inventory data for particular company grouped by size and store.
         :param item_id : Item code of the product of which size is to be get. : type integer
         :param size : Size of which inventory is to get. : type string
         :param page_no : The page number to navigate through the given set of results : type integer
@@ -2432,7 +2423,7 @@ class Catalog:
         return response
     
     async def addInventory(self, item_id=None, size=None, body="", request_headers:Dict={}):
-        """Allows add Inventory for particular size and store.
+        """This API allows add Inventory for particular size and store.
         :param item_id : Item code of the product of which size is to be get. : type integer
         :param size : Size in which inventory is to be added. : type string
         """
@@ -2480,8 +2471,56 @@ class Catalog:
 
         return response
     
+    async def deleteInventory(self, size=None, item_id=None, location_id=None, request_headers:Dict={}):
+        """This API allows to delete inventory of a particular product for particular company.
+        :param size : size that is to be deleted. : type string
+        :param item_id : Id of the product associated with Inventory to be deleted. : type integer
+        :param location_id : Location ID of store of which inventory is to be deleted. : type number
+        """
+        payload = {}
+        
+        if size is not None:
+            payload["size"] = size
+        if item_id is not None:
+            payload["item_id"] = item_id
+        if location_id is not None:
+            payload["location_id"] = location_id
+
+        # Parameter validation
+        schema = CatalogValidator.deleteInventory()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}/location/{location_id}/", """{"required":[{"description":"Company Id of the company associated with Inventory that is to be deleted.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"size that is to be deleted.","in":"path","name":"size","required":true,"schema":{"type":"string"}},{"description":"Id of the product associated with Inventory to be deleted.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Location ID of store of which inventory is to be deleted.","in":"path","name":"location_id","required":true,"schema":{"type":"number"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Company Id of the company associated with Inventory that is to be deleted.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"size that is to be deleted.","in":"path","name":"size","required":true,"schema":{"type":"string"}},{"description":"Id of the product associated with Inventory to be deleted.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Location ID of store of which inventory is to be deleted.","in":"path","name":"location_id","required":true,"schema":{"type":"number"}}]}""", size=size, item_id=item_id, location_id=location_id)
+        query_string = await create_query_string(size=size, item_id=item_id, location_id=location_id)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}/location/{location_id}/", size=size, item_id=item_id, location_id=location_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponse
+            schema = SuccessResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteInventory")
+                print(e)
+
+        return response
+    
     async def getVariantsOfProducts(self, item_id=None, variant_type=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve variants of a specific product.
+        """This API gets meta associated to products.
         :param item_id : Get list of variants of item Id : type integer
         :param variant_type : Get multiple products filtered by variant type : type string
         :param page_no : The page number to navigate through the given set of results : type integer
@@ -2531,14 +2570,13 @@ class Catalog:
 
         return response
     
-    async def getSizeGuides(self, active=None, q=None, tag=None, page_no=None, page_size=None, brand_id=None, request_headers:Dict={}):
-        """Allows to view all the size guides associated to the seller.
+    async def getSizeGuides(self, active=None, q=None, tag=None, page_no=None, page_size=None, request_headers:Dict={}):
+        """This API allows to view all the size guides associated to the seller.
         :param active : filter size guide on basis of active, in-active : type boolean
         :param q : Query that is to be searched. : type string
         :param tag : to filter size guide on basis of tag. : type string
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
-        :param brand_id : Brand id that is to be searched. : type integer
         """
         payload = {}
         
@@ -2552,16 +2590,14 @@ class Catalog:
             payload["page_no"] = page_no
         if page_size is not None:
             payload["page_size"] = page_size
-        if brand_id is not None:
-            payload["brand_id"] = brand_id
 
         # Parameter validation
         schema = CatalogValidator.getSizeGuides()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", """{"required":[{"description":"Id of the company for which the size guides are to be fetched.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"filter size guide on basis of active, in-active","in":"query","name":"active","required":false,"schema":{"type":"boolean"}},{"description":"Query that is to be searched.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"to filter size guide on basis of tag.","in":"query","name":"tag","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":10,"type":"integer"}},{"description":"Brand id that is to be searched.","in":"query","name":"brand_id","required":false,"schema":{"type":"integer"}}],"query":[{"description":"filter size guide on basis of active, in-active","in":"query","name":"active","required":false,"schema":{"type":"boolean"}},{"description":"Query that is to be searched.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"to filter size guide on basis of tag.","in":"query","name":"tag","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":10,"type":"integer"}},{"description":"Brand id that is to be searched.","in":"query","name":"brand_id","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"description":"Id of the company for which the size guides are to be fetched.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size, brand_id=brand_id)
-        query_string = await create_query_string(active=active, q=q, tag=tag, page_no=page_no, page_size=page_size, brand_id=brand_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", """{"required":[{"description":"Id of the company for which the size guides are to be fetched.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"filter size guide on basis of active, in-active","in":"query","name":"active","required":false,"schema":{"type":"boolean"}},{"description":"Query that is to be searched.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"to filter size guide on basis of tag.","in":"query","name":"tag","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":10,"type":"integer"}}],"query":[{"description":"filter size guide on basis of active, in-active","in":"query","name":"active","required":false,"schema":{"type":"boolean"}},{"description":"Query that is to be searched.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"to filter size guide on basis of tag.","in":"query","name":"tag","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":10,"type":"integer"}}],"headers":[],"path":[{"description":"Id of the company for which the size guides are to be fetched.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(active=active, q=q, tag=tag, page_no=page_no, page_size=page_size)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -2575,7 +2611,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size, brand_id=brand_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/sizeguide", active=active, q=q, tag=tag, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ListSizeGuide
@@ -2589,7 +2625,7 @@ class Catalog:
         return response
     
     async def createSizeGuide(self, body="", request_headers:Dict={}):
-        """Allows to create a size guide associated to a brand.
+        """This API allows to create a size guide associated to a brand.
         """
         payload = {}
         
@@ -2632,7 +2668,7 @@ class Catalog:
         return response
     
     async def getSizeGuide(self, id=None, request_headers:Dict={}):
-        """Retrieve data associated about a specific size guide.
+        """This API helps to get data associated to a size guide.
         :param id : Id of the size guide to be viewed. : type string
         """
         payload = {}
@@ -2674,7 +2710,7 @@ class Catalog:
         return response
     
     async def updateSizeGuide(self, id=None, body="", request_headers:Dict={}):
-        """Allows to edit a size guide.
+        """This API allows to edit a size guide.
         :param id : Mongo id of the size guide to be edited : type string
         """
         payload = {}
@@ -2720,7 +2756,7 @@ class Catalog:
         return response
     
     async def getAllProductHsnCodes(self, page_no=None, page_size=None, q=None, type=None, request_headers:Dict={}):
-        """Retrieve all HSN codes associated with products.
+        """Hsn Code List.
         :param page_no : page no : type integer
         :param page_size : page size : type integer
         :param q : search using hsn code, description, reporting_hsn : type string
@@ -2771,7 +2807,7 @@ class Catalog:
         return response
     
     async def getSingleProductHSNCode(self, reporting_hsn=None, request_headers:Dict={}):
-        """Retrieve the HSN code for a single product.
+        """Hsn Code List.
         :param reporting_hsn : reporting_hsn : type string
         """
         payload = {}
@@ -2813,7 +2849,7 @@ class Catalog:
         return response
     
     async def updateInventories(self, body="", request_headers:Dict={}):
-        """Allows to add Inventory for particular size and store.
+        """This API allows add Inventory for particular size and store.
         """
         payload = {}
         
@@ -2856,7 +2892,7 @@ class Catalog:
         return response
     
     async def listInventoryExport(self, status=None, from_date=None, to_date=None, q=None, request_headers:Dict={}):
-        """Helps you the retrieve the history of inventory jobs depending on the filtered criteria.
+        """This API helps you the get the history of inventory jobs depending on the filtered criteria.
         :param status : Status of the export job. : type string
         :param from_date : Inventory export history filtered according to from_date. : type string
         :param to_date : Inventory export history filtered according to from_date. : type string
@@ -2907,7 +2943,7 @@ class Catalog:
         return response
     
     async def createInventoryExport(self, body="", request_headers:Dict={}):
-        """Helps to create a Inventory export job.
+        """This API helps to create a Inventory export job.
         """
         payload = {}
         
@@ -2950,7 +2986,7 @@ class Catalog:
         return response
     
     async def getProducts(self, brand_ids=None, category_ids=None, item_ids=None, department_ids=None, item_code=None, q=None, tags=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve a list of products available
+        """This API gets meta associated to products.
         :param brand_ids : Get multiple products filtered by Brand Ids : type array
         :param category_ids : Get multiple products filtered by Category Ids : type array
         :param item_ids : Get multiple products filtered by Item Ids : type array
@@ -3016,7 +3052,7 @@ class Catalog:
         return response
     
     async def createProduct(self, body="", request_headers:Dict={}):
-        """Allows to create product.
+        """This API allows to create product.
         """
         payload = {}
         
@@ -3048,8 +3084,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponse1
-            schema = SuccessResponse1()
+            from .models import SuccessResponse
+            schema = SuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -3059,7 +3095,7 @@ class Catalog:
         return response
     
     async def uploadBulkProducts(self, department=None, product_type=None, body="", request_headers:Dict={}):
-        """Helps to create a bulk products upload job.
+        """This API helps to create a bulk products upload job.
         :param department : Department of the product to be uploaded. : type string
         :param product_type : Product type of the product to be uploaded i.e. set, standard , digital. : type string
         """
@@ -3108,7 +3144,7 @@ class Catalog:
         return response
     
     async def getProductExportJobs(self, status=None, from_date=None, to_date=None, q=None, request_headers:Dict={}):
-        """View details including trigger data, task id , etc.
+        """Can view details including trigger data, task id , etc.
         :param status : This is a parameter used to find all the jobs with the specified status. : type string
         :param from_date : This is a parameter used to find the job from the date specified to the current date. : type string
         :param to_date : This is a parameter used to find the job from the from_date specified to the to_date. : type string
@@ -3159,7 +3195,7 @@ class Catalog:
         return response
     
     async def createProductExportJob(self, body="", request_headers:Dict={}):
-        """Helps to create a Inventory export job.
+        """This API helps to create a Inventory export job.
         """
         payload = {}
         
@@ -3202,7 +3238,7 @@ class Catalog:
         return response
     
     async def deleteProduct(self, item_id=None, request_headers:Dict={}):
-        """Remove a specific product in the catalog
+        """This API allows to delete product.
         :param item_id : Id of the product to be updated. : type integer
         """
         payload = {}
@@ -3244,7 +3280,7 @@ class Catalog:
         return response
     
     async def getProduct(self, item_id=None, brand_uid=None, item_code=None, request_headers:Dict={}):
-        """Retrieve data associated to a particular product.
+        """This API helps to get data associated to a particular product.
         :param item_id : Item Id of the product. : type integer
         :param brand_uid : Brand Id of the product. : type integer
         :param item_code : Item code of the product. : type string
@@ -3292,7 +3328,7 @@ class Catalog:
         return response
     
     async def editProduct(self, item_id=None, body="", request_headers:Dict={}):
-        """Modify the details and settings of an existing product in the catalog.
+        """This API allows to edit product.
         :param item_id : Id of the product to be updated. : type integer
         """
         payload = {}
@@ -3338,7 +3374,7 @@ class Catalog:
         return response
     
     async def allSizes(self, item_id=None, request_headers:Dict={}):
-        """Retrieve all available sizes for a product.
+        """This API allows to get  All Sizes for a given Product.
         :param item_id : Id of the product to be updated. : type integer
         """
         payload = {}
@@ -3380,7 +3416,7 @@ class Catalog:
         return response
     
     async def deleteRealtimeInventory(self, item_id=None, seller_identifier=None, body="", request_headers:Dict={}):
-        """Remove specific realtime inventory data.
+        """This API allows add Inventory for particular size and store.
         :param item_id : Item code of the product of which size is to be get. : type integer
         :param seller_identifier : Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. : type string
         """
@@ -3429,7 +3465,7 @@ class Catalog:
         return response
     
     async def updateRealtimeInventory(self, item_id=None, seller_identifier=None, body="", request_headers:Dict={}):
-        """Allows to add Inventory for particular size and store.
+        """This API allows add Inventory for particular size and store.
         :param item_id : Item code of the product of which size is to be get. : type integer
         :param seller_identifier : Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. : type string
         """
@@ -3473,91 +3509,6 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for updateRealtimeInventory")
-                print(e)
-
-        return response
-    
-    async def getMarketplaces(self, request_headers:Dict={}):
-        """This API allows to get marketplace information.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getMarketplaces()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/channel", """{"required":[{"description":"Id of the company associated to the marketplace.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to the marketplace.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true}]}""", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/channel", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetAllMarketplaces
-            schema = GetAllMarketplaces()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getMarketplaces")
-                print(e)
-
-        return response
-    
-    async def updateMarketplaceOptin(self, marketplace_slug=None, body="", request_headers:Dict={}):
-        """This API allows to update marketplace optin for a company.
-        :param marketplace_slug : Slug of the marketplace . : type string
-        """
-        payload = {}
-        
-        if marketplace_slug is not None:
-            payload["marketplace_slug"] = marketplace_slug
-
-        # Parameter validation
-        schema = CatalogValidator.updateMarketplaceOptin()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import UpdateMarketplaceOptinRequest
-        schema = UpdateMarketplaceOptinRequest()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/channel/{marketplace_slug}/opt-in", """{"required":[{"description":"Id of the company associated to the marketplace.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"Slug of the marketplace .","in":"path","name":"marketplace_slug","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to the marketplace.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"Slug of the marketplace .","in":"path","name":"marketplace_slug","schema":{"type":"string"},"required":true}]}""", marketplace_slug=marketplace_slug)
-        query_string = await create_query_string(marketplace_slug=marketplace_slug)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/channel/{marketplace_slug}/opt-in", marketplace_slug=marketplace_slug), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import UpdateMarketplaceOptinResponse
-            schema = UpdateMarketplaceOptinResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateMarketplaceOptin")
                 print(e)
 
         return response

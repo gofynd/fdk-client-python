@@ -47,7 +47,6 @@ from ..ApplicationModel import BaseSchema
     
     
     
-        
     
     
         
@@ -71,6 +70,9 @@ from ..ApplicationModel import BaseSchema
         
     
     
+        
+    
+    
     
     
         
@@ -83,20 +85,6 @@ from ..ApplicationModel import BaseSchema
     
     
         
-        
-        
-        
-        
-        
-    
-    
-    
-        
-    
-    
-        
-    
-    
         
         
         
@@ -111,10 +99,15 @@ from ..ApplicationModel import BaseSchema
         
     
     
+        
+        
+        
+        
+        
+    
     
     
         
-    
 
 class UserValidator:
     
@@ -180,17 +173,17 @@ class UserValidator:
          
         
     
-    class sendResetToken(BaseSchema):
-        
-        pass 
-        
-    
     class forgotPassword(BaseSchema):
         
         pass 
         
     
     class resetForgotPassword(BaseSchema):
+        
+        pass 
+        
+    
+    class sendResetToken(BaseSchema):
         
         pass 
         
@@ -223,6 +216,16 @@ class UserValidator:
         
     
     class updatePassword(BaseSchema):
+        
+        pass 
+        
+    
+    class deleteUser(BaseSchema):
+        
+        pass 
+        
+    
+    class logout(BaseSchema):
         
         pass 
         
@@ -375,35 +378,6 @@ class UserValidator:
         
         platform = fields.Str(required=False)
          
-        
-    
-    class userExists(BaseSchema):
-        
-        
-        q = fields.Str(required=False)
-         
-        
-    
-    class deleteUser(BaseSchema):
-        
-        pass 
-        
-    
-    class logout(BaseSchema):
-        
-        pass 
-        
-    
-    class getUserAttributes(BaseSchema):
-        
-        
-        slug = fields.Str(required=False)
-         
-        
-    
-    class updateUserAttributes(BaseSchema):
-        
-        pass 
         
     
     

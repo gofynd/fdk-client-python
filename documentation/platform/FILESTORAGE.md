@@ -8,34 +8,24 @@
 This service provides functionality to manage assets and generate pdf. You can upload the assets, get the cdn link for the assets, proxy the assets and many more things.
 
 
-File Upload and Management
+Default
 * [startUpload](#startupload)
 * [completeUpload](#completeupload)
 * [appStartUpload](#appstartupload)
 * [appCompleteUpload](#appcompleteupload)
 * [getSignUrls](#getsignurls)
-
-
-File Transfer Suite
 * [copyFiles](#copyfiles)
 * [appCopyFiles](#appcopyfiles)
 * [browse](#browse)
-* [browsefiles](#browsefiles)
-* [proxy](#proxy)
-
-
-Default
 * [appbrowse](#appbrowse)
-* [updateHtmlTemplate](#updatehtmltemplate)
-* [getDefaultHtmlTemplate](#getdefaulthtmltemplate)
-* [generatePaymentReceipt](#generatepaymentreceipt)
-
-
-PDF and HTML Template Management
+* [proxy](#proxy)
 * [getPdfTypes](#getpdftypes)
 * [getDefaultPdfData](#getdefaultpdfdata)
+* [updateHtmlTemplate](#updatehtmltemplate)
+* [getDefaultHtmlTemplate](#getdefaulthtmltemplate)
 * [saveHtmlTemplate](#savehtmltemplate)
 * [getDefaultPdfTemplate](#getdefaultpdftemplate)
+* [generatePaymentReceipt](#generatepaymentreceipt)
 
 
 
@@ -45,7 +35,7 @@ PDF and HTML Template Management
 
 
 ### startUpload
-Start file upload.
+This operation initiates upload and returns storage link which is valid for 30 Minutes. You can use that storage link to make subsequent upload request with file buffer or blob.
 
 
 
@@ -68,7 +58,25 @@ except Exception as e:
 | body | [StartRequest](#StartRequest) | yes | Request body |
 
 
-Inititates the process of uploading a file to storage location, and returns a storage link in response.
+Uploads an arbitrarily sized buffer or blob.
+
+It has three Major Steps:
+* Start
+* Upload
+* Complete
+
+### Start
+Initiates the assets upload using `startUpload`.
+It returns the storage link in response.
+
+### Upload
+Use the storage link to upload a file (Buffer or Blob) to the File Storage.
+Make a `PUT` request on storage link received from `startUpload` api with file (Buffer or Blob) as a request body.
+
+### Complete
+After successfully upload, call `completeUpload` api to complete the upload process.
+This operation will return the url for the uploaded file.
+
 
 *Returned Response:*
 
@@ -131,7 +139,7 @@ Success. Returns a response containing relaving and absolute_url of storage serv
 
 
 ### completeUpload
-Complete file upload.
+This will complete the upload process. After successfully uploading file, you can call this operation to complete the upload process.
 
 
 
@@ -154,7 +162,25 @@ except Exception as e:
 | body | [StartResponse](#StartResponse) | yes | Request body |
 
 
-Starts the process of uploading a file to storage location, and returns a storage link in response.
+Uploads an arbitrarily sized buffer or blob.
+
+It has three Major Steps:
+* Start
+* Upload
+* Complete
+
+### Start
+Initiates the assets upload using `startUpload`.
+It returns the storage link in response.
+
+### Upload
+Use the storage link to upload a file (Buffer or Blob) to the File Storage.
+Make a `PUT` request on storage link received from `startUpload` api with file (Buffer or Blob) as a request body.
+
+### Complete
+After successfully upload, call `completeUpload` api to complete the upload process.
+This operation will return the url for the uploaded file.
+
 
 *Returned Response:*
 
@@ -221,7 +247,7 @@ Success
 
 
 ### appStartUpload
-Application start upload.
+This operation initiates upload and returns storage link which is valid for 30 Minutes. You can use that storage link to make subsequent upload request with file buffer or blob.
 
 
 
@@ -244,7 +270,25 @@ except Exception as e:
 | body | [StartRequest](#StartRequest) | yes | Request body |
 
 
-Start uploading a file from an application and returns a storage link in response.
+Uploads an arbitrarily sized buffer or blob.
+
+It has three Major Steps:
+* Start
+* Upload
+* Complete
+
+### Start
+Initiates the assets upload using `appStartUpload`.
+It returns the storage link in response.
+
+### Upload
+Use the storage link to upload a file (Buffer or Blob) to the File Storage.
+Make a `PUT` request on storage link received from `appStartUpload` api with file (Buffer or Blob) as a request body.
+
+### Complete
+After successfully upload, call `appCompleteUpload` api to complete the upload process.
+This operation will return the url for the uploaded file.
+
 
 *Returned Response:*
 
@@ -307,7 +351,7 @@ Success. Returns a response containing relaving and absolute_url of storage serv
 
 
 ### appCompleteUpload
-Application complete upload.
+This will complete the upload process. After successfully uploading file, you can call this operation to complete the upload process.
 
 
 
@@ -330,7 +374,25 @@ except Exception as e:
 | body | [StartResponse](#StartResponse) | yes | Request body |
 
 
-Finish uploading a file from an application.
+Uploads an arbitrarily sized buffer or blob.
+
+It has three Major Steps:
+* Start
+* Upload
+* Complete
+
+### Start
+Initiates the assets upload using `appStartUpload`.
+It returns the storage link in response.
+
+### Upload
+Use the storage link to upload a file (Buffer or Blob) to the File Storage.
+Make a `PUT` request on storage link received from `appStartUpload` api with file (Buffer or Blob) as a request body.
+
+### Complete
+After successfully upload, call `appCompleteUpload` api to complete the upload process.
+This operation will return the url for the uploaded file.
+
 
 *Returned Response:*
 
@@ -397,7 +459,7 @@ Success
 
 
 ### getSignUrls
-Get signed URLs.
+Gives signed urls to access private files
 
 
 
@@ -419,7 +481,7 @@ except Exception as e:
 | body | [SignUrlRequest](#SignUrlRequest) | yes | Request body |
 
 
-Retrieve signed URLs for file access.
+Describe here
 
 *Returned Response:*
 
@@ -468,10 +530,8 @@ Success
 ---
 
 
-
-
 ### copyFiles
-Copy files.
+Copy Files
 
 
 
@@ -494,7 +554,7 @@ except Exception as e:
 | body | [CopyFiles](#CopyFiles) | yes | Request body |
 
 
-Duplicate files to another location.
+Copy Files
 
 *Returned Response:*
 
@@ -568,7 +628,7 @@ Success
 
 
 ### appCopyFiles
-Application copy files.
+Copy Files
 
 
 
@@ -591,7 +651,7 @@ except Exception as e:
 | body | [CopyFiles](#CopyFiles) | yes | Request body |
 
 
-Copy files from an application to another location.
+Copy Files
 
 *Returned Response:*
 
@@ -665,7 +725,7 @@ Success
 
 
 ### browse
-Browse files.
+Browse Files
 
 
 
@@ -690,7 +750,7 @@ except Exception as e:
 
 
 
-View and navigate through available files.
+Browse Files
 
 *Returned Response:*
 
@@ -731,7 +791,7 @@ Success
           "relative_url": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/brands/pictures/square-logo/original/uY0P_ZtIz-logo.png"
         },
         "upload": {
-          "url": "https://fynd-staging-assets.s3-accelerate.amazonaws.com/addsale/brands/pictures/square-logo/original/uY0P_ZtIz-logo.png?Content-Type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=%2F20230820%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230820T101213Z&X-Amz-Expires=1800&X-Amz-Signature=04915b14aec15712abdea3c340d5dc43729e7c982a4994650488c0150c22b0ae&X-Amz-SignedHeaders=host%3Bx-amz-acl&x-amz-acl=public-read",
+          "url": "https://fynd-staging-assets.s3-accelerate.amazonaws.com",
           "expiry": 1800
         },
         "created_by": {
@@ -769,7 +829,7 @@ Success
 ---
 
 
-### browsefiles
+### appbrowse
 Browse Files
 
 
@@ -777,7 +837,7 @@ Browse Files
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").filestorage.browsefiles(namespace=namespace, page=page, limit=limit, search=search, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").filestorage.appbrowse(namespace=namespace, page=page, limit=limit)
     # use result
 except Exception as e:
     print(e)
@@ -791,9 +851,8 @@ except Exception as e:
 | --------- | -----  | -------- | ----------- | 
 | namespace | String | yes | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. |   
 | page | Int? | no | page no |   
-| limit | Int? | no | Limit |   
-| search | String? | no | Search |  
-| body | [ExtensionSlug](#ExtensionSlug) | yes | Request body |
+| limit | Int? | no | Limit |  
+
 
 
 Browse Files
@@ -837,7 +896,7 @@ Success
           "relative_url": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/brands/pictures/square-logo/original/uY0P_ZtIz-logo.png"
         },
         "upload": {
-          "url": "https://fynd-staging-assets.s3-accelerate.amazonaws.com/addsale/brands/pictures/square-logo/original/uY0P_ZtIz-logo.png?Content-Type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=%2F20230820%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230820T101213Z&X-Amz-Expires=1800&X-Amz-Signature=04915b14aec15712abdea3c340d5dc43729e7c982a4994650488c0150c22b0ae&X-Amz-SignedHeaders=host%3Bx-amz-acl&x-amz-acl=public-read",
+          "url": "https://fynd-staging-assets.s3-accelerate.amazonaws.com",
           "expiry": 1800
         },
         "created_by": {
@@ -876,7 +935,7 @@ Success
 
 
 ### proxy
-Proxy file access.
+Proxy
 
 
 
@@ -899,7 +958,7 @@ except Exception as e:
 
 
 
-Access files through a proxy.
+Proxy
 
 *Returned Response:*
 
@@ -940,358 +999,15 @@ Success
 ---
 
 
-
-
-### appbrowse
-Application browse files.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").filestorage.appbrowse(namespace=namespace, page=page, limit=limit, search=search)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| namespace | String | yes | Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. |   
-| page | Int? | no | page no |   
-| limit | Int? | no | Limit |   
-| search | String? | no | Search |  
-
-
-
-Browse files within an application.
-
-*Returned Response:*
-
-
-
-
-[HashMap<String,Any>](#HashMap<String,Any>)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "64e1e6fe0153e1a6d3e101f4",
-        "file_name": "logo.png",
-        "file_path": "/brands/pictures/square-logo/original/uY0P_ZtIz-logo.png",
-        "success": true,
-        "namespace": "brand-square-logo",
-        "content_type": "image/png",
-        "size": 3298,
-        "operation": "putObject",
-        "tags": [],
-        "cdn": {
-          "url": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/brands/pictures/square-logo/original/uY0P_ZtIz-logo.png",
-          "absolute_url": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/brands/pictures/square-logo/original/uY0P_ZtIz-logo.png",
-          "relative_url": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/brands/pictures/square-logo/original/uY0P_ZtIz-logo.png"
-        },
-        "upload": {
-          "url": "https://fynd-staging-assets.s3-accelerate.amazonaws.com/addsale/brands/pictures/square-logo/original/uY0P_ZtIz-logo.png?Content-Type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=%2F20230820%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230820T101213Z&X-Amz-Expires=1800&X-Amz-Signature=04915b14aec15712abdea3c340d5dc43729e7c982a4994650488c0150c22b0ae&X-Amz-SignedHeaders=host%3Bx-amz-acl&x-amz-acl=public-read",
-          "expiry": 1800
-        },
-        "created_by": {
-          "username": "fp_sdet_gofynd_com_65071"
-        },
-        "company_id": 6520,
-        "bucket_key": "addsale/brands/pictures/square-logo/original/uY0P_ZtIz-logo.png",
-        "createdAt": "2023-08-20T10:12:14.118Z",
-        "updatedAt": "2023-08-20T10:12:14.118Z",
-        "__v": 0
-      }
-    ],
-    "page": {
-      "current": 1,
-      "has_previous": false,
-      "has_next": true,
-      "item_total": 481,
-      "type": "number"
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateHtmlTemplate
-Update HTML Template
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").filestorage.updateHtmlTemplate(id=id, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes |  |  
-| body | [PdfConfig](#PdfConfig) | yes | Request body |
-
-
-Update the HTML Template.
-
-*Returned Response:*
-
-
-
-
-[PdfConfigSaveSuccess](#PdfConfigSaveSuccess)
-
-Update html template for invoice
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "data": {
-      "_id": "64dfd8fc8f3b8b5ae5beb72c",
-      "format": "A4",
-      "pdf_type_id": 1,
-      "template": "<div>\n  \n</div>",
-      "__v": 0
-    },
-    "success": true
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getDefaultHtmlTemplate
-Get html template for sales channel
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").filestorage.getDefaultHtmlTemplate(pdfTypeId=pdfTypeId, format=format, countryCode=countryCode)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| pdfTypeId | Int | yes |  |   
-| format | String | yes |  |   
-| countryCode | String? | no |  |  
-
-
-
-Get default html template for invoice or label
-
-*Returned Response:*
-
-
-
-
-[PdfConfigSuccess](#PdfConfigSuccess)
-
-Get last saved html template for invoice
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "data": [
-      {
-        "_id": "64b7f52d56a0cba5231964b0",
-        "company_id": 1,
-        "application_id": "64aed475db2cfb5b8a9f623d",
-        "pdf_type_id": 1,
-        "format": "A4",
-        "template": "<p>Hello world</p>",
-        "__v": 0
-      }
-    ],
-    "success": true
-  }
-}
-```
-</details>
-
-<details>
-<summary><i>&nbsp; failure</i></summary>
-
-```json
-{
-  "value": {
-    "data": [],
-    "success": true
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### generatePaymentReceipt
-Generate payment receipt.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").filestorage.generatePaymentReceipt(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [PaymentReceiptRequestBody](#PaymentReceiptRequestBody) | yes | Request body |
-
-
-Generate Payment Receipt for Jiomart Digital
-
-*Returned Response:*
-
-
-
-
-[HashMap<String,Any>](#HashMap<String,Any>)
-
-Kafka response published to generate payment receipt
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "success": true
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
 ### getPdfTypes
-Get PDF types.
+Get all the supported invoice pdf types
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").filestorage.getPdfTypes(countryCode=countryCode)
+    result = await platformClient.application("<APPLICATION_ID>").filestorage.getPdfTypes()
     # use result
 except Exception as e:
     print(e)
@@ -1301,13 +1017,8 @@ except Exception as e:
 
 
 
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| countryCode | String? | no |  |  
 
-
-
-Retrieve a list of available PDF types.
+Get all the supported invoice pdf types such as Invoice, Label, Deliver challan
 
 *Returned Response:*
 
@@ -1366,14 +1077,14 @@ Get all the invoice types and its format
 
 
 ### getDefaultPdfData
-Get default PDF data.
+Get Dummy pdf data for invoice or label
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").filestorage.getDefaultPdfData(pdfTypeId=pdfTypeId, countryCode=countryCode)
+    result = await platformClient.application("<APPLICATION_ID>").filestorage.getDefaultPdfData(pdfTypeId=pdfTypeId)
     # use result
 except Exception as e:
     print(e)
@@ -1385,12 +1096,11 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| pdfTypeId | Int | yes |  |   
-| countryCode | String? | no |  |  
+| pdfTypeId | Int | yes |  |  
 
 
 
-Retrieve default data for PDF generation.
+Get Dummy pdf data for invoice or label
 
 *Returned Response:*
 
@@ -1419,7 +1129,7 @@ Get dummy json data for invoice
         "_id": "64b7f52d56a0cba5231964b0",
         "pdf_type_id": 1,
         "payload": {
-          "is_export": false,
+          "is_international": false,
           "app_domain_name": "https://shop.fynd.com",
           "conversion_rate": {
             "base": "INR",
@@ -1454,7 +1164,7 @@ Get dummy json data for invoice
             {
               "payment_type": "Cash on Delivery",
               "amount": 3010,
-              "date": "2023-08-09T00:00:00.000Z",
+              "date": "2023-08-09",
               "transaction_id": "TR64D383390EAD429ED3"
             }
           ],
@@ -1682,7 +1392,6 @@ Get dummy json data for invoice
           "awb_number_barcode": "data:image/png;base64,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",
           "uid": "16915832909421966006"
         },
-        "country_code": "IN",
         "__v": 0
       }
     ],
@@ -1718,8 +1427,174 @@ Get dummy json data for invoice
 ---
 
 
+### updateHtmlTemplate
+Update html template for invoice or label
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").filestorage.updateHtmlTemplate(id=id, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes |  |  
+| body | [PdfConfig](#PdfConfig) | yes | Request body |
+
+
+Update html template for invoice such as Invoice, Label, Deliver challan
+
+*Returned Response:*
+
+
+
+
+[PdfConfigSaveSuccess](#PdfConfigSaveSuccess)
+
+Update html template for invoice
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; success</i></summary>
+
+```json
+{
+  "value": {
+    "data": {
+      "_id": "64dfd8fc8f3b8b5ae5beb72c",
+      "format": "A4",
+      "pdf_type_id": 1,
+      "template": "<div>\n  \n</div>",
+      "__v": 0
+    },
+    "success": true
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getDefaultHtmlTemplate
+Get html template for sales channel
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").filestorage.getDefaultHtmlTemplate(pdfTypeId=pdfTypeId, format=format)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pdfTypeId | Int | yes |  |   
+| format | String | yes |  |  
+
+
+
+Get default html template for invoice or label
+
+*Returned Response:*
+
+
+
+
+[PdfConfigSuccess](#PdfConfigSuccess)
+
+Get last saved html template for invoice
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; success</i></summary>
+
+```json
+{
+  "value": {
+    "data": [
+      {
+        "_id": "64b7f52d56a0cba5231964b0",
+        "company_id": 1,
+        "application_id": "64aed475db2cfb5b8a9f623d",
+        "pdf_type_id": 1,
+        "format": "A4",
+        "template": "<p>Hello world</p>",
+        "__v": 0
+      }
+    ],
+    "success": true
+  }
+}
+```
+</details>
+
+<details>
+<summary><i>&nbsp; failure</i></summary>
+
+```json
+{
+  "value": {
+    "data": [],
+    "success": true
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### saveHtmlTemplate
-Save HTML template.
+Update html template for invoice or label
 
 
 
@@ -1741,7 +1616,7 @@ except Exception as e:
 | body | [PdfConfig](#PdfConfig) | yes | Request body |
 
 
-Store an HTML template.
+Update html template for invoice such as Invoice, Label, Deliver challan
 
 *Returned Response:*
 
@@ -1792,14 +1667,14 @@ Saved html template for invoice
 
 
 ### getDefaultPdfTemplate
-Get default PDF template.
+Default html template
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").filestorage.getDefaultPdfTemplate(pdfTypeId=pdfTypeId, format=format, countryCode=countryCode)
+    result = await platformClient.application("<APPLICATION_ID>").filestorage.getDefaultPdfTemplate(pdfTypeId=pdfTypeId, format=format)
     # use result
 except Exception as e:
     print(e)
@@ -1812,12 +1687,11 @@ except Exception as e:
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
 | pdfTypeId | Int | yes |  |   
-| format | String | yes |  |   
-| countryCode | String? | no |  |  
+| format | String | yes |  |  
 
 
 
-Retrieve the default PDF template.
+Get default html template data for invoice or label
 
 *Returned Response:*
 
@@ -1864,6 +1738,72 @@ Get rendered html with dummy json payload
 {
   "value": {
     "data": [],
+    "success": true
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### generatePaymentReceipt
+Generate Payment Receipt for Jiomart Digital
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").filestorage.generatePaymentReceipt(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [PaymentReceiptRequestBody](#PaymentReceiptRequestBody) | yes | Request body |
+
+
+Generate Payment Receipt for Jiomart Digital
+
+*Returned Response:*
+
+
+
+
+[HashMap<String,Any>](#HashMap<String,Any>)
+
+Kafka response published to generate payment receipt
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; success</i></summary>
+
+```json
+{
+  "value": {
     "success": true
   }
 }
@@ -1964,7 +1904,7 @@ Get rendered html with dummy json payload
  | contentType | String |  no  |  |
  | size | Int |  no  |  |
  | tags | ArrayList<String>? |  yes  |  |
- | params | HashMap<String,Any>? |  yes  |  |
+ | params | [Params](#Params)? |  yes  |  |
 
 ---
 
@@ -2077,7 +2017,7 @@ Get rendered html with dummy json payload
  | format | ArrayList<String> |  no  |  |
  | v | Int |  no  |  |
  | visibility | Boolean |  no  |  |
- | countryCode | String |  no  |  |
+ | countryCode | String? |  yes  |  |
 
 ---
 
@@ -2096,12 +2036,52 @@ Get rendered html with dummy json payload
 
  
  
+ #### [Inr](#Inr)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String? |  yes  |  |
+ | value | Double? |  yes  |  |
+ | symbol | String? |  yes  |  |
+ | subUnit | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Usd](#Usd)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | name | String? |  yes  |  |
+ | value | Double? |  yes  |  |
+ | symbol | String? |  yes  |  |
+ | subUnit | String? |  yes  |  |
+
+---
+
+
+ 
+ 
+ #### [Rates](#Rates)
+
+ | Properties | Type | Nullable | Description |
+ | ---------- | ---- | -------- | ----------- |
+ | inr | [Inr](#Inr)? |  yes  |  |
+ | usd | [Usd](#Usd)? |  yes  |  |
+
+---
+
+
+ 
+ 
  #### [ConversionRate](#ConversionRate)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | base | String? |  yes  |  |
- | rates | HashMap<String,Any>? |  yes  |  |
+ | rates | [Rates](#Rates)? |  yes  |  |
  | timestamp | Double? |  yes  |  |
 
 ---
@@ -2116,8 +2096,6 @@ Get rendered html with dummy json payload
  | name | String? |  yes  |  |
  | awbNumberBarcode | String? |  yes  |  |
  | awbNumber | String? |  yes  |  |
- | origin | String? |  yes  |  |
- | destination | String? |  yes  |  |
  | ewayBillNumber | String? |  yes  |  |
 
 ---
@@ -2144,10 +2122,6 @@ Get rendered html with dummy json payload
  | amount | Double? |  yes  |  |
  | date | String? |  yes  |  |
  | transactionId | String? |  yes  |  |
- | time | String? |  yes  |  |
- | mode | String? |  yes  |  |
- | name | String? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -2165,10 +2139,6 @@ Get rendered html with dummy json payload
  | shipmentId | String? |  yes  |  |
  | signedQrcode | String? |  yes  |  |
  | upiQrcode | String? |  yes  |  |
- | deviceId | String? |  yes  |  |
- | marketplaceInvoiceId | String? |  yes  |  |
- | marketplaceShipmentId | String? |  yes  |  |
- | channelOrderId | String? |  yes  |  |
 
 ---
 
@@ -2193,13 +2163,6 @@ Get rendered html with dummy json payload
  | cin | String? |  yes  |  |
  | websiteUrl | String? |  yes  |  |
  | email | String? |  yes  |  |
- | displayAddress | String? |  yes  |  |
- | sector | String? |  yes  |  |
- | phone | HashMap<String,Any>? |  yes  |  |
- | trn | String? |  yes  |  |
- | vat | String? |  yes  |  |
- | businessCountryTimezone | String? |  yes  |  |
- | businessCountryCurrency | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -2219,9 +2182,6 @@ Get rendered html with dummy json payload
  | zipCode | String? |  yes  |  |
  | stateCode | String? |  yes  |  |
  | gstin | String? |  yes  |  |
- | displayAddress | String? |  yes  |  |
- | sector | String? |  yes  |  |
- | storeId | String? |  yes  |  |
 
 ---
 
@@ -2242,9 +2202,6 @@ Get rendered html with dummy json payload
  | zipCode | String? |  yes  |  |
  | stateCode | String? |  yes  |  |
  | gstin | String? |  yes  |  |
- | displayAddress | String? |  yes  |  |
- | sector | String? |  yes  |  |
- | email | String? |  yes  |  |
 
 ---
 
@@ -2265,8 +2222,6 @@ Get rendered html with dummy json payload
  | zipCode | String? |  yes  |  |
  | stateCode | String? |  yes  |  |
  | gstin | String? |  yes  |  |
- | displayAddress | String? |  yes  |  |
- | sector | String? |  yes  |  |
 
 ---
 
@@ -2285,8 +2240,6 @@ Get rendered html with dummy json payload
  | zipCode | String? |  yes  |  |
  | stateCode | String? |  yes  |  |
  | gstin | String? |  yes  |  |
- | displayAddress | String? |  yes  |  |
- | sector | String? |  yes  |  |
 
 ---
 
@@ -2371,8 +2324,6 @@ Get rendered html with dummy json payload
  | taxableAmount | Double? |  yes  |  |
  | totalTaxableAmount | Double? |  yes  |  |
  | tax | [Tax](#Tax)? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | countryOfOrigin | String? |  yes  |  |
 
 ---
 
@@ -2391,15 +2342,6 @@ Get rendered html with dummy json payload
  | codCharges | Double? |  yes  |  |
  | fyndDiscounts | Double? |  yes  |  |
  | totalInWords | String? |  yes  |  |
- | giftPrice | Double? |  yes  |  |
- | totalQuantity | Double? |  yes  |  |
- | subTotal | Double? |  yes  |  |
- | discount | Double? |  yes  |  |
- | promotion | Double? |  yes  |  |
- | coupon | Double? |  yes  |  |
- | reward | Double? |  yes  |  |
- | roundOff | Double? |  yes  |  |
- | totalValueOfGoods | Double? |  yes  |  |
 
 ---
 
@@ -2443,8 +2385,6 @@ Get rendered html with dummy json payload
  | countryCode | String? |  yes  |  |
  | zipCode | Double? |  yes  |  |
  | stateCode | String? |  yes  |  |
- | displayAddress | String? |  yes  |  |
- | sector | String? |  yes  |  |
 
 ---
 
@@ -2545,18 +2485,6 @@ Get rendered html with dummy json payload
 
  
  
- #### [AwbNumberBarcodeGenerator](#AwbNumberBarcodeGenerator)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | method | String? |  yes  |  |
- | kwargs | [Kwargs](#Kwargs)? |  yes  |  |
-
----
-
-
- 
- 
  #### [MetaProperty](#MetaProperty)
 
  | Properties | Type | Nullable | Description |
@@ -2566,7 +2494,6 @@ Get rendered html with dummy json payload
  | upiQrcodeGenerator | [UpiQrcodeGenerator](#UpiQrcodeGenerator)? |  yes  |  |
  | digitalsignatureGenerator | [DigitalsignatureGenerator](#DigitalsignatureGenerator)? |  yes  |  |
  | awbNumberLabelBarcodeGenerator | [AwbNumberLabelBarcodeGenerator](#AwbNumberLabelBarcodeGenerator)? |  yes  |  |
- | awbNumberBarcodeGenerator | [AwbNumberBarcodeGenerator](#AwbNumberBarcodeGenerator)? |  yes  |  |
 
 ---
 
@@ -2588,18 +2515,8 @@ Get rendered html with dummy json payload
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | isExport | Boolean? |  yes  |  |
- | isExportShipment | Boolean? |  yes  |  |
+ | isInternational | Boolean? |  yes  |  |
  | appDomainName | String? |  yes  |  |
- | txnId | String? |  yes  |  |
- | utr | String? |  yes  |  |
- | poNumber | String? |  yes  |  |
- | creditNoteId | String? |  yes  |  |
- | currentDate | String? |  yes  |  |
- | totalValueOfGoods | Double? |  yes  |  |
- | b2BBuyerDetails | HashMap<String,Any>? |  yes  |  |
- | isQwik | HashMap<String,Any>? |  yes  |  |
- | orderType | String? |  yes  |  |
  | conversionRate | [ConversionRate](#ConversionRate)? |  yes  |  |
  | currencyCode | String? |  yes  |  |
  | shipmentId | String? |  yes  |  |
@@ -2646,7 +2563,6 @@ Get rendered html with dummy json payload
  | id | String? |  yes  |  |
  | pdfTypeId | Double? |  yes  |  |
  | payload | [DummyTemplateDataPayload](#DummyTemplateDataPayload) |  no  |  |
- | countryCode | String? |  yes  |  |
  | v | Int? |  yes  |  |
 
 ---
@@ -2888,17 +2804,6 @@ Get rendered html with dummy json payload
  | service | [PaymentReceiptService](#PaymentReceiptService)? |  yes  |  |
  | eventTraceInfo | HashMap<String,Any>? |  yes  |  |
  | trace | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [ExtensionSlug](#ExtensionSlug)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | extensionSlug | String? |  yes  |  |
 
 ---
 

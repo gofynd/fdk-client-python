@@ -58,7 +58,7 @@ class Common:
         return response
     
     async def getLocations(self, location_type=None, id=None, request_headers:Dict={}):
-        """Retrieve a list of locations associated with the company.
+        """Retrieve a list of countries, states, or cities based on the provided location_type and id parameters.
         :param location_type :  : type string
         :param id : Field is optional when location_type is country. If querying for state, provide id of the country. If querying for city, provide id of the state. : type string
         """

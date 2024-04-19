@@ -68,38 +68,6 @@ class PaymentOptions(BaseSchema):
     pass
 
 
-class AggregatorRoute(BaseSchema):
-    pass
-
-
-class PaymentDefaultSelection(BaseSchema):
-    pass
-
-
-class PaymentFlow(BaseSchema):
-    pass
-
-
-class PaymentOptionAndFlow(BaseSchema):
-    pass
-
-
-class AdvanceObject(BaseSchema):
-    pass
-
-
-class SplitObject(BaseSchema):
-    pass
-
-
-class AdvancePaymentObject(BaseSchema):
-    pass
-
-
-class PaymentModeRouteResponse(BaseSchema):
-    pass
-
-
 class PaymentOptionsResponse(BaseSchema):
     pass
 
@@ -412,7 +380,7 @@ class GetPaymentCodeResponse(BaseSchema):
     pass
 
 
-class PlatformPaymentModeResponse(BaseSchema):
+class MerchnatPaymentModeResponse(BaseSchema):
     pass
 
 
@@ -452,22 +420,6 @@ class RefundSessionResponseSerializer(BaseSchema):
     pass
 
 
-class PaymentDetailsSerializer(BaseSchema):
-    pass
-
-
-class CartDetailsSerializer(BaseSchema):
-    pass
-
-
-class RefundDetailsSerializer(BaseSchema):
-    pass
-
-
-class PaymentSessionSerializer(BaseSchema):
-    pass
-
-
 class RefundSourcesPriority(BaseSchema):
     pass
 
@@ -477,90 +429,6 @@ class RefundPriorityResponseSerializer(BaseSchema):
 
 
 class RefundPriorityRequestSerializer(BaseSchema):
-    pass
-
-
-class MerchantPaymentModeRequest(BaseSchema):
-    pass
-
-
-class FromConfig(BaseSchema):
-    pass
-
-
-class ToConfig(BaseSchema):
-    pass
-
-
-class PlatformPaymentModeCopyConfigRequest(BaseSchema):
-    pass
-
-
-class PaymentMethodsMetaOrder(BaseSchema):
-    pass
-
-
-class PaymentOrderMethods(BaseSchema):
-    pass
-
-
-class PaymentOrderRequest(BaseSchema):
-    pass
-
-
-class PaymentOrderData(BaseSchema):
-    pass
-
-
-class PaymentOrderResponse(BaseSchema):
-    pass
-
-
-class AggregatorVersionItemSchema(BaseSchema):
-    pass
-
-
-class AggregatorVersionResponse(BaseSchema):
-    pass
-
-
-class AggregatorVersionRequestSchema(BaseSchema):
-    pass
-
-
-class AggregatorControlRequest(BaseSchema):
-    pass
-
-
-class PaymentModeCustomConfigSchema(BaseSchema):
-    pass
-
-
-class PaymentCustomConfigDetailsSchema(BaseSchema):
-    pass
-
-
-class PaymentCustomConfigCustomerSchema(BaseSchema):
-    pass
-
-
-class PaymentCustomConfigModeSchema(BaseSchema):
-    pass
-
-
-class PaymentCustomConfigDetailsRequestSchema(BaseSchema):
-    pass
-
-
-class PaymentCustomConfigCustomerRequestSchema(BaseSchema):
-    pass
-
-
-class PaymentCustomConfigRequestSchema(BaseSchema):
-    pass
-
-
-class PaymentCustomConfigResponseSchema(BaseSchema):
     pass
 
 
@@ -671,7 +539,7 @@ class ProductCODData(BaseSchema):
     
     items = fields.Dict(required=False, allow_none=True)
     
-    cod_charges = fields.Nested(CODChargesLimitsResponse, required=False)
+    cod_charges = fields.Dict(required=False, allow_none=True)
     
 
 
@@ -707,7 +575,7 @@ class IntentApp(BaseSchema):
     
     code = fields.Str(required=False, allow_none=True)
     
-    logos = fields.Nested(PaymentModeLogo, required=False)
+    logos = fields.Dict(required=False, allow_none=True)
     
 
 
@@ -761,7 +629,7 @@ class PaymentModeList(BaseSchema):
     
     expired = fields.Boolean(required=False, allow_none=True)
     
-    logo_url = fields.Nested(PaymentModeLogo, required=False)
+    logo_url = fields.Dict(required=False, allow_none=True)
     
     card_token = fields.Str(required=False, allow_none=True)
     
@@ -769,7 +637,7 @@ class PaymentModeList(BaseSchema):
     
     cod_charges = fields.Float(required=False, allow_none=True)
     
-    product_cod_data = fields.Nested(ProductCODData, required=False)
+    product_cod_data = fields.Dict(required=False, allow_none=True)
     
     cod_limit = fields.Float(required=False, allow_none=True)
     
@@ -819,150 +687,6 @@ class PaymentOptions(BaseSchema):
     
 
 
-class AggregatorRoute(BaseSchema):
-    # Payment swagger.json
-
-    
-    data = fields.Dict(required=False, allow_none=True)
-    
-    payment_flow_data = fields.Str(required=False, allow_none=True)
-    
-    payment_flow = fields.Str(required=False, allow_none=True)
-    
-    api_link = fields.Str(required=False, allow_none=True)
-    
-
-
-class PaymentDefaultSelection(BaseSchema):
-    # Payment swagger.json
-
-    
-    mode = fields.Str(required=False, allow_none=True)
-    
-    identifier = fields.Str(required=False, allow_none=True)
-    
-    skip = fields.Boolean(required=False, allow_none=True)
-    
-
-
-class PaymentFlow(BaseSchema):
-    # Payment swagger.json
-
-    
-    bqr_razorpay = fields.Nested(AggregatorRoute, required=False)
-    
-    fynd = fields.Nested(AggregatorRoute, required=False)
-    
-    epaylater = fields.Nested(AggregatorRoute, required=False)
-    
-    razorpay = fields.Nested(AggregatorRoute, required=False)
-    
-    juspay = fields.Nested(AggregatorRoute, required=False)
-    
-    ajiodhan = fields.Nested(AggregatorRoute, required=False)
-    
-    simpl = fields.Nested(AggregatorRoute, required=False)
-    
-    rupifi = fields.Nested(AggregatorRoute, required=False)
-    
-    mswipe = fields.Nested(AggregatorRoute, required=False)
-    
-    stripe = fields.Nested(AggregatorRoute, required=False)
-    
-    ccavenue = fields.Nested(AggregatorRoute, required=False)
-    
-    payubiz = fields.Nested(AggregatorRoute, required=False)
-    
-    jiopay = fields.Nested(AggregatorRoute, required=False)
-    
-
-
-class PaymentOptionAndFlow(BaseSchema):
-    # Payment swagger.json
-
-    
-    payment_option = fields.List(fields.Nested(RootPaymentMode, required=False), required=False)
-    
-    payment_flows = fields.Nested(PaymentFlow, required=False)
-    
-    payment_default_selection = fields.Nested(PaymentDefaultSelection, required=False)
-    
-
-
-class AdvanceObject(BaseSchema):
-    # Payment swagger.json
-
-    
-    is_active = fields.Boolean(required=False, allow_none=True)
-    
-    amount = fields.Float(required=False, allow_none=True)
-    
-    time_unit = fields.Str(required=False, allow_none=True)
-    
-    description = fields.Str(required=False, allow_none=True)
-    
-    display_name = fields.Str(required=False, allow_none=True)
-    
-    prepayment_type = fields.Str(required=False, allow_none=True)
-    
-    prepayment_value = fields.Float(required=False, allow_none=True)
-    
-    cancellation_type = fields.Str(required=False, allow_none=True)
-    
-    refund_time_limit = fields.Float(required=False, allow_none=True)
-    
-    all_prepayment_type = fields.List(fields.Str(required=False, allow_none=True), required=False)
-    
-    allow_custom_advance_amount = fields.Boolean(required=False, allow_none=True)
-    
-
-
-class SplitObject(BaseSchema):
-    # Payment swagger.json
-
-    
-    total_number_of_splits = fields.Float(required=False, allow_none=True)
-    
-    splits_remaining = fields.Float(required=False, allow_none=True)
-    
-    amount_remaining = fields.Float(required=False, allow_none=True)
-    
-
-
-class AdvancePaymentObject(BaseSchema):
-    # Payment swagger.json
-
-    
-    name = fields.Str(required=False, allow_none=True)
-    
-    display_priority = fields.Float(required=False, allow_none=True)
-    
-    payment_mode_id = fields.Float(required=False, allow_none=True)
-    
-    display_name = fields.Str(required=False, allow_none=True)
-    
-    list = fields.List(fields.Nested(PaymentModeList, required=False), required=False)
-    
-    split = fields.Nested(SplitObject, required=False)
-    
-    advance = fields.Nested(AdvanceObject, required=False)
-    
-
-
-class PaymentModeRouteResponse(BaseSchema):
-    # Payment swagger.json
-
-    
-    payment_options = fields.Nested(PaymentOptionAndFlow, required=False)
-    
-    success = fields.Boolean(required=False)
-    
-    payment_breakup = fields.Dict(required=False)
-    
-    advance_payment = fields.List(fields.Nested(AdvancePaymentObject, required=False), required=False)
-    
-
-
 class PaymentOptionsResponse(BaseSchema):
     # Payment swagger.json
 
@@ -970,8 +694,6 @@ class PaymentOptionsResponse(BaseSchema):
     payment_options = fields.Nested(PaymentOptions, required=False)
     
     success = fields.Boolean(required=False)
-    
-    payment_breakup = fields.Dict(required=False)
     
 
 
@@ -1729,7 +1451,7 @@ class LinkStatus(BaseSchema):
     # Payment swagger.json
 
     
-    status = fields.Str(required=False)
+    status = fields.Boolean(required=False)
     
     message = fields.Str(required=False)
     
@@ -2005,7 +1727,7 @@ class ErrorResponse(BaseSchema):
     
     status_code = fields.Int(required=False)
     
-    error = fields.Nested(ErrorDescription, required=False)
+    error = fields.Dict(required=False, allow_none=True)
     
     message = fields.Str(required=False)
     
@@ -2025,6 +1747,8 @@ class CreatePaymentLinkMeta(BaseSchema):
     
     assign_card_id = fields.Str(required=False, allow_none=True)
     
+    pincode = fields.Str(required=False)
+    
 
 
 class CreatePaymentLinkRequest(BaseSchema):
@@ -2036,8 +1760,6 @@ class CreatePaymentLinkRequest(BaseSchema):
     amount = fields.Float(required=False)
     
     mobile_number = fields.Str(required=False)
-    
-    country_phone_code = fields.Str(required=False)
     
     description = fields.Str(required=False, allow_none=True)
     
@@ -2169,7 +1891,7 @@ class GetPaymentCodeResponse(BaseSchema):
     
 
 
-class PlatformPaymentModeResponse(BaseSchema):
+class MerchnatPaymentModeResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2241,7 +1963,7 @@ class AddressDetail(BaseSchema):
     
     name = fields.Str(required=False)
     
-    address_type = fields.Str(required=False, allow_none=True)
+    address_type = fields.Str(required=False)
     
     address = fields.Str(required=False)
     
@@ -2267,18 +1989,6 @@ class PaymentSessionDetail(BaseSchema):
     
     shipping_address = fields.Nested(AddressDetail, required=False)
     
-    amount_captured = fields.Int(required=False)
-    
-    amount_refunded = fields.Int(required=False)
-    
-    aggregator_customer_id = fields.Str(required=False)
-    
-    cancel_url = fields.Str(required=False)
-    
-    payment_methods = fields.List(fields.Dict(required=False), required=False)
-    
-    created = fields.Str(required=False)
-    
     g_user_id = fields.Str(required=False)
     
     currency = fields.Str(required=False)
@@ -2291,15 +2001,25 @@ class PaymentSessionDetail(BaseSchema):
     
     gid = fields.Str(required=False)
     
-    kind = fields.Str(required=False)
+    cancel_url = fields.Str(required=False)
     
-    billing_address = fields.Nested(AddressDetail, required=False)
+    amount_refunded = fields.Int(required=False)
     
     captured = fields.Boolean(required=False)
     
-    meta = fields.Dict(required=False)
+    created = fields.Str(required=False)
     
     status = fields.Str(required=False)
+    
+    kind = fields.Str(required=False)
+    
+    aggregator_customer_id = fields.Str(required=False)
+    
+    payment_methods = fields.List(fields.Dict(required=False), required=False)
+    
+    billing_address = fields.Nested(AddressDetail, required=False)
+    
+    amount_captured = fields.Int(required=False)
     
 
 
@@ -2320,8 +2040,6 @@ class PaymentSessionRequestSerializer(BaseSchema):
     payment_details = fields.List(fields.Nested(PaymentSessionDetail, required=False), required=False)
     
     total_amount = fields.Int(required=False)
-    
-    checksum = fields.Str(required=False)
     
 
 
@@ -2385,15 +2103,9 @@ class RefundSessionRequestSerializer(BaseSchema):
     
     payment_details = fields.Nested(PaymentSessionDetail, required=False)
     
-    total_amount = fields.Int(required=False)
-    
     refund_details = fields.List(fields.Nested(RefundSessionDetail, required=False), required=False)
     
-    error = fields.Nested(ErrorDescription, required=False)
-    
-    message = fields.Str(required=False)
-    
-    checksum = fields.Str(required=False)
+    total_amount = fields.Int(required=False)
     
 
 
@@ -2410,104 +2122,6 @@ class RefundSessionResponseSerializer(BaseSchema):
     platform_refund_details = fields.List(fields.Dict(required=False), required=False)
     
     total_refund_amount = fields.Int(required=False)
-    
-
-
-class PaymentDetailsSerializer(BaseSchema):
-    # Payment swagger.json
-
-    
-    payment_methods = fields.List(fields.Dict(required=False), required=False)
-    
-    gid = fields.Str(required=False)
-    
-    amount_refunded = fields.Int(required=False)
-    
-    currency = fields.Str(required=False)
-    
-    mode = fields.Str(required=False)
-    
-    merchant_locale = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False, allow_none=True)
-    
-    kind = fields.Str(required=False)
-    
-    success_url = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-    captured = fields.Boolean(required=False)
-    
-    payment_id = fields.Str(required=False)
-    
-    g_user_id = fields.Str(required=False)
-    
-    locale = fields.Str(required=False)
-    
-    cancel_url = fields.Str(required=False)
-    
-    created = fields.Str(required=False)
-    
-    amount_captured = fields.Int(required=False)
-    
-    amount = fields.Int(required=False)
-    
-    aggregator_customer_id = fields.Str(required=False)
-    
-    aggregator_order_id = fields.Str(required=False)
-    
-
-
-class CartDetailsSerializer(BaseSchema):
-    # Payment swagger.json
-
-    
-    items = fields.Dict(required=False)
-    
-    articles = fields.List(fields.Dict(required=False), required=False)
-    
-    cart_value = fields.Float(required=False)
-    
-    total_quantity = fields.Int(required=False)
-    
-
-
-class RefundDetailsSerializer(BaseSchema):
-    # Payment swagger.json
-
-    
-    amount = fields.Int(required=False)
-    
-    currency = fields.Str(required=False)
-    
-    request_id = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-    created = fields.Str(required=False)
-    
-    refund_utr = fields.Str(required=False)
-    
-
-
-class PaymentSessionSerializer(BaseSchema):
-    # Payment swagger.json
-
-    
-    payment_details = fields.Raw(required=False)
-    
-    currency = fields.Str(required=False, allow_none=True)
-    
-    status = fields.Str(required=False)
-    
-    total_amount = fields.Int(required=False)
-    
-    gid = fields.Str(required=False, allow_none=True)
-    
-    cart_details = fields.Nested(CartDetailsSerializer, required=False)
-    
-    refund_details = fields.List(fields.Nested(RefundDetailsSerializer, required=False), required=False)
     
 
 
@@ -2546,276 +2160,6 @@ class RefundPriorityRequestSerializer(BaseSchema):
     apportion = fields.Boolean(required=False)
     
     refund_sources_priority = fields.List(fields.Nested(RefundSourcesPriority, required=False), required=False)
-    
-
-
-class MerchantPaymentModeRequest(BaseSchema):
-    # Payment swagger.json
-
-    
-    business_unit = fields.Str(required=False)
-    
-    items = fields.List(fields.Dict(required=False), required=False)
-    
-    device = fields.Dict(required=False)
-    
-
-
-class FromConfig(BaseSchema):
-    # Payment swagger.json
-
-    
-    device = fields.Str(required=False)
-    
-    business_unit = fields.Str(required=False)
-    
-
-
-class ToConfig(BaseSchema):
-    # Payment swagger.json
-
-    
-    device = fields.List(fields.Dict(required=False), required=False)
-    
-    business_unit = fields.Str(required=False)
-    
-
-
-class PlatformPaymentModeCopyConfigRequest(BaseSchema):
-    # Payment swagger.json
-
-    
-    from_config = fields.Nested(FromConfig, required=False)
-    
-    to_config = fields.Nested(ToConfig, required=False)
-    
-
-
-class PaymentMethodsMetaOrder(BaseSchema):
-    # Payment swagger.json
-
-    
-    payment_identifier = fields.Str(required=False)
-    
-    merchant_code = fields.Str(required=False)
-    
-    payment_gateway = fields.Str(required=False)
-    
-
-
-class PaymentOrderMethods(BaseSchema):
-    # Payment swagger.json
-
-    
-    amount = fields.Float(required=False)
-    
-    payment = fields.Str(required=False)
-    
-    mode = fields.Str(required=False)
-    
-    meta = fields.Nested(PaymentMethodsMetaOrder, required=False)
-    
-    name = fields.Str(required=False)
-    
-
-
-class PaymentOrderRequest(BaseSchema):
-    # Payment swagger.json
-
-    
-    order_id = fields.Str(required=False)
-    
-    payment_methods = fields.List(fields.Nested(PaymentOrderMethods, required=False), required=False)
-    
-    shipment_id = fields.Str(required=False)
-    
-
-
-class PaymentOrderData(BaseSchema):
-    # Payment swagger.json
-
-    
-    contact = fields.Str(required=False, allow_none=True)
-    
-    aggregator = fields.Str(required=False, allow_none=True)
-    
-    amount = fields.Float(required=False, allow_none=True)
-    
-    customer_id = fields.Str(required=False, allow_none=True)
-    
-    currency = fields.Str(required=False, allow_none=True)
-    
-    email = fields.Str(required=False, allow_none=True)
-    
-    callback_url = fields.Str(required=False, allow_none=True)
-    
-    order_id = fields.Str(required=False, allow_none=True)
-    
-    method = fields.Str(required=False, allow_none=True)
-    
-    merchant_order_id = fields.Str(required=False, allow_none=True)
-    
-
-
-class PaymentOrderResponse(BaseSchema):
-    # Payment swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-    payment_confirm_url = fields.Str(required=False, allow_none=True)
-    
-    callback_url = fields.Str(required=False, allow_none=True)
-    
-    status_code = fields.Int(required=False)
-    
-    order_id = fields.Str(required=False, allow_none=True)
-    
-    data = fields.Nested(PaymentOrderData, required=False)
-    
-
-
-class AggregatorVersionItemSchema(BaseSchema):
-    # Payment swagger.json
-
-    
-    is_equal_to = fields.Str(required=False)
-    
-    is_less_than = fields.Str(required=False)
-    
-    is_greater_than = fields.Str(required=False)
-    
-
-
-class AggregatorVersionResponse(BaseSchema):
-    # Payment swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-    items = fields.Nested(AggregatorVersionItemSchema, required=False)
-    
-
-
-class AggregatorVersionRequestSchema(BaseSchema):
-    # Payment swagger.json
-
-    
-    is_equal_to = fields.Str(required=False)
-    
-    is_less_than = fields.Str(required=False)
-    
-    is_greater_than = fields.Str(required=False)
-    
-
-
-class AggregatorControlRequest(BaseSchema):
-    # Payment swagger.json
-
-    
-    business_unit = fields.Str(required=False)
-    
-    items = fields.List(fields.Dict(required=False), required=False)
-    
-    device = fields.Str(required=False)
-    
-    version = fields.Nested(AggregatorVersionRequestSchema, required=False)
-    
-
-
-class PaymentModeCustomConfigSchema(BaseSchema):
-    # Payment swagger.json
-
-    
-    display_name = fields.Str(required=False)
-    
-    business_unit = fields.Str(required=False)
-    
-    custom_config = fields.Nested(PaymentCustomConfigDetailsSchema, required=False)
-    
-
-
-class PaymentCustomConfigDetailsSchema(BaseSchema):
-    # Payment swagger.json
-
-    
-    customer = fields.Nested(PaymentCustomConfigCustomerSchema, required=False)
-    
-    payment_mode = fields.Nested(PaymentCustomConfigModeSchema, required=False)
-    
-    min_order_value = fields.Float(required=False)
-    
-
-
-class PaymentCustomConfigCustomerSchema(BaseSchema):
-    # Payment swagger.json
-
-    
-    restriction = fields.Str(required=False)
-    
-    groups = fields.List(fields.Int(required=False), required=False)
-    
-    types = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class PaymentCustomConfigModeSchema(BaseSchema):
-    # Payment swagger.json
-
-    
-    available = fields.Boolean(required=False)
-    
-    pre_order = fields.List(fields.Str(required=False), required=False)
-    
-    post_order = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class PaymentCustomConfigDetailsRequestSchema(BaseSchema):
-    # Payment swagger.json
-
-    
-    customer = fields.Nested(PaymentCustomConfigCustomerRequestSchema, required=False)
-    
-    payment_mode = fields.Nested(PaymentCustomConfigModeSchema, required=False)
-    
-    min_order_value = fields.Float(required=False)
-    
-
-
-class PaymentCustomConfigCustomerRequestSchema(BaseSchema):
-    # Payment swagger.json
-
-    
-    restriction = fields.Str(required=False)
-    
-    groups = fields.List(fields.Int(required=False), required=False)
-    
-
-
-class PaymentCustomConfigRequestSchema(BaseSchema):
-    # Payment swagger.json
-
-    
-    business_unit = fields.Str(required=False)
-    
-    items = fields.List(fields.Nested(PaymentCustomConfigDetailsRequestSchema, required=False), required=False)
-    
-
-
-class PaymentCustomConfigResponseSchema(BaseSchema):
-    # Payment swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
-    
-    items = fields.List(fields.Nested(PaymentModeCustomConfigSchema, required=False), required=False)
     
 
 

@@ -36,17 +36,14 @@ class Order:
     async def updateUrls(self, urls):
         self._urls.update(urls)
     
-    async def getOrders(self, status=None, page_no=None, page_size=None, from_date=None, to_date=None, start_date=None, end_date=None, custom_meta=None, allow_inactive=None, body="", request_headers:Dict={}):
-        """Retrieves all orders associated with a customer account.
+    async def getOrders(self, status=None, page_no=None, page_size=None, from_date=None, to_date=None, custom_meta=None, body="", request_headers:Dict={}):
+        """Use this API to retrieve all the orders.
         :param status : A filter to retrieve orders by their current status such as _placed_, _delivered_, etc. : type integer
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         :param from_date : The date from which the orders should be retrieved. : type string
         :param to_date : The date till which the orders should be retrieved. : type string
-        :param start_date : UTC Start Date in ISO format : type string
-        :param end_date : UTC Start Date in ISO format : type string
         :param custom_meta : A filter and retrieve data using special fields included for special use-cases : type string
-        :param allow_inactive : Flag indicating whether inactive shipments are allowed : type boolean
         """
         payload = {}
         
@@ -60,22 +57,16 @@ class Order:
             payload["from_date"] = from_date
         if to_date is not None:
             payload["to_date"] = to_date
-        if start_date is not None:
-            payload["start_date"] = start_date
-        if end_date is not None:
-            payload["end_date"] = end_date
         if custom_meta is not None:
             payload["custom_meta"] = custom_meta
-        if allow_inactive is not None:
-            payload["allow_inactive"] = allow_inactive
 
         # Parameter validation
         schema = OrderValidator.getOrders()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getOrders"], proccessed_params="""{"required":[],"optional":[{"in":"query","description":"A filter to retrieve orders by their current status such as _placed_, _delivered_, etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The date from which the orders should be retrieved.","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"The date till which the orders should be retrieved.","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"UTC Start Date in ISO format","name":"start_date","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-29T10:49:36.804Z"}},{"in":"query","description":"UTC Start Date in ISO format","name":"end_date","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-30T10:49:36.804Z"}},{"in":"query","description":"A filter and retrieve data using special fields included for special use-cases","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","description":"A filter to retrieve orders by their current status such as _placed_, _delivered_, etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The date from which the orders should be retrieved.","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"The date till which the orders should be retrieved.","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"UTC Start Date in ISO format","name":"start_date","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-29T10:49:36.804Z"}},{"in":"query","description":"UTC Start Date in ISO format","name":"end_date","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-30T10:49:36.804Z"}},{"in":"query","description":"A filter and retrieve data using special fields included for special use-cases","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[]}""", status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, custom_meta=custom_meta, allow_inactive=allow_inactive)
-        query_string = await create_query_string(status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, custom_meta=custom_meta, allow_inactive=allow_inactive)
+        url_with_params = await create_url_with_params(api_url=self._urls["getOrders"], proccessed_params="""{"required":[],"optional":[{"in":"query","description":"A filter to retrieve orders by their current status such as _placed_, _delivered_, etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The date from which the orders should be retrieved.","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"The date till which the orders should be retrieved.","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"A filter and retrieve data using special fields included for special use-cases","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}}],"query":[{"in":"query","description":"A filter to retrieve orders by their current status such as _placed_, _delivered_, etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The date from which the orders should be retrieved.","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"The date till which the orders should be retrieved.","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"A filter and retrieve data using special fields included for special use-cases","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}}],"headers":[],"path":[]}""", status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, custom_meta=custom_meta)
+        query_string = await create_query_string(status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, custom_meta=custom_meta)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -91,7 +82,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrders"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders", status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, custom_meta=custom_meta, allow_inactive=allow_inactive), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrders"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders", status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, custom_meta=custom_meta), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OrderList
@@ -104,25 +95,22 @@ class Order:
 
         return response
     
-    async def getOrderById(self, order_id=None, allow_inactive=None, body="", request_headers:Dict={}):
-        """Retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
+    async def getOrderById(self, order_id=None, body="", request_headers:Dict={}):
+        """Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
         :param order_id : A unique number used for identifying and tracking your orders. : type string
-        :param allow_inactive : Flag to allow inactive shipments : type boolean
         """
         payload = {}
         
         if order_id is not None:
             payload["order_id"] = order_id
-        if allow_inactive is not None:
-            payload["allow_inactive"] = allow_inactive
 
         # Parameter validation
         schema = OrderValidator.getOrderById()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getOrderById"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string"}}]}""", order_id=order_id, allow_inactive=allow_inactive)
-        query_string = await create_query_string(order_id=order_id, allow_inactive=allow_inactive)
+        url_with_params = await create_url_with_params(api_url=self._urls["getOrderById"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string"}}]}""", order_id=order_id)
+        query_string = await create_query_string(order_id=order_id)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -138,7 +126,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrderById"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/{order_id}", order_id=order_id, allow_inactive=allow_inactive), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrderById"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/{order_id}", order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OrderById
@@ -152,7 +140,7 @@ class Order:
         return response
     
     async def getPosOrderById(self, order_id=None, body="", request_headers:Dict={}):
-        """Retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+        """Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
         :param order_id : A unique number used for identifying and tracking your orders. : type string
         """
         payload = {}
@@ -195,25 +183,22 @@ class Order:
 
         return response
     
-    async def getShipmentById(self, shipment_id=None, allow_inactive=None, body="", request_headers:Dict={}):
-        """Retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
+    async def getShipmentById(self, shipment_id=None, body="", request_headers:Dict={}):
+        """Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
-        :param allow_inactive : Flag to allow inactive shipments : type boolean
         """
         payload = {}
         
         if shipment_id is not None:
             payload["shipment_id"] = shipment_id
-        if allow_inactive is not None:
-            payload["allow_inactive"] = allow_inactive
 
         # Parameter validation
         schema = OrderValidator.getShipmentById()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentById"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", shipment_id=shipment_id, allow_inactive=allow_inactive)
-        query_string = await create_query_string(shipment_id=shipment_id, allow_inactive=allow_inactive)
+        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentById"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", shipment_id=shipment_id)
+        query_string = await create_query_string(shipment_id=shipment_id)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -229,7 +214,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getShipmentById"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/shipments/{shipment_id}", shipment_id=shipment_id, allow_inactive=allow_inactive), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getShipmentById"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/shipments/{shipment_id}", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ShipmentById
@@ -243,7 +228,7 @@ class Order:
         return response
     
     async def getInvoiceByShipmentId(self, shipment_id=None, body="", request_headers:Dict={}):
-        """Retrieve the invoice corresponding to a specific shipment ID.
+        """Use this API to retrieve shipment invoice.
         :param shipment_id : ID of the shipment. : type string
         """
         payload = {}
@@ -287,7 +272,7 @@ class Order:
         return response
     
     async def trackShipment(self, shipment_id=None, body="", request_headers:Dict={}):
-        """Track Shipment by shipment id, for application based on application Id.
+        """Track Shipment by shipment id, for application based on application Id
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
         payload = {}
@@ -331,7 +316,7 @@ class Order:
         return response
     
     async def getCustomerDetailsByShipmentId(self, order_id=None, shipment_id=None, body="", request_headers:Dict={}):
-        """Retrieve customer details such as mobile number using Shipment ID.
+        """Use this API to retrieve customer details such as mobileno using Shipment ID.
         :param order_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         :param shipment_id : A unique number used for identifying and tracking your orders. : type string
         """
@@ -378,7 +363,7 @@ class Order:
         return response
     
     async def sendOtpToShipmentCustomer(self, order_id=None, shipment_id=None, body="", request_headers:Dict={}):
-        """Sends a one-time password (OTP) to the customer for shipment verification.
+        """Use this API to send OTP to the customer of the mapped Shipment.
         :param order_id : A unique number used for identifying and tracking your orders. : type string
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
@@ -425,7 +410,7 @@ class Order:
         return response
     
     async def verifyOtpShipmentCustomer(self, order_id=None, shipment_id=None, body="", request_headers:Dict={}):
-        """Confirms the OTP sent to the shipment customer for verification.
+        """Use this API to verify OTP and create a session token with custom payload.
         :param order_id : A unique number used for identifying and tracking your orders. : type string
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
@@ -476,7 +461,7 @@ class Order:
         return response
     
     async def getShipmentBagReasons(self, shipment_id=None, bag_id=None, body="", request_headers:Dict={}):
-        """Retrieves reasons that led to the cancellation for the status of shipment bags.
+        """Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
         :param shipment_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         :param bag_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
@@ -523,7 +508,7 @@ class Order:
         return response
     
     async def getShipmentReasons(self, shipment_id=None, body="", request_headers:Dict={}):
-        """Retrieve reasons explaining various shipment statuses.
+        """Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
         payload = {}
@@ -567,7 +552,7 @@ class Order:
         return response
     
     async def updateShipmentStatus(self, shipment_id=None, body="", request_headers:Dict={}):
-        """Modifies the current status of a specific shipment using its shipment ID.
+        """Use this API to update the status of a shipment using its shipment ID.
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
         payload = {}

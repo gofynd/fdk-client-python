@@ -108,58 +108,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
         
     
     
@@ -173,28 +121,9 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
     
     
         
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
         
         
         
@@ -217,6 +146,82 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
         
         
     
@@ -232,8 +237,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
         
         
         
@@ -584,6 +587,17 @@ class CartValidator:
          
         
     
+    class getPriceAdjustments(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        cart_id = fields.Str(required=False)
+         
+        
+    
     class fetchAndvalidateCartItems(BaseSchema):
         
         
@@ -867,10 +881,6 @@ class CartValidator:
         id = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
-        
-        slug = fields.Str(required=False)
-        
-        store_id = fields.Str(required=False)
          
         
     

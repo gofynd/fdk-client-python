@@ -24,7 +24,7 @@ class Partner:
         self._urls.update(urls)
     
     async def getPanelExtensionDetails(self, slug=None, body="", request_headers:Dict={}):
-        """Retrieve detailed information about panel extensions in the public server setup.
+        """Use this API to get extension details
         :param slug : pass the slug of the extension : type string
         """
         payload = {}

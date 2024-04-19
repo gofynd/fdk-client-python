@@ -6,8 +6,6 @@ from marshmallow.validate import OneOf
 from ..PlatformModel import BaseSchema
 
 
-from .enums import *
-
 
 
 class ThemeReq(BaseSchema):
@@ -22,7 +20,7 @@ class MarketplaceThemeId(BaseSchema):
     pass
 
 
-class CompanyThemeMeta(BaseSchema):
+class ThemeMeta(BaseSchema):
     pass
 
 
@@ -42,39 +40,11 @@ class AvailablePageSectionMetaAttributes(BaseSchema):
     pass
 
 
-class SEOMetaItem(BaseSchema):
-    pass
-
-
-class SEOMetaItems(BaseSchema):
-    pass
-
-
-class SEOSitemap(BaseSchema):
-    pass
-
-
-class SEObreadcrumb(BaseSchema):
-    pass
-
-
-class Action(BaseSchema):
-    pass
-
-
-class ActionPage(BaseSchema):
-    pass
-
-
 class AvailablePageSeo(BaseSchema):
     pass
 
 
 class AvailablePageSchemaSections(BaseSchema):
-    pass
-
-
-class AvailablePagePredicate(BaseSchema):
     pass
 
 
@@ -90,11 +60,7 @@ class AvailablePageRoutePredicate(BaseSchema):
     pass
 
 
-class AvailablePagePlatformPredicate(BaseSchema):
-    pass
-
-
-class AvailablePageSchedulePredicate(BaseSchema):
+class AvailablePagePredicate(BaseSchema):
     pass
 
 
@@ -162,35 +128,11 @@ class ThemeConfiguration(BaseSchema):
     pass
 
 
-class OverlayPopup(BaseSchema):
-    pass
-
-
-class DividerStrokeHighlight(BaseSchema):
-    pass
-
-
-class UserAlerts(BaseSchema):
-    pass
-
-
-class OrderTracking(BaseSchema):
-    pass
-
-
-class ThemeConfigListPage(BaseSchema):
-    pass
-
-
-class ThemeConfigListPageSettingsProps(BaseSchema):
-    pass
-
-
 class CustomConfig(BaseSchema):
     pass
 
 
-class ThemeMeta(BaseSchema):
+class Meta(BaseSchema):
     pass
 
 
@@ -306,14 +248,6 @@ class DummyResponse(BaseSchema):
     pass
 
 
-class AppliedThemes(BaseSchema):
-    pass
-
-
-class CompanyPrivateTheme(BaseSchema):
-    pass
-
-
 
 
 
@@ -337,13 +271,11 @@ class CompanyThemeSchema(BaseSchema):
     
     company_id = fields.Int(required=False)
     
-    meta = fields.Nested(CompanyThemeMeta, required=False)
+    meta = fields.Nested(ThemeMeta, required=False)
     
     created_at = fields.Str(required=False)
     
     updated_at = fields.Str(required=False)
-    
-    applied_themes = fields.List(fields.Nested(AppliedThemes, required=False), required=False)
     
 
 
@@ -355,15 +287,9 @@ class MarketplaceThemeId(BaseSchema):
     
     is_default = fields.Boolean(required=False)
     
-    release = fields.Nested(Release, required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
 
 
-class CompanyThemeMeta(BaseSchema):
+class ThemeMeta(BaseSchema):
     # Theme swagger.json
 
     
@@ -423,10 +349,6 @@ class AvailablePageSchema(BaseSchema):
     
     _id = fields.Str(required=False)
     
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
 
 
 class AvailablePageSectionMetaAttributes(BaseSchema):
@@ -437,72 +359,6 @@ class AvailablePageSectionMetaAttributes(BaseSchema):
     
 
 
-class SEOMetaItem(BaseSchema):
-    # Theme swagger.json
-
-    
-    title = fields.Str(required=False)
-    
-    items = fields.List(fields.Nested(SEOMetaItems, required=False), required=False)
-    
-
-
-class SEOMetaItems(BaseSchema):
-    # Theme swagger.json
-
-    
-    key = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-
-
-class SEOSitemap(BaseSchema):
-    # Theme swagger.json
-
-    
-    priority = fields.Float(required=False)
-    
-    frequency = fields.Str(required=False)
-    
-
-
-class SEObreadcrumb(BaseSchema):
-    # Theme swagger.json
-
-    
-    url = fields.Str(required=False)
-    
-    action = fields.Nested(Action, required=False)
-    
-
-
-class Action(BaseSchema):
-    # Theme swagger.json
-
-    
-    page = fields.Nested(ActionPage, required=False)
-    
-    popup = fields.Nested(ActionPage, required=False)
-    
-    type = fields.Str(required=False)
-    
-
-
-class ActionPage(BaseSchema):
-    # Theme swagger.json
-
-    
-    params = fields.Dict(required=False)
-    
-    query = fields.Dict(required=False)
-    
-    url = fields.Str(required=False)
-    
-    type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
-    
-
-
 class AvailablePageSeo(BaseSchema):
     # Theme swagger.json
 
@@ -510,12 +366,6 @@ class AvailablePageSeo(BaseSchema):
     title = fields.Str(required=False)
     
     description = fields.Str(required=False)
-    
-    meta_tags = fields.List(fields.Nested(SEOMetaItem, required=False), required=False)
-    
-    sitemap = fields.Nested(SEOSitemap, required=False)
-    
-    breadcrumb = fields.List(fields.Nested(SEObreadcrumb, required=False), required=False)
     
     _id = fields.Str(required=False)
     
@@ -536,26 +386,6 @@ class AvailablePageSchemaSections(BaseSchema):
     preset = fields.Dict(required=False)
     
     predicate = fields.Nested(AvailablePagePredicate, required=False)
-    
-    source = fields.Str(required=False)
-    
-
-
-class AvailablePagePredicate(BaseSchema):
-    # Theme swagger.json
-
-    
-    screen = fields.Nested(AvailablePageScreenPredicate, required=False)
-    
-    user = fields.Nested(AvailablePageUserPredicate, required=False)
-    
-    route = fields.Nested(AvailablePageRoutePredicate, required=False)
-    
-    schedule = fields.Nested(AvailablePageSchedulePredicate, required=False)
-    
-    platform = fields.Nested(AvailablePagePlatformPredicate, required=False)
-    
-    zones = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -593,27 +423,15 @@ class AvailablePageRoutePredicate(BaseSchema):
     
 
 
-class AvailablePagePlatformPredicate(BaseSchema):
+class AvailablePagePredicate(BaseSchema):
     # Theme swagger.json
 
     
-    ios = fields.Boolean(required=False)
+    screen = fields.Nested(AvailablePageScreenPredicate, required=False)
     
-    android = fields.Boolean(required=False)
+    user = fields.Nested(AvailablePageUserPredicate, required=False)
     
-    web = fields.Boolean(required=False)
-    
-
-
-class AvailablePageSchedulePredicate(BaseSchema):
-    # Theme swagger.json
-
-    
-    cron = fields.Str(required=False)
-    
-    start = fields.Str(required=False)
-    
-    end = fields.Str(required=False)
+    route = fields.Nested(AvailablePageRoutePredicate, required=False)
     
 
 
@@ -713,7 +531,7 @@ class ThemesSchema(BaseSchema):
     
     marketplace_theme_id = fields.Str(required=False)
     
-    meta = fields.Nested(ThemeMeta, required=False)
+    meta = fields.Nested(Meta, required=False)
     
     name = fields.Str(required=False)
     
@@ -730,12 +548,6 @@ class ThemesSchema(BaseSchema):
     assets = fields.Nested(Assets, required=False)
     
     available_sections = fields.List(fields.Nested(SectionItem, required=False), required=False)
-    
-    theme_type = fields.Str(required=False)
-    
-    company_id = fields.Float(required=False)
-    
-    src = fields.Str(required=False)
     
 
 
@@ -827,73 +639,9 @@ class ThemeConfiguration(BaseSchema):
     
     global_config = fields.Dict(required=False)
     
-    page = fields.List(fields.Nested(ThemeConfigListPage, required=False), required=False)
+    custom = fields.Nested(CustomConfig, required=False)
     
-
-
-class OverlayPopup(BaseSchema):
-    # Theme swagger.json
-
-    
-    dialog_backgroung = fields.Str(required=False)
-    
-    overlay = fields.Str(required=False)
-    
-
-
-class DividerStrokeHighlight(BaseSchema):
-    # Theme swagger.json
-
-    
-    divider_strokes = fields.Str(required=False)
-    
-    highlight = fields.Str(required=False)
-    
-
-
-class UserAlerts(BaseSchema):
-    # Theme swagger.json
-
-    
-    success_background = fields.Str(required=False)
-    
-    success_text = fields.Str(required=False)
-    
-    error_background = fields.Str(required=False)
-    
-    error_text = fields.Str(required=False)
-    
-    info_background = fields.Str(required=False)
-    
-    info_text = fields.Str(required=False)
-    
-
-
-class OrderTracking(BaseSchema):
-    # Theme swagger.json
-
-    
-    show_header = fields.Boolean(required=False)
-    
-    show_footer = fields.Boolean(required=False)
-    
-
-
-class ThemeConfigListPage(BaseSchema):
-    # Theme swagger.json
-
-    
-    page = fields.Str(required=False)
-    
-    settings = fields.Nested(ThemeConfigListPageSettingsProps, required=False)
-    
-
-
-class ThemeConfigListPageSettingsProps(BaseSchema):
-    # Theme swagger.json
-
-    
-    props = fields.Dict(required=False)
+    page = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -905,7 +653,7 @@ class CustomConfig(BaseSchema):
     
 
 
-class ThemeMeta(BaseSchema):
+class Meta(BaseSchema):
     # Theme swagger.json
 
     
@@ -1027,8 +775,6 @@ class Prop(BaseSchema):
     
     category = fields.Str(required=False)
     
-    value = fields.Str(required=False)
-    
     id = fields.Str(required=False)
     
     label = fields.Str(required=False)
@@ -1053,8 +799,6 @@ class UMDJs(BaseSchema):
     # Theme swagger.json
 
     
-    link = fields.Str(required=False)
-    
     links = fields.List(fields.Str(required=False), required=False)
     
 
@@ -1070,8 +814,6 @@ class CommonJS(BaseSchema):
 class CSS(BaseSchema):
     # Theme swagger.json
 
-    
-    link = fields.Str(required=False)
     
     links = fields.List(fields.Str(required=False), required=False)
     
@@ -1288,42 +1030,6 @@ class DummyResponse(BaseSchema):
 
     
     message = fields.Str(required=False)
-    
-
-
-class AppliedThemes(BaseSchema):
-    # Theme swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    application_id = fields.Str(required=False)
-    
-
-
-class CompanyPrivateTheme(BaseSchema):
-    # Theme swagger.json
-
-    
-    theme_type = fields.Str(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    version = fields.Str(required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    applied = fields.Boolean(required=False)
-    
-    is_private = fields.Boolean(required=False)
-    
-    meta = fields.Nested(CompanyThemeMeta, required=False)
     
 
 

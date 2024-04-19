@@ -14,7 +14,7 @@ class Theme:
 
     
     async def getAllPages(self, theme_id=None, request_headers:Dict={}):
-        """Retrieve a list of all available pages.
+        """Use this API to retrieve all the available pages of a theme by its ID.
         :param theme_id : ID of the theme to be retrieved : type string
         """
         payload = {}
@@ -56,7 +56,7 @@ class Theme:
         return response
     
     async def createPage(self, theme_id=None, body="", request_headers:Dict={}):
-        """Generate and add a new page to the platform.
+        """Use this API to create a page for a theme by its ID.
         :param theme_id : ID of the theme : type string
         """
         payload = {}
@@ -102,7 +102,7 @@ class Theme:
         return response
     
     async def updateMultiplePages(self, theme_id=None, body="", request_headers:Dict={}):
-        """Modify multiple pages simultaneously.
+        """Use this API to update multiple pages of a theme by its ID.
         :param theme_id : ID of the theme to be retrieved : type string
         """
         payload = {}
@@ -148,7 +148,7 @@ class Theme:
         return response
     
     async def getPage(self, theme_id=None, page_value=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific page.
+        """Use this API to retrieve a page of a theme.
         :param theme_id : ID of the theme to be retrieved : type string
         :param page_value : Value of the page to be retrieved : type string
         """
@@ -193,7 +193,7 @@ class Theme:
         return response
     
     async def updatePage(self, theme_id=None, page_value=None, body="", request_headers:Dict={}):
-        """Modify and update the content of a page.
+        """Use this API to update a page for a theme by its ID.
         :param theme_id : ID of the theme : type string
         :param page_value : Value of the page to be updated : type string
         """
@@ -242,7 +242,7 @@ class Theme:
         return response
     
     async def deletePage(self, theme_id=None, page_value=None, request_headers:Dict={}):
-        """Remove a page from the platform.
+        """Use this API to delete a page for a theme by its ID and page_value.
         :param theme_id : ID of the theme : type string
         :param page_value : Value of the page to be updated : type string
         """
@@ -287,7 +287,7 @@ class Theme:
         return response
     
     async def getThemeLibrary(self, page_size=None, page_no=None, request_headers:Dict={}):
-        """Retrieve themes available in the platform's library.
+        """Theme library is a personalized collection of themes that are chosen and added from the available themes. Use this API to fetch a list of themes from the library along with their configuration details. 
         :param page_size : The number of items to retrieve in each page. Default value is 10.  : type integer
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         """
@@ -332,7 +332,7 @@ class Theme:
         return response
     
     async def addToThemeLibrary(self, body="", request_headers:Dict={}):
-        """Store and add a theme to the platform's library.
+        """Theme library is a personalized collection of themes that are chosen and added from the available themes. Use this API to choose a theme and add it to the theme library.
         """
         payload = {}
         
@@ -375,7 +375,7 @@ class Theme:
         return response
     
     async def getPublicThemes(self, page_size=None, page_no=None, request_headers:Dict={}):
-        """Retrieve themes that are publicly accessible.
+        """Use this API to get a list of free themes that you can apply to your website.
         :param page_size : The number of items to retrieve in each page. Default value is 10.  : type integer
         :param page_no : The page number to navigate through the given set of results. Default value is 1.  : type integer
         """
@@ -420,7 +420,7 @@ class Theme:
         return response
     
     async def getFonts(self, request_headers:Dict={}):
-        """Retrieve a list of available fonts.
+        """Font is a collection of characters with a similar design. Use this API to retrieve a list of website fonts.
         """
         payload = {}
         
@@ -459,7 +459,7 @@ class Theme:
         return response
     
     async def publishTheme(self, theme_id=None, request_headers:Dict={}):
-        """Make a theme accessible for use.
+        """Use this API to publish a theme that is either newly created or edited.
         :param theme_id : ID allotted to the theme. : type string
         """
         payload = {}
@@ -501,7 +501,7 @@ class Theme:
         return response
     
     async def unpublishTheme(self, theme_id=None, request_headers:Dict={}):
-        """Remove a published theme from public access.
+        """Use this API to remove an existing theme from the list of available themes.
         :param theme_id : ID allotted to the theme. : type string
         """
         payload = {}
@@ -543,7 +543,7 @@ class Theme:
         return response
     
     async def archiveTheme(self, theme_id=None, request_headers:Dict={}):
-        """Store a theme in an archive.
+        """Use this API to store an existing theme but not delete it so that it can be used in future if required. 
         :param theme_id : ID allotted to the theme. : type string
         """
         payload = {}
@@ -585,7 +585,7 @@ class Theme:
         return response
     
     async def unarchiveTheme(self, theme_id=None, request_headers:Dict={}):
-        """Retrieve a theme from the archive.
+        """Use this API to restore an archived theme and bring it back for editing or publishing. 
         :param theme_id : ID allotted to the theme. : type string
         """
         payload = {}
@@ -627,7 +627,7 @@ class Theme:
         return response
     
     async def getApplicationThemes(self, request_headers:Dict={}):
-        """Retrieve themes available for an application.
+        """Get all the themes for a specific application
         """
         payload = {}
         
@@ -657,7 +657,7 @@ class Theme:
         return response
     
     async def getApplicationThemesCount(self, request_headers:Dict={}):
-        """Count the number of themes available for an application.
+        """Get the count of themes for a specific application
         """
         payload = {}
         
@@ -687,7 +687,7 @@ class Theme:
         return response
     
     async def getThemeById(self, theme_id=None, request_headers:Dict={}):
-        """Retrieve a theme by its unique identifier.
+        """Get Theme By Theme Id
         :param theme_id : The ID of the theme : type string
         """
         payload = {}
@@ -729,7 +729,7 @@ class Theme:
         return response
     
     async def updateTheme(self, theme_id=None, body="", request_headers:Dict={}):
-        """Modify and update the content and settings of a theme
+        """Update theme for a specific company and application
         :param theme_id : The ID of the theme. : type string
         """
         payload = {}
@@ -775,7 +775,7 @@ class Theme:
         return response
     
     async def deleteTheme(self, theme_id=None, request_headers:Dict={}):
-        """Remove a theme from the platform.
+        """This endpoint is used to delete a theme from the specified company and application.
         :param theme_id : The ID of the theme to be deleted. : type string
         """
         payload = {}
@@ -817,7 +817,7 @@ class Theme:
         return response
     
     async def addThemeToApplication(self, body="", request_headers:Dict={}):
-        """Include a theme in an application's design.
+        """Add a theme to an application by providing the marketplace theme ID.
         """
         payload = {}
         
@@ -860,7 +860,7 @@ class Theme:
         return response
     
     async def updateThemeName(self, theme_id=None, body="", request_headers:Dict={}):
-        """Modify the name of a theme.
+        """Update the name of a theme for a specific company and application.
         :param theme_id : The ID of the theme to be updated. : type string
         """
         payload = {}
@@ -906,7 +906,7 @@ class Theme:
         return response
     
     async def applyTheme(self, theme_id=None, request_headers:Dict={}):
-        """Set and apply a theme to an application or page.
+        """Apply theme to a specific application by providing company_id, application_id, and theme_id.
         :param theme_id : The ID of the apply : type string
         """
         payload = {}
@@ -948,7 +948,7 @@ class Theme:
         return response
     
     async def duplicateTheme(self, theme_id=None, request_headers:Dict={}):
-        """Create a copy of an existing theme.
+        """This endpoint duplicates a Theme in the specified application.
         :param theme_id : The ID of the theme to be duplicated : type string
         """
         payload = {}
@@ -990,7 +990,7 @@ class Theme:
         return response
     
     async def getAppliedTheme(self, request_headers:Dict={}):
-        """Retrieve the currently applied theme.
+        """Get Applied Theme of an Application by Application Id
         """
         payload = {}
         
@@ -1029,7 +1029,7 @@ class Theme:
         return response
     
     async def getThemeForPreview(self, theme_id=None, request_headers:Dict={}):
-        """Retrieve a theme for previewing before application.
+        """Get Theme Preview By Theme Id
         :param theme_id : The ID of the theme : type string
         """
         payload = {}
@@ -1071,7 +1071,7 @@ class Theme:
         return response
     
     async def getThemeLastModified(self, theme_id=None, request_headers:Dict={}):
-        """Retrieve the last modification of a theme.
+        """Use this API to fetch Last-Modified timestamp in header metadata.
         :param theme_id : ID allotted to the theme. : type string
         """
         payload = {}
@@ -1104,7 +1104,7 @@ class Theme:
         return response
     
     async def isUpgradable(self, theme_id=None, request_headers:Dict={}):
-        """Determine if a theme is eligible for an upgrade.
+        """This API endpoint checks if the theme is upgradable for a specific company and application.
         :param theme_id : The ID of the theme : type string
         """
         payload = {}
@@ -1146,7 +1146,7 @@ class Theme:
         return response
     
     async def upgradeTheme(self, theme_id=None, request_headers:Dict={}):
-        """Enhance and update a theme to a new version.
+        """This endpoint allows you to upgrade an application.
         :param theme_id : The ID of the upgrade : type string
         """
         payload = {}

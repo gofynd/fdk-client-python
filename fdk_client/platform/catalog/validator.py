@@ -18,8 +18,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
     
     
         
@@ -44,7 +42,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
@@ -268,14 +265,19 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
         
         
     
     
+        
+        
+        
+        
         
+    
+    
         
         
         
@@ -353,12 +355,8 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
         
         
-    
-    
         
         
     
@@ -369,7 +367,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
     
     
         
@@ -378,8 +375,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
         
         
 
@@ -395,17 +390,13 @@ class CatalogValidator:
         
         level = fields.Str(required=False)
         
-        department = fields.Int(required=False)
+        departments = fields.Str(required=False)
         
         q = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
-        
-        uids = fields.List(fields.Int(required=False), required=False)
-        
-        slug = fields.Str(required=False)
          
         
     
@@ -459,8 +450,6 @@ class CatalogValidator:
         search = fields.Str(required=False)
         
         is_active = fields.Boolean(required=False)
-        
-        slug = fields.Str(required=False)
          
         
     
@@ -955,6 +944,19 @@ class CatalogValidator:
          
         
     
+    class deleteInventory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        size = fields.Str(required=False)
+        
+        item_id = fields.Int(required=False)
+        
+        location_id = fields.Float(required=False)
+         
+        
+    
     class getVariantsOfProducts(BaseSchema):
         
         
@@ -984,8 +986,6 @@ class CatalogValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
-        
-        brand_id = fields.Int(required=False)
          
         
     
@@ -1191,22 +1191,6 @@ class CatalogValidator:
         item_id = fields.Int(required=False)
         
         seller_identifier = fields.Str(required=False)
-         
-        
-    
-    class getMarketplaces(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class updateMarketplaceOptin(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        marketplace_slug = fields.Str(required=False)
          
         
     

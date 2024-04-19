@@ -41,7 +41,7 @@ class Configuration:
         self._urls.update(urls)
     
     async def getApplication(self, body="", request_headers:Dict={}):
-        """Retrieve the current sales channel details which includes configurations that indicate the status of the website, domain, ID, tokens, images, etc.
+        """Use this API to get the current sales channel details which includes configurations that indicate the status of the website, domain, ID, tokens, images, etc.
         """
         payload = {}
         
@@ -82,7 +82,7 @@ class Configuration:
         return response
     
     async def getOwnerInfo(self, body="", request_headers:Dict={}):
-        """Retrieve the current sales channel details which includes channel name, description, banner, logo, favicon, domain details, etc. Also retrieves the seller and owner information such as address, email address, and phone number.
+        """Use this API to get the current sales channel details which includes channel name, description, banner, logo, favicon, domain details, etc. This API also retrieves the seller and owner information such as address, email address, and phone number.
         """
         payload = {}
         
@@ -123,7 +123,7 @@ class Configuration:
         return response
     
     async def getBasicDetails(self, body="", request_headers:Dict={}):
-        """Retrieve only the basic details of the application which includes channel name, description, banner, logo, favicon, domain details, etc.
+        """Use this API to retrieve only the basic details of the application which includes channel name, description, banner, logo, favicon, domain details, etc.
         """
         payload = {}
         
@@ -164,7 +164,7 @@ class Configuration:
         return response
     
     async def getIntegrationTokens(self, body="", request_headers:Dict={}):
-        """Retrieve the tokens used while integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map and Facebook.
+        """Use this API to retrieve the tokens used while integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map and Facebook. **Note** - Token values are encrypted with AES encryption using a secret key. Kindly reach out to the developers for obtaining the secret key.
         """
         payload = {}
         
@@ -205,7 +205,7 @@ class Configuration:
         return response
     
     async def getOrderingStores(self, page_no=None, page_size=None, q=None, body="", request_headers:Dict={}):
-        """Retrieve the details of all the deployment stores (the selling locations where the application will be utilized for placing orders).
+        """Use this API to retrieve the details of all the deployment stores (the selling locations where the application will be utilized for placing orders).
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         :param q : Store code or name of the ordering store. : type string
@@ -224,7 +224,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getOrderingStores"], proccessed_params="""{"required":[],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."},{"name":"q","in":"query","schema":{"type":"string"},"description":"Store code or name of the ordering store.","examples":{"success":{"value":"MRVLB01"}}}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."},{"name":"q","in":"query","schema":{"type":"string"},"description":"Store code or name of the ordering store.","examples":{"success":{"value":"MRVLB01"}}}],"headers":[],"path":[]}""", page_no=page_no, page_size=page_size, q=q)
+        url_with_params = await create_url_with_params(api_url=self._urls["getOrderingStores"], proccessed_params="""{"required":[],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."},{"name":"q","in":"query","schema":{"type":"string"},"description":"Store code or name of the ordering store."}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."},{"name":"q","in":"query","schema":{"type":"string"},"description":"Store code or name of the ordering store."}],"headers":[],"path":[]}""", page_no=page_no, page_size=page_size, q=q)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q)
 
         headers={}
@@ -255,7 +255,7 @@ class Configuration:
         return response
     
     async def getStoreDetailById(self, store_id=None, body="", request_headers:Dict={}):
-        """Retrieve the details of given stores uid (the selling locations where the application will be utilized for placing orders). 
+        """Use this API to retrieve the details of given stores uid (the selling locations where the application will be utilized for placing orders).
         :param store_id : Store uid : type integer
         """
         payload = {}
@@ -268,7 +268,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getStoreDetailById"], proccessed_params="""{"required":[{"name":"store_id","in":"path","required":true,"description":"Store uid","schema":{"type":"integer"},"examples":{"404":{"value":990},"success":{"value":1}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"store_id","in":"path","required":true,"description":"Store uid","schema":{"type":"integer"},"examples":{"404":{"value":990},"success":{"value":1}}}]}""", store_id=store_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getStoreDetailById"], proccessed_params="""{"required":[{"name":"store_id","in":"path","required":true,"description":"Store uid","schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"store_id","in":"path","required":true,"description":"Store uid","schema":{"type":"integer"}}]}""", store_id=store_id)
         query_string = await create_query_string(store_id=store_id)
 
         headers={}
@@ -299,7 +299,7 @@ class Configuration:
         return response
     
     async def getFeatures(self, body="", request_headers:Dict={}):
-        """Retrieve the configuration of features such as product detail, landing page, options in the login/registration screen, communication opt-in, cart options and many more.
+        """Use this API to retrieve the configuration of features such as product detail, landing page, options in the login/registration screen, communication opt-in, cart options and many more.
         """
         payload = {}
         
@@ -340,7 +340,7 @@ class Configuration:
         return response
     
     async def getContactInfo(self, body="", request_headers:Dict={}):
-        """Retrieve information about the social links, address and contact information of the company/seller/brand operating the application.
+        """Use this API to retrieve information about the social links, address and contact information of the company/seller/brand operating the application.
         """
         payload = {}
         
@@ -381,7 +381,7 @@ class Configuration:
         return response
     
     async def getCurrencies(self, body="", request_headers:Dict={}):
-        """Retrieve a list of currencies available. Also get the name, code, symbol, and the decimal digits of the currencies. 
+        """Use this API to get a list of currencies available. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
         """
         payload = {}
         
@@ -422,7 +422,7 @@ class Configuration:
         return response
     
     async def getCurrencyById(self, id=None, body="", request_headers:Dict={}):
-        """Retrieve details of a specific currency using its ID. 
+        """Use this API to retrieve a currency using its ID.
         :param id : Object ID assigned to the currency : type string
         """
         payload = {}
@@ -435,7 +435,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCurrencyById"], proccessed_params="""{"required":[{"name":"id","in":"path","required":true,"description":"Object ID assigned to the currency","schema":{"type":"string"},"examples":{"success":{"value":"5bc8a62e21d33c25ebbfd6d3"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","required":true,"description":"Object ID assigned to the currency","schema":{"type":"string"},"examples":{"success":{"value":"5bc8a62e21d33c25ebbfd6d3"}}}]}""", id=id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCurrencyById"], proccessed_params="""{"required":[{"name":"id","in":"path","required":true,"description":"Object ID assigned to the currency","schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","required":true,"description":"Object ID assigned to the currency","schema":{"type":"string"}}]}""", id=id)
         query_string = await create_query_string(id=id)
 
         headers={}
@@ -466,7 +466,7 @@ class Configuration:
         return response
     
     async def getAppCurrencies(self, body="", request_headers:Dict={}):
-        """Retrieve a list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
+        """Use this API to get a list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
         """
         payload = {}
         
@@ -507,7 +507,7 @@ class Configuration:
         return response
     
     async def getLanguages(self, body="", request_headers:Dict={}):
-        """Retrieves all languages supported by the app.
+        """Use this API to get a list of languages supported in the application
         """
         payload = {}
         
@@ -548,7 +548,7 @@ class Configuration:
         return response
     
     async def getOrderingStoreCookie(self, body="", request_headers:Dict={}):
-        """Retrieve an Ordering Store signed cookie upon selecting an ordering store. This will be used by the cart service to verify a coupon against the selected ordering store in cart. 
+        """Use this API to get an Ordering Store signed cookie upon selecting an ordering store. This will be used by the cart service to verify a coupon against the selected ordering store in cart.
         """
         payload = {}
         
@@ -593,7 +593,7 @@ class Configuration:
         return response
     
     async def removeOrderingStoreCookie(self, body="", request_headers:Dict={}):
-        """Unset the Ordering Store cookie upon changing the sales channel, by its domain URL, in the Universal Fynd Store app.
+        """Use this API to unset the Ordering Store cookie upon changing the sales channel, by its domain URL, in the Universal Fynd Store app.
         """
         payload = {}
         
@@ -634,7 +634,7 @@ class Configuration:
         return response
     
     async def getAppStaffList(self, page_no=None, page_size=None, order_incent=None, ordering_store=None, user=None, user_name=None, body="", request_headers:Dict={}):
-        """Retrieve a list of staff including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the application.
+        """Use this API to get a list of staff including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the application.
         :param page_no :  : type integer
         :param page_size :  : type integer
         :param order_incent : This is a boolean value. Select `true` to retrieve the staff members eligible for getting incentives on orders. : type boolean
@@ -662,7 +662,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getAppStaffList"], proccessed_params="""{"required":[],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"}},{"name":"page_size","in":"query","schema":{"type":"integer"}},{"name":"order_incent","in":"query","description":"This is a boolean value. Select `true` to retrieve the staff members eligible for getting incentives on orders.","required":false,"schema":{"type":"boolean","example":true}},{"name":"ordering_store","in":"query","description":"ID of the ordering store. Helps in retrieving staff members working at a particular ordering store.","required":false,"schema":{"type":"integer","example":12},"examples":{"400":{"value":1},"success":{"value":1}}},{"name":"user","in":"query","description":"Mongo ID of the staff. Helps in retrieving the details of a particular staff member.","required":false,"schema":{"type":"string","example":"5e6b6ae7d450b1219ffdf3b2"},"examples":{"400":{"value":"test"},"success":{"value":"000000000000000016841367"}}},{"name":"user_name","in":"query","description":"user name of the member","schema":{"type":"string"},"examples":{"400":{"value":"Fynd"},"success":{"value":"Fynd"}}}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"}},{"name":"page_size","in":"query","schema":{"type":"integer"}},{"name":"order_incent","in":"query","description":"This is a boolean value. Select `true` to retrieve the staff members eligible for getting incentives on orders.","required":false,"schema":{"type":"boolean","example":true}},{"name":"ordering_store","in":"query","description":"ID of the ordering store. Helps in retrieving staff members working at a particular ordering store.","required":false,"schema":{"type":"integer","example":12},"examples":{"400":{"value":1},"success":{"value":1}}},{"name":"user","in":"query","description":"Mongo ID of the staff. Helps in retrieving the details of a particular staff member.","required":false,"schema":{"type":"string","example":"5e6b6ae7d450b1219ffdf3b2"},"examples":{"400":{"value":"test"},"success":{"value":"000000000000000016841367"}}},{"name":"user_name","in":"query","description":"user name of the member","schema":{"type":"string"},"examples":{"400":{"value":"Fynd"},"success":{"value":"Fynd"}}}],"headers":[],"path":[]}""", page_no=page_no, page_size=page_size, order_incent=order_incent, ordering_store=ordering_store, user=user, user_name=user_name)
+        url_with_params = await create_url_with_params(api_url=self._urls["getAppStaffList"], proccessed_params="""{"required":[],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"}},{"name":"page_size","in":"query","schema":{"type":"integer"}},{"name":"order_incent","in":"query","description":"This is a boolean value. Select `true` to retrieve the staff members eligible for getting incentives on orders.","required":false,"schema":{"type":"boolean","example":true}},{"name":"ordering_store","in":"query","description":"ID of the ordering store. Helps in retrieving staff members working at a particular ordering store.","required":false,"schema":{"type":"integer","example":12}},{"name":"user","in":"query","description":"Mongo ID of the staff. Helps in retrieving the details of a particular staff member.","required":false,"schema":{"type":"string","example":"5e6b6ae7d450b1219ffdf3b2"}},{"name":"user_name","in":"query","description":"user name of the member","schema":{"type":"string"}}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"}},{"name":"page_size","in":"query","schema":{"type":"integer"}},{"name":"order_incent","in":"query","description":"This is a boolean value. Select `true` to retrieve the staff members eligible for getting incentives on orders.","required":false,"schema":{"type":"boolean","example":true}},{"name":"ordering_store","in":"query","description":"ID of the ordering store. Helps in retrieving staff members working at a particular ordering store.","required":false,"schema":{"type":"integer","example":12}},{"name":"user","in":"query","description":"Mongo ID of the staff. Helps in retrieving the details of a particular staff member.","required":false,"schema":{"type":"string","example":"5e6b6ae7d450b1219ffdf3b2"}},{"name":"user_name","in":"query","description":"user name of the member","schema":{"type":"string"}}],"headers":[],"path":[]}""", page_no=page_no, page_size=page_size, order_incent=order_incent, ordering_store=ordering_store, user=user, user_name=user_name)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, order_incent=order_incent, ordering_store=ordering_store, user=user, user_name=user_name)
 
         headers={}
@@ -693,7 +693,7 @@ class Configuration:
         return response
     
     async def getAppStaffs(self, order_incent=None, ordering_store=None, user=None, body="", request_headers:Dict={}):
-        """Retrieve a list of staff including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the application.
+        """Use this API to get a list of staff including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the application.
         :param order_incent : This is a boolean value. Select `true` to retrieve the staff members eligible for getting incentives on orders. : type boolean
         :param ordering_store : ID of the ordering store. Helps in retrieving staff members working at a particular ordering store. : type integer
         :param user : Mongo ID of the staff. Helps in retrieving the details of a particular staff member. : type string
@@ -712,7 +712,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getAppStaffs"], proccessed_params="""{"required":[],"optional":[{"name":"order_incent","in":"query","description":"This is a boolean value. Select `true` to retrieve the staff members eligible for getting incentives on orders.","required":false,"schema":{"type":"boolean","example":true}},{"name":"ordering_store","in":"query","description":"ID of the ordering store. Helps in retrieving staff members working at a particular ordering store.","required":false,"schema":{"type":"integer","example":12},"examples":{"400":{"value":1},"success":{"value":1}}},{"name":"user","in":"query","description":"Mongo ID of the staff. Helps in retrieving the details of a particular staff member.","required":false,"schema":{"type":"string","example":"5e6b6ae7d450b1219ffdf3b2"},"examples":{"400":{"value":"test"},"success":{"value":"000000000000000016841367"}}}],"query":[{"name":"order_incent","in":"query","description":"This is a boolean value. Select `true` to retrieve the staff members eligible for getting incentives on orders.","required":false,"schema":{"type":"boolean","example":true}},{"name":"ordering_store","in":"query","description":"ID of the ordering store. Helps in retrieving staff members working at a particular ordering store.","required":false,"schema":{"type":"integer","example":12},"examples":{"400":{"value":1},"success":{"value":1}}},{"name":"user","in":"query","description":"Mongo ID of the staff. Helps in retrieving the details of a particular staff member.","required":false,"schema":{"type":"string","example":"5e6b6ae7d450b1219ffdf3b2"},"examples":{"400":{"value":"test"},"success":{"value":"000000000000000016841367"}}}],"headers":[],"path":[]}""", order_incent=order_incent, ordering_store=ordering_store, user=user)
+        url_with_params = await create_url_with_params(api_url=self._urls["getAppStaffs"], proccessed_params="""{"required":[],"optional":[{"name":"order_incent","in":"query","description":"This is a boolean value. Select `true` to retrieve the staff members eligible for getting incentives on orders.","required":false,"schema":{"type":"boolean","example":true}},{"name":"ordering_store","in":"query","description":"ID of the ordering store. Helps in retrieving staff members working at a particular ordering store.","required":false,"schema":{"type":"integer","example":12}},{"name":"user","in":"query","description":"Mongo ID of the staff. Helps in retrieving the details of a particular staff member.","required":false,"schema":{"type":"string","example":"5e6b6ae7d450b1219ffdf3b2"}}],"query":[{"name":"order_incent","in":"query","description":"This is a boolean value. Select `true` to retrieve the staff members eligible for getting incentives on orders.","required":false,"schema":{"type":"boolean","example":true}},{"name":"ordering_store","in":"query","description":"ID of the ordering store. Helps in retrieving staff members working at a particular ordering store.","required":false,"schema":{"type":"integer","example":12}},{"name":"user","in":"query","description":"Mongo ID of the staff. Helps in retrieving the details of a particular staff member.","required":false,"schema":{"type":"string","example":"5e6b6ae7d450b1219ffdf3b2"}}],"headers":[],"path":[]}""", order_incent=order_incent, ordering_store=ordering_store, user=user)
         query_string = await create_query_string(order_incent=order_incent, ordering_store=ordering_store, user=user)
 
         headers={}

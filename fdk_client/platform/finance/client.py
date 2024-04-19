@@ -13,7 +13,7 @@ class Finance:
 
     
     async def generateReport(self, body="", request_headers:Dict={}):
-        """Create a financial report with relevant data.
+        """Generate finance reports.
         """
         payload = {}
         
@@ -56,7 +56,7 @@ class Finance:
         return response
     
     async def downloadReport(self, body="", request_headers:Dict={}):
-        """Retrieve and save a financial report.
+        """Gives list of all downloaded reports.
         """
         payload = {}
         
@@ -99,7 +99,7 @@ class Finance:
         return response
     
     async def getData(self, body="", request_headers:Dict={}):
-        """Retrieve financial data for analysis.
+        """Gives list of columns for table provided.
         """
         payload = {}
         
@@ -142,7 +142,7 @@ class Finance:
         return response
     
     async def getReason(self, body="", request_headers:Dict={}):
-        """Retrieve the reason behind a transaction.
+        """Gives list of the reasons.
         """
         payload = {}
         
@@ -185,7 +185,7 @@ class Finance:
         return response
     
     async def getReportList(self, body="", request_headers:Dict={}):
-        """Retrieve a list of available financial reports.
+        """Gives list of reports.
         """
         payload = {}
         
@@ -228,7 +228,7 @@ class Finance:
         return response
     
     async def getAffiliate(self, body="", request_headers:Dict={}):
-        """Retrieve information about an affiliate.
+        """Gives list of affiliates for company.
         """
         payload = {}
         
@@ -271,7 +271,7 @@ class Finance:
         return response
     
     async def downloadCreditDebitNote(self, body="", request_headers:Dict={}):
-        """Retrieve and save credit/debit notes.
+        """Download credit debit note pdf.
         """
         payload = {}
         
@@ -314,7 +314,7 @@ class Finance:
         return response
     
     async def paymentProcess(self, body="", request_headers:Dict={}):
-        """Initiate and manage payment processes.
+        """Payment Processing API.
         """
         payload = {}
         
@@ -357,7 +357,7 @@ class Finance:
         return response
     
     async def creditlineDataplatform(self, body="", request_headers:Dict={}):
-        """Connect to the credit line data platform.
+        """Used to fetch creditline data.
         """
         payload = {}
         
@@ -400,7 +400,7 @@ class Finance:
         return response
     
     async def isCreditlinePlatform(self, body="", request_headers:Dict={}):
-        """Determine if the credit line platform is operational.
+        """Checks if seller has opted for creditline or not.
         """
         payload = {}
         
@@ -443,7 +443,7 @@ class Finance:
         return response
     
     async def invoiceType(self, body="", request_headers:Dict={}):
-        """Retrieve a list of available invoice types.
+        """Gives list of active invoice type.
         """
         payload = {}
         
@@ -529,7 +529,7 @@ class Finance:
         return response
     
     async def invoicePDF(self, body="", request_headers:Dict={}):
-        """Retrieve the PDF version of an invoice.
+        """Gives pdf view of invoice.
         """
         payload = {}
         
@@ -572,7 +572,7 @@ class Finance:
         return response
     
     async def isCnRefundMethod(self, body="", request_headers:Dict={}):
-        """Verify the refund method for credit notes.
+        """Checks if seller has obtained cn as refund method or not.
         """
         payload = {}
         
@@ -615,7 +615,7 @@ class Finance:
         return response
     
     async def createSellerCreditNoteConfig(self, body="", request_headers:Dict={}):
-        """Set up configuration for seller credit notes.
+        """Creates credit note config.
         """
         payload = {}
         
@@ -701,7 +701,7 @@ class Finance:
         return response
     
     async def channelDisplayName(self, filter_key=None, request_headers:Dict={}):
-        """Retrieve the display name for a channel.
+        """Provide channel display name dict.
         :param filter_key : gives display name for channel. : type string
         """
         payload = {}
@@ -743,7 +743,7 @@ class Finance:
         return response
     
     async def getPdfUrlView(self, body="", request_headers:Dict={}):
-        """Retrieve a URL to view a PDF document.
+        """Gives cn pdf url.
         """
         payload = {}
         
@@ -786,7 +786,7 @@ class Finance:
         return response
     
     async def creditNoteDetails(self, body="", request_headers:Dict={}):
-        """Retrieve detailed information about a credit note.
+        """Gives credit note details.
         """
         payload = {}
         
@@ -829,7 +829,7 @@ class Finance:
         return response
     
     async def getCustomerCreditBalance(self, body="", request_headers:Dict={}):
-        """Retrieve the credit balance of a customer.
+        """Gives customer credit balance.
         """
         payload = {}
         
@@ -872,7 +872,7 @@ class Finance:
         return response
     
     async def getCnConfig(self, body="", request_headers:Dict={}):
-        """Retrieve configuration settings for credit notes.
+        """Gives credit note config.
         """
         payload = {}
         
@@ -915,7 +915,7 @@ class Finance:
         return response
     
     async def generateReportCustomerCn(self, body="", request_headers:Dict={}):
-        """Create a report specifically for customer credit notes.
+        """Generate Credit Note report and gives Note details.
         """
         payload = {}
         
@@ -958,7 +958,7 @@ class Finance:
         return response
     
     async def downloadReportCustomerCn(self, body="", request_headers:Dict={}):
-        """Retrieve and save a report for customer credit notes.
+        """Gives list of downloaded reports.
         """
         payload = {}
         
@@ -1001,7 +1001,7 @@ class Finance:
         return response
     
     async def getReportingFilters(self, filter_key=None, affiliate_id=None, request_headers:Dict={}):
-        """Retrieve available filters for financial reporting.
+        """Gets all customer Cn filters and search.
         :param filter_key : filter type. : type string
         :param affiliate_id : affiliate id. : type string
         """
@@ -1041,133 +1041,6 @@ class Finance:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getReportingFilters")
-                print(e)
-
-        return response
-    
-    async def invoicePaymentDetails(self, invoice_number=None, request_headers:Dict={}):
-        """Display payment details of invoice.
-        :param invoice_number : Invoice Number for which the data will be returned.Invoice_Number is required. : type string
-        """
-        payload = {}
-        
-        if invoice_number is not None:
-            payload["invoice_number"] = invoice_number
-
-        # Parameter validation
-        schema = FinanceValidator.invoicePaymentDetails()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/{invoice_number}/payment", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true},{"in":"path","name":"invoice_number","description":"Invoice Number for which the data will be returned.Invoice_Number is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true},{"in":"path","name":"invoice_number","description":"Invoice Number for which the data will be returned.Invoice_Number is required.","schema":{"type":"string"},"required":true}]}""", invoice_number=invoice_number)
-        query_string = await create_query_string(invoice_number=invoice_number)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/{invoice_number}/payment", invoice_number=invoice_number), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import InvoicePaymentDetailsResponse
-            schema = InvoicePaymentDetailsResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for invoicePaymentDetails")
-                print(e)
-
-        return response
-    
-    async def invoiceActivityLogs(self, invoice_number=None, request_headers:Dict={}):
-        """Display activity log details of invoice.
-        :param invoice_number : Invoice Number for which the data will be returned. Invoice_number is required. : type string
-        """
-        payload = {}
-        
-        if invoice_number is not None:
-            payload["invoice_number"] = invoice_number
-
-        # Parameter validation
-        schema = FinanceValidator.invoiceActivityLogs()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/{invoice_number}/activity", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned. Company_id is required.","schema":{"type":"string"},"required":true},{"in":"path","name":"invoice_number","description":"Invoice Number for which the data will be returned. Invoice_number is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned. Company_id is required.","schema":{"type":"string"},"required":true},{"in":"path","name":"invoice_number","description":"Invoice Number for which the data will be returned. Invoice_number is required.","schema":{"type":"string"},"required":true}]}""", invoice_number=invoice_number)
-        query_string = await create_query_string(invoice_number=invoice_number)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/{invoice_number}/activity", invoice_number=invoice_number), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import InvoiceActivityLogsResponse
-            schema = InvoiceActivityLogsResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for invoiceActivityLogs")
-                print(e)
-
-        return response
-    
-    async def unlockCreditNote(self, body="", request_headers:Dict={}):
-        """Used to unlock all request credit notes.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = FinanceValidator.unlockCreditNote()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import UnlockCreditNoteRequest
-        schema = UnlockCreditNoteRequest()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-notes/unlock", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-notes/unlock", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import UnlockCreditNoteResponse
-            schema = UnlockCreditNoteResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for unlockCreditNote")
                 print(e)
 
         return response

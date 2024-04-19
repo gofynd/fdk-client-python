@@ -5,51 +5,32 @@
 ##### [Back to Platform docs](./README.md)
 
 ## Lead Methods
-Handles communication between Administrator-Staff and Staff-Users
-
-Ticket Management
-* [getPlatformTickets](#getplatformtickets)
-* [createTicket](#createticket)
-* [getPlatformTicket](#getplatformticket)
-* [editPlatformTicket](#editplatformticket)
-
+Handles communication between Administrator
 
 Default
-* [getNewTickets](#getnewtickets)
-* [getNewTicket](#getnewticket)
-* [editNewTicket](#editnewticket)
-* [createNewHistory](#createnewhistory)
-* [getNewTicketHistory](#getnewtickethistory)
-* [deleteCustomForm](#deletecustomform)
-* [getNewTokenForVideoRoom](#getnewtokenforvideoroom)
-* [getNewVideoParticipants](#getnewvideoparticipants)
-
-
-Ticket History Management
+* [getPlatformTickets](#getplatformtickets)
+* [createTicket](#createticket)
+* [getTickets](#gettickets)
+* [getPlatformTicket](#getplatformticket)
+* [editPlatformTicket](#editplatformticket)
+* [getTicket](#getticket)
+* [editTicket](#editticket)
 * [createPlatformTicketHistory](#createplatformtickethistory)
 * [getPlatformTicketHistory](#getplatformtickethistory)
-
-
-Feedback Management
 * [getFeedbacks](#getfeedbacks)
 * [submitFeedback](#submitfeedback)
-
-
-Custom Form Management:
+* [createHistory](#createhistory)
+* [getTicketHistory](#gettickethistory)
 * [getCustomForm](#getcustomform)
 * [editCustomForm](#editcustomform)
 * [getCustomForms](#getcustomforms)
 * [createCustomForm](#createcustomform)
-
-
-Video Room Management
 * [getTokenForPlatformVideoRoom](#gettokenforplatformvideoroom)
+* [getTokenForVideoRoom](#gettokenforvideoroom)
 * [getPlatformVideoParticipants](#getplatformvideoparticipants)
+* [getVideoParticipants](#getvideoparticipants)
 * [openVideoRoom](#openvideoroom)
 * [closeVideoRoom](#closevideoroom)
-
-
-General Configuration
 * [getGeneralConfig](#getgeneralconfig)
 
 
@@ -60,7 +41,7 @@ General Configuration
 
 
 ### getPlatformTickets
-Get platform tickets.
+Gets the list of company level tickets and/or ticket filters depending on query params
 
 
 
@@ -90,7 +71,7 @@ except Exception as e:
 
 
 
-Retrieve a list of tickets created within the platform at company level
+Gets the list of company level tickets and/or ticket filters
 
 *Returned Response:*
 
@@ -498,7 +479,7 @@ Success
 
 
 ### createTicket
-Create ticket.
+Creates a company level ticket
 
 
 
@@ -520,7 +501,7 @@ except Exception as e:
 | body | [AddTicketPayload](#AddTicketPayload) | yes | Request body |
 
 
-Create a new ticket at application level
+Creates a company level ticket
 
 *Returned Response:*
 
@@ -751,519 +732,7 @@ Success
 ---
 
 
-### getPlatformTicket
-Get platform ticket.
-
-
-
-
-```python
-try:
-    result = await platformClient.lead.getPlatformTicket(id=id)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | Tiket ID of the ticket to be fetched |  
-
-
-
-Retrieve detailed information about a specific ticket which is raised at company level
-
-*Returned Response:*
-
-
-
-
-[Ticket](#Ticket)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "context": {
-      "company_id": "1"
-    },
-    "content": {
-      "title": "SOme title Response",
-      "description": "Handles communication between Administrator",
-      "attachments": []
-    },
-    "status": {
-      "display": "In Progress",
-      "color": "#ffa951",
-      "key": "in_progress"
-    },
-    "priority": {
-      "display": "Medium",
-      "color": "#f37736",
-      "key": "medium"
-    },
-    "assigned_to": {
-      "agent_id": "5d1363adf599d850df93175e",
-      "gender": "male",
-      "accountType": "user",
-      "active": true,
-      "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
-      "hasOldPasswordHash": false,
-      "_id": "5d1363adf599d850df93175e",
-      "phoneNumbers": [
-        {
-          "active": true,
-          "primary": true,
-          "verified": true,
-          "countryCode": 91,
-          "phone": "9999999999"
-        }
-      ],
-      "firstName": "Nikhil",
-      "lastName": "Manapure",
-      "emails": [
-        {
-          "active": true,
-          "primary": true,
-          "verified": true,
-          "email": "niktest@xyz.com"
-        }
-      ],
-      "username": "niktest_xyz_com_38425_20500281",
-      "createdAt": "2019-01-01T17:22:38.528Z",
-      "updatedAt": "2021-01-22T10:02:42.258Z",
-      "uid": "20500281",
-      "__v": 56
-    },
-    "tags": [
-      "some-title"
-    ],
-    "_id": "6012f38557751ee8fc162cf7",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.96"
-        },
-        "os": {
-          "name": "macOS",
-          "version": "10.15.7",
-          "versionName": "Catalina"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
-        }
-      }
-    },
-    "source": "sales_channel",
-    "created_by": {
-      "id": "5d1363adf599d850df93175e",
-      "user": {
-        "gender": "male",
-        "accountType": "user",
-        "active": true,
-        "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
-        "hasOldPasswordHash": false,
-        "_id": "5d1363adf599d850df93175e",
-        "phoneNumbers": [
-          {
-            "active": true,
-            "primary": true,
-            "verified": true,
-            "countryCode": 91,
-            "phone": "9999999999"
-          }
-        ],
-        "firstName": "Nikhil",
-        "lastName": "Manapure",
-        "emails": [
-          {
-            "active": true,
-            "primary": true,
-            "verified": true,
-            "email": "niktest@xyz.com"
-          }
-        ],
-        "username": "niktest_xyz_com_38425_20500281",
-        "createdAt": "2019-01-01T17:22:38.528Z",
-        "updatedAt": "2021-01-22T10:02:42.258Z",
-        "uid": "20500281",
-        "__v": 56
-      }
-    },
-    "response_id": "6012f38457751e0fb8162cf6",
-    "category": {
-      "form": {
-        "login_required": false,
-        "should_notify": false,
-        "inputs": [
-          {
-            "required": false,
-            "type": "text",
-            "enum": [],
-            "display": "Single lineeee",
-            "key": "single-lineeee",
-            "showRegexInput": false
-          },
-          {
-            "required": false,
-            "type": "email",
-            "enum": [],
-            "display": "Email",
-            "regex": "\\S+@\\S+\\.\\S+",
-            "key": "email",
-            "showRegexInput": true
-          },
-          {
-            "required": false,
-            "type": "text",
-            "enum": [],
-            "display": "dfsdf",
-            "key": "dfsdf",
-            "showRegexInput": false
-          }
-        ],
-        "available_assignees": [
-          "5b9b98150df588546aaea6d2",
-          "5c45d78395d7504f76c2cb37"
-        ],
-        "_id": "5fd72db3dc250f8decfc61b2",
-        "title": "SOme title",
-        "description": "SOme big description",
-        "slug": "some-title",
-        "application_id": "000000000000000000000003",
-        "created_on": {
-          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-          "platform": "web",
-          "meta": {
-            "browser": {
-              "name": "Chrome",
-              "version": "87.0.4280.88"
-            },
-            "os": {
-              "name": "macOS",
-              "version": "10.15.6",
-              "versionName": "Catalina"
-            },
-            "platform": {
-              "type": "desktop",
-              "vendor": "Apple"
-            },
-            "engine": {
-              "name": "Blink"
-            }
-          }
-        },
-        "created_by": "5d1363adf599d850df93175e",
-        "createdAt": "2020-12-14T09:17:39.953Z",
-        "updatedAt": "2021-01-28T18:48:07.717Z",
-        "__v": 0
-      },
-      "key": "some-title",
-      "display": "SOme title"
-    },
-    "ticket_id": "43",
-    "createdAt": "2021-01-28T17:25:25.013Z",
-    "updatedAt": "2021-01-28T17:25:33.396Z",
-    "__v": 0,
-    "video_room_id": "6012f38557751ee8fc162cf7"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### editPlatformTicket
-Edit platform ticket.
-
-
-
-
-```python
-try:
-    result = await platformClient.lead.editPlatformTicket(id=id, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | Ticket ID of ticket to be edited |  
-| body | [EditTicketPayload](#EditTicketPayload) | yes | Request body |
-
-
-Modify the content and settings of a specific company level ticket.
-
-*Returned Response:*
-
-
-
-
-[Ticket](#Ticket)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "context": {
-      "company_id": "1"
-    },
-    "content": {
-      "title": "SOme title Response",
-      "description": "Handles communication between Administrator",
-      "attachments": []
-    },
-    "status": {
-      "display": "In Progress",
-      "color": "#ffa951",
-      "key": "in_progress"
-    },
-    "priority": {
-      "display": "Medium",
-      "color": "#f37736",
-      "key": "medium"
-    },
-    "assigned_to": {
-      "agent_id": "5d1363adf599d850df93175e",
-      "gender": "male",
-      "accountType": "user",
-      "active": true,
-      "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
-      "hasOldPasswordHash": false,
-      "_id": "5d1363adf599d850df93175e",
-      "phoneNumbers": [
-        {
-          "active": true,
-          "primary": true,
-          "verified": true,
-          "countryCode": 91,
-          "phone": "9999999999"
-        }
-      ],
-      "firstName": "Nikhil",
-      "lastName": "Manapure",
-      "emails": [
-        {
-          "active": true,
-          "primary": true,
-          "verified": true,
-          "email": "niktest@xyz.com"
-        }
-      ],
-      "username": "niktest_xyz_com_38425_20500281",
-      "createdAt": "2019-01-01T17:22:38.528Z",
-      "updatedAt": "2021-01-22T10:02:42.258Z",
-      "uid": "20500281",
-      "__v": 56
-    },
-    "tags": [
-      "some-title"
-    ],
-    "_id": "6012f38557751ee8fc162cf7",
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.96"
-        },
-        "os": {
-          "name": "macOS",
-          "version": "10.15.7",
-          "versionName": "Catalina"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
-        }
-      }
-    },
-    "source": "sales_channel",
-    "created_by": {
-      "id": "5d1363adf599d850df93175e",
-      "user": {
-        "gender": "male",
-        "accountType": "user",
-        "active": true,
-        "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
-        "hasOldPasswordHash": false,
-        "_id": "5d1363adf599d850df93175e",
-        "phoneNumbers": [
-          {
-            "active": true,
-            "primary": true,
-            "verified": true,
-            "countryCode": 91,
-            "phone": "9999999999"
-          }
-        ],
-        "firstName": "Nikhil",
-        "lastName": "Manapure",
-        "emails": [
-          {
-            "active": true,
-            "primary": true,
-            "verified": true,
-            "email": "niktest@xyz.com"
-          }
-        ],
-        "username": "niktest_xyz_com_38425_20500281",
-        "createdAt": "2019-01-01T17:22:38.528Z",
-        "updatedAt": "2021-01-22T10:02:42.258Z",
-        "uid": "20500281",
-        "__v": 56
-      }
-    },
-    "response_id": "6012f38457751e0fb8162cf6",
-    "category": {
-      "form": {
-        "login_required": false,
-        "should_notify": false,
-        "inputs": [
-          {
-            "required": false,
-            "type": "text",
-            "enum": [],
-            "display": "Single lineeee",
-            "key": "single-lineeee",
-            "showRegexInput": false
-          },
-          {
-            "required": false,
-            "type": "email",
-            "enum": [],
-            "display": "Email",
-            "regex": "\\S+@\\S+\\.\\S+",
-            "key": "email",
-            "showRegexInput": true
-          },
-          {
-            "required": false,
-            "type": "text",
-            "enum": [],
-            "display": "dfsdf",
-            "key": "dfsdf",
-            "showRegexInput": false
-          }
-        ],
-        "available_assignees": [
-          "5b9b98150df588546aaea6d2",
-          "5c45d78395d7504f76c2cb37"
-        ],
-        "_id": "5fd72db3dc250f8decfc61b2",
-        "title": "SOme title",
-        "description": "SOme big description",
-        "slug": "some-title",
-        "application_id": "000000000000000000000003",
-        "created_on": {
-          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-          "platform": "web",
-          "meta": {
-            "browser": {
-              "name": "Chrome",
-              "version": "87.0.4280.88"
-            },
-            "os": {
-              "name": "macOS",
-              "version": "10.15.6",
-              "versionName": "Catalina"
-            },
-            "platform": {
-              "type": "desktop",
-              "vendor": "Apple"
-            },
-            "engine": {
-              "name": "Blink"
-            }
-          }
-        },
-        "created_by": "5d1363adf599d850df93175e",
-        "createdAt": "2020-12-14T09:17:39.953Z",
-        "updatedAt": "2021-01-28T18:48:07.717Z",
-        "__v": 0
-      },
-      "key": "some-title",
-      "display": "SOme title"
-    },
-    "ticket_id": "43",
-    "createdAt": "2021-01-28T17:25:25.013Z",
-    "updatedAt": "2021-01-28T17:25:33.396Z",
-    "__v": 0,
-    "video_room_id": "6012f38557751ee8fc162cf7"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getNewTickets
+### getTickets
 Gets the list of Application level Tickets and/or ticket filters depending on query params
 
 
@@ -1271,7 +740,7 @@ Gets the list of Application level Tickets and/or ticket filters depending on qu
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").lead.getNewTickets(items=items, filters=filters, q=q, status=status, priority=priority, category=category)
+    result = await platformClient.application("<APPLICATION_ID>").lead.getTickets(items=items, filters=filters, q=q, status=status, priority=priority, category=category)
     # use result
 except Exception as e:
     print(e)
@@ -1699,7 +1168,517 @@ Success
 ---
 
 
-### getNewTicket
+### getPlatformTicket
+Retreives ticket details of a company level ticket with ticket ID
+
+
+
+
+```python
+try:
+    result = await platformClient.lead.getPlatformTicket(id=id)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | Tiket ID of the ticket to be fetched |  
+
+
+
+Retreives ticket details of a company level ticket
+
+*Returned Response:*
+
+
+
+
+[Ticket](#Ticket)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Default</i></summary>
+
+```json
+{
+  "value": {
+    "context": {
+      "company_id": "1"
+    },
+    "content": {
+      "title": "SOme title Response",
+      "description": "Handles communication between Administrator",
+      "attachments": []
+    },
+    "status": {
+      "display": "In Progress",
+      "color": "#ffa951",
+      "key": "in_progress"
+    },
+    "priority": {
+      "display": "Medium",
+      "color": "#f37736",
+      "key": "medium"
+    },
+    "assigned_to": {
+      "agent_id": "5d1363adf599d850df93175e",
+      "gender": "male",
+      "accountType": "user",
+      "active": true,
+      "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
+      "hasOldPasswordHash": false,
+      "_id": "5d1363adf599d850df93175e",
+      "phoneNumbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "countryCode": 91,
+          "phone": "9999999999"
+        }
+      ],
+      "firstName": "Nikhil",
+      "lastName": "Manapure",
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "niktest@xyz.com"
+        }
+      ],
+      "username": "niktest_xyz_com_38425_20500281",
+      "createdAt": "2019-01-01T17:22:38.528Z",
+      "updatedAt": "2021-01-22T10:02:42.258Z",
+      "uid": "20500281",
+      "__v": 56
+    },
+    "tags": [
+      "some-title"
+    ],
+    "_id": "6012f38557751ee8fc162cf7",
+    "created_on": {
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
+      "platform": "web",
+      "meta": {
+        "browser": {
+          "name": "Chrome",
+          "version": "88.0.4324.96"
+        },
+        "os": {
+          "name": "macOS",
+          "version": "10.15.7",
+          "versionName": "Catalina"
+        },
+        "platform": {
+          "type": "desktop",
+          "vendor": "Apple"
+        },
+        "engine": {
+          "name": "Blink"
+        }
+      }
+    },
+    "source": "sales_channel",
+    "created_by": {
+      "id": "5d1363adf599d850df93175e",
+      "user": {
+        "gender": "male",
+        "accountType": "user",
+        "active": true,
+        "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
+        "hasOldPasswordHash": false,
+        "_id": "5d1363adf599d850df93175e",
+        "phoneNumbers": [
+          {
+            "active": true,
+            "primary": true,
+            "verified": true,
+            "countryCode": 91,
+            "phone": "9999999999"
+          }
+        ],
+        "firstName": "Nikhil",
+        "lastName": "Manapure",
+        "emails": [
+          {
+            "active": true,
+            "primary": true,
+            "verified": true,
+            "email": "niktest@xyz.com"
+          }
+        ],
+        "username": "niktest_xyz_com_38425_20500281",
+        "createdAt": "2019-01-01T17:22:38.528Z",
+        "updatedAt": "2021-01-22T10:02:42.258Z",
+        "uid": "20500281",
+        "__v": 56
+      }
+    },
+    "response_id": "6012f38457751e0fb8162cf6",
+    "category": {
+      "form": {
+        "login_required": false,
+        "should_notify": false,
+        "inputs": [
+          {
+            "required": false,
+            "type": "text",
+            "enum": [],
+            "display": "Single lineeee",
+            "key": "single-lineeee",
+            "showRegexInput": false
+          },
+          {
+            "required": false,
+            "type": "email",
+            "enum": [],
+            "display": "Email",
+            "regex": "\\S+@\\S+\\.\\S+",
+            "key": "email",
+            "showRegexInput": true
+          },
+          {
+            "required": false,
+            "type": "text",
+            "enum": [],
+            "display": "dfsdf",
+            "key": "dfsdf",
+            "showRegexInput": false
+          }
+        ],
+        "available_assignees": [
+          "5b9b98150df588546aaea6d2",
+          "5c45d78395d7504f76c2cb37"
+        ],
+        "_id": "5fd72db3dc250f8decfc61b2",
+        "title": "SOme title",
+        "description": "SOme big description",
+        "slug": "some-title",
+        "application_id": "000000000000000000000003",
+        "created_on": {
+          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
+          "platform": "web",
+          "meta": {
+            "browser": {
+              "name": "Chrome",
+              "version": "87.0.4280.88"
+            },
+            "os": {
+              "name": "macOS",
+              "version": "10.15.6",
+              "versionName": "Catalina"
+            },
+            "platform": {
+              "type": "desktop",
+              "vendor": "Apple"
+            },
+            "engine": {
+              "name": "Blink"
+            }
+          }
+        },
+        "created_by": "5d1363adf599d850df93175e",
+        "createdAt": "2020-12-14T09:17:39.953Z",
+        "updatedAt": "2021-01-28T18:48:07.717Z",
+        "__v": 0
+      },
+      "key": "some-title",
+      "display": "SOme title"
+    },
+    "ticket_id": "43",
+    "createdAt": "2021-01-28T17:25:25.013Z",
+    "updatedAt": "2021-01-28T17:25:33.396Z",
+    "__v": 0,
+    "video_room_id": "6012f38557751ee8fc162cf7"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### editPlatformTicket
+Edits ticket details of a company level ticket
+
+
+
+
+```python
+try:
+    result = await platformClient.lead.editPlatformTicket(id=id, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | Ticket ID of ticket to be edited |  
+| body | [EditTicketPayload](#EditTicketPayload) | yes | Request body |
+
+
+Edits ticket details of a company level ticket such as status, priority, category, tags, attachments, assigne & ticket content changes
+
+*Returned Response:*
+
+
+
+
+[Ticket](#Ticket)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Default</i></summary>
+
+```json
+{
+  "value": {
+    "context": {
+      "company_id": "1"
+    },
+    "content": {
+      "title": "SOme title Response",
+      "description": "Handles communication between Administrator",
+      "attachments": []
+    },
+    "status": {
+      "display": "In Progress",
+      "color": "#ffa951",
+      "key": "in_progress"
+    },
+    "priority": {
+      "display": "Medium",
+      "color": "#f37736",
+      "key": "medium"
+    },
+    "assigned_to": {
+      "agent_id": "5d1363adf599d850df93175e",
+      "gender": "male",
+      "accountType": "user",
+      "active": true,
+      "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
+      "hasOldPasswordHash": false,
+      "_id": "5d1363adf599d850df93175e",
+      "phoneNumbers": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "countryCode": 91,
+          "phone": "9999999999"
+        }
+      ],
+      "firstName": "Nikhil",
+      "lastName": "Manapure",
+      "emails": [
+        {
+          "active": true,
+          "primary": true,
+          "verified": true,
+          "email": "niktest@xyz.com"
+        }
+      ],
+      "username": "niktest_xyz_com_38425_20500281",
+      "createdAt": "2019-01-01T17:22:38.528Z",
+      "updatedAt": "2021-01-22T10:02:42.258Z",
+      "uid": "20500281",
+      "__v": 56
+    },
+    "tags": [
+      "some-title"
+    ],
+    "_id": "6012f38557751ee8fc162cf7",
+    "created_on": {
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
+      "platform": "web",
+      "meta": {
+        "browser": {
+          "name": "Chrome",
+          "version": "88.0.4324.96"
+        },
+        "os": {
+          "name": "macOS",
+          "version": "10.15.7",
+          "versionName": "Catalina"
+        },
+        "platform": {
+          "type": "desktop",
+          "vendor": "Apple"
+        },
+        "engine": {
+          "name": "Blink"
+        }
+      }
+    },
+    "source": "sales_channel",
+    "created_by": {
+      "id": "5d1363adf599d850df93175e",
+      "user": {
+        "gender": "male",
+        "accountType": "user",
+        "active": true,
+        "profilePicUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2136700473091190&height=400&width=400&ext=1554542761&hash=AeS6cuWIdjDdJJ-b",
+        "hasOldPasswordHash": false,
+        "_id": "5d1363adf599d850df93175e",
+        "phoneNumbers": [
+          {
+            "active": true,
+            "primary": true,
+            "verified": true,
+            "countryCode": 91,
+            "phone": "9999999999"
+          }
+        ],
+        "firstName": "Nikhil",
+        "lastName": "Manapure",
+        "emails": [
+          {
+            "active": true,
+            "primary": true,
+            "verified": true,
+            "email": "niktest@xyz.com"
+          }
+        ],
+        "username": "niktest_xyz_com_38425_20500281",
+        "createdAt": "2019-01-01T17:22:38.528Z",
+        "updatedAt": "2021-01-22T10:02:42.258Z",
+        "uid": "20500281",
+        "__v": 56
+      }
+    },
+    "response_id": "6012f38457751e0fb8162cf6",
+    "category": {
+      "form": {
+        "login_required": false,
+        "should_notify": false,
+        "inputs": [
+          {
+            "required": false,
+            "type": "text",
+            "enum": [],
+            "display": "Single lineeee",
+            "key": "single-lineeee",
+            "showRegexInput": false
+          },
+          {
+            "required": false,
+            "type": "email",
+            "enum": [],
+            "display": "Email",
+            "regex": "\\S+@\\S+\\.\\S+",
+            "key": "email",
+            "showRegexInput": true
+          },
+          {
+            "required": false,
+            "type": "text",
+            "enum": [],
+            "display": "dfsdf",
+            "key": "dfsdf",
+            "showRegexInput": false
+          }
+        ],
+        "available_assignees": [
+          "5b9b98150df588546aaea6d2",
+          "5c45d78395d7504f76c2cb37"
+        ],
+        "_id": "5fd72db3dc250f8decfc61b2",
+        "title": "SOme title",
+        "description": "SOme big description",
+        "slug": "some-title",
+        "application_id": "000000000000000000000003",
+        "created_on": {
+          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
+          "platform": "web",
+          "meta": {
+            "browser": {
+              "name": "Chrome",
+              "version": "87.0.4280.88"
+            },
+            "os": {
+              "name": "macOS",
+              "version": "10.15.6",
+              "versionName": "Catalina"
+            },
+            "platform": {
+              "type": "desktop",
+              "vendor": "Apple"
+            },
+            "engine": {
+              "name": "Blink"
+            }
+          }
+        },
+        "created_by": "5d1363adf599d850df93175e",
+        "createdAt": "2020-12-14T09:17:39.953Z",
+        "updatedAt": "2021-01-28T18:48:07.717Z",
+        "__v": 0
+      },
+      "key": "some-title",
+      "display": "SOme title"
+    },
+    "ticket_id": "43",
+    "createdAt": "2021-01-28T17:25:25.013Z",
+    "updatedAt": "2021-01-28T17:25:33.396Z",
+    "__v": 0,
+    "video_room_id": "6012f38557751ee8fc162cf7"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getTicket
 Retreives ticket details of a application level ticket
 
 
@@ -1707,7 +1686,7 @@ Retreives ticket details of a application level ticket
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").lead.getNewTicket(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").lead.getTicket(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -1955,7 +1934,7 @@ Success
 ---
 
 
-### editNewTicket
+### editTicket
 Edits ticket details of a application level ticket
 
 
@@ -1963,7 +1942,7 @@ Edits ticket details of a application level ticket
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").lead.editNewTicket(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").lead.editTicket(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2211,7 +2190,491 @@ Success
 ---
 
 
-### createNewHistory
+### createPlatformTicketHistory
+Create history for specific company level ticket
+
+
+
+
+```python
+try:
+    result = await platformClient.lead.createPlatformTicketHistory(id=id, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | Ticket ID for which history is created |  
+| body | [TicketHistoryPayload](#TicketHistoryPayload) | yes | Request body |
+
+
+Create history for specific company level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
+
+*Returned Response:*
+
+
+
+
+[TicketHistory](#TicketHistory)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Default</i></summary>
+
+```json
+{
+  "value": {
+    "_id": "601a9d52c26687d086c499ef",
+    "ticket_id": "43",
+    "type": "comment",
+    "value": {
+      "text": "d",
+      "media": []
+    },
+    "created_on": {
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
+      "platform": "web",
+      "meta": {
+        "browser": {
+          "name": "Chrome",
+          "version": "88.0.4324.96"
+        },
+        "os": {
+          "name": "macOS",
+          "version": "10.15.7",
+          "versionName": "Catalina"
+        },
+        "platform": {
+          "type": "desktop",
+          "vendor": "Apple"
+        },
+        "engine": {
+          "name": "Blink"
+        }
+      }
+    },
+    "created_by": {
+      "5d1363adf599d850df93175e": null
+    },
+    "createdAt": "2021-02-03T12:55:46.808Z",
+    "updatedAt": "2021-02-03T12:55:46.808Z",
+    "__v": 0
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getPlatformTicketHistory
+Gets history list for specific company level ticket
+
+
+
+
+```python
+try:
+    result = await platformClient.lead.getPlatformTicketHistory(id=id)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | Ticket ID for which history is to be fetched |  
+
+
+
+Gets history list for specific company level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
+
+*Returned Response:*
+
+
+
+
+[TicketHistoryList](#TicketHistoryList)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Default</i></summary>
+
+```json
+{
+  "value": {
+    "docs": [
+      {
+        "_id": "602e5384204225eed5cadae7",
+        "ticket_id": "41",
+        "type": "comment",
+        "value": {
+          "text": "hello service",
+          "media": []
+        },
+        "created_on": {
+          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
+          "platform": "web",
+          "meta": {
+            "browser": {
+              "name": "Chrome",
+              "version": "88.0.4324.150"
+            },
+            "os": {
+              "name": "macOS",
+              "version": "11.2.0"
+            },
+            "platform": {
+              "type": "desktop",
+              "vendor": "Apple"
+            },
+            "engine": {
+              "name": "Blink"
+            }
+          }
+        },
+        "created_by": {
+          "gender": "male",
+          "accountType": "user",
+          "active": true,
+          "profilePicUrl": "https://hdn-1.fynd.com/company/884/applications/000000000000000000000001/theme/pictures/free/original/default-profile_nxhzui.png",
+          "hasOldPasswordHash": false,
+          "_id": "5f8147abbd1a0a870f61f1a6",
+          "phoneNumbers": [
+            {
+              "active": true,
+              "primary": true,
+              "verified": true,
+              "phone": "9999999999",
+              "countryCode": 91
+            }
+          ],
+          "firstName": "Satyen",
+          "lastName": "Maurya",
+          "emails": [
+            {
+              "active": true,
+              "primary": true,
+              "verified": true,
+              "email": "sattest@xyz.com"
+            }
+          ],
+          "username": "sat5_xyz_com_11118",
+          "createdAt": "2020-10-10T05:33:31.119Z",
+          "updatedAt": "2020-10-10T05:33:31.119Z",
+          "uid": "5678",
+          "__v": 0
+        },
+        "createdAt": "2021-02-18T11:46:12.522Z",
+        "updatedAt": "2021-02-18T11:46:12.522Z",
+        "__v": 0,
+        "id": "602e5384204225eed5cadae7"
+      },
+      {
+        "_id": "60372aa78a046d4d79c46e15",
+        "ticket_id": "41",
+        "type": "diff",
+        "value": {
+          "status": [
+            "pending",
+            "in_progress"
+          ]
+        },
+        "created_by": {
+          "gender": "male",
+          "accountType": "user",
+          "active": true,
+          "profilePicUrl": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
+          "hasOldPasswordHash": false,
+          "_id": "5e79e721768c6bf54b783146",
+          "emails": [
+            {
+              "active": true,
+              "primary": true,
+              "verified": true,
+              "email": "niktest@xyz.com"
+            },
+            {
+              "active": true,
+              "primary": false,
+              "verified": true,
+              "email": "xyz@xyz.com"
+            },
+            {
+              "active": true,
+              "primary": false,
+              "verified": true,
+              "email": "xyz@xyz.com"
+            },
+            {
+              "active": true,
+              "primary": false,
+              "verified": true,
+              "email": "xyz@xyz.com"
+            }
+          ],
+          "phoneNumbers": [
+            {
+              "active": true,
+              "primary": true,
+              "verified": true,
+              "countryCode": 91,
+              "phone": "9999999999"
+            }
+          ],
+          "firstName": "Nikhil",
+          "lastName": "Manapure",
+          "username": "xyz_xyz_com",
+          "createdAt": "2020-03-24T10:55:29.298Z",
+          "updatedAt": "2020-05-12T07:46:41.816Z",
+          "uid": "5567",
+          "__v": 2
+        },
+        "createdAt": "2021-02-25T04:42:15.225Z",
+        "updatedAt": "2021-02-25T04:42:15.225Z",
+        "__v": 0,
+        "id": "60372aa78a046d4d79c46e15"
+      }
+    ],
+    "total": 2,
+    "limit": 100,
+    "page": {
+      "type": ""
+    },
+    "pages": 1
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getFeedbacks
+Gets a list of feedback submitted against that ticket
+
+
+
+
+```python
+try:
+    result = await platformClient.lead.getFeedbacks(id=id)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | Ticket ID for which feedbacks are to be fetched |  
+
+
+
+Gets a list of feedback submitted against that ticket
+
+*Returned Response:*
+
+
+
+
+[TicketFeedbackList](#TicketFeedbackList)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Default</i></summary>
+
+```json
+{
+  "value": {
+    "items": [
+      {
+        "_id": "60c255bf00ecabfad19e9601",
+        "company_id": "1",
+        "ticket_id": "6095812876d2bf17143cb3b3",
+        "user": {
+          "_id": "5f8147abbd1a0a870f61f1a6",
+          "authenticated": true,
+          "user_id": "5f8147abbd1a0a870f61f1a6"
+        },
+        "category": "customers",
+        "response": [
+          {
+            "audio": 2,
+            "video": 6,
+            "display": "",
+            "key": "",
+            "value": ""
+          }
+        ],
+        "createdAt": "2021-06-10T18:11:11.349Z",
+        "updatedAt": "2021-06-10T18:11:11.349Z",
+        "__v": 0
+      }
+    ]
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### submitFeedback
+Submit a response for feeback form against that ticket
+
+
+
+
+```python
+try:
+    result = await platformClient.lead.submitFeedback(id=id, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | Ticket ID for which feedback is to be submitted |  
+| body | [TicketFeedbackPayload](#TicketFeedbackPayload) | yes | Request body |
+
+
+Submit a response for feeback form against that ticket
+
+*Returned Response:*
+
+
+
+
+[TicketFeedback](#TicketFeedback)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Default</i></summary>
+
+```json
+{
+  "value": {
+    "_id": "60c255bf00ecabfad19e9601",
+    "company_id": "1",
+    "ticket_id": "6095812876d2bf17143cb3b3",
+    "user": {
+      "_id": "5f8147abbd1a0a870f61f1a6",
+      "authenticated": true,
+      "user_id": "5f8147abbd1a0a870f61f1a6"
+    },
+    "category": "customers",
+    "response": [
+      {
+        "audio": 2,
+        "video": 6,
+        "display": "",
+        "key": "",
+        "value": ""
+      }
+    ],
+    "createdAt": "2021-06-10T18:11:11.349Z",
+    "updatedAt": "2021-06-10T18:11:11.349Z",
+    "__v": 0
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createHistory
 Create history for specific application level ticket
 
 
@@ -2219,7 +2682,7 @@ Create history for specific application level ticket
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").lead.createNewHistory(id=id, body=body)
+    result = await platformClient.application("<APPLICATION_ID>").lead.createHistory(id=id, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -2312,7 +2775,7 @@ Success
 ---
 
 
-### getNewTicketHistory
+### getTicketHistory
 Gets history list for specific application level ticket
 
 
@@ -2320,7 +2783,7 @@ Gets history list for specific application level ticket
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").lead.getNewTicketHistory(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").lead.getTicketHistory(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -2517,754 +2980,8 @@ Success
 ---
 
 
-### deleteCustomForm
-Delete a custom form
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").lead.deleteCustomForm(slug=slug)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| slug | String | yes | Slug of form whose response is getting submitted |  
-
-
-
-Delete a custom form using it's slug
-
-*Returned Response:*
-
-
-
-
-[CustomForm](#CustomForm)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": [
-    {
-      "required": false,
-      "login_required": false,
-      "should_notify": false,
-      "inputs": [
-        {
-          "type": "email",
-          "showRegexInput": true,
-          "enum": [],
-          "regex": "\\S+@\\S+\\.\\S+",
-          "display": "email",
-          "required": true,
-          "key": "email"
-        },
-        {
-          "type": "number",
-          "showRegexInput": false,
-          "enum": [],
-          "display": "Enter your fav number",
-          "placeholder": "123",
-          "key": "enter-your-fav-number"
-        }
-      ],
-      "available_assignees": [],
-      "_id": "602e900a2042255c03cadaf0",
-      "title": "service-test-satyen",
-      "description": "testing form from service",
-      "slug": "service-test-satyen",
-      "header_image": "https://hdn-1.addsale.com/x0/support-ticket/files/free/original/KZL86aN5l-service-test-satyen.jpeg",
-      "application_id": "000000000000000000000001",
-      "created_on": {
-        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-        "platform": "web",
-        "meta": {
-          "browser": {
-            "name": "Chrome",
-            "version": "88.0.4324.150"
-          },
-          "os": {
-            "name": "macOS",
-            "version": "11.2.0"
-          },
-          "platform": {
-            "type": "desktop",
-            "vendor": "Apple"
-          },
-          "engine": {
-            "name": "Blink"
-          }
-        }
-      },
-      "created_by": "5f8147abbd1a0a870f61f1a6",
-      "createdAt": "2021-02-18T16:04:26.495Z",
-      "updatedAt": "2021-02-26T10:16:49.272Z",
-      "__v": 0
-    }
-  ]
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getNewTokenForVideoRoom
-Get Token to join a specific Video Room using it's unqiue name
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").lead.getNewTokenForVideoRoom(uniqueName=uniqueName)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| uniqueName | String | yes | Unique name of video room |  
-
-
-
-Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
-
-*Returned Response:*
-
-
-
-
-[GetTokenForVideoRoomResponse](#GetTokenForVideoRoomResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "access_token": "your_token_to_the_room"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getNewVideoParticipants
-Get participants of a specific Video Room using it's unique name
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").lead.getNewVideoParticipants(uniqueName=uniqueName)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| uniqueName | String | yes | Unique name of Video Room |  
-
-
-
-Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
-
-*Returned Response:*
-
-
-
-
-[GetParticipantsInsideVideoRoomResponse](#GetParticipantsInsideVideoRoomResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "participants": []
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### createPlatformTicketHistory
-Create platform ticket history.
-
-
-
-
-```python
-try:
-    result = await platformClient.lead.createPlatformTicketHistory(id=id, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | Ticket ID for which history is created |  
-| body | [TicketHistoryPayload](#TicketHistoryPayload) | yes | Request body |
-
-
-Create futher interactions on a company level ticket such as changing it's status, priority or replying to a ticket via a thread.
-
-*Returned Response:*
-
-
-
-
-[TicketHistory](#TicketHistory)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "601a9d52c26687d086c499ef",
-    "ticket_id": "43",
-    "type": "comment",
-    "value": {
-      "text": "d",
-      "media": []
-    },
-    "created_on": {
-      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
-      "platform": "web",
-      "meta": {
-        "browser": {
-          "name": "Chrome",
-          "version": "88.0.4324.96"
-        },
-        "os": {
-          "name": "macOS",
-          "version": "10.15.7",
-          "versionName": "Catalina"
-        },
-        "platform": {
-          "type": "desktop",
-          "vendor": "Apple"
-        },
-        "engine": {
-          "name": "Blink"
-        }
-      }
-    },
-    "created_by": {
-      "5d1363adf599d850df93175e": null
-    },
-    "createdAt": "2021-02-03T12:55:46.808Z",
-    "updatedAt": "2021-02-03T12:55:46.808Z",
-    "__v": 0
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getPlatformTicketHistory
-Get platform ticket history.
-
-
-
-
-```python
-try:
-    result = await platformClient.lead.getPlatformTicketHistory(id=id)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | Ticket ID for which history is to be fetched |  
-
-
-
-Retrieve a list of history records for a company level ticket.
-
-*Returned Response:*
-
-
-
-
-[TicketHistoryList](#TicketHistoryList)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "docs": [
-      {
-        "_id": "602e5384204225eed5cadae7",
-        "ticket_id": "41",
-        "type": "comment",
-        "value": {
-          "text": "hello service",
-          "media": []
-        },
-        "created_on": {
-          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-          "platform": "web",
-          "meta": {
-            "browser": {
-              "name": "Chrome",
-              "version": "88.0.4324.150"
-            },
-            "os": {
-              "name": "macOS",
-              "version": "11.2.0"
-            },
-            "platform": {
-              "type": "desktop",
-              "vendor": "Apple"
-            },
-            "engine": {
-              "name": "Blink"
-            }
-          }
-        },
-        "created_by": {
-          "gender": "male",
-          "accountType": "user",
-          "active": true,
-          "profilePicUrl": "https://hdn-1.fynd.com/company/884/applications/000000000000000000000001/theme/pictures/free/original/default-profile_nxhzui.png",
-          "hasOldPasswordHash": false,
-          "_id": "5f8147abbd1a0a870f61f1a6",
-          "phoneNumbers": [
-            {
-              "active": true,
-              "primary": true,
-              "verified": true,
-              "phone": "9999999999",
-              "countryCode": 91
-            }
-          ],
-          "firstName": "Satyen",
-          "lastName": "Maurya",
-          "emails": [
-            {
-              "active": true,
-              "primary": true,
-              "verified": true,
-              "email": "sattest@xyz.com"
-            }
-          ],
-          "username": "sat5_xyz_com_11118",
-          "createdAt": "2020-10-10T05:33:31.119Z",
-          "updatedAt": "2020-10-10T05:33:31.119Z",
-          "uid": "5678",
-          "__v": 0
-        },
-        "createdAt": "2021-02-18T11:46:12.522Z",
-        "updatedAt": "2021-02-18T11:46:12.522Z",
-        "__v": 0,
-        "id": "602e5384204225eed5cadae7"
-      },
-      {
-        "_id": "60372aa78a046d4d79c46e15",
-        "ticket_id": "41",
-        "type": "diff",
-        "value": {
-          "status": [
-            "pending",
-            "in_progress"
-          ]
-        },
-        "created_by": {
-          "gender": "male",
-          "accountType": "user",
-          "active": true,
-          "profilePicUrl": "https://d2co8r51m5ca2d.cloudfront.net/inapp_banners/default_profile_img.png",
-          "hasOldPasswordHash": false,
-          "_id": "5e79e721768c6bf54b783146",
-          "emails": [
-            {
-              "active": true,
-              "primary": true,
-              "verified": true,
-              "email": "niktest@xyz.com"
-            },
-            {
-              "active": true,
-              "primary": false,
-              "verified": true,
-              "email": "xyz@xyz.com"
-            },
-            {
-              "active": true,
-              "primary": false,
-              "verified": true,
-              "email": "xyz@xyz.com"
-            },
-            {
-              "active": true,
-              "primary": false,
-              "verified": true,
-              "email": "xyz@xyz.com"
-            }
-          ],
-          "phoneNumbers": [
-            {
-              "active": true,
-              "primary": true,
-              "verified": true,
-              "countryCode": 91,
-              "phone": "9999999999"
-            }
-          ],
-          "firstName": "Nikhil",
-          "lastName": "Manapure",
-          "username": "xyz_xyz_com",
-          "createdAt": "2020-03-24T10:55:29.298Z",
-          "updatedAt": "2020-05-12T07:46:41.816Z",
-          "uid": "5567",
-          "__v": 2
-        },
-        "createdAt": "2021-02-25T04:42:15.225Z",
-        "updatedAt": "2021-02-25T04:42:15.225Z",
-        "__v": 0,
-        "id": "60372aa78a046d4d79c46e15"
-      }
-    ],
-    "total": 2,
-    "limit": 100,
-    "page": {
-      "type": ""
-    },
-    "pages": 1
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getFeedbacks
-Get feedbacks.
-
-
-
-
-```python
-try:
-    result = await platformClient.lead.getFeedbacks(id=id)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | Ticket ID for which feedbacks are to be fetched |  
-
-
-
-Retrieve feedback information related to a ticket.
-
-*Returned Response:*
-
-
-
-
-[TicketFeedbackList](#TicketFeedbackList)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "60c255bf00ecabfad19e9601",
-        "company_id": "1",
-        "ticket_id": "6095812876d2bf17143cb3b3",
-        "user": {
-          "_id": "5f8147abbd1a0a870f61f1a6",
-          "authenticated": true,
-          "user_id": "5f8147abbd1a0a870f61f1a6"
-        },
-        "category": "customers",
-        "response": [
-          {
-            "audio": 2,
-            "video": 6,
-            "display": "",
-            "key": "",
-            "value": ""
-          }
-        ],
-        "createdAt": "2021-06-10T18:11:11.349Z",
-        "updatedAt": "2021-06-10T18:11:11.349Z",
-        "__v": 0
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### submitFeedback
-Submit feedback.
-
-
-
-
-```python
-try:
-    result = await platformClient.lead.submitFeedback(id=id, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | Ticket ID for which feedback is to be submitted |  
-| body | [TicketFeedbackPayload](#TicketFeedbackPayload) | yes | Request body |
-
-
-Provide feedback on a ticket and it's resolution.
-
-*Returned Response:*
-
-
-
-
-[TicketFeedback](#TicketFeedback)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Default</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "60c255bf00ecabfad19e9601",
-    "company_id": "1",
-    "ticket_id": "6095812876d2bf17143cb3b3",
-    "user": {
-      "_id": "5f8147abbd1a0a870f61f1a6",
-      "authenticated": true,
-      "user_id": "5f8147abbd1a0a870f61f1a6"
-    },
-    "category": "customers",
-    "response": [
-      {
-        "audio": 2,
-        "video": 6,
-        "display": "",
-        "key": "",
-        "value": ""
-      }
-    ],
-    "createdAt": "2021-06-10T18:11:11.349Z",
-    "updatedAt": "2021-06-10T18:11:11.349Z",
-    "__v": 0
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
 ### getCustomForm
-Get custom form.
+Get specific custom form using it's slug
 
 
 
@@ -3287,7 +3004,7 @@ except Exception as e:
 
 
 
-Retrieve information about a custom form which includes corresponding field details and any validation regex required against that field or not
+Get specific custom form using it's slug, this is used to view the form.
 
 *Returned Response:*
 
@@ -3376,7 +3093,7 @@ Success
 
 
 ### editCustomForm
-Edit custom form.
+Edit the given custom form
 
 
 
@@ -3399,7 +3116,7 @@ except Exception as e:
 | body | [EditCustomFormPayload](#EditCustomFormPayload) | yes | Request body |
 
 
-Modify the content and assosciated settings of a custom form.
+Edit the given custom form field such as adding or deleting input, assignee, title, decription, notification and polling information.
 
 *Returned Response:*
 
@@ -3498,7 +3215,7 @@ Success
 
 
 ### getCustomForms
-Get custom forms.
+Get list of custom form
 
 
 
@@ -3516,7 +3233,7 @@ except Exception as e:
 
 
 
-Retrieve a list of available custom forms.
+Get list of custom form for given application
 
 *Returned Response:*
 
@@ -3693,7 +3410,7 @@ Success
 
 
 ### createCustomForm
-Create custom form.
+Creates a new custom form
 
 
 
@@ -3715,7 +3432,7 @@ except Exception as e:
 | body | [CreateCustomFormPayload](#CreateCustomFormPayload) | yes | Request body |
 
 
-Create a new custom form for application users to fill
+Creates a new custom form for given application
 
 *Returned Response:*
 
@@ -3813,10 +3530,8 @@ Success
 ---
 
 
-
-
 ### getTokenForPlatformVideoRoom
-Get token for platform video room.
+Get Token to join a specific Video Room using it's unqiue name
 
 
 
@@ -3839,7 +3554,74 @@ except Exception as e:
 
 
 
-Retrieve an access token for a platform video room.
+Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
+
+*Returned Response:*
+
+
+
+
+[GetTokenForVideoRoomResponse](#GetTokenForVideoRoomResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Default</i></summary>
+
+```json
+{
+  "value": {
+    "access_token": "your_token_to_the_room"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getTokenForVideoRoom
+Get Token to join a specific Video Room using it's unqiue name
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").lead.getTokenForVideoRoom(uniqueName=uniqueName)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| uniqueName | String | yes | Unique name of video room |  
+
+
+
+Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
 
 *Returned Response:*
 
@@ -3883,7 +3665,7 @@ Success
 
 
 ### getPlatformVideoParticipants
-Get platform video participants.
+Get participants of a specific Video Room using it's unique name
 
 
 
@@ -3906,7 +3688,74 @@ except Exception as e:
 
 
 
-Retrieve a list of participants in a platform video room.
+Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
+
+*Returned Response:*
+
+
+
+
+[GetParticipantsInsideVideoRoomResponse](#GetParticipantsInsideVideoRoomResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Default</i></summary>
+
+```json
+{
+  "value": {
+    "participants": []
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getVideoParticipants
+Get participants of a specific Video Room using it's unique name
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").lead.getVideoParticipants(uniqueName=uniqueName)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| uniqueName | String | yes | Unique name of Video Room |  
+
+
+
+Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
 
 *Returned Response:*
 
@@ -3950,7 +3799,7 @@ Success
 
 
 ### openVideoRoom
-Open video room.
+Open a video room.
 
 
 
@@ -3972,7 +3821,7 @@ except Exception as e:
 | body | [CreateVideoRoomPayload](#CreateVideoRoomPayload) | yes | Request body |
 
 
-Initiate and open a video room.
+Open a video room.
 
 *Returned Response:*
 
@@ -4016,7 +3865,7 @@ Success
 
 
 ### closeVideoRoom
-Close video room.
+Close the video room and force all participants to leave.
 
 
 
@@ -4039,7 +3888,7 @@ except Exception as e:
 
 
 
-Terminate and close an active video room.
+Close the video room and force all participants to leave.
 
 *Returned Response:*
 
@@ -4082,10 +3931,8 @@ Success
 ---
 
 
-
-
 ### getGeneralConfig
-Get general configuration.
+Get general support configuration.
 
 
 
@@ -4103,7 +3950,7 @@ except Exception as e:
 
 
 
-Retrieve general configuration settings related to support system for company tickets
+Get general support configuration.
 
 *Returned Response:*
 
@@ -4713,17 +4560,6 @@ Success
 ---
 
 
- 
- 
- #### [ErrorMessage](#ErrorMessage)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | message | String? |  yes  |  |
-
----
-
-
 
 
 ### Enums
@@ -4754,7 +4590,6 @@ Success
  | rating | rating | This means history event is a rating |
  | log | log | This means history event is a changelog |
  | comment | comment | This means history event is a comment |
- | thread | thread | This means history event is a thread |
 
 ---
 

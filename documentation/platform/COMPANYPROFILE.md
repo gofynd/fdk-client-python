@@ -7,24 +7,15 @@
 ## CompanyProfile Methods
 Catalog CBS - platform Front API's
 
-Company Onboarding and Metrics
+Default
 * [cbsOnboardGet](#cbsonboardget)
 * [updateCompany](#updatecompany)
 * [getCompanyMetrics](#getcompanymetrics)
-
-
-Brand Management
 * [getBrand](#getbrand)
 * [editBrand](#editbrand)
 * [createBrand](#createbrand)
 * [getBrands](#getbrands)
-
-
-Company-Brand Mapping
 * [createCompanyBrandMapping](#createcompanybrandmapping)
-
-
-Location Management
 * [getLocations](#getlocations)
 * [createLocation](#createlocation)
 * [getLocationDetail](#getlocationdetail)
@@ -40,7 +31,7 @@ Location Management
 
 
 ### cbsOnboardGet
-Get company onboard data.
+Get company profile
 
 
 
@@ -58,7 +49,7 @@ except Exception as e:
 
 
 
-View the company profile of the seller account.
+This API allows to view the company profile of the seller account.
 
 *Returned Response:*
 
@@ -135,13 +126,7 @@ Company profile object. See example below or refer `GetCompanyProfileSerializerR
   "uid": 1,
   "business_country_info": {
     "country": "India",
-    "country_code": "IN",
-    "currency": {
-      "code": "INR",
-      "symbol": "₹",
-      "name": "Indian Rupee"
-    },
-    "timezone": "Asia/Calcutta"
+    "country_code": "IN"
   }
 }
 ```
@@ -159,7 +144,7 @@ Company profile object. See example below or refer `GetCompanyProfileSerializerR
 
 
 ### updateCompany
-Update company information.
+Edit company profile
 
 
 
@@ -181,7 +166,7 @@ except Exception as e:
 | body | [UpdateCompany](#UpdateCompany) | yes | Request body |
 
 
-Allows to edit the company profile of the seller account.
+This API allows to edit the company profile of the seller account.
 
 *Returned Response:*
 
@@ -218,7 +203,7 @@ Returns a success message
 
 
 ### getCompanyMetrics
-Get company metrics.
+Get company metrics
 
 
 
@@ -236,7 +221,7 @@ except Exception as e:
 
 
 
-Allows to view the company metrics, i.e. the status of its brand and stores. Also its allows to view the number of products, company documents & store documents which are verified and unverified.
+This API allows to view the company metrics, i.e. the status of its brand and stores. Also its allows to view the number of products, company documents & store documents which are verified and unverified.
 
 *Returned Response:*
 
@@ -292,10 +277,8 @@ Metrics response object. See example below or refer `MetricsSerializer` for deta
 ---
 
 
-
-
 ### getBrand
-Get brand details.
+Get a single company brand.
 
 
 
@@ -318,7 +301,7 @@ except Exception as e:
 
 
 
-Retrieve detailed information about a specific brand. Get data associated to a particular company brand.
+This API helps to get data associated to a particular company brand.
 
 *Returned Response:*
 
@@ -380,7 +363,7 @@ Brand object. See example below or refer `GetBrandResponseSerializer` for detail
 
 
 ### editBrand
-Edit brand details.
+Edit a brand.
 
 
 
@@ -403,7 +386,7 @@ except Exception as e:
 | body | [CreateUpdateBrandRequestSerializer](#CreateUpdateBrandRequestSerializer) | yes | Request body |
 
 
-Modify details and settings of a specific brand. Allows to edit meta of a brand.
+This API allows to edit meta of a brand.
 
 *Returned Response:*
 
@@ -440,7 +423,7 @@ Returns a success response
 
 
 ### createBrand
-Create brand.
+Create a Brand.
 
 
 
@@ -462,7 +445,7 @@ except Exception as e:
 | body | [CreateUpdateBrandRequestSerializer](#CreateUpdateBrandRequestSerializer) | yes | Request body |
 
 
-Allows to create a brand associated to a company.
+This API allows to create a brand associated to a company.
 
 *Returned Response:*
 
@@ -499,7 +482,7 @@ Returns a success response
 
 
 ### getBrands
-Get brands.
+Get brands associated to a company
 
 
 
@@ -524,7 +507,7 @@ except Exception as e:
 
 
 
-Retrieve a list of available brands.
+This API helps to get view brands associated to a particular company.
 
 *Returned Response:*
 
@@ -560,12 +543,12 @@ Brand object. See example below or refer `CompanyBrandListSerializer` for detail
         "synonyms": [
           "xyz"
         ],
-        "created_on": "2021-02-25T15:21:57.666Z",
+        "created_on": "2021-02-25T15:21:57.666000+00:00",
         "created_by": {
           "user_id": "123",
           "username": "917827311650_22960"
         },
-        "modified_on": "2021-02-25T15:21:57.666Z",
+        "modified_on": "2021-02-25T15:21:57.666000+00:00",
         "name": "test_post",
         "logo": "http://cdn4.gofynd.com/media/logo/brand/original/4597_40d1ce44d61940d4829a3c54951bd9ee.jpg"
       },
@@ -608,12 +591,12 @@ Brand object. See example below or refer `CompanyBrandListSerializer` for detail
           "username": "silverbolt"
         },
         "company_type": "mbo",
-        "created_on": "2021-02-25T15:21:51.526Z",
+        "created_on": "2021-02-25T15:21:51.526000+00:00",
         "created_by": {
           "user_id": "123",
           "username": "917827311650_22960"
         },
-        "modified_on": "2021-02-25T17:44:55.722Z",
+        "modified_on": "2021-02-25T17:44:55.722000+00:00",
         "name": "Cache Company"
       },
       "created_by": {
@@ -645,10 +628,8 @@ Brand object. See example below or refer `CompanyBrandListSerializer` for detail
 ---
 
 
-
-
 ### createCompanyBrandMapping
-Create company-brand mapping.
+Create a company brand mapping.
 
 
 
@@ -670,7 +651,7 @@ except Exception as e:
 | body | [CompanyBrandPostRequestSerializer](#CompanyBrandPostRequestSerializer) | yes | Request body |
 
 
-Establish a mapping between a company and a brand.
+This API allows to create a company brand mapping, for a already existing brand in the system.
 
 *Returned Response:*
 
@@ -705,17 +686,15 @@ Returns a success response
 ---
 
 
-
-
 ### getLocations
-Get company locations.
+Get list of locations
 
 
 
 
 ```python
 try:
-    result = await platformClient.companyprofile.getLocations(storeType=storeType, q=q, stage=stage, pageNo=pageNo, pageSize=pageSize, locationIds=locationIds, types=types, tags=tags)
+    result = await platformClient.companyprofile.getLocations(storeType=storeType, q=q, stage=stage, pageNo=pageNo, pageSize=pageSize, locationIds=locationIds)
     # use result
 except Exception as e:
     print(e)
@@ -732,13 +711,11 @@ except Exception as e:
 | stage | String? | no | to filter companies on basis of verified or unverified companies. |   
 | pageNo | Int? | no | The page number to navigate through the given set of results |   
 | pageSize | Int? | no | Number of items to retrieve in each page. Default is 10. |   
-| locationIds | ArrayList<Int>? | no | Helps to filter stores on the basis of uids. |   
-| types | ArrayList<String>? | no | Helps to get the location list on the basis of multiple location type. |   
-| tags | ArrayList<String>? | no | Helps to get the location list on the basis of multiple location tag. |  
+| locationIds | ArrayList<Int>? | no | Helps to filter stores on the basis of uids. |  
 
 
 
-Retrieve a list of locations associated with the company.
+This API allows to view all the locations associated to a company.
 
 *Returned Response:*
 
@@ -792,12 +769,12 @@ Company profile object. See example below or refer `LocationListSerializer` for 
           "username": "silverbolt"
         },
         "company_type": "mbo",
-        "created_on": "2021-02-25T15:21:51.526Z",
+        "created_on": "2021-02-25T15:21:51.526000+00:00",
         "created_by": {
           "user_id": "123",
           "username": "917827311650_22960"
         },
-        "modified_on": "2021-02-25T17:44:55.722Z",
+        "modified_on": "2021-02-25T17:44:55.722000+00:00",
         "name": "Cache Company"
       },
       "address": {
@@ -909,7 +886,7 @@ Company profile object. See example below or refer `LocationListSerializer` for 
       "product_return_config": {
         "on_same_store": true
       },
-      "created_on": "2021-02-25T15:22:04.913Z",
+      "created_on": "2021-02-25T15:22:04.913000+00:00",
       "created_by": {
         "user_id": "123",
         "username": "917827311650_22960"
@@ -956,7 +933,7 @@ Company profile object. See example below or refer `LocationListSerializer` for 
 
 
 ### createLocation
-Create location.
+Create a location associated to a company.
 
 
 
@@ -978,7 +955,7 @@ except Exception as e:
 | body | [LocationSerializer](#LocationSerializer) | yes | Request body |
 
 
-Create a new location. Allows to edit a location associated to a company.
+This API allows to edit a location associated to a company.
 
 *Returned Response:*
 
@@ -1015,7 +992,7 @@ Returns a success response
 
 
 ### getLocationDetail
-Get location detail.
+Get details of a specific location.
 
 
 
@@ -1038,7 +1015,7 @@ except Exception as e:
 
 
 
-Retrieve detailed information about a specific location. Get data associated to a specific location.
+This API helps to get data associated to a specific location.
 
 *Returned Response:*
 
@@ -1057,7 +1034,7 @@ Brand object. See example below or refer `GetLocationSerializer` for details
 
 ```json
 {
-  "verified_on": "2021-02-25T15:22:07.140Z",
+  "verified_on": "2021-02-25T15:22:07.140000+00:00",
   "company": {
     "business_type": "huf",
     "stage": "complete",
@@ -1253,7 +1230,7 @@ Brand object. See example below or refer `GetLocationSerializer` for details
 
 
 ### updateLocation
-Update location.
+Edit a location asscoiated to a company.
 
 
 
@@ -1276,7 +1253,7 @@ except Exception as e:
 | body | [LocationSerializer](#LocationSerializer) | yes | Request body |
 
 
-Allows to edit a location associated to a company.
+This API allows to edit a location associated to a company.
 
 *Returned Response:*
 
@@ -1313,7 +1290,7 @@ Returns a success response
 
 
 ### createLocationBulk
-Create locations in bulk.
+Create a location asscoiated to a company in bulk.
 
 
 
@@ -1335,7 +1312,7 @@ except Exception as e:
 | body | [BulkLocationSerializer](#BulkLocationSerializer) | yes | Request body |
 
 
-Allows to create a location associated to a company.
+This API allows to create a location associated to a company.
 
 *Returned Response:*
 
@@ -1372,7 +1349,7 @@ Returns a success response
 
 
 ### getLocationTags
-Get location tags.
+Get tags associated with locations for a company.
 
 
 
@@ -1390,7 +1367,7 @@ except Exception as e:
 
 
 
-Retrieve all the tags associated to a company.
+This API fetches all the tags associated to a company.
 
 *Returned Response:*
 
@@ -1528,27 +1505,12 @@ Tags list. See example below or refer `StoreTagsResponseSchema` for details
 
  
  
- #### [CountryCurrencyInfo](#CountryCurrencyInfo)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | code | String |  no  |  |
- | symbol | String |  no  |  |
- | name | String |  no  |  |
-
----
-
-
- 
- 
  #### [BusinessCountryInfo](#BusinessCountryInfo)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | countryCode | String |  no  |  |
- | country | String |  no  |  |
- | currency | [CountryCurrencyInfo](#CountryCurrencyInfo) |  no  |  |
- | timezone | String |  no  |  |
+ | countryCode | String? |  yes  |  |
+ | country | String? |  yes  |  |
 
 ---
 
@@ -1582,8 +1544,6 @@ Tags list. See example below or refer `StoreTagsResponseSchema` for details
  | country | String? |  yes  |  |
  | address2 | String? |  yes  |  |
  | state | String? |  yes  |  |
- | stateCode | String? |  yes  |  |
- | sector | String? |  yes  |  |
  | address1 | String? |  yes  |  |
  | city | String? |  yes  |  |
  | latitude | Double |  no  |  |
@@ -2077,7 +2037,6 @@ Tags list. See example below or refer `StoreTagsResponseSchema` for details
  | orderAcceptanceTiming | ArrayList<[LocationDayWiseSerializer](#LocationDayWiseSerializer)>? |  yes  |  |
  | avgOrderProcessingTime | [AverageOrderProcessingTime](#AverageOrderProcessingTime)? |  yes  |  |
  | bulkShipment | Boolean? |  yes  |  |
- | autoAssignCourierPartner | Boolean? |  yes  |  |
 
 ---
 
@@ -2101,15 +2060,13 @@ Tags list. See example below or refer `StoreTagsResponseSchema` for details
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | landmark | String? |  yes  |  |
- | countryCode | String |  no  |  |
+ | countryCode | String? |  yes  |  |
  | pincode | Int? |  yes  |  |
  | addressType | String? |  yes  |  |
  | longitude | Double |  no  |  |
  | country | String? |  yes  |  |
  | address2 | String? |  yes  |  |
  | state | String? |  yes  |  |
- | sector | String? |  yes  |  |
- | stateCode | String? |  yes  |  |
  | address1 | String? |  yes  |  |
  | city | String? |  yes  |  |
  | latitude | Double |  no  |  |
@@ -2137,7 +2094,7 @@ Tags list. See example below or refer `StoreTagsResponseSchema` for details
  | uid | Int? |  yes  |  |
  | timing | ArrayList<[LocationDayWiseSerializer](#LocationDayWiseSerializer)>? |  yes  |  |
  | stage | String? |  yes  |  |
- | documents | ArrayList<[Document](#Document)> |  no  |  |
+ | documents | ArrayList<[Document](#Document)>? |  yes  |  |
  | creditNote | Boolean? |  yes  |  |
  | holiday | ArrayList<[HolidaySchemaSerializer](#HolidaySchemaSerializer)>? |  yes  |  |
  | productReturnConfig | [ProductReturnConfigSerializer](#ProductReturnConfigSerializer)? |  yes  |  |
@@ -2148,7 +2105,6 @@ Tags list. See example below or refer `StoreTagsResponseSchema` for details
  | orderAcceptanceTiming | ArrayList<[LocationDayWiseSerializer](#LocationDayWiseSerializer)>? |  yes  | Order acceptance timing of the store |
  | avgOrderProcessingTime | [AverageOrderProcessingTime](#AverageOrderProcessingTime)? |  yes  |  |
  | bulkShipment | Boolean? |  yes  |  |
- | autoAssignCourierPartner | Boolean? |  yes  |  |
 
 ---
 

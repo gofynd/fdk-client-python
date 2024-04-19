@@ -68,6 +68,18 @@ class InvoiceTypesResponse(BaseSchema):
     pass
 
 
+class Inr(BaseSchema):
+    pass
+
+
+class Usd(BaseSchema):
+    pass
+
+
+class Rates(BaseSchema):
+    pass
+
+
 class ConversionRate(BaseSchema):
     pass
 
@@ -180,10 +192,6 @@ class AwbNumberLabelBarcodeGenerator(BaseSchema):
     pass
 
 
-class AwbNumberBarcodeGenerator(BaseSchema):
-    pass
-
-
 class MetaProperty(BaseSchema):
     pass
 
@@ -268,10 +276,6 @@ class PaymentReceiptMeta(BaseSchema):
     pass
 
 
-class ExtensionSlug(BaseSchema):
-    pass
-
-
 
 
 
@@ -351,7 +355,7 @@ class StartRequest(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
-    params = fields.Dict(required=False)
+    params = fields.Nested(Params, required=False)
     
 
 
@@ -479,13 +483,51 @@ class InvoiceTypesResponse(BaseSchema):
     
 
 
+class Inr(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    value = fields.Float(required=False)
+    
+    symbol = fields.Str(required=False)
+    
+    sub_unit = fields.Str(required=False)
+    
+
+
+class Usd(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    value = fields.Float(required=False)
+    
+    symbol = fields.Str(required=False)
+    
+    sub_unit = fields.Str(required=False)
+    
+
+
+class Rates(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    inr = fields.Nested(Inr, required=False)
+    
+    usd = fields.Nested(Usd, required=False)
+    
+
+
 class ConversionRate(BaseSchema):
     # FileStorage swagger.json
 
     
     base = fields.Str(required=False)
     
-    rates = fields.Dict(required=False)
+    rates = fields.Nested(Rates, required=False)
     
     timestamp = fields.Float(required=False)
     
@@ -500,10 +542,6 @@ class DeliveryPartnerDetail(BaseSchema):
     awb_number_barcode = fields.Str(required=False)
     
     awb_number = fields.Str(required=False)
-    
-    origin = fields.Str(required=False)
-    
-    destination = fields.Str(required=False)
     
     eway_bill_number = fields.Str(required=False, allow_none=True)
     
@@ -529,14 +567,6 @@ class PaymentData(BaseSchema):
     
     transaction_id = fields.Str(required=False)
     
-    time = fields.Str(required=False)
-    
-    mode = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
 
 
 class InvoiceDetail(BaseSchema):
@@ -556,14 +586,6 @@ class InvoiceDetail(BaseSchema):
     signed_qrcode = fields.Str(required=False)
     
     upi_qrcode = fields.Str(required=False)
-    
-    device_id = fields.Str(required=False)
-    
-    marketplace_invoice_id = fields.Str(required=False)
-    
-    marketplace_shipment_id = fields.Str(required=False)
-    
-    channel_order_id = fields.Str(required=False)
     
 
 
@@ -599,20 +621,6 @@ class CompanyDetail(BaseSchema):
     
     email = fields.Str(required=False)
     
-    display_address = fields.Str(required=False)
-    
-    sector = fields.Str(required=False)
-    
-    phone = fields.Dict(required=False)
-    
-    trn = fields.Str(required=False)
-    
-    vat = fields.Str(required=False)
-    
-    business_country_timezone = fields.Str(required=False)
-    
-    business_country_currency = fields.Dict(required=False)
-    
 
 
 class StoreDetail(BaseSchema):
@@ -635,13 +643,7 @@ class StoreDetail(BaseSchema):
     
     state_code = fields.Str(required=False)
     
-    gstin = fields.Str(required=False, allow_none=True)
-    
-    display_address = fields.Str(required=False)
-    
-    sector = fields.Str(required=False)
-    
-    store_id = fields.Str(required=False)
+    gstin = fields.Str(required=False)
     
 
 
@@ -669,12 +671,6 @@ class CustomerBillingDetail(BaseSchema):
     
     gstin = fields.Str(required=False, allow_none=True)
     
-    display_address = fields.Str(required=False)
-    
-    sector = fields.Str(required=False)
-    
-    email = fields.Str(required=False)
-    
 
 
 class CustomerShippingDetail(BaseSchema):
@@ -701,10 +697,6 @@ class CustomerShippingDetail(BaseSchema):
     
     gstin = fields.Str(required=False, allow_none=True)
     
-    display_address = fields.Str(required=False)
-    
-    sector = fields.Str(required=False)
-    
 
 
 class ReturnDetail(BaseSchema):
@@ -725,11 +717,7 @@ class ReturnDetail(BaseSchema):
     
     state_code = fields.Str(required=False)
     
-    gstin = fields.Str(required=False, allow_none=True)
-    
-    display_address = fields.Str(required=False)
-    
-    sector = fields.Str(required=False)
+    gstin = fields.Str(required=False)
     
 
 
@@ -815,10 +803,6 @@ class ItemsProductTable(BaseSchema):
     
     tax = fields.Nested(Tax, required=False)
     
-    meta = fields.Dict(required=False)
-    
-    country_of_origin = fields.Str(required=False)
-    
 
 
 class ProductTable(BaseSchema):
@@ -840,24 +824,6 @@ class ProductTable(BaseSchema):
     fynd_discounts = fields.Float(required=False)
     
     total_in_words = fields.Str(required=False)
-    
-    gift_price = fields.Float(required=False)
-    
-    total_quantity = fields.Float(required=False)
-    
-    sub_total = fields.Float(required=False)
-    
-    discount = fields.Float(required=False)
-    
-    promotion = fields.Float(required=False)
-    
-    coupon = fields.Float(required=False)
-    
-    reward = fields.Float(required=False)
-    
-    round_off = fields.Float(required=False)
-    
-    total_value_of_goods = fields.Float(required=False)
     
 
 
@@ -902,10 +868,6 @@ class RegisteredCompanyDetail(BaseSchema):
     zip_code = fields.Float(required=False)
     
     state_code = fields.Str(required=False)
-    
-    display_address = fields.Str(required=False)
-    
-    sector = fields.Str(required=False)
     
 
 
@@ -985,16 +947,6 @@ class AwbNumberLabelBarcodeGenerator(BaseSchema):
     
 
 
-class AwbNumberBarcodeGenerator(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    method = fields.Str(required=False)
-    
-    kwargs = fields.Nested(Kwargs, required=False)
-    
-
-
 class MetaProperty(BaseSchema):
     # FileStorage swagger.json
 
@@ -1008,8 +960,6 @@ class MetaProperty(BaseSchema):
     digitalsignature_generator = fields.Nested(DigitalsignatureGenerator, required=False)
     
     awb_number_label_barcode_generator = fields.Nested(AwbNumberLabelBarcodeGenerator, required=False)
-    
-    awb_number_barcode_generator = fields.Nested(AwbNumberBarcodeGenerator, required=False)
     
 
 
@@ -1025,29 +975,9 @@ class DummyTemplateDataPayload(BaseSchema):
     # FileStorage swagger.json
 
     
-    is_export = fields.Boolean(required=False)
-    
-    is_export_shipment = fields.Boolean(required=False)
+    is_international = fields.Boolean(required=False)
     
     app_domain_name = fields.Str(required=False)
-    
-    txn_id = fields.Str(required=False)
-    
-    utr = fields.Str(required=False)
-    
-    po_number = fields.Str(required=False)
-    
-    credit_note_id = fields.Str(required=False, allow_none=True)
-    
-    current_date = fields.Str(required=False)
-    
-    total_value_of_goods = fields.Float(required=False)
-    
-    b2b_buyer_details = fields.Dict(required=False)
-    
-    is_qwik = fields.Dict(required=False)
-    
-    order_type = fields.Str(required=False)
     
     conversion_rate = fields.Nested(ConversionRate, required=False)
     
@@ -1126,8 +1056,6 @@ class DummyTemplateData(BaseSchema):
     pdf_type_id = fields.Float(required=False)
     
     payload = fields.Nested(DummyTemplateDataPayload, required=False)
-    
-    country_code = fields.Str(required=False)
     
     __v = fields.Int(required=False)
     
@@ -1372,14 +1300,6 @@ class PaymentReceiptMeta(BaseSchema):
     event_trace_info = fields.Dict(required=False)
     
     trace = fields.Str(required=False)
-    
-
-
-class ExtensionSlug(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    extension_slug = fields.Str(required=False)
     
 
 

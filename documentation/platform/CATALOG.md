@@ -7,71 +7,70 @@
 ## Catalog Methods
 Catalog - Platform Front API's' API's allows you to access list of products, prices, seller details, similar features, variants and many more useful features.
 
-Insights and Metrics
+Default
 * [getCatalogInsights](#getcataloginsights)
-* [getSellerInsights](#getsellerinsights)
-
-
-Application Information & Brand/Category/Department/Location Management
 * [getApplicationBrandListing](#getapplicationbrandlisting)
 * [updateAppBrand](#updateappbrand)
 * [getApplicationBrands](#getapplicationbrands)
 * [getCategories](#getcategories)
 * [getApplicationCategoryListing](#getapplicationcategorylisting)
 * [updateAppCategory](#updateappcategory)
-* [getApplicationDepartmentListing](#getapplicationdepartmentlisting)
-* [updateAppDepartment](#updateappdepartment)
-* [getDepartments](#getdepartments)
-* [getAppInventory](#getappinventory)
-* [getAppLocations](#getapplocations)
-* [getAppicationProducts](#getappicationproducts)
-* [getProductDetailBySlug](#getproductdetailbyslug)
-* [getAppProducts](#getappproducts)
-* [updateAppLocation](#updateapplocation)
-
-
-Collection Management
 * [getAllCollections](#getallcollections)
 * [createCollection](#createcollection)
+* [getQueryFilters](#getqueryfilters)
 * [deleteCollection](#deletecollection)
 * [updateCollection](#updatecollection)
 * [getCollectionItems](#getcollectionitems)
 * [addCollectionItems](#addcollectionitems)
 * [getCollectionDetail](#getcollectiondetail)
-
-
-Default
-* [getApplicationFilterValues](#getapplicationfiltervalues)
-* [getApplicationFilterKeys](#getapplicationfilterkeys)
-
-
-Website Configuration Management
-* [getQueryFilters](#getqueryfilters)
+* [getApplicationDepartmentListing](#getapplicationdepartmentlisting)
+* [updateAppDepartment](#updateappdepartment)
+* [getDepartments](#getdepartments)
+* [getAppInventory](#getappinventory)
+* [getAppLocations](#getapplocations)
 * [getConfigurations](#getconfigurations)
 * [createConfigurationProductListing](#createconfigurationproductlisting)
 * [getCatalogConfiguration](#getcatalogconfiguration)
 * [getConfigurationByType](#getconfigurationbytype)
 * [createConfigurationByType](#createconfigurationbytype)
-* [updateAllowSingle](#updateallowsingle)
-* [updateDefaultSort](#updatedefaultsort)
-* [getListingConfigurations](#getlistingconfigurations)
-* [createListingConfiguration](#createlistingconfiguration)
-* [getGroupConfigurations](#getgroupconfigurations)
-* [createGroupConfiguration](#creategroupconfiguration)
-* [deleteGroupConfiguration](#deletegroupconfiguration)
-* [updateGroupConfiguration](#updategroupconfiguration)
-* [deleteListingConfiguration](#deletelistingconfiguration)
-* [updateListingConfiguration](#updatelistingconfiguration)
-* [getConfigurationMetadata](#getconfigurationmetadata)
-
-
-App Product Handling
 * [getAppProduct](#getappproduct)
 * [updateAppProduct](#updateappproduct)
-
-
-Product Management
+* [getAppicationProducts](#getappicationproducts)
 * [getDiscountedInventoryBySizeIdentifier](#getdiscountedinventorybysizeidentifier)
+* [getProductDetailBySlug](#getproductdetailbyslug)
+* [getAppProducts](#getappproducts)
+* [getAppReturnConfiguration](#getappreturnconfiguration)
+* [createAppReturnConfiguration](#createappreturnconfiguration)
+* [updateAppReturnConfiguration](#updateappreturnconfiguration)
+* [deleteAppCategoryReturnConfiguration](#deleteappcategoryreturnconfiguration)
+* [getAppCategoryReturnConfig](#getappcategoryreturnconfig)
+* [createAppCategoryReturnConfiguration](#createappcategoryreturnconfiguration)
+* [updateAppCategoryReturnConfiguration](#updateappcategoryreturnconfiguration)
+* [getAutocompleteConfig](#getautocompleteconfig)
+* [createCustomAutocompleteRule](#createcustomautocompleterule)
+* [deleteAutocompleteKeyword](#deleteautocompletekeyword)
+* [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
+* [updateAutocompleteKeyword](#updateautocompletekeyword)
+* [deleteSearchConfiguration](#deletesearchconfiguration)
+* [getSearchConfiguration](#getsearchconfiguration)
+* [createSearchConfiguration](#createsearchconfiguration)
+* [updateSearchConfiguration](#updatesearchconfiguration)
+* [getAllSearchKeyword](#getallsearchkeyword)
+* [createCustomKeyword](#createcustomkeyword)
+* [deleteSearchKeywords](#deletesearchkeywords)
+* [getSearchKeywords](#getsearchkeywords)
+* [updateSearchKeywords](#updatesearchkeywords)
+* [updateAppLocation](#updateapplocation)
+* [listCategories](#listcategories)
+* [createCategories](#createcategories)
+* [getCategoryData](#getcategorydata)
+* [updateCategory](#updatecategory)
+* [getSellerInsights](#getsellerinsights)
+* [listDepartmentsData](#listdepartmentsdata)
+* [createDepartments](#createdepartments)
+* [getDepartmentData](#getdepartmentdata)
+* [updateDepartment](#updatedepartment)
+* [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
 * [bulkHsnCode](#bulkhsncode)
 * [getHsnCode](#gethsncode)
 * [updateHsnCode](#updatehsncode)
@@ -83,20 +82,57 @@ Product Management
 * [getInventoryExport](#getinventoryexport)
 * [createInventoryExportJob](#createinventoryexportjob)
 * [exportInventoryConfig](#exportinventoryconfig)
+* [downloadInventoryTemplateView](#downloadinventorytemplateview)
+* [validateProductTemplateSchema](#validateproducttemplateschema)
+* [getOptimalLocations](#getoptimallocations)
+* [getMarketplaceOptinDetail](#getmarketplaceoptindetail)
+* [getCompanyBrandDetail](#getcompanybranddetail)
+* [getCompanyDetail](#getcompanydetail)
+* [getCompanyMetrics](#getcompanymetrics)
+* [getStoreDetail](#getstoredetail)
+* [createMarketplaceOptin](#createmarketplaceoptin)
 * [getProductAttributes](#getproductattributes)
+* [getGenderAttribute](#getgenderattribute)
+* [getProductBundle](#getproductbundle)
+* [createProductBundle](#createproductbundle)
+* [getProductBundleDetail](#getproductbundledetail)
+* [updateProductBundle](#updateproductbundle)
 * [getProductAssetsInBulk](#getproductassetsinbulk)
 * [createProductAssetsInBulk](#createproductassetsinbulk)
 * [getProductBulkUploadHistory](#getproductbulkuploadhistory)
+* [createBulkProductUploadJob](#createbulkproductuploadjob)
 * [deleteProductBulkJob](#deleteproductbulkjob)
 * [createProductsInBulk](#createproductsinbulk)
+* [listProductTemplateExportDetails](#listproducttemplateexportdetails)
+* [listHSNCodes](#listhsncodes)
 * [getProductTags](#getproducttags)
+* [listProductTemplate](#listproducttemplate)
+* [listProductTemplateCategories](#listproducttemplatecategories)
+* [downloadProductTemplateViews](#downloadproducttemplateviews)
+* [validateProductTemplate](#validateproducttemplate)
 * [getProductValidation](#getproductvalidation)
 * [getInventoryBySizeIdentifier](#getinventorybysizeidentifier)
 * [getProductSize](#getproductsize)
 * [deleteSize](#deletesize)
 * [getInventoryBySize](#getinventorybysize)
 * [addInventory](#addinventory)
+* [deleteInventory](#deleteinventory)
 * [getVariantsOfProducts](#getvariantsofproducts)
+* [getSizeGuides](#getsizeguides)
+* [createSizeGuide](#createsizeguide)
+* [getSizeGuide](#getsizeguide)
+* [updateSizeGuide](#updatesizeguide)
+* [updateAllowSingle](#updateallowsingle)
+* [updateDefaultSort](#updatedefaultsort)
+* [getListingConfigurations](#getlistingconfigurations)
+* [createListingConfiguration](#createlistingconfiguration)
+* [getGroupConfigurations](#getgroupconfigurations)
+* [createGroupConfiguration](#creategroupconfiguration)
+* [deleteGroupConfiguration](#deletegroupconfiguration)
+* [updateGroupConfiguration](#updategroupconfiguration)
+* [deleteListingConfiguration](#deletelistingconfiguration)
+* [updateListingConfiguration](#updatelistingconfiguration)
+* [getConfigurationMetadata](#getconfigurationmetadata)
 * [getAllProductHsnCodes](#getallproducthsncodes)
 * [getSingleProductHSNCode](#getsingleproducthsncode)
 * [updateInventories](#updateinventories)
@@ -105,113 +141,14 @@ Product Management
 * [getProducts](#getproducts)
 * [createProduct](#createproduct)
 * [uploadBulkProducts](#uploadbulkproducts)
+* [getProductExportJobs](#getproductexportjobs)
+* [createProductExportJob](#createproductexportjob)
 * [deleteProduct](#deleteproduct)
 * [getProduct](#getproduct)
 * [editProduct](#editproduct)
 * [allSizes](#allsizes)
 * [deleteRealtimeInventory](#deleterealtimeinventory)
 * [updateRealtimeInventory](#updaterealtimeinventory)
-
-
-Configuration
-* [getAppReturnConfiguration](#getappreturnconfiguration)
-* [createAppReturnConfiguration](#createappreturnconfiguration)
-* [updateAppReturnConfiguration](#updateappreturnconfiguration)
-* [deleteAppCategoryReturnConfiguration](#deleteappcategoryreturnconfiguration)
-* [getAppCategoryReturnConfig](#getappcategoryreturnconfig)
-* [createAppCategoryReturnConfiguration](#createappcategoryreturnconfiguration)
-* [updateAppCategoryReturnConfiguration](#updateappcategoryreturnconfiguration)
-
-
-Search Keywords and Autocomplete
-* [getAutocompleteConfig](#getautocompleteconfig)
-* [createCustomAutocompleteRule](#createcustomautocompleterule)
-* [deleteAutocompleteKeyword](#deleteautocompletekeyword)
-* [getAutocompleteKeywordDetail](#getautocompletekeyworddetail)
-* [updateAutocompleteKeyword](#updateautocompletekeyword)
-* [deleteSearchConfiguration](#deletesearchconfiguration)
-* [getSearchConfiguration](#getsearchconfiguration)
-* [createSearchConfiguration](#createsearchconfiguration)
-* [getAllSearchKeyword](#getallsearchkeyword)
-* [createCustomKeyword](#createcustomkeyword)
-* [deleteSearchKeywords](#deletesearchkeywords)
-* [getSearchKeywords](#getsearchkeywords)
-* [updateSearchKeywords](#updatesearchkeywords)
-
-
-Search
-* [updateSearchConfiguration](#updatesearchconfiguration)
-
-
-Category management
-* [listCategories](#listcategories)
-* [createCategories](#createcategories)
-* [getCategoryData](#getcategorydata)
-* [updateCategory](#updatecategory)
-
-
-Product Template and Department management
-* [listDepartmentsData](#listdepartmentsdata)
-* [createDepartments](#createdepartments)
-* [getDepartmentData](#getdepartmentdata)
-* [updateDepartment](#updatedepartment)
-* [downloadInventoryTemplateView](#downloadinventorytemplateview)
-* [validateProductTemplateSchema](#validateproducttemplateschema)
-* [listProductTemplate](#listproducttemplate)
-* [listProductTemplateCategories](#listproducttemplatecategories)
-* [downloadProductTemplateViews](#downloadproducttemplateviews)
-* [validateProductTemplate](#validateproducttemplate)
-
-
-HSN Code Management
-* [listTemplateBrandTypeValues](#listtemplatebrandtypevalues)
-* [listProductTemplateExportDetails](#listproducttemplateexportdetails)
-* [listHSNCodes](#listhsncodes)
-* [getProductExportJobs](#getproductexportjobs)
-* [createProductExportJob](#createproductexportjob)
-
-
-Store Management
-* [getOptimalLocations](#getoptimallocations)
-
-
-Marketplaces
-* [getMarketplaceOptinDetail](#getmarketplaceoptindetail)
-* [getCompanyBrandDetail](#getcompanybranddetail)
-* [getCompanyDetail](#getcompanydetail)
-* [createMarketplaceOptin](#createmarketplaceoptin)
-
-
-Company Onboarding and Metrics
-* [getCompanyMetrics](#getcompanymetrics)
-
-
-Store and All Attribute
-* [getStoreDetail](#getstoredetail)
-* [getGenderAttribute](#getgenderattribute)
-
-
-Product Bundle Management
-* [getProductBundle](#getproductbundle)
-* [createProductBundle](#createproductbundle)
-* [getProductBundleDetail](#getproductbundledetail)
-* [updateProductBundle](#updateproductbundle)
-
-
-Product
-* [createBulkProductUploadJob](#createbulkproductuploadjob)
-
-
-Size Guide Handling
-* [getSizeGuides](#getsizeguides)
-* [createSizeGuide](#createsizeguide)
-* [getSizeGuide](#getsizeguide)
-* [updateSizeGuide](#updatesizeguide)
-
-
-Marketplace
-* [getMarketplaces](#getmarketplaces)
-* [updateMarketplaceOptin](#updatemarketplaceoptin)
 
 
 
@@ -221,7 +158,7 @@ Marketplace
 
 
 ### getCatalogInsights
-Get catalog insights.
+Analytics data of catalog and inventory.
 
 
 
@@ -244,7 +181,7 @@ except Exception as e:
 
 
 
-Retrieve the count of catalog related data like products, brands, departments and categories that have been made live as per configuration of the application.
+Catalog Insights api returns the count of catalog related data like products, brands, departments and categories that have been made live as per configuration of the app.
 
 *Returned Response:*
 
@@ -283,70 +220,8 @@ Response Data
 ---
 
 
-### getSellerInsights
-Get seller insights.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getSellerInsights(sellerAppId=sellerAppId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| sellerAppId | String | yes | Id of the seller application which is serving the invetory/catalog of the company |  
-
-
-
-Retrieve insights and analytics related to sellers within the catalog.
-
-*Returned Response:*
-
-
-
-
-[CrossSellingResponse](#CrossSellingResponse)
-
-Response Data
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "articles": 18,
-  "products": 18
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
 ### getApplicationBrandListing
-Get application brand listing.
+List all the brands for the application
 
 
 
@@ -371,7 +246,7 @@ except Exception as e:
 
 
 
-Retrieve brand listings related to the application. A brand is the name under which a product is being sold
+A brand is the name under which a product is being sold. Use this API to list all the brands. You can pass optionally filter the brands by the department. If successful, returns a paginated list of brands specified in `BrandListingResponse`
 
 *Returned Response:*
 
@@ -443,7 +318,7 @@ List of Brands. See example below or refer `BrandListingResponse` for details
 
 
 ### updateAppBrand
-Update application brand.
+Update a single custom json.
 
 
 
@@ -466,7 +341,7 @@ except Exception as e:
 | body | [ApplicationBrandJson](#ApplicationBrandJson) | yes | Request body |
 
 
-Modify data associated to a item custom meta.
+This API helps to update data associated to a item custom meta.
 
 *Returned Response:*
 
@@ -502,7 +377,7 @@ Returns a success response
 
 
 ### getApplicationBrands
-Get application brands.
+List all the brands
 
 
 
@@ -529,7 +404,7 @@ except Exception as e:
 
 
 
-List all the brands. A brand is the name under which a product is being sold. 
+A brand is the name under which a product is being sold. Use this API to list all the brands. You can pass optionally filter the brands by the department. If successful, returns a paginated list of brands specified in `BrandListingResponse`
 
 *Returned Response:*
 
@@ -601,7 +476,7 @@ List of Brands. See example below or refer `BrandListingResponse` for details
 
 
 ### getCategories
-Get categories.
+List all the categories
 
 
 
@@ -624,7 +499,7 @@ except Exception as e:
 
 
 
-Retrieve a list of categories. Optionally pass filter the brands by the department.
+List all the categories. You can optionally pass filter the brands by the department. If successful, returns a paginated list of brands specified in `CategoryListingResponse`
 
 *Returned Response:*
 
@@ -746,7 +621,7 @@ List of Categories. See example below or refer `CategoryListingResponse` for det
 
 
 ### getApplicationCategoryListing
-Get application category listing.
+List all the brands for the application
 
 
 
@@ -772,7 +647,7 @@ except Exception as e:
 
 
 
-Retrieve category listings related to the application. A brand is the name under which a product is being sold.
+A brand is the name under which a product is being sold. Use this API to list all the brands. You can pass optionally filter the brands by the department. If successful, returns a paginated list of brands specified in `BrandListingResponse`
 
 *Returned Response:*
 
@@ -844,7 +719,7 @@ List of Brands. See example below or refer `BrandListingResponse` for details
 
 
 ### updateAppCategory
-Update application category.
+Update a single custom json.
 
 
 
@@ -867,7 +742,7 @@ except Exception as e:
 | body | [ApplicationCategoryJson](#ApplicationCategoryJson) | yes | Request body |
 
 
-Modify category data related to the application. Helps to update data associated to a item custom meta.
+This API helps to update data associated to a item custom meta.
 
 *Returned Response:*
 
@@ -902,8 +777,1265 @@ Returns a success response
 ---
 
 
+### getAllCollections
+List all the collections
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getAllCollections(q=q, scheduleStatus=scheduleStatus, type=type, tags=tags, isActive=isActive, pageNo=pageNo, pageSize=pageSize)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| q | String? | no | Get collection list filtered by q string, |   
+| scheduleStatus | String? | no | Get collection list filtered by scheduled status, |   
+| type | String? | no | type of the collections |   
+| tags | ArrayList<String>? | no | Each response will contain next_id param, which should be sent back to make pagination work. |   
+| isActive | Boolean? | no | get collections filtered by active status. |   
+| pageNo | Int? | no | The page number to navigate through the given set of results. |   
+| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |  
+
+
+
+A Collection allows you to organize your products into hierarchical groups. For example, a dress might be in the category _Clothing_, the individual product might also be in the collection _Summer_. On successful request, returns all the collections as specified in `CollectionListingSchema`
+
+*Returned Response:*
+
+
+
+
+[GetCollectionListingResponse](#GetCollectionListingResponse)
+
+List of collections. See example below or refer `GetCollectionListingResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "filters": {
+    "tags": [
+      {
+        "display": "1+",
+        "is_selected": false,
+        "name": "1+"
+      },
+      {
+        "display": "aa",
+        "is_selected": false,
+        "name": "aa"
+      },
+      {
+        "display": "asd",
+        "is_selected": false,
+        "name": "asd"
+      },
+      {
+        "display": "dda",
+        "is_selected": false,
+        "name": "dda"
+      },
+      {
+        "display": "fahim",
+        "is_selected": false,
+        "name": "fahim"
+      },
+      {
+        "display": "gfg",
+        "is_selected": false,
+        "name": "gfg"
+      },
+      {
+        "display": "sakri",
+        "is_selected": false,
+        "name": "sakri"
+      },
+      {
+        "display": "sdsadas",
+        "is_selected": false,
+        "name": "sdsadas"
+      },
+      {
+        "display": "uuy",
+        "is_selected": false,
+        "name": "uuy"
+      }
+    ],
+    "type": [
+      {
+        "display": "items",
+        "is_selected": false,
+        "name": "items"
+      },
+      {
+        "display": "query",
+        "is_selected": false,
+        "name": "query"
+      }
+    ]
+  },
+  "items": [
+    {
+      "_custom_json": {},
+      "_locale_language": {},
+      "_schedule": {
+        "end": null,
+        "next_schedule": [
+          {
+            "end": null,
+            "start": "2021-03-04T15:35:13.640000Z"
+          }
+        ],
+        "start": "2021-03-04T15:35:13.640000Z"
+      },
+      "action": {
+        "page": {
+          "query": {
+            "collection": [
+              "test1"
+            ]
+          },
+          "type": "collection"
+        },
+        "type": "page"
+      },
+      "allow_facets": true,
+      "allow_sort": true,
+      "badge": {
+        "color": "#ffffff",
+        "text": ""
+      },
+      "banners": {
+        "landscape": {
+          "type": "image",
+          "url": "https://hdn-1.addsale.com/x0/company/1/applications/000000000000000000000001/collections/pictures/landscape-banner/original/3jSEzw9CN-1601465376892.jpeg"
+        },
+        "portrait": {
+          "type": "image",
+          "url": "https://hdn-1.addsale.com/x0/company/1/applications/000000000000000000000001/collections/pictures/portrait-banner/original/mP6OnINGR-1601466767814.jpeg"
+        }
+      },
+      "description": "this is description",
+      "is_active": true,
+      "logo": {
+        "type": "image",
+        "url": "https://hdn-1.addsale.com/x0/company/1/applications/000000000000000000000001/collections/pictures/square-logo/original/y_-XUYXwx-1602326103322.jpeg"
+      },
+      "meta": {},
+      "name": "test1",
+      "published": true,
+      "query": [],
+      "slug": "test1",
+      "sort_on": "price_asc",
+      "tags": [],
+      "type": "query",
+      "uid": "6040fed076d8a500011ef829",
+      "visible_facets_keys": []
+    },
+    {
+      "_custom_json": {},
+      "_locale_language": {},
+      "_schedule": {
+        "end": null,
+        "next_schedule": [
+          {
+            "end": null,
+            "start": "2021-03-04T09:33:53.686000Z"
+          }
+        ],
+        "start": "2021-03-04T09:33:53.686000Z"
+      },
+      "action": {
+        "page": {
+          "query": {
+            "collection": [
+              "newapiplaform"
+            ]
+          },
+          "type": "collection"
+        },
+        "type": "page"
+      },
+      "allow_facets": true,
+      "allow_sort": true,
+      "badge": {
+        "color": "#aa2727",
+        "text": ""
+      },
+      "banners": {
+        "landscape": {
+          "type": "image",
+          "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857999/production/applications/app_000000000000000000000001/media/collection/landscape/avm7xibo2jgk8glc4bwl.png"
+        },
+        "portrait": {
+          "type": "image",
+          "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588858137/production/applications/app_000000000000000000000001/media/collection/portrait/xzuftshmmw4yuwzb12pm.png"
+        }
+      },
+      "description": "sadasd",
+      "is_active": true,
+      "logo": {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857854/production/applications/app_000000000000000000000001/media/collection/logo/w9ns7nfgv7fk45xqrpoh.png"
+      },
+      "meta": {},
+      "name": "newapiplaform",
+      "published": true,
+      "query": [
+        {
+          "attribute": "catalogue",
+          "op": "in",
+          "value": []
+        }
+      ],
+      "slug": "newapiplaform",
+      "sort_on": "popular",
+      "tags": [
+        "sdsadas",
+        "asd"
+      ],
+      "type": "items",
+      "uid": "6040a9b250f97e0001886294",
+      "visible_facets_keys": []
+    },
+    {
+      "_custom_json": {},
+      "_locale_language": {},
+      "_schedule": {
+        "end": null,
+        "next_schedule": [
+          {
+            "end": null,
+            "start": "2021-03-03T10:45:40.544000Z"
+          }
+        ],
+        "start": "2021-03-03T10:45:40.544000Z"
+      },
+      "action": {
+        "page": {
+          "query": {
+            "collection": [
+              "old"
+            ]
+          },
+          "type": "collection"
+        },
+        "type": "page"
+      },
+      "allow_facets": true,
+      "allow_sort": true,
+      "badge": {
+        "color": "#ffffff",
+        "text": ""
+      },
+      "banners": {
+        "landscape": {
+          "type": "image",
+          "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857999/production/applications/app_000000000000000000000001/media/collection/landscape/avm7xibo2jgk8glc4bwl.png"
+        },
+        "portrait": {
+          "type": "image",
+          "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588858137/production/applications/app_000000000000000000000001/media/collection/portrait/xzuftshmmw4yuwzb12pm.png"
+        }
+      },
+      "description": "",
+      "is_active": true,
+      "logo": {
+        "type": "image",
+        "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857854/production/applications/app_000000000000000000000001/media/collection/logo/w9ns7nfgv7fk45xqrpoh.png"
+      },
+      "meta": {},
+      "name": "new",
+      "published": true,
+      "query": [],
+      "slug": "old",
+      "sort_on": "popular",
+      "tags": [],
+      "type": "query",
+      "uid": "603f68fd953a69000145dc92",
+      "visible_facets_keys": []
+    }
+  ],
+  "page": {
+    "current": 1,
+    "has_next": true,
+    "has_previous": false,
+    "item_total": 190,
+    "size": 19,
+    "type": "collection"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createCollection
+Add a Collection
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.createCollection(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [CreateCollection](#CreateCollection) | yes | Request body |
+
+
+Create a collection. See `CreateCollectionRequestSchema` for the list of attributes needed to create a collection and collections/query-options for the available options to create a collection. On successful request, returns a paginated list of collections specified in `CollectionCreateResponse`
+
+*Returned Response:*
+
+
+
+
+[CollectionCreateResponse](#CollectionCreateResponse)
+
+List of all the collections including the one you added. See example below or refer `CollectionCreateResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "_custom_json": {},
+  "_locale_language": {},
+  "_schedule": {
+    "end": null,
+    "next_schedule": [
+      {
+        "end": null,
+        "start": "2021-03-15T12:51:21.333000+00:00Z"
+      }
+    ],
+    "start": "2021-03-15T12:51:21.333000+00:00Z"
+  },
+  "action": {
+    "page": {
+      "query": {
+        "collection": [
+          "new"
+        ]
+      },
+      "type": "collection"
+    },
+    "type": "page"
+  },
+  "allow_facets": true,
+  "allow_sort": true,
+  "badge": {
+    "color": "#ffffff",
+    "text": ""
+  },
+  "banners": {
+    "landscape": {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857999/production/applications/app_000000000000000000000001/media/collection/landscape/avm7xibo2jgk8glc4bwl.png"
+    },
+    "portrait": {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588858137/production/applications/app_000000000000000000000001/media/collection/portrait/xzuftshmmw4yuwzb12pm.png"
+    }
+  },
+  "description": "",
+  "is_active": true,
+  "logo": {
+    "type": "image",
+    "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857854/production/applications/app_000000000000000000000001/media/collection/logo/w9ns7nfgv7fk45xqrpoh.png"
+  },
+  "meta": {},
+  "name": "New",
+  "published": true,
+  "query": [],
+  "seo": {
+    "description": "Test description",
+    "title": "Test"
+  },
+  "slug": "new",
+  "sort_on": "depth_desc",
+  "tags": [],
+  "type": "query",
+  "uid": "604f585a7051e30001173ac1",
+  "visible_facets_keys": []
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getQueryFilters
+Get query filters to configure a collection
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getQueryFilters()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Get query filters to configure a collection
+
+*Returned Response:*
+
+
+
+
+[GetCollectionQueryOptionResponse](#GetCollectionQueryOptionResponse)
+
+The attached items of an collection. See example below or refer `GetCollectionQueryOptionResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "filters": [
+    {
+      "key": {
+        "display": "Department",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Department.png",
+        "name": "department"
+      },
+      "values": [
+        {
+          "count": 2113,
+          "display": "Men's Fashion",
+          "is_selected": false,
+          "logo": {
+            "type": "image",
+            "url": "https://hdn-1.fynd.com/media/category_tab_icons/department/Men.png"
+          },
+          "value": "men"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Category",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Category.png",
+        "name": "category"
+      },
+      "values": [
+        {
+          "count": 968,
+          "display": "T-Shirts",
+          "is_selected": false,
+          "logo": "https://hdn-1.fynd.com/media/logo/category/original/15442_57fdc97abfd248aaaf8841f097a4ed67.jpg",
+          "value": "192"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Size",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Sizes.png",
+        "name": "sizes"
+      },
+      "values": [
+        {
+          "count": 1438,
+          "display": "S",
+          "is_selected": false,
+          "value": "S"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Brand",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Brand%20ID.png",
+        "name": "brand"
+      },
+      "values": [
+        {
+          "count": 4263,
+          "display": "Superdry",
+          "is_selected": false,
+          "logo": "https://hdn-1.fynd.com/media/logo/brand/original/1008_238113b8e11448f792e9bf860aac30f2.jpg",
+          "value": "235"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Rating",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Rating.png",
+        "name": "rating"
+      },
+      "values": [
+        {
+          "count": 3,
+          "display": "5 ★",
+          "is_selected": false,
+          "value": "[4 TO *}"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Company",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Store%20ID%20List.png",
+        "name": "company_id_list"
+      },
+      "values": [
+        {
+          "count": 4262,
+          "display": "RELIANCE BRANDS LIMITED",
+          "is_selected": false,
+          "value": "46"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Store Ids",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Store%20ID%20List.png",
+        "name": "store_id_list"
+      },
+      "values": [
+        {
+          "count": 1385,
+          "display": "PHOENIX, ,PALLADIUM,  LOWER PAREL - 5410",
+          "is_selected": false,
+          "value": "2201"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Image",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/image%20Nature.png",
+        "name": "image_nature"
+      },
+      "values": [
+        {
+          "count": 3111,
+          "display": "Good Quality",
+          "is_selected": false,
+          "value": "standard"
+        },
+        {
+          "count": 1152,
+          "display": "No Image",
+          "is_selected": false,
+          "value": "default"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Set",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Department.png",
+        "name": "is_set"
+      },
+      "values": [
+        {
+          "count": 4263,
+          "display": "No",
+          "is_selected": false,
+          "value": false
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Product Fit",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Department.png",
+        "name": "product_fit"
+      },
+      "values": [
+        {
+          "count": 14,
+          "display": "Regular",
+          "is_selected": false,
+          "value": "Regular"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Primary Material",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Department.png",
+        "name": "primary_material"
+      },
+      "values": [
+        {
+          "count": 1246,
+          "display": "Cotton",
+          "is_selected": false,
+          "value": "Cotton"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Gender",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Department.png",
+        "name": "gender"
+      },
+      "values": [
+        {
+          "count": 2125,
+          "display": "Men",
+          "is_selected": false,
+          "value": "Men"
+        },
+        {
+          "count": 1492,
+          "display": "Women",
+          "is_selected": false,
+          "value": "Women"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Primary Colour",
+        "kind": "multivalued",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Department.png",
+        "name": "primary_color"
+      },
+      "values": [
+        {
+          "count": 1403,
+          "display": "Multi",
+          "is_selected": false,
+          "value": "Multi"
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Size Depth",
+        "kind": "range",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Size%20Depth.png",
+        "name": "size_depth"
+      },
+      "values": [
+        {
+          "count": 4263,
+          "display": "0 - 9",
+          "display_format": "{} - {}",
+          "is_selected": false,
+          "max": 9,
+          "min": 0,
+          "query_format": "[{} TO {}]",
+          "selected_max": 9,
+          "selected_min": 0,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Price",
+        "kind": "range",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Min%20price%20effective.png",
+        "name": "min_price_effective"
+      },
+      "values": [
+        {
+          "count": 4263,
+          "currency_code": "INR",
+          "currency_symbol": "₹",
+          "display": "0 - 9",
+          "is_selected": false,
+          "max": 24999,
+          "min": 398,
+          "query_format": "[{},INR TO {},INR]",
+          "selected_max": 24998,
+          "selected_min": 398,
+          "value": 1
+        }
+      ]
+    },
+    {
+      "key": {
+        "display": "Discount",
+        "kind": "range",
+        "logo": "https://hdn-1.fynd.com/global/menu-icons/Platform%20Discount.png",
+        "name": "platform_discount"
+      },
+      "values": [
+        {
+          "count": 4263,
+          "display": "0 - 50",
+          "display_format": "{} - {}",
+          "is_selected": false,
+          "max": 50,
+          "min": 0,
+          "query_format": "[{} TO {}]",
+          "selected_max": 50,
+          "selected_min": 0,
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "operators": {
+    "key": "value"
+  },
+  "sort_on": [
+    {
+      "display": "Latest Products",
+      "is_selected": true,
+      "logo": "https://hdn-1.fynd.com/global/menu-icons/Latest%20Products.png",
+      "name": "Latest Products",
+      "value": "latest"
+    },
+    {
+      "display": "Popularity",
+      "is_selected": false,
+      "logo": "https://hdn-1.fynd.com/global/menu-icons/Popularity.png",
+      "name": "Popularity",
+      "value": "popular"
+    },
+    {
+      "display": "Price Low to High",
+      "is_selected": false,
+      "logo": "https://hdn-1.fynd.com/global/menu-icons/Price%20High%20to%20Low.png",
+      "name": "Price Low to High",
+      "value": "price_asc"
+    },
+    {
+      "display": "Price High to Low",
+      "is_selected": false,
+      "logo": "https://hdn-1.fynd.com/global/menu-icons/Price%20High%20to%20Low.png",
+      "name": "Price High to Low",
+      "value": "price_dsc"
+    },
+    {
+      "display": "Discount Low to High",
+      "is_selected": false,
+      "logo": "https://hdn-1.fynd.com/global/menu-icons/Discount%20Low%20to%20High.png",
+      "name": "Discount Low to High",
+      "value": "discount_asc"
+    },
+    {
+      "display": "Discount High to Low",
+      "is_selected": false,
+      "logo": "https://hdn-1.fynd.com/global/menu-icons/Discount%20Low%20to%20High.png",
+      "name": "Discount High to Low",
+      "value": "discount_dsc"
+    },
+    {
+      "display": "Rating",
+      "is_selected": false,
+      "logo": "https://hdn-1.fynd.com/global/menu-icons/Rating.png",
+      "name": "Rating",
+      "value": "rating_dsc"
+    },
+    {
+      "display": "Size Depth (High to Low)",
+      "is_selected": false,
+      "logo": "https://hdn-1.fynd.com/global/menu-icons/Size%20Depth.png",
+      "name": "Size Depth (High to Low)",
+      "value": "depth_desc"
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deleteCollection
+Delete a Collection
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.deleteCollection(id=id)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | A `id` is a unique identifier of a collection. |  
+
+
+
+Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+
+*Returned Response:*
+
+
+
+
+[DeleteResponse](#DeleteResponse)
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "message": "Collection Deleted"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateCollection
+Update a collection
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.updateCollection(id=id, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | A `id` is a unique identifier of a collection. |  
+| body | [UpdateCollection](#UpdateCollection) | yes | Request body |
+
+
+Update a collection by it's id. On successful request, returns the updated collection
+
+*Returned Response:*
+
+
+
+
+[UpdateCollection](#UpdateCollection)
+
+The Collection object. See example below or refer `UpdateCollectionSchema` for details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "_custom_json": {},
+  "_locale_language": {},
+  "_schedule": {
+    "end": null,
+    "next_schedule": [
+      {
+        "end": null,
+        "start": "2021-04-02T15:43:59.410000Z"
+      }
+    ],
+    "start": "2021-04-02T15:43:59.410000Z"
+  },
+  "action": {
+    "page": {
+      "query": {
+        "collection": [
+          "new"
+        ]
+      },
+      "type": "collection"
+    },
+    "type": "page"
+  },
+  "allow_facets": true,
+  "allow_sort": true,
+  "badge": {
+    "color": "#ffffff",
+    "text": ""
+  },
+  "banners": {
+    "landscape": {
+      "aspect_ratio": "250",
+      "type": "image",
+      "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857999/production/applications/app_000000000000000000000001/media/collection/landscape/avm7xibo2jgk8glc4bwl.png"
+    },
+    "portrait": {
+      "aspect_ratio": "250",
+      "type": "image",
+      "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588858137/production/applications/app_000000000000000000000001/media/collection/portrait/xzuftshmmw4yuwzb12pm.png"
+    }
+  },
+  "description": "",
+  "is_active": true,
+  "logo": {
+    "aspect_ratio": "250",
+    "type": "image",
+    "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857854/production/applications/app_000000000000000000000001/media/collection/logo/w9ns7nfgv7fk45xqrpoh.png"
+  },
+  "meta": {},
+  "name": "New",
+  "published": true,
+  "query": [],
+  "seo": {
+    "description": "Test description",
+    "title": "Test"
+  },
+  "slug": "new",
+  "sort_on": "depth_desc",
+  "tags": [],
+  "type": "query",
+  "uid": "604f585a7051e30001173ac1",
+  "visible_facets_keys": []
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getCollectionItems
+Get the items for a collection
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getCollectionItems(id=id, sortOn=sortOn, pageId=pageId, pageSize=pageSize)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | A `id` is a unique identifier of a collection. |   
+| sortOn | String? | no | Each response will contain sort_on param, which should be sent back to make pagination work. |   
+| pageId | String? | no | Each response will contain next_id param, which should be sent back to make pagination work. |   
+| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |  
+
+
+
+Get items from a collection specified by its `id`.
+
+*Returned Response:*
+
+
+
+
+[GetCollectionItemsResponse](#GetCollectionItemsResponse)
+
+The attached items of an collection. See example below or refer `GetCollectionItemsResponseSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### addCollectionItems
+Add items to a collection
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.addCollectionItems(id=id, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | A `id` is a unique identifier of a collection. |  
+| body | [CollectionItemUpdate](#CollectionItemUpdate) | yes | Request body |
+
+
+Adds items to a collection specified by its `id`. See `CollectionItemRequest` for the list of attributes needed to add items to an collection.
+
+*Returned Response:*
+
+
+
+
+[UpdatedResponse](#UpdatedResponse)
+
+Status object. Tells whether the operation was successful.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "message": "items updated"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getCollectionDetail
+Get a particular collection
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getCollectionDetail(slug=slug)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| slug | String | yes | A `slug` is a human readable, URL friendly unique identifier of an object. Pass the `slug` of the collection which you want to retrieve. |  
+
+
+
+Get the details of a collection by its `slug`. If successful, returns a Collection resource in the response body specified in `CollectionDetailResponse`
+
+*Returned Response:*
+
+
+
+
+[CollectionDetailResponse](#CollectionDetailResponse)
+
+The Collection object. See example below or refer `CollectionDetailResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "_custom_json": {},
+  "_locale_language": {},
+  "_schedule": {
+    "end": null,
+    "next_schedule": [
+      {
+        "end": null,
+        "start": "2020-05-21T03:58:41.237000Z"
+      }
+    ],
+    "start": "2020-05-21T03:58:41.237000Z"
+  },
+  "action": {
+    "page": {
+      "query": {
+        "collection": [
+          "new"
+        ]
+      },
+      "type": "collection"
+    },
+    "type": "page"
+  },
+  "allow_facets": true,
+  "allow_sort": true,
+  "badge": {
+    "color": "#ffffff",
+    "text": ""
+  },
+  "banners": {
+    "landscape": {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857999/production/applications/app_000000000000000000000001/media/collection/landscape/avm7xibo2jgk8glc4bwl.png"
+    },
+    "portrait": {
+      "type": "image",
+      "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588858137/production/applications/app_000000000000000000000001/media/collection/portrait/xzuftshmmw4yuwzb12pm.png"
+    }
+  },
+  "description": "",
+  "is_active": true,
+  "logo": {
+    "type": "image",
+    "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857854/production/applications/app_000000000000000000000001/media/collection/logo/w9ns7nfgv7fk45xqrpoh.png"
+  },
+  "meta": {},
+  "name": "new",
+  "published": true,
+  "query": [
+    {
+      "attribute": "",
+      "op": "in",
+      "value": []
+    }
+  ],
+  "slug": "new",
+  "sort_on": "popular",
+  "tags": [],
+  "type": "query",
+  "uid": "5ec5fc757cb1e4740a17da23",
+  "visible_facets_keys": []
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### getApplicationDepartmentListing
-Get application department listing.
+List all the departments for the application
 
 
 
@@ -928,7 +2060,7 @@ except Exception as e:
 
 
 
-Retrieve department listings related to the application. Departments are a way to categorise similar products. A product can lie in multiple departments.
+Departments are a way to categorise similar products. A product can lie in multiple departments. For example, a skirt can below to the 'Women's Fashion' Department while a handbag can lie in 'Women's Accessories' Department. Use this API to list all the application departments. If successful, returns the list of departments specified in `ApplicationDepartmentListingResponse`
 
 *Returned Response:*
 
@@ -998,7 +2130,7 @@ List of Departments. See example below or refer `BrandListingResponse` for detai
 
 
 ### updateAppDepartment
-Update application department.
+Update a single custom json.
 
 
 
@@ -1021,7 +2153,7 @@ except Exception as e:
 | body | [ApplicationDepartmentJson](#ApplicationDepartmentJson) | yes | Request body |
 
 
-Modify department data related to the application.
+This API helps to update data associated to a item custom meta.
 
 *Returned Response:*
 
@@ -1057,7 +2189,7 @@ Returns a success response
 
 
 ### getDepartments
-Get departments.
+List all the departments
 
 
 
@@ -1075,7 +2207,7 @@ except Exception as e:
 
 
 
-Retrieve a list of departments. Departments are a way to categorise similar products. A product can lie in multiple departments.
+Departments are a way to categorise similar products. A product can lie in multiple departments. For example, a skirt can below to the 'Women's Fashion' Department while a handbag can lie in 'Women's Accessories' Department. Use this API to list all the departments. If successful, returns the list of departments specified in `DepartmentResponse`
 
 *Returned Response:*
 
@@ -1212,7 +2344,7 @@ List of Departments. See example below or refer `DepartmentResponse` for details
 
 
 ### getAppInventory
-Get application inventory.
+Get the stock of a product
 
 
 
@@ -1241,7 +2373,7 @@ except Exception as e:
 
 
 
-Retrieve inventory data related to the application. Retrieve the available Inventory of the products. Use this API to get the Inventory status of products with the filters of timestamp, store_ids, brand_ids, item_id, Items, Pagination
+Retrieve the available Inventory of the products. Use this API to get the Inventory status of products with the filters of timestamp, store_ids, brand_ids, item_id - Items - Pagination
 
 *Returned Response:*
 
@@ -1289,7 +2421,7 @@ Success. Returns the article/stock of the product stock.
         "width": 20
       },
       "discount_applied": null,
-      "expiration_date": "9998-01-30T23:59:00.000Z",
+      "expiration_date": "9998-01-30T23:59:00",
       "fragile": false,
       "fynd_article_code": "LS101269_11",
       "fynd_item_code": "LS101269",
@@ -1320,7 +2452,7 @@ Success. Returns the article/stock of the product stock.
         "effective": 3250,
         "marked": 5000,
         "transfer": 0,
-        "updated_at": "2022-07-20T13:58:06.122Z"
+        "updated_at": "2022-07-20T13:58:06.122914+00:00"
       },
       "quantities": {
         "sellable": {
@@ -1391,7 +2523,7 @@ Success. Returns the article/stock of the product stock.
         "width": 20
       },
       "discount_applied": null,
-      "expiration_date": "9998-01-30T23:59:00.000Z",
+      "expiration_date": "9998-01-30T23:59:00",
       "fragile": false,
       "fynd_article_code": "LS101163_11",
       "fynd_item_code": "LS101163",
@@ -1422,7 +2554,7 @@ Success. Returns the article/stock of the product stock.
         "effective": 3250,
         "marked": 5000,
         "transfer": 0,
-        "updated_at": "2022-07-20T13:58:06.396Z"
+        "updated_at": "2022-07-20T13:58:06.396235+00:00"
       },
       "quantities": {
         "sellable": {
@@ -1493,7 +2625,7 @@ Success. Returns the article/stock of the product stock.
         "width": 20
       },
       "discount_applied": null,
-      "expiration_date": "9998-01-30T23:59:00.000Z",
+      "expiration_date": "9998-01-30T23:59:00",
       "fragile": false,
       "fynd_article_code": "LS101173_11",
       "fynd_item_code": "LS101173",
@@ -1524,7 +2656,7 @@ Success. Returns the article/stock of the product stock.
         "effective": 3250,
         "marked": 5000,
         "transfer": 0,
-        "updated_at": "2022-07-20T13:58:06.635Z"
+        "updated_at": "2022-07-20T13:58:06.635248+00:00"
       },
       "quantities": {
         "sellable": {
@@ -1595,7 +2727,7 @@ Success. Returns the article/stock of the product stock.
         "width": 20
       },
       "discount_applied": null,
-      "expiration_date": "9998-01-30T23:59:00.000Z",
+      "expiration_date": "9998-01-30T23:59:00",
       "fragile": false,
       "fynd_article_code": "LS101198_11",
       "fynd_item_code": "LS101198",
@@ -1626,7 +2758,7 @@ Success. Returns the article/stock of the product stock.
         "effective": 3250,
         "marked": 5000,
         "transfer": 0,
-        "updated_at": "2022-07-20T13:58:06.898Z"
+        "updated_at": "2022-07-20T13:58:06.898687+00:00"
       },
       "quantities": {
         "sellable": {
@@ -1693,14 +2825,14 @@ Success. Returns the article/stock of the product stock.
 
 
 ### getAppLocations
-Get application locations.
+Get list of locations
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getAppLocations(storeType=storeType, uid=uid, q=q, stage=stage, pageNo=pageNo, pageSize=pageSize, tags=tags, storeTypes=storeTypes)
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getAppLocations(storeType=storeType, uid=uid, q=q, stage=stage, pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -1717,13 +2849,11 @@ except Exception as e:
 | q | String? | no | Query that is to be searched. |   
 | stage | String? | no | to filter companies on basis of verified or unverified companies. |   
 | pageNo | Int? | no | The page number to navigate through the given set of results |   
-| pageSize | Int? | no | Number of items to retrieve in each page. Default is 20. |   
-| tags | ArrayList<String>? | no | Get locations filtered by tags. |   
-| storeTypes | ArrayList<String>? | no | Get locations filtered by store types. |  
+| pageSize | Int? | no | Number of items to retrieve in each page. Default is 20. |  
 
 
 
-Retrieve locations specific to the application. View all the locations asscoiated to a application.
+This API allows to view all the locations asscoiated to a application.
 
 *Returned Response:*
 
@@ -1794,8 +2924,732 @@ Company profile object. See example below or refer `LocationListSerializer` for 
 ---
 
 
+### getConfigurations
+Get configured details for catalog
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getConfigurations()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+configured details for catalog.
+
+*Returned Response:*
+
+
+
+
+[GetAppCatalogConfiguration](#GetAppCatalogConfiguration)
+
+Get application level configured catalog details. See example below or refer `GetAppCatalogConfigurationSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "data": {
+    "app_id": "000000000000000000000001",
+    "config_id": "000000000000000000000001",
+    "config_type": "app",
+    "listing": {
+      "filter": {
+        "allow_single": false,
+        "attribute_config": [
+          {
+            "is_active": true,
+            "key": "gender",
+            "name": "Gender",
+            "priority": 1,
+            "type": "multivalued",
+            "value_config": {
+              "bucket_points": [],
+              "condition": "OR",
+              "map": {},
+              "sort": "count",
+              "value": ""
+            }
+          },
+          {
+            "is_active": true,
+            "key": "min_price_effective",
+            "name": "Price",
+            "priority": 2,
+            "type": "range",
+            "value_config": {
+              "bucket_points": [],
+              "condition": "OR",
+              "map": {
+                "< 500": "Below Rs. 500",
+                ">= 6000": "Above Rs. 6000"
+              },
+              "sort": "count",
+              "value": ""
+            }
+          },
+          {
+            "is_active": true,
+            "key": "departments",
+            "name": "Department",
+            "priority": 3,
+            "type": "multivalued",
+            "value_config": {
+              "bucket_points": [],
+              "condition": "OR",
+              "map": {},
+              "sort": "count",
+              "value": "metadata"
+            }
+          },
+          {
+            "is_active": true,
+            "key": "brand_id",
+            "name": "Brand",
+            "priority": 4,
+            "type": "multivalued",
+            "value_config": {
+              "bucket_points": [],
+              "condition": "OR",
+              "map": {
+                "5th Avenue": "A {{value}}"
+              },
+              "sort": "ascending",
+              "value": "metadata"
+            }
+          },
+          {
+            "is_active": false,
+            "key": "season",
+            "name": "Season",
+            "priority": 5,
+            "type": "multivalued",
+            "value_config": {
+              "bucket_points": [],
+              "condition": "OR",
+              "map": {
+                "": ""
+              },
+              "sort": "count",
+              "value": ""
+            }
+          },
+          {
+            "is_active": true,
+            "key": "is_set",
+            "name": "Set",
+            "priority": 6,
+            "type": "multivalued",
+            "value_config": {
+              "bucket_points": [],
+              "condition": "OR",
+              "map": {
+                "false": "No",
+                "true": "Yes"
+              },
+              "sort": "descending",
+              "value": ""
+            }
+          },
+          {
+            "is_active": true,
+            "key": "rating",
+            "name": "Rating",
+            "priority": 7,
+            "type": "multivalued",
+            "value_config": {
+              "bucket_points": [],
+              "condition": "OR",
+              "map": {
+                "": ""
+              },
+              "sort": "count",
+              "value": ""
+            }
+          },
+          {
+            "is_active": true,
+            "key": "size_depth",
+            "name": "Size Depth",
+            "priority": 8,
+            "type": "range",
+            "value_config": {
+              "bucket_points": [],
+              "condition": "OR",
+              "map": {
+                "{} - {}": "{} - {}"
+              },
+              "sort": "count",
+              "value": ""
+            }
+          }
+        ]
+      },
+      "sort": {
+        "config": [
+          {
+            "is_active": false,
+            "key": "price_dsc",
+            "logo": "https://hdn-1.fynd.com/global/menu-icons/Price%20High%20to%20Low.png",
+            "name": "Price High to Low",
+            "priority": 1
+          },
+          {
+            "is_active": true,
+            "key": "rating_dsc",
+            "logo": "https://hdn-1.fynd.com/global/menu-icons/Rating.png",
+            "name": "Rating",
+            "priority": 2
+          },
+          {
+            "is_active": true,
+            "key": "depth_desc",
+            "name": "Size Depth (High to Low)",
+            "priority": 3
+          },
+          {
+            "is_active": true,
+            "key": "discount_dsc",
+            "logo": "https://hdn-1.fynd.com/global/menu-icons/Discount%20Low%20to%20High.png",
+            "name": "Discount High to Low",
+            "priority": 4
+          },
+          {
+            "is_active": true,
+            "key": "popular",
+            "logo": "https://hdn-1.fynd.com/global/menu-icons/Popularity.png",
+            "name": "Popularity",
+            "priority": 5
+          },
+          {
+            "is_active": true,
+            "key": "relevance",
+            "name": "Relevance",
+            "priority": 6
+          },
+          {
+            "is_active": true,
+            "key": "price_asc",
+            "logo": "https://hdn-1.fynd.com/global/menu-icons/Price%20Low%20to%20High.png",
+            "name": "Price Low to High",
+            "priority": 7
+          }
+        ],
+        "default_key": ""
+      }
+    },
+    "product": {
+      "similar": {
+        "config": [
+          {
+            "is_active": true,
+            "key": "seller",
+            "priority": 1,
+            "size": {
+              "max": 10,
+              "min": 2
+            },
+            "subtitle": "",
+            "title": "Seller"
+          },
+          {
+            "is_active": true,
+            "key": "visual",
+            "priority": 2,
+            "size": {
+              "max": 10,
+              "min": 2
+            },
+            "subtitle": "",
+            "title": "Visual"
+          },
+          {
+            "is_active": true,
+            "key": "brand",
+            "priority": 3,
+            "size": {
+              "max": 10,
+              "min": 2
+            },
+            "subtitle": "",
+            "title": "Brand"
+          },
+          {
+            "is_active": true,
+            "key": "specs",
+            "priority": 4,
+            "size": {
+              "max": 10,
+              "min": 2
+            },
+            "subtitle": "",
+            "title": "Specs"
+          }
+        ]
+      },
+      "variant": {
+        "config": [
+          {
+            "display_type": "image",
+            "is_active": true,
+            "key": "color",
+            "name": "Additional Colors12",
+            "priority": 1,
+            "size": {
+              "max": 10,
+              "min": 2
+            }
+          },
+          {
+            "display_type": "text",
+            "is_active": true,
+            "key": "storage",
+            "name": "Memory",
+            "priority": 2,
+            "size": {
+              "max": 10,
+              "min": 2
+            }
+          },
+          {
+            "display_type": "image",
+            "is_active": true,
+            "key": "visual",
+            "name": "Additional Colors",
+            "priority": 3,
+            "size": {
+              "max": 10,
+              "min": 2
+            }
+          },
+          {
+            "display_type": "text",
+            "is_active": true,
+            "key": "ram_storage",
+            "name": "Ram_Storage",
+            "priority": 4,
+            "size": {
+              "max": 10,
+              "min": 2
+            }
+          },
+          {
+            "display_type": "color",
+            "is_active": true,
+            "key": "shade",
+            "name": "Additional Shades",
+            "priority": 5,
+            "size": {
+              "max": 10,
+              "min": 2
+            }
+          },
+          {
+            "display_type": "text",
+            "is_active": true,
+            "key": "water_resistant",
+            "name": "Water_Resistant",
+            "priority": 6,
+            "size": {
+              "max": 10,
+              "min": 2
+            }
+          }
+        ]
+      }
+    }
+  },
+  "is_default": false
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createConfigurationProductListing
+Add configuration for products & listings
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.createConfigurationProductListing(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [AppConfiguration](#AppConfiguration) | yes | Request body |
+
+
+Add configuration for products & listing.
+
+*Returned Response:*
+
+
+
+
+[GetAppCatalogConfiguration](#GetAppCatalogConfiguration)
+
+success flag will tell whether the operation was successful.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getCatalogConfiguration
+Get configuration meta  details for catalog for admin panel
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getCatalogConfiguration()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+configuration meta  details for catalog.
+
+*Returned Response:*
+
+
+
+
+[GetCatalogConfigurationMetaData](#GetCatalogConfigurationMetaData)
+
+configuration details for catalog. See example below or refer `GetCatalogConfigurationMetaDataSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getConfigurationByType
+Get configured details for catalog
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getConfigurationByType(type=type)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| type | String | yes | type can be brands, categories etc. |  
+
+
+
+configured details for catalog.
+
+*Returned Response:*
+
+
+
+
+[GetAppCatalogEntityConfiguration](#GetAppCatalogEntityConfiguration)
+
+Get application level configured catalog details. See example below or refer `GetAppCatalogEntityConfigurationSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createConfigurationByType
+Add configuration for categories and brands
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.createConfigurationByType(type=type, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| type | String | yes | type can be brands, categories etc. |  
+| body | [AppConfiguration](#AppConfiguration) | yes | Request body |
+
+
+Add configuration for categories & brands.
+
+*Returned Response:*
+
+
+
+
+[GetAppCatalogConfiguration](#GetAppCatalogConfiguration)
+
+success flag will tell whether the operation was successful.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getAppProduct
+Get company application product data.
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getAppProduct(itemId=itemId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| itemId | String | yes | product id for a particular product. |  
+
+
+
+Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
+
+*Returned Response:*
+
+
+
+
+[OwnerAppItemResponse](#OwnerAppItemResponse)
+
+The Company Applicaton Product Data(MOQ/SEO).
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "alt_text": {
+    "https://test-url.com/test.png": "test-alt"
+  },
+  "is_cod": false,
+  "is_gift": false,
+  "moq": {
+    "increment_unit": 2,
+    "maximum": 10,
+    "minimum": 1
+  },
+  "seo": {
+    "description": "test-description",
+    "title": "test-title",
+    "breadcrumbs": [],
+    "sitemap": {},
+    "meta_tags": []
+  },
+  "size_promotion_threshold": {
+    "threshold_type": "flat",
+    "threshold_value": 100
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateAppProduct
+Update a single custom meta.
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.updateAppProduct(itemId=itemId, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| itemId | String | yes | product id for which the custom_meta is associated. |  
+| body | [ApplicationItemMeta](#ApplicationItemMeta) | yes | Request body |
+
+
+This API helps to update data associated to a item custom meta.
+
+*Returned Response:*
+
+
+
+
+[SuccessResponse1](#SuccessResponse1)
+
+Returns a success response
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### getAppicationProducts
-Get application products.
+List the products
 
 
 
@@ -1828,7 +3682,7 @@ except Exception as e:
 
 
 
-Retrieve products associated with the application. List all the products associated with a brand, collection or category in a requested sort order.
+List all the products associated with a brand, collection or category in a requested sort order. The API additionally supports arbitrary search queries that may refer the name of any product, brand, category or collection. If successful, returns a paginated list of products specified in `ApplicationProductListingResponse`
 
 *Returned Response:*
 
@@ -2477,8 +4331,386 @@ List of Products. See example below or refer `ApplicationProductListingResponse`
 ---
 
 
+### getDiscountedInventoryBySizeIdentifier
+Get Inventory for company
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getDiscountedInventoryBySizeIdentifier(itemId=itemId, sizeIdentifier=sizeIdentifier, pageNo=pageNo, pageSize=pageSize, q=q, locationIds=locationIds)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| itemId | Int | yes | Item code of the product of which size is to be get. |   
+| sizeIdentifier | String | yes | Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. |   
+| pageNo | Int? | no | The page number to navigate through the given set of results |   
+| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |   
+| q | String? | no | Search with help of store code. |   
+| locationIds | ArrayList<Int>? | no | Search by store ids. |  
+
+
+
+This API allows get Inventory data for particular company grouped by size and store.
+
+*Returned Response:*
+
+
+
+
+[InventorySellerIdentifierResponsePaginated](#InventorySellerIdentifierResponsePaginated)
+
+returns a list of all inventory grouped by size and store
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "brand": {
+        "id": 1,
+        "name": "ab"
+      },
+      "company": {
+        "id": 1
+      },
+      "country_of_origin": "",
+      "currency": "INR",
+      "dimension": {
+        "height": 15,
+        "is_default": true,
+        "length": 10.5,
+        "unit": "cm",
+        "width": 5.2
+      },
+      "fragile": true,
+      "fynd_article_code": "",
+      "fynd_item_code": "",
+      "identifier": {
+        "article_id": 1
+      },
+      "identifiers": [
+        {
+          "gtin_type": "sku_code",
+          "gtin_value": "RTYUIDSDFV",
+          "primary": true
+        }
+      ],
+      "inventory_updated_on": "2021-04-06T03:30:01.487000",
+      "item_id": 7500651,
+      "manufacturer": {
+        "address": "st",
+        "is_default": true,
+        "name": "manufacturer"
+      },
+      "price": {
+        "currency": "USD",
+        "effective": 79.99,
+        "marked": 99.99,
+        "transfer": 79.99
+      },
+      "price_effective": 1234,
+      "price_transfer": 0,
+      "quantity": 10,
+      "sellable_quantity": 10,
+      "seller_identifier": "RTYUIDSDFV",
+      "size": "AAX1 (1 PCS)",
+      "store": {
+        "id": 1
+      },
+      "total_quantity": 1,
+      "uid": "59_RTYUIDSDFV",
+      "weight": {
+        "is_default": true,
+        "shipping": 1.5,
+        "unit": "kg"
+      }
+    },
+    {
+      "brand": {
+        "id": 1,
+        "name": "ab"
+      },
+      "company": {
+        "id": 1
+      },
+      "country_of_origin": "",
+      "currency": "INR",
+      "dimension": {
+        "height": 15,
+        "is_default": true,
+        "length": 10.5,
+        "unit": "cm",
+        "width": 5.2
+      },
+      "fragile": true,
+      "fynd_article_code": "",
+      "fynd_item_code": "",
+      "identifier": {
+        "article_id": 1
+      },
+      "identifiers": [
+        {
+          "gtin_type": "sku_code",
+          "gtin_value": "RTYUIDSDFV",
+          "primary": true
+        }
+      ],
+      "inventory_updated_on": "2021-04-06T03:29:35.291000",
+      "item_id": 7500651,
+      "manufacturer": {
+        "address": "st",
+        "is_default": true,
+        "name": "manufacturer"
+      },
+      "price": {
+        "currency": "USD",
+        "effective": 79.99,
+        "marked": 99.99,
+        "transfer": 79.99
+      },
+      "price_effective": 1234,
+      "price_transfer": 0,
+      "quantity": 10,
+      "sellable_quantity": 10,
+      "seller_identifier": "RTYUIDSDFV",
+      "size": "AAX1 (1 PCS)",
+      "store": {
+        "id": 1
+      },
+      "total_quantity": 1,
+      "uid": "10_RTYUIDSDFV",
+      "weight": {
+        "is_default": true,
+        "shipping": 1.5,
+        "unit": "kg"
+      }
+    },
+    {
+      "brand": {
+        "id": 1,
+        "name": "ab"
+      },
+      "company": {
+        "id": 1
+      },
+      "country_of_origin": "",
+      "currency": "INR",
+      "dimension": {
+        "height": 15,
+        "is_default": true,
+        "length": 10.5,
+        "unit": "cm",
+        "width": 5.2
+      },
+      "fragile": true,
+      "fynd_article_code": "",
+      "fynd_item_code": "",
+      "identifier": {
+        "article_id": 1
+      },
+      "identifiers": [
+        {
+          "gtin_type": "sku_code",
+          "gtin_value": "RTYUIDSDFV",
+          "primary": true
+        }
+      ],
+      "inventory_updated_on": "2021-03-17T12:35:29.992000",
+      "item_id": 7500651,
+      "manufacturer": {
+        "address": "st",
+        "is_default": true,
+        "name": "manufacturer"
+      },
+      "order_committed_quantity": 0,
+      "price": {
+        "currency": "USD",
+        "effective": 79.99,
+        "marked": 99.99,
+        "transfer": 79.99
+      },
+      "price_effective": 1234,
+      "price_transfer": 0,
+      "quantity": 10000000,
+      "sellable_quantity": 10000000,
+      "seller_identifier": "RTYUIDSDFV",
+      "size": "AAX1 (1 PCS)",
+      "store": {
+        "id": 1
+      },
+      "total_quantity": 1,
+      "uid": "11061_RTYUIDSDFV",
+      "weight": {
+        "is_default": true,
+        "shipping": 1.5,
+        "unit": "kg"
+      }
+    },
+    {
+      "brand": {
+        "id": 1,
+        "name": "ab"
+      },
+      "company": {
+        "id": 1
+      },
+      "country_of_origin": "",
+      "currency": "INR",
+      "damaged_quantity": 0,
+      "dimension": {
+        "height": 15,
+        "is_default": true,
+        "length": 10.5,
+        "unit": "cm",
+        "width": 5.2
+      },
+      "fragile": true,
+      "fynd_article_code": "",
+      "fynd_item_code": "",
+      "identifier": {
+        "article_id": 1
+      },
+      "identifiers": [
+        {
+          "gtin_type": "sku_code",
+          "gtin_value": "RTYUIDSDFV",
+          "primary": true
+        }
+      ],
+      "inventory_updated_on": "2021-03-31T19:00:10.943000",
+      "item_id": 7500651,
+      "manufacturer": {
+        "address": "st",
+        "is_default": true,
+        "name": "manufacturer"
+      },
+      "not_available_quantity": 0,
+      "order_committed_quantity": 7,
+      "price": {
+        "currency": "USD",
+        "effective": 79.99,
+        "marked": 99.99,
+        "transfer": 79.99
+      },
+      "price_effective": 1234,
+      "price_transfer": 0,
+      "quantity": 39,
+      "sellable_quantity": 18,
+      "seller_identifier": "RTYUIDSDFV",
+      "size": "AAX1 (1 PCS)",
+      "store": {
+        "id": 1
+      },
+      "total_quantity": 1,
+      "uid": "1_RTYUIDSDFV",
+      "weight": {
+        "is_default": true,
+        "shipping": 1.5,
+        "unit": "kg"
+      }
+    },
+    {
+      "brand": {
+        "id": 1,
+        "name": "ab"
+      },
+      "company": {
+        "id": 1
+      },
+      "country_of_origin": "",
+      "currency": "INR",
+      "dimension": {
+        "height": 15,
+        "is_default": true,
+        "length": 10.5,
+        "unit": "cm",
+        "width": 5.2
+      },
+      "fragile": true,
+      "fynd_article_code": "",
+      "fynd_item_code": "",
+      "identifier": {
+        "article_id": 1
+      },
+      "identifiers": [
+        {
+          "gtin_type": "sku_code",
+          "gtin_value": "RTYUIDSDFV",
+          "primary": true
+        }
+      ],
+      "inventory_updated_on": "2020-07-07T10:37:06.146000",
+      "item_id": 7500651,
+      "manufacturer": {
+        "address": "st",
+        "is_default": true,
+        "name": "manufacturer"
+      },
+      "order_committed_quantity": 39,
+      "price": {
+        "currency": "USD",
+        "effective": 79.99,
+        "marked": 99.99,
+        "transfer": 79.99
+      },
+      "price_effective": 1234,
+      "price_transfer": 0,
+      "quantity": 39,
+      "sellable_quantity": 0,
+      "seller_identifier": "RTYUIDSDFV",
+      "size": "AAX1 (1 PCS)",
+      "store": {
+        "id": 1
+      },
+      "total_quantity": 1,
+      "uid": "1_rtyuidsdfv",
+      "weight": {
+        "is_default": true,
+        "shipping": 1.5,
+        "unit": "kg"
+      }
+    }
+  ],
+  "page": {
+    "current": 1,
+    "has_next": false,
+    "has_previous": false,
+    "item_total": 5,
+    "size": 1,
+    "type": "number"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### getProductDetailBySlug
-Get product details by slug.
+Get a product
 
 
 
@@ -2501,7 +4733,7 @@ except Exception as e:
 
 
 
-Retrieve detailed product information using a product slug. Products are the core resource of an application. Products can be associated by categories, collections, brands and more.
+Products are the core resource of an application. Products can be associated by categories, collections, brands and more. This API retrieves the product specified by the given **slug**. If successful, returns a Product resource in the response body specified in `ProductDetail`
 
 *Returned Response:*
 
@@ -2622,7 +4854,7 @@ The Product object. See example below or refer `ProductDetail` for details.
   ],
   "name": "benchmark collaborative paradigms",
   "no_of_boxes": 1,
-  "product_online_date": "2021-02-03T07:22:29.000Z",
+  "product_online_date": "2021-02-03T07:22:29Z",
   "rating": 2.7,
   "rating_count": 2,
   "similars": [
@@ -2652,7 +4884,7 @@ The Product object. See example below or refer `ProductDetail` for details.
 
 
 ### getAppProducts
-Get application products.
+Get applicationwise products
 
 
 
@@ -2682,7 +4914,7 @@ except Exception as e:
 
 
 
-Retrieve products specific to the application. Products are the core resource of an application. Products can be associated by categories, collections, brands and more.
+Products are the core resource of an application. Products can be associated by categories, collections, brands and more. If successful, returns a Product resource in the response body specified in `ApplicationProductListingResponseDatabasePowered`
 
 *Returned Response:*
 
@@ -2745,7 +4977,7 @@ The Product object. See example below or refer `ApplicationProductListingRespons
         "user_id": "5",
         "username": "919049753052_37528"
       },
-      "created_on": "2021-04-02T15:43:59.410Z",
+      "created_on": "2021-04-02T15:43:59.410000Z",
       "currency": "INR",
       "custom_order": {
         "is_custom_order": true,
@@ -2787,7 +5019,7 @@ The Product object. See example below or refer `ApplicationProductListingRespons
         "user_id": "xxxxxxxxxxx",
         "username": "xxxxxxxxxx"
       },
-      "modified_on": "2021-04-02T15:43:59.410Z",
+      "modified_on": "2021-04-02T15:43:59.410000Z",
       "multi_size": true,
       "name": "TV Set",
       "no_of_boxes": 1,
@@ -2853,7 +5085,7 @@ The Product object. See example below or refer `ApplicationProductListingRespons
         "user_id": "0",
         "username": "Silverbolt"
       },
-      "verified_on": "2021-04-02T15:43:59.410Z"
+      "verified_on": "2021-04-02T15:43:59.410000Z"
     }
   ],
   "page": {
@@ -2879,8 +5111,1428 @@ The Product object. See example below or refer `ApplicationProductListingRespons
 ---
 
 
+### getAppReturnConfiguration
+Get Return configuration level set for an application
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getAppReturnConfiguration()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Get Product Return configuration set at an application level
+
+*Returned Response:*
+
+
+
+
+[AppReturnConfigResponse](#AppReturnConfigResponse)
+
+success message will tell whether the operation was successful.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "app_id": "5d638512c9accedcd910591a",
+  "category_count": 32,
+  "company_id": 1,
+  "created_by": {
+    "user_id": "054bb99f009aece85a3fa087",
+    "username": "test"
+  },
+  "modified_by": {
+    "user_id": "054bb99f009aece85a3fa087",
+    "username": "test"
+  },
+  "modified_on": "2023-03-28T06:05:24.026000",
+  "return_config_level": "category"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createAppReturnConfiguration
+Create Return configuration level set for an application
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.createAppReturnConfiguration(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [CreateUpdateAppReturnConfig](#CreateUpdateAppReturnConfig) | yes | Request body |
+
+
+Create Return configuration level set for an application.
+
+*Returned Response:*
+
+
+
+
+[SuccessResponse1](#SuccessResponse1)
+
+success message will tell whether the operation was successful.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "value": {
+    "success": true
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateAppReturnConfiguration
+Update Return configuration level set for an application
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.updateAppReturnConfiguration(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [CreateUpdateAppReturnConfig](#CreateUpdateAppReturnConfig) | yes | Request body |
+
+
+Update Return configuration level set for an application.
+
+*Returned Response:*
+
+
+
+
+[SuccessResponse1](#SuccessResponse1)
+
+success message will tell whether the operation was successful.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "value": {
+    "success": true
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deleteAppCategoryReturnConfiguration
+Delete Category level Application Return Configuration setttings
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.deleteAppCategoryReturnConfiguration(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [DeleteAppCategoryReturnConfig](#DeleteAppCategoryReturnConfig) | yes | Request body |
+
+
+Delete Category level Application Return Configuration setttings
+
+*Returned Response:*
+
+
+
+
+[SuccessResponse](#SuccessResponse)
+
+success message will tell whether the operation was successful.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "value": {
+    "success": true
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getAppCategoryReturnConfig
+Get all category level configuration level set for an application
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getAppCategoryReturnConfig()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Get all category level configuration level set for an application.
+
+*Returned Response:*
+
+
+
+
+[BaseAppCategoryReturnConfigResponse](#BaseAppCategoryReturnConfigResponse)
+
+success message will tell whether the operation was successful.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "value": {
+    "data": [
+      {
+        "app_id": "5d638512c9accedcd910591a",
+        "category_id": 1659,
+        "logo": "https://hdn-1.addsale.com/addsale/category/pictures/square-logo/original/7hR5xHVUi0-eTdgOunCZ-.jpeg",
+        "name": "MG TEST DIGITAL",
+        "return_config": {
+          "returnable": true,
+          "time": 10,
+          "unit": "days"
+        }
+      }
+    ],
+    "page": {
+      "current": "1",
+      "has_next": false,
+      "has_previous": false,
+      "item_total": 1,
+      "size": 1,
+      "type": "number"
+    }
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createAppCategoryReturnConfiguration
+Create Category level Application Return Configuration setttings
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.createAppCategoryReturnConfiguration(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [BaseAppCategoryReturnConfig](#BaseAppCategoryReturnConfig) | yes | Request body |
+
+
+Create Category level Application Return Configuration setttings
+
+*Returned Response:*
+
+
+
+
+[SuccessResponse1](#SuccessResponse1)
+
+success message will tell whether the operation was successful.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "value": {
+    "success": true
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateAppCategoryReturnConfiguration
+Update Category level Application Return Configuration setttings
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.updateAppCategoryReturnConfiguration(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [BaseAppCategoryReturnConfig](#BaseAppCategoryReturnConfig) | yes | Request body |
+
+
+Update Category level Application Return Configuration setttings
+
+*Returned Response:*
+
+
+
+
+[SuccessResponse](#SuccessResponse)
+
+success message will tell whether the operation was successful.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "value": {
+    "success": true
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getAutocompleteConfig
+List all Autocomplete Keyword Listing
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getAutocompleteConfig()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Custom Autocomplete Keyword allows you to map conditions with keywords to give you the ultimate results
+
+*Returned Response:*
+
+
+
+
+[GetAutocompleteWordsResponse](#GetAutocompleteWordsResponse)
+
+List of custom autocomplete keywords. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "app_id": "000000000000000000000001",
+      "is_active": true,
+      "results": [
+        {
+          "_custom_json": {},
+          "action": {
+            "page": {
+              "query": {
+                "brand": [
+                  "nike"
+                ]
+              },
+              "type": "products",
+              "url": "/products/?brand=nike"
+            },
+            "type": "page"
+          },
+          "display": "Helllow",
+          "logo": {
+            "url": "https://hdn-1.addsale.com/addsale/company/61/applications/600a5b3fe0991a4718cdb448/company/1/application/000000000000000000000001/search/pictures/square-logo/original/n_8bvEaBw-Helllow.png"
+          }
+        }
+      ],
+      "uid": "602fa1eaa596ce349563f6c6",
+      "words": [
+        "dasd"
+      ]
+    }
+  ],
+  "page": {
+    "current": 1,
+    "has_next": false,
+    "has_previous": false,
+    "item_count": 1,
+    "size": 1,
+    "type": "number"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createCustomAutocompleteRule
+Add a Custom Autocomplete Keywords
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.createCustomAutocompleteRule(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [CreateAutocompleteKeyword](#CreateAutocompleteKeyword) | yes | Request body |
+
+
+Create a Custom Autocomplete Keywords. See `CreateAutocompleteKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateAutocompleteKeywordSchema`
+
+*Returned Response:*
+
+
+
+
+[CreateAutocompleteWordsResponse](#CreateAutocompleteWordsResponse)
+
+List of all the collections including the one you added. See example below or refer `CreateAutocompleteWordsResponseSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deleteAutocompleteKeyword
+Delete a Autocomplete Keywords
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.deleteAutocompleteKeyword(id=id)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. |  
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Returned Response:*
+
+
+
+
+[DeleteResponse](#DeleteResponse)
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "message": "Words Deleted"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getAutocompleteKeywordDetail
+Get a Autocomplete Keywords Details
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getAutocompleteKeywordDetail(id=id)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. |  
+
+
+
+Get the details of a words by its `id`. If successful, returns a keywords resource in the response body specified in `GetAutocompleteWordsResponseSchema`
+
+*Returned Response:*
+
+
+
+
+[GetAutocompleteWordsResponse](#GetAutocompleteWordsResponse)
+
+The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "app_id": "000000000000000000000001",
+  "is_active": true,
+  "results": [
+    {
+      "_custom_json": {},
+      "action": {
+        "page": {
+          "query": {
+            "brand": [
+              "nike"
+            ]
+          },
+          "type": "products",
+          "url": "/products/?brand=nike"
+        },
+        "type": "page"
+      },
+      "display": "Helllow",
+      "logo": {
+        "url": "https://hdn-1.addsale.com/addsale/company/61/applications/600a5b3fe0991a4718cdb448/company/1/application/000000000000000000000001/search/pictures/square-logo/original/n_8bvEaBw-Helllow.png"
+      }
+    }
+  ],
+  "uid": "602fa1eaa596ce349563f6c6",
+  "words": [
+    "dasd"
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateAutocompleteKeyword
+Create & Update Autocomplete Keyword
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.updateAutocompleteKeyword(id=id, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. |  
+| body | [CreateAutocompleteKeyword](#CreateAutocompleteKeyword) | yes | Request body |
+
+
+Update a mapping by it's id. On successful request, returns the updated Keyword mapping
+
+*Returned Response:*
+
+
+
+
+[GetAutocompleteWordsResponse](#GetAutocompleteWordsResponse)
+
+The Mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deleteSearchConfiguration
+Delete search configuration for an application
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.deleteSearchConfiguration()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+This view allows you to reset search config for an application
+
+*Returned Response:*
+
+
+
+
+[DeleteSearchConfigurationResponse](#DeleteSearchConfigurationResponse)
+
+Status of the delete operation. See `DeleteSearchConfigurationResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getSearchConfiguration
+List search configuration for an application
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getSearchConfiguration()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+This view allows you to add/modify searchable attributes for an application
+
+*Returned Response:*
+
+
+
+
+[GetSearchConfigurationResponse](#GetSearchConfigurationResponse)
+
+Search configuration for the specified application. See example below or refer `GetSearchConfigurationResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "application_id": "1234",
+  "company_id": 1,
+  "is_proximity_enabled": false,
+  "proximity": 2,
+  "searchable_attributes": [
+    {
+      "key": "brand_uid",
+      "name": "",
+      "priority": 1
+    },
+    {
+      "key": "category_uid",
+      "name": "",
+      "priority": 2
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createSearchConfiguration
+Update search configuration for an application
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.createSearchConfiguration(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [CreateSearchConfigurationRequest](#CreateSearchConfigurationRequest) | yes | Request body |
+
+
+This view allows you to modify searchable attributes for an application
+
+*Returned Response:*
+
+
+
+
+[CreateSearchConfigurationResponse](#CreateSearchConfigurationResponse)
+
+List of custom search keywords. See example below or refer `CreateSearchConfigurationResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "application_id": 1234,
+  "company_id": 1,
+  "is_proximity_enabled": false,
+  "proximity": 2,
+  "searchable_attributes": [
+    {
+      "key": "brand_uid",
+      "priority": 1
+    },
+    {
+      "key": "category_uid",
+      "priority": 2
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateSearchConfiguration
+Update search configuration for an application
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.updateSearchConfiguration(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [UpdateSearchConfigurationRequest](#UpdateSearchConfigurationRequest) | yes | Request body |
+
+
+This view allows you to modify searchable attributes for an application
+
+*Returned Response:*
+
+
+
+
+[UpdateSearchConfigurationResponse](#UpdateSearchConfigurationResponse)
+
+List of custom search keywords. See example below or refer `UpdateSearchConfigurationResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "searchable_attributes": {}
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getAllSearchKeyword
+List all Search Custom Keyword Listing
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getAllSearchKeyword()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Custom Search Keyword allows you to map conditions with keywords to give you the ultimate results
+
+*Returned Response:*
+
+
+
+
+[GetSearchWordsResponse](#GetSearchWordsResponse)
+
+List of custom search keywords. See example below or refer `GetSearchWordsResponseSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "_custom_json": {},
+      "app_id": "000000000000000000000001",
+      "is_active": true,
+      "result": {
+        "query": {
+          "department": [
+            "men"
+          ]
+        },
+        "sort_on": "popular"
+      },
+      "uid": "602fa1e9a596ce349563f6b9",
+      "words": [
+        "sds"
+      ]
+    }
+  ],
+  "page": {
+    "current": 1,
+    "has_next": false,
+    "has_previous": false,
+    "item_count": 1,
+    "size": 1,
+    "type": "number"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createCustomKeyword
+Add a Custom Search Keywords
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.createCustomKeyword(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [CreateSearchKeyword](#CreateSearchKeyword) | yes | Request body |
+
+
+Create a Custom Search Keywords. See `CreateSearchKeywordSchema` for the list of attributes needed to create a mapping and /collections/query-options for the available options to create a rule. On successful request, returns a paginated list of collections specified in `CreateSearchKeywordSchema`
+
+*Returned Response:*
+
+
+
+
+[GetSearchWordsData](#GetSearchWordsData)
+
+Get keyword object with id that is added. See example below or refer `GetSearchWordsDataSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "_custom_json": {},
+  "app_id": "000000000000000000000001",
+  "is_active": true,
+  "result": {
+    "query": {
+      "department": [
+        "men"
+      ]
+    },
+    "sort_on": "popular"
+  },
+  "uid": "602fa1e9a596ce349563f6b9",
+  "words": [
+    "sds"
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deleteSearchKeywords
+Delete a Search Keywords
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.deleteSearchKeywords(id=id)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. |  
+
+
+
+Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+
+*Returned Response:*
+
+
+
+
+[DeleteResponse](#DeleteResponse)
+
+Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "message": "Words Deleted"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getSearchKeywords
+Get a Search Keywords Details
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getSearchKeywords(id=id)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. |  
+
+
+
+Get the details of a words by its `id`. If successful, returns a Collection resource in the response body specified in `GetSearchWordsDetailResponseSchema`
+
+*Returned Response:*
+
+
+
+
+[GetSearchWordsDetailResponse](#GetSearchWordsDetailResponse)
+
+The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "_custom_json": {},
+  "app_id": "000000000000000000000001",
+  "is_active": true,
+  "result": {
+    "query": {
+      "department": [
+        "men"
+      ]
+    },
+    "sort_on": "popular"
+  },
+  "uid": "602fa1e9a596ce349563f6b9",
+  "words": [
+    "sds"
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateSearchKeywords
+Update Search Keyword
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").catalog.updateSearchKeywords(id=id, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. |  
+| body | [CreateSearchKeyword](#CreateSearchKeyword) | yes | Request body |
+
+
+Update Search Keyword by its id. On successful request, returns the updated collection
+
+*Returned Response:*
+
+
+
+
+[GetSearchWordsData](#GetSearchWordsData)
+
+The Collection object. See example below or refer `GetSearchWordsDataSchema` for details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### updateAppLocation
-Update application location.
+Update a single custom json.
 
 
 
@@ -2903,7 +6555,7 @@ except Exception as e:
 | body | [ApplicationStoreJson](#ApplicationStoreJson) | yes | Request body |
 
 
-Modify location data related to the application. Helps to update data associated to a item custom meta
+This API helps to update data associated to a item custom meta.
 
 *Returned Response:*
 
@@ -2938,17 +6590,15 @@ Returns a success response
 ---
 
 
-
-
-### getAllCollections
-Retrieve all collections.
+### listCategories
+Get product categories list
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getAllCollections(q=q, scheduleStatus=scheduleStatus, type=type, tags=tags, isActive=isActive, pageNo=pageNo, pageSize=pageSize)
+    result = await platformClient.catalog.listCategories(level=level, departments=departments, q=q, pageNo=pageNo, pageSize=pageSize)
     # use result
 except Exception as e:
     print(e)
@@ -2960,26 +6610,24 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| q | String? | no | Get collection list filtered by q string, |   
-| scheduleStatus | String? | no | Get collection list filtered by scheduled status, |   
-| type | String? | no | type of the collections |   
-| tags | ArrayList<String>? | no | Each response will contain next_id param, which should be sent back to make pagination work. |   
-| isActive | Boolean? | no | get collections filtered by active status. |   
-| pageNo | Int? | no | The page number to navigate through the given set of results. |   
-| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |  
+| level | String? | no | Get category for multiple levels |   
+| departments | String? | no | Get category for multiple departments filtered |   
+| q | String? | no | Get multiple categories filtered by search string |   
+| pageNo | Int? | no | The page number to navigate through the given set of results |   
+| pageSize | Int? | no | Number of items to retrieve in each page. Default is 10. |  
 
 
 
-A Collection allows you to organize your products into hierarchical groups.
+This API gets meta associated to product categories.
 
 *Returned Response:*
 
 
 
 
-[GetCollectionListingResponse](#GetCollectionListingResponse)
+[CategoryResponse](#CategoryResponse)
 
-List of collections. See example below or refer `GetCollectionListingResponse` for details
+Category Meta. See example below or refer `CategoryResponse` for details
 
 
 
@@ -2989,256 +6637,403 @@ List of collections. See example below or refer `GetCollectionListingResponse` f
 
 ```json
 {
-  "filters": {
-    "tags": [
-      {
-        "display": "1+",
-        "is_selected": false,
-        "name": "1+"
-      },
-      {
-        "display": "aa",
-        "is_selected": false,
-        "name": "aa"
-      },
-      {
-        "display": "asd",
-        "is_selected": false,
-        "name": "asd"
-      },
-      {
-        "display": "dda",
-        "is_selected": false,
-        "name": "dda"
-      },
-      {
-        "display": "fahim",
-        "is_selected": false,
-        "name": "fahim"
-      },
-      {
-        "display": "gfg",
-        "is_selected": false,
-        "name": "gfg"
-      },
-      {
-        "display": "sakri",
-        "is_selected": false,
-        "name": "sakri"
-      },
-      {
-        "display": "sdsadas",
-        "is_selected": false,
-        "name": "sdsadas"
-      },
-      {
-        "display": "uuy",
-        "is_selected": false,
-        "name": "uuy"
-      }
-    ],
-    "type": [
-      {
-        "display": "items",
-        "is_selected": false,
-        "name": "items"
-      },
-      {
-        "display": "query",
-        "is_selected": false,
-        "name": "query"
-      }
-    ]
-  },
   "items": [
     {
-      "_custom_json": {},
-      "_locale_language": {},
-      "_schedule": {
-        "end": null,
-        "next_schedule": [
-          {
-            "end": null,
-            "start": "2021-03-04T15:35:13.640Z"
-          }
-        ],
-        "start": "2021-03-04T15:35:13.640Z"
+      "created_by": {
+        "user_id": "5646",
+        "username": "917972410891_48194"
       },
-      "action": {
-        "page": {
-          "query": {
-            "collection": [
-              "test1"
-            ]
-          },
-          "type": "collection"
-        },
-        "type": "page"
-      },
-      "allow_facets": true,
-      "allow_sort": true,
-      "badge": {
-        "color": "#ffffff",
-        "text": ""
-      },
-      "banners": {
-        "landscape": {
-          "type": "image",
-          "url": "https://hdn-1.addsale.com/x0/company/1/applications/000000000000000000000001/collections/pictures/landscape-banner/original/3jSEzw9CN-1601465376892.jpeg"
-        },
-        "portrait": {
-          "type": "image",
-          "url": "https://hdn-1.addsale.com/x0/company/1/applications/000000000000000000000001/collections/pictures/portrait-banner/original/mP6OnINGR-1601466767814.jpeg"
-        }
-      },
-      "description": "this is description",
-      "is_active": true,
-      "logo": {
-        "type": "image",
-        "url": "https://hdn-1.addsale.com/x0/company/1/applications/000000000000000000000001/collections/pictures/square-logo/original/y_-XUYXwx-1602326103322.jpeg"
-      },
-      "meta": {},
-      "name": "test1",
-      "published": true,
-      "query": [],
-      "slug": "test1",
-      "sort_on": "price_asc",
-      "tags": [],
-      "type": "query",
-      "uid": "6040fed076d8a500011ef829",
-      "visible_facets_keys": []
-    },
-    {
-      "_custom_json": {},
-      "_locale_language": {},
-      "_schedule": {
-        "end": null,
-        "next_schedule": [
-          {
-            "end": null,
-            "start": "2021-03-04T09:33:53.686Z"
-          }
-        ],
-        "start": "2021-03-04T09:33:53.686Z"
-      },
-      "action": {
-        "page": {
-          "query": {
-            "collection": [
-              "newapiplaform"
-            ]
-          },
-          "type": "collection"
-        },
-        "type": "page"
-      },
-      "allow_facets": true,
-      "allow_sort": true,
-      "badge": {
-        "color": "#aa2727",
-        "text": ""
-      },
-      "banners": {
-        "landscape": {
-          "type": "image",
-          "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857999/production/applications/app_000000000000000000000001/media/collection/landscape/avm7xibo2jgk8glc4bwl.png"
-        },
-        "portrait": {
-          "type": "image",
-          "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588858137/production/applications/app_000000000000000000000001/media/collection/portrait/xzuftshmmw4yuwzb12pm.png"
-        }
-      },
-      "description": "sadasd",
-      "is_active": true,
-      "logo": {
-        "type": "image",
-        "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857854/production/applications/app_000000000000000000000001/media/collection/logo/w9ns7nfgv7fk45xqrpoh.png"
-      },
-      "meta": {},
-      "name": "newapiplaform",
-      "published": true,
-      "query": [
+      "created_on": "2021-04-02T15:43:59.410000Z",
+      "departments": [
+        1
+      ],
+      "hierarchy": [
         {
-          "attribute": "catalogue",
-          "op": "in",
-          "value": []
+          "department": 1,
+          "l1": 1,
+          "l2": 22329
         }
       ],
-      "slug": "newapiplaform",
-      "sort_on": "popular",
-      "tags": [
-        "sdsadas",
-        "asd"
-      ],
-      "type": "items",
-      "uid": "6040a9b250f97e0001886294",
-      "visible_facets_keys": []
+      "id": "60673bbf7896da00017885ad",
+      "is_active": true,
+      "level": 3,
+      "marketplaces": {},
+      "media": {
+        "landscape": "https://hdn-1.addsale.com/x0/category/pictures/landscape-banner/original/_7GDi3tyi-.png",
+        "logo": "https://hdn-1.addsale.com/x0/category/pictures/square-logo/original/zTgh1zslj-.png",
+        "portrait": "https://hdn-1.addsale.com/x0/category/pictures/portrait-banner/original/VKqwRngFh-.png"
+      },
+      "modified_by": {
+        "user_id": "5646",
+        "username": "917972410891_48194"
+      },
+      "modified_on": "2021-04-02T15:43:59.410000Z",
+      "name": "Air Conditioners",
+      "priority": 1,
+      "slug": "air-conditioners",
+      "synonyms": [],
+      "tryouts": [],
+      "uid": 22330
     },
     {
-      "_custom_json": {},
-      "_locale_language": {},
-      "_schedule": {
-        "end": null,
-        "next_schedule": [
-          {
-            "end": null,
-            "start": "2021-03-03T10:45:40.544Z"
-          }
-        ],
-        "start": "2021-03-03T10:45:40.544Z"
+      "created_by": {
+        "user_id": "5646",
+        "username": "917972410891_48194"
       },
-      "action": {
-        "page": {
-          "query": {
-            "collection": [
-              "old"
-            ]
-          },
-          "type": "collection"
-        },
-        "type": "page"
-      },
-      "allow_facets": true,
-      "allow_sort": true,
-      "badge": {
-        "color": "#ffffff",
-        "text": ""
-      },
-      "banners": {
-        "landscape": {
-          "type": "image",
-          "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857999/production/applications/app_000000000000000000000001/media/collection/landscape/avm7xibo2jgk8glc4bwl.png"
-        },
-        "portrait": {
-          "type": "image",
-          "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588858137/production/applications/app_000000000000000000000001/media/collection/portrait/xzuftshmmw4yuwzb12pm.png"
-        }
-      },
-      "description": "",
+      "created_on": "2021-04-02T15:42:55.405000Z",
+      "departments": [
+        1
+      ],
+      "hierarchy": [],
+      "id": "60673b7f7896da00017885ac",
       "is_active": true,
-      "logo": {
-        "type": "image",
-        "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857854/production/applications/app_000000000000000000000001/media/collection/logo/w9ns7nfgv7fk45xqrpoh.png"
+      "level": 2,
+      "media": {
+        "landscape": "https://hdn-1.addsale.com/x0/category/pictures/landscape-banner/original/_7GDi3tyi-.png",
+        "logo": "https://hdn-1.addsale.com/x0/category/pictures/square-logo/original/zTgh1zslj-.png",
+        "portrait": "https://hdn-1.addsale.com/x0/category/pictures/portrait-banner/original/VKqwRngFh-.png"
       },
-      "meta": {},
-      "name": "new",
-      "published": true,
-      "query": [],
-      "slug": "old",
-      "sort_on": "popular",
-      "tags": [],
-      "type": "query",
-      "uid": "603f68fd953a69000145dc92",
-      "visible_facets_keys": []
+      "modified_by": {
+        "user_id": "5646",
+        "username": "917972410891_48194"
+      },
+      "modified_on": "2021-04-02T15:42:55.405000Z",
+      "name": "Home Appliances",
+      "priority": 1,
+      "slug": "home-appliances",
+      "synonyms": [],
+      "uid": 22329
+    },
+    {
+      "created_by": {
+        "user_id": "5721",
+        "username": "919821012599_75351"
+      },
+      "created_on": "2021-01-14T05:28:02.148000Z",
+      "departments": [
+        21
+      ],
+      "hierarchy": [],
+      "id": "5fffd662e64eb40001fc8a42",
+      "is_active": true,
+      "level": 2,
+      "media": {
+        "landscape": "https://hdn-1.addsale.com/x0/category/pictures/landscape-banner/original/0wCdjxWpI-.png",
+        "logo": "https://hdn-1.addsale.com/x0/category/pictures/square-logo/original/zTgh1zslj-.png",
+        "portrait": "https://hdn-1.addsale.com/x0/category/pictures/portrait-banner/original/VKqwRngFh-.png"
+      },
+      "modified_by": {
+        "user_id": "5677",
+        "username": "917753852478_51632"
+      },
+      "modified_on": "2021-03-04T15:43:50.495000Z",
+      "name": "Dummy category level 2 by fahim",
+      "priority": 123456,
+      "slug": "dummy-category-level-2",
+      "synonyms": [
+        "skin",
+        "care",
+        "asdasd"
+      ],
+      "uid": 22323
+    },
+    {
+      "created_by": {
+        "user_id": "-1",
+        "username": "silverbolt"
+      },
+      "created_on": "2021-02-25T00:00:47.589000Z",
+      "departments": [
+        21
+      ],
+      "hierarchy": [
+        {
+          "department": 21,
+          "l1": 22322,
+          "l2": 22323
+        }
+      ],
+      "id": "60369b57d23031d14be92c18",
+      "is_active": true,
+      "level": 3,
+      "marketplaces": {},
+      "media": {
+        "landscape": "https://hdn-1.addsale.com/x0/category/pictures/landscape-banner/original/0wCdjxWpI-.png",
+        "logo": "https://hdn-1.addsale.com/x0/category/pictures/square-logo/original/EfCt9iXx8-http/d3p8ifzkmzds37.cloudfront.net/media/logo/department/original/15870_c287d3c2431a432bb0e49363ef6b82bc.png.jpeg",
+        "portrait": "https://hdn-1.addsale.com/x0/category/pictures/portrait-banner/original/S1axCMOJ4-.png"
+      },
+      "modified_by": {
+        "user_id": "5677",
+        "username": "917753852478_51632"
+      },
+      "modified_on": "2021-03-04T15:39:52.108000Z",
+      "name": "Dummy level 4",
+      "priority": 986532,
+      "slug": "dummy-level-4",
+      "synonyms": [],
+      "tryouts": [],
+      "uid": 22325
+    },
+    {
+      "created_by": {
+        "user_id": "5721",
+        "username": "919821012599_75351"
+      },
+      "created_on": "2021-01-14T05:28:59.852000Z",
+      "departments": [
+        2,
+        4,
+        21
+      ],
+      "hierarchy": [
+        {
+          "department": 21,
+          "l1": 22322,
+          "l2": 22323
+        },
+        {
+          "department": 4,
+          "l1": 3672,
+          "l2": 3732
+        },
+        {
+          "department": 2,
+          "l1": 595,
+          "l2": 730
+        }
+      ],
+      "id": "5fffd69be64eb40001fc8a65",
+      "is_active": true,
+      "level": 3,
+      "marketplaces": {},
+      "media": {
+        "landscape": "https://hdn-1.addsale.com/x0/category/pictures/landscape-banner/original/0wCdjxWpI-.png",
+        "logo": "https://hdn-1.addsale.com/x0/category/pictures/square-logo/original/EfCt9iXx8-http/d3p8ifzkmzds37.cloudfront.net/media/logo/department/original/15870_c287d3c2431a432bb0e49363ef6b82bc.png.jpeg",
+        "portrait": "https://hdn-1.addsale.com/x0/category/pictures/portrait-banner/original/S1axCMOJ4-.png"
+      },
+      "modified_by": {
+        "user_id": "5677",
+        "username": "917753852478_51632"
+      },
+      "modified_on": "2021-03-04T15:39:46.246000Z",
+      "name": "Dummy level 3 by fahim",
+      "priority": 986532,
+      "slug": "dummy-level-3",
+      "synonyms": [],
+      "tryouts": [
+        "Lipstick",
+        "Eyeliner"
+      ],
+      "uid": 22324
+    },
+    {
+      "created_on": "2016-04-09T06:44:35Z",
+      "departments": [
+        4
+      ],
+      "hierarchy": [],
+      "id": "5fabab8ea18a1284b97ff6c4",
+      "is_active": true,
+      "level": 1,
+      "media": {
+        "landscape": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/ywPVrU_preview_a637ca6e4da6e38f03eb0d650ac5d6ba.jpgc73cc22f-b5ee-4fd4-a585-8ada35762d68/ywPVrU_preview_a637ca6e4da6e38f03eb0d650ac5d6ba.jpg",
+        "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/YHIeoQ_fruit___vegetable_logo.jpg16aab608-a78a-458f-b60b-524525f27dec/YHIeoQ_fruit___vegetable_logo.jpg",
+        "portrait": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/ywPVrU_preview_a637ca6e4da6e38f03eb0d650ac5d6ba.jpgc73cc22f-b5ee-4fd4-a585-8ada35762d68/ywPVrU_preview_a637ca6e4da6e38f03eb0d650ac5d6ba.jpg"
+      },
+      "modified_by": {
+        "uid": "5677",
+        "username": "917753852478_51632"
+      },
+      "modified_on": "2021-03-03T09:35:50.415000Z",
+      "name": "Gourmet & World Food",
+      "priority": 123,
+      "slug": "gourmet-world-food",
+      "synonyms": [
+        "gourmet & world food",
+        "food",
+        "gourmet"
+      ],
+      "uid": 3151
+    },
+    {
+      "created_by": {
+        "uid": "5677",
+        "username": "917753852478_51632"
+      },
+      "created_on": "2021-03-03T06:30:08.342000Z",
+      "departments": [
+        1,
+        2
+      ],
+      "hierarchy": [
+        {
+          "department": 2,
+          "l1": 595,
+          "l2": 714
+        },
+        {
+          "department": 1,
+          "l1": 2,
+          "l2": 4
+        }
+      ],
+      "id": "603f2cf0aac0360001c00731",
+      "is_active": true,
+      "level": 3,
+      "marketplaces": {},
+      "media": {
+        "landscape": "https://hdn-1.addsale.com/x0/category/pictures/landscape-banner/original/0wCdjxWpI-.png",
+        "logo": "https://hdn-1.addsale.com/x0/category/pictures/square-logo/original/EfCt9iXx8-http/d3p8ifzkmzds37.cloudfront.net/media/logo/department/original/15870_c287d3c2431a432bb0e49363ef6b82bc.png.jpeg",
+        "portrait": "https://hdn-1.addsale.com/x0/category/pictures/portrait-banner/original/VKqwRngFh-.png"
+      },
+      "modified_by": {
+        "uid": "5677",
+        "username": "917753852478_51632"
+      },
+      "modified_on": "2021-03-03T08:34:47.999000Z",
+      "name": "Test Category kaf",
+      "priority": 23,
+      "slug": "test-category-kaf",
+      "synonyms": [
+        "test",
+        "category"
+      ],
+      "tryouts": [
+        "Lipstick",
+        "Blush"
+      ],
+      "uid": 22328
+    },
+    {
+      "created_by": {
+        "user_id": "-1",
+        "username": "silverbolt"
+      },
+      "created_on": "2021-02-25T09:26:53.123000Z",
+      "departments": [
+        1
+      ],
+      "hierarchy": [
+        {
+          "department": 1,
+          "l1": 2,
+          "l2": 3
+        }
+      ],
+      "id": "60372005d230311fe9e51f0b",
+      "is_active": false,
+      "level": 3,
+      "marketplaces": {},
+      "media": {
+        "landscape": "https://hdn-1.fynd.com/media/banner/category/original/16128_380bed8bff064a0b981041df65e0d8b3.jpg",
+        "logo": "http://d3p8ifzkmzds37.cloudfront.net/media/logo/department/original/15870_c287d3c2431a432bb0e49363ef6b82bc.png",
+        "portrait": "http://cdn4.gofynd.com/media/logo/department/original/13239_660c6f5b2b8d458789de4552d241ea1b.jpg"
+      },
+      "modified_by": {
+        "user_id": "-1",
+        "username": "silverbolt"
+      },
+      "modified_on": "2021-02-25T09:26:53.123000Z",
+      "name": "Smart Cell",
+      "priority": 5,
+      "slug": "smart-cell",
+      "synonyms": [],
+      "tryouts": [],
+      "uid": 22327
+    },
+    {
+      "created_by": {
+        "user_id": "-1",
+        "username": "silverbolt"
+      },
+      "created_on": "2021-02-25T00:09:35.026000Z",
+      "departments": [
+        21
+      ],
+      "hierarchy": [
+        {
+          "department": 21,
+          "l1": 22322,
+          "l2": 22323
+        }
+      ],
+      "id": "60369d67d2303111b8924dcf",
+      "is_active": true,
+      "level": 3,
+      "marketplaces": {},
+      "media": {
+        "landscape": "https://hdn-1.addsale.com/x0/category/pictures/landscape-banner/original/0wCdjxWpI-.png",
+        "logo": "https://hdn-1.addsale.com/x0/category/pictures/square-logo/original/EfCt9iXx8-http/d3p8ifzkmzds37.cloudfront.net/media/logo/department/original/15870_c287d3c2431a432bb0e49363ef6b82bc.png.jpeg",
+        "portrait": "https://hdn-1.addsale.com/x0/category/pictures/portrait-banner/original/S1axCMOJ4-.png"
+      },
+      "modified_by": {
+        "user_id": "-1",
+        "username": "silverbolt"
+      },
+      "modified_on": "2021-02-25T00:09:35.026000Z",
+      "name": "Dummy level 98",
+      "priority": 986532,
+      "slug": "dummy-level-98",
+      "synonyms": [],
+      "tryouts": [],
+      "uid": 22326
+    },
+    {
+      "created_on": "2016-04-09T06:44:35Z",
+      "departments": [
+        2,
+        3
+      ],
+      "hierarchy": [
+        {
+          "department": 2,
+          "l1": 65,
+          "l2": 66
+        },
+        {
+          "department": 2,
+          "l1": 442,
+          "l2": 26
+        },
+        {
+          "department": 3,
+          "l1": 442,
+          "l2": 26
+        }
+      ],
+      "id": "5fdba984642de8d93efb0d71",
+      "is_active": true,
+      "level": 3,
+      "marketplaces": {},
+      "media": {
+        "landscape": "https://hdn-1.fynd.com/media/banner/category/original/19961_f042f1f4a90f4e828b6d77d6dbea264d.jpg",
+        "logo": "https://hdn-1.fynd.com/media/logo/category/original/81ef023d375044e9b9daa66b81ec411f.jpg",
+        "portrait": "https://hdn-1.fynd.com/media/banner_portrait/category/original/19960_c679d51cb1bd4ca99f00f9050aa647a4.jpg"
+      },
+      "modified_by": {
+        "user_id": "5677",
+        "username": "917753852478_51632"
+      },
+      "modified_on": "2021-02-15T15:48:05.329000Z",
+      "name": "Sports Bra",
+      "priority": 281,
+      "slug": "sports-bra",
+      "synonyms": [
+        "Sports Bra",
+        "activewear bra",
+        "gym bra"
+      ],
+      "tryouts": [],
+      "uid": 315
     }
   ],
   "page": {
     "current": 1,
     "has_next": true,
     "has_previous": false,
-    "item_total": 190,
-    "size": 19,
-    "type": "collection"
+    "item_total": 574,
+    "size": 58,
+    "type": "number"
   }
 }
 ```
@@ -3255,15 +7050,15 @@ List of collections. See example below or refer `GetCollectionListingResponse` f
 ---
 
 
-### createCollection
-Add a Collection
+### createCategories
+Create product categories
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.createCollection(body=body)
+    result = await platformClient.catalog.createCategories(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3275,19 +7070,19 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- |
-| body | [CreateCollection](#CreateCollection) | yes | Request body |
+| body | [CategoryRequestBody](#CategoryRequestBody) | yes | Request body |
 
 
-Create a collection to the catalog.
+This API lets user create product categories
 
 *Returned Response:*
 
 
 
 
-[CollectionCreateResponse](#CollectionCreateResponse)
+[CategoryCreateResponse](#CategoryCreateResponse)
 
-List of all the collections including the one you added. See example below or refer `CollectionCreateResponse` for details
+Category Meta. See example below or refer `CategoryCreateResponse` for details
 
 
 
@@ -3297,65 +7092,103 @@ List of all the collections including the one you added. See example below or re
 
 ```json
 {
-  "_custom_json": {},
-  "_locale_language": {},
-  "_schedule": {
-    "end": null,
-    "next_schedule": [
+  "message": "Success",
+  "uid": 0
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getCategoryData
+Get product category by uid
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getCategoryData(uid=uid)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| uid | String | yes | Category unique id |  
+
+
+
+This API gets meta associated to product categories.
+
+*Returned Response:*
+
+
+
+
+[SingleCategoryResponse](#SingleCategoryResponse)
+
+Get Data for one category. See example below or refer `CategoryResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "data": {
+    "created_by": {
+      "user_id": "5646",
+      "username": "917972410891_48194"
+    },
+    "created_on": "2021-04-02T15:43:59.410000Z",
+    "departments": [
+      1
+    ],
+    "hierarchy": [
       {
-        "end": null,
-        "start": "2021-03-15T12:51:21.333000+00:00Z"
+        "department": 1,
+        "l1": 1,
+        "l2": 22329
       }
     ],
-    "start": "2021-03-15T12:51:21.333000+00:00Z"
-  },
-  "action": {
-    "page": {
-      "query": {
-        "collection": [
-          "new"
-        ]
-      },
-      "type": "collection"
+    "id": "60673bbf7896da00017885ad",
+    "is_active": true,
+    "level": 3,
+    "marketplaces": {},
+    "media": {
+      "landscape": "https://hdn-1.addsale.com/x0/category/pictures/landscape-banner/original/nsi0nJ6gX-landscape.png",
+      "logo": "https://hdn-1.addsale.com/x0/category/pictures/square-logo/original/zTgh1zslj-.png",
+      "portrait": "https://hdn-1.addsale.com/x0/category/pictures/portrait-banner/original/_4p7Kz9Yp-banner.png"
     },
-    "type": "page"
-  },
-  "allow_facets": true,
-  "allow_sort": true,
-  "badge": {
-    "color": "#ffffff",
-    "text": ""
-  },
-  "banners": {
-    "landscape": {
-      "type": "image",
-      "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857999/production/applications/app_000000000000000000000001/media/collection/landscape/avm7xibo2jgk8glc4bwl.png"
+    "modified_by": {
+      "user_id": "16",
+      "username": "nikhilmhatre_gofynd_com_97636"
     },
-    "portrait": {
-      "type": "image",
-      "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588858137/production/applications/app_000000000000000000000001/media/collection/portrait/xzuftshmmw4yuwzb12pm.png"
-    }
-  },
-  "description": "",
-  "is_active": true,
-  "logo": {
-    "type": "image",
-    "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857854/production/applications/app_000000000000000000000001/media/collection/logo/w9ns7nfgv7fk45xqrpoh.png"
-  },
-  "meta": {},
-  "name": "New",
-  "published": true,
-  "query": [],
-  "seo": {
-    "description": "Test description",
-    "title": "Test"
-  },
-  "slug": "new",
-  "sort_on": "depth_desc",
-  "tags": [],
-  "type": "query",
-  "uid": "604f585a7051e30001173ac1",
-  "visible_facets_keys": []
+    "modified_on": "2021-04-13T13:57:56.443000Z",
+    "name": "Air Conditioners",
+    "priority": 1,
+    "slug": "air-conditioners",
+    "synonyms": [],
+    "tryouts": [],
+    "uid": 22330
+  }
 }
 ```
 </details>
@@ -3371,15 +7204,15 @@ List of all the collections including the one you added. See example below or re
 ---
 
 
-### deleteCollection
-Delete a collection.
+### updateCategory
+Update product categories
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.deleteCollection(id=id)
+    result = await platformClient.catalog.updateCategory(uid=uid, body=body)
     # use result
 except Exception as e:
     print(e)
@@ -3391,20 +7224,77 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String | yes | A `id` is a unique identifier of a collection. |  
+| uid | String | yes | Category unique id |  
+| body | [CategoryRequestBody](#CategoryRequestBody) | yes | Request body |
 
 
-
-Delete a collection by it's id. Returns an object that tells whether the collection was deleted successfully
+Update a product category using this api
 
 *Returned Response:*
 
 
 
 
-[CommonResponseSchemaCollection](#CommonResponseSchemaCollection)
+[CategoryUpdateResponse](#CategoryUpdateResponse)
 
-Status object. Tells whether the operation was successful.
+Category Meta. See example below or refer `CategoryUpdateResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getSellerInsights
+Analytics data of catalog and inventory that are being cross-selled.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getSellerInsights(sellerAppId=sellerAppId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| sellerAppId | String | yes | Id of the seller application which is serving the invetory/catalog of the company |  
+
+
+
+Analytics data of catalog and inventory that are being cross-selled.
+
+*Returned Response:*
+
+
+
+
+[CrossSellingResponse](#CrossSellingResponse)
+
+Response Data
 
 
 
@@ -3414,7 +7304,8 @@ Status object. Tells whether the operation was successful.
 
 ```json
 {
-  "message": "Collection Deleted"
+  "articles": 18,
+  "products": 18
 }
 ```
 </details>
@@ -3430,15 +7321,15 @@ Status object. Tells whether the operation was successful.
 ---
 
 
-### updateCollection
-Update a collection
+### listDepartmentsData
+List all Departments.
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.updateCollection(id=id, body=body)
+    result = await platformClient.catalog.listDepartmentsData(pageNo=pageNo, itemType=itemType, pageSize=pageSize, name=name, search=search, isActive=isActive)
     # use result
 except Exception as e:
     print(e)
@@ -3450,381 +7341,25 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String | yes | A `id` is a unique identifier of a collection. |  
-| body | [UpdateCollection](#UpdateCollection) | yes | Request body |
-
-
-Update a collection by it's id. On successful request, returns the updated collection
-
-*Returned Response:*
-
-
-
-
-[UpdateCollection](#UpdateCollection)
-
-The Collection object. See example below or refer `UpdateCollectionSchema` for details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "_custom_json": {},
-  "_locale_language": {},
-  "_schedule": {
-    "end": null,
-    "next_schedule": [
-      {
-        "end": null,
-        "start": "2021-03-15T12:51:21.333000+00:00Z"
-      }
-    ],
-    "start": "2021-03-15T12:51:21.333000+00:00Z"
-  },
-  "action": {
-    "page": {
-      "query": {
-        "collection": [
-          "new"
-        ]
-      },
-      "type": "collection"
-    },
-    "type": "page"
-  },
-  "allow_facets": true,
-  "allow_sort": true,
-  "badge": {
-    "color": "#ffffff",
-    "text": ""
-  },
-  "banners": {
-    "landscape": {
-      "type": "image",
-      "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857999/production/applications/app_000000000000000000000001/media/collection/landscape/avm7xibo2jgk8glc4bwl.png"
-    },
-    "portrait": {
-      "type": "image",
-      "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588858137/production/applications/app_000000000000000000000001/media/collection/portrait/xzuftshmmw4yuwzb12pm.png"
-    }
-  },
-  "description": "",
-  "is_active": true,
-  "logo": {
-    "type": "image",
-    "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857854/production/applications/app_000000000000000000000001/media/collection/logo/w9ns7nfgv7fk45xqrpoh.png"
-  },
-  "meta": {},
-  "name": "New",
-  "published": true,
-  "query": {},
-  "seo": {
-    "description": "Test description",
-    "title": "Test"
-  },
-  "slug": "new",
-  "sort_on": "depth_desc",
-  "tags": [],
-  "type": "query",
-  "uid": "604f585a7051e30001173ac1",
-  "visible_facets_keys": []
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCollectionItems
-Get the items for a collection
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getCollectionItems(id=id, sortOn=sortOn, pageId=pageId, pageSize=pageSize)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | A `id` is a unique identifier of a collection. |   
-| sortOn | String? | no | Each response will contain sort_on param, which should be sent back to make pagination work. |   
-| pageId | String? | no | Each response will contain next_id param, which should be sent back to make pagination work. |   
-| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |  
-
-
-
-Get items from a collection specified by its `id`.
-
-*Returned Response:*
-
-
-
-
-[GetCollectionItemsResponse](#GetCollectionItemsResponse)
-
-The attached items of an collection. See example below or refer `GetCollectionItemsResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### addCollectionItems
-Add items to a collection
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.addCollectionItems(id=id, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | A `id` is a unique identifier of a collection. |  
-| body | [CollectionItemUpdateSchema](#CollectionItemUpdateSchema) | yes | Request body |
-
-
-Adds items to a collection specified by its `id`. See `CollectionItemRequest` for the list of attributes needed to add items to an collection.
-
-*Returned Response:*
-
-
-
-
-[CommonResponseSchemaCollection](#CommonResponseSchemaCollection)
-
-Status object. Tells whether the operation was successful.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "message": "items updated"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCollectionDetail
-Get collection details.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getCollectionDetail(slug=slug)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| slug | String | yes | A `slug` is a human readable, URL friendly unique identifier of an object. Pass the `slug` of the collection which you want to retrieve. |  
-
-
-
-Get the details of a collection by its slug.
-
-*Returned Response:*
-
-
-
-
-[GetCollectionDetailResponse](#GetCollectionDetailResponse)
-
-The Collection object. See example below or refer `GetCollectionDetailResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "_custom_json": {},
-  "_locale_language": {},
-  "_schedule": {
-    "end": null,
-    "next_schedule": [
-      {
-        "end": null,
-        "start": "2020-05-21T03:58:41.237Z"
-      }
-    ],
-    "start": "2020-05-21T03:58:41.237Z"
-  },
-  "action": {
-    "page": {
-      "query": {
-        "collection": [
-          "new"
-        ]
-      },
-      "type": "collection"
-    },
-    "type": "page"
-  },
-  "allow_facets": true,
-  "allow_sort": true,
-  "badge": {
-    "color": "#ffffff",
-    "text": ""
-  },
-  "banners": {
-    "landscape": {
-      "type": "image",
-      "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857999/production/applications/app_000000000000000000000001/media/collection/landscape/avm7xibo2jgk8glc4bwl.png"
-    },
-    "portrait": {
-      "type": "image",
-      "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588858137/production/applications/app_000000000000000000000001/media/collection/portrait/xzuftshmmw4yuwzb12pm.png"
-    }
-  },
-  "description": "",
-  "is_active": true,
-  "logo": {
-    "type": "image",
-    "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1588857854/production/applications/app_000000000000000000000001/media/collection/logo/w9ns7nfgv7fk45xqrpoh.png"
-  },
-  "meta": {},
-  "name": "new",
-  "published": true,
-  "query": {
-    "l3_categories": [
-      "12"
-    ],
-    "sort_on": "discount_asc"
-  },
-  "slug": "new",
-  "sort_on": "popular",
-  "tags": [],
-  "type": "query",
-  "uid": "5ec5fc757cb1e4740a17da23",
-  "visible_facets_keys": []
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getApplicationFilterValues
-Get values of the selected value for the filter options.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getApplicationFilterValues(filterKey=filterKey, c=c, collectionId=collectionId, pageNo=pageNo, pageSize=pageSize, q=q)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| filterKey | String | yes | A `filter_key` is a filter key for a for which all the available filter values will returned. channel. |   
-| c | String? | no | The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans\|and:::category:nin:t-shirts\|shirts** |   
-| collectionId | String? | no | A `collection_id` is a unique identifier for a particular collection. channel. |   
 | pageNo | Int? | no | The page number to navigate through the given set of results |   
+| itemType | String? | no | A `item_type` is a type of product eg. set, standard, digital |   
 | pageSize | Int? | no | Number of items to retrieve in each page. Default is 10. |   
-| q | String? | no | Get Values filtered by q string |  
+| name | String? | no | Can search departments by passing name. |   
+| search | String? | no | Can search departments by passing name of the department in search parameter. |   
+| isActive | Boolean? | no | Can query for departments based on whether they are active or inactive. |  
 
 
 
-Get query filters keys to configure a collection
+Allows you to list all departments, also can search using name and filter active and incative departments, and item type.
 
 *Returned Response:*
 
 
 
 
-[GetQueryFiltersValuesResponse](#GetQueryFiltersValuesResponse)
+[DepartmentsResponse](#DepartmentsResponse)
 
-The attached items of an collection. See example below or refer `GetQueryFiltersValuesResponse` for details
+List of departments data. See example below or refer `DepartmentsResponse` for details
 
 
 
@@ -3834,30 +7369,314 @@ The attached items of an collection. See example below or refer `GetQueryFilters
 
 ```json
 {
-  "values": [
+  "items": [
     {
-      "display": "OS",
-      "count": 2,
-      "is_selected": false,
-      "value": "OS"
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "3",
+        "username": "918793638893_86554"
+      },
+      "created_on": "2020-07-01T05:33:39.325000Z",
+      "id": "5efc2033623d390001782238",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/BSQ9Gk_123522-best-starry-sky-wallpaper-1920x1200-ipad-pro.jpgc7d0c15c-c1ff-47eb-8423-6e2df51f2ddf/BSQ9Gk_123522-best-starry-sky-wallpaper-1920x1200-ipad-pro.jpg",
+      "modified_by": {
+        "user_id": "5677",
+        "username": "917753852478_51632"
+      },
+      "modified_on": "2021-03-03T15:55:25.118000Z",
+      "name": "Sample Dept",
+      "platforms": {},
+      "priority_order": 111,
+      "slug": "sample-dept",
+      "synonyms": [
+        "test",
+        "sampe"
+      ],
+      "tags": [],
+      "uid": 5
     },
     {
-      "display": "S",
-      "count": 2,
-      "is_selected": false,
-      "value": "S"
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "0",
+        "username": "app@fynd.com"
+      },
+      "created_on": "2020-05-19T06:53:37.629000Z",
+      "id": "5ec3827156a7200001c9aeea",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/addsale/media/logo/department/original/15974_381e2236c2a348cc851c29a5d05c66a9.png",
+      "modified_by": {
+        "user_id": "10",
+        "username": "fahimsakri_gofynd_com_44938"
+      },
+      "modified_on": "2021-03-04T14:01:02.556000Z",
+      "name": "Men's Fashion",
+      "platforms": {
+        "fynd": true,
+        "fynd_store": true,
+        "marketplace": true,
+        "openapi": true,
+        "uniket_store": true,
+        "uniket_wholesale": true
+      },
+      "priority_order": 111,
+      "slug": "men-s-fashion",
+      "synonyms": [],
+      "tags": [],
+      "uid": 2
     },
     {
-      "display": "M",
-      "count": 2,
-      "is_selected": false,
-      "value": "M"
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "10",
+        "username": "fahimsakri_gofynd_com_44938"
+      },
+      "created_on": "2020-06-29T10:59:33.620000Z",
+      "id": "5ef9c9959b04f00001e40dba",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/ywPVrU_preview_a637ca6e4da6e38f03eb0d650ac5d6ba.jpgc73cc22f-b5ee-4fd4-a585-8ada35762d68/ywPVrU_preview_a637ca6e4da6e38f03eb0d650ac5d6ba.jpg",
+      "modified_by": {
+        "user_id": "3",
+        "username": "918793638893_86554"
+      },
+      "modified_on": "2020-08-06T18:08:02.675000Z",
+      "name": "Groceries",
+      "platforms": {},
+      "priority_order": 10,
+      "slug": "groceries",
+      "synonyms": [],
+      "tags": [],
+      "uid": 4
     },
     {
-      "display": "L",
-      "count": 2,
-      "is_selected": false,
-      "value": "L"
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "0",
+        "username": "app@fynd.com"
+      },
+      "created_on": "2020-05-18T16:14:41.689000Z",
+      "id": "5ec2b471661a4100019fca0d",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/platform/pictures/free-logo/original/_G1Z2Fg1L-http:d3p8ifzkmzds37.cloudfront.netmedialogodepartmentoriginal15870_c287d3c2431a432bb0e49363ef6b82bc.png.png",
+      "modified_by": {
+        "user_id": "5677",
+        "username": "917753852478_51632"
+      },
+      "modified_on": "2021-03-04T15:39:38.528000Z",
+      "name": "Electronics",
+      "platforms": {
+        "fynd": true,
+        "fynd_store": true,
+        "marketplace": true,
+        "openapi": true,
+        "uniket_store": true,
+        "uniket_wholesale": true
+      },
+      "priority_order": 100,
+      "slug": "electronics",
+      "synonyms": [],
+      "tags": [],
+      "uid": 1
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "3",
+        "username": "918793638893_86554"
+      },
+      "created_on": "2020-05-27T12:04:19.111000Z",
+      "id": "5ece5743cd1bae0001440427",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/landscape-banner/original/g2plam_logo_Jio.pngeeb392ca-3958-46a0-9f13-23c205b596f7/g2plam_logo_Jio.png",
+      "modified_by": {
+        "user_id": "3",
+        "username": "918793638893_86554"
+      },
+      "modified_on": "2020-08-06T18:07:46.060000Z",
+      "name": "Industrial Supplies",
+      "platforms": {},
+      "priority_order": 111,
+      "slug": "industrial-supplies",
+      "synonyms": [],
+      "tags": [],
+      "uid": 3
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "13",
+        "username": "abhinavsrivastava_gofynd_com_05674"
+      },
+      "created_on": "2020-07-06T07:56:01.508000Z",
+      "id": "5f02d9116b0ae500018923dd",
+      "is_active": false,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/wTcfEi_crysis_-_1.jpg14580947-a659-486d-b2d3-d2ca025b1cac/wTcfEi_crysis_-_1.jpg",
+      "modified_by": {
+        "user_id": "3",
+        "username": "918793638893_86554"
+      },
+      "modified_on": "2020-08-06T18:08:12.576000Z",
+      "name": "Clothing",
+      "platforms": {},
+      "priority_order": 1,
+      "slug": "clothing",
+      "synonyms": [],
+      "tags": [],
+      "uid": 6
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "5634",
+        "username": "asavarijadhav_gofynd_com_99880"
+      },
+      "created_on": "2020-08-05T09:04:33.604000Z",
+      "id": "5f2a762131c66700018cdc47",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/RxTsd8_0DEFAULT-LOGO.jpg000ccfc1-2f79-4426-9ac3-de2468c2fcb9/RxTsd8_0DEFAULT-LOGO.jpg",
+      "modified_by": {
+        "user_id": "5634",
+        "username": "asavarijadhav_gofynd_com_99880"
+      },
+      "modified_on": "2020-08-05T09:44:01.234000Z",
+      "name": "Kids",
+      "platforms": {},
+      "priority_order": 3,
+      "slug": "kids",
+      "synonyms": [],
+      "tags": [],
+      "uid": 8
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "5634",
+        "username": "asavarijadhav_gofynd_com_99880"
+      },
+      "created_on": "2020-08-05T09:44:46.632000Z",
+      "id": "5f2a7f8e31c66700018cdc49",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/tKkDB8_0DEFAULT-LOGO.jpg1c324d4d-f667-4af8-8d98-37205d34e3b5/tKkDB8_0DEFAULT-LOGO.jpg",
+      "modified_by": {
+        "user_id": "3",
+        "username": "918793638893_86554"
+      },
+      "modified_on": "2020-08-06T18:07:35.231000Z",
+      "name": "Women's Fashion",
+      "platforms": {},
+      "priority_order": 2,
+      "slug": "women-s-fashion",
+      "synonyms": [],
+      "tags": [],
+      "uid": 9
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "5634",
+        "username": "asavarijadhav_gofynd_com_99880"
+      },
+      "created_on": "2020-08-05T09:45:12.075000Z",
+      "id": "5f2a7fa831c66700018cdc4a",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/oLoxiL_0DEFAULT-LOGO.jpgbd050200-700a-4a3e-9da6-e6b78fbee943/oLoxiL_0DEFAULT-LOGO.jpg",
+      "modified_by": {
+        "user_id": "5634",
+        "username": "asavarijadhav_gofynd_com_99880"
+      },
+      "modified_on": "2020-08-05T09:48:01.660000Z",
+      "name": "Beauty & Personal Care",
+      "platforms": {},
+      "priority_order": 4,
+      "slug": "beauty-personal-care",
+      "synonyms": [],
+      "tags": [],
+      "uid": 10
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "5634",
+        "username": "asavarijadhav_gofynd_com_99880"
+      },
+      "created_on": "2020-08-05T09:45:39.797000Z",
+      "id": "5f2a7fc331c66700018cdc4b",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/vQv4ot_0DEFAULT-LOGO.jpg701cb5af-2024-4abf-ae5d-b68bc1a3cd43/vQv4ot_0DEFAULT-LOGO.jpg",
+      "modified_by": {
+        "user_id": "3",
+        "username": "918793638893_86554"
+      },
+      "modified_on": "2020-08-06T11:38:57.599000Z",
+      "name": "Home & Living",
+      "platforms": {},
+      "priority_order": 5,
+      "slug": "home-living",
+      "synonyms": [],
+      "tags": [],
+      "uid": 11
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "5634",
+        "username": "asavarijadhav_gofynd_com_99880"
+      },
+      "created_on": "2020-08-05T09:48:42.347000Z",
+      "id": "5f2a807a31c66700018cdc4e",
+      "is_active": false,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/hTobjV_0DEFAULT-LOGO.jpga020159c-7fe7-4c1c-a11a-4be61a60da9f/hTobjV_0DEFAULT-LOGO.jpg",
+      "modified_by": {
+        "user_id": "5634",
+        "username": "asavarijadhav_gofynd_com_99880"
+      },
+      "modified_on": "2020-08-05T09:48:42.347000Z",
+      "name": "Baby Care & Kids Essentials",
+      "platforms": {},
+      "priority_order": 7,
+      "slug": "baby-care-kids-essentials",
+      "synonyms": [],
+      "tags": [],
+      "uid": 14
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "5721",
+        "username": "919821012599_75351"
+      },
+      "created_on": "2021-01-13T10:12:33.002000Z",
+      "id": "5ffec79192813f0001eb6560",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/department/pictures/square-logo/original/rNz8grLys-.png",
+      "modified_by": {
+        "user_id": "5721",
+        "username": "919821012599_75351"
+      },
+      "modified_on": "2021-01-13T13:50:55.415000Z",
+      "name": "Skin care products",
+      "platforms": {},
+      "priority_order": 10235,
+      "slug": "skin-care-produts",
+      "synonyms": [
+        "skin",
+        "care"
+      ],
+      "tags": [],
+      "uid": 21
     }
   ],
   "page": {
@@ -3883,980 +7702,15 @@ The attached items of an collection. See example below or refer `GetQueryFilters
 ---
 
 
-### getApplicationFilterKeys
-Get filters keys of the filter options.
+### createDepartments
+Create the department.
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getApplicationFilterKeys(c=c)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| c | String? | no | The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans\|and:::category:nin:t-shirts\|shirts** |  
-
-
-
-Get query filters keys to configure a collection
-
-*Returned Response:*
-
-
-
-
-[GetQueryFiltersKeysResponse](#GetQueryFiltersKeysResponse)
-
-The attached items of an collection. See example below or refer `GetQueryFiltersKeysResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "filters": [
-    {
-      "key": {
-        "display": "Department",
-        "kind": "multivalued",
-        "logo": "https://hdn-1.fynd.com/global/menu-icons/Department.png",
-        "name": "department",
-        "operators": [
-          "in",
-          "nin"
-        ]
-      }
-    },
-    {
-      "key": {
-        "display": "Category",
-        "kind": "multivalued",
-        "logo": "https://hdn-1.fynd.com/global/menu-icons/Category.png",
-        "name": "category",
-        "operators": [
-          "in",
-          "nin"
-        ]
-      }
-    },
-    {
-      "key": {
-        "display": "Category L1",
-        "kind": "multivalued",
-        "logo": "https://hdn-1.fynd.com/global/menu-icons/Category.png",
-        "name": "category",
-        "operators": [
-          "in",
-          "nin"
-        ]
-      }
-    }
-  ],
-  "operators": {
-    "btw": "Between",
-    "lte": "Less than Equals",
-    "gte": "Greater than Equals",
-    "gt": "Greater than",
-    "lt": "Less than",
-    "in": "Equal to",
-    "nin": "Not Equal to"
-  },
-  "sort_on": [
-    {
-      "display": "Latest Products",
-      "is_selected": true,
-      "logo": "https://hdn-1.fynd.com/global/menu-icons/Latest%20Products.png",
-      "name": "Latest Products",
-      "value": "latest"
-    },
-    {
-      "display": "Popularity",
-      "is_selected": false,
-      "logo": "https://hdn-1.fynd.com/global/menu-icons/Popularity.png",
-      "name": "Popularity",
-      "value": "popular"
-    },
-    {
-      "display": "Price Low to High",
-      "is_selected": false,
-      "logo": "https://hdn-1.fynd.com/global/menu-icons/Price%20High%20to%20Low.png",
-      "name": "Price Low to High",
-      "value": "price_asc"
-    },
-    {
-      "display": "Price High to Low",
-      "is_selected": false,
-      "logo": "https://hdn-1.fynd.com/global/menu-icons/Price%20High%20to%20Low.png",
-      "name": "Price High to Low",
-      "value": "price_dsc"
-    },
-    {
-      "display": "Discount Low to High",
-      "is_selected": false,
-      "logo": "https://hdn-1.fynd.com/global/menu-icons/Discount%20Low%20to%20High.png",
-      "name": "Discount Low to High",
-      "value": "discount_asc"
-    },
-    {
-      "display": "Discount High to Low",
-      "is_selected": false,
-      "logo": "https://hdn-1.fynd.com/global/menu-icons/Discount%20Low%20to%20High.png",
-      "name": "Discount High to Low",
-      "value": "discount_dsc"
-    },
-    {
-      "display": "Rating",
-      "is_selected": false,
-      "logo": "https://hdn-1.fynd.com/global/menu-icons/Rating.png",
-      "name": "Rating",
-      "value": "rating_dsc"
-    },
-    {
-      "display": "Size Depth (High to Low)",
-      "is_selected": false,
-      "logo": "https://hdn-1.fynd.com/global/menu-icons/Size%20Depth.png",
-      "name": "Size Depth (High to Low)",
-      "value": "depth_desc"
-    }
-  ]
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getQueryFilters
-Retrieve query filters.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getQueryFilters()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Retrieve query filters to configure a collection
-
-*Returned Response:*
-
-
-
-
-[GetQueryFiltersResponse](#GetQueryFiltersResponse)
-
-The attached items of an collection. See example below or refer `GetQueryFiltersResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "filters": [
-    {
-      "key": {
-        "display": "Department",
-        "kind": "multivalued",
-        "logo": "https://hdn-1.fynd.com/global/menu-icons/Department.png",
-        "name": "department"
-      },
-      "values": [
-        {
-          "count": 2113,
-          "display": "Men's Fashion",
-          "is_selected": false,
-          "logo": {
-            "type": "image",
-            "url": "https://hdn-1.fynd.com/media/category_tab_icons/department/Men.png"
-          },
-          "value": "men"
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Category",
-        "kind": "multivalued",
-        "logo": "https://hdn-1.fynd.com/global/menu-icons/Category.png",
-        "name": "category"
-      },
-      "values": [
-        {
-          "count": 968,
-          "display": "T-Shirts",
-          "is_selected": false,
-          "logo": "https://hdn-1.fynd.com/media/logo/category/original/15442_57fdc97abfd248aaaf8841f097a4ed67.jpg",
-          "value": "192"
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Category L1",
-        "kind": "multivalued",
-        "logo": "https://hdn-1.fynd.com/global/menu-icons/Category.png",
-        "name": "category"
-      },
-      "values": [
-        {
-          "count": 968,
-          "display": "T-Shirts",
-          "is_selected": false,
-          "logo": "https://hdn-1.fynd.com/media/logo/category/original/15442_57fdc97abfd248aaaf8841f097a4ed67.jpg",
-          "value": "192"
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Category L2",
-        "kind": "multivalued",
-        "logo": "https://hdn-1.fynd.com/global/menu-icons/Category.png",
-        "name": "category"
-      },
-      "values": [
-        {
-          "count": 968,
-          "display": "T-Shirts",
-          "is_selected": false,
-          "logo": "https://hdn-1.fynd.com/media/logo/category/original/15442_57fdc97abfd248aaaf8841f097a4ed67.jpg",
-          "value": "192"
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Size",
-        "kind": "multivalued",
-        "logo": "https://hdn-1.fynd.com/global/menu-icons/Sizes.png",
-        "name": "sizes"
-      },
-      "values": [
-        {
-          "count": 1438,
-          "display": "S",
-          "is_selected": false,
-          "value": "S"
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Brand",
-        "kind": "multivalued",
-        "logo": "https://hdn-1.fynd.com/global/menu-icons/Brand%20ID.png",
-        "name": "brand"
-      },
-      "values": [
-        {
-          "count": 4263,
-          "display": "Superdry",
-          "is_selected": false,
-          "logo": "https://hdn-1.fynd.com/media/logo/brand/original/1008_238113b8e11448f792e9bf860aac30f2.jpg",
-          "value": "235"
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Rating",
-        "kind": "multivalued",
-        "logo": "https://hdn-1.fynd.com/global/menu-icons/Rating.png",
-        "name": "rating"
-      },
-      "values": [
-        {
-          "count": 3,
-          "display": "5 ★",
-          "is_selected": false,
-          "value": "[4 TO *}"
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Company",
-        "kind": "multivalued",
-        "logo": "https://hdn-1.fynd.com/global/menu-icons/Store%20ID%20List.png",
-        "name": "company_id_list"
-      },
-      "values": [
-        {
-          "count": 4262,
-          "display": "RELIANCE BRANDS LIMITED",
-          "is_selected": false,
-          "value": "46"
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Store Ids",
-        "kind": "multivalued",
-        "logo": "https://hdn-1.fynd.com/global/menu-icons/Store%20ID%20List.png",
-        "name": "store_id_list"
-      },
-      "values": [
-        {
-          "count": 1385,
-          "display": "PHOENIX, ,PALLADIUM,  LOWER PAREL - 5410",
-          "is_selected": false,
-          "value": "2201"
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Image",
-        "kind": "multivalued",
-        "logo": "https://hdn-1.fynd.com/global/menu-icons/image%20Nature.png",
-        "name": "image_nature"
-      },
-      "values": [
-        {
-          "count": 3111,
-          "display": "Good Quality",
-          "is_selected": false,
-          "value": "standard"
-        },
-        {
-          "count": 1152,
-          "display": "No Image",
-          "is_selected": false,
-          "value": "default"
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Set",
-        "kind": "multivalued",
-        "logo": "",
-        "name": "is_set"
-      },
-      "values": [
-        {
-          "count": 4263,
-          "display": "No",
-          "is_selected": false,
-          "value": false
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Product Fit",
-        "kind": "multivalued",
-        "logo": "",
-        "name": "product_fit"
-      },
-      "values": [
-        {
-          "count": 14,
-          "display": "Regular",
-          "is_selected": false,
-          "value": "Regular"
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Primary Material",
-        "kind": "multivalued",
-        "logo": "",
-        "name": "primary_material"
-      },
-      "values": [
-        {
-          "count": 1246,
-          "display": "Cotton",
-          "is_selected": false,
-          "value": "Cotton"
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Gender",
-        "kind": "multivalued",
-        "logo": "",
-        "name": "gender"
-      },
-      "values": [
-        {
-          "count": 2125,
-          "display": "Men",
-          "is_selected": false,
-          "value": "Men"
-        },
-        {
-          "count": 1492,
-          "display": "Women",
-          "is_selected": false,
-          "value": "Women"
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Primary Colour",
-        "kind": "multivalued",
-        "logo": "",
-        "name": "primary_color"
-      },
-      "values": [
-        {
-          "count": 1403,
-          "display": "Multi",
-          "is_selected": false,
-          "value": "Multi"
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Size Depth",
-        "kind": "range",
-        "logo": "https://hdn-1.fynd.com/global/menu-icons/Size%20Depth.png",
-        "name": "size_depth"
-      },
-      "values": [
-        {
-          "count": 4263,
-          "display": "0 - 9",
-          "display_format": "{} - {}",
-          "is_selected": false,
-          "max": 9,
-          "min": 0,
-          "query_format": "[{} TO {}]",
-          "selected_max": 9,
-          "selected_min": 0
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Price",
-        "kind": "range",
-        "logo": "https://hdn-1.fynd.com/global/menu-icons/Min%20price%20effective.png",
-        "name": "min_price_effective"
-      },
-      "values": [
-        {
-          "count": 4263,
-          "currency_code": "INR",
-          "currency_symbol": "₹",
-          "is_selected": false,
-          "max": 24999,
-          "min": 398,
-          "query_format": "[{},INR TO {},INR]",
-          "selected_max": 24998.77,
-          "selected_min": 398.8
-        }
-      ]
-    },
-    {
-      "key": {
-        "display": "Discount",
-        "kind": "range",
-        "logo": "https://hdn-1.fynd.com/global/menu-icons/Platform%20Discount.png",
-        "name": "platform_discount"
-      },
-      "values": [
-        {
-          "count": 4263,
-          "display": "0 - 50",
-          "display_format": "{} - {}",
-          "is_selected": false,
-          "max": 50,
-          "min": 0,
-          "query_format": "[{} TO {}]",
-          "selected_max": 50,
-          "selected_min": 0
-        }
-      ]
-    }
-  ],
-  "sort_on": [
-    {
-      "display": "Latest Products",
-      "is_selected": true,
-      "logo": "https://hdn-1.fynd.com/global/menu-icons/Latest%20Products.png",
-      "name": "Latest Products",
-      "value": "latest"
-    },
-    {
-      "display": "Popularity",
-      "is_selected": false,
-      "logo": "https://hdn-1.fynd.com/global/menu-icons/Popularity.png",
-      "name": "Popularity",
-      "value": "popular"
-    },
-    {
-      "display": "Price Low to High",
-      "is_selected": false,
-      "logo": "https://hdn-1.fynd.com/global/menu-icons/Price%20High%20to%20Low.png",
-      "name": "Price Low to High",
-      "value": "price_asc"
-    },
-    {
-      "display": "Price High to Low",
-      "is_selected": false,
-      "logo": "https://hdn-1.fynd.com/global/menu-icons/Price%20High%20to%20Low.png",
-      "name": "Price High to Low",
-      "value": "price_dsc"
-    },
-    {
-      "display": "Discount Low to High",
-      "is_selected": false,
-      "logo": "https://hdn-1.fynd.com/global/menu-icons/Discount%20Low%20to%20High.png",
-      "name": "Discount Low to High",
-      "value": "discount_asc"
-    },
-    {
-      "display": "Discount High to Low",
-      "is_selected": false,
-      "logo": "https://hdn-1.fynd.com/global/menu-icons/Discount%20Low%20to%20High.png",
-      "name": "Discount High to Low",
-      "value": "discount_dsc"
-    },
-    {
-      "display": "Rating",
-      "is_selected": false,
-      "logo": "https://hdn-1.fynd.com/global/menu-icons/Rating.png",
-      "name": "Rating",
-      "value": "rating_dsc"
-    },
-    {
-      "display": "Size Depth (High to Low)",
-      "is_selected": false,
-      "logo": "https://hdn-1.fynd.com/global/menu-icons/Size%20Depth.png",
-      "name": "Size Depth (High to Low)",
-      "value": "depth_desc"
-    }
-  ]
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getConfigurations
-Retrieve configurations.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getConfigurations()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Retrieve a configured details for catalog.
-
-*Returned Response:*
-
-
-
-
-[GetAppCatalogConfiguration](#GetAppCatalogConfiguration)
-
-Get application level configured catalog details. See example below or refer `GetAppCatalogConfigurationSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "data": {
-    "app_id": "000000000000000000000001",
-    "config_id": "000000000000000000000001",
-    "config_type": "app",
-    "listing": {
-      "filter": {
-        "allow_single": false,
-        "attribute_config": [
-          {
-            "is_active": true,
-            "key": "gender",
-            "name": "Gender",
-            "priority": 1,
-            "type": "multivalued",
-            "value_config": {
-              "bucket_points": [],
-              "condition": "OR",
-              "map": {},
-              "sort": "count",
-              "value": ""
-            }
-          },
-          {
-            "is_active": true,
-            "key": "min_price_effective",
-            "name": "Price",
-            "priority": 2,
-            "type": "range",
-            "value_config": {
-              "bucket_points": [],
-              "condition": "OR",
-              "map": {
-                "< 500": "Below Rs. 500",
-                ">= 6000": "Above Rs. 6000"
-              },
-              "sort": "count",
-              "value": ""
-            }
-          },
-          {
-            "is_active": true,
-            "key": "departments",
-            "name": "Department",
-            "priority": 3,
-            "type": "multivalued",
-            "value_config": {
-              "bucket_points": [],
-              "condition": "OR",
-              "map": {},
-              "sort": "count",
-              "value": "metadata"
-            }
-          },
-          {
-            "is_active": true,
-            "key": "brand_id",
-            "name": "Brand",
-            "priority": 4,
-            "type": "multivalued",
-            "value_config": {
-              "bucket_points": [],
-              "condition": "OR",
-              "map": {
-                "5th Avenue": "A {{value}}"
-              },
-              "sort": "ascending",
-              "value": "metadata"
-            }
-          },
-          {
-            "is_active": false,
-            "key": "season",
-            "name": "Season",
-            "priority": 5,
-            "type": "multivalued",
-            "value_config": {
-              "bucket_points": [],
-              "condition": "OR",
-              "map": {
-                "": ""
-              },
-              "sort": "count",
-              "value": ""
-            }
-          },
-          {
-            "is_active": true,
-            "key": "is_set",
-            "name": "Set",
-            "priority": 6,
-            "type": "multivalued",
-            "value_config": {
-              "bucket_points": [],
-              "condition": "OR",
-              "map": {
-                "false": "No",
-                "true": "Yes"
-              },
-              "sort": "descending",
-              "value": ""
-            }
-          },
-          {
-            "is_active": true,
-            "key": "rating",
-            "name": "Rating",
-            "priority": 7,
-            "type": "multivalued",
-            "value_config": {
-              "bucket_points": [],
-              "condition": "OR",
-              "map": {
-                "": ""
-              },
-              "sort": "count",
-              "value": ""
-            }
-          },
-          {
-            "is_active": true,
-            "key": "size_depth",
-            "name": "Size Depth",
-            "priority": 8,
-            "type": "range",
-            "value_config": {
-              "bucket_points": [],
-              "condition": "OR",
-              "map": {
-                "{} - {}": "{} - {}"
-              },
-              "sort": "count",
-              "value": ""
-            }
-          }
-        ]
-      },
-      "sort": {
-        "config": [
-          {
-            "is_active": false,
-            "key": "price_dsc",
-            "logo": "https://hdn-1.fynd.com/global/menu-icons/Price%20High%20to%20Low.png",
-            "name": "Price High to Low",
-            "priority": 1
-          },
-          {
-            "is_active": true,
-            "key": "rating_dsc",
-            "logo": "https://hdn-1.fynd.com/global/menu-icons/Rating.png",
-            "name": "Rating",
-            "priority": 2
-          },
-          {
-            "is_active": true,
-            "key": "depth_desc",
-            "name": "Size Depth (High to Low)",
-            "priority": 3
-          },
-          {
-            "is_active": true,
-            "key": "discount_dsc",
-            "logo": "https://hdn-1.fynd.com/global/menu-icons/Discount%20Low%20to%20High.png",
-            "name": "Discount High to Low",
-            "priority": 4
-          },
-          {
-            "is_active": true,
-            "key": "popular",
-            "logo": "https://hdn-1.fynd.com/global/menu-icons/Popularity.png",
-            "name": "Popularity",
-            "priority": 5
-          },
-          {
-            "is_active": true,
-            "key": "relevance",
-            "name": "Relevance",
-            "priority": 6
-          },
-          {
-            "is_active": true,
-            "key": "price_asc",
-            "logo": "https://hdn-1.fynd.com/global/menu-icons/Price%20Low%20to%20High.png",
-            "name": "Price Low to High",
-            "priority": 7
-          }
-        ],
-        "default_key": ""
-      }
-    },
-    "product": {
-      "similar": {
-        "config": [
-          {
-            "is_active": true,
-            "key": "seller",
-            "priority": 1,
-            "size": {
-              "max": 10,
-              "min": 2
-            },
-            "subtitle": "",
-            "title": "Seller"
-          },
-          {
-            "is_active": true,
-            "key": "visual",
-            "priority": 2,
-            "size": {
-              "max": 10,
-              "min": 2
-            },
-            "subtitle": "",
-            "title": "Visual"
-          },
-          {
-            "is_active": true,
-            "key": "brand",
-            "priority": 3,
-            "size": {
-              "max": 10,
-              "min": 2
-            },
-            "subtitle": "",
-            "title": "Brand"
-          },
-          {
-            "is_active": true,
-            "key": "specs",
-            "priority": 4,
-            "size": {
-              "max": 10,
-              "min": 2
-            },
-            "subtitle": "",
-            "title": "Specs"
-          }
-        ]
-      },
-      "variant": {
-        "config": [
-          {
-            "display_type": "image",
-            "is_active": true,
-            "key": "color",
-            "name": "Additional Colors12",
-            "priority": 1,
-            "size": {
-              "max": 10,
-              "min": 2
-            }
-          },
-          {
-            "display_type": "text",
-            "is_active": true,
-            "key": "storage",
-            "name": "Memory",
-            "priority": 2,
-            "size": {
-              "max": 10,
-              "min": 2
-            }
-          },
-          {
-            "display_type": "image",
-            "is_active": true,
-            "key": "visual",
-            "name": "Additional Colors",
-            "priority": 3,
-            "size": {
-              "max": 10,
-              "min": 2
-            }
-          },
-          {
-            "display_type": "text",
-            "is_active": true,
-            "key": "ram_storage",
-            "name": "Ram_Storage",
-            "priority": 4,
-            "size": {
-              "max": 10,
-              "min": 2
-            }
-          },
-          {
-            "display_type": "color",
-            "is_active": true,
-            "key": "shade",
-            "name": "Additional Shades",
-            "priority": 5,
-            "size": {
-              "max": 10,
-              "min": 2
-            }
-          },
-          {
-            "display_type": "text",
-            "is_active": true,
-            "key": "water_resistant",
-            "name": "Water_Resistant",
-            "priority": 6,
-            "size": {
-              "max": 10,
-              "min": 2
-            }
-          }
-        ]
-      }
-    }
-  },
-  "is_default": false
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createConfigurationProductListing
-Create configuration for product listing.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.createConfigurationProductListing(body=body)
+    result = await platformClient.catalog.createDepartments(body=body)
     # use result
 except Exception as e:
     print(e)
@@ -4868,19 +7722,19 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- |
-| body | [AppConfiguration](#AppConfiguration) | yes | Request body |
+| body | [DepartmentCreateUpdate](#DepartmentCreateUpdate) | yes | Request body |
 
 
-Add configuration for products & listing.
+Create departments using the API.
 
 *Returned Response:*
 
 
 
 
-[GetAppCatalogConfiguration](#GetAppCatalogConfiguration)
+[DepartmentCreateResponse](#DepartmentCreateResponse)
 
-success flag will tell whether the operation was successful.
+Success Response. See example below or refer `DepartmentCreateResponseSchema` for details
 
 
 
@@ -4889,7 +7743,10 @@ success flag will tell whether the operation was successful.
 <summary><i>&nbsp; Example:</i></summary>
 
 ```json
-
+{
+  "message": "Success",
+  "uid": 2
+}
 ```
 </details>
 
@@ -4904,67 +7761,15 @@ success flag will tell whether the operation was successful.
 ---
 
 
-### getCatalogConfiguration
-Retrieve catalog configuration.
+### getDepartmentData
+Get specific departments details by passing in unique id of the department.
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getCatalogConfiguration()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Retrieve configuration meta details for the catalog.
-
-*Returned Response:*
-
-
-
-
-[GetCatalogConfigurationMetaData](#GetCatalogConfigurationMetaData)
-
-configuration details for catalog. See example below or refer `GetCatalogConfigurationMetaDataSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getConfigurationByType
-Retrieve configuration by type.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getConfigurationByType(type=type)
+    result = await platformClient.catalog.getDepartmentData(uid=uid)
     # use result
 except Exception as e:
     print(e)
@@ -4976,20 +7781,1818 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| type | String | yes | type can be brands, categories etc. |  
+| uid | String | yes | A `uid` is a unique identifier of a department. |  
 
 
 
-Retrieve configuration details based on a specific type in the catalog.
+Allows you to get department data, by uid.
 
 *Returned Response:*
 
 
 
 
-[GetAppCatalogEntityConfiguration](#GetAppCatalogEntityConfiguration)
+[DepartmentsResponse](#DepartmentsResponse)
 
-Get application level configured catalog details. See example below or refer `GetAppCatalogEntityConfigurationSchema` for details
+Departments Data. See example below or refer `DepartmentsResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "3",
+        "username": "918793638893_86554"
+      },
+      "created_on": "2020-07-01T05:33:39.325000Z",
+      "id": "5efc2033623d390001782238",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/BSQ9Gk_123522-best-starry-sky-wallpaper-1920x1200-ipad-pro.jpgc7d0c15c-c1ff-47eb-8423-6e2df51f2ddf/BSQ9Gk_123522-best-starry-sky-wallpaper-1920x1200-ipad-pro.jpg",
+      "modified_by": {
+        "user_id": "5677",
+        "username": "917753852478_51632"
+      },
+      "modified_on": "2021-03-03T15:55:25.118000Z",
+      "name": "Sample Dept",
+      "platforms": {},
+      "priority_order": 111,
+      "slug": "sample-dept",
+      "synonyms": [
+        "test",
+        "sampe"
+      ],
+      "tags": [],
+      "uid": 5
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "0",
+        "username": "app@fynd.com"
+      },
+      "created_on": "2020-05-19T06:53:37.629000Z",
+      "id": "5ec3827156a7200001c9aeea",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/addsale/media/logo/department/original/15974_381e2236c2a348cc851c29a5d05c66a9.png",
+      "modified_by": {
+        "user_id": "10",
+        "username": "fahimsakri_gofynd_com_44938"
+      },
+      "modified_on": "2021-03-04T14:01:02.556000Z",
+      "name": "Men's Fashion",
+      "platforms": {
+        "fynd": true,
+        "fynd_store": true,
+        "marketplace": true,
+        "openapi": true,
+        "uniket_store": true,
+        "uniket_wholesale": true
+      },
+      "priority_order": 111,
+      "slug": "men-s-fashion",
+      "synonyms": [],
+      "tags": [],
+      "uid": 2
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "10",
+        "username": "fahimsakri_gofynd_com_44938"
+      },
+      "created_on": "2020-06-29T10:59:33.620000Z",
+      "id": "5ef9c9959b04f00001e40dba",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/ywPVrU_preview_a637ca6e4da6e38f03eb0d650ac5d6ba.jpgc73cc22f-b5ee-4fd4-a585-8ada35762d68/ywPVrU_preview_a637ca6e4da6e38f03eb0d650ac5d6ba.jpg",
+      "modified_by": {
+        "user_id": "3",
+        "username": "918793638893_86554"
+      },
+      "modified_on": "2020-08-06T18:08:02.675000Z",
+      "name": "Groceries",
+      "platforms": {},
+      "priority_order": 10,
+      "slug": "groceries",
+      "synonyms": [],
+      "tags": [],
+      "uid": 4
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "0",
+        "username": "app@fynd.com"
+      },
+      "created_on": "2020-05-18T16:14:41.689000Z",
+      "id": "5ec2b471661a4100019fca0d",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/platform/pictures/free-logo/original/_G1Z2Fg1L-http:d3p8ifzkmzds37.cloudfront.netmedialogodepartmentoriginal15870_c287d3c2431a432bb0e49363ef6b82bc.png.png",
+      "modified_by": {
+        "user_id": "5677",
+        "username": "917753852478_51632"
+      },
+      "modified_on": "2021-03-04T15:39:38.528000Z",
+      "name": "Electronics",
+      "platforms": {
+        "fynd": true,
+        "fynd_store": true,
+        "marketplace": true,
+        "openapi": true,
+        "uniket_store": true,
+        "uniket_wholesale": true
+      },
+      "priority_order": 100,
+      "slug": "electronics",
+      "synonyms": [],
+      "tags": [],
+      "uid": 1
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "3",
+        "username": "918793638893_86554"
+      },
+      "created_on": "2020-05-27T12:04:19.111000Z",
+      "id": "5ece5743cd1bae0001440427",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/landscape-banner/original/g2plam_logo_Jio.pngeeb392ca-3958-46a0-9f13-23c205b596f7/g2plam_logo_Jio.png",
+      "modified_by": {
+        "user_id": "3",
+        "username": "918793638893_86554"
+      },
+      "modified_on": "2020-08-06T18:07:46.060000Z",
+      "name": "Industrial Supplies",
+      "platforms": {},
+      "priority_order": 111,
+      "slug": "industrial-supplies",
+      "synonyms": [],
+      "tags": [],
+      "uid": 3
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "13",
+        "username": "abhinavsrivastava_gofynd_com_05674"
+      },
+      "created_on": "2020-07-06T07:56:01.508000Z",
+      "id": "5f02d9116b0ae500018923dd",
+      "is_active": false,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/wTcfEi_crysis_-_1.jpg14580947-a659-486d-b2d3-d2ca025b1cac/wTcfEi_crysis_-_1.jpg",
+      "modified_by": {
+        "user_id": "3",
+        "username": "918793638893_86554"
+      },
+      "modified_on": "2020-08-06T18:08:12.576000Z",
+      "name": "Clothing",
+      "platforms": {},
+      "priority_order": 1,
+      "slug": "clothing",
+      "synonyms": [],
+      "tags": [],
+      "uid": 6
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "5634",
+        "username": "asavarijadhav_gofynd_com_99880"
+      },
+      "created_on": "2020-08-05T09:04:33.604000Z",
+      "id": "5f2a762131c66700018cdc47",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/RxTsd8_0DEFAULT-LOGO.jpg000ccfc1-2f79-4426-9ac3-de2468c2fcb9/RxTsd8_0DEFAULT-LOGO.jpg",
+      "modified_by": {
+        "user_id": "5634",
+        "username": "asavarijadhav_gofynd_com_99880"
+      },
+      "modified_on": "2020-08-05T09:44:01.234000Z",
+      "name": "Kids",
+      "platforms": {},
+      "priority_order": 3,
+      "slug": "kids",
+      "synonyms": [],
+      "tags": [],
+      "uid": 8
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "5634",
+        "username": "asavarijadhav_gofynd_com_99880"
+      },
+      "created_on": "2020-08-05T09:44:46.632000Z",
+      "id": "5f2a7f8e31c66700018cdc49",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/tKkDB8_0DEFAULT-LOGO.jpg1c324d4d-f667-4af8-8d98-37205d34e3b5/tKkDB8_0DEFAULT-LOGO.jpg",
+      "modified_by": {
+        "user_id": "3",
+        "username": "918793638893_86554"
+      },
+      "modified_on": "2020-08-06T18:07:35.231000Z",
+      "name": "Women's Fashion",
+      "platforms": {},
+      "priority_order": 2,
+      "slug": "women-s-fashion",
+      "synonyms": [],
+      "tags": [],
+      "uid": 9
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "5634",
+        "username": "asavarijadhav_gofynd_com_99880"
+      },
+      "created_on": "2020-08-05T09:45:12.075000Z",
+      "id": "5f2a7fa831c66700018cdc4a",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/oLoxiL_0DEFAULT-LOGO.jpgbd050200-700a-4a3e-9da6-e6b78fbee943/oLoxiL_0DEFAULT-LOGO.jpg",
+      "modified_by": {
+        "user_id": "5634",
+        "username": "asavarijadhav_gofynd_com_99880"
+      },
+      "modified_on": "2020-08-05T09:48:01.660000Z",
+      "name": "Beauty & Personal Care",
+      "platforms": {},
+      "priority_order": 4,
+      "slug": "beauty-personal-care",
+      "synonyms": [],
+      "tags": [],
+      "uid": 10
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "5634",
+        "username": "asavarijadhav_gofynd_com_99880"
+      },
+      "created_on": "2020-08-05T09:45:39.797000Z",
+      "id": "5f2a7fc331c66700018cdc4b",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/vQv4ot_0DEFAULT-LOGO.jpg701cb5af-2024-4abf-ae5d-b68bc1a3cd43/vQv4ot_0DEFAULT-LOGO.jpg",
+      "modified_by": {
+        "user_id": "3",
+        "username": "918793638893_86554"
+      },
+      "modified_on": "2020-08-06T11:38:57.599000Z",
+      "name": "Home & Living",
+      "platforms": {},
+      "priority_order": 5,
+      "slug": "home-living",
+      "synonyms": [],
+      "tags": [],
+      "uid": 11
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "5634",
+        "username": "asavarijadhav_gofynd_com_99880"
+      },
+      "created_on": "2020-08-05T09:48:42.347000Z",
+      "id": "5f2a807a31c66700018cdc4e",
+      "is_active": false,
+      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/hTobjV_0DEFAULT-LOGO.jpga020159c-7fe7-4c1c-a11a-4be61a60da9f/hTobjV_0DEFAULT-LOGO.jpg",
+      "modified_by": {
+        "user_id": "5634",
+        "username": "asavarijadhav_gofynd_com_99880"
+      },
+      "modified_on": "2020-08-05T09:48:42.347000Z",
+      "name": "Baby Care & Kids Essentials",
+      "platforms": {},
+      "priority_order": 7,
+      "slug": "baby-care-kids-essentials",
+      "synonyms": [],
+      "tags": [],
+      "uid": 14
+    },
+    {
+      "_cls": "Department",
+      "_custom_json": {},
+      "created_by": {
+        "user_id": "5721",
+        "username": "919821012599_75351"
+      },
+      "created_on": "2021-01-13T10:12:33.002000Z",
+      "id": "5ffec79192813f0001eb6560",
+      "is_active": true,
+      "logo": "https://hdn-1.addsale.com/x0/department/pictures/square-logo/original/rNz8grLys-.png",
+      "modified_by": {
+        "user_id": "5721",
+        "username": "919821012599_75351"
+      },
+      "modified_on": "2021-01-13T13:50:55.415000Z",
+      "name": "Skin care products",
+      "platforms": {},
+      "priority_order": 10235,
+      "slug": "skin-care-produts",
+      "synonyms": [
+        "skin",
+        "care"
+      ],
+      "tags": [],
+      "uid": 21
+    }
+  ],
+  "page": {
+    "type": ""
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateDepartment
+Update the department by their uid.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.updateDepartment(uid=uid, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| uid | String | yes | A `uid` is a unique identifier of a department. |  
+| body | [DepartmentCreateUpdate](#DepartmentCreateUpdate) | yes | Request body |
+
+
+Update the department by their uid using this API.
+
+*Returned Response:*
+
+
+
+
+[DepartmentModel](#DepartmentModel)
+
+Success Response. See example below or refer `DepartmentCreateResponseSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "created_on": "2021-04-02T15:43:59.410000Z",
+  "is_active": true,
+  "logo": "https://hdn-1.addsale.com/x0/department/pictures/square-logo/original/xKDsQBbu4-department.png",
+  "modified_by": {
+    "user_id": "f5b6a546565146sdfg584c342",
+    "username": "31315573458_05620"
+  },
+  "modified_on": "2022-08-09T15:44:02.540740",
+  "name": "Fashion",
+  "priority_order": 1,
+  "slug": "fashion",
+  "synonyms": [
+    "fashion",
+    "mensfashion"
+  ],
+  "uid": 2
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### listTemplateBrandTypeValues
+Allows you to list all values for Templates, Brands or Type
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.listTemplateBrandTypeValues(filter=filter, templateTag=templateTag, itemType=itemType)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| filter | String | yes | A `filter` is the unique identifier of the type of value required. |   
+| templateTag | String? | no | A `template_tag` is the identifier of the type of template required. |   
+| itemType | String? | no | A `item_type` is the identifier of the type of template required. |  
+
+
+
+The filter type query parameter defines what type of data to return. The type of query returns the valid values for the same
+
+*Returned Response:*
+
+
+
+
+[ProductConfigurationDownloads](#ProductConfigurationDownloads)
+
+See example below or refer `ProductConfigurationDownloadsSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "data": [
+    {
+      "display": "csv",
+      "value": "csv"
+    },
+    {
+      "display": "excel",
+      "value": "excel"
+    }
+  ],
+  "multivalue": false
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### bulkHsnCode
+Bulk Create or Update Hsn Code.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.bulkHsnCode(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [BulkHsnUpsert](#BulkHsnUpsert) | yes | Request body |
+
+
+Bulk Create or Update Hsn Code.
+
+*Returned Response:*
+
+
+
+
+[BulkHsnResponse](#BulkHsnResponse)
+
+See example below for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getHsnCode
+Fetch Hsn Code.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getHsnCode(id=id)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | Unique id |  
+
+
+
+Fetch Hsn Code.
+
+*Returned Response:*
+
+
+
+
+[HsnCode](#HsnCode)
+
+See example below details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "data": {
+    "company_id": 1,
+    "hs2_code": "xx",
+    "hsn_code": "xxxxxxxx",
+    "id": "xxxxxxxxxxxx",
+    "modified_by": {
+      "user_id": "0",
+      "username": "narutouzumaki"
+    },
+    "slabs": [
+      {
+        "tax": 0,
+        "threshold": 999999
+      },
+      {
+        "tax": 0,
+        "threshold": 0
+      }
+    ],
+    "tax_on": "esp"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateHsnCode
+Update Hsn Code.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.updateHsnCode(id=id, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | Unique id |  
+| body | [HsnUpsert](#HsnUpsert) | yes | Request body |
+
+
+Update Hsn Code.
+
+*Returned Response:*
+
+
+
+
+[HsnCode](#HsnCode)
+
+See example below for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "data": {
+    "company_id": 1,
+    "hs2_code": "xx",
+    "hsn_code": "xxxxxxxx",
+    "id": "xxxxxxxxxxxx",
+    "modified_by": {
+      "user_id": "0",
+      "username": "narutouzumaki"
+    },
+    "slabs": [
+      {
+        "tax": 0,
+        "threshold": 999999
+      },
+      {
+        "tax": 0,
+        "threshold": 0
+      }
+    ],
+    "tax_on": "esp"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getInventories
+Get Inventory for company
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getInventories(itemId=itemId, size=size, pageNo=pageNo, pageSize=pageSize, q=q, sellable=sellable, storeIds=storeIds, sizeIdentifier=sizeIdentifier)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| itemId | String? | no | Item code of the product of which size is to be get. |   
+| size | String? | no | Size of which inventory is to get. |   
+| pageNo | Int? | no | The page number to navigate through the given set of results |   
+| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |   
+| q | String? | no | Search with help of store code. |   
+| sellable | Boolean? | no | Filter on whether product is in stock or not. |   
+| storeIds | ArrayList<Int>? | no | The Store Id of products to fetch inventory. |   
+| sizeIdentifier | String? | no | Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. |  
+
+
+
+This API allows get Inventories data for particular company.
+
+*Returned Response:*
+
+
+
+
+[GetInventoriesResponse](#GetInventoriesResponse)
+
+returns a list of all inventory grouped by size and store
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "brand": {
+        "id": 355
+      },
+      "company": {
+        "id": 46
+      },
+      "country_of_origin": "Malaysia",
+      "created_by": {
+        "user_id": "68c3800d602c0fda0dab4fea",
+        "username": "abhishekbhakurlekar_gofynd_com_63787"
+      },
+      "date_meta": {
+        "added_on_store": "2023-01-20T07:26:18.834000",
+        "created_on": "2023-01-20T07:26:18.828000",
+        "inventory_updated_on": "2023-01-20T07:26:18.828000",
+        "modified_on": "2023-01-20T07:26:18.828000"
+      },
+      "dimension": {
+        "height": 10,
+        "length": 25,
+        "unit": "cm",
+        "width": 15
+      },
+      "expiration_date": "9998-01-30T23:59:00",
+      "id": "63ca421a6fb0ce930685f46e",
+      "identifier": {
+        "alu": "410163085004",
+        "upc": "777697046"
+      },
+      "is_set": false,
+      "manufacturer": {
+        "address": "5TH FLOOR, COURT HOUSE,LOKMANYA TILAK MARGA, DHOBI TALAOMUMBAI MAHARASHTRA, , MAHARASHTRA, MUMBAI",
+        "is_default": true,
+        "name": "RELIANCE BRANDS LIMITED"
+      },
+      "modified_by": {
+        "user_id": "68c3800d602c0fda0dab4fea",
+        "username": "abhishekbhakurlekar_gofynd_com_63787"
+      },
+      "platforms": {
+        "fynd": false,
+        "uniket_wholesale": false
+      },
+      "price": {
+        "currency": "INR",
+        "effective": 8000,
+        "marked": 8000,
+        "transfer": 0
+      },
+      "quantities": {
+        "sellable": {
+          "count": 12
+        }
+      },
+      "return_config": {
+        "returnable": true,
+        "time": 30,
+        "unit": "days"
+      },
+      "seller_identifier": "410163085004",
+      "size": "S",
+      "stage": "verified",
+      "store": {
+        "name": "Khan Market",
+        "store_code": "THR1",
+        "store_type": "high_street",
+        "uid": 10444
+      },
+      "tax_identifier": {
+        "hsn_code_id": "000000000000000000000001"
+      },
+      "total_quantity": 12,
+      "trace_id": "inventory.bb475064-9893-11ed-88db-2efc0f0504bd",
+      "track_inventory": true,
+      "trader": [
+        {
+          "address": [
+            "Brooks Brothers India Private Limited registered address is 8th Floor, Maker Tower 'E' Cuffe Parade Mumbai MH 400005 IN"
+          ],
+          "name": "Imported & Marketed by Brooks Brothers India Pvt.Ltd",
+          "type": "Importer"
+        }
+      ],
+      "uid": "10444_410163085004",
+      "weight": {
+        "shipping": 999,
+        "unit": "gram"
+      }
+    },
+    {
+      "brand": {
+        "id": 355
+      },
+      "company": {
+        "id": 46
+      },
+      "country_of_origin": "Malaysia",
+      "created_by": {
+        "user_id": "68c3800d602c0fda0dab4fea",
+        "username": "abhishekbhakurlekar_gofynd_com_63787"
+      },
+      "date_meta": {
+        "added_on_store": "2023-01-16T05:25:49.491000",
+        "created_on": "2023-01-16T05:25:49.482000",
+        "inventory_updated_on": "2023-01-16T05:25:49.482000",
+        "modified_on": "2023-01-16T05:25:49.482000"
+      },
+      "dimension": {
+        "height": 10,
+        "length": 25,
+        "unit": "cm",
+        "width": 15
+      },
+      "expiration_date": "9998-01-30T23:59:00",
+      "id": "63c4dfdd11e44ffd96d600bc",
+      "identifier": {
+        "alu": "410163085005",
+        "upc": "777697038"
+      },
+      "is_set": false,
+      "manufacturer": {
+        "address": "5TH FLOOR, COURT HOUSE,LOKMANYA TILAK MARGA, DHOBI TALAOMUMBAI MAHARASHTRA, , MAHARASHTRA, MUMBAI",
+        "is_default": true,
+        "name": "RELIANCE BRANDS LIMITED"
+      },
+      "modified_by": {
+        "user_id": "68c3800d602c0fda0dab4fea",
+        "username": "abhishekbhakurlekar_gofynd_com_63787"
+      },
+      "platforms": {
+        "fynd": false,
+        "uniket_wholesale": false
+      },
+      "price": {
+        "currency": "INR",
+        "effective": 8000,
+        "marked": 8000,
+        "transfer": 0
+      },
+      "quantities": {
+        "sellable": {
+          "count": 12
+        }
+      },
+      "return_config": {
+        "returnable": true,
+        "time": 30,
+        "unit": "days"
+      },
+      "seller_identifier": "410163085005",
+      "size": "M",
+      "stage": "verified",
+      "store": {
+        "name": "Khan Market",
+        "store_code": "THR1",
+        "store_type": "high_street",
+        "uid": 10444
+      },
+      "tax_identifier": {
+        "hsn_code_id": "000000000000000000000001"
+      },
+      "total_quantity": 12,
+      "trace_id": "inventory.3c9a25e4-955e-11ed-8584-92a07e366903",
+      "track_inventory": true,
+      "trader": [
+        {
+          "address": [
+            "Brooks Brothers India Private Limited registered address is 8th Floor, Maker Tower 'E' Cuffe Parade Mumbai MH 400005 IN"
+          ],
+          "name": "Imported & Marketed by Brooks Brothers India Pvt.Ltd",
+          "type": "Importer"
+        }
+      ],
+      "uid": "10444_410163085005",
+      "weight": {
+        "shipping": 999,
+        "unit": "gram"
+      }
+    },
+    {
+      "brand": {
+        "id": 355
+      },
+      "company": {
+        "id": 46
+      },
+      "country_of_origin": "Malaysia",
+      "created_by": {
+        "user_id": "bc5fbaf5e6f4b5288e9a9a22",
+        "username": "sagardhiman_gofynd_com_43846"
+      },
+      "date_meta": {
+        "added_on_store": "2023-01-05T10:45:41.988000",
+        "created_on": "2023-01-05T10:45:41.979000",
+        "inventory_updated_on": "2023-01-19T10:37:00.504000",
+        "modified_on": "2023-01-19T10:37:00.504000"
+      },
+      "dimension": {
+        "height": 10,
+        "length": 25,
+        "unit": "cm",
+        "width": 15
+      },
+      "expiration_date": "9998-01-30T23:59:00",
+      "id": "63b6aa5558bf3ed100740c10",
+      "identifier": {
+        "alu": "410163085004",
+        "upc": "777697046"
+      },
+      "is_set": false,
+      "manufacturer": {
+        "address": "5TH FLOOR, COURT HOUSE,LOKMANYA TILAK MARGA, DHOBI TALAOMUMBAI MAHARASHTRA, , MAHARASHTRA, MUMBAI",
+        "is_default": true,
+        "name": "RELIANCE BRANDS LIMITED"
+      },
+      "modified_by": {
+        "user_id": "68c3800d602c0fda0dab4fea",
+        "username": "abhishekbhakurlekar_gofynd_com_63787"
+      },
+      "platforms": {
+        "fynd": false,
+        "uniket_wholesale": false
+      },
+      "price": {
+        "currency": "INR",
+        "effective": 7001,
+        "marked": 8000,
+        "transfer": 0
+      },
+      "quantities": {
+        "damaged": {
+          "count": 0
+        },
+        "not_available": {
+          "count": 0
+        },
+        "sellable": {
+          "count": 5001
+        }
+      },
+      "return_config": {
+        "returnable": true,
+        "time": 30,
+        "unit": "days"
+      },
+      "seller_identifier": "410163085004",
+      "size": "S",
+      "stage": "verified",
+      "store": {
+        "name": "Reliance 2",
+        "store_code": "R591",
+        "store_type": "warehouse",
+        "uid": 11336
+      },
+      "tax_identifier": {
+        "hsn_code_id": "000000000000000000000001"
+      },
+      "total_quantity": 5001,
+      "trace_id": "inventory.3485e8b4-97e5-11ed-a9d9-5eca1fff6de0",
+      "track_inventory": true,
+      "trader": [
+        {
+          "address": [
+            "Brooks Brothers India Private Limited registered address is 8th Floor, Maker Tower 'E' Cuffe Parade Mumbai MH 400005 IN"
+          ],
+          "name": "Imported & Marketed by Brooks Brothers India Pvt.Ltd",
+          "type": "Importer"
+        }
+      ],
+      "uid": "11336_410163085004",
+      "weight": {
+        "shipping": 999,
+        "unit": "gram"
+      }
+    },
+    {
+      "brand": {
+        "id": 355
+      },
+      "company": {
+        "id": 46
+      },
+      "country_of_origin": "Malaysia",
+      "created_by": {
+        "user_id": "5f200182ee4d3377e83330c2",
+        "username": "meghanakate_gofynd_com_58351"
+      },
+      "date_meta": {
+        "added_on_store": "2022-11-29T11:17:42.271000",
+        "created_on": "2022-11-29T11:17:42.263000",
+        "inventory_updated_on": "2022-11-29T11:18:35.183000",
+        "modified_on": "2022-11-29T11:18:35.183000"
+      },
+      "dimension": {
+        "height": 10,
+        "length": 25,
+        "unit": "cm",
+        "width": 15
+      },
+      "expiration_date": "9998-01-30T23:59:00",
+      "id": "6385ea569715e74d8a92ce88",
+      "identifier": {
+        "alu": "410163085001",
+        "upc": "777697079"
+      },
+      "is_set": false,
+      "manufacturer": {
+        "address": "5TH FLOOR, COURT HOUSE,LOKMANYA TILAK MARGA, DHOBI TALAOMUMBAI MAHARASHTRA, , MAHARASHTRA, MUMBAI",
+        "is_default": true,
+        "name": "RELIANCE BRANDS LIMITED"
+      },
+      "modified_by": {
+        "user_id": "5f200182ee4d3377e83330c2",
+        "username": "meghanakate_gofynd_com_58351"
+      },
+      "platforms": {
+        "fynd": false,
+        "uniket_wholesale": false
+      },
+      "price": {
+        "currency": "INR",
+        "effective": 8000,
+        "marked": 8000,
+        "transfer": 0
+      },
+      "quantities": {
+        "damaged": {
+          "count": 0
+        },
+        "not_available": {
+          "count": 0
+        },
+        "sellable": {
+          "count": 1000
+        }
+      },
+      "return_config": {
+        "returnable": true,
+        "time": 30,
+        "unit": "days"
+      },
+      "seller_identifier": "410163085001",
+      "size": "XXL",
+      "stage": "verified",
+      "store": {
+        "name": "Shopsense Retail Technologies",
+        "store_code": "SRT91",
+        "store_type": "warehouse",
+        "uid": 11701
+      },
+      "tax_identifier": {
+        "hsn_code_id": "000000000000000000000001"
+      },
+      "total_quantity": 1000,
+      "track_inventory": true,
+      "trader": [
+        {
+          "address": [
+            "Brooks Brothers India Private Limited registered address is 8th Floor, Maker Tower 'E' Cuffe Parade Mumbai MH 400005 IN"
+          ],
+          "name": "Imported & Marketed by Brooks Brothers India Pvt.Ltd",
+          "type": "Importer"
+        }
+      ],
+      "uid": "11701_410163085001",
+      "weight": {
+        "shipping": 999,
+        "unit": "gram"
+      }
+    },
+    {
+      "brand": {
+        "id": 355
+      },
+      "company": {
+        "id": 46
+      },
+      "country_of_origin": "Malaysia",
+      "created_by": {
+        "user_id": "5f200182ee4d3377e83330c2",
+        "username": "meghanakate_gofynd_com_58351"
+      },
+      "date_meta": {
+        "added_on_store": "2022-11-29T11:17:34.431000",
+        "created_on": "2022-11-29T11:17:34.424000",
+        "inventory_updated_on": "2022-11-29T11:18:27.331000",
+        "modified_on": "2022-11-29T11:18:27.331000"
+      },
+      "dimension": {
+        "height": 10,
+        "length": 25,
+        "unit": "cm",
+        "width": 15
+      },
+      "expiration_date": "9998-01-30T23:59:00",
+      "id": "6385ea4e9715e74d8a92ce86",
+      "identifier": {
+        "alu": "410163085003",
+        "upc": "777697053"
+      },
+      "is_set": false,
+      "manufacturer": {
+        "address": "5TH FLOOR, COURT HOUSE,LOKMANYA TILAK MARGA, DHOBI TALAOMUMBAI MAHARASHTRA, , MAHARASHTRA, MUMBAI",
+        "is_default": true,
+        "name": "RELIANCE BRANDS LIMITED"
+      },
+      "modified_by": {
+        "user_id": "5f200182ee4d3377e83330c2",
+        "username": "meghanakate_gofynd_com_58351"
+      },
+      "platforms": {
+        "fynd": false,
+        "uniket_wholesale": false
+      },
+      "price": {
+        "currency": "INR",
+        "effective": 8000,
+        "marked": 8000,
+        "transfer": 0
+      },
+      "quantities": {
+        "damaged": {
+          "count": 0
+        },
+        "not_available": {
+          "count": 0
+        },
+        "sellable": {
+          "count": 1000
+        }
+      },
+      "return_config": {
+        "returnable": true,
+        "time": 30,
+        "unit": "days"
+      },
+      "seller_identifier": "410163085003",
+      "size": "XL",
+      "stage": "verified",
+      "store": {
+        "name": "Shopsense Retail Technologies",
+        "store_code": "SRT91",
+        "store_type": "warehouse",
+        "uid": 11701
+      },
+      "tax_identifier": {
+        "hsn_code_id": "000000000000000000000001"
+      },
+      "total_quantity": 1000,
+      "track_inventory": true,
+      "trader": [
+        {
+          "address": [
+            "Brooks Brothers India Private Limited registered address is 8th Floor, Maker Tower 'E' Cuffe Parade Mumbai MH 400005 IN"
+          ],
+          "name": "Imported & Marketed by Brooks Brothers India Pvt.Ltd",
+          "type": "Importer"
+        }
+      ],
+      "uid": "11701_410163085003",
+      "weight": {
+        "shipping": 999,
+        "unit": "gram"
+      }
+    }
+  ],
+  "page": {
+    "current": 1,
+    "has_next": false,
+    "has_previous": false,
+    "item_total": 5,
+    "size": 1,
+    "type": "number"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getInventoryBulkUploadHistory
+Get a list of all bulk Inventory upload jobs.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getInventoryBulkUploadHistory(pageNo=pageNo, pageSize=pageSize)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pageNo | Int? | no | The page number to navigate through the given set of results |   
+| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |  
+
+
+
+This API helps to get bulk Inventory upload jobs data.
+
+*Returned Response:*
+
+
+
+
+[BulkInventoryGet](#BulkInventoryGet)
+
+List of bulk Inventory upload jobs. See `BulkInventoryGetSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "cancelled": 0,
+      "cancelled_records": [],
+      "company_id": 1,
+      "created_by": {
+        "full_name": "Nikhil Mhatre",
+        "user_id": "16",
+        "username": "nikhilmhatre_gofynd_com_97636"
+      },
+      "created_on": "2021-03-11T10:54:44.998000Z",
+      "failed": 0,
+      "failed_records": [],
+      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/50DbgKLND-NtnL_EAVb-REicn1sDv-V8ZrKdnLt-product_inventory.csv",
+      "id": "6049f6f5723043000125a9ea",
+      "is_active": true,
+      "modified_by": {
+        "user_id": "0",
+        "username": "Silverbolt"
+      },
+      "modified_on": "2021-03-11T10:54:45.296000Z",
+      "stage": "completed",
+      "succeed": 1,
+      "total": 1
+    },
+    {
+      "cancelled": 0,
+      "cancelled_records": [],
+      "company_id": 1,
+      "created_by": {
+        "user_id": "-1",
+        "username": "silverbolt"
+      },
+      "created_on": "2021-03-04T09:46:51.714000Z",
+      "failed": 0,
+      "failed_records": [],
+      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/NtnL_EAVb-REicn1sDv-V8ZrKdnLt-product_inventory.csv",
+      "id": "6040ac8b1803830001fcc1ed",
+      "is_active": true,
+      "modified_by": {
+        "user_id": "0",
+        "username": "Silverbolt"
+      },
+      "modified_on": "2021-03-04T09:46:55.349000Z",
+      "stage": "completed",
+      "succeed": 1,
+      "total": 1
+    },
+    {
+      "cancelled": 0,
+      "cancelled_records": [],
+      "company_id": 1,
+      "created_by": {
+        "user_id": "-1",
+        "username": "silverbolt"
+      },
+      "created_on": "2021-03-04T09:22:32.222000Z",
+      "failed": 0,
+      "failed_records": [],
+      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/bmBZY9iAX-REicn1sDv-V8ZrKdnLt-product_inventory.csv",
+      "id": "6040a6d8104f110001a85061",
+      "is_active": true,
+      "modified_by": {
+        "user_id": "-1",
+        "username": "silverbolt"
+      },
+      "modified_on": "2021-03-04T09:22:32.222000Z",
+      "stage": "terminated",
+      "succeed": 0,
+      "total": 1
+    },
+    {
+      "cancelled": 0,
+      "cancelled_records": [],
+      "company_id": 1,
+      "created_by": {
+        "user_id": "-1",
+        "username": "silverbolt"
+      },
+      "created_on": "2021-03-04T09:20:29.719000Z",
+      "failed": 0,
+      "failed_records": [],
+      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/m73yWRT3v-REicn1sDv-V8ZrKdnLt-product_inventory.csv",
+      "id": "6040a65d104f110001a85060",
+      "is_active": true,
+      "modified_by": {
+        "user_id": "-1",
+        "username": "silverbolt"
+      },
+      "modified_on": "2021-03-04T09:20:29.719000Z",
+      "stage": "terminated",
+      "succeed": 0,
+      "total": 1
+    },
+    {
+      "cancelled": 0,
+      "cancelled_records": [],
+      "company_id": 1,
+      "created_by": {
+        "user_id": "-1",
+        "username": "silverbolt"
+      },
+      "created_on": "2021-03-04T08:50:49.367000Z",
+      "failed": 0,
+      "failed_records": [],
+      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/W9lxe19Uu-REicn1sDv-V8ZrKdnLt-product_inventory.csv",
+      "id": "60409f699b21e30001c1e6b5",
+      "is_active": true,
+      "modified_by": {
+        "user_id": "-1",
+        "username": "silverbolt"
+      },
+      "modified_on": "2021-03-04T08:50:49.367000Z",
+      "stage": "terminated",
+      "succeed": 0,
+      "total": 1
+    },
+    {
+      "cancelled": 0,
+      "cancelled_records": [],
+      "company_id": 1,
+      "created_by": {
+        "full_name": "Sourabh Nilakhe",
+        "user_id": "5646",
+        "username": "917972410891_48194"
+      },
+      "created_on": "2021-02-10T10:57:57.236000Z",
+      "failed": 0,
+      "failed_records": [],
+      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/REicn1sDv-V8ZrKdnLt-product_inventory.csv",
+      "id": "6023bc35c85ca1000171e08a",
+      "is_active": true,
+      "modified_by": {
+        "user_id": "0",
+        "username": "Silverbolt"
+      },
+      "modified_on": "2021-02-10T10:57:57.571000Z",
+      "stage": "completed",
+      "succeed": 1,
+      "total": 1
+    },
+    {
+      "cancelled": 0,
+      "cancelled_records": [],
+      "company_id": 1,
+      "created_by": {
+        "full_name": "Sourabh Nilakhe",
+        "user_id": "5646",
+        "username": "917972410891_48194"
+      },
+      "created_on": "2021-02-10T10:57:22.535000Z",
+      "failed": 0,
+      "failed_records": [],
+      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/Oth_LaVyI-V8ZrKdnLt-product_inventory.csv",
+      "id": "6023bc12c85ca1000171e089",
+      "is_active": true,
+      "modified_by": {
+        "user_id": "0",
+        "username": "Silverbolt"
+      },
+      "modified_on": "2021-02-10T10:57:23.311000Z",
+      "stage": "completed",
+      "succeed": 1,
+      "total": 1
+    },
+    {
+      "cancelled": 0,
+      "cancelled_records": [],
+      "company_id": 1,
+      "created_by": {
+        "full_name": "Nikhil Mhatre",
+        "user_id": "16",
+        "username": "nikhilmhatre_gofynd_com_97636"
+      },
+      "created_on": "2021-01-13T13:58:06.155000Z",
+      "failed": 0,
+      "failed_records": [],
+      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/V8ZrKdnLt-product_inventory.csv",
+      "id": "5ffefc6ee2db8f000183fab8",
+      "is_active": true,
+      "modified_by": {
+        "user_id": "0",
+        "username": "Silverbolt"
+      },
+      "modified_on": "2021-01-13T13:58:06.369000Z",
+      "stage": "completed",
+      "succeed": 1,
+      "total": 1
+    },
+    {
+      "cancelled": 0,
+      "cancelled_records": [],
+      "company_id": 1,
+      "created_by": {
+        "full_name": "Nikhil Mhatre",
+        "user_id": "16",
+        "username": "nikhilmhatre_gofynd_com_97636"
+      },
+      "created_on": "2021-01-13T13:57:38.598000Z",
+      "failed": 1,
+      "failed_records": [],
+      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/t3T6X2Riy-product_inventory.csv",
+      "id": "5ffefc5252f31100012ea981",
+      "is_active": true,
+      "modified_by": {
+        "user_id": "0",
+        "username": "Silverbolt"
+      },
+      "modified_on": "2021-01-13T13:57:38.832000Z",
+      "stage": "failed",
+      "succeed": 0,
+      "total": 1
+    },
+    {
+      "cancelled": 0,
+      "cancelled_records": [],
+      "company_id": 1,
+      "created_by": {
+        "full_name": "Nikhil Mhatre",
+        "user_id": "16",
+        "username": "nikhilmhatre_gofynd_com_97636"
+      },
+      "created_on": "2021-01-13T13:57:13.639000Z",
+      "failed": 1,
+      "failed_records": [],
+      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/NSTuhgsgq-product_inventory.csv",
+      "id": "5ffefc39a0d1e20001ae118c",
+      "is_active": true,
+      "modified_by": {
+        "user_id": "0",
+        "username": "Silverbolt"
+      },
+      "modified_on": "2021-01-13T13:57:13.847000Z",
+      "stage": "failed",
+      "succeed": 0,
+      "total": 1
+    },
+    {
+      "cancelled": 0,
+      "cancelled_records": [],
+      "company_id": 1,
+      "created_by": {
+        "full_name": "Nikhil Mhatre",
+        "user_id": "16",
+        "username": "nikhilmhatre_gofynd_com_97636"
+      },
+      "created_on": "2021-01-12T06:37:06.167000Z",
+      "failed": 0,
+      "failed_records": [],
+      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/cwQV-Z6gT-product_inventory.xlsx",
+      "id": "5ffd4392b4c34d000170697b",
+      "is_active": true,
+      "modified_by": {
+        "user_id": "0",
+        "username": "Silverbolt"
+      },
+      "modified_on": "2021-01-12T06:37:06.307000Z",
+      "stage": "completed",
+      "succeed": 1,
+      "total": 1
+    },
+    {
+      "cancelled": 0,
+      "cancelled_records": [],
+      "company_id": 1,
+      "created_by": {
+        "full_name": "Nikhil Mhatre",
+        "user_id": "16",
+        "username": "nikhilmhatre_gofynd_com_97636"
+      },
+      "created_on": "2021-01-12T06:36:24.292000Z",
+      "failed": 0,
+      "failed_records": [],
+      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/gccehef2f-product_inventory.xlsx",
+      "id": "5ffd4368b4c34d0001706960",
+      "is_active": true,
+      "modified_by": {
+        "user_id": "0",
+        "username": "Silverbolt"
+      },
+      "modified_on": "2021-01-12T06:36:24.535000Z",
+      "stage": "completed",
+      "succeed": 1,
+      "total": 1
+    }
+  ],
+  "page": {
+    "current": 1,
+    "has_next": true,
+    "has_previous": false,
+    "item_total": 39,
+    "size": 4,
+    "type": "number"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createBulkInventoryJob
+Create a Bulk Inventory upload Job.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.createBulkInventoryJob(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [BulkJob](#BulkJob) | yes | Request body |
+
+
+This API helps to create a bulk Inventory upload job.
+
+*Returned Response:*
+
+
+
+
+[BulkResponse](#BulkResponse)
+
+Returns a success response
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "batch_id": "507f1f77bcf86cd799439011",
+  "created_on": "2021-04-02T15:43:59.410000Z"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deleteBulkInventoryJob
+Delete Bulk Inventory job.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.deleteBulkInventoryJob(batchId=batchId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| batchId | String | yes | Batch Id of the bulk delete job. |  
+
+
+
+This API allows to delete bulk Inventory job associated with company.
+
+*Returned Response:*
+
+
+
+
+[SuccessResponse](#SuccessResponse)
+
+Returns a success response
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createBulkInventory
+Create products in bulk associated with given batch Id.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.createBulkInventory(batchId=batchId, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| batchId | String | yes | Batch Id of the bulk create job. |  
+| body | [InventoryBulkRequest](#InventoryBulkRequest) | yes | Request body |
+
+
+This API helps to create products in bulk push to kafka for approval/creation.
+
+*Returned Response:*
+
+
+
+
+[SuccessResponse](#SuccessResponse)
+
+Returns a success response
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getInventoryExport
+Get Inventory export history.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getInventoryExport()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+This API helps to get Inventory export history.
+
+*Returned Response:*
+
+
+
+
+[InventoryExportJob](#InventoryExportJob)
+
+Returns a list of inventory export jobs
 
 
 
@@ -5013,15 +9616,71 @@ Get application level configured catalog details. See example below or refer `Ge
 ---
 
 
-### createConfigurationByType
-Create configuration by type.
+### createInventoryExportJob
+Create a Inventory export Job.
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.createConfigurationByType(type=type, body=body)
+    result = await platformClient.catalog.createInventoryExportJob(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [InventoryExportRequest](#InventoryExportRequest) | yes | Request body |
+
+
+This API helps to create a Inventory export job.
+
+*Returned Response:*
+
+
+
+
+[InventoryExportResponse](#InventoryExportResponse)
+
+Returns a success response
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### exportInventoryConfig
+Get List of different filters for inventory export
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.exportInventoryConfig(filterType=filterType)
     # use result
 except Exception as e:
     print(e)
@@ -5033,20 +9692,89 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| type | String | yes | type can be brands, categories etc. |  
-| body | [AppConfiguration](#AppConfiguration) | yes | Request body |
+| filterType | String? | no | filter type from any one of ['brand', 'store', 'type'] |  
 
 
-Add configuration for categories & brands.
+
+This API allows get List of different filters like brand, store, and type for inventory export.
 
 *Returned Response:*
 
 
 
 
-[GetAppCatalogConfiguration](#GetAppCatalogConfiguration)
+[InventoryConfig](#InventoryConfig)
 
-success flag will tell whether the operation was successful.
+returns filters configuration for inventory export
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "data": [
+    {
+      "display": "csv",
+      "value": "csv"
+    },
+    {
+      "display": "excel",
+      "value": "excel"
+    }
+  ],
+  "multivalues": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### downloadInventoryTemplateView
+Download Product Template View
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.downloadInventoryTemplateView(itemType=itemType)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| itemType | String | yes | An `item_type` defines the type of item. |  
+
+
+
+Allows you to download product template data
+
+*Returned Response:*
+
+
+
+
+[String](#String)
+
+CSV File of product template data.
 
 
 
@@ -5056,6 +9784,4048 @@ success flag will tell whether the operation was successful.
 
 ```json
 
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### validateProductTemplateSchema
+Validate Product Template Schema
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.validateProductTemplateSchema(itemType=itemType)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| itemType | String | yes | An `item_type` defines the type of item. The default value is standard. |  
+
+
+
+Allows you to list all product templates validation values for all the fields present in the database
+
+*Returned Response:*
+
+
+
+
+[InventoryValidationResponse](#InventoryValidationResponse)
+
+List of fields and validation values fro each. See example below or refer `InventoryValidationResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "data": {
+    "definitions": {
+      "InventoryBaseSchema": {
+        "properties": {
+          "currency": {
+            "enum": [
+              "INR",
+              "QAR"
+            ],
+            "title": "Currency",
+            "type": "string"
+          },
+          "price": {
+            "exclusiveMinimum": 1,
+            "title": "Actual Price",
+            "type": "number"
+          },
+          "price_effective": {
+            "exclusiveMinimum": 1,
+            "title": "Selling Price",
+            "type": "number"
+          },
+          "quantity": {
+            "minimum": 0,
+            "title": "Quantity",
+            "type": "integer"
+          },
+          "seller_identifier": {
+            "pattern": "^[A-Za-z0-9]*$",
+            "title": "Gtin Value",
+            "type": "string"
+          },
+          "size": {
+            "title": "Size",
+            "type": "string"
+          },
+          "store_code": {
+            "enum": [
+              "RUOSH43",
+              "S106",
+              "S108",
+              "TIO9",
+              "talha"
+            ],
+            "title": "Store Code",
+            "type": "string"
+          }
+        },
+        "required": [
+          "price",
+          "price_effective",
+          "seller_identifier",
+          "quantity",
+          "store_code",
+          "currency",
+          "size"
+        ],
+        "title": "InventoryBaseSchema",
+        "type": "object"
+      },
+      "ItemQuery": {
+        "properties": {
+          "brand_uid": {
+            "title": "Brand Uid",
+            "type": "integer"
+          },
+          "item_code": {
+            "title": "Item Code",
+            "type": "integer"
+          },
+          "uid": {
+            "title": "Uid",
+            "type": "integer"
+          }
+        },
+        "title": "ItemQuery",
+        "type": "object"
+      }
+    },
+    "properties": {
+      "sizes": {
+        "title": "Sizes",
+        "type": "array"
+      }
+    },
+    "required": [
+      "item",
+      "sizes"
+    ],
+    "title": "InventoryValidationResponse",
+    "type": "object"
+  },
+  "message": "Success"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getOptimalLocations
+Location Reassignment
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getOptimalLocations(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [AssignStore](#AssignStore) | yes | Request body |
+
+
+
+
+*Returned Response:*
+
+
+
+
+[StoreAssignResponse](#StoreAssignResponse)
+
+Returns a success response
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "_id": "61161830f1061e7c7f81d8ed",
+  "article_assignment": {
+    "level": "multi-company",
+    "strategy": "app-config"
+  },
+  "company_id": 783,
+  "index": 0,
+  "item_id": 75252658,
+  "price_effective": 995,
+  "price_marked": 995,
+  "quantity": 1,
+  "s_city": "NOIDA",
+  "size": "OS",
+  "status": true,
+  "store_id": 11550,
+  "store_pincode": 201303,
+  "strategy_wise_listing": [],
+  "uid": "11550_000000410234883001"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getMarketplaceOptinDetail
+Get opt-in infomation.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getMarketplaceOptinDetail()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Use this API to fetch opt-in information for all the platforms. If successful, returns a logs in the response body as specified in `GetOptInPlatformSchema`
+
+*Returned Response:*
+
+
+
+
+[GetOptInPlatform](#GetOptInPlatform)
+
+See example below or refer `GetOptInPlatformSchema` for details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getCompanyBrandDetail
+Get the Company Brand details of Optin.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getCompanyBrandDetail(isActive=isActive, q=q, pageNo=pageNo, pageSize=pageSize, marketplace=marketplace)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| isActive | Boolean? | no | The is_active status for the optin id. |   
+| q | String? | no | The search value to filter the list. |   
+| pageNo | Int? | no | The number of page for the company id. |   
+| pageSize | Int? | no | Number of records that can be seen on the page for the company id. |   
+| marketplace | String? | no | The marketplace platform associated with the company id. |  
+
+
+
+Get the details of the Brands associated with the given company_id passed.
+
+*Returned Response:*
+
+
+
+
+[OptinCompanyBrandDetailsView](#OptinCompanyBrandDetailsView)
+
+See example below or refer `OptinCompanyBrandDetailsView` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getCompanyDetail
+Get the Company details.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getCompanyDetail()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Get the details of the company associated with the given company_id passed.
+
+*Returned Response:*
+
+
+
+
+[OptinCompanyDetail](#OptinCompanyDetail)
+
+See example below or refer `OptinCompanyDetailSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getCompanyMetrics
+Get the Company metrics
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getCompanyMetrics()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Get the Company metrics associated with the company ID passed.
+
+*Returned Response:*
+
+
+
+
+[OptinCompanyMetrics](#OptinCompanyMetrics)
+
+See example below or refer `OptinCompanyMetrics` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getStoreDetail
+Get the Store details.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getStoreDetail(q=q, pageNo=pageNo, pageSize=pageSize)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| q | String? | no | The search related the store for the company id. |   
+| pageNo | Int? | no | The number of page for the company id. |   
+| pageSize | Int? | no | Number of records that can be seen on the page for the company id. |  
+
+
+
+Get the details of the store associated with the company ID passed.
+
+*Returned Response:*
+
+
+
+
+[OptinStoreDetails](#OptinStoreDetails)
+
+See example below or refer `OptinStoreDetailsSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createMarketplaceOptin
+Create/Update opt-in infomation.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.createMarketplaceOptin(marketplace=marketplace, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| marketplace | String | yes | The marketplace for which the detail needs to be retrieved. |  
+| body | [OptInPostRequest](#OptInPostRequest) | yes | Request body |
+
+
+Use this API to create/update opt-in information for given platform. If successful, returns data in the response body as specified in `OptInPostResponseSchema`
+
+*Returned Response:*
+
+
+
+
+[UpdatedResponse](#UpdatedResponse)
+
+See example below or refer `UpdatedResponse` for details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getProductAttributes
+Get list of all the attributes by their l3_categories
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getProductAttributes(category=category, filter=filter)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| category | String | yes | It is the name of the l3 cateogry |   
+| filter | Boolean? | no | If true, returns filtered values, else returns all the attributes |  
+
+
+
+This API allows to list all the attributes by their l3_categories.
+
+*Returned Response:*
+
+
+
+
+[ProductAttributesResponse](#ProductAttributesResponse)
+
+Size guide object. See example below or refer `ProductAttributesResponseSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "created_by": {
+        "user_id": "8ec76d9df98f4246a9d6e5a6",
+        "username": "anveshreddy_fynd_external_com_85084"
+      },
+      "created_on": "2022-05-25T16:15:01.276000Z",
+      "departments": [
+        "men-s-fashion"
+      ],
+      "description": "to test the attribute that represents area",
+      "details": {
+        "display_type": "text"
+      },
+      "filters": {
+        "indexing": false
+      },
+      "id": "628e5605c71589dba709c365",
+      "modified_by": {
+        "user_id": "8ec76d9df98f4246a9d6e5a6",
+        "username": "anveshreddy_fynd_external_com_85084"
+      },
+      "modified_on": "2022-05-25T16:15:01.276000Z",
+      "name": "test number area",
+      "schema": {
+        "allowed_values": [],
+        "format": "",
+        "multi": true,
+        "range": {},
+        "type": "int"
+      },
+      "slug": "test-number-area",
+      "unit": "ft**2",
+      "variant": false
+    },
+    {
+      "created_by": {
+        "user_id": "8ec76d9df98f4246a9d6e5a6",
+        "username": "anveshreddy_fynd_external_com_85084"
+      },
+      "created_on": "2022-05-05T09:40:00.453000Z",
+      "departments": [
+        "men-s-fashion",
+        "anvesh-department"
+      ],
+      "description": "tells the power of the motor",
+      "details": {
+        "display_type": "text"
+      },
+      "enabled_for_end_consumer": true,
+      "filters": {
+        "indexing": true,
+        "priority": 26
+      },
+      "id": "62739b7043385c1f314d4868",
+      "logo": "https://hdn-1.jiomarketx0.de/x0/products/pictures/attribute/logo/original/UYTUHgLGj-Color.png",
+      "modified_by": {
+        "user_id": "8ec76d9df98f4246a9d6e5a6",
+        "username": "anveshreddy_fynd_external_com_85084"
+      },
+      "modified_on": "2022-05-05T09:40:00.453000Z",
+      "name": "Motor Power",
+      "schema": {
+        "allowed_values": [],
+        "format": "",
+        "mandatory": true,
+        "multi": false,
+        "range": {
+          "max": 10,
+          "min": 1
+        },
+        "type": "int"
+      },
+      "slug": "motor-power",
+      "unit": "hp",
+      "variant": true
+    },
+    {
+      "created_by": {
+        "user_id": "8ec76d9df98f4246a9d6e5a6",
+        "username": "anveshreddy_fynd_external_com_85084"
+      },
+      "created_on": "2022-05-05T08:56:59.483000Z",
+      "departments": [
+        "men-s-fashion",
+        "electronics-test",
+        "anvesh-department",
+        "fashion",
+        "test1"
+      ],
+      "description": "describes the size of the item",
+      "details": {
+        "display_type": "text"
+      },
+      "enabled_for_end_consumer": true,
+      "filters": {
+        "indexing": true,
+        "priority": 25
+      },
+      "id": "6273915b43385c1f314d4867",
+      "logo": "https://hdn-1.jiomarketx0.de/x0/products/pictures/attribute/logo/original/UYTUHgLGj-Color.png",
+      "modified_by": {
+        "user_id": "8ec76d9df98f4246a9d6e5a6",
+        "username": "anveshreddy_fynd_external_com_85084"
+      },
+      "modified_on": "2022-05-05T13:25:33.353000Z",
+      "name": "SIZE NEW",
+      "schema": {
+        "allowed_values": [
+          "XS",
+          "S",
+          "M",
+          "L",
+          "XXL",
+          "XXXL"
+        ],
+        "format": "upper case",
+        "mandatory": true,
+        "multi": false,
+        "range": {},
+        "type": "str"
+      },
+      "slug": "size-new",
+      "variant": false
+    },
+    {
+      "created_by": {
+        "user_id": "5d9aa3ca5acdcb33fdcc8472",
+        "username": "piyushsinha_fynd_external_com_34090"
+      },
+      "created_on": "2022-04-13T13:35:53.611000Z",
+      "departments": [
+        "men-s-fashion"
+      ],
+      "details": {
+        "display_type": "text"
+      },
+      "filters": {
+        "indexing": false
+      },
+      "id": "6256d1b9635e136dc2cb9a02",
+      "modified_by": {
+        "user_id": "5d9aa3ca5acdcb33fdcc8472",
+        "username": "piyushsinha_fynd_external_com_34090"
+      },
+      "modified_on": "2022-04-13T13:35:53.611000Z",
+      "name": "White",
+      "schema": {
+        "allowed_values": [],
+        "format": "title case",
+        "multi": false,
+        "range": {},
+        "type": "str"
+      },
+      "slug": "white",
+      "variant": false
+    },
+    {
+      "created_by": {
+        "user_id": "f6fccadda27e6b365b87c027",
+        "username": "jagadeshsahadevan_gofynd_com_66706"
+      },
+      "created_on": "2022-03-24T07:16:59.998000Z",
+      "departments": [
+        "men-s-fashion"
+      ],
+      "description": "Hello World",
+      "details": {
+        "display_type": "text"
+      },
+      "filters": {
+        "indexing": false
+      },
+      "id": "623c1aecb9e8edcfeb8d076a",
+      "modified_by": {
+        "user_id": "f6fccadda27e6b365b87c027",
+        "username": "jagadeshsahadevan_gofynd_com_66706"
+      },
+      "modified_on": "2022-03-24T07:16:59.998000Z",
+      "name": "Test Attributes",
+      "schema": {
+        "allowed_values": [
+          "A",
+          "B"
+        ],
+        "format": "",
+        "multi": true,
+        "range": {},
+        "type": "str"
+      },
+      "slug": "test-attributes",
+      "variant": false
+    },
+    {
+      "created_by": {
+        "user_id": "59ad6a452775bfd63674f0a5",
+        "username": "rockypatro_gofynd_com_32787"
+      },
+      "created_on": "2022-03-17T14:54:41.251000Z",
+      "departments": [
+        "men-s-fashion"
+      ],
+      "description": "Any specific care instruction note or Safety instructions that needs to be followed",
+      "details": {
+        "display_type": "text"
+      },
+      "enabled_for_end_consumer": true,
+      "filters": {
+        "indexing": true,
+        "priority": 9
+      },
+      "id": "62334bb1d6b144588682e1c0",
+      "modified_by": {
+        "user_id": "59ad6a452775bfd63674f0a5",
+        "username": "rockypatro_gofynd_com_32787"
+      },
+      "modified_on": "2022-03-17T14:54:41.251000Z",
+      "name": "Care Instructions",
+      "schema": {
+        "allowed_values": [],
+        "format": "",
+        "multi": false,
+        "range": {},
+        "type": "str"
+      },
+      "slug": "care-instructions",
+      "variant": false
+    },
+    {
+      "created_by": {
+        "user_id": "59ad6a452775bfd63674f0a5",
+        "username": "rockypatro_gofynd_com_32787"
+      },
+      "created_on": "2022-03-17T14:53:45.700000Z",
+      "departments": [
+        "men-s-fashion"
+      ],
+      "description": "Specify the length of the sleeve. Select the value from the dropdown",
+      "details": {
+        "display_type": "text"
+      },
+      "enabled_for_end_consumer": true,
+      "filters": {
+        "indexing": true,
+        "priority": 8
+      },
+      "id": "62334b79d6b144588682e1bf",
+      "modified_by": {
+        "user_id": "59ad6a452775bfd63674f0a5",
+        "username": "rockypatro_gofynd_com_32787"
+      },
+      "modified_on": "2022-03-17T14:53:45.700000Z",
+      "name": "Sleeve Length",
+      "schema": {
+        "allowed_values": [
+          "Sleeveless",
+          "Short",
+          "Long"
+        ],
+        "format": "",
+        "multi": false,
+        "range": {},
+        "type": "str"
+      },
+      "slug": "sleeve-length",
+      "variant": false
+    },
+    {
+      "created_by": {
+        "user_id": "59ad6a452775bfd63674f0a5",
+        "username": "rockypatro_gofynd_com_32787"
+      },
+      "created_on": "2022-03-17T14:52:12.367000Z",
+      "departments": [
+        "men-s-fashion",
+        "women-s-fashion"
+      ],
+      "description": "A repeated form or design on the product, Select the values from the dropdown.",
+      "details": {
+        "display_type": "text"
+      },
+      "enabled_for_end_consumer": true,
+      "filters": {
+        "indexing": true,
+        "priority": 7
+      },
+      "id": "62334b1cd6b144588682e1be",
+      "modified_by": {
+        "user_id": "f6fccadda27e6b365b87c027",
+        "username": "jagadeshsahadevan_gofynd_com_66706"
+      },
+      "modified_on": "2022-03-24T07:23:32.752000Z",
+      "name": "Pattern",
+      "schema": {
+        "allowed_values": [
+          "Solid",
+          "Printed",
+          "Ripped",
+          "Checked"
+        ],
+        "format": "",
+        "multi": false,
+        "range": {},
+        "type": "str"
+      },
+      "slug": "pattern",
+      "variant": false
+    },
+    {
+      "created_by": {
+        "user_id": "59ad6a452775bfd63674f0a5",
+        "username": "rockypatro_gofynd_com_32787"
+      },
+      "created_on": "2022-03-17T14:50:30.717000Z",
+      "departments": [
+        "men-s-fashion",
+        "beauty-and-personal-care",
+        "electronics"
+      ],
+      "description": "Specify the Material name or Material composition of the product",
+      "details": {
+        "display_type": "text"
+      },
+      "enabled_for_end_consumer": true,
+      "filters": {
+        "indexing": true,
+        "priority": 6
+      },
+      "id": "62334ab6d6b144588682e1bd",
+      "modified_by": {
+        "user_id": "59ad6a452775bfd63674f0a5",
+        "username": "rockypatro_gofynd_com_32787"
+      },
+      "modified_on": "2022-03-17T14:50:30.717000Z",
+      "name": "Material",
+      "schema": {
+        "allowed_values": [],
+        "format": "",
+        "multi": false,
+        "range": {},
+        "type": "str"
+      },
+      "slug": "material",
+      "variant": false
+    },
+    {
+      "created_by": {
+        "user_id": "59ad6a452775bfd63674f0a5",
+        "username": "rockypatro_gofynd_com_32787"
+      },
+      "created_on": "2022-03-17T14:49:43.160000Z",
+      "departments": [
+        "men-s-fashion",
+        "beauty-and-personal-care",
+        "electronics"
+      ],
+      "description": "Specify the colour of the product, if you have any customized colour name Specify in this column.",
+      "details": {
+        "display_type": "text"
+      },
+      "enabled_for_end_consumer": true,
+      "filters": {
+        "indexing": true,
+        "priority": 5
+      },
+      "id": "62334a87d6b144588682e1bc",
+      "modified_by": {
+        "user_id": "59ad6a452775bfd63674f0a5",
+        "username": "rockypatro_gofynd_com_32787"
+      },
+      "modified_on": "2022-03-17T14:49:43.160000Z",
+      "name": "Colour",
+      "schema": {
+        "allowed_values": [],
+        "format": "",
+        "multi": false,
+        "range": {},
+        "type": "str"
+      },
+      "slug": "colour",
+      "variant": false
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getGenderAttribute
+Get gender attribute details
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getGenderAttribute(attributeSlug=attributeSlug)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| attributeSlug | String | yes | slug of the attribute for which you want to view the genders |  
+
+
+
+This API allows to view the gender attribute details.
+
+*Returned Response:*
+
+
+
+
+[GenderDetail](#GenderDetail)
+
+Size guide object. See example below or refer `GenderDetailSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "departments": [
+    "men-s-fashion",
+    "kids",
+    "women-s-fashion",
+    "beauty-personal-care"
+  ],
+  "description": "Clothing department needs gener attribute",
+  "details": {
+    "display_type": "text"
+  },
+  "enabled_for_end_consumer": true,
+  "filters": {
+    "indexing": true,
+    "priority": 2
+  },
+  "id": "5ed11eb0be8d5e00016f0335",
+  "is_nested": true,
+  "logo": "https://hdn-1.addsale.com/x0/products/pictures/attribute/logo/original/Rhv89tqRo-brand-website-logo.png",
+  "meta": {
+    "enriched": false,
+    "mandatory_details": {
+      "l3_keys": []
+    }
+  },
+  "name": "Gender",
+  "schema": {
+    "enum": [
+      "Men",
+      "Women",
+      "Boy",
+      "Girl",
+      "more",
+      "men"
+    ],
+    "format": "",
+    "mandatory": false,
+    "multi": true,
+    "type": "str"
+  },
+  "slug": "gender"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getProductBundle
+List all Product Bundles
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getProductBundle(q=q, slug=slug)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| q | String? | no | A search string that is searched with product bundle name. |   
+| slug | ArrayList<String>? | no | slugs of bundles to be retrieved. |  
+
+
+
+Get all product bundles for a particular company
+
+*Returned Response:*
+
+
+
+
+[GetProductBundleListingResponse](#GetProductBundleListingResponse)
+
+List of bundle configured for a company. See example below or refer `GetProductBundleListingResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "choice": "multi",
+      "company_id": 1,
+      "created_by": {
+        "uid": "123",
+        "username": "917827311650_22960"
+      },
+      "created_on": "2021-02-19 16:40:26.310007",
+      "id": "602f9ca2a596ce312f5956f9",
+      "is_active": true,
+      "logo": "http://g.com/poo.png/",
+      "meta": {},
+      "modified_by": {
+        "uid": "123",
+        "username": "917827311650_22960"
+      },
+      "modified_on": "2021-02-19 16:40:26.310027",
+      "name": "Bag",
+      "page_visibility": [
+        "pdp"
+      ],
+      "products": [
+        {
+          "allow_remove": true,
+          "auto_add_to_cart": false,
+          "auto_select": false,
+          "max_quantity": 1,
+          "min_quantity": 1,
+          "product_uid": 7500001
+        }
+      ],
+      "same_store_assignment": true,
+      "slug": "bag"
+    },
+    {
+      "choice": "multi",
+      "company_id": 1,
+      "created_by": {
+        "uid": "123",
+        "username": "917827311650_22960"
+      },
+      "created_on": "2021-02-19 16:21:35.091512",
+      "id": "602f9837a596ce2edf9868e2",
+      "is_active": true,
+      "logo": "http://g.com/poo.png/",
+      "meta": {},
+      "modified_by": {
+        "uid": "123",
+        "username": "917827311650_22960"
+      },
+      "modified_on": "2021-02-19 16:21:35.091540",
+      "name": "Bag",
+      "page_visibility": [
+        "pdp"
+      ],
+      "products": [
+        {
+          "allow_remove": true,
+          "auto_add_to_cart": false,
+          "auto_select": false,
+          "max_quantity": 1,
+          "min_quantity": 1,
+          "product_uid": 7500001
+        }
+      ],
+      "same_store_assignment": true,
+      "slug": "bag"
+    },
+    {
+      "choice": "multi",
+      "company_id": 1,
+      "created_by": {
+        "uid": "123",
+        "username": "917827311650_22960"
+      },
+      "created_on": "2021-02-19 16:20:24.605207",
+      "id": "602f97f0a596ce2ead47cd0b",
+      "is_active": true,
+      "logo": "http://g.com/poo.png/",
+      "meta": {},
+      "modified_by": {
+        "uid": "123",
+        "username": "917827311650_22960"
+      },
+      "modified_on": "2021-02-19 16:20:24.605230",
+      "name": "Bag",
+      "page_visibility": [
+        "pdp"
+      ],
+      "products": [
+        {
+          "allow_remove": true,
+          "auto_add_to_cart": false,
+          "auto_select": false,
+          "max_quantity": 1,
+          "min_quantity": 1,
+          "product_uid": 7500001
+        }
+      ],
+      "same_store_assignment": true,
+      "slug": "bag"
+    },
+    {
+      "choice": "multi",
+      "company_id": 1,
+      "created_by": {
+        "uid": "123",
+        "username": "917827311650_22960"
+      },
+      "created_on": "2021-02-19 16:16:46.196449",
+      "id": "602f9716a596ce2e415196df",
+      "is_active": true,
+      "logo": "http://g.com/poo.png/",
+      "meta": {},
+      "modified_by": {
+        "uid": "123",
+        "username": "917827311650_22960"
+      },
+      "modified_on": "2021-02-19 16:16:46.196467",
+      "name": "Bag",
+      "page_visibility": [
+        "pdp"
+      ],
+      "products": [
+        {
+          "allow_remove": true,
+          "auto_add_to_cart": false,
+          "auto_select": false,
+          "max_quantity": 1,
+          "min_quantity": 1,
+          "product_uid": 7500001
+        }
+      ],
+      "same_store_assignment": true,
+      "slug": "bag"
+    }
+  ],
+  "page": {
+    "current": 1,
+    "has_next": false,
+    "has_previous": false,
+    "total": 1,
+    "total_item_count": 4,
+    "type": "number"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createProductBundle
+Create Product Bundle
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.createProductBundle(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [ProductBundleRequest](#ProductBundleRequest) | yes | Request body |
+
+
+Create Product Bundle. See `ProductBundleRequest` for the request body parameter need to create a product bundle. On successful request, returns in `ProductBundleRequest` with id
+
+*Returned Response:*
+
+
+
+
+[GetProductBundleCreateResponse](#GetProductBundleCreateResponse)
+
+Get bundle with id that is added. See example below or refer `GetProductBundleCreateResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "choice": "multi",
+  "company_id": 1,
+  "created_by": {
+    "uid": "123",
+    "username": "917827311650_22960"
+  },
+  "created_on": "2021-02-19 16:40:26.310007",
+  "id": "602f9ca2a596ce312f5956f9",
+  "is_active": true,
+  "logo": "http://g.com/poo.png/",
+  "meta": {},
+  "modified_by": {
+    "uid": "123",
+    "username": "917827311650_22960"
+  },
+  "modified_on": "2021-02-19 16:40:26.310027",
+  "name": "Bag",
+  "page_visibility": [
+    "pdp"
+  ],
+  "products": [
+    {
+      "allow_remove": true,
+      "auto_add_to_cart": false,
+      "auto_select": false,
+      "max_quantity": 1,
+      "min_quantity": 1,
+      "product_uid": 7500001
+    }
+  ],
+  "same_store_assignment": true,
+  "slug": "bag"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getProductBundleDetail
+Get a particular Product Bundle details
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getProductBundleDetail(id=id)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. |  
+
+
+
+Get a particular Bundle details by its `id`. If successful, returns a Product bundle resource in the response body specified in `GetProductBundleResponse`
+
+*Returned Response:*
+
+
+
+
+[GetProductBundleResponse](#GetProductBundleResponse)
+
+The Collection object. See example below or refer `GetProductBundleResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "choice": "multi",
+  "company_id": 1,
+  "logo": "http://g.com/poo.png/",
+  "meta": {},
+  "name": "Bag",
+  "page_visibility": [
+    "pdp"
+  ],
+  "products": [
+    {
+      "allow_remove": true,
+      "auto_add_to_cart": false,
+      "auto_select": false,
+      "max_quantity": 1,
+      "min_quantity": 1,
+      "product_details": {
+        "attributes": {
+          "brand_name": "brand 2"
+        },
+        "country_of_origin": "India",
+        "images": [
+          "https://hdn-1.addsale.com/x0/media/pictures/tagged_items/original/random_code_4/FE6DUR_000000.png"
+        ],
+        "item_code": "760B3BFF-4905-44B8-A50E-082829E7107F",
+        "name": "Some Phone",
+        "slug": "slug-1",
+        "uid": 7500001
+      },
+      "product_uid": 7500001
+    }
+  ],
+  "same_store_assignment": true,
+  "slug": "bag"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateProductBundle
+Update a Product Bundle
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.updateProductBundle(id=id, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. |  
+| body | [ProductBundleUpdateRequest](#ProductBundleUpdateRequest) | yes | Request body |
+
+
+Update a Product Bundle by its id. On successful request, returns the updated product bundle
+
+*Returned Response:*
+
+
+
+
+[GetProductBundleCreateResponse](#GetProductBundleCreateResponse)
+
+The Collection object. See example below or refer `GetProductBundleCreateResponse` for details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "choice": "multi",
+  "company_id": 1,
+  "created_by": {
+    "uid": "123",
+    "username": "917827311650_22960"
+  },
+  "created_on": "2021-02-19 16:40:26.310007",
+  "id": "602f9ca2a596ce312f5956f9",
+  "is_active": true,
+  "logo": "http://g.com/poo.png/",
+  "meta": {},
+  "modified_by": {
+    "uid": "123",
+    "username": "917827311650_22960"
+  },
+  "modified_on": "2021-02-19 16:40:26.310027",
+  "name": "Bag",
+  "page_visibility": [
+    "pdp"
+  ],
+  "products": [
+    {
+      "allow_remove": true,
+      "auto_add_to_cart": false,
+      "auto_select": false,
+      "max_quantity": 1,
+      "min_quantity": 1,
+      "product_uid": 7500001
+    }
+  ],
+  "same_store_assignment": true,
+  "slug": "bag"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getProductAssetsInBulk
+Get a list of all bulk asset jobs.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getProductAssetsInBulk(pageNo=pageNo, pageSize=pageSize)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pageNo | Int? | no | The page number to navigate through the given set of results |   
+| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |  
+
+
+
+This API helps to get bulk asset jobs data associated to a particular company.
+
+*Returned Response:*
+
+
+
+
+[BulkAssetResponse](#BulkAssetResponse)
+
+List of bulk asset jobs List. See `BulkUtil.modify_batch_response` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "cancelled": 0,
+      "cancelled_records": [],
+      "company_id": 61,
+      "created_by": {
+        "full_name": "nikhil mhatre",
+        "user_id": "23175373",
+        "username": "nikhilmhatre_gofynd_com_28085_23175373"
+      },
+      "created_on": "2021-02-25T16:45:22.425000Z",
+      "failed": 0,
+      "failed_records": [],
+      "file_path": "https://hdn-1.fynd.com/company/61/self/documents/product-import/free/original/ZUSmmXHmZ-U8mTYx3KR-Nike-hoddie.zip",
+      "id": "6037d422aa879600015c6d1d",
+      "is_active": true,
+      "modified_by": {
+        "user_id": "23175373",
+        "username": "nikhilmhatre_gofynd_com_28085_23175373"
+      },
+      "modified_on": "2021-02-25T16:47:24.551000Z",
+      "retry": 1,
+      "stage": "completed",
+      "succeed": 1,
+      "total": 1,
+      "tracking_url": "https://api.fynd.com/common/assets/v1/asset/status/extract-zips/3296"
+    }
+  ],
+  "page": {
+    "current": 1,
+    "has_next": false,
+    "has_previous": false,
+    "item_total": 1,
+    "size": 3,
+    "type": "number"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createProductAssetsInBulk
+Create a Bulk asset upload Job.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.createProductAssetsInBulk(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [ProductBulkAssets](#ProductBulkAssets) | yes | Request body |
+
+
+This API helps to create a bulk asset upload job.
+
+*Returned Response:*
+
+
+
+
+[SuccessResponse](#SuccessResponse)
+
+Returns a success response
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getProductBulkUploadHistory
+Get a list of all bulk product upload jobs.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getProductBulkUploadHistory(search=search, pageNo=pageNo, pageSize=pageSize)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| search | String? | no | Search string to filter the results by batch id |   
+| pageNo | Int? | no | The page number to navigate through the given set of results |   
+| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |  
+
+
+
+This API helps to get bulk product upload jobs data.
+
+*Returned Response:*
+
+
+
+
+[ProductBulkRequestList](#ProductBulkRequestList)
+
+List of bulk product upload jobs. See `BulkRequestGetSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "cancelled": 0,
+      "cancelled_records": [],
+      "company_id": 61,
+      "created_by": {
+        "full_name": "Anuja Yadav",
+        "user_id": "23218433",
+        "username": "yadavanuja039_gmail_com_82948"
+      },
+      "created_on": "2021-03-12T08:11:06.848000Z",
+      "failed": 0,
+      "failed_records": [],
+      "file_path": "https://hdn-1.fynd.com/company/61/self/documents/product-import/free/original/mkX5ApRmw-sample_bulk_products_footwear.xlsx",
+      "id": "604b221a73bfa20001cb00e8",
+      "is_active": true,
+      "modified_by": {
+        "user_id": "0",
+        "username": "Silverbolt"
+      },
+      "modified_on": "2021-03-12T08:11:08.646000Z",
+      "stage": "completed",
+      "succeed": 1,
+      "template": {
+        "banner": "https://hdn-1.fynd.com/seller/pictures/landscape-banner/original/nFPtXR_Beauty_&_Personal_Care_L.jpgf30455a5-d265-4382-b513-65afb9240320/nFPtXR_Beauty_and_Personal_Care_L.jpg",
+        "departments": [
+          "men",
+          "women",
+          "kids",
+          "fashion"
+        ],
+        "description": "Footwear is a garment worn on the feet to protect against environmental adversities like heat or ground textures. Example: Sports Shoes",
+        "is_expirable": true,
+        "is_physical": true,
+        "logo": "https://hdn-1.fynd.com/seller/pictures/logo/original/9Y2UEp_ssssss.jpg7359e4c6-4c53-4dbe-a920-ef8ac658afb1/9Y2UEp_ssssss.jpg",
+        "name": "Footwear",
+        "slug": "footwear"
+      },
+      "template_tag": "footwear",
+      "total": 1
+    }
+  ],
+  "page": {
+    "current": 1,
+    "has_next": true,
+    "has_previous": false,
+    "item_total": 251,
+    "size": 26,
+    "type": "number"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createBulkProductUploadJob
+Create a Bulk product to upload job.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.createBulkProductUploadJob(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [BulkJob](#BulkJob) | yes | Request body |
+
+
+This API helps to create a bulk products upload job.
+
+*Returned Response:*
+
+
+
+
+[BulkResponse](#BulkResponse)
+
+Returns a success response
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "batch_id": "507f1f77bcf86cd799439011",
+  "created_on": "2021-04-02T15:43:59.410000Z"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deleteProductBulkJob
+Delete Bulk product job.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.deleteProductBulkJob(batchId=batchId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| batchId | Int | yes | Batch Id of the bulk product job to be deleted. |  
+
+
+
+This API allows to delete bulk product job associated with company.
+
+*Returned Response:*
+
+
+
+
+[SuccessResponse](#SuccessResponse)
+
+Returns a success response
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createProductsInBulk
+Create products in bulk associated with given batch Id.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.createProductsInBulk(batchId=batchId, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| batchId | String | yes | Batch Id in which assets to be uploaded. |  
+| body | [BulkProductRequest](#BulkProductRequest) | yes | Request body |
+
+
+This API helps to create products in bulk push to kafka for approval/creation.
+
+*Returned Response:*
+
+
+
+
+[SuccessResponse](#SuccessResponse)
+
+Returns a success response
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### listProductTemplateExportDetails
+Allows you to list all product templates export list details
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.listProductTemplateExportDetails()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Can view details including trigger data, task id , etc.
+
+*Returned Response:*
+
+
+
+
+[ProductDownloadsResponse](#ProductDownloadsResponse)
+
+List of Product Downloads Data. See example below or refer `ProductDownloadsResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "completed_on": "2020-12-23T07:23:41.031000Z",
+      "created_by": {
+        "user_id": "5646",
+        "username": "917972410891_48194"
+      },
+      "data": {
+        "brand": [
+          "ruosh"
+        ],
+        "templates": [
+          "mobile-phones-and-tablet"
+        ],
+        "type": "csv"
+      },
+      "id": "5fe2f077516d980001880943",
+      "seller_id": 3,
+      "status": "success",
+      "task_id": "c4b54ace-44ef-11eb-9806-1ef9bc4a2da1",
+      "template_tags": {
+        "mobile-phones-and-tablet": {
+          "display": "Mobile Phones & Tablet",
+          "logo": "https://hdn-1.jiox0.de/jiox0/seller/pictures/logo/original/Oda39B_99946594-portable-devices-with-tablet-and-mobile-phone-vector-icon-for-apps-and-websites.jpgcc2dff44-7fae-4002-9ebe-d2b59c8bee91/Oda39B_99946594-portable-devices-with-tablet-and-mobile-phone-vector-icon-for-apps-and-websites.jpg"
+        }
+      },
+      "trigger_on": "2020-12-23T07:23:35.302000Z",
+      "url": "https://regrowth.s3.amazonaws.com/slingshot-catalogues/seller-catalog/3/c4b54ace-44ef-11eb-9806-1ef9bc4a2da1/c4b54ace-44ef-11eb-9806-1ef9bc4a2da1.zip"
+    }
+  ],
+  "page": {}
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### listHSNCodes
+List HSN Codes
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.listHSNCodes()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Allows you to list all hsn Codes
+
+*Returned Response:*
+
+
+
+
+[HSNCodesResponse](#HSNCodesResponse)
+
+List of all HSN Codes. See example below or refer `HSNCodesResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "data": {
+    "country_of_origin": [
+      "India"
+    ],
+    "hsn_code": [
+      "11111111"
+    ]
+  },
+  "message": "Success"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getProductTags
+Get a list of all tags associated with company.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getProductTags()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+This API helps to get tags data associated to a particular company.
+
+*Returned Response:*
+
+
+
+
+[ProductTagsViewResponse](#ProductTagsViewResponse)
+
+Tag List. See example below for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    "demo",
+    "custom"
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### listProductTemplate
+List all Templates
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.listProductTemplate(department=department)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| department | String | yes | A `department` is the name of a particular department. |  
+
+
+
+Allows you to list all product templates, also can filter by department
+
+*Returned Response:*
+
+
+
+
+[TemplatesResponse](#TemplatesResponse)
+
+List of product templates. See example below or refer `TemplatesResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": {
+    "attributes": [
+      "gender",
+      "fragile",
+      "manufacturer-packer-importer-name",
+      "manufacturer-packer-importer-address"
+    ],
+    "banner": "https://hdn-1.fynd.com/seller/pictures/landscape-banner/original/F4W6Pd_DEFAULT-BANNER_LANDSCAPE.jpgd54cb24d-dd2c-441c-bca0-8f65ea3b101c/F4W6Pd_DEFAULT-BANNER_LANDSCAPE.jpg",
+    "categories": [
+      "accessories-adornments",
+      "socks",
+      "toric-contact-lenses",
+      "daily-disposable",
+      "monthly-reusable",
+      "multifocal-varifocal",
+      "solutions-accessories",
+      "coloured-lenses"
+    ],
+    "departments": [
+      "electronics",
+      "men",
+      "women",
+      "kids",
+      "toys"
+    ],
+    "description": "This is the file validation template for the fashion department and accessories category.",
+    "id": "5f04a23544a2e5404274bc07",
+    "is_expirable": true,
+    "is_physical": true,
+    "logo": "https://hdn-1.fynd.com/seller/pictures/logo/original/hkE1dC_0DEFAULT-LOGO.jpgfb5b1b31-9449-43db-9049-435fec88ee77/hkE1dC_0DEFAULT-LOGO.jpg",
+    "name": "Accessories",
+    "slug": "accessories"
+  },
+  "page": {
+    "current": 1,
+    "has_next": true,
+    "has_previous": false,
+    "item_total": 36,
+    "size": 3,
+    "type": "number"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### listProductTemplateCategories
+List Department specifiec product categories
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.listProductTemplateCategories(departments=departments, itemType=itemType)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| departments | String | yes | A `department` is name of a departments whose category needs to be listed. Can specify multiple departments. |   
+| itemType | String | yes | An `item_type` is the type of item, it can be `set`, `standard`, `digital`, etc. |  
+
+
+
+Allows you to list all product categories values for the departments specified
+
+*Returned Response:*
+
+
+
+
+[ProdcutTemplateCategoriesResponse](#ProdcutTemplateCategoriesResponse)
+
+List of all categories attached to departments specified. See example below or refer `ProdcutTemplateCategoriesResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [],
+  "page": {
+    "type": ""
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### downloadProductTemplateViews
+Download Product Template View
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.downloadProductTemplateViews(slug=slug, itemType=itemType, type=type)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| slug | String | yes | A `slug` is a unique identifier for a particular template. |   
+| itemType | String? | no | An `item_type` defines the type of item. The default value is standard. |   
+| type | String? | no | Format type of the sample file. The default value is excel. |  
+
+
+
+Allows you to download product template data
+
+*Returned Response:*
+
+
+
+
+[String](#String)
+
+CSV File of product template data. See example below or refer `TemplatesResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### validateProductTemplate
+Validate Product Template Schema
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.validateProductTemplate(slug=slug, itemType=itemType, bulk=bulk)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| slug | String | yes | A `slug` is a unique identifier for a particular template. |   
+| itemType | String? | no | An `item_type` defines the type of item. The default value is standard. |   
+| bulk | Boolean? | no | This specification determines the schema type to be retrieved. When set to true, it will return the schema for bulk data; when set to false, it will provide the schema for a single product. The default value is false. |  
+
+
+
+Allows you to list all product templates validation values for all the fields present in the database
+
+*Returned Response:*
+
+
+
+
+[TemplatesValidationResponse](#TemplatesValidationResponse)
+
+List of fields and validation values fro each. See example below or refer `TemplatesValidationResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "data": {
+    "global_validation": {
+      "properties": {},
+      "required": []
+    }
+  },
+  "template_details": {
+    "attributes": [],
+    "categories": [],
+    "departments": [],
+    "is_expirable": true,
+    "is_physical": true,
+    "slug": ""
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getProductValidation
+Validate product/size data
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getProductValidation()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+This API validates product data.
+
+*Returned Response:*
+
+
+
+
+[ValidateProduct](#ValidateProduct)
+
+Validate Meta. See example below for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "valid": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getInventoryBySizeIdentifier
+Get Inventory for company
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getInventoryBySizeIdentifier(itemId=itemId, sizeIdentifier=sizeIdentifier, pageNo=pageNo, pageSize=pageSize, q=q, locationIds=locationIds)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| itemId | Int | yes | Item code of the product of which size is to be get. |   
+| sizeIdentifier | String | yes | Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. |   
+| pageNo | Int? | no | The page number to navigate through the given set of results |   
+| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |   
+| q | String? | no | Search with help of store code. |   
+| locationIds | ArrayList<Int>? | no | Search by store ids. |  
+
+
+
+This API allows get Inventory data for particular company grouped by size and store.
+
+*Returned Response:*
+
+
+
+
+[InventorySellerIdentifierResponsePaginated](#InventorySellerIdentifierResponsePaginated)
+
+returns a list of all inventory grouped by size and store
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "brand": {
+        "id": 1,
+        "name": "ab"
+      },
+      "company": {
+        "id": 1
+      },
+      "country_of_origin": "",
+      "currency": "INR",
+      "dimension": {
+        "height": 13.1,
+        "is_default": true,
+        "length": 1.3,
+        "unit": "cm",
+        "width": 23.4
+      },
+      "fragile": false,
+      "fynd_article_code": "",
+      "fynd_item_code": "",
+      "identifier": {},
+      "identifiers": [
+        {
+          "gtin_type": "sku_code",
+          "gtin_value": "RTYUIDSDFV",
+          "primary": true
+        }
+      ],
+      "inventory_updated_on": "2021-04-06T03:30:01.487000",
+      "item_id": 7500651,
+      "manufacturer": {
+        "address": "ab",
+        "is_default": true,
+        "name": "ab"
+      },
+      "price": {
+        "currency": "USD",
+        "effective": 79.99,
+        "marked": 99.99,
+        "transfer": 89.99
+      },
+      "price_effective": 1234,
+      "price_transfer": 0,
+      "quantity": 10,
+      "sellable_quantity": 10,
+      "seller_identifier": "RTYUIDSDFV",
+      "size": "AAX1 (1 PCS)",
+      "store": {
+        "id": 1
+      },
+      "total_quantity": 1,
+      "uid": "59_RTYUIDSDFV",
+      "weight": {
+        "is_default": true,
+        "shipping": 1.5,
+        "unit": "kg"
+      }
+    },
+    {
+      "brand": {
+        "id": 1,
+        "name": "ab"
+      },
+      "company": {
+        "id": 1
+      },
+      "country_of_origin": "",
+      "currency": "INR",
+      "dimension": {
+        "height": 13.1,
+        "is_default": true,
+        "length": 1.3,
+        "unit": "cm",
+        "width": 23.4
+      },
+      "fragile": false,
+      "fynd_article_code": "",
+      "fynd_item_code": "",
+      "identifier": {},
+      "identifiers": [
+        {
+          "gtin_type": "sku_code",
+          "gtin_value": "RTYUIDSDFV",
+          "primary": true
+        }
+      ],
+      "inventory_updated_on": "2021-04-06T03:29:35.291000",
+      "item_id": 7500651,
+      "manufacturer": {
+        "address": "ab",
+        "is_default": true,
+        "name": "ab"
+      },
+      "price": {
+        "currency": "USD",
+        "effective": 79.99,
+        "marked": 99.99,
+        "transfer": 89.99
+      },
+      "price_effective": 1234,
+      "price_transfer": 0,
+      "quantity": 10,
+      "sellable_quantity": 10,
+      "seller_identifier": "RTYUIDSDFV",
+      "size": "AAX1 (1 PCS)",
+      "store": {
+        "id": 1
+      },
+      "total_quantity": 1,
+      "uid": "10_RTYUIDSDFV",
+      "weight": {
+        "is_default": true,
+        "shipping": 1.5,
+        "unit": "kg"
+      }
+    },
+    {
+      "brand": {
+        "id": 1,
+        "name": "ab"
+      },
+      "company": {
+        "id": 1
+      },
+      "country_of_origin": "",
+      "currency": "INR",
+      "dimension": {
+        "height": 13.1,
+        "is_default": true,
+        "length": 1.3,
+        "unit": "cm",
+        "width": 23.4
+      },
+      "fragile": false,
+      "fynd_article_code": "",
+      "fynd_item_code": "",
+      "identifier": {},
+      "identifiers": [
+        {
+          "gtin_type": "sku_code",
+          "gtin_value": "RTYUIDSDFV",
+          "primary": true
+        }
+      ],
+      "inventory_updated_on": "2021-03-17T12:35:29.992000",
+      "item_id": 7500651,
+      "manufacturer": {
+        "address": "ab",
+        "is_default": true,
+        "name": "ab"
+      },
+      "order_committed_quantity": 0,
+      "price": {
+        "currency": "USD",
+        "effective": 79.99,
+        "marked": 99.99,
+        "transfer": 89.99
+      },
+      "price_effective": 1234,
+      "price_transfer": 0,
+      "quantity": 10000000,
+      "sellable_quantity": 10000000,
+      "seller_identifier": "RTYUIDSDFV",
+      "size": "AAX1 (1 PCS)",
+      "store": {
+        "id": 1
+      },
+      "total_quantity": 1,
+      "uid": "11061_RTYUIDSDFV",
+      "weight": {
+        "is_default": true,
+        "shipping": 1.5,
+        "unit": "kg"
+      }
+    },
+    {
+      "brand": {
+        "id": 1,
+        "name": "ab"
+      },
+      "company": {
+        "id": 1
+      },
+      "country_of_origin": "",
+      "currency": "INR",
+      "damaged_quantity": 0,
+      "dimension": {
+        "height": 13.1,
+        "is_default": true,
+        "length": 1.3,
+        "unit": "cm",
+        "width": 23.4
+      },
+      "fragile": false,
+      "fynd_article_code": "",
+      "fynd_item_code": "",
+      "identifier": {},
+      "identifiers": [
+        {
+          "gtin_type": "sku_code",
+          "gtin_value": "RTYUIDSDFV",
+          "primary": true
+        }
+      ],
+      "inventory_updated_on": "2021-03-31T19:00:10.943000",
+      "item_id": 7500651,
+      "manufacturer": {
+        "address": "ab",
+        "is_default": true,
+        "name": "ab"
+      },
+      "not_available_quantity": 0,
+      "order_committed_quantity": 7,
+      "price": {
+        "currency": "USD",
+        "effective": 79.99,
+        "marked": 99.99,
+        "transfer": 89.99
+      },
+      "price_effective": 1234,
+      "price_transfer": 0,
+      "quantity": 39,
+      "sellable_quantity": 18,
+      "seller_identifier": "RTYUIDSDFV",
+      "size": "AAX1 (1 PCS)",
+      "store": {
+        "id": 1
+      },
+      "total_quantity": 1,
+      "uid": "1_RTYUIDSDFV",
+      "weight": {
+        "is_default": true,
+        "shipping": 1.5,
+        "unit": "kg"
+      }
+    },
+    {
+      "brand": {
+        "id": 1,
+        "name": "ab"
+      },
+      "company": {
+        "id": 1
+      },
+      "country_of_origin": "",
+      "currency": "INR",
+      "dimension": {
+        "height": 13.1,
+        "is_default": true,
+        "length": 1.3,
+        "unit": "cm",
+        "width": 23.4
+      },
+      "fragile": false,
+      "fynd_article_code": "",
+      "fynd_item_code": "",
+      "identifier": {},
+      "identifiers": [
+        {
+          "gtin_type": "sku_code",
+          "gtin_value": "RTYUIDSDFV",
+          "primary": true
+        }
+      ],
+      "inventory_updated_on": "2020-07-07T10:37:06.146000",
+      "item_id": 7500651,
+      "manufacturer": {
+        "address": "ab",
+        "is_default": true,
+        "name": "ab"
+      },
+      "order_committed_quantity": 39,
+      "price": {
+        "currency": "USD",
+        "effective": 79.99,
+        "marked": 99.99,
+        "transfer": 89.99
+      },
+      "price_effective": 1234,
+      "price_transfer": 0,
+      "quantity": 39,
+      "sellable_quantity": 0,
+      "seller_identifier": "RTYUIDSDFV",
+      "size": "AAX1 (1 PCS)",
+      "store": {
+        "id": 1
+      },
+      "total_quantity": 1,
+      "uid": "1_rtyuidsdfv",
+      "weight": {
+        "is_default": true,
+        "shipping": 1.5,
+        "unit": "kg"
+      }
+    }
+  ],
+  "page": {
+    "current": 1,
+    "has_next": false,
+    "has_previous": false,
+    "item_total": 5,
+    "size": 1,
+    "type": "number"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getProductSize
+Get a single product size.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getProductSize(itemCode=itemCode, itemId=itemId, brandUid=brandUid, uid=uid)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| itemCode | String? | no | Item code of the product size. |   
+| itemId | Int | yes | Item Id of the product size. |   
+| brandUid | Int? | no | Brand Id of the product size. |   
+| uid | Int? | no | Id of the product size. |  
+
+
+
+This API helps to get data associated to a particular product size.
+
+*Returned Response:*
+
+
+
+
+[ProductListingResponse](#ProductListingResponse)
+
+Product object. See example below for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "all_sizes": [
+    "3XL"
+  ],
+  "attributes": {
+    "color": "Red",
+    "created_by": {
+      "company_id": 1181,
+      "user_id": "-1",
+      "username": "silverbolt"
+    },
+    "created_on": "2020-07-23T04:20:43.810000Z",
+    "essential": "Yes",
+    "gender": [
+      "Men"
+    ],
+    "image_nature": "standard",
+    "is_image_less_product": false,
+    "l3_mapping": [
+      "men>casual_tees",
+      "women>casual_tees",
+      "girls>casual_tees",
+      "more>casual_tees"
+    ],
+    "material": "cotton",
+    "meta_nature": "standard",
+    "modified_by": {
+      "company_id": 61,
+      "user_id": "-1",
+      "username": "silverbolt"
+    },
+    "modified_on": "2020-07-23T04:20:44.185000Z",
+    "neck_type": "Round Neck",
+    "pattern": "Printed",
+    "primary_color": "Red",
+    "primary_material": "Others",
+    "product_fit": "Regular",
+    "sleeve_length": "Short",
+    "stage": "verified",
+    "verified_by": {
+      "user_id": "0",
+      "username": "Silverbolt"
+    },
+    "verified_on": 1595478044
+  },
+  "brand": {
+    "logo": {
+      "aspect_ratio": "1:1",
+      "aspect_ratio_f": 1,
+      "secure_url": "https://hdn-1.fynd.com/brands/pictures/square-logo/50x0/zjt4-wU8Lk-VQYu0pcokb-r6yteuannoorjkq9f4tk.jpg",
+      "url": "https://hdn-1.fynd.com/brands/pictures/square-logo/50x0/zjt4-wU8Lk-VQYu0pcokb-r6yteuannoorjkq9f4tk.jpg"
+    },
+    "name": "play clan",
+    "uid": 85
+  },
+  "category_slug": "t-shirts",
+  "company_id": 61,
+  "country_of_origin": "India",
+  "currency": "INR",
+  "departments": [
+    1
+  ],
+  "description": "",
+  "highlights": null,
+  "hsn_code": "61099090",
+  "id": "5f19101b99ee0500011dc896",
+  "images": [],
+  "is_active": false,
+  "is_dependent": false,
+  "is_set": false,
+  "item_code": "ACTESTCREATELISTING1",
+  "item_type": "standard",
+  "media": [],
+  "multi_size": true,
+  "name": "SQUADMTGIVESPACE",
+  "product_publish": {
+    "is_set": false,
+    "product_online_date": 1595478043
+  },
+  "size_guide": "play-clan-men-casual-tees",
+  "sizes": [
+    {
+      "currency": "INR",
+      "identifiers": [
+        {
+          "gtin_type": "sku_code",
+          "gtin_value": "ACTESTCREATELISTING1_3XL",
+          "primary": true
+        }
+      ],
+      "is_set": false,
+      "price": 10000,
+      "price_effective": 10000,
+      "price_transfer": 0,
+      "size": "3XL"
+    }
+  ],
+  "slug": "play-clan-squadmtgivespace-857587-e928b0",
+  "template_tag": "topwear",
+  "uid": 857587
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deleteSize
+Delete a Size associated with product.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.deleteSize(itemId=itemId, size=size)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| itemId | Int | yes | Item Id of the product associated with size to be deleted. |   
+| size | String | yes | size to be deleted. |  
+
+
+
+This API allows to delete size associated with product.
+
+*Returned Response:*
+
+
+
+
+[ProductSizeDeleteResponse](#ProductSizeDeleteResponse)
+
+Returns a success response
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "data": {
+    "company_id": 1,
+    "item_id": 114,
+    "size": "3"
+  },
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getInventoryBySize
+Get Inventory for company
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getInventoryBySize(itemId=itemId, size=size, pageNo=pageNo, pageSize=pageSize, q=q, sellable=sellable)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| itemId | Int | yes | Item code of the product of which size is to be get. |   
+| size | String | yes | Size of which inventory is to get. |   
+| pageNo | Int? | no | The page number to navigate through the given set of results |   
+| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |   
+| q | String? | no | Search with help of store code. |   
+| sellable | Boolean? | no | Filter on whether product is in stock or not. |  
+
+
+
+This API allows get Inventory data for particular company grouped by size and store.
+
+*Returned Response:*
+
+
+
+
+[InventoryResponsePaginated](#InventoryResponsePaginated)
+
+returns a list of all inventory grouped by size and store
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "currency": "INR",
+      "identifiers": {
+        "gtin_type": "sku_code",
+        "gtin_value": "RTYUIDSDFV",
+        "primary": true
+      },
+      "inventory_updated_on": "2021-04-06T03:30:01.487000",
+      "item_id": 7500651,
+      "price": 1234,
+      "price_effective": 1234,
+      "price_transfer": 0,
+      "quantity": 10,
+      "sellable_quantity": 10,
+      "seller_identifier": "RTYUIDSDFV",
+      "size": "AAX1 (1 PCS)",
+      "store": {
+        "_custom_json": {},
+        "address": {
+          "address1": "A/204, SAI VANDAN, NARAYAN NAGAR, TULINJ ROAD",
+          "address2": "",
+          "city": "MUMBAI",
+          "country": "INDIA",
+          "landmark": "",
+          "lat_long": {
+            "coordinates": [
+              72.8231511,
+              19.4232024
+            ],
+            "type": "Point"
+          },
+          "pincode": 401209,
+          "state": "MAHARASHTRA"
+        },
+        "integration_type": {
+          "inventory": "browntape",
+          "order": "browntape"
+        },
+        "manager": {
+          "email": "a@b.com",
+          "mobile_no": {
+            "country_code": 91,
+            "number": "2382634324"
+          },
+          "name": "abc"
+        },
+        "name": "yosss sdd dsdyo",
+        "store_code": "sanic6sdfsf7",
+        "uid": 59
+      },
+      "uid": "59_RTYUIDSDFV"
+    },
+    {
+      "currency": "INR",
+      "identifiers": {
+        "gtin_type": "sku_code",
+        "gtin_value": "RTYUIDSDFV",
+        "primary": true
+      },
+      "inventory_updated_on": "2021-04-06T03:29:35.291000",
+      "item_id": 7500651,
+      "price": 1234,
+      "price_effective": 1234,
+      "price_transfer": 0,
+      "quantity": 10,
+      "sellable_quantity": 10,
+      "seller_identifier": "RTYUIDSDFV",
+      "size": "AAX1 (1 PCS)",
+      "store": {
+        "_custom_json": {},
+        "address": {
+          "address1": "NO",
+          "address2": "",
+          "city": "MUMBAI",
+          "country": "INDIA",
+          "lat_long": {
+            "coordinates": [
+              1,
+              1
+            ],
+            "type": "Point"
+          },
+          "pincode": 400072,
+          "state": "MAHA"
+        },
+        "integration_type": {
+          "inventory": "browntape",
+          "order": "browntape"
+        },
+        "manager": {
+          "email": "rehman@cashkart.com",
+          "mobile_no": {
+            "country_code": 91,
+            "number": "9167943983"
+          },
+          "name": "abc"
+        },
+        "name": "Saran Ledonne",
+        "store_code": "af6198fe-2c23-4441-bbf4-e694c96e255c",
+        "uid": 10
+      },
+      "uid": "10_RTYUIDSDFV"
+    },
+    {
+      "currency": "INR",
+      "identifiers": {
+        "gtin_type": "sku_code",
+        "gtin_value": "RTYUIDSDFV",
+        "primary": true
+      },
+      "inventory_updated_on": "2021-03-17T12:35:29.992000",
+      "item_id": 7500651,
+      "order_committed_quantity": 0,
+      "price": 1234,
+      "price_effective": 1234,
+      "price_transfer": 0,
+      "quantity": 10000000,
+      "sellable_quantity": 10000000,
+      "seller_identifier": "RTYUIDSDFV",
+      "size": "AAX1 (1 PCS)",
+      "store": {
+        "_custom_json": {},
+        "address": {
+          "address1": "14/1, VINOBHA BHAVE NAGAR",
+          "address2": "VINOBHA BHAVE NAGAR, KURLA WEST, KURLA, ",
+          "city": "MUMBAI",
+          "country": "INDIA",
+          "lat_long": {
+            "coordinates": [
+              1,
+              1
+            ],
+            "type": "Point"
+          },
+          "pincode": 400070,
+          "state": "MAHARASHTRA"
+        },
+        "integration_type": {
+          "inventory": "browntape",
+          "order": "browntape"
+        },
+        "manager": {
+          "email": "fahimsakri@gofynd.com",
+          "mobile_no": {
+            "country_code": 91,
+            "number": "9594495254"
+          },
+          "name": "Fahim"
+        },
+        "name": "ABC-1-17",
+        "store_code": "ABC-1-17",
+        "uid": 11061
+      },
+      "uid": "11061_RTYUIDSDFV"
+    },
+    {
+      "currency": "INR",
+      "damaged_quantity": 0,
+      "identifiers": {
+        "gtin_type": "sku_code",
+        "gtin_value": "RTYUIDSDFV",
+        "primary": true
+      },
+      "inventory_updated_on": "2021-03-31T19:00:10.943000",
+      "item_id": 7500651,
+      "not_available_quantity": 0,
+      "order_committed_quantity": 7,
+      "price": 1234,
+      "price_effective": 1234,
+      "price_transfer": 0,
+      "quantity": 39,
+      "sellable_quantity": 18,
+      "seller_identifier": "RTYUIDSDFV",
+      "size": "AAX1 (1 PCS)",
+      "store": {
+        "_custom_json": {},
+        "address": {
+          "address1": "SHOPSENSE RETAIL TECHNOLOGIES PRIVATE LIMITED 1ST FLOOR WEWORK VIJAY DIAMOND, CROSS RD B, AJIT NAGAR,",
+          "address2": "KONDIVITA, ANDHERI EAST, MUMBAI, MAHARASHTRA 400069",
+          "city": "MUMBAI",
+          "country": "INDIA",
+          "lat_long": {
+            "coordinates": [
+              72.8691788,
+              19.1174114
+            ],
+            "type": "Point"
+          },
+          "pincode": 400059,
+          "state": "MAHARASHTRA"
+        },
+        "integration_type": {
+          "inventory": "browntape",
+          "order": "browntape"
+        },
+        "manager": {
+          "email": "ASHISHCHANDORKAR@FYND.COM",
+          "mobile_no": {
+            "country_code": 91,
+            "number": "8369782851"
+          },
+          "name": "ASHISH CHANDORKAR"
+        },
+        "name": "RRL01",
+        "store_code": "WH_8513",
+        "uid": 1
+      },
+      "uid": "1_RTYUIDSDFV"
+    },
+    {
+      "currency": "INR",
+      "identifiers": {
+        "gtin_type": "sku_code",
+        "gtin_value": "RTYUIDSDFV",
+        "primary": true
+      },
+      "inventory_updated_on": "2020-07-07T10:37:06.146000",
+      "item_id": 7500651,
+      "order_committed_quantity": 39,
+      "price": 1234,
+      "price_effective": 1234,
+      "price_transfer": 0,
+      "quantity": 39,
+      "sellable_quantity": 0,
+      "seller_identifier": "RTYUIDSDFV",
+      "size": "AAX1 (1 PCS)",
+      "store": {
+        "_custom_json": {},
+        "address": {
+          "address1": "SHOPSENSE RETAIL TECHNOLOGIES PRIVATE LIMITED 1ST FLOOR WEWORK VIJAY DIAMOND, CROSS RD B, AJIT NAGAR,",
+          "address2": "KONDIVITA, ANDHERI EAST, MUMBAI, MAHARASHTRA 400069",
+          "city": "MUMBAI",
+          "country": "INDIA",
+          "lat_long": {
+            "coordinates": [
+              72.8691788,
+              19.1174114
+            ],
+            "type": "Point"
+          },
+          "pincode": 400059,
+          "state": "MAHARASHTRA"
+        },
+        "integration_type": {
+          "inventory": "browntape",
+          "order": "browntape"
+        },
+        "manager": {
+          "email": "ASHISHCHANDORKAR@FYND.COM",
+          "mobile_no": {
+            "country_code": 91,
+            "number": "8369782851"
+          },
+          "name": "ASHISH CHANDORKAR"
+        },
+        "name": "RRL01",
+        "store_code": "WH_8513",
+        "uid": 1
+      },
+      "uid": "1_rtyuidsdfv"
+    }
+  ],
+  "page": {
+    "current": 1,
+    "has_next": false,
+    "has_previous": false,
+    "item_total": 5,
+    "size": 1,
+    "type": "number"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### addInventory
+Add Inventory for particular size and store.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.addInventory(itemId=itemId, size=size, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| itemId | Int | yes | Item code of the product of which size is to be get. |   
+| size | String | yes | Size in which inventory is to be added. |  
+| body | [InventoryRequest](#InventoryRequest) | yes | Request body |
+
+
+This API allows add Inventory for particular size and store.
+
+*Returned Response:*
+
+
+
+
+[SuccessResponse](#SuccessResponse)
+
+Returns a success response
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deleteInventory
+Delete a Inventory.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.deleteInventory(size=size, itemId=itemId, locationId=locationId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| size | String | yes | size that is to be deleted. |   
+| itemId | Int | yes | Id of the product associated with Inventory to be deleted. |   
+| locationId | Double | yes | Location ID of store of which inventory is to be deleted. |  
+
+
+
+This API allows to delete inventory of a particular product for particular company.
+
+*Returned Response:*
+
+
+
+
+[SuccessResponse](#SuccessResponse)
+
+Returns a success response
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getVariantsOfProducts
+Get product list
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getVariantsOfProducts(itemId=itemId, variantType=variantType, pageNo=pageNo, pageSize=pageSize)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| itemId | Int | yes | Get list of variants of item Id |   
+| variantType | String | yes | Get multiple products filtered by variant type |   
+| pageNo | Int? | no | The page number to navigate through the given set of results |   
+| pageSize | Int? | no | Number of items to retrieve in each page. Default is 10. |  
+
+
+
+This API gets meta associated to products.
+
+*Returned Response:*
+
+
+
+
+[ProductVariantsResponse](#ProductVariantsResponse)
+
+Product Meta. See example below for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "page": {
+    "current": 1,
+    "has_next": false,
+    "has_previous": false,
+    "item_total": 1,
+    "size": 1,
+    "type": "number"
+  },
+  "variants": [
+    {
+      "brand_uid": 401,
+      "category_uid": 3938,
+      "item_code": "TEST-MSA-6",
+      "media": [
+        {
+          "type": "image",
+          "url": "https://hdn-1.jiox0.de/jiox0/products/pictures/item/free/original/7cGLXZLpO-iN3Jd9uro-Wiv-7J9qC-product.png"
+        }
+      ],
+      "name": "test-msa-6",
+      "slug": "test-msa-6",
+      "uid": 7526471
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getSizeGuides
+Get list of size guides
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getSizeGuides(active=active, q=q, tag=tag, pageNo=pageNo, pageSize=pageSize)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| active | Boolean? | no | filter size guide on basis of active, in-active |   
+| q | String? | no | Query that is to be searched. |   
+| tag | String? | no | to filter size guide on basis of tag. |   
+| pageNo | Int? | no | The page number to navigate through the given set of results |   
+| pageSize | Int? | no | Number of items to retrieve in each page. Default is 10. |  
+
+
+
+This API allows to view all the size guides associated to the seller.
+
+*Returned Response:*
+
+
+
+
+[ListSizeGuide](#ListSizeGuide)
+
+Size guide object. See example below or refer `ListSizeGuide` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "active": true,
+      "brand_id": 2,
+      "company_id": 12,
+      "created_by": {
+        "user_id": "-1",
+        "username": "silverbolt"
+      },
+      "created_on": "2021-02-24T17:46:04.146000Z",
+      "guide": {
+        "meta": {
+          "headers": {
+            "col_1": {
+              "convertable": false,
+              "value": "Head"
+            },
+            "col_2": {
+              "convertable": true,
+              "value": "Shoulder"
+            }
+          },
+          "unit": "cm",
+          "values": [
+            {
+              "col_1": "10",
+              "col_2": "20"
+            },
+            {
+              "col_1": "12",
+              "col_2": "22"
+            },
+            {
+              "col_1": "14",
+              "col_2": "24"
+            }
+          ]
+        }
+      },
+      "id": "60364384f08385bee776f83d",
+      "modified_by": {
+        "user_id": "-1",
+        "username": "silverbolt"
+      },
+      "modified_on": "2021-02-24T17:46:04.146000Z",
+      "name": "Demo",
+      "subtitle": "I am demo",
+      "tag": "demo",
+      "title": "Demo SG"
+    }
+  ],
+  "page": {
+    "current": 1,
+    "has_next": false,
+    "has_previous": false,
+    "item_count": 1,
+    "size": 1,
+    "type": "number"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createSizeGuide
+Create a size guide.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.createSizeGuide(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [ValidateSizeGuide](#ValidateSizeGuide) | yes | Request body |
+
+
+This API allows to create a size guide associated to a brand.
+
+*Returned Response:*
+
+
+
+
+[SuccessResponse](#SuccessResponse)
+
+Returns a success response
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getSizeGuide
+Get a single size guide.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getSizeGuide(id=id)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | Id of the size guide to be viewed. |  
+
+
+
+This API helps to get data associated to a size guide.
+
+*Returned Response:*
+
+
+
+
+[SizeGuideResponse](#SizeGuideResponse)
+
+Brand object. See example below or refer `SizeGuideResponseSchema` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "active": true,
+  "brand_id": 1,
+  "company_id": 1,
+  "created_by": {
+    "user_id": "-1",
+    "username": "silverbolt"
+  },
+  "created_on": "2021-02-24T17:46:04.146000Z",
+  "guide": {
+    "meta": {
+      "headers": {
+        "col_1": {
+          "convertable": false,
+          "value": "Head"
+        },
+        "col_2": {
+          "convertable": true,
+          "value": "Shoulder"
+        }
+      },
+      "unit": "cm",
+      "values": [
+        {
+          "col_1": "10",
+          "col_2": "20"
+        },
+        {
+          "col_1": "12",
+          "col_2": "22"
+        },
+        {
+          "col_1": "14",
+          "col_2": "24"
+        }
+      ]
+    }
+  },
+  "id": "60364384f08385bee776f83d",
+  "modified_by": {
+    "user_id": "123",
+    "username": "917827311650_22960"
+  },
+  "modified_on": "2021-02-25T15:19:30.822000Z",
+  "name": "edited size guide",
+  "subtitle": "I am demo",
+  "tag": "demo",
+  "title": "Demo SG"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateSizeGuide
+Edit a size guide.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.updateSizeGuide(id=id, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | Mongo id of the size guide to be edited |  
+| body | [ValidateSizeGuide](#ValidateSizeGuide) | yes | Request body |
+
+
+This API allows to edit a size guide.
+
+*Returned Response:*
+
+
+
+
+[SuccessResponse](#SuccessResponse)
+
+Returns a success response
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
 ```
 </details>
 
@@ -5071,7 +13841,7 @@ success flag will tell whether the operation was successful.
 
 
 ### updateAllowSingle
-Update 'Allow Single' setting.
+Update allow single flag for filters of the application.
 
 
 
@@ -5093,7 +13863,7 @@ except Exception as e:
 | body | [AllowSingleRequest](#AllowSingleRequest) | yes | Request body |
 
 
-Modify allow single flag for filters of the application.
+Update allow single flag for filters of the application.
 
 *Returned Response:*
 
@@ -5127,7 +13897,7 @@ success message will tell whether the operation was successful.
 
 
 ### updateDefaultSort
-Update default sorting.
+Update the default sort key configuration for the application.
 
 
 
@@ -5149,7 +13919,7 @@ except Exception as e:
 | body | [DefaultKeyRequest](#DefaultKeyRequest) | yes | Request body |
 
 
-Modify the default sort key configuration for the application.
+Update the default sort key configuration for the application.
 
 *Returned Response:*
 
@@ -5183,7 +13953,7 @@ success message will tell whether the operation was successful.
 
 
 ### getListingConfigurations
-Retrieve listing configurations.
+Get the details of the application configured configurations of listing config types.
 
 
 
@@ -5209,7 +13979,7 @@ except Exception as e:
 
 
 
-Retrieve the details of the application configured configurations of listing config types.
+Get the details of the application configured configurations of listing config types.
 
 *Returned Response:*
 
@@ -5337,7 +14107,7 @@ configuration details for catalog. See example below or refer `GetConfigResponse
 
 
 ### createListingConfiguration
-Create listing configuration.
+Add configuration for listings
 
 
 
@@ -5360,7 +14130,7 @@ except Exception as e:
 | body | [AppConfigurationsSort](#AppConfigurationsSort) | yes | Request body |
 
 
-Add configuration for catalog listing.
+Add configuration for listing.
 
 *Returned Response:*
 
@@ -5404,7 +14174,7 @@ success flag will tell whether the operation was successful.
 
 
 ### getGroupConfigurations
-Retrieve group configurations.
+Get the details of the application configured configurations of group config types.
 
 
 
@@ -5431,7 +14201,7 @@ except Exception as e:
 
 
 
-Retrieve the details of the application configured configurations of group config types.
+Get the details of the application configured configurations of group config types.
 
 *Returned Response:*
 
@@ -5558,7 +14328,7 @@ configuration details for catalog. See example below or refer `GetConfigResponse
 
 
 ### createGroupConfiguration
-Create group configuration.
+Create configuration for Group config types.
 
 
 
@@ -5581,7 +14351,7 @@ except Exception as e:
 | body | [AppConfigurationDetail](#AppConfigurationDetail) | yes | Request body |
 
 
-Create configuration for group configuration types.
+Create configuration for Group config types.
 
 *Returned Response:*
 
@@ -5636,7 +14406,7 @@ success flag will tell whether the operation was successful.
 
 
 ### deleteGroupConfiguration
-Delete group configuration.
+Delete configuration of the product config type of the application.
 
 
 
@@ -5696,7 +14466,7 @@ success message will tell whether the operation was successful.
 
 
 ### updateGroupConfiguration
-Update group configuration.
+Update the group configurations for the application.
 
 
 
@@ -5720,7 +14490,7 @@ except Exception as e:
 | body | [AppConfigurationDetail](#AppConfigurationDetail) | yes | Request body |
 
 
-Modify the group configurations for the application.
+Update the group configurations for the application.
 
 *Returned Response:*
 
@@ -5775,7 +14545,7 @@ success flag will tell whether the operation was successful.
 
 
 ### deleteListingConfiguration
-Delete listing configuration.
+Delete configuration for listings
 
 
 
@@ -5799,7 +14569,7 @@ except Exception as e:
 
 
 
-Remove a specific listing configuration from the catalog.
+Delete configuration for listing.
 
 *Returned Response:*
 
@@ -5835,7 +14605,7 @@ success message will tell whether the operation was successful.
 
 
 ### updateListingConfiguration
-Update listing configuration.
+Update configuration for listings
 
 
 
@@ -5859,7 +14629,7 @@ except Exception as e:
 | body | [AppConfigurationsSort](#AppConfigurationsSort) | yes | Request body |
 
 
-Modify the details and settings of an existing listing configuration.
+Update configuration for listing.
 
 *Returned Response:*
 
@@ -5902,14 +14672,14 @@ success flag will tell whether the operation was successful.
 
 
 ### getConfigurationMetadata
-Retrieve configuration metadata.
+Get configuration metadata details for catalog for admin panel
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getConfigurationMetadata(configType=configType, templateSlug=templateSlug, pageNo=pageNo, pageSize=pageSize, q=q)
+    result = await platformClient.application("<APPLICATION_ID>").catalog.getConfigurationMetadata(configType=configType, templateSlug=templateSlug)
     # use result
 except Exception as e:
     print(e)
@@ -5922,14 +14692,11 @@ except Exception as e:
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
 | configType | String | yes | A `config_type` is an identifier that defines a specific type of configuration. |   
-| templateSlug | String? | no | Get configuration list filtered by `template_slug` string. This is for the details and comparision groups. |   
-| pageNo | Int? | no | The page number to navigate through the given set of results. |   
-| pageSize | Int? | no | Number of items to retrieve in each page. |   
-| q | String? | no | Get configuration list filtered by `q` string. |  
+| templateSlug | String? | no | Get configuration list filtered by `template_slug` string. This is for the details and comparision groups. |  
 
 
 
-Retrieve the configuraion metadata details for catalog.
+Get the configuraion metadata details for catalog.
 
 *Returned Response:*
 
@@ -6655,26 +15422,6 @@ configuration details for catalog. See example below or refer `GetConfigMetadata
       "key": "rating"
     }
   ],
-  "page": [
-    {
-      "current": 1
-    },
-    {
-      "type": "number"
-    },
-    {
-      "size": 1
-    },
-    {
-      "has_previous": false
-    },
-    {
-      "has_next": false
-    },
-    {
-      "item_total": 3
-    }
-  ],
   "values": [
     {
       "sort": [
@@ -6726,3999 +15473,8 @@ configuration details for catalog. See example below or refer `GetConfigMetadata
 ---
 
 
-
-
-### getAppProduct
-Retrieve application product data.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getAppProduct(itemId=itemId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| itemId | String | yes | product id for a particular product. |  
-
-
-
-Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
-
-*Returned Response:*
-
-
-
-
-[OwnerAppItemResponse](#OwnerAppItemResponse)
-
-The Company Applicaton Product Data(MOQ/SEO).
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "alt_text": {
-    "https://test-url.com/test.png": "test-alt"
-  },
-  "is_cod": false,
-  "is_gift": false,
-  "moq": {
-    "increment_unit": 2,
-    "maximum": 10,
-    "minimum": 1
-  },
-  "seo": {
-    "description": "test-description",
-    "title": "test-title",
-    "breadcrumbs": [],
-    "sitemap": {},
-    "meta_tags": [],
-    "canonical_url": "/test"
-  },
-  "size_promotion_threshold": {
-    "threshold_type": "flat",
-    "threshold_value": 100
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateAppProduct
-Update application product data.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.updateAppProduct(itemId=itemId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| itemId | String | yes | product id for which the custom_meta is associated. |  
-| body | [ApplicationItemMeta](#ApplicationItemMeta) | yes | Request body |
-
-
-Allows to update data associated to a item custom meta.
-
-*Returned Response:*
-
-
-
-
-[SuccessResponse1](#SuccessResponse1)
-
-Returns a success response
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getDiscountedInventoryBySizeIdentifier
-Get discounted inventory by size identifier.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getDiscountedInventoryBySizeIdentifier(itemId=itemId, sizeIdentifier=sizeIdentifier, pageNo=pageNo, pageSize=pageSize, q=q, locationIds=locationIds)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| itemId | Int | yes | Item code of the product of which size is to be get. |   
-| sizeIdentifier | String | yes | Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. |   
-| pageNo | Int? | no | The page number to navigate through the given set of results |   
-| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |   
-| q | String? | no | Search with help of store code. |   
-| locationIds | ArrayList<Int>? | no | Search by store ids. |  
-
-
-
-Allows to retrieve Inventory data for particular company grouped by size and store.
-
-*Returned Response:*
-
-
-
-
-[InventorySellerIdentifierResponsePaginated](#InventorySellerIdentifierResponsePaginated)
-
-returns a list of all inventory grouped by size and store
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "brand": {
-        "id": 1,
-        "name": "ab"
-      },
-      "company": {
-        "id": 1
-      },
-      "country_of_origin": "",
-      "currency": "INR",
-      "dimension": {
-        "height": 15,
-        "is_default": true,
-        "length": 10.5,
-        "unit": "cm",
-        "width": 5.2
-      },
-      "fragile": true,
-      "fynd_article_code": "",
-      "fynd_item_code": "",
-      "identifier": {
-        "article_id": 1
-      },
-      "identifiers": [
-        {
-          "gtin_type": "sku_code",
-          "gtin_value": "RTYUIDSDFV",
-          "primary": true
-        }
-      ],
-      "inventory_updated_on": "2021-04-06T03:30:01.487Z",
-      "item_id": 7500651,
-      "manufacturer": {
-        "address": "st",
-        "is_default": true,
-        "name": "manufacturer"
-      },
-      "price": {
-        "currency": "USD",
-        "effective": 79.99,
-        "marked": 99.99,
-        "transfer": 79.99
-      },
-      "price_effective": 1234,
-      "price_transfer": 0,
-      "quantity": 10,
-      "sellable_quantity": 10,
-      "seller_identifier": "RTYUIDSDFV",
-      "size": "AAX1 (1 PCS)",
-      "store": {
-        "id": 1
-      },
-      "total_quantity": 1,
-      "uid": "59_RTYUIDSDFV",
-      "weight": {
-        "is_default": true,
-        "shipping": 1.5,
-        "unit": "kg"
-      }
-    },
-    {
-      "brand": {
-        "id": 1,
-        "name": "ab"
-      },
-      "company": {
-        "id": 1
-      },
-      "country_of_origin": "",
-      "currency": "INR",
-      "dimension": {
-        "height": 15,
-        "is_default": true,
-        "length": 10.5,
-        "unit": "cm",
-        "width": 5.2
-      },
-      "fragile": true,
-      "fynd_article_code": "",
-      "fynd_item_code": "",
-      "identifier": {
-        "article_id": 1
-      },
-      "identifiers": [
-        {
-          "gtin_type": "sku_code",
-          "gtin_value": "RTYUIDSDFV",
-          "primary": true
-        }
-      ],
-      "inventory_updated_on": "2021-04-06T03:29:35.291Z",
-      "item_id": 7500651,
-      "manufacturer": {
-        "address": "st",
-        "is_default": true,
-        "name": "manufacturer"
-      },
-      "price": {
-        "currency": "USD",
-        "effective": 79.99,
-        "marked": 99.99,
-        "transfer": 79.99
-      },
-      "price_effective": 1234,
-      "price_transfer": 0,
-      "quantity": 10,
-      "sellable_quantity": 10,
-      "seller_identifier": "RTYUIDSDFV",
-      "size": "AAX1 (1 PCS)",
-      "store": {
-        "id": 1
-      },
-      "total_quantity": 1,
-      "uid": "10_RTYUIDSDFV",
-      "weight": {
-        "is_default": true,
-        "shipping": 1.5,
-        "unit": "kg"
-      }
-    },
-    {
-      "brand": {
-        "id": 1,
-        "name": "ab"
-      },
-      "company": {
-        "id": 1
-      },
-      "country_of_origin": "",
-      "currency": "INR",
-      "dimension": {
-        "height": 15,
-        "is_default": true,
-        "length": 10.5,
-        "unit": "cm",
-        "width": 5.2
-      },
-      "fragile": true,
-      "fynd_article_code": "",
-      "fynd_item_code": "",
-      "identifier": {
-        "article_id": 1
-      },
-      "identifiers": [
-        {
-          "gtin_type": "sku_code",
-          "gtin_value": "RTYUIDSDFV",
-          "primary": true
-        }
-      ],
-      "inventory_updated_on": "2021-03-17T12:35:29.992Z",
-      "item_id": 7500651,
-      "manufacturer": {
-        "address": "st",
-        "is_default": true,
-        "name": "manufacturer"
-      },
-      "order_committed_quantity": 0,
-      "price": {
-        "currency": "USD",
-        "effective": 79.99,
-        "marked": 99.99,
-        "transfer": 79.99
-      },
-      "price_effective": 1234,
-      "price_transfer": 0,
-      "quantity": 10000000,
-      "sellable_quantity": 10000000,
-      "seller_identifier": "RTYUIDSDFV",
-      "size": "AAX1 (1 PCS)",
-      "store": {
-        "id": 1
-      },
-      "total_quantity": 1,
-      "uid": "11061_RTYUIDSDFV",
-      "weight": {
-        "is_default": true,
-        "shipping": 1.5,
-        "unit": "kg"
-      }
-    },
-    {
-      "brand": {
-        "id": 1,
-        "name": "ab"
-      },
-      "company": {
-        "id": 1
-      },
-      "country_of_origin": "",
-      "currency": "INR",
-      "damaged_quantity": 0,
-      "dimension": {
-        "height": 15,
-        "is_default": true,
-        "length": 10.5,
-        "unit": "cm",
-        "width": 5.2
-      },
-      "fragile": true,
-      "fynd_article_code": "",
-      "fynd_item_code": "",
-      "identifier": {
-        "article_id": 1
-      },
-      "identifiers": [
-        {
-          "gtin_type": "sku_code",
-          "gtin_value": "RTYUIDSDFV",
-          "primary": true
-        }
-      ],
-      "inventory_updated_on": "2021-03-31T19:00:10.943Z",
-      "item_id": 7500651,
-      "manufacturer": {
-        "address": "st",
-        "is_default": true,
-        "name": "manufacturer"
-      },
-      "not_available_quantity": 0,
-      "order_committed_quantity": 7,
-      "price": {
-        "currency": "USD",
-        "effective": 79.99,
-        "marked": 99.99,
-        "transfer": 79.99
-      },
-      "price_effective": 1234,
-      "price_transfer": 0,
-      "quantity": 39,
-      "sellable_quantity": 18,
-      "seller_identifier": "RTYUIDSDFV",
-      "size": "AAX1 (1 PCS)",
-      "store": {
-        "id": 1
-      },
-      "total_quantity": 1,
-      "uid": "1_RTYUIDSDFV",
-      "weight": {
-        "is_default": true,
-        "shipping": 1.5,
-        "unit": "kg"
-      }
-    },
-    {
-      "brand": {
-        "id": 1,
-        "name": "ab"
-      },
-      "company": {
-        "id": 1
-      },
-      "country_of_origin": "",
-      "currency": "INR",
-      "dimension": {
-        "height": 15,
-        "is_default": true,
-        "length": 10.5,
-        "unit": "cm",
-        "width": 5.2
-      },
-      "fragile": true,
-      "fynd_article_code": "",
-      "fynd_item_code": "",
-      "identifier": {
-        "article_id": 1
-      },
-      "identifiers": [
-        {
-          "gtin_type": "sku_code",
-          "gtin_value": "RTYUIDSDFV",
-          "primary": true
-        }
-      ],
-      "inventory_updated_on": "2020-07-07T10:37:06.146Z",
-      "item_id": 7500651,
-      "manufacturer": {
-        "address": "st",
-        "is_default": true,
-        "name": "manufacturer"
-      },
-      "order_committed_quantity": 39,
-      "price": {
-        "currency": "USD",
-        "effective": 79.99,
-        "marked": 99.99,
-        "transfer": 79.99
-      },
-      "price_effective": 1234,
-      "price_transfer": 0,
-      "quantity": 39,
-      "sellable_quantity": 0,
-      "seller_identifier": "RTYUIDSDFV",
-      "size": "AAX1 (1 PCS)",
-      "store": {
-        "id": 1
-      },
-      "total_quantity": 1,
-      "uid": "1_rtyuidsdfv",
-      "weight": {
-        "is_default": true,
-        "shipping": 1.5,
-        "unit": "kg"
-      }
-    }
-  ],
-  "page": {
-    "current": 1,
-    "has_next": false,
-    "has_previous": false,
-    "item_total": 5,
-    "size": 1,
-    "type": "number"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### bulkHsnCode
-Bulk update HSN codes.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.bulkHsnCode(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [BulkHsnUpsert](#BulkHsnUpsert) | yes | Request body |
-
-
-Perform bulk updates of HSN codes for products.
-
-*Returned Response:*
-
-
-
-
-[BulkHsnResponse](#BulkHsnResponse)
-
-See example below for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getHsnCode
-Get HSN code.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getHsnCode(id=id)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | Unique id |  
-
-
-
-Retrieve the HSN code for a product.
-
-*Returned Response:*
-
-
-
-
-[HsnCode](#HsnCode)
-
-See example below details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "data": {
-    "company_id": 1,
-    "hs2_code": "xx",
-    "hsn_code": "xxxxxxxx",
-    "id": "xxxxxxxxxxxx",
-    "modified_by": {
-      "user_id": "0",
-      "username": "narutouzumaki"
-    },
-    "slabs": [
-      {
-        "tax": 0,
-        "threshold": 999999
-      },
-      {
-        "tax": 0,
-        "threshold": 0
-      }
-    ],
-    "tax_on": "esp"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateHsnCode
-Update HSN code.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.updateHsnCode(id=id, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | Unique id |  
-| body | [HsnUpsert](#HsnUpsert) | yes | Request body |
-
-
-Modify the HSN code associated with a product.
-
-*Returned Response:*
-
-
-
-
-[HsnCode](#HsnCode)
-
-See example below for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "data": {
-    "company_id": 1,
-    "hs2_code": "xx",
-    "hsn_code": "xxxxxxxx",
-    "id": "xxxxxxxxxxxx",
-    "modified_by": {
-      "user_id": "0",
-      "username": "narutouzumaki"
-    },
-    "slabs": [
-      {
-        "tax": 0,
-        "threshold": 999999
-      },
-      {
-        "tax": 0,
-        "threshold": 0
-      }
-    ],
-    "tax_on": "esp"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getInventories
-Retrieve inventories.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getInventories(itemId=itemId, size=size, pageNo=pageNo, pageSize=pageSize, q=q, sellable=sellable, storeIds=storeIds, sizeIdentifier=sizeIdentifier)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| itemId | String? | no | Item code of the product of which size is to be get. |   
-| size | String? | no | Size of which inventory is to get. |   
-| pageNo | Int? | no | The page number to navigate through the given set of results |   
-| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |   
-| q | String? | no | Search with help of store code. |   
-| sellable | Boolean? | no | Filter on whether product is in stock or not. |   
-| storeIds | ArrayList<Int>? | no | The Store Id of products to fetch inventory. |   
-| sizeIdentifier | String? | no | Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. |  
-
-
-
-Allows to get Inventories data for particular company.
-
-*Returned Response:*
-
-
-
-
-[GetInventoriesResponse](#GetInventoriesResponse)
-
-returns a list of all inventory grouped by size and store
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "brand": {
-        "id": 355
-      },
-      "company": {
-        "id": 46
-      },
-      "country_of_origin": "Malaysia",
-      "created_by": {
-        "user_id": "68c3800d602c0fda0dab4fea",
-        "username": "abhishekbhakurlekar_gofynd_com_63787"
-      },
-      "date_meta": {
-        "added_on_store": "2023-01-20T07:26:18.834Z",
-        "created_on": "2023-01-20T07:26:18.828Z",
-        "inventory_updated_on": "2023-01-20T07:26:18.828Z",
-        "modified_on": "2023-01-20T07:26:18.828Z"
-      },
-      "dimension": {
-        "height": 10,
-        "length": 25,
-        "unit": "cm",
-        "width": 15
-      },
-      "expiration_date": "9998-01-30T23:59:00.000Z",
-      "id": "63ca421a6fb0ce930685f46e",
-      "identifier": {
-        "alu": "410163085004",
-        "upc": "777697046"
-      },
-      "is_set": false,
-      "manufacturer": {
-        "address": "5TH FLOOR, COURT HOUSE,LOKMANYA TILAK MARGA, DHOBI TALAOMUMBAI MAHARASHTRA, , MAHARASHTRA, MUMBAI",
-        "is_default": true,
-        "name": "RELIANCE BRANDS LIMITED"
-      },
-      "modified_by": {
-        "user_id": "68c3800d602c0fda0dab4fea",
-        "username": "abhishekbhakurlekar_gofynd_com_63787"
-      },
-      "platforms": {
-        "fynd": false,
-        "uniket_wholesale": false
-      },
-      "price": {
-        "currency": "INR",
-        "effective": 8000,
-        "marked": 8000,
-        "transfer": 0
-      },
-      "quantities": {
-        "sellable": {
-          "count": 12
-        }
-      },
-      "return_config": {
-        "returnable": true,
-        "time": 30,
-        "unit": "days"
-      },
-      "seller_identifier": "410163085004",
-      "size": "S",
-      "stage": "verified",
-      "store": {
-        "name": "Khan Market",
-        "store_code": "THR1",
-        "store_type": "high_street",
-        "uid": 10444
-      },
-      "tax_identifier": {
-        "hsn_code_id": "000000000000000000000001"
-      },
-      "total_quantity": 12,
-      "trace_id": "inventory.bb475064-9893-11ed-88db-2efc0f0504bd",
-      "track_inventory": true,
-      "trader": [
-        {
-          "address": [
-            "Brooks Brothers India Private Limited registered address is 8th Floor, Maker Tower 'E' Cuffe Parade Mumbai MH 400005 IN"
-          ],
-          "name": "Imported & Marketed by Brooks Brothers India Pvt.Ltd",
-          "type": "Importer"
-        }
-      ],
-      "uid": "10444_410163085004",
-      "weight": {
-        "shipping": 999,
-        "unit": "gram"
-      }
-    },
-    {
-      "brand": {
-        "id": 355
-      },
-      "company": {
-        "id": 46
-      },
-      "country_of_origin": "Malaysia",
-      "created_by": {
-        "user_id": "68c3800d602c0fda0dab4fea",
-        "username": "abhishekbhakurlekar_gofynd_com_63787"
-      },
-      "date_meta": {
-        "added_on_store": "2023-01-16T05:25:49.491Z",
-        "created_on": "2023-01-16T05:25:49.482Z",
-        "inventory_updated_on": "2023-01-16T05:25:49.482Z",
-        "modified_on": "2023-01-16T05:25:49.482Z"
-      },
-      "dimension": {
-        "height": 10,
-        "length": 25,
-        "unit": "cm",
-        "width": 15
-      },
-      "expiration_date": "9998-01-30T23:59:00.000Z",
-      "id": "63c4dfdd11e44ffd96d600bc",
-      "identifier": {
-        "alu": "410163085005",
-        "upc": "777697038"
-      },
-      "is_set": false,
-      "manufacturer": {
-        "address": "5TH FLOOR, COURT HOUSE,LOKMANYA TILAK MARGA, DHOBI TALAOMUMBAI MAHARASHTRA, , MAHARASHTRA, MUMBAI",
-        "is_default": true,
-        "name": "RELIANCE BRANDS LIMITED"
-      },
-      "modified_by": {
-        "user_id": "68c3800d602c0fda0dab4fea",
-        "username": "abhishekbhakurlekar_gofynd_com_63787"
-      },
-      "platforms": {
-        "fynd": false,
-        "uniket_wholesale": false
-      },
-      "price": {
-        "currency": "INR",
-        "effective": 8000,
-        "marked": 8000,
-        "transfer": 0
-      },
-      "quantities": {
-        "sellable": {
-          "count": 12
-        }
-      },
-      "return_config": {
-        "returnable": true,
-        "time": 30,
-        "unit": "days"
-      },
-      "seller_identifier": "410163085005",
-      "size": "M",
-      "stage": "verified",
-      "store": {
-        "name": "Khan Market",
-        "store_code": "THR1",
-        "store_type": "high_street",
-        "uid": 10444
-      },
-      "tax_identifier": {
-        "hsn_code_id": "000000000000000000000001"
-      },
-      "total_quantity": 12,
-      "trace_id": "inventory.3c9a25e4-955e-11ed-8584-92a07e366903",
-      "track_inventory": true,
-      "trader": [
-        {
-          "address": [
-            "Brooks Brothers India Private Limited registered address is 8th Floor, Maker Tower 'E' Cuffe Parade Mumbai MH 400005 IN"
-          ],
-          "name": "Imported & Marketed by Brooks Brothers India Pvt.Ltd",
-          "type": "Importer"
-        }
-      ],
-      "uid": "10444_410163085005",
-      "weight": {
-        "shipping": 999,
-        "unit": "gram"
-      }
-    },
-    {
-      "brand": {
-        "id": 355
-      },
-      "company": {
-        "id": 46
-      },
-      "country_of_origin": "Malaysia",
-      "created_by": {
-        "user_id": "bc5fbaf5e6f4b5288e9a9a22",
-        "username": "sagardhiman_gofynd_com_43846"
-      },
-      "date_meta": {
-        "added_on_store": "2023-01-05T10:45:41.988Z",
-        "created_on": "2023-01-05T10:45:41.979Z",
-        "inventory_updated_on": "2023-01-19T10:37:00.504Z",
-        "modified_on": "2023-01-19T10:37:00.504Z"
-      },
-      "dimension": {
-        "height": 10,
-        "length": 25,
-        "unit": "cm",
-        "width": 15
-      },
-      "expiration_date": "9998-01-30T23:59:00.000Z",
-      "id": "63b6aa5558bf3ed100740c10",
-      "identifier": {
-        "alu": "410163085004",
-        "upc": "777697046"
-      },
-      "is_set": false,
-      "manufacturer": {
-        "address": "5TH FLOOR, COURT HOUSE,LOKMANYA TILAK MARGA, DHOBI TALAOMUMBAI MAHARASHTRA, , MAHARASHTRA, MUMBAI",
-        "is_default": true,
-        "name": "RELIANCE BRANDS LIMITED"
-      },
-      "modified_by": {
-        "user_id": "68c3800d602c0fda0dab4fea",
-        "username": "abhishekbhakurlekar_gofynd_com_63787"
-      },
-      "platforms": {
-        "fynd": false,
-        "uniket_wholesale": false
-      },
-      "price": {
-        "currency": "INR",
-        "effective": 7001,
-        "marked": 8000,
-        "transfer": 0
-      },
-      "quantities": {
-        "damaged": {
-          "count": 0
-        },
-        "not_available": {
-          "count": 0
-        },
-        "sellable": {
-          "count": 5001
-        }
-      },
-      "return_config": {
-        "returnable": true,
-        "time": 30,
-        "unit": "days"
-      },
-      "seller_identifier": "410163085004",
-      "size": "S",
-      "stage": "verified",
-      "store": {
-        "name": "Reliance 2",
-        "store_code": "R591",
-        "store_type": "warehouse",
-        "uid": 11336
-      },
-      "tax_identifier": {
-        "hsn_code_id": "000000000000000000000001"
-      },
-      "total_quantity": 5001,
-      "trace_id": "inventory.3485e8b4-97e5-11ed-a9d9-5eca1fff6de0",
-      "track_inventory": true,
-      "trader": [
-        {
-          "address": [
-            "Brooks Brothers India Private Limited registered address is 8th Floor, Maker Tower 'E' Cuffe Parade Mumbai MH 400005 IN"
-          ],
-          "name": "Imported & Marketed by Brooks Brothers India Pvt.Ltd",
-          "type": "Importer"
-        }
-      ],
-      "uid": "11336_410163085004",
-      "weight": {
-        "shipping": 999,
-        "unit": "gram"
-      }
-    },
-    {
-      "brand": {
-        "id": 355
-      },
-      "company": {
-        "id": 46
-      },
-      "country_of_origin": "Malaysia",
-      "created_by": {
-        "user_id": "5f200182ee4d3377e83330c2",
-        "username": "meghanakate_gofynd_com_58351"
-      },
-      "date_meta": {
-        "added_on_store": "2022-11-29T11:17:42.271Z",
-        "created_on": "2022-11-29T11:17:42.263Z",
-        "inventory_updated_on": "2022-11-29T11:18:35.183Z",
-        "modified_on": "2022-11-29T11:18:35.183Z"
-      },
-      "dimension": {
-        "height": 10,
-        "length": 25,
-        "unit": "cm",
-        "width": 15
-      },
-      "expiration_date": "9998-01-30T23:59:00.000Z",
-      "id": "6385ea569715e74d8a92ce88",
-      "identifier": {
-        "alu": "410163085001",
-        "upc": "777697079"
-      },
-      "is_set": false,
-      "manufacturer": {
-        "address": "5TH FLOOR, COURT HOUSE,LOKMANYA TILAK MARGA, DHOBI TALAOMUMBAI MAHARASHTRA, , MAHARASHTRA, MUMBAI",
-        "is_default": true,
-        "name": "RELIANCE BRANDS LIMITED"
-      },
-      "modified_by": {
-        "user_id": "5f200182ee4d3377e83330c2",
-        "username": "meghanakate_gofynd_com_58351"
-      },
-      "platforms": {
-        "fynd": false,
-        "uniket_wholesale": false
-      },
-      "price": {
-        "currency": "INR",
-        "effective": 8000,
-        "marked": 8000,
-        "transfer": 0
-      },
-      "quantities": {
-        "damaged": {
-          "count": 0
-        },
-        "not_available": {
-          "count": 0
-        },
-        "sellable": {
-          "count": 1000
-        }
-      },
-      "return_config": {
-        "returnable": true,
-        "time": 30,
-        "unit": "days"
-      },
-      "seller_identifier": "410163085001",
-      "size": "XXL",
-      "stage": "verified",
-      "store": {
-        "name": "Shopsense Retail Technologies",
-        "store_code": "SRT91",
-        "store_type": "warehouse",
-        "uid": 11701
-      },
-      "tax_identifier": {
-        "hsn_code_id": "000000000000000000000001"
-      },
-      "total_quantity": 1000,
-      "track_inventory": true,
-      "trader": [
-        {
-          "address": [
-            "Brooks Brothers India Private Limited registered address is 8th Floor, Maker Tower 'E' Cuffe Parade Mumbai MH 400005 IN"
-          ],
-          "name": "Imported & Marketed by Brooks Brothers India Pvt.Ltd",
-          "type": "Importer"
-        }
-      ],
-      "uid": "11701_410163085001",
-      "weight": {
-        "shipping": 999,
-        "unit": "gram"
-      }
-    },
-    {
-      "brand": {
-        "id": 355
-      },
-      "company": {
-        "id": 46
-      },
-      "country_of_origin": "Malaysia",
-      "created_by": {
-        "user_id": "5f200182ee4d3377e83330c2",
-        "username": "meghanakate_gofynd_com_58351"
-      },
-      "date_meta": {
-        "added_on_store": "2022-11-29T11:17:34.431Z",
-        "created_on": "2022-11-29T11:17:34.424Z",
-        "inventory_updated_on": "2022-11-29T11:18:27.331Z",
-        "modified_on": "2022-11-29T11:18:27.331Z"
-      },
-      "dimension": {
-        "height": 10,
-        "length": 25,
-        "unit": "cm",
-        "width": 15
-      },
-      "expiration_date": "9998-01-30T23:59:00.000Z",
-      "id": "6385ea4e9715e74d8a92ce86",
-      "identifier": {
-        "alu": "410163085003",
-        "upc": "777697053"
-      },
-      "is_set": false,
-      "manufacturer": {
-        "address": "5TH FLOOR, COURT HOUSE,LOKMANYA TILAK MARGA, DHOBI TALAOMUMBAI MAHARASHTRA, , MAHARASHTRA, MUMBAI",
-        "is_default": true,
-        "name": "RELIANCE BRANDS LIMITED"
-      },
-      "modified_by": {
-        "user_id": "5f200182ee4d3377e83330c2",
-        "username": "meghanakate_gofynd_com_58351"
-      },
-      "platforms": {
-        "fynd": false,
-        "uniket_wholesale": false
-      },
-      "price": {
-        "currency": "INR",
-        "effective": 8000,
-        "marked": 8000,
-        "transfer": 0
-      },
-      "quantities": {
-        "damaged": {
-          "count": 0
-        },
-        "not_available": {
-          "count": 0
-        },
-        "sellable": {
-          "count": 1000
-        }
-      },
-      "return_config": {
-        "returnable": true,
-        "time": 30,
-        "unit": "days"
-      },
-      "seller_identifier": "410163085003",
-      "size": "XL",
-      "stage": "verified",
-      "store": {
-        "name": "Shopsense Retail Technologies",
-        "store_code": "SRT91",
-        "store_type": "warehouse",
-        "uid": 11701
-      },
-      "tax_identifier": {
-        "hsn_code_id": "000000000000000000000001"
-      },
-      "total_quantity": 1000,
-      "track_inventory": true,
-      "trader": [
-        {
-          "address": [
-            "Brooks Brothers India Private Limited registered address is 8th Floor, Maker Tower 'E' Cuffe Parade Mumbai MH 400005 IN"
-          ],
-          "name": "Imported & Marketed by Brooks Brothers India Pvt.Ltd",
-          "type": "Importer"
-        }
-      ],
-      "uid": "11701_410163085003",
-      "weight": {
-        "shipping": 999,
-        "unit": "gram"
-      }
-    }
-  ],
-  "page": {
-    "current": 1,
-    "has_next": false,
-    "has_previous": false,
-    "item_total": 5,
-    "size": 1,
-    "type": "number"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getInventoryBulkUploadHistory
-Retrieve inventory bulk upload history.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getInventoryBulkUploadHistory(pageNo=pageNo, pageSize=pageSize)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| pageNo | Int? | no | The page number to navigate through the given set of results |   
-| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |  
-
-
-
-Helps to get bulk Inventory upload jobs data.
-
-*Returned Response:*
-
-
-
-
-[BulkInventoryGet](#BulkInventoryGet)
-
-List of bulk Inventory upload jobs. See `BulkInventoryGetSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "cancelled": 0,
-      "cancelled_records": [],
-      "company_id": 1,
-      "created_by": {
-        "full_name": "Nikhil Mhatre",
-        "user_id": "16",
-        "username": "nikhilmhatre_gofynd_com_97636"
-      },
-      "created_on": "2021-03-11T10:54:44.998Z",
-      "failed": 0,
-      "failed_records": [],
-      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/50DbgKLND-NtnL_EAVb-REicn1sDv-V8ZrKdnLt-product_inventory.csv",
-      "id": "6049f6f5723043000125a9ea",
-      "is_active": true,
-      "modified_by": {
-        "user_id": "0",
-        "username": "Silverbolt"
-      },
-      "modified_on": "2021-03-11T10:54:45.296Z",
-      "stage": "completed",
-      "succeed": 1,
-      "total": 1
-    },
-    {
-      "cancelled": 0,
-      "cancelled_records": [],
-      "company_id": 1,
-      "created_by": {
-        "user_id": "-1",
-        "username": "silverbolt"
-      },
-      "created_on": "2021-03-04T09:46:51.714Z",
-      "failed": 0,
-      "failed_records": [],
-      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/NtnL_EAVb-REicn1sDv-V8ZrKdnLt-product_inventory.csv",
-      "id": "6040ac8b1803830001fcc1ed",
-      "is_active": true,
-      "modified_by": {
-        "user_id": "0",
-        "username": "Silverbolt"
-      },
-      "modified_on": "2021-03-04T09:46:55.349Z",
-      "stage": "completed",
-      "succeed": 1,
-      "total": 1
-    },
-    {
-      "cancelled": 0,
-      "cancelled_records": [],
-      "company_id": 1,
-      "created_by": {
-        "user_id": "-1",
-        "username": "silverbolt"
-      },
-      "created_on": "2021-03-04T09:22:32.222Z",
-      "failed": 0,
-      "failed_records": [],
-      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/bmBZY9iAX-REicn1sDv-V8ZrKdnLt-product_inventory.csv",
-      "id": "6040a6d8104f110001a85061",
-      "is_active": true,
-      "modified_by": {
-        "user_id": "-1",
-        "username": "silverbolt"
-      },
-      "modified_on": "2021-03-04T09:22:32.222Z",
-      "stage": "terminated",
-      "succeed": 0,
-      "total": 1
-    },
-    {
-      "cancelled": 0,
-      "cancelled_records": [],
-      "company_id": 1,
-      "created_by": {
-        "user_id": "-1",
-        "username": "silverbolt"
-      },
-      "created_on": "2021-03-04T09:20:29.719Z",
-      "failed": 0,
-      "failed_records": [],
-      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/m73yWRT3v-REicn1sDv-V8ZrKdnLt-product_inventory.csv",
-      "id": "6040a65d104f110001a85060",
-      "is_active": true,
-      "modified_by": {
-        "user_id": "-1",
-        "username": "silverbolt"
-      },
-      "modified_on": "2021-03-04T09:20:29.719Z",
-      "stage": "terminated",
-      "succeed": 0,
-      "total": 1
-    },
-    {
-      "cancelled": 0,
-      "cancelled_records": [],
-      "company_id": 1,
-      "created_by": {
-        "user_id": "-1",
-        "username": "silverbolt"
-      },
-      "created_on": "2021-03-04T08:50:49.367Z",
-      "failed": 0,
-      "failed_records": [],
-      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/W9lxe19Uu-REicn1sDv-V8ZrKdnLt-product_inventory.csv",
-      "id": "60409f699b21e30001c1e6b5",
-      "is_active": true,
-      "modified_by": {
-        "user_id": "-1",
-        "username": "silverbolt"
-      },
-      "modified_on": "2021-03-04T08:50:49.367Z",
-      "stage": "terminated",
-      "succeed": 0,
-      "total": 1
-    },
-    {
-      "cancelled": 0,
-      "cancelled_records": [],
-      "company_id": 1,
-      "created_by": {
-        "full_name": "Sourabh Nilakhe",
-        "user_id": "5646",
-        "username": "917972410891_48194"
-      },
-      "created_on": "2021-02-10T10:57:57.236Z",
-      "failed": 0,
-      "failed_records": [],
-      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/REicn1sDv-V8ZrKdnLt-product_inventory.csv",
-      "id": "6023bc35c85ca1000171e08a",
-      "is_active": true,
-      "modified_by": {
-        "user_id": "0",
-        "username": "Silverbolt"
-      },
-      "modified_on": "2021-02-10T10:57:57.571Z",
-      "stage": "completed",
-      "succeed": 1,
-      "total": 1
-    },
-    {
-      "cancelled": 0,
-      "cancelled_records": [],
-      "company_id": 1,
-      "created_by": {
-        "full_name": "Sourabh Nilakhe",
-        "user_id": "5646",
-        "username": "917972410891_48194"
-      },
-      "created_on": "2021-02-10T10:57:22.535Z",
-      "failed": 0,
-      "failed_records": [],
-      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/Oth_LaVyI-V8ZrKdnLt-product_inventory.csv",
-      "id": "6023bc12c85ca1000171e089",
-      "is_active": true,
-      "modified_by": {
-        "user_id": "0",
-        "username": "Silverbolt"
-      },
-      "modified_on": "2021-02-10T10:57:23.311Z",
-      "stage": "completed",
-      "succeed": 1,
-      "total": 1
-    },
-    {
-      "cancelled": 0,
-      "cancelled_records": [],
-      "company_id": 1,
-      "created_by": {
-        "full_name": "Nikhil Mhatre",
-        "user_id": "16",
-        "username": "nikhilmhatre_gofynd_com_97636"
-      },
-      "created_on": "2021-01-13T13:58:06.155Z",
-      "failed": 0,
-      "failed_records": [],
-      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/V8ZrKdnLt-product_inventory.csv",
-      "id": "5ffefc6ee2db8f000183fab8",
-      "is_active": true,
-      "modified_by": {
-        "user_id": "0",
-        "username": "Silverbolt"
-      },
-      "modified_on": "2021-01-13T13:58:06.369Z",
-      "stage": "completed",
-      "succeed": 1,
-      "total": 1
-    },
-    {
-      "cancelled": 0,
-      "cancelled_records": [],
-      "company_id": 1,
-      "created_by": {
-        "full_name": "Nikhil Mhatre",
-        "user_id": "16",
-        "username": "nikhilmhatre_gofynd_com_97636"
-      },
-      "created_on": "2021-01-13T13:57:38.598Z",
-      "failed": 1,
-      "failed_records": [],
-      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/t3T6X2Riy-product_inventory.csv",
-      "id": "5ffefc5252f31100012ea981",
-      "is_active": true,
-      "modified_by": {
-        "user_id": "0",
-        "username": "Silverbolt"
-      },
-      "modified_on": "2021-01-13T13:57:38.832Z",
-      "stage": "failed",
-      "succeed": 0,
-      "total": 1
-    },
-    {
-      "cancelled": 0,
-      "cancelled_records": [],
-      "company_id": 1,
-      "created_by": {
-        "full_name": "Nikhil Mhatre",
-        "user_id": "16",
-        "username": "nikhilmhatre_gofynd_com_97636"
-      },
-      "created_on": "2021-01-13T13:57:13.639Z",
-      "failed": 1,
-      "failed_records": [],
-      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/NSTuhgsgq-product_inventory.csv",
-      "id": "5ffefc39a0d1e20001ae118c",
-      "is_active": true,
-      "modified_by": {
-        "user_id": "0",
-        "username": "Silverbolt"
-      },
-      "modified_on": "2021-01-13T13:57:13.847Z",
-      "stage": "failed",
-      "succeed": 0,
-      "total": 1
-    },
-    {
-      "cancelled": 0,
-      "cancelled_records": [],
-      "company_id": 1,
-      "created_by": {
-        "full_name": "Nikhil Mhatre",
-        "user_id": "16",
-        "username": "nikhilmhatre_gofynd_com_97636"
-      },
-      "created_on": "2021-01-12T06:37:06.167Z",
-      "failed": 0,
-      "failed_records": [],
-      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/cwQV-Z6gT-product_inventory.xlsx",
-      "id": "5ffd4392b4c34d000170697b",
-      "is_active": true,
-      "modified_by": {
-        "user_id": "0",
-        "username": "Silverbolt"
-      },
-      "modified_on": "2021-01-12T06:37:06.307Z",
-      "stage": "completed",
-      "succeed": 1,
-      "total": 1
-    },
-    {
-      "cancelled": 0,
-      "cancelled_records": [],
-      "company_id": 1,
-      "created_by": {
-        "full_name": "Nikhil Mhatre",
-        "user_id": "16",
-        "username": "nikhilmhatre_gofynd_com_97636"
-      },
-      "created_on": "2021-01-12T06:36:24.292Z",
-      "failed": 0,
-      "failed_records": [],
-      "file_path": "https://hdn-1.addsale.com/x0/company/1/self/documents/inventory-import/free/original/gccehef2f-product_inventory.xlsx",
-      "id": "5ffd4368b4c34d0001706960",
-      "is_active": true,
-      "modified_by": {
-        "user_id": "0",
-        "username": "Silverbolt"
-      },
-      "modified_on": "2021-01-12T06:36:24.535Z",
-      "stage": "completed",
-      "succeed": 1,
-      "total": 1
-    }
-  ],
-  "page": {
-    "current": 1,
-    "has_next": true,
-    "has_previous": false,
-    "item_total": 39,
-    "size": 4,
-    "type": "number"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createBulkInventoryJob
-Create bulk inventory upload job.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.createBulkInventoryJob(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [BulkJob](#BulkJob) | yes | Request body |
-
-
-Helps to create a bulk Inventory upload job.
-
-*Returned Response:*
-
-
-
-
-[BulkResponse](#BulkResponse)
-
-Returns a success response
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "batch_id": "507f1f77bcf86cd799439011",
-  "created_on": "2021-04-02T15:43:59.410Z"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteBulkInventoryJob
-Delete inventory bulk upload job.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.deleteBulkInventoryJob(batchId=batchId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| batchId | String | yes | Batch Id of the bulk delete job. |  
-
-
-
-Allows to delete bulk Inventory job associated with company.
-
-*Returned Response:*
-
-
-
-
-[SuccessResponse](#SuccessResponse)
-
-Returns a success response
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createBulkInventory
-Create bulk inventory.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.createBulkInventory(batchId=batchId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| batchId | String | yes | Batch Id of the bulk create job. |  
-| body | [InventoryBulkRequest](#InventoryBulkRequest) | yes | Request body |
-
-
-Helps to create products in bulk push to kafka for approval/creation.
-
-*Returned Response:*
-
-
-
-
-[SuccessResponse](#SuccessResponse)
-
-Returns a success response
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getInventoryExport
-Retrieve inventory export data.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getInventoryExport()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Helps to retrieve Inventory export history.
-
-*Returned Response:*
-
-
-
-
-[InventoryExportJob](#InventoryExportJob)
-
-Returns a list of inventory export jobs
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createInventoryExportJob
-Create inventory export job.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.createInventoryExportJob(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [InventoryExportRequest](#InventoryExportRequest) | yes | Request body |
-
-
-Helps to create a Inventory export job.
-
-*Returned Response:*
-
-
-
-
-[InventoryExportResponse](#InventoryExportResponse)
-
-Returns a success response
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### exportInventoryConfig
-Export inventory configuration.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.exportInventoryConfig(filterType=filterType)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| filterType | String? | no | filter type from any one of ['brand', 'store', 'type'] |  
-
-
-
-Retrieve List of different filters like brand, store, and type for inventory export.
-
-*Returned Response:*
-
-
-
-
-[InventoryConfig](#InventoryConfig)
-
-returns filters configuration for inventory export
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "data": [
-    {
-      "display": "csv",
-      "value": "csv"
-    },
-    {
-      "display": "excel",
-      "value": "excel"
-    }
-  ],
-  "multivalues": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getProductAttributes
-Get product attributes.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getProductAttributes(category=category, filter=filter)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| category | String | yes | It is the name of the l3 cateogry |   
-| filter | Boolean? | no | If true, returns filtered values, else returns all the attributes |  
-
-
-
-List all the attributes by their L3 categories.
-
-*Returned Response:*
-
-
-
-
-[ProductAttributesResponse](#ProductAttributesResponse)
-
-Size guide object. See example below or refer `ProductAttributesResponseSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "created_by": {
-        "user_id": "8ec76d9df98f4246a9d6e5a6",
-        "username": "anveshreddy_fynd_external_com_85084"
-      },
-      "created_on": "2022-05-25T16:15:01.276Z",
-      "departments": [
-        "men-s-fashion"
-      ],
-      "description": "to test the attribute that represents area",
-      "details": {
-        "display_type": "text"
-      },
-      "filters": {
-        "indexing": false
-      },
-      "id": "628e5605c71589dba709c365",
-      "modified_by": {
-        "user_id": "8ec76d9df98f4246a9d6e5a6",
-        "username": "anveshreddy_fynd_external_com_85084"
-      },
-      "modified_on": "2022-05-25T16:15:01.276Z",
-      "name": "test number area",
-      "schema": {
-        "allowed_values": [],
-        "format": "",
-        "multi": true,
-        "range": {},
-        "type": "int"
-      },
-      "slug": "test-number-area",
-      "unit": "ft**2",
-      "variant": false
-    },
-    {
-      "created_by": {
-        "user_id": "8ec76d9df98f4246a9d6e5a6",
-        "username": "anveshreddy_fynd_external_com_85084"
-      },
-      "created_on": "2022-05-05T09:40:00.453Z",
-      "departments": [
-        "men-s-fashion",
-        "anvesh-department"
-      ],
-      "description": "tells the power of the motor",
-      "details": {
-        "display_type": "text"
-      },
-      "enabled_for_end_consumer": true,
-      "filters": {
-        "indexing": true,
-        "priority": 26
-      },
-      "id": "62739b7043385c1f314d4868",
-      "logo": "https://hdn-1.jiomarketx0.de/x0/products/pictures/attribute/logo/original/UYTUHgLGj-Color.png",
-      "modified_by": {
-        "user_id": "8ec76d9df98f4246a9d6e5a6",
-        "username": "anveshreddy_fynd_external_com_85084"
-      },
-      "modified_on": "2022-05-05T09:40:00.453Z",
-      "name": "Motor Power",
-      "schema": {
-        "allowed_values": [],
-        "format": "",
-        "mandatory": true,
-        "multi": false,
-        "range": {
-          "max": 10,
-          "min": 1
-        },
-        "type": "int"
-      },
-      "slug": "motor-power",
-      "unit": "hp",
-      "variant": true
-    },
-    {
-      "created_by": {
-        "user_id": "8ec76d9df98f4246a9d6e5a6",
-        "username": "anveshreddy_fynd_external_com_85084"
-      },
-      "created_on": "2022-05-05T08:56:59.483Z",
-      "departments": [
-        "men-s-fashion",
-        "electronics-test",
-        "anvesh-department",
-        "fashion",
-        "test1"
-      ],
-      "description": "describes the size of the item",
-      "details": {
-        "display_type": "text"
-      },
-      "enabled_for_end_consumer": true,
-      "filters": {
-        "indexing": true,
-        "priority": 25
-      },
-      "id": "6273915b43385c1f314d4867",
-      "logo": "https://hdn-1.jiomarketx0.de/x0/products/pictures/attribute/logo/original/UYTUHgLGj-Color.png",
-      "modified_by": {
-        "user_id": "8ec76d9df98f4246a9d6e5a6",
-        "username": "anveshreddy_fynd_external_com_85084"
-      },
-      "modified_on": "2022-05-05T13:25:33.353Z",
-      "name": "SIZE NEW",
-      "schema": {
-        "allowed_values": [
-          "XS",
-          "S",
-          "M",
-          "L",
-          "XXL",
-          "XXXL"
-        ],
-        "format": "upper case",
-        "mandatory": true,
-        "multi": false,
-        "range": {},
-        "type": "str"
-      },
-      "slug": "size-new",
-      "variant": false
-    },
-    {
-      "created_by": {
-        "user_id": "5d9aa3ca5acdcb33fdcc8472",
-        "username": "piyushsinha_fynd_external_com_34090"
-      },
-      "created_on": "2022-04-13T13:35:53.611Z",
-      "departments": [
-        "men-s-fashion"
-      ],
-      "details": {
-        "display_type": "text"
-      },
-      "filters": {
-        "indexing": false
-      },
-      "id": "6256d1b9635e136dc2cb9a02",
-      "modified_by": {
-        "user_id": "5d9aa3ca5acdcb33fdcc8472",
-        "username": "piyushsinha_fynd_external_com_34090"
-      },
-      "modified_on": "2022-04-13T13:35:53.611Z",
-      "name": "White",
-      "schema": {
-        "allowed_values": [],
-        "format": "title case",
-        "multi": false,
-        "range": {},
-        "type": "str"
-      },
-      "slug": "white",
-      "variant": false
-    },
-    {
-      "created_by": {
-        "user_id": "f6fccadda27e6b365b87c027",
-        "username": "jagadeshsahadevan_gofynd_com_66706"
-      },
-      "created_on": "2022-03-24T07:16:59.998Z",
-      "departments": [
-        "men-s-fashion"
-      ],
-      "description": "Hello World",
-      "details": {
-        "display_type": "text"
-      },
-      "filters": {
-        "indexing": false
-      },
-      "id": "623c1aecb9e8edcfeb8d076a",
-      "modified_by": {
-        "user_id": "f6fccadda27e6b365b87c027",
-        "username": "jagadeshsahadevan_gofynd_com_66706"
-      },
-      "modified_on": "2022-03-24T07:16:59.998Z",
-      "name": "Test Attributes",
-      "schema": {
-        "allowed_values": [
-          "A",
-          "B"
-        ],
-        "format": "",
-        "multi": true,
-        "range": {},
-        "type": "str"
-      },
-      "slug": "test-attributes",
-      "variant": false
-    },
-    {
-      "created_by": {
-        "user_id": "59ad6a452775bfd63674f0a5",
-        "username": "rockypatro_gofynd_com_32787"
-      },
-      "created_on": "2022-03-17T14:54:41.251Z",
-      "departments": [
-        "men-s-fashion"
-      ],
-      "description": "Any specific care instruction note or Safety instructions that needs to be followed",
-      "details": {
-        "display_type": "text"
-      },
-      "enabled_for_end_consumer": true,
-      "filters": {
-        "indexing": true,
-        "priority": 9
-      },
-      "id": "62334bb1d6b144588682e1c0",
-      "modified_by": {
-        "user_id": "59ad6a452775bfd63674f0a5",
-        "username": "rockypatro_gofynd_com_32787"
-      },
-      "modified_on": "2022-03-17T14:54:41.251Z",
-      "name": "Care Instructions",
-      "schema": {
-        "allowed_values": [],
-        "format": "",
-        "multi": false,
-        "range": {},
-        "type": "str"
-      },
-      "slug": "care-instructions",
-      "variant": false
-    },
-    {
-      "created_by": {
-        "user_id": "59ad6a452775bfd63674f0a5",
-        "username": "rockypatro_gofynd_com_32787"
-      },
-      "created_on": "2022-03-17T14:53:45.700Z",
-      "departments": [
-        "men-s-fashion"
-      ],
-      "description": "Specify the length of the sleeve. Select the value from the dropdown",
-      "details": {
-        "display_type": "text"
-      },
-      "enabled_for_end_consumer": true,
-      "filters": {
-        "indexing": true,
-        "priority": 8
-      },
-      "id": "62334b79d6b144588682e1bf",
-      "modified_by": {
-        "user_id": "59ad6a452775bfd63674f0a5",
-        "username": "rockypatro_gofynd_com_32787"
-      },
-      "modified_on": "2022-03-17T14:53:45.700Z",
-      "name": "Sleeve Length",
-      "schema": {
-        "allowed_values": [
-          "Sleeveless",
-          "Short",
-          "Long"
-        ],
-        "format": "",
-        "multi": false,
-        "range": {},
-        "type": "str"
-      },
-      "slug": "sleeve-length",
-      "variant": false
-    },
-    {
-      "created_by": {
-        "user_id": "59ad6a452775bfd63674f0a5",
-        "username": "rockypatro_gofynd_com_32787"
-      },
-      "created_on": "2022-03-17T14:52:12.367Z",
-      "departments": [
-        "men-s-fashion",
-        "women-s-fashion"
-      ],
-      "description": "A repeated form or design on the product, Select the values from the dropdown.",
-      "details": {
-        "display_type": "text"
-      },
-      "enabled_for_end_consumer": true,
-      "filters": {
-        "indexing": true,
-        "priority": 7
-      },
-      "id": "62334b1cd6b144588682e1be",
-      "modified_by": {
-        "user_id": "f6fccadda27e6b365b87c027",
-        "username": "jagadeshsahadevan_gofynd_com_66706"
-      },
-      "modified_on": "2022-03-24T07:23:32.752Z",
-      "name": "Pattern",
-      "schema": {
-        "allowed_values": [
-          "Solid",
-          "Printed",
-          "Ripped",
-          "Checked"
-        ],
-        "format": "",
-        "multi": false,
-        "range": {},
-        "type": "str"
-      },
-      "slug": "pattern",
-      "variant": false
-    },
-    {
-      "created_by": {
-        "user_id": "59ad6a452775bfd63674f0a5",
-        "username": "rockypatro_gofynd_com_32787"
-      },
-      "created_on": "2022-03-17T14:50:30.717Z",
-      "departments": [
-        "men-s-fashion",
-        "beauty-and-personal-care",
-        "electronics"
-      ],
-      "description": "Specify the Material name or Material composition of the product",
-      "details": {
-        "display_type": "text"
-      },
-      "enabled_for_end_consumer": true,
-      "filters": {
-        "indexing": true,
-        "priority": 6
-      },
-      "id": "62334ab6d6b144588682e1bd",
-      "modified_by": {
-        "user_id": "59ad6a452775bfd63674f0a5",
-        "username": "rockypatro_gofynd_com_32787"
-      },
-      "modified_on": "2022-03-17T14:50:30.717Z",
-      "name": "Material",
-      "schema": {
-        "allowed_values": [],
-        "format": "",
-        "multi": false,
-        "range": {},
-        "type": "str"
-      },
-      "slug": "material",
-      "variant": false
-    },
-    {
-      "created_by": {
-        "user_id": "59ad6a452775bfd63674f0a5",
-        "username": "rockypatro_gofynd_com_32787"
-      },
-      "created_on": "2022-03-17T14:49:43.160Z",
-      "departments": [
-        "men-s-fashion",
-        "beauty-and-personal-care",
-        "electronics"
-      ],
-      "description": "Specify the colour of the product, if you have any customized colour name Specify in this column.",
-      "details": {
-        "display_type": "text"
-      },
-      "enabled_for_end_consumer": true,
-      "filters": {
-        "indexing": true,
-        "priority": 5
-      },
-      "id": "62334a87d6b144588682e1bc",
-      "modified_by": {
-        "user_id": "59ad6a452775bfd63674f0a5",
-        "username": "rockypatro_gofynd_com_32787"
-      },
-      "modified_on": "2022-03-17T14:49:43.160Z",
-      "name": "Colour",
-      "schema": {
-        "allowed_values": [],
-        "format": "",
-        "multi": false,
-        "range": {},
-        "type": "str"
-      },
-      "slug": "colour",
-      "variant": false
-    }
-  ]
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getProductAssetsInBulk
-Retrieve product assets in bulk.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getProductAssetsInBulk(pageNo=pageNo, pageSize=pageSize)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| pageNo | Int? | no | The page number to navigate through the given set of results |   
-| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |  
-
-
-
-Helps to retrieve bulk asset jobs data associated to a particular company.
-
-*Returned Response:*
-
-
-
-
-[BulkAssetResponse](#BulkAssetResponse)
-
-List of bulk asset jobs List. See `BulkUtil.modify_batch_response` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "cancelled": 0,
-      "cancelled_records": [],
-      "company_id": 61,
-      "created_by": {
-        "full_name": "nikhil mhatre",
-        "user_id": "23175373",
-        "username": "nikhilmhatre_gofynd_com_28085_23175373"
-      },
-      "created_on": "2021-02-25T16:45:22.425Z",
-      "failed": 0,
-      "failed_records": [],
-      "file_path": "https://hdn-1.fynd.com/company/61/self/documents/product-import/free/original/ZUSmmXHmZ-U8mTYx3KR-Nike-hoddie.zip",
-      "id": "6037d422aa879600015c6d1d",
-      "is_active": true,
-      "modified_by": {
-        "user_id": "23175373",
-        "username": "nikhilmhatre_gofynd_com_28085_23175373"
-      },
-      "modified_on": "2021-02-25T16:47:24.551Z",
-      "retry": 1,
-      "stage": "completed",
-      "succeed": 1,
-      "total": 1,
-      "tracking_url": "https://api.fynd.com/common/assets/v1/asset/status/extract-zips/3296"
-    }
-  ],
-  "page": {
-    "current": 1,
-    "has_next": false,
-    "has_previous": false,
-    "item_total": 1,
-    "size": 3,
-    "type": "number"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createProductAssetsInBulk
-Create product assets in bulk.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.createProductAssetsInBulk(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [ProductBulkAssets](#ProductBulkAssets) | yes | Request body |
-
-
-Helps to create a bulk asset upload job.
-
-*Returned Response:*
-
-
-
-
-[SuccessResponse](#SuccessResponse)
-
-Returns a success response
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getProductBulkUploadHistory
-Retrieve product bulk upload history.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getProductBulkUploadHistory(search=search, pageNo=pageNo, pageSize=pageSize)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| search | String? | no | Search string to filter the results by batch id |   
-| pageNo | Int? | no | The page number to navigate through the given set of results |   
-| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |  
-
-
-
-Helps to get bulk product upload jobs data.
-
-*Returned Response:*
-
-
-
-
-[ProductBulkRequestList](#ProductBulkRequestList)
-
-List of bulk product upload jobs. See `BulkRequestGetSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "cancelled": 0,
-      "cancelled_records": [],
-      "company_id": 61,
-      "created_by": {
-        "full_name": "Anuja Yadav",
-        "user_id": "23218433",
-        "username": "yadavanuja039_gmail_com_82948"
-      },
-      "created_on": "2021-03-12T08:11:06.848Z",
-      "failed": 0,
-      "failed_records": [],
-      "file_path": "https://hdn-1.fynd.com/company/61/self/documents/product-import/free/original/mkX5ApRmw-sample_bulk_products_footwear.xlsx",
-      "id": "604b221a73bfa20001cb00e8",
-      "is_active": true,
-      "modified_by": {
-        "user_id": "0",
-        "username": "Silverbolt"
-      },
-      "modified_on": "2021-03-12T08:11:08.646Z",
-      "stage": "completed",
-      "succeed": 1,
-      "template": {
-        "banner": "https://hdn-1.fynd.com/seller/pictures/landscape-banner/original/nFPtXR_Beauty_&_Personal_Care_L.jpgf30455a5-d265-4382-b513-65afb9240320/nFPtXR_Beauty_and_Personal_Care_L.jpg",
-        "departments": [
-          "men",
-          "women",
-          "kids",
-          "fashion"
-        ],
-        "description": "Footwear is a garment worn on the feet to protect against environmental adversities like heat or ground textures. Example: Sports Shoes",
-        "is_expirable": true,
-        "is_physical": true,
-        "logo": "https://hdn-1.fynd.com/seller/pictures/logo/original/9Y2UEp_ssssss.jpg7359e4c6-4c53-4dbe-a920-ef8ac658afb1/9Y2UEp_ssssss.jpg",
-        "name": "Footwear",
-        "slug": "footwear"
-      },
-      "template_tag": "footwear",
-      "total": 1
-    }
-  ],
-  "page": {
-    "current": 1,
-    "has_next": true,
-    "has_previous": false,
-    "item_total": 251,
-    "size": 26,
-    "type": "number"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteProductBulkJob
-Delete product bulk upload job.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.deleteProductBulkJob(batchId=batchId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| batchId | Int | yes | Batch Id of the bulk product job to be deleted. |  
-
-
-
-Allows to delete bulk product job associated with company.
-
-*Returned Response:*
-
-
-
-
-[SuccessResponse](#SuccessResponse)
-
-Returns a success response
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createProductsInBulk
-Create products in bulk.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.createProductsInBulk(batchId=batchId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| batchId | String | yes | Batch Id in which assets to be uploaded. |  
-| body | [BulkProductRequest](#BulkProductRequest) | yes | Request body |
-
-
-Helps to create products in bulk push to kafka for approval/creation.
-
-*Returned Response:*
-
-
-
-
-[SuccessResponse](#SuccessResponse)
-
-Returns a success response
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getProductTags
-Get product tags.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getProductTags()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Retrieve tags data associated to a particular company.
-
-*Returned Response:*
-
-
-
-
-[ProductTagsViewResponse](#ProductTagsViewResponse)
-
-Tag List. See example below for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    "demo",
-    "custom"
-  ]
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getProductValidation
-Get product validation.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getProductValidation()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Retrieve validation data for a specific product.
-
-*Returned Response:*
-
-
-
-
-[ValidateProduct](#ValidateProduct)
-
-Validate Meta. See example below for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "valid": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getInventoryBySizeIdentifier
-Get inventory by size identifier.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getInventoryBySizeIdentifier(itemId=itemId, sizeIdentifier=sizeIdentifier, pageNo=pageNo, pageSize=pageSize, q=q, locationIds=locationIds)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| itemId | Int | yes | Item code of the product of which size is to be get. |   
-| sizeIdentifier | String | yes | Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get. |   
-| pageNo | Int? | no | The page number to navigate through the given set of results |   
-| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |   
-| q | String? | no | Search with help of store code. |   
-| locationIds | ArrayList<Int>? | no | Search by store ids. |  
-
-
-
-Allows to retrieve Inventory data for particular company grouped by size and store.
-
-*Returned Response:*
-
-
-
-
-[InventorySellerIdentifierResponsePaginated](#InventorySellerIdentifierResponsePaginated)
-
-returns a list of all inventory grouped by size and store
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "brand": {
-        "id": 1,
-        "name": "ab"
-      },
-      "company": {
-        "id": 1
-      },
-      "country_of_origin": "",
-      "currency": "INR",
-      "dimension": {
-        "height": 13.1,
-        "is_default": true,
-        "length": 1.3,
-        "unit": "cm",
-        "width": 23.4
-      },
-      "fragile": false,
-      "fynd_article_code": "",
-      "fynd_item_code": "",
-      "identifier": {},
-      "identifiers": [
-        {
-          "gtin_type": "sku_code",
-          "gtin_value": "RTYUIDSDFV",
-          "primary": true
-        }
-      ],
-      "inventory_updated_on": "2021-04-06T03:30:01.487Z",
-      "item_id": 7500651,
-      "manufacturer": {
-        "address": "ab",
-        "is_default": true,
-        "name": "ab"
-      },
-      "price": {
-        "currency": "USD",
-        "effective": 79.99,
-        "marked": 99.99,
-        "transfer": 89.99
-      },
-      "price_effective": 1234,
-      "price_transfer": 0,
-      "quantity": 10,
-      "sellable_quantity": 10,
-      "seller_identifier": "RTYUIDSDFV",
-      "size": "AAX1 (1 PCS)",
-      "store": {
-        "id": 1
-      },
-      "total_quantity": 1,
-      "uid": "59_RTYUIDSDFV",
-      "weight": {
-        "is_default": true,
-        "shipping": 1.5,
-        "unit": "kg"
-      }
-    },
-    {
-      "brand": {
-        "id": 1,
-        "name": "ab"
-      },
-      "company": {
-        "id": 1
-      },
-      "country_of_origin": "",
-      "currency": "INR",
-      "dimension": {
-        "height": 13.1,
-        "is_default": true,
-        "length": 1.3,
-        "unit": "cm",
-        "width": 23.4
-      },
-      "fragile": false,
-      "fynd_article_code": "",
-      "fynd_item_code": "",
-      "identifier": {},
-      "identifiers": [
-        {
-          "gtin_type": "sku_code",
-          "gtin_value": "RTYUIDSDFV",
-          "primary": true
-        }
-      ],
-      "inventory_updated_on": "2021-04-06T03:29:35.291Z",
-      "item_id": 7500651,
-      "manufacturer": {
-        "address": "ab",
-        "is_default": true,
-        "name": "ab"
-      },
-      "price": {
-        "currency": "USD",
-        "effective": 79.99,
-        "marked": 99.99,
-        "transfer": 89.99
-      },
-      "price_effective": 1234,
-      "price_transfer": 0,
-      "quantity": 10,
-      "sellable_quantity": 10,
-      "seller_identifier": "RTYUIDSDFV",
-      "size": "AAX1 (1 PCS)",
-      "store": {
-        "id": 1
-      },
-      "total_quantity": 1,
-      "uid": "10_RTYUIDSDFV",
-      "weight": {
-        "is_default": true,
-        "shipping": 1.5,
-        "unit": "kg"
-      }
-    },
-    {
-      "brand": {
-        "id": 1,
-        "name": "ab"
-      },
-      "company": {
-        "id": 1
-      },
-      "country_of_origin": "",
-      "currency": "INR",
-      "dimension": {
-        "height": 13.1,
-        "is_default": true,
-        "length": 1.3,
-        "unit": "cm",
-        "width": 23.4
-      },
-      "fragile": false,
-      "fynd_article_code": "",
-      "fynd_item_code": "",
-      "identifier": {},
-      "identifiers": [
-        {
-          "gtin_type": "sku_code",
-          "gtin_value": "RTYUIDSDFV",
-          "primary": true
-        }
-      ],
-      "inventory_updated_on": "2021-03-17T12:35:29.992Z",
-      "item_id": 7500651,
-      "manufacturer": {
-        "address": "ab",
-        "is_default": true,
-        "name": "ab"
-      },
-      "order_committed_quantity": 0,
-      "price": {
-        "currency": "USD",
-        "effective": 79.99,
-        "marked": 99.99,
-        "transfer": 89.99
-      },
-      "price_effective": 1234,
-      "price_transfer": 0,
-      "quantity": 10000000,
-      "sellable_quantity": 10000000,
-      "seller_identifier": "RTYUIDSDFV",
-      "size": "AAX1 (1 PCS)",
-      "store": {
-        "id": 1
-      },
-      "total_quantity": 1,
-      "uid": "11061_RTYUIDSDFV",
-      "weight": {
-        "is_default": true,
-        "shipping": 1.5,
-        "unit": "kg"
-      }
-    },
-    {
-      "brand": {
-        "id": 1,
-        "name": "ab"
-      },
-      "company": {
-        "id": 1
-      },
-      "country_of_origin": "",
-      "currency": "INR",
-      "damaged_quantity": 0,
-      "dimension": {
-        "height": 13.1,
-        "is_default": true,
-        "length": 1.3,
-        "unit": "cm",
-        "width": 23.4
-      },
-      "fragile": false,
-      "fynd_article_code": "",
-      "fynd_item_code": "",
-      "identifier": {},
-      "identifiers": [
-        {
-          "gtin_type": "sku_code",
-          "gtin_value": "RTYUIDSDFV",
-          "primary": true
-        }
-      ],
-      "inventory_updated_on": "2021-03-31T19:00:10.943Z",
-      "item_id": 7500651,
-      "manufacturer": {
-        "address": "ab",
-        "is_default": true,
-        "name": "ab"
-      },
-      "not_available_quantity": 0,
-      "order_committed_quantity": 7,
-      "price": {
-        "currency": "USD",
-        "effective": 79.99,
-        "marked": 99.99,
-        "transfer": 89.99
-      },
-      "price_effective": 1234,
-      "price_transfer": 0,
-      "quantity": 39,
-      "sellable_quantity": 18,
-      "seller_identifier": "RTYUIDSDFV",
-      "size": "AAX1 (1 PCS)",
-      "store": {
-        "id": 1
-      },
-      "total_quantity": 1,
-      "uid": "1_RTYUIDSDFV",
-      "weight": {
-        "is_default": true,
-        "shipping": 1.5,
-        "unit": "kg"
-      }
-    },
-    {
-      "brand": {
-        "id": 1,
-        "name": "ab"
-      },
-      "company": {
-        "id": 1
-      },
-      "country_of_origin": "",
-      "currency": "INR",
-      "dimension": {
-        "height": 13.1,
-        "is_default": true,
-        "length": 1.3,
-        "unit": "cm",
-        "width": 23.4
-      },
-      "fragile": false,
-      "fynd_article_code": "",
-      "fynd_item_code": "",
-      "identifier": {},
-      "identifiers": [
-        {
-          "gtin_type": "sku_code",
-          "gtin_value": "RTYUIDSDFV",
-          "primary": true
-        }
-      ],
-      "inventory_updated_on": "2020-07-07T10:37:06.146Z",
-      "item_id": 7500651,
-      "manufacturer": {
-        "address": "ab",
-        "is_default": true,
-        "name": "ab"
-      },
-      "order_committed_quantity": 39,
-      "price": {
-        "currency": "USD",
-        "effective": 79.99,
-        "marked": 99.99,
-        "transfer": 89.99
-      },
-      "price_effective": 1234,
-      "price_transfer": 0,
-      "quantity": 39,
-      "sellable_quantity": 0,
-      "seller_identifier": "RTYUIDSDFV",
-      "size": "AAX1 (1 PCS)",
-      "store": {
-        "id": 1
-      },
-      "total_quantity": 1,
-      "uid": "1_rtyuidsdfv",
-      "weight": {
-        "is_default": true,
-        "shipping": 1.5,
-        "unit": "kg"
-      }
-    }
-  ],
-  "page": {
-    "current": 1,
-    "has_next": false,
-    "has_previous": false,
-    "item_total": 5,
-    "size": 1,
-    "type": "number"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getProductSize
-Get product size details.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getProductSize(itemCode=itemCode, itemId=itemId, brandUid=brandUid, uid=uid)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| itemCode | String? | no | Item code of the product size. |   
-| itemId | Int | yes | Item Id of the product size. |   
-| brandUid | Int? | no | Brand Id of the product size. |   
-| uid | Int? | no | Id of the product size. |  
-
-
-
-Retrieve data associated to a particular product size.
-
-*Returned Response:*
-
-
-
-
-[ProductListingResponse](#ProductListingResponse)
-
-Product object. See example below for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "all_sizes": [
-    "3XL"
-  ],
-  "attributes": {
-    "color": "Red",
-    "created_by": {
-      "company_id": 1181,
-      "user_id": "-1",
-      "username": "silverbolt"
-    },
-    "created_on": "2020-07-23T04:20:43.810Z",
-    "essential": "Yes",
-    "gender": [
-      "Men"
-    ],
-    "image_nature": "standard",
-    "is_image_less_product": false,
-    "l3_mapping": [
-      "men>casual_tees",
-      "women>casual_tees",
-      "girls>casual_tees",
-      "more>casual_tees"
-    ],
-    "material": "cotton",
-    "meta_nature": "standard",
-    "modified_by": {
-      "company_id": 61,
-      "user_id": "-1",
-      "username": "silverbolt"
-    },
-    "modified_on": "2020-07-23T04:20:44.185Z",
-    "neck_type": "Round Neck",
-    "pattern": "Printed",
-    "primary_color": "Red",
-    "primary_material": "Others",
-    "product_fit": "Regular",
-    "sleeve_length": "Short",
-    "stage": "verified",
-    "verified_by": {
-      "user_id": "0",
-      "username": "Silverbolt"
-    },
-    "verified_on": 1595478044
-  },
-  "brand": {
-    "logo": {
-      "aspect_ratio": "1:1",
-      "aspect_ratio_f": 1,
-      "secure_url": "https://hdn-1.fynd.com/brands/pictures/square-logo/50x0/zjt4-wU8Lk-VQYu0pcokb-r6yteuannoorjkq9f4tk.jpg",
-      "url": "https://hdn-1.fynd.com/brands/pictures/square-logo/50x0/zjt4-wU8Lk-VQYu0pcokb-r6yteuannoorjkq9f4tk.jpg"
-    },
-    "name": "play clan",
-    "uid": 85
-  },
-  "category_slug": "t-shirts",
-  "company_id": 61,
-  "country_of_origin": "India",
-  "currency": "INR",
-  "departments": [
-    1
-  ],
-  "description": "",
-  "highlights": null,
-  "hsn_code": "61099090",
-  "id": "5f19101b99ee0500011dc896",
-  "images": [],
-  "is_active": false,
-  "is_dependent": false,
-  "is_set": false,
-  "item_code": "ACTESTCREATELISTING1",
-  "item_type": "standard",
-  "media": [],
-  "multi_size": true,
-  "name": "SQUADMTGIVESPACE",
-  "product_publish": {
-    "is_set": false,
-    "product_online_date": 1595478043
-  },
-  "size_guide": "play-clan-men-casual-tees",
-  "sizes": [
-    {
-      "currency": "INR",
-      "identifiers": [
-        {
-          "gtin_type": "sku_code",
-          "gtin_value": "ACTESTCREATELISTING1_3XL",
-          "primary": true
-        }
-      ],
-      "is_set": false,
-      "price": 10000,
-      "price_effective": 10000,
-      "price_transfer": 0,
-      "size": "3XL"
-    }
-  ],
-  "slug": "play-clan-squadmtgivespace-857587-e928b0",
-  "template_tag": "topwear",
-  "uid": 857587
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteSize
-Delete product size.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.deleteSize(itemId=itemId, size=size)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| itemId | Int | yes | Item Id of the product associated with size to be deleted. |   
-| size | String | yes | size to be deleted. |  
-
-
-
-Allows to delete size associated with product.
-
-*Returned Response:*
-
-
-
-
-[ProductSizeDeleteResponse](#ProductSizeDeleteResponse)
-
-Returns a success response
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "data": {
-    "company_id": 1,
-    "item_id": 114,
-    "size": "3"
-  },
-  "success": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getInventoryBySize
-Get inventory by size.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getInventoryBySize(itemId=itemId, size=size, pageNo=pageNo, pageSize=pageSize, q=q, sellable=sellable)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| itemId | Int | yes | Item code of the product of which size is to be get. |   
-| size | String | yes | Size of which inventory is to get. |   
-| pageNo | Int? | no | The page number to navigate through the given set of results |   
-| pageSize | Int? | no | Number of items to retrieve in each page. Default is 12. |   
-| q | String? | no | Search with help of store code. |   
-| sellable | Boolean? | no | Filter on whether product is in stock or not. |  
-
-
-
-Allows to retrieve Inventory data for particular company grouped by size and store.
-
-*Returned Response:*
-
-
-
-
-[InventoryResponsePaginated](#InventoryResponsePaginated)
-
-returns a list of all inventory grouped by size and store
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "currency": "INR",
-      "identifiers": {
-        "gtin_type": "sku_code",
-        "gtin_value": "RTYUIDSDFV",
-        "primary": true
-      },
-      "inventory_updated_on": "2021-04-06T03:30:01.487Z",
-      "item_id": 7500651,
-      "price": 1234,
-      "price_effective": 1234,
-      "price_transfer": 0,
-      "quantity": 10,
-      "sellable_quantity": 10,
-      "seller_identifier": "RTYUIDSDFV",
-      "size": "AAX1 (1 PCS)",
-      "store": {
-        "_custom_json": {},
-        "address": {
-          "address1": "A/204, SAI VANDAN, NARAYAN NAGAR, TULINJ ROAD",
-          "address2": "",
-          "city": "MUMBAI",
-          "country": "INDIA",
-          "landmark": "",
-          "lat_long": {
-            "coordinates": [
-              72.8231511,
-              19.4232024
-            ],
-            "type": "Point"
-          },
-          "pincode": 401209,
-          "state": "MAHARASHTRA"
-        },
-        "integration_type": {
-          "inventory": "browntape",
-          "order": "browntape"
-        },
-        "manager": {
-          "email": "a@b.com",
-          "mobile_no": {
-            "country_code": 91,
-            "number": "2382634324"
-          },
-          "name": "abc"
-        },
-        "name": "yosss sdd dsdyo",
-        "store_code": "sanic6sdfsf7",
-        "uid": 59
-      },
-      "uid": "59_RTYUIDSDFV"
-    },
-    {
-      "currency": "INR",
-      "identifiers": {
-        "gtin_type": "sku_code",
-        "gtin_value": "RTYUIDSDFV",
-        "primary": true
-      },
-      "inventory_updated_on": "2021-04-06T03:29:35.291Z",
-      "item_id": 7500651,
-      "price": 1234,
-      "price_effective": 1234,
-      "price_transfer": 0,
-      "quantity": 10,
-      "sellable_quantity": 10,
-      "seller_identifier": "RTYUIDSDFV",
-      "size": "AAX1 (1 PCS)",
-      "store": {
-        "_custom_json": {},
-        "address": {
-          "address1": "NO",
-          "address2": "",
-          "city": "MUMBAI",
-          "country": "INDIA",
-          "lat_long": {
-            "coordinates": [
-              1,
-              1
-            ],
-            "type": "Point"
-          },
-          "pincode": 400072,
-          "state": "MAHA"
-        },
-        "integration_type": {
-          "inventory": "browntape",
-          "order": "browntape"
-        },
-        "manager": {
-          "email": "rehman@cashkart.com",
-          "mobile_no": {
-            "country_code": 91,
-            "number": "9167943983"
-          },
-          "name": "abc"
-        },
-        "name": "Saran Ledonne",
-        "store_code": "af6198fe-2c23-4441-bbf4-e694c96e255c",
-        "uid": 10
-      },
-      "uid": "10_RTYUIDSDFV"
-    },
-    {
-      "currency": "INR",
-      "identifiers": {
-        "gtin_type": "sku_code",
-        "gtin_value": "RTYUIDSDFV",
-        "primary": true
-      },
-      "inventory_updated_on": "2021-03-17T12:35:29.992Z",
-      "item_id": 7500651,
-      "order_committed_quantity": 0,
-      "price": 1234,
-      "price_effective": 1234,
-      "price_transfer": 0,
-      "quantity": 10000000,
-      "sellable_quantity": 10000000,
-      "seller_identifier": "RTYUIDSDFV",
-      "size": "AAX1 (1 PCS)",
-      "store": {
-        "_custom_json": {},
-        "address": {
-          "address1": "14/1, VINOBHA BHAVE NAGAR",
-          "address2": "VINOBHA BHAVE NAGAR, KURLA WEST, KURLA, ",
-          "city": "MUMBAI",
-          "country": "INDIA",
-          "lat_long": {
-            "coordinates": [
-              1,
-              1
-            ],
-            "type": "Point"
-          },
-          "pincode": 400070,
-          "state": "MAHARASHTRA"
-        },
-        "integration_type": {
-          "inventory": "browntape",
-          "order": "browntape"
-        },
-        "manager": {
-          "email": "fahimsakri@gofynd.com",
-          "mobile_no": {
-            "country_code": 91,
-            "number": "9594495254"
-          },
-          "name": "Fahim"
-        },
-        "name": "ABC-1-17",
-        "store_code": "ABC-1-17",
-        "uid": 11061
-      },
-      "uid": "11061_RTYUIDSDFV"
-    },
-    {
-      "currency": "INR",
-      "damaged_quantity": 0,
-      "identifiers": {
-        "gtin_type": "sku_code",
-        "gtin_value": "RTYUIDSDFV",
-        "primary": true
-      },
-      "inventory_updated_on": "2021-03-31T19:00:10.943Z",
-      "item_id": 7500651,
-      "not_available_quantity": 0,
-      "order_committed_quantity": 7,
-      "price": 1234,
-      "price_effective": 1234,
-      "price_transfer": 0,
-      "quantity": 39,
-      "sellable_quantity": 18,
-      "seller_identifier": "RTYUIDSDFV",
-      "size": "AAX1 (1 PCS)",
-      "store": {
-        "_custom_json": {},
-        "address": {
-          "address1": "SHOPSENSE RETAIL TECHNOLOGIES PRIVATE LIMITED 1ST FLOOR WEWORK VIJAY DIAMOND, CROSS RD B, AJIT NAGAR,",
-          "address2": "KONDIVITA, ANDHERI EAST, MUMBAI, MAHARASHTRA 400069",
-          "city": "MUMBAI",
-          "country": "INDIA",
-          "lat_long": {
-            "coordinates": [
-              72.8691788,
-              19.1174114
-            ],
-            "type": "Point"
-          },
-          "pincode": 400059,
-          "state": "MAHARASHTRA"
-        },
-        "integration_type": {
-          "inventory": "browntape",
-          "order": "browntape"
-        },
-        "manager": {
-          "email": "ASHISHCHANDORKAR@FYND.COM",
-          "mobile_no": {
-            "country_code": 91,
-            "number": "8369782851"
-          },
-          "name": "ASHISH CHANDORKAR"
-        },
-        "name": "RRL01",
-        "store_code": "WH_8513",
-        "uid": 1
-      },
-      "uid": "1_RTYUIDSDFV"
-    },
-    {
-      "currency": "INR",
-      "identifiers": {
-        "gtin_type": "sku_code",
-        "gtin_value": "RTYUIDSDFV",
-        "primary": true
-      },
-      "inventory_updated_on": "2020-07-07T10:37:06.146Z",
-      "item_id": 7500651,
-      "order_committed_quantity": 39,
-      "price": 1234,
-      "price_effective": 1234,
-      "price_transfer": 0,
-      "quantity": 39,
-      "sellable_quantity": 0,
-      "seller_identifier": "RTYUIDSDFV",
-      "size": "AAX1 (1 PCS)",
-      "store": {
-        "_custom_json": {},
-        "address": {
-          "address1": "SHOPSENSE RETAIL TECHNOLOGIES PRIVATE LIMITED 1ST FLOOR WEWORK VIJAY DIAMOND, CROSS RD B, AJIT NAGAR,",
-          "address2": "KONDIVITA, ANDHERI EAST, MUMBAI, MAHARASHTRA 400069",
-          "city": "MUMBAI",
-          "country": "INDIA",
-          "lat_long": {
-            "coordinates": [
-              72.8691788,
-              19.1174114
-            ],
-            "type": "Point"
-          },
-          "pincode": 400059,
-          "state": "MAHARASHTRA"
-        },
-        "integration_type": {
-          "inventory": "browntape",
-          "order": "browntape"
-        },
-        "manager": {
-          "email": "ASHISHCHANDORKAR@FYND.COM",
-          "mobile_no": {
-            "country_code": 91,
-            "number": "8369782851"
-          },
-          "name": "ASHISH CHANDORKAR"
-        },
-        "name": "RRL01",
-        "store_code": "WH_8513",
-        "uid": 1
-      },
-      "uid": "1_rtyuidsdfv"
-    }
-  ],
-  "page": {
-    "current": 1,
-    "has_next": false,
-    "has_previous": false,
-    "item_total": 5,
-    "size": 1,
-    "type": "number"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### addInventory
-Add Inventory for particular size and store.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.addInventory(itemId=itemId, size=size, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| itemId | Int | yes | Item code of the product of which size is to be get. |   
-| size | String | yes | Size in which inventory is to be added. |  
-| body | [InventoryRequest](#InventoryRequest) | yes | Request body |
-
-
-Allows add Inventory for particular size and store.
-
-*Returned Response:*
-
-
-
-
-[SuccessResponse](#SuccessResponse)
-
-Returns a success response
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getVariantsOfProducts
-Get variants of products.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getVariantsOfProducts(itemId=itemId, variantType=variantType, pageNo=pageNo, pageSize=pageSize)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| itemId | Int | yes | Get list of variants of item Id |   
-| variantType | String | yes | Get multiple products filtered by variant type |   
-| pageNo | Int? | no | The page number to navigate through the given set of results |   
-| pageSize | Int? | no | Number of items to retrieve in each page. Default is 10. |  
-
-
-
-Retrieve variants of a specific product.
-
-*Returned Response:*
-
-
-
-
-[ProductVariantsResponse](#ProductVariantsResponse)
-
-Product Meta. See example below for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "page": {
-    "current": 1,
-    "has_next": false,
-    "has_previous": false,
-    "item_total": 1,
-    "size": 1,
-    "type": "number"
-  },
-  "variants": [
-    {
-      "brand_uid": 401,
-      "category_uid": 3938,
-      "item_code": "TEST-MSA-6",
-      "media": [
-        {
-          "type": "image",
-          "url": "https://hdn-1.jiox0.de/jiox0/products/pictures/item/free/original/7cGLXZLpO-iN3Jd9uro-Wiv-7J9qC-product.png"
-        }
-      ],
-      "name": "test-msa-6",
-      "slug": "test-msa-6",
-      "uid": 7526471
-    }
-  ]
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
 ### getAllProductHsnCodes
-Get all product HSN codes.
+Hsn Code List.
 
 
 
@@ -10744,7 +15500,7 @@ except Exception as e:
 
 
 
-Retrieve all HSN codes associated with products.
+Hsn Code List.
 
 *Returned Response:*
 
@@ -10770,16 +15526,16 @@ List of all HSN Codes. See example below or refer `HsnCodesListingResponseSchema
       "hs2_code": "26",
       "hsn_code": "123fght3",
       "id": "619e17925e3d3ea77d6fe8cf",
-      "modified_on": "2021-11-25T06:37:00.880Z",
+      "modified_on": "2021-11-25T06:37:00.880000Z",
       "reporting_hsn": "12345678",
       "slabs": [
         {
-          "effective_date": "2021-11-18T10:00:31.798Z",
+          "effective_date": "2021-11-18T10:00:31.798000+00:00",
           "tax": 10,
           "threshold": 100
         },
         {
-          "effective_date": "2022-11-18T10:00:31.798Z",
+          "effective_date": "2022-11-18T10:00:31.798000+00:00",
           "tax": 20,
           "threshold": 200
         }
@@ -10788,7 +15544,7 @@ List of all HSN Codes. See example below or refer `HsnCodesListingResponseSchema
       "tax_on_mrp": false,
       "taxes": [
         {
-          "effective_date": "2021-04-02T15:43:59.410Z",
+          "effective_date": "2021-04-02T15:43:59.410000Z",
           "rate": 0,
           "threshold": 0.5
         }
@@ -10821,7 +15577,7 @@ List of all HSN Codes. See example below or refer `HsnCodesListingResponseSchema
 
 
 ### getSingleProductHSNCode
-Get single product HSN code.
+Hsn Code List.
 
 
 
@@ -10844,7 +15600,7 @@ except Exception as e:
 
 
 
-Retrieve the HSN code for a single product.
+Hsn Code List.
 
 *Returned Response:*
 
@@ -10868,7 +15624,7 @@ Get specific HSN details. See example below or refer `HsnCodesListingResponseSch
     "user_id": -1,
     "username": "silverbolt"
   },
-  "created_on": "2022-02-24T09:14:03.000Z",
+  "created_on": "2022-02-24T09:14:03Z",
   "description": "Data for HSN Code",
   "hsn_code": "89787179",
   "id": "6216ff0378da3f906fc82544",
@@ -10876,22 +15632,22 @@ Get specific HSN details. See example below or refer `HsnCodesListingResponseSch
     "user_id": -1,
     "username": "silverbolt"
   },
-  "modified_on": "2022-02-24T09:14:03.000Z",
+  "modified_on": "2022-02-24T09:14:03Z",
   "reporting_hsn": "89787179H29",
   "taxes": [
     {
       "cess": 23,
-      "effective_date": "2022-02-11T15:00:00.000Z",
+      "effective_date": "2022-02-11T15:00:00",
       "rate": 5,
       "threshold": 10000
     },
     {
-      "effective_date": "2022-02-11T15:00:00.000Z",
+      "effective_date": "2022-02-11T15:00:00",
       "rate": 12,
       "threshold": 12000
     },
     {
-      "effective_date": "2022-02-12T15:00:00.000Z",
+      "effective_date": "2022-02-12T15:00:00",
       "rate": 18,
       "threshold": 5000
     }
@@ -10913,7 +15669,7 @@ Get specific HSN details. See example below or refer `HsnCodesListingResponseSch
 
 
 ### updateInventories
-Update inventories.
+Add Inventory for particular size and store.
 
 
 
@@ -10935,7 +15691,7 @@ except Exception as e:
 | body | [InventoryRequestSchemaV2](#InventoryRequestSchemaV2) | yes | Request body |
 
 
-Allows to add Inventory for particular size and store.
+This API allows add Inventory for particular size and store.
 
 *Returned Response:*
 
@@ -10957,7 +15713,7 @@ Returns a success or partial success response
   "items": [
     {
       "data": {
-        "expiration_date": "9998-01-30T23:59:00.000Z",
+        "expiration_date": "9998-01-30T23:59:00",
         "price_effective": 109.01,
         "price_marked": 130,
         "seller_identifier": "SELLER123",
@@ -10971,7 +15727,7 @@ Returns a success or partial success response
     },
     {
       "data": {
-        "expiration_date": "9998-01-30T23:59:00.000Z",
+        "expiration_date": "9998-01-30T23:59:00",
         "price_effective": 109.01,
         "price_marked": 130,
         "seller_identifier": "SELLER123",
@@ -11001,7 +15757,7 @@ Returns a success or partial success response
 
 
 ### listInventoryExport
-List inventory exports.
+Get the history of the inventory export.
 
 
 
@@ -11027,7 +15783,7 @@ except Exception as e:
 
 
 
-Helps you the retrieve the history of inventory jobs depending on the filtered criteria.
+This API helps you the get the history of inventory jobs depending on the filtered criteria.
 
 *Returned Response:*
 
@@ -11048,12 +15804,12 @@ Returns a list of inventory export jobs
 {
   "items": {
     "_id": "6401bd972a2e6c3d508c9203",
-    "completed_on": "2023-03-03T09:33:11.416Z",
+    "completed_on": "2023-03-03T09:33:11.416000Z",
     "created_by": {
       "user_id": "5e199e6998cfe1776f1385dc",
       "username": "rohanshah@fynd.com"
     },
-    "created_on": "2023-03-03T09:27:51.262Z",
+    "created_on": "2023-03-03T09:27:51.262000Z",
     "filters": {
       "brand_ids": [
         2751
@@ -11069,7 +15825,7 @@ Returns a list of inventory export jobs
       ]
     },
     "id": "6401bd972a2e6c3d508c9203",
-    "modified_on": "2023-03-03T09:27:51.262Z",
+    "modified_on": "2023-03-03T09:27:51.262000",
     "notification_emails": [],
     "seller_id": 577,
     "status": "success",
@@ -11093,7 +15849,7 @@ Returns a list of inventory export jobs
 
 
 ### createInventoryExport
-Create inventory export.
+Create an inventory export job.
 
 
 
@@ -11115,7 +15871,7 @@ except Exception as e:
 | body | [InventoryCreateRequest](#InventoryCreateRequest) | yes | Request body |
 
 
-Helps to create a Inventory export job.
+This API helps to create a Inventory export job.
 
 *Returned Response:*
 
@@ -11149,7 +15905,7 @@ Returns a success response
 
 
 ### getProducts
-Retrieve products.
+Get product list
 
 
 
@@ -11180,7 +15936,7 @@ except Exception as e:
 
 
 
-Retrieve a list of products available
+This API gets meta associated to products.
 
 *Returned Response:*
 
@@ -11243,7 +15999,7 @@ Product Meta. See example below for details
         "user_id": "5",
         "username": "919049753052_37528"
       },
-      "created_on": "2021-04-02T15:43:59.410Z",
+      "created_on": "2021-04-02T15:43:59.410000Z",
       "currency": "INR",
       "custom_order": {
         "is_custom_order": true,
@@ -11287,7 +16043,7 @@ Product Meta. See example below for details
         "user_id": "xxxxxxxxxxx",
         "username": "xxxxxxxxxx"
       },
-      "modified_on": "2021-04-02T15:43:59.410Z",
+      "modified_on": "2021-04-02T15:43:59.410000Z",
       "multi_size": true,
       "name": "TV Set",
       "no_of_boxes": 1,
@@ -11304,7 +16060,7 @@ Product Meta. See example below for details
       "product_group_tag": [],
       "product_publish": {
         "is_set": false,
-        "product_online_date": "2021-04-02T15:43:59.410Z"
+        "product_online_date": "2021-04-02T15:43:59.410000Z"
       },
       "return_config": {
         "returnable": false,
@@ -11353,7 +16109,7 @@ Product Meta. See example below for details
         "user_id": "0",
         "username": "Silverbolt"
       },
-      "verified_on": "2020-07-23T04:20:43.810Z"
+      "verified_on": "2020-07-23T04:20:43.810000Z"
     }
   ],
   "page": {
@@ -11402,14 +16158,14 @@ except Exception as e:
 | body | [ProductCreateUpdateSchemaV2](#ProductCreateUpdateSchemaV2) | yes | Request body |
 
 
-Allows to create product.
+This API allows to create product.
 
 *Returned Response:*
 
 
 
 
-[SuccessResponse1](#SuccessResponse1)
+[SuccessResponse](#SuccessResponse)
 
 Returns a success response
 
@@ -11438,7 +16194,7 @@ Returns a success response
 
 
 ### uploadBulkProducts
-Upload bulk products.
+Create a Bulk product to upload job.
 
 
 
@@ -11462,7 +16218,7 @@ except Exception as e:
 | body | [BulkJob](#BulkJob) | yes | Request body |
 
 
-Helps to create a bulk products upload job.
+This API helps to create a bulk products upload job.
 
 *Returned Response:*
 
@@ -11482,7 +16238,180 @@ Returns a success response
 ```json
 {
   "batch_id": "507f1f77bcf86cd799439011",
-  "created_on": "2021-04-02T15:43:59.410Z"
+  "created_on": "2021-04-02T15:43:59.410000Z"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getProductExportJobs
+Allows you to list all product templates export list details
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.getProductExportJobs(status=status, fromDate=fromDate, toDate=toDate, q=q)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| status | String? | no | This is a parameter used to find all the jobs with the specified status. |   
+| fromDate | String? | no | This is a parameter used to find the job from the date specified to the current date. |   
+| toDate | String? | no | This is a parameter used to find the job from the from_date specified to the to_date. |   
+| q | String? | no | It is a query parameter to search the export job with the task ID. |  
+
+
+
+Can view details including trigger data, task id , etc.
+
+*Returned Response:*
+
+
+
+
+[ProductDownloadsResponse](#ProductDownloadsResponse)
+
+List of Product Downloads Data. See example below or refer `ProductDownloadsResponse` for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "completed_on": "2020-12-23T07:23:41.031000Z",
+      "created_by": {
+        "user_id": "5646",
+        "username": "917972410891_48194"
+      },
+      "data": {
+        "brand": [
+          "ruosh"
+        ],
+        "templates": [
+          "mobile-phones-and-tablet"
+        ],
+        "type": "csv"
+      },
+      "id": "5fe2f077516d980001880943",
+      "seller_id": 3,
+      "status": "success",
+      "task_id": "c4b54ace-44ef-11eb-9806-1ef9bc4a2da1",
+      "template_tags": {
+        "mobile-phones-and-tablet": {
+          "display": "Mobile Phones & Tablet",
+          "logo": "https://hdn-1.jiox0.de/jiox0/seller/pictures/logo/original/Oda39B_99946594-portable-devices-with-tablet-and-mobile-phone-vector-icon-for-apps-and-websites.jpgcc2dff44-7fae-4002-9ebe-d2b59c8bee91/Oda39B_99946594-portable-devices-with-tablet-and-mobile-phone-vector-icon-for-apps-and-websites.jpg"
+        }
+      },
+      "trigger_on": "2020-12-23T07:23:35.302000Z",
+      "url": "https://regrowth.s3.amazonaws.com/slingshot-catalogues/seller-catalog/3/c4b54ace-44ef-11eb-9806-1ef9bc4a2da1/c4b54ace-44ef-11eb-9806-1ef9bc4a2da1.zip"
+    }
+  ],
+  "page": {}
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createProductExportJob
+Create a product export job.
+
+
+
+
+```python
+try:
+    result = await platformClient.catalog.createProductExportJob(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [ProductTemplateDownloadsExport](#ProductTemplateDownloadsExport) | yes | Request body |
+
+
+This API helps to create a Inventory export job.
+
+*Returned Response:*
+
+
+
+
+[ProductDownloadsResponse](#ProductDownloadsResponse)
+
+Returns a success response
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "data": {
+    "_id": "6401cb6729885c34aa30b0c6",
+    "created_by": {
+      "user_id": "550fe8ce436ea332b9e4b4b0",
+      "username": "purvashukla_gofynd_com_44895"
+    },
+    "created_on": "2023-03-03T10:26:47.047171Z",
+    "filters": {
+      "brands": [],
+      "catalogue_types": [
+        "standard"
+      ],
+      "templates": [
+        "footwear"
+      ]
+    },
+    "modified_on": "2023-03-03T10:26:47.047179",
+    "notification_emails": [],
+    "seller_id": 577,
+    "stats": {},
+    "status": "pending",
+    "task_id": "e6c47f1a-b9ad-11ed-b7a0-3ef7b700888d",
+    "type": "excel"
+  }
 }
 ```
 </details>
@@ -11522,7 +16451,7 @@ except Exception as e:
 
 
 
-Remove a specific product in the catalog
+This API allows to delete product.
 
 *Returned Response:*
 
@@ -11558,7 +16487,7 @@ Returns a success response
 
 
 ### getProduct
-Get product details.
+Get a single product.
 
 
 
@@ -11583,7 +16512,7 @@ except Exception as e:
 
 
 
-Retrieve data associated to a particular product.
+This API helps to get data associated to a particular product.
 
 *Returned Response:*
 
@@ -11657,7 +16586,7 @@ Product object. See example below or refer `product.utils.format_product_respons
       "user_id": "757bf08ff5dd4ba95f8778cf",
       "username": "mdnehalahmed_fynd_external_com_90136"
     },
-    "created_on": "2023-02-16T09:37:31.304Z",
+    "created_on": "2023-02-16T09:37:31.304000",
     "currency": "INR",
     "custom_order": {
       "is_custom_order": false,
@@ -11688,7 +16617,7 @@ Product object. See example below or refer `product.utils.format_product_respons
       "user_id": "757bf08ff5dd4ba95f8778cf",
       "username": "mdnehalahmed_fynd_external_com_90136"
     },
-    "modified_on": "2023-02-16T09:37:31.304Z",
+    "modified_on": "2023-02-16T09:37:31.304000",
     "multi_size": false,
     "name": "Test-01",
     "net_quantity": {},
@@ -11696,7 +16625,7 @@ Product object. See example below or refer `product.utils.format_product_respons
     "product_group_tag": [],
     "product_publish": {
       "is_set": false,
-      "product_online_date": "2023-02-16T09:37:29.620Z"
+      "product_online_date": "2023-02-16T09:37:29.620000Z"
     },
     "return_config": {
       "returnable": false,
@@ -11710,7 +16639,7 @@ Product object. See example below or refer `product.utils.format_product_respons
         "_custom_json": {},
         "brand_uid": 3272,
         "company_id": 835,
-        "created_on": "2023-02-16T09:37:31.352Z",
+        "created_on": "2023-02-16T09:37:31.352000",
         "currency": "INR",
         "id": "63edf95bf314486d44a6b364",
         "identifiers": [
@@ -11728,7 +16657,7 @@ Product object. See example below or refer `product.utils.format_product_respons
         "item_weight": 10,
         "item_weight_unit_of_measure": "gram",
         "item_width": 10,
-        "modified_on": "2023-02-16T09:37:31.352Z",
+        "modified_on": "2023-02-16T09:37:31.352000",
         "price": 10,
         "price_effective": 10,
         "price_transfer": 0,
@@ -11799,7 +16728,7 @@ except Exception as e:
 | body | [ProductCreateUpdateSchemaV2](#ProductCreateUpdateSchemaV2) | yes | Request body |
 
 
-Modify the details and settings of an existing product in the catalog.
+This API allows to edit product.
 
 *Returned Response:*
 
@@ -11835,7 +16764,7 @@ Returns a success response
 
 
 ### allSizes
-Get all product sizes.
+All Sizes for a given Product
 
 
 
@@ -11858,7 +16787,7 @@ except Exception as e:
 
 
 
-Retrieve all available sizes for a product.
+This API allows to get  All Sizes for a given Product.
 
 *Returned Response:*
 
@@ -11911,7 +16840,7 @@ List Product Sizes. See example below or refer `AllSizes` for details
 
 
 ### deleteRealtimeInventory
-Delete realtime inventory.
+Add Inventory for particular size and store.
 
 
 
@@ -11935,7 +16864,7 @@ except Exception as e:
 | body | [InventoryRequestSchemaV2](#InventoryRequestSchemaV2) | yes | Request body |
 
 
-Remove specific realtime inventory data.
+This API allows add Inventory for particular size and store.
 
 *Returned Response:*
 
@@ -11957,7 +16886,7 @@ Returns a success response
   "items": [
     {
       "data": {
-        "expiration_date": "9998-01-30T23:59:00.000Z",
+        "expiration_date": "9998-01-30T23:59:00",
         "price_effective": 109.01,
         "price_marked": 130,
         "seller_identifier": "SELLER123",
@@ -11971,7 +16900,7 @@ Returns a success response
     },
     {
       "data": {
-        "expiration_date": "9998-01-30T23:59:00.000Z",
+        "expiration_date": "9998-01-30T23:59:00",
         "price_effective": 109.01,
         "price_marked": 130,
         "seller_identifier": "SELLER123",
@@ -12001,7 +16930,7 @@ Returns a success response
 
 
 ### updateRealtimeInventory
-Update realtime inventory.
+Add Inventory for particular size and store.
 
 
 
@@ -12025,7 +16954,7 @@ except Exception as e:
 | body | [InventoryRequestSchemaV2](#InventoryRequestSchemaV2) | yes | Request body |
 
 
-Allows to add Inventory for particular size and store.
+This API allows add Inventory for particular size and store.
 
 *Returned Response:*
 
@@ -12047,7 +16976,7 @@ Returns a success response
   "items": [
     {
       "data": {
-        "expiration_date": "9998-01-30T23:59:00.000Z",
+        "expiration_date": "9998-01-30T23:59:00",
         "price_effective": 109.01,
         "price_marked": 130,
         "seller_identifier": "SELLER123",
@@ -12061,7 +16990,7 @@ Returns a success response
     },
     {
       "data": {
-        "expiration_date": "9998-01-30T23:59:00.000Z",
+        "expiration_date": "9998-01-30T23:59:00",
         "price_effective": 109.01,
         "price_marked": 130,
         "seller_identifier": "SELLER123",
@@ -12075,5445 +17004,6 @@ Returns a success response
     }
   ],
   "message": "Partially Successful"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getAppReturnConfiguration
-Get Return configuration level set for an application
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getAppReturnConfiguration()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Get Product Return configuration set at an application level
-
-*Returned Response:*
-
-
-
-
-[AppReturnConfigResponse](#AppReturnConfigResponse)
-
-success message will tell whether the operation was successful.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "app_id": "5d638512c9accedcd910591a",
-  "category_count": 32,
-  "company_id": 1,
-  "created_by": {
-    "user_id": "054bb99f009aece85a3fa087",
-    "username": "test"
-  },
-  "modified_by": {
-    "user_id": "054bb99f009aece85a3fa087",
-    "username": "test"
-  },
-  "modified_on": "2023-03-28T06:05:24.026Z",
-  "return_config_level": "category"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createAppReturnConfiguration
-Create Return configuration level set for an application
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.createAppReturnConfiguration(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CreateUpdateAppReturnConfig](#CreateUpdateAppReturnConfig) | yes | Request body |
-
-
-Create Return configuration level set for an application.
-
-*Returned Response:*
-
-
-
-
-[SuccessResponse1](#SuccessResponse1)
-
-success message will tell whether the operation was successful.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "success": true
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateAppReturnConfiguration
-Update Return configuration level set for an application
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.updateAppReturnConfiguration(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CreateUpdateAppReturnConfig](#CreateUpdateAppReturnConfig) | yes | Request body |
-
-
-Update Return configuration level set for an application.
-
-*Returned Response:*
-
-
-
-
-[SuccessResponse1](#SuccessResponse1)
-
-success message will tell whether the operation was successful.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "success": true
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteAppCategoryReturnConfiguration
-Delete Category level Application Return Configuration setttings
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.deleteAppCategoryReturnConfiguration(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [DeleteAppCategoryReturnConfig](#DeleteAppCategoryReturnConfig) | yes | Request body |
-
-
-Delete Category level Application Return Configuration setttings
-
-*Returned Response:*
-
-
-
-
-[SuccessResponse](#SuccessResponse)
-
-success message will tell whether the operation was successful.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "success": true
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getAppCategoryReturnConfig
-Get all category level configuration level set for an application
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getAppCategoryReturnConfig()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Get all category level configuration level set for an application.
-
-*Returned Response:*
-
-
-
-
-[BaseAppCategoryReturnConfigResponse](#BaseAppCategoryReturnConfigResponse)
-
-success message will tell whether the operation was successful.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "data": [
-      {
-        "app_id": "5d638512c9accedcd910591a",
-        "category_id": 1659,
-        "logo": "https://hdn-1.addsale.com/addsale/category/pictures/square-logo/original/7hR5xHVUi0-eTdgOunCZ-.jpeg",
-        "name": "MG TEST DIGITAL",
-        "return_config": {
-          "returnable": true,
-          "time": 10,
-          "unit": "days"
-        }
-      }
-    ],
-    "page": {
-      "current": "1",
-      "has_next": false,
-      "has_previous": false,
-      "item_total": 1,
-      "size": 1,
-      "type": "number"
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createAppCategoryReturnConfiguration
-Create Category level Application Return Configuration setttings
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.createAppCategoryReturnConfiguration(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [BaseAppCategoryReturnConfig](#BaseAppCategoryReturnConfig) | yes | Request body |
-
-
-Create Category level Application Return Configuration setttings
-
-*Returned Response:*
-
-
-
-
-[SuccessResponse1](#SuccessResponse1)
-
-success message will tell whether the operation was successful.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "success": true
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateAppCategoryReturnConfiguration
-Update Category level Application Return Configuration setttings
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.updateAppCategoryReturnConfiguration(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [BaseAppCategoryReturnConfig](#BaseAppCategoryReturnConfig) | yes | Request body |
-
-
-Update Category level Application Return Configuration setttings
-
-*Returned Response:*
-
-
-
-
-[SuccessResponse](#SuccessResponse)
-
-success message will tell whether the operation was successful.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "success": true
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getAutocompleteConfig
-Get autocomplete configuration.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getAutocompleteConfig()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Custom Autocomplete Keyword allows you to map conditions with keywords to give you the ultimate results
-
-*Returned Response:*
-
-
-
-
-[GetAutocompleteWordsResponse](#GetAutocompleteWordsResponse)
-
-List of custom autocomplete keywords. See example below or refer `GetAutocompleteWordsResponseSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "app_id": "000000000000000000000001",
-      "is_active": true,
-      "results": [
-        {
-          "_custom_json": {},
-          "action": {
-            "page": {
-              "query": {
-                "brand": [
-                  "nike"
-                ]
-              },
-              "type": "products",
-              "url": "/products/?brand=nike"
-            },
-            "type": "page"
-          },
-          "display": "Helllow",
-          "logo": {
-            "url": "https://hdn-1.addsale.com/addsale/company/61/applications/600a5b3fe0991a4718cdb448/company/1/application/000000000000000000000001/search/pictures/square-logo/original/n_8bvEaBw-Helllow.png"
-          }
-        }
-      ],
-      "uid": "602fa1eaa596ce349563f6c6",
-      "words": [
-        "dasd"
-      ]
-    }
-  ],
-  "page": {
-    "current": 1,
-    "has_next": false,
-    "has_previous": false,
-    "item_count": 1,
-    "size": 1,
-    "type": "number"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createCustomAutocompleteRule
-Create custom autocomplete rules.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.createCustomAutocompleteRule(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CreateAutocompleteKeyword](#CreateAutocompleteKeyword) | yes | Request body |
-
-
-Generate and add custom autocomplete rules to the catalog.
-
-*Returned Response:*
-
-
-
-
-[CreateAutocompleteWordsResponse](#CreateAutocompleteWordsResponse)
-
-List of all the collections including the one you added. See example below or refer `CreateAutocompleteWordsResponseSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteAutocompleteKeyword
-Delete autocomplete keywords.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.deleteAutocompleteKeyword(id=id)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. |  
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Returned Response:*
-
-
-
-
-[DeleteResponse](#DeleteResponse)
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "message": "Words Deleted"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getAutocompleteKeywordDetail
-Get autocomplete keyword details.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getAutocompleteKeywordDetail(id=id)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. |  
-
-
-
-Retrieve detailed information about a specific autocomplete keyword.
-
-*Returned Response:*
-
-
-
-
-[GetAutocompleteWordsResponse](#GetAutocompleteWordsResponse)
-
-The mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "app_id": "000000000000000000000001",
-  "is_active": true,
-  "results": [
-    {
-      "_custom_json": {},
-      "action": {
-        "page": {
-          "query": {
-            "brand": [
-              "nike"
-            ]
-          },
-          "type": "products",
-          "url": "/products/?brand=nike"
-        },
-        "type": "page"
-      },
-      "display": "Helllow",
-      "logo": {
-        "url": "https://hdn-1.addsale.com/addsale/company/61/applications/600a5b3fe0991a4718cdb448/company/1/application/000000000000000000000001/search/pictures/square-logo/original/n_8bvEaBw-Helllow.png"
-      }
-    }
-  ],
-  "uid": "602fa1eaa596ce349563f6c6",
-  "words": [
-    "dasd"
-  ]
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateAutocompleteKeyword
-Update autocomplete keywords.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.updateAutocompleteKeyword(id=id, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. |  
-| body | [CreateAutocompleteKeyword](#CreateAutocompleteKeyword) | yes | Request body |
-
-
-Update a mapping by it's id. On successful request, returns the updated Keyword mapping
-
-*Returned Response:*
-
-
-
-
-[GetAutocompleteWordsResponse](#GetAutocompleteWordsResponse)
-
-The Mapping object. See example below or refer `GetAutocompleteWordsResponseSchema` for details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteSearchConfiguration
-Delete Search Configuration
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.deleteSearchConfiguration()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Delete search configuration in the catalog.
-
-*Returned Response:*
-
-
-
-
-[DeleteSearchConfigurationResponse](#DeleteSearchConfigurationResponse)
-
-Status of the delete operation. See `DeleteSearchConfigurationResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getSearchConfiguration
-Get Search Configuration
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getSearchConfiguration()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Get search configuration in the catalog.
-
-*Returned Response:*
-
-
-
-
-[GetSearchConfigurationResponse](#GetSearchConfigurationResponse)
-
-Search configuration for the specified application. See example below or refer `GetSearchConfigurationResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "application_id": "1234",
-  "company_id": 1,
-  "is_proximity_enabled": false,
-  "proximity": 2,
-  "searchable_attributes": [
-    {
-      "key": "brand_uid",
-      "name": "",
-      "priority": 1
-    },
-    {
-      "key": "category_uid",
-      "name": "",
-      "priority": 2
-    }
-  ]
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createSearchConfiguration
-Create search configuration
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.createSearchConfiguration(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CreateSearchConfigurationRequest](#CreateSearchConfigurationRequest) | yes | Request body |
-
-
-Create search configuration for the catalog.
-
-*Returned Response:*
-
-
-
-
-[CreateSearchConfigurationResponse](#CreateSearchConfigurationResponse)
-
-List of custom search keywords. See example below or refer `CreateSearchConfigurationResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "application_id": 1234,
-  "company_id": 1,
-  "is_proximity_enabled": false,
-  "proximity": 2,
-  "searchable_attributes": [
-    {
-      "key": "brand_uid",
-      "priority": 1
-    },
-    {
-      "key": "category_uid",
-      "priority": 2
-    }
-  ]
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getAllSearchKeyword
-Get all search keywords.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getAllSearchKeyword()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Custom Search Keyword allows you to map conditions with keywords to give you the ultimate results
-
-*Returned Response:*
-
-
-
-
-[GetSearchWordsResponse](#GetSearchWordsResponse)
-
-List of custom search keywords. See example below or refer `GetSearchWordsResponseSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "_custom_json": {},
-      "app_id": "000000000000000000000001",
-      "is_active": true,
-      "result": {
-        "query": {
-          "department": [
-            "men"
-          ]
-        },
-        "sort_on": "popular"
-      },
-      "uid": "602fa1e9a596ce349563f6b9",
-      "words": [
-        "sds"
-      ]
-    }
-  ],
-  "page": {
-    "current": 1,
-    "has_next": false,
-    "has_previous": false,
-    "item_count": 1,
-    "size": 1,
-    "type": "number"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createCustomKeyword
-Create custom search keywords.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.createCustomKeyword(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CreateSearchKeyword](#CreateSearchKeyword) | yes | Request body |
-
-
-Create a Custom Search Keywords. 
-
-*Returned Response:*
-
-
-
-
-[GetSearchWordsData](#GetSearchWordsData)
-
-Get keyword object with id that is added. See example below or refer `GetSearchWordsDataSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "_custom_json": {},
-  "app_id": "000000000000000000000001",
-  "is_active": true,
-  "result": {
-    "query": {
-      "department": [
-        "men"
-      ]
-    },
-    "sort_on": "popular"
-  },
-  "uid": "602fa1e9a596ce349563f6b9",
-  "words": [
-    "sds"
-  ]
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteSearchKeywords
-Delete search keywords.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.deleteSearchKeywords(id=id)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. |  
-
-
-
-Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
-
-*Returned Response:*
-
-
-
-
-[DeleteResponse](#DeleteResponse)
-
-Status object. Tells whether the operation was successful. See example below or refer `DeleteResponse`
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "message": "Words Deleted"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getSearchKeywords
-Retrieve search keywords.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.getSearchKeywords(id=id)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. |  
-
-
-
-Retrieve a list of search keywords from the catalog.
-
-*Returned Response:*
-
-
-
-
-[GetSearchWordsDetailResponse](#GetSearchWordsDetailResponse)
-
-The Collection object. See example below or refer `GetSearchWordsDetailResponseSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "_custom_json": {},
-  "app_id": "000000000000000000000001",
-  "is_active": true,
-  "result": {
-    "query": {
-      "department": [
-        "men"
-      ]
-    },
-    "sort_on": "popular"
-  },
-  "uid": "602fa1e9a596ce349563f6b9",
-  "words": [
-    "sds"
-  ]
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateSearchKeywords
-Update search keywords.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.updateSearchKeywords(id=id, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. |  
-| body | [CreateSearchKeyword](#CreateSearchKeyword) | yes | Request body |
-
-
-Update Search Keyword by its id. On successful request, returns the updated collection
-
-*Returned Response:*
-
-
-
-
-[GetSearchWordsData](#GetSearchWordsData)
-
-The Collection object. See example below or refer `GetSearchWordsDataSchema` for details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### updateSearchConfiguration
-Update search configuration for an application
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").catalog.updateSearchConfiguration(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [UpdateSearchConfigurationRequest](#UpdateSearchConfigurationRequest) | yes | Request body |
-
-
-This view allows you to modify searchable attributes for an application
-
-*Returned Response:*
-
-
-
-
-[UpdateSearchConfigurationResponse](#UpdateSearchConfigurationResponse)
-
-List of custom search keywords. See example below or refer `UpdateSearchConfigurationResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "searchable_attributes": {}
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### listCategories
-List categories.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.listCategories(level=level, department=department, q=q, pageNo=pageNo, pageSize=pageSize, uids=uids, slug=slug)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| level | String? | no | Get category for multiple levels |   
-| department | Int? | no | Get category for multiple departments filtered |   
-| q | String? | no | Get multiple categories filtered by search string |   
-| pageNo | Int? | no | The page number to navigate through the given set of results |   
-| pageSize | Int? | no | Number of items to retrieve in each page. Default is 10. |   
-| uids | ArrayList<Int>? | no | Get multiple categories filtered by category uids. |   
-| slug | String? | no | Get category by slug |  
-
-
-
-Retrieve a list of meta associated available product categories in the catalog.
-
-*Returned Response:*
-
-
-
-
-[CategoryResponse](#CategoryResponse)
-
-Category Meta. See example below or refer `CategoryResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "created_by": {
-        "user_id": "5646",
-        "username": "917972410891_48194"
-      },
-      "created_on": "2021-04-02T15:43:59.410Z",
-      "departments": [
-        1
-      ],
-      "hierarchy": [
-        {
-          "department": 1,
-          "l1": 1,
-          "l2": 22329
-        }
-      ],
-      "id": "60673bbf7896da00017885ad",
-      "is_active": true,
-      "level": 3,
-      "marketplaces": {},
-      "media": {
-        "landscape": "https://hdn-1.addsale.com/x0/category/pictures/landscape-banner/original/_7GDi3tyi-.png",
-        "logo": "https://hdn-1.addsale.com/x0/category/pictures/square-logo/original/zTgh1zslj-.png",
-        "portrait": "https://hdn-1.addsale.com/x0/category/pictures/portrait-banner/original/VKqwRngFh-.png"
-      },
-      "modified_by": {
-        "user_id": "5646",
-        "username": "917972410891_48194"
-      },
-      "modified_on": "2021-04-02T15:43:59.410Z",
-      "name": "Air Conditioners",
-      "priority": 1,
-      "slug": "air-conditioners",
-      "synonyms": [],
-      "tryouts": [],
-      "uid": 22330
-    },
-    {
-      "created_by": {
-        "user_id": "5646",
-        "username": "917972410891_48194"
-      },
-      "created_on": "2021-04-02T15:42:55.405Z",
-      "departments": [
-        1
-      ],
-      "hierarchy": [],
-      "id": "60673b7f7896da00017885ac",
-      "is_active": true,
-      "level": 2,
-      "media": {
-        "landscape": "https://hdn-1.addsale.com/x0/category/pictures/landscape-banner/original/_7GDi3tyi-.png",
-        "logo": "https://hdn-1.addsale.com/x0/category/pictures/square-logo/original/zTgh1zslj-.png",
-        "portrait": "https://hdn-1.addsale.com/x0/category/pictures/portrait-banner/original/VKqwRngFh-.png"
-      },
-      "modified_by": {
-        "user_id": "5646",
-        "username": "917972410891_48194"
-      },
-      "modified_on": "2021-04-02T15:42:55.405Z",
-      "name": "Home Appliances",
-      "priority": 1,
-      "slug": "home-appliances",
-      "synonyms": [],
-      "uid": 22329
-    },
-    {
-      "created_by": {
-        "user_id": "5721",
-        "username": "919821012599_75351"
-      },
-      "created_on": "2021-01-14T05:28:02.148Z",
-      "departments": [
-        21
-      ],
-      "hierarchy": [],
-      "id": "5fffd662e64eb40001fc8a42",
-      "is_active": true,
-      "level": 2,
-      "media": {
-        "landscape": "https://hdn-1.addsale.com/x0/category/pictures/landscape-banner/original/0wCdjxWpI-.png",
-        "logo": "https://hdn-1.addsale.com/x0/category/pictures/square-logo/original/zTgh1zslj-.png",
-        "portrait": "https://hdn-1.addsale.com/x0/category/pictures/portrait-banner/original/VKqwRngFh-.png"
-      },
-      "modified_by": {
-        "user_id": "5677",
-        "username": "917753852478_51632"
-      },
-      "modified_on": "2021-03-04T15:43:50.495Z",
-      "name": "Dummy category level 2 by fahim",
-      "priority": 123456,
-      "slug": "dummy-category-level-2",
-      "synonyms": [
-        "skin",
-        "care",
-        "asdasd"
-      ],
-      "uid": 22323
-    },
-    {
-      "created_by": {
-        "user_id": "-1",
-        "username": "silverbolt"
-      },
-      "created_on": "2021-02-25T00:00:47.589Z",
-      "departments": [
-        21
-      ],
-      "hierarchy": [
-        {
-          "department": 21,
-          "l1": 22322,
-          "l2": 22323
-        }
-      ],
-      "id": "60369b57d23031d14be92c18",
-      "is_active": true,
-      "level": 3,
-      "marketplaces": {},
-      "media": {
-        "landscape": "https://hdn-1.addsale.com/x0/category/pictures/landscape-banner/original/0wCdjxWpI-.png",
-        "logo": "https://hdn-1.addsale.com/x0/category/pictures/square-logo/original/EfCt9iXx8-http/d3p8ifzkmzds37.cloudfront.net/media/logo/department/original/15870_c287d3c2431a432bb0e49363ef6b82bc.png.jpeg",
-        "portrait": "https://hdn-1.addsale.com/x0/category/pictures/portrait-banner/original/S1axCMOJ4-.png"
-      },
-      "modified_by": {
-        "user_id": "5677",
-        "username": "917753852478_51632"
-      },
-      "modified_on": "2021-03-04T15:39:52.108Z",
-      "name": "Dummy level 4",
-      "priority": 986532,
-      "slug": "dummy-level-4",
-      "synonyms": [],
-      "tryouts": [],
-      "uid": 22325
-    },
-    {
-      "created_by": {
-        "user_id": "5721",
-        "username": "919821012599_75351"
-      },
-      "created_on": "2021-01-14T05:28:59.852Z",
-      "departments": [
-        2,
-        4,
-        21
-      ],
-      "hierarchy": [
-        {
-          "department": 21,
-          "l1": 22322,
-          "l2": 22323
-        },
-        {
-          "department": 4,
-          "l1": 3672,
-          "l2": 3732
-        },
-        {
-          "department": 2,
-          "l1": 595,
-          "l2": 730
-        }
-      ],
-      "id": "5fffd69be64eb40001fc8a65",
-      "is_active": true,
-      "level": 3,
-      "marketplaces": {},
-      "media": {
-        "landscape": "https://hdn-1.addsale.com/x0/category/pictures/landscape-banner/original/0wCdjxWpI-.png",
-        "logo": "https://hdn-1.addsale.com/x0/category/pictures/square-logo/original/EfCt9iXx8-http/d3p8ifzkmzds37.cloudfront.net/media/logo/department/original/15870_c287d3c2431a432bb0e49363ef6b82bc.png.jpeg",
-        "portrait": "https://hdn-1.addsale.com/x0/category/pictures/portrait-banner/original/S1axCMOJ4-.png"
-      },
-      "modified_by": {
-        "user_id": "5677",
-        "username": "917753852478_51632"
-      },
-      "modified_on": "2021-03-04T15:39:46.246Z",
-      "name": "Dummy level 3 by fahim",
-      "priority": 986532,
-      "slug": "dummy-level-3",
-      "synonyms": [],
-      "tryouts": [
-        "Lipstick",
-        "Eyeliner"
-      ],
-      "uid": 22324
-    },
-    {
-      "created_on": "2016-04-09T06:44:35.000Z",
-      "departments": [
-        4
-      ],
-      "hierarchy": [],
-      "id": "5fabab8ea18a1284b97ff6c4",
-      "is_active": true,
-      "level": 1,
-      "media": {
-        "landscape": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/ywPVrU_preview_a637ca6e4da6e38f03eb0d650ac5d6ba.jpgc73cc22f-b5ee-4fd4-a585-8ada35762d68/ywPVrU_preview_a637ca6e4da6e38f03eb0d650ac5d6ba.jpg",
-        "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/YHIeoQ_fruit___vegetable_logo.jpg16aab608-a78a-458f-b60b-524525f27dec/YHIeoQ_fruit___vegetable_logo.jpg",
-        "portrait": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/ywPVrU_preview_a637ca6e4da6e38f03eb0d650ac5d6ba.jpgc73cc22f-b5ee-4fd4-a585-8ada35762d68/ywPVrU_preview_a637ca6e4da6e38f03eb0d650ac5d6ba.jpg"
-      },
-      "modified_by": {
-        "uid": "5677",
-        "username": "917753852478_51632"
-      },
-      "modified_on": "2021-03-03T09:35:50.415Z",
-      "name": "Gourmet & World Food",
-      "priority": 123,
-      "slug": "gourmet-world-food",
-      "synonyms": [
-        "gourmet & world food",
-        "food",
-        "gourmet"
-      ],
-      "uid": 3151
-    },
-    {
-      "created_by": {
-        "uid": "5677",
-        "username": "917753852478_51632"
-      },
-      "created_on": "2021-03-03T06:30:08.342Z",
-      "departments": [
-        1,
-        2
-      ],
-      "hierarchy": [
-        {
-          "department": 2,
-          "l1": 595,
-          "l2": 714
-        },
-        {
-          "department": 1,
-          "l1": 2,
-          "l2": 4
-        }
-      ],
-      "id": "603f2cf0aac0360001c00731",
-      "is_active": true,
-      "level": 3,
-      "marketplaces": {},
-      "media": {
-        "landscape": "https://hdn-1.addsale.com/x0/category/pictures/landscape-banner/original/0wCdjxWpI-.png",
-        "logo": "https://hdn-1.addsale.com/x0/category/pictures/square-logo/original/EfCt9iXx8-http/d3p8ifzkmzds37.cloudfront.net/media/logo/department/original/15870_c287d3c2431a432bb0e49363ef6b82bc.png.jpeg",
-        "portrait": "https://hdn-1.addsale.com/x0/category/pictures/portrait-banner/original/VKqwRngFh-.png"
-      },
-      "modified_by": {
-        "uid": "5677",
-        "username": "917753852478_51632"
-      },
-      "modified_on": "2021-03-03T08:34:47.999Z",
-      "name": "Test Category kaf",
-      "priority": 23,
-      "slug": "test-category-kaf",
-      "synonyms": [
-        "test",
-        "category"
-      ],
-      "tryouts": [
-        "Lipstick",
-        "Blush"
-      ],
-      "uid": 22328
-    },
-    {
-      "created_by": {
-        "user_id": "-1",
-        "username": "silverbolt"
-      },
-      "created_on": "2021-02-25T09:26:53.123Z",
-      "departments": [
-        1
-      ],
-      "hierarchy": [
-        {
-          "department": 1,
-          "l1": 2,
-          "l2": 3
-        }
-      ],
-      "id": "60372005d230311fe9e51f0b",
-      "is_active": false,
-      "level": 3,
-      "marketplaces": {},
-      "media": {
-        "landscape": "https://hdn-1.fynd.com/media/banner/category/original/16128_380bed8bff064a0b981041df65e0d8b3.jpg",
-        "logo": "http://d3p8ifzkmzds37.cloudfront.net/media/logo/department/original/15870_c287d3c2431a432bb0e49363ef6b82bc.png",
-        "portrait": "http://cdn4.gofynd.com/media/logo/department/original/13239_660c6f5b2b8d458789de4552d241ea1b.jpg"
-      },
-      "modified_by": {
-        "user_id": "-1",
-        "username": "silverbolt"
-      },
-      "modified_on": "2021-02-25T09:26:53.123Z",
-      "name": "Smart Cell",
-      "priority": 5,
-      "slug": "smart-cell",
-      "synonyms": [],
-      "tryouts": [],
-      "uid": 22327
-    },
-    {
-      "created_by": {
-        "user_id": "-1",
-        "username": "silverbolt"
-      },
-      "created_on": "2021-02-25T00:09:35.026Z",
-      "departments": [
-        21
-      ],
-      "hierarchy": [
-        {
-          "department": 21,
-          "l1": 22322,
-          "l2": 22323
-        }
-      ],
-      "id": "60369d67d2303111b8924dcf",
-      "is_active": true,
-      "level": 3,
-      "marketplaces": {},
-      "media": {
-        "landscape": "https://hdn-1.addsale.com/x0/category/pictures/landscape-banner/original/0wCdjxWpI-.png",
-        "logo": "https://hdn-1.addsale.com/x0/category/pictures/square-logo/original/EfCt9iXx8-http/d3p8ifzkmzds37.cloudfront.net/media/logo/department/original/15870_c287d3c2431a432bb0e49363ef6b82bc.png.jpeg",
-        "portrait": "https://hdn-1.addsale.com/x0/category/pictures/portrait-banner/original/S1axCMOJ4-.png"
-      },
-      "modified_by": {
-        "user_id": "-1",
-        "username": "silverbolt"
-      },
-      "modified_on": "2021-02-25T00:09:35.026Z",
-      "name": "Dummy level 98",
-      "priority": 986532,
-      "slug": "dummy-level-98",
-      "synonyms": [],
-      "tryouts": [],
-      "uid": 22326
-    },
-    {
-      "created_on": "2016-04-09T06:44:35.000Z",
-      "departments": [
-        2,
-        3
-      ],
-      "hierarchy": [
-        {
-          "department": 2,
-          "l1": 65,
-          "l2": 66
-        },
-        {
-          "department": 2,
-          "l1": 442,
-          "l2": 26
-        },
-        {
-          "department": 3,
-          "l1": 442,
-          "l2": 26
-        }
-      ],
-      "id": "5fdba984642de8d93efb0d71",
-      "is_active": true,
-      "level": 3,
-      "marketplaces": {},
-      "media": {
-        "landscape": "https://hdn-1.fynd.com/media/banner/category/original/19961_f042f1f4a90f4e828b6d77d6dbea264d.jpg",
-        "logo": "https://hdn-1.fynd.com/media/logo/category/original/81ef023d375044e9b9daa66b81ec411f.jpg",
-        "portrait": "https://hdn-1.fynd.com/media/banner_portrait/category/original/19960_c679d51cb1bd4ca99f00f9050aa647a4.jpg"
-      },
-      "modified_by": {
-        "user_id": "5677",
-        "username": "917753852478_51632"
-      },
-      "modified_on": "2021-02-15T15:48:05.329Z",
-      "name": "Sports Bra",
-      "priority": 281,
-      "slug": "sports-bra",
-      "synonyms": [
-        "Sports Bra",
-        "activewear bra",
-        "gym bra"
-      ],
-      "tryouts": [],
-      "uid": 315
-    }
-  ],
-  "page": {
-    "current": 1,
-    "has_next": true,
-    "has_previous": false,
-    "item_total": 574,
-    "size": 58,
-    "type": "number"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createCategories
-Create categories.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.createCategories(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CategoryRequestBody](#CategoryRequestBody) | yes | Request body |
-
-
-Lets user create product categories on for the seller on the platform.
-
-*Returned Response:*
-
-
-
-
-[CategoryCreateResponse](#CategoryCreateResponse)
-
-Category Meta. See example below or refer `CategoryCreateResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "message": "Success",
-  "uid": 0
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCategoryData
-Get category data.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getCategoryData(uid=uid)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| uid | String | yes | Category unique id |  
-
-
-
-Retrieve detailed information about a specific category with the associated meta.
-
-*Returned Response:*
-
-
-
-
-[SingleCategoryResponse](#SingleCategoryResponse)
-
-Get Data for one category. See example below or refer `CategoryResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "data": {
-    "created_by": {
-      "user_id": "5646",
-      "username": "917972410891_48194"
-    },
-    "created_on": "2021-04-02T15:43:59.410Z",
-    "departments": [
-      1
-    ],
-    "hierarchy": [
-      {
-        "department": 1,
-        "l1": 1,
-        "l2": 22329
-      }
-    ],
-    "id": "60673bbf7896da00017885ad",
-    "is_active": true,
-    "level": 3,
-    "marketplaces": {},
-    "media": {
-      "landscape": "https://hdn-1.addsale.com/x0/category/pictures/landscape-banner/original/nsi0nJ6gX-landscape.png",
-      "logo": "https://hdn-1.addsale.com/x0/category/pictures/square-logo/original/zTgh1zslj-.png",
-      "portrait": "https://hdn-1.addsale.com/x0/category/pictures/portrait-banner/original/_4p7Kz9Yp-banner.png"
-    },
-    "modified_by": {
-      "user_id": "16",
-      "username": "nikhilmhatre_gofynd_com_97636"
-    },
-    "modified_on": "2021-04-13T13:57:56.443Z",
-    "name": "Air Conditioners",
-    "priority": 1,
-    "slug": "air-conditioners",
-    "synonyms": [],
-    "tryouts": [],
-    "uid": 22330
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateCategory
-Update category data.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.updateCategory(uid=uid, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| uid | String | yes | Category unique id |  
-| body | [CategoryRequestBody](#CategoryRequestBody) | yes | Request body |
-
-
-Modify data for an existing category in the catalog.
-
-*Returned Response:*
-
-
-
-
-[CategoryUpdateResponse](#CategoryUpdateResponse)
-
-Category Meta. See example below or refer `CategoryUpdateResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### listDepartmentsData
-List department data.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.listDepartmentsData(pageNo=pageNo, itemType=itemType, pageSize=pageSize, name=name, search=search, isActive=isActive, slug=slug)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| pageNo | Int? | no | The page number to navigate through the given set of results |   
-| itemType | String? | no | A `item_type` is a type of product eg. set, standard, digital |   
-| pageSize | Int? | no | Number of items to retrieve in each page. Default is 10. |   
-| name | String? | no | Can search departments by passing name. |   
-| search | String? | no | Can search departments by passing name of the department in search parameter. |   
-| isActive | Boolean? | no | Can query for departments based on whether they are active or inactive. |   
-| slug | String? | no | Can filter by slug |  
-
-
-
-Allows you to list all departments, also can search using name and filter active and incative departments, and item type.
-
-*Returned Response:*
-
-
-
-
-[DepartmentsResponse](#DepartmentsResponse)
-
-List of departments data. See example below or refer `DepartmentsResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "3",
-        "username": "918793638893_86554"
-      },
-      "created_on": "2020-07-01T05:33:39.325Z",
-      "id": "5efc2033623d390001782238",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/BSQ9Gk_123522-best-starry-sky-wallpaper-1920x1200-ipad-pro.jpgc7d0c15c-c1ff-47eb-8423-6e2df51f2ddf/BSQ9Gk_123522-best-starry-sky-wallpaper-1920x1200-ipad-pro.jpg",
-      "modified_by": {
-        "user_id": "5677",
-        "username": "917753852478_51632"
-      },
-      "modified_on": "2021-03-03T15:55:25.118Z",
-      "name": "Sample Dept",
-      "platforms": {},
-      "priority_order": 111,
-      "slug": "sample-dept",
-      "synonyms": [
-        "test",
-        "sampe"
-      ],
-      "tags": [],
-      "uid": 5
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "0",
-        "username": "app@fynd.com"
-      },
-      "created_on": "2020-05-19T06:53:37.629Z",
-      "id": "5ec3827156a7200001c9aeea",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/addsale/media/logo/department/original/15974_381e2236c2a348cc851c29a5d05c66a9.png",
-      "modified_by": {
-        "user_id": "10",
-        "username": "fahimsakri_gofynd_com_44938"
-      },
-      "modified_on": "2021-03-04T14:01:02.556Z",
-      "name": "Men's Fashion",
-      "platforms": {
-        "fynd": true,
-        "fynd_store": true,
-        "marketplace": true,
-        "openapi": true,
-        "uniket_store": true,
-        "uniket_wholesale": true
-      },
-      "priority_order": 111,
-      "slug": "men-s-fashion",
-      "synonyms": [],
-      "tags": [],
-      "uid": 2
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "10",
-        "username": "fahimsakri_gofynd_com_44938"
-      },
-      "created_on": "2020-06-29T10:59:33.620Z",
-      "id": "5ef9c9959b04f00001e40dba",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/ywPVrU_preview_a637ca6e4da6e38f03eb0d650ac5d6ba.jpgc73cc22f-b5ee-4fd4-a585-8ada35762d68/ywPVrU_preview_a637ca6e4da6e38f03eb0d650ac5d6ba.jpg",
-      "modified_by": {
-        "user_id": "3",
-        "username": "918793638893_86554"
-      },
-      "modified_on": "2020-08-06T18:08:02.675Z",
-      "name": "Groceries",
-      "platforms": {},
-      "priority_order": 10,
-      "slug": "groceries",
-      "synonyms": [],
-      "tags": [],
-      "uid": 4
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "0",
-        "username": "app@fynd.com"
-      },
-      "created_on": "2020-05-18T16:14:41.689Z",
-      "id": "5ec2b471661a4100019fca0d",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/platform/pictures/free-logo/original/_G1Z2Fg1L-http:d3p8ifzkmzds37.cloudfront.netmedialogodepartmentoriginal15870_c287d3c2431a432bb0e49363ef6b82bc.png.png",
-      "modified_by": {
-        "user_id": "5677",
-        "username": "917753852478_51632"
-      },
-      "modified_on": "2021-03-04T15:39:38.528Z",
-      "name": "Electronics",
-      "platforms": {
-        "fynd": true,
-        "fynd_store": true,
-        "marketplace": true,
-        "openapi": true,
-        "uniket_store": true,
-        "uniket_wholesale": true
-      },
-      "priority_order": 100,
-      "slug": "electronics",
-      "synonyms": [],
-      "tags": [],
-      "uid": 1
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "3",
-        "username": "918793638893_86554"
-      },
-      "created_on": "2020-05-27T12:04:19.111Z",
-      "id": "5ece5743cd1bae0001440427",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/landscape-banner/original/g2plam_logo_Jio.pngeeb392ca-3958-46a0-9f13-23c205b596f7/g2plam_logo_Jio.png",
-      "modified_by": {
-        "user_id": "3",
-        "username": "918793638893_86554"
-      },
-      "modified_on": "2020-08-06T18:07:46.060Z",
-      "name": "Industrial Supplies",
-      "platforms": {},
-      "priority_order": 111,
-      "slug": "industrial-supplies",
-      "synonyms": [],
-      "tags": [],
-      "uid": 3
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "13",
-        "username": "abhinavsrivastava_gofynd_com_05674"
-      },
-      "created_on": "2020-07-06T07:56:01.508Z",
-      "id": "5f02d9116b0ae500018923dd",
-      "is_active": false,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/wTcfEi_crysis_-_1.jpg14580947-a659-486d-b2d3-d2ca025b1cac/wTcfEi_crysis_-_1.jpg",
-      "modified_by": {
-        "user_id": "3",
-        "username": "918793638893_86554"
-      },
-      "modified_on": "2020-08-06T18:08:12.576Z",
-      "name": "Clothing",
-      "platforms": {},
-      "priority_order": 1,
-      "slug": "clothing",
-      "synonyms": [],
-      "tags": [],
-      "uid": 6
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "5634",
-        "username": "asavarijadhav_gofynd_com_99880"
-      },
-      "created_on": "2020-08-05T09:04:33.604Z",
-      "id": "5f2a762131c66700018cdc47",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/RxTsd8_0DEFAULT-LOGO.jpg000ccfc1-2f79-4426-9ac3-de2468c2fcb9/RxTsd8_0DEFAULT-LOGO.jpg",
-      "modified_by": {
-        "user_id": "5634",
-        "username": "asavarijadhav_gofynd_com_99880"
-      },
-      "modified_on": "2020-08-05T09:44:01.234Z",
-      "name": "Kids",
-      "platforms": {},
-      "priority_order": 3,
-      "slug": "kids",
-      "synonyms": [],
-      "tags": [],
-      "uid": 8
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "5634",
-        "username": "asavarijadhav_gofynd_com_99880"
-      },
-      "created_on": "2020-08-05T09:44:46.632Z",
-      "id": "5f2a7f8e31c66700018cdc49",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/tKkDB8_0DEFAULT-LOGO.jpg1c324d4d-f667-4af8-8d98-37205d34e3b5/tKkDB8_0DEFAULT-LOGO.jpg",
-      "modified_by": {
-        "user_id": "3",
-        "username": "918793638893_86554"
-      },
-      "modified_on": "2020-08-06T18:07:35.231Z",
-      "name": "Women's Fashion",
-      "platforms": {},
-      "priority_order": 2,
-      "slug": "women-s-fashion",
-      "synonyms": [],
-      "tags": [],
-      "uid": 9
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "5634",
-        "username": "asavarijadhav_gofynd_com_99880"
-      },
-      "created_on": "2020-08-05T09:45:12.075Z",
-      "id": "5f2a7fa831c66700018cdc4a",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/oLoxiL_0DEFAULT-LOGO.jpgbd050200-700a-4a3e-9da6-e6b78fbee943/oLoxiL_0DEFAULT-LOGO.jpg",
-      "modified_by": {
-        "user_id": "5634",
-        "username": "asavarijadhav_gofynd_com_99880"
-      },
-      "modified_on": "2020-08-05T09:48:01.660Z",
-      "name": "Beauty & Personal Care",
-      "platforms": {},
-      "priority_order": 4,
-      "slug": "beauty-personal-care",
-      "synonyms": [],
-      "tags": [],
-      "uid": 10
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "5634",
-        "username": "asavarijadhav_gofynd_com_99880"
-      },
-      "created_on": "2020-08-05T09:45:39.797Z",
-      "id": "5f2a7fc331c66700018cdc4b",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/vQv4ot_0DEFAULT-LOGO.jpg701cb5af-2024-4abf-ae5d-b68bc1a3cd43/vQv4ot_0DEFAULT-LOGO.jpg",
-      "modified_by": {
-        "user_id": "3",
-        "username": "918793638893_86554"
-      },
-      "modified_on": "2020-08-06T11:38:57.599Z",
-      "name": "Home & Living",
-      "platforms": {},
-      "priority_order": 5,
-      "slug": "home-living",
-      "synonyms": [],
-      "tags": [],
-      "uid": 11
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "5634",
-        "username": "asavarijadhav_gofynd_com_99880"
-      },
-      "created_on": "2020-08-05T09:48:42.347Z",
-      "id": "5f2a807a31c66700018cdc4e",
-      "is_active": false,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/hTobjV_0DEFAULT-LOGO.jpga020159c-7fe7-4c1c-a11a-4be61a60da9f/hTobjV_0DEFAULT-LOGO.jpg",
-      "modified_by": {
-        "user_id": "5634",
-        "username": "asavarijadhav_gofynd_com_99880"
-      },
-      "modified_on": "2020-08-05T09:48:42.347Z",
-      "name": "Baby Care & Kids Essentials",
-      "platforms": {},
-      "priority_order": 7,
-      "slug": "baby-care-kids-essentials",
-      "synonyms": [],
-      "tags": [],
-      "uid": 14
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "5721",
-        "username": "919821012599_75351"
-      },
-      "created_on": "2021-01-13T10:12:33.002Z",
-      "id": "5ffec79192813f0001eb6560",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/department/pictures/square-logo/original/rNz8grLys-.png",
-      "modified_by": {
-        "user_id": "5721",
-        "username": "919821012599_75351"
-      },
-      "modified_on": "2021-01-13T13:50:55.415Z",
-      "name": "Skin care products",
-      "platforms": {},
-      "priority_order": 10235,
-      "slug": "skin-care-produts",
-      "synonyms": [
-        "skin",
-        "care"
-      ],
-      "tags": [],
-      "uid": 21
-    }
-  ],
-  "page": {
-    "current": 1,
-    "has_next": false,
-    "has_previous": false,
-    "item_total": 12,
-    "size": 1,
-    "type": "number"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createDepartments
-Create departments.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.createDepartments(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [DepartmentCreateUpdate](#DepartmentCreateUpdate) | yes | Request body |
-
-
-Create departments with this resource.
-
-*Returned Response:*
-
-
-
-
-[DepartmentCreateResponse](#DepartmentCreateResponse)
-
-Success Response. See example below or refer `DepartmentCreateResponseSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "message": "Success",
-  "uid": 2
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getDepartmentData
-Get department data.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getDepartmentData(uid=uid)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| uid | String | yes | A `uid` is a unique identifier of a department. |  
-
-
-
-Retrieve detailed information about a specific department by UID.
-
-*Returned Response:*
-
-
-
-
-[DepartmentsResponse](#DepartmentsResponse)
-
-Departments Data. See example below or refer `DepartmentsResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "3",
-        "username": "918793638893_86554"
-      },
-      "created_on": "2020-07-01T05:33:39.325Z",
-      "id": "5efc2033623d390001782238",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/BSQ9Gk_123522-best-starry-sky-wallpaper-1920x1200-ipad-pro.jpgc7d0c15c-c1ff-47eb-8423-6e2df51f2ddf/BSQ9Gk_123522-best-starry-sky-wallpaper-1920x1200-ipad-pro.jpg",
-      "modified_by": {
-        "user_id": "5677",
-        "username": "917753852478_51632"
-      },
-      "modified_on": "2021-03-03T15:55:25.118Z",
-      "name": "Sample Dept",
-      "platforms": {},
-      "priority_order": 111,
-      "slug": "sample-dept",
-      "synonyms": [
-        "test",
-        "sampe"
-      ],
-      "tags": [],
-      "uid": 5
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "0",
-        "username": "app@fynd.com"
-      },
-      "created_on": "2020-05-19T06:53:37.629Z",
-      "id": "5ec3827156a7200001c9aeea",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/addsale/media/logo/department/original/15974_381e2236c2a348cc851c29a5d05c66a9.png",
-      "modified_by": {
-        "user_id": "10",
-        "username": "fahimsakri_gofynd_com_44938"
-      },
-      "modified_on": "2021-03-04T14:01:02.556Z",
-      "name": "Men's Fashion",
-      "platforms": {
-        "fynd": true,
-        "fynd_store": true,
-        "marketplace": true,
-        "openapi": true,
-        "uniket_store": true,
-        "uniket_wholesale": true
-      },
-      "priority_order": 111,
-      "slug": "men-s-fashion",
-      "synonyms": [],
-      "tags": [],
-      "uid": 2
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "10",
-        "username": "fahimsakri_gofynd_com_44938"
-      },
-      "created_on": "2020-06-29T10:59:33.620Z",
-      "id": "5ef9c9959b04f00001e40dba",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/ywPVrU_preview_a637ca6e4da6e38f03eb0d650ac5d6ba.jpgc73cc22f-b5ee-4fd4-a585-8ada35762d68/ywPVrU_preview_a637ca6e4da6e38f03eb0d650ac5d6ba.jpg",
-      "modified_by": {
-        "user_id": "3",
-        "username": "918793638893_86554"
-      },
-      "modified_on": "2020-08-06T18:08:02.675Z",
-      "name": "Groceries",
-      "platforms": {},
-      "priority_order": 10,
-      "slug": "groceries",
-      "synonyms": [],
-      "tags": [],
-      "uid": 4
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "0",
-        "username": "app@fynd.com"
-      },
-      "created_on": "2020-05-18T16:14:41.689Z",
-      "id": "5ec2b471661a4100019fca0d",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/platform/pictures/free-logo/original/_G1Z2Fg1L-http:d3p8ifzkmzds37.cloudfront.netmedialogodepartmentoriginal15870_c287d3c2431a432bb0e49363ef6b82bc.png.png",
-      "modified_by": {
-        "user_id": "5677",
-        "username": "917753852478_51632"
-      },
-      "modified_on": "2021-03-04T15:39:38.528Z",
-      "name": "Electronics",
-      "platforms": {
-        "fynd": true,
-        "fynd_store": true,
-        "marketplace": true,
-        "openapi": true,
-        "uniket_store": true,
-        "uniket_wholesale": true
-      },
-      "priority_order": 100,
-      "slug": "electronics",
-      "synonyms": [],
-      "tags": [],
-      "uid": 1
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "3",
-        "username": "918793638893_86554"
-      },
-      "created_on": "2020-05-27T12:04:19.111Z",
-      "id": "5ece5743cd1bae0001440427",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/landscape-banner/original/g2plam_logo_Jio.pngeeb392ca-3958-46a0-9f13-23c205b596f7/g2plam_logo_Jio.png",
-      "modified_by": {
-        "user_id": "3",
-        "username": "918793638893_86554"
-      },
-      "modified_on": "2020-08-06T18:07:46.060Z",
-      "name": "Industrial Supplies",
-      "platforms": {},
-      "priority_order": 111,
-      "slug": "industrial-supplies",
-      "synonyms": [],
-      "tags": [],
-      "uid": 3
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "13",
-        "username": "abhinavsrivastava_gofynd_com_05674"
-      },
-      "created_on": "2020-07-06T07:56:01.508Z",
-      "id": "5f02d9116b0ae500018923dd",
-      "is_active": false,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/wTcfEi_crysis_-_1.jpg14580947-a659-486d-b2d3-d2ca025b1cac/wTcfEi_crysis_-_1.jpg",
-      "modified_by": {
-        "user_id": "3",
-        "username": "918793638893_86554"
-      },
-      "modified_on": "2020-08-06T18:08:12.576Z",
-      "name": "Clothing",
-      "platforms": {},
-      "priority_order": 1,
-      "slug": "clothing",
-      "synonyms": [],
-      "tags": [],
-      "uid": 6
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "5634",
-        "username": "asavarijadhav_gofynd_com_99880"
-      },
-      "created_on": "2020-08-05T09:04:33.604Z",
-      "id": "5f2a762131c66700018cdc47",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/RxTsd8_0DEFAULT-LOGO.jpg000ccfc1-2f79-4426-9ac3-de2468c2fcb9/RxTsd8_0DEFAULT-LOGO.jpg",
-      "modified_by": {
-        "user_id": "5634",
-        "username": "asavarijadhav_gofynd_com_99880"
-      },
-      "modified_on": "2020-08-05T09:44:01.234Z",
-      "name": "Kids",
-      "platforms": {},
-      "priority_order": 3,
-      "slug": "kids",
-      "synonyms": [],
-      "tags": [],
-      "uid": 8
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "5634",
-        "username": "asavarijadhav_gofynd_com_99880"
-      },
-      "created_on": "2020-08-05T09:44:46.632Z",
-      "id": "5f2a7f8e31c66700018cdc49",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/tKkDB8_0DEFAULT-LOGO.jpg1c324d4d-f667-4af8-8d98-37205d34e3b5/tKkDB8_0DEFAULT-LOGO.jpg",
-      "modified_by": {
-        "user_id": "3",
-        "username": "918793638893_86554"
-      },
-      "modified_on": "2020-08-06T18:07:35.231Z",
-      "name": "Women's Fashion",
-      "platforms": {},
-      "priority_order": 2,
-      "slug": "women-s-fashion",
-      "synonyms": [],
-      "tags": [],
-      "uid": 9
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "5634",
-        "username": "asavarijadhav_gofynd_com_99880"
-      },
-      "created_on": "2020-08-05T09:45:12.075Z",
-      "id": "5f2a7fa831c66700018cdc4a",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/oLoxiL_0DEFAULT-LOGO.jpgbd050200-700a-4a3e-9da6-e6b78fbee943/oLoxiL_0DEFAULT-LOGO.jpg",
-      "modified_by": {
-        "user_id": "5634",
-        "username": "asavarijadhav_gofynd_com_99880"
-      },
-      "modified_on": "2020-08-05T09:48:01.660Z",
-      "name": "Beauty & Personal Care",
-      "platforms": {},
-      "priority_order": 4,
-      "slug": "beauty-personal-care",
-      "synonyms": [],
-      "tags": [],
-      "uid": 10
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "5634",
-        "username": "asavarijadhav_gofynd_com_99880"
-      },
-      "created_on": "2020-08-05T09:45:39.797Z",
-      "id": "5f2a7fc331c66700018cdc4b",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/vQv4ot_0DEFAULT-LOGO.jpg701cb5af-2024-4abf-ae5d-b68bc1a3cd43/vQv4ot_0DEFAULT-LOGO.jpg",
-      "modified_by": {
-        "user_id": "3",
-        "username": "918793638893_86554"
-      },
-      "modified_on": "2020-08-06T11:38:57.599Z",
-      "name": "Home & Living",
-      "platforms": {},
-      "priority_order": 5,
-      "slug": "home-living",
-      "synonyms": [],
-      "tags": [],
-      "uid": 11
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "5634",
-        "username": "asavarijadhav_gofynd_com_99880"
-      },
-      "created_on": "2020-08-05T09:48:42.347Z",
-      "id": "5f2a807a31c66700018cdc4e",
-      "is_active": false,
-      "logo": "https://hdn-1.addsale.com/x0/seller/pictures/logo/original/hTobjV_0DEFAULT-LOGO.jpga020159c-7fe7-4c1c-a11a-4be61a60da9f/hTobjV_0DEFAULT-LOGO.jpg",
-      "modified_by": {
-        "user_id": "5634",
-        "username": "asavarijadhav_gofynd_com_99880"
-      },
-      "modified_on": "2020-08-05T09:48:42.347Z",
-      "name": "Baby Care & Kids Essentials",
-      "platforms": {},
-      "priority_order": 7,
-      "slug": "baby-care-kids-essentials",
-      "synonyms": [],
-      "tags": [],
-      "uid": 14
-    },
-    {
-      "_cls": "Department",
-      "_custom_json": {},
-      "created_by": {
-        "user_id": "5721",
-        "username": "919821012599_75351"
-      },
-      "created_on": "2021-01-13T10:12:33.002Z",
-      "id": "5ffec79192813f0001eb6560",
-      "is_active": true,
-      "logo": "https://hdn-1.addsale.com/x0/department/pictures/square-logo/original/rNz8grLys-.png",
-      "modified_by": {
-        "user_id": "5721",
-        "username": "919821012599_75351"
-      },
-      "modified_on": "2021-01-13T13:50:55.415Z",
-      "name": "Skin care products",
-      "platforms": {},
-      "priority_order": 10235,
-      "slug": "skin-care-produts",
-      "synonyms": [
-        "skin",
-        "care"
-      ],
-      "tags": [],
-      "uid": 21
-    }
-  ],
-  "page": {
-    "type": ""
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateDepartment
-Update department data.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.updateDepartment(uid=uid, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| uid | String | yes | A `uid` is a unique identifier of a department. |  
-| body | [DepartmentCreateUpdate](#DepartmentCreateUpdate) | yes | Request body |
-
-
-Modify the department by their uid using this API.
-
-*Returned Response:*
-
-
-
-
-[DepartmentModel](#DepartmentModel)
-
-Success Response. See example below or refer `DepartmentCreateResponseSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "created_on": "2021-04-02T15:43:59.410Z",
-  "is_active": true,
-  "logo": "https://hdn-1.addsale.com/x0/department/pictures/square-logo/original/xKDsQBbu4-department.png",
-  "modified_by": {
-    "user_id": "f5b6a546565146sdfg584c342",
-    "username": "31315573458_05620"
-  },
-  "modified_on": "2022-08-09T15:44:02.540Z",
-  "name": "Fashion",
-  "priority_order": 1,
-  "slug": "fashion",
-  "synonyms": [
-    "fashion",
-    "mensfashion"
-  ],
-  "uid": 2
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### downloadInventoryTemplateView
-Download inventory template view.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.downloadInventoryTemplateView(itemType=itemType)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| itemType | String | yes | An `item_type` defines the type of item. |  
-
-
-
-Allows you to download product template data.
-
-*Returned Response:*
-
-
-
-
-[String](#String)
-
-CSV File of product template data.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### validateProductTemplateSchema
-Validate product template schema.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.validateProductTemplateSchema(itemType=itemType)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| itemType | String | yes | An `item_type` defines the type of item. The default value is standard. |  
-
-
-
-Allows you to list all product templates validation values for all the fields present in the database.
-
-*Returned Response:*
-
-
-
-
-[InventoryValidationResponse](#InventoryValidationResponse)
-
-List of fields and validation values fro each. See example below or refer `InventoryValidationResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "data": {
-    "definitions": {
-      "InventoryBaseSchema": {
-        "properties": {
-          "currency": {
-            "title": "Currency",
-            "type": "string"
-          },
-          "price": {
-            "exclusiveMinimum": 1,
-            "title": "Actual Price",
-            "type": "number"
-          },
-          "price_effective": {
-            "exclusiveMinimum": 1,
-            "title": "Selling Price",
-            "type": "number"
-          },
-          "quantity": {
-            "minimum": 0,
-            "title": "Quantity",
-            "type": "integer"
-          },
-          "seller_identifier": {
-            "pattern": "^[A-Za-z0-9]*$",
-            "title": "Gtin Value",
-            "type": "string"
-          },
-          "size": {
-            "title": "Size",
-            "type": "string"
-          },
-          "store_code": {
-            "enum": [
-              "RUOSH43",
-              "S106",
-              "S108",
-              "TIO9",
-              "talha"
-            ],
-            "title": "Store Code",
-            "type": "string"
-          }
-        },
-        "required": [
-          "price",
-          "price_effective",
-          "seller_identifier",
-          "quantity",
-          "store_code",
-          "currency",
-          "size"
-        ],
-        "title": "InventoryBaseSchema",
-        "type": "object"
-      },
-      "ItemQuery": {
-        "properties": {
-          "brand_uid": {
-            "title": "Brand Uid",
-            "type": "integer"
-          },
-          "item_code": {
-            "title": "Item Code",
-            "type": "integer"
-          },
-          "uid": {
-            "title": "Uid",
-            "type": "integer"
-          }
-        },
-        "title": "ItemQuery",
-        "type": "object"
-      }
-    },
-    "properties": {
-      "sizes": {
-        "title": "Sizes",
-        "type": "array"
-      }
-    },
-    "required": [
-      "item",
-      "sizes"
-    ],
-    "title": "InventoryValidationResponse",
-    "type": "object"
-  },
-  "message": "Success"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### listProductTemplate
-List product templates.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.listProductTemplate(department=department)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| department | String | yes | A `department` is the name of a particular department. |  
-
-
-
-Allows you to list all product templates, also can filter by department.
-
-*Returned Response:*
-
-
-
-
-[TemplatesResponse](#TemplatesResponse)
-
-List of product templates. See example below or refer `TemplatesResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": {
-    "attributes": [
-      "gender",
-      "fragile",
-      "manufacturer-packer-importer-name",
-      "manufacturer-packer-importer-address"
-    ],
-    "banner": "https://hdn-1.fynd.com/seller/pictures/landscape-banner/original/F4W6Pd_DEFAULT-BANNER_LANDSCAPE.jpgd54cb24d-dd2c-441c-bca0-8f65ea3b101c/F4W6Pd_DEFAULT-BANNER_LANDSCAPE.jpg",
-    "categories": [
-      "accessories-adornments",
-      "socks",
-      "toric-contact-lenses",
-      "daily-disposable",
-      "monthly-reusable",
-      "multifocal-varifocal",
-      "solutions-accessories",
-      "coloured-lenses"
-    ],
-    "departments": [
-      "electronics",
-      "men",
-      "women",
-      "kids",
-      "toys"
-    ],
-    "description": "This is the file validation template for the fashion department and accessories category.",
-    "id": "5f04a23544a2e5404274bc07",
-    "is_expirable": true,
-    "is_physical": true,
-    "logo": "https://hdn-1.fynd.com/seller/pictures/logo/original/hkE1dC_0DEFAULT-LOGO.jpgfb5b1b31-9449-43db-9049-435fec88ee77/hkE1dC_0DEFAULT-LOGO.jpg",
-    "name": "Accessories",
-    "slug": "accessories"
-  },
-  "page": {
-    "current": 1,
-    "has_next": true,
-    "has_previous": false,
-    "item_total": 36,
-    "size": 3,
-    "type": "number"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### listProductTemplateCategories
-List product template categories.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.listProductTemplateCategories(departments=departments, itemType=itemType)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| departments | String | yes | A `department` is name of a departments whose category needs to be listed. Can specify multiple departments. |   
-| itemType | String | yes | An `item_type` is the type of item, it can be `set`, `standard`, `digital`, etc. |  
-
-
-
-Allows you to list all product categories values for the departments specified.
-
-*Returned Response:*
-
-
-
-
-[ProdcutTemplateCategoriesResponse](#ProdcutTemplateCategoriesResponse)
-
-List of all categories attached to departments specified. See example below or refer `ProdcutTemplateCategoriesResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [],
-  "page": {
-    "type": ""
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### downloadProductTemplateViews
-Download product template views.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.downloadProductTemplateViews(slug=slug, itemType=itemType, type=type)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| slug | String | yes | A `slug` is a unique identifier for a particular template. |   
-| itemType | String? | no | An `item_type` defines the type of item. The default value is standard. |   
-| type | String? | no | Format type of the sample file. The default value is excel. |  
-
-
-
-Allows you to download product template data.
-
-*Returned Response:*
-
-
-
-
-[String](#String)
-
-CSV File of product template data. See example below or refer `TemplatesResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### validateProductTemplate
-Validate product template.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.validateProductTemplate(slug=slug, itemType=itemType, bulk=bulk)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| slug | String | yes | A `slug` is a unique identifier for a particular template. |   
-| itemType | String? | no | An `item_type` defines the type of item. The default value is standard. |   
-| bulk | Boolean? | no | This specification determines the schema type to be retrieved. When set to true, it will return the schema for bulk data; when set to false, it will provide the schema for a single product. The default value is false. |  
-
-
-
-Allows you to list all product templates validation values for all the fields present in the database.
-
-*Returned Response:*
-
-
-
-
-[TemplatesValidationResponse](#TemplatesValidationResponse)
-
-List of fields and validation values fro each. See example below or refer `TemplatesValidationResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "data": {
-    "global_validation": {
-      "properties": {},
-      "required": []
-    }
-  },
-  "template_details": {
-    "attributes": [],
-    "categories": [],
-    "departments": [],
-    "is_expirable": true,
-    "is_physical": true,
-    "slug": ""
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### listTemplateBrandTypeValues
-List template brand type values.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.listTemplateBrandTypeValues(filter=filter, templateTag=templateTag, itemType=itemType)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| filter | String | yes | A `filter` is the unique identifier of the type of value required. |   
-| templateTag | String? | no | A `template_tag` is the identifier of the type of template required. |   
-| itemType | String? | no | A `item_type` is the identifier of the type of template required. |  
-
-
-
-Retrieve values related to template brand types. The filter type query parameter defines what type of data to return. The type of query returns the valid values for the same
-
-*Returned Response:*
-
-
-
-
-[ProductConfigurationDownloads](#ProductConfigurationDownloads)
-
-See example below or refer `ProductConfigurationDownloadsSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "data": [
-    {
-      "display": "csv",
-      "value": "csv"
-    },
-    {
-      "display": "excel",
-      "value": "excel"
-    }
-  ],
-  "multivalue": false
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### listProductTemplateExportDetails
-List product template export details.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.listProductTemplateExportDetails()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Retrieve export details related to product templates. Can view details including trigger data, task id , etc.
-
-*Returned Response:*
-
-
-
-
-[ProductDownloadsResponse](#ProductDownloadsResponse)
-
-List of Product Downloads Data. See example below or refer `ProductDownloadsResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "completed_on": "2020-12-23T07:23:41.031Z",
-      "created_by": {
-        "user_id": "5646",
-        "username": "917972410891_48194"
-      },
-      "data": {
-        "brand": [
-          "ruosh"
-        ],
-        "templates": [
-          "mobile-phones-and-tablet"
-        ],
-        "type": "csv"
-      },
-      "id": "5fe2f077516d980001880943",
-      "seller_id": 3,
-      "status": "success",
-      "task_id": "c4b54ace-44ef-11eb-9806-1ef9bc4a2da1",
-      "template_tags": {
-        "mobile-phones-and-tablet": {
-          "display": "Mobile Phones & Tablet",
-          "logo": "https://hdn-1.jiox0.de/jiox0/seller/pictures/logo/original/Oda39B_99946594-portable-devices-with-tablet-and-mobile-phone-vector-icon-for-apps-and-websites.jpgcc2dff44-7fae-4002-9ebe-d2b59c8bee91/Oda39B_99946594-portable-devices-with-tablet-and-mobile-phone-vector-icon-for-apps-and-websites.jpg"
-        }
-      },
-      "trigger_on": "2020-12-23T07:23:35.302Z",
-      "url": "https://regrowth.s3.amazonaws.com/slingshot-catalogues/seller-catalog/3/c4b54ace-44ef-11eb-9806-1ef9bc4a2da1/c4b54ace-44ef-11eb-9806-1ef9bc4a2da1.zip"
-    }
-  ],
-  "page": {}
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### listHSNCodes
-List HSN codes.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.listHSNCodes()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Retrieve a list of Harmonized System Nomenclature (HSN) codes.
-
-*Returned Response:*
-
-
-
-
-[HSNCodesResponse](#HSNCodesResponse)
-
-List of all HSN Codes. See example below or refer `HSNCodesResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "data": {
-    "country_of_origin": [
-      "India"
-    ],
-    "hsn_code": [
-      "11111111"
-    ]
-  },
-  "message": "Success"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getProductExportJobs
-Retrieve product export jobs.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getProductExportJobs(status=status, fromDate=fromDate, toDate=toDate, q=q)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| status | String? | no | This is a parameter used to find all the jobs with the specified status. |   
-| fromDate | String? | no | This is a parameter used to find the job from the date specified to the current date. |   
-| toDate | String? | no | This is a parameter used to find the job from the from_date specified to the to_date. |   
-| q | String? | no | It is a query parameter to search the export job with the task ID. |  
-
-
-
-View details including trigger data, task id , etc.
-
-*Returned Response:*
-
-
-
-
-[ProductDownloadsResponse](#ProductDownloadsResponse)
-
-List of Product Downloads Data. See example below or refer `ProductDownloadsResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "completed_on": "2020-12-23T07:23:41.031Z",
-      "created_by": {
-        "user_id": "5646",
-        "username": "917972410891_48194"
-      },
-      "data": {
-        "brand": [
-          "ruosh"
-        ],
-        "templates": [
-          "mobile-phones-and-tablet"
-        ],
-        "type": "csv"
-      },
-      "id": "5fe2f077516d980001880943",
-      "seller_id": 3,
-      "status": "success",
-      "task_id": "c4b54ace-44ef-11eb-9806-1ef9bc4a2da1",
-      "template_tags": {
-        "mobile-phones-and-tablet": {
-          "display": "Mobile Phones & Tablet",
-          "logo": "https://hdn-1.jiox0.de/jiox0/seller/pictures/logo/original/Oda39B_99946594-portable-devices-with-tablet-and-mobile-phone-vector-icon-for-apps-and-websites.jpgcc2dff44-7fae-4002-9ebe-d2b59c8bee91/Oda39B_99946594-portable-devices-with-tablet-and-mobile-phone-vector-icon-for-apps-and-websites.jpg"
-        }
-      },
-      "trigger_on": "2020-12-23T07:23:35.302Z",
-      "url": "https://regrowth.s3.amazonaws.com/slingshot-catalogues/seller-catalog/3/c4b54ace-44ef-11eb-9806-1ef9bc4a2da1/c4b54ace-44ef-11eb-9806-1ef9bc4a2da1.zip"
-    }
-  ],
-  "page": {}
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createProductExportJob
-Create product export job.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.createProductExportJob(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [ProductTemplateDownloadsExport](#ProductTemplateDownloadsExport) | yes | Request body |
-
-
-Helps to create a Inventory export job.
-
-*Returned Response:*
-
-
-
-
-[ProductDownloadsResponse](#ProductDownloadsResponse)
-
-Returns a success response
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "data": {
-    "_id": "6401cb6729885c34aa30b0c6",
-    "created_by": {
-      "user_id": "550fe8ce436ea332b9e4b4b0",
-      "username": "purvashukla_gofynd_com_44895"
-    },
-    "created_on": "2023-03-03T10:26:47.047Z",
-    "filters": {
-      "brands": [],
-      "catalogue_types": [
-        "standard"
-      ],
-      "templates": [
-        "footwear"
-      ]
-    },
-    "modified_on": "2023-03-03T10:26:47.047Z",
-    "notification_emails": [],
-    "seller_id": 577,
-    "stats": {},
-    "status": "pending",
-    "task_id": "e6c47f1a-b9ad-11ed-b7a0-3ef7b700888d",
-    "type": "excel"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getOptimalLocations
-Get optimal locations.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getOptimalLocations(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [AssignStore](#AssignStore) | yes | Request body |
-
-
-Retrieve the most suitable locations based on certain criteria.
-
-*Returned Response:*
-
-
-
-
-[StoreAssignResponse](#StoreAssignResponse)
-
-Returns a success response
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "_id": "61161830f1061e7c7f81d8ed",
-  "article_assignment": {
-    "level": "multi-company",
-    "strategy": "app-config"
-  },
-  "company_id": 783,
-  "index": 0,
-  "item_id": 75252658,
-  "price_effective": 995,
-  "price_marked": 995,
-  "quantity": 1,
-  "s_city": "NOIDA",
-  "size": "OS",
-  "status": true,
-  "store_id": 11550,
-  "store_pincode": 201303,
-  "strategy_wise_listing": [],
-  "uid": "11550_000000410234883001"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getMarketplaceOptinDetail
-Get opt-in infomation.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getMarketplaceOptinDetail()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Use this API to fetch opt-in information for all the platforms. If successful, returns a logs in the response body as specified in `GetOptInPlatformSchema`
-
-*Returned Response:*
-
-
-
-
-[GetOptInPlatform](#GetOptInPlatform)
-
-See example below or refer `GetOptInPlatformSchema` for details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCompanyBrandDetail
-Get the Company Brand details of Optin.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getCompanyBrandDetail(isActive=isActive, q=q, pageNo=pageNo, pageSize=pageSize, marketplace=marketplace)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| isActive | Boolean? | no | The is_active status for the optin id. |   
-| q | String? | no | The search value to filter the list. |   
-| pageNo | Int? | no | The number of page for the company id. |   
-| pageSize | Int? | no | Number of records that can be seen on the page for the company id. |   
-| marketplace | String? | no | The marketplace platform associated with the company id. |  
-
-
-
-Get the details of the Brands associated with the given company_id passed.
-
-*Returned Response:*
-
-
-
-
-[OptinCompanyBrandDetailsView](#OptinCompanyBrandDetailsView)
-
-See example below or refer `OptinCompanyBrandDetailsView` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCompanyDetail
-Get the Company details.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getCompanyDetail()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Get the details of the company associated with the given company_id passed.
-
-*Returned Response:*
-
-
-
-
-[OptinCompanyDetail](#OptinCompanyDetail)
-
-See example below or refer `OptinCompanyDetailSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createMarketplaceOptin
-Create/Update opt-in infomation.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.createMarketplaceOptin(marketplace=marketplace, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| marketplace | String | yes | The marketplace for which the detail needs to be retrieved. |  
-| body | [OptInPostRequest](#OptInPostRequest) | yes | Request body |
-
-
-Use this API to create/update opt-in information for given platform. If successful, returns data in the response body as specified in `OptInPostResponseSchema`
-
-*Returned Response:*
-
-
-
-
-[UpdatedResponse](#UpdatedResponse)
-
-See example below or refer `UpdatedResponse` for details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getCompanyMetrics
-Get company metrics.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getCompanyMetrics()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Allows to view the company metrics, i.e. the status of its brand and stores. Also its allows to view the number of products, company documents & store documents which are verified and unverified.
-
-*Returned Response:*
-
-
-
-
-[OptinCompanyMetrics](#OptinCompanyMetrics)
-
-See example below or refer `OptinCompanyMetrics` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getStoreDetail
-Get store details.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getStoreDetail(q=q, pageNo=pageNo, pageSize=pageSize)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| q | String? | no | The search related the store for the company id. |   
-| pageNo | Int? | no | The number of page for the company id. |   
-| pageSize | Int? | no | Number of records that can be seen on the page for the company id. |  
-
-
-
-Retrieve the details of the store associated with the company ID passed.
-
-*Returned Response:*
-
-
-
-
-[OptinStoreDetails](#OptinStoreDetails)
-
-See example below or refer `OptinStoreDetailsSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getGenderAttribute
-Get gender attribute.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getGenderAttribute(attributeSlug=attributeSlug)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| attributeSlug | String | yes | slug of the attribute for which you want to view the genders |  
-
-
-
-Retrieve the gender attribute for catalog listings.
-
-*Returned Response:*
-
-
-
-
-[GenderDetail](#GenderDetail)
-
-Size guide object. See example below or refer `GenderDetailSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "departments": [
-    "men-s-fashion",
-    "kids",
-    "women-s-fashion",
-    "beauty-personal-care"
-  ],
-  "description": "Clothing department needs gener attribute",
-  "details": {
-    "display_type": "text"
-  },
-  "enabled_for_end_consumer": true,
-  "filters": {
-    "indexing": true,
-    "priority": 2
-  },
-  "id": "5ed11eb0be8d5e00016f0335",
-  "is_nested": true,
-  "logo": "https://hdn-1.addsale.com/x0/products/pictures/attribute/logo/original/Rhv89tqRo-brand-website-logo.png",
-  "meta": {
-    "enriched": false,
-    "mandatory_details": {
-      "l3_keys": []
-    }
-  },
-  "name": "Gender",
-  "schema": {
-    "enum": [
-      "Men",
-      "Women",
-      "Boy",
-      "Girl",
-      "more",
-      "men"
-    ],
-    "format": "",
-    "mandatory": false,
-    "multi": true,
-    "type": "str"
-  },
-  "slug": "gender"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getProductBundle
-Retrieve product bundles.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getProductBundle(q=q, slug=slug)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| q | String? | no | A search string that is searched with product bundle name. |   
-| slug | ArrayList<String>? | no | slugs of bundles to be retrieved. |  
-
-
-
-Retrieve a list of product bundles available in the catalog.
-
-*Returned Response:*
-
-
-
-
-[GetProductBundleListingResponse](#GetProductBundleListingResponse)
-
-List of bundle configured for a company. See example below or refer `GetProductBundleListingResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "choice": "multi",
-      "company_id": 1,
-      "created_by": {
-        "uid": "123",
-        "username": "917827311650_22960"
-      },
-      "created_on": "2021-02-19T16:40:26.310Z",
-      "id": "602f9ca2a596ce312f5956f9",
-      "is_active": true,
-      "logo": "http://g.com/poo.png/",
-      "meta": {},
-      "modified_by": {
-        "uid": "123",
-        "username": "917827311650_22960"
-      },
-      "modified_on": "2021-02-19T16:40:26.310Z",
-      "name": "Bag",
-      "page_visibility": [
-        "pdp"
-      ],
-      "products": [
-        {
-          "allow_remove": true,
-          "auto_add_to_cart": false,
-          "auto_select": false,
-          "max_quantity": 1,
-          "min_quantity": 1,
-          "product_uid": 7500001
-        }
-      ],
-      "same_store_assignment": true,
-      "slug": "bag"
-    },
-    {
-      "choice": "multi",
-      "company_id": 1,
-      "created_by": {
-        "uid": "123",
-        "username": "917827311650_22960"
-      },
-      "created_on": "2021-02-19T16:21:35.091Z",
-      "id": "602f9837a596ce2edf9868e2",
-      "is_active": true,
-      "logo": "http://g.com/poo.png/",
-      "meta": {},
-      "modified_by": {
-        "uid": "123",
-        "username": "917827311650_22960"
-      },
-      "modified_on": "2021-02-19T16:21:35.091Z",
-      "name": "Bag",
-      "page_visibility": [
-        "pdp"
-      ],
-      "products": [
-        {
-          "allow_remove": true,
-          "auto_add_to_cart": false,
-          "auto_select": false,
-          "max_quantity": 1,
-          "min_quantity": 1,
-          "product_uid": 7500001
-        }
-      ],
-      "same_store_assignment": true,
-      "slug": "bag"
-    },
-    {
-      "choice": "multi",
-      "company_id": 1,
-      "created_by": {
-        "uid": "123",
-        "username": "917827311650_22960"
-      },
-      "created_on": "2021-02-19T16:20:24.605Z",
-      "id": "602f97f0a596ce2ead47cd0b",
-      "is_active": true,
-      "logo": "http://g.com/poo.png/",
-      "meta": {},
-      "modified_by": {
-        "uid": "123",
-        "username": "917827311650_22960"
-      },
-      "modified_on": "2021-02-19T16:20:24.605Z",
-      "name": "Bag",
-      "page_visibility": [
-        "pdp"
-      ],
-      "products": [
-        {
-          "allow_remove": true,
-          "auto_add_to_cart": false,
-          "auto_select": false,
-          "max_quantity": 1,
-          "min_quantity": 1,
-          "product_uid": 7500001
-        }
-      ],
-      "same_store_assignment": true,
-      "slug": "bag"
-    },
-    {
-      "choice": "multi",
-      "company_id": 1,
-      "created_by": {
-        "uid": "123",
-        "username": "917827311650_22960"
-      },
-      "created_on": "2021-02-19T16:16:46.196Z",
-      "id": "602f9716a596ce2e415196df",
-      "is_active": true,
-      "logo": "http://g.com/poo.png/",
-      "meta": {},
-      "modified_by": {
-        "uid": "123",
-        "username": "917827311650_22960"
-      },
-      "modified_on": "2021-02-19T16:16:46.196Z",
-      "name": "Bag",
-      "page_visibility": [
-        "pdp"
-      ],
-      "products": [
-        {
-          "allow_remove": true,
-          "auto_add_to_cart": false,
-          "auto_select": false,
-          "max_quantity": 1,
-          "min_quantity": 1,
-          "product_uid": 7500001
-        }
-      ],
-      "same_store_assignment": true,
-      "slug": "bag"
-    }
-  ],
-  "page": {
-    "current": 1,
-    "has_next": false,
-    "has_previous": false,
-    "total": 1,
-    "total_item_count": 4,
-    "type": "number"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createProductBundle
-Create a product bundle.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.createProductBundle(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [ProductBundleRequest](#ProductBundleRequest) | yes | Request body |
-
-
-Create product bundle in the catalog.
-
-*Returned Response:*
-
-
-
-
-[GetProductBundleCreateResponse](#GetProductBundleCreateResponse)
-
-Get bundle with id that is added. See example below or refer `GetProductBundleCreateResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "choice": "multi",
-  "company_id": 1,
-  "created_by": {
-    "uid": "123",
-    "username": "917827311650_22960"
-  },
-  "created_on": "2021-02-19T16:40:26.310Z",
-  "id": "602f9ca2a596ce312f5956f9",
-  "is_active": true,
-  "logo": "http://g.com/poo.png/",
-  "meta": {},
-  "modified_by": {
-    "uid": "123",
-    "username": "917827311650_22960"
-  },
-  "modified_on": "2021-02-19T16:40:26.310Z",
-  "name": "Bag",
-  "page_visibility": [
-    "pdp"
-  ],
-  "products": [
-    {
-      "allow_remove": true,
-      "auto_add_to_cart": false,
-      "auto_select": false,
-      "max_quantity": 1,
-      "min_quantity": 1,
-      "product_uid": 7500001
-    }
-  ],
-  "same_store_assignment": true,
-  "slug": "bag"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getProductBundleDetail
-Get product bundle details.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getProductBundleDetail(id=id)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. |  
-
-
-
-Retrieve detailed information about a specific product bundle.
-
-*Returned Response:*
-
-
-
-
-[GetProductBundleResponse](#GetProductBundleResponse)
-
-The Collection object. See example below or refer `GetProductBundleResponse` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "choice": "multi",
-  "company_id": 1,
-  "logo": "http://g.com/poo.png/",
-  "meta": {},
-  "name": "Bag",
-  "page_visibility": [
-    "pdp"
-  ],
-  "products": [
-    {
-      "allow_remove": true,
-      "auto_add_to_cart": false,
-      "auto_select": false,
-      "max_quantity": 1,
-      "min_quantity": 1,
-      "product_details": {
-        "attributes": {
-          "brand_name": "brand 2"
-        },
-        "country_of_origin": "India",
-        "images": [
-          "https://hdn-1.addsale.com/x0/media/pictures/tagged_items/original/random_code_4/FE6DUR_000000.png"
-        ],
-        "item_code": "760B3BFF-4905-44B8-A50E-082829E7107F",
-        "name": "Some Phone",
-        "slug": "slug-1",
-        "uid": 7500001
-      },
-      "product_uid": 7500001
-    }
-  ],
-  "same_store_assignment": true,
-  "slug": "bag"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateProductBundle
-Update a product bundle.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.updateProductBundle(id=id, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. |  
-| body | [ProductBundleUpdateRequest](#ProductBundleUpdateRequest) | yes | Request body |
-
-
-Modify the details of an existing product bundle.
-
-*Returned Response:*
-
-
-
-
-[GetProductBundleCreateResponse](#GetProductBundleCreateResponse)
-
-The Collection object. See example below or refer `GetProductBundleCreateResponse` for details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "choice": "multi",
-  "company_id": 1,
-  "created_by": {
-    "uid": "123",
-    "username": "917827311650_22960"
-  },
-  "created_on": "2021-02-19T16:40:26.310Z",
-  "id": "602f9ca2a596ce312f5956f9",
-  "is_active": true,
-  "logo": "http://g.com/poo.png/",
-  "meta": {},
-  "modified_by": {
-    "uid": "123",
-    "username": "917827311650_22960"
-  },
-  "modified_on": "2021-02-19T16:40:26.310Z",
-  "name": "Bag",
-  "page_visibility": [
-    "pdp"
-  ],
-  "products": [
-    {
-      "allow_remove": true,
-      "auto_add_to_cart": false,
-      "auto_select": false,
-      "max_quantity": 1,
-      "min_quantity": 1,
-      "product_uid": 7500001
-    }
-  ],
-  "same_store_assignment": true,
-  "slug": "bag"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### createBulkProductUploadJob
-Create a Bulk product to upload job.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.createBulkProductUploadJob(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [BulkJob](#BulkJob) | yes | Request body |
-
-
-This API helps to create a bulk products upload job.
-
-*Returned Response:*
-
-
-
-
-[BulkResponse](#BulkResponse)
-
-Returns a success response
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "batch_id": "507f1f77bcf86cd799439011",
-  "created_on": "2021-04-02T15:43:59.410Z"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getSizeGuides
-Retrieve size guides.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getSizeGuides(active=active, q=q, tag=tag, pageNo=pageNo, pageSize=pageSize, brandId=brandId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| active | Boolean? | no | filter size guide on basis of active, in-active |   
-| q | String? | no | Query that is to be searched. |   
-| tag | String? | no | to filter size guide on basis of tag. |   
-| pageNo | Int? | no | The page number to navigate through the given set of results |   
-| pageSize | Int? | no | Number of items to retrieve in each page. Default is 10. |   
-| brandId | Int? | no | Brand id that is to be searched. |  
-
-
-
-Allows to view all the size guides associated to the seller.
-
-*Returned Response:*
-
-
-
-
-[ListSizeGuide](#ListSizeGuide)
-
-Size guide object. See example below or refer `ListSizeGuide` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "active": true,
-      "brand_id": 2,
-      "company_id": 12,
-      "created_by": {
-        "user_id": "-1",
-        "username": "silverbolt"
-      },
-      "created_on": "2021-02-24T17:46:04.146Z",
-      "guide": {
-        "meta": {
-          "headers": {
-            "col_1": {
-              "convertable": false,
-              "value": "Head"
-            },
-            "col_2": {
-              "convertable": true,
-              "value": "Shoulder"
-            }
-          },
-          "unit": "cm",
-          "values": [
-            {
-              "col_1": "10",
-              "col_2": "20"
-            },
-            {
-              "col_1": "12",
-              "col_2": "22"
-            },
-            {
-              "col_1": "14",
-              "col_2": "24"
-            }
-          ]
-        }
-      },
-      "id": "60364384f08385bee776f83d",
-      "modified_by": {
-        "user_id": "-1",
-        "username": "silverbolt"
-      },
-      "modified_on": "2021-02-24T17:46:04.146Z",
-      "name": "Demo",
-      "subtitle": "I am demo",
-      "tag": "demo",
-      "title": "Demo SG"
-    }
-  ],
-  "page": {
-    "current": 1,
-    "has_next": false,
-    "has_previous": false,
-    "item_count": 1,
-    "size": 1,
-    "type": "number"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createSizeGuide
-Create a size guide.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.createSizeGuide(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [ValidateSizeGuide](#ValidateSizeGuide) | yes | Request body |
-
-
-Allows to create a size guide associated to a brand.
-
-*Returned Response:*
-
-
-
-
-[SuccessResponse](#SuccessResponse)
-
-Returns a success response
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getSizeGuide
-Get size guide details.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getSizeGuide(id=id)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | Id of the size guide to be viewed. |  
-
-
-
-Retrieve data associated about a specific size guide.
-
-*Returned Response:*
-
-
-
-
-[SizeGuideResponse](#SizeGuideResponse)
-
-Brand object. See example below or refer `SizeGuideResponseSchema` for details
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "active": true,
-  "brand_id": 1,
-  "company_id": 1,
-  "created_by": {
-    "user_id": "-1",
-    "username": "silverbolt"
-  },
-  "created_on": "2021-02-24T17:46:04.146Z",
-  "guide": {
-    "meta": {
-      "headers": {
-        "col_1": {
-          "convertable": false,
-          "value": "Head"
-        },
-        "col_2": {
-          "convertable": true,
-          "value": "Shoulder"
-        }
-      },
-      "unit": "cm",
-      "values": [
-        {
-          "col_1": "10",
-          "col_2": "20"
-        },
-        {
-          "col_1": "12",
-          "col_2": "22"
-        },
-        {
-          "col_1": "14",
-          "col_2": "24"
-        }
-      ]
-    }
-  },
-  "id": "60364384f08385bee776f83d",
-  "modified_by": {
-    "user_id": "123",
-    "username": "917827311650_22960"
-  },
-  "modified_on": "2021-02-25T15:19:30.822Z",
-  "name": "edited size guide",
-  "subtitle": "I am demo",
-  "tag": "demo",
-  "title": "Demo SG"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateSizeGuide
-Update a size guide.
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.updateSizeGuide(id=id, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | Mongo id of the size guide to be edited |  
-| body | [ValidateSizeGuide](#ValidateSizeGuide) | yes | Request body |
-
-
-Allows to edit a size guide.
-
-*Returned Response:*
-
-
-
-
-[SuccessResponse](#SuccessResponse)
-
-Returns a success response
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getMarketplaces
-List all marketplaces
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.getMarketplaces()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-This API allows to get marketplace information.
-
-*Returned Response:*
-
-
-
-
-[GetAllMarketplaces](#GetAllMarketplaces)
-
-List all Marketplace details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "brand_ids": [],
-      "app_id": "000000000000000000000001",
-      "enabled": true,
-      "created_by": {
-        "username": "test@gofynd.com",
-        "user_id": "ef56cde2dc3227c44bcb73fd"
-      },
-      "created_on": "2023-07-11T18:27:10.477Z",
-      "opt_level": "company",
-      "company_id": 1,
-      "modified_by": {
-        "username": "test@gofynd.com",
-        "user_id": "ef56cde2dc3227c44bcb73fd"
-      },
-      "store_ids": [],
-      "modified_on": "2023-07-11T18:27:10.477Z",
-      "platform": "fynd",
-      "_id": "64ad9efe8069f0f413265003"
-    }
-  ],
-  "page": {
-    "current": 1,
-    "has_next": false,
-    "has_previous": false,
-    "item_total": 6,
-    "size": 1,
-    "type": "number"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateMarketplaceOptin
-Update marketplace optin
-
-
-
-
-```python
-try:
-    result = await platformClient.catalog.updateMarketplaceOptin(marketplaceSlug=marketplaceSlug, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| marketplaceSlug | String | yes | Slug of the marketplace . |  
-| body | [UpdateMarketplaceOptinRequest](#UpdateMarketplaceOptinRequest) | yes | Request body |
-
-
-This API allows to update marketplace optin for a company.
-
-*Returned Response:*
-
-
-
-
-[UpdateMarketplaceOptinResponse](#UpdateMarketplaceOptinResponse)
-
-Update marketplace optin config.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": null,
-  "-data": {
-    "brand_ids": [],
-    "app_id": "000000000000000000000001",
-    "enabled": true,
-    "created_by": {
-      "username": "test@gofynd.com",
-      "user_id": "ef56cde2dc3227c44bcb73fd"
-    },
-    "opt_level": "company",
-    "company_id": 1,
-    "modified_by": {
-      "username": "test@gofynd.com",
-      "user_id": "ef56cde2dc3227c44bcb73fd"
-    },
-    "store_ids": [],
-    "platform": "fynd"
-  }
 }
 ```
 </details>
@@ -19769,7 +19259,6 @@ Update marketplace optin config.
  | ---------- | ---- | -------- | ----------- |
  | condition | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | data | ArrayList<HashMap<String,Any>> |  no  |  |
- | page | [Page](#Page)? |  yes  |  |
  | values | ArrayList<HashMap<String,Any>>? |  yes  |  |
 
 ---
@@ -19983,172 +19472,6 @@ Update marketplace optin config.
  | productDetails | [LimitedProductData](#LimitedProductData)? |  yes  |  |
  | productUid | Int? |  yes  |  |
  | sizes | ArrayList<[Size](#Size)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [GetCollectionDetailResponse](#GetCollectionDetailResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | customJson | HashMap<String,Any>? |  yes  |  |
- | localeLanguage | HashMap<String,Any>? |  yes  |  |
- | schedule | [CollectionSchedule](#CollectionSchedule)? |  yes  |  |
- | action | HashMap<String,Any>? |  yes  |  |
- | allowFacets | Boolean? |  yes  |  |
- | allowSort | Boolean? |  yes  |  |
- | appId | String? |  yes  |  |
- | badge | [CollectionBadge](#CollectionBadge)? |  yes  |  |
- | banners | [ImageUrls](#ImageUrls)? |  yes  |  |
- | description | String? |  yes  |  |
- | isActive | Boolean? |  yes  |  |
- | isVisible | Boolean? |  yes  |  |
- | logo | [Media](#Media)? |  yes  |  |
- | meta | HashMap<String,Any>? |  yes  |  |
- | name | String? |  yes  |  |
- | priority | Int? |  yes  |  |
- | published | Boolean? |  yes  |  |
- | query | ArrayList<[CollectionQuery](#CollectionQuery)>? |  yes  |  |
- | seo | [SeoDetail](#SeoDetail)? |  yes  |  |
- | slug | String? |  yes  |  |
- | sortOn | String? |  yes  |  |
- | tags | ArrayList<String>? |  yes  |  |
- | type | String? |  yes  |  |
- | uid | String? |  yes  |  |
- | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CommonResponseSchemaCollection](#CommonResponseSchemaCollection)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | message | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [GetQueryFiltersKeysResponse](#GetQueryFiltersKeysResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | filters | ArrayList<[ProductFiltersKeysOnly](#ProductFiltersKeysOnly)>? |  yes  |  |
- | operators | HashMap<String,String> |  no  |  |
- | sortOn | ArrayList<[ProductSortOn](#ProductSortOn)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [GetQueryFiltersResponse](#GetQueryFiltersResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | filters | ArrayList<[ProductFilters](#ProductFilters)>? |  yes  |  |
- | operators | HashMap<String,String> |  no  |  |
- | sortOn | ArrayList<[ProductSortOn](#ProductSortOn)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [GetCollectionItemsResponseSchemaV2](#GetCollectionItemsResponseSchemaV2)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<[ProductDetailV2](#ProductDetailV2)>? |  yes  |  |
- | page | [Page1](#Page1)? |  yes  |  |
-
----
-
-
- 
- 
- #### [Page1](#Page1)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | ca | Boolean? |  yes  |  |
- | department | String? |  yes  |  |
- | pageNo | Int? |  yes  |  |
- | pageSize | Int? |  yes  |  |
- | q | String? |  yes  |  |
- | sort | String? |  yes  |  |
- | sortOn | String? |  yes  |  |
- | type | String? |  yes  |  |
- | variant | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CollectionItemSchemaV2](#CollectionItemSchemaV2)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | action | String |  no  |  |
- | itemId | Int |  no  |  |
- | priority | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [CollectionItemUpdateSchema](#CollectionItemUpdateSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | allowFacets | Boolean? |  yes  |  |
- | allowSort | Boolean? |  yes  |  |
- | items | ArrayList<[CollectionItemSchemaV2](#CollectionItemSchemaV2)>? |  yes  |  |
- | query | ArrayList<[CollectionQuerySchemaV2](#CollectionQuerySchemaV2)>? |  yes  |  |
- | type | String |  no  |  |
- | visibleFacetsKeys | ArrayList<String>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CollectionQuerySchemaV2](#CollectionQuerySchemaV2)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | attribute | String |  no  | The attribute of the collection query |
- | op | String |  no  | The operation to be performed on the attribute of the collection query |
- | value | ArrayList<Any> |  no  | The value of the attribute of the collection query |
-
----
-
-
- 
- 
- #### [ProductDetailV2](#ProductDetailV2)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | brand | [ProductBrand](#ProductBrand)? |  yes  |  |
- | isExcluded | Boolean? |  yes  |  |
- | isPinned | Boolean? |  yes  |  |
- | itemCode | String? |  yes  |  |
- | itemType | String? |  yes  |  |
- | medias | ArrayList<[Media](#Media)>? |  yes  |  |
- | name | String? |  yes  |  |
- | priority | Int? |  yes  |  |
- | shortDescription | String? |  yes  |  |
- | slug | String |  no  |  |
- | uid | Int? |  yes  |  |
 
 ---
 
@@ -21810,29 +21133,6 @@ Update marketplace optin config.
 
  
  
- #### [GetQueryFiltersValuesResponse](#GetQueryFiltersValuesResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | values | ArrayList<[ProductFiltersValue](#ProductFiltersValue)> |  no  |  |
- | page | [Page](#Page) |  no  |  |
-
----
-
-
- 
- 
- #### [ProductFiltersKeysOnly](#ProductFiltersKeysOnly)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | key | [ProductFiltersKey](#ProductFiltersKey) |  no  |  |
-
----
-
-
- 
- 
  #### [ProductFiltersKey](#ProductFiltersKey)
 
  | Properties | Type | Nullable | Description |
@@ -22473,7 +21773,6 @@ Update marketplace optin config.
  | sitemap | [Sitemap](#Sitemap)? |  yes  |  |
  | breadcrumbs | ArrayList<[ApplicationItemSeoBreadcrumbs](#ApplicationItemSeoBreadcrumbs)>? |  yes  |  |
  | metaTags | ArrayList<[Metatags](#Metatags)>? |  yes  |  |
- | canonicalUrl | String? |  yes  |  |
 
 ---
 
@@ -22543,7 +21842,6 @@ Update marketplace optin config.
  | sitemap | HashMap<String,Any>? |  yes  |  |
  | breadcrumbs | ArrayList<[ApplicationItemSeoBreadcrumbs](#ApplicationItemSeoBreadcrumbs)>? |  yes  |  |
  | metaTags | ArrayList<[Metatags](#Metatags)>? |  yes  |  |
- | canonicalUrl | String? |  yes  |  |
 
 ---
 
@@ -23147,87 +22445,6 @@ Update marketplace optin config.
  | ---------- | ---- | -------- | ----------- |
  | shipping | Double? |  yes  |  |
  | unit | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CreatedBy](#CreatedBy)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | username | String? |  yes  |  |
- | userId | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [Marketplaces](#Marketplaces)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | brandIds | ArrayList<Int>? |  yes  |  |
- | appId | String? |  yes  |  |
- | enabled | Boolean? |  yes  |  |
- | createdBy | [CreatedBy](#CreatedBy)? |  yes  |  |
- | createdOn | Any? |  yes  |  |
- | optLevel | String? |  yes  |  |
- | companyId | Int? |  yes  |  |
- | modifiedBy | [CreatedBy](#CreatedBy)? |  yes  |  |
- | storeIds | ArrayList<Int>? |  yes  |  |
- | modifiedOn | Any? |  yes  |  |
- | platforms | String? |  yes  |  |
- | id | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [GetAllMarketplaces](#GetAllMarketplaces)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<[Marketplaces](#Marketplaces)>? |  yes  |  |
- | page | [Page](#Page)? |  yes  |  |
-
----
-
-
- 
- 
- #### [UpdateMarketplaceOptinRequest](#UpdateMarketplaceOptinRequest)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | brandIds | ArrayList<Int>? |  yes  |  |
- | companyId | Int? |  yes  |  |
- | enabled | Boolean? |  yes  |  |
- | optLevel | String? |  yes  |  |
- | platform | String? |  yes  |  |
- | storeIds | ArrayList<Int>? |  yes  |  |
-
----
-
-
- 
- 
- #### [UpdateMarketplaceOptinResponse](#UpdateMarketplaceOptinResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | brandIds | ArrayList<Int>? |  yes  |  |
- | companyId | Int? |  yes  |  |
- | appId | String? |  yes  |  |
- | enabled | Boolean? |  yes  |  |
- | optLevel | String? |  yes  |  |
- | platform | String? |  yes  |  |
- | storeIds | ArrayList<Int>? |  yes  |  |
- | createdBy | [CreatedBy](#CreatedBy)? |  yes  |  |
- | modifiedBy | [CreatedBy](#CreatedBy)? |  yes  |  |
 
 ---
 

@@ -16,8 +16,6 @@ from ..ApplicationModel import BaseSchema
     
         
         
-        
-        
     
     
     
@@ -39,10 +37,6 @@ class ThemeValidator:
         theme_id = fields.Str(required=False)
         
         page_value = fields.Str(required=False)
-        
-        filters = fields.Str(required=False)
-        
-        company = fields.Int(required=False)
          
         
     

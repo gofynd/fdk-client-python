@@ -7,7 +7,7 @@
 ## Billing Methods
 Handle platform subscription
 
-Billing & Subscription
+Default
 * [checkCouponValidity](#checkcouponvalidity)
 * [createSubscriptionCharge](#createsubscriptioncharge)
 * [getSubscriptionCharge](#getsubscriptioncharge)
@@ -27,10 +27,6 @@ Billing & Subscription
 * [subscripePlan](#subscripeplan)
 
 
-Default
-* [getentityDetail](#getentitydetail)
-
-
 
 
 ## Methods with example and description
@@ -38,7 +34,7 @@ Default
 
 
 ### checkCouponValidity
-Verify coupon validity.
+Check coupon validity
 
 
 
@@ -62,7 +58,7 @@ except Exception as e:
 
 
 
-Checks whether a coupon code is valid for discounts while billing.
+Check coupon validity.
 
 *Returned Response:*
 
@@ -96,7 +92,7 @@ Success
 
 
 ### createSubscriptionCharge
-Initiate subscription billing.
+Create subscription charge
 
 
 
@@ -119,7 +115,7 @@ except Exception as e:
 | body | [CreateSubscriptionCharge](#CreateSubscriptionCharge) | yes | Request body |
 
 
-Register a subscription charge for a seller using your extension.
+Register subscription charge for a seller of your extension.
 
 *Returned Response:*
 
@@ -153,7 +149,7 @@ Success
 
 
 ### getSubscriptionCharge
-Retrieve subscription charge details.
+Get subscription charge details
 
 
 
@@ -177,7 +173,7 @@ except Exception as e:
 
 
 
-Retrieve detailed information about subscription charges using this API.
+Get created subscription charge details
 
 *Returned Response:*
 
@@ -211,7 +207,7 @@ Success
 
 
 ### cancelSubscriptionCharge
-Cancel a subscription charge.
+Cancel subscription charge
 
 
 
@@ -235,7 +231,7 @@ except Exception as e:
 
 
 
-Cancel an ongoing subscription charge for a customer.
+Cancel subscription and attached charges.
 
 *Returned Response:*
 
@@ -269,7 +265,7 @@ Success
 
 
 ### createOneTimeCharge
-Generate a one-time charge.
+Create one time subscription charge
 
 
 
@@ -292,7 +288,7 @@ except Exception as e:
 | body | [CreateOneTimeCharge](#CreateOneTimeCharge) | yes | Request body |
 
 
-Generate a one-time charge for specific services or products.
+Register one time subscription charge for a seller of your extension.
 
 *Returned Response:*
 
@@ -326,7 +322,7 @@ Success
 
 
 ### getChargeDetails
-Obtain charge details.
+Get subscription charge details
 
 
 
@@ -350,7 +346,7 @@ except Exception as e:
 
 
 
-Retrieve comprehensive details about a specific billing charge.
+Get created subscription charge details
 
 *Returned Response:*
 
@@ -384,7 +380,7 @@ Success
 
 
 ### getInvoices
-Retrieve invoices.
+Get invoices
 
 
 
@@ -402,7 +398,7 @@ except Exception as e:
 
 
 
-Retrieve invoices for billing and payment tracking.
+Get invoices.
 
 *Returned Response:*
 
@@ -675,7 +671,7 @@ Success
 
 
 ### getInvoiceById
-Get a specific invoice.
+Get invoice by id
 
 
 
@@ -698,7 +694,7 @@ except Exception as e:
 
 
 
-Retrieve a particular invoice's details by providing its unique ID.
+Get invoice by id.
 
 *Returned Response:*
 
@@ -965,7 +961,7 @@ Success
 
 
 ### getCustomerDetail
-Fetch customer details.
+Get subscription customer detail
 
 
 
@@ -983,7 +979,7 @@ except Exception as e:
 
 
 
-Obtain customer-related billing information.
+Get subscription customer detail.
 
 *Returned Response:*
 
@@ -1049,7 +1045,7 @@ Success
 
 
 ### upsertCustomerDetail
-Update or insert customer details.
+Upsert subscription customer detail
 
 
 
@@ -1071,7 +1067,7 @@ except Exception as e:
 | body | [SubscriptionCustomerCreate](#SubscriptionCustomerCreate) | yes | Request body |
 
 
-Allows you to modify or insert customer information in the billing system.
+Upsert subscription customer detail.
 
 *Returned Response:*
 
@@ -1137,7 +1133,7 @@ Success
 
 
 ### getSubscription
-Retrieve subscription details.
+Get current subscription detail
 
 
 
@@ -1155,7 +1151,8 @@ except Exception as e:
 
 
 
-Retrieve details of a customer's subscription information.
+If subscription is active then it will return is_enabled true and return subscription object. If subscription is not active then is_enabled false and message.
+
 
 *Returned Response:*
 
@@ -1685,14 +1682,14 @@ Success
 
 
 ### getFeatureLimitConfig
-Obtain feature limit configurations.
+Get subscription subscription limits
 
 
 
 
 ```python
 try:
-    result = await platformClient.billing.getFeatureLimitConfig(productSuite=productSuite, type=type)
+    result = await platformClient.billing.getFeatureLimitConfig()
     # use result
 except Exception as e:
     print(e)
@@ -1702,14 +1699,8 @@ except Exception as e:
 
 
 
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| productSuite | String? | no |  |   
-| type | String? | no |  |  
 
-
-
-Retrieve configuration settings for feature limits in subscription plans.
+Get subscription subscription limits.
 
 *Returned Response:*
 
@@ -1779,7 +1770,7 @@ Success
 
 
 ### activateSubscriptionPlan
-Activate a subscription plan.
+Activate subscription
 
 
 
@@ -1801,7 +1792,7 @@ except Exception as e:
 | body | [SubscriptionActivateReq](#SubscriptionActivateReq) | yes | Request body |
 
 
-Activate a specific subscription plan for a customer.
+It will activate subscription plan for customer
 
 *Returned Response:*
 
@@ -1891,7 +1882,7 @@ Success
 
 
 ### cancelSubscriptionPlan
-Cancel a subscription plan.
+Cancel subscription
 
 
 
@@ -1913,7 +1904,7 @@ except Exception as e:
 | body | [CancelSubscriptionReq](#CancelSubscriptionReq) | yes | Request body |
 
 
-Cancel an active subscription plan for a customer
+It will cancel current active subscription.
 
 *Returned Response:*
 
@@ -2005,7 +1996,7 @@ Success
 
 
 ### getEnterprisePlans
-Retrieve enterprise-level plans.
+Get Enterprise Plans
 
 
 
@@ -2023,7 +2014,8 @@ except Exception as e:
 
 
 
-Retrieve available enterprise-level subscription plans.
+Get Enterprise Plans.
+
 
 *Returned Response:*
 
@@ -2193,7 +2185,7 @@ Success
 
 
 ### planStatusUpdate
-Update subscription plan status.
+Update Status of The plan
 
 
 
@@ -2215,7 +2207,7 @@ except Exception as e:
 | body | [PlanStatusUpdateReq](#PlanStatusUpdateReq) | yes | Request body |
 
 
-Modify the status of a subscription plan.
+It will update the status of the plan
 
 *Returned Response:*
 
@@ -2452,7 +2444,7 @@ Success
 
 
 ### subscripePlan
-Subscribe to a plan.
+Subscribe plan.
 
 
 
@@ -2474,7 +2466,7 @@ except Exception as e:
 | body | [SunscribePlan](#SunscribePlan) | yes | Request body |
 
 
-Subscribe to a specific billing plan.
+It will subscribe a plan.
 
 *Returned Response:*
 
@@ -2511,69 +2503,6 @@ Success
 ```
 </details>
 
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getentityDetail
-Generic api to get the entity detail
-
-
-
-
-```python
-try:
-    result = await platformClient.billing.getentityDetail(entityName=entityName, entityId=entityId, channel=channel, component=component, componentName=componentName)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| entityName | String | yes | Entity name. |   
-| entityId | String? | no | Entity unique id. |   
-| channel | String | yes | Ordering channel. |   
-| component | String? | no | The coponents the user would like to know. |   
-| componentName | String? | no | The name of component the preferred to be fetched. |  
-
-
-
-Generic api to get the entity detail
-
-*Returned Response:*
-
-
-
-
-[EntityResponse](#EntityResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
 </details>
 
 
@@ -3501,65 +3430,6 @@ Success
  | transactionId | String? |  yes  |  |
  | currentStatus | String? |  yes  |  |
  | meta | [Meta](#Meta)? |  yes  |  |
-
----
-
-
- 
- 
- #### [Features](#Features)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | slug | String? |  yes  |  |
- | description | String? |  yes  |  |
- | group | String? |  yes  |  |
- | enabled | Boolean? |  yes  |  |
- | displayText | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [FeeComponents](#FeeComponents)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | brand | ArrayList<String>? |  yes  |  |
- | location | ArrayList<String>? |  yes  |  |
- | channel | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | businessLead | String? |  yes  |  |
- | settlementType | String? |  yes  |  |
- | settleCyclePeriod | HashMap<String,Any>? |  yes  |  |
- | components | ArrayList<HashMap<String,Any>>? |  yes  |  |
-
----
-
-
- 
- 
- #### [Details](#Details)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | feeComponents | ArrayList<[FeeComponents](#FeeComponents)>? |  yes  |  |
- | features | ArrayList<[Features](#Features)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [EntityResponse](#EntityResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | success | Boolean? |  yes  |  |
- | page | Int? |  yes  |  |
- | pageSize | Int? |  yes  |  |
- | items | ArrayList<[Details](#Details)>? |  yes  |  |
 
 ---
 

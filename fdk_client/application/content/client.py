@@ -28,15 +28,12 @@ class Content:
             "getLegalInformation": "/service/application/content/v1.0/legal",
             "getNavigations": "/service/application/content/v1.0/navigations/",
             "getSEOConfiguration": "/service/application/content/v1.0/seo",
-            "getSEOMarkupSchemas": "/service/application/content/v1.0/seo/schema",
             "getSlideshows": "/service/application/content/v1.0/slideshow/",
             "getSlideshow": "/service/application/content/v1.0/slideshow/{slug}",
             "getSupportInformation": "/service/application/content/v1.0/support",
             "getTags": "/service/application/content/v1.0/tags",
             "getPage": "/service/application/content/v2.0/pages/{slug}",
-            "getPages": "/service/application/content/v2.0/pages/",
-            "getCustomObject": "/service/application/content/v1.0/metaobjects/{metaobject_id}",
-            "getCustomFields": "/service/application/content/v1.0/metafields/{resource}/{resource_id}"
+            "getPages": "/service/application/content/v2.0/pages/"
             
         }
         self._urls = {
@@ -47,7 +44,7 @@ class Content:
         self._urls.update(urls)
     
     async def getAnnouncements(self, body="", request_headers:Dict={}):
-        """Retrieves all current announcements in the application.
+        """Announcements are useful to highlight a message or information on top of a webpage. Use this API to retrieve live announcements. Get announcements on individual pages or for all pages.
         """
         payload = {}
         
@@ -88,7 +85,7 @@ class Content:
         return response
     
     async def getBlog(self, slug=None, root_id=None, body="", request_headers:Dict={}):
-        """Retrieves all information relate to a specific blog such as it's contents, author, publish date, SEO related information.
+        """Use this API to get the details of a blog using its slug. Details include the title, reading time, publish status, feature image, tags, author, etc.
         :param slug : A short, human-readable, URL-friendly identifier of a blog. You can get slug value from the endpoint /service/application/content/v1.0/blogs/. : type string
         :param root_id : ID given to the HTML element : type string
         """
@@ -135,7 +132,7 @@ class Content:
         return response
     
     async def getBlogs(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Retrieve all the blogs which are present in the application.
+        """Use this API to get all the blogs.
         :param page_no : The page number to navigate through the given set of results. Default value is 1.  : type integer
         :param page_size : The number of items to retrieve in each page. : type integer
         """
@@ -182,7 +179,7 @@ class Content:
         return response
     
     async def getDataLoaders(self, body="", request_headers:Dict={}):
-        """Retrieves all the data loaders that are added and enabled for an application.
+        """Use this API to get all selected data loaders of the application in the form of tags.
         """
         payload = {}
         
@@ -223,7 +220,7 @@ class Content:
         return response
     
     async def getFaqs(self, body="", request_headers:Dict={}):
-        """Retrieves a list of frequently asked questions.
+        """Use this API to get a list of frequently asked questions. Users will benefit from it when facing any issue with the website.
         """
         payload = {}
         
@@ -264,7 +261,7 @@ class Content:
         return response
     
     async def getFaqCategories(self, body="", request_headers:Dict={}):
-        """Retrieve categories for organizing FAQs.
+        """FAQs can be divided into categories. Use this API to get a list of FAQ categories.
         """
         payload = {}
         
@@ -305,7 +302,7 @@ class Content:
         return response
     
     async def getFaqBySlug(self, slug=None, body="", request_headers:Dict={}):
-        """Retrieves a specific FAQ using its slug identifier.
+        """Use this API to get a particular FAQ by its slug.
         :param slug : A short, human-readable, URL-friendly identifier of an FAQ. You can get slug value from the endpoint /service/application/content/v1.0/faq. : type string
         """
         payload = {}
@@ -349,7 +346,7 @@ class Content:
         return response
     
     async def getFaqCategoryBySlug(self, slug=None, body="", request_headers:Dict={}):
-        """Retrieve a specific FAQ category using its slug.
+        """FAQs can be divided into categories. Use this API to get the category to which an FAQ belongs.
         :param slug : A short, human-readable, URL-friendly identifier of an FAQ category. You can get slug value from the endpoint /service/application/content/v1.0/faq/categories. : type string
         """
         payload = {}
@@ -393,7 +390,7 @@ class Content:
         return response
     
     async def getFaqsByCategorySlug(self, slug=None, body="", request_headers:Dict={}):
-        """Retrieves FAQs belonging to a specific category slug.
+        """FAQs can be divided into categories. Use this API to get all the FAQs belonging to a category by using the category slug.
         :param slug : A short, human-readable, URL-friendly identifier of an FAQ category. You can get slug value from the endpoint /service/application/content/v1.0/faq/categories. : type string
         """
         payload = {}
@@ -437,7 +434,7 @@ class Content:
         return response
     
     async def getLandingPage(self, body="", request_headers:Dict={}):
-        """Gets the content of the application's landing page.
+        """Landing page is the first page that a prospect lands upon while visiting a website. Use this API to fetch the details of a landing page.
         """
         payload = {}
         
@@ -478,7 +475,7 @@ class Content:
         return response
     
     async def getLegalInformation(self, body="", request_headers:Dict={}):
-        """Retrieve legal policies for an application which includes Terms and conditions, return policy, shipping policy and privacy policy.
+        """Use this API to get the legal information of an application, which includes Privacy Policy, Terms and Conditions, Shipping Policy and FAQs regarding the usage of the application.
         """
         payload = {}
         
@@ -519,7 +516,7 @@ class Content:
         return response
     
     async def getNavigations(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Retrieves the navigation link items which can be powered to genreate menus on application's website or equivalent mobile apps
+        """Use this API to fetch the navigations details which includes the items of the navigation panel. It also shows the links and sub-navigations.
         :param page_no : The page number to navigate through the given set of results. Default value is 1.  : type integer
         :param page_size : The number of items to retrieve in each page. : type integer
         """
@@ -566,7 +563,7 @@ class Content:
         return response
     
     async def getSEOConfiguration(self, body="", request_headers:Dict={}):
-        """Retrieve search engine optimization configurations of an application. Details include the title, description and an image
+        """Use this API to get the SEO details of an application, which includes a robot.txt, meta-tags and sitemap.
         """
         payload = {}
         
@@ -602,53 +599,6 @@ class Content:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getSEOConfiguration")
-                print(e)
-
-        return response
-    
-    async def getSEOMarkupSchemas(self, page_type=None, active=None, body="", request_headers:Dict={}):
-        """Use this API to get all SEO Markup schema Templates setup for an application
-        :param page_type : The type of page against which schema template was created : type string
-        :param active : Boolean value for fetching seo schema. : type boolean
-        """
-        payload = {}
-        
-        if page_type is not None:
-            payload["page_type"] = page_type
-        if active is not None:
-            payload["active"] = active
-
-        # Parameter validation
-        schema = ContentValidator.getSEOMarkupSchemas()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getSEOMarkupSchemas"], proccessed_params="""{"required":[],"optional":[{"name":"page_type","in":"query","description":"The type of page against which schema template was created","required":false,"schema":{"type":"string"}},{"name":"active","in":"query","description":"Boolean value for fetching seo schema.","required":false,"schema":{"type":"boolean","default":true}}],"query":[{"name":"page_type","in":"query","description":"The type of page against which schema template was created","required":false,"schema":{"type":"string"}},{"name":"active","in":"query","description":"Boolean value for fetching seo schema.","required":false,"schema":{"type":"boolean","default":true}}],"headers":[],"path":[]}""", page_type=page_type, active=active)
-        query_string = await create_query_string(page_type=page_type, active=active)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSEOMarkupSchemas"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/seo/schema", page_type=page_type, active=active), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SeoSchemaComponent
-            schema = SeoSchemaComponent()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSEOMarkupSchemas")
                 print(e)
 
         return response
@@ -745,7 +695,7 @@ class Content:
         return response
     
     async def getSupportInformation(self, body="", request_headers:Dict={}):
-        """Retrieves customer support contact details. Contact Details can be either phone number or email-id or both.
+        """Use this API to get contact details for customer support including emails and phone numbers.
         """
         payload = {}
         
@@ -786,7 +736,7 @@ class Content:
         return response
     
     async def getTags(self, body="", request_headers:Dict={}):
-        """Retrieve any HTML tags to power additional functionalities within an application.
+        """Use this API to get all the CSS and JS injected in the application in the form of tags.
         """
         payload = {}
         
@@ -827,7 +777,7 @@ class Content:
         return response
     
     async def getPage(self, slug=None, root_id=None, body="", request_headers:Dict={}):
-        """Retrieve detailed information for a specific page within the theme.
+        """Use this API to get the details of a page using its slug. Details include the title, seo, publish status, feature image, tags, meta, etc.
         :param slug : A short, human-readable, URL-friendly identifier of a page. You can get slug value from the endpoint /service/application/content/v2.0/pages/. : type string
         :param root_id : ID given to the HTML element : type string
         """
@@ -874,7 +824,7 @@ class Content:
         return response
     
     async def getPages(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Retrieve all available content pages in the app.
+        """Use this API to get a list of pages.
         :param page_no : The page number to navigate through the given set of results. Default value is 1.  : type integer
         :param page_size : The number of items to retrieve in each page. : type integer
         """
@@ -916,97 +866,6 @@ class Content:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getPages")
-                print(e)
-
-        return response
-    
-    async def getCustomObject(self, metaobject_id=None, body="", request_headers:Dict={}):
-        """Use this API to retrieve the custom object details, their fields details with definitions and references.
-        :param metaobject_id :  : type string
-        """
-        payload = {}
-        
-        if metaobject_id is not None:
-            payload["metaobject_id"] = metaobject_id
-
-        # Parameter validation
-        schema = ContentValidator.getCustomObject()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getCustomObject"], proccessed_params="""{"required":[{"name":"metaobject_id","in":"path","required":true,"schema":{"type":"string","description":"This is meta object id"},"examples":{"success":{"value":"65392bd912376081aafa90ff"},"failure":{"value":"5eda528b97457fe43a733acd"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"metaobject_id","in":"path","required":true,"schema":{"type":"string","description":"This is meta object id"},"examples":{"success":{"value":"65392bd912376081aafa90ff"},"failure":{"value":"5eda528b97457fe43a733acd"}}}]}""", metaobject_id=metaobject_id)
-        query_string = await create_query_string(metaobject_id=metaobject_id)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCustomObject"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/metaobjects/{metaobject_id}", metaobject_id=metaobject_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CustomObjectByIdSchema
-            schema = CustomObjectByIdSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCustomObject")
-                print(e)
-
-        return response
-    
-    async def getCustomFields(self, resource=None, resource_id=None, body="", request_headers:Dict={}):
-        """Use this API to retrieve the custom fields for given resource and resource_id in param.
-        :param resource :  : type string
-        :param resource_id :  : type string
-        """
-        payload = {}
-        
-        if resource is not None:
-            payload["resource"] = resource
-        if resource_id is not None:
-            payload["resource_id"] = resource_id
-
-        # Parameter validation
-        schema = ContentValidator.getCustomFields()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getCustomFields"], proccessed_params="""{"required":[{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the name of resource for which you want to fetch custom fields eg. product, collection, customer etc."},"examples":{"success":{"value":"product"},"failure":{"value":"inventory"}}},{"name":"resource_id","in":"path","required":true,"schema":{"type":"string","description":"This is the resource id for which custom fields created"},"examples":{"success":{"value":"64bb987e9a3c4b6c29d676bc"},"failure":{"value":"64bb987e9a3c4b6c29d67eee"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the name of resource for which you want to fetch custom fields eg. product, collection, customer etc."},"examples":{"success":{"value":"product"},"failure":{"value":"inventory"}}},{"name":"resource_id","in":"path","required":true,"schema":{"type":"string","description":"This is the resource id for which custom fields created"},"examples":{"success":{"value":"64bb987e9a3c4b6c29d676bc"},"failure":{"value":"64bb987e9a3c4b6c29d67eee"}}}]}""", resource=resource, resource_id=resource_id)
-        query_string = await create_query_string(resource=resource, resource_id=resource_id)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCustomFields"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/metafields/{resource}/{resource_id}", resource=resource, resource_id=resource_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CustomFieldsResponseByResourceIdSchema
-            schema = CustomFieldsResponseByResourceIdSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCustomFields")
                 print(e)
 
         return response

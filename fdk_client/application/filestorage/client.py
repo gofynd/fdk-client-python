@@ -28,7 +28,25 @@ class FileStorage:
         self._urls.update(urls)
     
     async def startUpload(self, namespace=None, body="", request_headers:Dict={}):
-        """Starts the process of uploading a file to storage location, and returns a storage link in response.
+        """Use this API to perform the first step of uploading (i.e. **Start**) an arbitrarily sized buffer or blob.
+
+The three major steps are:
+* Start
+* Upload
+* Complete
+
+### Start
+Initiates the assets upload using `startUpload`.
+It returns a storage link in response.
+
+### Upload
+Use the storage link to upload a file (Buffer or Blob) to the File Storage.
+Make a `PUT` request on storage link received from `startUpload` API with the file (Buffer or Blob) in the request body.
+
+### Complete
+After successfully upload, call the `completeUpload` API to finish the upload process.
+This operation will return the URL of the uploaded file.
+
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
@@ -76,7 +94,25 @@ class FileStorage:
         return response
     
     async def completeUpload(self, namespace=None, body="", request_headers:Dict={}):
-        """Complete the process of uploading the file, and will return the URL of the uploaded file
+        """Use this API to perform the third step of uploading (i.e. **Complete**) an arbitrarily sized buffer or blob.
+
+The three major steps are:
+* Start
+* Upload
+* Complete
+
+### Start
+Initiates the assets upload using `startUpload`.
+It returns a storage link in response.
+
+### Upload
+Use the storage link to upload a file (Buffer or Blob) to the File Storage.
+Make a `PUT` request on storage link received from `startUpload` API with the file (Buffer or Blob) in the request body.
+
+### Complete
+After successfully upload, call the `completeUpload` API to finish the upload process.
+This operation will return the URL of the uploaded file.
+
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
@@ -124,7 +160,7 @@ class FileStorage:
         return response
     
     async def signUrls(self, body="", request_headers:Dict={}):
-        """Generates secure, signed URLs that is valid for certain expiry time for accessing stored files.
+        """Describe here
         """
         payload = {}
         

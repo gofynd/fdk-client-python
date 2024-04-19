@@ -8,34 +8,6 @@ from ..PlatformModel import BaseSchema
 
 
 
-class SuccessMessageResponse(BaseSchema):
-    pass
-
-
-class UserAttributeDefinition(BaseSchema):
-    pass
-
-
-class UserAttributeDefinitionResponse(BaseSchema):
-    pass
-
-
-class UserAttributeDefinitionValidation(BaseSchema):
-    pass
-
-
-class UserAttributeResponse(BaseSchema):
-    pass
-
-
-class CreateUserAttributeRequest(BaseSchema):
-    pass
-
-
-class CreateUserAttributeDefinition(BaseSchema):
-    pass
-
-
 class BlockUserRequestSchema(BaseSchema):
     pass
 
@@ -84,19 +56,11 @@ class SessionsDeleteResponseSchema(BaseSchema):
     pass
 
 
-class APIError(BaseSchema):
+class AuthenticationApiErrorSchema(BaseSchema):
     pass
 
 
 class SessionListResponseInfo(BaseSchema):
-    pass
-
-
-class Conditions(BaseSchema):
-    pass
-
-
-class UserResponseErrorSchema(BaseSchema):
     pass
 
 
@@ -108,11 +72,7 @@ class UserGroupListResponseSchema(BaseSchema):
     pass
 
 
-class ConditionsSchema(BaseSchema):
-    pass
-
-
-class CreateUserGroup(BaseSchema):
+class CreateUserGroupSchema(BaseSchema):
     pass
 
 
@@ -236,10 +196,6 @@ class UserSchema(BaseSchema):
     pass
 
 
-class UserSearchSchema(BaseSchema):
-    pass
-
-
 class PhoneNumber(BaseSchema):
     pass
 
@@ -249,162 +205,6 @@ class Email(BaseSchema):
 
 
 
-
-
-class SuccessMessageResponse(BaseSchema):
-    # User swagger.json
-
-    
-    success = fields.Str(required=False)
-    
-
-
-class UserAttributeDefinition(BaseSchema):
-    # User swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    multi_value = fields.Boolean(required=False)
-    
-    customer_editable = fields.Boolean(required=False)
-    
-    encrypted = fields.Boolean(required=False)
-    
-    pinned = fields.Boolean(required=False)
-    
-    pin_order = fields.Int(required=False)
-    
-    validations = fields.List(fields.Dict(required=False), required=False)
-    
-    is_locked = fields.Boolean(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    modified_at = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
-    
-
-
-class UserAttributeDefinitionResponse(BaseSchema):
-    # User swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    multi_value = fields.Boolean(required=False)
-    
-    customer_editable = fields.Boolean(required=False)
-    
-    encrypted = fields.Boolean(required=False)
-    
-    pinned = fields.Boolean(required=False)
-    
-    pin_order = fields.Int(required=False)
-    
-    validations = fields.List(fields.Nested(UserAttributeDefinitionValidation, required=False), required=False)
-    
-    is_locked = fields.Boolean(required=False)
-    
-    created_by = fields.Str(required=False)
-    
-    updated_by = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    modified_at = fields.Str(required=False)
-    
-
-
-class UserAttributeDefinitionValidation(BaseSchema):
-    # User swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    value = fields.Raw(required=False)
-    
-
-
-class UserAttributeResponse(BaseSchema):
-    # User swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    user_id = fields.Str(required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    customer_overriden = fields.Boolean(required=False)
-    
-    attribute = fields.Dict(required=False)
-    
-    updated_by = fields.Str(required=False)
-    
-
-
-class CreateUserAttributeRequest(BaseSchema):
-    # User swagger.json
-
-    
-    customer_overriden = fields.Boolean(required=False)
-    
-    attribute = fields.Dict(required=False)
-    
-
-
-class CreateUserAttributeDefinition(BaseSchema):
-    # User swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    multi_value = fields.Boolean(required=False)
-    
-    customer_editable = fields.Boolean(required=False)
-    
-    encrypted = fields.Boolean(required=False)
-    
-    pinned = fields.Boolean(required=False)
-    
-    pin_order = fields.Float(required=False)
-    
-    default_value = fields.Str(required=False)
-    
-    validations = fields.List(fields.Dict(required=False), required=False)
-    
 
 
 class BlockUserRequestSchema(BaseSchema):
@@ -467,7 +267,7 @@ class UserSearchResponseSchema(BaseSchema):
     # User swagger.json
 
     
-    users = fields.List(fields.Nested(UserSearchSchema, required=False), required=False)
+    users = fields.List(fields.Nested(UserSchema, required=False), required=False)
     
 
 
@@ -475,7 +275,7 @@ class CustomerListResponseSchema(BaseSchema):
     # User swagger.json
 
     
-    items = fields.List(fields.Nested(UserSearchSchema, required=False), required=False)
+    items = fields.List(fields.Nested(UserSchema, required=False), required=False)
     
     page = fields.Nested(PaginationSchema, required=False)
     
@@ -525,23 +325,11 @@ class SessionsDeleteResponseSchema(BaseSchema):
     
 
 
-class APIError(BaseSchema):
+class AuthenticationApiErrorSchema(BaseSchema):
     # User swagger.json
 
     
-    code = fields.Str(required=False)
-    
     message = fields.Str(required=False)
-    
-    info = fields.Str(required=False)
-    
-    request_id = fields.Str(required=False)
-    
-    error = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    authenticated = fields.Boolean(required=False)
     
 
 
@@ -559,41 +347,11 @@ class SessionListResponseInfo(BaseSchema):
     
     expire_in = fields.Str(required=False)
     
-    location = fields.Str(required=False)
-    
-
-
-class Conditions(BaseSchema):
-    # User swagger.json
-
-    
-    user_attribute_definition_id = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-    key = fields.Str(required=False)
-    
-
-
-class UserResponseErrorSchema(BaseSchema):
-    # User swagger.json
-
-    
-    count = fields.Int(required=False)
-    
-    file_url = fields.Str(required=False)
-    
 
 
 class UserGroupResponseSchema(BaseSchema):
     # User swagger.json
 
-    
-    conditions = fields.List(fields.Nested(Conditions, required=False), required=False)
-    
-    error = fields.Nested(UserResponseErrorSchema, required=False)
     
     name = fields.Str(required=False)
     
@@ -604,10 +362,6 @@ class UserGroupResponseSchema(BaseSchema):
     _id = fields.Str(required=False)
     
     status = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    type = fields.Str(required=False)
     
     uid = fields.Int(required=False)
     
@@ -631,25 +385,9 @@ class UserGroupListResponseSchema(BaseSchema):
     
 
 
-class ConditionsSchema(BaseSchema):
+class CreateUserGroupSchema(BaseSchema):
     # User swagger.json
 
-    
-    user_attribute_definition_id = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-
-
-class CreateUserGroup(BaseSchema):
-    # User swagger.json
-
-    
-    conditions = fields.List(fields.Nested(ConditionsSchema, required=False), required=False)
-    
-    type = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
@@ -767,11 +505,9 @@ class PlatformSchema(BaseSchema):
     
     delete_account_reasons = fields.List(fields.Nested(DeleteAccountReasons, required=False), required=False)
     
-    delete_account_consent = fields.Nested(DeleteAccountConsent, required=False)
+    delete_account_consent = fields.Dict(required=False)
     
-    session_config = fields.Nested(SessionExpiry, required=False)
-    
-    __v = fields.Int(required=False)
+    session_config = fields.Dict(required=False)
     
 
 
@@ -927,8 +663,6 @@ class Facebook(BaseSchema):
     
     app_id = fields.Str(required=False)
     
-    app_secret = fields.Str(required=False)
-    
 
 
 class Accountkit(BaseSchema):
@@ -937,8 +671,6 @@ class Accountkit(BaseSchema):
     
     app_id = fields.Str(required=False)
     
-    app_secret = fields.Str(required=False)
-    
 
 
 class Google(BaseSchema):
@@ -946,8 +678,6 @@ class Google(BaseSchema):
 
     
     app_id = fields.Str(required=False)
-    
-    app_secret = fields.Str(required=False)
     
 
 
@@ -966,10 +696,6 @@ class SessionExpiry(BaseSchema):
 class UpdateUserGroupSchema(BaseSchema):
     # User swagger.json
 
-    
-    conditions = fields.List(fields.Nested(ConditionsSchema, required=False), required=False)
-    
-    type = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
@@ -1096,50 +822,6 @@ class UserSchema(BaseSchema):
     updated_at = fields.Str(required=False)
     
     external_id = fields.Str(required=False)
-    
-
-
-class UserSearchSchema(BaseSchema):
-    # User swagger.json
-
-    
-    application_id = fields.Str(required=False)
-    
-    user_id = fields.Str(required=False)
-    
-    first_name = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    last_name = fields.Str(required=False)
-    
-    phone_numbers = fields.List(fields.Nested(PhoneNumber, required=False), required=False)
-    
-    emails = fields.List(fields.Nested(Email, required=False), required=False)
-    
-    gender = fields.Str(required=False)
-    
-    dob = fields.Str(required=False)
-    
-    active = fields.Boolean(required=False)
-    
-    profile_pic_url = fields.Str(required=False)
-    
-    username = fields.Str(required=False)
-    
-    account_type = fields.Str(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    external_id = fields.Str(required=False)
-    
-    archive = fields.Boolean(required=False)
-    
-    status = fields.Str(required=False)
     
 
 

@@ -13,11 +13,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-    
-    
-        
-        
     
     
         
@@ -35,17 +30,6 @@ class ThemeValidator:
         
         
         company_id = fields.Int(required=False)
-        
-        search_text = fields.Str(required=False)
-         
-        
-    
-    class getCompanyLevelPrivateThemes(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        search_text = fields.Str(required=False)
          
         
     

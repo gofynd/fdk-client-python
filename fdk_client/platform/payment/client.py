@@ -13,7 +13,7 @@ class Payment:
 
     
     async def getAllPayouts(self, unique_external_id=None, request_headers:Dict={}):
-        """Retrieve a list of all payout transactions.
+        """Get All Payouts
         :param unique_external_id : Fetch payouts using unique external id : type string
         """
         payload = {}
@@ -55,7 +55,7 @@ class Payment:
         return response
     
     async def savePayout(self, body="", request_headers:Dict={}):
-        """Store and process a payout transaction.
+        """Save Payout
         """
         payload = {}
         
@@ -98,7 +98,7 @@ class Payment:
         return response
     
     async def updatePayout(self, unique_transfer_no=None, body="", request_headers:Dict={}):
-        """Modify the details of a payout transaction.
+        """Update Payout
         :param unique_transfer_no : Unique transfer id : type string
         """
         payload = {}
@@ -144,7 +144,7 @@ class Payment:
         return response
     
     async def activateAndDectivatePayout(self, unique_transfer_no=None, body="", request_headers:Dict={}):
-        """Enable or disable payout functionality.
+        """Partial Update Payout
         :param unique_transfer_no : Unique transfer id : type string
         """
         payload = {}
@@ -190,7 +190,7 @@ class Payment:
         return response
     
     async def deletePayout(self, unique_transfer_no=None, request_headers:Dict={}):
-        """Remove a payout transaction from the system.
+        """Delete Payout
         :param unique_transfer_no : Unique transfer id : type string
         """
         payload = {}
@@ -232,7 +232,7 @@ class Payment:
         return response
     
     async def getSubscriptionPaymentMethod(self, unique_external_id=None, request_headers:Dict={}):
-        """Retrieve payment methods for subscriptions.
+        """Get all  Subscription  Payment Method
         :param unique_external_id : Unique external id : type string
         """
         payload = {}
@@ -274,7 +274,7 @@ class Payment:
         return response
     
     async def deleteSubscriptionPaymentMethod(self, unique_external_id=None, payment_method_id=None, request_headers:Dict={}):
-        """Remove a payment method from subscription options.
+        """Uses this api to Delete Subscription Payment Method
         :param unique_external_id :  : type string
         :param payment_method_id :  : type string
         """
@@ -319,7 +319,7 @@ class Payment:
         return response
     
     async def getSubscriptionConfig(self, request_headers:Dict={}):
-        """Retrieve configuration settings for subscriptions.
+        """Get all  Subscription Config details
         """
         payload = {}
         
@@ -358,7 +358,7 @@ class Payment:
         return response
     
     async def saveSubscriptionSetupIntent(self, body="", request_headers:Dict={}):
-        """Store and process setup intent for subscriptions.
+        """Uses this api to Save Subscription Setup Intent
         """
         payload = {}
         
@@ -401,7 +401,7 @@ class Payment:
         return response
     
     async def verifyIfscCode(self, ifsc_code=None, request_headers:Dict={}):
-        """Check the authenticity of an IFSC code.
+        """Get True/False for correct IFSC Code for adding bank details for refund
         :param ifsc_code :  : type string
         """
         payload = {}

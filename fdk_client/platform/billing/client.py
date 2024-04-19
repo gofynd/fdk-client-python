@@ -13,7 +13,7 @@ class Billing:
 
     
     async def checkCouponValidity(self, plan=None, coupon_code=None, request_headers:Dict={}):
-        """Checks whether a coupon code is valid for discounts while billing.
+        """Check coupon validity.
         :param plan : ID of the plan. : type string
         :param coupon_code : Coupon code. : type string
         """
@@ -58,7 +58,7 @@ class Billing:
         return response
     
     async def createSubscriptionCharge(self, extension_id=None, body="", request_headers:Dict={}):
-        """Register a subscription charge for a seller using your extension.
+        """Register subscription charge for a seller of your extension.
         :param extension_id : Extension _id : type string
         """
         payload = {}
@@ -104,7 +104,7 @@ class Billing:
         return response
     
     async def getSubscriptionCharge(self, extension_id=None, subscription_id=None, request_headers:Dict={}):
-        """Retrieve detailed information about subscription charges using this API.
+        """Get created subscription charge details
         :param extension_id : Extension _id : type string
         :param subscription_id : Subscription charge _id : type string
         """
@@ -149,7 +149,7 @@ class Billing:
         return response
     
     async def cancelSubscriptionCharge(self, extension_id=None, subscription_id=None, request_headers:Dict={}):
-        """Cancel an ongoing subscription charge for a customer.
+        """Cancel subscription and attached charges.
         :param extension_id : Extension _id : type string
         :param subscription_id : Subscription charge _id : type string
         """
@@ -194,7 +194,7 @@ class Billing:
         return response
     
     async def createOneTimeCharge(self, extension_id=None, body="", request_headers:Dict={}):
-        """Generate a one-time charge for specific services or products.
+        """Register one time subscription charge for a seller of your extension.
         :param extension_id : Extension _id : type string
         """
         payload = {}
@@ -240,7 +240,7 @@ class Billing:
         return response
     
     async def getChargeDetails(self, extension_id=None, charge_id=None, request_headers:Dict={}):
-        """Retrieve comprehensive details about a specific billing charge.
+        """Get created subscription charge details
         :param extension_id : Extension _id : type string
         :param charge_id : Standalone charge _id : type string
         """
@@ -285,7 +285,7 @@ class Billing:
         return response
     
     async def getInvoices(self, request_headers:Dict={}):
-        """Retrieve invoices for billing and payment tracking.
+        """Get invoices.
         """
         payload = {}
         
@@ -324,7 +324,7 @@ class Billing:
         return response
     
     async def getInvoiceById(self, invoice_id=None, request_headers:Dict={}):
-        """Retrieve a particular invoice's details by providing its unique ID.
+        """Get invoice by id.
         :param invoice_id : Invoice id : type string
         """
         payload = {}
@@ -366,7 +366,7 @@ class Billing:
         return response
     
     async def getCustomerDetail(self, request_headers:Dict={}):
-        """Obtain customer-related billing information.
+        """Get subscription customer detail.
         """
         payload = {}
         
@@ -405,7 +405,7 @@ class Billing:
         return response
     
     async def upsertCustomerDetail(self, body="", request_headers:Dict={}):
-        """Allows you to modify or insert customer information in the billing system.
+        """Upsert subscription customer detail.
         """
         payload = {}
         
@@ -448,7 +448,8 @@ class Billing:
         return response
     
     async def getSubscription(self, request_headers:Dict={}):
-        """Retrieve details of a customer's subscription information.
+        """If subscription is active then it will return is_enabled true and return subscription object. If subscription is not active then is_enabled false and message.
+
         """
         payload = {}
         
@@ -486,25 +487,19 @@ class Billing:
 
         return response
     
-    async def getFeatureLimitConfig(self, product_suite=None, type=None, request_headers:Dict={}):
-        """Retrieve configuration settings for feature limits in subscription plans.
-        :param product_suite :  : type string
-        :param type :  : type string
+    async def getFeatureLimitConfig(self, request_headers:Dict={}):
+        """Get subscription subscription limits.
         """
         payload = {}
         
-        if product_suite is not None:
-            payload["product_suite"] = product_suite
-        if type is not None:
-            payload["type"] = type
 
         # Parameter validation
         schema = BillingValidator.getFeatureLimitConfig()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/current-limit", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[{"in":"query","name":"product_suite","schema":{"type":"string"}},{"in":"query","name":"type","schema":{"type":"string"}}],"query":[{"in":"query","name":"product_suite","schema":{"type":"string"}},{"in":"query","name":"type","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", product_suite=product_suite, type=type)
-        query_string = await create_query_string(product_suite=product_suite, type=type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/current-limit", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", )
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -518,7 +513,7 @@ class Billing:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/current-limit", product_suite=product_suite, type=type), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/subscription/current-limit", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SubscriptionLimit
@@ -532,7 +527,7 @@ class Billing:
         return response
     
     async def activateSubscriptionPlan(self, body="", request_headers:Dict={}):
-        """Activate a specific subscription plan for a customer.
+        """It will activate subscription plan for customer
         """
         payload = {}
         
@@ -575,7 +570,7 @@ class Billing:
         return response
     
     async def cancelSubscriptionPlan(self, body="", request_headers:Dict={}):
-        """Cancel an active subscription plan for a customer
+        """It will cancel current active subscription.
         """
         payload = {}
         
@@ -618,7 +613,8 @@ class Billing:
         return response
     
     async def getEnterprisePlans(self, request_headers:Dict={}):
-        """Retrieve available enterprise-level subscription plans.
+        """Get Enterprise Plans.
+
         """
         payload = {}
         
@@ -648,7 +644,7 @@ class Billing:
         return response
     
     async def planStatusUpdate(self, body="", request_headers:Dict={}):
-        """Modify the status of a subscription plan.
+        """It will update the status of the plan
         """
         payload = {}
         
@@ -691,7 +687,7 @@ class Billing:
         return response
     
     async def subscripePlan(self, body="", request_headers:Dict={}):
-        """Subscribe to a specific billing plan.
+        """It will subscribe a plan.
         """
         payload = {}
         
@@ -729,60 +725,6 @@ class Billing:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for subscripePlan")
-                print(e)
-
-        return response
-    
-    async def getentityDetail(self, entity_name=None, entity_id=None, channel=None, component=None, component_name=None, request_headers:Dict={}):
-        """Generic api to get the entity detail
-        :param entity_name : Entity name. : type string
-        :param entity_id : Entity unique id. : type string
-        :param channel : Ordering channel. : type string
-        :param component : The coponents the user would like to know. : type string
-        :param component_name : The name of component the preferred to be fetched. : type string
-        """
-        payload = {}
-        
-        if entity_name is not None:
-            payload["entity_name"] = entity_name
-        if entity_id is not None:
-            payload["entity_id"] = entity_id
-        if channel is not None:
-            payload["channel"] = channel
-        if component is not None:
-            payload["component"] = component
-        if component_name is not None:
-            payload["component_name"] = component_name
-
-        # Parameter validation
-        schema = BillingValidator.getentityDetail()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/entity/detail", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}},{"in":"query","name":"entity_name","description":"Entity name.","required":true,"schema":{"type":"string","example":"plan/subscription"}},{"in":"query","name":"channel","description":"Ordering channel.","required":true,"schema":{"type":"string","example":"ecomm"}}],"optional":[{"in":"query","name":"entity_id","description":"Entity unique id.","required":false,"schema":{"type":"string","example":"1"}},{"in":"query","name":"component","description":"The coponents the user would like to know.","required":false,"schema":{"type":"string","example":"fee/feature"}},{"in":"query","name":"component_name","description":"The name of component the preferred to be fetched.","required":false,"schema":{"type":"string","example":"logistic_fee"}}],"query":[{"in":"query","name":"entity_name","description":"Entity name.","required":true,"schema":{"type":"string","example":"plan/subscription"}},{"in":"query","name":"entity_id","description":"Entity unique id.","required":false,"schema":{"type":"string","example":"1"}},{"in":"query","name":"channel","description":"Ordering channel.","required":true,"schema":{"type":"string","example":"ecomm"}},{"in":"query","name":"component","description":"The coponents the user would like to know.","required":false,"schema":{"type":"string","example":"fee/feature"}},{"in":"query","name":"component_name","description":"The name of component the preferred to be fetched.","required":false,"schema":{"type":"string","example":"logistic_fee"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string","example":"1"}}]}""", entity_name=entity_name, entity_id=entity_id, channel=channel, component=component, component_name=component_name)
-        query_string = await create_query_string(entity_name=entity_name, entity_id=entity_id, channel=channel, component=component, component_name=component_name)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/billing/v1.0/company/{self._conf.companyId}/entity/detail", entity_name=entity_name, entity_id=entity_id, channel=channel, component=component, component_name=component_name), query_string, headers, "", exclude_headers=exclude_headers), data="")
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EntityResponse
-            schema = EntityResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getentityDetail")
                 print(e)
 
         return response

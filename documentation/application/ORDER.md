@@ -5,21 +5,15 @@
 ##### [Back to Application docs](./README.md)
 
 ## Order Methods
-The Order and Shipment module is designed for retrieving application-specific orders, accessing order details, and obtaining shipment and invoice information. This module facilitates shipment tracking, allows customization of shipment details, and provides reasons for cancellations and returns. Additionally, it offers real-time shipment status updates.
+Handles all Application order and shipment api(s)
 
-Order Details
+Default
 * [getOrders](#getorders)
 * [getOrderById](#getorderbyid)
 * [getPosOrderById](#getposorderbyid)
 * [getShipmentById](#getshipmentbyid)
-* [trackShipment](#trackshipment)
-
-
-Receipt, Label and Invoice Download 
 * [getInvoiceByShipmentId](#getinvoicebyshipmentid)
-
-
-Default
+* [trackShipment](#trackshipment)
 * [getCustomerDetailsByShipmentId](#getcustomerdetailsbyshipmentid)
 * [sendOtpToShipmentCustomer](#sendotptoshipmentcustomer)
 * [verifyOtpShipmentCustomer](#verifyotpshipmentcustomer)
@@ -35,14 +29,14 @@ Default
 
 
 ### getOrders
-Lists customer orders.
+Get all orders
 
 
 
 
 ```python
 try:
-    result = await applicationClient.order.getOrders(status=status, pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, startDate=startDate, endDate=endDate, customMeta=customMeta, allowInactive=allowInactive)
+    result = await applicationClient.order.getOrders(status=status, pageNo=pageNo, pageSize=pageSize, fromDate=fromDate, toDate=toDate, customMeta=customMeta)
     # use result
 except Exception as e:
     print(e)
@@ -59,14 +53,11 @@ except Exception as e:
 | pageSize | Int? | no | The number of items to retrieve in each page. Default value is 10. |   
 | fromDate | String? | no | The date from which the orders should be retrieved. |   
 | toDate | String? | no | The date till which the orders should be retrieved. |   
-| startDate | String? | no | UTC Start Date in ISO format |   
-| endDate | String? | no | UTC Start Date in ISO format |   
-| customMeta | String? | no | A filter and retrieve data using special fields included for special use-cases |   
-| allowInactive | Boolean? | no | Flag indicating whether inactive shipments are allowed |  
+| customMeta | String? | no | A filter and retrieve data using special fields included for special use-cases |  
 
 
 
-Retrieves all orders associated with a customer account.
+Use this API to retrieve all the orders.
 
 *Returned Response:*
 
@@ -100,14 +91,14 @@ Success. Returns all the orders. Check the example shown below or refer `OrderLi
 
 
 ### getOrderById
-Fetches order by ID.
+Get details of an order
 
 
 
 
 ```python
 try:
-    result = await applicationClient.order.getOrderById(orderId=orderId, allowInactive=allowInactive)
+    result = await applicationClient.order.getOrderById(orderId=orderId)
     # use result
 except Exception as e:
     print(e)
@@ -119,12 +110,11 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| orderId | String | yes | A unique number used for identifying and tracking your orders. |   
-| allowInactive | Boolean? | no | Flag to allow inactive shipments |  
+| orderId | String | yes | A unique number used for identifying and tracking your orders. |  
 
 
 
-Retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
+Use this API to retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
 
 *Returned Response:*
 
@@ -213,11 +203,6 @@ Success. Check the example shown below or refer `OrderById` for more details.
         "value": 0
       },
       {
-        "name": "amount_to_be_collected",
-        "display": "Amount To Be Collected",
-        "value": 0
-      },
-      {
         "name": "total",
         "display": "Total",
         "value": 1797
@@ -226,13 +211,6 @@ Success. Check the example shown below or refer `OrderById` for more details.
     "shipments": [
       {
         "order_id": "FY632D541F01152493D0",
-        "order": {
-          "meta": {
-            "custom_cart_id": "652ce6972512f05477a32547",
-            "name": "Universal/Smart Bazar/Fresh Cart",
-            "slug": "universal/smart-bazar/fresh-cart"
-          }
-        },
         "breakup_values": [
           {
             "name": "mrp_total",
@@ -277,11 +255,6 @@ Success. Check the example shown below or refer `OrderById` for more details.
           {
             "name": "cod_charges",
             "display": "COD Charges",
-            "value": 0
-          },
-          {
-            "name": "amount_to_be_collected",
-            "display": "Amount To Be Collected",
             "value": 0
           },
           {
@@ -346,8 +319,8 @@ Success. Check the example shown below or refer `OrderById` for more details.
           "show_promise": true,
           "timestamp": {
             "dp_promise": null,
-            "min": "2022-09-26T06:37:17.000Z",
-            "max": "2022-09-27T06:37:17.000Z"
+            "min": "2022-09-26T06:37:17+00:00",
+            "max": "2022-09-27T06:37:17+00:00"
           }
         },
         "bags": [
@@ -355,7 +328,7 @@ Success. Check the example shown below or refer `OrderById` for more details.
             "id": 67631,
             "current_status": {
               "status": "placed",
-              "updated_at": "2022-09-23T12:07:35.000Z",
+              "updated_at": "2022-09-23T12:07:35+00:00",
               "name": "Placed",
               "journey_type": "forward"
             },
@@ -379,7 +352,6 @@ Success. Check the example shown below or refer `OrderById` for more details.
               "brand_calculated_amount": 599,
               "promotion_effective_discount": 0,
               "coupon_value": 0,
-              "amount_to_be_collected": 0,
               "pm_price_split": {
                 "": 599
               }
@@ -482,7 +454,6 @@ Success. Check the example shown below or refer `OrderById` for more details.
                 "brand_calculated_amount": 599,
                 "promotion_effective_discount": 0,
                 "coupon_value": 0,
-                "amount_to_be_collected": 0,
                 "pm_price_split": {
                   "": 599
                 },
@@ -501,14 +472,7 @@ Success. Check the example shown below or refer `OrderById` for more details.
             "can_cancel": true,
             "can_return": false,
             "delivery_date": null,
-            "returnable_date": null,
-            "article": [
-              {
-                "tags": [
-                  "1P"
-                ]
-              }
-            ]
+            "returnable_date": null
           }
         ],
         "size_info": {
@@ -556,8 +520,8 @@ Success. Check the example shown below or refer `OrderById` for more details.
           "address_1": " asd",
           "area_code": "400059",
           "longitude": 72.8773159,
-          "created_at": "2022-09-22T18:19:29.000Z",
-          "updated_at": "2022-09-22T18:19:29.000Z",
+          "created_at": "2022-09-22T18:19:29+00:00",
+          "updated_at": "2022-09-22T18:19:29+00:00",
           "address_type": "home",
           "country_code": "91",
           "geo_location": {
@@ -588,8 +552,7 @@ Success. Check the example shown below or refer `OrderById` for more details.
           "price_effective": 1198,
           "refund_credit": 0,
           "value_of_good": 1140.96,
-          "discount_percent": 40,
-          "amount_to_be_collected": 0
+          "discount_percent": 40
         },
         "can_break": {
           "bag_repriced": {
@@ -636,14 +599,6 @@ Success. Check the example shown below or refer `OrderById` for more details.
           "mop": "PREPAID",
           "status": "Paid"
         },
-        "payment_info": [
-          {
-            "logo": "https://hdn-1.fynd.com/payment/Pos+Logo.png",
-            "mode": "Jio Partner Pay",
-            "mop": "PREPAID",
-            "status": "Paid"
-          }
-        ],
         "user_info": {
           "email": "paymentsdummy@gofynd.com",
           "gender": "male",
@@ -710,11 +665,6 @@ Success. Check the example shown below or refer `OrderById` for more details.
             "value": 0
           },
           {
-            "name": "amount_to_be_collected",
-            "display": "Amount To Be Collected",
-            "value": 0
-          },
-          {
             "name": "total",
             "display": "Total",
             "value": 599
@@ -772,8 +722,8 @@ Success. Check the example shown below or refer `OrderById` for more details.
           "show_promise": false,
           "timestamp": {
             "dp_promise": null,
-            "min": "2022-09-26T06:37:17.000Z",
-            "max": "2022-09-27T06:37:17.000Z"
+            "min": "2022-09-26T06:37:17+00:00",
+            "max": "2022-09-27T06:37:17+00:00"
           }
         },
         "bags": [
@@ -781,7 +731,7 @@ Success. Check the example shown below or refer `OrderById` for more details.
             "id": 67632,
             "current_status": {
               "status": "refund_acknowledged",
-              "updated_at": "2022-09-23T12:07:58.000Z",
+              "updated_at": "2022-09-23T12:07:58+00:00",
               "name": "Refund Acknowledged",
               "journey_type": null
             },
@@ -805,7 +755,6 @@ Success. Check the example shown below or refer `OrderById` for more details.
               "brand_calculated_amount": 599,
               "promotion_effective_discount": 0,
               "coupon_value": 0,
-              "amount_to_be_collected": 0,
               "pm_price_split": {
                 "": 599
               }
@@ -908,7 +857,6 @@ Success. Check the example shown below or refer `OrderById` for more details.
                 "brand_calculated_amount": 599,
                 "promotion_effective_discount": 0,
                 "coupon_value": 0,
-                "amount_to_be_collected": 0,
                 "pm_price_split": {
                   "": 599
                 },
@@ -975,8 +923,8 @@ Success. Check the example shown below or refer `OrderById` for more details.
           "address_1": " asd",
           "area_code": "400059",
           "longitude": 72.8773159,
-          "created_at": "2022-09-22T18:19:29.000Z",
-          "updated_at": "2022-09-22T18:19:29.000Z",
+          "created_at": "2022-09-22T18:19:29+00:00",
+          "updated_at": "2022-09-22T18:19:29+00:00",
           "address_type": "home",
           "country_code": "91",
           "geo_location": {
@@ -1007,8 +955,7 @@ Success. Check the example shown below or refer `OrderById` for more details.
           "price_effective": 599,
           "refund_credit": 0,
           "value_of_good": 570.48,
-          "discount_percent": 40,
-          "amount_to_be_collected": 0
+          "discount_percent": 40
         },
         "can_break": {
           "refund_completed": {
@@ -1100,14 +1047,6 @@ Success. Check the example shown below or refer `OrderById` for more details.
           "mop": "PREPAID",
           "status": "Paid"
         },
-        "payment_info": [
-          {
-            "logo": "https://hdn-1.fynd.com/payment/Pos+Logo.png",
-            "mode": "Jio Partner Pay",
-            "mop": "PREPAID",
-            "status": "Paid"
-          }
-        ],
         "user_info": {
           "email": "paymentsdummy@gofynd.com",
           "gender": "male",
@@ -1144,7 +1083,7 @@ Success. Check the example shown below or refer `OrderById` for more details.
 
 
 ### getPosOrderById
-Retrieves POS order details.
+Get POS Order
 
 
 
@@ -1167,7 +1106,7 @@ except Exception as e:
 
 
 
-Retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+Use this API to retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
 
 *Returned Response:*
 
@@ -1353,8 +1292,8 @@ Success. Check the example shown below or refer `PosOrderById` for more details.
           "show_promise": false,
           "timestamp": {
             "dp_promise": null,
-            "min": "2022-08-15T09:38:44.000Z",
-            "max": "2022-08-18T09:38:44.000Z"
+            "min": "2022-08-15T09:38:44+00:00",
+            "max": "2022-08-18T09:38:44+00:00"
           }
         },
         "bags": [
@@ -1362,7 +1301,7 @@ Success. Check the example shown below or refer `PosOrderById` for more details.
             "id": 59987,
             "current_status": {
               "status": "bag_not_picked",
-              "updated_at": "2022-08-22T21:33:33.000Z",
+              "updated_at": "2022-08-22T21:33:33+00:00",
               "name": "Bag Not Picked",
               "journey_type": "forward"
             },
@@ -1488,14 +1427,14 @@ Success. Check the example shown below or refer `PosOrderById` for more details.
 
 
 ### getShipmentById
-Fetches shipment by ID.
+Get details of a shipment
 
 
 
 
 ```python
 try:
-    result = await applicationClient.order.getShipmentById(shipmentId=shipmentId, allowInactive=allowInactive)
+    result = await applicationClient.order.getShipmentById(shipmentId=shipmentId)
     # use result
 except Exception as e:
     print(e)
@@ -1507,12 +1446,11 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| shipmentId | String | yes | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |   
-| allowInactive | Boolean? | no | Flag to allow inactive shipments |  
+| shipmentId | String | yes | ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. |  
 
 
 
-Retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
+Use this API to retrieve shipment details such as price breakup, tracking details, store information, etc. using Shipment ID.
 
 *Returned Response:*
 
@@ -1533,13 +1471,6 @@ Success. Check the example shown below or refer `ShipmentById` for more details.
 {
   "shipment": {
     "order_id": "FY62F3B8290150D13E36",
-    "order": {
-      "meta": {
-        "custom_cart_id": "652ce6972512f05477a32547",
-        "name": "Universal/Smart Bazar/Fresh Cart",
-        "slug": "universal/smart-bazar/fresh-cart"
-      }
-    },
     "breakup_values": [
       {
         "name": "mrp_total",
@@ -1584,11 +1515,6 @@ Success. Check the example shown below or refer `ShipmentById` for more details.
       {
         "name": "cod_charges",
         "display": "COD Charges",
-        "value": 0
-      },
-      {
-        "name": "amount_to_be_collected",
-        "display": "Amount To Be Collected",
         "value": 0
       },
       {
@@ -1652,8 +1578,8 @@ Success. Check the example shown below or refer `ShipmentById` for more details.
     "promise": {
       "show_promise": false,
       "timestamp": {
-        "min": "2022-08-14T13:52:37.000Z",
-        "max": "2022-08-17T13:52:37.000Z",
+        "min": "2022-08-14T13:52:37+00:00",
+        "max": "2022-08-17T13:52:37+00:00",
         "dp_promise": null
       }
     },
@@ -1662,7 +1588,7 @@ Success. Check the example shown below or refer `ShipmentById` for more details.
         "id": 59624,
         "current_status": {
           "status": "bag_not_picked",
-          "updated_at": "2022-08-18T23:46:11.000Z",
+          "updated_at": "2022-08-18T23:46:11+00:00",
           "name": "Bag Not Picked",
           "journey_type": "forward"
         },
@@ -1686,7 +1612,6 @@ Success. Check the example shown below or refer `ShipmentById` for more details.
           "brand_calculated_amount": 50,
           "promotion_effective_discount": 0,
           "coupon_value": 0,
-          "amount_to_be_collected": 0,
           "pm_price_split": {
             "COD": 50
           }
@@ -1738,7 +1663,6 @@ Success. Check the example shown below or refer `ShipmentById` for more details.
             "brand_calculated_amount": 50,
             "promotion_effective_discount": 0,
             "coupon_value": 0,
-            "amount_to_be_collected": 0,
             "pm_price_split": {
               "COD": 50
             },
@@ -1758,14 +1682,7 @@ Success. Check the example shown below or refer `ShipmentById` for more details.
           31
         ],
         "can_cancel": false,
-        "can_return": false,
-        "article": [
-          {
-            "tags": [
-              "1P"
-            ]
-          }
-        ]
+        "can_return": false
       }
     ],
     "size_info": {
@@ -1786,10 +1703,7 @@ Success. Check the example shown below or refer `ShipmentById` for more details.
       "name": "Jio-market-store3",
       "company_id": 33,
       "id": 50,
-      "code": "store3",
-      "tags": [
-        "infibeam"
-      ]
+      "code": "store3"
     },
     "fulfilling_company": {
       "id": 33,
@@ -1815,8 +1729,8 @@ Success. Check the example shown below or refer `ShipmentById` for more details.
       "address_1": " test",
       "area_code": "400074",
       "longitude": 72.8423802,
-      "created_at": "2022-08-10T18:52:38.000Z",
-      "updated_at": "2022-08-10T18:52:38.000Z",
+      "created_at": "2022-08-10T18:52:38+00:00",
+      "updated_at": "2022-08-10T18:52:38+00:00",
       "address_type": "home",
       "country_code": "91",
       "geo_location": {
@@ -1847,8 +1761,7 @@ Success. Check the example shown below or refer `ShipmentById` for more details.
       "cashback": 0,
       "price_effective": 50,
       "refund_credit": 0,
-      "value_of_good": 42.37,
-      "amount_to_be_collected": 0
+      "value_of_good": 42.37
     },
     "can_break": {
       "bag_not_picked": {
@@ -1899,16 +1812,6 @@ Success. Check the example shown below or refer `ShipmentById` for more details.
       "payment_mode": "COD",
       "status": "Unpaid"
     },
-    "payment_info": [
-      {
-        "logo": "https://hdn-1.fynd.com/payment/Pos+Logo.png",
-        "mode": "Jio Partner Pay",
-        "mop": "COD",
-        "display_name": "COD",
-        "payment_mode": "COD",
-        "status": "Unpaid"
-      }
-    ],
     "user_info": {
       "email": "paymentsdummy@gofynd.com",
       "gender": "male",
@@ -1941,8 +1844,65 @@ Success. Check the example shown below or refer `ShipmentById` for more details.
 ---
 
 
+### getInvoiceByShipmentId
+Get Invoice of a shipment
+
+
+
+
+```python
+try:
+    result = await applicationClient.order.getInvoiceByShipmentId(shipmentId=shipmentId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| shipmentId | String | yes | ID of the shipment. |  
+
+
+
+Use this API to retrieve shipment invoice.
+
+*Returned Response:*
+
+
+
+
+[ResponseGetInvoiceShipment](#ResponseGetInvoiceShipment)
+
+Success. Check the example shown below or refer `ShipmentById` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### trackShipment
-Tracks shipment status.
+Track shipment
 
 
 
@@ -1965,7 +1925,7 @@ except Exception as e:
 
 
 
-Track Shipment by shipment id, for application based on application Id.
+Track Shipment by shipment id, for application based on application Id
 
 *Returned Response:*
 
@@ -2011,69 +1971,8 @@ Success. Check the example shown below or refer `ShipmentTrack` for more details
 ---
 
 
-
-
-### getInvoiceByShipmentId
-Retrieves invoice for shipment.
-
-
-
-
-```python
-try:
-    result = await applicationClient.order.getInvoiceByShipmentId(shipmentId=shipmentId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| shipmentId | String | yes | ID of the shipment. |  
-
-
-
-Retrieve the invoice corresponding to a specific shipment ID.
-
-*Returned Response:*
-
-
-
-
-[ResponseGetInvoiceShipment](#ResponseGetInvoiceShipment)
-
-Success. Check the example shown below or refer `ShipmentById` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
 ### getCustomerDetailsByShipmentId
-Retrieves shipment customer.
+Get Customer Details by Shipment Id
 
 
 
@@ -2097,7 +1996,7 @@ except Exception as e:
 
 
 
-Retrieve customer details such as mobile number using Shipment ID.
+Use this API to retrieve customer details such as mobileno using Shipment ID.
 
 *Returned Response:*
 
@@ -2137,7 +2036,7 @@ Success. Check the example shown below or refer `CustomerDetailsByShipmentId` fo
 
 
 ### sendOtpToShipmentCustomer
-Sends OTP to customer.
+Send and Resend Otp code to Order-Shipment customer
 
 
 
@@ -2161,7 +2060,7 @@ except Exception as e:
 
 
 
-Sends a one-time password (OTP) to the customer for shipment verification.
+Use this API to send OTP to the customer of the mapped Shipment.
 
 *Returned Response:*
 
@@ -2200,7 +2099,7 @@ Success to acknowledge the service was notified
 
 
 ### verifyOtpShipmentCustomer
-Verifies OTP.
+Verify Otp code
 
 
 
@@ -2224,7 +2123,7 @@ except Exception as e:
 | body | [VerifyOtp](#VerifyOtp) | yes | Request body |
 
 
-Confirms the OTP sent to the shipment customer for verification.
+Use this API to verify OTP and create a session token with custom payload.
 
 *Returned Response:*
 
@@ -2260,7 +2159,7 @@ Success, the code is valid and returns a session token
 
 
 ### getShipmentBagReasons
-Lists bag reasons.
+Get reasons behind full or partial cancellation of a shipment
 
 
 
@@ -2284,7 +2183,7 @@ except Exception as e:
 
 
 
-Retrieves reasons that led to the cancellation for the status of shipment bags.
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 *Returned Response:*
 
@@ -2360,7 +2259,7 @@ Success. Check the example shown below or refer `ShipmentBagReasons` for more de
 
 
 ### getShipmentReasons
-Lists shipment reasons.
+Get reasons behind full or partial cancellation of a shipment
 
 
 
@@ -2383,7 +2282,7 @@ except Exception as e:
 
 
 
-Retrieve reasons explaining various shipment statuses.
+Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
 
 *Returned Response:*
 
@@ -2500,7 +2399,7 @@ Success. Check the example shown below or refer `ShipmentBagReasons` for more de
 
 
 ### updateShipmentStatus
-Updates shipment status.
+Update the shipment status
 
 
 
@@ -2523,7 +2422,7 @@ except Exception as e:
 | body | [UpdateShipmentStatusRequest](#UpdateShipmentStatusRequest) | yes | Request body |
 
 
-Modifies the current status of a specific shipment using its shipment ID.
+Use this API to update the status of a shipment using its shipment ID.
 
 *Returned Response:*
 
@@ -2722,7 +2621,6 @@ Successfully updateShipmentStatus!
  | isPassed | Boolean? |  yes  |  |
  | status | String? |  yes  |  |
  | time | String? |  yes  |  |
- | createdTs | String? |  yes  |  |
  | trackingDetails | ArrayList<[NestedTrackingDetails](#NestedTrackingDetails)>? |  yes  |  |
 
 ---
@@ -2793,7 +2691,6 @@ Successfully updateShipmentStatus!
  | refundAmount | Double? |  yes  |  |
  | currencyCode | String? |  yes  |  |
  | fyndCredits | Double? |  yes  |  |
- | amountToBeCollected | Double? |  yes  |  |
 
 ---
 
@@ -2908,7 +2805,6 @@ Successfully updateShipmentStatus!
  | gstFee | Double? |  yes  |  |
  | refundAmount | Double? |  yes  |  |
  | fyndCredits | Double? |  yes  |  |
- | amountToBeCollected | Double? |  yes  |  |
 
 ---
 
@@ -2950,7 +2846,6 @@ Successfully updateShipmentStatus!
  | currencyCode | String? |  yes  |  |
  | sellerIdentifier | String? |  yes  |  |
  | currentStatus | [CurrentStatus](#CurrentStatus)? |  yes  |  |
- | article | [Article](#Article)? |  yes  |  |
 
 ---
 
@@ -2963,17 +2858,6 @@ Successfully updateShipmentStatus!
  | ---------- | ---- | -------- | ----------- |
  | id | Int? |  yes  |  |
  | name | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [Article](#Article)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | tags | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -2998,7 +2882,6 @@ Successfully updateShipmentStatus!
  | state | String? |  yes  |  |
  | createdAt | String? |  yes  |  |
  | address1 | String? |  yes  |  |
- | displayAddress | String? |  yes  |  |
  | name | String? |  yes  |  |
  | contactPerson | String? |  yes  |  |
  | addressCategory | String? |  yes  |  |
@@ -3018,7 +2901,6 @@ Successfully updateShipmentStatus!
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | payment | [ShipmentPayment](#ShipmentPayment)? |  yes  |  |
- | paymentInfo | ArrayList<[ShipmentPayment](#ShipmentPayment)>? |  yes  |  |
  | orderType | String? |  yes  |  |
  | showDownloadInvoice | Boolean? |  yes  |  |
  | canCancel | Boolean? |  yes  |  |
@@ -3041,7 +2923,6 @@ Successfully updateShipmentStatus!
  | prices | [Prices](#Prices)? |  yes  |  |
  | returnableDate | String? |  yes  |  |
  | shipmentCreatedAt | String? |  yes  |  |
- | shipmentCreatedTs | String? |  yes  |  |
  | sizeInfo | HashMap<String,Any>? |  yes  |  |
  | bags | ArrayList<[Bags](#Bags)>? |  yes  |  |
  | dpName | String? |  yes  |  |
@@ -3055,7 +2936,6 @@ Successfully updateShipmentStatus!
  | needHelpUrl | String? |  yes  |  |
  | returnMeta | HashMap<String,Any>? |  yes  |  |
  | deliveryDate | String? |  yes  |  |
- | order | [OrderRequest](#OrderRequest)? |  yes  |  |
 
 ---
 
@@ -3098,7 +2978,6 @@ Successfully updateShipmentStatus!
  | userInfo | [UserInfo](#UserInfo)? |  yes  |  |
  | breakupValues | ArrayList<[BreakupValues](#BreakupValues)>? |  yes  |  |
  | orderCreatedTime | String? |  yes  |  |
- | orderCreatedTs | String? |  yes  |  |
  | orderId | String? |  yes  |  |
  | shipments | ArrayList<[Shipments](#Shipments)>? |  yes  |  |
  | bagsForReorder | ArrayList<[BagsForReorder](#BagsForReorder)>? |  yes  |  |
@@ -3507,17 +3386,6 @@ Successfully updateShipmentStatus!
  | shipments | ArrayList<[ShipmentsRequest](#ShipmentsRequest)>? |  yes  |  |
  | excludeBagsNextState | String? |  yes  |  |
  | status | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [OrderRequest](#OrderRequest)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | meta | HashMap<String,Any>? |  yes  |  |
 
 ---
 

@@ -13,7 +13,25 @@ class FileStorage:
 
     
     async def startUpload(self, namespace=None, body="", request_headers:Dict={}):
-        """Inititates the process of uploading a file to storage location, and returns a storage link in response.
+        """Uploads an arbitrarily sized buffer or blob.
+
+It has three Major Steps:
+* Start
+* Upload
+* Complete
+
+### Start
+Initiates the assets upload using `startUpload`.
+It returns the storage link in response.
+
+### Upload
+Use the storage link to upload a file (Buffer or Blob) to the File Storage.
+Make a `PUT` request on storage link received from `startUpload` api with file (Buffer or Blob) as a request body.
+
+### Complete
+After successfully upload, call `completeUpload` api to complete the upload process.
+This operation will return the url for the uploaded file.
+
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
@@ -59,7 +77,25 @@ class FileStorage:
         return response
     
     async def completeUpload(self, namespace=None, body="", request_headers:Dict={}):
-        """Starts the process of uploading a file to storage location, and returns a storage link in response.
+        """Uploads an arbitrarily sized buffer or blob.
+
+It has three Major Steps:
+* Start
+* Upload
+* Complete
+
+### Start
+Initiates the assets upload using `startUpload`.
+It returns the storage link in response.
+
+### Upload
+Use the storage link to upload a file (Buffer or Blob) to the File Storage.
+Make a `PUT` request on storage link received from `startUpload` api with file (Buffer or Blob) as a request body.
+
+### Complete
+After successfully upload, call `completeUpload` api to complete the upload process.
+This operation will return the url for the uploaded file.
+
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
@@ -105,7 +141,7 @@ class FileStorage:
         return response
     
     async def getSignUrls(self, body="", request_headers:Dict={}):
-        """Retrieve signed URLs for file access.
+        """Describe here
         """
         payload = {}
         
@@ -148,7 +184,7 @@ class FileStorage:
         return response
     
     async def copyFiles(self, sync=None, body="", request_headers:Dict={}):
-        """Duplicate files to another location.
+        """Copy Files
         :param sync :  : type boolean
         """
         payload = {}
@@ -185,7 +221,7 @@ class FileStorage:
         return response
     
     async def browse(self, namespace=None, page=None, limit=None, request_headers:Dict={}):
-        """View and navigate through available files.
+        """Browse Files
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         :param page : page no : type integer
         :param limit : Limit : type integer
@@ -224,7 +260,7 @@ class FileStorage:
         return response
     
     async def proxy(self, url=None, request_headers:Dict={}):
-        """Access files through a proxy.
+        """Proxy
         :param url : url : type string
         """
         payload = {}

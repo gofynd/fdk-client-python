@@ -7,46 +7,31 @@
 ## Finance Methods
 Handles all finance related activities
 
-Report Generation & Download
+Default
 * [generateReport](#generatereport)
 * [downloadReport](#downloadreport)
 * [getData](#getdata)
+* [getReason](#getreason)
 * [getReportList](#getreportlist)
 * [getAffiliate](#getaffiliate)
 * [downloadCreditDebitNote](#downloadcreditdebitnote)
-* [invoicePDF](#invoicepdf)
-* [getPdfUrlView](#getpdfurlview)
-* [generateReportCustomerCn](#generatereportcustomercn)
-* [downloadReportCustomerCn](#downloadreportcustomercn)
-* [getReportingFilters](#getreportingfilters)
-
-
-Reason and Configuration Management
-* [getReason](#getreason)
-
-
-Payment and Credit Note Management
 * [paymentProcess](#paymentprocess)
 * [creditlineDataplatform](#creditlinedataplatform)
 * [isCreditlinePlatform](#iscreditlineplatform)
-* [createSellerCreditNoteConfig](#createsellercreditnoteconfig)
-* [channelDisplayName](#channeldisplayname)
-* [getCnConfig](#getcnconfig)
-
-
-Invoice and Credit Note Management
 * [invoiceType](#invoicetype)
+* [invoiceListing](#invoicelisting)
+* [invoicePDF](#invoicepdf)
 * [isCnRefundMethod](#iscnrefundmethod)
+* [createSellerCreditNoteConfig](#createsellercreditnoteconfig)
+* [deleteConfig](#deleteconfig)
+* [channelDisplayName](#channeldisplayname)
+* [getPdfUrlView](#getpdfurlview)
 * [creditNoteDetails](#creditnotedetails)
 * [getCustomerCreditBalance](#getcustomercreditbalance)
-
-
-Default
-* [invoiceListing](#invoicelisting)
-* [deleteConfig](#deleteconfig)
-* [invoicePaymentDetails](#invoicepaymentdetails)
-* [invoiceActivityLogs](#invoiceactivitylogs)
-* [unlockCreditNote](#unlockcreditnote)
+* [getCnConfig](#getcnconfig)
+* [generateReportCustomerCn](#generatereportcustomercn)
+* [downloadReportCustomerCn](#downloadreportcustomercn)
+* [getReportingFilters](#getreportingfilters)
 
 
 
@@ -56,7 +41,7 @@ Default
 
 
 ### generateReport
-Generate financial report.
+Generate finance reports.
 
 
 
@@ -78,7 +63,7 @@ except Exception as e:
 | body | [GenerateReportRequest](#GenerateReportRequest) | yes | Request body |
 
 
-Create a financial report with relevant data.
+Generate finance reports.
 
 *Returned Response:*
 
@@ -98,8 +83,8 @@ We are processing the report!
 ```json
 {
   "data": {
-    "start_date": "2023-07-26T00:00:00.000Z",
-    "end_date": "2023-07-31T00:00:00.000Z",
+    "start_date": "2023-07-26",
+    "end_date": "2023-07-31",
     "headers": [
       "Company Id",
       "Company",
@@ -241,7 +226,7 @@ We are processing the report!
 
 
 ### downloadReport
-Download financial report.
+Gives list of all downloaded reports.
 
 
 
@@ -263,7 +248,7 @@ except Exception as e:
 | body | [DownloadReport](#DownloadReport) | yes | Request body |
 
 
-Retrieve and save a financial report.
+Gives list of all downloaded reports.
 
 *Returned Response:*
 
@@ -290,7 +275,7 @@ Success
       "requested_by": "jayeshfansamkar_gofynd_com_17506",
       "full_name": "jayesh fansamkar",
       "display_name": "Settlement Report",
-      "created_at": "2023-07-26T22:38:04.000Z",
+      "created_at": "2023-07-26 22:38:04",
       "filters": {
         "brand": [],
         "channel": [],
@@ -305,8 +290,8 @@ Success
         "job_id": "export_1690391284747"
       },
       "status": "In Process",
-      "start_date": "2023-07-19T00:00:00.000Z",
-      "end_date": "2023-07-26T00:00:00.000Z",
+      "start_date": "2023-07-19",
+      "end_date": "2023-07-26",
       "msg": null,
       "download_link": null
     }
@@ -335,7 +320,7 @@ Success
 
 
 ### getData
-Get financial data.
+Gives list of columns for table provided.
 
 
 
@@ -357,7 +342,7 @@ except Exception as e:
 | body | [GetEngineRequest](#GetEngineRequest) | yes | Request body |
 
 
-Retrieve financial data for analysis.
+Gives list of columns for table provided.
 
 *Returned Response:*
 
@@ -432,8 +417,86 @@ Success
 ---
 
 
+### getReason
+Gives list of the reasons.
+
+
+
+
+```python
+try:
+    result = await platformClient.finance.getReason(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [GetReasonRequest](#GetReasonRequest) | yes | Request body |
+
+
+Gives list of the reasons.
+
+*Returned Response:*
+
+
+
+
+[GetReasonResponse](#GetReasonResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "item_list": [
+    {
+      "id": "82d68950-5bdd-4a2b-a179-afc83454bde3",
+      "name": "DS01",
+      "display_name": "Bag Lost Reimbursement"
+    },
+    {
+      "id": "8f90e0a1-c082-4c0e-b6e1-3640a4dfc69c",
+      "name": "DS02",
+      "display_name": "Wrong Product Reimbursement"
+    }
+  ],
+  "item_count": 16,
+  "page": {
+    "type": "number",
+    "size": 10,
+    "current": 1,
+    "has_next": true,
+    "item_count": 16
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### getReportList
-Get report list.
+Get the list of available reports for a company.
 
 
 
@@ -455,7 +518,7 @@ except Exception as e:
 | body | [GetReportListRequest](#GetReportListRequest) | yes | Request body |
 
 
-Retrieve a list of available financial reports.
+Gives list of reports.
 
 *Returned Response:*
 
@@ -560,7 +623,7 @@ Success
 
 
 ### getAffiliate
-Get affiliate details.
+Gives list of affiliates for company.
 
 
 
@@ -582,7 +645,7 @@ except Exception as e:
 | body | [GetAffiliate](#GetAffiliate) | yes | Request body |
 
 
-Retrieve information about an affiliate.
+Gives list of affiliates for company.
 
 *Returned Response:*
 
@@ -691,7 +754,7 @@ Success
 
 
 ### downloadCreditDebitNote
-Download credit/debit note.
+Download credit debit note pdf.
 
 
 
@@ -713,7 +776,7 @@ except Exception as e:
 | body | [DownloadCreditDebitNoteRequest](#DownloadCreditDebitNoteRequest) | yes | Request body |
 
 
-Retrieve and save credit/debit notes.
+Download credit debit note pdf.
 
 *Returned Response:*
 
@@ -736,7 +799,7 @@ Success
   "data": [
     {
       "id": "2b9c0729-3fa0-4565-8fcb-e822c87a95f9",
-      "pdf_s3_url": "https://fynd-staging-assets-private.s3-accelerate.amazonaws.com/addsale/documents/daytrader/PDFs/123/07-2023/FS/FS-C27-A00003-24_123_07-2023.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJUADR2WMPQT6ZJ2Q%2F20230726%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20230726T153559Z&X-Amz-Expires=604800&X-Amz-Signature=f7793b1afb0983ea4b51d8ae2e5792df3319141422d13f81b0de5ce644ffd139&X-Amz-SignedHeaders=host"
+      "pdf_s3_url": "https://fynd-staging-assets-private.s3-accelerate.amazonaws.com"
     }
   ]
 }
@@ -754,8 +817,476 @@ Success
 ---
 
 
+### paymentProcess
+Payment Processing API.
+
+
+
+
+```python
+try:
+    result = await platformClient.finance.paymentProcess(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [PaymentProcessRequest](#PaymentProcessRequest) | yes | Request body |
+
+
+Payment Processing API.
+
+*Returned Response:*
+
+
+
+
+[PaymentProcessResponse](#PaymentProcessResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "code": 200,
+  "message": "success",
+  "transaction_id": "64c2386821617314bf24c3d2",
+  "redirect_url": "https://platform.fyndx1.de/company/123/subscription/renew-plan?plan_id=64c0ffe4770e21b533114912&transaction_id=64c2386821617314bf24c3d2&renew=true&callback_url=http://localdev.fyndx1.de:8087/company/123/billing/bills?activeTab=invoices&meta={\"remarks\":\"Invoice Payment\",\"seller_id\":\"123\",\"callback_url\":\"http://localdev.fyndx1.de:8087/company/123/billing/bills?activeTab=invoices\",\"invoice_number\":\"UN-I-A00355-FY24\",\"mode_of_payment\":\"online\",\"paid_amount_key\":\"total_payable\",\"isInvoicePayment\":true,\"source_reference\":\"invoice\"}",
+  "meta": {
+    "callback_url": "http://localdev.fyndx1.de:8087/company/123/billing/bills?activeTab=invoices",
+    "remarks": "Invoice Payment",
+    "isInvoicePayment": true,
+    "paid_amount_key": "total_payable",
+    "seller_id": "123",
+    "invoice_number": "UN-I-A00355-FY24",
+    "source_reference": "invoice",
+    "mode_of_payment": "online",
+    "source": "website"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### creditlineDataplatform
+Used to fetch creditline data.
+
+
+
+
+```python
+try:
+    result = await platformClient.finance.creditlineDataplatform(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [CreditlineDataPlatformRequest](#CreditlineDataPlatformRequest) | yes | Request body |
+
+
+Used to fetch creditline data.
+
+*Returned Response:*
+
+
+
+
+[CreditlineDataPlatformResponse](#CreditlineDataPlatformResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "headers": [
+    "Date",
+    "Purpose",
+    "Transaction Type",
+    "Amount",
+    "Credit Balance",
+    "MR Balance"
+  ],
+  "items": [
+    {
+      "table_data": [
+        {
+          "date": "2023-07-14",
+          "purpose": "Monthly Credit Limit Reset",
+          "transaction_type": "Debit",
+          "amount": "₹1295.25",
+          "credit_balance": "₹0.00",
+          "mr_balance": "₹0.00"
+        },
+        {
+          "date": "2023-07-27",
+          "purpose": "Advance Reciept Offline",
+          "transaction_type": "Credit",
+          "amount": "₹120.50",
+          "credit_balance": "₹1295.25",
+          "mr_balance": "₹0.00"
+        },
+        {
+          "date": "2023-07-25",
+          "purpose": "Commission Deduction",
+          "transaction_type": "Debit",
+          "amount": "₹1825.25",
+          "credit_balance": "₹1174.75",
+          "mr_balance": "₹0.00"
+        },
+        {
+          "date": "2023-07-26",
+          "purpose": "Credits Added",
+          "transaction_type": "Credit",
+          "amount": "₹2000.00",
+          "credit_balance": "₹2000.00",
+          "mr_balance": "₹1000.00"
+        },
+        {
+          "date": "2023-07-26",
+          "purpose": "Minimum Retainership",
+          "transaction_type": "Credit",
+          "amount": "₹1000.00",
+          "credit_balance": "₹0.00",
+          "mr_balance": "₹1000.00"
+        }
+      ],
+      "creditline": {
+        "total_amount": 2000,
+        "used_amount": 2000,
+        "balance": 0
+      },
+      "minimum_retainership": {
+        "total_amount": 1000,
+        "used_amount": 1000,
+        "balance": 0
+      },
+      "show_mr": true
+    }
+  ],
+  "item_count": 5,
+  "page": {
+    "type": "number",
+    "size": 10,
+    "current": 1,
+    "has_next": false,
+    "item_count": 5
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### isCreditlinePlatform
+Checks if seller has opted for creditline or not.
+
+
+
+
+```python
+try:
+    result = await platformClient.finance.isCreditlinePlatform(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [IsCreditlinePlatformRequest](#IsCreditlinePlatformRequest) | yes | Request body |
+
+
+Checks if seller has opted for creditline or not.
+
+*Returned Response:*
+
+
+
+
+[IsCreditlinePlatformResponse](#IsCreditlinePlatformResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "code": 200,
+  "is_creditline_opted": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### invoiceType
+Gives list of active invoice type.
+
+
+
+
+```python
+try:
+    result = await platformClient.finance.invoiceType(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [InvoiceTypeRequest](#InvoiceTypeRequest) | yes | Request body |
+
+
+Gives list of active invoice type.
+
+*Returned Response:*
+
+
+
+
+[InvoiceTypeResponse](#InvoiceTypeResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "invoice_type_list": [
+    {
+      "text": "Creditline Minimum Gaurantee",
+      "value": "0ebf0c84-2577-4374-a48c-bcbec5afbbd3"
+    },
+    {
+      "text": "Platform Subscription",
+      "value": "fc912415-0e32-4de9-9c46-7b21543747c3"
+    },
+    {
+      "text": "Seller Invoice Fynd",
+      "value": "1ec78cf4-2d25-4bba-9d42-6515dfaf1751"
+    },
+    {
+      "text": "Seller Invoice Fynd Store",
+      "value": "e6d8a752-1691-4b2d-9327-a0a4ea2f7dfd"
+    },
+    {
+      "text": "Seller Invoice OpenAPI Ecom",
+      "value": "5ef45de7-388a-460a-a5ba-ab2de8fcc632"
+    },
+    {
+      "text": "Seller Invoice Uniket",
+      "value": "8d85b574-17b7-4ddd-8d0a-e3a79cbd0659"
+    }
+  ],
+  "payment_status_list": [
+    {
+      "text": "In Process",
+      "value": "in_process"
+    },
+    {
+      "text": "Paid",
+      "value": "paid"
+    },
+    {
+      "text": "Unpaid",
+      "value": "unpaid"
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### invoiceListing
+Gives list of invoices.
+
+
+
+
+```python
+try:
+    result = await platformClient.finance.invoiceListing(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [InvoiceListingRequest](#InvoiceListingRequest) | yes | Request body |
+
+
+Gives list of invoices.
+
+*Returned Response:*
+
+
+
+
+[InvoiceListingResponse](#InvoiceListingResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "items": [
+    {
+      "company": "(61) sumeetest",
+      "invoice_number": "FY-I-A23004-FY24",
+      "invoice_type": "Seller Invoice Fynd",
+      "invoice_date": "20-07-23",
+      "period": "01-05-23 - 31-05-23",
+      "amount": "₹247.8",
+      "due_date": "22-07-23",
+      "status": "UNPAID",
+      "is_downloadable": true,
+      "invoice_id": "622c45ae-70e1-4222-9f4f-69dde51ad870",
+      "source_id": ""
+    },
+    {
+      "company": "(61) sumeetest",
+      "invoice_number": "FY-I-A23003-FY24",
+      "invoice_type": "Seller Invoice Fynd",
+      "invoice_date": "20-07-23",
+      "period": "01-05-23 - 31-05-23",
+      "amount": "₹247.8",
+      "due_date": "22-07-23",
+      "status": "UNPAID",
+      "is_downloadable": true,
+      "invoice_id": "18d6bf81-21f8-4dd7-9c37-72751173a24a",
+      "source_id": ""
+    }
+  ],
+  "unpaid_invoice_data": {
+    "total_unpaid_amount": 495.6,
+    "total_unpaid_invoice_count": 2,
+    "currency": "INR"
+  },
+  "headers": [
+    "Company",
+    "Invoice No",
+    "Type",
+    "Date",
+    "Period",
+    "Amount",
+    "Due Date",
+    "Status"
+  ],
+  "item_count": 26,
+  "page": {
+    "type": "number",
+    "size": 10,
+    "current": 1,
+    "has_next": true,
+    "item_count": 2
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### invoicePDF
-Get invoice PDF.
+Gives pdf view of invoice.
 
 
 
@@ -777,7 +1308,7 @@ except Exception as e:
 | body | [InvoicePdfRequest](#InvoicePdfRequest) | yes | Request body |
 
 
-Retrieve the PDF version of an invoice.
+Gives pdf view of invoice.
 
 *Returned Response:*
 
@@ -798,7 +1329,7 @@ Success
 {
   "success": true,
   "data": [
-    "https://fynd-staging-assets-private.s3-accelerate.amazonaws.com/addsale/documents/daytrader/PDFs/61/07-2023/FY/FY-I-A23004-FY24_61_07-2023.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJUADR2WMPQT6ZJ2Q%2F20230727%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20230727T190229Z&X-Amz-Expires=604800&X-Amz-Signature=b8642e8764ea320332b5ccb825fe7427872d8fe31b4a3cafafb6c89dd854d9c3&X-Amz-SignedHeaders=host"
+    "https://fynd-staging-assets-private.s3-accelerate.amazonaws.com"
   ],
   "error": []
 }
@@ -816,8 +1347,249 @@ Success
 ---
 
 
+### isCnRefundMethod
+Checks if seller has obtained cn as refund method or not.
+
+
+
+
+```python
+try:
+    result = await platformClient.finance.isCnRefundMethod(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [IsCnRefundMethodRequest](#IsCnRefundMethodRequest) | yes | Request body |
+
+
+Checks if seller has obtained cn as refund method or not.
+
+*Returned Response:*
+
+
+
+
+[IsCnRefundMethodResponse](#IsCnRefundMethodResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "data": {
+    "is_first_time_user": false
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### createSellerCreditNoteConfig
+Creates credit note config.
+
+
+
+
+```python
+try:
+    result = await platformClient.finance.createSellerCreditNoteConfig(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [CreateSellerCreditNoteConfigRequest](#CreateSellerCreditNoteConfigRequest) | yes | Request body |
+
+
+Creates credit note config.
+
+*Returned Response:*
+
+
+
+
+[CreateSellerCreditNoteConfigResponse](#CreateSellerCreditNoteConfigResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "message": "Credit Note Config created."
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deleteConfig
+Deletes credit note config.
+
+
+
+
+```python
+try:
+    result = await platformClient.finance.deleteConfig(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [DeleteConfigRequest](#DeleteConfigRequest) | yes | Request body |
+
+
+Deletes credit note config.
+
+*Returned Response:*
+
+
+
+
+[DeleteConfigResponse](#DeleteConfigResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "message": "Seller configuration deleted successfully."
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### channelDisplayName
+Provide channel display name dict.
+
+
+
+
+```python
+try:
+    result = await platformClient.finance.channelDisplayName(filterKey=filterKey)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| filterKey | String | yes | gives display name for channel. |  
+
+
+
+Provide channel display name dict.
+
+*Returned Response:*
+
+
+
+
+[ChannelDisplayNameResponse](#ChannelDisplayNameResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "data": {
+    "platform-pos": "POS"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### getPdfUrlView
-Get PDF URL view.
+Gives cn pdf url.
 
 
 
@@ -839,7 +1611,7 @@ except Exception as e:
 | body | [GetPdfUrlViewRequest](#GetPdfUrlViewRequest) | yes | Request body |
 
 
-Retrieve a URL to view a PDF document.
+Gives cn pdf url.
 
 *Returned Response:*
 
@@ -861,7 +1633,248 @@ Success
   "success": true,
   "data": {
     "cn_reference_number": "6078OMR000006-23",
-    "s3_pdf_link": "https://fynd-staging-assets-private.s3-accelerate.amazonaws.com/addsale/documents/invoice_a4/PDFs/16814985547851457553_invoice_a4.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJUADR2WMPQT6ZJ2Q%2F20230427%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20230427T044807Z&X-Amz-Expires=604800&X-Amz-Signature=970ffe76016175a309d8042cbdbd0eaab623cf4c3b6ac968604fe710df855504&X-Amz-SignedHeaders=host"
+    "s3_pdf_link": "https://fynd-staging-assets-private.s3-accelerate.amazonaws.com"
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### creditNoteDetails
+Gives credit note details.
+
+
+
+
+```python
+try:
+    result = await platformClient.finance.creditNoteDetails(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [CreditNoteDetailsRequest](#CreditNoteDetailsRequest) | yes | Request body |
+
+
+Gives credit note details.
+
+*Returned Response:*
+
+
+
+
+[CreditNoteDetailsResponse](#CreditNoteDetailsResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "data": {
+    "cn_reference_number": "test_cn_1",
+    "customer_mobile_number": "1234567890",
+    "cn_amount": 200,
+    "remaining_cn_amount": 200,
+    "cn_status": "unutilised",
+    "cn_details": {
+      "ordering_channel": "POS",
+      "channel_of_issuance": "POS",
+      "order_id": "11111",
+      "shipment_id": "11111",
+      "invoice_number": "invoice_1",
+      "date_issued": "2023-03-08 17:47:20",
+      "expiry_date": "2023-03-08 17:47:20",
+      "staff_id": "staff_1",
+      "store_id": "111"
+    },
+    "available_cn_balance": 500,
+    "redemption_details": [
+      {
+        "order_id": "111",
+        "shipment_id": "111",
+        "invoice_number": "invoice_1",
+        "store_id": "11",
+        "staff_id": "staff_1",
+        "ordering_channel": "POS",
+        "created_at": "2023-03-08 17:47:20",
+        "amount_debited": 100
+      },
+      {
+        "order_id": "111",
+        "shipment_id": "111",
+        "invoice_number": "invoice_1",
+        "store_id": "11",
+        "staff_id": "staff_1",
+        "ordering_channel": "POS",
+        "created_at": "2023-03-08 17:47:20",
+        "amount_debited": 100
+      }
+    ]
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getCustomerCreditBalance
+Gives customer credit balance.
+
+
+
+
+```python
+try:
+    result = await platformClient.finance.getCustomerCreditBalance(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [GetCustomerCreditBalanceRequest](#GetCustomerCreditBalanceRequest) | yes | Request body |
+
+
+Gives customer credit balance.
+
+*Returned Response:*
+
+
+
+
+[GetCustomerCreditBalanceResponse](#GetCustomerCreditBalanceResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "data": {
+    "customer_mobile_number": "1234567890",
+    "total_credited_balance": 500
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getCnConfig
+Gives credit note config.
+
+
+
+
+```python
+try:
+    result = await platformClient.finance.getCnConfig(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [GetCnConfigRequest](#GetCnConfigRequest) | yes | Request body |
+
+
+Gives credit note config.
+
+*Returned Response:*
+
+
+
+
+[GetCnConfigResponse](#GetCnConfigResponse)
+
+Success
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "data": {
+    "is_cn_as_refund_method": true,
+    "validity": 365,
+    "currency_type": "Indian Rupees",
+    "seller_id": 25,
+    "affiliate_id": "5ea82cc2b496555b51caafa3",
+    "notification_events": {
+      "repeat": "once per day",
+      "expiration_reminder_to_customer": 5
+    },
+    "meta": {
+      "reason": "",
+      "source_channel": [
+        "POS",
+        "ECOMM"
+      ]
+    },
+    "redemption_ordering_channel": [
+      "ECOMM",
+      "POS"
+    ]
   }
 }
 ```
@@ -879,7 +1892,7 @@ Success
 
 
 ### generateReportCustomerCn
-Generate customer credit note report.
+Generate Credit Note report and gives Note details.
 
 
 
@@ -901,7 +1914,7 @@ except Exception as e:
 | body | [GenerateReportCustomerCnRequest](#GenerateReportCustomerCnRequest) | yes | Request body |
 
 
-Create a report specifically for customer credit notes.
+Generate Credit Note report and gives Note details.
 
 *Returned Response:*
 
@@ -921,8 +1934,8 @@ Success
 ```json
 {
   "data": {
-    "start_date": "2023-04-26T00:00:00.000Z",
-    "end_date": "2023-07-31T00:00:00.000Z",
+    "start_date": "2023-04-26",
+    "end_date": "2023-07-31",
     "headers": [
       "Credit Reference Number",
       "Amount",
@@ -979,7 +1992,7 @@ Success
 
 
 ### downloadReportCustomerCn
-Download customer credit note report.
+Gives list of downloaded reports.
 
 
 
@@ -1001,7 +2014,7 @@ except Exception as e:
 | body | [DownloadReportCustomerCnRequest](#DownloadReportCustomerCnRequest) | yes | Request body |
 
 
-Retrieve and save a report for customer credit notes.
+Gives list of downloaded reports.
 
 *Returned Response:*
 
@@ -1028,14 +2041,14 @@ Success
       "requested_by": "app",
       "full_name": "app",
       "display_name": "Credit Note Report",
-      "created_at": "2023-04-18T06:29:11.000Z",
+      "created_at": "2023-04-18 06:29:11",
       "filters": {},
       "meta": {},
       "status": "Completed",
-      "start_date": "2023-04-21T00:00:00.000Z",
-      "end_date": "2023-04-22T00:00:00.000Z",
+      "start_date": "2023-04-21",
+      "end_date": "2023-04-22",
       "msg": "",
-      "download_link": "https://opex-test-bucket.s3.amazonaws.com/csv/credit%20note%20report_2023-04-21_2023-04-22_1681799353.csv.gz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJUADR2WMPQT6ZJ2Q%2F20230418%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20230418T062915Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=a92612927b39a630e894e9179b531d2af3954223a6dc16788275a52675c8a7bf"
+      "download_link": "https://opex-test-bucket.s3.amazonaws.com/csv/credit%20note%20report_2023-04-21_2023-04-22_1681799353.csv.gz"
     },
     {
       "request_dict": {},
@@ -1044,14 +2057,14 @@ Success
       "requested_by": "app",
       "full_name": "app",
       "display_name": "Credit Note Report",
-      "created_at": "2023-04-18T06:15:39.000Z",
+      "created_at": "2023-04-18 06:15:39",
       "filters": {},
       "meta": {},
       "status": "In Process",
-      "start_date": "2023-04-21T00:00:00.000Z",
-      "end_date": "2023-04-22T00:00:00.000Z",
+      "start_date": "2023-04-21",
+      "end_date": "2023-04-22",
       "msg": "",
-      "download_link": "https://opex-test-bucket.s3.amazonaws.com/csv/credit%20note%20report_2023-04-21_2023-04-22_1681799353.csv.gz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJUADR2WMPQT6ZJ2Q%2F20230418%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20230418T062915Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=a92612927b39a630e894e9179b531d2af3954223a6dc16788275a52675c8a7bf"
+      "download_link": "https://opex-test-bucket.s3.amazonaws.com/csv/credit%20note%20report_2023-04-21_2023-04-22_1681799353.csv.gz"
     }
   ],
   "item_count": 1,
@@ -1078,7 +2091,7 @@ Success
 
 
 ### getReportingFilters
-Get reporting filters.
+Gets all customer Cn filters and search.
 
 
 
@@ -1102,7 +2115,7 @@ except Exception as e:
 
 
 
-Retrieve available filters for financial reporting.
+Gets all customer Cn filters and search.
 
 *Returned Response:*
 
@@ -1223,1261 +2236,6 @@ Success
 
 
 
-### getReason
-Get transaction reason.
-
-
-
-
-```python
-try:
-    result = await platformClient.finance.getReason(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [GetReasonRequest](#GetReasonRequest) | yes | Request body |
-
-
-Retrieve the reason behind a transaction.
-
-*Returned Response:*
-
-
-
-
-[GetReasonResponse](#GetReasonResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true,
-  "item_list": [
-    {
-      "id": "82d68950-5bdd-4a2b-a179-afc83454bde3",
-      "name": "DS01",
-      "display_name": "Bag Lost Reimbursement"
-    },
-    {
-      "id": "8f90e0a1-c082-4c0e-b6e1-3640a4dfc69c",
-      "name": "DS02",
-      "display_name": "Wrong Product Reimbursement"
-    }
-  ],
-  "item_count": 16,
-  "page": {
-    "type": "number",
-    "size": 10,
-    "current": 1,
-    "has_next": true,
-    "item_count": 16
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### paymentProcess
-Process payments.
-
-
-
-
-```python
-try:
-    result = await platformClient.finance.paymentProcess(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [PaymentProcessRequest](#PaymentProcessRequest) | yes | Request body |
-
-
-Initiate and manage payment processes.
-
-*Returned Response:*
-
-
-
-
-[PaymentProcessResponse](#PaymentProcessResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "code": 200,
-  "message": "success",
-  "transaction_id": "64c2386821617314bf24c3d2",
-  "redirect_url": "https://platform.fyndx1.de/company/123/subscription/renew-plan?plan_id=64c0ffe4770e21b533114912&transaction_id=64c2386821617314bf24c3d2&renew=true&callback_url=http://localdev.fyndx1.de:8087/company/123/billing/bills?activeTab=invoices&meta={\"remarks\":\"Invoice Payment\",\"seller_id\":\"123\",\"callback_url\":\"http://localdev.fyndx1.de:8087/company/123/billing/bills?activeTab=invoices\",\"invoice_number\":\"UN-I-A00355-FY24\",\"mode_of_payment\":\"online\",\"paid_amount_key\":\"total_payable\",\"isInvoicePayment\":true,\"source_reference\":\"invoice\"}",
-  "meta": {
-    "callback_url": "http://localdev.fyndx1.de:8087/company/123/billing/bills?activeTab=invoices",
-    "remarks": "Invoice Payment",
-    "isInvoicePayment": true,
-    "paid_amount_key": "total_payable",
-    "seller_id": "123",
-    "invoice_number": "UN-I-A00355-FY24",
-    "source_reference": "invoice",
-    "mode_of_payment": "online",
-    "source": "website"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### creditlineDataplatform
-Access credit line data platform.
-
-
-
-
-```python
-try:
-    result = await platformClient.finance.creditlineDataplatform(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CreditlineDataPlatformRequest](#CreditlineDataPlatformRequest) | yes | Request body |
-
-
-Connect to the credit line data platform.
-
-*Returned Response:*
-
-
-
-
-[CreditlineDataPlatformResponse](#CreditlineDataPlatformResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "headers": [
-    "Date",
-    "Purpose",
-    "Transaction Type",
-    "Amount",
-    "Credit Balance",
-    "MR Balance"
-  ],
-  "items": [
-    {
-      "table_data": [
-        {
-          "date": "2023-07-14T00:00:00.000Z",
-          "purpose": "Monthly Credit Limit Reset",
-          "transaction_type": "Debit",
-          "amount": "₹1295.25",
-          "credit_balance": "₹0.00",
-          "mr_balance": "₹0.00"
-        },
-        {
-          "date": "2023-07-27T00:00:00.000Z",
-          "purpose": "Advance Reciept Offline",
-          "transaction_type": "Credit",
-          "amount": "₹120.50",
-          "credit_balance": "₹1295.25",
-          "mr_balance": "₹0.00"
-        },
-        {
-          "date": "2023-07-25T00:00:00.000Z",
-          "purpose": "Commission Deduction",
-          "transaction_type": "Debit",
-          "amount": "₹1825.25",
-          "credit_balance": "₹1174.75",
-          "mr_balance": "₹0.00"
-        },
-        {
-          "date": "2023-07-26T00:00:00.000Z",
-          "purpose": "Credits Added",
-          "transaction_type": "Credit",
-          "amount": "₹2000.00",
-          "credit_balance": "₹2000.00",
-          "mr_balance": "₹1000.00"
-        },
-        {
-          "date": "2023-07-26T00:00:00.000Z",
-          "purpose": "Minimum Retainership",
-          "transaction_type": "Credit",
-          "amount": "₹1000.00",
-          "credit_balance": "₹0.00",
-          "mr_balance": "₹1000.00"
-        }
-      ],
-      "creditline": {
-        "total_amount": 2000,
-        "used_amount": 2000,
-        "balance": 0
-      },
-      "minimum_retainership": {
-        "total_amount": 1000,
-        "used_amount": 1000,
-        "balance": 0
-      },
-      "show_mr": true
-    }
-  ],
-  "item_count": 5,
-  "page": {
-    "type": "number",
-    "size": 10,
-    "current": 1,
-    "has_next": false,
-    "item_count": 5
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### isCreditlinePlatform
-Check credit line platform status.
-
-
-
-
-```python
-try:
-    result = await platformClient.finance.isCreditlinePlatform(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [IsCreditlinePlatformRequest](#IsCreditlinePlatformRequest) | yes | Request body |
-
-
-Determine if the credit line platform is operational.
-
-*Returned Response:*
-
-
-
-
-[IsCreditlinePlatformResponse](#IsCreditlinePlatformResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "code": 200,
-  "is_creditline_opted": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createSellerCreditNoteConfig
-Create seller credit note config.
-
-
-
-
-```python
-try:
-    result = await platformClient.finance.createSellerCreditNoteConfig(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CreateSellerCreditNoteConfigRequest](#CreateSellerCreditNoteConfigRequest) | yes | Request body |
-
-
-Set up configuration for seller credit notes.
-
-*Returned Response:*
-
-
-
-
-[CreateSellerCreditNoteConfigResponse](#CreateSellerCreditNoteConfigResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true,
-  "message": "Credit Note Config created."
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### channelDisplayName
-Get channel display name.
-
-
-
-
-```python
-try:
-    result = await platformClient.finance.channelDisplayName(filterKey=filterKey)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| filterKey | String | yes | gives display name for channel. |  
-
-
-
-Retrieve the display name for a channel.
-
-*Returned Response:*
-
-
-
-
-[ChannelDisplayNameResponse](#ChannelDisplayNameResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true,
-  "data": {
-    "platform-pos": "POS"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCnConfig
-Get credit note configuration.
-
-
-
-
-```python
-try:
-    result = await platformClient.finance.getCnConfig(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [GetCnConfigRequest](#GetCnConfigRequest) | yes | Request body |
-
-
-Retrieve configuration settings for credit notes.
-
-*Returned Response:*
-
-
-
-
-[GetCnConfigResponse](#GetCnConfigResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true,
-  "data": {
-    "is_cn_as_refund_method": true,
-    "validity": 365,
-    "currency_type": "Indian Rupees",
-    "seller_id": 25,
-    "affiliate_id": "5ea82cc2b496555b51caafa3",
-    "notification_events": {
-      "repeat": "once per day",
-      "expiration_reminder_to_customer": 5
-    },
-    "meta": {
-      "reason": "",
-      "source_channel": [
-        "POS",
-        "ECOMM"
-      ]
-    },
-    "redemption_ordering_channel": [
-      "ECOMM",
-      "POS"
-    ]
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### invoiceType
-Get invoice types.
-
-
-
-
-```python
-try:
-    result = await platformClient.finance.invoiceType(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [InvoiceTypeRequest](#InvoiceTypeRequest) | yes | Request body |
-
-
-Retrieve a list of available invoice types.
-
-*Returned Response:*
-
-
-
-
-[InvoiceTypeResponse](#InvoiceTypeResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true,
-  "invoice_type_list": [
-    {
-      "text": "Creditline Minimum Gaurantee",
-      "value": "0ebf0c84-2577-4374-a48c-bcbec5afbbd3"
-    },
-    {
-      "text": "Platform Subscription",
-      "value": "fc912415-0e32-4de9-9c46-7b21543747c3"
-    },
-    {
-      "text": "Seller Invoice Fynd",
-      "value": "1ec78cf4-2d25-4bba-9d42-6515dfaf1751"
-    },
-    {
-      "text": "Seller Invoice Fynd Store",
-      "value": "e6d8a752-1691-4b2d-9327-a0a4ea2f7dfd"
-    },
-    {
-      "text": "Seller Invoice OpenAPI Ecom",
-      "value": "5ef45de7-388a-460a-a5ba-ab2de8fcc632"
-    },
-    {
-      "text": "Seller Invoice Uniket",
-      "value": "8d85b574-17b7-4ddd-8d0a-e3a79cbd0659"
-    }
-  ],
-  "payment_status_list": [
-    {
-      "text": "In Process",
-      "value": "in_process"
-    },
-    {
-      "text": "Paid",
-      "value": "paid"
-    },
-    {
-      "text": "Unpaid",
-      "value": "unpaid"
-    }
-  ]
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### isCnRefundMethod
-Check CN refund method.
-
-
-
-
-```python
-try:
-    result = await platformClient.finance.isCnRefundMethod(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [IsCnRefundMethodRequest](#IsCnRefundMethodRequest) | yes | Request body |
-
-
-Verify the refund method for credit notes.
-
-*Returned Response:*
-
-
-
-
-[IsCnRefundMethodResponse](#IsCnRefundMethodResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true,
-  "data": {
-    "is_first_time_user": false
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### creditNoteDetails
-Get credit note details.
-
-
-
-
-```python
-try:
-    result = await platformClient.finance.creditNoteDetails(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CreditNoteDetailsRequest](#CreditNoteDetailsRequest) | yes | Request body |
-
-
-Retrieve detailed information about a credit note.
-
-*Returned Response:*
-
-
-
-
-[CreditNoteDetailsResponse](#CreditNoteDetailsResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true,
-  "data": {
-    "cn_reference_number": "test_cn_1",
-    "customer_mobile_number": "1234567890",
-    "cn_amount": 200,
-    "remaining_cn_amount": 200,
-    "cn_status": "unutilised",
-    "cn_details": {
-      "ordering_channel": "POS",
-      "channel_of_issuance": "POS",
-      "order_id": "11111",
-      "shipment_id": "11111",
-      "invoice_number": "invoice_1",
-      "date_issued": "2023-03-08T17:47:20.000Z",
-      "expiry_date": "2023-03-08T17:47:20.000Z",
-      "staff_id": "staff_1",
-      "store_id": "111"
-    },
-    "available_cn_balance": 500,
-    "redemption_details": [
-      {
-        "order_id": "111",
-        "shipment_id": "111",
-        "invoice_number": "invoice_1",
-        "store_id": "11",
-        "staff_id": "staff_1",
-        "ordering_channel": "POS",
-        "created_at": "2023-03-08T17:47:20.000Z",
-        "amount_debited": 100
-      },
-      {
-        "order_id": "111",
-        "shipment_id": "111",
-        "invoice_number": "invoice_1",
-        "store_id": "11",
-        "staff_id": "staff_1",
-        "ordering_channel": "POS",
-        "created_at": "2023-03-08T17:47:20.000Z",
-        "amount_debited": 100
-      }
-    ]
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCustomerCreditBalance
-Get customer credit balance.
-
-
-
-
-```python
-try:
-    result = await platformClient.finance.getCustomerCreditBalance(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [GetCustomerCreditBalanceRequest](#GetCustomerCreditBalanceRequest) | yes | Request body |
-
-
-Retrieve the credit balance of a customer.
-
-*Returned Response:*
-
-
-
-
-[GetCustomerCreditBalanceResponse](#GetCustomerCreditBalanceResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true,
-  "data": {
-    "customer_mobile_number": "1234567890",
-    "total_credited_balance": 500
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### invoiceListing
-Gives list of invoices.
-
-
-
-
-```python
-try:
-    result = await platformClient.finance.invoiceListing(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [InvoiceListingRequest](#InvoiceListingRequest) | yes | Request body |
-
-
-Gives list of invoices.
-
-*Returned Response:*
-
-
-
-
-[InvoiceListingResponse](#InvoiceListingResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true,
-  "items": [
-    {
-      "company": "(61) sumeetest",
-      "invoice_number": "FY-I-A23004-FY24",
-      "invoice_type": "Seller Invoice Fynd",
-      "invoice_date": "20-07-23",
-      "period": "01-05-23 - 31-05-23",
-      "amount": "₹247.8",
-      "due_date": "22-07-23",
-      "status": "UNPAID",
-      "is_downloadable": true,
-      "invoice_id": "622c45ae-70e1-4222-9f4f-69dde51ad870",
-      "source_id": ""
-    },
-    {
-      "company": "(61) sumeetest",
-      "invoice_number": "FY-I-A23003-FY24",
-      "invoice_type": "Seller Invoice Fynd",
-      "invoice_date": "20-07-23",
-      "period": "01-05-23 - 31-05-23",
-      "amount": "₹247.8",
-      "due_date": "22-07-23",
-      "status": "UNPAID",
-      "is_downloadable": true,
-      "invoice_id": "18d6bf81-21f8-4dd7-9c37-72751173a24a",
-      "source_id": "",
-      "currency": {
-        "code": "INR",
-        "symbol": "r",
-        "name": "Indian Rupee"
-      }
-    }
-  ],
-  "unpaid_invoice_data": {
-    "total_unpaid_amount": 495.6,
-    "total_unpaid_invoice_count": 2,
-    "currency": "INR"
-  },
-  "headers": [
-    "Company",
-    "Invoice No",
-    "Type",
-    "Date",
-    "Period",
-    "Amount",
-    "Due Date",
-    "Status"
-  ],
-  "item_count": 26,
-  "page": {
-    "type": "number",
-    "size": 10,
-    "current": 1,
-    "has_next": true,
-    "item_count": 2
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteConfig
-Deletes credit note config.
-
-
-
-
-```python
-try:
-    result = await platformClient.finance.deleteConfig(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [DeleteConfigRequest](#DeleteConfigRequest) | yes | Request body |
-
-
-Deletes credit note config.
-
-*Returned Response:*
-
-
-
-
-[DeleteConfigResponse](#DeleteConfigResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true,
-  "message": "Seller configuration deleted successfully."
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### invoicePaymentDetails
-Display payment details of an invoice.
-
-
-
-
-```python
-try:
-    result = await platformClient.finance.invoicePaymentDetails(invoiceNumber=invoiceNumber)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| invoiceNumber | String | yes | Invoice Number for which the data will be returned.Invoice_Number is required. |  
-
-
-
-Display payment details of invoice.
-
-*Returned Response:*
-
-
-
-
-[InvoicePaymentDetailsResponse](#InvoicePaymentDetailsResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "payment_details_visible": true,
-  "paid_invoice_payment_details": [
-    {
-      "payment_details": [
-        {
-          "display_name": "Type of Payment",
-          "value": "Online"
-        },
-        {
-          "display_name": "Mode of Payment",
-          "value": "Upi"
-        },
-        {
-          "display_name": "UPI ID",
-          "value": "8787987654@ybl"
-        },
-        {
-          "display_name": "Reference Number",
-          "value": "882648404204"
-        }
-      ],
-      "date_of_payment": "2023-07-19T13:12:15.901Z",
-      "amount": 8000
-    }
-  ],
-  "failed_attempts_details": []
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### invoiceActivityLogs
-Display activity log details of an invoice.
-
-
-
-
-```python
-try:
-    result = await platformClient.finance.invoiceActivityLogs(invoiceNumber=invoiceNumber)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| invoiceNumber | String | yes | Invoice Number for which the data will be returned. Invoice_number is required. |  
-
-
-
-Display activity log details of invoice.
-
-*Returned Response:*
-
-
-
-
-[InvoiceActivityLogsResponse](#InvoiceActivityLogsResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "data": [
-    {
-      "performed_by": "system",
-      "status": "processed",
-      "reason": "",
-      "is_resolved": true,
-      "retry_attempts": 0,
-      "max_retry_attempts": 3
-    }
-  ]
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### unlockCreditNote
-Unlocks credit notes.
-
-
-
-
-```python
-try:
-    result = await platformClient.finance.unlockCreditNote(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [UnlockCreditNoteRequest](#UnlockCreditNoteRequest) | yes | Request body |
-
-
-Used to unlock all request credit notes.
-
-*Returned Response:*
-
-
-
-
-[UnlockCreditNoteResponse](#UnlockCreditNoteResponse)
-
-Success
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true,
-  "data": {
-    "is_cn_unlocked": true,
-    "status": "completed"
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
 ### Schemas
 
  
@@ -2538,24 +2296,11 @@ Success
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | itemCount | Int? |  yes  |  |
+ | itemTotal | Int? |  yes  |  |
  | current | Int? |  yes  |  |
  | hasNext | Boolean? |  yes  |  |
  | size | Int? |  yes  |  |
  | type | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [Currency](#Currency)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | code | String? |  yes  |  |
- | symbol | String? |  yes  |  |
- | name | String? |  yes  |  |
 
 ---
 
@@ -2922,7 +2667,7 @@ Success
  | items | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | code | Int? |  yes  |  |
  | showMr | Boolean? |  yes  |  |
- | page | [Page](#Page)? |  yes  |  |
+ | page | HashMap<String,Any>? |  yes  |  |
  | message | String? |  yes  |  |
  | headers | ArrayList<String>? |  yes  |  |
  | itemCount | Int? |  yes  |  |
@@ -3080,7 +2825,6 @@ Success
  | invoiceNumber | String? |  yes  |  |
  | isDownloadable | Boolean? |  yes  |  |
  | invoiceId | String? |  yes  |  |
- | currency | [Currency](#Currency)? |  yes  |  |
 
 ---
 
@@ -3397,7 +3141,7 @@ Success
  | cnStatus | String? |  yes  |  |
  | customerMobileNumber | String? |  yes  |  |
  | cnReferenceNumber | String? |  yes  |  |
- | cnDetails | [CnDetails](#CnDetails)? |  yes  |  |
+ | cnDetails | HashMap<String,Any>? |  yes  |  |
  | redemptionDetails | ArrayList<[RedemptionDetails](#RedemptionDetails)>? |  yes  |  |
  | remainingCnAmount | Int? |  yes  |  |
  | availableCnBalance | Int? |  yes  |  |
@@ -3717,143 +3461,6 @@ Success
  | search | [GetReportingFilters](#GetReportingFilters)? |  yes  |  |
  | filters | ArrayList<[GetReportingNestedFilters](#GetReportingNestedFilters)>? |  yes  |  |
  | status | [GetReportingFilters](#GetReportingFilters)? |  yes  |  |
-
----
-
-
- 
- 
- #### [PaymentDetail](#PaymentDetail)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | displayName | String? |  yes  |  |
- | value | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [PaidInvoicePaymentDetail](#PaidInvoicePaymentDetail)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | paymentDetails | ArrayList<[PaymentDetail](#PaymentDetail)>? |  yes  |  |
- | dateOfPayment | String? |  yes  |  |
- | amount | Double? |  yes  |  |
-
----
-
-
- 
- 
- #### [InvoicePaymentDetailsResponseData](#InvoicePaymentDetailsResponseData)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | paidInvoicePaymentDetails | ArrayList<[PaidInvoicePaymentDetail](#PaidInvoicePaymentDetail)>? |  yes  |  |
- | failedAttemptsDetails | ArrayList<HashMap<String,Any>>? |  yes  |  |
-
----
-
-
- 
- 
- #### [InvoicePaymentDetailsResponse](#InvoicePaymentDetailsResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | data | [InvoicePaymentDetailsResponseData](#InvoicePaymentDetailsResponseData)? |  yes  |  |
- | success | Boolean? |  yes  |  |
- | paymentDetailsVisible | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [InvoiceActivityLogsResponseData](#InvoiceActivityLogsResponseData)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | performedBy | String? |  yes  |  |
- | status | String? |  yes  |  |
- | reason | String? |  yes  |  |
- | isResolved | Boolean? |  yes  |  |
- | retryAttempts | Double? |  yes  |  |
- | maxRetryAttempts | Double? |  yes  |  |
-
----
-
-
- 
- 
- #### [InvoiceActivityLogsResponse](#InvoiceActivityLogsResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | data | ArrayList<[InvoiceActivityLogsResponseData](#InvoiceActivityLogsResponseData)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [InvoiceActivityLogError](#InvoiceActivityLogError)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | reason | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [UnlockCreditNoteRequestData](#UnlockCreditNoteRequestData)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | sellerId | String? |  yes  |  |
- | lockedCreditNotes | ArrayList<String>? |  yes  |  |
- | unlockReason | String? |  yes  |  |
- | description | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [UnlockCreditNoteRequest](#UnlockCreditNoteRequest)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | data | [UnlockCreditNoteRequestData](#UnlockCreditNoteRequestData)? |  yes  |  |
-
----
-
-
- 
- 
- #### [UnlockCreditNoteResponseData](#UnlockCreditNoteResponseData)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | isCnUnlocked | Boolean? |  yes  |  |
- | status | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [UnlockCreditNoteResponse](#UnlockCreditNoteResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | success | Boolean? |  yes  |  |
- | data | [UnlockCreditNoteResponseData](#UnlockCreditNoteResponseData)? |  yes  |  |
 
 ---
 

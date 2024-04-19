@@ -7,36 +7,24 @@
 ## Cart Methods
 Cart APIs
 
-Coupon Management
+Default
 * [getCoupons](#getcoupons)
 * [createCoupon](#createcoupon)
 * [getCouponById](#getcouponbyid)
 * [updateCoupon](#updatecoupon)
 * [updateCouponPartially](#updatecouponpartially)
-
-
-Promotion Management
 * [getPromotions](#getpromotions)
 * [createPromotion](#createpromotion)
 * [getPromotionById](#getpromotionbyid)
 * [updatePromotion](#updatepromotion)
 * [updatePromotionPartially](#updatepromotionpartially)
-
-
-Cart Meta Configuration
 * [getPromosCouponConfig](#getpromoscouponconfig)
 * [updateCartMetaConfig](#updatecartmetaconfig)
 * [fetchCartMetaConfig](#fetchcartmetaconfig)
 * [createCartMetaConfig](#createcartmetaconfig)
-
-
-Price Adjustment Management
 * [updatePriceAdjustment](#updatepriceadjustment)
 * [removePriceAdjustment](#removepriceadjustment)
 * [addPriceAdjustment](#addpriceadjustment)
-
-
-Cart and Checkout Handling
 * [fetchAndvalidateCartItems](#fetchandvalidatecartitems)
 * [checkCartServiceability](#checkcartserviceability)
 * [checkoutCart](#checkoutcart)
@@ -44,6 +32,9 @@ Cart and Checkout Handling
 * [getAbandonedCartDetails](#getabandonedcartdetails)
 * [addItems](#additems)
 * [updateCart](#updatecart)
+* [getCouponOptionValues](#getcouponoptionvalues)
+* [getCouponCodeExists](#getcouponcodeexists)
+* [getPromotionCodeExists](#getpromotioncodeexists)
 * [overrideCart](#overridecart)
 * [getCartShareLink](#getcartsharelink)
 * [getCartSharedItems](#getcartshareditems)
@@ -55,43 +46,29 @@ Cart and Checkout Handling
 * [platformUpdateCart](#platformupdatecart)
 * [deleteCart](#deletecart)
 * [getItemCount](#getitemcount)
-* [platformCheckoutCart](#platformcheckoutcart)
-* [platformCheckoutCartV2](#platformcheckoutcartv2)
-
-
-Coupon and Payment Handling
-* [getCouponOptionValues](#getcouponoptionvalues)
-* [getCouponCodeExists](#getcouponcodeexists)
-* [getPromotionCodeExists](#getpromotioncodeexists)
-* [validateCouponForPayment](#validatecouponforpayment)
-
-
-Cart management
 * [getAppCoupons](#getappcoupons)
 * [applyCoupon](#applycoupon)
 * [removeCoupon](#removecoupon)
-* [updateCartMeta](#updatecartmeta)
-
-
-Address and Shipment Management
 * [getAddresses](#getaddresses)
 * [addAddress](#addaddress)
 * [getAddressById](#getaddressbyid)
+* [updateAddress](#updateaddress)
 * [removeAddress](#removeaddress)
 * [selectAddress](#selectaddress)
+* [getShipments](#getshipments)
 * [updateShipments](#updateshipments)
+* [updateCartMeta](#updatecartmeta)
+* [platformCheckoutCart](#platformcheckoutcart)
 * [getAvailableDeliveryModes](#getavailabledeliverymodes)
 * [getStoreAddressByUid](#getstoreaddressbyuid)
-
-
-Default
-* [updateAddress](#updateaddress)
-* [getShipments](#getshipments)
-
-
-Payment Mode Selection 
 * [selectPaymentMode](#selectpaymentmode)
+* [validateCouponForPayment](#validatecouponforpayment)
+* [platformCheckoutCartV2](#platformcheckoutcartv2)
 * [selectPaymentModeV2](#selectpaymentmodev2)
+
+
+Price Adjustment Management
+* [getPriceAdjustments](#getpriceadjustments)
 
 
 
@@ -101,7 +78,7 @@ Payment Mode Selection
 
 
 ### getCoupons
-Retrieve available coupons.
+Get with single coupon details or coupon list
 
 
 
@@ -131,7 +108,7 @@ except Exception as e:
 
 
 
-Retrieve a list of available coupons for use in the shopping cart.
+Get coupon list with pagination
 
 *Returned Response:*
 
@@ -170,13 +147,13 @@ Coupon List for sent page_size and page_no
         "_schedule": {
           "next_schedule": [
             {
-              "start": "2020-01-14T10:45:03.600Z",
-              "end": "2020-01-16T10:45:03.000Z"
+              "start": "2020-01-14T10:45:03.600000+00:00",
+              "end": "2020-01-16T10:45:03+00:00"
             }
           ],
           "duration": null,
-          "start": "2020-01-14T10:45:03.600Z",
-          "end": "2020-01-16T10:45:03.000Z",
+          "start": "2020-01-14T10:45:03.600000+00:00",
+          "end": "2020-01-16T10:45:03+00:00",
           "cron": ""
         },
         "state": {
@@ -226,7 +203,7 @@ Coupon List for sent page_size and page_no
 
 
 ### createCoupon
-Create a new coupon.
+Create new coupon
 
 
 
@@ -248,7 +225,7 @@ except Exception as e:
 | body | [CouponAdd](#CouponAdd) | yes | Request body |
 
 
-Generate and add a new coupon to the cart.
+Create new coupon
 
 *Returned Response:*
 
@@ -285,7 +262,7 @@ Coupon Created successfully
 
 
 ### getCouponById
-Get coupon details by ID.
+Get with single coupon details or coupon list
 
 
 
@@ -308,7 +285,7 @@ except Exception as e:
 
 
 
-Retrieve detailed information about a specific coupon using its unique ID.
+Get single coupon details with `id` in path param
 
 *Returned Response:*
 
@@ -361,8 +338,8 @@ Coupon object for sent `id`
     }
   },
   "date_meta": {
-    "modified_on": "2020-02-04T14:27:00.577Z",
-    "created_on": "2020-01-14T10:46:04.474Z"
+    "modified_on": "2020-02-04T14:27:00.577000+00:00",
+    "created_on": "2020-01-14T10:46:04.474000+00:00"
   },
   "action": {
     "action_date": null,
@@ -404,13 +381,13 @@ Coupon object for sent `id`
   "_schedule": {
     "next_schedule": [
       {
-        "start": "2020-01-14T10:45:03.600Z",
-        "end": "2020-01-16T10:45:03.000Z"
+        "start": "2020-01-14T10:45:03.600000+00:00",
+        "end": "2020-01-16T10:45:03+00:00"
       }
     ],
     "duration": null,
-    "start": "2020-01-14T10:45:03.600Z",
-    "end": "2020-01-16T10:45:03.000Z",
+    "start": "2020-01-14T10:45:03.600000+00:00",
+    "end": "2020-01-16T10:45:03+00:00",
     "cron": ""
   },
   "state": {
@@ -482,7 +459,7 @@ Coupon object for sent `id`
 
 
 ### updateCoupon
-Update a coupon.
+Update existing coupon configuration
 
 
 
@@ -505,7 +482,7 @@ except Exception as e:
 | body | [CouponUpdate](#CouponUpdate) | yes | Request body |
 
 
-Modify the details and settings of an existing coupon in the cart system.
+Update coupon with id sent in `id`
 
 *Returned Response:*
 
@@ -542,7 +519,7 @@ Coupon updated successfully
 
 
 ### updateCouponPartially
-Partially update a coupon.
+Update coupon archive state and schedule
 
 
 
@@ -565,7 +542,7 @@ except Exception as e:
 | body | [CouponPartialUpdate](#CouponPartialUpdate) | yes | Request body |
 
 
-Make partial modifications to the settings of an existing coupon in the cart system.
+Update archive/unarchive and change schedule for coupon
 
 *Returned Response:*
 
@@ -622,10 +599,8 @@ Coupon updated successfully
 ---
 
 
-
-
 ### getPromotions
-Retrieve available promotions.
+Get promotion list
 
 
 
@@ -655,7 +630,7 @@ except Exception as e:
 
 
 
-Retrieve a list of available promotions to apply to the cart.
+Get promotion list with pagination
 
 *Returned Response:*
 
@@ -686,8 +661,8 @@ Promotion List for sent page_size and page_no
         "promo_group": "product",
         "promotion_type": "bogo",
         "date_meta": {
-          "modified_on": "2022-01-11T05:47:11.503Z",
-          "created_on": "2022-01-10T19:49:29.917Z"
+          "modified_on": "2022-01-11T05:47:11.503000+00:00",
+          "created_on": "2022-01-10T19:49:29.917000+00:00"
         },
         "display_meta": {
           "name": "Test BOGO promo"
@@ -701,12 +676,12 @@ Promotion List for sent page_size and page_no
           "modified_by": "5"
         },
         "_schedule": {
-          "start": "2022-01-10T18:45:36.311Z",
-          "end": "2025-01-10T18:45:36.311Z",
+          "start": "2022-01-10T18:45:36.311000+00:00",
+          "end": "2025-01-10T18:45:36.311000+00:00",
           "published": true,
           "next_schedule": [
             {
-              "start": "2022-01-10T18:45:36.311Z",
+              "start": "2022-01-10T18:45:36.311000+00:00",
               "end": null,
               "cron": ""
             }
@@ -776,7 +751,7 @@ Promotion List for sent page_size and page_no
 
 
 ### createPromotion
-Create a new promotion.
+Create new promotion
 
 
 
@@ -798,7 +773,7 @@ except Exception as e:
 | body | [PromotionAdd](#PromotionAdd) | yes | Request body |
 
 
-Generate and add a new promotion to the cart system 
+Create new promotion
 
 *Returned Response:*
 
@@ -822,8 +797,8 @@ Promotion Created successfully
   "promo_group": "product",
   "promotion_type": "bogo",
   "date_meta": {
-    "modified_on": "2022-01-11T05:47:11.503Z",
-    "created_on": "2022-01-10T19:49:29.917Z"
+    "modified_on": "2022-01-11T05:47:11.503000+00:00",
+    "created_on": "2022-01-10T19:49:29.917000+00:00"
   },
   "discount_rules": [
     {
@@ -946,7 +921,7 @@ Promotion Created successfully
 
 
 ### getPromotionById
-Get promotion details by ID.
+Get with single promotion details or promotion list
 
 
 
@@ -969,7 +944,7 @@ except Exception as e:
 
 
 
-Retrieve detailed information about a specific promotion using its unique ID.
+Get single promotion details with `id` in path param
 
 *Returned Response:*
 
@@ -993,8 +968,8 @@ Promotion object for sent `id`
   "promo_group": "product",
   "promotion_type": "bogo",
   "date_meta": {
-    "modified_on": "2022-01-11T05:47:11.503Z",
-    "created_on": "2022-01-10T19:49:29.917Z"
+    "modified_on": "2022-01-11T05:47:11.503000+00:00",
+    "created_on": "2022-01-10T19:49:29.917000+00:00"
   },
   "discount_rules": [
     {
@@ -1117,7 +1092,7 @@ Promotion object for sent `id`
 
 
 ### updatePromotion
-Update a promotion.
+Update existing promotion configuration
 
 
 
@@ -1140,7 +1115,7 @@ except Exception as e:
 | body | [PromotionUpdate](#PromotionUpdate) | yes | Request body |
 
 
-Modify the details and settings of an existing promotion in the cart system.
+Update promotion with id sent in `id`
 
 *Returned Response:*
 
@@ -1164,8 +1139,8 @@ Promotion updated successfully
   "promo_group": "product",
   "promotion_type": "bogo",
   "date_meta": {
-    "modified_on": "2022-01-11T05:47:11.503Z",
-    "created_on": "2022-01-10T19:49:29.917Z"
+    "modified_on": "2022-01-11T05:47:11.503000+00:00",
+    "created_on": "2022-01-10T19:49:29.917000+00:00"
   },
   "discount_rules": [
     {
@@ -1288,7 +1263,7 @@ Promotion updated successfully
 
 
 ### updatePromotionPartially
-Partially update a promotion.
+Update promotion publish state and schedule
 
 
 
@@ -1311,7 +1286,7 @@ except Exception as e:
 | body | [PromotionPartialUpdate](#PromotionPartialUpdate) | yes | Request body |
 
 
-Make partial modifications to the settings of an existing promotion in the cart system.
+Update publish/unpublish and change schedule for promotion
 
 *Returned Response:*
 
@@ -1368,10 +1343,8 @@ Promotion updated successfully
 ---
 
 
-
-
 ### getPromosCouponConfig
-Get promotion and coupon configuration.
+Fetch all promos that are set as active
 
 
 
@@ -1395,7 +1368,7 @@ except Exception as e:
 
 
 
-Retrieve configuration settings for promotions and coupons.
+Use this API to get list of all the active promos/coupons.
 
 *Returned Response:*
 
@@ -1425,8 +1398,8 @@ Success. Returns a list of all the curently active coupons/promos
       "is_hidden": true,
       "entity_type": "promotion",
       "type": "percentage",
-      "created_on": "2022-05-30T07:33:01.303Z",
-      "modified_on": "2022-05-31T10:41:01.441Z"
+      "created_on": "2022-05-30 07:33:01.303000",
+      "modified_on": "2022-05-31 10:41:01.441000"
     }
   ]
 }
@@ -1445,7 +1418,7 @@ Success. Returns a list of all the curently active coupons/promos
 
 
 ### updateCartMetaConfig
-Update cart metadata configuration.
+Update cart meta configuration
 
 
 
@@ -1464,11 +1437,11 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| cartMetaId | String | yes | CartMeta mongo _id for fetching single cart meta data for editing |  
+| cartMetaId | String | yes |  |  
 | body | [CartMetaConfigUpdate](#CartMetaConfigUpdate) | yes | Request body |
 
 
-Modify the configuration settings for cart metadata.
+Update cart meta configuration
 
 *Returned Response:*
 
@@ -1477,7 +1450,7 @@ Modify the configuration settings for cart metadata.
 
 [CartMetaConfigUpdate](#CartMetaConfigUpdate)
 
-Cart Meta Config updated successfully
+Cart Meta Config Created successfully
 
 
 
@@ -1657,10 +1630,8 @@ Cart Meta Config Created successfully
 ---
 
 
-
-
 ### updatePriceAdjustment
-Update price adjustments.
+Update price adjustment configuration
 
 
 
@@ -1683,7 +1654,7 @@ except Exception as e:
 | body | [PriceAdjustmentUpdate](#PriceAdjustmentUpdate) | yes | Request body |
 
 
-Modify price adjustments for items in the cart.
+Update price adjustment configuration
 
 *Returned Response:*
 
@@ -1725,12 +1696,6 @@ Price Adjustment Updated successfully
     "collection": {
       "collected_by": "FYND",
       "refund_by": "FYND"
-    },
-    "restrictions": {
-      "post_order": {
-        "cancellation_allowed": false,
-        "return_allowed": false
-      }
     }
   }
 }
@@ -1749,7 +1714,7 @@ Price Adjustment Updated successfully
 
 
 ### removePriceAdjustment
-Remove price adjustments.
+Remove price adjustment
 
 
 
@@ -1772,7 +1737,7 @@ except Exception as e:
 
 
 
-Remove price adjustments applied to items in the cart.
+Remove price adjustment
 
 *Returned Response:*
 
@@ -1809,7 +1774,7 @@ Price Adjustment data Removed successfully
 
 
 ### addPriceAdjustment
-Add price adjustments.
+Create new price adjustment
 
 
 
@@ -1831,7 +1796,7 @@ except Exception as e:
 | body | [PriceAdjustmentAdd](#PriceAdjustmentAdd) | yes | Request body |
 
 
-Apply price adjustments to items in the cart.
+Create new price adjustment
 
 *Returned Response:*
 
@@ -1873,12 +1838,6 @@ Price Adjustment Created successfully
     "collection": {
       "collected_by": "FYND",
       "refund_by": "FYND"
-    },
-    "restrictions": {
-      "post_order": {
-        "cancellation_allowed": false,
-        "return_allowed": false
-      }
     }
   }
 }
@@ -1896,10 +1855,8 @@ Price Adjustment Created successfully
 ---
 
 
-
-
 ### fetchAndvalidateCartItems
-Fetch and validate cart items.
+Fetch Cart Details
 
 
 
@@ -1921,7 +1878,7 @@ except Exception as e:
 | body | [OpenapiCartDetailsRequest](#OpenapiCartDetailsRequest) | yes | Request body |
 
 
-Retrieve and validate items currently in the cart.
+Get all the details of cart for a list of provided `cart_items`
 
 *Returned Response:*
 
@@ -2241,7 +2198,7 @@ Cart details with breakup
 
 
 ### checkCartServiceability
-Check cart serviceability.
+Check Pincode Serviceability
 
 
 
@@ -2263,7 +2220,7 @@ except Exception as e:
 | body | [OpenApiCartServiceabilityRequest](#OpenApiCartServiceabilityRequest) | yes | Request body |
 
 
-Verify if the items in the cart are serviceable.
+Check Pincode serviceability for cart items provided in `cart_items` and address pincode in `shipping_address`
 
 *Returned Response:*
 
@@ -2848,7 +2805,7 @@ Cart details with pincode validity information at item level
 
 
 ### checkoutCart
-Proceed to cart checkout.
+Create Fynd order with cart details
 
 
 
@@ -2870,7 +2827,7 @@ except Exception as e:
 | body | [OpenApiPlatformCheckoutReq](#OpenApiPlatformCheckoutReq) | yes | Request body |
 
 
-Initiate the checkout process for the items in the cart.
+Generate Fynd order for cart details send with provided `cart_items`
 
 *Returned Response:*
 
@@ -2909,7 +2866,7 @@ Checkout cart and create Fynd order id
 
 
 ### getAbandonedCart
-Retrieve abandoned carts.
+Get with abandoned cart list
 
 
 
@@ -2938,7 +2895,7 @@ except Exception as e:
 
 
 
-Retrieve abandoned carts for analysis and potential recovery.
+Get abandoned cart list with pagination
 
 *Returned Response:*
 
@@ -3084,9 +3041,9 @@ Abandoned Cart List for sent page_size and page_no
         },
         "payments": {},
         "is_archive": false,
-        "created_on": "2022-06-28T14:25:15.578Z",
-        "last_modified": "2022-06-29T13:52:03.313Z",
-        "expire_at": "2023-06-24T13:52:03.313Z",
+        "created_on": "2022-06-28 14:25:15.578000",
+        "last_modified": "2022-06-29 13:52:03.313000",
+        "expire_at": "2023-06-24 13:52:03.313000",
         "fc_index_map": [
           0,
           0
@@ -3133,7 +3090,7 @@ Abandoned Cart List for sent page_size and page_no
 
 
 ### getAbandonedCartDetails
-Get abandoned cart details.
+Fetch all items added to the cart
 
 
 
@@ -3159,7 +3116,7 @@ except Exception as e:
 
 
 
-Retrieve detailed information about a specific abandoned cart.
+Use this API to get details of all the items added to a cart.
 
 *Returned Response:*
 
@@ -3346,7 +3303,7 @@ Success. Returns a Cart object. Check the example shown below or refer `CartDeta
   "checkout_mode": "self",
   "restrict_checkout": false,
   "is_valid": true,
-  "last_modified": "2022-06-28T00:00:00.000Z"
+  "last_modified": "2022-06-28"
 }
 ```
 </details>
@@ -3363,7 +3320,7 @@ Success. Returns a Cart object. Check the example shown below or refer `CartDeta
 
 
 ### addItems
-Add items to the cart.
+Add items to abandoned cart
 
 
 
@@ -3387,7 +3344,7 @@ except Exception as e:
 | body | [AddCartRequest](#AddCartRequest) | yes | Request body |
 
 
-Add items to the shopping cart 
+Use this API to add items to the abandoned cart.
 
 *Returned Response:*
 
@@ -3867,7 +3824,7 @@ Success. Returns a cart object as shown below. Refer `AddCartDetailResponse` for
       "uid": "7927",
       "gstin": "",
       "checkout_mode": "self",
-      "last_modified": "2023-03-03T00:00:00.000Z",
+      "last_modified": "2023-03-03",
       "restrict_checkout": false,
       "is_valid": true
     },
@@ -4059,7 +4016,7 @@ Success. Returns a cart object as shown below. Refer `AddCartDetailResponse` for
       "checkout_mode": "self",
       "restrict_checkout": false,
       "is_valid": false,
-      "last_modified": "2023-03-03T00:00:00.000Z"
+      "last_modified": "2023-03-03"
     },
     "result": {}
   }
@@ -4081,7 +4038,7 @@ Success. Returns a cart object as shown below. Refer `AddCartDetailResponse` for
 
 
 ### updateCart
-Update cart items.
+Update items in the abandoned cart
 
 
 
@@ -4105,7 +4062,7 @@ except Exception as e:
 | body | [UpdateCartRequest](#UpdateCartRequest) | yes | Request body |
 
 
-Modify items and their quantities in the shopping cart.
+Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs operation Operation for current api call.update_item for update items. remove_item for removing items. item_id "/platform/content/v1/products/" "/platform/content/v1/products/:slug/sizes/" quantity item quantity (must be greater than or equal to 1) article_id "/content​/v1​/products​/:identifier​/sizes​/price​/"  item position in the cart (must be greater than or equal to 0)
 
 *Returned Response:*
 
@@ -4303,7 +4260,7 @@ Success. Updates and returns a cart object as shown below. Refer `UpdateCartDeta
       "checkout_mode": "self",
       "restrict_checkout": false,
       "is_valid": true,
-      "last_modified": "2023-03-03T00:00:00.000Z"
+      "last_modified": "2023-03-03"
     },
     "result": {
       "707569_90": {
@@ -4630,7 +4587,7 @@ Success. Updates and returns a cart object as shown below. Refer `UpdateCartDeta
         "code": "INR",
         "symbol": "₹"
       },
-      "last_modified": "2023-03-03T00:00:00.000Z"
+      "last_modified": "2023-03-03"
     },
     "message": "Quantity of item updated",
     "success": true
@@ -4652,8 +4609,247 @@ Success. Updates and returns a cart object as shown below. Refer `UpdateCartDeta
 ---
 
 
+### getCouponOptionValues
+Get coupon options enums with display values
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").cart.getCouponOptionValues()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Get coupon enum values for fields in valid coupon object. Used for front end to create, update and filter coupon lists via fields
+
+*Returned Response:*
+
+
+
+
+[HashMap<String,Any>](#HashMap<String,Any>)
+
+Coupon options enums
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "types": [
+    "Absolute"
+  ],
+  "scopes": [
+    "Categories"
+  ],
+  "applicable_on": [
+    "Amount"
+  ],
+  "value_types": [
+    "Absolute"
+  ],
+  "calculate_on": [
+    "Mrp"
+  ],
+  "payable_category": [
+    "Fynd"
+  ],
+  "txn_mode": [
+    "Fynd Cash"
+  ],
+  "payable_by": [
+    "Fynd Marketing"
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getCouponCodeExists
+Check if coupon is already created with coupon code
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").cart.getCouponCodeExists(code=code)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| code | String? | no |  |  
+
+
+
+Check if sent coupon code is already existing coupon code. As coupon code is to be unique.
+
+*Returned Response:*
+
+
+
+
+[HashMap<String,Any>](#HashMap<String,Any>)
+
+Valid response with existing coupon code count
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Coupon code exists</i></summary>
+
+```json
+{
+  "value": {
+    "success": true,
+    "count": 1
+  }
+}
+```
+</details>
+
+<details>
+<summary><i>&nbsp; Coupon code is new</i></summary>
+
+```json
+{
+  "value": {
+    "success": true,
+    "count": 0
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getPromotionCodeExists
+Check if promotion is already created with promotion code
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").cart.getPromotionCodeExists(code=code)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| code | String? | no |  |  
+
+
+
+Check if sent promotion code is already existing promotion code. As promotion code is to be unique.
+
+*Returned Response:*
+
+
+
+
+[HashMap<String,Any>](#HashMap<String,Any>)
+
+Valid response with existing promotion code count
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Promotion code exists</i></summary>
+
+```json
+{
+  "value": {
+    "success": true,
+    "count": 1
+  }
+}
+```
+</details>
+
+<details>
+<summary><i>&nbsp; Promotion code is new</i></summary>
+
+```json
+{
+  "value": {
+    "success": true,
+    "count": 0
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### overrideCart
-Override the cart.
+Create Fynd order with overriding cart details
 
 
 
@@ -4675,7 +4871,7 @@ except Exception as e:
 | body | [OverrideCheckoutReq](#OverrideCheckoutReq) | yes | Request body |
 
 
-Override the current cart with a new configuration.
+Generate Fynd order while overriding cart details sent with provided `cart_items`
 
 *Returned Response:*
 
@@ -5097,7 +5293,7 @@ Returns a URL to share and a token as shown below.
 
 
 ### getCartSharedItems
-Get items shared via a cart link.
+Get details of a shared cart
 
 
 
@@ -5120,7 +5316,7 @@ except Exception as e:
 
 
 
-Retrieve the items shared with you via a cart link.
+Use this API to get the shared cart details as per the token generated using the share-cart API.
 
 *Returned Response:*
 
@@ -5153,7 +5349,7 @@ Success. Returns a Cart object as per the valid token. Refer `SharedCartResponse
       "selected_staff": "",
       "ordering_store": null,
       "source": {},
-      "created_on": "2019-12-18T14:00:07.165Z"
+      "created_on": "2019-12-18T14:00:07.165000"
     },
     "items": [
       {
@@ -5417,7 +5613,7 @@ Success. Returns a Cart object as per the valid token. Refer `SharedCartResponse
     },
     "restrict_checkout": false,
     "is_valid": true,
-    "last_modified": "2023-03-03T00:00:00.000Z"
+    "last_modified": "2023-03-03"
   },
   "error": ""
 }
@@ -5436,7 +5632,7 @@ Success. Returns a Cart object as per the valid token. Refer `SharedCartResponse
 
 
 ### updateCartWithSharedItems
-Update cart with shared items.
+Merge or replace existing cart
 
 
 
@@ -5461,7 +5657,7 @@ except Exception as e:
 
 
 
-Modify your cart by adding shared items from a cart link.
+Use this API to merge the shared cart with existing cart, or replace the existing cart with the shared cart. The `action` parameter is used to indicate the operation Merge or Replace.
 
 *Returned Response:*
 
@@ -5499,7 +5695,7 @@ Success. Returns a merged or replaced cart as per the valid token. Refer `Shared
         "selected_staff": "",
         "ordering_store": null,
         "source": {},
-        "created_on": "2019-12-18T14:00:07.165Z"
+        "created_on": "2019-12-18T14:00:07.165000"
       },
       "items": [
         {
@@ -5763,7 +5959,7 @@ Success. Returns a merged or replaced cart as per the valid token. Refer `Shared
       },
       "restrict_checkout": false,
       "is_valid": true,
-      "last_modified": "2023-03-03T00:00:00.000Z"
+      "last_modified": "2023-03-03"
     }
   }
 }
@@ -5784,7 +5980,7 @@ Success. Returns a merged or replaced cart as per the valid token. Refer `Shared
 
 
 ### getCartList
-Retrieve a list of carts.
+Get cart list for store os user
 
 
 
@@ -5809,7 +6005,7 @@ except Exception as e:
 
 
 
-Retrieve a list of saved shopping carts.
+Get all carts for the store os user which is created for customer
 
 *Returned Response:*
 
@@ -5874,7 +6070,7 @@ Platform user cart list
 
 
 ### updateCartUser
-Update cart user details.
+Update user id for store os customer
 
 
 
@@ -5897,7 +6093,7 @@ except Exception as e:
 | body | [UpdateUserCartMapping](#UpdateUserCartMapping) | yes | Request body |
 
 
-Modify user-related details for a shopping cart.
+Update user id for store os customer after creating customer
 
 *Returned Response:*
 
@@ -6257,7 +6453,7 @@ Modify user-related details for a shopping cart.
 
 
 ### getCart
-Get cart details.
+Fetch all items added to the customer cart using cart id
 
 
 
@@ -6276,16 +6472,16 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String? | no | The unique identifier of the cart |   
-| userId | String? | no | Option to fetch cart for the provided user_id. |   
-| i | Boolean? | no | This is a boolean value. Select `true` to retrieve all the items added in the cart. |   
-| b | Boolean? | no | This is a boolean value. Select `true` to retrieve the price breakup of cart items. |   
-| assignCardId | Int? | no | Token of user's debit or credit card |   
-| buyNow | Boolean? | no | This is a boolen value. Select `true` to set/initialize buy now cart |  
+| id | String? | no |  |   
+| userId | String? | no |  |   
+| i | Boolean? | no |  |   
+| b | Boolean? | no |  |   
+| assignCardId | Int? | no |  |   
+| buyNow | Boolean? | no |  |  
 
 
 
-Retrieve detailed information about a shopping cart.
+Use this API to get details of all the items added to a cart.
 
 *Returned Response:*
 
@@ -6313,7 +6509,6 @@ Success. Returns a Cart object. Check the example shown below or refer `CartDeta
       "discount": "67% OFF",
       "article": {
         "type": "article",
-        "tags": [],
         "uid": "604_902_SSTC60401_636BLUE_1",
         "size": "1",
         "seller": {
@@ -6473,7 +6668,7 @@ Success. Returns a Cart object. Check the example shown below or refer `CartDeta
   "checkout_mode": "self",
   "restrict_checkout": false,
   "is_valid": true,
-  "last_modified": "2023-03-03T00:00:00.000Z"
+  "last_modified": "2023-03-03"
 }
 ```
 </details>
@@ -6490,7 +6685,7 @@ Success. Returns a Cart object. Check the example shown below or refer `CartDeta
 
 
 ### platformAddItems
-Add items via platform integration.
+Add items to cart
 
 
 
@@ -6509,14 +6704,14 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| i | Boolean? | no | This is a boolean value. Select `true` to retrieve all the items added in the cart. |   
-| b | Boolean? | no | This is a boolean value. Select `true` to retrieve the price breakup of cart items. |   
-| buyNow | Boolean? | no | This is a boolen value. Select `true` to set/initialize buy now cart |   
-| id | String? | no | The unique identifier of the cart |  
+| i | Boolean? | no |  |   
+| b | Boolean? | no |  |   
+| buyNow | Boolean? | no |  |   
+| id | String? | no |  |  
 | body | [PlatformAddCartRequest](#PlatformAddCartRequest) | yes | Request body |
 
 
-Add items to the cart through platform integration.
+Use this API to add items to the cart.
 
 *Returned Response:*
 
@@ -7229,10 +7424,10 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String? | no | The unique identifier of the cart |   
-| i | Boolean? | no | This is a boolean value. Select `true` to retrieve all the items added in the cart. |   
-| b | Boolean? | no | This is a boolean value. Select `true` to retrieve the price breakup of cart items. |   
-| buyNow | Boolean? | no | This is a boolen value. Select `true` to set/initialize buy now cart |  
+| id | String? | no |  |   
+| i | Boolean? | no |  |   
+| b | Boolean? | no |  |   
+| buyNow | Boolean? | no |  |  
 | body | [PlatformUpdateCartRequest](#PlatformUpdateCartRequest) | yes | Request body |
 
 
@@ -7650,7 +7845,7 @@ Success. Updates and returns a cart object as shown below. Refer `UpdateCartDeta
 
 
 ### deleteCart
-Delete a cart.
+Delete cart once user made successful checkout
 
 
 
@@ -7673,7 +7868,7 @@ except Exception as e:
 | body | [DeleteCartRequest](#DeleteCartRequest) | yes | Request body |
 
 
-Delete a specific shopping cart from the system.
+Use this API to delete the cart.
 
 *Returned Response:*
 
@@ -7710,7 +7905,7 @@ Success. Returns whether the cart has been deleted or not.
 
 
 ### getItemCount
-Get the item count in a cart.
+Count items in the customer's cart
 
 
 
@@ -7730,11 +7925,11 @@ except Exception as e:
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
 | id | String? | no | The unique identifier of the cart. |   
-| buyNow | Boolean? | no | Boolean value to get buy_now cart. |  
+| buyNow | Boolean? | no |  |  
 
 
 
-Retrieve the total number of items in a shopping cart.
+Use this API to get the total number of items present in cart.
 
 *Returned Response:*
 
@@ -7769,1211 +7964,15 @@ Success. Returns the total count of items in a user's cart.
 ---
 
 
-### platformCheckoutCart
-Platform-specific cart checkout.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.platformCheckoutCart(id=id, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String? | no | The unique identifier of the cart |  
-| body | [PlatformCartCheckoutDetailRequest](#PlatformCartCheckoutDetailRequest) | yes | Request body |
-
-
-Initiate cart checkout through platform-specific integration.
-
-*Returned Response:*
-
-
-
-
-[CartCheckoutResponse](#CartCheckoutResponse)
-
-Success. Returns the status of cart checkout. Refer `CartCheckoutResponse` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Address id not found</i></summary>
-
-```json
-{
-  "value": {
-    "success": false,
-    "message": "No address found with address id {address_id}"
-  }
-}
-```
-</details>
-
-<details>
-<summary><i>&nbsp; Missing address_id</i></summary>
-
-```json
-{
-  "value": {
-    "address_id": [
-      "Missing data for required field."
-    ]
-  }
-}
-```
-</details>
-
-<details>
-<summary><i>&nbsp; Successful checkout cod payment</i></summary>
-
-```json
-{
-  "value": {
-    "success": true,
-    "cart": {
-      "success": true,
-      "error_message": "Note: Your order delivery will be delayed by 7-10 Days",
-      "payment_options": {
-        "payment_option": [
-          {
-            "name": "COD",
-            "display_name": "Cash on Delivery",
-            "display_priority": 1,
-            "payment_mode_id": 11,
-            "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
-            "logo_url": {
-              "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
-              "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png"
-            },
-            "list": []
-          },
-          {
-            "name": "CARD",
-            "display_priority": 2,
-            "payment_mode_id": 2,
-            "display_name": "Card",
-            "list": []
-          },
-          {
-            "name": "NB",
-            "display_priority": 3,
-            "payment_mode_id": 3,
-            "display_name": "Net Banking",
-            "list": [
-              {
-                "aggregator_name": "Razorpay",
-                "bank_name": "ICICI Bank",
-                "bank_code": "ICIC",
-                "url": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
-                "logo_url": {
-                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
-                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png"
-                },
-                "merchant_code": "NB_ICICI",
-                "display_priority": 1
-              }
-            ]
-          },
-          {
-            "name": "WL",
-            "display_priority": 4,
-            "payment_mode_id": 4,
-            "display_name": "Wallet",
-            "list": [
-              {
-                "wallet_name": "Paytm",
-                "wallet_code": "paytm",
-                "wallet_id": 4,
-                "merchant_code": "PAYTM",
-                "logo_url": {
-                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_small.png",
-                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_large.png"
-                },
-                "aggregator_name": "Juspay",
-                "display_priority": 1
-              }
-            ]
-          },
-          {
-            "name": "UPI",
-            "display_priority": 9,
-            "payment_mode_id": 6,
-            "display_name": "UPI",
-            "list": [
-              {
-                "aggregator_name": "UPI_Razorpay",
-                "name": "UPI",
-                "display_name": "BHIM UPI",
-                "code": "UPI",
-                "logo_url": {
-                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_100x78.png",
-                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_150x100.png"
-                },
-                "merchant_code": "UPI",
-                "timeout": 240,
-                "retry_count": 0,
-                "fynd_vpa": "shopsense.rzp@hdfcbank",
-                "intent_flow": true,
-                "intent_app_error_list": [
-                  "com.csam.icici.bank.imobile",
-                  "in.org.npci.upiapp",
-                  "com.whatsapp"
-                ]
-              }
-            ]
-          },
-          {
-            "name": "PL",
-            "display_priority": 11,
-            "payment_mode_id": 1,
-            "display_name": "Pay Later",
-            "list": [
-              {
-                "aggregator_name": "Simpl",
-                "name": "Simpl",
-                "code": "simpl",
-                "merchant_code": "SIMPL",
-                "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
-                "logo_url": {
-                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
-                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png"
-                }
-              }
-            ]
-          }
-        ],
-        "payment_flows": {
-          "Simpl": {
-            "data": {
-              "gateway": {
-                "route": "simpl",
-                "entity": "sdk",
-                "is_customer_validation_required": true,
-                "cust_validation_url": "https://api.addsale.com/gringotts/api/v1/validate-customer/",
-                "sdk": {
-                  "config": {
-                    "redirect": false,
-                    "callback_url": null,
-                    "action_url": "https://api.addsale.com/avis/api/v1/payments/charge-gringotts-transaction/"
-                  },
-                  "data": {
-                    "user_phone": "8452996729",
-                    "user_email": "paymentsdummy@gofynd.com"
-                  }
-                },
-                "return_url": null
-              }
-            },
-            "api_link": "",
-            "payment_flow": "sdk"
-          },
-          "Juspay": {
-            "data": {},
-            "api_link": "https://sandbox.juspay.in/txns",
-            "payment_flow": "api"
-          },
-          "Razorpay": {
-            "data": {},
-            "api_link": "",
-            "payment_flow": "sdk"
-          },
-          "UPI_Razorpay": {
-            "data": {},
-            "api_link": "https://api.addsale.com/gringotts/api/v1/external/payment-initialisation/",
-            "payment_flow": "api"
-          },
-          "Fynd": {
-            "data": {},
-            "api_link": "",
-            "payment_flow": "api"
-          }
-        },
-        "default": {}
-      },
-      "user_type": "Store User",
-      "cod_charges": 0,
-      "order_id": "FY5D5E215CF287584CE6",
-      "cod_available": true,
-      "cod_message": "No additional COD charges applicable",
-      "delivery_charges": 0,
-      "delivery_charge_order_value": 0,
-      "delivery_slots": [
-        {
-          "date": "Sat, 24 Aug",
-          "delivery_slot": [
-            {
-              "delivery_slot_timing": "By 9:00 PM",
-              "default": true,
-              "delivery_slot_id": 1
-            }
-          ]
-        }
-      ],
-      "store_code": "",
-      "store_emps": [],
-      "breakup_values": {
-        "coupon": {
-          "type": "cash",
-          "code": "",
-          "uid": "",
-          "value": 0,
-          "is_applied": false,
-          "message": "Sorry! Invalid Coupon"
-        },
-        "loyalty_points": {
-          "total": 0,
-          "applicable": 0,
-          "is_applied": false,
-          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
-        },
-        "raw": {
-          "cod_charge": 0,
-          "convenience_fee": 0,
-          "coupon": 0,
-          "delivery_charge": 0,
-          "discount": 0,
-          "fynd_cash": 0,
-          "gst_charges": 214.18,
-          "mrp_total": 1999,
-          "subtotal": 1999,
-          "total": 1999,
-          "vog": 1784.82,
-          "you_saved": 0
-        },
-        "display": [
-          {
-            "display": "MRP Total",
-            "key": "mrp_total",
-            "value": 1999,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Subtotal",
-            "key": "subtotal",
-            "value": 1999,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Total",
-            "key": "total",
-            "value": 1999,
-            "currency_code": "INR"
-          }
-        ]
-      },
-      "items": [
-        {
-          "key": "820312_L",
-          "identifiers": {
-            "identifier": "5mPyy88URXuh3Lo35uaTg"
-          },
-          "message": "",
-          "bulk_offer": {},
-          "price": {
-            "base": {
-              "add_on": 1999,
-              "marked": 1999,
-              "effective": 1999,
-              "selling": 1999,
-              "currency_code": "INR"
-            },
-            "converted": {
-              "add_on": 1999,
-              "marked": 1999,
-              "effective": 1999,
-              "selling": 1999,
-              "currency_code": "INR"
-            }
-          },
-          "quantity": 1,
-          "discount": "",
-          "product": {
-            "type": "product",
-            "uid": 820312,
-            "name": "Navy Blue Melange Shorts",
-            "slug": "883-police-navy-blue-melange-shorts-820312-4943a8",
-            "brand": {
-              "uid": 610,
-              "name": "883 Police"
-            },
-            "categories": [
-              {
-                "uid": 193,
-                "name": "Shorts"
-              }
-            ],
-            "images": [
-              {
-                "aspect_ratio": "16:25",
-                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg",
-                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg"
-              }
-            ],
-            "action": {
-              "type": "product",
-              "url": "https://api.addsale.com/platform/content/v1/products/883-police-navy-blue-melange-shorts-820312-4943a8/",
-              "query": {
-                "product_slug": [
-                  "883-police-navy-blue-melange-shorts-820312-4943a8"
-                ]
-              }
-            }
-          },
-          "article": {
-            "type": "article",
-            "uid": "381_610_IGPL01_SPIRAL19ANAVY_L",
-            "size": "L",
-            "seller": {
-              "uid": 381,
-              "name": "INTERSOURCE GARMENTS PVT LTD"
-            },
-            "store": {
-              "uid": 3009,
-              "name": "Kormangala"
-            },
-            "quantity": 2,
-            "price": {
-              "base": {
-                "marked": 1999,
-                "effective": 1999,
-                "currency_code": "INR"
-              },
-              "converted": {
-                "marked": 1999,
-                "effective": 1999,
-                "currency_code": "INR"
-              }
-            }
-          },
-          "coupon_message": "",
-          "availability": {
-            "sizes": [
-              "L",
-              "XL",
-              "XXL"
-            ],
-            "other_store_quantity": 1,
-            "out_of_stock": false,
-            "deliverable": true,
-            "is_valid": true
-          }
-        }
-      ],
-      "delivery_charge_info": "",
-      "coupon_text": "View all offers",
-      "cart_id": 7483,
-      "uid": "7483",
-      "gstin": "",
-      "checkout_mode": "self",
-      "last_modified": "2023-03-03T00:00:00.000Z",
-      "restrict_checkout": false,
-      "is_valid": true
-    },
-    "callback_url": "https://api.addsale.com/gringotts/api/v1/external/payment-callback/",
-    "app_intercept_url": "http://uniket-testing.addsale.link/cart/order-status",
-    "message": "",
-    "data": {
-      "order_id": "FY5D5E215CF287584CE6"
-    },
-    "order_id": "FY5D5E215CF287584CE6"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### platformCheckoutCartV2
-Platform-specific cart checkout v2.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.platformCheckoutCartV2(id=id, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String? | no | The unique identifier of the cart |  
-| body | [PlatformCartCheckoutDetailV2Request](#PlatformCartCheckoutDetailV2Request) | yes | Request body |
-
-
-Initiate cart checkout through an updated platform-specific integration.
-
-*Returned Response:*
-
-
-
-
-[CartCheckoutResponse](#CartCheckoutResponse)
-
-Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Address id not found</i></summary>
-
-```json
-{
-  "value": {
-    "success": false,
-    "message": "No address found with address id {address_id}"
-  }
-}
-```
-</details>
-
-<details>
-<summary><i>&nbsp; Missing address_id</i></summary>
-
-```json
-{
-  "value": {
-    "address_id": [
-      "Missing data for required field."
-    ]
-  }
-}
-```
-</details>
-
-<details>
-<summary><i>&nbsp; Successful checkout cod payment</i></summary>
-
-```json
-{
-  "value": {
-    "success": true,
-    "cart": {
-      "success": true,
-      "error_message": "Note: Your order delivery will be delayed by 7-10 Days",
-      "payment_options": {
-        "payment_option": [
-          {
-            "name": "COD",
-            "display_name": "Cash on Delivery",
-            "display_priority": 1,
-            "payment_mode_id": 11,
-            "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
-            "logo_url": {
-              "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
-              "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png"
-            },
-            "list": []
-          },
-          {
-            "name": "CARD",
-            "display_priority": 2,
-            "payment_mode_id": 2,
-            "display_name": "Card",
-            "list": []
-          },
-          {
-            "name": "NB",
-            "display_priority": 3,
-            "payment_mode_id": 3,
-            "display_name": "Net Banking",
-            "list": [
-              {
-                "aggregator_name": "Razorpay",
-                "bank_name": "ICICI Bank",
-                "bank_code": "ICIC",
-                "url": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
-                "logo_url": {
-                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
-                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png"
-                },
-                "merchant_code": "NB_ICICI",
-                "display_priority": 1
-              }
-            ]
-          },
-          {
-            "name": "WL",
-            "display_priority": 4,
-            "payment_mode_id": 4,
-            "display_name": "Wallet",
-            "list": [
-              {
-                "wallet_name": "Paytm",
-                "wallet_code": "paytm",
-                "wallet_id": 4,
-                "merchant_code": "PAYTM",
-                "logo_url": {
-                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_small.png",
-                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_large.png"
-                },
-                "aggregator_name": "Juspay",
-                "display_priority": 1
-              }
-            ]
-          },
-          {
-            "name": "UPI",
-            "display_priority": 9,
-            "payment_mode_id": 6,
-            "display_name": "UPI",
-            "list": [
-              {
-                "aggregator_name": "UPI_Razorpay",
-                "name": "UPI",
-                "display_name": "BHIM UPI",
-                "code": "UPI",
-                "logo_url": {
-                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_100x78.png",
-                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_150x100.png"
-                },
-                "merchant_code": "UPI",
-                "timeout": 240,
-                "retry_count": 0,
-                "fynd_vpa": "shopsense.rzp@hdfcbank",
-                "intent_flow": true,
-                "intent_app_error_list": [
-                  "com.csam.icici.bank.imobile",
-                  "in.org.npci.upiapp",
-                  "com.whatsapp"
-                ]
-              }
-            ]
-          },
-          {
-            "name": "PL",
-            "display_priority": 11,
-            "payment_mode_id": 1,
-            "display_name": "Pay Later",
-            "list": [
-              {
-                "aggregator_name": "Simpl",
-                "name": "Simpl",
-                "code": "simpl",
-                "merchant_code": "SIMPL",
-                "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
-                "logo_url": {
-                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
-                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png"
-                }
-              }
-            ]
-          }
-        ],
-        "payment_flows": {
-          "Simpl": {
-            "data": {
-              "gateway": {
-                "route": "simpl",
-                "entity": "sdk",
-                "is_customer_validation_required": true,
-                "cust_validation_url": "https://api.addsale.com/gringotts/api/v1/validate-customer/",
-                "sdk": {
-                  "config": {
-                    "redirect": false,
-                    "callback_url": null,
-                    "action_url": "https://api.addsale.com/avis/api/v1/payments/charge-gringotts-transaction/"
-                  },
-                  "data": {
-                    "user_phone": "8452996729",
-                    "user_email": "paymentsdummy@gofynd.com"
-                  }
-                },
-                "return_url": null
-              }
-            },
-            "api_link": "",
-            "payment_flow": "sdk"
-          },
-          "Juspay": {
-            "data": {},
-            "api_link": "https://sandbox.juspay.in/txns",
-            "payment_flow": "api"
-          },
-          "Razorpay": {
-            "data": {},
-            "api_link": "",
-            "payment_flow": "sdk"
-          },
-          "UPI_Razorpay": {
-            "data": {},
-            "api_link": "https://api.addsale.com/gringotts/api/v1/external/payment-initialisation/",
-            "payment_flow": "api"
-          },
-          "Fynd": {
-            "data": {},
-            "api_link": "",
-            "payment_flow": "api"
-          }
-        },
-        "default": {}
-      },
-      "user_type": "Store User",
-      "cod_charges": 0,
-      "order_id": "FY5D5E215CF287584CE6",
-      "cod_available": true,
-      "cod_message": "No additional COD charges applicable",
-      "delivery_charges": 0,
-      "delivery_charge_order_value": 0,
-      "delivery_slots": [
-        {
-          "date": "Sat, 24 Aug",
-          "delivery_slot": [
-            {
-              "delivery_slot_timing": "By 9:00 PM",
-              "default": true,
-              "delivery_slot_id": 1
-            }
-          ]
-        }
-      ],
-      "store_code": "",
-      "store_emps": [],
-      "breakup_values": {
-        "coupon": {
-          "type": "cash",
-          "code": "",
-          "uid": "",
-          "value": 0,
-          "is_applied": false,
-          "message": "Sorry! Invalid Coupon"
-        },
-        "loyalty_points": {
-          "total": 0,
-          "applicable": 0,
-          "is_applied": false,
-          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
-        },
-        "raw": {
-          "cod_charge": 0,
-          "convenience_fee": 0,
-          "coupon": 0,
-          "delivery_charge": 0,
-          "discount": 0,
-          "fynd_cash": 0,
-          "gst_charges": 214.18,
-          "mrp_total": 1999,
-          "subtotal": 1999,
-          "total": 1999,
-          "vog": 1784.82,
-          "you_saved": 0
-        },
-        "display": [
-          {
-            "display": "MRP Total",
-            "key": "mrp_total",
-            "value": 1999,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Subtotal",
-            "key": "subtotal",
-            "value": 1999,
-            "currency_code": "INR"
-          },
-          {
-            "display": "Total",
-            "key": "total",
-            "value": 1999,
-            "currency_code": "INR"
-          }
-        ]
-      },
-      "items": [
-        {
-          "key": "820312_L",
-          "identifiers": {
-            "identifier": "5mPyy88URXuh3Lo35uaTg"
-          },
-          "message": "",
-          "bulk_offer": {},
-          "price": {
-            "base": {
-              "add_on": 1999,
-              "marked": 1999,
-              "effective": 1999,
-              "selling": 1999,
-              "currency_code": "INR"
-            },
-            "converted": {
-              "add_on": 1999,
-              "marked": 1999,
-              "effective": 1999,
-              "selling": 1999,
-              "currency_code": "INR"
-            }
-          },
-          "quantity": 1,
-          "discount": "",
-          "product": {
-            "type": "product",
-            "uid": 820312,
-            "name": "Navy Blue Melange Shorts",
-            "slug": "883-police-navy-blue-melange-shorts-820312-4943a8",
-            "brand": {
-              "uid": 610,
-              "name": "883 Police"
-            },
-            "categories": [
-              {
-                "uid": 193,
-                "name": "Shorts"
-              }
-            ],
-            "images": [
-              {
-                "aspect_ratio": "16:25",
-                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg",
-                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg"
-              }
-            ],
-            "action": {
-              "type": "product",
-              "url": "https://api.addsale.com/platform/content/v1/products/883-police-navy-blue-melange-shorts-820312-4943a8/",
-              "query": {
-                "product_slug": [
-                  "883-police-navy-blue-melange-shorts-820312-4943a8"
-                ]
-              }
-            }
-          },
-          "article": {
-            "type": "article",
-            "uid": "381_610_IGPL01_SPIRAL19ANAVY_L",
-            "size": "L",
-            "seller": {
-              "uid": 381,
-              "name": "INTERSOURCE GARMENTS PVT LTD"
-            },
-            "store": {
-              "uid": 3009,
-              "name": "Kormangala"
-            },
-            "quantity": 2,
-            "price": {
-              "base": {
-                "marked": 1999,
-                "effective": 1999,
-                "currency_code": "INR"
-              },
-              "converted": {
-                "marked": 1999,
-                "effective": 1999,
-                "currency_code": "INR"
-              }
-            }
-          },
-          "coupon_message": "",
-          "availability": {
-            "sizes": [
-              "L",
-              "XL",
-              "XXL"
-            ],
-            "other_store_quantity": 1,
-            "out_of_stock": false,
-            "deliverable": true,
-            "is_valid": true
-          }
-        }
-      ],
-      "delivery_charge_info": "",
-      "coupon_text": "View all offers",
-      "cart_id": 7483,
-      "uid": "7483",
-      "gstin": "",
-      "checkout_mode": "self",
-      "last_modified": "2023-02-02T00:00:00.000Z",
-      "restrict_checkout": false,
-      "is_valid": true
-    },
-    "callback_url": "https://api.addsale.com/gringotts/api/v1/external/payment-callback/",
-    "app_intercept_url": "http://uniket-testing.addsale.link/cart/order-status",
-    "message": "",
-    "data": {
-      "order_id": "FY5D5E215CF287584CE6"
-    },
-    "order_id": "FY5D5E215CF287584CE6"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getCouponOptionValues
-Get coupon option values.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getCouponOptionValues()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Retrieve available values for coupon options.
-
-*Returned Response:*
-
-
-
-
-[HashMap<String,Any>](#HashMap<String,Any>)
-
-Coupon options enums
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "types": [
-    "Absolute"
-  ],
-  "scopes": [
-    "Categories"
-  ],
-  "applicable_on": [
-    "Amount"
-  ],
-  "value_types": [
-    "Absolute"
-  ],
-  "calculate_on": [
-    "Mrp"
-  ],
-  "payable_category": [
-    "Fynd"
-  ],
-  "txn_mode": [
-    "Fynd Cash"
-  ],
-  "payable_by": [
-    "Fynd Marketing"
-  ]
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCouponCodeExists
-Check if a coupon code exists.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getCouponCodeExists(code=code)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| code | String? | no |  |  
-
-
-
-Verify the existence of a specific coupon code.
-
-*Returned Response:*
-
-
-
-
-[HashMap<String,Any>](#HashMap<String,Any>)
-
-Valid response with existing coupon code count
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Coupon code exists</i></summary>
-
-```json
-{
-  "value": {
-    "success": true,
-    "count": 1
-  }
-}
-```
-</details>
-
-<details>
-<summary><i>&nbsp; Coupon code is new</i></summary>
-
-```json
-{
-  "value": {
-    "success": true,
-    "count": 0
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getPromotionCodeExists
-Check if a promotion code exists.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getPromotionCodeExists(code=code)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| code | String? | no |  |  
-
-
-
-Verify the existence of a specific promotion code.
-
-*Returned Response:*
-
-
-
-
-[HashMap<String,Any>](#HashMap<String,Any>)
-
-Valid response with existing promotion code count
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Promotion code exists</i></summary>
-
-```json
-{
-  "value": {
-    "success": true,
-    "count": 1
-  }
-}
-```
-</details>
-
-<details>
-<summary><i>&nbsp; Promotion code is new</i></summary>
-
-```json
-{
-  "value": {
-    "success": true,
-    "count": 0
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### validateCouponForPayment
-Validate a coupon for payment.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.validateCouponForPayment(id=id, buyNow=buyNow, addressId=addressId, paymentMode=paymentMode, paymentIdentifier=paymentIdentifier, aggregatorName=aggregatorName, merchantCode=merchantCode)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String? | no |  |   
-| buyNow | Boolean? | no |  |   
-| addressId | String? | no |  |   
-| paymentMode | String? | no |  |   
-| paymentIdentifier | String? | no |  |   
-| aggregatorName | String? | no |  |   
-| merchantCode | String? | no |  |  
-
-
-
- Verify the validity of a coupon code for the payment process.
-
-*Returned Response:*
-
-
-
-
-[PaymentCouponValidate](#PaymentCouponValidate)
-
-Success. Returns a success message and the coupon validity. Refer `PaymentCouponValidate` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true,
-  "message": "",
-  "coupon_validity": {
-    "valid": true,
-    "discount": 499.5,
-    "code": "testpayment",
-    "display_message_en": "",
-    "title": "Coupon value will change."
-  }
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
 ### getAppCoupons
-Get app-specific coupons.
+Fetch Coupon
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getAppCoupons(id=id, buyNow=buyNow, slug=slug, storeId=storeId)
+    result = await platformClient.application("<APPLICATION_ID>").cart.getAppCoupons(id=id, buyNow=buyNow)
     # use result
 except Exception as e:
     print(e)
@@ -8986,13 +7985,11 @@ except Exception as e:
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
 | id | String? | no |  |   
-| buyNow | Boolean? | no |  |   
-| slug | String? | no |  |   
-| storeId | String? | no |  |  
+| buyNow | Boolean? | no |  |  
 
 
 
-Retrieve coupons specific to the mobile app.
+Use this API to get a list of available coupons along with their details.
 
 *Returned Response:*
 
@@ -9062,7 +8059,7 @@ Success. Returns a coupon object which has a list of all the eligible coupons. R
 
 
 ### applyCoupon
-Apply a coupon to the cart.
+Apply Coupon for platform pos user
 
 
 
@@ -9089,7 +8086,7 @@ except Exception as e:
 | body | [ApplyCouponRequest](#ApplyCouponRequest) | yes | Request body |
 
 
-Apply a selected coupon to the items in the shopping cart.
+Use this API to apply coupons on items in the cart.
 
 *Returned Response:*
 
@@ -9668,7 +8665,7 @@ Success. Returns coupons applied to the cart along with item details and price b
 
 
 ### removeCoupon
-Remove a coupon from the cart.
+Remove Applied Coupon for platform pos user
 
 
 
@@ -9692,7 +8689,7 @@ except Exception as e:
 
 
 
-Remove a coupon from the items in the shopping cart.
+Remove Coupon applied on the cart by passing uid in request body.
 
 *Returned Response:*
 
@@ -9886,68 +8883,6 @@ Success. Returns coupons removed from the cart along with item details and price
 ---
 
 
-### updateCartMeta
-Update cart metadata.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.updateCartMeta(id=id, buyNow=buyNow, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String? | no |  |   
-| buyNow | Boolean? | no |  |  
-| body | [PlatformCartMetaRequest](#PlatformCartMetaRequest) | yes | Request body |
-
-
-Modify the metadata associated with the shopping cart.
-
-*Returned Response:*
-
-
-
-
-[CartMetaResponse](#CartMetaResponse)
-
-Returns a message indicating the success of cart meta updation as shown below.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "message": "cart meta updated"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
 ### getAddresses
 Fetch address
 
@@ -9993,92 +8928,39 @@ Success. Returns an Address object containing a list of address saved in the acc
 
 
 <details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; example1</i></summary>
+<summary><i>&nbsp; Example:</i></summary>
 
 ```json
 {
-  "summary": "Address for India",
-  "value": {
-    "address": [
-      {
-        "landmark": "",
-        "area_code": "8b526f521bb14a2593a8b9e3ce8c76b3",
-        "id": "8b526f521bb14a2593a8b9e3ce8c76b3",
-        "state": "Maharashtra",
-        "meta": {},
-        "user_id": "8b526f521bb14a2593a8b9e3ce8c76b3",
-        "created_by_user_id": "8b526f521bb14a2593a8b9e3ce8c76b3",
-        "country_code": "+91",
-        "state_code": "MH",
-        "country_phone_code": "91",
-        "country_iso_code": "IN",
-        "phone": "9915347757",
-        "geo_location": {},
-        "country": "India",
-        "is_default_address": true,
-        "is_active": true,
-        "city": "Mumbai",
-        "pincode": 400093,
-        "checkout_mode": "self",
-        "address_type": "home",
-        "tags": [],
-        "area": "Sector 127",
-        "name": "abc",
-        "email": "ankur@gofynd1.com",
-        "address": "Megatron2",
-        "_custom_json": {}
-      }
-    ]
-  }
+  "address": [
+    {
+      "landmark": "",
+      "area_code": "410218",
+      "id": "8b526f521bb14a2593a8b9e3ce8c76b3",
+      "state": "Maharashtra",
+      "meta": {},
+      "user_id": "8b526f521bb14a2593a8b9e3ce8c76b3",
+      "created_by_user_id": "8b526f521bb14a2593a8b9e3ce8c76b3",
+      "country_code": "IND",
+      "phone": "99999999",
+      "geo_location": {},
+      "country": "India",
+      "is_default_address": true,
+      "is_active": true,
+      "city": "Mumbai",
+      "pincode": 400093,
+      "checkout_mode": "self",
+      "address_type": "home",
+      "tags": [],
+      "area": "Sector 127",
+      "name": "abc",
+      "email": "ankur@gofynd1.com",
+      "address": "Megatron2",
+      "store_name": "store123"
+    }
+  ]
 }
 ```
-</details>
-
-<details>
-<summary><i>&nbsp; example2</i></summary>
-
-```json
-{
-  "summary": "Address for Dubai",
-  "value": {
-    "address": [
-      {
-        "landmark": "",
-        "area_code": "",
-        "id": "651c0b882dbd5f702f711677",
-        "state": "",
-        "meta": {},
-        "user_id": "8b526f521bb14a2593a8b9e3ce8c76b3",
-        "created_by_user_id": "8b526f521bb14a2593a8b9e3ce8c76b3",
-        "country_code": "+971",
-        "country_phone_code": "+971",
-        "country_iso_code": "AE",
-        "phone": "551234567",
-        "geo_location": {},
-        "country": "United Arab Emirates",
-        "is_default_address": true,
-        "is_active": true,
-        "city": "Sharjah",
-        "sector": "Al Fisht",
-        "checkout_mode": "self",
-        "address_type": "home",
-        "tags": [],
-        "area": "Dubai Park",
-        "name": "Shaikh Ahmed",
-        "email": "example@gmail.com",
-        "address": "B-62",
-        "_custom_json": {}
-      }
-    ]
-  }
-}
-```
-</details>
-
 </details>
 
 
@@ -10093,7 +8975,7 @@ Success. Returns an Address object containing a list of address saved in the acc
 
 
 ### addAddress
-Add a new user address.
+Add address to an account
 
 
 
@@ -10115,7 +8997,7 @@ except Exception as e:
 | body | [PlatformAddress](#PlatformAddress) | yes | Request body |
 
 
-Create and add a new user address for cart checkout.
+Use this API to add an address to an account.
 
 *Returned Response:*
 
@@ -10209,7 +9091,6 @@ Success. Returns an PlatformAddress object containing a list of address saved in
   "user_id": "8b526f521bb14a2593a8b9e3ce8c76b3",
   "created_by_user_id": "8b526f521bb14a2593a8b9e3ce8c76b3",
   "country_code": "IND",
-  "state_code": "MH",
   "phone": "9915347757",
   "geo_location": {},
   "country": "India",
@@ -10242,8 +9123,70 @@ Success. Returns an PlatformAddress object containing a list of address saved in
 ---
 
 
+### updateAddress
+Update address added to an account
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").cart.updateAddress(id=id, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | ID allotted to the selected address |  
+| body | [PlatformAddress](#PlatformAddress) | yes | Request body |
+
+
+Use this API to update an existing address in the account. Request object should contain attributes mentioned in Address can be updated. These attributes are:is_default_address landmark area pincode email address_type name address_id address
+
+*Returned Response:*
+
+
+
+
+[UpdateAddressResponse](#UpdateAddressResponse)
+
+Success. Returns the address ID and a message indicating a successful address updation.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "is_updated": true,
+  "id": "<mongo_object_id>",
+  "is_default_address": true,
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### removeAddress
-Remove a user address.
+Remove address associated with an account
 
 
 
@@ -10267,7 +9210,7 @@ except Exception as e:
 
 
 
-Delete an existing user address from the system.
+Use this API to delete an address by its ID. This will returns an object that will indicate whether the address was deleted successfully or not.
 
 *Returned Response:*
 
@@ -10625,928 +9568,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
 ---
 
 
-### updateShipments
-Update shipment details.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.updateShipments(i=i, p=p, id=id, addressId=addressId, areaCode=areaCode, orderType=orderType, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| i | Boolean? | no | This is a boolean value. Select `true` to retrieve all the items added in the cart. |   
-| p | Boolean? | no | This is a boolean value. Select `true` for getting a payment option in response. |   
-| id | String? | no | The unique identifier of the cart |   
-| addressId | String? | no | ID allotted to an address |   
-| areaCode | String? | no | The PIN Code of the destination address, e.g. 400059 |   
-| orderType | String? | no | The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. |  
-| body | [UpdateCartShipmentRequest](#UpdateCartShipmentRequest) | yes | Request body |
-
-
-Modify the details and settings of cart shipments.
-
-*Returned Response:*
-
-
-
-
-[PlatformCartShipmentsResponse](#PlatformCartShipmentsResponse)
-
-Success. Returns delivery promise along with shipment details and price breakup. Refer `PlatformCartShipmentsResponse` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Shipment Generated</i></summary>
-
-```json
-{
-  "value": {
-    "items": [],
-    "cart_id": 7501,
-    "uid": "7501",
-    "success": true,
-    "error_message": "Note: Your order delivery will be delayed by 7-10 Days",
-    "payment_options": {
-      "payment_option": [
-        {
-          "name": "COD",
-          "display_name": "Cash on Delivery",
-          "display_priority": 1,
-          "payment_mode_id": 11,
-          "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
-          "logo_url": {
-            "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
-            "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png"
-          },
-          "list": []
-        },
-        {
-          "name": "CARD",
-          "display_priority": 2,
-          "payment_mode_id": 2,
-          "display_name": "Card",
-          "list": []
-        },
-        {
-          "name": "NB",
-          "display_priority": 3,
-          "payment_mode_id": 3,
-          "display_name": "Net Banking",
-          "list": [
-            {
-              "aggregator_name": "Razorpay",
-              "bank_name": "ICICI Bank",
-              "bank_code": "ICIC",
-              "url": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
-              "logo_url": {
-                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
-                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png"
-              },
-              "merchant_code": "NB_ICICI",
-              "display_priority": 1
-            }
-          ]
-        },
-        {
-          "name": "WL",
-          "display_priority": 4,
-          "payment_mode_id": 4,
-          "display_name": "Wallet",
-          "list": [
-            {
-              "wallet_name": "Paytm",
-              "wallet_code": "paytm",
-              "wallet_id": 4,
-              "merchant_code": "PAYTM",
-              "logo_url": {
-                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_small.png",
-                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_large.png"
-              },
-              "aggregator_name": "Juspay",
-              "display_priority": 1
-            }
-          ]
-        },
-        {
-          "name": "UPI",
-          "display_priority": 9,
-          "payment_mode_id": 6,
-          "display_name": "UPI",
-          "list": [
-            {
-              "aggregator_name": "UPI_Razorpay",
-              "name": "UPI",
-              "display_name": "BHIM UPI",
-              "code": "UPI",
-              "logo_url": {
-                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_100x78.png",
-                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_150x100.png"
-              },
-              "merchant_code": "UPI",
-              "timeout": 240,
-              "retry_count": 0,
-              "fynd_vpa": "shopsense.rzp@hdfcbank",
-              "intent_flow": true,
-              "intent_app_error_list": [
-                "com.csam.icici.bank.imobile",
-                "in.org.npci.upiapp",
-                "com.whatsapp"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "PL",
-          "display_priority": 11,
-          "payment_mode_id": 1,
-          "display_name": "Pay Later",
-          "list": [
-            {
-              "aggregator_name": "Simpl",
-              "name": "Simpl",
-              "code": "simpl",
-              "merchant_code": "SIMPL",
-              "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
-              "logo_url": {
-                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
-                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png"
-              }
-            }
-          ]
-        }
-      ],
-      "payment_flows": {
-        "Simpl": {
-          "data": {
-            "gateway": {
-              "route": "simpl",
-              "entity": "sdk",
-              "is_customer_validation_required": true,
-              "cust_validation_url": "https://api.addsale.com/gringotts/api/v1/validate-customer/",
-              "sdk": {
-                "config": {
-                  "redirect": false,
-                  "callback_url": null,
-                  "action_url": "https://api.addsale.com/avis/api/v1/payments/charge-gringotts-transaction/"
-                },
-                "data": {
-                  "user_phone": "8452996729",
-                  "user_email": "paymentsdummy@gofynd.com"
-                }
-              },
-              "return_url": null
-            }
-          },
-          "api_link": "",
-          "payment_flow": "sdk"
-        },
-        "Juspay": {
-          "data": {},
-          "api_link": "https://sandbox.juspay.in/txns",
-          "payment_flow": "api"
-        },
-        "Razorpay": {
-          "data": {},
-          "api_link": "",
-          "payment_flow": "sdk"
-        },
-        "UPI_Razorpay": {
-          "data": {},
-          "api_link": "https://api.addsale.com/gringotts/api/v1/external/payment-initialisation/",
-          "payment_flow": "api"
-        },
-        "Fynd": {
-          "data": {},
-          "api_link": "",
-          "payment_flow": "api"
-        }
-      },
-      "default": {}
-    },
-    "user_type": "Store User",
-    "cod_charges": 0,
-    "order_id": null,
-    "cod_available": true,
-    "cod_message": "No additional COD charges applicable",
-    "delivery_charges": 0,
-    "delivery_charge_order_value": 0,
-    "delivery_slots": [
-      {
-        "date": "Sat, 24 Aug",
-        "delivery_slot": [
-          {
-            "delivery_slot_timing": "By 9:00 PM",
-            "default": true,
-            "delivery_slot_id": 1
-          }
-        ]
-      }
-    ],
-    "store_code": "",
-    "store_emps": [],
-    "breakup_values": {
-      "loyalty_points": {
-        "total": 0,
-        "applicable": 0,
-        "is_applied": false,
-        "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
-      },
-      "coupon": {
-        "type": "cash",
-        "code": "",
-        "uid": "304_1054_9036_R1005753_6",
-        "value": 0,
-        "is_applied": false,
-        "message": "Sorry! Invalid Coupon"
-      },
-      "raw": {
-        "cod_charge": 0,
-        "convenience_fee": 0,
-        "coupon": 0,
-        "delivery_charge": 0,
-        "discount": 0,
-        "fynd_cash": 0,
-        "gst_charges": 214.18,
-        "mrp_total": 1999,
-        "subtotal": 1999,
-        "total": 1999,
-        "vog": 1784.82,
-        "you_saved": 0
-      },
-      "display": [
-        {
-          "display": "MRP Total",
-          "key": "mrp_total",
-          "value": 1999,
-          "currency_code": "INR"
-        },
-        {
-          "display": "Subtotal",
-          "key": "subtotal",
-          "value": 1999,
-          "currency_code": "INR"
-        },
-        {
-          "display": "Total",
-          "key": "total",
-          "value": 1999,
-          "currency_code": "INR"
-        }
-      ]
-    },
-    "shipments": [
-      {
-        "fulfillment_id": 3009,
-        "shipment_type": "single_shipment",
-        "fulfillment_type": "store",
-        "dp_id": "29",
-        "order_type": "PickAtStore",
-        "dp_options": {
-          "4": {
-            "f_priority": 4,
-            "r_priority": 5,
-            "is_cod": true,
-            "is_prepaid": true,
-            "is_reverse": true
-          },
-          "7": {
-            "f_priority": 3,
-            "r_priority": 4,
-            "is_cod": true,
-            "is_prepaid": true,
-            "is_reverse": true
-          },
-          "29": {
-            "f_priority": 1,
-            "r_priority": 2,
-            "is_cod": true,
-            "is_prepaid": true,
-            "is_reverse": true
-          }
-        },
-        "promise": {
-          "timestamp": {
-            "min": 1566678108,
-            "max": 1567023708
-          },
-          "formatted": {
-            "min": "Aug 24",
-            "max": "Aug 28"
-          },
-          "iso": {
-            "min": "2019-08-25T00:35:08.000Z",
-            "max": "2019-08-29T07:55:08.000Z"
-          }
-        },
-        "box_type": "Small Courier bag",
-        "shipments": 1,
-        "items": [
-          {
-            "quantity": 1,
-            "identifiers": {
-              "identifier": "5mPyy88URXuh3Lo35uaTg"
-            },
-            "product": {
-              "type": "product",
-              "uid": 820312,
-              "name": "Navy Blue Melange Shorts",
-              "slug": "883-police-navy-blue-melange-shorts-820312-4943a8",
-              "brand": {
-                "uid": 610,
-                "name": "883 Police"
-              },
-              "categories": [
-                {
-                  "uid": 193,
-                  "name": "Shorts"
-                }
-              ],
-              "images": [
-                {
-                  "aspect_ratio": "16:25",
-                  "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg",
-                  "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg"
-                }
-              ],
-              "action": {
-                "type": "product",
-                "url": "https://api.addsale.com/platform/content/v1/products/883-police-navy-blue-melange-shorts-820312-4943a8/",
-                "query": {
-                  "product_slug": [
-                    "883-police-navy-blue-melange-shorts-820312-4943a8"
-                  ]
-                }
-              }
-            },
-            "discount": "",
-            "bulk_offer": {},
-            "key": "820312_L",
-            "price": {
-              "base": {
-                "add_on": 1999,
-                "marked": 1999,
-                "effective": 1999,
-                "selling": 1999,
-                "currency_code": "INR"
-              },
-              "converted": {
-                "add_on": 1999,
-                "marked": 1999,
-                "effective": 1999,
-                "selling": 1999,
-                "currency_code": "INR"
-              }
-            },
-            "article": {
-              "type": "article",
-              "uid": "381_610_IGPL01_SPIRAL19ANAVY_L",
-              "size": "L",
-              "seller": {
-                "uid": 381,
-                "name": "INTERSOURCE GARMENTS PVT LTD"
-              },
-              "store": {
-                "uid": 3009,
-                "name": "Kormangala"
-              },
-              "quantity": 2,
-              "price": {
-                "base": {
-                  "marked": 1999,
-                  "effective": 1999,
-                  "currency_code": "INR"
-                },
-                "converted": {
-                  "marked": 1999,
-                  "effective": 1999,
-                  "currency_code": "INR"
-                }
-              }
-            },
-            "availability": {
-              "sizes": [
-                "L",
-                "XL",
-                "XXL"
-              ],
-              "other_store_quantity": 1,
-              "out_of_stock": false,
-              "deliverable": true,
-              "is_valid": true
-            },
-            "coupon_message": "",
-            "message": ""
-          }
-        ]
-      }
-    ],
-    "delivery_charge_info": "",
-    "coupon_text": "View all offers",
-    "gstin": "",
-    "checkout_mode": "self",
-    "last_modified": "2023-03-03T00:00:00.000Z",
-    "restrict_checkout": false,
-    "is_valid": true
-  }
-}
-```
-</details>
-
-<details>
-<summary><i>&nbsp; Shipment Generation Failed</i></summary>
-
-```json
-{
-  "value": {
-    "items": [],
-    "cart_id": 7501,
-    "uid": "7501",
-    "success": true,
-    "error_message": "Note: Your order delivery will be delayed by 7-10 Days",
-    "payment_options": {
-      "payment_option": [
-        {
-          "name": "COD",
-          "display_name": "Cash on Delivery",
-          "display_priority": 1,
-          "payment_mode_id": 11,
-          "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
-          "logo_url": {
-            "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
-            "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png"
-          },
-          "list": []
-        },
-        {
-          "name": "CARD",
-          "display_priority": 2,
-          "payment_mode_id": 2,
-          "display_name": "Card",
-          "list": []
-        },
-        {
-          "name": "NB",
-          "display_priority": 3,
-          "payment_mode_id": 3,
-          "display_name": "Net Banking",
-          "list": [
-            {
-              "aggregator_name": "Razorpay",
-              "bank_name": "ICICI Bank",
-              "bank_code": "ICIC",
-              "url": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
-              "logo_url": {
-                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
-                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png"
-              },
-              "merchant_code": "NB_ICICI",
-              "display_priority": 1
-            }
-          ]
-        },
-        {
-          "name": "WL",
-          "display_priority": 4,
-          "payment_mode_id": 4,
-          "display_name": "Wallet",
-          "list": [
-            {
-              "wallet_name": "Paytm",
-              "wallet_code": "paytm",
-              "wallet_id": 4,
-              "merchant_code": "PAYTM",
-              "logo_url": {
-                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_small.png",
-                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_large.png"
-              },
-              "aggregator_name": "Juspay",
-              "display_priority": 1
-            }
-          ]
-        },
-        {
-          "name": "UPI",
-          "display_priority": 9,
-          "payment_mode_id": 6,
-          "display_name": "UPI",
-          "list": [
-            {
-              "aggregator_name": "UPI_Razorpay",
-              "name": "UPI",
-              "display_name": "BHIM UPI",
-              "code": "UPI",
-              "logo_url": {
-                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_100x78.png",
-                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_150x100.png"
-              },
-              "merchant_code": "UPI",
-              "timeout": 240,
-              "retry_count": 0,
-              "fynd_vpa": "shopsense.rzp@hdfcbank",
-              "intent_flow": true,
-              "intent_app_error_list": [
-                "com.csam.icici.bank.imobile",
-                "in.org.npci.upiapp",
-                "com.whatsapp"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "PL",
-          "display_priority": 11,
-          "payment_mode_id": 1,
-          "display_name": "Pay Later",
-          "list": [
-            {
-              "aggregator_name": "Simpl",
-              "name": "Simpl",
-              "code": "simpl",
-              "merchant_code": "SIMPL",
-              "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
-              "logo_url": {
-                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
-                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png"
-              }
-            }
-          ]
-        }
-      ],
-      "payment_flows": {
-        "Simpl": {
-          "data": {
-            "gateway": {
-              "route": "simpl",
-              "entity": "sdk",
-              "is_customer_validation_required": true,
-              "cust_validation_url": "https://api.addsale.com/gringotts/api/v1/validate-customer/",
-              "sdk": {
-                "config": {
-                  "redirect": false,
-                  "callback_url": null,
-                  "action_url": "https://api.addsale.com/avis/api/v1/payments/charge-gringotts-transaction/"
-                },
-                "data": {
-                  "user_phone": "8452996729",
-                  "user_email": "paymentsdummy@gofynd.com"
-                }
-              },
-              "return_url": null
-            }
-          },
-          "api_link": "",
-          "payment_flow": "sdk"
-        },
-        "Juspay": {
-          "data": {},
-          "api_link": "https://sandbox.juspay.in/txns",
-          "payment_flow": "api"
-        },
-        "Razorpay": {
-          "data": {},
-          "api_link": "",
-          "payment_flow": "sdk"
-        },
-        "UPI_Razorpay": {
-          "data": {},
-          "api_link": "https://api.addsale.com/gringotts/api/v1/external/payment-initialisation/",
-          "payment_flow": "api"
-        },
-        "Fynd": {
-          "data": {},
-          "api_link": "",
-          "payment_flow": "api"
-        }
-      },
-      "default": {}
-    },
-    "user_type": "Store User",
-    "cod_charges": 0,
-    "order_id": null,
-    "cod_available": true,
-    "cod_message": "No additional COD charges applicable",
-    "delivery_charges": 0,
-    "delivery_charge_order_value": 0,
-    "delivery_slots": [
-      {
-        "date": "Sat, 24 Aug",
-        "delivery_slot": [
-          {
-            "delivery_slot_timing": "By 9:00 PM",
-            "default": true,
-            "delivery_slot_id": 1
-          }
-        ]
-      }
-    ],
-    "store_code": "",
-    "store_emps": [],
-    "breakup_values": {
-      "loyalty_points": {
-        "total": 0,
-        "applicable": 0,
-        "is_applied": false,
-        "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
-      },
-      "coupon": {
-        "type": "cash",
-        "code": "",
-        "uid": "304_1054_9036_R1005753_6",
-        "value": 0,
-        "is_applied": false,
-        "message": "Sorry! Invalid Coupon"
-      },
-      "raw": {
-        "cod_charge": 0,
-        "convenience_fee": 0,
-        "coupon": 0,
-        "delivery_charge": 0,
-        "discount": 0,
-        "fynd_cash": 0,
-        "gst_charges": 214.18,
-        "mrp_total": 1999,
-        "subtotal": 1999,
-        "total": 1999,
-        "vog": 1784.82,
-        "you_saved": 0
-      },
-      "display": [
-        {
-          "display": "MRP Total",
-          "key": "mrp_total",
-          "value": 1999,
-          "currency_code": "INR"
-        },
-        {
-          "display": "Subtotal",
-          "key": "subtotal",
-          "value": 1999,
-          "currency_code": "INR"
-        },
-        {
-          "display": "Total",
-          "key": "total",
-          "value": 1999,
-          "currency_code": "INR"
-        }
-      ]
-    },
-    "shipments": [],
-    "message": "Shipments could not be generated. Please Try again after some time.",
-    "delivery_charge_info": "",
-    "coupon_text": "View all offers",
-    "gstin": "",
-    "checkout_mode": "self",
-    "last_modified": "2023-03-03T00:00:00.000Z",
-    "restrict_checkout": false,
-    "is_valid": false
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getAvailableDeliveryModes
-Get available delivery modes.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getAvailableDeliveryModes(areaCode=areaCode, id=id)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| areaCode | String | yes |  |   
-| id | String? | no |  |  
-
-
-
-Retrieve a list of available delivery modes for cart checkout.
-
-*Returned Response:*
-
-
-
-
-[CartDeliveryModesResponse](#CartDeliveryModesResponse)
-
-Success. Returns the available delivery mode available for a given PIN Code, along with the UID of all the eligible pickup stores.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "available_modes": [
-    "HomeDelivery",
-    "PickAtStore"
-  ],
-  "pickup_stores": [
-    1
-  ]
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getStoreAddressByUid
-Get store address by UID.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.getStoreAddressByUid(storeUid=storeUid)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| storeUid | Int | yes |  |  
-
-
-
-Retrieve the store address using a unique identifier (UID).
-
-*Returned Response:*
-
-
-
-
-[StoreDetailsResponse](#StoreDetailsResponse)
-
-Success. Returns available store information with its address as shown below.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "name": "Tennille Urse",
-      "phone": "9819716565",
-      "email": "rehman@cashkart.com",
-      "address_type": "store",
-      "address": "NO",
-      "area": "",
-      "pincode": 400072,
-      "area_code": "400072",
-      "area_code_slug": "pincode",
-      "landmark": "",
-      "country": "INDIA",
-      "city": "MUMBAI",
-      "state": "MAHA",
-      "store_code": "6462b3cd-9d64-4da9-a764-b0e6a52cf5e8",
-      "uid": 20,
-      "store_manager_name": "Salma",
-      "geo_location": {
-        "longitude": 1,
-        "latitude": 1
-      }
-    }
-  ]
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### updateAddress
-Update address.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").cart.updateAddress(id=id, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | ID allotted to the selected address |  
-| body | [PlatformAddress](#PlatformAddress) | yes | Request body |
-
-
-Modify the shipping address for an order.
-
-*Returned Response:*
-
-
-
-
-[UpdateAddressResponse](#UpdateAddressResponse)
-
-Success. Returns the address ID and a message indicating a successful address updation.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "is_updated": true,
-  "id": "<mongo_object_id>",
-  "is_default_address": true,
-  "success": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
 ### getShipments
 Get delivery date and options before checkout
 
@@ -11872,10 +9893,6 @@ Success. Returns delivery promise along with shipment details and price breakup.
           "formatted": {
             "min": "Aug 24",
             "max": "Aug 28"
-          },
-          "iso": {
-            "min": "2019-08-25T00:35:08.000Z",
-            "max": "2019-08-29T07:55:08.000Z"
           }
         },
         "box_type": "Small Courier bag",
@@ -11939,7 +9956,6 @@ Success. Returns delivery promise along with shipment details and price breakup.
             },
             "article": {
               "type": "article",
-              "tags": [],
               "uid": "381_610_IGPL01_SPIRAL19ANAVY_L",
               "size": "L",
               "seller": {
@@ -11985,7 +10001,7 @@ Success. Returns delivery promise along with shipment details and price breakup.
     "coupon_text": "View all offers",
     "gstin": "",
     "checkout_mode": "self",
-    "last_modified": "2023-03-03T00:00:00.000Z",
+    "last_modified": "2023-03-03",
     "restrict_checkout": false,
     "is_valid": true
   }
@@ -12238,7 +10254,7 @@ Success. Returns delivery promise along with shipment details and price breakup.
     "coupon_text": "View all offers",
     "gstin": "",
     "checkout_mode": "self",
-    "last_modified": "2023-03-03T00:00:00.000Z",
+    "last_modified": "2023-03-03",
     "restrict_checkout": false,
     "is_valid": false
   }
@@ -12259,10 +10275,1362 @@ Success. Returns delivery promise along with shipment details and price breakup.
 ---
 
 
+### updateShipments
+Update shipment delivery type and quantity before checkout
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").cart.updateShipments(i=i, p=p, id=id, addressId=addressId, areaCode=areaCode, orderType=orderType, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| i | Boolean? | no | This is a boolean value. Select `true` to retrieve all the items added in the cart. |   
+| p | Boolean? | no | This is a boolean value. Select `true` for getting a payment option in response. |   
+| id | String? | no | The unique identifier of the cart |   
+| addressId | String? | no | ID allotted to an address |   
+| areaCode | String? | no | The PIN Code of the destination address, e.g. 400059 |   
+| orderType | String? | no | The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. |  
+| body | [UpdateCartShipmentRequest](#UpdateCartShipmentRequest) | yes | Request body |
+
+
+Use this API to update the delivery type and quantity as per customer's preference for either store pick-up or home-delivery.
+
+*Returned Response:*
+
+
+
+
+[PlatformCartShipmentsResponse](#PlatformCartShipmentsResponse)
+
+Success. Returns delivery promise along with shipment details and price breakup. Refer `PlatformCartShipmentsResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Shipment Generated</i></summary>
+
+```json
+{
+  "value": {
+    "items": [],
+    "cart_id": 7501,
+    "uid": "7501",
+    "success": true,
+    "error_message": "Note: Your order delivery will be delayed by 7-10 Days",
+    "payment_options": {
+      "payment_option": [
+        {
+          "name": "COD",
+          "display_name": "Cash on Delivery",
+          "display_priority": 1,
+          "payment_mode_id": 11,
+          "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+          "logo_url": {
+            "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+            "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png"
+          },
+          "list": []
+        },
+        {
+          "name": "CARD",
+          "display_priority": 2,
+          "payment_mode_id": 2,
+          "display_name": "Card",
+          "list": []
+        },
+        {
+          "name": "NB",
+          "display_priority": 3,
+          "payment_mode_id": 3,
+          "display_name": "Net Banking",
+          "list": [
+            {
+              "aggregator_name": "Razorpay",
+              "bank_name": "ICICI Bank",
+              "bank_code": "ICIC",
+              "url": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png"
+              },
+              "merchant_code": "NB_ICICI",
+              "display_priority": 1
+            }
+          ]
+        },
+        {
+          "name": "WL",
+          "display_priority": 4,
+          "payment_mode_id": 4,
+          "display_name": "Wallet",
+          "list": [
+            {
+              "wallet_name": "Paytm",
+              "wallet_code": "paytm",
+              "wallet_id": 4,
+              "merchant_code": "PAYTM",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_small.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_large.png"
+              },
+              "aggregator_name": "Juspay",
+              "display_priority": 1
+            }
+          ]
+        },
+        {
+          "name": "UPI",
+          "display_priority": 9,
+          "payment_mode_id": 6,
+          "display_name": "UPI",
+          "list": [
+            {
+              "aggregator_name": "UPI_Razorpay",
+              "name": "UPI",
+              "display_name": "BHIM UPI",
+              "code": "UPI",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_100x78.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_150x100.png"
+              },
+              "merchant_code": "UPI",
+              "timeout": 240,
+              "retry_count": 0,
+              "fynd_vpa": "shopsense.rzp@hdfcbank",
+              "intent_flow": true,
+              "intent_app_error_list": [
+                "com.csam.icici.bank.imobile",
+                "in.org.npci.upiapp",
+                "com.whatsapp"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PL",
+          "display_priority": 11,
+          "payment_mode_id": 1,
+          "display_name": "Pay Later",
+          "list": [
+            {
+              "aggregator_name": "Simpl",
+              "name": "Simpl",
+              "code": "simpl",
+              "merchant_code": "SIMPL",
+              "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png"
+              }
+            }
+          ]
+        }
+      ],
+      "payment_flows": {
+        "Simpl": {
+          "data": {
+            "gateway": {
+              "route": "simpl",
+              "entity": "sdk",
+              "is_customer_validation_required": true,
+              "cust_validation_url": "https://api.addsale.com/gringotts/api/v1/validate-customer/",
+              "sdk": {
+                "config": {
+                  "redirect": false,
+                  "callback_url": null,
+                  "action_url": "https://api.addsale.com/avis/api/v1/payments/charge-gringotts-transaction/"
+                },
+                "data": {
+                  "user_phone": "8452996729",
+                  "user_email": "paymentsdummy@gofynd.com"
+                }
+              },
+              "return_url": null
+            }
+          },
+          "api_link": "",
+          "payment_flow": "sdk"
+        },
+        "Juspay": {
+          "data": {},
+          "api_link": "https://sandbox.juspay.in/txns",
+          "payment_flow": "api"
+        },
+        "Razorpay": {
+          "data": {},
+          "api_link": "",
+          "payment_flow": "sdk"
+        },
+        "UPI_Razorpay": {
+          "data": {},
+          "api_link": "https://api.addsale.com/gringotts/api/v1/external/payment-initialisation/",
+          "payment_flow": "api"
+        },
+        "Fynd": {
+          "data": {},
+          "api_link": "",
+          "payment_flow": "api"
+        }
+      },
+      "default": {}
+    },
+    "user_type": "Store User",
+    "cod_charges": 0,
+    "order_id": null,
+    "cod_available": true,
+    "cod_message": "No additional COD charges applicable",
+    "delivery_charges": 0,
+    "delivery_charge_order_value": 0,
+    "delivery_slots": [
+      {
+        "date": "Sat, 24 Aug",
+        "delivery_slot": [
+          {
+            "delivery_slot_timing": "By 9:00 PM",
+            "default": true,
+            "delivery_slot_id": 1
+          }
+        ]
+      }
+    ],
+    "store_code": "",
+    "store_emps": [],
+    "breakup_values": {
+      "loyalty_points": {
+        "total": 0,
+        "applicable": 0,
+        "is_applied": false,
+        "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+      },
+      "coupon": {
+        "type": "cash",
+        "code": "",
+        "uid": "304_1054_9036_R1005753_6",
+        "value": 0,
+        "is_applied": false,
+        "message": "Sorry! Invalid Coupon"
+      },
+      "raw": {
+        "cod_charge": 0,
+        "convenience_fee": 0,
+        "coupon": 0,
+        "delivery_charge": 0,
+        "discount": 0,
+        "fynd_cash": 0,
+        "gst_charges": 214.18,
+        "mrp_total": 1999,
+        "subtotal": 1999,
+        "total": 1999,
+        "vog": 1784.82,
+        "you_saved": 0
+      },
+      "display": [
+        {
+          "display": "MRP Total",
+          "key": "mrp_total",
+          "value": 1999,
+          "currency_code": "INR"
+        },
+        {
+          "display": "Subtotal",
+          "key": "subtotal",
+          "value": 1999,
+          "currency_code": "INR"
+        },
+        {
+          "display": "Total",
+          "key": "total",
+          "value": 1999,
+          "currency_code": "INR"
+        }
+      ]
+    },
+    "shipments": [
+      {
+        "fulfillment_id": 3009,
+        "shipment_type": "single_shipment",
+        "fulfillment_type": "store",
+        "dp_id": "29",
+        "order_type": "PickAtStore",
+        "dp_options": {
+          "4": {
+            "f_priority": 4,
+            "r_priority": 5,
+            "is_cod": true,
+            "is_prepaid": true,
+            "is_reverse": true
+          },
+          "7": {
+            "f_priority": 3,
+            "r_priority": 4,
+            "is_cod": true,
+            "is_prepaid": true,
+            "is_reverse": true
+          },
+          "29": {
+            "f_priority": 1,
+            "r_priority": 2,
+            "is_cod": true,
+            "is_prepaid": true,
+            "is_reverse": true
+          }
+        },
+        "promise": {
+          "timestamp": {
+            "min": 1566678108,
+            "max": 1567023708
+          },
+          "formatted": {
+            "min": "Aug 24",
+            "max": "Aug 28"
+          }
+        },
+        "box_type": "Small Courier bag",
+        "shipments": 1,
+        "items": [
+          {
+            "quantity": 1,
+            "identifiers": {
+              "identifier": "5mPyy88URXuh3Lo35uaTg"
+            },
+            "product": {
+              "type": "product",
+              "uid": 820312,
+              "name": "Navy Blue Melange Shorts",
+              "slug": "883-police-navy-blue-melange-shorts-820312-4943a8",
+              "brand": {
+                "uid": 610,
+                "name": "883 Police"
+              },
+              "categories": [
+                {
+                  "uid": 193,
+                  "name": "Shorts"
+                }
+              ],
+              "images": [
+                {
+                  "aspect_ratio": "16:25",
+                  "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg",
+                  "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg"
+                }
+              ],
+              "action": {
+                "type": "product",
+                "url": "https://api.addsale.com/platform/content/v1/products/883-police-navy-blue-melange-shorts-820312-4943a8/",
+                "query": {
+                  "product_slug": [
+                    "883-police-navy-blue-melange-shorts-820312-4943a8"
+                  ]
+                }
+              }
+            },
+            "discount": "",
+            "bulk_offer": {},
+            "key": "820312_L",
+            "price": {
+              "base": {
+                "add_on": 1999,
+                "marked": 1999,
+                "effective": 1999,
+                "selling": 1999,
+                "currency_code": "INR"
+              },
+              "converted": {
+                "add_on": 1999,
+                "marked": 1999,
+                "effective": 1999,
+                "selling": 1999,
+                "currency_code": "INR"
+              }
+            },
+            "article": {
+              "type": "article",
+              "uid": "381_610_IGPL01_SPIRAL19ANAVY_L",
+              "size": "L",
+              "seller": {
+                "uid": 381,
+                "name": "INTERSOURCE GARMENTS PVT LTD"
+              },
+              "store": {
+                "uid": 3009,
+                "name": "Kormangala"
+              },
+              "quantity": 2,
+              "price": {
+                "base": {
+                  "marked": 1999,
+                  "effective": 1999,
+                  "currency_code": "INR"
+                },
+                "converted": {
+                  "marked": 1999,
+                  "effective": 1999,
+                  "currency_code": "INR"
+                }
+              }
+            },
+            "availability": {
+              "sizes": [
+                "L",
+                "XL",
+                "XXL"
+              ],
+              "other_store_quantity": 1,
+              "out_of_stock": false,
+              "deliverable": true,
+              "is_valid": true
+            },
+            "coupon_message": "",
+            "message": ""
+          }
+        ]
+      }
+    ],
+    "delivery_charge_info": "",
+    "coupon_text": "View all offers",
+    "gstin": "",
+    "checkout_mode": "self",
+    "last_modified": "2023-03-03",
+    "restrict_checkout": false,
+    "is_valid": true
+  }
+}
+```
+</details>
+
+<details>
+<summary><i>&nbsp; Shipment Generation Failed</i></summary>
+
+```json
+{
+  "value": {
+    "items": [],
+    "cart_id": 7501,
+    "uid": "7501",
+    "success": true,
+    "error_message": "Note: Your order delivery will be delayed by 7-10 Days",
+    "payment_options": {
+      "payment_option": [
+        {
+          "name": "COD",
+          "display_name": "Cash on Delivery",
+          "display_priority": 1,
+          "payment_mode_id": 11,
+          "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+          "logo_url": {
+            "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+            "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png"
+          },
+          "list": []
+        },
+        {
+          "name": "CARD",
+          "display_priority": 2,
+          "payment_mode_id": 2,
+          "display_name": "Card",
+          "list": []
+        },
+        {
+          "name": "NB",
+          "display_priority": 3,
+          "payment_mode_id": 3,
+          "display_name": "Net Banking",
+          "list": [
+            {
+              "aggregator_name": "Razorpay",
+              "bank_name": "ICICI Bank",
+              "bank_code": "ICIC",
+              "url": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png"
+              },
+              "merchant_code": "NB_ICICI",
+              "display_priority": 1
+            }
+          ]
+        },
+        {
+          "name": "WL",
+          "display_priority": 4,
+          "payment_mode_id": 4,
+          "display_name": "Wallet",
+          "list": [
+            {
+              "wallet_name": "Paytm",
+              "wallet_code": "paytm",
+              "wallet_id": 4,
+              "merchant_code": "PAYTM",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_small.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_large.png"
+              },
+              "aggregator_name": "Juspay",
+              "display_priority": 1
+            }
+          ]
+        },
+        {
+          "name": "UPI",
+          "display_priority": 9,
+          "payment_mode_id": 6,
+          "display_name": "UPI",
+          "list": [
+            {
+              "aggregator_name": "UPI_Razorpay",
+              "name": "UPI",
+              "display_name": "BHIM UPI",
+              "code": "UPI",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_100x78.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_150x100.png"
+              },
+              "merchant_code": "UPI",
+              "timeout": 240,
+              "retry_count": 0,
+              "fynd_vpa": "shopsense.rzp@hdfcbank",
+              "intent_flow": true,
+              "intent_app_error_list": [
+                "com.csam.icici.bank.imobile",
+                "in.org.npci.upiapp",
+                "com.whatsapp"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PL",
+          "display_priority": 11,
+          "payment_mode_id": 1,
+          "display_name": "Pay Later",
+          "list": [
+            {
+              "aggregator_name": "Simpl",
+              "name": "Simpl",
+              "code": "simpl",
+              "merchant_code": "SIMPL",
+              "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+              "logo_url": {
+                "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+                "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png"
+              }
+            }
+          ]
+        }
+      ],
+      "payment_flows": {
+        "Simpl": {
+          "data": {
+            "gateway": {
+              "route": "simpl",
+              "entity": "sdk",
+              "is_customer_validation_required": true,
+              "cust_validation_url": "https://api.addsale.com/gringotts/api/v1/validate-customer/",
+              "sdk": {
+                "config": {
+                  "redirect": false,
+                  "callback_url": null,
+                  "action_url": "https://api.addsale.com/avis/api/v1/payments/charge-gringotts-transaction/"
+                },
+                "data": {
+                  "user_phone": "8452996729",
+                  "user_email": "paymentsdummy@gofynd.com"
+                }
+              },
+              "return_url": null
+            }
+          },
+          "api_link": "",
+          "payment_flow": "sdk"
+        },
+        "Juspay": {
+          "data": {},
+          "api_link": "https://sandbox.juspay.in/txns",
+          "payment_flow": "api"
+        },
+        "Razorpay": {
+          "data": {},
+          "api_link": "",
+          "payment_flow": "sdk"
+        },
+        "UPI_Razorpay": {
+          "data": {},
+          "api_link": "https://api.addsale.com/gringotts/api/v1/external/payment-initialisation/",
+          "payment_flow": "api"
+        },
+        "Fynd": {
+          "data": {},
+          "api_link": "",
+          "payment_flow": "api"
+        }
+      },
+      "default": {}
+    },
+    "user_type": "Store User",
+    "cod_charges": 0,
+    "order_id": null,
+    "cod_available": true,
+    "cod_message": "No additional COD charges applicable",
+    "delivery_charges": 0,
+    "delivery_charge_order_value": 0,
+    "delivery_slots": [
+      {
+        "date": "Sat, 24 Aug",
+        "delivery_slot": [
+          {
+            "delivery_slot_timing": "By 9:00 PM",
+            "default": true,
+            "delivery_slot_id": 1
+          }
+        ]
+      }
+    ],
+    "store_code": "",
+    "store_emps": [],
+    "breakup_values": {
+      "loyalty_points": {
+        "total": 0,
+        "applicable": 0,
+        "is_applied": false,
+        "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+      },
+      "coupon": {
+        "type": "cash",
+        "code": "",
+        "uid": "304_1054_9036_R1005753_6",
+        "value": 0,
+        "is_applied": false,
+        "message": "Sorry! Invalid Coupon"
+      },
+      "raw": {
+        "cod_charge": 0,
+        "convenience_fee": 0,
+        "coupon": 0,
+        "delivery_charge": 0,
+        "discount": 0,
+        "fynd_cash": 0,
+        "gst_charges": 214.18,
+        "mrp_total": 1999,
+        "subtotal": 1999,
+        "total": 1999,
+        "vog": 1784.82,
+        "you_saved": 0
+      },
+      "display": [
+        {
+          "display": "MRP Total",
+          "key": "mrp_total",
+          "value": 1999,
+          "currency_code": "INR"
+        },
+        {
+          "display": "Subtotal",
+          "key": "subtotal",
+          "value": 1999,
+          "currency_code": "INR"
+        },
+        {
+          "display": "Total",
+          "key": "total",
+          "value": 1999,
+          "currency_code": "INR"
+        }
+      ]
+    },
+    "shipments": [],
+    "message": "Shipments could not be generated. Please Try again after some time.",
+    "delivery_charge_info": "",
+    "coupon_text": "View all offers",
+    "gstin": "",
+    "checkout_mode": "self",
+    "last_modified": "2023-03-03",
+    "restrict_checkout": false,
+    "is_valid": false
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateCartMeta
+Update the cart meta for platform pos user
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").cart.updateCartMeta(id=id, buyNow=buyNow, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String? | no |  |   
+| buyNow | Boolean? | no |  |  
+| body | [PlatformCartMetaRequest](#PlatformCartMetaRequest) | yes | Request body |
+
+
+Use this API to update cart meta like checkout_mode and gstin.
+
+*Returned Response:*
+
+
+
+
+[CartMetaResponse](#CartMetaResponse)
+
+Returns a message indicating the success of cart meta updation as shown below.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "message": "cart meta updated"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### platformCheckoutCart
+Checkout all items in the cart
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").cart.platformCheckoutCart(id=id, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String? | no |  |  
+| body | [PlatformCartCheckoutDetailRequest](#PlatformCartCheckoutDetailRequest) | yes | Request body |
+
+
+Use this API to checkout all items in the cart for payment and order generation. For COD, order will be generated directly, whereas for other checkout modes, user will be redirected to a payment gateway.
+
+*Returned Response:*
+
+
+
+
+[CartCheckoutResponse](#CartCheckoutResponse)
+
+Success. Returns the status of cart checkout. Refer `CartCheckoutResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Address id not found</i></summary>
+
+```json
+{
+  "value": {
+    "success": false,
+    "message": "No address found with address id {address_id}"
+  }
+}
+```
+</details>
+
+<details>
+<summary><i>&nbsp; Missing address_id</i></summary>
+
+```json
+{
+  "value": {
+    "address_id": [
+      "Missing data for required field."
+    ]
+  }
+}
+```
+</details>
+
+<details>
+<summary><i>&nbsp; Successful checkout cod payment</i></summary>
+
+```json
+{
+  "value": {
+    "success": true,
+    "cart": {
+      "success": true,
+      "error_message": "Note: Your order delivery will be delayed by 7-10 Days",
+      "payment_options": {
+        "payment_option": [
+          {
+            "name": "COD",
+            "display_name": "Cash on Delivery",
+            "display_priority": 1,
+            "payment_mode_id": 11,
+            "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+            "logo_url": {
+              "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+              "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png"
+            },
+            "list": []
+          },
+          {
+            "name": "CARD",
+            "display_priority": 2,
+            "payment_mode_id": 2,
+            "display_name": "Card",
+            "list": []
+          },
+          {
+            "name": "NB",
+            "display_priority": 3,
+            "payment_mode_id": 3,
+            "display_name": "Net Banking",
+            "list": [
+              {
+                "aggregator_name": "Razorpay",
+                "bank_name": "ICICI Bank",
+                "bank_code": "ICIC",
+                "url": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+                "logo_url": {
+                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png"
+                },
+                "merchant_code": "NB_ICICI",
+                "display_priority": 1
+              }
+            ]
+          },
+          {
+            "name": "WL",
+            "display_priority": 4,
+            "payment_mode_id": 4,
+            "display_name": "Wallet",
+            "list": [
+              {
+                "wallet_name": "Paytm",
+                "wallet_code": "paytm",
+                "wallet_id": 4,
+                "merchant_code": "PAYTM",
+                "logo_url": {
+                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_small.png",
+                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_large.png"
+                },
+                "aggregator_name": "Juspay",
+                "display_priority": 1
+              }
+            ]
+          },
+          {
+            "name": "UPI",
+            "display_priority": 9,
+            "payment_mode_id": 6,
+            "display_name": "UPI",
+            "list": [
+              {
+                "aggregator_name": "UPI_Razorpay",
+                "name": "UPI",
+                "display_name": "BHIM UPI",
+                "code": "UPI",
+                "logo_url": {
+                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_100x78.png",
+                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_150x100.png"
+                },
+                "merchant_code": "UPI",
+                "timeout": 240,
+                "retry_count": 0,
+                "fynd_vpa": "shopsense.rzp@hdfcbank",
+                "intent_flow": true,
+                "intent_app_error_list": [
+                  "com.csam.icici.bank.imobile",
+                  "in.org.npci.upiapp",
+                  "com.whatsapp"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "PL",
+            "display_priority": 11,
+            "payment_mode_id": 1,
+            "display_name": "Pay Later",
+            "list": [
+              {
+                "aggregator_name": "Simpl",
+                "name": "Simpl",
+                "code": "simpl",
+                "merchant_code": "SIMPL",
+                "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+                "logo_url": {
+                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png"
+                }
+              }
+            ]
+          }
+        ],
+        "payment_flows": {
+          "Simpl": {
+            "data": {
+              "gateway": {
+                "route": "simpl",
+                "entity": "sdk",
+                "is_customer_validation_required": true,
+                "cust_validation_url": "https://api.addsale.com/gringotts/api/v1/validate-customer/",
+                "sdk": {
+                  "config": {
+                    "redirect": false,
+                    "callback_url": null,
+                    "action_url": "https://api.addsale.com/avis/api/v1/payments/charge-gringotts-transaction/"
+                  },
+                  "data": {
+                    "user_phone": "8452996729",
+                    "user_email": "paymentsdummy@gofynd.com"
+                  }
+                },
+                "return_url": null
+              }
+            },
+            "api_link": "",
+            "payment_flow": "sdk"
+          },
+          "Juspay": {
+            "data": {},
+            "api_link": "https://sandbox.juspay.in/txns",
+            "payment_flow": "api"
+          },
+          "Razorpay": {
+            "data": {},
+            "api_link": "",
+            "payment_flow": "sdk"
+          },
+          "UPI_Razorpay": {
+            "data": {},
+            "api_link": "https://api.addsale.com/gringotts/api/v1/external/payment-initialisation/",
+            "payment_flow": "api"
+          },
+          "Fynd": {
+            "data": {},
+            "api_link": "",
+            "payment_flow": "api"
+          }
+        },
+        "default": {}
+      },
+      "user_type": "Store User",
+      "cod_charges": 0,
+      "order_id": "FY5D5E215CF287584CE6",
+      "cod_available": true,
+      "cod_message": "No additional COD charges applicable",
+      "delivery_charges": 0,
+      "delivery_charge_order_value": 0,
+      "delivery_slots": [
+        {
+          "date": "Sat, 24 Aug",
+          "delivery_slot": [
+            {
+              "delivery_slot_timing": "By 9:00 PM",
+              "default": true,
+              "delivery_slot_id": 1
+            }
+          ]
+        }
+      ],
+      "store_code": "",
+      "store_emps": [],
+      "breakup_values": {
+        "coupon": {
+          "type": "cash",
+          "code": "",
+          "uid": "",
+          "value": 0,
+          "is_applied": false,
+          "message": "Sorry! Invalid Coupon"
+        },
+        "loyalty_points": {
+          "total": 0,
+          "applicable": 0,
+          "is_applied": false,
+          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+        },
+        "raw": {
+          "cod_charge": 0,
+          "convenience_fee": 0,
+          "coupon": 0,
+          "delivery_charge": 0,
+          "discount": 0,
+          "fynd_cash": 0,
+          "gst_charges": 214.18,
+          "mrp_total": 1999,
+          "subtotal": 1999,
+          "total": 1999,
+          "vog": 1784.82,
+          "you_saved": 0
+        },
+        "display": [
+          {
+            "display": "MRP Total",
+            "key": "mrp_total",
+            "value": 1999,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Subtotal",
+            "key": "subtotal",
+            "value": 1999,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Total",
+            "key": "total",
+            "value": 1999,
+            "currency_code": "INR"
+          }
+        ]
+      },
+      "items": [
+        {
+          "key": "820312_L",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
+          "message": "",
+          "bulk_offer": {},
+          "price": {
+            "base": {
+              "add_on": 1999,
+              "marked": 1999,
+              "effective": 1999,
+              "selling": 1999,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "add_on": 1999,
+              "marked": 1999,
+              "effective": 1999,
+              "selling": 1999,
+              "currency_code": "INR"
+            }
+          },
+          "quantity": 1,
+          "discount": "",
+          "product": {
+            "type": "product",
+            "uid": 820312,
+            "name": "Navy Blue Melange Shorts",
+            "slug": "883-police-navy-blue-melange-shorts-820312-4943a8",
+            "brand": {
+              "uid": 610,
+              "name": "883 Police"
+            },
+            "categories": [
+              {
+                "uid": 193,
+                "name": "Shorts"
+              }
+            ],
+            "images": [
+              {
+                "aspect_ratio": "16:25",
+                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg",
+                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg"
+              }
+            ],
+            "action": {
+              "type": "product",
+              "url": "https://api.addsale.com/platform/content/v1/products/883-police-navy-blue-melange-shorts-820312-4943a8/",
+              "query": {
+                "product_slug": [
+                  "883-police-navy-blue-melange-shorts-820312-4943a8"
+                ]
+              }
+            }
+          },
+          "article": {
+            "type": "article",
+            "uid": "381_610_IGPL01_SPIRAL19ANAVY_L",
+            "size": "L",
+            "seller": {
+              "uid": 381,
+              "name": "INTERSOURCE GARMENTS PVT LTD"
+            },
+            "store": {
+              "uid": 3009,
+              "name": "Kormangala"
+            },
+            "quantity": 2,
+            "price": {
+              "base": {
+                "marked": 1999,
+                "effective": 1999,
+                "currency_code": "INR"
+              },
+              "converted": {
+                "marked": 1999,
+                "effective": 1999,
+                "currency_code": "INR"
+              }
+            }
+          },
+          "coupon_message": "",
+          "availability": {
+            "sizes": [
+              "L",
+              "XL",
+              "XXL"
+            ],
+            "other_store_quantity": 1,
+            "out_of_stock": false,
+            "deliverable": true,
+            "is_valid": true
+          }
+        }
+      ],
+      "delivery_charge_info": "",
+      "coupon_text": "View all offers",
+      "cart_id": 7483,
+      "uid": "7483",
+      "gstin": "",
+      "checkout_mode": "self",
+      "last_modified": "2023-03-03T00:00:00.000Z",
+      "restrict_checkout": false,
+      "is_valid": true
+    },
+    "callback_url": "https://api.addsale.com/gringotts/api/v1/external/payment-callback/",
+    "app_intercept_url": "http://uniket-testing.addsale.link/cart/order-status",
+    "message": "",
+    "data": {
+      "order_id": "FY5D5E215CF287584CE6"
+    },
+    "order_id": "FY5D5E215CF287584CE6"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getAvailableDeliveryModes
+Get available delivery modes for cart
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").cart.getAvailableDeliveryModes(areaCode=areaCode, id=id)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| areaCode | String | yes |  |   
+| id | String? | no |  |  
+
+
+
+Use this API to get the delivery modes (home-delivery/store-pickup) along with a list of pickup stores available for a given cart at a given PIN Code. User can then view the address of a pickup store with the help of store-address API.
+
+*Returned Response:*
+
+
+
+
+[CartDeliveryModesResponse](#CartDeliveryModesResponse)
+
+Success. Returns the available delivery mode available for a given PIN Code, along with the UID of all the eligible pickup stores.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "available_modes": [
+    "HomeDelivery",
+    "PickAtStore"
+  ],
+  "pickup_stores": [
+    1
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getStoreAddressByUid
+Get list of stores for give uids
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").cart.getStoreAddressByUid(storeUid=storeUid)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| storeUid | Int | yes |  |  
+
+
+
+Use this API to get the store details by entering the unique identifier of the pickup stores shown in the response of available-delivery-mode API.
+
+*Returned Response:*
+
+
+
+
+[StoreDetailsResponse](#StoreDetailsResponse)
+
+Success. Returns available store information with its address as shown below.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "items": [
+    {
+      "name": "Tennille Urse",
+      "phone": "9819716565",
+      "email": "rehman@cashkart.com",
+      "address_type": "store",
+      "address": "NO",
+      "area": "",
+      "pincode": 400072,
+      "area_code": "400072",
+      "area_code_slug": "pincode",
+      "landmark": "",
+      "country": "INDIA",
+      "city": "MUMBAI",
+      "state": "MAHA",
+      "store_code": "6462b3cd-9d64-4da9-a764-b0e6a52cf5e8",
+      "uid": 20,
+      "store_manager_name": "Salma",
+      "geo_location": {
+        "longitude": 1,
+        "latitude": 1
+      }
+    }
+  ]
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
 
 
 ### selectPaymentMode
-Select a payment mode.
+Update cart payment
 
 
 
@@ -12287,7 +11655,7 @@ except Exception as e:
 | body | [UpdateCartPaymentRequest](#UpdateCartPaymentRequest) | yes | Request body |
 
 
-Choose a payment mode for cart checkout.
+Use this API to update cart payment.
 
 *Returned Response:*
 
@@ -12594,8 +11962,521 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
 ---
 
 
+### validateCouponForPayment
+Verify the coupon eligibility against the payment mode
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").cart.validateCouponForPayment(id=id, buyNow=buyNow, addressId=addressId, paymentMode=paymentMode, paymentIdentifier=paymentIdentifier, aggregatorName=aggregatorName, merchantCode=merchantCode)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String? | no |  |   
+| buyNow | Boolean? | no |  |   
+| addressId | String? | no |  |   
+| paymentMode | String? | no |  |   
+| paymentIdentifier | String? | no |  |   
+| aggregatorName | String? | no |  |   
+| merchantCode | String? | no |  |  
+
+
+
+Use this API to validate a coupon against the payment mode such as NetBanking, Wallet, UPI etc.
+
+*Returned Response:*
+
+
+
+
+[PaymentCouponValidate](#PaymentCouponValidate)
+
+Success. Returns a success message and the coupon validity. Refer `PaymentCouponValidate` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true,
+  "message": "",
+  "coupon_validity": {
+    "valid": true,
+    "discount": 499.5,
+    "code": "testpayment",
+    "display_message_en": "",
+    "title": "Coupon value will change."
+  }
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### platformCheckoutCartV2
+Checkout all items in the cart
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").cart.platformCheckoutCartV2(id=id, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String? | no |  |  
+| body | [PlatformCartCheckoutDetailV2Request](#PlatformCartCheckoutDetailV2Request) | yes | Request body |
+
+
+Use this API to checkout all items in the cart for payment and order generation. For COD, order will be directly generated, whereas for other checkout modes, user will be redirected to a payment gateway.
+
+*Returned Response:*
+
+
+
+
+[CartCheckoutResponse](#CartCheckoutResponse)
+
+Success. Returns the status of cart checkout. Refer `CartCheckoutResponseSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Address id not found</i></summary>
+
+```json
+{
+  "value": {
+    "success": false,
+    "message": "No address found with address id {address_id}"
+  }
+}
+```
+</details>
+
+<details>
+<summary><i>&nbsp; Missing address_id</i></summary>
+
+```json
+{
+  "value": {
+    "address_id": [
+      "Missing data for required field."
+    ]
+  }
+}
+```
+</details>
+
+<details>
+<summary><i>&nbsp; Successful checkout cod payment</i></summary>
+
+```json
+{
+  "value": {
+    "success": true,
+    "cart": {
+      "success": true,
+      "error_message": "Note: Your order delivery will be delayed by 7-10 Days",
+      "payment_options": {
+        "payment_option": [
+          {
+            "name": "COD",
+            "display_name": "Cash on Delivery",
+            "display_priority": 1,
+            "payment_mode_id": 11,
+            "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+            "logo_url": {
+              "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png",
+              "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/cod.png"
+            },
+            "list": []
+          },
+          {
+            "name": "CARD",
+            "display_priority": 2,
+            "payment_mode_id": 2,
+            "display_name": "Card",
+            "list": []
+          },
+          {
+            "name": "NB",
+            "display_priority": 3,
+            "payment_mode_id": 3,
+            "display_name": "Net Banking",
+            "list": [
+              {
+                "aggregator_name": "Razorpay",
+                "bank_name": "ICICI Bank",
+                "bank_code": "ICIC",
+                "url": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+                "logo_url": {
+                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png",
+                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/NB_ICICI.png"
+                },
+                "merchant_code": "NB_ICICI",
+                "display_priority": 1
+              }
+            ]
+          },
+          {
+            "name": "WL",
+            "display_priority": 4,
+            "payment_mode_id": 4,
+            "display_name": "Wallet",
+            "list": [
+              {
+                "wallet_name": "Paytm",
+                "wallet_code": "paytm",
+                "wallet_id": 4,
+                "merchant_code": "PAYTM",
+                "logo_url": {
+                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_small.png",
+                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/paytm_logo_large.png"
+                },
+                "aggregator_name": "Juspay",
+                "display_priority": 1
+              }
+            ]
+          },
+          {
+            "name": "UPI",
+            "display_priority": 9,
+            "payment_mode_id": 6,
+            "display_name": "UPI",
+            "list": [
+              {
+                "aggregator_name": "UPI_Razorpay",
+                "name": "UPI",
+                "display_name": "BHIM UPI",
+                "code": "UPI",
+                "logo_url": {
+                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_100x78.png",
+                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/upi_150x100.png"
+                },
+                "merchant_code": "UPI",
+                "timeout": 240,
+                "retry_count": 0,
+                "fynd_vpa": "shopsense.rzp@hdfcbank",
+                "intent_flow": true,
+                "intent_app_error_list": [
+                  "com.csam.icici.bank.imobile",
+                  "in.org.npci.upiapp",
+                  "com.whatsapp"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "PL",
+            "display_priority": 11,
+            "payment_mode_id": 1,
+            "display_name": "Pay Later",
+            "list": [
+              {
+                "aggregator_name": "Simpl",
+                "name": "Simpl",
+                "code": "simpl",
+                "merchant_code": "SIMPL",
+                "logo": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+                "logo_url": {
+                  "small": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png",
+                  "large": "https://d2co8r51m5ca2d.cloudfront.net/payments_assets/simpl_logo.png"
+                }
+              }
+            ]
+          }
+        ],
+        "payment_flows": {
+          "Simpl": {
+            "data": {
+              "gateway": {
+                "route": "simpl",
+                "entity": "sdk",
+                "is_customer_validation_required": true,
+                "cust_validation_url": "https://api.addsale.com/gringotts/api/v1/validate-customer/",
+                "sdk": {
+                  "config": {
+                    "redirect": false,
+                    "callback_url": null,
+                    "action_url": "https://api.addsale.com/avis/api/v1/payments/charge-gringotts-transaction/"
+                  },
+                  "data": {
+                    "user_phone": "8452996729",
+                    "user_email": "paymentsdummy@gofynd.com"
+                  }
+                },
+                "return_url": null
+              }
+            },
+            "api_link": "",
+            "payment_flow": "sdk"
+          },
+          "Juspay": {
+            "data": {},
+            "api_link": "https://sandbox.juspay.in/txns",
+            "payment_flow": "api"
+          },
+          "Razorpay": {
+            "data": {},
+            "api_link": "",
+            "payment_flow": "sdk"
+          },
+          "UPI_Razorpay": {
+            "data": {},
+            "api_link": "https://api.addsale.com/gringotts/api/v1/external/payment-initialisation/",
+            "payment_flow": "api"
+          },
+          "Fynd": {
+            "data": {},
+            "api_link": "",
+            "payment_flow": "api"
+          }
+        },
+        "default": {}
+      },
+      "user_type": "Store User",
+      "cod_charges": 0,
+      "order_id": "FY5D5E215CF287584CE6",
+      "cod_available": true,
+      "cod_message": "No additional COD charges applicable",
+      "delivery_charges": 0,
+      "delivery_charge_order_value": 0,
+      "delivery_slots": [
+        {
+          "date": "Sat, 24 Aug",
+          "delivery_slot": [
+            {
+              "delivery_slot_timing": "By 9:00 PM",
+              "default": true,
+              "delivery_slot_id": 1
+            }
+          ]
+        }
+      ],
+      "store_code": "",
+      "store_emps": [],
+      "breakup_values": {
+        "coupon": {
+          "type": "cash",
+          "code": "",
+          "uid": "",
+          "value": 0,
+          "is_applied": false,
+          "message": "Sorry! Invalid Coupon"
+        },
+        "loyalty_points": {
+          "total": 0,
+          "applicable": 0,
+          "is_applied": false,
+          "description": "Your cashback, referrals, and refund amount get credited to Fynd Cash which can be redeemed while placing an order."
+        },
+        "raw": {
+          "cod_charge": 0,
+          "convenience_fee": 0,
+          "coupon": 0,
+          "delivery_charge": 0,
+          "discount": 0,
+          "fynd_cash": 0,
+          "gst_charges": 214.18,
+          "mrp_total": 1999,
+          "subtotal": 1999,
+          "total": 1999,
+          "vog": 1784.82,
+          "you_saved": 0
+        },
+        "display": [
+          {
+            "display": "MRP Total",
+            "key": "mrp_total",
+            "value": 1999,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Subtotal",
+            "key": "subtotal",
+            "value": 1999,
+            "currency_code": "INR"
+          },
+          {
+            "display": "Total",
+            "key": "total",
+            "value": 1999,
+            "currency_code": "INR"
+          }
+        ]
+      },
+      "items": [
+        {
+          "key": "820312_L",
+          "identifiers": {
+            "identifier": "5mPyy88URXuh3Lo35uaTg"
+          },
+          "message": "",
+          "bulk_offer": {},
+          "price": {
+            "base": {
+              "add_on": 1999,
+              "marked": 1999,
+              "effective": 1999,
+              "selling": 1999,
+              "currency_code": "INR"
+            },
+            "converted": {
+              "add_on": 1999,
+              "marked": 1999,
+              "effective": 1999,
+              "selling": 1999,
+              "currency_code": "INR"
+            }
+          },
+          "quantity": 1,
+          "discount": "",
+          "product": {
+            "type": "product",
+            "uid": 820312,
+            "name": "Navy Blue Melange Shorts",
+            "slug": "883-police-navy-blue-melange-shorts-820312-4943a8",
+            "brand": {
+              "uid": 610,
+              "name": "883 Police"
+            },
+            "categories": [
+              {
+                "uid": 193,
+                "name": "Shorts"
+              }
+            ],
+            "images": [
+              {
+                "aspect_ratio": "16:25",
+                "url": "http://cdn4.gofynd.com/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg",
+                "secure_url": "https://d2zv4gzhlr4ud6.cloudfront.net/media/pictures/tagged_items/original/610_SPIRAL19ANAVY/1_1549105947281.jpg"
+              }
+            ],
+            "action": {
+              "type": "product",
+              "url": "https://api.addsale.com/platform/content/v1/products/883-police-navy-blue-melange-shorts-820312-4943a8/",
+              "query": {
+                "product_slug": [
+                  "883-police-navy-blue-melange-shorts-820312-4943a8"
+                ]
+              }
+            }
+          },
+          "article": {
+            "type": "article",
+            "uid": "381_610_IGPL01_SPIRAL19ANAVY_L",
+            "size": "L",
+            "seller": {
+              "uid": 381,
+              "name": "INTERSOURCE GARMENTS PVT LTD"
+            },
+            "store": {
+              "uid": 3009,
+              "name": "Kormangala"
+            },
+            "quantity": 2,
+            "price": {
+              "base": {
+                "marked": 1999,
+                "effective": 1999,
+                "currency_code": "INR"
+              },
+              "converted": {
+                "marked": 1999,
+                "effective": 1999,
+                "currency_code": "INR"
+              }
+            }
+          },
+          "coupon_message": "",
+          "availability": {
+            "sizes": [
+              "L",
+              "XL",
+              "XXL"
+            ],
+            "other_store_quantity": 1,
+            "out_of_stock": false,
+            "deliverable": true,
+            "is_valid": true
+          }
+        }
+      ],
+      "delivery_charge_info": "",
+      "coupon_text": "View all offers",
+      "cart_id": 7483,
+      "uid": "7483",
+      "gstin": "",
+      "checkout_mode": "self",
+      "last_modified": "2023-02-02T00:00:00.000Z",
+      "restrict_checkout": false,
+      "is_valid": true
+    },
+    "callback_url": "https://api.addsale.com/gringotts/api/v1/external/payment-callback/",
+    "app_intercept_url": "http://uniket-testing.addsale.link/cart/order-status",
+    "message": "",
+    "data": {
+      "order_id": "FY5D5E215CF287584CE6"
+    },
+    "order_id": "FY5D5E215CF287584CE6"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### selectPaymentModeV2
-Select a payment mode v2.
+Update cart payment
 
 
 
@@ -12620,7 +12501,7 @@ except Exception as e:
 | body | [UpdateCartPaymentRequestV2](#UpdateCartPaymentRequestV2) | yes | Request body |
 
 
-Choose a payment mode for cart checkout in the updated platform integration.
+Use this API to update cart payment.
 
 *Returned Response:*
 
@@ -12914,6 +12795,107 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
   "is_valid": true
 }
 ```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+### getPriceAdjustments
+Get a list of all price adjustments associated with a cart
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").cart.getPriceAdjustments(cartId=cartId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| cartId | String | yes | Cart Id |  
+
+
+
+This API helps to get price adjustments data associated to a particular cart
+
+*Returned Response:*
+
+
+
+
+[PriceAdjustmentResponse](#PriceAdjustmentResponse)
+
+Price Adjustments List. See example below for details
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; 200_OKAY</i></summary>
+
+```json
+{
+  "value": {
+    "success": true,
+    "data": {
+      "id": "cc8154592ccb42c88b481ce4c21ab602",
+      "cart_id": "fa45f5cbd3764a6297bfa79d6bedf71c",
+      "is_authenticated": true,
+      "article_ids": [
+        {
+          "article_id": "f322167ce70f4dca8f8ac0efdc496abe",
+          "value": 100,
+          "code": "abs120",
+          "meta": {},
+          "quantity": 2
+        }
+      ],
+      "type": "discount",
+      "message": "Fynd Campaign 100 Rs off",
+      "value": 100,
+      "article_level_distribution": true,
+      "allow_refund": true,
+      "meta": {},
+      "collection": {
+        "collected_by": "FYND",
+        "refund_by": "FYND"
+      },
+      "restrictions": {
+        "post_order": {
+          "cancellation_allowed": false,
+          "return_allowed": false
+        }
+      },
+      "remove_articles": false,
+      "auto_remove": true
+    }
+  }
+}
+```
+</details>
+
 </details>
 
 
@@ -13296,7 +13278,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | ---------- | ---- | -------- | ----------- |
  | success | Boolean? |  yes  |  |
  | message | String? |  yes  |  |
- | error | String? |  yes  |  |
 
 ---
 
@@ -13529,8 +13510,8 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | payments | HashMap<String,Any>? |  yes  |  |
- | userRegistered | [UserRegistered](#UserRegistered)? |  yes  |  |
+ | payments | ArrayList<[PromotionPaymentModes](#PromotionPaymentModes)>? |  yes  |  |
+ | userRegistered | HashMap<String,Any>? |  yes  |  |
  | platforms | ArrayList<String>? |  yes  |  |
  | postOrder | [PostOrder1](#PostOrder1)? |  yes  |  |
  | userGroups | ArrayList<Int>? |  yes  |  |
@@ -13636,7 +13617,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | customJson | HashMap<String,Any>? |  yes  | custom data stored in promotion |
  | dateMeta | [PromotionDateMeta](#PromotionDateMeta)? |  yes  |  |
  | id | String? |  yes  | Promotion id |
- | tags | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -13681,7 +13661,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | buyRules | HashMap<String,[ItemCriteria](#ItemCriteria)> |  no  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
  | dateMeta | [PromotionDateMeta](#PromotionDateMeta)? |  yes  |  |
- | tags | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -13714,7 +13693,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | buyRules | HashMap<String,[ItemCriteria](#ItemCriteria)> |  no  |  |
  | customJson | HashMap<String,Any>? |  yes  |  |
  | dateMeta | [PromotionDateMeta](#PromotionDateMeta)? |  yes  |  |
- | tags | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -13782,7 +13760,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | minCartValue | Int? |  yes  |  |
- | maxCartValue | Int? |  yes  |  |
  | bulkCoupons | Boolean? |  yes  |  |
  | maxCartItems | Int? |  yes  |  |
  | giftDisplayText | String? |  yes  |  |
@@ -13801,7 +13778,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | minCartValue | Int? |  yes  |  |
- | maxCartValue | Int? |  yes  |  |
  | bulkCoupons | Boolean? |  yes  |  |
  | maxCartItems | Int? |  yes  |  |
  | giftDisplayText | String? |  yes  |  |
@@ -13831,17 +13807,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
 
  
  
- #### [PriceAdjustmentRestrictions](#PriceAdjustmentRestrictions)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | postOrder | HashMap<String,Any>? |  yes  | This field holds the post-order restrictions, indicated by nested fields ['cancellation_allowed','return_allowed'] |
-
----
-
-
- 
- 
  #### [Collection](#Collection)
 
  | Properties | Type | Nullable | Description |
@@ -13862,7 +13827,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | value | Double |  no  |  |
  | message | String |  no  | The message associated with the price adjustment |
  | applyExpiry | String? |  yes  | The date and time when the expiry should be applied |
- | restrictions | [PriceAdjustmentRestrictions](#PriceAdjustmentRestrictions)? |  yes  | restrictions applied to this particular item or product, including whether or not cancellation and return are allowed. |
  | articleLevelDistribution | Boolean |  no  | Flag indicating whether the distribution should is done at the article level |
  | collection | [Collection](#Collection) |  no  |  |
  | type | String |  no  | type of price adjusment |
@@ -13884,7 +13848,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | value | Double |  no  |  |
  | message | String |  no  | The message associated with the price adjustment |
  | applyExpiry | String? |  yes  | The date and time when the expiry should be applied |
- | restrictions | [PriceAdjustmentRestrictions](#PriceAdjustmentRestrictions)? |  yes  | This field accepts the restrictions applied to this particular item or service, including whether or not cancellation and return are allowed, etc |
  | articleLevelDistribution | Boolean |  no  | Flag indicating whether the distribution should is done at the article level |
  | id | String? |  yes  |  |
  | collection | [Collection](#Collection) |  no  |  |
@@ -13918,7 +13881,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | value | Double |  no  |  |
  | message | String |  no  | The message associated with the price adjustment |
  | applyExpiry | String? |  yes  | The date and time when the expiry should be applied |
- | restrictions | [PriceAdjustmentRestrictions](#PriceAdjustmentRestrictions)? |  yes  | This field accepts the restrictions applied to this particular item or service, including whether or not cancellation and return are allowed, etc |
  | createdBy | String? |  yes  | The entity that created the field |
  | articleLevelDistribution | Boolean |  no  | Flag indicating whether the distribution should is done at the article level |
  | collection | [Collection](#Collection) |  no  |  |
@@ -14204,7 +14166,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | meta | HashMap<String,Any>? |  yes  |  |
  | size | String? |  yes  |  |
  | store | [StoreInfo](#StoreInfo)? |  yes  |  |
- | tags | ArrayList<String>? |  yes  | a list of article tags |
 
 ---
 
@@ -14285,7 +14246,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | ---------- | ---- | -------- | ----------- |
  | articleQuantity | Int? |  yes  | Quantity of article on which promotion is applicable |
  | ownership | [Ownership2](#Ownership2)? |  yes  | Ownership of promotion |
- | currency | [CartCurrency](#CartCurrency)? |  yes  |  |
  | discountRules | ArrayList<[DiscountRulesApp](#DiscountRulesApp)>? |  yes  | Discount rules for promotions |
  | appliedFreeArticles | ArrayList<[AppliedFreeArticles](#AppliedFreeArticles)>? |  yes  | Applied free article for free gift item promotions |
  | promotionName | String? |  yes  | Promotion name of current promotion |
@@ -14316,18 +14276,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
 
  
  
- #### [PromiseISOFormat](#PromiseISOFormat)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | max | String? |  yes  | Max promise in ISO format. |
- | min | String? |  yes  | Min Promise in ISO format. |
-
----
-
-
- 
- 
  #### [PromiseTimestamp](#PromiseTimestamp)
 
  | Properties | Type | Nullable | Description |
@@ -14346,7 +14294,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | ---------- | ---- | -------- | ----------- |
  | formatted | [PromiseFormatted](#PromiseFormatted)? |  yes  |  |
  | timestamp | [PromiseTimestamp](#PromiseTimestamp)? |  yes  |  |
- | iso | [PromiseISOFormat](#PromiseISOFormat)? |  yes  |  |
 
 ---
 
@@ -14879,7 +14826,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | customJson | HashMap<String,Any>? |  yes  |  |
  | meta | HashMap<String,Any>? |  yes  |  |
  | pos | Boolean? |  yes  |  |
- | sellerIdentifier | String? |  yes  | Add items using seller identifier for store os |
 
 ---
 
@@ -14966,7 +14912,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | promoDesc | String? |  yes  |  |
  | rwrdTndr | String? |  yes  |  |
  | itemList | ArrayList<HashMap<String,Any>>? |  yes  |  |
- | parentPromoId | String? |  yes  |  |
 
 ---
 
@@ -15118,7 +15063,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | cartValue | Double? |  yes  |  |
  | createdOn | String? |  yes  |  |
  | userId | String? |  yes  |  |
- | currencyCode | String? |  yes  |  |
  | itemCounts | Int? |  yes  |  |
 
 ---
@@ -15274,9 +15218,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | isApplicable | Boolean? |  yes  |  |
  | message | String? |  yes  |  |
  | description | String? |  yes  |  |
- | startDate | String? |  yes  |  |
- | endDate | String? |  yes  |  |
- | couponApplicableMessage | String? |  yes  |  |
 
 ---
 
@@ -15357,15 +15298,10 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | googleMapPoint | HashMap<String,Any>? |  yes  |  |
  | cartId | String? |  yes  |  |
  | city | String? |  yes  |  |
- | sector | String? |  yes  |  |
- | stateCode | String? |  yes  | State code for international address |
  | area | String? |  yes  |  |
  | userId | String? |  yes  |  |
  | addressType | String? |  yes  |  |
  | address | String? |  yes  |  |
- | countryPhoneCode | String? |  yes  |  |
- | countryIsoCode | String? |  yes  |  |
- | customJson | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -15650,10 +15586,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | files | ArrayList<[Files](#Files)>? |  yes  | List of file url |
  | orderingStore | Int? |  yes  |  |
  | paymentExtraIdentifiers | HashMap<String,Any>? |  yes  |  |
- | iin | String? |  yes  |  |
- | network | String? |  yes  |  |
- | type | String? |  yes  |  |
- | cardId | String? |  yes  |  |
 
 ---
 
@@ -15680,7 +15612,7 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | orderId | String? |  yes  |  |
  | message | String? |  yes  |  |
  | breakupValues | [CartBreakup](#CartBreakup)? |  yes  |  |
- | codCharges | Double? |  yes  |  |
+ | codCharges | Int? |  yes  |  |
  | isValid | Boolean? |  yes  |  |
  | uid | String? |  yes  |  |
  | checkoutMode | String? |  yes  |  |
@@ -15692,7 +15624,7 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | storeEmps | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | gstin | String? |  yes  |  |
  | codAvailable | Boolean? |  yes  |  |
- | deliveryCharges | Double? |  yes  |  |
+ | deliveryCharges | Int? |  yes  |  |
 
 ---
 
@@ -15873,10 +15805,6 @@ Success. Returns a Cart object as shown below. Refer `CartDetailResponse` for mo
  | orderType | String |  no  |  |
  | files | ArrayList<[Files](#Files)>? |  yes  | List of file url |
  | orderingStore | Int? |  yes  |  |
- | iin | String? |  yes  |  |
- | network | String? |  yes  |  |
- | type | String? |  yes  |  |
- | cardId | String? |  yes  |  |
 
 ---
 

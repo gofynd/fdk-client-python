@@ -28,7 +28,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
@@ -50,7 +49,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
         
@@ -86,7 +84,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
@@ -139,7 +136,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
@@ -178,7 +174,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
         
@@ -213,31 +208,19 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
-        
-        
-        
-        
-        
         
-    
-    
         
         
-    
-    
         
         
     
     
         
         
-        
     
     
-        
         
         
     
@@ -250,19 +233,13 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
     
     
-        
         
-    
-    
         
         
     
     
-        
         
         
         
@@ -275,20 +252,11 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-        
-    
-    
-        
-        
-        
     
     
         
         
         
-    
-    
         
         
     
@@ -301,15 +269,10 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
         
         
         
         
-    
-    
-        
         
     
     
@@ -322,21 +285,12 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
-        
-        
         
         
         
         
-    
-    
-        
-        
-    
-    
         
         
     
@@ -390,8 +344,6 @@ class CommunicationValidator:
         page_size = fields.Int(required=False)
         
         sort = fields.Dict(required=False)
-        
-        query = fields.Dict(required=False)
          
         
     
@@ -449,8 +401,6 @@ class CommunicationValidator:
         page_size = fields.Int(required=False)
         
         sort = fields.Dict(required=False)
-        
-        query = fields.Dict(required=False)
          
         
     
@@ -511,8 +461,6 @@ class CommunicationValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
-        
-        query = fields.Dict(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -634,8 +582,6 @@ class CommunicationValidator:
         page_size = fields.Int(required=False)
         
         sort = fields.Dict(required=False)
-        
-        query = fields.Dict(required=False)
          
         
     
@@ -731,8 +677,6 @@ class CommunicationValidator:
         page_size = fields.Int(required=False)
         
         sort = fields.Dict(required=False)
-        
-        query = fields.Dict(required=False)
          
         
     
@@ -797,8 +741,6 @@ class CommunicationValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
-        
-        query = fields.Dict(required=False)
          
         
     
@@ -814,8 +756,6 @@ class CommunicationValidator:
         page_size = fields.Int(required=False)
         
         sort = fields.Dict(required=False)
-        
-        query = fields.Dict(required=False)
          
         
     
@@ -880,8 +820,6 @@ class CommunicationValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
-        
-        query = fields.Dict(required=False)
          
         
     
@@ -918,59 +856,6 @@ class CommunicationValidator:
          
         
     
-    class createEventSubscriptions(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getEventSubscriptionsById(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-        
-        populate = fields.Str(required=False)
-         
-        
-    
-    class editEventSubscriptions(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class deleteEventSubscriptionsById(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class createEventSubscriptionsByBulk(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
     class getGlobalVariables(BaseSchema):
         
         
@@ -1001,17 +886,6 @@ class CommunicationValidator:
         page_size = fields.Int(required=False)
         
         sort = fields.Dict(required=False)
-        
-        query = fields.Dict(required=False)
-         
-        
-    
-    class createJobs(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
          
         
     
@@ -1036,8 +910,6 @@ class CommunicationValidator:
         page_size = fields.Int(required=False)
         
         sort = fields.Dict(required=False)
-        
-        query = fields.Dict(required=False)
          
         
     
@@ -1068,24 +940,6 @@ class CommunicationValidator:
         
     
     class verfiyOtp(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getOtpConfiguration(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateOtpConfiguration(BaseSchema):
         
         
         company_id = fields.Str(required=False)

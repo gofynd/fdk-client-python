@@ -7,16 +7,13 @@
 ## Theme Methods
 Responsible for themes
 
-Page Management
+Default
 * [getAllPages](#getallpages)
 * [createPage](#createpage)
 * [updateMultiplePages](#updatemultiplepages)
 * [getPage](#getpage)
 * [updatePage](#updatepage)
 * [deletePage](#deletepage)
-
-
-Theme management 
 * [getThemeLibrary](#getthemelibrary)
 * [addToThemeLibrary](#addtothemelibrary)
 * [getPublicThemes](#getpublicthemes)
@@ -44,10 +41,6 @@ Theme management
 * [upgradeTheme](#upgradetheme)
 
 
-Default
-* [getCompanyLevelPrivateThemes](#getcompanylevelprivatethemes)
-
-
 
 
 ## Methods with example and description
@@ -55,7 +48,7 @@ Default
 
 
 ### getAllPages
-Get all pages.
+Get all pages of a theme
 
 
 
@@ -78,7 +71,7 @@ except Exception as e:
 
 
 
-Retrieve a list of all available pages.
+Use this API to retrieve all the available pages of a theme by its ID.
 
 *Returned Response:*
 
@@ -109,12 +102,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981639e13f6b2"
         },
         "_id": "60ab5ca6d572fed64294eb0e",
@@ -130,13 +117,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981fc5d13f6b9"
         },
         "_id": "60ab5ca6d572fed64294eaf9",
@@ -152,13 +132,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981cbca13f6b1"
         },
         "_id": "60ab5ca6d572fed64294eb0b",
@@ -174,13 +147,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e9812fdf13f6ae"
         },
         "_id": "60ab5ca6d572fed64294eb02",
@@ -196,13 +162,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e9815c9713f6ab"
         },
         "_id": "60ab5ca6d572fed64294eaf6",
@@ -218,13 +177,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60ab5ca6d572fed64294eb24"
         },
         "_id": "60ab5ca6d572fed64294eb25",
@@ -240,13 +192,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60ab5ca6d572fed64294eb22"
         },
         "_id": "60ab5ca6d572fed64294eb23",
@@ -262,13 +207,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e9814fed13f6b5"
         },
         "_id": "60ab5ca6d572fed64294eb17",
@@ -284,13 +222,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981b32713f6b6"
         },
         "_id": "60ab5ca6d572fed64294eb1a",
@@ -306,13 +237,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60ab5ca6d572fed64294eb28"
         },
         "_id": "60ab5ca6d572fed64294eb29",
@@ -328,13 +252,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981dd2d13f6b3"
         },
         "_id": "60ab5ca6d572fed64294eb11",
@@ -350,13 +267,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60ab5ca6d572fed64294eb26"
         },
         "_id": "60ab5ca6d572fed64294eb27",
@@ -372,13 +282,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981161a13f6ad"
         },
         "_id": "60ab5ca6d572fed64294eaff",
@@ -394,13 +297,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e98115b013f6ac"
         },
         "_id": "60ab5ca6d572fed64294eafc",
@@ -416,13 +312,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981ad0b13f6b0"
         },
         "_id": "60ab5ca6d572fed64294eb08",
@@ -438,13 +327,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981872c13f6af"
         },
         "_id": "60ab5ca6d572fed64294eb05",
@@ -460,13 +342,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e98177f713f6b4"
         },
         "_id": "60ab5ca6d572fed64294eb14",
@@ -482,13 +357,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e98170b813f6b8"
         },
         "_id": "60ab5ca6d572fed64294eb20",
@@ -504,13 +372,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981469613f6b7"
         },
         "_id": "60ab5ca6d572fed64294eb1d",
@@ -540,7 +401,7 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
 
 
 ### createPage
-Create page.
+Create a page 
 
 
 
@@ -563,7 +424,7 @@ except Exception as e:
 | body | [AvailablePageSchema](#AvailablePageSchema) | yes | Request body |
 
 
-Generate and add a new page to the platform.
+Use this API to create a page for a theme by its ID.
 
 *Returned Response:*
 
@@ -592,13 +453,6 @@ Success. Returns the page of the theme. Refer `AvailablePageSchema` for more det
     "seo": {
       "title": "",
       "description": "",
-      "canonical_url": "",
-      "breadcrumbs": [],
-      "sitemap": {
-        "priority": 0.5,
-        "frequency": "never"
-      },
-      "meta_tags": [],
       "_id": "60210832d7e98115b013f6ac"
     },
     "props": [],
@@ -972,7 +826,7 @@ Success. Returns the page of the theme. Refer `AvailablePageSchema` for more det
 
 
 ### updateMultiplePages
-Update multiple pages.
+Update multiple pages of a theme
 
 
 
@@ -995,7 +849,7 @@ except Exception as e:
 | body | [AllAvailablePageSchema](#AllAvailablePageSchema) | yes | Request body |
 
 
-Modify multiple pages simultaneously.
+Use this API to update multiple pages of a theme by its ID.
 
 *Returned Response:*
 
@@ -1026,12 +880,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981639e13f6b2"
         },
         "_id": "60ab5ca6d572fed64294eb0e",
@@ -1047,13 +895,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981fc5d13f6b9"
         },
         "_id": "60ab5ca6d572fed64294eaf9",
@@ -1069,13 +910,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981cbca13f6b1"
         },
         "_id": "60ab5ca6d572fed64294eb0b",
@@ -1091,13 +925,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e9812fdf13f6ae"
         },
         "_id": "60ab5ca6d572fed64294eb02",
@@ -1113,13 +940,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e9815c9713f6ab"
         },
         "_id": "60ab5ca6d572fed64294eaf6",
@@ -1135,13 +955,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60ab5ca6d572fed64294eb24"
         },
         "_id": "60ab5ca6d572fed64294eb25",
@@ -1157,13 +970,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60ab5ca6d572fed64294eb22"
         },
         "_id": "60ab5ca6d572fed64294eb23",
@@ -1179,13 +985,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e9814fed13f6b5"
         },
         "_id": "60ab5ca6d572fed64294eb17",
@@ -1201,13 +1000,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981b32713f6b6"
         },
         "_id": "60ab5ca6d572fed64294eb1a",
@@ -1223,13 +1015,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60ab5ca6d572fed64294eb28"
         },
         "_id": "60ab5ca6d572fed64294eb29",
@@ -1245,13 +1030,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981dd2d13f6b3"
         },
         "_id": "60ab5ca6d572fed64294eb11",
@@ -1267,13 +1045,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60ab5ca6d572fed64294eb26"
         },
         "_id": "60ab5ca6d572fed64294eb27",
@@ -1289,13 +1060,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981161a13f6ad"
         },
         "_id": "60ab5ca6d572fed64294eaff",
@@ -1311,13 +1075,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e98115b013f6ac"
         },
         "_id": "60ab5ca6d572fed64294eafc",
@@ -1333,13 +1090,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981ad0b13f6b0"
         },
         "_id": "60ab5ca6d572fed64294eb08",
@@ -1355,13 +1105,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981872c13f6af"
         },
         "_id": "60ab5ca6d572fed64294eb05",
@@ -1377,13 +1120,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e98177f713f6b4"
         },
         "_id": "60ab5ca6d572fed64294eb14",
@@ -1399,13 +1135,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e98170b813f6b8"
         },
         "_id": "60ab5ca6d572fed64294eb20",
@@ -1421,13 +1150,6 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
         "seo": {
           "title": "",
           "description": "",
-          "canonical_url": "",
-          "breadcrumbs": [],
-          "sitemap": {
-            "priority": 0.5,
-            "frequency": "never"
-          },
-          "meta_tags": [],
           "_id": "60210832d7e981469613f6b7"
         },
         "_id": "60ab5ca6d572fed64294eb1d",
@@ -1457,7 +1179,7 @@ Success. Returns an array all the pages of the theme. Refer `AllAvailablePageSch
 
 
 ### getPage
-Get page.
+Get page of a theme
 
 
 
@@ -1481,7 +1203,7 @@ except Exception as e:
 
 
 
-Retrieve detailed information about a specific page.
+Use this API to retrieve a page of a theme.
 
 *Returned Response:*
 
@@ -1510,13 +1232,6 @@ Success. Returns an object of the page.  Refer `AvailablePageSchema` for more de
     "seo": {
       "title": "",
       "description": "",
-      "canonical_url": "",
-      "breadcrumbs": [],
-      "sitemap": {
-        "priority": 0.5,
-        "frequency": "never"
-      },
-      "meta_tags": [],
       "_id": "60210832d7e98115b013f6ac"
     },
     "props": [],
@@ -1890,7 +1605,7 @@ Success. Returns an object of the page.  Refer `AvailablePageSchema` for more de
 
 
 ### updatePage
-Update page.
+Updates a page 
 
 
 
@@ -1914,7 +1629,7 @@ except Exception as e:
 | body | [AvailablePageSchema](#AvailablePageSchema) | yes | Request body |
 
 
-Modify and update the content of a page.
+Use this API to update a page for a theme by its ID.
 
 *Returned Response:*
 
@@ -1943,13 +1658,6 @@ Success. Returns a the page of the theme. Refer `AvailablePageSchema` for more d
     "seo": {
       "title": "",
       "description": "",
-      "canonical_url": "",
-      "breadcrumbs": [],
-      "sitemap": {
-        "priority": 0.5,
-        "frequency": "never"
-      },
-      "meta_tags": [],
       "_id": "60210832d7e98115b013f6ac"
     },
     "props": [],
@@ -2323,7 +2031,7 @@ Success. Returns a the page of the theme. Refer `AvailablePageSchema` for more d
 
 
 ### deletePage
-Delete page.
+Deletes a page 
 
 
 
@@ -2347,7 +2055,7 @@ except Exception as e:
 
 
 
-Remove a page from the platform.
+Use this API to delete a page for a theme by its ID and page_value.
 
 *Returned Response:*
 
@@ -2376,13 +2084,6 @@ Success. Returns a the page of the theme. Refer `AvailablePageSchema` for more d
     "seo": {
       "title": "",
       "description": "",
-      "canonical_url": "",
-      "breadcrumbs": [],
-      "sitemap": {
-        "priority": 0.5,
-        "frequency": "never"
-      },
-      "meta_tags": [],
       "_id": "60210832d7e98115b013f6ac"
     },
     "props": [],
@@ -2755,10 +2456,8 @@ Success. Returns a the page of the theme. Refer `AvailablePageSchema` for more d
 ---
 
 
-
-
 ### getThemeLibrary
-Get theme library.
+Get a list of themes from the theme library
 
 
 
@@ -2782,7 +2481,7 @@ except Exception as e:
 
 
 
-Retrieve themes available in the platform's library.
+Theme library is a personalized collection of themes that are chosen and added from the available themes. Use this API to fetch a list of themes from the library along with their configuration details. 
 
 *Returned Response:*
 
@@ -2816,7 +2515,7 @@ Success. Refer `FontsSchema` for more details.
 
 
 ### addToThemeLibrary
-Add to theme library.
+Add a theme to the theme library
 
 
 
@@ -2838,7 +2537,7 @@ except Exception as e:
 | body | [AddThemeRequestSchema](#AddThemeRequestSchema) | yes | Request body |
 
 
-Store and add a theme to the platform's library.
+Theme library is a personalized collection of themes that are chosen and added from the available themes. Use this API to choose a theme and add it to the theme library.
 
 *Returned Response:*
 
@@ -2872,7 +2571,7 @@ Success. Refer `FontsSchema` for more details.
 
 
 ### getPublicThemes
-Get public themes.
+Get all public themes
 
 
 
@@ -2896,7 +2595,7 @@ except Exception as e:
 
 
 
-Retrieve themes that are publicly accessible.
+Use this API to get a list of free themes that you can apply to your website.
 
 *Returned Response:*
 
@@ -2930,7 +2629,7 @@ Success. Refer `FontsSchema` for more details.
 
 
 ### getFonts
-Get fonts.
+Get all the supported fonts in a theme
 
 
 
@@ -2948,7 +2647,7 @@ except Exception as e:
 
 
 
-Retrieve a list of available fonts.
+Font is a collection of characters with a similar design. Use this API to retrieve a list of website fonts.
 
 *Returned Response:*
 
@@ -2983,7 +2682,7 @@ Success. Refer `FontsSchema` for more details.
         "latin"
       ],
       "version": "v14",
-      "last_modified": "2020-09-02T00:00:00.000Z",
+      "last_modified": "2020-09-02",
       "files": {
         "regular": "http://fonts.gstatic.com/s/abeezee/v14/esDR31xSG-6AGleN6tKukbcHCpE.ttf",
         "italic": "http://fonts.gstatic.com/s/abeezee/v14/esDT31xSG-6AGleN2tCklZUCGpG-GQ.ttf"
@@ -3008,7 +2707,7 @@ Success. Refer `FontsSchema` for more details.
 
 
 ### publishTheme
-Publish theme.
+Publish a theme
 
 
 
@@ -3031,7 +2730,7 @@ except Exception as e:
 
 
 
-Make a theme accessible for use.
+Use this API to publish a theme that is either newly created or edited.
 
 *Returned Response:*
 
@@ -3065,7 +2764,7 @@ Success. Refer `FontsSchema` for more details.
 
 
 ### unpublishTheme
-Unpublish theme.
+Unpublish a theme
 
 
 
@@ -3088,7 +2787,7 @@ except Exception as e:
 
 
 
-Remove a published theme from public access.
+Use this API to remove an existing theme from the list of available themes.
 
 *Returned Response:*
 
@@ -3122,7 +2821,7 @@ Success. Refer `FontsSchema` for more details.
 
 
 ### archiveTheme
-Archive theme.
+Archive a theme
 
 
 
@@ -3145,7 +2844,7 @@ except Exception as e:
 
 
 
-Store a theme in an archive.
+Use this API to store an existing theme but not delete it so that it can be used in future if required. 
 
 *Returned Response:*
 
@@ -3179,7 +2878,7 @@ Success. Refer `FontsSchema` for more details.
 
 
 ### unarchiveTheme
-Unarchive theme.
+Unarchive a theme
 
 
 
@@ -3202,7 +2901,7 @@ except Exception as e:
 
 
 
-Retrieve a theme from the archive.
+Use this API to restore an archived theme and bring it back for editing or publishing. 
 
 *Returned Response:*
 
@@ -3236,14 +2935,14 @@ Success. Refer `FontsSchema` for more details.
 
 
 ### getCompanyLevelThemes
-Get company-level themes.
+Get themes for a company
 
 
 
 
 ```python
 try:
-    result = await platformClient.theme.getCompanyLevelThemes(searchText=searchText)
+    result = await platformClient.theme.getCompanyLevelThemes()
     # use result
 except Exception as e:
     print(e)
@@ -3253,13 +2952,8 @@ except Exception as e:
 
 
 
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| searchText | String? | no | Search Text to match the Theme Names and return the response. |  
 
-
-
-Retrieve themes specific to a company.
+Retrieve a list of themes available for a specific company.
 
 *Returned Response:*
 
@@ -3293,7 +2987,7 @@ A list of themes for the company.
 
 
 ### addMarketplaceThemeToCompany
-Add marketplace theme to company.
+Add a theme to a company
 
 
 
@@ -3315,7 +3009,7 @@ except Exception as e:
 | body | [ThemeReq](#ThemeReq) | yes | Request body |
 
 
-Incorporate a marketplace theme into a company's profile.
+Add a marketplace theme to a company by providing the theme ID and company ID.
 
 *Returned Response:*
 
@@ -3349,7 +3043,7 @@ The theme was successfully applied to the company.
 
 
 ### deleteCompanyTheme
-Delete company theme.
+Delete a theme
 
 
 
@@ -3372,7 +3066,7 @@ except Exception as e:
 
 
 
-Remove a theme associated with a company.
+Delete a specific theme for a company by providing the company ID and theme ID.
 
 *Returned Response:*
 
@@ -3406,7 +3100,7 @@ Theme deleted successfully.
 
 
 ### getApplicationThemes
-Get application themes.
+Get all the themes for a specific application
 
 
 
@@ -3424,7 +3118,7 @@ except Exception as e:
 
 
 
-Retrieve themes available for an application.
+Get all the themes for a specific application
 
 *Returned Response:*
 
@@ -5428,8 +5122,7 @@ The list of themes for the application was fetched successfully.
           }
         }
       ],
-      "src": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/organization/64b0eb01c35f990518880a82/theme/assets/7yuL57qP2-archive.zip",
-      "company_id": 1
+      "src": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/organization/64b0eb01c35f990518880a82/theme/assets/7yuL57qP2-archive.zip"
     }
   ]
 }
@@ -7402,8 +7095,7 @@ The list of themes for the application was fetched successfully.
           }
         }
       ],
-      "src": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/organization/64aec4634bc407961ed265c5/theme/assets/Gpbt5naNG-archive.zip",
-      "company_id": 1
+      "src": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/organization/64aec4634bc407961ed265c5/theme/assets/Gpbt5naNG-archive.zip"
     }
   ]
 }
@@ -7424,7 +7116,7 @@ The list of themes for the application was fetched successfully.
 
 
 ### getApplicationThemesCount
-Get application themes count.
+Get the count of themes for a specific application
 
 
 
@@ -7442,7 +7134,7 @@ except Exception as e:
 
 
 
-Count the number of themes available for an application.
+Get the count of themes for a specific application
 
 *Returned Response:*
 
@@ -7476,7 +7168,7 @@ The count of themes for the application was fetched successfully.
 
 
 ### getThemeById
-Get theme by ID.
+Get Theme By Theme Id
 
 
 
@@ -7499,7 +7191,7 @@ except Exception as e:
 
 
 
-Retrieve a theme by its unique identifier.
+Get Theme By Theme Id
 
 *Returned Response:*
 
@@ -7533,7 +7225,7 @@ The Details of themes for the application was fetched successfully.
 
 
 ### updateTheme
-Update theme.
+Update theme for a specific company and application
 
 
 
@@ -7556,7 +7248,7 @@ except Exception as e:
 | body | [UpdateThemeRequestBody](#UpdateThemeRequestBody) | yes | Request body |
 
 
-Modify and update the content and settings of a theme
+Update theme for a specific company and application
 
 *Returned Response:*
 
@@ -11549,7 +11241,7 @@ Theme updated successfully
 
 
 ### deleteTheme
-Delete theme.
+Delete a theme
 
 
 
@@ -11572,7 +11264,7 @@ except Exception as e:
 
 
 
-Remove a theme from the platform.
+This endpoint is used to delete a theme from the specified company and application.
 
 *Returned Response:*
 
@@ -15565,7 +15257,7 @@ Theme successfully deleted.
 
 
 ### addThemeToApplication
-Add theme to application.
+Add a theme to an application
 
 
 
@@ -15587,7 +15279,7 @@ except Exception as e:
 | body | [ThemeReq](#ThemeReq) | yes | Request body |
 
 
-Include a theme in an application's design.
+Add a theme to an application by providing the marketplace theme ID.
 
 *Returned Response:*
 
@@ -19580,7 +19272,7 @@ Theme
 
 
 ### updateThemeName
-Update theme name.
+Update Theme Name
 
 
 
@@ -19603,7 +19295,7 @@ except Exception as e:
 | body | [UpdateThemeNameRequestBody](#UpdateThemeNameRequestBody) | yes | Request body |
 
 
-Modify the name of a theme.
+Update the name of a theme for a specific company and application.
 
 *Returned Response:*
 
@@ -23596,7 +23288,7 @@ Theme name updated successfully.
 
 
 ### applyTheme
-Apply theme.
+Apply theme to a specific application
 
 
 
@@ -23619,7 +23311,7 @@ except Exception as e:
 
 
 
-Set and apply a theme to an application or page.
+Apply theme to a specific application by providing company_id, application_id, and theme_id.
 
 *Returned Response:*
 
@@ -27612,7 +27304,7 @@ Theme applied successfully
 
 
 ### duplicateTheme
-Duplicate theme.
+Duplicate a Theme
 
 
 
@@ -27635,7 +27327,7 @@ except Exception as e:
 
 
 
-Create a copy of an existing theme.
+This endpoint duplicates a Theme in the specified application.
 
 *Returned Response:*
 
@@ -31628,7 +31320,7 @@ Resource duplicated successfully
 
 
 ### getAppliedTheme
-Get applied theme.
+Get the Applied theme of an Application
 
 
 
@@ -31646,7 +31338,7 @@ except Exception as e:
 
 
 
-Retrieve the currently applied theme.
+Get Applied Theme of an Application by Application Id
 
 *Returned Response:*
 
@@ -35639,7 +35331,7 @@ Successfully fetch the applied theme
 
 
 ### getThemeForPreview
-Get theme for preview.
+Get Theme Preview By Theme Id
 
 
 
@@ -35662,7 +35354,7 @@ except Exception as e:
 
 
 
-Retrieve a theme for previewing before application.
+Get Theme Preview By Theme Id
 
 *Returned Response:*
 
@@ -39655,7 +39347,7 @@ Get the details of the theme for preview purpose.
 
 
 ### getThemeLastModified
-Get theme last modified.
+Fetch last modified timestamp
 
 
 
@@ -39678,7 +39370,7 @@ except Exception as e:
 
 
 
-Retrieve the last modification of a theme.
+Use this API to fetch Last-Modified timestamp in header metadata.
 
 *Returned Response:*
 
@@ -39693,7 +39385,7 @@ Retrieve the last modification of a theme.
 
 
 ### isUpgradable
-Is upgradable.
+Check if the theme is upgradable
 
 
 
@@ -39716,7 +39408,7 @@ except Exception as e:
 
 
 
-Determine if a theme is eligible for an upgrade.
+This API endpoint checks if the theme is upgradable for a specific company and application.
 
 *Returned Response:*
 
@@ -39782,7 +39474,7 @@ Successful response
 
 
 ### upgradeTheme
-Upgrade theme.
+Upgrade an application
 
 
 
@@ -39805,7 +39497,7 @@ except Exception as e:
 
 
 
-Enhance and update a theme to a new version.
+This endpoint allows you to upgrade an application.
 
 *Returned Response:*
 
@@ -43799,65 +43491,6 @@ Successful upgrade
 
 
 
-### getCompanyLevelPrivateThemes
-Get private themes for a company
-
-
-
-
-```python
-try:
-    result = await platformClient.theme.getCompanyLevelPrivateThemes(searchText=searchText)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| searchText | String? | no | Search Text to match the Theme Names and return the response. |  
-
-
-
-Retrieve a list of private themes available for a specific company.
-
-*Returned Response:*
-
-
-
-
-[ArrayList<CompanyPrivateTheme>](#ArrayList<CompanyPrivateTheme>)
-
-A list of Private themes for the company.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
 ### Schemas
 
  
@@ -43881,10 +43514,9 @@ A list of Private themes for the company.
  | name | String? |  yes  | The name of the theme. |
  | marketplaceThemeId | [MarketplaceThemeId](#MarketplaceThemeId)? |  yes  |  |
  | companyId | Int? |  yes  | The ID of the company that the theme belongs to. |
- | meta | [CompanyThemeMeta](#CompanyThemeMeta)? |  yes  |  |
+ | meta | [ThemeMeta](#ThemeMeta)? |  yes  |  |
  | createdAt | String? |  yes  | The timestamp when the theme was created. |
  | updatedAt | String? |  yes  | The timestamp when the theme was last updated. |
- | appliedThemes | ArrayList<[AppliedThemes](#AppliedThemes)>? |  yes  |  |
 
 ---
 
@@ -43897,16 +43529,13 @@ A list of Private themes for the company.
  | ---------- | ---- | -------- | ----------- |
  | id | String? |  yes  | The unique identifier for the marketplace theme. |
  | isDefault | Boolean? |  yes  | Whether the theme is the default theme. |
- | release | [Release](#Release)? |  yes  |  |
- | createdAt | String? |  yes  | Creation date of the theme |
- | updatedAt | String? |  yes  | Update date of the theme |
 
 ---
 
 
  
  
- #### [CompanyThemeMeta](#CompanyThemeMeta)
+ #### [ThemeMeta](#ThemeMeta)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
@@ -43959,8 +43588,6 @@ A list of Private themes for the company.
  | seo | [AvailablePageSeo](#AvailablePageSeo)? |  yes  |  |
  | props | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | id | String? |  yes  |  |
- | createdAt | String? |  yes  | The creation timestamp of the page |
- | updatedAt | String? |  yes  | The last update timestamp of the page |
 
 ---
 
@@ -43978,90 +43605,12 @@ A list of Private themes for the company.
 
  
  
- #### [SEOMetaItem](#SEOMetaItem)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | title | String? |  yes  |  |
- | items | ArrayList<[SEOMetaItems](#SEOMetaItems)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [SEOMetaItems](#SEOMetaItems)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | key | String? |  yes  |  |
- | value | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [SEOSitemap](#SEOSitemap)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | priority | Double? |  yes  |  |
- | frequency | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [SEObreadcrumb](#SEObreadcrumb)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | url | String? |  yes  |  |
- | action | [Action](#Action)? |  yes  |  |
-
----
-
-
- 
- 
- #### [Action](#Action)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | page | [ActionPage](#ActionPage)? |  yes  |  |
- | popup | [ActionPage](#ActionPage)? |  yes  |  |
- | type | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [ActionPage](#ActionPage)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | params | HashMap<String,ArrayList<String>>? |  yes  |  |
- | query | HashMap<String,ArrayList<String>>? |  yes  |  |
- | url | String? |  yes  |  |
- | type | String? |  yes  |  |
-
----
-
-
- 
- 
  #### [AvailablePageSeo](#AvailablePageSeo)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | title | String? |  yes  |  |
  | description | String? |  yes  |  |
- | metaTags | ArrayList<[SEOMetaItem](#SEOMetaItem)>? |  yes  |  |
- | sitemap | [SEOSitemap](#SEOSitemap)? |  yes  |  |
- | breadcrumb | ArrayList<[SEObreadcrumb](#SEObreadcrumb)>? |  yes  |  |
  | id | String? |  yes  |  |
 
 ---
@@ -44079,23 +43628,6 @@ A list of Private themes for the company.
  | blocks | ArrayList<HashMap<String,Any>>? |  yes  |  |
  | preset | HashMap<String,Any>? |  yes  |  |
  | predicate | [AvailablePagePredicate](#AvailablePagePredicate)? |  yes  |  |
- | source | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [AvailablePagePredicate](#AvailablePagePredicate)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | screen | [AvailablePageScreenPredicate](#AvailablePageScreenPredicate)? |  yes  |  |
- | user | [AvailablePageUserPredicate](#AvailablePageUserPredicate)? |  yes  |  |
- | route | [AvailablePageRoutePredicate](#AvailablePageRoutePredicate)? |  yes  |  |
- | schedule | [AvailablePageSchedulePredicate](#AvailablePageSchedulePredicate)? |  yes  |  |
- | platform | [AvailablePagePlatformPredicate](#AvailablePagePlatformPredicate)? |  yes  |  |
- | zones | ArrayList<String>? |  yes  | An array of zone ids associated with the section |
 
 ---
 
@@ -44140,26 +43672,13 @@ A list of Private themes for the company.
 
  
  
- #### [AvailablePagePlatformPredicate](#AvailablePagePlatformPredicate)
+ #### [AvailablePagePredicate](#AvailablePagePredicate)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | ios | Boolean? |  yes  | Section visibility on ios platform |
- | android | Boolean? |  yes  | Section visibility on android platform |
- | web | Boolean? |  yes  | Section visibility on web platform |
-
----
-
-
- 
- 
- #### [AvailablePageSchedulePredicate](#AvailablePageSchedulePredicate)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | cron | String? |  yes  |  |
- | start | String? |  yes  |  |
- | end | String? |  yes  |  |
+ | screen | [AvailablePageScreenPredicate](#AvailablePageScreenPredicate)? |  yes  |  |
+ | user | [AvailablePageUserPredicate](#AvailablePageUserPredicate)? |  yes  |  |
+ | route | [AvailablePageRoutePredicate](#AvailablePageRoutePredicate)? |  yes  |  |
 
 ---
 
@@ -44265,7 +43784,7 @@ A list of Private themes for the company.
  | id | String? |  yes  | The unique identifier of the theme |
  | applicationId | String? |  yes  | The ID of the application |
  | marketplaceThemeId | String? |  yes  | The ID of the theme in the marketplace |
- | meta | [ThemeMeta](#ThemeMeta)? |  yes  |  |
+ | meta | [Meta](#Meta)? |  yes  |  |
  | name | String? |  yes  | The name of the theme |
  | templateThemeId | String? |  yes  | The ID of the template theme |
  | version | String? |  yes  | The version of the theme |
@@ -44274,9 +43793,6 @@ A list of Private themes for the company.
  | updatedAt | String? |  yes  | The last update timestamp of the theme |
  | assets | [Assets](#Assets)? |  yes  |  |
  | availableSections | ArrayList<[SectionItem](#SectionItem)>? |  yes  | Available sections information |
- | themeType | String? |  yes  |  |
- | companyId | Double? |  yes  | The company id in which sales channel exists |
- | src | String? |  yes  |  |
 
 ---
 
@@ -44378,82 +43894,8 @@ A list of Private themes for the company.
  | ---------- | ---- | -------- | ----------- |
  | name | String? |  yes  | The name of the configuration |
  | globalConfig | HashMap<String,Any>? |  yes  |  |
- | page | ArrayList<[ThemeConfigListPage](#ThemeConfigListPage)>? |  yes  | An array of pages |
-
----
-
-
- 
- 
- #### [OverlayPopup](#OverlayPopup)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | dialogBackgroung | String? |  yes  |  |
- | overlay | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [DividerStrokeHighlight](#DividerStrokeHighlight)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | dividerStrokes | String? |  yes  |  |
- | highlight | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [UserAlerts](#UserAlerts)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | successBackground | String? |  yes  |  |
- | successText | String? |  yes  |  |
- | errorBackground | String? |  yes  |  |
- | errorText | String? |  yes  |  |
- | infoBackground | String? |  yes  |  |
- | infoText | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [OrderTracking](#OrderTracking)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | showHeader | Boolean? |  yes  |  |
- | showFooter | Boolean? |  yes  |  |
-
----
-
-
- 
- 
- #### [ThemeConfigListPage](#ThemeConfigListPage)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | page | String? |  yes  | Name of the page |
- | settings | [ThemeConfigListPageSettingsProps](#ThemeConfigListPageSettingsProps)? |  yes  |  |
-
----
-
-
- 
- 
- #### [ThemeConfigListPageSettingsProps](#ThemeConfigListPageSettingsProps)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | props | HashMap<String,Any>? |  yes  |  |
+ | custom | [CustomConfig](#CustomConfig)? |  yes  |  |
+ | page | ArrayList<String>? |  yes  | An array of pages |
 
 ---
 
@@ -44471,7 +43913,7 @@ A list of Private themes for the company.
 
  
  
- #### [ThemeMeta](#ThemeMeta)
+ #### [Meta](#Meta)
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
@@ -44569,7 +44011,6 @@ A list of Private themes for the company.
  | ---------- | ---- | -------- | ----------- |
  | type | String? |  yes  | The type of the property |
  | category | String? |  yes  | The category of the property |
- | value | String? |  yes  | The value of the property |
  | id | String? |  yes  | The ID of the property |
  | label | String? |  yes  | The label of the property |
  | info | String? |  yes  | Additional information about the property |
@@ -44596,8 +44037,7 @@ A list of Private themes for the company.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | link | String? |  yes  |  |
- | links | ArrayList<String>? |  yes  | An array of pages |
+ | links | ArrayList<String>? |  yes  |  |
 
 ---
 
@@ -44619,7 +44059,6 @@ A list of Private themes for the company.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
- | link | String? |  yes  |  |
  | links | ArrayList<String>? |  yes  |  |
 
 ---
@@ -44858,103 +44297,6 @@ A list of Private themes for the company.
  | message | String? |  yes  |  |
 
 ---
-
-
- 
- 
- #### [AppliedThemes](#AppliedThemes)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  | ID of the application theme |
- | applicationId | String? |  yes  | ID of the application |
-
----
-
-
- 
- 
- #### [CompanyPrivateTheme](#CompanyPrivateTheme)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | themeType | String? |  yes  | Type of the theme |
- | id | String? |  yes  | Unique identifier for the theme |
- | name | String? |  yes  | Name of the theme |
- | version | String? |  yes  | Version of the theme |
- | applicationId | String? |  yes  | Identifier for the application |
- | createdAt | String? |  yes  | Date and time when the theme was created |
- | updatedAt | String? |  yes  | Date and time when the theme was last updated |
- | applied | Boolean? |  yes  | Whether the theme is applied or not |
- | isPrivate | Boolean? |  yes  | Whether the theme is private or not |
- | meta | [CompanyThemeMeta](#CompanyThemeMeta)? |  yes  |  |
-
----
-
-
-
-
-### Enums
-
-
-
-
-
- #### [PageType](#PageType)
- Type : string
-
- | Name | Value | Description |
- | ---- | ----- | ----------- |
- | aboutUs | about-us | Symbolic link for About Us: /about-us |
- | addresses | addresses | Symbolic link for Saved Addresses: /profile/address |
- | blog | blog | Symbolic link for Blog: /blog/:slug |
- | brands | brands | Symbolic link for Brands: /brands/:department |
- | cards | cards | Symbolic link for Saved Cards: /profile/my-cards |
- | cart | cart | Symbolic link for Cart: /cart/bag/ |
- | categories | categories | Symbolic link for Categories: /categories/:department |
- | brand | brand | Symbolic link for Brand: /brand/:slug |
- | category | category | Symbolic link for Category: /category/:slug |
- | collection | collection | Symbolic link for Collection: /collection/:slug |
- | collections | collections | Symbolic link for Collections: /collections/ |
- | contactUs | contact-us | Symbolic link for Contact Us: /contact-us/ |
- | external | external | Symbolic link for External Link: /external/ |
- | faq | faq | Symbolic link for FAQ: /faq |
- | freshchat | freshchat | Symbolic link for Chat by Freshchat: /freshchat |
- | home | home | Symbolic link for Home: / |
- | notificationSettings | notification-settings | Symbolic link for Notification Settings: /notification-settings |
- | orders | orders | Symbolic link for Orders: /profile/orders |
- | page | page | Symbolic link for Page: /page/:slug |
- | policy | policy | Symbolic link for Privacy Policy: /privacy-policy |
- | product | product | Symbolic link for Product: /product/:slug |
- | productRequest | product-request | Symbolic link for Product Request: /product-request/ |
- | products | products | Symbolic link for Products: /products/ |
- | profile | profile | Symbolic link for Profile: /profile |
- | profileOrderShipment | profile-order-shipment | Symbolic link for profile orders shipment: /profile/orders/shipment/:shipmentid |
- | profileBasic | profile-basic | Symbolic link for Basic Profile: /profile/details |
- | profileCompany | profile-company | Symbolic link for Profile Company: /profile/company |
- | profileEmails | profile-emails | Symbolic link for Profile Emails: /profile/email |
- | profilePhones | profile-phones | Symbolic link for Profile Phones: /profile/phone |
- | rateUs | rate-us | Symbolic link for Rate Us: /rate-us |
- | referEarn | refer-earn | Symbolic link for Refer & Earn: /profile/refer-earn |
- | settings | settings | Symbolic link for Settings: /setting/currency |
- | sharedCart | shared-cart | Symbolic link for Shared Cart: /shared-cart/:token |
- | tnc | tnc | Symbolic link for Terms and Conditions: /terms-and-conditions |
- | trackOrder | track-order | Symbolic link for Track Order: /order-tracking/:orderId |
- | wishlist | wishlist | Symbolic link for Wishlist: /wishlist/ |
- | sections | sections | Symbolic link for Sections: /sections/:group |
- | form | form | Symbolic link for Form: /form/:slug |
- | cartDelivery | cart-delivery | Symbolic link for Cart Delivery: /cart/delivery |
- | cartPayment | cart-payment | Symbolic link for Cart Payment Information: /cart/payment-info |
- | cartReview | cart-review | Symbolic link for Cart Order Review: /cart/order-review |
- | login | login | Symbolic link for Login: /auth/login |
- | register | register | Symbolic link for Register: /auth/register |
- | shippingPolicy | shipping-policy | Symbolic link for Shipping policy: /shipping-policy |
- | returnPolicy | return-policy | Symbolic link for Return policy: /return-policy |
- | orderStatus | order-status | Symbolic link for Order status: /cart/order-status |
-
----
-
-
 
 
 

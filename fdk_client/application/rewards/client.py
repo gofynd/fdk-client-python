@@ -32,7 +32,7 @@ class Rewards:
         self._urls.update(urls)
     
     async def getOfferByName(self, name=None, body="", request_headers:Dict={}):
-        """Retrieves detailed information about an offer by its name.
+        """Use this API to get fetch the specific offer details and configuration by the name of the offer.
         :param name : The name given to the offer. : type string
         """
         payload = {}
@@ -76,7 +76,7 @@ class Rewards:
         return response
     
     async def catalogueOrder(self, body="", request_headers:Dict={}):
-        """Place an reward on order items available in the catalogue.
+        """Use this API to evaluate the amount of reward points that could be earned on any catalogue product.
         """
         payload = {}
         
@@ -121,7 +121,7 @@ class Rewards:
         return response
     
     async def getUserPointsHistory(self, page_id=None, page_size=None, body="", request_headers:Dict={}):
-        """Gets the historical data of points earned or spent by the user.
+        """Use this API to fetch a list of points transactions like giveaway points, signup points, referral points, order earn points, redeem points and expired points.
         :param page_id : PageID is the ID of the requested page. For first request it should be kept empty. : type string
         :param page_size : The number of items to retrieve in each page. : type integer
         """
@@ -168,7 +168,7 @@ class Rewards:
         return response
     
     async def getUserPoints(self, body="", request_headers:Dict={}):
-        """Retrieves the current reward points balance for the user.
+        """Use this API to retrieve total available points of a user for current application.
         """
         payload = {}
         
@@ -209,7 +209,7 @@ class Rewards:
         return response
     
     async def getUserReferralDetails(self, body="", request_headers:Dict={}):
-        """Gets the details of the user’s referral status and codes.
+        """Use this API to retrieve the referral details like referral code of a user.
         """
         payload = {}
         
@@ -250,7 +250,7 @@ class Rewards:
         return response
     
     async def getOrderDiscount(self, body="", request_headers:Dict={}):
-        """Retrieve the discount applied to a specific order.
+        """Use this API to calculate the discount on the order amount, based on all the amount range configured in Order Discount offer.
         """
         payload = {}
         
@@ -295,7 +295,7 @@ class Rewards:
         return response
     
     async def redeemReferralCode(self, body="", request_headers:Dict={}):
-        """Applies a referral code to earn or redeem rewards.
+        """Use this API to enter a referral code following which, the configured points would be credited to a user's reward points account.
         """
         payload = {}
         

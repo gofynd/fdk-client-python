@@ -48,8 +48,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
     
     
         
@@ -155,10 +153,6 @@ class CompanyProfileValidator:
         page_size = fields.Int(required=False)
         
         location_ids = fields.List(fields.Int(required=False), required=False)
-        
-        types = fields.List(fields.Str(required=False), required=False)
-        
-        tags = fields.List(fields.Str(required=False), required=False)
          
         
     

@@ -7,7 +7,7 @@
 ## Share Methods
 Short link and QR Code
 
-URL Shortner
+Default
 * [createShortLink](#createshortlink)
 * [getShortLinks](#getshortlinks)
 * [getShortLinkByHash](#getshortlinkbyhash)
@@ -22,7 +22,7 @@ URL Shortner
 
 
 ### createShortLink
-Create short link.
+Create short link
 
 
 
@@ -44,7 +44,7 @@ except Exception as e:
 | body | [ShortLinkReq](#ShortLinkReq) | yes | Request body |
 
 
-Generate a shortened URL link for sharing.
+Create short link
 
 *Returned Response:*
 
@@ -64,6 +64,8 @@ Success
 ```json
 {
   "url": {
+    "original": "https://0icof6vvsf.hostx0.de/products/?brand=ruosh",
+    "short": "https://0icof6vvsf.hostx0.de/l/3qKlnsq-x",
     "hash": "3qKlnsq-x"
   },
   "redirects": {
@@ -116,14 +118,14 @@ Success
 
 
 ### getShortLinks
-Get short links.
+Get short links
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").share.getShortLinks(pageNo=pageNo, pageSize=pageSize, createdBy=createdBy, active=active, shortUrl=shortUrl, originalUrl=originalUrl, title=title)
+    result = await platformClient.application("<APPLICATION_ID>").share.getShortLinks(pageNo=pageNo, pageSize=pageSize, createdBy=createdBy, active=active, q=q)
     # use result
 except Exception as e:
     print(e)
@@ -139,13 +141,11 @@ except Exception as e:
 | pageSize | Int? | no | Current page size |   
 | createdBy | String? | no | Short link creator |   
 | active | String? | no | Short link active status |   
-| shortUrl | String? | no | Search for short url |   
-| originalUrl | String? | no | Search for original url |   
-| title | String? | no | Search text for title |  
+| q | String? | no | Search text for original and short url |  
 
 
 
-Retrieve a list of all generated short links.
+Get short links
 
 *Returned Response:*
 
@@ -167,6 +167,8 @@ Success
   "items": [
     {
       "url": {
+        "original": "https://0icof6vvsf.hostx0.de/products/?brand=ruosh",
+        "short": "https://0icof6vvsf.hostx0.de/l/3qKlnsq-x",
         "hash": "3qKlnsq-x"
       },
       "redirects": {
@@ -228,7 +230,7 @@ Success
 
 
 ### getShortLinkByHash
-Get short link by hash.
+Get short link by hash
 
 
 
@@ -251,7 +253,7 @@ except Exception as e:
 
 
 
-Retrieve a specific short link by its unique hash.
+Get short link by hash
 
 *Returned Response:*
 
@@ -271,6 +273,8 @@ Success
 ```json
 {
   "url": {
+    "original": "https://0icof6vvsf.hostx0.de/products/?brand=ruosh",
+    "short": "https://0icof6vvsf.hostx0.de/l/3qKlnsq-x",
     "hash": "3qKlnsq-x"
   },
   "redirects": {
@@ -323,7 +327,7 @@ Success
 
 
 ### updateShortLinkById
-Update short link by ID.
+Update short link by id
 
 
 
@@ -346,7 +350,7 @@ except Exception as e:
 | body | [ShortLinkReq](#ShortLinkReq) | yes | Request body |
 
 
-Update details of a specific short link by its ID.
+Update short link by id
 
 *Returned Response:*
 
@@ -366,6 +370,8 @@ Success
 ```json
 {
   "url": {
+    "original": "https://0icof6vvsf.hostx0.de/products/?brand=ruosh",
+    "short": "https://0icof6vvsf.hostx0.de/l/3qKlnsq-x",
     "hash": "3qKlnsq-x"
   },
   "redirects": {
@@ -418,7 +424,7 @@ Success
 
 
 ### getShortLinkClickStats
-Get short link click statistics.
+Get click statistics for a short link
 
 
 
@@ -441,7 +447,7 @@ except Exception as e:
 
 
 
-Retrieve statistics and analytics for clicks on a short link.
+Retrieve click statistics for a given short link ID.
 
 *Returned Response:*
 
@@ -603,6 +609,8 @@ Successful retrieval of click statistics.
 
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
+ | original | String? |  yes  |  |
+ | short | String? |  yes  |  |
  | hash | String? |  yes  |  |
 
 ---

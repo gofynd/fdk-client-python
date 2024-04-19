@@ -107,14 +107,14 @@ class ConfigurationValidator:
     class createApplication(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
          
         
     
     class getApplications(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -127,30 +127,30 @@ class ConfigurationValidator:
     class getCurrencies(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
          
         
     
     class getDomainAvailibility(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
          
         
     
     class getIntegrationById(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        id = fields.Int(required=False)
          
         
     
     class getAvailableOptIns(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -161,7 +161,7 @@ class ConfigurationValidator:
     class getSelectedOptIns(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         level = fields.Str(required=False)
         
@@ -176,7 +176,7 @@ class ConfigurationValidator:
     class getIntegrationLevelConfig(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
         
@@ -191,7 +191,7 @@ class ConfigurationValidator:
     class updateLevelIntegration(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
         
@@ -202,7 +202,7 @@ class ConfigurationValidator:
     class getIntegrationByLevelId(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
         
@@ -215,7 +215,7 @@ class ConfigurationValidator:
     class updateLevelUidIntegration(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
         
@@ -228,7 +228,7 @@ class ConfigurationValidator:
     class getLevelActiveIntegrations(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
         
@@ -241,7 +241,7 @@ class ConfigurationValidator:
     class getBrandsByCompany(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         q = fields.Str(required=False)
          
@@ -250,7 +250,7 @@ class ConfigurationValidator:
     class getCompanyByBrands(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -261,7 +261,7 @@ class ConfigurationValidator:
     class getStoreByBrands(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -272,7 +272,7 @@ class ConfigurationValidator:
     class getOtherSellerApplications(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -283,7 +283,7 @@ class ConfigurationValidator:
     class getOtherSellerApplicationById(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
          
@@ -292,7 +292,7 @@ class ConfigurationValidator:
     class optOutFromApplication(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
          

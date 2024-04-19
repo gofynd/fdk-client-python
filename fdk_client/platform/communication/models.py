@@ -8,26 +8,6 @@ from ..PlatformModel import BaseSchema
 
 
 
-class EventSubscriptionsBulkUpdateRequest(BaseSchema):
-    pass
-
-
-class EventSubscriptionsBulkUpdateResponse(BaseSchema):
-    pass
-
-
-class SubscriptionsObject(BaseSchema):
-    pass
-
-
-class TemplateObject(BaseSchema):
-    pass
-
-
-class CommunicationTemplate(BaseSchema):
-    pass
-
-
 class AppProvider(BaseSchema):
     pass
 
@@ -288,14 +268,6 @@ class Jobs(BaseSchema):
     pass
 
 
-class CreateJobsRes(BaseSchema):
-    pass
-
-
-class CreateJobsReq(BaseSchema):
-    pass
-
-
 class JobLog(BaseSchema):
     pass
 
@@ -456,83 +428,7 @@ class EnabledObj(BaseSchema):
     pass
 
 
-class OtpConfigurationExpiryDuration(BaseSchema):
-    pass
 
-
-class OtpConfigurationExpiry(BaseSchema):
-    pass
-
-
-class OtpConfiguration(BaseSchema):
-    pass
-
-
-
-
-
-class EventSubscriptionsBulkUpdateRequest(BaseSchema):
-    # Communication swagger.json
-
-    
-    subscriptions = fields.List(fields.Nested(SubscriptionsObject, required=False), required=False)
-    
-
-
-class EventSubscriptionsBulkUpdateResponse(BaseSchema):
-    # Communication swagger.json
-
-    
-    template = fields.Nested(EventSubscriptionTemplate, required=False)
-    
-    _id = fields.Str(required=False)
-    
-    application = fields.Str(required=False)
-    
-    event = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    category = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
-    
-
-
-class SubscriptionsObject(BaseSchema):
-    # Communication swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    template = fields.Nested(TemplateObject, required=False)
-    
-
-
-class TemplateObject(BaseSchema):
-    # Communication swagger.json
-
-    
-    sms = fields.Nested(CommunicationTemplate, required=False)
-    
-    email = fields.Nested(CommunicationTemplate, required=False)
-    
-    pushnotification = fields.Nested(CommunicationTemplate, required=False)
-    
-
-
-class CommunicationTemplate(BaseSchema):
-    # Communication swagger.json
-
-    
-    subscribed = fields.Boolean(required=False)
-    
-    template = fields.Str(required=False)
-    
 
 
 class AppProvider(BaseSchema):
@@ -1463,36 +1359,6 @@ class Jobs(BaseSchema):
     
 
 
-class CreateJobsRes(BaseSchema):
-    # Communication swagger.json
-
-    
-    application = fields.Str(required=False)
-    
-    campaign = fields.Str(required=False)
-    
-    completed = fields.Boolean(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
-    
-
-
-class CreateJobsReq(BaseSchema):
-    # Communication swagger.json
-
-    
-    campaign = fields.Str(required=False)
-    
-
-
 class JobLog(BaseSchema):
     # Communication swagger.json
 
@@ -2128,42 +1994,6 @@ class EnabledObj(BaseSchema):
 
     
     enabled = fields.Boolean(required=False)
-    
-
-
-class OtpConfigurationExpiryDuration(BaseSchema):
-    # Communication swagger.json
-
-    
-    time = fields.Float(required=False)
-    
-    denomination = fields.Str(required=False)
-    
-
-
-class OtpConfigurationExpiry(BaseSchema):
-    # Communication swagger.json
-
-    
-    duration = fields.Nested(OtpConfigurationExpiryDuration, required=False)
-    
-    type = fields.Str(required=False)
-    
-
-
-class OtpConfiguration(BaseSchema):
-    # Communication swagger.json
-
-    
-    otp_length = fields.Int(required=False)
-    
-    type = fields.Str(required=False)
-    
-    expiry = fields.Nested(OtpConfigurationExpiry, required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    company_id = fields.Str(required=False)
     
 
 

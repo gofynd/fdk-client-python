@@ -7,24 +7,17 @@
 ## Content Methods
 Content System
 
-Announcement Management
+Default
 * [getAnnouncementsList](#getannouncementslist)
 * [createAnnouncement](#createannouncement)
 * [getAnnouncementById](#getannouncementbyid)
 * [updateAnnouncement](#updateannouncement)
 * [updateAnnouncementSchedule](#updateannouncementschedule)
 * [deleteAnnouncement](#deleteannouncement)
-
-
-Blog Management
 * [createBlog](#createblog)
 * [getBlogs](#getblogs)
 * [updateBlog](#updateblog)
 * [deleteBlog](#deleteblog)
-* [getBlogBySlug](#getblogbyslug)
-
-
-Component & Data Loader Management
 * [getComponentById](#getcomponentbyid)
 * [addDataLoader](#adddataloader)
 * [getDataLoaders](#getdataloaders)
@@ -32,72 +25,6 @@ Component & Data Loader Management
 * [editDataLoader](#editdataloader)
 * [selectDataLoader](#selectdataloader)
 * [resetDataLoader](#resetdataloader)
-
-
-Default
-* [getDataLoadersByService](#getdataloadersbyservice)
-* [getDefaultSEOMarkupSchema](#getdefaultseomarkupschema)
-* [getSEOMarkupSchemas](#getseomarkupschemas)
-* [createSEOMarkupSchema](#createseomarkupschema)
-* [getSEOMarkupSchema](#getseomarkupschema)
-* [editSEOMarkupSchema](#editseomarkupschema)
-* [deleteSEOMarkupSchema](#deleteseomarkupschema)
-* [getSlideshows](#getslideshows)
-* [createSlideshow](#createslideshow)
-* [getSlideshowBySlug](#getslideshowbyslug)
-* [updateSlideshow](#updateslideshow)
-* [deleteSlideshow](#deleteslideshow)
-* [getCustomFieldTypes](#getcustomfieldtypes)
-* [getResources](#getresources)
-* [getCustomFieldDefinitions](#getcustomfielddefinitions)
-* [createCustomFieldDefinition](#createcustomfielddefinition)
-* [getCustomFieldDefinition](#getcustomfielddefinition)
-* [updateCustomFieldDefinition](#updatecustomfielddefinition)
-* [deleteCustomFieldDefinition](#deletecustomfielddefinition)
-* [getCustomFields](#getcustomfields)
-* [getCustomFieldsByResourceId](#getcustomfieldsbyresourceid)
-* [createCustomFieldByResourceId](#createcustomfieldbyresourceid)
-* [createCustomObjectDefinition](#createcustomobjectdefinition)
-* [getCustomObjectDefinitions](#getcustomobjectdefinitions)
-* [getCustomObjectDefinition](#getcustomobjectdefinition)
-* [updateCustomObjectDefinition](#updatecustomobjectdefinition)
-* [deleteCustomObjectDefinition](#deletecustomobjectdefinition)
-* [getCustomObjects](#getcustomobjects)
-* [createCustomObject](#createcustomobject)
-* [getCustomObject](#getcustomobject)
-* [deleteCustomObject](#deletecustomobject)
-* [updateCustomObject](#updatecustomobject)
-* [getJobs](#getjobs)
-* [importCustomObjectEntries](#importcustomobjectentries)
-* [exportCustomObjectEntries](#exportcustomobjectentries)
-* [sampleCustomObjectBulkEntry](#samplecustomobjectbulkentry)
-* [getAppCustomFieldTypes](#getappcustomfieldtypes)
-* [getAppResources](#getappresources)
-* [getAppCustomFieldDefinitions](#getappcustomfielddefinitions)
-* [createAppCustomFieldDefinition](#createappcustomfielddefinition)
-* [getAppCustomFieldDefinition](#getappcustomfielddefinition)
-* [updateAppCustomFieldDefinition](#updateappcustomfielddefinition)
-* [deleteAppCustomFieldDefinition](#deleteappcustomfielddefinition)
-* [getAppCustomFields](#getappcustomfields)
-* [getAppCustomFieldsByResourceId](#getappcustomfieldsbyresourceid)
-* [createAppCustomFieldByResourceId](#createappcustomfieldbyresourceid)
-* [createAppCustomObjectDefinition](#createappcustomobjectdefinition)
-* [getAppCustomObjectDefinitions](#getappcustomobjectdefinitions)
-* [getAppCustomObjectDefinition](#getappcustomobjectdefinition)
-* [updateAppCustomObjectDefinition](#updateappcustomobjectdefinition)
-* [deleteAppCustomObjectDefinition](#deleteappcustomobjectdefinition)
-* [getAppCustomObjects](#getappcustomobjects)
-* [createAppCustomObject](#createappcustomobject)
-* [getAppCustomObject](#getappcustomobject)
-* [deleteAppCustomObject](#deleteappcustomobject)
-* [updateAppCustomObject](#updateappcustomobject)
-* [getAppJobs](#getappjobs)
-* [importAppCustomObjectEntries](#importappcustomobjectentries)
-* [exportAppCustomObjectEntries](#exportappcustomobjectentries)
-* [sampleAppCustomObjectBulkEntry](#sampleappcustomobjectbulkentry)
-
-
-FAQ Category and FAQ Management
 * [getFaqCategories](#getfaqcategories)
 * [getFaqCategoryBySlugOrId](#getfaqcategorybyslugorid)
 * [createFaqCategory](#createfaqcategory)
@@ -108,69 +35,48 @@ FAQ Category and FAQ Management
 * [updateFaq](#updatefaq)
 * [deleteFaq](#deletefaq)
 * [getFaqByIdOrSlug](#getfaqbyidorslug)
-
-
-SEO and Landing Page Management:
 * [generateSEOTitle](#generateseotitle)
 * [getLandingPages](#getlandingpages)
 * [createLandingPage](#createlandingpage)
 * [updateLandingPage](#updatelandingpage)
 * [deleteLandingPage](#deletelandingpage)
-
-
-Legal Information Management
 * [getLegalInformation](#getlegalinformation)
 * [updateLegalInformation](#updatelegalinformation)
-
-
-Navigation Management
 * [getNavigations](#getnavigations)
 * [createNavigation](#createnavigation)
 * [getDefaultNavigations](#getdefaultnavigations)
 * [getNavigationBySlug](#getnavigationbyslug)
 * [updateNavigation](#updatenavigation)
 * [deleteNavigation](#deletenavigation)
-
-
-Page management
 * [getPageMeta](#getpagemeta)
 * [getPageSpec](#getpagespec)
 * [createPagePreview](#createpagepreview)
 * [updatePagePreview](#updatepagepreview)
-* [getPages](#getpages)
-
-
-Page Management
 * [deletePage](#deletepage)
-* [createPage](#createpage)
-* [updatePage](#updatepage)
-* [getPageBySlug](#getpagebyslug)
-
-
-Path Redirection Rules
 * [addPathRedirectionRules](#addpathredirectionrules)
 * [getPathRedirectionRules](#getpathredirectionrules)
 * [getPathRedirectionRule](#getpathredirectionrule)
 * [updatePathRedirectionRules](#updatepathredirectionrules)
 * [deletePathRedirectionRules](#deletepathredirectionrules)
-
-
-SEO Configuration Management
 * [getSEOConfiguration](#getseoconfiguration)
 * [updateSEOConfiguration](#updateseoconfiguration)
-
-
-Support Information Management
+* [getSlideshows](#getslideshows)
+* [createSlideshow](#createslideshow)
+* [getSlideshowBySlug](#getslideshowbyslug)
+* [updateSlideshow](#updateslideshow)
+* [deleteSlideshow](#deleteslideshow)
 * [getSupportInformation](#getsupportinformation)
 * [updateSupportInformation](#updatesupportinformation)
-
-
-Injectable Tag Management
 * [updateInjectableTag](#updateinjectabletag)
 * [getInjectableTags](#getinjectabletags)
 * [addInjectableTag](#addinjectabletag)
 * [removeInjectableTag](#removeinjectabletag)
 * [editInjectableTag](#editinjectabletag)
+* [getBlogBySlug](#getblogbyslug)
+* [createPage](#createpage)
+* [getPages](#getpages)
+* [updatePage](#updatepage)
+* [getPageBySlug](#getpagebyslug)
 
 
 
@@ -180,7 +86,7 @@ Injectable Tag Management
 
 
 ### getAnnouncementsList
-Get announcements list.
+Get a list of announcements
 
 
 
@@ -204,7 +110,7 @@ except Exception as e:
 
 
 
-Retrieve a list of announcements.
+Announcements are useful to highlight a message or information on top of a webpage. Use this API to retrieve a list of announcements.	
 
 *Returned Response:*
 
@@ -299,7 +205,7 @@ Success. Refer `GetAnnouncementListSchema` for more details.
 
 
 ### createAnnouncement
-Create announcement.
+Create an announcement
 
 
 
@@ -321,7 +227,7 @@ except Exception as e:
 | body | [AdminAnnouncementSchema](#AdminAnnouncementSchema) | yes | Request body |
 
 
-Generate and add a new announcement.
+Announcements are useful to highlight a message or information on top of a webpage. Use this API to create an announcement.
 
 *Returned Response:*
 
@@ -409,7 +315,7 @@ Success. Refer `CreateAnnouncementSchema` for more details.
 
 
 ### getAnnouncementById
-Get announcement by ID.
+Get announcement by ID
 
 
 
@@ -432,7 +338,7 @@ except Exception as e:
 
 
 
-Retrieve detailed information about a specific announcement.
+Use this API to retrieve an announcement and its details such as the target platform and pages on which it's applicable
 
 *Returned Response:*
 
@@ -515,7 +421,7 @@ Success. Refer `AdminAnnouncementSchema` for more details.
 
 
 ### updateAnnouncement
-Update announcement.
+Update an announcement
 
 
 
@@ -538,7 +444,7 @@ except Exception as e:
 | body | [AdminAnnouncementSchema](#AdminAnnouncementSchema) | yes | Request body |
 
 
-Modify the content and settings of a specific announcement.
+Use this API to edit an existing announcement and its details such as the target platform and pages on which it's applicable
 
 *Returned Response:*
 
@@ -626,7 +532,7 @@ Success. Refer `CreateAnnouncementSchema` for more details.
 
 
 ### updateAnnouncementSchedule
-Update announcement schedule.
+Update the schedule and the publish status of an announcement
 
 
 
@@ -649,7 +555,7 @@ except Exception as e:
 | body | [ScheduleSchema](#ScheduleSchema) | yes | Request body |
 
 
-Modify the scheduling of a specific announcement.
+Use this API to edit the duration, i.e. start date-time and end date-time of an announcement. Moreover, you can enable/disable an announcement using this API.
 
 *Returned Response:*
 
@@ -737,7 +643,7 @@ Success. Refer `CreateAnnouncementSchema` for more details.
 
 
 ### deleteAnnouncement
-Delete announcement.
+Delete announcement by id
 
 
 
@@ -760,7 +666,7 @@ except Exception as e:
 
 
 
-Remove a specific announcement.
+Use this API to delete an existing announcement.
 
 *Returned Response:*
 
@@ -847,10 +753,8 @@ Success.
 ---
 
 
-
-
 ### createBlog
-Create blog.
+Create a blog
 
 
 
@@ -872,7 +776,7 @@ except Exception as e:
 | body | [BlogRequest](#BlogRequest) | yes | Request body |
 
 
-Generate and add a new blog.
+Use this API to create a blog.
 
 *Returned Response:*
 
@@ -951,7 +855,7 @@ Success. Refer `BlogSchema` for more details.
 
 
 ### getBlogs
-Get blogs.
+Get blogs
 
 
 
@@ -975,7 +879,7 @@ except Exception as e:
 
 
 
-Retrieve a list of available blogs.
+Use this API to get a list of blogs along with their details, such as the title, reading time, publish status, feature image, tags, author, etc.
 
 *Returned Response:*
 
@@ -1058,7 +962,7 @@ Success. Refer `BlogGetResponse` for more details.
 
 
 ### updateBlog
-Update blog.
+Update a blog
 
 
 
@@ -1081,7 +985,7 @@ except Exception as e:
 | body | [BlogRequest](#BlogRequest) | yes | Request body |
 
 
-Modify the content and settings of a specific blog.
+Use this API to update the details of an existing blog which includes title, feature image, content, SEO details, expiry, etc.
 
 *Returned Response:*
 
@@ -1160,7 +1064,7 @@ Success.
 
 
 ### deleteBlog
-Delete blog.
+Delete blogs
 
 
 
@@ -1183,7 +1087,7 @@ except Exception as e:
 
 
 
-Remove a specific blog.
+Use this API to delete a blog.
 
 *Returned Response:*
 
@@ -1261,112 +1165,8 @@ Success.
 ---
 
 
-### getBlogBySlug
-Get blog by slug.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getBlogBySlug(slug=slug)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| slug | String | yes | A short, human-readable, URL-friendly identifier of a blog page. You can get slug value of a blog from `getBlogs` API. |  
-
-
-
-Retrieve detailed information about a specific blog using its slug.
-
-*Returned Response:*
-
-
-
-
-[BlogSchema](#BlogSchema)
-
-Success. Returns a a JSON object with components. Refer `BlogSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "5eaa451a21a4dd75f0fd96c5",
-    "application": "5d3ebd89f540e7506b8b3548",
-    "tags": [
-      "abhinav"
-    ],
-    "title": "my first blog",
-    "slug": "1st_blog",
-    "feature_image": {
-      "secure_url": "https://google.com"
-    },
-    "content": [
-      {
-        "type": "html",
-        "value": "<p>hey there!</p>"
-      }
-    ],
-    "_schedule": {
-      "cron": "* 10 * * *",
-      "start": "2021-03-31T23:30:00.000Z",
-      "end": "2021-03-31T23:55:00.000Z",
-      "duration": 1000,
-      "next_schedule": [
-        {
-          "start": "2021-03-17T04:30:00.000Z",
-          "end": "2021-03-17T04:46:40.000Z"
-        }
-      ]
-    },
-    "published": true,
-    "author": {
-      "name": "Fynd App"
-    },
-    "date_meta": {
-      "created_on": "2021-03-14T06:49:03.945Z",
-      "modified_on": "2021-03-14T06:49:03.945Z"
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
 ### getComponentById
-Get component by ID.
+Get components of a blog
 
 
 
@@ -1389,7 +1189,7 @@ except Exception as e:
 
 
 
-Retrieve detailed information about a specific component.
+Use this API to retrieve the components of a blog, such as title, slug, feature image, content, schedule, publish status, author, etc.
 
 *Returned Response:*
 
@@ -1468,7 +1268,7 @@ Success. Returns a a JSON object with components. Refer `BlogSchema` for more de
 
 
 ### addDataLoader
-Add data loader.
+Adds a data loader
 
 
 
@@ -1490,7 +1290,7 @@ except Exception as e:
 | body | [DataLoaderSchema](#DataLoaderSchema) | yes | Request body |
 
 
-Create and add a new data loader.
+Use this API to add data loader. This includes the data loader name, operationId, service name and its type (url/function) with corresponding value.
 
 *Returned Response:*
 
@@ -1532,7 +1332,7 @@ Success.
 
 
 ### getDataLoaders
-Get data loaders.
+Get all the data loaders in an application
 
 
 
@@ -1550,7 +1350,7 @@ except Exception as e:
 
 
 
-Retrieve a list of data loaders.
+Use this to get all data loaders of an application
 
 *Returned Response:*
 
@@ -1617,7 +1417,7 @@ Success. Refer `DataLoadersSchema` for more details.
 
 
 ### deleteDataLoader
-Delete data loader.
+Delete data loader in application
 
 
 
@@ -1640,7 +1440,7 @@ except Exception as e:
 
 
 
-Remove a specific data loader.
+Use this API to delete data loader.
 
 *Returned Response:*
 
@@ -1682,7 +1482,7 @@ Success.
 
 
 ### editDataLoader
-Edit data loader.
+Edit a data loader by id
 
 
 
@@ -1705,7 +1505,7 @@ except Exception as e:
 | body | [DataLoaderSchema](#DataLoaderSchema) | yes | Request body |
 
 
-Modify the settings of a specific data loader.
+Use this API to edit the details of an existing data loader by its ID.
 
 *Returned Response:*
 
@@ -1747,7 +1547,7 @@ Success.
 
 
 ### selectDataLoader
-Select data loader.
+Select a data loader by id
 
 
 
@@ -1770,7 +1570,7 @@ except Exception as e:
 
 
 
-Choose and set a data loader for use.
+Use this API to select a data loader to be used in applications.
 
 *Returned Response:*
 
@@ -1812,7 +1612,7 @@ Success.
 
 
 ### resetDataLoader
-Reset data loader.
+Reset a data loader by serive name and operation Id
 
 
 
@@ -1836,7 +1636,7 @@ except Exception as e:
 
 
 
-Clear and reset data loader settings.
+Use this API to reselect a data loader.
 
 *Returned Response:*
 
@@ -1871,6544 +1671,8 @@ Success.
 ---
 
 
-
-
-### getDataLoadersByService
-Get all the data loaders in an application by service name
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getDataLoadersByService(serviceName=serviceName)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| serviceName | String | yes | Service name of the data loader.. |  
-
-
-
-Use this to get all data loaders of an application by service name
-
-*Returned Response:*
-
-
-
-
-[DataLoaderResponseSchema](#DataLoaderResponseSchema)
-
-Success. Refer `DataLoaderResponseSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "items": [
-    {
-      "name": "Algolia",
-      "is_selected": false,
-      "type": "url",
-      "_id": "61bc4523a7ffc7504f4de4a5",
-      "service": "catalog",
-      "operation_id": "fetchSuggestions",
-      "url": "/ext/example/url",
-      "__source": {
-        "type": "extension",
-        "id": "000000000000000000000003"
-      },
-      "application": "100000000000000000000001",
-      "__v": 0
-    },
-    {
-      "name": "Algolia v3",
-      "is_selected": false,
-      "type": "url",
-      "_id": "61bc452da7ffc7504f4de4a7",
-      "service": "catalog",
-      "operation_id": "fetchSuggestions",
-      "url": "/ext/example/url",
-      "__source": {
-        "type": "extension",
-        "id": "000000000000000000000003"
-      },
-      "application": "100000000000000000000001",
-      "__v": 0
-    }
-  ]
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getDefaultSEOMarkupSchema
-Get Default SEO Markup schemas of an application
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getDefaultSEOMarkupSchema(pageType=pageType)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| pageType | String? | no | The type of page against which schema template was created |  
-
-
-
-Use this API to get the Default SEO Markup schema Templates setup for an application
-
-*Returned Response:*
-
-
-
-
-[DefaultSchemaComponent](#DefaultSchemaComponent)
-
-Success. Refer `DefaultSchemaComponent` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getSEOMarkupSchemas
-Get SEO Markup schemas of an application
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getSEOMarkupSchemas(title=title, active=active, pageNo=pageNo, pageSize=pageSize)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| title | String? | no | Title of the seo schema. |   
-| active | String? | no | Boolean value for fetching seo schema. |   
-| pageNo | Int? | no | The page number to navigate through the given set of results. Default value is 1. |   
-| pageSize | Int? | no | The number of items to retrieve in each page. Default value is 10. |  
-
-
-
-Use this API to get all SEO Markup schema Templates setup for an application
-
-*Returned Response:*
-
-
-
-
-[SeoSchemaComponent](#SeoSchemaComponent)
-
-Success. Refer `SeoSchemaComponent` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createSEOMarkupSchema
-Create a SEO Markup schema Template of a page type for an application
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.createSEOMarkupSchema(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [SEOSchemaMarkupTemplateRequestBody](#SEOSchemaMarkupTemplateRequestBody) | yes | Request body |
-
-
-Use this API to create a SEO Markup schema Template inside an application
-
-*Returned Response:*
-
-
-
-
-[SEOSchemaMarkupTemplate](#SEOSchemaMarkupTemplate)
-
-Success. Refer `SEOSchemaMarkupTemplate` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getSEOMarkupSchema
-Get a particular SEO Markup schema of an application using its id
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getSEOMarkupSchema(id=id)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | Alphanumeric ID allotted to a SEO Markup Schema Template created within a business. |  
-
-
-
-Use this API to get a existing SEO Markup schema an application
-
-*Returned Response:*
-
-
-
-
-[SEOSchemaMarkupTemplate](#SEOSchemaMarkupTemplate)
-
-Success. Refer `SEOSchemaMarkupTemplate` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### editSEOMarkupSchema
-Get a particular SEO Markup schema of an application using its id
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.editSEOMarkupSchema(id=id, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | Alphanumeric ID allotted to a SEO Markup Schema Template created within a business. |  
-| body | [SEOSchemaMarkupTemplateRequestBody](#SEOSchemaMarkupTemplateRequestBody) | yes | Request body |
-
-
-Use this API to edit an existing SEO Markup schema an application
-
-*Returned Response:*
-
-
-
-
-[SEOSchemaMarkupTemplate](#SEOSchemaMarkupTemplate)
-
-Success. Refer `SEOSchemaMarkupTemplate` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteSEOMarkupSchema
-delete a particular SEO Markup schema of an application using its id
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.deleteSEOMarkupSchema(id=id)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | Alphanumeric ID allotted to a SEO Markup Schema Template created within a business. |  
-
-
-
-Use this API to delete an existing SEO Markup schema an application
-
-*Returned Response:*
-
-
-
-
-[SEOSchemaMarkupTemplate](#SEOSchemaMarkupTemplate)
-
-Success. Refer `SEOSchemaMarkupTemplate` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getSlideshows
-Get slideshows
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getSlideshows(devicePlatform=devicePlatform, pageNo=pageNo, pageSize=pageSize)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| devicePlatform | String | yes | Filter slideshows by platform. Acceptable values are: web, android, ios and all |   
-| pageNo | Int? | no | The page number to navigate through the given set of results. Default value is 1. |   
-| pageSize | Int? | no | The number of items to retrieve in each page. Default value is 10. |  
-
-
-
-A slideshow is a group of images, videos or a combination of both that are shown on the website in the form of slides. Use this API to fetch a list of slideshows.
-
-*Returned Response:*
-
-
-
-
-[SlideshowGetResponse](#SlideshowGetResponse)
-
-Success. Refer `SlideshowGetResponse` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "date_meta": {
-          "created_on": "2021-03-14T05:27:12.319Z",
-          "modified_on": "2021-03-14T05:27:12.319Z"
-        },
-        "archived": false,
-        "_id": "604d9eb975e9d136bb1b8b83",
-        "configuration": {
-          "start_on_launch": false,
-          "duration": 50,
-          "sleep_time": 100,
-          "slide_direction": "horizontal"
-        },
-        "slug": "ss-sfsd-updated",
-        "platform": "ios",
-        "media": [
-          {
-            "auto_decide_duration": false,
-            "type": "image",
-            "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1567148153/production/system/icons/brands-tab_sfinpk.png",
-            "bg_color": "#ffffff",
-            "duration": 10,
-            "action": {
-              "type": ""
-            }
-          },
-          {
-            "auto_decide_duration": true,
-            "type": "youtube",
-            "url": "https://www.youtube.com/embed/9vJRopau0g0",
-            "bg_color": "#ffffff",
-            "duration": 909,
-            "action": {
-              "type": ""
-            }
-          }
-        ],
-        "application": "5cd3db5e9d692cfe5302a7bb",
-        "active": true,
-        "__v": 0
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 1,
-      "item_total": 2,
-      "has_next": true
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createSlideshow
-Create a slideshow
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.createSlideshow(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [SlideshowRequest](#SlideshowRequest) | yes | Request body |
-
-
-A slideshow is a group of images, videos or a combination of both that are shown on the website in the form of slides. Use this API to create a slideshow.
-
-*Returned Response:*
-
-
-
-
-[SlideshowSchema](#SlideshowSchema)
-
-Success. Refer `SlideshowSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "date_meta": {
-      "created_on": "2021-03-14T05:27:12.319Z",
-      "modified_on": "2021-03-14T05:27:12.319Z"
-    },
-    "archived": false,
-    "_id": "604d9eb975e9d136bb1b8b83",
-    "configuration": {
-      "start_on_launch": false,
-      "duration": 50,
-      "sleep_time": 100,
-      "slide_direction": "horizontal"
-    },
-    "slug": "ss-sfsd-updated",
-    "platform": "ios",
-    "media": [
-      {
-        "auto_decide_duration": false,
-        "type": "image",
-        "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1567148153/production/system/icons/brands-tab_sfinpk.png",
-        "bg_color": "#ffffff",
-        "duration": 10,
-        "action": {
-          "type": ""
-        }
-      },
-      {
-        "auto_decide_duration": true,
-        "type": "youtube",
-        "url": "https://www.youtube.com/embed/9vJRopau0g0",
-        "bg_color": "#ffffff",
-        "duration": 909,
-        "action": {
-          "type": ""
-        }
-      }
-    ],
-    "application": "5cd3db5e9d692cfe5302a7bb",
-    "active": true
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getSlideshowBySlug
-Get slideshow by slug
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getSlideshowBySlug(slug=slug, devicePlatform=devicePlatform)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| slug | String | yes | A short, human-readable, URL-friendly identifier of a slideshow. You can get slug value of a page from `getSlideshows` API. |   
-| devicePlatform | String | yes | Filter slideshows by platform. Acceptable values are: web, android, ios and all |  
-
-
-
-Use this API to retrieve the details of a slideshow by its slug.
-
-*Returned Response:*
-
-
-
-
-[SlideshowSchema](#SlideshowSchema)
-
-Success. Refer `SlideshowSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "date_meta": {
-      "created_on": "2021-03-14T05:27:12.319Z",
-      "modified_on": "2021-03-14T05:27:12.319Z"
-    },
-    "archived": false,
-    "_id": "604d9eb975e9d136bb1b8b83",
-    "configuration": {
-      "start_on_launch": false,
-      "duration": 50,
-      "sleep_time": 100,
-      "slide_direction": "horizontal"
-    },
-    "slug": "ss-sfsd-updated",
-    "platform": "ios",
-    "media": [
-      {
-        "auto_decide_duration": false,
-        "type": "image",
-        "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1567148153/production/system/icons/brands-tab_sfinpk.png",
-        "bg_color": "#ffffff",
-        "duration": 10,
-        "action": {
-          "type": ""
-        }
-      },
-      {
-        "auto_decide_duration": true,
-        "type": "youtube",
-        "url": "https://www.youtube.com/embed/9vJRopau0g0",
-        "bg_color": "#ffffff",
-        "duration": 909,
-        "action": {
-          "type": ""
-        }
-      }
-    ],
-    "application": "5cd3db5e9d692cfe5302a7bb",
-    "active": true
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateSlideshow
-Update a slideshow
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.updateSlideshow(id=id, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | ID allotted to the slideshow. |  
-| body | [SlideshowRequest](#SlideshowRequest) | yes | Request body |
-
-
-Use this API to edit the details of an existing slideshow.
-
-*Returned Response:*
-
-
-
-
-[SlideshowSchema](#SlideshowSchema)
-
-Success. Refer `SlideshowSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "date_meta": {
-      "created_on": "2021-03-14T05:27:12.319Z",
-      "modified_on": "2021-03-14T05:27:12.319Z"
-    },
-    "archived": false,
-    "_id": "604d9eb975e9d136bb1b8b83",
-    "configuration": {
-      "start_on_launch": false,
-      "duration": 50,
-      "sleep_time": 100,
-      "slide_direction": "horizontal"
-    },
-    "slug": "ss-sfsd-updated",
-    "platform": "ios",
-    "media": [
-      {
-        "auto_decide_duration": false,
-        "type": "image",
-        "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1567148153/production/system/icons/brands-tab_sfinpk.png",
-        "bg_color": "#ffffff",
-        "duration": 10,
-        "action": {
-          "type": ""
-        }
-      },
-      {
-        "auto_decide_duration": true,
-        "type": "youtube",
-        "url": "https://www.youtube.com/embed/9vJRopau0g0",
-        "bg_color": "#ffffff",
-        "duration": 909,
-        "action": {
-          "type": ""
-        }
-      }
-    ],
-    "application": "5cd3db5e9d692cfe5302a7bb",
-    "active": true
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteSlideshow
-Delete a slideshow
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.deleteSlideshow(id=id)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| id | String | yes | ID allotted to the slideshow. |  
-
-
-
-Use this API to delete an existing slideshow.
-
-*Returned Response:*
-
-
-
-
-[SlideshowSchema](#SlideshowSchema)
-
-Success.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "date_meta": {
-      "created_on": "2021-03-14T05:27:12.319Z",
-      "modified_on": "2021-03-14T05:27:12.319Z"
-    },
-    "archived": true,
-    "_id": "604d9eb975e9d136bb1b8b83",
-    "configuration": {
-      "start_on_launch": false,
-      "duration": 50,
-      "sleep_time": 100,
-      "slide_direction": "horizontal"
-    },
-    "slug": "ss-sfsd-updated",
-    "platform": "ios",
-    "media": [
-      {
-        "auto_decide_duration": false,
-        "type": "image",
-        "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1567148153/production/system/icons/brands-tab_sfinpk.png",
-        "bg_color": "#ffffff",
-        "duration": 10,
-        "action": {
-          "type": ""
-        }
-      },
-      {
-        "auto_decide_duration": true,
-        "type": "youtube",
-        "url": "https://www.youtube.com/embed/9vJRopau0g0",
-        "bg_color": "#ffffff",
-        "duration": 909,
-        "action": {
-          "type": ""
-        }
-      }
-    ],
-    "application": "5cd3db5e9d692cfe5302a7bb",
-    "active": true
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCustomFieldTypes
-Get custom field types
-
-
-
-
-```python
-try:
-    result = await platformClient.content.getCustomFieldTypes()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Use this API to retrieve the custom field types 
-
-*Returned Response:*
-
-
-
-
-[CustomObjectByIdSchema](#CustomObjectByIdSchema)
-
-Success. Returns all custom field types. 
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "metafield_types": {
-      "string_single_line": {
-        "name": "Single Line Text",
-        "list_enabled": true,
-        "category": "TEXT",
-        "type": "string",
-        "supported_validations": [
-          {
-            "name": "min",
-            "type": "integer",
-            "display": "Minimum Characters"
-          },
-          {
-            "name": "max",
-            "type": "integer",
-            "display": "Maximum Characters"
-          },
-          {
-            "name": "regex",
-            "type": "string",
-            "display": "Regular Expression",
-            "meta": {
-              "examples": [
-                {
-                  "name": "Alphabet Characters",
-                  "value": "^[a-zA-Z]+$"
-                },
-                {
-                  "name": "Alphanumeric Characters",
-                  "value": "^[a-zA-Z0-9]+$"
-                },
-                {
-                  "name": "Numeric Characters",
-                  "value": "^[0-9]+$"
-                },
-                {
-                  "name": "Email Address",
-                  "value": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
-                }
-              ]
-            }
-          },
-          {
-            "name": "choices",
-            "type": "string_array",
-            "display": "Choices"
-          }
-        ]
-      },
-      "string_multi_line": {
-        "name": "Multi Line Text",
-        "list_enabled": true,
-        "category": "TEXT",
-        "type": "string",
-        "supported_validations": [
-          {
-            "name": "min",
-            "type": "integer",
-            "display": "Minimum Characters"
-          },
-          {
-            "name": "max",
-            "type": "integer",
-            "display": "Maximum Characters"
-          }
-        ]
-      },
-      "dropdown": {
-        "name": "Dropdown",
-        "list_enabled": true,
-        "category": "TEXT",
-        "type": "string",
-        "supported_validations": [
-          {
-            "name": "choices",
-            "type": "string_array",
-            "display": "Choices",
-            "required": true
-          }
-        ]
-      },
-      "integer": {
-        "name": "Integer",
-        "list_enabled": true,
-        "type": "integer",
-        "category": "NUMBER",
-        "supported_validations": [
-          {
-            "name": "min",
-            "type": "integer",
-            "display": "Minimum Value"
-          },
-          {
-            "name": "max",
-            "type": "integer",
-            "display": "Maximum Value"
-          },
-          {
-            "name": "choices",
-            "type": "integer_array",
-            "display": "Choices"
-          }
-        ]
-      },
-      "float_type": {
-        "name": "Decimal",
-        "list_enabled": true,
-        "type": "float",
-        "category": "NUMBER",
-        "supported_validations": [
-          {
-            "name": "min",
-            "type": "float",
-            "display": "Minimum Value"
-          },
-          {
-            "name": "max",
-            "type": "float",
-            "display": "Maximum Value"
-          },
-          {
-            "name": "choices",
-            "type": "float_array",
-            "display": "Choices"
-          }
-        ]
-      },
-      "boolean_type": {
-        "name": "Boolean",
-        "category": "TRUE_FALSE",
-        "list_enabled": false,
-        "type": "boolean",
-        "supported_validations": []
-      },
-      "date": {
-        "name": "Date",
-        "list_enabled": true,
-        "category": "DATETIME",
-        "type": "date",
-        "supported_validations": [
-          {
-            "name": "min",
-            "type": "date",
-            "display": "From Date"
-          },
-          {
-            "name": "max",
-            "type": "date",
-            "display": "To Date"
-          }
-        ]
-      },
-      "datetime": {
-        "name": "Date - Time",
-        "category": "DATETIME",
-        "list_enabled": true,
-        "type": "datetime",
-        "supported_validations": [
-          {
-            "name": "min",
-            "type": "date",
-            "display": "From Date & Time"
-          },
-          {
-            "name": "max",
-            "type": "date",
-            "display": "To Date & Time"
-          }
-        ]
-      },
-      "json": {
-        "name": "JSON",
-        "list_enabled": false,
-        "category": "ADVANCED",
-        "type": "json",
-        "supported_validations": [
-          {
-            "name": "schema",
-            "type": "json",
-            "display": "JSON Schema"
-          }
-        ]
-      },
-      "file": {
-        "name": "File",
-        "category": "REFERENCE",
-        "list_enabled": true,
-        "type": "string",
-        "supported_validations": [
-          {
-            "name": "file_type_options",
-            "type": "string_array",
-            "meta": {
-              "options": [
-                {
-                  "image": {
-                    "supported_types": [
-                      "jpeg",
-                      "jpg",
-                      "png",
-                      "svg+xml",
-                      "tiff",
-                      "webp",
-                      "gif"
-                    ],
-                    "max_size": 20971520
-                  },
-                  "video": {
-                    "supported_types": [
-                      "x-flv",
-                      "mp4",
-                      "x-mpegURL",
-                      "MP2T",
-                      "3gpp",
-                      "/quicktime",
-                      "x-msvideo",
-                      "x-ms-wmv",
-                      "webm"
-                    ],
-                    "max_size": 1048576000
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      },
-      "url": {
-        "name": "URL",
-        "list_enabled": true,
-        "type": "string",
-        "supported_validations": [
-          {
-            "name": "allowed_domains",
-            "display": "Allowed Domains",
-            "type": "string_array"
-          }
-        ]
-      },
-      "metaobject": {
-        "name": "Custom Object",
-        "list_enabled": true,
-        "category": "REFERENCE",
-        "type": "string",
-        "supported_validations": [
-          {
-            "name": "metaobject_definition_id",
-            "display": "Reference",
-            "type": "string",
-            "required": true
-          }
-        ]
-      },
-      "product": {
-        "name": "Product",
-        "list_enabled": true,
-        "category": "REFERENCE",
-        "type": "string",
-        "supported_validations": [],
-        "scope": [
-          "company",
-          "application"
-        ]
-      }
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getResources
-Get resources
-
-
-
-
-```python
-try:
-    result = await platformClient.content.getResources()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Use this API to retrieve the resources, such as products, collections, customers, selling locations, etc.
-
-*Returned Response:*
-
-
-
-
-[ResourcesSchema](#ResourcesSchema)
-
-Success. Returns a JSON object of resources. Refer `ResourcesSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "resources": [
-      {
-        "name": "product",
-        "key": "product",
-        "definitions_count": 0
-      },
-      {
-        "name": "Collection",
-        "key": "collection",
-        "definitions_count": 0
-      },
-      {
-        "name": "Page",
-        "key": "page",
-        "definitions_count": 0
-      },
-      {
-        "name": "Blog",
-        "key": "blog",
-        "definitions_count": 0
-      },
-      {
-        "name": "Customer",
-        "key": "customer",
-        "definitions_count": 0
-      },
-      {
-        "name": "Store",
-        "key": "store",
-        "definitions_count": 0
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCustomFieldDefinitions
-Get custom fields definitions
-
-
-
-
-```python
-try:
-    result = await platformClient.content.getCustomFieldDefinitions(pageNo=pageNo, pageSize=pageSize, resources=resources, types=types, search=search)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| pageNo | String | yes |  |   
-| pageSize | String | yes |  |   
-| resources | String? | no |  |   
-| types | String? | no |  |   
-| search | String? | no |  |  
-
-
-
-Use this API to retrieve the definitions of custom fields.
-
-*Returned Response:*
-
-
-
-
-[CustomFieldDefinitionsSchema](#CustomFieldDefinitionsSchema)
-
-Success. Returns a list of custom fields definitions. Refer `CustomFieldDefinitionsSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "652e183347320aa8d8c28361",
-        "creator": "company",
-        "resource": "product",
-        "name": "new meta object",
-        "namespace": "custom",
-        "key": "new-meta-object",
-        "description": "",
-        "type": "metaobject",
-        "multi_value": false,
-        "validations": [
-          {
-            "name": "metaobject_definition_id",
-            "type": "string",
-            "value": "652e1298b6ece12d06684c18"
-          }
-        ],
-        "company_id": "2",
-        "created_by": "5e5796c4fc10a0d133839372",
-        "updated_by": "5e5796c4fc10a0d133839372",
-        "required": false,
-        "is_deleted": false,
-        "created_at": "2023-10-17T05:14:27.960Z",
-        "updated_at": "2023-10-17T05:14:27.960Z",
-        "type_name": "Custom Object",
-        "invalid_fields_count": 0
-      },
-      {
-        "_id": "652826cd99822ff1f62cbf13",
-        "creator": "company",
-        "resource": "product",
-        "name": "single image",
-        "namespace": "custom",
-        "key": "single-image",
-        "description": "this is single",
-        "type": "file",
-        "multi_value": false,
-        "validations": [
-          {
-            "name": "file_type_options",
-            "type": "string_array",
-            "value": [
-              "image",
-              "audio",
-              "video",
-              "document",
-              "pdf"
-            ]
-          }
-        ],
-        "company_id": "2",
-        "created_by": "5e5796c4fc10a0d133839372",
-        "updated_by": "5e5796c4fc10a0d133839372",
-        "required": false,
-        "is_deleted": false,
-        "created_at": "2023-10-12T17:03:09.868Z",
-        "updated_at": "2023-10-12T17:03:09.868Z",
-        "type_name": "File",
-        "invalid_fields_count": 0
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 10,
-      "item_total": 15,
-      "has_next": true
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createCustomFieldDefinition
-Create custom field definition
-
-
-
-
-```python
-try:
-    result = await platformClient.content.createCustomFieldDefinition(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CustomFieldDefinitionRequestSchema](#CustomFieldDefinitionRequestSchema) | yes | Request body |
-
-
-Use this API to create a custom field definition for your application.
-
-*Returned Response:*
-
-
-
-
-[CustomFieldDefinitionDetailResSchema](#CustomFieldDefinitionDetailResSchema)
-
-Custom field definition created.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success1</i></summary>
-
-```json
-{
-  "value": {
-    "creator": "application",
-    "resource": "product",
-    "name": "name",
-    "namespace": "fname",
-    "key": "fname",
-    "description": "First name",
-    "type": "string_single_line",
-    "multi_value": false,
-    "company_id": "1",
-    "application_id": "000000000000000000000001",
-    "created_by": "000000000000000000000001",
-    "updated_by": "000000000000000000000001",
-    "required": false,
-    "is_deleted": false,
-    "_id": "65369654d436ae0e54147e7b",
-    "validations": [],
-    "created_at": "2023-10-23T15:50:44.143Z",
-    "updated_at": "2023-10-23T15:50:44.143Z"
-  }
-}
-```
-</details>
-
-<details>
-<summary><i>&nbsp; success2</i></summary>
-
-```json
-{
-  "value": {
-    "creator": "application",
-    "resource": "product",
-    "name": "name",
-    "namespace": "fname",
-    "key": "fname",
-    "description": "First name",
-    "type": "string_single_line",
-    "multi_value": false,
-    "company_id": "1",
-    "application_id": "000000000000000000000001",
-    "created_by": "000000000000000000000001",
-    "updated_by": "000000000000000000000001",
-    "required": false,
-    "is_deleted": false,
-    "_id": "65369654d436ae0e54147e7b",
-    "validations": [],
-    "created_at": "2023-10-23T15:50:44.143Z",
-    "updated_at": "2023-10-23T15:50:44.143Z"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCustomFieldDefinition
-Get custom fields definition by id
-
-
-
-
-```python
-try:
-    result = await platformClient.content.getCustomFieldDefinition(definitionId=definitionId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-
-
-
-Use this API to retrieve the definitions of custom fields using definition_id.
-
-*Returned Response:*
-
-
-
-
-[CustomFieldDefinitionDetailResSchema](#CustomFieldDefinitionDetailResSchema)
-
-Success. Returns a object of custom field definition. Refer `CustomFieldDefinitionsSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "652e183347320aa8d8c28361",
-        "creator": "company",
-        "resource": "product",
-        "name": "new meta object",
-        "namespace": "custom",
-        "key": "new-meta-object",
-        "description": "",
-        "type": "metaobject",
-        "multi_value": false,
-        "validations": [
-          {
-            "name": "metaobject_definition_id",
-            "type": "string",
-            "value": "652e1298b6ece12d06684c18"
-          }
-        ],
-        "company_id": "2",
-        "created_by": "5e5796c4fc10a0d133839372",
-        "updated_by": "5e5796c4fc10a0d133839372",
-        "required": false,
-        "is_deleted": false,
-        "created_at": "2023-10-17T05:14:27.960Z",
-        "updated_at": "2023-10-17T05:14:27.960Z",
-        "type_name": "Custom Object",
-        "invalid_fields_count": 0
-      },
-      {
-        "_id": "652826cd99822ff1f62cbf13",
-        "creator": "company",
-        "resource": "product",
-        "name": "single image",
-        "namespace": "custom",
-        "key": "single-image",
-        "description": "this is single",
-        "type": "file",
-        "multi_value": false,
-        "validations": [
-          {
-            "name": "file_type_options",
-            "type": "string_array",
-            "value": [
-              "image",
-              "audio",
-              "video",
-              "document",
-              "pdf"
-            ]
-          }
-        ],
-        "company_id": "2",
-        "created_by": "5e5796c4fc10a0d133839372",
-        "updated_by": "5e5796c4fc10a0d133839372",
-        "required": false,
-        "is_deleted": false,
-        "created_at": "2023-10-12T17:03:09.868Z",
-        "updated_at": "2023-10-12T17:03:09.868Z",
-        "type_name": "File",
-        "invalid_fields_count": 0
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 10,
-      "item_total": 15,
-      "has_next": true
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateCustomFieldDefinition
-Update custom field definition
-
-
-
-
-```python
-try:
-    result = await platformClient.content.updateCustomFieldDefinition(definitionId=definitionId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-| body | [CustomFieldDefinitionRequestSchema](#CustomFieldDefinitionRequestSchema) | yes | Request body |
-
-
-Use this API to update a custom field definition for your application.
-
-*Returned Response:*
-
-
-
-
-[CustomFieldDefinitionDetailResSchema](#CustomFieldDefinitionDetailResSchema)
-
-Custom field definition created.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "creator": "application",
-    "resource": "product",
-    "name": "name",
-    "namespace": "fname",
-    "key": "fname",
-    "description": "First name",
-    "type": "string_single_line",
-    "multi_value": false,
-    "company_id": "1",
-    "application_id": "000000000000000000000001",
-    "created_by": "000000000000000000000001",
-    "updated_by": "000000000000000000000001",
-    "required": false,
-    "is_deleted": false,
-    "_id": "65369654d436ae0e54147e7b",
-    "validations": [],
-    "created_at": "2023-10-23T15:50:44.143Z",
-    "updated_at": "2023-10-23T15:50:44.143Z"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteCustomFieldDefinition
-Delete custom fields definition.
-
-
-
-
-```python
-try:
-    result = await platformClient.content.deleteCustomFieldDefinition(definitionId=definitionId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-
-
-
-Use this API to delete the definitions of custom fields using definition_id. This will also delete related custom fields entries related to this definition.
-
-*Returned Response:*
-
-
-
-
-[CustomDataDeleteSchema](#CustomDataDeleteSchema)
-
-Success. It will returns the message for delete successfully.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "success": true,
-    "message": "Metafield definition deleted successfully"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCustomFields
-Get list of custom fields of given resource
-
-
-
-
-```python
-try:
-    result = await platformClient.content.getCustomFields(resource=resource)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| resource | String | yes |  |  
-
-
-
-Use this API to retrieve the custom fields for given resource in param.
-
-*Returned Response:*
-
-
-
-
-[CustomFieldsResponseSchema](#CustomFieldsResponseSchema)
-
-Success. Returns a list of custom fields. Refer `CustomFieldsResponseSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "652f8c5b6c1643cbd1659d88",
-        "namespace": "product_test_2",
-        "key": "manufacturer",
-        "resource": "product",
-        "creator": "company",
-        "value": [
-          "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/misc/general/free/original/NWt9CSoYbo-airtel_money.png",
-          "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/misc/general/free/original/QqkJBM4IQL-amazon-pay.png",
-          "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/misc/general/free/original/2Ed7Pk03Z-amex.png"
-        ],
-        "resource_id": "64bb987e9a3c4b6c29d676bc",
-        "type": "file",
-        "multi_value": true,
-        "company_id": "1",
-        "definition_id": "650c4ea3e0e7980d14c16c06",
-        "has_invalid_values": false,
-        "invalid_value_errors": [],
-        "created_by": "000000000000000000000001",
-        "is_deleted": false,
-        "created_at": "2023-10-18T07:42:19.551Z",
-        "updated_at": "2023-10-18T07:42:19.551Z"
-      },
-      {
-        "_id": "652f8b4628dd2571fe5e90d8",
-        "namespace": "product_test_1",
-        "key": "manufacturer",
-        "resource": "product",
-        "creator": "company",
-        "value": [
-          "this",
-          "is",
-          "testing"
-        ],
-        "resource_id": "64ba480fdf9cbe3a90b052f4",
-        "type": "string_single_line",
-        "multi_value": true,
-        "company_id": "1",
-        "definition_id": "650ae0d67f9c7b2a7d56b409",
-        "has_invalid_values": false,
-        "invalid_value_errors": [],
-        "created_by": "000000000000000000000001",
-        "is_deleted": false,
-        "created_at": "2023-10-18T07:37:42.797Z",
-        "updated_at": "2023-10-18T07:37:42.797Z"
-      },
-      {
-        "_id": "652f8b4628dd2571fe5e90d7",
-        "namespace": "product_test",
-        "key": "manufacturer",
-        "resource": "product",
-        "creator": "company",
-        "value": [
-          "kuldeep",
-          "kumar",
-          "harshwal"
-        ],
-        "resource_id": "64ba32fbdf9cbe3a90b052f0",
-        "type": "string_single_line",
-        "multi_value": true,
-        "company_id": "1",
-        "definition_id": "650ae0b27f9c7b2a7d56b407",
-        "has_invalid_values": false,
-        "invalid_value_errors": [],
-        "created_by": "000000000000000000000001",
-        "is_deleted": false,
-        "created_at": "2023-10-18T07:37:42.796Z",
-        "updated_at": "2023-10-18T07:37:42.796Z"
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 20,
-      "item_total": 3,
-      "has_next": false
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCustomFieldsByResourceId
-Get list of custom fields of given resource and resource id
-
-
-
-
-```python
-try:
-    result = await platformClient.content.getCustomFieldsByResourceId(resource=resource, resourceId=resourceId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| resource | String | yes |  |   
-| resourceId | String | yes |  |  
-
-
-
-Use this API to retrieve the custom fields for given resource in param.
-
-*Returned Response:*
-
-
-
-
-[CustomFieldsResponseByResourceIdSchema](#CustomFieldsResponseByResourceIdSchema)
-
-Success. Returns a list of custom fields. Refer `CustomFieldsResponseByResourceIdSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "65705772a20cc45d3f2585b3",
-        "namespace": "custom",
-        "key": "designer-name",
-        "resource": "product",
-        "creator": "company",
-        "value": [
-          "ramsons"
-        ],
-        "resource_id": "7612437",
-        "type": "string_single_line",
-        "multi_value": false,
-        "company_id": "2",
-        "definition_id": "65604cdb6a78c23f082c850b",
-        "has_invalid_values": false,
-        "invalid_value_errors": [],
-        "created_by": "bd7223b6727eb087987eece7",
-        "is_deleted": false,
-        "created_at": "2023-12-06T11:13:54.217Z",
-        "updated_at": "2023-12-06T11:19:02.311Z",
-        "updated_by": "bd7223b6727eb087987eece7"
-      },
-      {
-        "_id": "65705772a20cc45d3f2585b4",
-        "namespace": "custom",
-        "key": "manufactures",
-        "resource": "product",
-        "creator": "company",
-        "value": [
-          "kartik"
-        ],
-        "resource_id": "7612437",
-        "type": "string_single_line",
-        "multi_value": false,
-        "company_id": "2",
-        "definition_id": "655f53ddca37f5deb832a185",
-        "has_invalid_values": false,
-        "invalid_value_errors": [],
-        "created_by": "bd7223b6727eb087987eece7",
-        "is_deleted": false,
-        "created_at": "2023-12-06T11:13:54.218Z",
-        "updated_at": "2023-12-06T11:19:02.311Z",
-        "updated_by": "bd7223b6727eb087987eece7"
-      },
-      {
-        "_id": "65705772a20cc45d3f2585b1",
-        "namespace": "custom",
-        "key": "product-designer",
-        "resource": "product",
-        "creator": "company",
-        "value": [
-          "65702b4574c5764716ee671d"
-        ],
-        "resource_id": "7612437",
-        "type": "metaobject",
-        "multi_value": true,
-        "company_id": "2",
-        "definition_id": "656d6bc9766f9511345091a6",
-        "has_invalid_values": false,
-        "invalid_value_errors": [],
-        "created_by": "bd7223b6727eb087987eece7",
-        "is_deleted": false,
-        "created_at": "2023-12-06T11:13:54.217Z",
-        "updated_at": "2023-12-06T11:19:02.311Z",
-        "updated_by": "bd7223b6727eb087987eece7"
-      },
-      {
-        "_id": "65705772a20cc45d3f2585b2",
-        "namespace": "custom",
-        "key": "validation-check",
-        "resource": "product",
-        "creator": "company",
-        "value": [
-          "ram"
-        ],
-        "resource_id": "7612437",
-        "type": "string_single_line",
-        "multi_value": false,
-        "company_id": "2",
-        "definition_id": "656866a30152b0584464d547",
-        "has_invalid_values": false,
-        "invalid_value_errors": [],
-        "created_by": "bd7223b6727eb087987eece7",
-        "is_deleted": false,
-        "created_at": "2023-12-06T11:13:54.217Z",
-        "updated_at": "2023-12-06T11:19:02.311Z",
-        "updated_by": "bd7223b6727eb087987eece7"
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createCustomFieldByResourceId
-Create custom field entries for gives resource and resource_id
-
-
-
-
-```python
-try:
-    result = await platformClient.content.createCustomFieldByResourceId(resource=resource, resourceId=resourceId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| resource | String | yes |  |   
-| resourceId | String | yes |  |  
-| body | [CustomFieldRequestSchema](#CustomFieldRequestSchema) | yes | Request body |
-
-
-Use this API to create the custom field entry for given resource and resource_id in param.
-
-*Returned Response:*
-
-
-
-
-[CustomFieldsResponseByResourceIdSchema](#CustomFieldsResponseByResourceIdSchema)
-
-Success. Returns a list of custom fields. Refer `CustomFieldsResponseByResourceIdSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "65705772a20cc45d3f2585b1",
-        "updated_by": "bd7223b6727eb087987eece7",
-        "namespace": "custom",
-        "key": "product-designer",
-        "resource": "product",
-        "resource_id": "7612437",
-        "type": "metaobject",
-        "multi_value": true,
-        "company_id": "2",
-        "creator": "company",
-        "invalid_value_errors": [],
-        "has_invalid_values": false,
-        "definition_id": "656d6bc9766f9511345091a6",
-        "value": [
-          "65702b4574c5764716ee671d"
-        ]
-      },
-      {
-        "_id": "65705772a20cc45d3f2585b2",
-        "updated_by": "bd7223b6727eb087987eece7",
-        "namespace": "custom",
-        "key": "validation-check",
-        "resource": "product",
-        "resource_id": "7612437",
-        "type": "string_single_line",
-        "multi_value": false,
-        "company_id": "2",
-        "creator": "company",
-        "invalid_value_errors": [],
-        "has_invalid_values": false,
-        "definition_id": "656866a30152b0584464d547",
-        "value": [
-          "ram"
-        ]
-      },
-      {
-        "_id": "65705772a20cc45d3f2585b3",
-        "updated_by": "bd7223b6727eb087987eece7",
-        "namespace": "custom",
-        "key": "designer-name",
-        "resource": "product",
-        "resource_id": "7612437",
-        "type": "string_single_line",
-        "multi_value": false,
-        "company_id": "2",
-        "creator": "company",
-        "invalid_value_errors": [],
-        "has_invalid_values": false,
-        "definition_id": "65604cdb6a78c23f082c850b",
-        "value": [
-          "ramsons"
-        ]
-      },
-      {
-        "_id": "65705772a20cc45d3f2585b4",
-        "updated_by": "bd7223b6727eb087987eece7",
-        "namespace": "custom",
-        "key": "manufactures",
-        "resource": "product",
-        "resource_id": "7612437",
-        "type": "string_single_line",
-        "multi_value": false,
-        "company_id": "2",
-        "creator": "company",
-        "invalid_value_errors": [],
-        "has_invalid_values": false,
-        "definition_id": "655f53ddca37f5deb832a185",
-        "value": [
-          "kartik"
-        ]
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createCustomObjectDefinition
-Create custom object definition
-
-
-
-
-```python
-try:
-    result = await platformClient.content.createCustomObjectDefinition(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CustomObjectDefinitionRequestSchema](#CustomObjectDefinitionRequestSchema) | yes | Request body |
-
-
-Use this API to create custom object defintion
-
-*Returned Response:*
-
-
-
-
-[CustomObjectDefinitionSchema](#CustomObjectDefinitionSchema)
-
-Success. Returns the saved custom object defintion
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "656db530766f951134509542",
-    "name": "customObject1",
-    "type": "customobject1",
-    "display_name_key": "cocustomfield2",
-    "description": "",
-    "creator": "company",
-    "created_by": "bd7223b6727eb087987eece7",
-    "updated_by": "bd7223b6727eb087987eece7",
-    "field_definitions": [
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "coCustomField1",
-        "namespace": "customobject1",
-        "key": "cocustomfield1",
-        "description": "",
-        "type": "string_single_line",
-        "multi_value": false,
-        "validations": [
-          {
-            "name": "min",
-            "type": "integer",
-            "value": 2
-          },
-          {
-            "name": "max",
-            "type": "integer",
-            "value": 10
-          },
-          {
-            "name": "regex",
-            "type": "string",
-            "value": "^[a-zA-Z]+$"
-          }
-        ],
-        "company_id": "1",
-        "created_by": "bd7223b6727eb087987eece7",
-        "metaobject_definition_id": "656db530766f951134509542",
-        "required": false,
-        "is_deleted": false,
-        "_id": "656db530766f951134509545",
-        "created_at": "2023-12-04T11:17:04.153Z",
-        "updated_at": "2023-12-04T11:17:04.153Z"
-      },
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "coCustomField2",
-        "namespace": "customobject1",
-        "key": "cocustomfield2",
-        "description": "this is custom field 2 of custom object",
-        "type": "string_single_line",
-        "multi_value": false,
-        "validations": [
-          {
-            "name": "min",
-            "type": "integer",
-            "value": 1
-          },
-          {
-            "name": "max",
-            "type": "integer",
-            "value": 100
-          }
-        ],
-        "company_id": "1",
-        "created_by": "bd7223b6727eb087987eece7",
-        "metaobject_definition_id": "656db530766f951134509542",
-        "required": false,
-        "is_deleted": false,
-        "_id": "656db530766f951134509546",
-        "created_at": "2023-12-04T11:17:04.154Z",
-        "updated_at": "2023-12-04T11:17:04.154Z"
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCustomObjectDefinitions
-Get custom object definitions
-
-
-
-
-```python
-try:
-    result = await platformClient.content.getCustomObjectDefinitions(pageNo=pageNo, pageSize=pageSize, search=search)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| pageNo | String | yes |  |   
-| pageSize | String | yes |  |   
-| search | String? | no |  |  
-
-
-
-Use this API to retrieve the custom object definitions
-
-*Returned Response:*
-
-
-
-
-[CustomObjectDefinitionsSchema](#CustomObjectDefinitionsSchema)
-
-Success. Returns a list custom object definitions.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "656db530766f951134509542",
-        "name": "customObject1",
-        "type": "customobject1",
-        "updated_at": "2023-12-04T11:17:04.136Z",
-        "entries_count": 0,
-        "fields_count": 2
-      },
-      {
-        "_id": "656db2d9766f95113450952b",
-        "name": "sample",
-        "type": "sample",
-        "updated_at": "2023-12-04T11:07:05.705Z",
-        "entries_count": 0,
-        "fields_count": 1
-      },
-      {
-        "_id": "656495b58d3278a7c24260f8",
-        "name": "address",
-        "type": "address",
-        "updated_at": "2023-11-27T13:12:21.999Z",
-        "entries_count": 1,
-        "fields_count": 3
-      },
-      {
-        "_id": "655c706ad5ff69fd3b95a1d9",
-        "name": "coCustomObject",
-        "type": "cocustomobject",
-        "updated_at": "2023-11-21T08:55:06.013Z",
-        "entries_count": 0,
-        "fields_count": 2
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 10,
-      "item_total": 4,
-      "has_next": false
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCustomObjectDefinition
-get custom object definition by id
-
-
-
-
-```python
-try:
-    result = await platformClient.content.getCustomObjectDefinition(definitionId=definitionId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-
-
-
-Use this API to update a custom object definition for your application.
-
-*Returned Response:*
-
-
-
-
-[CustomObjectDefinitionSchema](#CustomObjectDefinitionSchema)
-
-Custom object definition details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "656d67de766f95113450917b",
-    "name": "Designer",
-    "type": "designer",
-    "display_name_key": "name",
-    "description": "",
-    "creator": "company",
-    "created_by": "9759643b65ebc6bacb5275f5",
-    "updated_by": "bd7223b6727eb087987eece7",
-    "field_definitions": [
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "city2",
-        "namespace": "designer",
-        "key": "city",
-        "type": "string_single_line",
-        "description": "",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": false
-      },
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "mobile",
-        "namespace": "designer",
-        "key": "mobile",
-        "type": "string_single_line",
-        "description": "",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": false
-      },
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "name",
-        "namespace": "designer",
-        "key": "name",
-        "type": "string_single_line",
-        "description": "This is name of designer",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": true
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateCustomObjectDefinition
-Update custom object definition
-
-
-
-
-```python
-try:
-    result = await platformClient.content.updateCustomObjectDefinition(definitionId=definitionId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-| body | [CustomObjectDefinitionUpdateRequestSchema](#CustomObjectDefinitionUpdateRequestSchema) | yes | Request body |
-
-
-Use this API to update a custom object definition for your application.
-
-*Returned Response:*
-
-
-
-
-[CustomObjectDefinitionSchema](#CustomObjectDefinitionSchema)
-
-Custom field definition updated.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "656d67de766f95113450917b",
-    "name": "Designer",
-    "type": "designer",
-    "display_name_key": "name",
-    "description": "",
-    "creator": "company",
-    "created_by": "9759643b65ebc6bacb5275f5",
-    "updated_by": "bd7223b6727eb087987eece7",
-    "field_definitions": [
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "city2",
-        "namespace": "designer",
-        "key": "city",
-        "type": "string_single_line",
-        "description": "",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": false
-      },
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "mobile",
-        "namespace": "designer",
-        "key": "mobile",
-        "type": "string_single_line",
-        "description": "",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": false
-      },
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "name",
-        "namespace": "designer",
-        "key": "name",
-        "type": "string_single_line",
-        "description": "This is name of designer",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": true
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteCustomObjectDefinition
-delete custom object definition by id
-
-
-
-
-```python
-try:
-    result = await platformClient.content.deleteCustomObjectDefinition(definitionId=definitionId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-
-
-
-Use this API to delete a custom object definition and related data for your application.
-
-*Returned Response:*
-
-
-
-
-[CustomObjectDefinitionDeleteResponseSchema](#CustomObjectDefinitionDeleteResponseSchema)
-
-Custom object definition details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "success": true,
-    "message": "MetaObjectDefinition deleted successfully"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCustomObjects
-Get list of custom objects
-
-
-
-
-```python
-try:
-    result = await platformClient.content.getCustomObjects(definitionId=definitionId, pageNo=pageNo, pageSize=pageSize)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String? | no |  |   
-| pageNo | String | yes |  |   
-| pageSize | String | yes |  |  
-
-
-
-Use this API to retrieve the custom objects.
-
-*Returned Response:*
-
-
-
-
-[CustomObjectsSchema](#CustomObjectsSchema)
-
-Success. Returns a list of custom objects. Refer `CustomObjectsSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "653929f012376081aafa90f1",
-        "definition_id": "653907ced878d53c1a502d92",
-        "status": "active",
-        "updated_at": "2023-10-25T14:45:04.446Z",
-        "display_name": "painter #653929f012376081aafa90f1",
-        "definition": {
-          "_id": "653907ced878d53c1a502d92",
-          "name": "painter",
-          "type": "painter"
-        },
-        "references": 0
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 10,
-      "item_total": 1,
-      "has_next": false
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createCustomObject
-Create custom object entries
-
-
-
-
-```python
-try:
-    result = await platformClient.content.createCustomObject(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CustomObjectRequestSchema](#CustomObjectRequestSchema) | yes | Request body |
-
-
-Use this API to create the custom object entry.
-
-*Returned Response:*
-
-
-
-
-[CustomObjectSchema](#CustomObjectSchema)
-
-Success. Returns a list of custom objects. Refer `CustomObjectSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "65392bd912376081aafa90ff",
-    "creator": "application",
-    "company_id": "1",
-    "application_id": "000000000000000000000001",
-    "created_by": "000000000000000000000001",
-    "updated_by": "000000000000000000000001",
-    "status": "active",
-    "type": "painter",
-    "display_name": "painter #65392bd912376081aafa90ff",
-    "definition_id": "653907ced878d53c1a502d92",
-    "fields": [
-      {
-        "_id": "65392bd912376081aafa9103",
-        "namespace": "painter",
-        "key": "name",
-        "resource": "metaobject",
-        "resource_id": "65392bd912376081aafa90ff",
-        "type": "string_single_line",
-        "multi_value": false,
-        "company_id": "1",
-        "application_id": "000000000000000000000001",
-        "creator": "application",
-        "invalid_value_errors": [],
-        "has_invalid_values": false,
-        "metaobject_definition_id": "653907ced878d53c1a502d92",
-        "definition_id": "653907ced878d53c1a502d95",
-        "value": [
-          "Batman"
-        ],
-        "created_by": "000000000000000000000001"
-      },
-      {
-        "_id": "65392bd912376081aafa9104",
-        "namespace": "painter",
-        "key": "age",
-        "resource": "metaobject",
-        "resource_id": "65392bd912376081aafa90ff",
-        "type": "integer",
-        "multi_value": false,
-        "company_id": "1",
-        "application_id": "000000000000000000000001",
-        "creator": "application",
-        "invalid_value_errors": [],
-        "has_invalid_values": false,
-        "metaobject_definition_id": "653907ced878d53c1a502d92",
-        "definition_id": "653907ced878d53c1a502d96",
-        "value": [
-          50
-        ],
-        "created_by": "000000000000000000000001"
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getCustomObject
-Get custom object details
-
-
-
-
-```python
-try:
-    result = await platformClient.content.getCustomObject(metaobjectId=metaobjectId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| metaobjectId | String | yes |  |  
-
-
-
-Use this API to retrieve the custom object details and their fields details and definitions and references.
-
-*Returned Response:*
-
-
-
-
-[CustomObjectByIdSchema](#CustomObjectByIdSchema)
-
-Success. Returns a custom object. Refer `CustomObjectByIdSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "653929f012376081aafa90f1",
-    "status": "active",
-    "display_name": "painter #653929f012376081aafa90f1",
-    "definition": {
-      "_id": "653907ced878d53c1a502d92",
-      "name": "painter",
-      "type": "painter"
-    },
-    "references": [],
-    "fields": [
-      {
-        "_id": "653929f012376081aafa90f5",
-        "key": "name",
-        "value": [
-          "Bruce Wayne"
-        ],
-        "type": "string_single_line",
-        "definition_id": "653907ced878d53c1a502d95"
-      },
-      {
-        "_id": "653929f012376081aafa90f6",
-        "key": "age",
-        "value": [
-          5
-        ],
-        "type": "integer",
-        "definition_id": "653907ced878d53c1a502d96"
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteCustomObject
-Delete custom object
-
-
-
-
-```python
-try:
-    result = await platformClient.content.deleteCustomObject(metaobjectId=metaobjectId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| metaobjectId | String | yes |  |  
-
-
-
-Use this API to delete the custom object entry by id. This will also delete related custom fields entries related to this custom object.
-
-*Returned Response:*
-
-
-
-
-[CustomDataDeleteSchema](#CustomDataDeleteSchema)
-
-Success. It will returns the message for delete successfully.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "success": true,
-    "message": "Metafield definition deleted successfully"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateCustomObject
-Update custom object details
-
-
-
-
-```python
-try:
-    result = await platformClient.content.updateCustomObject(metaobjectId=metaobjectId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| metaobjectId | String | yes |  |  
-| body | [CustomObjectRequestSchema](#CustomObjectRequestSchema) | yes | Request body |
-
-
-Use this API to update a custom object detail for your application.
-
-*Returned Response:*
-
-
-
-
-[CustomObjectByIdSchema](#CustomObjectByIdSchema)
-
-Custom field definition created.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "656d67de766f95113450917b",
-    "name": "Designer",
-    "type": "designer",
-    "display_name_key": "name",
-    "description": "",
-    "creator": "company",
-    "created_by": "9759643b65ebc6bacb5275f5",
-    "updated_by": "bd7223b6727eb087987eece7",
-    "field_definitions": [
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "city2",
-        "namespace": "designer",
-        "key": "city",
-        "type": "string_single_line",
-        "description": "",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": false
-      },
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "mobile",
-        "namespace": "designer",
-        "key": "mobile",
-        "type": "string_single_line",
-        "description": "",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": false
-      },
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "name",
-        "namespace": "designer",
-        "key": "name",
-        "type": "string_single_line",
-        "description": "This is name of designer",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": true
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getJobs
-Fetch bulk import and export job list.
-
-
-
-
-```python
-try:
-    result = await platformClient.content.getJobs(page=page, pageSize=pageSize, actionType=actionType)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| page | String | yes |  |   
-| pageSize | String | yes |  |   
-| actionType | String | yes |  |  
-
-
-
-Use this api to get list of jobs of bulk import and exports
-
-*Returned Response:*
-
-
-
-
-[CustomObjectBulkEntry](#CustomObjectBulkEntry)
-
-Success. Returns all bulk entries history. 
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "6570124da20cc45d3f2582a7",
-        "jobs": [
-          "2311"
-        ],
-        "finished_jobs": [
-          "2311"
-        ],
-        "error_jobs": [],
-        "errors_occured": [],
-        "company_id": "2",
-        "creator": "company",
-        "URL": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/misc/custom-data/CustomObject-designer-import-6570124da20cc45d3f2582a7.csv",
-        "status": "completed",
-        "action_type": "upload",
-        "entity": "metaobject",
-        "error_url": "",
-        "finished_count": 0,
-        "error_count": 0,
-        "success_count": 0,
-        "total_jobs": 1,
-        "meta": {
-          "mo_total_count": 2,
-          "mo_success_count": 2,
-          "mo_error_count": 0,
-          "mo_defintion_type": "designer"
-        },
-        "created_by": "bd7223b6727eb087987eece7",
-        "created_at": "2023-12-06T06:18:53.219Z",
-        "updated_at": "2023-12-06T06:20:23.560Z",
-        "id": "6570124da20cc45d3f2582a7"
-      },
-      {
-        "_id": "6558b8c49340c43a7015b4af",
-        "jobs": [
-          "2297"
-        ],
-        "finished_jobs": [
-          "2297"
-        ],
-        "error_jobs": [],
-        "errors_occured": [],
-        "company_id": "2",
-        "creator": "company",
-        "URL": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/misc/custom-data/CustomObject-kuldeep-custom-import-6558b8c49340c43a7015b4af.csv",
-        "status": "completed",
-        "action_type": "upload",
-        "entity": "metaobject",
-        "error_url": "",
-        "finished_count": 0,
-        "error_count": 0,
-        "success_count": 0,
-        "total_jobs": 1,
-        "meta": {
-          "mo_total_count": 1,
-          "mo_success_count": 0,
-          "mo_error_count": 1,
-          "mo_defintion_type": "kuldeep-custom"
-        },
-        "created_by": "9759643b65ebc6bacb5275f5",
-        "created_at": "2023-11-18T13:14:44.360Z",
-        "updated_at": "2023-11-18T13:17:19.765Z",
-        "id": "6558b8c49340c43a7015b4af"
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 20,
-      "item_total": 2,
-      "has_next": false
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### importCustomObjectEntries
-Bulk custom object entries upload
-
-
-
-
-```python
-try:
-    result = await platformClient.content.importCustomObjectEntries(definitionId=definitionId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-| body | [CustomObjectBulkSchema](#CustomObjectBulkSchema) | yes | Request body |
-
-
-Use this API to upload custom object entries
-
-*Returned Response:*
-
-
-
-
-[CustomObjectEntryBulkUploadResponse](#CustomObjectEntryBulkUploadResponse)
-
-Success. Returns confirmation that the upload has started
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "message": "Bulk upload of Meta objects started successfully",
-    "task_id": "6570124da20cc45d3f2582a7"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### exportCustomObjectEntries
-Initiate download for bulk custom object entries
-
-
-
-
-```python
-try:
-    result = await platformClient.content.exportCustomObjectEntries(definitionId=definitionId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-
-
-
-Use this api to initiate download of bulk entries
-
-*Returned Response:*
-
-
-
-
-[CustomObjectBulkEntryInitiateDownload](#CustomObjectBulkEntryInitiateDownload)
-
-Success. Initiates bulk entries download 
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "message": "Bulk download of Meta Objects started successfully",
-    "task_id": "65702d2aa20cc45d3f258358"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### sampleCustomObjectBulkEntry
-download sample for custom object bulk entry
-
-
-
-
-```python
-try:
-    result = await platformClient.content.sampleCustomObjectBulkEntry(definitionId=definitionId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-
-
-
-Use this api to get sample csv file 
-
-*Returned Response:*
-
-
-
-
-[String](#String)
-
-Success. Get headers of custom object definition
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": "city,mobile,name,custom_object_status"
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getAppCustomFieldTypes
-Get custom field types
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getAppCustomFieldTypes()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Use this API to retrieve the custom field types 
-
-*Returned Response:*
-
-
-
-
-[CustomObjectByIdSchema](#CustomObjectByIdSchema)
-
-Success. Returns all custom field types. 
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "metafield_types": {
-      "string_single_line": {
-        "name": "Single Line Text",
-        "list_enabled": true,
-        "category": "TEXT",
-        "type": "string",
-        "supported_validations": [
-          {
-            "name": "min",
-            "type": "integer",
-            "display": "Minimum Characters"
-          },
-          {
-            "name": "max",
-            "type": "integer",
-            "display": "Maximum Characters"
-          },
-          {
-            "name": "regex",
-            "type": "string",
-            "display": "Regular Expression",
-            "meta": {
-              "examples": [
-                {
-                  "name": "Alphabet Characters",
-                  "value": "^[a-zA-Z]+$"
-                },
-                {
-                  "name": "Alphanumeric Characters",
-                  "value": "^[a-zA-Z0-9]+$"
-                },
-                {
-                  "name": "Numeric Characters",
-                  "value": "^[0-9]+$"
-                },
-                {
-                  "name": "Email Address",
-                  "value": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
-                }
-              ]
-            }
-          },
-          {
-            "name": "choices",
-            "type": "string_array",
-            "display": "Choices"
-          }
-        ]
-      },
-      "string_multi_line": {
-        "name": "Multi Line Text",
-        "list_enabled": true,
-        "category": "TEXT",
-        "type": "string",
-        "supported_validations": [
-          {
-            "name": "min",
-            "type": "integer",
-            "display": "Minimum Characters"
-          },
-          {
-            "name": "max",
-            "type": "integer",
-            "display": "Maximum Characters"
-          }
-        ]
-      },
-      "dropdown": {
-        "name": "Dropdown",
-        "list_enabled": true,
-        "category": "TEXT",
-        "type": "string",
-        "supported_validations": [
-          {
-            "name": "choices",
-            "type": "string_array",
-            "display": "Choices",
-            "required": true
-          }
-        ]
-      },
-      "integer": {
-        "name": "Integer",
-        "list_enabled": true,
-        "type": "integer",
-        "category": "NUMBER",
-        "supported_validations": [
-          {
-            "name": "min",
-            "type": "integer",
-            "display": "Minimum Value"
-          },
-          {
-            "name": "max",
-            "type": "integer",
-            "display": "Maximum Value"
-          },
-          {
-            "name": "choices",
-            "type": "integer_array",
-            "display": "Choices"
-          }
-        ]
-      },
-      "float_type": {
-        "name": "Decimal",
-        "list_enabled": true,
-        "type": "float",
-        "category": "NUMBER",
-        "supported_validations": [
-          {
-            "name": "min",
-            "type": "float",
-            "display": "Minimum Value"
-          },
-          {
-            "name": "max",
-            "type": "float",
-            "display": "Maximum Value"
-          },
-          {
-            "name": "choices",
-            "type": "float_array",
-            "display": "Choices"
-          }
-        ]
-      },
-      "boolean_type": {
-        "name": "Boolean",
-        "category": "TRUE_FALSE",
-        "list_enabled": false,
-        "type": "boolean",
-        "supported_validations": []
-      },
-      "date": {
-        "name": "Date",
-        "list_enabled": true,
-        "category": "DATETIME",
-        "type": "date",
-        "supported_validations": [
-          {
-            "name": "min",
-            "type": "date",
-            "display": "From Date"
-          },
-          {
-            "name": "max",
-            "type": "date",
-            "display": "To Date"
-          }
-        ]
-      },
-      "datetime": {
-        "name": "Date - Time",
-        "category": "DATETIME",
-        "list_enabled": true,
-        "type": "datetime",
-        "supported_validations": [
-          {
-            "name": "min",
-            "type": "date",
-            "display": "From Date & Time"
-          },
-          {
-            "name": "max",
-            "type": "date",
-            "display": "To Date & Time"
-          }
-        ]
-      },
-      "json": {
-        "name": "JSON",
-        "list_enabled": false,
-        "category": "ADVANCED",
-        "type": "json",
-        "supported_validations": [
-          {
-            "name": "schema",
-            "type": "json",
-            "display": "JSON Schema"
-          }
-        ]
-      },
-      "file": {
-        "name": "File",
-        "category": "REFERENCE",
-        "list_enabled": true,
-        "type": "string",
-        "supported_validations": [
-          {
-            "name": "file_type_options",
-            "type": "string_array",
-            "meta": {
-              "options": [
-                {
-                  "image": {
-                    "supported_types": [
-                      "jpeg",
-                      "jpg",
-                      "png",
-                      "svg+xml",
-                      "tiff",
-                      "webp",
-                      "gif"
-                    ],
-                    "max_size": 20971520
-                  },
-                  "video": {
-                    "supported_types": [
-                      "x-flv",
-                      "mp4",
-                      "x-mpegURL",
-                      "MP2T",
-                      "3gpp",
-                      "/quicktime",
-                      "x-msvideo",
-                      "x-ms-wmv",
-                      "webm"
-                    ],
-                    "max_size": 1048576000
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      },
-      "url": {
-        "name": "URL",
-        "list_enabled": true,
-        "type": "string",
-        "supported_validations": [
-          {
-            "name": "allowed_domains",
-            "display": "Allowed Domains",
-            "type": "string_array"
-          }
-        ]
-      },
-      "metaobject": {
-        "name": "Custom Object",
-        "list_enabled": true,
-        "category": "REFERENCE",
-        "type": "string",
-        "supported_validations": [
-          {
-            "name": "metaobject_definition_id",
-            "display": "Reference",
-            "type": "string",
-            "required": true
-          }
-        ]
-      },
-      "product": {
-        "name": "Product",
-        "list_enabled": true,
-        "category": "REFERENCE",
-        "type": "string",
-        "supported_validations": [],
-        "scope": [
-          "company",
-          "application"
-        ]
-      }
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getAppResources
-Get resources
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getAppResources()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Use this API to retrieve the resources, such as products, collections, customers, selling locations, etc.
-
-*Returned Response:*
-
-
-
-
-[ResourcesSchema](#ResourcesSchema)
-
-Success. Returns a JSON object of resources. Refer `ResourcesSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "resources": [
-      {
-        "name": "product",
-        "key": "product",
-        "definitions_count": 0
-      },
-      {
-        "name": "Collection",
-        "key": "collection",
-        "definitions_count": 0
-      },
-      {
-        "name": "Page",
-        "key": "page",
-        "definitions_count": 0
-      },
-      {
-        "name": "Blog",
-        "key": "blog",
-        "definitions_count": 0
-      },
-      {
-        "name": "Customer",
-        "key": "customer",
-        "definitions_count": 0
-      },
-      {
-        "name": "Store",
-        "key": "store",
-        "definitions_count": 0
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getAppCustomFieldDefinitions
-Get custom fields definitions
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getAppCustomFieldDefinitions(pageNo=pageNo, pageSize=pageSize, resources=resources, types=types, search=search)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| pageNo | String | yes |  |   
-| pageSize | String | yes |  |   
-| resources | String? | no |  |   
-| types | String? | no |  |   
-| search | String? | no |  |  
-
-
-
-Use this API to retrieve the definitions of custom fields.
-
-*Returned Response:*
-
-
-
-
-[CustomFieldDefinitionsSchema](#CustomFieldDefinitionsSchema)
-
-Success. Returns a list of custom fields definitions. Refer `CustomFieldDefinitionsSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "652e183347320aa8d8c28361",
-        "creator": "company",
-        "resource": "product",
-        "name": "new meta object",
-        "namespace": "custom",
-        "key": "new-meta-object",
-        "description": "",
-        "type": "metaobject",
-        "multi_value": false,
-        "validations": [
-          {
-            "name": "metaobject_definition_id",
-            "type": "string",
-            "value": "652e1298b6ece12d06684c18"
-          }
-        ],
-        "company_id": "2",
-        "created_by": "5e5796c4fc10a0d133839372",
-        "updated_by": "5e5796c4fc10a0d133839372",
-        "required": false,
-        "is_deleted": false,
-        "created_at": "2023-10-17T05:14:27.960Z",
-        "updated_at": "2023-10-17T05:14:27.960Z",
-        "type_name": "Custom Object",
-        "invalid_fields_count": 0
-      },
-      {
-        "_id": "652826cd99822ff1f62cbf13",
-        "creator": "company",
-        "resource": "product",
-        "name": "single image",
-        "namespace": "custom",
-        "key": "single-image",
-        "description": "this is single",
-        "type": "file",
-        "multi_value": false,
-        "validations": [
-          {
-            "name": "file_type_options",
-            "type": "string_array",
-            "value": [
-              "image",
-              "audio",
-              "video",
-              "document",
-              "pdf"
-            ]
-          }
-        ],
-        "company_id": "2",
-        "created_by": "5e5796c4fc10a0d133839372",
-        "updated_by": "5e5796c4fc10a0d133839372",
-        "required": false,
-        "is_deleted": false,
-        "created_at": "2023-10-12T17:03:09.868Z",
-        "updated_at": "2023-10-12T17:03:09.868Z",
-        "type_name": "File",
-        "invalid_fields_count": 0
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 10,
-      "item_total": 15,
-      "has_next": true
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createAppCustomFieldDefinition
-Create custom field definition
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.createAppCustomFieldDefinition(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CustomFieldDefinitionRequestSchema](#CustomFieldDefinitionRequestSchema) | yes | Request body |
-
-
-Use this API to create a custom field definition for your application.
-
-*Returned Response:*
-
-
-
-
-[CustomFieldDefinitionDetailResSchema](#CustomFieldDefinitionDetailResSchema)
-
-Custom field definition created.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success1</i></summary>
-
-```json
-{
-  "value": {
-    "creator": "application",
-    "resource": "product",
-    "name": "name",
-    "namespace": "fname",
-    "key": "fname",
-    "description": "First name",
-    "type": "string_single_line",
-    "multi_value": false,
-    "company_id": "1",
-    "application_id": "000000000000000000000001",
-    "created_by": "000000000000000000000001",
-    "updated_by": "000000000000000000000001",
-    "required": false,
-    "is_deleted": false,
-    "_id": "65369654d436ae0e54147e7b",
-    "validations": [],
-    "created_at": "2023-10-23T15:50:44.143Z",
-    "updated_at": "2023-10-23T15:50:44.143Z"
-  }
-}
-```
-</details>
-
-<details>
-<summary><i>&nbsp; success2</i></summary>
-
-```json
-{
-  "value": {
-    "creator": "application",
-    "resource": "product",
-    "name": "name",
-    "namespace": "fname",
-    "key": "fname",
-    "description": "First name",
-    "type": "string_single_line",
-    "multi_value": false,
-    "company_id": "1",
-    "application_id": "000000000000000000000001",
-    "created_by": "000000000000000000000001",
-    "updated_by": "000000000000000000000001",
-    "required": false,
-    "is_deleted": false,
-    "_id": "65369654d436ae0e54147e7b",
-    "validations": [],
-    "created_at": "2023-10-23T15:50:44.143Z",
-    "updated_at": "2023-10-23T15:50:44.143Z"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getAppCustomFieldDefinition
-Get custom fields definition by id
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getAppCustomFieldDefinition(definitionId=definitionId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-
-
-
-Use this API to retrieve the definitions of custom fields using definition_id.
-
-*Returned Response:*
-
-
-
-
-[CustomFieldDefinitionDetailResSchema](#CustomFieldDefinitionDetailResSchema)
-
-Success. Returns a object of custom field definition. Refer `CustomFieldDefinitionsSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "652e183347320aa8d8c28361",
-        "creator": "company",
-        "resource": "product",
-        "name": "new meta object",
-        "namespace": "custom",
-        "key": "new-meta-object",
-        "description": "",
-        "type": "metaobject",
-        "multi_value": false,
-        "validations": [
-          {
-            "name": "metaobject_definition_id",
-            "type": "string",
-            "value": "652e1298b6ece12d06684c18"
-          }
-        ],
-        "company_id": "2",
-        "created_by": "5e5796c4fc10a0d133839372",
-        "updated_by": "5e5796c4fc10a0d133839372",
-        "required": false,
-        "is_deleted": false,
-        "created_at": "2023-10-17T05:14:27.960Z",
-        "updated_at": "2023-10-17T05:14:27.960Z",
-        "type_name": "Custom Object",
-        "invalid_fields_count": 0
-      },
-      {
-        "_id": "652826cd99822ff1f62cbf13",
-        "creator": "company",
-        "resource": "product",
-        "name": "single image",
-        "namespace": "custom",
-        "key": "single-image",
-        "description": "this is single",
-        "type": "file",
-        "multi_value": false,
-        "validations": [
-          {
-            "name": "file_type_options",
-            "type": "string_array",
-            "value": [
-              "image",
-              "audio",
-              "video",
-              "document",
-              "pdf"
-            ]
-          }
-        ],
-        "company_id": "2",
-        "created_by": "5e5796c4fc10a0d133839372",
-        "updated_by": "5e5796c4fc10a0d133839372",
-        "required": false,
-        "is_deleted": false,
-        "created_at": "2023-10-12T17:03:09.868Z",
-        "updated_at": "2023-10-12T17:03:09.868Z",
-        "type_name": "File",
-        "invalid_fields_count": 0
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 10,
-      "item_total": 15,
-      "has_next": true
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateAppCustomFieldDefinition
-Update custom field definition
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.updateAppCustomFieldDefinition(definitionId=definitionId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-| body | [CustomFieldDefinitionRequestSchema](#CustomFieldDefinitionRequestSchema) | yes | Request body |
-
-
-Use this API to update a custom field definition for your application.
-
-*Returned Response:*
-
-
-
-
-[CustomFieldDefinitionDetailResSchema](#CustomFieldDefinitionDetailResSchema)
-
-Custom field definition created.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "creator": "application",
-    "resource": "product",
-    "name": "name",
-    "namespace": "fname",
-    "key": "fname",
-    "description": "First name",
-    "type": "string_single_line",
-    "multi_value": false,
-    "company_id": "1",
-    "application_id": "000000000000000000000001",
-    "created_by": "000000000000000000000001",
-    "updated_by": "000000000000000000000001",
-    "required": false,
-    "is_deleted": false,
-    "_id": "65369654d436ae0e54147e7b",
-    "validations": [],
-    "created_at": "2023-10-23T15:50:44.143Z",
-    "updated_at": "2023-10-23T15:50:44.143Z"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteAppCustomFieldDefinition
-Delete custom fields definition.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.deleteAppCustomFieldDefinition(definitionId=definitionId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-
-
-
-Use this API to delete the definitions of custom fields using definition_id. This will also delete related custom fields entries related to this definition.
-
-*Returned Response:*
-
-
-
-
-[CustomDataDeleteSchema](#CustomDataDeleteSchema)
-
-Success. It will returns the message for delete successfully.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "success": true,
-    "message": "Metafield definition deleted successfully"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getAppCustomFields
-Get list of custom fields of gives resource
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getAppCustomFields(resource=resource)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| resource | String | yes |  |  
-
-
-
-Use this API to retrieve the custom fields for given resource in param.
-
-*Returned Response:*
-
-
-
-
-[CustomFieldsResponseSchema](#CustomFieldsResponseSchema)
-
-Success. Returns a list of custom fields. Refer `CustomFieldsResponseSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "652f8c5b6c1643cbd1659d88",
-        "namespace": "product_test_2",
-        "key": "manufacturer",
-        "resource": "product",
-        "creator": "company",
-        "value": [
-          "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/misc/general/free/original/NWt9CSoYbo-airtel_money.png",
-          "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/misc/general/free/original/QqkJBM4IQL-amazon-pay.png",
-          "https://cdn.pixelbin.io/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/misc/general/free/original/2Ed7Pk03Z-amex.png"
-        ],
-        "resource_id": "64bb987e9a3c4b6c29d676bc",
-        "type": "file",
-        "multi_value": true,
-        "company_id": "1",
-        "definition_id": "650c4ea3e0e7980d14c16c06",
-        "has_invalid_values": false,
-        "invalid_value_errors": [],
-        "created_by": "000000000000000000000001",
-        "is_deleted": false,
-        "created_at": "2023-10-18T07:42:19.551Z",
-        "updated_at": "2023-10-18T07:42:19.551Z"
-      },
-      {
-        "_id": "652f8b4628dd2571fe5e90d8",
-        "namespace": "product_test_1",
-        "key": "manufacturer",
-        "resource": "product",
-        "creator": "company",
-        "value": [
-          "this",
-          "is",
-          "testing"
-        ],
-        "resource_id": "64ba480fdf9cbe3a90b052f4",
-        "type": "string_single_line",
-        "multi_value": true,
-        "company_id": "1",
-        "definition_id": "650ae0d67f9c7b2a7d56b409",
-        "has_invalid_values": false,
-        "invalid_value_errors": [],
-        "created_by": "000000000000000000000001",
-        "is_deleted": false,
-        "created_at": "2023-10-18T07:37:42.797Z",
-        "updated_at": "2023-10-18T07:37:42.797Z"
-      },
-      {
-        "_id": "652f8b4628dd2571fe5e90d7",
-        "namespace": "product_test",
-        "key": "manufacturer",
-        "resource": "product",
-        "creator": "company",
-        "value": [
-          "kuldeep",
-          "kumar",
-          "harshwal"
-        ],
-        "resource_id": "64ba32fbdf9cbe3a90b052f0",
-        "type": "string_single_line",
-        "multi_value": true,
-        "company_id": "1",
-        "definition_id": "650ae0b27f9c7b2a7d56b407",
-        "has_invalid_values": false,
-        "invalid_value_errors": [],
-        "created_by": "000000000000000000000001",
-        "is_deleted": false,
-        "created_at": "2023-10-18T07:37:42.796Z",
-        "updated_at": "2023-10-18T07:37:42.796Z"
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 20,
-      "item_total": 3,
-      "has_next": false
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getAppCustomFieldsByResourceId
-Get list of custom fields of given resource and resource id
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getAppCustomFieldsByResourceId(resource=resource, resourceId=resourceId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| resource | String | yes |  |   
-| resourceId | String | yes |  |  
-
-
-
-Use this API to retrieve the custom fields for given resource in param.
-
-*Returned Response:*
-
-
-
-
-[CustomFieldsResponseByResourceIdSchema](#CustomFieldsResponseByResourceIdSchema)
-
-Success. Returns a list of custom fields. Refer `CustomFieldsResponseByResourceIdSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "65705772a20cc45d3f2585b3",
-        "namespace": "custom",
-        "key": "designer-name",
-        "resource": "product",
-        "creator": "company",
-        "value": [
-          "ramsons"
-        ],
-        "resource_id": "7612437",
-        "type": "string_single_line",
-        "multi_value": false,
-        "company_id": "2",
-        "definition_id": "65604cdb6a78c23f082c850b",
-        "has_invalid_values": false,
-        "invalid_value_errors": [],
-        "created_by": "bd7223b6727eb087987eece7",
-        "is_deleted": false,
-        "created_at": "2023-12-06T11:13:54.217Z",
-        "updated_at": "2023-12-06T11:19:02.311Z",
-        "updated_by": "bd7223b6727eb087987eece7"
-      },
-      {
-        "_id": "65705772a20cc45d3f2585b4",
-        "namespace": "custom",
-        "key": "manufactures",
-        "resource": "product",
-        "creator": "company",
-        "value": [
-          "kartik"
-        ],
-        "resource_id": "7612437",
-        "type": "string_single_line",
-        "multi_value": false,
-        "company_id": "2",
-        "definition_id": "655f53ddca37f5deb832a185",
-        "has_invalid_values": false,
-        "invalid_value_errors": [],
-        "created_by": "bd7223b6727eb087987eece7",
-        "is_deleted": false,
-        "created_at": "2023-12-06T11:13:54.218Z",
-        "updated_at": "2023-12-06T11:19:02.311Z",
-        "updated_by": "bd7223b6727eb087987eece7"
-      },
-      {
-        "_id": "65705772a20cc45d3f2585b1",
-        "namespace": "custom",
-        "key": "product-designer",
-        "resource": "product",
-        "creator": "company",
-        "value": [
-          "65702b4574c5764716ee671d"
-        ],
-        "resource_id": "7612437",
-        "type": "metaobject",
-        "multi_value": true,
-        "company_id": "2",
-        "definition_id": "656d6bc9766f9511345091a6",
-        "has_invalid_values": false,
-        "invalid_value_errors": [],
-        "created_by": "bd7223b6727eb087987eece7",
-        "is_deleted": false,
-        "created_at": "2023-12-06T11:13:54.217Z",
-        "updated_at": "2023-12-06T11:19:02.311Z",
-        "updated_by": "bd7223b6727eb087987eece7"
-      },
-      {
-        "_id": "65705772a20cc45d3f2585b2",
-        "namespace": "custom",
-        "key": "validation-check",
-        "resource": "product",
-        "creator": "company",
-        "value": [
-          "ram"
-        ],
-        "resource_id": "7612437",
-        "type": "string_single_line",
-        "multi_value": false,
-        "company_id": "2",
-        "definition_id": "656866a30152b0584464d547",
-        "has_invalid_values": false,
-        "invalid_value_errors": [],
-        "created_by": "bd7223b6727eb087987eece7",
-        "is_deleted": false,
-        "created_at": "2023-12-06T11:13:54.217Z",
-        "updated_at": "2023-12-06T11:19:02.311Z",
-        "updated_by": "bd7223b6727eb087987eece7"
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createAppCustomFieldByResourceId
-Create custom field entries for gives resource and resource_id
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.createAppCustomFieldByResourceId(resource=resource, resourceId=resourceId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| resource | String | yes |  |   
-| resourceId | String | yes |  |  
-| body | [CustomFieldRequestSchema](#CustomFieldRequestSchema) | yes | Request body |
-
-
-Use this API to create the custom field entry for given resource and resource_id in param.
-
-*Returned Response:*
-
-
-
-
-[CustomFieldsResponseByResourceIdSchema](#CustomFieldsResponseByResourceIdSchema)
-
-Success. Returns a list of custom fields. Refer `CustomFieldsResponseByResourceIdSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "65705772a20cc45d3f2585b1",
-        "updated_by": "bd7223b6727eb087987eece7",
-        "namespace": "custom",
-        "key": "product-designer",
-        "resource": "product",
-        "resource_id": "7612437",
-        "type": "metaobject",
-        "multi_value": true,
-        "company_id": "2",
-        "creator": "company",
-        "invalid_value_errors": [],
-        "has_invalid_values": false,
-        "definition_id": "656d6bc9766f9511345091a6",
-        "value": [
-          "65702b4574c5764716ee671d"
-        ]
-      },
-      {
-        "_id": "65705772a20cc45d3f2585b2",
-        "updated_by": "bd7223b6727eb087987eece7",
-        "namespace": "custom",
-        "key": "validation-check",
-        "resource": "product",
-        "resource_id": "7612437",
-        "type": "string_single_line",
-        "multi_value": false,
-        "company_id": "2",
-        "creator": "company",
-        "invalid_value_errors": [],
-        "has_invalid_values": false,
-        "definition_id": "656866a30152b0584464d547",
-        "value": [
-          "ram"
-        ]
-      },
-      {
-        "_id": "65705772a20cc45d3f2585b3",
-        "updated_by": "bd7223b6727eb087987eece7",
-        "namespace": "custom",
-        "key": "designer-name",
-        "resource": "product",
-        "resource_id": "7612437",
-        "type": "string_single_line",
-        "multi_value": false,
-        "company_id": "2",
-        "creator": "company",
-        "invalid_value_errors": [],
-        "has_invalid_values": false,
-        "definition_id": "65604cdb6a78c23f082c850b",
-        "value": [
-          "ramsons"
-        ]
-      },
-      {
-        "_id": "65705772a20cc45d3f2585b4",
-        "updated_by": "bd7223b6727eb087987eece7",
-        "namespace": "custom",
-        "key": "manufactures",
-        "resource": "product",
-        "resource_id": "7612437",
-        "type": "string_single_line",
-        "multi_value": false,
-        "company_id": "2",
-        "creator": "company",
-        "invalid_value_errors": [],
-        "has_invalid_values": false,
-        "definition_id": "655f53ddca37f5deb832a185",
-        "value": [
-          "kartik"
-        ]
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createAppCustomObjectDefinition
-Create custom object definition
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.createAppCustomObjectDefinition(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CustomObjectDefinitionRequestSchema](#CustomObjectDefinitionRequestSchema) | yes | Request body |
-
-
-Use this API to create custom object defintion
-
-*Returned Response:*
-
-
-
-
-[CustomObjectDefinitionSchema](#CustomObjectDefinitionSchema)
-
-Success. Returns the saved custom object defintion
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "656db530766f951134509542",
-    "name": "customObject1",
-    "type": "customobject1",
-    "display_name_key": "cocustomfield2",
-    "description": "",
-    "creator": "company",
-    "created_by": "bd7223b6727eb087987eece7",
-    "updated_by": "bd7223b6727eb087987eece7",
-    "field_definitions": [
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "coCustomField1",
-        "namespace": "customobject1",
-        "key": "cocustomfield1",
-        "description": "",
-        "type": "string_single_line",
-        "multi_value": false,
-        "validations": [
-          {
-            "name": "min",
-            "type": "integer",
-            "value": 2
-          },
-          {
-            "name": "max",
-            "type": "integer",
-            "value": 10
-          },
-          {
-            "name": "regex",
-            "type": "string",
-            "value": "^[a-zA-Z]+$"
-          }
-        ],
-        "company_id": "1",
-        "created_by": "bd7223b6727eb087987eece7",
-        "metaobject_definition_id": "656db530766f951134509542",
-        "required": false,
-        "is_deleted": false,
-        "_id": "656db530766f951134509545",
-        "created_at": "2023-12-04T11:17:04.153Z",
-        "updated_at": "2023-12-04T11:17:04.153Z"
-      },
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "coCustomField2",
-        "namespace": "customobject1",
-        "key": "cocustomfield2",
-        "description": "this is custom field 2 of custom object",
-        "type": "string_single_line",
-        "multi_value": false,
-        "validations": [
-          {
-            "name": "min",
-            "type": "integer",
-            "value": 1
-          },
-          {
-            "name": "max",
-            "type": "integer",
-            "value": 100
-          }
-        ],
-        "company_id": "1",
-        "created_by": "bd7223b6727eb087987eece7",
-        "metaobject_definition_id": "656db530766f951134509542",
-        "required": false,
-        "is_deleted": false,
-        "_id": "656db530766f951134509546",
-        "created_at": "2023-12-04T11:17:04.154Z",
-        "updated_at": "2023-12-04T11:17:04.154Z"
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getAppCustomObjectDefinitions
-Get custom object definitions
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getAppCustomObjectDefinitions(pageNo=pageNo, pageSize=pageSize, search=search)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| pageNo | String | yes |  |   
-| pageSize | String | yes |  |   
-| search | String? | no |  |  
-
-
-
-Use this API to retrieve the custom object definitions
-
-*Returned Response:*
-
-
-
-
-[CustomObjectDefinitionsSchema](#CustomObjectDefinitionsSchema)
-
-Success. Returns a list custom object definitions.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "656db530766f951134509542",
-        "name": "customObject1",
-        "type": "customobject1",
-        "updated_at": "2023-12-04T11:17:04.136Z",
-        "entries_count": 0,
-        "fields_count": 2
-      },
-      {
-        "_id": "656db2d9766f95113450952b",
-        "name": "sample",
-        "type": "sample",
-        "updated_at": "2023-12-04T11:07:05.705Z",
-        "entries_count": 0,
-        "fields_count": 1
-      },
-      {
-        "_id": "656495b58d3278a7c24260f8",
-        "name": "address",
-        "type": "address",
-        "updated_at": "2023-11-27T13:12:21.999Z",
-        "entries_count": 1,
-        "fields_count": 3
-      },
-      {
-        "_id": "655c706ad5ff69fd3b95a1d9",
-        "name": "coCustomObject",
-        "type": "cocustomobject",
-        "updated_at": "2023-11-21T08:55:06.013Z",
-        "entries_count": 0,
-        "fields_count": 2
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 10,
-      "item_total": 4,
-      "has_next": false
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getAppCustomObjectDefinition
-get custom object definition by id
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getAppCustomObjectDefinition(definitionId=definitionId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-
-
-
-Use this API to update a custom object definition for your application.
-
-*Returned Response:*
-
-
-
-
-[CustomObjectDefinitionSchema](#CustomObjectDefinitionSchema)
-
-Success. It will returns the message for delete successfully.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "656d67de766f95113450917b",
-    "name": "Designer",
-    "type": "designer",
-    "display_name_key": "name",
-    "description": "",
-    "creator": "company",
-    "created_by": "9759643b65ebc6bacb5275f5",
-    "updated_by": "bd7223b6727eb087987eece7",
-    "field_definitions": [
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "city2",
-        "namespace": "designer",
-        "key": "city",
-        "type": "string_single_line",
-        "description": "",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": false
-      },
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "mobile",
-        "namespace": "designer",
-        "key": "mobile",
-        "type": "string_single_line",
-        "description": "",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": false
-      },
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "name",
-        "namespace": "designer",
-        "key": "name",
-        "type": "string_single_line",
-        "description": "This is name of designer",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": true
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateAppCustomObjectDefinition
-Update custom object definition
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.updateAppCustomObjectDefinition(definitionId=definitionId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-| body | [CustomObjectDefinitionUpdateRequestSchema](#CustomObjectDefinitionUpdateRequestSchema) | yes | Request body |
-
-
-Use this API to update a custom object definition for your application.
-
-*Returned Response:*
-
-
-
-
-[CustomObjectDefinitionSchema](#CustomObjectDefinitionSchema)
-
-Custom field definition updated.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "656d67de766f95113450917b",
-    "name": "Designer",
-    "type": "designer",
-    "display_name_key": "name",
-    "description": "",
-    "creator": "company",
-    "created_by": "9759643b65ebc6bacb5275f5",
-    "updated_by": "bd7223b6727eb087987eece7",
-    "field_definitions": [
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "city2",
-        "namespace": "designer",
-        "key": "city",
-        "type": "string_single_line",
-        "description": "",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": false
-      },
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "mobile",
-        "namespace": "designer",
-        "key": "mobile",
-        "type": "string_single_line",
-        "description": "",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": false
-      },
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "name",
-        "namespace": "designer",
-        "key": "name",
-        "type": "string_single_line",
-        "description": "This is name of designer",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": true
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteAppCustomObjectDefinition
-delete custom object definition by id
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.deleteAppCustomObjectDefinition(definitionId=definitionId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-
-
-
-Use this API to delete a custom object definition and related data for your application.
-
-*Returned Response:*
-
-
-
-
-[CustomObjectDefinitionDeleteResponseSchema](#CustomObjectDefinitionDeleteResponseSchema)
-
-Custom object definition details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "success": true,
-    "message": "MetaObjectDefinition deleted successfully"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getAppCustomObjects
-Get list of custom objects
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getAppCustomObjects(definitionId=definitionId, pageNo=pageNo, pageSize=pageSize)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String? | no |  |   
-| pageNo | String | yes |  |   
-| pageSize | String | yes |  |  
-
-
-
-Use this API to retrieve the custom objects.
-
-*Returned Response:*
-
-
-
-
-[CustomObjectsSchema](#CustomObjectsSchema)
-
-Success. Returns a list of custom objects. Refer `CustomObjectsSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "653929f012376081aafa90f1",
-        "definition_id": "653907ced878d53c1a502d92",
-        "status": "active",
-        "updated_at": "2023-10-25T14:45:04.446Z",
-        "display_name": "painter #653929f012376081aafa90f1",
-        "definition": {
-          "_id": "653907ced878d53c1a502d92",
-          "name": "painter",
-          "type": "painter"
-        },
-        "references": 0
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 10,
-      "item_total": 1,
-      "has_next": false
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### createAppCustomObject
-Create custom object entries
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.createAppCustomObject(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CustomObjectRequestSchema](#CustomObjectRequestSchema) | yes | Request body |
-
-
-Use this API to create the custom object entry.
-
-*Returned Response:*
-
-
-
-
-[CustomObjectSchema](#CustomObjectSchema)
-
-Success. Returns a list of custom objects. Refer `CustomObjectSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "65392bd912376081aafa90ff",
-    "creator": "application",
-    "company_id": "1",
-    "application_id": "000000000000000000000001",
-    "created_by": "000000000000000000000001",
-    "updated_by": "000000000000000000000001",
-    "status": "active",
-    "type": "painter",
-    "display_name": "painter #65392bd912376081aafa90ff",
-    "definition_id": "653907ced878d53c1a502d92",
-    "fields": [
-      {
-        "_id": "65392bd912376081aafa9103",
-        "namespace": "painter",
-        "key": "name",
-        "resource": "metaobject",
-        "resource_id": "65392bd912376081aafa90ff",
-        "type": "string_single_line",
-        "multi_value": false,
-        "company_id": "1",
-        "application_id": "000000000000000000000001",
-        "creator": "application",
-        "invalid_value_errors": [],
-        "has_invalid_values": false,
-        "metaobject_definition_id": "653907ced878d53c1a502d92",
-        "definition_id": "653907ced878d53c1a502d95",
-        "value": [
-          "Batman"
-        ],
-        "created_by": "000000000000000000000001"
-      },
-      {
-        "_id": "65392bd912376081aafa9104",
-        "namespace": "painter",
-        "key": "age",
-        "resource": "metaobject",
-        "resource_id": "65392bd912376081aafa90ff",
-        "type": "integer",
-        "multi_value": false,
-        "company_id": "1",
-        "application_id": "000000000000000000000001",
-        "creator": "application",
-        "invalid_value_errors": [],
-        "has_invalid_values": false,
-        "metaobject_definition_id": "653907ced878d53c1a502d92",
-        "definition_id": "653907ced878d53c1a502d96",
-        "value": [
-          50
-        ],
-        "created_by": "000000000000000000000001"
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getAppCustomObject
-Get custom object details
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getAppCustomObject(metaobjectId=metaobjectId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| metaobjectId | String | yes |  |  
-
-
-
-Use this API to retrieve the custom object details and their fields details and definitions and references.
-
-*Returned Response:*
-
-
-
-
-[CustomObjectByIdSchema](#CustomObjectByIdSchema)
-
-Success. Returns a custom object. Refer `CustomObjectByIdSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "653929f012376081aafa90f1",
-    "status": "active",
-    "display_name": "painter #653929f012376081aafa90f1",
-    "definition": {
-      "_id": "653907ced878d53c1a502d92",
-      "name": "painter",
-      "type": "painter"
-    },
-    "references": [],
-    "fields": [
-      {
-        "_id": "653929f012376081aafa90f5",
-        "key": "name",
-        "value": [
-          "Bruce Wayne"
-        ],
-        "type": "string_single_line",
-        "definition_id": "653907ced878d53c1a502d95"
-      },
-      {
-        "_id": "653929f012376081aafa90f6",
-        "key": "age",
-        "value": [
-          5
-        ],
-        "type": "integer",
-        "definition_id": "653907ced878d53c1a502d96"
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deleteAppCustomObject
-Delete custom object
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.deleteAppCustomObject(metaobjectId=metaobjectId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| metaobjectId | String | yes |  |  
-
-
-
-Use this API to delete the custom object entry by id. This will also delete related custom fields entries related to this custom object.
-
-*Returned Response:*
-
-
-
-
-[CustomDataDeleteSchema](#CustomDataDeleteSchema)
-
-Success. It will returns the message for delete successfully.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "success": true,
-    "message": "Metafield definition deleted successfully"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateAppCustomObject
-Update custom object details
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.updateAppCustomObject(metaobjectId=metaobjectId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| metaobjectId | String | yes |  |  
-| body | [CustomObjectRequestSchema](#CustomObjectRequestSchema) | yes | Request body |
-
-
-Use this API to update a custom object detail for your application.
-
-*Returned Response:*
-
-
-
-
-[CustomObjectByIdSchema](#CustomObjectByIdSchema)
-
-Custom field definition created.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "656d67de766f95113450917b",
-    "name": "Designer",
-    "type": "designer",
-    "display_name_key": "name",
-    "description": "",
-    "creator": "company",
-    "created_by": "9759643b65ebc6bacb5275f5",
-    "updated_by": "bd7223b6727eb087987eece7",
-    "field_definitions": [
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "city2",
-        "namespace": "designer",
-        "key": "city",
-        "type": "string_single_line",
-        "description": "",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": false
-      },
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "mobile",
-        "namespace": "designer",
-        "key": "mobile",
-        "type": "string_single_line",
-        "description": "",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": false
-      },
-      {
-        "creator": "company",
-        "resource": "metaobject",
-        "name": "name",
-        "namespace": "designer",
-        "key": "name",
-        "type": "string_single_line",
-        "description": "This is name of designer",
-        "multi_value": false,
-        "validations": [],
-        "company_id": "2",
-        "metaobject_definition_id": "656d67de766f95113450917b",
-        "required": true
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getAppJobs
-Fetch bulk import and export job list.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getAppJobs(page=page, pageSize=pageSize, actionType=actionType)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| page | String | yes |  |   
-| pageSize | String | yes |  |   
-| actionType | String | yes |  |  
-
-
-
-Use this api to get list of jobs of bulk import and exports
-
-*Returned Response:*
-
-
-
-
-[CustomObjectBulkEntry](#CustomObjectBulkEntry)
-
-Success. Returns all bulk entries history. 
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "items": [
-      {
-        "_id": "6570124da20cc45d3f2582a7",
-        "jobs": [
-          "2311"
-        ],
-        "finished_jobs": [
-          "2311"
-        ],
-        "error_jobs": [],
-        "errors_occured": [],
-        "company_id": "2",
-        "creator": "company",
-        "URL": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/misc/custom-data/CustomObject-designer-import-6570124da20cc45d3f2582a7.csv",
-        "status": "completed",
-        "action_type": "upload",
-        "entity": "metaobject",
-        "error_url": "",
-        "finished_count": 0,
-        "error_count": 0,
-        "success_count": 0,
-        "total_jobs": 1,
-        "meta": {
-          "mo_total_count": 2,
-          "mo_success_count": 2,
-          "mo_error_count": 0,
-          "mo_defintion_type": "designer"
-        },
-        "created_by": "bd7223b6727eb087987eece7",
-        "created_at": "2023-12-06T06:18:53.219Z",
-        "updated_at": "2023-12-06T06:20:23.560Z",
-        "id": "6570124da20cc45d3f2582a7"
-      },
-      {
-        "_id": "6558b8c49340c43a7015b4af",
-        "jobs": [
-          "2297"
-        ],
-        "finished_jobs": [
-          "2297"
-        ],
-        "error_jobs": [],
-        "errors_occured": [],
-        "company_id": "2",
-        "creator": "company",
-        "URL": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/misc/custom-data/CustomObject-kuldeep-custom-import-6558b8c49340c43a7015b4af.csv",
-        "status": "completed",
-        "action_type": "upload",
-        "entity": "metaobject",
-        "error_url": "",
-        "finished_count": 0,
-        "error_count": 0,
-        "success_count": 0,
-        "total_jobs": 1,
-        "meta": {
-          "mo_total_count": 1,
-          "mo_success_count": 0,
-          "mo_error_count": 1,
-          "mo_defintion_type": "kuldeep-custom"
-        },
-        "created_by": "9759643b65ebc6bacb5275f5",
-        "created_at": "2023-11-18T13:14:44.360Z",
-        "updated_at": "2023-11-18T13:17:19.765Z",
-        "id": "6558b8c49340c43a7015b4af"
-      }
-    ],
-    "page": {
-      "type": "number",
-      "current": 1,
-      "size": 20,
-      "item_total": 2,
-      "has_next": false
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### importAppCustomObjectEntries
-Bulk custom object entries upload
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.importAppCustomObjectEntries(definitionId=definitionId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-| body | [CustomObjectBulkSchema](#CustomObjectBulkSchema) | yes | Request body |
-
-
-Use this API to upload custom object entries
-
-*Returned Response:*
-
-
-
-
-[CustomObjectEntryBulkUploadResponse](#CustomObjectEntryBulkUploadResponse)
-
-Success. Returns confirmation that the upload has started
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "message": "Bulk upload of Meta objects started successfully",
-    "task_id": "6570124da20cc45d3f2582a7"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### exportAppCustomObjectEntries
-Initiate download for bulk custom object entries
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.exportAppCustomObjectEntries(definitionId=definitionId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-
-
-
-Use this api to initiate download of bulk entries
-
-*Returned Response:*
-
-
-
-
-[CustomObjectBulkEntryInitiateDownload](#CustomObjectBulkEntryInitiateDownload)
-
-Success. Initiates bulk entries download 
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": {
-    "message": "Bulk download of Meta Objects started successfully",
-    "task_id": "65702d2aa20cc45d3f258358"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### sampleAppCustomObjectBulkEntry
-download sample for custom object bulk entry
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.sampleAppCustomObjectBulkEntry(definitionId=definitionId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| definitionId | String | yes |  |  
-
-
-
-Use this api to get sample csv file 
-
-*Returned Response:*
-
-
-
-
-[String](#String)
-
-Success. Get headers of custom object definition
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; success</i></summary>
-
-```json
-{
-  "value": "city,mobile,name,custom_object_status"
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
 ### getFaqCategories
-Get FAQ categories.
+Get a list of FAQ categories
 
 
 
@@ -8426,7 +1690,7 @@ except Exception as e:
 
 
 
-Retrieve a list of FAQ categories.
+FAQs can be divided into categories. Use this API to get a list of FAQ categories.
 
 *Returned Response:*
 
@@ -8473,7 +1737,7 @@ Success. Refer `GetFaqCategoriesSchema` for more details.
 
 
 ### getFaqCategoryBySlugOrId
-Get FAQ category by slug or ID.
+Get an FAQ category by slug or id
 
 
 
@@ -8496,7 +1760,7 @@ except Exception as e:
 
 
 
-Retrieve detailed information about a specific FAQ category.
+FAQs can be divided into categories. Use this API to get an FAQ categories using its slug or ID.
 
 *Returned Response:*
 
@@ -8547,7 +1811,7 @@ Success. Refer `GetFaqCategoryBySlugSchema` for more details.
 
 
 ### createFaqCategory
-Create FAQ category.
+Create an FAQ category
 
 
 
@@ -8569,7 +1833,7 @@ except Exception as e:
 | body | [CreateFaqCategoryRequestSchema](#CreateFaqCategoryRequestSchema) | yes | Request body |
 
 
-Generate and add a new FAQ category.
+FAQs help users to solve an issue or know more about a process. FAQs can be categorized separately, for e.g. some questions can be related to payment, some could be related to purchase, shipping, navigating, etc. Use this API to create an FAQ category.
 
 *Returned Response:*
 
@@ -8612,7 +1876,7 @@ Success.
 
 
 ### updateFaqCategory
-Update FAQ category.
+Update an FAQ category
 
 
 
@@ -8635,7 +1899,7 @@ except Exception as e:
 | body | [UpdateFaqCategoryRequestSchema](#UpdateFaqCategoryRequestSchema) | yes | Request body |
 
 
-Modify the content and settings of a specific FAQ category.
+Use this API to edit an existing FAQ category.
 
 *Returned Response:*
 
@@ -8678,7 +1942,7 @@ Success.
 
 
 ### deleteFaqCategory
-Delete FAQ category.
+Delete an FAQ category
 
 
 
@@ -8701,7 +1965,7 @@ except Exception as e:
 
 
 
-Remove a specific FAQ category.
+Use this API to delete an FAQ category.
 
 *Returned Response:*
 
@@ -8745,7 +2009,7 @@ Success.
 
 
 ### getFaqsByCategoryIdOrSlug
-Get FAQs by category ID or slug.
+Get question and answers within an FAQ category
 
 
 
@@ -8768,7 +2032,7 @@ except Exception as e:
 
 
 
-Retrieve a list of FAQs within a specific category.
+Use this API to retrieve all the commonly asked question and answers belonging to an FAQ category.
 
 *Returned Response:*
 
@@ -8812,7 +2076,7 @@ Success. Refer `GetFaqSchema` for more details.
 
 
 ### addFaq
-Add FAQ.
+Create an FAQ
 
 
 
@@ -8835,7 +2099,7 @@ except Exception as e:
 | body | [CreateFaqSchema](#CreateFaqSchema) | yes | Request body |
 
 
-Create and add a new FAQ.
+FAQs help users to solve an issue or know more about a process. Use this API to create an FAQ for a given FAQ category.
 
 *Returned Response:*
 
@@ -8877,7 +2141,7 @@ Success.
 
 
 ### updateFaq
-Update FAQ.
+Update an FAQ
 
 
 
@@ -8901,7 +2165,7 @@ except Exception as e:
 | body | [CreateFaqSchema](#CreateFaqSchema) | yes | Request body |
 
 
-Modify the content and settings of a specific FAQ.
+Use this API to edit an existing FAQ.
 
 *Returned Response:*
 
@@ -8943,7 +2207,7 @@ Success.
 
 
 ### deleteFaq
-Delete FAQ.
+Delete an FAQ
 
 
 
@@ -8967,7 +2231,7 @@ except Exception as e:
 
 
 
-Remove a specific FAQ.
+Use this API to delete an existing FAQ.
 
 *Returned Response:*
 
@@ -9009,7 +2273,7 @@ Success.
 
 
 ### getFaqByIdOrSlug
-Get FAQ by ID or slug.
+Get an FAQ
 
 
 
@@ -9032,7 +2296,7 @@ except Exception as e:
 
 
 
-Retrieve detailed information about a specific FAQ.
+Use this API to retrieve a specific FAQ. You will get the question and answer of that FAQ.
 
 *Returned Response:*
 
@@ -9073,10 +2337,8 @@ Success. Refer `CreateFaqResponseSchema` for more details.
 ---
 
 
-
-
 ### generateSEOTitle
-Generate SEO title.
+Get SEO meta tag title for content
 
 
 
@@ -9099,7 +2361,7 @@ except Exception as e:
 | body | [GenerateSEOContent](#GenerateSEOContent) | yes | Request body |
 
 
-Create an SEO-friendly title for content.
+Use this API to get GPT3 generated SEO meta tag title for content
 
 *Returned Response:*
 
@@ -9144,7 +2406,7 @@ Returns the generated SEO title
 
 
 ### getLandingPages
-Get landing pages.
+Get landing pages
 
 
 
@@ -9168,7 +2430,7 @@ except Exception as e:
 
 
 
-Retrieve a list of landing pages.
+Landing page is the first page that a prospect lands upon while visiting a website. Use this API to fetch a list of landing pages.
 
 *Returned Response:*
 
@@ -9242,7 +2504,7 @@ Success. Refer `LandingPageGetResponse` for more details.
 
 
 ### createLandingPage
-Create landing page.
+Create a landing page
 
 
 
@@ -9264,7 +2526,7 @@ except Exception as e:
 | body | [LandingPageSchema](#LandingPageSchema) | yes | Request body |
 
 
-Generate and add a new landing page.
+Landing page is the first page that a prospect lands upon while visiting a website. Use this API to create a landing page.
 
 *Returned Response:*
 
@@ -9329,7 +2591,7 @@ Success.
 
 
 ### updateLandingPage
-Update landing page.
+Update a landing page
 
 
 
@@ -9352,7 +2614,7 @@ except Exception as e:
 | body | [LandingPageSchema](#LandingPageSchema) | yes | Request body |
 
 
-Modify the content and settings of a specific landing page.
+Use this API to edit the details of an existing landing page.
 
 *Returned Response:*
 
@@ -9417,7 +2679,7 @@ Success.
 
 
 ### deleteLandingPage
-Delete landing page.
+Delete a landing page
 
 
 
@@ -9440,7 +2702,7 @@ except Exception as e:
 
 
 
-Remove a specific landing page.
+Use this API to delete an existing landing page.
 
 *Returned Response:*
 
@@ -9504,10 +2766,8 @@ Success.
 ---
 
 
-
-
 ### getLegalInformation
-Get legal related information for applicaiton
+Get legal information
 
 
 
@@ -9525,7 +2785,7 @@ except Exception as e:
 
 
 
-Retrieve legal information and terms.
+Use this API to get the legal information of an application, which includes Policy, Terms and Conditions, Shipping Policy and FAQ regarding the application.
 
 *Returned Response:*
 
@@ -9599,7 +2859,7 @@ Success. Refer `ApplicationLegal` for more details.
 
 
 ### updateLegalInformation
-Update legal related information for application
+Save legal information
 
 
 
@@ -9621,7 +2881,7 @@ except Exception as e:
 | body | [ApplicationLegal](#ApplicationLegal) | yes | Request body |
 
 
-Modify legal information and terms.
+Use this API to edit, update and save the legal information of an application, which includes Policy, Terms and Conditions, Shipping Policy and FAQ regarding the application.
 
 *Returned Response:*
 
@@ -9663,10 +2923,8 @@ Success. Refer `ApplicationLegal` for more details.
 ---
 
 
-
-
 ### getNavigations
-Get navigation items
+Get navigations
 
 
 
@@ -9691,7 +2949,7 @@ except Exception as e:
 
 
 
-Retrieve a list of navigational elements.
+Use this API to fetch the navigations details which includes the items of the navigation pane. It also shows the orientation, links, sub-navigations, etc.
 
 *Returned Response:*
 
@@ -9920,7 +3178,7 @@ Success. Refer `NavigationGetResponse` for more details.
 
 
 ### createNavigation
-Create navigation items
+Create a navigation
 
 
 
@@ -9942,7 +3200,7 @@ except Exception as e:
 | body | [NavigationRequest](#NavigationRequest) | yes | Request body |
 
 
-Generate and add a new navigation element.
+Navigation is the arrangement of navigational items to ease the accessibility of resources for users on a website. Use this API to create a navigation.
 
 *Returned Response:*
 
@@ -10167,7 +3425,7 @@ Success.
 
 
 ### getDefaultNavigations
-Get default navigations.
+Get default navigations
 
 
 
@@ -10185,7 +3443,7 @@ except Exception as e:
 
 
 
-Retrieve default navigation elements.
+On any website (application), there are navigations that are present by default. Use this API to retrieve those default navigations.
 
 *Returned Response:*
 
@@ -10889,7 +4147,7 @@ Success. Refer `DefaultNavigationResponse` for more details.
 
 
 ### getNavigationBySlug
-Get navigation by slug.
+Get a navigation by slug
 
 
 
@@ -10913,7 +4171,7 @@ except Exception as e:
 
 
 
-Retrieve detailed information about a specific navigation element.
+Use this API to retrieve a navigation by its slug.
 
 *Returned Response:*
 
@@ -11138,7 +4396,7 @@ Success. Refer `NavigationSchema` for more details.
 
 
 ### updateNavigation
-Update navigation.
+Update a navigation
 
 
 
@@ -11161,7 +4419,7 @@ except Exception as e:
 | body | [NavigationRequest](#NavigationRequest) | yes | Request body |
 
 
-Modify the content and settings of a specific navigation element.
+Use this API to edit the details of an existing navigation.
 
 *Returned Response:*
 
@@ -11386,7 +4644,7 @@ Success.
 
 
 ### deleteNavigation
-Delete navigation.
+Delete a navigation
 
 
 
@@ -11409,7 +4667,7 @@ except Exception as e:
 
 
 
-Remove a specific navigation element.
+Use this API to delete an existing navigation.
 
 *Returned Response:*
 
@@ -11630,10 +4888,8 @@ Success.
 ---
 
 
-
-
 ### getPageMeta
-Get page meta.
+Get page meta
 
 
 
@@ -11651,7 +4907,7 @@ except Exception as e:
 
 
 
-Retrieve metadata for a specific page.
+Use this API to get the meta of custom pages (blog, page) and default system pages (e.g. home/brand/category/collection).
 
 *Returned Response:*
 
@@ -11747,7 +5003,7 @@ Success. Refer `PageMetaSchema` for more details.
 
 
 ### getPageSpec
-Get page specification.
+Get page spec
 
 
 
@@ -11765,7 +5021,7 @@ except Exception as e:
 
 
 
-Retrieve specifications and details for a specific page.
+Use this API to get the specifications of a page, such as page type, display name, params and query.
 
 *Returned Response:*
 
@@ -11833,7 +5089,7 @@ Success. Refer `PageSpec` for more details.
 
 
 ### createPagePreview
-Create page preview.
+Create a page preview
 
 
 
@@ -11855,7 +5111,7 @@ except Exception as e:
 | body | [PageRequest](#PageRequest) | yes | Request body |
 
 
-Generate and add a new page preview.
+Use this API to create a page preview to check the appearance of a custom page.
 
 *Returned Response:*
 
@@ -11951,7 +5207,7 @@ Success. Refer `PageSchema` for more details.
 
 
 ### updatePagePreview
-Update page preview.
+Change the publish status of a page
 
 
 
@@ -11974,7 +5230,7 @@ except Exception as e:
 | body | [PagePublishRequest](#PagePublishRequest) | yes | Request body |
 
 
-Modify the content and settings of a specific page preview.
+Use this API to change the publish status of an existing page. Allows you to publish and unpublish the page.
 
 *Returned Response:*
 
@@ -12069,15 +5325,15 @@ Success.
 ---
 
 
-### getPages
-Get pages.
+### deletePage
+Delete a page
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getPages(pageNo=pageNo, pageSize=pageSize)
+    result = await platformClient.application("<APPLICATION_ID>").content.deletePage(id=id)
     # use result
 except Exception as e:
     print(e)
@@ -12089,21 +5345,665 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| pageNo | Int? | no | The page number to navigate through the given set of results. Default value is 1. |   
-| pageSize | Int? | no | The number of items to retrieve in each page. Default value is 10. |  
+| id | String | yes | ID allotted to the page. |  
 
 
 
-Retrieve a list of available pages.
+Use this API to delete an existing page.
 
 *Returned Response:*
 
 
 
 
-[PageGetResponse](#PageGetResponse)
+[PageSchema](#PageSchema)
 
-Success. Refer `PageGetResponse` for more details.
+Success.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "value": {
+    "date_meta": {
+      "created_on": "2021-03-16T08:24:19.197Z",
+      "modified_on": "2021-03-16T08:24:19.197Z"
+    },
+    "tags": [
+      "my first page"
+    ],
+    "published": true,
+    "component_ids": [],
+    "archived": false,
+    "_id": "60506dcad18cb33946026862",
+    "title": "my first page",
+    "slug": "1st_page",
+    "feature_image": {
+      "secure_url": "https://google.com/some-image"
+    },
+    "content": [
+      {
+        "type": "html",
+        "value": "<div id=\"icfm\">Emtpy Page. Create Page here.</div><div id=\"izu5\" class=\"aa\">hello there!<div id=\"izzl\">how are you doing</div><div><br/></div></div><img id=\"ibgj\" src=\"https://hdn-1.addsale.com/x0/company/52/applications/614957b7e7a0ccc371e96094/pages/pictures/free-content/original/-zLi_CuyM-apple.jpeg\"/>"
+      },
+      {
+        "type": "css",
+        "value": "* { box-sizing: border-box; } body {margin: 0;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}#icfm{text-align:center;padding-top:30px;padding-right:30px;padding-bottom:30px;padding-left:30px;}#izu5{padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;}#ibgj{color:black;}#izzl{float:none;display:flex;}.aa{float:right;}"
+      },
+      {
+        "type": "js",
+        "value": ""
+      }
+    ],
+    "content_path": "https://hdn-1.fynd.com/company/1526/applications/61012f6a9250ccd1b9ef8a1d/pages/content/page_slug.html",
+    "platform": "web",
+    "description": "hey this is my first page",
+    "visibility": {
+      "test": true
+    },
+    "_schedule": {
+      "start": "2021-04-23T23:50:00.000Z",
+      "next_schedule": [
+        {}
+      ]
+    },
+    "seo": {
+      "title": "my first page",
+      "description": "hey this is my first page",
+      "image": {
+        "url": ""
+      }
+    },
+    "type": "rawhtml",
+    "application": "000000000000000000000001",
+    "orientation": "portrait",
+    "page_meta": []
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### addPathRedirectionRules
+Save path based redirection rules
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.addPathRedirectionRules(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [PathMappingSchema](#PathMappingSchema) | yes | Request body |
+
+
+Use this API to add redirection rules
+
+*Returned Response:*
+
+
+
+
+[PathMappingSchema](#PathMappingSchema)
+
+Success. Refer `PathMappingSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Success</i></summary>
+
+```json
+{
+  "value": {
+    "_id": "615188e9db1e444cb0f40837",
+    "application": "000000000000000000000002",
+    "redirect_from": "/from",
+    "redirect_to": "/to",
+    "createdAt": "2021-09-27T09:03:37.053Z",
+    "updatedAt": "2021-09-27T09:09:25.587Z"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getPathRedirectionRules
+Get path based redirection rules
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.getPathRedirectionRules(pageSize=pageSize, pageNo=pageNo)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pageSize | Int? | no | The number of items to retrieve in each page. Default value is 5.  |   
+| pageNo | Int? | no | The page number to navigate through the given set of results. Default value is 1. |  
+
+
+
+Use this API to get path based redirection rules.
+
+*Returned Response:*
+
+
+
+
+[PathMappingSchema](#PathMappingSchema)
+
+Success. Refer `PathMappingSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Success</i></summary>
+
+```json
+{
+  "value": {
+    "_id": "615188e9db1e444cb0f40837",
+    "application": "000000000000000000000002",
+    "redirect_from": "/from",
+    "redirect_to": "/to",
+    "createdAt": "2021-09-27T09:03:37.053Z",
+    "updatedAt": "2021-09-27T09:09:25.587Z"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getPathRedirectionRule
+Get path based redirection rule
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.getPathRedirectionRule(pathId=pathId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pathId | String | yes | ID allotted to the path redirection rule. |  
+
+
+
+Use this API to get path based redirection rule.
+
+*Returned Response:*
+
+
+
+
+[PathMappingSchema](#PathMappingSchema)
+
+Success. Refer `PathMappingSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Success</i></summary>
+
+```json
+{
+  "value": {
+    "_id": "615188e9db1e444cb0f40837",
+    "application": "000000000000000000000002",
+    "redirect_from": "/from",
+    "redirect_to": "/to",
+    "createdAt": "2021-09-27T09:03:37.053Z",
+    "updatedAt": "2021-09-27T09:09:25.587Z"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updatePathRedirectionRules
+Update path based redirection rules
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.updatePathRedirectionRules(pathId=pathId, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pathId | String | yes | ID allotted to the path redirection rule. |  
+| body | [PathMappingSchema](#PathMappingSchema) | yes | Request body |
+
+
+Use this API to update redirection rules
+
+*Returned Response:*
+
+
+
+
+[PathMappingSchema](#PathMappingSchema)
+
+Success. Refer `PathMappingSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; Success</i></summary>
+
+```json
+{
+  "value": {
+    "_id": "615188e9db1e444cb0f40837",
+    "application": "000000000000000000000002",
+    "redirect_from": "/from",
+    "redirect_to": "/to",
+    "createdAt": "2021-09-27T09:03:37.053Z",
+    "updatedAt": "2021-09-27T09:09:25.587Z"
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deletePathRedirectionRules
+Delete path based redirection rules
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.deletePathRedirectionRules(pathId=pathId)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pathId | String | yes | ID allotted to the path redirection rule. |  
+
+
+
+Use this API to delete redirection rules
+
+*Returned Response:*
+
+
+
+
+[HashMap<String,Any>](#HashMap<String,Any>)
+
+Success.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "message": "Redirection deleted successfully"
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getSEOConfiguration
+Get SEO configuration of an application
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.getSEOConfiguration()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Use this API to know how the SEO is configured in the application. This includes the sitemap, robot.txt, custom meta tags, etc.
+
+*Returned Response:*
+
+
+
+
+[SeoComponent](#SeoComponent)
+
+Success. Refer `SeoComponent` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "value": {
+    "seo": {
+      "details": {
+        "title": "Zyosa Zyosa",
+        "description": "",
+        "image_url": ""
+      },
+      "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
+      "sitemap_enabled": false,
+      "cannonical_enabled": false,
+      "_id": "6009819ee463ad40de397eb2",
+      "app": "000000000000000000000001",
+      "created_at": "2021-01-21T13:29:02.543Z",
+      "updated_at": "2021-02-05T06:36:16.048Z",
+      "__v": 11,
+      "custom_meta_tags": [
+        {
+          "name": "test 0000",
+          "content": "<meta name=\"test\" content=\"0000 cn dcje dcj rejre cjrenurenc \">",
+          "_id": "6017c301bde3c21dbb13b284"
+        },
+        {
+          "name": "cwdcdc",
+          "content": "<meta content=\"wdcewdewc\">",
+          "_id": "6017c675bde3c22cfb13b290"
+        }
+      ]
+    }
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateSEOConfiguration
+Update SEO of application
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.updateSEOConfiguration(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [SeoComponent](#SeoComponent) | yes | Request body |
+
+
+Use this API to edit the SEO details of an application. This includes the sitemap, robot.txt, custom meta tags, etc.
+
+*Returned Response:*
+
+
+
+
+[SeoSchema](#SeoSchema)
+
+Success. Refer `SeoSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "value": {
+    "details": {
+      "title": "Zyosa Zyosa",
+      "description": "",
+      "image_url": ""
+    },
+    "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
+    "sitemap_enabled": false,
+    "_id": "6009819ee463ad40de397eb2",
+    "app": "000000000000000000000001",
+    "created_at": "2021-01-21T13:29:02.543Z",
+    "updated_at": "2021-02-05T06:36:16.048Z",
+    "__v": 11,
+    "custom_meta_tags": [
+      {
+        "name": "test 0000",
+        "content": "<meta name=\"test\" content=\"0000 cn dcje dcj rejre cjrenurenc \">",
+        "_id": "6017c301bde3c21dbb13b284"
+      },
+      {
+        "name": "cwdcdc",
+        "content": "<meta content=\"wdcewdewc\">",
+        "_id": "6017c675bde3c22cfb13b290"
+      }
+    ]
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getSlideshows
+Get slideshows
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.getSlideshows(devicePlatform=devicePlatform, pageNo=pageNo, pageSize=pageSize)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| devicePlatform | String | yes | Filter slideshows by platform. Acceptable values are: web, android, ios and all |   
+| pageNo | Int? | no | The page number to navigate through the given set of results. Default value is 1. |   
+| pageSize | Int? | no | The number of items to retrieve in each page. Default value is 10. |  
+
+
+
+A slideshow is a group of images, videos or a combination of both that are shown on the website in the form of slides. Use this API to fetch a list of slideshows.
+
+*Returned Response:*
+
+
+
+
+[SlideshowGetResponse](#SlideshowGetResponse)
+
+Success. Refer `SlideshowGetResponse` for more details.
 
 
 
@@ -12121,38 +6021,44 @@ Success. Refer `PageGetResponse` for more details.
     "items": [
       {
         "date_meta": {
-          "created_on": "2021-03-14T06:49:03.945Z",
-          "modified_on": "2021-03-14T06:49:03.945Z"
+          "created_on": "2021-03-14T05:27:12.319Z",
+          "modified_on": "2021-03-14T05:27:12.319Z"
         },
-        "tags": [
-          "my first page"
-        ],
-        "_id": "604db275b3ae202873964d94",
-        "content_path": "https://hdn-1.fynd.com/company/1526/applications/61012f6a9250ccd1b9ef8a1d/pages/content/page_slug.html",
-        "title": "test-page",
-        "slug": "test-page",
-        "published": true,
-        "_schedule": {
-          "next_schedule": [
-            {}
-          ],
-          "start": "2021-04-08T07:15:13.000Z",
-          "end": "2021-04-10T02:00:00.000Z"
+        "archived": false,
+        "_id": "604d9eb975e9d136bb1b8b83",
+        "configuration": {
+          "start_on_launch": false,
+          "duration": 50,
+          "sleep_time": 100,
+          "slide_direction": "horizontal"
         },
-        "feature_image": {
-          "secure_url": "https://google.com/some-image"
-        },
-        "seo": {
-          "title": "my first page",
-          "description": "hey this is my first page",
-          "image": {
-            "url": ""
+        "slug": "ss-sfsd-updated",
+        "platform": "ios",
+        "media": [
+          {
+            "auto_decide_duration": false,
+            "type": "image",
+            "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1567148153/production/system/icons/brands-tab_sfinpk.png",
+            "bg_color": "#ffffff",
+            "duration": 10,
+            "action": {
+              "type": ""
+            }
+          },
+          {
+            "auto_decide_duration": true,
+            "type": "youtube",
+            "url": "https://www.youtube.com/embed/9vJRopau0g0",
+            "bg_color": "#ffffff",
+            "duration": 909,
+            "action": {
+              "type": ""
+            }
           }
-        },
-        "application": "000000000000000000000001",
-        "author": {
-          "name": "Abhinav Maurya"
-        }
+        ],
+        "application": "5cd3db5e9d692cfe5302a7bb",
+        "active": true,
+        "__v": 0
       }
     ],
     "page": {
@@ -12180,17 +6086,118 @@ Success. Refer `PageGetResponse` for more details.
 ---
 
 
-
-
-### deletePage
-Delete page.
+### createSlideshow
+Create a slideshow
 
 
 
 
 ```python
 try:
-    result = await platformClient.application("<APPLICATION_ID>").content.deletePage(id=id)
+    result = await platformClient.application("<APPLICATION_ID>").content.createSlideshow(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [SlideshowRequest](#SlideshowRequest) | yes | Request body |
+
+
+A slideshow is a group of images, videos or a combination of both that are shown on the website in the form of slides. Use this API to create a slideshow.
+
+*Returned Response:*
+
+
+
+
+[SlideshowSchema](#SlideshowSchema)
+
+Success. Refer `SlideshowSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "value": {
+    "date_meta": {
+      "created_on": "2021-03-14T05:27:12.319Z",
+      "modified_on": "2021-03-14T05:27:12.319Z"
+    },
+    "archived": false,
+    "_id": "604d9eb975e9d136bb1b8b83",
+    "configuration": {
+      "start_on_launch": false,
+      "duration": 50,
+      "sleep_time": 100,
+      "slide_direction": "horizontal"
+    },
+    "slug": "ss-sfsd-updated",
+    "platform": "ios",
+    "media": [
+      {
+        "auto_decide_duration": false,
+        "type": "image",
+        "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1567148153/production/system/icons/brands-tab_sfinpk.png",
+        "bg_color": "#ffffff",
+        "duration": 10,
+        "action": {
+          "type": ""
+        }
+      },
+      {
+        "auto_decide_duration": true,
+        "type": "youtube",
+        "url": "https://www.youtube.com/embed/9vJRopau0g0",
+        "bg_color": "#ffffff",
+        "duration": 909,
+        "action": {
+          "type": ""
+        }
+      }
+    ],
+    "application": "5cd3db5e9d692cfe5302a7bb",
+    "active": true
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getSlideshowBySlug
+Get slideshow by slug
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.getSlideshowBySlug(slug=slug, devicePlatform=devicePlatform)
     # use result
 except Exception as e:
     print(e)
@@ -12202,18 +6209,227 @@ except Exception as e:
 
 | Argument  |  Type  | Required | Description |
 | --------- | -----  | -------- | ----------- | 
-| id | String | yes | ID allotted to the page. |  
+| slug | String | yes | A short, human-readable, URL-friendly identifier of a slideshow. You can get slug value of a page from `getSlideshows` API. |   
+| devicePlatform | String | yes | Filter slideshows by platform. Acceptable values are: web, android, ios and all |  
 
 
 
-Remove a page from the platform.
+Use this API to retrieve the details of a slideshow by its slug.
 
 *Returned Response:*
 
 
 
 
-[PageSchema](#PageSchema)
+[SlideshowSchema](#SlideshowSchema)
+
+Success. Refer `SlideshowSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "value": {
+    "date_meta": {
+      "created_on": "2021-03-14T05:27:12.319Z",
+      "modified_on": "2021-03-14T05:27:12.319Z"
+    },
+    "archived": false,
+    "_id": "604d9eb975e9d136bb1b8b83",
+    "configuration": {
+      "start_on_launch": false,
+      "duration": 50,
+      "sleep_time": 100,
+      "slide_direction": "horizontal"
+    },
+    "slug": "ss-sfsd-updated",
+    "platform": "ios",
+    "media": [
+      {
+        "auto_decide_duration": false,
+        "type": "image",
+        "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1567148153/production/system/icons/brands-tab_sfinpk.png",
+        "bg_color": "#ffffff",
+        "duration": 10,
+        "action": {
+          "type": ""
+        }
+      },
+      {
+        "auto_decide_duration": true,
+        "type": "youtube",
+        "url": "https://www.youtube.com/embed/9vJRopau0g0",
+        "bg_color": "#ffffff",
+        "duration": 909,
+        "action": {
+          "type": ""
+        }
+      }
+    ],
+    "application": "5cd3db5e9d692cfe5302a7bb",
+    "active": true
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateSlideshow
+Update a slideshow
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.updateSlideshow(id=id, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | ID allotted to the slideshow. |  
+| body | [SlideshowRequest](#SlideshowRequest) | yes | Request body |
+
+
+Use this API to edit the details of an existing slideshow.
+
+*Returned Response:*
+
+
+
+
+[SlideshowSchema](#SlideshowSchema)
+
+Success. Refer `SlideshowSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "value": {
+    "date_meta": {
+      "created_on": "2021-03-14T05:27:12.319Z",
+      "modified_on": "2021-03-14T05:27:12.319Z"
+    },
+    "archived": false,
+    "_id": "604d9eb975e9d136bb1b8b83",
+    "configuration": {
+      "start_on_launch": false,
+      "duration": 50,
+      "sleep_time": 100,
+      "slide_direction": "horizontal"
+    },
+    "slug": "ss-sfsd-updated",
+    "platform": "ios",
+    "media": [
+      {
+        "auto_decide_duration": false,
+        "type": "image",
+        "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1567148153/production/system/icons/brands-tab_sfinpk.png",
+        "bg_color": "#ffffff",
+        "duration": 10,
+        "action": {
+          "type": ""
+        }
+      },
+      {
+        "auto_decide_duration": true,
+        "type": "youtube",
+        "url": "https://www.youtube.com/embed/9vJRopau0g0",
+        "bg_color": "#ffffff",
+        "duration": 909,
+        "action": {
+          "type": ""
+        }
+      }
+    ],
+    "application": "5cd3db5e9d692cfe5302a7bb",
+    "active": true
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### deleteSlideshow
+Delete a slideshow
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.deleteSlideshow(id=id)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| id | String | yes | ID allotted to the slideshow. |  
+
+
+
+Use this API to delete an existing slideshow.
+
+*Returned Response:*
+
+
+
+
+[SlideshowSchema](#SlideshowSchema)
 
 Success.
 
@@ -12231,58 +6447,671 @@ Success.
 {
   "value": {
     "date_meta": {
-      "created_on": "2021-03-16T08:24:19.197Z",
-      "modified_on": "2021-03-16T08:24:19.197Z"
+      "created_on": "2021-03-14T05:27:12.319Z",
+      "modified_on": "2021-03-14T05:27:12.319Z"
     },
-    "tags": [
-      "my first page"
+    "archived": true,
+    "_id": "604d9eb975e9d136bb1b8b83",
+    "configuration": {
+      "start_on_launch": false,
+      "duration": 50,
+      "sleep_time": 100,
+      "slide_direction": "horizontal"
+    },
+    "slug": "ss-sfsd-updated",
+    "platform": "ios",
+    "media": [
+      {
+        "auto_decide_duration": false,
+        "type": "image",
+        "url": "https://res.cloudinary.com/dwzm9bysq/image/upload/v1567148153/production/system/icons/brands-tab_sfinpk.png",
+        "bg_color": "#ffffff",
+        "duration": 10,
+        "action": {
+          "type": ""
+        }
+      },
+      {
+        "auto_decide_duration": true,
+        "type": "youtube",
+        "url": "https://www.youtube.com/embed/9vJRopau0g0",
+        "bg_color": "#ffffff",
+        "duration": 909,
+        "action": {
+          "type": ""
+        }
+      }
     ],
-    "published": true,
-    "component_ids": [],
-    "archived": false,
-    "_id": "60506dcad18cb33946026862",
-    "title": "my first page",
-    "slug": "1st_page",
+    "application": "5cd3db5e9d692cfe5302a7bb",
+    "active": true
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getSupportInformation
+Get support information
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.getSupportInformation()
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+
+Use this API to get the contact details for customer support, including emails and phone numbers.
+
+*Returned Response:*
+
+
+
+
+[Support](#Support)
+
+Success. Refer `Support` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "value": {
+    "_id": "5ea4980b87a7944094216193",
+    "config_type": "app",
+    "application": "000000000000000000000001",
+    "created_at": "2020-04-25T20:05:31.300Z",
+    "updated_at": "2020-12-04T10:48:12.194Z",
+    "contact": {
+      "phone": {
+        "active": true,
+        "phone": [
+          {
+            "key": "Jane Doe",
+            "code": "91",
+            "number": "9988776655"
+          }
+        ]
+      },
+      "email": {
+        "active": false,
+        "email": []
+      }
+    },
+    "created": true
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateSupportInformation
+Update the support data of an application
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.updateSupportInformation(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [Support](#Support) | yes | Request body |
+
+
+Use this API to edit the existing contact details for customer support, including emails and phone numbers.
+
+*Returned Response:*
+
+
+
+
+[Support](#Support)
+
+Success. Refer `Support` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "value": {
+    "_id": "5ea4980b87a7944094216193",
+    "config_type": "app",
+    "application": "000000000000000000000001",
+    "created_at": "2020-04-25T20:05:31.300Z",
+    "updated_at": "2020-12-04T10:48:12.194Z",
+    "contact": {
+      "phone": {
+        "active": true,
+        "phone": [
+          {
+            "key": "Jane Doe",
+            "code": "91",
+            "number": "9988776655"
+          }
+        ]
+      },
+      "email": {
+        "active": false,
+        "email": []
+      }
+    },
+    "created": true
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### updateInjectableTag
+Update the exisitng tags for an application by replacing with provided tags
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.updateInjectableTag(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [CreateTagRequestSchema](#CreateTagRequestSchema) | yes | Request body |
+
+
+Use this API to edit and override all existing tags. All existing tags will be replaced by the new tags provided in body. 
+
+*Returned Response:*
+
+
+
+
+[TagsSchema](#TagsSchema)
+
+Success.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "_id": "601f77e7aa61066feda44487",
+  "tags": [
+    {
+      "name": "Test",
+      "sub_type": "external",
+      "_id": "601f77e7aa61066feda44488",
+      "type": "js",
+      "url": "youtube.com/watch?v=AaxFIY-cWH0&list=PL3O3jhFJEElBHFbs6XsOqZAWZLtlEkZTw&index=31",
+      "position": "head"
+    },
+    {
+      "name": "Test 2",
+      "sub_type": "external",
+      "_id": "601f77e7aa61066feda44489",
+      "type": "js",
+      "url": "youtube.com/watch?v=AaxFIY-cWH0&list=PL3O3jhFJEElBHFbs6XsOqZAWZLtlEkZTw&index=31",
+      "position": "head"
+    }
+  ],
+  "application": "000000000000000000000001",
+  "__v": 0
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getInjectableTags
+Get all the tags in an application
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.getInjectableTags(all=all)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| all | Boolean? | no | Get all tags irrespective of the creator of tags |  
+
+
+
+Use this API to get the CSS and JS injected in the application in the form of tags.
+
+*Returned Response:*
+
+
+
+
+[TagsSchema](#TagsSchema)
+
+Success. Refer `TagsSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "_id": "601f77e7aa61066feda44487",
+  "tags": [
+    {
+      "name": "Test",
+      "sub_type": "external",
+      "_id": "601f77e7aa61066feda44488",
+      "type": "js",
+      "url": "youtube.com/watch?v=AaxFIY-cWH0&list=PL3O3jhFJEElBHFbs6XsOqZAWZLtlEkZTw&index=31",
+      "position": "head"
+    },
+    {
+      "name": "Test 2",
+      "sub_type": "external",
+      "_id": "601f77e7aa61066feda44489",
+      "type": "js",
+      "url": "youtube.com/watch?v=AaxFIY-cWH0&list=PL3O3jhFJEElBHFbs6XsOqZAWZLtlEkZTw&index=31",
+      "position": "head"
+    }
+  ],
+  "application": "000000000000000000000001",
+  "__v": 0
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### addInjectableTag
+Add a tag
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.addInjectableTag(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [CreateTagRequestSchema](#CreateTagRequestSchema) | yes | Request body |
+
+
+CSS and JS can be injected in the application (website) with the help of tags. Use this API to create such tags by entering the tag name, tag type (css/js), url and position of the tag.
+
+*Returned Response:*
+
+
+
+
+[TagsSchema](#TagsSchema)
+
+Success.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "_id": "601f77e7aa61066feda44487",
+  "tags": [
+    {
+      "name": "Test",
+      "sub_type": "external",
+      "_id": "601f77e7aa61066feda44488",
+      "type": "js",
+      "url": "youtube.com/watch?v=AaxFIY-cWH0&list=PL3O3jhFJEElBHFbs6XsOqZAWZLtlEkZTw&index=31",
+      "position": "head"
+    }
+  ],
+  "application": "000000000000000000000001",
+  "__v": 0
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### removeInjectableTag
+Remove a tag
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.removeInjectableTag(body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- |
+| body | [RemoveHandpickedSchema](#RemoveHandpickedSchema) | yes | Request body |
+
+
+Use this API to delete an existing tag.
+
+*Returned Response:*
+
+
+
+
+[TagDeleteSuccessResponse](#TagDeleteSuccessResponse)
+
+Success.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "success": true
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### editInjectableTag
+Edit a tag by id
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.editInjectableTag(tagId=tagId, body=body)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| tagId | String | yes | ID allotted to the tag. |  
+| body | [UpdateHandpickedSchema](#UpdateHandpickedSchema) | yes | Request body |
+
+
+Use this API to edit the details of an existing tag by its ID.
+
+*Returned Response:*
+
+
+
+
+[TagsSchema](#TagsSchema)
+
+Success.
+
+
+
+
+<details>
+<summary><i>&nbsp; Example:</i></summary>
+
+```json
+{
+  "_id": "602671b3c0bac99158b10874",
+  "application": "000000000000000000000001",
+  "tags": [
+    {
+      "_id": "601f77e7aa61066feda44488",
+      "name": "floating whatsapp",
+      "sub_type": "inline",
+      "type": "css",
+      "position": "head",
+      "content": ".float{\n\tposition:fixed;\n\twidth:60px;\n\theight:60px;\n\tbottom:40px;\n\tright:40px;\n\tbackground-color:#25d366;\n\tcolor:#FFF;\n\tborder-radius:50px;\n\ttext-align:center;\n  font-size:30px;\n\tbox-shadow: 2px 2px 3px #999;\n  z-index:100;\n}\n\n.my-float{\n\tmargin-top:16px;\n}"
+    }
+  ],
+  "__v": 1
+}
+```
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
+### getBlogBySlug
+Get blog by slug
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.getBlogBySlug(slug=slug)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| slug | String | yes | A short, human-readable, URL-friendly identifier of a blog page. You can get slug value of a blog from `getBlogs` API. |  
+
+
+
+Use this API to retrieve the components of a blog, such as title, slug, feature image, content, schedule, publish status, author, etc.
+
+*Returned Response:*
+
+
+
+
+[BlogSchema](#BlogSchema)
+
+Success. Returns a a JSON object with components. Refer `BlogSchema` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "value": {
+    "_id": "5eaa451a21a4dd75f0fd96c5",
+    "application": "5d3ebd89f540e7506b8b3548",
+    "tags": [
+      "abhinav"
+    ],
+    "title": "my first blog",
+    "slug": "1st_blog",
     "feature_image": {
-      "secure_url": "https://google.com/some-image"
+      "secure_url": "https://google.com"
     },
     "content": [
       {
         "type": "html",
-        "value": "<div id=\"icfm\">Emtpy Page. Create Page here.</div><div id=\"izu5\" class=\"aa\">hello there!<div id=\"izzl\">how are you doing</div><div><br/></div></div><img id=\"ibgj\" src=\"https://hdn-1.addsale.com/x0/company/52/applications/614957b7e7a0ccc371e96094/pages/pictures/free-content/original/-zLi_CuyM-apple.jpeg\"/>"
-      },
-      {
-        "type": "css",
-        "value": "* { box-sizing: border-box; } body {margin: 0;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}#icfm{text-align:center;padding-top:30px;padding-right:30px;padding-bottom:30px;padding-left:30px;}#izu5{padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;}#ibgj{color:black;}#izzl{float:none;display:flex;}.aa{float:right;}"
-      },
-      {
-        "type": "js",
-        "value": ""
+        "value": "<p>hey there!</p>"
       }
     ],
-    "content_path": "https://hdn-1.fynd.com/company/1526/applications/61012f6a9250ccd1b9ef8a1d/pages/content/page_slug.html",
-    "platform": "web",
-    "description": "hey this is my first page",
-    "visibility": {
-      "test": true
-    },
     "_schedule": {
-      "start": "2021-04-23T23:50:00.000Z",
+      "cron": "* 10 * * *",
+      "start": "2021-03-31T23:30:00.000Z",
+      "end": "2021-03-31T23:55:00.000Z",
+      "duration": 1000,
       "next_schedule": [
-        {}
+        {
+          "start": "2021-03-17T04:30:00.000Z",
+          "end": "2021-03-17T04:46:40.000Z"
+        }
       ]
     },
-    "seo": {
-      "title": "my first page",
-      "description": "hey this is my first page",
-      "image": {
-        "url": ""
-      }
+    "published": true,
+    "author": {
+      "name": "Fynd App"
     },
-    "type": "rawhtml",
-    "application": "000000000000000000000001",
-    "orientation": "portrait",
-    "page_meta": []
+    "date_meta": {
+      "created_on": "2021-03-14T06:49:03.945Z",
+      "modified_on": "2021-03-14T06:49:03.945Z"
+    }
   }
 }
 ```
@@ -12302,7 +7131,7 @@ Success.
 
 
 ### createPage
-Create page.
+Create a page
 
 
 
@@ -12324,7 +7153,7 @@ except Exception as e:
 | body | [PageRequest](#PageRequest) | yes | Request body |
 
 
-Generate and add a new page to the platform.
+Use this API to create a custom page using a title, seo, publish status, feature image, tags, meta, etc.
 
 *Returned Response:*
 
@@ -12419,8 +7248,119 @@ Success. Refer `PageSchema` for more details.
 ---
 
 
+### getPages
+Get a list of pages
+
+
+
+
+```python
+try:
+    result = await platformClient.application("<APPLICATION_ID>").content.getPages(pageNo=pageNo, pageSize=pageSize)
+    # use result
+except Exception as e:
+    print(e)
+```
+
+
+
+
+
+| Argument  |  Type  | Required | Description |
+| --------- | -----  | -------- | ----------- | 
+| pageNo | Int? | no | The page number to navigate through the given set of results. Default value is 1. |   
+| pageSize | Int? | no | The number of items to retrieve in each page. Default value is 10. |  
+
+
+
+Use this API to retrieve a list of pages.
+
+*Returned Response:*
+
+
+
+
+[PageGetResponse](#PageGetResponse)
+
+Success. Refer `PageGetResponse` for more details.
+
+
+
+
+<details>
+<summary><i>&nbsp; Examples:</i></summary>
+
+
+<details>
+<summary><i>&nbsp; default</i></summary>
+
+```json
+{
+  "value": {
+    "items": [
+      {
+        "date_meta": {
+          "created_on": "2021-03-14T06:49:03.945Z",
+          "modified_on": "2021-03-14T06:49:03.945Z"
+        },
+        "tags": [
+          "my first page"
+        ],
+        "_id": "604db275b3ae202873964d94",
+        "content_path": "https://hdn-1.fynd.com/company/1526/applications/61012f6a9250ccd1b9ef8a1d/pages/content/page_slug.html",
+        "title": "test-page",
+        "slug": "test-page",
+        "published": true,
+        "_schedule": {
+          "next_schedule": [
+            {}
+          ],
+          "start": "2021-04-08T07:15:13.000Z",
+          "end": "2021-04-10T02:00:00.000Z"
+        },
+        "feature_image": {
+          "secure_url": "https://google.com/some-image"
+        },
+        "seo": {
+          "title": "my first page",
+          "description": "hey this is my first page",
+          "image": {
+            "url": ""
+          }
+        },
+        "application": "000000000000000000000001",
+        "author": {
+          "name": "Abhinav Maurya"
+        }
+      }
+    ],
+    "page": {
+      "type": "number",
+      "current": 1,
+      "size": 1,
+      "item_total": 2,
+      "has_next": true
+    }
+  }
+}
+```
+</details>
+
+</details>
+
+
+
+
+
+
+
+
+
+---
+
+
 ### updatePage
-Update page.
+Update a page
 
 
 
@@ -12443,7 +7383,7 @@ except Exception as e:
 | body | [PageSchema](#PageSchema) | yes | Request body |
 
 
-Modify and update the content of a page.
+Use this API to edit the details of an existing page, such as its title, seo, publish status, feature image, tags, schedule, etc.
 
 *Returned Response:*
 
@@ -12539,7 +7479,7 @@ Success. Refer `PageSchema` for more details.
 
 
 ### getPageBySlug
-Get page by slug.
+Get page by slug
 
 
 
@@ -12562,7 +7502,7 @@ except Exception as e:
 
 
 
-Retrieve detailed information about a specific page using its slug.
+Use this API to retrieve the components of a page, such as its title, seo, publish status, feature image, tags, schedule, etc.
 
 *Returned Response:*
 
@@ -12644,1064 +7584,6 @@ Success. Returns a JSON object of components. Refer `PageSchema` for more detail
 ```
 </details>
 
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### addPathRedirectionRules
-Add path redirection rules.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.addPathRedirectionRules(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [PathMappingSchema](#PathMappingSchema) | yes | Request body |
-
-
-Create and add rules for path redirection.
-
-*Returned Response:*
-
-
-
-
-[PathMappingSchema](#PathMappingSchema)
-
-Success. Refer `PathMappingSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Success</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "615188e9db1e444cb0f40837",
-    "application": "000000000000000000000002",
-    "redirect_from": "/from",
-    "redirect_to": "/to",
-    "createdAt": "2021-09-27T09:03:37.053Z",
-    "updatedAt": "2021-09-27T09:09:25.587Z"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getPathRedirectionRules
-Get path redirection rules.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getPathRedirectionRules(pageSize=pageSize, pageNo=pageNo)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| pageSize | Int? | no | The number of items to retrieve in each page. Default value is 5.  |   
-| pageNo | Int? | no | The page number to navigate through the given set of results. Default value is 1. |  
-
-
-
-Retrieve a list of path redirection rules.
-
-*Returned Response:*
-
-
-
-
-[PathMappingSchema](#PathMappingSchema)
-
-Success. Refer `PathMappingSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Success</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "615188e9db1e444cb0f40837",
-    "application": "000000000000000000000002",
-    "redirect_from": "/from",
-    "redirect_to": "/to",
-    "createdAt": "2021-09-27T09:03:37.053Z",
-    "updatedAt": "2021-09-27T09:09:25.587Z"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getPathRedirectionRule
-Get path redirection rule.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getPathRedirectionRule(pathId=pathId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| pathId | String | yes | ID allotted to the path redirection rule. |  
-
-
-
-Retrieve detailed information about a specific path redirection rule.
-
-*Returned Response:*
-
-
-
-
-[PathMappingSchema](#PathMappingSchema)
-
-Success. Refer `PathMappingSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Success</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "615188e9db1e444cb0f40837",
-    "application": "000000000000000000000002",
-    "redirect_from": "/from",
-    "redirect_to": "/to",
-    "createdAt": "2021-09-27T09:03:37.053Z",
-    "updatedAt": "2021-09-27T09:09:25.587Z"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updatePathRedirectionRules
-Update path redirection rules.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.updatePathRedirectionRules(pathId=pathId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| pathId | String | yes | ID allotted to the path redirection rule. |  
-| body | [PathMappingSchema](#PathMappingSchema) | yes | Request body |
-
-
-Modify settings for path redirection rules.
-
-*Returned Response:*
-
-
-
-
-[PathMappingSchema](#PathMappingSchema)
-
-Success. Refer `PathMappingSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; Success</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "615188e9db1e444cb0f40837",
-    "application": "000000000000000000000002",
-    "redirect_from": "/from",
-    "redirect_to": "/to",
-    "createdAt": "2021-09-27T09:03:37.053Z",
-    "updatedAt": "2021-09-27T09:09:25.587Z"
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### deletePathRedirectionRules
-Delete path redirection rules.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.deletePathRedirectionRules(pathId=pathId)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| pathId | String | yes | ID allotted to the path redirection rule. |  
-
-
-
-Remove specific path redirection rules.
-
-*Returned Response:*
-
-
-
-
-[HashMap<String,Any>](#HashMap<String,Any>)
-
-Success.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "message": "Redirection deleted successfully"
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getSEOConfiguration
-Get SEO configuration for an application
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getSEOConfiguration()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Retrieve configuration settings for SEO.
-
-*Returned Response:*
-
-
-
-
-[SeoComponent](#SeoComponent)
-
-Success. Refer `SeoComponent` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "seo": {
-      "details": {
-        "title": "Zyosa Zyosa",
-        "description": "",
-        "image_url": ""
-      },
-      "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
-      "sitemap_enabled": false,
-      "cannonical_enabled": false,
-      "_id": "6009819ee463ad40de397eb2",
-      "app": "000000000000000000000001",
-      "created_at": "2021-01-21T13:29:02.543Z",
-      "updated_at": "2021-02-05T06:36:16.048Z",
-      "__v": 11,
-      "custom_meta_tags": [
-        {
-          "name": "test 0000",
-          "content": "<meta name=\"test\" content=\"0000 cn dcje dcj rejre cjrenurenc \">",
-          "_id": "6017c301bde3c21dbb13b284"
-        },
-        {
-          "name": "cwdcdc",
-          "content": "<meta content=\"wdcewdewc\">",
-          "_id": "6017c675bde3c22cfb13b290"
-        }
-      ]
-    }
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateSEOConfiguration
-Update SEO configuration for an application
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.updateSEOConfiguration(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [SeoComponent](#SeoComponent) | yes | Request body |
-
-
-Modify configuration settings for SEO.
-
-*Returned Response:*
-
-
-
-
-[SeoSchema](#SeoSchema)
-
-Success. Refer `SeoSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "details": {
-      "title": "Zyosa Zyosa",
-      "description": "",
-      "image_url": ""
-    },
-    "robots_txt": "User-agent: * \nAllow: / \nsancisciasn xwsaixjowqnxwsiwjs",
-    "sitemap_enabled": false,
-    "_id": "6009819ee463ad40de397eb2",
-    "app": "000000000000000000000001",
-    "created_at": "2021-01-21T13:29:02.543Z",
-    "updated_at": "2021-02-05T06:36:16.048Z",
-    "__v": 11,
-    "custom_meta_tags": [
-      {
-        "name": "test 0000",
-        "content": "<meta name=\"test\" content=\"0000 cn dcje dcj rejre cjrenurenc \">",
-        "_id": "6017c301bde3c21dbb13b284"
-      },
-      {
-        "name": "cwdcdc",
-        "content": "<meta content=\"wdcewdewc\">",
-        "_id": "6017c675bde3c22cfb13b290"
-      }
-    ]
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### getSupportInformation
-Get support information.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getSupportInformation()
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-
-Retrieve information related to customer support.
-
-*Returned Response:*
-
-
-
-
-[Support](#Support)
-
-Success. Refer `Support` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "5ea4980b87a7944094216193",
-    "config_type": "app",
-    "application": "000000000000000000000001",
-    "created_at": "2020-04-25T20:05:31.300Z",
-    "updated_at": "2020-12-04T10:48:12.194Z",
-    "contact": {
-      "phone": {
-        "active": true,
-        "phone": [
-          {
-            "key": "Jane Doe",
-            "code": "91",
-            "number": "9988776655"
-          }
-        ]
-      },
-      "email": {
-        "active": false,
-        "email": []
-      }
-    },
-    "created": true
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### updateSupportInformation
-Update support related info for an application
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.updateSupportInformation(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [Support](#Support) | yes | Request body |
-
-
-Modify information related to customer support.
-
-*Returned Response:*
-
-
-
-
-[Support](#Support)
-
-Success. Refer `Support` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Examples:</i></summary>
-
-
-<details>
-<summary><i>&nbsp; default</i></summary>
-
-```json
-{
-  "value": {
-    "_id": "5ea4980b87a7944094216193",
-    "config_type": "app",
-    "application": "000000000000000000000001",
-    "created_at": "2020-04-25T20:05:31.300Z",
-    "updated_at": "2020-12-04T10:48:12.194Z",
-    "contact": {
-      "phone": {
-        "active": true,
-        "phone": [
-          {
-            "key": "Jane Doe",
-            "code": "91",
-            "number": "9988776655"
-          }
-        ]
-      },
-      "email": {
-        "active": false,
-        "email": []
-      }
-    },
-    "created": true
-  }
-}
-```
-</details>
-
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### updateInjectableTag
-Update HTML tag
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.updateInjectableTag(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CreateTagRequestSchema](#CreateTagRequestSchema) | yes | Request body |
-
-
-Modify settings for an injectable tag.
-
-*Returned Response:*
-
-
-
-
-[TagsSchema](#TagsSchema)
-
-Success.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "_id": "601f77e7aa61066feda44487",
-  "tags": [
-    {
-      "name": "Test",
-      "sub_type": "external",
-      "_id": "601f77e7aa61066feda44488",
-      "type": "js",
-      "url": "youtube.com/watch?v=AaxFIY-cWH0&list=PL3O3jhFJEElBHFbs6XsOqZAWZLtlEkZTw&index=31",
-      "position": "head"
-    },
-    {
-      "name": "Test 2",
-      "sub_type": "external",
-      "_id": "601f77e7aa61066feda44489",
-      "type": "js",
-      "url": "youtube.com/watch?v=AaxFIY-cWH0&list=PL3O3jhFJEElBHFbs6XsOqZAWZLtlEkZTw&index=31",
-      "position": "head"
-    }
-  ],
-  "application": "000000000000000000000001",
-  "__v": 0
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### getInjectableTags
-Get all HTML tags
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.getInjectableTags(all=all)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| all | Boolean? | no | Get all tags irrespective of the creator of tags |  
-
-
-
-Retrieve a list of injectable tags.
-
-*Returned Response:*
-
-
-
-
-[TagsSchema](#TagsSchema)
-
-Success. Refer `TagsSchema` for more details.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "_id": "601f77e7aa61066feda44487",
-  "tags": [
-    {
-      "name": "Test",
-      "sub_type": "external",
-      "_id": "601f77e7aa61066feda44488",
-      "type": "js",
-      "url": "youtube.com/watch?v=AaxFIY-cWH0&list=PL3O3jhFJEElBHFbs6XsOqZAWZLtlEkZTw&index=31",
-      "position": "head"
-    },
-    {
-      "name": "Test 2",
-      "sub_type": "external",
-      "_id": "601f77e7aa61066feda44489",
-      "type": "js",
-      "url": "youtube.com/watch?v=AaxFIY-cWH0&list=PL3O3jhFJEElBHFbs6XsOqZAWZLtlEkZTw&index=31",
-      "position": "head"
-    }
-  ],
-  "application": "000000000000000000000001",
-  "__v": 0
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### addInjectableTag
-Create HTML tag.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.addInjectableTag(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [CreateTagRequestSchema](#CreateTagRequestSchema) | yes | Request body |
-
-
-Create and add a new injectable tag.
-
-*Returned Response:*
-
-
-
-
-[TagsSchema](#TagsSchema)
-
-Success.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "_id": "601f77e7aa61066feda44487",
-  "tags": [
-    {
-      "name": "Test",
-      "sub_type": "external",
-      "_id": "601f77e7aa61066feda44488",
-      "type": "js",
-      "url": "youtube.com/watch?v=AaxFIY-cWH0&list=PL3O3jhFJEElBHFbs6XsOqZAWZLtlEkZTw&index=31",
-      "position": "head"
-    }
-  ],
-  "application": "000000000000000000000001",
-  "__v": 0
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### removeInjectableTag
-Remove HTML tag.
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.removeInjectableTag(body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- |
-| body | [RemoveHandpickedSchema](#RemoveHandpickedSchema) | yes | Request body |
-
-
-Delete a specific injectable tag.
-
-*Returned Response:*
-
-
-
-
-[TagDeleteSuccessResponse](#TagDeleteSuccessResponse)
-
-Success.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "success": true
-}
-```
-</details>
-
-
-
-
-
-
-
-
-
----
-
-
-### editInjectableTag
-Update HTML tag
-
-
-
-
-```python
-try:
-    result = await platformClient.application("<APPLICATION_ID>").content.editInjectableTag(tagId=tagId, body=body)
-    # use result
-except Exception as e:
-    print(e)
-```
-
-
-
-
-
-| Argument  |  Type  | Required | Description |
-| --------- | -----  | -------- | ----------- | 
-| tagId | String | yes | ID allotted to the tag. |  
-| body | [UpdateHandpickedSchema](#UpdateHandpickedSchema) | yes | Request body |
-
-
-Modify settings for an injectable tag.
-
-*Returned Response:*
-
-
-
-
-[TagsSchema](#TagsSchema)
-
-Success.
-
-
-
-
-<details>
-<summary><i>&nbsp; Example:</i></summary>
-
-```json
-{
-  "_id": "602671b3c0bac99158b10874",
-  "application": "000000000000000000000001",
-  "tags": [
-    {
-      "_id": "601f77e7aa61066feda44488",
-      "name": "floating whatsapp",
-      "sub_type": "inline",
-      "type": "css",
-      "position": "head",
-      "content": ".float{\n\tposition:fixed;\n\twidth:60px;\n\theight:60px;\n\tbottom:40px;\n\tright:40px;\n\tbackground-color:#25d366;\n\tcolor:#FFF;\n\tborder-radius:50px;\n\ttext-align:center;\n  font-size:30px;\n\tbox-shadow: 2px 2px 3px #999;\n  z-index:100;\n}\n\n.my-float{\n\tmargin-top:16px;\n}"
-    }
-  ],
-  "__v": 1
-}
-```
 </details>
 
 
@@ -13826,7 +7708,6 @@ Success.
  | id | String? |  yes  |  |
  | robotsTxt | String? |  yes  |  |
  | sitemapEnabled | Boolean? |  yes  |  |
- | additionalSitemap | String? |  yes  |  |
  | cannonicalEnabled | Boolean? |  yes  |  |
  | customMetaTags | ArrayList<[CustomMetaTag](#CustomMetaTag)>? |  yes  |  |
  | details | [Detail](#Detail)? |  yes  |  |
@@ -13858,56 +7739,6 @@ Success.
  | title | String? |  yes  |  |
  | description | String? |  yes  |  |
  | imageUrl | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [SeoSchemaComponent](#SeoSchemaComponent)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<[SEOSchemaMarkupTemplate](#SEOSchemaMarkupTemplate)>? |  yes  |  |
- | page | [Page](#Page)? |  yes  |  |
-
----
-
-
- 
- 
- #### [SEOSchemaMarkupTemplate](#SEOSchemaMarkupTemplate)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  |  |
- | title | String? |  yes  |  |
- | pageType | String? |  yes  |  |
- | schema | String? |  yes  |  |
- | description | String? |  yes  |  |
- | active | Boolean? |  yes  |  |
- | createdAt | String? |  yes  |  |
- | updatedAt | String? |  yes  |  |
- | application | String? |  yes  |  |
- | targetJson | HashMap<String,Any>? |  yes  |  |
-
----
-
-
- 
- 
- #### [SEOSchemaMarkupTemplateRequestBody](#SEOSchemaMarkupTemplateRequestBody)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | title | String? |  yes  |  |
- | pageType | String? |  yes  |  |
- | schema | String? |  yes  |  |
- | description | String? |  yes  |  |
- | targetJson | HashMap<String,Any>? |  yes  |  |
- | active | Boolean? |  yes  |  |
- | createdAt | String? |  yes  |  |
- | updatedAt | String? |  yes  |  |
 
 ---
 
@@ -13967,30 +7798,6 @@ Success.
  | app | String? |  yes  |  |
  | modifiedAt | String? |  yes  |  |
  | schedule | [ScheduleSchema](#ScheduleSchema)? |  yes  |  |
-
----
-
-
- 
- 
- #### [DefaultSchemaComponent](#DefaultSchemaComponent)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<[DefaultSEOSchemaMarkupTemplate](#DefaultSEOSchemaMarkupTemplate)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [DefaultSEOSchemaMarkupTemplate](#DefaultSEOSchemaMarkupTemplate)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | pageType | String? |  yes  |  |
- | schema | String? |  yes  |  |
- | targetJson | HashMap<String,Any>? |  yes  |  |
 
 ---
 
@@ -14106,10 +7913,6 @@ Success.
  | description | String? |  yes  |  |
  | image | [SEOImage](#SEOImage)? |  yes  |  |
  | title | String? |  yes  |  |
- | metaTags | ArrayList<[SEOMetaItem](#SEOMetaItem)>? |  yes  |  |
- | sitemap | [SEOSitemap](#SEOSitemap)? |  yes  |  |
- | breadcrumb | ArrayList<[SEObreadcrumb](#SEObreadcrumb)>? |  yes  |  |
- | canonicalUrl | String? |  yes  |  |
 
 ---
 
@@ -14121,54 +7924,6 @@ Success.
  | Properties | Type | Nullable | Description |
  | ---------- | ---- | -------- | ----------- |
  | url | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [SEOMetaItem](#SEOMetaItem)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | title | String? |  yes  |  |
- | items | ArrayList<[SEOMetaItems](#SEOMetaItems)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [SEOMetaItems](#SEOMetaItems)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | key | String? |  yes  |  |
- | value | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [SEOSitemap](#SEOSitemap)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | priority | Double? |  yes  |  |
- | frequency | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [SEObreadcrumb](#SEObreadcrumb)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | url | String? |  yes  |  |
- | action | [Action](#Action)? |  yes  |  |
 
 ---
 
@@ -14328,22 +8083,7 @@ Success.
  | active | Boolean? |  yes  |  |
  | display | String? |  yes  |  |
  | sortOrder | Int? |  yes  |  |
- | schedule | [CronBasedScheduleSchema](#CronBasedScheduleSchema)? |  yes  |  |
  | subNavigation | ArrayList<[NavigationReference](#NavigationReference)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CronBasedScheduleSchema](#CronBasedScheduleSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | enabled | Boolean? |  yes  |  |
- | cron | String? |  yes  |  |
- | start | String? |  yes  |  |
- | end | String? |  yes  |  |
 
 ---
 
@@ -15148,827 +8888,6 @@ Success.
  | ---------- | ---- | -------- | ----------- |
  | type | String? |  yes  |  |
  | id | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [ResourcesSchema](#ResourcesSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | resources | ArrayList<[ResourceSchema](#ResourceSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [ResourceSchema](#ResourceSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  | Resource name |
- | key | String? |  yes  | Resource key |
- | definitionsCount | Double? |  yes  | Number of definitions |
-
----
-
-
- 
- 
- #### [FieldValidations](#FieldValidations)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | type | String? |  yes  |  |
- | value | Any? |  yes  |  |
-
----
-
-
- 
- 
- #### [FieldDefinitionSchema](#FieldDefinitionSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  |  |
- | creator | String? |  yes  |  |
- | resource | String? |  yes  |  |
- | name | String? |  yes  |  |
- | namespace | String? |  yes  |  |
- | key | String? |  yes  |  |
- | description | String? |  yes  |  |
- | type | String? |  yes  |  |
- | multiValue | Boolean? |  yes  |  |
- | validations | ArrayList<[FieldValidations](#FieldValidations)>? |  yes  |  |
- | companyId | String? |  yes  |  |
- | createdBy | String? |  yes  |  |
- | updatedBy | String? |  yes  |  |
- | required | Boolean? |  yes  |  |
- | isDeleted | Boolean? |  yes  |  |
- | createdAt | String? |  yes  |  |
- | updatedAt | String? |  yes  |  |
- | typeName | String? |  yes  |  |
- | invalidFieldsCount | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomFieldDefinitionsSchema](#CustomFieldDefinitionsSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<[FieldDefinitionSchema](#FieldDefinitionSchema)>? |  yes  |  |
- | page | [Page](#Page)? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomFieldDefinitionRequestSchema](#CustomFieldDefinitionRequestSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | resource | String? |  yes  |  |
- | type | String? |  yes  |  |
- | key | String? |  yes  |  |
- | namespace | String? |  yes  |  |
- | multiValue | Boolean? |  yes  |  |
- | name | String? |  yes  |  |
- | description | String? |  yes  |  |
- | validations | ArrayList<[FieldValidations](#FieldValidations)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectCustomFieldDefinitions](#CustomObjectCustomFieldDefinitions)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  |  |
- | type | String? |  yes  |  |
- | description | String? |  yes  |  |
- | name | String? |  yes  |  |
- | multiValue | Boolean? |  yes  |  |
- | required | Boolean? |  yes  |  |
- | key | String? |  yes  |  |
- | validations | ArrayList<[FieldValidations](#FieldValidations)>? |  yes  |  |
- | action | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectDefinitionUpdateRequestSchema](#CustomObjectDefinitionUpdateRequestSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | type | String? |  yes  |  |
- | description | String? |  yes  |  |
- | name | String? |  yes  |  |
- | displayNameKey | String? |  yes  |  |
- | fieldDefinitions | ArrayList<[CustomObjectCustomFieldDefinitions](#CustomObjectCustomFieldDefinitions)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomFieldDefinitionDetailResSchema](#CustomFieldDefinitionDetailResSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | creator | String? |  yes  |  |
- | resource | String? |  yes  |  |
- | name | String? |  yes  |  |
- | namespace | String? |  yes  |  |
- | key | String? |  yes  |  |
- | description | String? |  yes  |  |
- | type | String? |  yes  |  |
- | multiValue | Boolean? |  yes  |  |
- | companyId | String? |  yes  |  |
- | applicationId | String? |  yes  |  |
- | createdBy | String? |  yes  |  |
- | updatedBy | String? |  yes  |  |
- | required | Boolean? |  yes  |  |
- | isDeleted | Boolean? |  yes  |  |
- | id | String? |  yes  |  |
- | validations | ArrayList<Any>? |  yes  |  |
- | createdAt | String? |  yes  |  |
- | updatedAt | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomDataDeleteSchema](#CustomDataDeleteSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | success | Boolean? |  yes  |  |
- | message | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomFieldValue](#CustomFieldValue)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | value | Any? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomFieldSchema](#CustomFieldSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  |  |
- | namespace | String? |  yes  |  |
- | key | String? |  yes  |  |
- | resource | String? |  yes  |  |
- | creator | String? |  yes  |  |
- | value | ArrayList<[CustomFieldValue](#CustomFieldValue)>? |  yes  |  |
- | resourceId | String? |  yes  |  |
- | type | String? |  yes  |  |
- | multiValue | Boolean? |  yes  |  |
- | companyId | String? |  yes  |  |
- | definitionId | String? |  yes  |  |
- | hasInvalidValues | Boolean? |  yes  |  |
- | invalidValueErrors | ArrayList<Any>? |  yes  |  |
- | createdBy | String? |  yes  |  |
- | isDeleted | Boolean? |  yes  |  |
- | createdAt | String? |  yes  |  |
- | updatedAt | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomFieldsResponseSchema](#CustomFieldsResponseSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<[CustomFieldSchema](#CustomFieldSchema)>? |  yes  |  |
- | page | [Page](#Page)? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomFieldsResponseByResourceIdSchema](#CustomFieldsResponseByResourceIdSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<[CustomFieldSchema](#CustomFieldSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomField](#CustomField)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | value | ArrayList<Any>? |  yes  |  |
- | definitionId | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomFieldRequestSchema](#CustomFieldRequestSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | fields | ArrayList<[CustomField](#CustomField)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectSchema](#CustomObjectSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  |  |
- | creator | String? |  yes  |  |
- | companyId | String? |  yes  |  |
- | applicationId | String? |  yes  |  |
- | createdBy | String? |  yes  |  |
- | updatedBy | String? |  yes  |  |
- | status | String? |  yes  |  |
- | type | String? |  yes  |  |
- | displayName | String? |  yes  |  |
- | definitionId | String? |  yes  |  |
- | fields | ArrayList<[CustomFieldSchema](#CustomFieldSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectDefinitionRequestSchema](#CustomObjectDefinitionRequestSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | type | String? |  yes  |  |
- | description | String? |  yes  |  |
- | name | String? |  yes  |  |
- | displayNameKey | String? |  yes  |  |
- | fieldDefinitions | ArrayList<[CustomObjectCustomFieldDefinitions](#CustomObjectCustomFieldDefinitions)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectCustomFieldDefinitionResSchema](#CustomObjectCustomFieldDefinitionResSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | creator | String? |  yes  |  |
- | resource | String? |  yes  |  |
- | name | String? |  yes  |  |
- | namespace | String? |  yes  |  |
- | key | String? |  yes  |  |
- | description | String? |  yes  |  |
- | type | String? |  yes  |  |
- | multiValue | Boolean? |  yes  |  |
- | validations | ArrayList<[FieldValidations](#FieldValidations)>? |  yes  |  |
- | companyId | String? |  yes  |  |
- | createdBy | String? |  yes  |  |
- | metaobjectDefinitionId | String? |  yes  |  |
- | required | Boolean? |  yes  |  |
- | isDeleted | Boolean? |  yes  |  |
- | id | String? |  yes  |  |
- | createdAt | String? |  yes  |  |
- | updatedAt | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectDefinitionSchema](#CustomObjectDefinitionSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  |  |
- | name | String? |  yes  |  |
- | type | String? |  yes  |  |
- | displayNameKey | String? |  yes  |  |
- | description | String? |  yes  |  |
- | creator | String? |  yes  |  |
- | createdBy | String? |  yes  |  |
- | updatedBy | String? |  yes  |  |
- | fieldDefinitions | ArrayList<[CustomObjectCustomFieldDefinitionResSchema](#CustomObjectCustomFieldDefinitionResSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectDefinitionDeleteResponseSchema](#CustomObjectDefinitionDeleteResponseSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | success | Boolean? |  yes  |  |
- | message | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectEntryBulkUploadResponse](#CustomObjectEntryBulkUploadResponse)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | url | String? |  yes  |  |
- | totalRecords | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectListItemDefinationSchema](#CustomObjectListItemDefinationSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  |  |
- | name | String? |  yes  |  |
- | type | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectListItemSchema](#CustomObjectListItemSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  |  |
- | definitionId | String? |  yes  |  |
- | status | String? |  yes  |  |
- | updatedAt | String? |  yes  |  |
- | displayName | String? |  yes  |  |
- | definition | [CustomObjectListItemDefinationSchema](#CustomObjectListItemDefinationSchema)? |  yes  |  |
- | references | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectsSchema](#CustomObjectsSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<[CustomObjectListItemSchema](#CustomObjectListItemSchema)>? |  yes  |  |
- | page | [Page](#Page)? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectFieldSchema](#CustomObjectFieldSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  |  |
- | key | String? |  yes  |  |
- | value | ArrayList<Any>? |  yes  |  |
- | type | String? |  yes  |  |
- | definitionId | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectByIdSchema](#CustomObjectByIdSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  |  |
- | status | String? |  yes  |  |
- | displayName | String? |  yes  |  |
- | definition | [CustomObjectListItemDefinationSchema](#CustomObjectListItemDefinationSchema)? |  yes  |  |
- | references | ArrayList<Any>? |  yes  |  |
- | fields | ArrayList<[CustomObjectFieldSchema](#CustomObjectFieldSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectBulkEntryInitiateDownload](#CustomObjectBulkEntryInitiateDownload)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | message | String? |  yes  |  |
- | taskId | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectMetaSchema](#CustomObjectMetaSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | moTotalCount | Int? |  yes  |  |
- | moSuccessCount | Int? |  yes  |  |
- | moErrorCount | Int? |  yes  |  |
- | moDefintionType | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectJobSchema](#CustomObjectJobSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  |  |
- | jobs | ArrayList<String>? |  yes  |  |
- | finishedJobs | ArrayList<String>? |  yes  |  |
- | errorJobs | ArrayList<String>? |  yes  |  |
- | errorsOccured | ArrayList<String>? |  yes  |  |
- | companyId | String? |  yes  |  |
- | creator | String? |  yes  |  |
- | url | String? |  yes  |  |
- | status | String? |  yes  |  |
- | actionType | String? |  yes  |  |
- | entity | String? |  yes  |  |
- | errorUrl | String? |  yes  |  |
- | finishedCount | Int? |  yes  |  |
- | errorCount | Int? |  yes  |  |
- | successCount | Int? |  yes  |  |
- | totalJobs | Int? |  yes  |  |
- | meta | [CustomObjectMetaSchema](#CustomObjectMetaSchema)? |  yes  |  |
- | createdBy | String? |  yes  |  |
- | createdAt | String? |  yes  |  |
- | updatedAt | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectBulkEntry](#CustomObjectBulkEntry)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<[CustomObjectJobSchema](#CustomObjectJobSchema)>? |  yes  |  |
- | page | [Page](#Page)? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomFieldTypeSchema](#CustomFieldTypeSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | stringSingleLine | [StringSingleLine](#StringSingleLine)? |  yes  |  |
- | stringMultiLine | [StringMultiLine](#StringMultiLine)? |  yes  |  |
- | dropdown | [Dropdown](#Dropdown)? |  yes  |  |
- | integer | [Integer](#Integer)? |  yes  |  |
- | floatType | [FloatType](#FloatType)? |  yes  |  |
- | booleanType | [BooleanType](#BooleanType)? |  yes  |  |
- | date | [Date](#Date)? |  yes  |  |
- | datetime | [Datetime](#Datetime)? |  yes  |  |
- | json | [Json](#Json)? |  yes  |  |
- | file | [File](#File)? |  yes  |  |
- | url | [Url](#Url)? |  yes  |  |
- | metaobject | [Metaobject](#Metaobject)? |  yes  |  |
- | product | [Product](#Product)? |  yes  |  |
-
----
-
-
- 
- 
- #### [SupportedValidationsMetaExampleSchema](#SupportedValidationsMetaExampleSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | value | String? |  yes  |  |
-
----
-
-
- 
- 
- #### [SupportedValidationsMetaSchema](#SupportedValidationsMetaSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | examples | ArrayList<[SupportedValidationsMetaExampleSchema](#SupportedValidationsMetaExampleSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [SupportedValidationsSchema](#SupportedValidationsSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | type | String? |  yes  |  |
- | display | String? |  yes  |  |
- | required | Boolean? |  yes  |  |
- | meta | [SupportedValidationsMetaSchema](#SupportedValidationsMetaSchema)? |  yes  |  |
-
----
-
-
- 
- 
- #### [StringSingleLine](#StringSingleLine)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | listEnabled | Boolean? |  yes  |  |
- | category | String? |  yes  |  |
- | type | String? |  yes  |  |
- | supportedValidations | ArrayList<[SupportedValidationsSchema](#SupportedValidationsSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [StringMultiLine](#StringMultiLine)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | listEnabled | Boolean? |  yes  |  |
- | category | String? |  yes  |  |
- | type | String? |  yes  |  |
- | supportedValidations | ArrayList<[SupportedValidationsSchema](#SupportedValidationsSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [Dropdown](#Dropdown)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | listEnabled | Boolean? |  yes  |  |
- | category | String? |  yes  |  |
- | type | String? |  yes  |  |
- | supportedValidations | ArrayList<[SupportedValidationsSchema](#SupportedValidationsSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [Integer](#Integer)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | listEnabled | Boolean? |  yes  |  |
- | type | String? |  yes  |  |
- | category | String? |  yes  |  |
- | supportedValidations | ArrayList<[SupportedValidationsSchema](#SupportedValidationsSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [FloatType](#FloatType)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | listEnabled | Boolean? |  yes  |  |
- | type | String? |  yes  |  |
- | category | String? |  yes  |  |
- | supportedValidations | ArrayList<[SupportedValidationsSchema](#SupportedValidationsSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [BooleanType](#BooleanType)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | category | String? |  yes  |  |
- | listEnabled | Boolean? |  yes  |  |
- | type | String? |  yes  |  |
- | supportedValidations | ArrayList<[SupportedValidationsSchema](#SupportedValidationsSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [Date](#Date)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | listEnabled | Boolean? |  yes  |  |
- | category | String? |  yes  |  |
- | type | String? |  yes  |  |
- | supportedValidations | ArrayList<[SupportedValidationsSchema](#SupportedValidationsSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [Datetime](#Datetime)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | category | String? |  yes  |  |
- | listEnabled | Boolean? |  yes  |  |
- | type | String? |  yes  |  |
- | supportedValidations | ArrayList<[SupportedValidationsSchema](#SupportedValidationsSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [Json](#Json)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | listEnabled | Boolean? |  yes  |  |
- | category | String? |  yes  |  |
- | type | String? |  yes  |  |
- | supportedValidations | ArrayList<[SupportedValidationsSchema](#SupportedValidationsSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [File](#File)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | category | String? |  yes  |  |
- | listEnabled | Boolean? |  yes  |  |
- | type | String? |  yes  |  |
- | supportedValidations | ArrayList<[SupportedValidationsSchema](#SupportedValidationsSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [Url](#Url)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | listEnabled | Boolean? |  yes  |  |
- | type | String? |  yes  |  |
- | supportedValidations | ArrayList<[SupportedValidationsSchema](#SupportedValidationsSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [Metaobject](#Metaobject)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | listEnabled | Boolean? |  yes  |  |
- | category | String? |  yes  |  |
- | type | String? |  yes  |  |
- | supportedValidations | ArrayList<[SupportedValidationsSchema](#SupportedValidationsSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [Product](#Product)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | name | String? |  yes  |  |
- | listEnabled | Boolean? |  yes  |  |
- | category | String? |  yes  |  |
- | type | String? |  yes  |  |
- | supportedValidations | ArrayList<[SupportedValidationsSchema](#SupportedValidationsSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectEntry](#CustomObjectEntry)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | id | String? |  yes  |  |
- | name | String? |  yes  |  |
- | type | String? |  yes  |  |
- | updatedAt | String? |  yes  |  |
- | entriesCount | Int? |  yes  |  |
- | fieldsCount | Int? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectDefinitionsSchema](#CustomObjectDefinitionsSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | items | ArrayList<[CustomObjectEntry](#CustomObjectEntry)>? |  yes  |  |
- | page | [Page](#Page)? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectEntryFieldSchema](#CustomObjectEntryFieldSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | definitionId | String? |  yes  |  |
- | value | ArrayList<Any>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectRequestSchema](#CustomObjectRequestSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | status | String? |  yes  |  |
- | definitionId | String? |  yes  |  |
- | fields | ArrayList<[CustomObjectEntryFieldSchema](#CustomObjectEntryFieldSchema)>? |  yes  |  |
-
----
-
-
- 
- 
- #### [CustomObjectBulkSchema](#CustomObjectBulkSchema)
-
- | Properties | Type | Nullable | Description |
- | ---------- | ---- | -------- | ----------- |
- | url | String? |  yes  |  |
- | totalRecords | Int? |  yes  |  |
 
 ---
 
