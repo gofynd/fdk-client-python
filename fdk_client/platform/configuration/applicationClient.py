@@ -226,7 +226,7 @@ class Configuration:
         return response
     
     async def modifyAppFeatures(self, body="", request_headers:Dict={}):
-        """Update features of application
+        """Modify the feature configuration of sales channel websites, such as product detail, landing page, options in the login/registration screen, home page, listing page, reward points, communication opt-in, cart options and many more.
         """
         payload = {}
         
@@ -351,7 +351,7 @@ class Configuration:
         return response
     
     async def getAppContactInfo(self, request_headers:Dict={}):
-        """Fetch data such as social links, copyright text, business highlights, address and contact information of the company/seller/brand operating the application.
+        """Fetch data such as social links, copyright text, business highlights, address and contact information of the company/seller/brand operating the sales channel.
         """
         payload = {}
         
@@ -390,7 +390,7 @@ class Configuration:
         return response
     
     async def updateAppContactInfo(self, body="", request_headers:Dict={}):
-        """Modify the social links, copyright text, business highlights, address and contact information of the company/seller/brand operating the application.
+        """Modify the social links, copyright text, business highlights, address and contact information of the company/seller/brand operating the sales channel.
         """
         payload = {}
         
@@ -472,7 +472,7 @@ class Configuration:
         return response
     
     async def updateAppApiTokens(self, body="", request_headers:Dict={}):
-        """Add or edit the tokens used for integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map, Google and Facebook auth.
+        """Add and edit the tokens used for integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map, Google and Facebook auth.
         """
         payload = {}
         
@@ -515,7 +515,7 @@ class Configuration:
         return response
     
     async def getAppCompanies(self, uid=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve info of all the companies (e.g. name, uid, and company type) whose inventory is fetched into the current sales channel application
+        """Retrieve info of all the companies (e.g. name, uid, and company type) whose inventory is fetched into the current sales channel sales channel
         :param uid : UID of companies to be fetched : type integer
         :param page_no : The current page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
@@ -563,7 +563,7 @@ class Configuration:
         return response
     
     async def getAppStores(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve information of all the companies (e.g. uid, name, display name, store type, store code and company id) whose inventory is fetched into the current sales channel application
+        """Retrieve information of all the companies (e.g. uid, name, display name, store type, store code and company id) whose inventory is fetched into the current sales channel sales channel
         :param page_no : The current page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -690,7 +690,7 @@ class Configuration:
         return response
     
     async def partiallyUpdateInventoryConfig(self, body="", request_headers:Dict={}):
-        """Partially update the configuration details of authentication, inventory, article assignment rules, reward points, cart, payment, order, logistics, etc.
+        """Modify the configuration details of authentication, inventory, article assignment rules, reward points, cart, payment, order, logistics, etc.
         """
         payload = {}
         
@@ -733,7 +733,7 @@ class Configuration:
         return response
     
     async def getAppCurrencyConfig(self, request_headers:Dict={}):
-        """Retrieve a list of currencies supported in the current sales channel. Moreover, get the cuurency that is set as the default one in the application.
+        """Retrieve a list of currencies supported in the current sales channel. Moreover, get the cuurency that is set as the default one in the sales channel.
         """
         payload = {}
         
@@ -772,7 +772,7 @@ class Configuration:
         return response
     
     async def updateAppCurrencyConfig(self, body="", request_headers:Dict={}):
-        """Modify currency configuration settings for the application. Add and edit the currencies supported in the application. Initially, INR will be enabled by default.
+        """Modify currency configuration settings for the sales channel. Add and edit the currencies supported in the sales channel. Initially, INR will be enabled by default.
         """
         payload = {}
         
@@ -815,7 +815,7 @@ class Configuration:
         return response
     
     async def getAppSupportedCurrency(self, request_headers:Dict={}):
-        """Retrieve a list of supported currencies for the application. A list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
+        """Retrieve a list of supported currencies for the sales channel. A list of currencies allowed in the current sales channel. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
         """
         payload = {}
         
@@ -854,7 +854,7 @@ class Configuration:
         return response
     
     async def getOrderingStoresByFilter(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Retrieve ordering stores based on specified filters. Use filters and retrieve the details of the deployment stores (the selling locations where the application will be utilised for placing orders).
+        """Retrieve ordering stores based on specified filters. Use filters and retrieve the details of the deployment stores (the selling locations where the sales channel will be utilised for placing orders).
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -903,7 +903,7 @@ class Configuration:
         return response
     
     async def updateOrderingStoreConfig(self, body="", request_headers:Dict={}):
-        """Modify configuration settings for ordering stores. Edit the details of the deployment stores (the selling locations where the application will be utilised for placing orders)
+        """Modify configuration settings for ordering stores. Edit the details of the deployment stores (the selling locations where the sales channel will be utilised for placing orders)
         """
         payload = {}
         
@@ -946,7 +946,7 @@ class Configuration:
         return response
     
     async def getOrderingStoreConfig(self, request_headers:Dict={}):
-        """Retrieve configuration settings for ordering stores. Retrieve the details of the deployment stores (the selling locations where the application will be utilised for placing orders).
+        """Retrieve configuration settings for ordering stores. Retrieve the details of the deployment stores (the selling locations where the sales channel will be utilised for placing orders).
         """
         payload = {}
         
@@ -985,7 +985,7 @@ class Configuration:
         return response
     
     async def getStaffOrderingStores(self, page_no=None, page_size=None, q=None, request_headers:Dict={}):
-        """Retrieve ordering stores accessible to staff members. Retrieve the details of all stores access given to the staff member (the selling locations where the application will be utilized for placing orders).
+        """Retrieve ordering stores accessible to staff members. Retrieve the details of all stores access given to the staff member (the selling locations where the sales channel will be utilized for placing orders).
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         :param q : Store code or name of the ordering store. : type string
@@ -1115,7 +1115,7 @@ class Configuration:
         return response
     
     async def getDomains(self, request_headers:Dict={}):
-        """Get list of domains. 
+        """Retrieve a list of existing domains by its sales channel id.
         """
         payload = {}
         
@@ -1154,7 +1154,7 @@ class Configuration:
         return response
     
     async def addDomain(self, body="", request_headers:Dict={}):
-        """Add a new domain. Add a new domain to current sales channel, including pre-defined domain (free domain) or custom domain (owned by the brand)
+        """Creates a domain for an sales channel. Note - Only 15 domains can be added to the sales channel
         """
         payload = {}
         
@@ -1197,7 +1197,7 @@ class Configuration:
         return response
     
     async def removeDomainById(self, id=None, request_headers:Dict={}):
-        """Delete a specific domain from the application. Delete a domain (secondary or shortlink domain) added to a sales channel. It will disable user's access to website, shared links, and other features associated with this domain.
+        """Delete a specific domain from the sales channel. Delete a domain (secondary or shortlink domain) added to a sales channel. It will disable user's access to website, shared links, and other features associated with this domain.
         :param id : The unique identifier (24-digit Mongo Object ID) of the domain : type string
         """
         payload = {}
@@ -1325,7 +1325,7 @@ class Configuration:
         return response
     
     async def getApplicationById(self, request_headers:Dict={}):
-        """Retrieve detailed information about a specific application. Use application ID to get the current sales channel details which includes channel name, description, banner, logo, favicon, domain details, token, etc.
+        """Retrieve detailed information about a specific sales channel. Use sales channel ID to get the current sales channel details which includes channel name, description, banner, logo, favicon, domain details, token, etc.
         """
         payload = {}
         

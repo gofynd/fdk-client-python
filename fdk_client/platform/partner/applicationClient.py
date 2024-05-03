@@ -14,7 +14,7 @@ class Partner:
 
     
     async def addProxyPath(self, extension_id=None, body="", request_headers:Dict={}):
-        """Create and add a new proxy path.
+        """Extension proxy can be used to call extension API from storefront and make extension API integration seamless.
         :param extension_id : Extension id for which a proxy URL will be generated : type string
         """
         payload = {}
@@ -60,7 +60,7 @@ class Partner:
         return response
     
     async def removeProxyPath(self, extension_id=None, attached_path=None, request_headers:Dict={}):
-        """Delete a proxy path from the platform.
+        """Remove the proxy which are created earlier for the extension.
         :param extension_id : Extension id for which proxy URL needs to be removed : type string
         :param attached_path : Attached path slug : type string
         """

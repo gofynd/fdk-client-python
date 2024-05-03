@@ -55,7 +55,7 @@ class Catalog:
         self._urls.update(urls)
     
     async def getProductDetailBySlug(self, slug=None, body="", request_headers:Dict={}):
-        """Retrieve a product by its slug value.
+        """Fetches properties related to Product such as price, attributes, HSN code, SKU code, etc.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         """
         payload = {}
@@ -99,7 +99,7 @@ class Catalog:
         return response
     
     async def getProductSizesBySlug(self, slug=None, store_id=None, body="", request_headers:Dict={}):
-        """Retrieve the size options available for a specific product based on its slug.
+        """Provides detailed information about a product, including its availability (sellable), available sizes with quantities, dimensions, weight, availability status, price details (marked, effective, selling), minimum order quantity (MOQ).
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         :param store_id : The ID of the store that is selling the product, e.g. 1,2,3. : type integer
         """
@@ -146,7 +146,7 @@ class Catalog:
         return response
     
     async def getProductComparisonBySlugs(self, slug=None, body="", request_headers:Dict={}):
-        """Retrieves side-by-side comparisons of multiple products identified by their slugs.
+        """Retrives all the products that have same category.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/. : type array
         """
         payload = {}
@@ -190,7 +190,7 @@ class Catalog:
         return response
     
     async def getSimilarComparisonProductBySlug(self, slug=None, body="", request_headers:Dict={}):
-        """Gets products similar to the one identified by the given slug for comparison.
+        """Retrives all products within the same category as the one specified by the provided slug.
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         """
         payload = {}
@@ -322,7 +322,7 @@ class Catalog:
         return response
     
     async def getProductStockByIds(self, item_id=None, alu=None, sku_code=None, ean=None, upc=None, body="", request_headers:Dict={}):
-        """Retrieves the current stock status for products identified by their IDs.
+        """Retrieves the current stock status for products identified by their IDs. such as SKU,ALU,EAN etc
         :param item_id : The Item ID of the product (Max. 50 allowed) : type string
         :param alu : ALU of the product (limited upto 50 ALU identifier in a single request) : type string
         :param sku_code : Stock-keeping Unit of the product (limited upto 50 SKU Code in a single request) : type string
@@ -378,7 +378,7 @@ class Catalog:
         return response
     
     async def getProductStockForTimeByIds(self, timestamp=None, page_size=None, page_id=None, body="", request_headers:Dict={}):
-        """Retrieves projected stock levels for specified products at a future time.
+        """Retrives the available stock levels for all products associated with a particular sales channel at a specified future time.
         :param timestamp : Timestamp in UTC format (2020-07-23T10:27:50Z) : type string
         :param page_size : The number of items to retrieve in each page. : type integer
         :param page_id : Page ID to retrieve next set of results. : type string
@@ -428,7 +428,7 @@ class Catalog:
         return response
     
     async def getProducts(self, q=None, f=None, filters=None, sort_on=None, page_id=None, page_size=None, page_no=None, page_type=None, body="", request_headers:Dict={}):
-        """Retrieves a list of all products in the catalog. Choose a sort order or make arbitrary search queries by entering the product name, brand, category or collection.
+        """Retrieves a list of all products available in the catalog. It supports filtering based on product name, brand, department, category, collection, and more, while also offering sorting options based on factors like price, ratings, discounts, and other relevant criteria.
         :param q : The search query for entering partial or full name of product, brand, category, or collection. : type string
         :param f : The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter paramater applied as an AND condition. : type string
         :param filters : This is a boolean value, True for fetching all filter parameters and False for disabling the filter parameters. : type boolean
@@ -493,7 +493,7 @@ class Catalog:
         return response
     
     async def getBrands(self, department=None, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Retrieves a comprehensive list of all brands in the catalog under which a product is sold.
+        """Retrieves a list of all the availabe brands. Filtering can be applied on department.
         :param department : The name of the department. Use this parameter to filter products by a particular department. See the list of available departments below. Also, you can get available departments from the endpoint /service/application/catalog/v1.0/departments/ : type string
         :param page_no : The page number to navigate through the given set of results. : type integer
         :param page_size : The number of items to retrieve in each page. : type integer
@@ -587,7 +587,7 @@ class Catalog:
         return response
     
     async def getCategories(self, department=None, body="", request_headers:Dict={}):
-        """Retrieves a list of all available product categories. Also filter the categories by department.
+        """Retrieves a list of all available product categories. Also user can filter the categories by department.
         :param department : The name of the department. Use this parameter to filter products by a particular department. See the list of available departments below. Also, you can get available departments from the endpoint /service/application/catalog/v1.0/departments/ : type string
         """
         payload = {}
@@ -725,7 +725,7 @@ class Catalog:
         return response
     
     async def getDepartments(self, body="", request_headers:Dict={}):
-        """Retrieves a list of all available product departments. Departments are a way to categorise similar products.
+        """Retrieve a list of all departments associated with available products.
         """
         payload = {}
         
@@ -766,7 +766,7 @@ class Catalog:
         return response
     
     async def getSearchResults(self, q=None, body="", request_headers:Dict={}):
-        """Retrieves products that match the user's search criteria.
+        """Retrieve products, brands, or categories based on a search query, which can be a partial or full name match.
         :param q : The search query for entering partial or full name of a product, brand or category. For example, if the given search query `q` is _ski_, the relevant search suggestions could be _skirt_, _ski shoes_, __skin cream_ etc. : type string
         """
         payload = {}
@@ -810,7 +810,7 @@ class Catalog:
         return response
     
     async def getCollections(self, page_no=None, page_size=None, tag=None, q=None, body="", request_headers:Dict={}):
-        """Retrieves a list of curated product collections.
+        """Retrieve a list of curated product collections with filtering options based on tags and collection names.
         :param page_no : The page number to navigate through the given set of results. : type integer
         :param page_size : The number of items to retrieve in each page. : type integer
         :param tag : List of tags  to filter collections : type array
@@ -863,7 +863,7 @@ class Catalog:
         return response
     
     async def getCollectionItemsBySlug(self, slug=None, f=None, q=None, filters=None, sort_on=None, page_id=None, page_size=None, page_no=None, page_type=None, body="", request_headers:Dict={}):
-        """Retrieve items in a specific collection identified by its slug.
+        """Fetch items within a particular collection identified by its slug.
         :param slug : A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/. : type string
         :param f : The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter paramater applied as an AND condition. : type string
         :param q : The search query for entering partial or full name of product, brand, category, or collection. : type string
@@ -1025,7 +1025,7 @@ class Catalog:
         return response
     
     async def unfollowById(self, collection_type=None, collection_id=None, body="", request_headers:Dict={}):
-        """Removes a followed item, brand, or product based on its ID.
+        """Removes a followed item, brand, or product using its collection ID.
         :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
         :param collection_id : The ID of the collection type. : type string
         """
@@ -1072,7 +1072,7 @@ class Catalog:
         return response
     
     async def followById(self, collection_type=None, collection_id=None, body="", request_headers:Dict={}):
-        """Adds a product, brand, or item to the user's followed list by its ID.
+        """Adds a product, brand, or item to the user's followed list by collection Id
         :param collection_type : Type of collection followed, i.e. products, brands, or collections. : type string
         :param collection_id : The ID of the collection type. : type string
         """
@@ -1119,7 +1119,7 @@ class Catalog:
         return response
     
     async def getFollowerCountById(self, collection_type=None, collection_id=None, body="", request_headers:Dict={}):
-        """Retrieves the total number of followers for a specific item by its ID.
+        """Retrieves the total number of followers for a specific item by its Id.
         :param collection_type : Type of collection, i.e. products, brands, or collections. : type string
         :param collection_id : The ID of the collection type. : type string
         """
@@ -1166,7 +1166,7 @@ class Catalog:
         return response
     
     async def getFollowIds(self, collection_type=None, body="", request_headers:Dict={}):
-        """Retrieves the IDs of all items the user is currently following like Products, Brands and Collections.
+        """Retrieves the IDs of all items the user is currently following like Products, Brands and Collections
         :param collection_type : Type of collection, i.e. products, brands, collections. : type string
         """
         payload = {}
@@ -1210,7 +1210,7 @@ class Catalog:
         return response
     
     async def getStores(self, page_no=None, page_size=None, q=None, city=None, range=None, latitude=None, longitude=None, tags=None, body="", request_headers:Dict={}):
-        """Retrieves a list of all physical or online stores.
+        """Retrieves a list of all stores associated with sales channel
         :param page_no : The page number to navigate through the given set of results. : type integer
         :param page_size : Number of items to retrieve in each page. : type integer
         :param q : Search a store by its name or store_code. : type string
@@ -1275,7 +1275,7 @@ class Catalog:
         return response
     
     async def getInStockLocations(self, page_no=None, page_size=None, q=None, city=None, range=None, latitude=None, longitude=None, body="", request_headers:Dict={}):
-        """Lists locations where specified products are currently in stock.
+        """Lists stores where specified products are currently in stock.
         :param page_no : The page number to navigate through the given set of results. : type integer
         :param page_size : Number of items to retrieve in each page. : type integer
         :param q : Search a store by its name or store_code. : type string
@@ -1337,7 +1337,7 @@ class Catalog:
         return response
     
     async def getLocationDetailsById(self, location_id=None, body="", request_headers:Dict={}):
-        """Retrieves detailed information about a specific location using its ID.
+        """This API retrieves comprehensive details about a store based on its location Id
         :param location_id : Unique Location ID. : type integer
         """
         payload = {}
@@ -1481,7 +1481,7 @@ class Catalog:
         return response
     
     async def getProductSellersBySlug(self, slug=None, size=None, strategy=None, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Retrieve a list of all sellers offering a specific product identified by its slug. 
+        """Retrieve a list of all sellers offering a specific product identified by its slug and size
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/ : type string
         :param size : A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes : type string
         :param strategy : Sort stores on the basis of strategy. eg, fast-delivery, low-price, optimal. : type string

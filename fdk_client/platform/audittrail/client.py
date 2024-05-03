@@ -104,7 +104,7 @@ class AuditTrail:
         return response
     
     async def getAuditLog(self, id=None, request_headers:Dict={}):
-        """Retrieve a specific audit log entry
+        """Retrieve a specific audit log entry.
         :param id : log uuid : type string
         """
         payload = {}
@@ -146,7 +146,7 @@ class AuditTrail:
         return response
     
     async def getEntityTypes(self, request_headers:Dict={}):
-        """List of entity types that can be audited within the platform's
+        """List of entity types that can be audited within the platform.
         """
         payload = {}
         

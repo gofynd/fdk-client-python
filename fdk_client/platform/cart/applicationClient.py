@@ -14,7 +14,7 @@ class Cart:
 
     
     async def getCoupons(self, page_no=None, page_size=None, is_archived=None, title=None, is_public=None, is_display=None, type_slug=None, code=None, request_headers:Dict={}):
-        """Retrieve a list of available coupons for use in the shopping cart.
+        """Retrieve a list of all created coupons for specific sales channel. It also supports searching based on text search, pagination and other flags to filter coupons.
         :param page_no :  : type integer
         :param page_size :  : type integer
         :param is_archived :  : type boolean
@@ -77,7 +77,7 @@ class Cart:
         return response
     
     async def createCoupon(self, body="", request_headers:Dict={}):
-        """Generate and add a new coupon to the cart.
+        """Creates a new coupon based on the selected coupon type. Sellers can choose from multiple supported coupon types, including percentage value, fixed amount value, bundled discount, buy X get Y items, and more, along with customizable coupon criteria to meet specific business requirements.
         """
         payload = {}
         
@@ -120,7 +120,7 @@ class Cart:
         return response
     
     async def getCouponById(self, id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific coupon using its unique ID.
+        """Retrieve details of a specific coupon by providing its unique identifier to obtain information such as coupon type, rules, validity period and other related information.
         :param id :  : type string
         """
         payload = {}
@@ -162,7 +162,7 @@ class Cart:
         return response
     
     async def updateCoupon(self, id=None, body="", request_headers:Dict={}):
-        """Modify the details and settings of an existing coupon in the cart system.
+        """Update the details of an existing coupon by specifying its unique identifier. This includes modifying coupon attributes such as discount percentage, validity period, and associated conditions. Leveraging this functionality allows businesses to quickly adapt their promotional strategies to changing market dynamics.
         :param id :  : type string
         """
         payload = {}
@@ -208,7 +208,7 @@ class Cart:
         return response
     
     async def updateCouponPartially(self, id=None, body="", request_headers:Dict={}):
-        """Make partial modifications to the settings of an existing coupon in the cart system.
+        """Seller can make partial adjustments of an existing coupon by specifying its unique identifier. It enables businesses to modify specific attributes of the coupon while preserving other details intact.
         :param id :  : type string
         """
         payload = {}
@@ -254,7 +254,7 @@ class Cart:
         return response
     
     async def getPromotions(self, page_no=None, page_size=None, q=None, is_active=None, promo_group=None, promotion_type=None, fp_panel=None, promotion_id=None, request_headers:Dict={}):
-        """Retrieve a list of available promotions to apply to the cart.
+        """Retrieve a list of all created promotions for specific sales channel. It also supports efficient text search and pagination functionalities, ensuring optimized promotion listing for streamlined navigation and management.
         :param page_no :  : type integer
         :param page_size :  : type integer
         :param q :  : type string
@@ -317,7 +317,7 @@ class Cart:
         return response
     
     async def createPromotion(self, body="", request_headers:Dict={}):
-        """Generate and add a new promotion to the cart system 
+        """Creates a new promotion based on the selected promotion type. Sellers can choose from multiple supported promotion types, including percentage value, fixed amount value, bundled discount, buy X get Y items, and more, along with customizable promotion criteria to meet specific business requirements.
         """
         payload = {}
         
@@ -360,7 +360,7 @@ class Cart:
         return response
     
     async def getPromotionById(self, id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific promotion using its unique ID.
+        """Retrieve details of a specific promotion by providing its unique identifier to obtain information such as promotion type, rules, validity period and other related information.
         :param id :  : type string
         """
         payload = {}
@@ -402,7 +402,7 @@ class Cart:
         return response
     
     async def updatePromotion(self, id=None, body="", request_headers:Dict={}):
-        """Modify the details and settings of an existing promotion in the cart system.
+        """Update the details of an existing promotion by specifying its unique identifier. This includes modifying promotion attributes such as discount percentage, validity period, and associated conditions. Leveraging this functionality allows businesses to quickly adapt their promotional strategies to changing market dynamics.
         :param id :  : type string
         """
         payload = {}
@@ -448,7 +448,7 @@ class Cart:
         return response
     
     async def updatePromotionPartially(self, id=None, body="", request_headers:Dict={}):
-        """Make partial modifications to the settings of an existing promotion in the cart system.
+        """Seller can make partial adjustments of an existing promotion by specifying its unique identifier. It enables businesses to modify specific attributes of the promotion while preserving other details intact.
         :param id :  : type string
         """
         payload = {}
@@ -494,7 +494,7 @@ class Cart:
         return response
     
     async def getPromosCouponConfig(self, entity_type=None, is_hidden=None, request_headers:Dict={}):
-        """Retrieve configuration settings for promotions and coupons.
+        """Retrieve the configuration settings related to promotions and coupons for a specific seller. It provides details of the supported types of coupons and promotions along with their descriptions, examples, and related attributes.
         :param entity_type : entity_type as promotion or coupon : type string
         :param is_hidden : promo-coupon config shown or not : type boolean
         """
@@ -539,7 +539,7 @@ class Cart:
         return response
     
     async def updateCartMetaConfig(self, cart_meta_id=None, body="", request_headers:Dict={}):
-        """Modify the configuration settings for cart metadata.
+        """Modify the configuration settings for cart metadata associated with a specific sales channel. Cart meta includes configuration settings such as allowed maximum cart value, allowed minimum cart value, maximum allowed cart items, delivery charges, etc.
         :param cart_meta_id : CartMeta mongo _id for fetching single cart meta data for editing : type string
         """
         payload = {}
@@ -585,7 +585,7 @@ class Cart:
         return response
     
     async def fetchCartMetaConfig(self, request_headers:Dict={}):
-        """Fetch cart meta configuration
+        """Retrieve meta configuration settings tailored for customizing the cart experience within a specific sales channel. Cart meta includes configuration settings such as allowed maximum cart value, allowed minimum cart value, maximum allowed cart items, delivery charges, etc.
         """
         payload = {}
         
@@ -624,7 +624,7 @@ class Cart:
         return response
     
     async def createCartMetaConfig(self, body="", request_headers:Dict={}):
-        """Create new cart meta configuration
+        """Create custom meta configurations for carts associated with a specific sales channel. By specifying the company ID and application ID, seller can define unique cart settings, including preferences, rules, and constraints, tailored to their business needs.
         """
         payload = {}
         
@@ -667,7 +667,7 @@ class Cart:
         return response
     
     async def updatePriceAdjustment(self, id=None, body="", request_headers:Dict={}):
-        """Modify price adjustments for items in the cart.
+        """Modify price adjustments for specific items in the cart. By providing the seller ID, sales channel ID, and price adjustment ID, seller can apply discounts or other adjustments to the prices of cart items, facilitating dynamic pricing strategies.
         :param id :  : type string
         """
         payload = {}
@@ -713,7 +713,7 @@ class Cart:
         return response
     
     async def removePriceAdjustment(self, id=None, request_headers:Dict={}):
-        """Remove price adjustments applied to items in the cart.
+        """Remove the applied price adjustments for specific items within the cart based on unique price adjustment ID.
         :param id :  : type string
         """
         payload = {}
@@ -755,7 +755,7 @@ class Cart:
         return response
     
     async def addPriceAdjustment(self, body="", request_headers:Dict={}):
-        """Apply price adjustments to items in the cart.
+        """Create custom price adjustments for items in the cart, facilitating the application of discounts or promotions. Price adjustments can be tailored based on specific sales channel contexts, enhancing flexibility in pricing strategies.
         """
         payload = {}
         
@@ -798,7 +798,7 @@ class Cart:
         return response
     
     async def fetchAndvalidateCartItems(self, body="", request_headers:Dict={}):
-        """Retrieve and validate items currently in the cart.
+        """Retrieve cart details for a provided list of cart items and validate its contents. This ensures accuracy and completeness in cart information, including item quantities, prices, discounts, and applicable taxes.
         """
         payload = {}
         
@@ -841,7 +841,7 @@ class Cart:
         return response
     
     async def checkCartServiceability(self, body="", request_headers:Dict={}):
-        """Verify if the items in the cart are serviceable.
+        """Verify the serviceability of items in the cart at a specific pin code and ensure accurate delivery promises. System checks each item's availability and delivery feasibility, providing real-time information on serviceability and estimated delivery times.
         """
         payload = {}
         
@@ -884,7 +884,7 @@ class Cart:
         return response
     
     async def checkoutCart(self, body="", request_headers:Dict={}):
-        """Initiate the checkout process for the items in the cart.
+        """The checkout cart initiates the order creation process based on the selected address and payment method. It revalidates the cart details to ensure safe and seamless order placement.
         """
         payload = {}
         
@@ -927,7 +927,7 @@ class Cart:
         return response
     
     async def getAbandonedCart(self, page_no=None, page_size=None, from_date=None, to_date=None, anonymous_cart=None, last_id=None, sort_on=None, request_headers:Dict={}):
-        """Retrieve abandoned carts for analysis and potential recovery.
+        """Retrieve the list of abandoned carts that have been active for the specified period of time and have not yet been archived for the specific sales channel.
         :param page_no :  : type integer
         :param page_size :  : type integer
         :param from_date :  : type string
@@ -987,7 +987,7 @@ class Cart:
         return response
     
     async def getAbandonedCartDetails(self, id=None, i=None, b=None, c=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific abandoned cart.
+        """Retrieves abandoned cart details linked to a specific customer using a unique cart ID. It offers an overview of the items, quantities, prices, and other relevant information associated with the cart.
         :param id :  : type string
         :param i :  : type boolean
         :param b :  : type boolean
@@ -1038,7 +1038,7 @@ class Cart:
         return response
     
     async def addItems(self, cart_id=None, b=None, body="", request_headers:Dict={}):
-        """Add items to the shopping cart 
+        """Add product items to the customer's existing shopping cart. If there is no existing cart associated with the customer, it creates a new one and adds the items to it.
         :param cart_id : Current Cart _id : type string
         :param b :  : type boolean
         """
@@ -1087,7 +1087,7 @@ class Cart:
         return response
     
     async def updateCart(self, cart_id=None, b=None, body="", request_headers:Dict={}):
-        """Modify items and their quantities in the shopping cart.
+        """Customers can modify added product attributes such as quantity and size, as well as remove items from the cart.
         :param cart_id : Current Cart _id : type string
         :param b :  : type boolean
         """
@@ -1136,7 +1136,7 @@ class Cart:
         return response
     
     async def getCouponOptionValues(self, request_headers:Dict={}):
-        """Retrieve available values for coupon options.
+        """Retrieves the available values for coupon options used to create and update coupons.
         """
         payload = {}
         
@@ -1166,7 +1166,7 @@ class Cart:
         return response
     
     async def getCouponCodeExists(self, code=None, request_headers:Dict={}):
-        """Verify the existence of a specific coupon code.
+        """Validates the presence of a coupon code for the specified sales channel to verify whether the provided code already exists or not.
         :param code :  : type string
         """
         payload = {}
@@ -1199,7 +1199,7 @@ class Cart:
         return response
     
     async def getPromotionCodeExists(self, code=None, request_headers:Dict={}):
-        """Verify the existence of a specific promotion code.
+        """Validates the presence of a promotion code for the specified sales channel to verify whether the provided code already exists or not.
         :param code :  : type string
         """
         payload = {}
@@ -1232,7 +1232,7 @@ class Cart:
         return response
     
     async def overrideCart(self, body="", request_headers:Dict={}):
-        """Override the current cart with a new configuration.
+        """Overrides the cart's checkout process with a new provided cart items. It provides flexibility in customizing checkout flows to meet specific business requirements, enhancing the user experience and optimizing order processing workflows.
         """
         payload = {}
         
@@ -1275,7 +1275,7 @@ class Cart:
         return response
     
     async def getCartShareLink(self, body="", request_headers:Dict={}):
-        """Use this API to generate a shared cart snapshot and return a shortlink token. The link can be shared with other users for getting the same items in their cart.
+        """Generate a unique shareable link for the customer's cart for a specific sales channel. This link enables easy sharing of the cart contents with other users, facilitating collaborative shopping experiences.
         """
         payload = {}
         
@@ -1318,7 +1318,7 @@ class Cart:
         return response
     
     async def getCartSharedItems(self, token=None, request_headers:Dict={}):
-        """Retrieve the items shared with you via a cart link.
+        """Retrieve the cart items from the shared cart link based on unique token.
         :param token : Token of the shared short link : type string
         """
         payload = {}
@@ -1360,7 +1360,7 @@ class Cart:
         return response
     
     async def updateCartWithSharedItems(self, token=None, action=None, cart_id=None, request_headers:Dict={}):
-        """Modify your cart by adding shared items from a cart link.
+        """Customer can either merge or replace shared cart items with existing cart.
         :param token : Token of the shared short link : type string
         :param action : Operation to perform on the existing cart merge or replace. : type string
         :param cart_id :  : type string
@@ -1408,7 +1408,7 @@ class Cart:
         return response
     
     async def getCartList(self, from_date=None, to_date=None, filter_on=None, request_headers:Dict={}):
-        """Retrieve a list of saved shopping carts.
+        """Retrieve the list of active carts associated with a specific customer. 
         :param from_date :  : type string
         :param to_date :  : type string
         :param filter_on :  : type string
@@ -1456,7 +1456,7 @@ class Cart:
         return response
     
     async def updateCartUser(self, id=None, body="", request_headers:Dict={}):
-        """Modify user-related details for a shopping cart.
+        """Modify the cart user to a new valid customer for the provided customer ID.
         :param id :  : type string
         """
         payload = {}
@@ -1502,7 +1502,7 @@ class Cart:
         return response
     
     async def getCart(self, id=None, user_id=None, i=None, b=None, assign_card_id=None, buy_now=None, request_headers:Dict={}):
-        """Retrieve detailed information about a shopping cart.
+        """Retrieve details of a cart linked to a specific customer using either the customer's ID or a unique cart ID. It offers an overview of the items, quantities, prices, and other relevant information associated with the cart.
         :param id : The unique identifier of the cart : type string
         :param user_id : Option to fetch cart for the provided user_id. : type string
         :param i : This is a boolean value. Select `true` to retrieve all the items added in the cart. : type boolean
@@ -1559,7 +1559,7 @@ class Cart:
         return response
     
     async def platformAddItems(self, i=None, b=None, buy_now=None, id=None, body="", request_headers:Dict={}):
-        """Add items to the cart through platform integration.
+        """Add product items to the customer's existing shopping cart. If there is no existing cart associated with the customer, it creates a new one and adds the items to it.
         :param i : This is a boolean value. Select `true` to retrieve all the items added in the cart. : type boolean
         :param b : This is a boolean value. Select `true` to retrieve the price breakup of cart items. : type boolean
         :param buy_now : This is a boolen value. Select `true` to set/initialize buy now cart : type boolean
@@ -1614,7 +1614,7 @@ class Cart:
         return response
     
     async def platformUpdateCart(self, id=None, i=None, b=None, buy_now=None, body="", request_headers:Dict={}):
-        """Use this API to update items added to the cart with the help of a request object containing attributes like item_quantity and item_size. These attributes will be fetched from the following APIs operation Operation for current api call. update_item for update items. remove_item for removing items.item_id "/platform/content/v1/products/" item_size "/platform/content/v1/products/:slug/sizes/" quantity  item quantity (must be greater than or equal to 1) article_id "/content​/v1​/products​/:identifier​/sizes​/price​/" item_index item position in the cart (must be greater than or equal to 0)
+        """Customers can modify added product attributes such as quantity and size, as well as remove items from the cart.
         :param id : The unique identifier of the cart : type string
         :param i : This is a boolean value. Select `true` to retrieve all the items added in the cart. : type boolean
         :param b : This is a boolean value. Select `true` to retrieve the price breakup of cart items. : type boolean
@@ -1669,7 +1669,7 @@ class Cart:
         return response
     
     async def deleteCart(self, id=None, body="", request_headers:Dict={}):
-        """Delete a specific shopping cart from the system.
+        """Delete all items from the user's cart and resets it to its initial state, providing a clean slate for new selections.
         :param id : The unique identifier of the cart. : type string
         """
         payload = {}
@@ -1715,7 +1715,7 @@ class Cart:
         return response
     
     async def getItemCount(self, id=None, buy_now=None, request_headers:Dict={}):
-        """Retrieve the total number of items in a shopping cart.
+        """Retrieve the total count of items currently present in the customer's cart.
         :param id : The unique identifier of the cart. : type string
         :param buy_now : Boolean value to get buy_now cart. : type boolean
         """
@@ -1760,7 +1760,7 @@ class Cart:
         return response
     
     async def getAppCoupons(self, id=None, buy_now=None, slug=None, store_id=None, request_headers:Dict={}):
-        """Retrieve coupons specific to the mobile app.
+        """Retrieve a list of all available coupons that customer can apply to their carts. It provides details about each coupon, including its code, discount amount, and applicable conditions.
         :param id :  : type string
         :param buy_now :  : type boolean
         :param slug :  : type string
@@ -1811,7 +1811,8 @@ class Cart:
         return response
     
     async def applyCoupon(self, i=None, b=None, p=None, id=None, buy_now=None, body="", request_headers:Dict={}):
-        """Apply a selected coupon to the items in the shopping cart.
+        """
+Apply a coupon code to the customer's cart to trigger discounts on eligible items
         :param i :  : type boolean
         :param b :  : type boolean
         :param p :  : type boolean
@@ -1869,7 +1870,7 @@ class Cart:
         return response
     
     async def removeCoupon(self, uid=None, buy_now=None, request_headers:Dict={}):
-        """Remove a coupon from the items in the shopping cart.
+        """Remove an applied coupon from the customer's cart, thereby removing the associated discount from the cart total.
         :param uid :  : type string
         :param buy_now :  : type boolean
         """
@@ -1914,7 +1915,7 @@ class Cart:
         return response
     
     async def getAddresses(self, cart_id=None, buy_now=None, mobile_no=None, checkout_mode=None, tags=None, is_default=None, user_id=None, request_headers:Dict={}):
-        """Use this API to get all the addresses associated with an account. If successful, returns a Address resource in the response body specified in GetAddressesResponse.attibutes listed below are optional uid address_id  mobile_no checkout_mode tags default
+        """Retrieves a list of all addresses saved by the customer, simplifying the checkout process by offering pre-saved address options for delivery.
         :param cart_id :  : type string
         :param buy_now :  : type boolean
         :param mobile_no :  : type string
@@ -1974,7 +1975,7 @@ class Cart:
         return response
     
     async def addAddress(self, body="", request_headers:Dict={}):
-        """Create and add a new user address for cart checkout.
+        """Customers can add a new address to their cart to save details such as name, email, contact information, and address.
         """
         payload = {}
         
@@ -2017,7 +2018,7 @@ class Cart:
         return response
     
     async def getAddressById(self, id=None, cart_id=None, buy_now=None, mobile_no=None, checkout_mode=None, tags=None, is_default=None, user_id=None, request_headers:Dict={}):
-        """Use this API to get an addresses using its ID. If successful, returns a Address resource in the response body specified in `PlatformAddress`. Attibutes listed below are optional mobile_no checkout_mode tags default
+        """Retrieve a specific customer address stored in the system by providing its unique identifier. This API provides detailed information about the address, including the recipient's name, address, city, postal code, and other relevant details.
         :param id :  : type string
         :param cart_id :  : type string
         :param buy_now :  : type boolean
@@ -2080,7 +2081,7 @@ class Cart:
         return response
     
     async def updateAddress(self, id=None, body="", request_headers:Dict={}):
-        """Modify the shipping address for an order.
+        """Update the user address
         :param id : ID allotted to the selected address : type string
         """
         payload = {}
@@ -2126,7 +2127,7 @@ class Cart:
         return response
     
     async def removeAddress(self, id=None, user_id=None, request_headers:Dict={}):
-        """Delete an existing user address from the system.
+        """Remove an existing customer address from the system.
         :param id : ID allotted to the selected address : type string
         :param user_id : Option to delete address for the provided user_id. : type string
         """
@@ -2171,7 +2172,7 @@ class Cart:
         return response
     
     async def selectAddress(self, cart_id=None, buy_now=None, i=None, b=None, body="", request_headers:Dict={}):
-        """Select Address from all addresses associated with the account in order to ship the cart items to that address, otherwise default address will be selected implicitly. See `PlatformSelectCartAddressRequest` in schema of request body for the list of attributes needed to select Address from account. On successful request, this API returns a Cart object. Below address attributes are required. address_id billing_address_id uid
+        """Select an address from the saved customer addresses and validates the availability of items in the cart. Additionally, it verifies and updates the delivery promise based on the selected address.
         :param cart_id :  : type string
         :param buy_now :  : type boolean
         :param i :  : type boolean
@@ -2289,7 +2290,7 @@ class Cart:
         return response
     
     async def updateShipments(self, i=None, p=None, id=None, address_id=None, area_code=None, order_type=None, body="", request_headers:Dict={}):
-        """Modify the details and settings of cart shipments.
+        """Update the quantity or delivery type of the shipments. Customers can switch the order type from Home Delivery to Pick At Store and vice versa.
         :param i : This is a boolean value. Select `true` to retrieve all the items added in the cart. : type boolean
         :param p : This is a boolean value. Select `true` for getting a payment option in response. : type boolean
         :param id : The unique identifier of the cart : type string
@@ -2350,7 +2351,7 @@ class Cart:
         return response
     
     async def updateCartMeta(self, id=None, buy_now=None, body="", request_headers:Dict={}):
-        """Modify the metadata associated with the shopping cart.
+        """Add or modify metadata associated with a cart, which includes customer preferences, delivery instructions, or any special requirements related to the cart items.
         :param id :  : type string
         :param buy_now :  : type boolean
         """
@@ -2399,7 +2400,7 @@ class Cart:
         return response
     
     async def platformCheckoutCart(self, id=None, body="", request_headers:Dict={}):
-        """Initiate cart checkout through platform-specific integration.
+        """The checkout cart initiates the order creation process based on the selected address and payment method. It revalidates the cart details to ensure safe and seamless order placement.
         :param id : The unique identifier of the cart : type string
         """
         payload = {}
@@ -2445,7 +2446,7 @@ class Cart:
         return response
     
     async def getAvailableDeliveryModes(self, area_code=None, id=None, request_headers:Dict={}):
-        """Retrieve a list of available delivery modes for cart checkout.
+        """Retrieve a list of delivery modes (home delivery/store pickup) along with a list of available pickup stores for a given cart at a specified PIN Code.
         :param area_code :  : type string
         :param id :  : type string
         """
@@ -2490,7 +2491,7 @@ class Cart:
         return response
     
     async def getStoreAddressByUid(self, store_uid=None, request_headers:Dict={}):
-        """Retrieve the store address using a unique identifier (UID).
+        """Retrieve store details by entering the unique identifier of the pickup stores. Store details include the seller's name, contact information such as email address or phone number and business address.
         :param store_uid :  : type integer
         """
         payload = {}
@@ -2532,7 +2533,7 @@ class Cart:
         return response
     
     async def selectPaymentMode(self, id=None, buy_now=None, order_type=None, body="", request_headers:Dict={}):
-        """Choose a payment mode for cart checkout.
+        """Customers can select a preferred payment mode from available options during the cart checkout process to securely and efficiently complete their transaction.
         :param id :  : type string
         :param buy_now :  : type boolean
         :param order_type : The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. : type string
@@ -2584,7 +2585,7 @@ class Cart:
         return response
     
     async def validateCouponForPayment(self, id=None, buy_now=None, address_id=None, payment_mode=None, payment_identifier=None, aggregator_name=None, merchant_code=None, request_headers:Dict={}):
-        """ Verify the validity of a coupon code for the payment process.
+        """Validates the applicability of a coupon code for the selected payment mode for the existing cart. This ensures the coupon's validity before proceeding with the payment process, enhancing user experience and preventing potential errors during transactions.
         :param id :  : type string
         :param buy_now :  : type boolean
         :param address_id :  : type string
@@ -2644,7 +2645,7 @@ class Cart:
         return response
     
     async def platformCheckoutCartV2(self, id=None, body="", request_headers:Dict={}):
-        """Initiate cart checkout through an updated platform-specific integration.
+        """Checkout process that supports multiple MOP(mode of payment).
         :param id : The unique identifier of the cart : type string
         """
         payload = {}
@@ -2690,7 +2691,7 @@ class Cart:
         return response
     
     async def selectPaymentModeV2(self, id=None, buy_now=None, order_type=None, body="", request_headers:Dict={}):
-        """Choose a payment mode for cart checkout in the updated platform integration.
+        """Selection of payment mode that supports multiple MOP(mode of payment).
         :param id :  : type string
         :param buy_now :  : type boolean
         :param order_type : The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. : type string

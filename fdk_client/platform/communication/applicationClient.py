@@ -14,7 +14,7 @@ class Communication:
 
     
     async def getAppProviders(self, request_headers:Dict={}):
-        """Retrieve a list of providers associated with the platform.
+        """Retrieve a list of providers associated with the sales channel.
         """
         payload = {}
         
@@ -53,7 +53,7 @@ class Communication:
         return response
     
     async def updateAppProviders(self, body="", request_headers:Dict={}):
-        """Modify provider information for the platform.
+        """Modify provider configuration using provider object id .
         """
         payload = {}
         
@@ -96,7 +96,7 @@ class Communication:
         return response
     
     async def getGlobalProviders(self, request_headers:Dict={}):
-        """Retrieve a list of global communication providers.
+        """Retrieve a list of global communication providers associated with the sales channel..
         """
         payload = {}
         
@@ -135,7 +135,7 @@ class Communication:
         return response
     
     async def getEmailProviders(self, page_no=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
-        """Retrieve a list of email communication providers.
+        """Retrieves a list of all email communication providers associated with the sales channel..
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
@@ -186,7 +186,7 @@ class Communication:
         return response
     
     async def createEmailProvider(self, body="", request_headers:Dict={}):
-        """Generate and add a new email communication provider.
+        """Creates a new email communication provider.
         """
         payload = {}
         
@@ -229,7 +229,7 @@ class Communication:
         return response
     
     async def getEmailProviderById(self, id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific email communication provider.
+        """Retrieves detailed information about a specific email communication provider.
         :param id : Email provider id : type string
         """
         payload = {}
@@ -271,7 +271,7 @@ class Communication:
         return response
     
     async def updateEmailProviderById(self, id=None, body="", request_headers:Dict={}):
-        """Modify the settings of a specific email communication provider.
+        """Modifys the configurations of a specific email communication provider.
         :param id : Email provider id : type string
         """
         payload = {}
@@ -317,7 +317,7 @@ class Communication:
         return response
     
     async def deleteEmailProviderById(self, id=None, request_headers:Dict={}):
-        """Remove a specific email communication provider from the platform.
+        """Removes a specific email communication provider from the platform permenantly.
         :param id : Email provider id : type string
         """
         payload = {}
@@ -359,7 +359,7 @@ class Communication:
         return response
     
     async def getSmsProviders(self, page_no=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
-        """Retrieve a list of SMS communication providers.
+        """Retrieves a list of SMS communication providers.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
@@ -401,7 +401,7 @@ class Communication:
         return response
     
     async def createSmsProvider(self, body="", request_headers:Dict={}):
-        """Add a new SMS communication provider.
+        """Creates a new SMS communication provider.
         """
         payload = {}
         
@@ -435,7 +435,7 @@ class Communication:
         return response
     
     async def getDefaultSmsProviders(self, request_headers:Dict={}):
-        """Retrieve the default SMS communication providers.
+        """Retrieve all the default SMS communication providers.
         """
         payload = {}
         
@@ -498,7 +498,7 @@ class Communication:
         return response
     
     async def updateSmsProviderById(self, id=None, body="", request_headers:Dict={}):
-        """Modify specific SMS communication provider.
+        """Modifys the configurations of a specific SMS communication provider.
         :param id : Sms provider id : type string
         """
         payload = {}
@@ -535,7 +535,7 @@ class Communication:
         return response
     
     async def deleteSmsProviderById(self, id=None, request_headers:Dict={}):
-        """Remove a specific SMS communication provider.
+        """Removes a specific SMS communication provider from the platform permenantly.
         :param id : Sms provider id : type string
         """
         payload = {}
@@ -577,7 +577,7 @@ class Communication:
         return response
     
     async def getCampaigns(self, query=None, page_no=None, page_size=None, sort=None, request_headers:Dict={}):
-        """Retrieve a list of communication campaigns.
+        """Retrieves a list of communication campaigns.
         :param query : To search based on plain text : type object
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
@@ -628,7 +628,7 @@ class Communication:
         return response
     
     async def createCampaign(self, body="", request_headers:Dict={}):
-        """Add a new communication campaign.
+        """Creates a new communication campaign.
         """
         payload = {}
         
@@ -671,7 +671,7 @@ class Communication:
         return response
     
     async def getCampaignById(self, id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific communication campaign.
+        """Retrieves detailed information about a specific communication campaign.
         :param id : Campaign id : type string
         """
         payload = {}
@@ -713,7 +713,7 @@ class Communication:
         return response
     
     async def updateCampaignById(self, id=None, body="", request_headers:Dict={}):
-        """Modify the settings of a specific communication campaign.
+        """Modify the configuration of a specific communication campaign.
         :param id : Campaign id : type string
         """
         payload = {}
@@ -759,7 +759,7 @@ class Communication:
         return response
     
     async def getStatsOfCampaignById(self, id=None, request_headers:Dict={}):
-        """Retrieve statistical data for a specific communication campaign.
+        """Retrieves statistical data for a specific a communication campaign.
         :param id : Campaign id : type string
         """
         payload = {}
@@ -801,7 +801,7 @@ class Communication:
         return response
     
     async def getBigQueryRowCountById(self, id=None, request_headers:Dict={}):
-        """Retrieve big query row count by id
+        """Retrieves big query row count by id
         :param id : Audience id : type string
         """
         payload = {}
@@ -834,7 +834,7 @@ class Communication:
         return response
     
     async def createBigQueryRowCount(self, request_headers:Dict={}):
-        """Create big query row count
+        """Creates big query row count
         """
         payload = {}
         
@@ -864,7 +864,7 @@ class Communication:
         return response
     
     async def getBigQueryHeadersById(self, id=None, request_headers:Dict={}):
-        """Retrieve header information from BigQuery for a specific campaign.
+        """Retrieves header information from BigQuery.
         :param id : Audience id : type string
         """
         payload = {}
@@ -897,7 +897,7 @@ class Communication:
         return response
     
     async def createBigQueryNCount(self, request_headers:Dict={}):
-        """Create big query n count
+        """Creates big query n count
         """
         payload = {}
         
@@ -927,7 +927,7 @@ class Communication:
         return response
     
     async def createBigQueryHeaders(self, request_headers:Dict={}):
-        """Create big query headers
+        """Create BigQuery headers
         """
         payload = {}
         
@@ -957,7 +957,7 @@ class Communication:
         return response
     
     async def getSystemAudiences(self, request_headers:Dict={}):
-        """Retrieve system-defined audiences for communication.
+        """Retrieves a list of  system-defined audiences for communication.
         """
         payload = {}
         
@@ -987,7 +987,7 @@ class Communication:
         return response
     
     async def getAudiences(self, page_no=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
-        """Audience is used to import CSV files containing emails, phone numbers, and other variables in order to populate email/SMS templates for bulk delivery via a Campaign.
+        """Retrieves a list of all the audiences.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
@@ -1038,7 +1038,7 @@ class Communication:
         return response
     
     async def createAudience(self, body="", request_headers:Dict={}):
-        """Add audience which is used to import CSV files containing emails, phone numbers, and other variables in order to populate email/SMS templates for bulk delivery via a Campaign. 
+        """Creates a new email audience.
         """
         payload = {}
         
@@ -1081,7 +1081,7 @@ class Communication:
         return response
     
     async def getAudienceById(self, id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific custom communication audience.
+        """Retrieves detailed information about an specific audience.
         :param id : Audience id : type string
         """
         payload = {}
@@ -1123,7 +1123,7 @@ class Communication:
         return response
     
     async def updateAudienceById(self, id=None, body="", request_headers:Dict={}):
-        """Modify the settings of a specific custom communication audience.
+        """Modify the configuration of a specific audience.
         :param id : Audience id : type string
         """
         payload = {}
@@ -1169,7 +1169,7 @@ class Communication:
         return response
     
     async def deleteAudienceById(self, id=None, body="", request_headers:Dict={}):
-        """Remove a specific custom communication audience.
+        """Remove a specific audience permenantly.
         :param id : Audience id : type string
         """
         payload = {}
@@ -1215,7 +1215,7 @@ class Communication:
         return response
     
     async def getDummyDatasources(self, request_headers:Dict={}):
-        """Retrieve a list of dummy data sources for testing.
+        """Retrieve a list of dummy data sources.
         """
         payload = {}
         
@@ -1287,7 +1287,7 @@ class Communication:
         return response
     
     async def getNSampleRecordsFromCsvByGet(self, request_headers:Dict={}):
-        """Retrieve a specified number of sample records from a CSV data source using a GET request.
+        """Retrieve a specified number of sample records from a CSV data source.
         """
         payload = {}
         
@@ -1369,7 +1369,7 @@ class Communication:
         return response
     
     async def getEmailTemplates(self, page_no=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
-        """Retrieve a list of available email communication templates.
+        """Retrieves a list of available email communication templates.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
@@ -1420,7 +1420,7 @@ class Communication:
         return response
     
     async def createEmailTemplate(self, body="", request_headers:Dict={}):
-        """Generate and add a new email communication template.
+        """Creates a new email communication template.
         """
         payload = {}
         
@@ -1463,7 +1463,7 @@ class Communication:
         return response
     
     async def getSystemEmailTemplates(self, request_headers:Dict={}):
-        """Retrieve system-defined email communication templates.
+        """Retrieves system-defined email communication templates.
         """
         payload = {}
         
@@ -1502,7 +1502,7 @@ class Communication:
         return response
     
     async def getEmailTemplateById(self, id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific email communication template.
+        """Retrieves detailed information about a specific email communication template.
         :param id : Email template id : type string
         """
         payload = {}
@@ -1544,7 +1544,7 @@ class Communication:
         return response
     
     async def updateEmailTemplateById(self, id=None, body="", request_headers:Dict={}):
-        """Modify the content and settings of a specific email communication template.
+        """Modifys the content and settings of a specific email communication template.
         :param id : Email template id : type string
         """
         payload = {}
@@ -1590,7 +1590,7 @@ class Communication:
         return response
     
     async def deleteEmailTemplateById(self, id=None, request_headers:Dict={}):
-        """Email templates are predefined formats linked to various events for delivering messages to users. Remove a specific email communication template by its ID.
+        """Removes a specific email communication template from the platform permenantly.
         :param id : Email template id : type string
         """
         payload = {}
@@ -1632,7 +1632,7 @@ class Communication:
         return response
     
     async def getSubscribedEmailTemplates(self, page_no=None, page_size=None, query=None, request_headers:Dict={}):
-        """Retrieve email communication templates that are subscribed to.
+        """Retrieves a list of email communication templates that are subscribed to an event.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param query : To search based on plain text : type object
@@ -1680,7 +1680,7 @@ class Communication:
         return response
     
     async def getSmsTemplates(self, page_no=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
-        """Retrieve a list of available SMS communication templates.
+        """Retrieve a list of all SMS communication templates.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
@@ -1731,7 +1731,7 @@ class Communication:
         return response
     
     async def createSmsTemplate(self, body="", request_headers:Dict={}):
-        """Add a new SMS communication template.
+        """Creates a new SMS communication template.
         """
         payload = {}
         
@@ -1774,7 +1774,7 @@ class Communication:
         return response
     
     async def getSystemSmsTemplates(self, request_headers:Dict={}):
-        """Retrieve system-defined SMS communication templates.
+        """Retrieves system-defined SMS communication templates.
         """
         payload = {}
         
@@ -1804,7 +1804,7 @@ class Communication:
         return response
     
     async def getSmsTemplateById(self, id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific SMS communication template.
+        """Retrieves detailed information about a specific SMS communication template.
         :param id : Sms template id : type string
         """
         payload = {}
@@ -1846,7 +1846,7 @@ class Communication:
         return response
     
     async def updateSmsTemplateById(self, id=None, body="", request_headers:Dict={}):
-        """Modify the content and settings of a specific SMS communication template.
+        """Modifys the content and settings of a specific SMS communication template.
         :param id : Sms template id : type string
         """
         payload = {}
@@ -1892,7 +1892,7 @@ class Communication:
         return response
     
     async def deleteSmsTemplateById(self, id=None, request_headers:Dict={}):
-        """Remove a specific SMS communication template.
+        """Removes a specific SMS communication template from the platform permenantly.
         :param id : Sms template id : type string
         """
         payload = {}
@@ -1934,7 +1934,7 @@ class Communication:
         return response
     
     async def getSubscribedSmsTemplates(self, page_no=None, page_size=None, query=None, request_headers:Dict={}):
-        """Retrieve SMS communication templates that are subscribed to.
+        """Retrieve a list of SMS communication templates that are subscribed to an event.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param query : To search based on plain text : type object
@@ -1982,7 +1982,7 @@ class Communication:
         return response
     
     async def sendCommunicationSynchronously(self, body="", request_headers:Dict={}):
-        """Initiate and send communication in real-time.
+        """Sends real-time communications to sellers with immediate delivery.
         """
         payload = {}
         
@@ -2025,7 +2025,7 @@ class Communication:
         return response
     
     async def sendCommunicationAsynchronously(self, body="", request_headers:Dict={}):
-        """Initiate and send communication with the option for asynchronous processing.
+        """Sends communications to sellers with deffered delivery.
         """
         payload = {}
         
@@ -2068,7 +2068,7 @@ class Communication:
         return response
     
     async def getEventSubscriptions(self, page_no=None, page_size=None, populate=None, request_headers:Dict={}):
-        """Retrieve a list of event subscriptions related to communication.
+        """Retrieves a list of all event subscriptions.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param populate : Populate Fields : type string
@@ -2116,7 +2116,7 @@ class Communication:
         return response
     
     async def createEventSubscriptions(self, body="", request_headers:Dict={}):
-        """Create event subscriptions
+        """Creates a new event subscription.
         """
         payload = {}
         
@@ -2159,7 +2159,7 @@ class Communication:
         return response
     
     async def getEventSubscriptionsById(self, id=None, populate=None, request_headers:Dict={}):
-        """Get event subscriptions by id
+        """Retrieves detailed information about a specific event subscription.
         :param id : Event subscription id : type string
         :param populate : Populate Fields : type string
         """
@@ -2204,7 +2204,7 @@ class Communication:
         return response
     
     async def editEventSubscriptions(self, id=None, body="", request_headers:Dict={}):
-        """Create event subscriptions
+        """Modifys the configuration and settings of a specific event subscription.
         :param id : Event subscription id : type string
         """
         payload = {}
@@ -2250,7 +2250,7 @@ class Communication:
         return response
     
     async def deleteEventSubscriptionsById(self, id=None, request_headers:Dict={}):
-        """Create event subscriptions
+        """Removes a specific event subscription from the platform permenantly.
         :param id : Event subscription id : type string
         """
         payload = {}
@@ -2292,7 +2292,7 @@ class Communication:
         return response
     
     async def createEventSubscriptionsByBulk(self, body="", request_headers:Dict={}):
-        """Create event subscriptions by bulk
+        """Creates a new event subscription in bulk.
         """
         payload = {}
         
@@ -2326,7 +2326,7 @@ class Communication:
         return response
     
     async def getGlobalVariables(self, request_headers:Dict={}):
-        """Retrieve global variables used in communication.
+        """Retrieves a list of communication global variables.
         """
         payload = {}
         
@@ -2365,7 +2365,7 @@ class Communication:
         return response
     
     async def postGlobalVariables(self, body="", request_headers:Dict={}):
-        """Update and post global variables for communication.
+        """Updates and creates communication global variables.
         """
         payload = {}
         
@@ -2408,7 +2408,7 @@ class Communication:
         return response
     
     async def getJobs(self, page_no=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
-        """Retrieve a list of communication jobs.
+        """Retrieves a list of campaign jobs.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
@@ -2459,7 +2459,7 @@ class Communication:
         return response
     
     async def createJobs(self, body="", request_headers:Dict={}):
-        """Create jobs
+        """Creates a new campaign  job.
         """
         payload = {}
         
@@ -2502,7 +2502,7 @@ class Communication:
         return response
     
     async def triggerCampaignJob(self, body="", request_headers:Dict={}):
-        """Initiate a job to execute a communication campaign.
+        """Initiates a job to execute a communication campaign.
         """
         payload = {}
         
@@ -2545,7 +2545,7 @@ class Communication:
         return response
     
     async def getJobLogs(self, page_no=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
-        """Retrieve logs and details related to communication jobs.
+        """Retrieve logs and details related to campaign jobs.
         :param page_no : Current page no : type integer
         :param page_size : Current request items count : type integer
         :param sort : To sort based on created_at : type object
@@ -2596,7 +2596,7 @@ class Communication:
         return response
     
     async def getCommunicationLogs(self, page_id=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
-        """Retrieve logs and records of communication activities.
+        """Retrieve a lsit of logs and records of communication activities.
         :param page_id : Current page no : type string
         :param page_size : Current request items count : type integer
         :param sort : To sort based on _id : type object
@@ -2647,7 +2647,7 @@ class Communication:
         return response
     
     async def sendOtp(self, body="", request_headers:Dict={}):
-        """Send a one-time password (OTP) for authentication or verification.
+        """Sends a one-time password (OTP) for authentication or verification.
         """
         payload = {}
         
@@ -2690,7 +2690,7 @@ class Communication:
         return response
     
     async def verfiyOtp(self, body="", request_headers:Dict={}):
-        """Verify the one-time password (OTP) for authentication or verification.
+        """Verifies the one-time password (OTP) for authentication or verification.
         """
         payload = {}
         
@@ -2733,7 +2733,7 @@ class Communication:
         return response
     
     async def getOtpConfiguration(self, request_headers:Dict={}):
-        """Get otp-configuration
+        """Retrieves all configurations related to OTP.
         """
         payload = {}
         
@@ -2772,7 +2772,7 @@ class Communication:
         return response
     
     async def updateOtpConfiguration(self, request_headers:Dict={}):
-        """Update otp-configuration
+        """Updates all configurations related to OTP.
         """
         payload = {}
         

@@ -13,7 +13,7 @@ class Lead:
 
     
     async def getPlatformTickets(self, items=None, filters=None, q=None, status=None, priority=None, category=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve a list of tickets created within the platform at company level
+        """List all tickets created within the platform at company level
         :param items : Decides that the reponse will contain the list of tickets : type boolean
         :param filters : Decides that the reponse will contain the ticket filters : type boolean
         :param q : Search through ticket titles and description : type string
@@ -119,7 +119,7 @@ class Lead:
         return response
     
     async def getPlatformTicket(self, id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific ticket which is raised at company level
+        """Get detailed information about a specific ticket which is raised at company level
         :param id : Tiket ID of the ticket to be fetched : type string
         """
         payload = {}
@@ -253,7 +253,7 @@ class Lead:
         return response
     
     async def getPlatformTicketHistory(self, id=None, request_headers:Dict={}):
-        """Retrieve a list of history records for a company level ticket.
+        """List history records for a company level ticket.
         :param id : Ticket ID for which history is to be fetched : type string
         """
         payload = {}
@@ -295,7 +295,7 @@ class Lead:
         return response
     
     async def getFeedbacks(self, id=None, request_headers:Dict={}):
-        """Retrieve feedback information related to a ticket.
+        """Get feedback information related to a ticket.
         :param id : Ticket ID for which feedbacks are to be fetched : type string
         """
         payload = {}
@@ -383,7 +383,7 @@ class Lead:
         return response
     
     async def getTokenForPlatformVideoRoom(self, unique_name=None, request_headers:Dict={}):
-        """Retrieve an access token for a platform video room.
+        """Get an access token for a platform video room.
         :param unique_name : Unique name of video room : type string
         """
         payload = {}
@@ -425,7 +425,7 @@ class Lead:
         return response
     
     async def getPlatformVideoParticipants(self, unique_name=None, request_headers:Dict={}):
-        """Retrieve a list of participants in a platform video room.
+        """Get a list of participants in a platform video room
         :param unique_name : Unique name of Video Room : type string
         """
         payload = {}
@@ -467,7 +467,7 @@ class Lead:
         return response
     
     async def getGeneralConfig(self, request_headers:Dict={}):
-        """Retrieve general configuration settings related to support system for company tickets
+        """Get general configuration settings related to support system for company tickets
         """
         payload = {}
         

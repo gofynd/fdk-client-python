@@ -401,7 +401,7 @@ class Payment:
         return response
     
     async def verifyIfscCode(self, ifsc_code=None, request_headers:Dict={}):
-        """Check the authenticity of an IFSC code.
+        """Checks the validity of the provided IFSC code and returns bank details if valid.
         :param ifsc_code :  : type string
         """
         payload = {}

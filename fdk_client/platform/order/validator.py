@@ -41,14 +41,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
-        
-        
-        
-    
-    
-        
     
     
         
@@ -417,23 +409,6 @@ class OrderValidator:
         state = fields.Str(required=False)
         
         country = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class click2Call(BaseSchema):
-        
-        
-        caller = fields.Str(required=False)
-        
-        receiver = fields.Str(required=False)
-        
-        bag_id = fields.Str(required=False)
-        
-        caller_id = fields.Str(required=False)
-        
-        method = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
          

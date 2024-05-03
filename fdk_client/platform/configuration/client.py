@@ -13,7 +13,7 @@ class Configuration:
 
     
     async def createApplication(self, body="", request_headers:Dict={}):
-        """Generate and add a new application. Applications are sales channel websites which can be configured, personalized and customized. Use this API to create a new application in the current company.
+        """Generate and add a new sales channel. sales channels are sales channel websites which can be configured, personalized and customized. Use this API to create a new sales channel in the current company.
         """
         payload = {}
         
@@ -56,7 +56,7 @@ class Configuration:
         return response
     
     async def getApplications(self, page_no=None, page_size=None, q=None, request_headers:Dict={}):
-        """Retrieve a list of available applications. Applications are sales channel websites which can be configured, personalized and customised. Use this API to fetch a list of applications created within a company.
+        """Retrieve a list of available sales channels. sales channels are sales channel websites which can be configured, personalized and customised. Use this API to fetch a list of sales channels created within a company.
         :param page_no :  : type integer
         :param page_size :  : type integer
         :param q : Search param by name or domain : type string
@@ -104,7 +104,7 @@ class Configuration:
         return response
     
     async def getCurrencies(self, request_headers:Dict={}):
-        """Retrieve a list of available currencies. Use this API to get a list of currencies allowed in the company. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
+        """Retrieve a list of available currencies.
         """
         payload = {}
         
@@ -143,7 +143,7 @@ class Configuration:
         return response
     
     async def getDomainAvailibility(self, body="", request_headers:Dict={}):
-        """Check the availability of a specific domain. Use this API to check the domain availability before linking it to application. Also sends domain suggestions that are similar to the queried domain. Note - Custom domain search is currently powered by GoDaddy provider.
+        """Check the availability of a specific domain. Use this API to check the domain availability before linking it to sales channel. Also sends domain suggestions that are similar to the queried domain. Note - Custom domain search is currently powered by GoDaddy provider.
         """
         payload = {}
         
@@ -228,7 +228,7 @@ class Configuration:
         return response
     
     async def getAvailableOptIns(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve a list of available opt-ins.  Retrieve a list of all available integrations in a company. 
+        """Retrieve a list of available opt-ins.  Retrieve a list of all available integrations in a company.
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -572,7 +572,7 @@ class Configuration:
         return response
     
     async def getBrandsByCompany(self, q=None, request_headers:Dict={}):
-        """Retrieve all the brands added in a company. Get all the brand names, along with URLs of their logo, banner, and portrait image.
+        """Retrieve all the brands added in a company. Get all the brand names, along with URLs of their logo, banner, and portrait image. can be searched on brand_name.
         :param q : Search text for brand name : type string
         """
         payload = {}
@@ -614,7 +614,7 @@ class Configuration:
         return response
     
     async def getCompanyByBrands(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Retrieve companies associated with specific brands. Retrieve a list of companies by the brands they deal.
+        """Retrieve a paginated list of companies associated with specific brands. Can be searched using the brand ID and company name
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -663,7 +663,7 @@ class Configuration:
         return response
     
     async def getStoreByBrands(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Retrieve stores associated with specific brands. Retrieve a list of selling locations (stores) by the brands they deal. Store has information about store name, store type, store code, store address, and company detail.
+        """Retrieve stores associated with specific brands. Retrieve a list of selling locations (stores) by the brands they deal. Store has information about store name, store type, store code, store address, and company detail. filtering can be done on brand id and brand names
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -712,7 +712,7 @@ class Configuration:
         return response
     
     async def getOtherSellerApplications(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve applications from other sellers. Retrieve all other seller applications that were not created within the current company. but have opted for the current company's inventory.
+        """Retrieve sales channels of  other sellers. Retrieve all other seller sales channels that were not created within the current company. but have opted for the current company's inventory.
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -757,7 +757,7 @@ class Configuration:
         return response
     
     async def getOtherSellerApplicationById(self, id=None, request_headers:Dict={}):
-        """Retrieve details of a seller application that was not created within the current company. but has opted for the current company's inventory
+        """Retrieve details of a seller sales channel that was not created within the current company but has opted for the current company's inventory and searched via the sales channel ID of another sales channel
         :param id : Application Id : type string
         """
         payload = {}
@@ -799,7 +799,7 @@ class Configuration:
         return response
     
     async def optOutFromApplication(self, id=None, body="", request_headers:Dict={}):
-        """Choose to opt-out your company or store from other seller application. The specific seller application will no longer fetch inventory from your company or store.
+        """This API allows businesses to opt out of sharing their inventory with external seller sales channels. By using this API, companies or stores can prevent specific seller sales channels from fetching their inventory data. This feature is useful for businesses that want to control who  can access their product listings and other inventory information. It helps maintain privacy and control over data distribution, ensuring that sensitive information is only shared with authorized partners.
         :param id : Alphanumeric ID allotted to an application (sales channel website) created within a business account. : type string
         """
         payload = {}

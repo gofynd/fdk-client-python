@@ -13,7 +13,7 @@ class Communication:
 
     
     async def getSystemNotifications(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve system notifications related to communication.
+        """Retrieves a list of system notifications.
         :param page_no :  : type integer
         :param page_size :  : type integer
         """

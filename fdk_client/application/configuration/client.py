@@ -41,7 +41,7 @@ class Configuration:
         self._urls.update(urls)
     
     async def getApplication(self, body="", request_headers:Dict={}):
-        """Retrieve the current sales channel details which includes configurations that indicate the status of the website, domain, ID, tokens, images, etc.
+        """Retrieve details of the current sales channel.
         """
         payload = {}
         
@@ -82,7 +82,7 @@ class Configuration:
         return response
     
     async def getOwnerInfo(self, body="", request_headers:Dict={}):
-        """Retrieve the current sales channel details which includes channel name, description, banner, logo, favicon, domain details, etc. Also retrieves the seller and owner information such as address, email address, and phone number.
+        """Retrieve details of the sales channel owner.
         """
         payload = {}
         
@@ -123,7 +123,7 @@ class Configuration:
         return response
     
     async def getBasicDetails(self, body="", request_headers:Dict={}):
-        """Retrieve only the basic details of the application which includes channel name, description, banner, logo, favicon, domain details, etc.
+        """Retrieve basic details of the sales channel.
         """
         payload = {}
         
@@ -164,7 +164,7 @@ class Configuration:
         return response
     
     async def getIntegrationTokens(self, body="", request_headers:Dict={}):
-        """Retrieve the tokens used while integrating Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map and Facebook.
+        """Retrieve tools integration token of the sales channel. For ex- Firebase, MoEngage, Segment, GTM, Freshchat, Safetynet, Google Map and Facebook.
         """
         payload = {}
         
@@ -205,7 +205,7 @@ class Configuration:
         return response
     
     async def getOrderingStores(self, page_no=None, page_size=None, q=None, body="", request_headers:Dict={}):
-        """Retrieve the details of all the deployment stores (the selling locations where the application will be utilized for placing orders).
+        """Retrieve details of all the deployment store locations where the sales channel will be used for order placement.
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         :param q : Store code or name of the ordering store. : type string
@@ -255,7 +255,7 @@ class Configuration:
         return response
     
     async def getStoreDetailById(self, store_id=None, body="", request_headers:Dict={}):
-        """Retrieve the details of given stores uid (the selling locations where the application will be utilized for placing orders). 
+        """Retrieve detail of a selling location (store) by it's Id.
         :param store_id : Store uid : type integer
         """
         payload = {}
@@ -299,7 +299,7 @@ class Configuration:
         return response
     
     async def getFeatures(self, body="", request_headers:Dict={}):
-        """Retrieve the configuration of features such as product detail, landing page, options in the login/registration screen, communication opt-in, cart options and many more.
+        """Retrieve configuration of the features of the sales channel.
         """
         payload = {}
         
@@ -340,7 +340,7 @@ class Configuration:
         return response
     
     async def getContactInfo(self, body="", request_headers:Dict={}):
-        """Retrieve information about the social links, address and contact information of the company/seller/brand operating the application.
+        """Retrieve contact details of the sales channel.
         """
         payload = {}
         
@@ -381,7 +381,7 @@ class Configuration:
         return response
     
     async def getCurrencies(self, body="", request_headers:Dict={}):
-        """Retrieve a list of currencies available. Also get the name, code, symbol, and the decimal digits of the currencies. 
+        """Retrieve a list of available currencies.
         """
         payload = {}
         
@@ -422,7 +422,7 @@ class Configuration:
         return response
     
     async def getCurrencyById(self, id=None, body="", request_headers:Dict={}):
-        """Retrieve details of a specific currency using its ID. 
+        """Retrieve details of the currency.
         :param id : Object ID assigned to the currency : type string
         """
         payload = {}
@@ -466,7 +466,7 @@ class Configuration:
         return response
     
     async def getAppCurrencies(self, body="", request_headers:Dict={}):
-        """Retrieve a list of currencies allowed in the current application. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
+        """Retrieve currency configuration of the sales channel.
         """
         payload = {}
         
@@ -507,7 +507,7 @@ class Configuration:
         return response
     
     async def getLanguages(self, body="", request_headers:Dict={}):
-        """Retrieves all languages supported by the app.
+        """Retrieve a list of available languages.
         """
         payload = {}
         
@@ -548,7 +548,7 @@ class Configuration:
         return response
     
     async def getOrderingStoreCookie(self, body="", request_headers:Dict={}):
-        """Retrieve an Ordering Store signed cookie upon selecting an ordering store. This will be used by the cart service to verify a coupon against the selected ordering store in cart. 
+        """Reset cookie of ordering store.
         """
         payload = {}
         
@@ -593,7 +593,7 @@ class Configuration:
         return response
     
     async def removeOrderingStoreCookie(self, body="", request_headers:Dict={}):
-        """Unset the Ordering Store cookie upon changing the sales channel, by its domain URL, in the Universal Fynd Store app.
+        """Remove store cookie
         """
         payload = {}
         
@@ -634,7 +634,7 @@ class Configuration:
         return response
     
     async def getAppStaffList(self, page_no=None, page_size=None, order_incent=None, ordering_store=None, user=None, user_name=None, body="", request_headers:Dict={}):
-        """Retrieve a list of staff including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the application.
+        """Retrieve a list of all staff members of the sales channel.
         :param page_no :  : type integer
         :param page_size :  : type integer
         :param order_incent : This is a boolean value. Select `true` to retrieve the staff members eligible for getting incentives on orders. : type boolean
@@ -693,7 +693,7 @@ class Configuration:
         return response
     
     async def getAppStaffs(self, order_incent=None, ordering_store=None, user=None, body="", request_headers:Dict={}):
-        """Retrieve a list of staff including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the application.
+        """Retrieve a staff user including the names, employee code, incentive status, assigned ordering stores, and title of each staff added to the sales channel.
         :param order_incent : This is a boolean value. Select `true` to retrieve the staff members eligible for getting incentives on orders. : type boolean
         :param ordering_store : ID of the ordering store. Helps in retrieving staff members working at a particular ordering store. : type integer
         :param user : Mongo ID of the staff. Helps in retrieving the details of a particular staff member. : type string

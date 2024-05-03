@@ -36,7 +36,7 @@ class Logistic:
         self._urls.update(urls)
     
     async def getPincodeCity(self, pincode=None, body="", request_headers:Dict={}):
-        """Retrieve the name of the city associated with a given pincode.
+        """Retrieve details of a specific pincode, such as obtaining its city and state information.
         :param pincode : A `pincode` contains a specific address of a location. : type string
         """
         payload = {}
@@ -80,7 +80,7 @@ class Logistic:
         return response
     
     async def getTatProduct(self, body="", request_headers:Dict={}):
-        """Retrieve the estimated delivery time for a specific product.
+        """Retrieve the estimated delivery timeframe for a specific product from a designated store.
         """
         payload = {}
         
@@ -125,7 +125,7 @@ class Logistic:
         return response
     
     async def getAllCountries(self, body="", request_headers:Dict={}):
-        """Retrieve a list of all countries supported by the system.
+        """Retrieves a list of countries within the specified delivery zones for that application.
         """
         payload = {}
         
@@ -166,7 +166,7 @@ class Logistic:
         return response
     
     async def getPincodeZones(self, body="", request_headers:Dict={}):
-        """Retreive the logistical zones corresponding to a given pincode.
+        """Retrieve the delivery zone associated with a given pincode
         """
         payload = {}
         
@@ -211,7 +211,7 @@ class Logistic:
         return response
     
     async def getOptimalLocations(self, body="", request_headers:Dict={}):
-        """Retrieve the most efficient locations for logistics purposes.
+        """Determines and returns the best fulfillment center for customers by analyzing their location, product availability, and inventory levels.
         """
         payload = {}
         
@@ -256,7 +256,7 @@ class Logistic:
         return response
     
     async def getLocations(self, x_application_id=None, x_application_data=None, country=None, state=None, city=None, pincode=None, sector=None, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Retrieves a list of all locations of countries, states, cities. 
+        """Retrieves stores available for the application based on Delivery Zones and Order Orchestration rules.
         :param x-application-id : A `x-application-id` is a unique identifier for a particular sale channel. : type string
         :param x-application-data : A `x-application-data` is a unique identifier for a particular sale channel. : type string
         :param country : A `country` contains a specific value of the country `iso2` code. : type string
@@ -324,7 +324,7 @@ class Logistic:
         return response
     
     async def getCountries(self, onboarding=None, page_no=None, page_size=None, q=None, body="", request_headers:Dict={}):
-        """Retrieve of all countries.
+        """Fetch the list of supported countries.
         :param onboarding : Only fetch countries which allowed for onboard on Platform. : type boolean
         :param page_no : page number. : type integer
         :param page_size : page size. : type integer
@@ -377,7 +377,7 @@ class Logistic:
         return response
     
     async def getCountry(self, country_iso_code=None, body="", request_headers:Dict={}):
-        """Retrieve data for a single country and address format.
+        """Fetch details about a particular country and its address format customized for different business scenarios.
         :param country_iso_code : The `country_iso_code` is ISO-2 (alpha-2) code for the country. : type string
         """
         payload = {}
@@ -421,7 +421,7 @@ class Logistic:
         return response
     
     async def getLocalities(self, locality_type=None, country=None, state=None, city=None, page_no=None, page_size=None, q=None, body="", request_headers:Dict={}):
-        """Get Localities data.
+        """Retrieve geographical data for a specific type of locality based on the provided filters. For instance, obtain a list of cities for a given country and state.
         :param locality_type : A `locality_type` contains unique geographical division. : type string
         :param country : A `country` contains a specific value of the country iso2 code. : type string
         :param state : A `state` contains a specific value of the state, province. : type string
@@ -483,7 +483,7 @@ class Logistic:
         return response
     
     async def getLocality(self, locality_type=None, locality_value=None, country=None, state=None, city=None, body="", request_headers:Dict={}):
-        """Get Locality data
+        """Retrieve detailed geographical data for a specific locality, such as a pincode. For example, for a pincode value of 400603, the service returns its parent locations, including city, state, and country details.
         :param locality_type : A `locality_type` contains value geographical division. : type string
         :param locality_value : A `locality_value` contains a specific name of the locality. : type string
         :param country : A `country` contains a specific value of the country iso2 code. : type string
@@ -539,7 +539,7 @@ class Logistic:
         return response
     
     async def validateAddress(self, country_iso_code=None, template_name=None, body="", request_headers:Dict={}):
-        """Validate given address wrt template
+        """Validate addresses using specific templates customized for each country and tailored to various business scenarios. This validation ensures that the data conforms to the information currently stored in the system.
         :param country_iso_code : The ISO code of the country. : type string
         :param template_name : The type of address form. : type string
         """

@@ -26,8 +26,6 @@ from .filestorage.client import FileStorage
 
 from .finance.client import Finance
 
-from .inventory.client import Inventory
-
 from .lead.client import Lead
 
 from .serviceability.client import Serviceability
@@ -66,8 +64,6 @@ class PlatformClient:
         self.fileStorage = FileStorage(config)
         
         self.finance = Finance(config)
-        
-        self.inventory = Inventory(config)
         
         self.lead = Lead(config)
         

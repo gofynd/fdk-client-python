@@ -13,7 +13,7 @@ class Theme:
 
     
     async def getCompanyLevelThemes(self, search_text=None, request_headers:Dict={}):
-        """Retrieve themes specific to a company.
+        """Retrieve themes added to a company.
         :param search_text : Search Text to match the Theme Names and return the response. : type string
         """
         payload = {}
@@ -46,7 +46,7 @@ class Theme:
         return response
     
     async def getCompanyLevelPrivateThemes(self, search_text=None, request_headers:Dict={}):
-        """Retrieve a list of private themes available for a specific company.
+        """Retrieve a list of private themes added to a company.
         :param search_text : Search Text to match the Theme Names and return the response. : type string
         """
         payload = {}

@@ -32,7 +32,7 @@ class Lead:
         self._urls.update(urls)
     
     async def getTicket(self, id=None, body="", request_headers:Dict={}):
-        """Retrieve details of a specific customer support ticket.
+        """Get details of a specific customer support ticket.
         :param id : ID of ticket to be retrieved : type string
         """
         payload = {}
@@ -169,7 +169,7 @@ class Lead:
         return response
     
     async def getCustomForm(self, slug=None, body="", request_headers:Dict={}):
-        """Retrieves a customizable form template for data collection.
+        """Get a customizable form template for data collection.
         :param slug : Slug of form whose response is getting submitted : type string
         """
         payload = {}
@@ -305,7 +305,7 @@ class Lead:
         return response
     
     async def getTokenForVideoRoom(self, unique_name=None, body="", request_headers:Dict={}):
-        """Retrieves a secure token for accessing a video chat room.
+        """Get a secure token for accessing a video chat room.
         :param unique_name : Unique name of Video Room : type string
         """
         payload = {}

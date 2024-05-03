@@ -13,7 +13,7 @@ class Order:
 
     
     async def invalidateShipmentCache(self, body="", request_headers:Dict={}):
-        """Invalidate shipment Cache.
+        """Clear the existing shipment cache data stored in Redis  and serialize the updated data for subsequent use.
         """
         payload = {}
         
@@ -56,7 +56,7 @@ class Order:
         return response
     
     async def reassignLocation(self, body="", request_headers:Dict={}):
-        """Change the assigned location for an order or shipment.
+        """Reassign the shipment to a another location and update its status to 'Store Reassigned.'
         """
         payload = {}
         
@@ -142,7 +142,7 @@ class Order:
         return response
     
     async def getAnnouncements(self, date=None, request_headers:Dict={}):
-        """Retrieve announcements related to orders or shipments.
+        """Retrieve announcements related to orders fulfilment configured by platform or company admin
         :param date : Date On which the announcement is Active (Date should in ISO Datetime format IST Time) : type string
         """
         payload = {}
@@ -184,7 +184,7 @@ class Order:
         return response
     
     async def updateAddress(self, shipment_id=None, name=None, address=None, address_type=None, pincode=None, phone=None, email=None, landmark=None, address_category=None, city=None, state=None, country=None, request_headers:Dict={}):
-        """Modify the shipping address for an order.
+        """Modify the address details of an existing shipment
         :param shipment_id :  : type string
         :param name :  : type string
         :param address :  : type string
@@ -258,62 +258,8 @@ class Order:
 
         return response
     
-    async def click2Call(self, caller=None, receiver=None, bag_id=None, caller_id=None, method=None, request_headers:Dict={}):
-        """Click to call. 
-        :param caller : Call Number : type string
-        :param receiver : Receiver Number : type string
-        :param bag_id : Bag Id for the query : type string
-        :param caller_id : Caller Id : type string
-        :param method : Provider Method to Call : type string
-        """
-        payload = {}
-        
-        if caller is not None:
-            payload["caller"] = caller
-        if receiver is not None:
-            payload["receiver"] = receiver
-        if bag_id is not None:
-            payload["bag_id"] = bag_id
-        if caller_id is not None:
-            payload["caller_id"] = caller_id
-        if method is not None:
-            payload["method"] = method
-
-        # Parameter validation
-        schema = OrderValidator.click2Call()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/click2call", """{"required":[{"in":"query","name":"caller","required":true,"description":"Call Number","schema":{"type":"string"}},{"in":"query","name":"receiver","required":true,"description":"Receiver Number","schema":{"type":"string"}},{"in":"query","name":"bag_id","required":true,"description":"Bag Id for the query","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"description":"Company Id","schema":{"type":"integer"}}],"optional":[{"in":"query","name":"caller_id","required":false,"description":"Caller Id","schema":{"type":"string"}},{"in":"query","name":"method","required":false,"description":"Provider Method to Call","schema":{"type":"string","example":"dial.click2call"}}],"query":[{"in":"query","name":"caller","required":true,"description":"Call Number","schema":{"type":"string"}},{"in":"query","name":"receiver","required":true,"description":"Receiver Number","schema":{"type":"string"}},{"in":"query","name":"bag_id","required":true,"description":"Bag Id for the query","schema":{"type":"string"}},{"in":"query","name":"caller_id","required":false,"description":"Caller Id","schema":{"type":"string"}},{"in":"query","name":"method","required":false,"description":"Provider Method to Call","schema":{"type":"string","example":"dial.click2call"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Company Id","schema":{"type":"integer"}}]}""", serverType="platform", caller=caller, receiver=receiver, bag_id=bag_id, caller_id=caller_id, method=method, )
-        query_string = await create_query_string(caller=caller, receiver=receiver, bag_id=bag_id, caller_id=caller_id, method=method, )
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/click2call", caller=caller, receiver=receiver, bag_id=bag_id, caller_id=caller_id, method=method), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import Click2CallResponse
-            schema = Click2CallResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for click2Call")
-                print(e)
-
-        return response
-    
     async def updateShipmentStatus(self, body="", request_headers:Dict={}):
-        """Shipment state transition or Shipment data update or both.
+        """Used for updating a shipment and its status. Can also be used for updating bags present in that shipment.
         """
         payload = {}
         
@@ -356,7 +302,7 @@ class Order:
         return response
     
     async def getRoleBasedActions(self, request_headers:Dict={}):
-        """Retrieve role based actions.
+        """Retrieve permissible actions based on user roles such as company_admin,  company_operation, customer_care, and read_only.
         """
         payload = {}
         
@@ -395,7 +341,7 @@ class Order:
         return response
     
     async def getShipmentHistory(self, shipment_id=None, bag_id=None, request_headers:Dict={}):
-        """Retrieve the shipment history.
+        """Get the history of the shipment
         :param shipment_id : Shipment Id : type string
         :param bag_id : Bag/Product Id : type integer
         """
@@ -440,7 +386,7 @@ class Order:
         return response
     
     async def postShipmentHistory(self, body="", request_headers:Dict={}):
-        """Add history records for a shipment.
+        """Used to add logs in history for a bag for the provided Shipment ID
         """
         payload = {}
         
@@ -483,7 +429,7 @@ class Order:
         return response
     
     async def sendSmsNinja(self, body="", request_headers:Dict={}):
-        """Send SMS Ninja Panel.
+        """Send SMS to customer based on the template that is selected
         """
         payload = {}
         
@@ -526,7 +472,7 @@ class Order:
         return response
     
     async def updatePackagingDimensions(self, body="", request_headers:Dict={}):
-        """Modify the dimensions of packaging.
+        """Used to modify the packaging dimension of a shipment
         """
         payload = {}
         
@@ -569,7 +515,7 @@ class Order:
         return response
     
     async def createOrder(self, body="", request_headers:Dict={}):
-        """Create order.
+        """Creates an order
         """
         payload = {}
         
@@ -612,7 +558,7 @@ class Order:
         return response
     
     async def getChannelConfig(self, request_headers:Dict={}):
-        """Retrieve configuration settings for a channel.
+        """Retrieve configuration settings specific to orders for a channel
         """
         payload = {}
         
@@ -651,7 +597,7 @@ class Order:
         return response
     
     async def createChannelConfig(self, body="", request_headers:Dict={}):
-        """Set up configuration for a channel.
+        """Set up configuration for a channel specific to orders which has implications over how the order fulfilment happens in a channel
         """
         payload = {}
         
@@ -694,7 +640,7 @@ class Order:
         return response
     
     async def orderUpdate(self, body="", request_headers:Dict={}):
-        """Modify the details and status of an order. 
+        """Used to update an order's meta information. These meta information can be accessed via order or shipment details API.
         """
         payload = {}
         
@@ -737,7 +683,7 @@ class Order:
         return response
     
     async def checkOrderStatus(self, body="", request_headers:Dict={}):
-        """Verify the current status of an order.
+        """Used to verify the status of order. It queries error logs, resyncs the shipments if there was an issue with sync etc.
         """
         payload = {}
         
@@ -780,7 +726,7 @@ class Order:
         return response
     
     async def getStateTransitionMap(self, request_headers:Dict={}):
-        """Retrieve a map of state transitions for orders.
+        """Retrieve a map of state transitions for orders
         """
         payload = {}
         
@@ -819,7 +765,7 @@ class Order:
         return response
     
     async def getAllowedStateTransition(self, ordering_channel=None, status=None, request_headers:Dict={}):
-        """Retrieve next possible states based on logged in user.
+        """Retrieve next possible states based on logged in user's role
         :param ordering_channel : Ordering channel : type string
         :param status : current status of a shipment : type string
         """
@@ -864,7 +810,7 @@ class Order:
         return response
     
     async def fetchCreditBalanceDetail(self, body="", request_headers:Dict={}):
-        """Retrieve details about credit balance.
+        """Retrieve details about credit balance on the basis of customer mobile number
         """
         payload = {}
         
@@ -907,7 +853,7 @@ class Order:
         return response
     
     async def fetchRefundModeConfig(self, body="", request_headers:Dict={}):
-        """Retrieve configuration for refund modes.
+        """Get list of refund modes to trigger refunds
         """
         payload = {}
         
@@ -950,7 +896,7 @@ class Order:
         return response
     
     async def attachOrderUser(self, body="", request_headers:Dict={}):
-        """Attach order User
+        """Attach an anonymous order to a customer based on OTP verification
         """
         payload = {}
         
@@ -993,7 +939,7 @@ class Order:
         return response
     
     async def sendUserMobileOTP(self, body="", request_headers:Dict={}):
-        """Send a one-time OTP to a users mobile device.
+        """Send a one-time OTP to a customer mobile number
         """
         payload = {}
         
@@ -1036,7 +982,7 @@ class Order:
         return response
     
     async def verifyMobileOTP(self, body="", request_headers:Dict={}):
-        """Verify Mobile OTP
+        """Perform OTP verification to link a user to an anonymous order
         """
         payload = {}
         
@@ -1079,7 +1025,7 @@ class Order:
         return response
     
     async def downloadLanesReport(self, body="", request_headers:Dict={}):
-        """Downloads lanes shipment/orders.
+        """Downloads shipments/orders present in the provided lane
         """
         payload = {}
         
@@ -1122,7 +1068,7 @@ class Order:
         return response
     
     async def bulkStateTransistion(self, body="", request_headers:Dict={}):
-        """Performs State Transisiton in Bulk for the given shipments in the excel/csv file url.
+        """Performs state transisiton in bulk using the CSV or excel file for the given shipments. The bulk transition CSV or excel template can be downloaded using the seller template download method. Current supported format is excel and CSV.
         """
         payload = {}
         
@@ -1165,8 +1111,7 @@ class Order:
         return response
     
     async def bulkListing(self, page_size=None, page_no=None, start_date=None, end_date=None, status=None, bulk_action_type=None, search_key=None, request_headers:Dict={}):
-        """Fetches of previous or running  bulk jobs.
-
+        """Get list of bulk operation that is initiated and completed as per the filters provided
         :param page_size : page size : type integer
         :param page_no : page number : type integer
         :param start_date : UTC start date in ISO format : type string
@@ -1226,7 +1171,7 @@ class Order:
         return response
     
     async def jobDetails(self, batch_id=None, request_headers:Dict={}):
-        """Fetches details for the job of the provided batch_id
+        """Fetches details of the job for the provided batch Id
         :param batch_id :  : type string
         """
         payload = {}
@@ -1268,7 +1213,7 @@ class Order:
         return response
     
     async def getFileByStatus(self, batch_id=None, status=None, file_type=None, report_type=None, request_headers:Dict={}):
-        """Get the file URL consisting Records of the provided status.
+        """Get the file download URL used for performing bulk operation
         :param batch_id :  : type string
         :param status :  : type string
         :param file_type :  : type string
@@ -1319,7 +1264,7 @@ class Order:
         return response
     
     async def getManifestShipments(self, dp_ids=None, stores=None, to_date=None, from_date=None, dp_name=None, sales_channels=None, search_type=None, search_value=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """get Manifest Shipments.
+        """Get list of shipments tagged to that manifest, the user can also search the shipments on the basis of shipment Id, order Id and AWB number
         :param dp_ids :  : type integer
         :param stores :  : type string
         :param to_date :  : type string
@@ -1388,7 +1333,7 @@ class Order:
         return response
     
     async def getManifests(self, status=None, start_date=None, end_date=None, search_type=None, store_id=None, search_value=None, dp_ids=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Fetch Manifests
+        """Get a list of manifest as per the filter provided
         :param status : Possible Status [ active, closed ] : type string
         :param start_date : UTC Start Date in ISO format : type string
         :param end_date : UTC End Date in ISO format : type string
@@ -1454,7 +1399,7 @@ class Order:
         return response
     
     async def processManifests(self, body="", request_headers:Dict={}):
-        """Process Manifest.
+        """Generate manifest Id and PDF and tags the shipments with that manifest Id
         """
         payload = {}
         
@@ -1497,7 +1442,7 @@ class Order:
         return response
     
     async def getManifestDetails(self, manifest_id=None, request_headers:Dict={}):
-        """get Manifest Details.
+        """Get details regarding a manifest which can be used to perform further actions on it
         :param manifest_id :  : type string
         """
         payload = {}
@@ -1539,7 +1484,7 @@ class Order:
         return response
     
     async def dispatchManifests(self, manifest_id=None, body="", request_headers:Dict={}):
-        """Dispatch Manifest
+        """Updates the status of the manifest to processed and change the status of the shipments in the manifest to dispatch status
         :param manifest_id :  : type string
         """
         payload = {}
@@ -1585,7 +1530,7 @@ class Order:
         return response
     
     async def uploadConsents(self, manifest_id=None, body="", request_headers:Dict={}):
-        """Upload Consent
+        """Uploads the consent signed by courier partner and seller to keep records
         :param manifest_id :  : type string
         """
         payload = {}
@@ -1631,7 +1576,7 @@ class Order:
         return response
     
     async def getManifestfilters(self, view=None, request_headers:Dict={}):
-        """get Manifest Filters.
+        """Get supported filter for listing manifests
         :param view : Name of View : type string
         """
         payload = {}
@@ -1673,7 +1618,7 @@ class Order:
         return response
     
     async def eInvoiceRetry(self, body="", request_headers:Dict={}):
-        """Retry e-invoice after failure
+        """Reattempt the generation of an E-invoice
         """
         payload = {}
         
@@ -1716,7 +1661,7 @@ class Order:
         return response
     
     async def trackShipment(self, shipment_id=None, awb=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve courier partner tracking details for a given shipment id or awb no.
+        """Retrieve courier partner tracking details for a given shipment Id or AWB number
         :param shipment_id : Shipment ID : type string
         :param awb : AWB number : type string
         :param page_no : Page number : type integer
@@ -1767,7 +1712,7 @@ class Order:
         return response
     
     async def updateShipmentTracking(self, body="", request_headers:Dict={}):
-        """Modify courier partner tracking details for a given shipment id or awb no.
+        """Modify courier partner tracking details for a given shipment Id or AWB number
         """
         payload = {}
         
@@ -1810,7 +1755,7 @@ class Order:
         return response
     
     async def generateInvoiceID(self, invoice_type=None, body="", request_headers:Dict={}):
-        """This API is used to manually generate Invoice ID against shipments.
+        """Generate and attach Invoice Ids against shipments.
         :param invoice_type : mention the type of invoice id to generate : type string
         """
         payload = {}
@@ -1856,7 +1801,7 @@ class Order:
         return response
     
     async def failedOrderLogDetails(self, log_id=None, request_headers:Dict={}):
-        """This endpoint allows users to get the exact error trace from the log id provided
+        """Get the exact error trace from the log Id provided in the failed order list API response 
         :param log_id : Log Error ID : type string
         """
         payload = {}
@@ -1898,7 +1843,7 @@ class Order:
         return response
     
     async def getShipments(self, lane=None, bag_status=None, status_override_lane=None, time_to_dispatch=None, search_type=None, search_value=None, from_date=None, to_date=None, start_date=None, end_date=None, dp_ids=None, stores=None, sales_channels=None, page_no=None, page_size=None, fetch_active_shipment=None, allow_inactive=None, exclude_locked_shipments=None, payment_methods=None, channel_shipment_id=None, channel_order_id=None, custom_meta=None, ordering_channel=None, company_affiliate_tag=None, my_orders=None, platform_user_id=None, sort_type=None, show_cross_company_data=None, tags=None, customer_id=None, order_type=None, request_headers:Dict={}):
-        """Retrieve a list of available shipments.
+        """Get a list of shipments based on the filters provided
         :param lane : Name of lane for which data is to be fetched : type string
         :param bag_status : Comma separated values of bag statuses : type string
         :param status_override_lane : Use this flag to fetch by bag_status and override lane : type boolean
@@ -2030,7 +1975,7 @@ class Order:
         return response
     
     async def getShipmentById(self, channel_shipment_id=None, shipment_id=None, fetch_active_shipment=None, allow_inactive=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific shipment.
+        """Get detailed information about a specific shipment
         :param channel_shipment_id : App Shipment Id : type string
         :param shipment_id : Shipment Id : type string
         :param fetch_active_shipment : flag to fetch active or deactivated shipments : type boolean
@@ -2081,7 +2026,7 @@ class Order:
         return response
     
     async def getOrderById(self, order_id=None, my_orders=None, allow_inactive=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific order.
+        """Get detailed information about a specific order
         :param order_id :  : type string
         :param my_orders :  : type boolean
         :param allow_inactive : Flag to allow inactive shipments : type boolean
@@ -2129,7 +2074,7 @@ class Order:
         return response
     
     async def getLaneConfig(self, super_lane=None, group_entity=None, from_date=None, to_date=None, start_date=None, end_date=None, dp_ids=None, stores=None, sales_channels=None, payment_mode=None, bag_status=None, search_type=None, search_value=None, tags=None, time_to_dispatch=None, payment_methods=None, my_orders=None, show_cross_company_data=None, order_type=None, request_headers:Dict={}):
-        """Retrieve configuration settings for lanes.
+        """Get configuration settings for lanes
         :param super_lane : Name of lane for which data is to be fetched : type string
         :param group_entity : Name of group entity : type string
         :param from_date : Start Date in DD-MM-YYYY format : type string
@@ -2225,7 +2170,7 @@ class Order:
         return response
     
     async def getOrders(self, lane=None, search_type=None, bag_status=None, time_to_dispatch=None, payment_methods=None, tags=None, search_value=None, from_date=None, to_date=None, start_date=None, end_date=None, dp_ids=None, stores=None, sales_channels=None, page_no=None, page_size=None, is_priority_sort=None, custom_meta=None, my_orders=None, show_cross_company_data=None, customer_id=None, order_type=None, allow_inactive=None, request_headers:Dict={}):
-        """Retrieve a list of available orders.
+        """Get a list of orders based on the filters provided
         :param lane : lane refers to a section where orders are assigned, indicating its grouping : type string
         :param search_type : search_type refers to the field that will be used as the target for the search operation : type string
         :param bag_status : bag_status refers to status of the entity. Filters orders based on the status. : type string
@@ -2333,7 +2278,7 @@ class Order:
         return response
     
     async def getfilters(self, view=None, group_entity=None, request_headers:Dict={}):
-        """Retrieve listing filters.
+        """Get supported filters for various listing operations
         :param view : Name of view : type string
         :param group_entity : Name of group entity : type string
         """
@@ -2378,7 +2323,7 @@ class Order:
         return response
     
     async def getBulkShipmentExcelFile(self, sales_channels=None, dp_ids=None, start_date=None, end_date=None, stores=None, tags=None, bag_status=None, payment_methods=None, file_type=None, time_to_dispatch=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve a bulk shipment Excel report.
+        """Generates the report which can be filled and uploaded to perform the bulk operation based on the filters provided
         :param sales_channels : Comma separated values of sales channel ids : type string
         :param dp_ids : Comma separated values of delivery partner ids : type string
         :param start_date : UTC start date in ISO format : type string
@@ -2453,7 +2398,7 @@ class Order:
         return response
     
     async def getBulkActionTemplate(self, request_headers:Dict={}):
-        """Retrieve bulk action seller templates.
+        """Get list of templates so that users can download the required template
         """
         payload = {}
         
@@ -2492,7 +2437,7 @@ class Order:
         return response
     
     async def downloadBulkActionTemplate(self, template_slug=None, request_headers:Dict={}):
-        """Download bulk actions seller templates.
+        """Download bulk seller templates which can be used to perform operations in bulk
         :param template_slug : Slug name of template to be downloaded : type string
         """
         payload = {}
@@ -2534,7 +2479,7 @@ class Order:
         return response
     
     async def getShipmentReasons(self, shipment_id=None, bag_id=None, state=None, request_headers:Dict={}):
-        """Retrieve the issues that led to the cancellation of bags within a shipment.
+        """Get reasons to perform full or partial cancellation of a bag
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         :param bag_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         :param state : State for which reasons are required. : type string
@@ -2582,7 +2527,7 @@ class Order:
         return response
     
     async def getBagById(self, bag_id=None, channel_bag_id=None, channel_id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific bag.
+        """Retrieve detailed information about a specific bag
         :param bag_id : Id of bag : type string
         :param channel_bag_id : Id of application bag : type string
         :param channel_id : Id of application : type string
@@ -2630,7 +2575,7 @@ class Order:
         return response
     
     async def getBags(self, bag_ids=None, shipment_ids=None, order_ids=None, channel_bag_ids=None, channel_shipment_ids=None, channel_order_ids=None, channel_id=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve Bags for the order.
+        """Get paginated list of bags based on provided filters
         :param bag_ids : Comma separated values of bag ids : type string
         :param shipment_ids : Comma separated values of shipment ids : type string
         :param order_ids : Comma separated values of order ids : type string
@@ -2696,7 +2641,7 @@ class Order:
         return response
     
     async def generatePOSReceiptByOrderId(self, order_id=None, shipment_id=None, document_type=None, request_headers:Dict={}):
-        """Create a point-of-sale (POS) receipt for a specific order by order ID.
+        """Create a point-of-sale (POS) receipt for a specific order by order Id.
         :param order_id :  : type string
         :param shipment_id :  : type string
         :param document_type :  : type string
@@ -2744,7 +2689,7 @@ class Order:
         return response
     
     async def getAllowedTemplatesForBulk(self, request_headers:Dict={}):
-        """Gets All the allowed Templates to perform Bulk Operations.
+        """Gets all the allowed templates to perform bulk operations.
         """
         payload = {}
         
@@ -2783,7 +2728,7 @@ class Order:
         return response
     
     async def getTemplate(self, template_name=None, request_headers:Dict={}):
-        """Get the Excel file URL for the Template.
+        """Get the excel or CSV file URL for the template.
         :param template_name :  : type string
         """
         payload = {}

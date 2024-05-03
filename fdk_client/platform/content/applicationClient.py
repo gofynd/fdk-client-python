@@ -14,7 +14,7 @@ class Content:
 
     
     async def getAnnouncementsList(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve a list of announcements.
+        """Lists all announcements
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -102,7 +102,7 @@ class Content:
         return response
     
     async def getAnnouncementById(self, announcement_id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific announcement.
+        """Get detailed information about a specific announcement
         :param announcement_id : ID allotted to the announcement. : type string
         """
         payload = {}
@@ -321,7 +321,7 @@ class Content:
         return response
     
     async def getBlogs(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve a list of available blogs.
+        """List all blogs
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -539,7 +539,7 @@ class Content:
         return response
     
     async def getDataLoaders(self, request_headers:Dict={}):
-        """Retrieve a list of data loaders.
+        """List all Dataloaders
         """
         payload = {}
         
@@ -795,7 +795,7 @@ class Content:
         return response
     
     async def getFaqCategories(self, request_headers:Dict={}):
-        """Retrieve a list of FAQ categories.
+        """List all FAQ Categories
         """
         payload = {}
         
@@ -834,7 +834,7 @@ class Content:
         return response
     
     async def getFaqCategoryBySlugOrId(self, id_or_slug=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific FAQ category.
+        """Get detailed information about a specific FAQ category
         :param id_or_slug : ID or the slug allotted to an FAQ category. Slug is a short, human-readable, URL-friendly identifier of an object. You can get slug value of an FAQ category from `getFaqCategories` API. : type string
         """
         payload = {}
@@ -1189,7 +1189,7 @@ class Content:
         return response
     
     async def getFaqByIdOrSlug(self, id_or_slug=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific FAQ.
+        """Get detailed information about a specific FAQ
         :param id_or_slug : ID or the slug allotted to an FAQ category. Slug is a short, human-readable, URL-friendly identifier of an object. You can get slug value of an FAQ category from `getFaqCategories` API. : type string
         """
         payload = {}
@@ -1277,7 +1277,7 @@ class Content:
         return response
     
     async def getLandingPages(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve a list of landing pages.
+        """Lists a list landing pages as per device types
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -1453,7 +1453,7 @@ class Content:
         return response
     
     async def getLegalInformation(self, request_headers:Dict={}):
-        """Retrieve legal information and terms.
+        """Get legal information and terms
         """
         payload = {}
         
@@ -1798,7 +1798,7 @@ class Content:
         return response
     
     async def getPageMeta(self, request_headers:Dict={}):
-        """Retrieve metadata for a specific page.
+        """Use this API to Get metadata for a specific page.
         """
         payload = {}
         
@@ -1837,7 +1837,7 @@ class Content:
         return response
     
     async def getPageSpec(self, request_headers:Dict={}):
-        """Retrieve specifications and details for a specific page.
+        """Use this API to Get specifications and details for a specific page
         """
         payload = {}
         
@@ -2050,7 +2050,7 @@ class Content:
         return response
     
     async def getPathRedirectionRules(self, page_size=None, page_no=None, request_headers:Dict={}):
-        """Retrieve a list of path redirection rules.
+        """Use this API to List Path Redirection Rules
         :param page_size : The number of items to retrieve in each page. Default value is 5.  : type integer
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         """
@@ -2095,7 +2095,7 @@ class Content:
         return response
     
     async def getPathRedirectionRule(self, path_id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific path redirection rule.
+        """Use this API to Get detailed information about a specific path redirection rule
         :param path_id : ID allotted to the path redirection rule. : type string
         """
         payload = {}
@@ -2298,7 +2298,7 @@ class Content:
         return response
     
     async def getDefaultSEOMarkupSchema(self, page_type=None, request_headers:Dict={}):
-        """Use this API to get the Default SEO Markup schema Templates setup for an application
+        """Use this API to List default SEO Markup Schemas
         :param page_type : The type of page against which schema template was created : type string
         """
         payload = {}
@@ -2340,7 +2340,7 @@ class Content:
         return response
     
     async def getSEOMarkupSchemas(self, title=None, active=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Use this API to get all SEO Markup schema Templates setup for an application
+        """Use this API to List default SEO Markup Schemas
         :param title : Title of the seo schema. : type string
         :param active : Boolean value for fetching seo schema. : type string
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
@@ -2391,7 +2391,7 @@ class Content:
         return response
     
     async def createSEOMarkupSchema(self, body="", request_headers:Dict={}):
-        """Use this API to create a SEO Markup schema Template inside an application
+        """Use this API to Create SEO Markup Schema
         """
         payload = {}
         
@@ -2434,7 +2434,7 @@ class Content:
         return response
     
     async def getSEOMarkupSchema(self, id=None, request_headers:Dict={}):
-        """Use this API to get a existing SEO Markup schema an application
+        """Use this API to Get SEO Markup Schema
         :param id : Alphanumeric ID allotted to a SEO Markup Schema Template created within a business. : type string
         """
         payload = {}
@@ -2476,7 +2476,7 @@ class Content:
         return response
     
     async def editSEOMarkupSchema(self, id=None, body="", request_headers:Dict={}):
-        """Use this API to edit an existing SEO Markup schema an application
+        """Use this API to Get SEO Markup Schema
         :param id : Alphanumeric ID allotted to a SEO Markup Schema Template created within a business. : type string
         """
         payload = {}
@@ -2522,7 +2522,7 @@ class Content:
         return response
     
     async def deleteSEOMarkupSchema(self, id=None, request_headers:Dict={}):
-        """Use this API to delete an existing SEO Markup schema an application
+        """Use this API to Delete SEO Markup Schema
         :param id : Alphanumeric ID allotted to a SEO Markup Schema Template created within a business. : type string
         """
         payload = {}
@@ -2564,7 +2564,7 @@ class Content:
         return response
     
     async def getSlideshows(self, device_platform=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """A slideshow is a group of images, videos or a combination of both that are shown on the website in the form of slides. Use this API to fetch a list of slideshows.
+        """Use this API to list all Slideshows
         :param device_platform : Filter slideshows by platform. Acceptable values are: web, android, ios and all : type string
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
@@ -2612,7 +2612,7 @@ class Content:
         return response
     
     async def createSlideshow(self, body="", request_headers:Dict={}):
-        """A slideshow is a group of images, videos or a combination of both that are shown on the website in the form of slides. Use this API to create a slideshow.
+        """Use this API to create a slideshow.
         """
         payload = {}
         
@@ -2655,7 +2655,7 @@ class Content:
         return response
     
     async def getSlideshowBySlug(self, slug=None, device_platform=None, request_headers:Dict={}):
-        """Use this API to retrieve the details of a slideshow by its slug.
+        """Use this API to get the details of a slideshow by its slug.
         :param slug : A short, human-readable, URL-friendly identifier of a slideshow. You can get slug value of a page from `getSlideshows` API. : type string
         :param device_platform : Filter slideshows by platform. Acceptable values are: web, android, ios and all : type string
         """
@@ -2700,7 +2700,7 @@ class Content:
         return response
     
     async def updateSlideshow(self, id=None, body="", request_headers:Dict={}):
-        """Use this API to edit the details of an existing slideshow.
+        """Use this API to Update Slideshow
         :param id : ID allotted to the slideshow. : type string
         """
         payload = {}
@@ -3263,7 +3263,7 @@ class Content:
         return response
     
     async def getPageBySlug(self, slug=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific page using its slug.
+        """Get detailed information about a specific page using its slug.
         :param slug : A short, human-readable, URL-friendly identifier of a page. You can get slug value of a page from `getPages` API. : type string
         """
         payload = {}
@@ -3305,7 +3305,7 @@ class Content:
         return response
     
     async def getAppCustomFieldTypes(self, request_headers:Dict={}):
-        """Use this API to retrieve the custom field types 
+        """Each custom field and custom field definition has a type, which defines the type of information that it can store. The custom field types have built-in validation. This api will give list of supported custom fields types
         """
         payload = {}
         
@@ -3344,7 +3344,7 @@ class Content:
         return response
     
     async def getAppResources(self, request_headers:Dict={}):
-        """Use this API to retrieve the resources, such as products, collections, customers, selling locations, etc.
+        """Each custom fields is assosiated with a resource such as product, promotion, coupon, selling location etc, This will gives list of supported resource list.
         """
         payload = {}
         
@@ -3383,7 +3383,7 @@ class Content:
         return response
     
     async def getAppCustomFieldDefinitions(self, page_no=None, page_size=None, resource=None, type=None, search=None, request_headers:Dict={}):
-        """Use this API to retrieve the definitions of custom fields.
+        """Custom field definitions enable you to include data validation for custom fields, and enable sellers to add custom fields values for resources. With the help of this seller can retrive list of custom field definitions list.
         :param page_no :  : type string
         :param page_size :  : type string
         :param resource :  : type string
@@ -3437,7 +3437,7 @@ class Content:
         return response
     
     async def createAppCustomFieldDefinition(self, body="", request_headers:Dict={}):
-        """Use this API to create a custom field definition for your application.
+        """You can create custom fields definition to any resource so you can extend property of resource.
         """
         payload = {}
         
@@ -3480,7 +3480,7 @@ class Content:
         return response
     
     async def getAppCustomFieldDefinition(self, definition_id=None, request_headers:Dict={}):
-        """Use this API to retrieve the definitions of custom fields using definition_id.
+        """Custom field definitions can be fetch using definition id.
         :param definition_id :  : type string
         """
         payload = {}
@@ -3522,7 +3522,7 @@ class Content:
         return response
     
     async def updateAppCustomFieldDefinition(self, definition_id=None, body="", request_headers:Dict={}):
-        """Use this API to update a custom field definition for your application.
+        """Custom fields definition can be update using this api, You can update custom field definition name and description.
         :param definition_id :  : type string
         """
         payload = {}
@@ -3568,7 +3568,7 @@ class Content:
         return response
     
     async def deleteAppCustomFieldDefinition(self, definition_id=None, request_headers:Dict={}):
-        """Use this API to delete the definitions of custom fields using definition_id. This will also delete related custom fields entries related to this definition.
+        """Custom field definition and its assosiated custom fields value can be deleted using this api on the basis of definition id.
         :param definition_id :  : type string
         """
         payload = {}
@@ -3610,7 +3610,7 @@ class Content:
         return response
     
     async def getAppCustomFields(self, resource=None, request_headers:Dict={}):
-        """Use this API to retrieve the custom fields for given resource in param.
+        """Retrieves a list of custom fields attached to a particular resource by using the resource.
         :param resource :  : type string
         """
         payload = {}
@@ -3652,7 +3652,7 @@ class Content:
         return response
     
     async def getAppCustomFieldsByResourceId(self, resource=None, resource_id=None, request_headers:Dict={}):
-        """Use this API to retrieve the custom fields for given resource in param.
+        """Retrieves a list of custom fields attached to a particular resource by using the resource and resource id.
         :param resource :  : type string
         :param resource_id :  : type string
         """
@@ -3697,7 +3697,7 @@ class Content:
         return response
     
     async def createAppCustomFieldByResourceId(self, resource=None, resource_id=None, body="", request_headers:Dict={}):
-        """Use this API to create the custom field entry for given resource and resource_id in param.
+        """You can add a custom field using this endpoint to any resource by providing the resource ID.
         :param resource :  : type string
         :param resource_id :  : type string
         """
@@ -3746,7 +3746,7 @@ class Content:
         return response
     
     async def createAppCustomObjectDefinition(self, body="", request_headers:Dict={}):
-        """Use this API to create custom object defintion
+        """Create a custom object that will have a collection of custom fields and can be used anywhere in the custom field for any resource.
         """
         payload = {}
         
@@ -3789,7 +3789,7 @@ class Content:
         return response
     
     async def getAppCustomObjectDefinitions(self, page_no=None, page_size=None, search=None, request_headers:Dict={}):
-        """Use this API to retrieve the custom object definitions
+        """Custom object definition lists can be obtained using this endpoint.
         :param page_no :  : type string
         :param page_size :  : type string
         :param search :  : type string
@@ -3837,7 +3837,7 @@ class Content:
         return response
     
     async def getAppCustomObjectDefinition(self, definition_id=None, request_headers:Dict={}):
-        """Use this API to update a custom object definition for your application.
+        """Custom object definitions can be fetched using their definition ID.
         :param definition_id :  : type string
         """
         payload = {}
@@ -3879,7 +3879,7 @@ class Content:
         return response
     
     async def updateAppCustomObjectDefinition(self, definition_id=None, body="", request_headers:Dict={}):
-        """Use this API to update a custom object definition for your application.
+        """Custom object definitions can be updated using this endpoint. You can update the name and description of the custom object and add more custom field definitions to the existing custom object.
         :param definition_id :  : type string
         """
         payload = {}
@@ -3925,7 +3925,7 @@ class Content:
         return response
     
     async def deleteAppCustomObjectDefinition(self, definition_id=None, request_headers:Dict={}):
-        """Use this API to delete a custom object definition and related data for your application.
+        """Custom object definitions can be deleted using this endpoint by providing the definition ID.
         :param definition_id :  : type string
         """
         payload = {}
@@ -3967,7 +3967,7 @@ class Content:
         return response
     
     async def getAppCustomObjects(self, definition_id=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Use this API to retrieve the custom objects.
+        """Custom object entries can fetch using this endpoint.
         :param definition_id :  : type string
         :param page_no :  : type string
         :param page_size :  : type string
@@ -4015,7 +4015,7 @@ class Content:
         return response
     
     async def createAppCustomObject(self, body="", request_headers:Dict={}):
-        """Use this API to create the custom object entry.
+        """Custom object entries against the custom object definition can be added using this API.
         """
         payload = {}
         
@@ -4058,7 +4058,7 @@ class Content:
         return response
     
     async def getAppCustomObject(self, metaobject_id=None, request_headers:Dict={}):
-        """Use this API to retrieve the custom object details and their fields details and definitions and references.
+        """Details of custom objects, their field details, definitions, and references can be obtained using this endpoint.
         :param metaobject_id :  : type string
         """
         payload = {}
@@ -4100,7 +4100,7 @@ class Content:
         return response
     
     async def deleteAppCustomObject(self, metaobject_id=None, request_headers:Dict={}):
-        """Use this API to delete the custom object entry by id. This will also delete related custom fields entries related to this custom object.
+        """Custom object entries can be deleted by providing the delete ID using this endpoint.
         :param metaobject_id :  : type string
         """
         payload = {}
@@ -4142,7 +4142,7 @@ class Content:
         return response
     
     async def updateAppCustomObject(self, metaobject_id=None, body="", request_headers:Dict={}):
-        """Use this API to update a custom object detail for your application.
+        """Custom object entries can be updated using this endpoint.
         :param metaobject_id :  : type string
         """
         payload = {}
@@ -4188,7 +4188,7 @@ class Content:
         return response
     
     async def getAppJobs(self, page=None, page_size=None, action_type=None, request_headers:Dict={}):
-        """Use this api to get list of jobs of bulk import and exports
+        """Custom object bulk import and export jobs status and details can be obtained using this endpoint.
         :param page :  : type string
         :param page_size :  : type string
         :param action_type :  : type string
@@ -4236,7 +4236,7 @@ class Content:
         return response
     
     async def importAppCustomObjectEntries(self, definition_id=None, body="", request_headers:Dict={}):
-        """Use this API to upload custom object entries
+        """Custom object bulk import of bulk entries can be performed using this endpoint.
         :param definition_id :  : type string
         """
         payload = {}
@@ -4282,7 +4282,7 @@ class Content:
         return response
     
     async def exportAppCustomObjectEntries(self, definition_id=None, request_headers:Dict={}):
-        """Use this api to initiate download of bulk entries
+        """Custom object bulk export of bulk entries can be perform using this endpoint.
         :param definition_id :  : type string
         """
         payload = {}
@@ -4324,7 +4324,7 @@ class Content:
         return response
     
     async def sampleAppCustomObjectBulkEntry(self, definition_id=None, request_headers:Dict={}):
-        """Use this api to get sample csv file 
+        """Sample files for custom object bulk import can be obtained from this endpoint.
         :param definition_id :  : type string
         """
         payload = {}

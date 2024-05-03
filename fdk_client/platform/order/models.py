@@ -1353,6 +1353,10 @@ class UpdateShipmentLockPayload(BaseSchema):
     
     resume_tasks_after_unlock = fields.Boolean(required=False, allow_none=True)
     
+    lock_after_transition = fields.Boolean(required=False)
+    
+    unlock_before_transition = fields.Boolean(required=False)
+    
 
 
 class OriginalFilter(BaseSchema):

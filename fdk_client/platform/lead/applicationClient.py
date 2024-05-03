@@ -71,7 +71,7 @@ class Lead:
         return response
     
     async def getNewTicket(self, id=None, request_headers:Dict={}):
-        """Retreives ticket details of a application level ticket with ticket ID
+        """Get ticket details of a application level ticket with ticket ID
         :param id : Tiket ID of the ticket to be fetched : type string
         """
         payload = {}
@@ -247,7 +247,7 @@ class Lead:
         return response
     
     async def getCustomForm(self, slug=None, request_headers:Dict={}):
-        """Retrieve information about a custom form which includes corresponding field details and any validation regex required against that field or not
+        """Get information about a custom form which includes corresponding field details and any validation regex required against that field or not
         :param slug : Slug of form whose response is getting submitted : type string
         """
         payload = {}
@@ -377,7 +377,7 @@ class Lead:
         return response
     
     async def getCustomForms(self, request_headers:Dict={}):
-        """Retrieve a list of available custom forms.
+        """List all available custom forms
         """
         payload = {}
         

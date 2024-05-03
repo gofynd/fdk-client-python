@@ -2363,6 +2363,8 @@ class RefundSessionDetail(BaseSchema):
     
     receipt_number = fields.Str(required=False)
     
+    pg_refund_id = fields.Str(required=False)
+    
     currency = fields.Str(required=False)
     
     transfer_reversal = fields.Str(required=False)

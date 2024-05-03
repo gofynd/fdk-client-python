@@ -13,7 +13,7 @@ class Serviceability:
 
     
     async def getZones(self, page_no=None, page_size=None, is_active=None, channel_id=None, q=None, country=None, state=None, city=None, pincode=None, sector=None, request_headers:Dict={}):
-        """Return the list of zones that are defined at the company level.
+        """Retrieves a list of delivery zones.
         :param page_no : index of the item to start returning with : type integer
         :param page_size : determines the items to be displayed in a page : type integer
         :param is_active : Status of Zone (either active or inactive) : type boolean
@@ -82,7 +82,7 @@ class Serviceability:
         return response
     
     async def createZone(self, body="", request_headers:Dict={}):
-        """Generate and add a new zone.
+        """Creates a delivery zone.
         """
         payload = {}
         
@@ -125,7 +125,7 @@ class Serviceability:
         return response
     
     async def updateZoneById(self, zone_id=None, body="", request_headers:Dict={}):
-        """Updates the region, application, store mapping and other details in the Zone.
+        """Update an existing delivery zone .
         :param zone_id : A `zone_id` is a unique identifier for a particular zone. : type string
         """
         payload = {}
@@ -171,7 +171,7 @@ class Serviceability:
         return response
     
     async def getZoneById(self, zone_id=None, request_headers:Dict={}):
-        """Returns the region, application, store mapping and other details in the Zone.
+        """Retrieves a single delivery zone.
         :param zone_id : A `zone_id` is a unique identifier for a particular zone. : type string
         """
         payload = {}
@@ -213,7 +213,7 @@ class Serviceability:
         return response
     
     async def getAllStores(self, request_headers:Dict={}):
-        """Retrieve a list of all available stores data.
+        """Retrieves a list of locations.
         """
         payload = {}
         
@@ -252,7 +252,7 @@ class Serviceability:
         return response
     
     async def createCourierPartnerAccount(self, body="", request_headers:Dict={}):
-        """This API Creates a new Courier Account
+        """Creates a courier partner account.
         """
         payload = {}
         
@@ -295,7 +295,7 @@ class Serviceability:
         return response
     
     async def getCourierPartnerAccounts(self, page_no=None, page_size=None, stage=None, payment_mode=None, transport_type=None, request_headers:Dict={}):
-        """This API returns Courier Account of a company.
+        """Retrieves a list of courier partner accounts.
         :param page_no : index of the item to start returning with : type integer
         :param page_size : determines the items to be displayed in a page : type integer
         :param stage : stage of the account. enabled/disabled : type string
@@ -349,7 +349,7 @@ class Serviceability:
         return response
     
     async def updateCourierPartnerAccount(self, account_id=None, body="", request_headers:Dict={}):
-        """Updates Courier Account
+        """Updates an existing courier partner account.
         :param account_id : Unique ID of courier account : type string
         """
         payload = {}
@@ -395,7 +395,7 @@ class Serviceability:
         return response
     
     async def getCourierPartnerAccount(self, account_id=None, request_headers:Dict={}):
-        """This API returns response DpAccount of a company from mongo database.
+        """Retrieves a single courier partner account.
         :param account_id : Unique ID of courier account : type string
         """
         payload = {}
@@ -437,7 +437,7 @@ class Serviceability:
         return response
     
     async def updateCompanyConfiguration(self, body="", request_headers:Dict={}):
-        """Apply Courier Rule to company with rules priority
+        """Updates an existing delivery setup for a company, including the ability to adjust self-shipping preferences.
         """
         payload = {}
         
@@ -480,7 +480,7 @@ class Serviceability:
         return response
     
     async def getCompanyConfiguration(self, request_headers:Dict={}):
-        """This API returns all Courier Rules applied for company.
+        """Retrieves information about the delivery setup for a company
         """
         payload = {}
         
@@ -519,7 +519,8 @@ class Serviceability:
         return response
     
     async def bulkTat(self, extension_id=None, scheme_id=None, body="", request_headers:Dict={}):
-        """Region TAT Import or Export
+        """Updates locality wise TAT(Turn Around Time) for particular courier scheme using CSV file.
+Export locality wise CSV files.
         :param extension_id : Unique Identifier of CP Extension : type string
         :param scheme_id : Unique identifier of a scheme : type string
         """
@@ -568,7 +569,7 @@ class Serviceability:
         return response
     
     async def getBulkTat(self, extension_id=None, scheme_id=None, page_no=None, page_size=None, batch_id=None, action=None, status=None, country=None, region=None, start_date=None, end_date=None, request_headers:Dict={}):
-        """Get region tat bulk history
+        """Retrieves the history of changes made to TAT(Turn Around Time) for scheme.
         :param extension_id : Unique Identifier of CP Extension : type string
         :param scheme_id : Unique identifier of a scheme : type string
         :param page_no : index of the item to start returning with : type integer
@@ -640,7 +641,7 @@ class Serviceability:
         return response
     
     async def bulkServiceability(self, extension_id=None, scheme_id=None, body="", request_headers:Dict={}):
-        """Serviceability Import or Export
+        """Bulk operations involve either new serviceability settings or updating existing ones in large quantities.
         :param extension_id : Unique Identifier of CP Extension : type string
         :param scheme_id : Unique identifier of a scheme : type string
         """
@@ -689,7 +690,7 @@ class Serviceability:
         return response
     
     async def getBulkServiceability(self, extension_id=None, scheme_id=None, page_no=None, page_size=None, batch_id=None, action=None, status=None, country=None, region=None, start_date=None, end_date=None, request_headers:Dict={}):
-        """Get Region Serviceability Bulk History
+        """Retrieves the history of changes made to serviceability settings for a scheme.
         :param extension_id : Unique Identifier of CP Extension : type string
         :param scheme_id : Unique identifier of a scheme : type string
         :param page_no : index of the item to start returning with : type integer
@@ -761,7 +762,7 @@ class Serviceability:
         return response
     
     async def getServiceability(self, extension_id=None, scheme_id=None, region_id=None, request_headers:Dict={}):
-        """Get Serviceability of a region
+        """Rerieves serviceability settings of a single courier scheme for a given locality
         :param extension_id : Unique Identifier of CP Extension : type string
         :param scheme_id : Unique identifier of a scheme : type string
         :param region_id : Unique identifier of a region : type string
@@ -809,7 +810,7 @@ class Serviceability:
         return response
     
     async def updateServiceability(self, extension_id=None, scheme_id=None, region_id=None, body="", request_headers:Dict={}):
-        """Serviceability Update for a region
+        """Updates serviceability settings of a single courier scheme for a given locality
         :param extension_id : Unique Identifier of CP Extension : type string
         :param scheme_id : Unique identifier of a scheme : type string
         :param region_id : Unique identifier of a region : type string
@@ -861,7 +862,7 @@ class Serviceability:
         return response
     
     async def createPackageMaterial(self, body="", request_headers:Dict={}):
-        """This API returns response of upsert of PackageMaterial in mongo database.
+        """Creates a packaging material
         """
         payload = {}
         
@@ -904,7 +905,7 @@ class Serviceability:
         return response
     
     async def getPackageMaterialList(self, page_no=None, page_size=None, q=None, size=None, package_type=None, request_headers:Dict={}):
-        """This API returns response of PackageMaterials from mongo database.
+        """Retrieves a list of packaging materials
         :param page_no : index of the item to start returning with : type integer
         :param page_size : determines the items to be displayed in a page : type integer
         :param q : perform regex search on items matching name for given value : type string
@@ -958,7 +959,7 @@ class Serviceability:
         return response
     
     async def createPackageMaterialRule(self, body="", request_headers:Dict={}):
-        """This API returns response of upsert of Package Material Rule in mongo database.
+        """Creates a packaging rule
         """
         payload = {}
         
@@ -1001,7 +1002,7 @@ class Serviceability:
         return response
     
     async def getPackageMaterialRules(self, page_no=None, page_size=None, is_active=None, request_headers:Dict={}):
-        """This API returns response of Package Materials Rules from mongo database.
+        """Retrieve packaging rules
         :param page_no : index of the item to start returning with : type integer
         :param page_size : determines the items to be displayed in a page : type integer
         :param is_active : filters items based on given is_active : type string
@@ -1049,7 +1050,7 @@ class Serviceability:
         return response
     
     async def updatePackageMaterialRule(self, rule_id=None, body="", request_headers:Dict={}):
-        """This API updates Package Material Rules into mongo database.
+        """Update an existing packaging rule
         :param rule_id : A `package_material_rule_id` is a unique identifier for a Package Material Rule : type string
         """
         payload = {}
@@ -1095,7 +1096,7 @@ class Serviceability:
         return response
     
     async def getPackageMaterialRule(self, rule_id=None, request_headers:Dict={}):
-        """This API returns response of Package Material from mongo database.
+        """Retrieve packaging rule details.
         :param rule_id : A `package_material_rule_id` is a unique identifier for a Package Material Rule : type string
         """
         payload = {}
@@ -1137,7 +1138,7 @@ class Serviceability:
         return response
     
     async def updatePackageMaterials(self, package_material_id=None, body="", request_headers:Dict={}):
-        """This API updates Package Materials from into mongo database.
+        """Update an existing packaging material
         :param package_material_id : A `package_material_id` is a unique identifier for a Package Material : type string
         """
         payload = {}
@@ -1183,7 +1184,7 @@ class Serviceability:
         return response
     
     async def getPackageMaterials(self, package_material_id=None, request_headers:Dict={}):
-        """This API returns response of Package Material from mongo database.
+        """Retrieve a single packaging material
         :param package_material_id : A `package_material_id` is a unique identifier for a Package Material : type string
         """
         payload = {}
@@ -1225,7 +1226,7 @@ class Serviceability:
         return response
     
     async def getOptimalLocations(self, body="", request_headers:Dict={}):
-        """Retrieve optimal locations based on the specific criteria
+        """Retrieves a list selling locations which are best suited to fullfil an order for a customer.
         """
         payload = {}
         

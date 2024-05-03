@@ -17,7 +17,6 @@ class Order:
         self._relativeUrls = {
             "getOrders": "/service/application/order/v1.0/orders",
             "getOrderById": "/service/application/order/v1.0/orders/{order_id}",
-            "getPosOrderById": "/service/application/order/v1.0/orders/pos-order/{order_id}",
             "getShipmentById": "/service/application/order/v1.0/orders/shipments/{shipment_id}",
             "getInvoiceByShipmentId": "/service/application/order/v1.0/orders/shipments/{shipment_id}/invoice",
             "trackShipment": "/service/application/order/v1.0/orders/shipments/{shipment_id}/track",
@@ -37,7 +36,7 @@ class Order:
         self._urls.update(urls)
     
     async def getOrders(self, status=None, page_no=None, page_size=None, from_date=None, to_date=None, start_date=None, end_date=None, custom_meta=None, allow_inactive=None, body="", request_headers:Dict={}):
-        """Retrieves all orders associated with a customer account.
+        """Retrieves all orders associated with a customer account
         :param status : A filter to retrieve orders by their current status such as _placed_, _delivered_, etc. : type integer
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
@@ -105,7 +104,7 @@ class Order:
         return response
     
     async def getOrderById(self, order_id=None, allow_inactive=None, body="", request_headers:Dict={}):
-        """Retrieve order details such as tracking details, shipment, store information using Fynd Order ID.
+        """Retrieve order details such as tracking details, shipment, store information using Fynd Order ID
         :param order_id : A unique number used for identifying and tracking your orders. : type string
         :param allow_inactive : Flag to allow inactive shipments : type boolean
         """
@@ -147,50 +146,6 @@ class Order:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getOrderById")
-                print(e)
-
-        return response
-    
-    async def getPosOrderById(self, order_id=None, body="", request_headers:Dict={}):
-        """Retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
-        :param order_id : A unique number used for identifying and tracking your orders. : type string
-        """
-        payload = {}
-        
-        if order_id is not None:
-            payload["order_id"] = order_id
-
-        # Parameter validation
-        schema = OrderValidator.getPosOrderById()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getPosOrderById"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string"}}]}""", serverType="application", order_id=order_id)
-        query_string = await create_query_string(order_id=order_id)
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPosOrderById"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/pos-order/{order_id}", order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import OrderById
-            schema = OrderById()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getPosOrderById")
                 print(e)
 
         return response
@@ -378,7 +333,7 @@ class Order:
         return response
     
     async def sendOtpToShipmentCustomer(self, order_id=None, shipment_id=None, body="", request_headers:Dict={}):
-        """Sends a one-time password (OTP) to the customer for shipment verification.
+        """Sends a one-time password (OTP) to the customer for shipment verification
         :param order_id : A unique number used for identifying and tracking your orders. : type string
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
@@ -476,7 +431,7 @@ class Order:
         return response
     
     async def getShipmentBagReasons(self, shipment_id=None, bag_id=None, body="", request_headers:Dict={}):
-        """Retrieves reasons that led to the cancellation for the status of shipment bags.
+        """Get reasons to perform full or partial cancellation of a bag
         :param shipment_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         :param bag_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
@@ -523,7 +478,7 @@ class Order:
         return response
     
     async def getShipmentReasons(self, shipment_id=None, body="", request_headers:Dict={}):
-        """Retrieve reasons explaining various shipment statuses.
+        """Get reasons to perform full or partial cancellation of a shipment
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
         payload = {}
@@ -567,7 +522,7 @@ class Order:
         return response
     
     async def updateShipmentStatus(self, shipment_id=None, body="", request_headers:Dict={}):
-        """Modifies the current status of a specific shipment using its shipment ID.
+        """Modifies the current status of a specific shipment using its shipment ID. Supports both partial and full transition as per the configured settings.
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         """
         payload = {}

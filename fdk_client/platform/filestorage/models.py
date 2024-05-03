@@ -601,11 +601,11 @@ class CompanyDetail(BaseSchema):
     
     country_code = fields.Str(required=False)
     
-    gstin = fields.Str(required=False)
+    gstin = fields.Str(required=False, allow_none=True)
     
     pan = fields.Str(required=False, allow_none=True)
     
-    phone_no = fields.Str(required=False)
+    phone_no = fields.Str(required=False, allow_none=True)
     
     cin = fields.Str(required=False)
     

@@ -14,7 +14,7 @@ class Order:
 
     
     async def failedOrderLogs(self, page_no=None, page_size=None, search_type=None, search_value=None, request_headers:Dict={}):
-        """This endpoint allows users to get failed order logs listing for filters based on order id, user contact number, user email id and sales channel id.
+        """Get failed order logs listing for filters based on order Id, user contact number, user email Id and sales channel Id.
         :param page_no : Page Number : type integer
         :param page_size : Page Size : type integer
         :param search_type : Search type for filter : type string
@@ -65,7 +65,7 @@ class Order:
         return response
     
     async def getShipmentBagReasons(self, shipment_id=None, line_number=None, request_headers:Dict={}):
-        """Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+        """Get reasons to perform full or partial cancellation of a shipment
         :param shipment_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
         :param line_number : line number of bag. : type integer
         """
@@ -110,7 +110,7 @@ class Order:
         return response
     
     async def getApplicationShipments(self, lane=None, search_type=None, search_id=None, from_date=None, to_date=None, dp_ids=None, ordering_company_id=None, stores=None, sales_channel=None, request_by_ext=None, page_no=None, page_size=None, customer_id=None, is_priority_sort=None, exclude_locked_shipments=None, request_headers:Dict={}):
-        """Get cross selling platform shipments
+        """Get shipments of a particular sales channel based on the filters provided
         :param lane :  : type string
         :param search_type :  : type string
         :param search_id :  : type string
@@ -194,7 +194,7 @@ class Order:
         return response
     
     async def trackShipmentPlatform(self, shipment_id=None, request_headers:Dict={}):
-        """Track shipment by Shipment ID for application based on application Id
+        """Track shipment by shipment Id for an application
         :param shipment_id : Shipment Id : type string
         """
         payload = {}
@@ -236,7 +236,7 @@ class Order:
         return response
     
     async def getPlatformShipmentReasons(self, action=None, request_headers:Dict={}):
-        """Retrieve reasons behind full or partial cancellation of a shipment
+        """Get reasons to perform full or partial cancellation of a shipment
         :param action :  : type string
         """
         payload = {}

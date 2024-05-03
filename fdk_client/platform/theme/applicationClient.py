@@ -56,7 +56,7 @@ class Theme:
         return response
     
     async def createPage(self, theme_id=None, body="", request_headers:Dict={}):
-        """Generate and add a new page to the platform.
+        """Generate and add a new page to the selected theme of the Platform.
         :param theme_id : ID of the theme : type string
         """
         payload = {}
@@ -102,7 +102,7 @@ class Theme:
         return response
     
     async def updateMultiplePages(self, theme_id=None, body="", request_headers:Dict={}):
-        """Modify multiple pages simultaneously.
+        """Modify multiple pages simultaneously of a theme.
         :param theme_id : ID of the theme to be retrieved : type string
         """
         payload = {}
@@ -148,7 +148,7 @@ class Theme:
         return response
     
     async def getPage(self, theme_id=None, page_value=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific page.
+        """Retrieve detailed information about a specific page of a theme.
         :param theme_id : ID of the theme to be retrieved : type string
         :param page_value : Value of the page to be retrieved : type string
         """
@@ -242,7 +242,7 @@ class Theme:
         return response
     
     async def deletePage(self, theme_id=None, page_value=None, request_headers:Dict={}):
-        """Remove a page from the platform.
+        """Remove a page from a theme of the platform.
         :param theme_id : ID of the theme : type string
         :param page_value : Value of the page to be updated : type string
         """
@@ -286,141 +286,8 @@ class Theme:
 
         return response
     
-    async def getThemeLibrary(self, page_size=None, page_no=None, request_headers:Dict={}):
-        """Retrieve themes available in the platform's library.
-        :param page_size : The number of items to retrieve in each page. Default value is 10.  : type integer
-        :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
-        """
-        payload = {}
-        
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if page_no is not None:
-            payload["page_no"] = page_no
-
-        # Parameter validation
-        schema = ThemeValidator.getThemeLibrary()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/library", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}}],"optional":[{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10. ","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}}],"query":[{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10. ","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}}]}""", serverType="platform", page_size=page_size, page_no=page_no)
-        query_string = await create_query_string(page_size=page_size, page_no=page_no)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/library", page_size=page_size, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DummyResponse
-            schema = DummyResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getThemeLibrary")
-                print(e)
-
-        return response
-    
-    async def addToThemeLibrary(self, body="", request_headers:Dict={}):
-        """Store and add a theme to the platform's library.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ThemeValidator.addToThemeLibrary()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import AddThemeRequestSchema
-        schema = AddThemeRequestSchema()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/library", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/library", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DummyResponse
-            schema = DummyResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for addToThemeLibrary")
-                print(e)
-
-        return response
-    
-    async def getPublicThemes(self, page_size=None, page_no=None, request_headers:Dict={}):
-        """Retrieve themes that are publicly accessible.
-        :param page_size : The number of items to retrieve in each page. Default value is 10.  : type integer
-        :param page_no : The page number to navigate through the given set of results. Default value is 1.  : type integer
-        """
-        payload = {}
-        
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if page_no is not None:
-            payload["page_no"] = page_no
-
-        # Parameter validation
-        schema = ThemeValidator.getPublicThemes()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/list/public", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}}],"optional":[{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10. ","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. ","required":false,"schema":{"type":"integer","default":1}}],"query":[{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10. ","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. ","required":false,"schema":{"type":"integer","default":1}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}}]}""", serverType="platform", page_size=page_size, page_no=page_no)
-        query_string = await create_query_string(page_size=page_size, page_no=page_no)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/list/public", page_size=page_size, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DummyResponse
-            schema = DummyResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getPublicThemes")
-                print(e)
-
-        return response
-    
     async def getFonts(self, request_headers:Dict={}):
-        """Retrieve a list of available fonts.
+        """Retrieve a list of available fonts that can be used by themes in the platform.
         """
         payload = {}
         
@@ -458,176 +325,8 @@ class Theme:
 
         return response
     
-    async def publishTheme(self, theme_id=None, request_headers:Dict={}):
-        """Make a theme accessible for use.
-        :param theme_id : ID allotted to the theme. : type string
-        """
-        payload = {}
-        
-        if theme_id is not None:
-            payload["theme_id"] = theme_id
-
-        # Parameter validation
-        schema = ThemeValidator.publishTheme()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/publish", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID allotted to the theme.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID allotted to the theme.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/publish", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DummyResponse
-            schema = DummyResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for publishTheme")
-                print(e)
-
-        return response
-    
-    async def unpublishTheme(self, theme_id=None, request_headers:Dict={}):
-        """Remove a published theme from public access.
-        :param theme_id : ID allotted to the theme. : type string
-        """
-        payload = {}
-        
-        if theme_id is not None:
-            payload["theme_id"] = theme_id
-
-        # Parameter validation
-        schema = ThemeValidator.unpublishTheme()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/unpublish", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID allotted to the theme.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID allotted to the theme.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/unpublish", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DummyResponse
-            schema = DummyResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for unpublishTheme")
-                print(e)
-
-        return response
-    
-    async def archiveTheme(self, theme_id=None, request_headers:Dict={}):
-        """Store a theme in an archive.
-        :param theme_id : ID allotted to the theme. : type string
-        """
-        payload = {}
-        
-        if theme_id is not None:
-            payload["theme_id"] = theme_id
-
-        # Parameter validation
-        schema = ThemeValidator.archiveTheme()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/archive", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID allotted to the theme.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID allotted to the theme.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/archive", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DummyResponse
-            schema = DummyResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for archiveTheme")
-                print(e)
-
-        return response
-    
-    async def unarchiveTheme(self, theme_id=None, request_headers:Dict={}):
-        """Retrieve a theme from the archive.
-        :param theme_id : ID allotted to the theme. : type string
-        """
-        payload = {}
-        
-        if theme_id is not None:
-            payload["theme_id"] = theme_id
-
-        # Parameter validation
-        schema = ThemeValidator.unarchiveTheme()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/unarchive", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID allotted to the theme.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID allotted to the theme.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/unarchive", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DummyResponse
-            schema = DummyResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for unarchiveTheme")
-                print(e)
-
-        return response
-    
     async def getApplicationThemes(self, request_headers:Dict={}):
-        """Retrieve themes available for an application.
+        """Retrieve all draft themes added to sales channel from theme collection.
         """
         payload = {}
         
@@ -657,7 +356,7 @@ class Theme:
         return response
     
     async def getApplicationThemesCount(self, request_headers:Dict={}):
-        """Count the number of themes available for an application.
+        """Retrieve count of all draft themes added to sales channel from theme collection.
         """
         payload = {}
         
@@ -687,7 +386,7 @@ class Theme:
         return response
     
     async def getThemeById(self, theme_id=None, request_headers:Dict={}):
-        """Retrieve a theme by its unique identifier.
+        """Retrieve a theme by its unique identifier. Response contains theme template data and data stored in theme editor.
         :param theme_id : The ID of the theme : type string
         """
         payload = {}
@@ -729,7 +428,7 @@ class Theme:
         return response
     
     async def updateTheme(self, theme_id=None, body="", request_headers:Dict={}):
-        """Modify and update the content and settings of a theme
+        """Modify and update the content and settings of a theme.
         :param theme_id : The ID of the theme. : type string
         """
         payload = {}
@@ -775,7 +474,7 @@ class Theme:
         return response
     
     async def deleteTheme(self, theme_id=None, request_headers:Dict={}):
-        """Remove a theme from the platform.
+        """Remove a theme from theme drafts of a sales channel.
         :param theme_id : The ID of the theme to be deleted. : type string
         """
         payload = {}
@@ -817,7 +516,7 @@ class Theme:
         return response
     
     async def addThemeToApplication(self, body="", request_headers:Dict={}):
-        """Include a theme in an application's design.
+        """Include a theme in an application drafts from theme collection.
         """
         payload = {}
         
@@ -860,7 +559,7 @@ class Theme:
         return response
     
     async def updateThemeName(self, theme_id=None, body="", request_headers:Dict={}):
-        """Modify the name of a theme.
+        """Modify the name of the draft theme by theme Id.
         :param theme_id : The ID of the theme to be updated. : type string
         """
         payload = {}
@@ -906,7 +605,7 @@ class Theme:
         return response
     
     async def applyTheme(self, theme_id=None, request_headers:Dict={}):
-        """Set and apply a theme to an application or page.
+        """Change current applied theme with new draft theme.
         :param theme_id : The ID of the apply : type string
         """
         payload = {}
@@ -948,7 +647,7 @@ class Theme:
         return response
     
     async def duplicateTheme(self, theme_id=None, request_headers:Dict={}):
-        """Create a copy of an existing theme.
+        """Create a new copy of an existing theme by theme Id
         :param theme_id : The ID of the theme to be duplicated : type string
         """
         payload = {}
@@ -990,7 +689,7 @@ class Theme:
         return response
     
     async def getAppliedTheme(self, request_headers:Dict={}):
-        """Retrieve the currently applied theme.
+        """Retrieve the currently applied theme of a sales channel using application Id.
         """
         payload = {}
         
@@ -1029,7 +728,7 @@ class Theme:
         return response
     
     async def getThemeForPreview(self, theme_id=None, request_headers:Dict={}):
-        """Retrieve a theme for previewing before application.
+        """Retrieve a theme by its unique identifier. Response contains theme template data and data stored in theme editor.
         :param theme_id : The ID of the theme : type string
         """
         payload = {}
@@ -1071,7 +770,7 @@ class Theme:
         return response
     
     async def getThemeLastModified(self, theme_id=None, request_headers:Dict={}):
-        """Retrieve the last modification of a theme.
+        """Retrieve the last modification of a theme used for polling and identifing cross user changes in a theme.
         :param theme_id : ID allotted to the theme. : type string
         """
         payload = {}
@@ -1104,7 +803,7 @@ class Theme:
         return response
     
     async def isUpgradable(self, theme_id=None, request_headers:Dict={}):
-        """Determine if a theme is eligible for an upgrade.
+        """Determine if a public theme is eligible for an upgrade to a new version after any new version released in marketplace. 
         :param theme_id : The ID of the theme : type string
         """
         payload = {}
@@ -1146,7 +845,7 @@ class Theme:
         return response
     
     async def upgradeTheme(self, theme_id=None, request_headers:Dict={}):
-        """Enhance and update a theme to a new version.
+        """Update a draft theme to a new version of the marketplace.
         :param theme_id : The ID of the upgrade : type string
         """
         payload = {}

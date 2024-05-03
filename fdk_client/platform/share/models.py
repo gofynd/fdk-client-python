@@ -187,6 +187,8 @@ class UrlInfo(BaseSchema):
     
     hash = fields.Str(required=False)
     
+    short_url = fields.Str(required=False)
+    
 
 
 class ShortLinkRes(BaseSchema):

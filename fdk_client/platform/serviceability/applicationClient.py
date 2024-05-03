@@ -14,7 +14,7 @@ class Serviceability:
 
     
     async def updatePincodeMopView(self, body="", request_headers:Dict={}):
-        """Modify and update views related to pincode MOP.
+        """Modify and update views related to pincode MOP (Mode of Payment).
         """
         payload = {}
         
@@ -57,7 +57,7 @@ class Serviceability:
         return response
     
     async def updatePincodeBulkView(self, body="", request_headers:Dict={}):
-        """Modify and update views related to bulk operations on pincode.
+        """Updates the cash on delivery settings for multiple specified pin codes simultaneously.
         """
         payload = {}
         
@@ -100,7 +100,7 @@ class Serviceability:
         return response
     
     async def updatePincodeCoDListing(self, body="", request_headers:Dict={}):
-        """Modify and update listings for CoD based on pincode.
+        """Retrieves a list of pincodes along with the count based on whether cash on delivery settings.
         """
         payload = {}
         
@@ -143,7 +143,7 @@ class Serviceability:
         return response
     
     async def updatePincodeAuditHistory(self, body="", request_headers:Dict={}):
-        """Modify and update audit history records for pincode-related activities.
+        """Retrieves the history of changes made to cash on delivery settings for pincodes.
         """
         payload = {}
         
@@ -186,7 +186,7 @@ class Serviceability:
         return response
     
     async def updateCourierRule(self, rule_id=None, body="", request_headers:Dict={}):
-        """This API updates and returns Courier Rule.
+        """Updates an existing rule within the delivery configuration.
         :param rule_id : A `rule_id` is a unique identifier for a particular Dp. : type string
         """
         payload = {}
@@ -232,7 +232,7 @@ class Serviceability:
         return response
     
     async def getCourierPartnerRule(self, rule_id=None, request_headers:Dict={}):
-        """This API returns Courier Rule.
+        """Retrieves a single rule within the delivery configuration.
         :param rule_id : A `rule_id` is a unique identifier for a rule. : type string
         """
         payload = {}
@@ -274,7 +274,7 @@ class Serviceability:
         return response
     
     async def createCourierPartnerRule(self, body="", request_headers:Dict={}):
-        """Creates Courier Rules with rule configuration and dp priority
+        """Creates a rule within the delivery configuration.
         """
         payload = {}
         
@@ -317,7 +317,7 @@ class Serviceability:
         return response
     
     async def getCourierPartnerRules(self, page_no=None, page_size=None, status=None, request_headers:Dict={}):
-        """This API returns Courier Rules List
+        """Retrieve a list of rules within the delivery configuration.
         :param page_no : index of the item to start returning with : type integer
         :param page_size : determines the items to be displayed in a page : type integer
         :param status : Filter rules based on rule status : type string
@@ -365,7 +365,7 @@ class Serviceability:
         return response
     
     async def updateApplicationConfiguration(self, body="", request_headers:Dict={}):
-        """Apply configuration to application to set DP rules and Zone configuration
+        """Updates an existing delivery setup for an application, which involves updating sorting settings or rule priorities.
         """
         payload = {}
         
@@ -408,7 +408,7 @@ class Serviceability:
         return response
     
     async def getApplicationConfiguration(self, request_headers:Dict={}):
-        """This API returns all the Courier Rules applied to an application
+        """Retrieves information about the delivery setup for an application
         """
         payload = {}
         
@@ -447,7 +447,7 @@ class Serviceability:
         return response
     
     async def patchApplicationServiceabilitySelfShipment(self, body="", request_headers:Dict={}):
-        """This API updates Self-ship configuration of the application.
+        """Updates self ship setup for an existing application
         """
         payload = {}
         
@@ -490,7 +490,7 @@ class Serviceability:
         return response
     
     async def getApplicationServiceabilitySelfShipment(self, request_headers:Dict={}):
-        """This API returns Self-ship configuration of the application.
+        """Retrieves the self ship setup for a single application
         """
         payload = {}
         
@@ -529,7 +529,7 @@ class Serviceability:
         return response
     
     async def getApplicationConfig(self, request_headers:Dict={}):
-        """Get Application Configuration
+        """Retrieves information about the order routing setup for a single application
         """
         payload = {}
         
@@ -568,7 +568,7 @@ class Serviceability:
         return response
     
     async def insertApplicationConfig(self, body="", request_headers:Dict={}):
-        """Insert Application Configuration
+        """Creates a order routing setup for an application, which involves updating sorting settings or rule priorities.
         """
         payload = {}
         
@@ -611,7 +611,7 @@ class Serviceability:
         return response
     
     async def updateStoreRulesConfig(self, body="", request_headers:Dict={}):
-        """Update Store Rule Configuration
+        """Updates an existing order routing setup for a single application, which involves updating sorting settings or rule priorities.
         """
         payload = {}
         
@@ -654,7 +654,7 @@ class Serviceability:
         return response
     
     async def getStoreRules(self, page_no=None, page_size=None, status=None, request_headers:Dict={}):
-        """Get Multiple Store Rules
+        """Retrieves an existing order routing setup for a single application
         :param page_no :  : type integer
         :param page_size :  : type integer
         :param status :  : type string
@@ -702,7 +702,7 @@ class Serviceability:
         return response
     
     async def createStoreRules(self, body="", request_headers:Dict={}):
-        """Create Store Rule
+        """Create a rule within the order routing rules
         """
         payload = {}
         
@@ -745,7 +745,7 @@ class Serviceability:
         return response
     
     async def getStoreRule(self, rule_uid=None, request_headers:Dict={}):
-        """Get Single Store Rule
+        """Retrieves a single rule within the order routing rules
         :param rule_uid : A `rule_uid` is a unique identifier for a particular rule object. : type string
         """
         payload = {}
@@ -787,7 +787,7 @@ class Serviceability:
         return response
     
     async def updateStoreRules(self, rule_uid=None, body="", request_headers:Dict={}):
-        """Update Store Rule
+        """Updates an existing rule within the order routing rules.
         :param rule_uid : A `rule_uid` is a unique identifier for a particular rule object. : type string
         """
         payload = {}
@@ -833,7 +833,7 @@ class Serviceability:
         return response
     
     async def updateCourierPartnerRulePriority(self, body="", request_headers:Dict={}):
-        """Updates Courier Partner Rules Priority for a sales channel
+        """Updates a courier partner rule priority for a single application
         """
         payload = {}
         

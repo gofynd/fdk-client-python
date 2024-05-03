@@ -27,7 +27,7 @@ class Common:
         self._urls.update(urls)
     
     async def searchApplication(self, authorization=None, query=None, body="", request_headers:Dict={}):
-        """Provide application name or domain url. 
+        """Retrieves an active sales channel based on a provided query. The query can be a valid sales channel ID or a verified domain name. If the sales channel is found, a success response is returned. If not, a 404 error response is returned
         :param authorization :  : type string
         :param query : Provide application name : type string
         """
@@ -74,7 +74,7 @@ class Common:
         return response
     
     async def getLocations(self, location_type=None, id=None, body="", request_headers:Dict={}):
-        """Retrieves a list of all locations of countries, states, cities. 
+        """Retrieves countries , state , cities data associated with the sales channel
         :param location_type : Provide location type to query on. Possible values : country, state, city : type string
         :param id : Field is optional when location_type is country. If querying for state, provide id of country. If querying for city, provide id of state. : type string
         """

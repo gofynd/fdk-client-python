@@ -14,7 +14,7 @@ class User:
 
     
     async def getCustomers(self, q=None, page_size=None, page_no=None, request_headers:Dict={}):
-        """Retrieve a list of customer profiles.
+        """Retrieve details of users registered in the sales channel
         :param q : The search query. Mobile number or email ID of a customer. : type string
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         :param page_no : The page number to navigate through the given set of results. Default value is 1.  : type integer
@@ -62,7 +62,7 @@ class User:
         return response
     
     async def searchUsers(self, q=None, query=None, request_headers:Dict={}):
-        """Search and filter user profiles.
+        """Search and filter users details registered in the sales channel
         :param q : The search query. Mobile number or email ID of a customer. : type string
         :param query : The search queries. Mobile numbers or email IDs of customers. : type array
         """
@@ -107,7 +107,7 @@ class User:
         return response
     
     async def createUser(self, body="", request_headers:Dict={}):
-        """Register and add a new user to the platform.
+        """Register and add a new user to the sales channel.
         """
         payload = {}
         
@@ -150,7 +150,7 @@ class User:
         return response
     
     async def blockOrUnblockUsers(self, body="", request_headers:Dict={}):
-        """Control user access by blocking or unblocking their accounts.
+        """Manage user access by blocking or unblocking their accounts, restricting login for blocked accounts and allowing login for unblocked accounts.
         """
         payload = {}
         
@@ -282,7 +282,7 @@ class User:
         return response
     
     async def createUserSession(self, body="", request_headers:Dict={}):
-        """Establish a session for user interactions.
+        """Create session for user interactions
         """
         payload = {}
         
@@ -415,7 +415,7 @@ class User:
         return response
     
     async def deleteActiveSessions(self, id=None, reason=None, request_headers:Dict={}):
-        """End multiple active user sessions.
+        """Terminate all active user sessions.
         :param id : ID of a customer. : type string
         :param reason : Reason to delete sessions. : type string
         """
@@ -460,7 +460,7 @@ class User:
         return response
     
     async def archiveUser(self, body="", request_headers:Dict={}):
-        """archive user
+        """Delete user from sales channel, allowing re-registration with the same mobile/email for a new user account.
         """
         payload = {}
         
@@ -503,7 +503,7 @@ class User:
         return response
     
     async def getPlatformConfig(self, request_headers:Dict={}):
-        """Retrieve configuration settings for the platform.
+        """Retrieve platform sales channel authentication configuration.
         """
         payload = {}
         
@@ -542,7 +542,7 @@ class User:
         return response
     
     async def updatePlatformConfig(self, body="", request_headers:Dict={}):
-        """Modify and update platform configuration settings.
+        """Modify and update platform sales channel authentication configuration.
         """
         payload = {}
         
@@ -819,7 +819,7 @@ class User:
         return response
     
     async def createUserAttributeDefinition(self, body="", request_headers:Dict={}):
-        """Use this API to areate a new User Attribute Definition
+        """Create a new User Attribute Definition
         """
         payload = {}
         
@@ -1104,7 +1104,7 @@ class User:
         return response
     
     async def getUserAttribute(self, attribute_def_id=None, user_id=None, request_headers:Dict={}):
-        """get User Attribute
+        """Get User Attribute
         :param attribute_def_id : The unique identifier of the attribute definition. : type string
         :param user_id : The unique identifier of the user. : type string
         """
@@ -1149,7 +1149,7 @@ class User:
         return response
     
     async def deleteUserAttribute(self, attribute_def_id=None, user_id=None, request_headers:Dict={}):
-        """delete User Attribute
+        """Delete User Attribute
         :param attribute_def_id : The unique identifier of the attribute definition. : type string
         :param user_id : The unique identifier of the user. : type string
         """
@@ -1194,7 +1194,7 @@ class User:
         return response
     
     async def getUserAttributesForUser(self, user_id=None, page_size=None, page_no=None, request_headers:Dict={}):
-        """Get all user attributes for user
+        """Retrieve all user attributes for a specific user
         :param user_id : The unique identifier of the user to update. : type string
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         :param page_no : The page number to navigate through the given set of results. Default value is 1.  : type integer
@@ -1233,7 +1233,7 @@ class User:
         return response
     
     async def getUserAttributeById(self, attribute_id=None, request_headers:Dict={}):
-        """Get User Attribute details by id
+        """Retrieve User Attribute details by ID.
         :param attribute_id : The unique identifier of the attribute to get. : type string
         """
         payload = {}

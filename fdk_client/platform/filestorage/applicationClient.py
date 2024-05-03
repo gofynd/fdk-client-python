@@ -14,7 +14,7 @@ class FileStorage:
 
     
     async def appStartUpload(self, namespace=None, body="", request_headers:Dict={}):
-        """Start uploading a file from an application and returns a storage link in response.
+        """Inititates the process of uploading a file to storage location, and returns a storage link in response on platofrm at application level. Please refer group description for more details.
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
@@ -60,7 +60,7 @@ class FileStorage:
         return response
     
     async def appCompleteUpload(self, namespace=None, body="", request_headers:Dict={}):
-        """Finish uploading a file from an application.
+        """Complete the file upload and store the file details such as name, size, content type, and namespace to maintain integrity within the system's database on platform at application level
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
@@ -106,7 +106,7 @@ class FileStorage:
         return response
     
     async def appCopyFiles(self, sync=None, body="", request_headers:Dict={}):
-        """Copy files from an application to another location.
+        """Handle multiple file uploads, updating progress and providing detailed status reports.
         :param sync : sync : type boolean
         """
         payload = {}
@@ -143,7 +143,7 @@ class FileStorage:
         return response
     
     async def appbrowse(self, namespace=None, page=None, limit=None, search=None, request_headers:Dict={}):
-        """Browse files within an application.
+        """View and navigate through available files.
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         :param page : page no : type integer
         :param limit : Limit : type integer
@@ -185,7 +185,7 @@ class FileStorage:
         return response
     
     async def browsefiles(self, namespace=None, page=None, limit=None, search=None, body="", request_headers:Dict={}):
-        """Browse Files
+        """View and navigate through available files.
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         :param page : page no : type integer
         :param limit : Limit : type integer
@@ -231,7 +231,7 @@ class FileStorage:
         return response
     
     async def getPdfTypes(self, country_code=None, request_headers:Dict={}):
-        """Retrieve a list of available PDF types.
+        """Retrieve a list of available invoice types.
         :param country_code :  : type string
         """
         payload = {}
@@ -273,7 +273,7 @@ class FileStorage:
         return response
     
     async def getDefaultPdfData(self, pdf_type_id=None, country_code=None, request_headers:Dict={}):
-        """Retrieve default data for PDF generation.
+        """Retrieve default pdf payload data for invoice generation.
         :param pdf_type_id :  : type integer
         :param country_code :  : type string
         """
@@ -364,7 +364,9 @@ class FileStorage:
         return response
     
     async def getDefaultHtmlTemplate(self, pdf_type_id=None, format=None, country_code=None, request_headers:Dict={}):
-        """Get default html template for invoice or label
+        """
+Get the saved html template for provided sales channel
+
         :param pdf_type_id :  : type integer
         :param format :  : type string
         :param country_code :  : type string
@@ -412,7 +414,7 @@ class FileStorage:
         return response
     
     async def saveHtmlTemplate(self, body="", request_headers:Dict={}):
-        """Store an HTML template.
+        """Save html template for provided sales channel
         """
         payload = {}
         
@@ -455,7 +457,7 @@ class FileStorage:
         return response
     
     async def getDefaultPdfTemplate(self, pdf_type_id=None, format=None, country_code=None, request_headers:Dict={}):
-        """Retrieve the default PDF template.
+        """Retrieve to get the default Invoice template.
         :param pdf_type_id :  : type integer
         :param format :  : type string
         :param country_code :  : type string

@@ -331,7 +331,8 @@ class Webhook:
         return response
     
     async def cancelJobByName(self, filename=None, request_headers:Dict={}):
-        """Cancel a specific job by its name.
+        """It will cancel export job triggerd by user in order to fetch
+historical delivery summery
         :param filename :  : type string
         """
         payload = {}

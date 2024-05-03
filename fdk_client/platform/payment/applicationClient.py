@@ -14,7 +14,7 @@ class Payment:
 
     
     async def getBrandPaymentGatewayConfig(self, aggregator=None, config_type=None, request_headers:Dict={}):
-        """Retrieve configuration settings for brand payment gateways.
+        """Retrieve configuration settings like key, secret, webhook url, merchant salt for brand payment gateways.
         :param aggregator : aggregator slug : type string
         :param config_type :  : type string
         """
@@ -59,7 +59,7 @@ class Payment:
         return response
     
     async def saveBrandPaymentGatewayConfig(self, body="", request_headers:Dict={}):
-        """Store and update configuration settings for brand payment gateways.
+        """Store and update configuration settings for brand payment gateways i.e required for payment for a payment gateway like key, secret, merchant salt.
         """
         payload = {}
         
@@ -102,7 +102,7 @@ class Payment:
         return response
     
     async def getPaymentModeRoutes(self, refresh=None, request_type=None, order_id=None, shipment_id=None, request_headers:Dict={}):
-        """Retrieve routes and options for payment modes.
+        """Available payment methods on the payment page, specifying the aggregator for each option, such as 'Netbanking powered by Juspay' and 'Card powered by Razorpay'.
         :param refresh :  : type boolean
         :param request_type :  : type string
         :param order_id :  : type string
@@ -153,7 +153,7 @@ class Payment:
         return response
     
     async def getBankAccountDetailsOpenAPI(self, order_id=None, request_hash=None, request_headers:Dict={}):
-        """Retrieve bank account information using an open API.
+        """Retrieve bank account information 
         :param order_id :  : type string
         :param request_hash :  : type string
         """
@@ -198,7 +198,7 @@ class Payment:
         return response
     
     async def addRefundBankAccountUsingOTP(self, body="", request_headers:Dict={}):
-        """Register a refund bank account with OTP verification.
+        """The addition of a bank account specifically for refunds, employing OTP verification for security
         """
         payload = {}
         
@@ -241,7 +241,7 @@ class Payment:
         return response
     
     async def getUserOrderBeneficiaries(self, order_id=None, request_headers:Dict={}):
-        """Retrieve beneficiaries associated with a user orders.
+        """Retrieve beneficiary details like bank name , ifsc code , branch name associated with a specific order for refund processing 
         :param order_id :  : type string
         """
         payload = {}
@@ -283,7 +283,7 @@ class Payment:
         return response
     
     async def getUserBeneficiaries(self, order_id=None, request_headers:Dict={}):
-        """Retrieve beneficiaries associated with a user.
+        """Retrieves information about beneficiaries associated with the user for processing refunds, based on the provided order ID
         :param order_id :  : type string
         """
         payload = {}
@@ -325,7 +325,7 @@ class Payment:
         return response
     
     async def confirmPayment(self, body="", request_headers:Dict={}):
-        """Authenticate and confirm a payment.
+        """Authentication and confirmation of a payment.It requires details such as the order ID and payment methods in the request body to authenticate and confirm the payment.
         """
         payload = {}
         
@@ -368,7 +368,7 @@ class Payment:
         return response
     
     async def getUserCODlimitRoutes(self, merchant_user_id=None, mobile_no=None, request_headers:Dict={}):
-        """Retrieve routes and limits for user cash-on-delivery (COD) transactions.
+        """Retrieve user cod limt data of user i.e cod is active or not for user and remaining limit 
         :param merchant_user_id :  : type string
         :param mobile_no :  : type string
         """
@@ -413,7 +413,7 @@ class Payment:
         return response
     
     async def setUserCODlimitRoutes(self, body="", request_headers:Dict={}):
-        """Configure routes and limits for user COD transactions.
+        """This allows access to seller to enable disable cod of specific user
         """
         payload = {}
         
@@ -495,7 +495,7 @@ class Payment:
         return response
     
     async def edcDeviceStats(self, request_headers:Dict={}):
-        """Get statistics and data related to EDC devices.
+        """Information about EDC (Electronic Data Capture) devices linked to a specific application within a company. It provides statistics such as the count of active and inactive devices.
         """
         payload = {}
         
@@ -534,7 +534,7 @@ class Payment:
         return response
     
     async def updateEdcDevice(self, body="", request_headers:Dict={}):
-        """Modify the settings and details of an EDC device.
+        """Enables the modification of settings and details associated with an Electronic Data Capture (EDC) device linked to a specific application within a company. Upon success, it returns the updated information of the EDC device.
         """
         payload = {}
         
@@ -577,7 +577,7 @@ class Payment:
         return response
     
     async def getEdcDevice(self, terminal_unique_identifier=None, request_headers:Dict={}):
-        """Retrieve detailed information about an EDC device.
+        """Retrieve comprehensive details regarding an Electronic Data Capture (EDC) device associated with a particular terminal unique identifier within a company's application.Upon success, it returns the detailed information of the EDC device, including terminal serial number, EDC device serial number, merchant store POS code, store ID, aggregator ID and name, device tag, activation status, and EDC model.
         :param terminal_unique_identifier : Terminal unique identifier : type string
         """
         payload = {}
@@ -619,7 +619,7 @@ class Payment:
         return response
     
     async def addEdcDevice(self, terminal_unique_identifier=None, body="", request_headers:Dict={}):
-        """Register and add a new EDC device.
+        """Registration and addition of a new EDC device to the system
         :param terminal_unique_identifier : Terminal unique identifier : type string
         """
         payload = {}
@@ -665,7 +665,7 @@ class Payment:
         return response
     
     async def edcDeviceList(self, page_no=None, page_size=None, is_active=None, store_id=None, device_tag=None, request_headers:Dict={}):
-        """Retrieve a list of available EDC devices.
+        """Retrieves a list of available Electronic Data Capture (EDC) devices.
         :param page_no :  : type integer
         :param page_size :  : type integer
         :param is_active :  : type boolean
@@ -719,7 +719,7 @@ class Payment:
         return response
     
     async def getPosPaymentModeRoutes(self, amount=None, cart_id=None, pincode=None, checkout_mode=None, refresh=None, order_id=None, card_reference=None, order_type=None, user_details=None, display_split=None, advance_payment=None, shipment_id=None, request_headers:Dict={}):
-        """Retrieve payment options and aggregator for point-of-sale (POS).
+        """Available payment methods on the payment page for POS, specifying the aggregator for each option, such as 'CARD powered by Juspay' and 'QR powered by Razorpay'.
         :param amount : Payable amount. : type integer
         :param cart_id : Identifier of the cart. : type string
         :param pincode : The PIN Code of the destination address, e.g. 400059 : type string
@@ -794,7 +794,7 @@ class Payment:
         return response
     
     async def initialisePayment(self, body="", request_headers:Dict={}):
-        """Start the payment initiation process for UPI and QR code.
+        """Initiates the payment procedure for an order.Upon successful initiation, it returns a  details including the success status, aggregator information, payment method, status, merchant order ID aggregator order , polling URL, timeout, virtual ID, Razorpay payment ID, customer ID, and device ID.
         """
         payload = {}
         
@@ -837,7 +837,7 @@ class Payment:
         return response
     
     async def checkAndUpdatePaymentStatus(self, body="", request_headers:Dict={}):
-        """Verify and modify the status of a payment.
+        """Polling process to confirm the payment status. It periodically checks and updates the current status of a payment, ensuring timely and accurate confirmation of payment transactions.
         """
         payload = {}
         
@@ -880,7 +880,7 @@ class Payment:
         return response
     
     async def resendOrCancelPayment(self, body="", request_headers:Dict={}):
-        """Resend or cancel a payment link.
+        """Enable you to perform actions related to the resending and cancellation of payment links through SMS or EMAIL. resend or cancel payment link that have been initiated but may require modification or cancellation for various reasons, ensuring flexibility and control in payment processing.
         """
         payload = {}
         
@@ -923,7 +923,7 @@ class Payment:
         return response
     
     async def paymentStatusBulk(self, body="", request_headers:Dict={}):
-        """Retrieve the status of multiple payments in bulk.
+        """Retrieve status of multiple payments in bulk and returns the status of each payment along with associated details such as payment ID, amount, currency, status, payment mode, and payment gateway in the response
         """
         payload = {}
         
@@ -966,7 +966,7 @@ class Payment:
         return response
     
     async def oauthGetUrl(self, aggregator=None, success_redirect_url=None, failure_redirect_url=None, request_headers:Dict={}):
-        """Retrieve an OAuth URL for PG API authentication.
+        """This has been used when merchant is setup their razorpay payment gateway, they will redirect to razorpay site after submitting all their secrets for authetication.
         :param aggregator : aggregator : type string
         :param success_redirect_url :  : type string
         :param failure_redirect_url :  : type string
@@ -1014,7 +1014,7 @@ class Payment:
         return response
     
     async def revokeOauthToken(self, aggregator=None, request_headers:Dict={}):
-        """Invalidate an OAuth token.
+        """Revoke the creds  for payment aggregator razropay.
         :param aggregator : aggregator_slug : type string
         """
         payload = {}
@@ -1056,7 +1056,7 @@ class Payment:
         return response
     
     async def repaymentDetails(self, body="", request_headers:Dict={}):
-        """Retrieve information about repayment transactions.
+        """Retrieve repayment details for Buy Now Pay Later (BNPL) payment
         """
         payload = {}
         
@@ -1099,7 +1099,7 @@ class Payment:
         return response
     
     async def merchantOnBoarding(self, body="", request_headers:Dict={}):
-        """Initiate the onboarding process for a merchant.
+        """Initiate the merchant onboarding process for Buy Now Pay Later (BNPL).
         """
         payload = {}
         
@@ -1142,7 +1142,7 @@ class Payment:
         return response
     
     async def verifyCustomerForPayment(self, body="", request_headers:Dict={}):
-        """Retrieve a link for making payments.
+        """Verify whether the user is eligible for pay-later payment from the payment aggregator's side using the customer's phone number
         """
         payload = {}
         
@@ -1185,7 +1185,7 @@ class Payment:
         return response
     
     async def getPaymentLink(self, payment_link_id=None, request_headers:Dict={}):
-        """Retrieve a link for making payments.
+        """Retrieve a payment link for making payments.
         :param payment_link_id :  : type string
         """
         payload = {}
@@ -1227,7 +1227,7 @@ class Payment:
         return response
     
     async def createPaymentLink(self, body="", request_headers:Dict={}):
-        """Generate a new link for accepting payments.
+        """Generate a payment link for accepting payments.
         """
         payload = {}
         
@@ -1270,7 +1270,7 @@ class Payment:
         return response
     
     async def pollingPaymentLink(self, payment_link_id=None, request_headers:Dict={}):
-        """Continuously check the status of a payment link.
+        """Periodically checks the status of a payment link to monitor for any updates or changes.retrieve real-time information about the payment link's current status, such as whether it has been processed, cancelled, or expired. 
         :param payment_link_id :  : type string
         """
         payload = {}
@@ -1312,7 +1312,7 @@ class Payment:
         return response
     
     async def resendPaymentLink(self, body="", request_headers:Dict={}):
-        """Reissue a payment link to a recipient.
+        """Resends an existing payment link to the user to complete the payment.
         """
         payload = {}
         
@@ -1398,7 +1398,7 @@ class Payment:
         return response
     
     async def getPaymentModeControlRoutes(self, mode=None, request_headers:Dict={}):
-        """Use this API to get details for the given offline / advance payment mode for merchant
+        """Get details of offline / advance payment mode like for cod  offline payment mode get user level cod limit, order level cod limit, cod charge.
         :param mode : offline / advance  modes to get the payment modes : type string
         """
         payload = {}
@@ -1440,7 +1440,7 @@ class Payment:
         return response
     
     async def setMerchantModeControlRoutes(self, mode=None, body="", request_headers:Dict={}):
-        """Use this API to update given offline / advance payment mode details for the merchant
+        """Update offline payment mode details for the merchant like update for cod  offline payment mode get user level cod limit, order level cod limit, cod charge, enable/disable device for cod.
         :param mode : offline / advance payment mode : type string
         """
         payload = {}
@@ -1486,7 +1486,7 @@ class Payment:
         return response
     
     async def getPaymentModeCustomConfig(self, mode=None, request_headers:Dict={}):
-        """Use this API to Get details of advance payment custom configurations of merchant
+        """Merchants to fetch detailed information regarding advance payment custom configurations tailored to their specific business needs. merchants can access settings such as customer restrictions, available payment modes for both pre-order and post-order transactions
         :param mode : offline / advance  mode : type string
         """
         payload = {}
@@ -1528,7 +1528,7 @@ class Payment:
         return response
     
     async def setPaymentModeCustomConfig(self, mode=None, body="", request_headers:Dict={}):
-        """Use this API to update given details of advance payment custom configurations of merchant
+        """Allows merchants to modify specific details of advance payment custom configurations tailored to their business requirements. By providing the company ID, application ID, and payment mode, merchants can update settings such as minimum order value, customer restrictions, and available payment modes for both pre-order and post-order transactions
         :param mode : offline / advance payment mode : type string
         """
         payload = {}
@@ -1574,7 +1574,7 @@ class Payment:
         return response
     
     async def getPaymentCodeOption(self, request_headers:Dict={}):
-        """Retrieve options for payment codes.
+        """Enables users to retrieve options for payment codes.users can access information such as payment method names, networks, and associated codes, facilitating seamless integration and management of payment modes
         """
         payload = {}
         
@@ -1613,7 +1613,7 @@ class Payment:
         return response
     
     async def getPaymentSession(self, gid=None, line_item=None, request_headers:Dict={}):
-        """Use this API to fetch the payment session details for given order ID or Transaction ID.
+        """Allows users to fetch the payment session details associated with a given order ID or transaction ID
         :param gid : global identifier of the entity (e.g. order, cart etc.) against which payment session was initiated. This is generated by Fynd payments platform and is unique. : type string
         :param line-item : line-item to add extra data into response (e.g. cart details) : type boolean
         """
@@ -1658,7 +1658,7 @@ class Payment:
         return response
     
     async def updatePaymentSession(self, gid=None, body="", request_headers:Dict={}):
-        """Modify the details of a payment session.
+        """Update the details of a payment session associated with a given order ID or transaction ID.
         :param gid : global identifier of the entity (e.g. order, cart etc.) against which payment_session was initiated. This is generated by Fynd payments platform and is unique. : type string
         """
         payload = {}
@@ -1704,7 +1704,7 @@ class Payment:
         return response
     
     async def updateRefundSession(self, gid=None, request_id=None, body="", request_headers:Dict={}):
-        """Modify the details of a refund session.
+        """Allows users to update the details of a refund session associated with a specific global identifier (GID) and request ID.
         :param gid : global identifier of the entity (e.g. order, cart etc.) against which payment_session was initiated. This is generated by Fynd payments platform and is unique. : type string
         :param request_id : A unique id that was used to initiate a refund session. This is generated by Fynd platform and is usually shipment_id. : type string
         """
@@ -1753,7 +1753,7 @@ class Payment:
         return response
     
     async def getMerchantPaymentOption(self, request_headers:Dict={}):
-        """Retrieve all the available Paymet Gateways for merchant and its offline payment mode details.
+        """Retrieve available payment gateways and offline payment mode details for a merchant by providing company ID and application ID, returning a list of active payment gateways and their configurations, including online and offline options.
         """
         payload = {}
         
@@ -1792,7 +1792,7 @@ class Payment:
         return response
     
     async def patchMerchantPaymentOption(self, body="", request_headers:Dict={}):
-        """To updated online payment as active/inactive or offline payment configuration like cod charges, anonymous cod allowed flags.
+        """Updated online/offline payment as active/inactive like disable offline payment mode will disable offline payment modes on checkout page on merchant's website
         """
         payload = {}
         
@@ -1835,7 +1835,7 @@ class Payment:
         return response
     
     async def getMerchantAggregatorPaymentModeDetails(self, aggregator_id=None, business_unit=None, device=None, request_headers:Dict={}):
-        """swagger not found. so operationId not found
+        """Get available payment gateways and payment mode and it's sub payment mode details like for razorpay their active/inactive payment modes netbanking , wallet, upi are shown. 
         :param aggregator_id : Aggregators Id : type integer
         :param business_unit :  : type string
         :param device :  : type string
@@ -1883,7 +1883,7 @@ class Payment:
         return response
     
     async def patchMerchantAggregatorPaymentModeDetails(self, aggregator_id=None, body="", request_headers:Dict={}):
-        """swagger not found. so operationId not found
+        """update payment gateway and it's payment mode and it's sub payment mode details like for razorpay update active/inactive payment modes.
         :param aggregator_id : Aggregators Id : type integer
         """
         payload = {}
@@ -1929,7 +1929,7 @@ class Payment:
         return response
     
     async def getPGConfigAggregators(self, request_headers:Dict={}):
-        """swagger not found. so operationId not found
+        """Get payment gateway and it's payment mode and it's sub payment mode details like for razorpay update active/inactive payment modes.
         """
         payload = {}
         
@@ -1968,7 +1968,7 @@ class Payment:
         return response
     
     async def getMerchantRefundPriority(self, config_type=None, request_headers:Dict={}):
-        """Get merchant refund priority.
+        """Retrieve merchant refund priority configurations, returning the status of the update and the refund sources priority with their descriptions and priorities.
         :param config_type : configuration for merchant or customer : type string
         """
         payload = {}
@@ -2010,7 +2010,7 @@ class Payment:
         return response
     
     async def createMerchantRefundPriority(self, config_type=None, body="", request_headers:Dict={}):
-        """Crete merchant refund priority.
+        """Create merchant refund priority configurations, with the provided refund sources priority details, and return the status of the operation.
         :param config_type : configuration for merchant or customer : type string
         """
         payload = {}
@@ -2056,7 +2056,7 @@ class Payment:
         return response
     
     async def updateMerchantRefundPriority(self, config_type=None, body="", request_headers:Dict={}):
-        """API to update merchant refund priority
+        """Update merchant refund priority configurations, with the provided refund sources priority details, and return the status of the operation.
         :param config_type : configuration for merchant or customer : type string
         """
         payload = {}
@@ -2102,7 +2102,7 @@ class Payment:
         return response
     
     async def createPaymentOrder(self, body="", request_headers:Dict={}):
-        """Use this API to create a order and payment on aggregator side
+        """Create an order and payment on the aggregator side
         """
         payload = {}
         
@@ -2145,7 +2145,7 @@ class Payment:
         return response
     
     async def getMerchantAggregatorAppVersion(self, aggregator_id=None, business_unit=None, device=None, payment_mode_id=None, sub_payment_mode=None, request_headers:Dict={}):
-        """This api provide read operations on the app version required for Payment Mode or sub payment mode for an Aggregator.
+        """Get app version required for Payment Mode or sub payment mode for an Aggregator.if merchant required any PG payment mode after certain version for mobile app.
         :param aggregator_id : Aggregators Id : type integer
         :param business_unit :  : type string
         :param device :  : type string
@@ -2199,7 +2199,7 @@ class Payment:
         return response
     
     async def patchMerchantPaymentOptionVersion(self, aggregator_id=None, body="", request_headers:Dict={}):
-        """This api provide wrote operations on the app version required for Payment Mode or sub payment mode for an Aggregator.
+        """Update app version required for Payment Mode or sub payment mode for an Aggregator.if merchant required any PG payment mode after certain version for mobile app.
         :param aggregator_id : Aggregators Id : type integer
         """
         payload = {}

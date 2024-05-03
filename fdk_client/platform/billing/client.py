@@ -149,7 +149,7 @@ class Billing:
         return response
     
     async def cancelSubscriptionCharge(self, extension_id=None, subscription_id=None, request_headers:Dict={}):
-        """Cancel an ongoing subscription charge for a customer.
+        """When uninstalling, the extension statue will be marked as canceled.
         :param extension_id : Extension _id : type string
         :param subscription_id : Subscription charge _id : type string
         """
@@ -240,7 +240,7 @@ class Billing:
         return response
     
     async def getChargeDetails(self, extension_id=None, charge_id=None, request_headers:Dict={}):
-        """Retrieve comprehensive details about a specific billing charge.
+        """It will fetch the information regarding the subscription for the extension.
         :param extension_id : Extension _id : type string
         :param charge_id : Standalone charge _id : type string
         """
@@ -366,7 +366,7 @@ class Billing:
         return response
     
     async def getCustomerDetail(self, request_headers:Dict={}):
-        """Obtain customer-related billing information.
+        """Retrieve seller information.
         """
         payload = {}
         
@@ -405,7 +405,7 @@ class Billing:
         return response
     
     async def upsertCustomerDetail(self, body="", request_headers:Dict={}):
-        """Allows you to modify or insert customer information in the billing system.
+        """Allows you to modify or insert seller information in the billing system.
         """
         payload = {}
         
@@ -448,7 +448,7 @@ class Billing:
         return response
     
     async def getSubscription(self, request_headers:Dict={}):
-        """Retrieve details of a customer's subscription information.
+        """t will show the most recent subscriptions of the seller for each ordering channel, regardless of their status—whether they're active, cancelled, or otherwise.
         """
         payload = {}
         
@@ -575,7 +575,7 @@ class Billing:
         return response
     
     async def cancelSubscriptionPlan(self, body="", request_headers:Dict={}):
-        """Cancel an active subscription plan for a customer
+        """The seller will initiate a request to cancel their current subscription on the platform.
         """
         payload = {}
         

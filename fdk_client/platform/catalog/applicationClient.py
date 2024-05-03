@@ -14,7 +14,7 @@ class Catalog:
 
     
     async def getCatalogInsights(self, brand=None, request_headers:Dict={}):
-        """Retrieve the count of catalog related data like products, brands, departments and categories that have been made live as per configuration of the application.
+        """Retrieve the count of catalog related data like products, brands, departments and categories that have been made live as per configuration of the sales channel.
         :param brand : Brand slug : type string
         """
         payload = {}
@@ -56,7 +56,7 @@ class Catalog:
         return response
     
     async def getApplicationBrandListing(self, page_no=None, page_size=None, q=None, request_headers:Dict={}):
-        """Retrieve brand listings related to the application. A brand is the name under which a product is being sold
+        """Retrieve brand listings related to the sales channel. A brand is the name under which a product is being sold
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
         :param q : Search query with brand name.Use this parameter to search brands by  brand name. : type string
@@ -104,7 +104,7 @@ class Catalog:
         return response
     
     async def updateAppBrand(self, brand_uid=None, body="", request_headers:Dict={}):
-        """Modify data associated to a item custom meta.
+        """Modify data associated to the brand for that particular sales channel.
         :param brand_uid : brand id for which the custom_json is associated. : type string
         """
         payload = {}
@@ -150,7 +150,7 @@ class Catalog:
         return response
     
     async def getApplicationBrands(self, department=None, page_no=None, page_size=None, q=None, brand_id=None, request_headers:Dict={}):
-        """List all the brands. A brand is the name under which a product is being sold. 
+        """List all the brands, and have search capabilities on brand uid, name etc
         :param department : The name of the department. Use this parameter to filter products by a particular department. See below the list of available departments. You can retrieve available departments from the **v1.0/departments/** API : type string
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
@@ -204,7 +204,7 @@ class Catalog:
         return response
     
     async def getCategories(self, department=None, request_headers:Dict={}):
-        """Retrieve a list of categories. Optionally pass filter the brands by the department.
+        """Retrieve a list of categories associated to company and sales channel. user can filter on departments.
         :param department : The name of the department. Use this parameter to filter products by a particular department. See below the list of available departments. You can retrieve available departments from the **v1.0/departments/** API : type string
         """
         payload = {}
@@ -246,7 +246,7 @@ class Catalog:
         return response
     
     async def getApplicationCategoryListing(self, department_id=None, page_no=None, page_size=None, q=None, request_headers:Dict={}):
-        """Retrieve category listings related to the application. A brand is the name under which a product is being sold.
+        """Retrieve category listings related to the sales channel , with the ability to filter results based on department ,category names etc.
         :param department_id : A `department_id` is a unique identifier for a particular department. : type integer
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
@@ -297,7 +297,7 @@ class Catalog:
         return response
     
     async def updateAppCategory(self, category_uid=None, body="", request_headers:Dict={}):
-        """Modify category data related to the application. Helps to update data associated to a item custom meta.
+        """Modify category data related to the sales channel .
         :param category_uid : category id for which the custom_json is associated. : type string
         """
         payload = {}
@@ -343,7 +343,7 @@ class Catalog:
         return response
     
     async def getAllCollections(self, q=None, schedule_status=None, type=None, tags=None, is_active=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """A Collection allows you to organize your products into hierarchical groups.
+        """Retrieve all collections based on criteria such as collection name, schedule status, and active status.
         :param q : Get collection list filtered by q string, : type string
         :param schedule_status : Get collection list filtered by scheduled status, : type string
         :param type : type of the collections : type string
@@ -403,7 +403,7 @@ class Catalog:
         return response
     
     async def createCollection(self, body="", request_headers:Dict={}):
-        """Create a collection to the catalog.
+        """Create a collection for a sales channel linked to a company.
         """
         payload = {}
         
@@ -446,7 +446,8 @@ class Catalog:
         return response
     
     async def getApplicationFilterValues(self, filter_key=None, c=None, collection_id=None, page_no=None, page_size=None, q=None, request_headers:Dict={}):
-        """Get query filters keys to configure a collection
+        """This API is designed to retrieve the filter values for all available options within the selected filter, such as "red" for color.
+
         :param filter_key : A `filter_key` is a filter key for a for which all the available filter values will returned. channel. : type string
         :param c : The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts** : type string
         :param collection_id : A `collection_id` is a unique identifier for a particular collection. channel. : type string
@@ -503,7 +504,7 @@ class Catalog:
         return response
     
     async def getApplicationFilterKeys(self, c=None, request_headers:Dict={}):
-        """Get query filters keys to configure a collection
+        """Retrieve the details of all applicable product filters, such as Color, Brand, and Category, indicating the criteria keys where filters can be applied.
         :param c : The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts** : type string
         """
         payload = {}
@@ -545,7 +546,7 @@ class Catalog:
         return response
     
     async def getQueryFilters(self, request_headers:Dict={}):
-        """Retrieve query filters to configure a collection
+        """Retrieve query filters to configure a collection for a company and a sales channel.
         """
         payload = {}
         
@@ -672,7 +673,7 @@ class Catalog:
         return response
     
     async def getCollectionItems(self, id=None, sort_on=None, page_id=None, page_size=None, request_headers:Dict={}):
-        """Get items from a collection specified by its `id`.
+        """Get items from a collection specified by its id.
         :param id : A `id` is a unique identifier of a collection. : type string
         :param sort_on : Each response will contain sort_on param, which should be sent back to make pagination work. : type string
         :param page_id : Each response will contain next_id param, which should be sent back to make pagination work. : type string
@@ -723,7 +724,7 @@ class Catalog:
         return response
     
     async def addCollectionItems(self, id=None, body="", request_headers:Dict={}):
-        """Adds items to a collection specified by its `id`. See `CollectionItemRequest` for the list of attributes needed to add items to an collection.
+        """Adds items to a collection specified by its id
         :param id : A `id` is a unique identifier of a collection. : type string
         """
         payload = {}
@@ -811,7 +812,7 @@ class Catalog:
         return response
     
     async def getApplicationDepartmentListing(self, page_no=None, page_size=None, q=None, request_headers:Dict={}):
-        """Retrieve department listings related to the application. Departments are a way to categorise similar products. A product can lie in multiple departments.
+        """Retrieve department listings related to the sales channel. Departments are used to categorize similar products, and you can filter the results based on department names
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
         :param q : Search query with brand name.Use this parameter to search department by name. : type string
@@ -859,7 +860,7 @@ class Catalog:
         return response
     
     async def updateAppDepartment(self, department_uid=None, body="", request_headers:Dict={}):
-        """Modify department data related to the application.
+        """Modify department data associated to the sales channel.
         :param department_uid : department id for which the custom_json is associated. : type string
         """
         payload = {}
@@ -905,7 +906,7 @@ class Catalog:
         return response
     
     async def getDepartments(self, request_headers:Dict={}):
-        """Retrieve a list of departments. Departments are a way to categorise similar products. A product can lie in multiple departments.
+        """Retrieve a list of departments associated with a comapny and sales channel.
         """
         payload = {}
         
@@ -944,7 +945,7 @@ class Catalog:
         return response
     
     async def getAppInventory(self, item_ids=None, store_ids=None, brand_ids=None, seller_identifiers=None, timestamp=None, page_size=None, page_id=None, request_headers:Dict={}):
-        """Retrieve inventory data related to the application. Retrieve the available Inventory of the products. Use this API to get the Inventory status of products with the filters of timestamp, store_ids, brand_ids, item_id, Items, Pagination
+        """Retrieve inventory data related to the sales channel. this can be used  to get the Inventory status of products with the filters of timestamp, store_ids, brand_ids, item_id, Items, Pagination.
         :param item_ids : The Item Id of the product. : type array
         :param store_ids : The Store Id of products to fetch inventory. : type array
         :param brand_ids : The Brand Id of products to fetch inventory. : type array
@@ -1004,7 +1005,7 @@ class Catalog:
         return response
     
     async def getAppLocations(self, store_type=None, uid=None, q=None, stage=None, page_no=None, page_size=None, tags=None, store_types=None, request_headers:Dict={}):
-        """Retrieve locations specific to the application. View all the locations asscoiated to a application.
+        """Retrieve all stores associated with an sales channel, with support for searching by store name and filtering by store type and status (verified/unverified)
         :param store_type : Helps to sort the location list on the basis of location type. : type string
         :param uid : Helps to sort the location list on the basis of uid list. : type array
         :param q : Query that is to be searched. : type string
@@ -1067,7 +1068,7 @@ class Catalog:
         return response
     
     async def getConfigurations(self, request_headers:Dict={}):
-        """Retrieve a configured details for catalog.
+        """Retrieve a detailed configurations for product catalog specific to a company and an sales channel.
         """
         payload = {}
         
@@ -1106,7 +1107,7 @@ class Catalog:
         return response
     
     async def createConfigurationProductListing(self, body="", request_headers:Dict={}):
-        """Add configuration for products & listing.
+        """Add configuration for products & listing specific to a company and an sales channel.
         """
         payload = {}
         
@@ -1149,7 +1150,7 @@ class Catalog:
         return response
     
     async def getCatalogConfiguration(self, request_headers:Dict={}):
-        """Retrieve configuration meta details for the catalog.
+        """Retrieve configuration meta data for the catalog specific to a company and an sales channel.
         """
         payload = {}
         
@@ -1188,7 +1189,7 @@ class Catalog:
         return response
     
     async def getConfigurationByType(self, type=None, request_headers:Dict={}):
-        """Retrieve configuration details based on a specific type in the catalog.
+        """Retrieve configuration details based on a specific type in the catalog for a company and an sales channel.
         :param type : type can be brands, categories etc. : type string
         """
         payload = {}
@@ -1230,7 +1231,7 @@ class Catalog:
         return response
     
     async def createConfigurationByType(self, type=None, body="", request_headers:Dict={}):
-        """Add configuration for categories & brands.
+        """Add configuration details based on a specific type in the catalog for a company and an sales channel.
         :param type : type can be brands, categories etc. : type string
         """
         payload = {}
@@ -1276,7 +1277,7 @@ class Catalog:
         return response
     
     async def getAppProduct(self, item_id=None, request_headers:Dict={}):
-        """Products are the core resource of an application. If successful, returns a Company Application Product resource in the response body depending upon filter sent.
+        """Retrieve sales channel product details by its item_id and depending upon filters sent in request.
         :param item_id : product id for a particular product. : type string
         """
         payload = {}
@@ -1318,7 +1319,7 @@ class Catalog:
         return response
     
     async def updateAppProduct(self, item_id=None, body="", request_headers:Dict={}):
-        """Allows to update data associated to a item custom meta.
+        """Allows to update data associated to a item by its item_id for an sales channel.
         :param item_id : product id for which the custom_meta is associated. : type string
         """
         payload = {}
@@ -1364,7 +1365,7 @@ class Catalog:
         return response
     
     async def getAppicationProducts(self, q=None, f=None, c=None, filters=None, is_dependent=None, sort_on=None, page_id=None, page_size=None, page_no=None, page_type=None, item_ids=None, request_headers:Dict={}):
-        """Retrieve products associated with the application. List all the products associated with a brand, collection or category in a requested sort order.
+        """Retrieve products associated with the sales channel. List all the products associated with a brand, collection or category in a requested sort order.
         :param q : The search query. This can be a partial or complete name of a either a product, brand or category : type string
         :param f : The search filter parameters. All the parameter filtered from filter parameters will be passed in **f** parameter in this format. **?f=brand:voi-jeans||and:::category:t-shirts||shirts** : type string
         :param c : The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts** : type string
@@ -1493,7 +1494,7 @@ class Catalog:
         return response
     
     async def getProductDetailBySlug(self, slug=None, request_headers:Dict={}):
-        """Retrieve detailed product information using a product slug. Products are the core resource of an application. Products can be associated by categories, collections, brands and more.
+        """Retrieve detailed product information using a product slug. 
         :param slug : The unique identifier of a product. i.e; `slug` of a product. You can retrieve these from the APIs that list products like **v1.0/products/** : type string
         """
         payload = {}
@@ -1535,7 +1536,7 @@ class Catalog:
         return response
     
     async def getAppProducts(self, brand_ids=None, category_ids=None, department_ids=None, tags=None, item_ids=None, page_no=None, page_size=None, q=None, request_headers:Dict={}):
-        """Retrieve products specific to the application. Products are the core resource of an application. Products can be associated by categories, collections, brands and more.
+        """Retrieve products specific to the sales channel, with filtering options available for brand, category, department, tags, item IDs, product name, and pagination support
         :param brand_ids : Get multiple products filtered by Brand Ids : type array
         :param category_ids : Get multiple products filtered by Category Ids : type array
         :param department_ids : Get multiple products filtered by Department Ids : type array
@@ -1598,7 +1599,7 @@ class Catalog:
         return response
     
     async def getAppReturnConfiguration(self, request_headers:Dict={}):
-        """Get Product Return configuration set at an application level
+        """Get Product Return configuration set at an sales channel level
         """
         payload = {}
         
@@ -1637,7 +1638,7 @@ class Catalog:
         return response
     
     async def createAppReturnConfiguration(self, body="", request_headers:Dict={}):
-        """Create Return configuration level set for an application.
+        """This allows you to configure all return-related settings, such as is_returnable and return window etc. for sales channel level
         """
         payload = {}
         
@@ -1680,7 +1681,7 @@ class Catalog:
         return response
     
     async def updateAppReturnConfiguration(self, body="", request_headers:Dict={}):
-        """Update Return configuration level set for an application.
+        """Update Return configuration level set for an sales channel.
         """
         payload = {}
         
@@ -1723,7 +1724,7 @@ class Catalog:
         return response
     
     async def deleteAppCategoryReturnConfiguration(self, body="", request_headers:Dict={}):
-        """Delete Category level Application Return Configuration setttings
+        """Delete Category level sales channel Return Configuration setttings
         """
         payload = {}
         
@@ -1766,7 +1767,7 @@ class Catalog:
         return response
     
     async def getAppCategoryReturnConfig(self, request_headers:Dict={}):
-        """Get all category level configuration level set for an application.
+        """Get all category level configuration level set for an sales channel.
         """
         payload = {}
         
@@ -1805,7 +1806,7 @@ class Catalog:
         return response
     
     async def createAppCategoryReturnConfiguration(self, body="", request_headers:Dict={}):
-        """Create Category level Application Return Configuration setttings
+        """Create Category level sales channel Return Configuration setttings
         """
         payload = {}
         
@@ -1848,7 +1849,7 @@ class Catalog:
         return response
     
     async def updateAppCategoryReturnConfiguration(self, body="", request_headers:Dict={}):
-        """Update Category level Application Return Configuration setttings
+        """Update Category level sales channel Return Configuration setttings
         """
         payload = {}
         
@@ -1891,7 +1892,7 @@ class Catalog:
         return response
     
     async def getAutocompleteConfig(self, request_headers:Dict={}):
-        """Custom Autocomplete Keyword allows you to map conditions with keywords to give you the ultimate results
+        """Get custom autocomplete keyword configuration for a specific sales channel which allows you to map any endpoint with these keywords to give you the ultimate suggestion results.
         """
         payload = {}
         
@@ -1930,7 +1931,7 @@ class Catalog:
         return response
     
     async def createCustomAutocompleteRule(self, body="", request_headers:Dict={}):
-        """Generate and add custom autocomplete rules to the catalog.
+        """Create custom autocomplete keyword configurations for a specific sales channel to map any endpoint with these keywords.
         """
         payload = {}
         
@@ -1973,7 +1974,7 @@ class Catalog:
         return response
     
     async def deleteAutocompleteKeyword(self, id=None, request_headers:Dict={}):
-        """Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+        """Delete custom autocomplete keyword configurations for a specific sales channel by its id.
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. : type string
         """
         payload = {}
@@ -2015,7 +2016,7 @@ class Catalog:
         return response
     
     async def getAutocompleteKeywordDetail(self, id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific autocomplete keyword.
+        """Retrieve detailed information about a specific autocomplete keyword for a specific sales channel by its id.
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. : type string
         """
         payload = {}
@@ -2057,7 +2058,7 @@ class Catalog:
         return response
     
     async def updateAutocompleteKeyword(self, id=None, body="", request_headers:Dict={}):
-        """Update a mapping by it's id. On successful request, returns the updated Keyword mapping
+        """Update a specific autocomplete keyword configuration by its id for a specific sales channel.
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. : type string
         """
         payload = {}
@@ -2103,7 +2104,7 @@ class Catalog:
         return response
     
     async def deleteSearchConfiguration(self, request_headers:Dict={}):
-        """Delete search configuration in the catalog.
+        """Delete Search Configuration for a specific sales channel.
         """
         payload = {}
         
@@ -2142,7 +2143,7 @@ class Catalog:
         return response
     
     async def getSearchConfiguration(self, request_headers:Dict={}):
-        """Get search configuration in the catalog.
+        """Get search configuration for a specific company and sales channel.
         """
         payload = {}
         
@@ -2181,7 +2182,7 @@ class Catalog:
         return response
     
     async def createSearchConfiguration(self, body="", request_headers:Dict={}):
-        """Create search configuration for the catalog.
+        """Create search configuration for the catalog for a specific company and sales channel.
         """
         payload = {}
         
@@ -2224,7 +2225,7 @@ class Catalog:
         return response
     
     async def updateSearchConfiguration(self, body="", request_headers:Dict={}):
-        """This view allows you to modify searchable attributes for an application
+        """Allows you to modify searchable attributes for an sales channel. searchable attributes are the fields on which the products are searched.
         """
         payload = {}
         
@@ -2267,7 +2268,7 @@ class Catalog:
         return response
     
     async def getAllSearchKeyword(self, request_headers:Dict={}):
-        """Custom Search Keyword allows you to map conditions with keywords to give you the ultimate results
+        """Get all custom search keywords for a specific company and sales channel allows you to map certain conditions with the keywords to give you ultimate results.
         """
         payload = {}
         
@@ -2306,7 +2307,7 @@ class Catalog:
         return response
     
     async def createCustomKeyword(self, body="", request_headers:Dict={}):
-        """Create a Custom Search Keywords. 
+        """Create a Custom Search Keywords for a specific company and sales channel allows you to map certail conditions with the keywords to give you ultimate results.
         """
         payload = {}
         
@@ -2349,7 +2350,7 @@ class Catalog:
         return response
     
     async def deleteSearchKeywords(self, id=None, request_headers:Dict={}):
-        """Delete a keywords by it's id. Returns an object that tells whether the keywords was deleted successfully
+        """Delete a search keywords by its id for a specific company and sales channel.
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. : type string
         """
         payload = {}
@@ -2391,7 +2392,7 @@ class Catalog:
         return response
     
     async def getSearchKeywords(self, id=None, request_headers:Dict={}):
-        """Retrieve a list of search keywords from the catalog.
+        """Retrieve a list of a specific list of keywords by its id for a specific company and sales channel.
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. : type string
         """
         payload = {}
@@ -2433,7 +2434,7 @@ class Catalog:
         return response
     
     async def updateSearchKeywords(self, id=None, body="", request_headers:Dict={}):
-        """Update Search Keyword by its id. On successful request, returns the updated collection
+        """Update a specific search keyword by its id for a specific company and sales channel.
         :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. : type string
         """
         payload = {}
@@ -2479,7 +2480,7 @@ class Catalog:
         return response
     
     async def updateAppLocation(self, store_uid=None, body="", request_headers:Dict={}):
-        """Modify location data related to the application. Helps to update data associated to a item custom meta
+        """Modify location data related to the sales channel.
         :param store_uid : store id for which the custom_json is associated. : type string
         """
         payload = {}
@@ -2525,7 +2526,7 @@ class Catalog:
         return response
     
     async def updateAllowSingle(self, body="", request_headers:Dict={}):
-        """Modify allow single flag for filters of the application.
+        """Modify allow single flag for filters of the sales channel for a company and an sales channel.
         """
         payload = {}
         
@@ -2568,7 +2569,7 @@ class Catalog:
         return response
     
     async def updateDefaultSort(self, body="", request_headers:Dict={}):
-        """Modify the default sort key configuration for the application.
+        """Modify the default sort key configuration for a company and an sales channel.
         """
         payload = {}
         
@@ -2611,7 +2612,7 @@ class Catalog:
         return response
     
     async def getListingConfigurations(self, config_type=None, page_no=None, page_size=None, search=None, request_headers:Dict={}):
-        """Retrieve the details of the application configured configurations of listing config types.
+        """Retrieve product listing configurations based on specific config_type for a company and an sales channel.
         :param config_type : A `config_type` is an identifier that defines a specific type of configuration. : type string
         :param page_no : The page number to navigate through the given set of results. : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
@@ -2662,7 +2663,7 @@ class Catalog:
         return response
     
     async def createListingConfiguration(self, config_type=None, body="", request_headers:Dict={}):
-        """Add configuration for catalog listing.
+        """Add configuration for product catalog listing specific to a company and an sales channel.
         :param config_type : A `config_type` is a unique identifier for a particular listing configuration type. : type string
         """
         payload = {}
@@ -2708,7 +2709,7 @@ class Catalog:
         return response
     
     async def getGroupConfigurations(self, config_type=None, page_no=None, page_size=None, search=None, template_slug=None, request_headers:Dict={}):
-        """Retrieve the details of the application configured configurations of group config types.
+        """Retrieve the details of product group configurations based on config types for a company and an sales channel.
         :param config_type : A `config_type` is an identifier that defines a specific type of configuration. : type string
         :param page_no : The page number to navigate through the given set of results. : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
@@ -2762,7 +2763,7 @@ class Catalog:
         return response
     
     async def createGroupConfiguration(self, config_type=None, body="", request_headers:Dict={}):
-        """Create configuration for group configuration types.
+        """Create group configuration for a specific config_type for a company and an sales channel.
         :param config_type : A `config_type` is a unique identifier for a particular group configuration type. : type string
         """
         payload = {}
@@ -2808,7 +2809,7 @@ class Catalog:
         return response
     
     async def deleteGroupConfiguration(self, config_type=None, group_slug=None, request_headers:Dict={}):
-        """Delete configuration of the product config type of the application.
+        """Delete group configurations by its slug for a specific config_type for a company and an sales channel.
         :param config_type : A `config_type` is a unique identifier for a particular group configuration type. : type string
         :param group_slug : A `group_slug` is a unique identifier of a particular configuration. : type string
         """
@@ -2853,7 +2854,7 @@ class Catalog:
         return response
     
     async def updateGroupConfiguration(self, config_type=None, group_slug=None, body="", request_headers:Dict={}):
-        """Modify the group configurations for the application.
+        """Modify group configurations by its slug for specific config_type for a company and an sales channel.
         :param config_type : A `config_type` is a unique identifier for a particular group configuration type. : type string
         :param group_slug : A `group_slug` is a unique identifier of a particular configuration. : type string
         """
@@ -2902,7 +2903,7 @@ class Catalog:
         return response
     
     async def deleteListingConfiguration(self, config_type=None, config_id=None, request_headers:Dict={}):
-        """Remove a specific listing configuration from the catalog.
+        """Remove a specific product listing configuration by its config_id for a specific config_type for a company and an sales channel.
         :param config_type : A `config_type` is a unique identifier for a particular listing configuration type. : type string
         :param config_id : A `config_id` is a unique identifier of a particular configuration. : type string
         """
@@ -2947,7 +2948,7 @@ class Catalog:
         return response
     
     async def updateListingConfiguration(self, config_type=None, config_id=None, body="", request_headers:Dict={}):
-        """Modify the details and settings of an existing listing configuration.
+        """Modify a specific product listing configuration by its config_id for a specific config_type for a company and an sales channel.
         :param config_type : A `config_type` is a unique identifier for a particular listing configuration type. : type string
         :param config_id : A `config_id` is a unique identifier of a particular configuration. : type string
         """
@@ -2996,7 +2997,7 @@ class Catalog:
         return response
     
     async def getConfigurationMetadata(self, config_type=None, template_slug=None, page_no=None, page_size=None, q=None, request_headers:Dict={}):
-        """Retrieve the configuraion metadata details for catalog.
+        """Retrieve the configuraion metadata details for specific config_type for a company and an sales channel.
         :param config_type : A `config_type` is an identifier that defines a specific type of configuration. : type string
         :param template_slug : Get configuration list filtered by `template_slug` string. This is for the details and comparision groups. : type string
         :param page_no : The page number to navigate through the given set of results. : type integer
