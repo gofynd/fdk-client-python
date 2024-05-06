@@ -289,7 +289,7 @@ class Lead:
         return response
     
     async def editCustomForm(self, slug=None, body="", request_headers:Dict={}):
-        """Modify the content and assosciated settings of a custom form.
+        """Modify the content and associated settings of a custom form.
         :param slug : Slug of form whose response is getting submitted : type string
         """
         payload = {}
