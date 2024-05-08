@@ -88,7 +88,11 @@ class GetBrandResponseSerializer(BaseSchema):
     pass
 
 
-class CreateUpdateBrandRequestSerializer(BaseSchema):
+class CreateBrandRequestSerializer(BaseSchema):
+    pass
+
+
+class UpdateBrandRequestSerializer(BaseSchema):
     pass
 
 
@@ -557,7 +561,7 @@ class GetBrandResponseSerializer(BaseSchema):
     
 
 
-class CreateUpdateBrandRequestSerializer(BaseSchema):
+class CreateBrandRequestSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -581,7 +585,33 @@ class CreateUpdateBrandRequestSerializer(BaseSchema):
     
     name = fields.Str(required=False)
     
-    slug = fields.Str(required=False)
+    slug_key = fields.Str(required=False)
+    
+
+
+class UpdateBrandRequestSerializer(BaseSchema):
+    # CompanyProfile swagger.json
+
+    
+    _custom_json = fields.Dict(required=False)
+    
+    _locale_language = fields.Dict(required=False)
+    
+    synonyms = fields.List(fields.Str(required=False), required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    description = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
+    
+    brand_tier = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    banner = fields.Nested(BrandBannerSerializer, required=False)
+    
+    name = fields.Str(required=False)
     
 
 

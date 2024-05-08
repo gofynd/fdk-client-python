@@ -189,8 +189,8 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateUpdateBrandRequestSerializer
-        schema = CreateUpdateBrandRequestSerializer()
+        from .models import UpdateBrandRequestSerializer
+        schema = UpdateBrandRequestSerializer()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/{brand_id}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to brand that is to be viewed.","schema":{"type":"string"},"required":true},{"in":"path","name":"brand_id","description":"Id of the brand to be viewed.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to brand that is to be viewed.","schema":{"type":"string"},"required":true},{"in":"path","name":"brand_id","description":"Id of the brand to be viewed.","schema":{"type":"string"},"required":true}]}""", serverType="platform", brand_id=brand_id)
@@ -232,8 +232,8 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateUpdateBrandRequestSerializer
-        schema = CreateUpdateBrandRequestSerializer()
+        from .models import CreateBrandRequestSerializer
+        schema = CreateBrandRequestSerializer()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/", """{"required":[{"in":"path","name":"company_id","description":"Id of the company.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
