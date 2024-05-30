@@ -26,8 +26,6 @@ from .order.client import Order
 
 from .payment.client import Payment
 
-from .poscart.client import PosCart
-
 from .rewards.client import Rewards
 
 from .share.client import Share
@@ -51,7 +49,6 @@ class ApplicationClient:
         self.logistic = Logistic(config)
         self.order = Order(config)
         self.payment = Payment(config)
-        self.posCart = PosCart(config)
         self.rewards = Rewards(config)
         self.share = Share(config)
         self.theme = Theme(config)

@@ -105,7 +105,7 @@ class Order:
     
     async def getOrderById(self, order_id=None, allow_inactive=None, body="", request_headers:Dict={}):
         """Retrieve order details such as tracking details, shipment, store information using Fynd Order ID
-        :param order_id : A unique number used for identifying and tracking your orders. : type string
+        :param order_id : A unique number used for identifying and tracking an order. : type string
         :param allow_inactive : Flag to allow inactive shipments : type boolean
         """
         payload = {}
@@ -120,7 +120,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getOrderById"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string"}}]}""", serverType="application", order_id=order_id, allow_inactive=allow_inactive)
+        url_with_params = await create_url_with_params(api_url=self._urls["getOrderById"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking an order.","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking an order.","required":true,"schema":{"type":"string"}}]}""", serverType="application", order_id=order_id, allow_inactive=allow_inactive)
         query_string = await create_query_string(order_id=order_id, allow_inactive=allow_inactive)
 
         headers={}

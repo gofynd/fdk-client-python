@@ -84,6 +84,15 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
         
@@ -540,11 +549,29 @@ class CatalogValidator:
         
         page_size = fields.Int(required=False)
         
+        page_id = fields.Str(required=False)
+        
+        page_type = fields.Str(required=False)
+        
         q = fields.Str(required=False)
         
         sellable = fields.Boolean(required=False)
         
         store_ids = fields.List(fields.Int(required=False), required=False)
+        
+        brand_ids = fields.List(fields.Int(required=False), required=False)
+        
+        seller_identifiers = fields.List(fields.Str(required=False), required=False)
+        
+        qty_gt = fields.Int(required=False)
+        
+        qty_lt = fields.Int(required=False)
+        
+        qty_type = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
         
         size_identifier = fields.Str(required=False)
          
