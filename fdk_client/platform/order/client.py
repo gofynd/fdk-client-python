@@ -1265,16 +1265,16 @@ class Order:
     
     async def getManifestShipments(self, dp_ids=None, stores=None, to_date=None, from_date=None, dp_name=None, sales_channels=None, search_type=None, search_value=None, page_no=None, page_size=None, request_headers:Dict={}):
         """Get list of shipments tagged to that manifest, the user can also search the shipments on the basis of shipment Id, order Id and AWB number
-        :param dp_ids :  : type integer
-        :param stores :  : type string
-        :param to_date :  : type string
-        :param from_date :  : type string
-        :param dp_name :  : type string
-        :param sales_channels :  : type string
-        :param search_type :  : type string
-        :param search_value :  : type string
-        :param page_no :  : type string
-        :param page_size :  : type string
+        :param dp_ids : Filter shipments with the specific Courier partner Ids which is a combination of courier partner extension and scheme Ids. : type string
+        :param stores : Filter with the specific store. : type integer
+        :param to_date : End date for the shipment search range. : type string
+        :param from_date : Start date for the shipment search range. : type string
+        :param dp_name : Filter with the specific courier partner name. : type string
+        :param sales_channels : Comma-separated list of sales channels. : type string
+        :param search_type : Type of search (e.g., by shipment ID, order ID, AWB number). : type string
+        :param search_value : Value to search for based on the search type. : type string
+        :param page_no : Page number for pagination. : type integer
+        :param page_size : Number of records per page for pagination. : type integer
         """
         payload = {}
         
@@ -1304,7 +1304,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifests/shipments", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"query","name":"dp_ids","required":true,"schema":{"type":"integer"}},{"in":"query","name":"stores","required":true,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":true,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"dp_name","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"dp_ids","required":true,"schema":{"type":"integer"}},{"in":"query","name":"stores","required":true,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":true,"schema":{"type":"string"}},{"in":"query","name":"from_date","required":true,"schema":{"type":"string"}},{"in":"query","name":"dp_name","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", dp_ids=dp_ids, stores=stores, to_date=to_date, from_date=from_date, dp_name=dp_name, sales_channels=sales_channels, search_type=search_type, search_value=search_value, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/shipments-listing", """{"required":[{"in":"path","name":"company_id","description":"The ID of the company.","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":148}}},{"in":"query","name":"dp_ids","description":"Filter shipments with the specific Courier partner Ids which is a combination of courier partner extension and scheme Ids.","required":true,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Filter with the specific store.","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":11343}}},{"in":"query","name":"to_date","description":"End date for the shipment search range.","required":true,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"from_date","description":"Start date for the shipment search range.","required":true,"schema":{"type":"string","format":"date-time"}}],"optional":[{"in":"query","name":"dp_name","description":"Filter with the specific courier partner name.","required":false,"schema":{"type":"string"},"examples":{"success":{"value":"Delhivery"}}},{"in":"query","name":"sales_channels","description":"Comma-separated list of sales channels.","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","description":"Type of search (e.g., by shipment ID, order ID, AWB number).","required":false,"schema":{"type":"string"},"examples":{"success":{"value":"auto"}}},{"in":"query","name":"search_value","description":"Value to search for based on the search type.","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"Page number for pagination.","required":false,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"in":"query","name":"page_size","description":"Number of records per page for pagination.","required":false,"schema":{"type":"integer"},"examples":{"success":{"value":2}}}],"query":[{"in":"query","name":"dp_ids","description":"Filter shipments with the specific Courier partner Ids which is a combination of courier partner extension and scheme Ids.","required":true,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Filter with the specific store.","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":11343}}},{"in":"query","name":"to_date","description":"End date for the shipment search range.","required":true,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"from_date","description":"Start date for the shipment search range.","required":true,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"dp_name","description":"Filter with the specific courier partner name.","required":false,"schema":{"type":"string"},"examples":{"success":{"value":"Delhivery"}}},{"in":"query","name":"sales_channels","description":"Comma-separated list of sales channels.","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","description":"Type of search (e.g., by shipment ID, order ID, AWB number).","required":false,"schema":{"type":"string"},"examples":{"success":{"value":"auto"}}},{"in":"query","name":"search_value","description":"Value to search for based on the search type.","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"Page number for pagination.","required":false,"schema":{"type":"integer"},"examples":{"success":{"value":1}}},{"in":"query","name":"page_size","description":"Number of records per page for pagination.","required":false,"schema":{"type":"integer"},"examples":{"success":{"value":2}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"The ID of the company.","required":true,"schema":{"type":"integer"},"examples":{"success":{"value":148}}}]}""", serverType="platform", dp_ids=dp_ids, stores=stores, to_date=to_date, from_date=from_date, dp_name=dp_name, sales_channels=sales_channels, search_type=search_type, search_value=search_value, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(dp_ids=dp_ids, stores=stores, to_date=to_date, from_date=from_date, dp_name=dp_name, sales_channels=sales_channels, search_type=search_type, search_value=search_value, page_no=page_no, page_size=page_size)
 
         headers = {}
@@ -1319,7 +1319,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifests/shipments", dp_ids=dp_ids, stores=stores, to_date=to_date, from_date=from_date, dp_name=dp_name, sales_channels=sales_channels, search_type=search_type, search_value=search_value, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/shipments-listing", dp_ids=dp_ids, stores=stores, to_date=to_date, from_date=from_date, dp_name=dp_name, sales_channels=sales_channels, search_type=search_type, search_value=search_value, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ManifestShipmentListing
@@ -1483,14 +1483,11 @@ class Order:
 
         return response
     
-    async def dispatchManifests(self, manifest_id=None, body="", request_headers:Dict={}):
+    async def dispatchManifests(self, body="", request_headers:Dict={}):
         """Updates the status of the manifest to processed and change the status of the shipments in the manifest to dispatch status
-        :param manifest_id :  : type string
         """
         payload = {}
         
-        if manifest_id is not None:
-            payload["manifest_id"] = manifest_id
 
         # Parameter validation
         schema = OrderValidator.dispatchManifests()
@@ -1501,8 +1498,8 @@ class Order:
         schema = DispatchManifest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/{manifest_id}/dispatch", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"manifest_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"manifest_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", manifest_id=manifest_id)
-        query_string = await create_query_string(manifest_id=manifest_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/dispatch", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Id of the company."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Id of the company."}]}""", serverType="platform", )
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -1516,7 +1513,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/{manifest_id}/dispatch", manifest_id=manifest_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/dispatch", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SuccessResponse
@@ -1838,6 +1835,49 @@ class Order:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for failedOrderLogDetails")
+                print(e)
+
+        return response
+    
+    async def generateProcessManifest(self, body="", request_headers:Dict={}):
+        """Endpoint to save and process order manifests.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.generateProcessManifest()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ProcessManifestRequest
+        schema = ProcessManifestRequest()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/process-manifest", """{"required":[{"name":"company_id","in":"path","required":true,"description":"The Id Of The Company.","schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"The Id Of The Company.","schema":{"type":"integer"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/process-manifest", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ManifestResponse
+            schema = ManifestResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for generateProcessManifest")
                 print(e)
 
         return response

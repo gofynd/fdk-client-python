@@ -705,10 +705,11 @@ class Catalog:
 
         return response
     
-    async def getInventoryBulkUploadHistory(self, page_no=None, page_size=None, request_headers:Dict={}):
+    async def getInventoryBulkUploadHistory(self, page_no=None, page_size=None, search=None, request_headers:Dict={}):
         """Helps to get bulk Inventory upload jobs status.
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
+        :param search : Search string to filter the results by batch id : type string
         """
         payload = {}
         
@@ -716,14 +717,16 @@ class Catalog:
             payload["page_no"] = page_no
         if page_size is not None:
             payload["page_size"] = page_size
+        if search is not None:
+            payload["search"] = search
 
         # Parameter validation
         schema = CatalogValidator.getInventoryBulkUploadHistory()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", """{"required":[{"description":"Company Id of of which Inventory Bulk Upload History to be obtained.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}}],"headers":[],"path":[{"description":"Company Id of of which Inventory Bulk Upload History to be obtained.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", """{"required":[{"description":"Company Id of of which Inventory Bulk Upload History to be obtained.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search string to filter the results by batch id","in":"query","name":"search","required":false,"schema":{"type":"string"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search string to filter the results by batch id","in":"query","name":"search","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"Company Id of of which Inventory Bulk Upload History to be obtained.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, search=search)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, search=search)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -737,7 +740,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", page_no=page_no, page_size=page_size, search=search), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import BulkInventoryGet
@@ -1338,52 +1341,6 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getStoreDetail")
-                print(e)
-
-        return response
-    
-    async def createMarketplaceOptin(self, marketplace=None, body="", request_headers:Dict={}):
-        """Allows to create and update opt-in information for a specific company.
-        :param marketplace : The marketplace for which the detail needs to be retrieved. : type string
-        """
-        payload = {}
-        
-        if marketplace is not None:
-            payload["marketplace"] = marketplace
-
-        # Parameter validation
-        schema = CatalogValidator.createMarketplaceOptin()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import OptInPostRequest
-        schema = OptInPostRequest()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/{marketplace}/optin/", """{"required":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"The marketplace for which the detail needs to be retrieved.","in":"path","name":"marketplace","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"The marketplace for which the detail needs to be retrieved.","in":"path","name":"marketplace","required":true,"schema":{"type":"string"}}]}""", serverType="platform", marketplace=marketplace)
-        query_string = await create_query_string(marketplace=marketplace)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/marketplaces/{marketplace}/optin/", marketplace=marketplace), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import UpdatedResponse
-            schema = UpdatedResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createMarketplaceOptin")
                 print(e)
 
         return response
@@ -3102,8 +3059,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import BulkJob
-        schema = BulkJob()
+        from .models import BulkProductJob
+        schema = BulkProductJob()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/bulk", """{"required":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Department of the product to be uploaded.","in":"query","name":"department","required":true,"schema":{"type":"string"}},{"description":"Product type of the product to be uploaded i.e. set, standard , digital.","in":"query","name":"product_type","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"description":"Department of the product to be uploaded.","in":"query","name":"department","required":true,"schema":{"type":"string"}},{"description":"Product type of the product to be uploaded i.e. set, standard , digital.","in":"query","name":"product_type","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", department=department, product_type=product_type)
@@ -3585,6 +3542,52 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for updateMarketplaceOptin")
+                print(e)
+
+        return response
+    
+    async def createMarketplaceOptin(self, marketplace_slug=None, body="", request_headers:Dict={}):
+        """Allows to create opt-in information for a specific company.
+        :param marketplace_slug : The marketplace for which the detail needs to be retrieved. : type string
+        """
+        payload = {}
+        
+        if marketplace_slug is not None:
+            payload["marketplace_slug"] = marketplace_slug
+
+        # Parameter validation
+        schema = CatalogValidator.createMarketplaceOptin()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import OptInPostRequest
+        schema = OptInPostRequest()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/channel/{marketplace_slug}/opt-in", """{"required":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"The marketplace for which the detail needs to be retrieved.","in":"path","name":"marketplace_slug","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"The marketplace for which the detail needs to be retrieved.","in":"path","name":"marketplace_slug","required":true,"schema":{"type":"string"}}]}""", serverType="platform", marketplace_slug=marketplace_slug)
+        query_string = await create_query_string(marketplace_slug=marketplace_slug)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/channel/{marketplace_slug}/opt-in", marketplace_slug=marketplace_slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateMarketplaceOptinResponse
+            schema = CreateMarketplaceOptinResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createMarketplaceOptin")
                 print(e)
 
         return response

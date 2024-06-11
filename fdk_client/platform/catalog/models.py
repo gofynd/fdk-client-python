@@ -214,7 +214,15 @@ class BulkInventoryGet(BaseSchema):
     pass
 
 
+class FailedRecord(BaseSchema):
+    pass
+
+
 class BulkInventoryGetItems(BaseSchema):
+    pass
+
+
+class BulkProductJob(BaseSchema):
     pass
 
 
@@ -602,7 +610,27 @@ class GetCompanySerializer(BaseSchema):
     pass
 
 
+class ConditionItem(BaseSchema):
+    pass
+
+
+class DataItem(BaseSchema):
+    pass
+
+
+class ValueTypeItem(BaseSchema):
+    pass
+
+
+class SortTypeItem(BaseSchema):
+    pass
+
+
 class GetConfigMetadataResponse(BaseSchema):
+    pass
+
+
+class GetConfigMetadataValues(BaseSchema):
     pass
 
 
@@ -1390,7 +1418,7 @@ class UpdateSearchConfigurationResponse(BaseSchema):
     pass
 
 
-class UpdatedResponse(BaseSchema):
+class CreateMarketplaceOptinResponse(BaseSchema):
     pass
 
 
@@ -2207,6 +2235,16 @@ class BulkInventoryGet(BaseSchema):
     
 
 
+class FailedRecord(BaseSchema):
+    # Catalog swagger.json
+
+    
+    identifiers = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
 class BulkInventoryGetItems(BaseSchema):
     # Catalog swagger.json
 
@@ -2223,7 +2261,7 @@ class BulkInventoryGetItems(BaseSchema):
     
     failed = fields.Int(required=False)
     
-    failed_records = fields.List(fields.Str(required=False), required=False)
+    failed_records = fields.List(fields.Nested(FailedRecord, required=False), required=False)
     
     file_path = fields.Str(required=False)
     
@@ -2240,6 +2278,22 @@ class BulkInventoryGetItems(BaseSchema):
     succeed = fields.Int(required=False)
     
     total = fields.Int(required=False)
+    
+
+
+class BulkProductJob(BaseSchema):
+    # Catalog swagger.json
+
+    
+    company_id = fields.Int(required=False)
+    
+    template_tag = fields.Str(required=False)
+    
+    product_type = fields.Str(required=False)
+    
+    department = fields.Str(required=False)
+    
+    file_path = fields.Str(required=False)
     
 
 
@@ -3877,17 +3931,71 @@ class GetCompanySerializer(BaseSchema):
     
 
 
+class ConditionItem(BaseSchema):
+    # Catalog swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    display = fields.Str(required=False)
+    
+
+
+class DataItem(BaseSchema):
+    # Catalog swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    display = fields.Str(required=False)
+    
+    filter_types = fields.List(fields.Str(required=False), required=False)
+    
+    compatible_units = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class ValueTypeItem(BaseSchema):
+    # Catalog swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    display = fields.Str(required=False)
+    
+
+
+class SortTypeItem(BaseSchema):
+    # Catalog swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    display = fields.Str(required=False)
+    
+
+
 class GetConfigMetadataResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    condition = fields.List(fields.Dict(required=False), required=False)
+    condition = fields.List(fields.Nested(ConditionItem, required=False), required=False)
     
-    data = fields.List(fields.Dict(required=False), required=False)
+    data = fields.List(fields.Nested(DataItem, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
-    values = fields.List(fields.Dict(required=False), required=False)
+    values = fields.Nested(GetConfigMetadataValues, required=False)
+    
+
+
+class GetConfigMetadataValues(BaseSchema):
+    # Catalog swagger.json
+
+    
+    type = fields.List(fields.Nested(ValueTypeItem, required=False), required=False)
+    
+    sort = fields.List(fields.Nested(SortTypeItem, required=False), required=False)
     
 
 
@@ -7465,13 +7573,27 @@ class UpdateSearchConfigurationResponse(BaseSchema):
     
 
 
-class UpdatedResponse(BaseSchema):
+class CreateMarketplaceOptinResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    items_not_updated = fields.List(fields.Int(required=False), required=False)
+    store_ids = fields.List(fields.Int(required=False), required=False)
     
-    message = fields.Str(required=False)
+    brand_ids = fields.List(fields.Int(required=False), required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    opt_level = fields.Str(required=False)
+    
+    platform = fields.Str(required=False)
+    
+    enabled = fields.Boolean(required=False)
+    
+    created_by = fields.Nested(CreatedBy, required=False)
+    
+    modified_by = fields.Nested(CreatedBy, required=False)
+    
+    app_id = fields.Str(required=False)
     
 
 

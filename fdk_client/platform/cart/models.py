@@ -3079,6 +3079,8 @@ class OverrideCheckoutReq(BaseSchema):
     
     order_type = fields.Str(required=False)
     
+    callback_url = fields.Str(required=False)
+    
     cart_items = fields.List(fields.Nested(OverrideCartItem, required=False), required=False)
     
     ordering_store = fields.Int(required=False, allow_none=True)

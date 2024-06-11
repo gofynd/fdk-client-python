@@ -74,6 +74,10 @@ class PingWebhookResponse(BaseSchema):
     pass
 
 
+class SubscriberEventMapping(BaseSchema):
+    pass
+
+
 class EventConfig(BaseSchema):
     pass
 
@@ -134,11 +138,15 @@ class AuthMeta(BaseSchema):
     pass
 
 
-class SubscriberEventMapping(BaseSchema):
+class SubscriberResponse(BaseSchema):
     pass
 
 
-class SubscriberResponse(BaseSchema):
+class Events(BaseSchema):
+    pass
+
+
+class SubscriberConfigRequestV2(BaseSchema):
     pass
 
 
@@ -369,6 +377,22 @@ class PingWebhookResponse(BaseSchema):
     
 
 
+class SubscriberEventMapping(BaseSchema):
+    # Webhook swagger.json
+
+    
+    id = fields.Float(required=False)
+    
+    event_id = fields.Float(required=False)
+    
+    subscriber_id = fields.Float(required=False)
+    
+    topic = fields.Str(required=False, allow_none=True)
+    
+    created_on = fields.Str(required=False)
+    
+
+
 class EventConfig(BaseSchema):
     # Webhook swagger.json
 
@@ -384,6 +408,8 @@ class EventConfig(BaseSchema):
     subscriber_event_mapping = fields.Nested(SubscriberEventMapping, required=False)
     
     event_schema = fields.Dict(required=False, allow_none=True)
+    
+    group = fields.Str(required=False, allow_none=True)
     
     version = fields.Str(required=False)
     
@@ -450,6 +476,8 @@ class HistoryFilters(BaseSchema):
     start_date = fields.Str(required=False)
     
     subscribers = fields.List(fields.Int(required=False), required=False)
+    
+    webhook_type = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -555,20 +583,6 @@ class AuthMeta(BaseSchema):
     
 
 
-class SubscriberEventMapping(BaseSchema):
-    # Webhook swagger.json
-
-    
-    id = fields.Int(required=False)
-    
-    event_id = fields.Int(required=False)
-    
-    subscriber_id = fields.Int(required=False)
-    
-    created_on = fields.Str(required=False)
-    
-
-
 class SubscriberResponse(BaseSchema):
     # Webhook swagger.json
 
@@ -578,6 +592,8 @@ class SubscriberResponse(BaseSchema):
     modified_by = fields.Str(required=False)
     
     name = fields.Str(required=False)
+    
+    provider = fields.Str(required=False)
     
     webhook_url = fields.Str(required=False)
     
@@ -598,6 +614,42 @@ class SubscriberResponse(BaseSchema):
     auth_meta = fields.Nested(AuthMeta, required=False)
     
     event_configs = fields.List(fields.Nested(EventConfig, required=False), required=False)
+    
+
+
+class Events(BaseSchema):
+    # Webhook swagger.json
+
+    
+    slug = fields.Str(required=False)
+    
+    topic = fields.Str(required=False)
+    
+
+
+class SubscriberConfigRequestV2(BaseSchema):
+    # Webhook swagger.json
+
+    
+    id = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
+    
+    webhook_url = fields.Str(required=False)
+    
+    provider = fields.Str(required=False)
+    
+    association = fields.Nested(Association, required=False)
+    
+    custom_headers = fields.Dict(required=False)
+    
+    status = fields.Str(required=False, validate=OneOf([val.value for val in SubscriberStatus.__members__.values()]))
+    
+    email_id = fields.Str(required=False)
+    
+    auth_meta = fields.Nested(AuthMeta, required=False)
+    
+    events = fields.List(fields.Nested(Events, required=False), required=False)
     
 
 
@@ -636,6 +688,8 @@ class SubscriberConfigResponse(BaseSchema):
     name = fields.Str(required=False)
     
     webhook_url = fields.Str(required=False)
+    
+    provider = fields.Str(required=False)
     
     association = fields.Nested(Association, required=False)
     

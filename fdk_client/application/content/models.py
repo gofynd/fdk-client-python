@@ -541,6 +541,8 @@ class BlogSchema(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
+    publish_date = fields.Str(required=False)
+    
     seo = fields.Nested(SEO, required=False)
     
     _schedule = fields.Nested(CronSchedule, required=False)

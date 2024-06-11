@@ -98,6 +98,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -149,12 +150,8 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
-        
-    
-    
         
         
     
@@ -381,11 +378,15 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
+    
+    
         
     
     
+        
         
     
     
@@ -585,6 +586,8 @@ class CatalogValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+        
+        search = fields.Str(required=False)
          
         
     
@@ -709,15 +712,6 @@ class CatalogValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
-         
-        
-    
-    class createMarketplaceOptin(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        marketplace = fields.Str(required=False)
          
         
     
@@ -1229,6 +1223,15 @@ class CatalogValidator:
         
     
     class updateMarketplaceOptin(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        marketplace_slug = fields.Str(required=False)
+         
+        
+    
+    class createMarketplaceOptin(BaseSchema):
         
         
         company_id = fields.Int(required=False)

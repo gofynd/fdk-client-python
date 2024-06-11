@@ -24,6 +24,10 @@ class ShipmentPayment(BaseSchema):
     pass
 
 
+class ShipmentPaymentInfo(BaseSchema):
+    pass
+
+
 class ShipmentUserInfo(BaseSchema):
     pass
 
@@ -104,7 +108,7 @@ class Article(BaseSchema):
     pass
 
 
-class DeliveryAddress(BaseSchema):
+class Address(BaseSchema):
     pass
 
 
@@ -340,6 +344,26 @@ class ShipmentPayment(BaseSchema):
     logo = fields.Str(required=False)
     
     display_name = fields.Str(required=False)
+    
+
+
+class ShipmentPaymentInfo(BaseSchema):
+    # Order swagger.json
+
+    
+    mop = fields.Str(required=False)
+    
+    payment_mode = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    mode = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    amount = fields.Float(required=False)
     
 
 
@@ -739,7 +763,7 @@ class Article(BaseSchema):
     
 
 
-class DeliveryAddress(BaseSchema):
+class Address(BaseSchema):
     # Order swagger.json
 
     
@@ -797,7 +821,7 @@ class Shipments(BaseSchema):
     
     payment = fields.Nested(ShipmentPayment, required=False)
     
-    payment_info = fields.List(fields.Nested(ShipmentPayment, required=False), required=False)
+    payment_info = fields.List(fields.Nested(ShipmentPaymentInfo, required=False), required=False)
     
     order_type = fields.Str(required=False, allow_none=True)
     
@@ -859,7 +883,9 @@ class Shipments(BaseSchema):
     
     can_return = fields.Boolean(required=False)
     
-    delivery_address = fields.Nested(DeliveryAddress, required=False)
+    delivery_address = fields.Nested(Address, required=False)
+    
+    billing_address = fields.Nested(Address, required=False)
     
     track_url = fields.Str(required=False)
     
@@ -908,6 +934,8 @@ class OrderSchema(BaseSchema):
 
     
     total_shipments_in_order = fields.Int(required=False)
+    
+    gstin_code = fields.Str(required=False)
     
     user_info = fields.Nested(UserInfo, required=False)
     

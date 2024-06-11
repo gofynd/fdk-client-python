@@ -8,11 +8,11 @@ from ..PartnerModel import BaseSchema
 
 
 
-class UpdateSubscriberResponse(BaseSchema):
+class UpdateSubscriberRequest(BaseSchema):
     pass
 
 
-class UpdateSubscriberRequest(BaseSchema):
+class UpdateSubscriberResponse(BaseSchema):
     pass
 
 
@@ -41,10 +41,6 @@ class InvalidEventsRequest(BaseSchema):
 
 
 class InvalidEventsResponse(BaseSchema):
-    pass
-
-
-class DownloadReponse(BaseSchema):
     pass
 
 
@@ -135,19 +131,19 @@ class ItemSchema(BaseSchema):
 
 
 
-class UpdateSubscriberResponse(BaseSchema):
-    # Webhook swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
 class UpdateSubscriberRequest(BaseSchema):
     # Webhook swagger.json
 
     
     status = fields.Str(required=False)
+    
+
+
+class UpdateSubscriberResponse(BaseSchema):
+    # Webhook swagger.json
+
+    
+    message = fields.Str(required=False)
     
 
 
@@ -185,6 +181,8 @@ class SubscriberEventMapping(BaseSchema):
     
     subscriber_id = fields.Int(required=False)
     
+    topic = fields.Str(required=False, allow_none=True)
+    
     created_on = fields.Str(required=False)
     
 
@@ -212,6 +210,8 @@ class EventConfigResponse(BaseSchema):
     created_on = fields.Str(required=False)
     
     updated_on = fields.Str(required=False)
+    
+    group = fields.Str(required=False, allow_none=True)
     
     subscriber_event_mapping = fields.Nested(SubscriberEventMapping, required=False)
     
@@ -259,14 +259,6 @@ class InvalidEventsResponse(BaseSchema):
     
 
 
-class DownloadReponse(BaseSchema):
-    # Webhook swagger.json
-
-    
-    file_name = fields.Str(required=False)
-    
-
-
 class HistoryFilters(BaseSchema):
     # Webhook swagger.json
 
@@ -282,6 +274,8 @@ class HistoryFilters(BaseSchema):
     start_date = fields.Str(required=False)
     
     subscribers = fields.List(fields.Int(required=False), required=False)
+    
+    webhook_type = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -560,6 +554,8 @@ class ItemSchema(BaseSchema):
     name = fields.Str(required=False)
     
     webhook_url = fields.Str(required=False)
+    
+    provider = fields.Str(required=False)
     
     association = fields.Nested(Association, required=False)
     

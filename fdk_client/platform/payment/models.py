@@ -825,7 +825,7 @@ class AggregatorRoute(BaseSchema):
     
     data = fields.Dict(required=False, allow_none=True)
     
-    payment_flow_data = fields.Str(required=False, allow_none=True)
+    payment_flow_data = fields.Dict(required=False, allow_none=True)
     
     payment_flow = fields.Str(required=False, allow_none=True)
     

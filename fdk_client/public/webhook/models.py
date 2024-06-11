@@ -87,6 +87,8 @@ class EventConfig(BaseSchema):
     
     updated_on = fields.Str(required=False)
     
+    group = fields.Str(required=False, allow_none=True)
+    
 
 
 class EventConfigResponse(BaseSchema):

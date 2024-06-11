@@ -1009,6 +1009,8 @@ class BlogSchema(BaseSchema):
     
     slug = fields.Str(required=False)
     
+    publish_date = fields.Str(required=False)
+    
     tags = fields.List(fields.Str(required=False), required=False)
     
     seo = fields.Nested(SEO, required=False)

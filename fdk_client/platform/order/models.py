@@ -740,6 +740,22 @@ class GenerateInvoiceIDErrorResponse(BaseSchema):
     pass
 
 
+class ManifestResponse(BaseSchema):
+    pass
+
+
+class ProcessManifestRequest(BaseSchema):
+    pass
+
+
+class ManifestItems(BaseSchema):
+    pass
+
+
+class ManifestErrorResponse(BaseSchema):
+    pass
+
+
 class Page(BaseSchema):
     pass
 
@@ -3535,13 +3551,15 @@ class Filters(BaseSchema):
     
     dp_name = fields.Str(required=False)
     
-    dp_ids = fields.Int(required=False)
+    dp_ids = fields.Str(required=False)
     
     lane = fields.Str(required=False)
     
     selected_shipments = fields.Str(required=False)
     
     store_name = fields.Str(required=False)
+    
+    deselected_shipments = fields.Str(required=False)
     
 
 
@@ -4068,6 +4086,62 @@ class GenerateInvoiceIDErrorResponse(BaseSchema):
 
     
     items = fields.List(fields.Nested(GenerateInvoiceIDErrorResponseData, required=False), required=False)
+    
+
+
+class ManifestResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    items = fields.Nested(ManifestItems, required=False)
+    
+
+
+class ProcessManifestRequest(BaseSchema):
+    # Order swagger.json
+
+    
+    action = fields.Str(required=False)
+    
+    manifest_id = fields.Str(required=False)
+    
+    filters = fields.Nested(Filters, required=False)
+    
+    unique_id = fields.Str(required=False)
+    
+
+
+class ManifestItems(BaseSchema):
+    # Order swagger.json
+
+    
+    filters = fields.Nested(Filters, required=False)
+    
+    manifest_id = fields.Str(required=False)
+    
+    unique_id = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    dp_id = fields.Str(required=False, allow_none=True)
+    
+    courier_partner_slug = fields.Str(required=False)
+    
+    action = fields.Str(required=False)
+    
+    created_by = fields.Str(required=False)
+    
+    user_id = fields.Str(required=False)
+    
+
+
+class ManifestErrorResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    error = fields.Str(required=False)
     
 
 

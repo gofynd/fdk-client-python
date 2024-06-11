@@ -158,7 +158,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
     
     
         
@@ -187,6 +186,9 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+    
+    
         
     
     
@@ -612,9 +614,9 @@ class OrderValidator:
         
         company_id = fields.Int(required=False)
         
-        dp_ids = fields.Int(required=False)
+        dp_ids = fields.Str(required=False)
         
-        stores = fields.Str(required=False)
+        stores = fields.Int(required=False)
         
         to_date = fields.Str(required=False)
         
@@ -628,9 +630,9 @@ class OrderValidator:
         
         search_value = fields.Str(required=False)
         
-        page_no = fields.Str(required=False)
+        page_no = fields.Int(required=False)
         
-        page_size = fields.Str(required=False)
+        page_size = fields.Int(required=False)
          
         
     
@@ -679,8 +681,6 @@ class OrderValidator:
         
         
         company_id = fields.Int(required=False)
-        
-        manifest_id = fields.Str(required=False)
          
         
     
@@ -746,6 +746,13 @@ class OrderValidator:
         company_id = fields.Int(required=False)
         
         log_id = fields.Str(required=False)
+         
+        
+    
+    class generateProcessManifest(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     
