@@ -799,7 +799,7 @@ Success
   "data": [
     {
       "id": "2b9c0729-3fa0-4565-8fcb-e822c87a95f9",
-      "pdf_s3_url": "https://fynd-staging-assets-private.s3-accelerate.amazonaws.com"
+      "pdf_s3_url": "https://fynd-staging-assets-private.s3-accelerate.amazonaws.com/addsale/documents/daytrader/PDFs/123/07-2023/FS/FS-C27-A00003-24_123_07-2023.pdf"
     }
   ]
 }
@@ -1329,7 +1329,7 @@ Success
 {
   "success": true,
   "data": [
-    "https://fynd-staging-assets-private.s3-accelerate.amazonaws.com"
+    "https://fynd-staging-assets-private.s3-accelerate.amazonaws.com/addsale/documents/daytrader/PDFs/61/07-2023/FY/FY-I-A23004-FY24_61_07-2023.pdf"
   ],
   "error": []
 }
@@ -1633,7 +1633,7 @@ Success
   "success": true,
   "data": {
     "cn_reference_number": "6078OMR000006-23",
-    "s3_pdf_link": "https://fynd-staging-assets-private.s3-accelerate.amazonaws.com"
+    "s3_pdf_link": "https://fynd-staging-assets-private.s3-accelerate.amazonaws.com/addsale/documents/invoice_a4/PDFs/16814985547851457553_invoice_a4.pdf"
   }
 }
 ```

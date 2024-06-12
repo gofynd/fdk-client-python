@@ -505,10 +505,6 @@ class AppliedPromotion(BaseSchema):
     
     promotion_type = fields.Str(required=False)
     
-    meta = fields.Dict(required=False)
-    
-    code = fields.Str(required=False, allow_none=True)
-    
 
 
 class PaymentSelectionLock(BaseSchema):
@@ -1978,6 +1974,10 @@ class PromotionOffer(BaseSchema):
     offer_text = fields.Str(required=False)
     
     promotion_group = fields.Str(required=False)
+    
+    promotion_name = fields.Str(required=False)
+    
+    promotion_type = fields.Str(required=False)
     
     valid_till = fields.Str(required=False)
     

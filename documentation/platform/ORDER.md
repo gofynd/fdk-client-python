@@ -4573,7 +4573,7 @@ We are processing the file!
   "method": "PUT",
   "tags": [],
   "upload": {
-    "url": "https://fynd-staging-assets.s3-accelerate.amazonaws.com",
+    "url": "https://fynd-staging-assets.s3-accelerate.amazonaws.com/x0/misc/general/free/original/0Ex0-zTyw-placed_352_1668856953.7936668.xlsx",
     "expiry": 1800
   },
   "cdn": {
@@ -4705,7 +4705,7 @@ We are processing the file!
   "method": "PUT",
   "tags": [],
   "upload": {
-    "url": "https://fynd-staging-assets.s3-accelerate.amazonaws.com",
+    "url": "https://fynd-staging-assets.s3-accelerate.amazonaws.com/x0/misc/general/free/original/0Ex0-zTyw-placed_352_1668856953.7936668.xlsx",
     "expiry": 1800
   },
   "cdn": {

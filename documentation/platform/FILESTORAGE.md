@@ -791,7 +791,7 @@ Success
           "relative_url": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/brands/pictures/square-logo/original/uY0P_ZtIz-logo.png"
         },
         "upload": {
-          "url": "https://fynd-staging-assets.s3-accelerate.amazonaws.com",
+          "url": "https://fynd-staging-assets.s3-accelerate.amazonaws.com/addsale/brands/pictures/square-logo/original/uY0P_ZtIz-logo.png",
           "expiry": 1800
         },
         "created_by": {
@@ -896,7 +896,7 @@ Success
           "relative_url": "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyndnp/wrkr/addsale/brands/pictures/square-logo/original/uY0P_ZtIz-logo.png"
         },
         "upload": {
-          "url": "https://fynd-staging-assets.s3-accelerate.amazonaws.com",
+          "url": "https://fynd-staging-assets.s3-accelerate.amazonaws.com/addsale/brands/pictures/square-logo/original/uY0P_ZtIz-logo.png",
           "expiry": 1800
         },
         "created_by": {

@@ -112,7 +112,7 @@ class OAuthClient:
     async def renewAccessToken(self, is_offline_token=False):
         if is_offline_token:
             request_cache_key = f"{self.config.apiKey}:{self.config.companyId}"
-            if not refresh_token_request_cache[request_cache_key]:
+            if not refresh_token_request_cache.get(request_cache_key):
                 refresh_token_request_cache[request_cache_key] = self.getAccesstokenObj(
                     grant_type='refresh_token',
                     refresh_token=self.refreshToken
