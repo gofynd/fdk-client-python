@@ -14,10 +14,6 @@ class Action(BaseSchema):
     pass
 
 
-class ActionPage(BaseSchema):
-    pass
-
-
 class AllSizes(BaseSchema):
     pass
 
@@ -75,6 +71,10 @@ class ApplicationItemMOQ(BaseSchema):
 
 
 class ApplicationItemMeta(BaseSchema):
+    pass
+
+
+class ApplicationItemSeoSitemap(BaseSchema):
     pass
 
 
@@ -214,7 +214,15 @@ class BulkInventoryGet(BaseSchema):
     pass
 
 
+class FailedRecord(BaseSchema):
+    pass
+
+
 class BulkInventoryGetItems(BaseSchema):
+    pass
+
+
+class BulkProductJob(BaseSchema):
     pass
 
 
@@ -602,7 +610,27 @@ class GetCompanySerializer(BaseSchema):
     pass
 
 
+class ConditionItem(BaseSchema):
+    pass
+
+
+class DataItem(BaseSchema):
+    pass
+
+
+class ValueTypeItem(BaseSchema):
+    pass
+
+
+class SortTypeItem(BaseSchema):
+    pass
+
+
 class GetConfigMetadataResponse(BaseSchema):
+    pass
+
+
+class GetConfigMetadataValues(BaseSchema):
     pass
 
 
@@ -643,6 +671,46 @@ class GetProductBundleResponse(BaseSchema):
 
 
 class GetProducts(BaseSchema):
+    pass
+
+
+class GetCollectionDetailResponse(BaseSchema):
+    pass
+
+
+class CommonResponseSchemaCollection(BaseSchema):
+    pass
+
+
+class GetQueryFiltersKeysResponse(BaseSchema):
+    pass
+
+
+class GetQueryFiltersResponse(BaseSchema):
+    pass
+
+
+class GetCollectionItemsResponseSchemaV2(BaseSchema):
+    pass
+
+
+class Page1(BaseSchema):
+    pass
+
+
+class CollectionItemSchemaV2(BaseSchema):
+    pass
+
+
+class CollectionItemUpdateSchema(BaseSchema):
+    pass
+
+
+class CollectionQuerySchemaV2(BaseSchema):
+    pass
+
+
+class ProductDetailV2(BaseSchema):
     pass
 
 
@@ -1062,6 +1130,14 @@ class ProductFilters(BaseSchema):
     pass
 
 
+class GetQueryFiltersValuesResponse(BaseSchema):
+    pass
+
+
+class ProductFiltersKeysOnly(BaseSchema):
+    pass
+
+
 class ProductFiltersKey(BaseSchema):
     pass
 
@@ -1342,7 +1418,7 @@ class UpdateSearchConfigurationResponse(BaseSchema):
     pass
 
 
-class UpdatedResponse(BaseSchema):
+class CreateMarketplaceOptinResponse(BaseSchema):
     pass
 
 
@@ -1406,6 +1482,30 @@ class WeightResponse1(BaseSchema):
     pass
 
 
+class CreatedBy(BaseSchema):
+    pass
+
+
+class Marketplaces(BaseSchema):
+    pass
+
+
+class GetAllMarketplaces(BaseSchema):
+    pass
+
+
+class UpdateMarketplaceOptinRequest(BaseSchema):
+    pass
+
+
+class UpdateMarketplaceOptinResponse(BaseSchema):
+    pass
+
+
+class ActionPage(BaseSchema):
+    pass
+
+
 
 
 
@@ -1413,25 +1513,11 @@ class Action(BaseSchema):
     # Catalog swagger.json
 
     
+    type = fields.Str(required=False)
+    
     page = fields.Nested(ActionPage, required=False)
     
     popup = fields.Nested(ActionPage, required=False)
-    
-    type = fields.Str(required=False)
-    
-
-
-class ActionPage(BaseSchema):
-    # Catalog swagger.json
-
-    
-    params = fields.Dict(required=False)
-    
-    query = fields.Dict(required=False)
-    
-    url = fields.Str(required=False)
-    
-    type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
     
 
 
@@ -1677,6 +1763,16 @@ class ApplicationItemMeta(BaseSchema):
     
 
 
+class ApplicationItemSeoSitemap(BaseSchema):
+    # Catalog swagger.json
+
+    
+    priority = fields.Float(required=False)
+    
+    frequency = fields.Str(required=False)
+    
+
+
 class ApplicationItemSEO(BaseSchema):
     # Catalog swagger.json
 
@@ -1684,6 +1780,14 @@ class ApplicationItemSEO(BaseSchema):
     description = fields.Str(required=False)
     
     title = fields.Str(required=False)
+    
+    sitemap = fields.Nested(ApplicationItemSeoSitemap, required=False)
+    
+    breadcrumbs = fields.List(fields.Nested(ApplicationItemSeoBreadcrumbs, required=False), required=False)
+    
+    meta_tags = fields.List(fields.Nested(ApplicationItemSeoMetaTags, required=False), required=False)
+    
+    canonical_url = fields.Str(required=False)
     
 
 
@@ -2131,6 +2235,16 @@ class BulkInventoryGet(BaseSchema):
     
 
 
+class FailedRecord(BaseSchema):
+    # Catalog swagger.json
+
+    
+    identifiers = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
 class BulkInventoryGetItems(BaseSchema):
     # Catalog swagger.json
 
@@ -2147,7 +2261,7 @@ class BulkInventoryGetItems(BaseSchema):
     
     failed = fields.Int(required=False)
     
-    failed_records = fields.List(fields.Str(required=False), required=False)
+    failed_records = fields.List(fields.Nested(FailedRecord, required=False), required=False)
     
     file_path = fields.Str(required=False)
     
@@ -2164,6 +2278,22 @@ class BulkInventoryGetItems(BaseSchema):
     succeed = fields.Int(required=False)
     
     total = fields.Int(required=False)
+    
+
+
+class BulkProductJob(BaseSchema):
+    # Catalog swagger.json
+
+    
+    company_id = fields.Int(required=False)
+    
+    template_tag = fields.Str(required=False)
+    
+    product_type = fields.Str(required=False)
+    
+    department = fields.Str(required=False)
+    
+    file_path = fields.Str(required=False)
     
 
 
@@ -3513,6 +3643,8 @@ class RawProduct(BaseSchema):
     
     verified_on = fields.Str(required=False)
     
+    store_id_list = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class RawProductListingResponse(BaseSchema):
@@ -3799,15 +3931,71 @@ class GetCompanySerializer(BaseSchema):
     
 
 
+class ConditionItem(BaseSchema):
+    # Catalog swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    display = fields.Str(required=False)
+    
+
+
+class DataItem(BaseSchema):
+    # Catalog swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    display = fields.Str(required=False)
+    
+    filter_types = fields.List(fields.Str(required=False), required=False)
+    
+    compatible_units = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class ValueTypeItem(BaseSchema):
+    # Catalog swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    display = fields.Str(required=False)
+    
+
+
+class SortTypeItem(BaseSchema):
+    # Catalog swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    display = fields.Str(required=False)
+    
+
+
 class GetConfigMetadataResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    condition = fields.List(fields.Dict(required=False), required=False)
+    condition = fields.List(fields.Nested(ConditionItem, required=False), required=False)
     
-    data = fields.List(fields.Dict(required=False), required=False)
+    data = fields.List(fields.Nested(DataItem, required=False), required=False)
     
-    values = fields.List(fields.Dict(required=False), required=False)
+    page = fields.Nested(Page, required=False)
+    
+    values = fields.Nested(GetConfigMetadataValues, required=False)
+    
+
+
+class GetConfigMetadataValues(BaseSchema):
+    # Catalog swagger.json
+
+    
+    type = fields.List(fields.Nested(ValueTypeItem, required=False), required=False)
+    
+    sort = fields.List(fields.Nested(SortTypeItem, required=False), required=False)
     
 
 
@@ -4092,6 +4280,198 @@ class GetProducts(BaseSchema):
     product_uid = fields.Int(required=False)
     
     sizes = fields.List(fields.Nested(Size, required=False), required=False)
+    
+
+
+class GetCollectionDetailResponse(BaseSchema):
+    # Catalog swagger.json
+
+    
+    _custom_json = fields.Dict(required=False)
+    
+    _locale_language = fields.Dict(required=False)
+    
+    _schedule = fields.Nested(CollectionSchedule, required=False)
+    
+    action = fields.Dict(required=False)
+    
+    allow_facets = fields.Boolean(required=False)
+    
+    allow_sort = fields.Boolean(required=False)
+    
+    app_id = fields.Str(required=False)
+    
+    badge = fields.Nested(CollectionBadge, required=False)
+    
+    banners = fields.Nested(ImageUrls, required=False)
+    
+    description = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    is_visible = fields.Boolean(required=False)
+    
+    logo = fields.Nested(Media, required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    name = fields.Str(required=False)
+    
+    priority = fields.Int(required=False)
+    
+    published = fields.Boolean(required=False)
+    
+    query = fields.List(fields.Nested(CollectionQuery, required=False), required=False)
+    
+    seo = fields.Nested(SeoDetail, required=False)
+    
+    slug = fields.Str(required=False)
+    
+    sort_on = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    type = fields.Str(required=False)
+    
+    uid = fields.Str(required=False)
+    
+    visible_facets_keys = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class CommonResponseSchemaCollection(BaseSchema):
+    # Catalog swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+
+
+class GetQueryFiltersKeysResponse(BaseSchema):
+    # Catalog swagger.json
+
+    
+    filters = fields.List(fields.Nested(ProductFiltersKeysOnly, required=False), required=False)
+    
+    operators = fields.Dict(required=False)
+    
+    sort_on = fields.List(fields.Nested(ProductSortOn, required=False), required=False)
+    
+
+
+class GetQueryFiltersResponse(BaseSchema):
+    # Catalog swagger.json
+
+    
+    filters = fields.List(fields.Nested(ProductFilters, required=False), required=False)
+    
+    operators = fields.Dict(required=False)
+    
+    sort_on = fields.List(fields.Nested(ProductSortOn, required=False), required=False)
+    
+
+
+class GetCollectionItemsResponseSchemaV2(BaseSchema):
+    # Catalog swagger.json
+
+    
+    items = fields.List(fields.Nested(ProductDetailV2, required=False), required=False)
+    
+    page = fields.Nested(Page1, required=False)
+    
+
+
+class Page1(BaseSchema):
+    # Catalog swagger.json
+
+    
+    ca = fields.Boolean(required=False)
+    
+    department = fields.Str(required=False)
+    
+    page_no = fields.Int(required=False)
+    
+    page_size = fields.Int(required=False)
+    
+    q = fields.Str(required=False)
+    
+    sort = fields.Str(required=False)
+    
+    sort_on = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    variant = fields.Str(required=False)
+    
+
+
+class CollectionItemSchemaV2(BaseSchema):
+    # Catalog swagger.json
+
+    
+    action = fields.Str(required=False)
+    
+    item_id = fields.Int(required=False)
+    
+    priority = fields.Int(required=False)
+    
+
+
+class CollectionItemUpdateSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    allow_facets = fields.Boolean(required=False)
+    
+    allow_sort = fields.Boolean(required=False)
+    
+    items = fields.List(fields.Nested(CollectionItemSchemaV2, required=False), required=False)
+    
+    query = fields.List(fields.Nested(CollectionQuerySchemaV2, required=False), required=False)
+    
+    type = fields.Str(required=False)
+    
+    visible_facets_keys = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class CollectionQuerySchemaV2(BaseSchema):
+    # Catalog swagger.json
+
+    
+    attribute = fields.Str(required=False)
+    
+    op = fields.Str(required=False)
+    
+    value = fields.List(fields.Raw(required=False), required=False)
+    
+
+
+class ProductDetailV2(BaseSchema):
+    # Catalog swagger.json
+
+    
+    brand = fields.Nested(ProductBrand, required=False)
+    
+    is_excluded = fields.Boolean(required=False)
+    
+    is_pinned = fields.Boolean(required=False)
+    
+    item_code = fields.Str(required=False)
+    
+    item_type = fields.Str(required=False)
+    
+    medias = fields.List(fields.Nested(Media, required=False), required=False)
+    
+    name = fields.Str(required=False)
+    
+    priority = fields.Int(required=False)
+    
+    short_description = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
     
 
 
@@ -4478,6 +4858,8 @@ class InventoryExportJobListResponse(BaseSchema):
 
     
     items = fields.Nested(InventoryJobDetailResponse, required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 
 
@@ -5301,6 +5683,10 @@ class OwnerAppItemResponse(BaseSchema):
     
     seo = fields.Nested(SEOData, required=False)
     
+    _custom_json = fields.Dict(required=False)
+    
+    _custom_meta = fields.List(fields.Nested(MetaFields, required=False), required=False)
+    
 
 
 class PTErrorResponse(BaseSchema):
@@ -5937,6 +6323,8 @@ class ProductDownloadsResponse(BaseSchema):
     
     items = fields.List(fields.Nested(ProductTemplateExportResponse, required=False), required=False)
     
+    page = fields.Nested(Page, required=False)
+    
 
 
 class ProductFilters(BaseSchema):
@@ -5946,6 +6334,24 @@ class ProductFilters(BaseSchema):
     key = fields.Nested(ProductFiltersKey, required=False)
     
     values = fields.List(fields.Nested(ProductFiltersValue, required=False), required=False)
+    
+
+
+class GetQueryFiltersValuesResponse(BaseSchema):
+    # Catalog swagger.json
+
+    
+    values = fields.List(fields.Nested(ProductFiltersValue, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class ProductFiltersKeysOnly(BaseSchema):
+    # Catalog swagger.json
+
+    
+    key = fields.Nested(ProductFiltersKey, required=False)
     
 
 
@@ -6535,6 +6941,8 @@ class Quantity(BaseSchema):
     
     count = fields.Int(required=False)
     
+    updated_at = fields.Str(required=False)
+    
 
 
 class QuantityBase(BaseSchema):
@@ -6651,7 +7059,7 @@ class Metatags(BaseSchema):
     
     title = fields.Str(required=False)
     
-    items = fields.List(fields.Nested(ApplicationItemSeoMetaTags, required=False), required=False)
+    items = fields.List(fields.Nested(ApplicationItemSeoMetaTagItem, required=False), required=False)
     
 
 
@@ -6678,6 +7086,8 @@ class SEOData(BaseSchema):
     breadcrumbs = fields.List(fields.Nested(ApplicationItemSeoBreadcrumbs, required=False), required=False)
     
     meta_tags = fields.List(fields.Nested(Metatags, required=False), required=False)
+    
+    canonical_url = fields.Str(required=False)
     
 
 
@@ -6746,6 +7156,8 @@ class SeoDetail(BaseSchema):
     breadcrumbs = fields.List(fields.Nested(ApplicationItemSeoBreadcrumbs, required=False), required=False)
     
     meta_tags = fields.List(fields.Nested(Metatags, required=False), required=False)
+    
+    canonical_url = fields.Str(required=False)
     
 
 
@@ -7165,13 +7577,27 @@ class UpdateSearchConfigurationResponse(BaseSchema):
     
 
 
-class UpdatedResponse(BaseSchema):
+class CreateMarketplaceOptinResponse(BaseSchema):
     # Catalog swagger.json
 
     
-    items_not_updated = fields.List(fields.Int(required=False), required=False)
+    store_ids = fields.List(fields.Int(required=False), required=False)
     
-    message = fields.Str(required=False)
+    brand_ids = fields.List(fields.Int(required=False), required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    opt_level = fields.Str(required=False)
+    
+    platform = fields.Str(required=False)
+    
+    enabled = fields.Boolean(required=False)
+    
+    created_by = fields.Nested(CreatedBy, required=False)
+    
+    modified_by = fields.Nested(CreatedBy, required=False)
+    
+    app_id = fields.Str(required=False)
     
 
 
@@ -7378,6 +7804,112 @@ class WeightResponse1(BaseSchema):
     shipping = fields.Float(required=False)
     
     unit = fields.Str(required=False)
+    
+
+
+class CreatedBy(BaseSchema):
+    # Catalog swagger.json
+
+    
+    username = fields.Str(required=False)
+    
+    user_id = fields.Str(required=False)
+    
+
+
+class Marketplaces(BaseSchema):
+    # Catalog swagger.json
+
+    
+    brand_ids = fields.List(fields.Int(required=False), required=False)
+    
+    app_id = fields.Str(required=False)
+    
+    enabled = fields.Boolean(required=False)
+    
+    created_by = fields.Nested(CreatedBy, required=False)
+    
+    created_on = fields.Raw(required=False)
+    
+    opt_level = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    modified_by = fields.Nested(CreatedBy, required=False)
+    
+    store_ids = fields.List(fields.Int(required=False), required=False)
+    
+    modified_on = fields.Raw(required=False)
+    
+    platforms = fields.Str(required=False)
+    
+    _id = fields.Str(required=False)
+    
+
+
+class GetAllMarketplaces(BaseSchema):
+    # Catalog swagger.json
+
+    
+    items = fields.List(fields.Nested(Marketplaces, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class UpdateMarketplaceOptinRequest(BaseSchema):
+    # Catalog swagger.json
+
+    
+    brand_ids = fields.List(fields.Int(required=False), required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    enabled = fields.Boolean(required=False)
+    
+    opt_level = fields.Str(required=False)
+    
+    platform = fields.Str(required=False)
+    
+    store_ids = fields.List(fields.Int(required=False), required=False)
+    
+
+
+class UpdateMarketplaceOptinResponse(BaseSchema):
+    # Catalog swagger.json
+
+    
+    brand_ids = fields.List(fields.Int(required=False), required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    app_id = fields.Str(required=False)
+    
+    enabled = fields.Boolean(required=False)
+    
+    opt_level = fields.Str(required=False)
+    
+    platform = fields.Str(required=False)
+    
+    store_ids = fields.List(fields.Int(required=False), required=False)
+    
+    created_by = fields.Nested(CreatedBy, required=False)
+    
+    modified_by = fields.Nested(CreatedBy, required=False)
+    
+
+
+class ActionPage(BaseSchema):
+    # Catalog swagger.json
+
+    
+    params = fields.Dict(required=False)
+    
+    query = fields.Dict(required=False)
+    
+    url = fields.Str(required=False)
+    
+    type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
     
 
 

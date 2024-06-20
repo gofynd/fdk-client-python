@@ -32,6 +32,10 @@ class ContactDetails(BaseSchema):
     pass
 
 
+class CountryCurrencyInfo(BaseSchema):
+    pass
+
+
 class BusinessCountryInfo(BaseSchema):
     pass
 
@@ -84,7 +88,11 @@ class GetBrandResponseSerializer(BaseSchema):
     pass
 
 
-class CreateUpdateBrandRequestSerializer(BaseSchema):
+class CreateBrandRequestSerializer(BaseSchema):
+    pass
+
+
+class UpdateBrandRequestSerializer(BaseSchema):
     pass
 
 
@@ -243,6 +251,18 @@ class ContactDetails(BaseSchema):
     
 
 
+class CountryCurrencyInfo(BaseSchema):
+    # CompanyProfile swagger.json
+
+    
+    code = fields.Str(required=False)
+    
+    symbol = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+
+
 class BusinessCountryInfo(BaseSchema):
     # CompanyProfile swagger.json
 
@@ -250,6 +270,10 @@ class BusinessCountryInfo(BaseSchema):
     country_code = fields.Str(required=False)
     
     country = fields.Str(required=False)
+    
+    currency = fields.Nested(CountryCurrencyInfo, required=False)
+    
+    timezone = fields.Str(required=False)
     
 
 
@@ -288,6 +312,10 @@ class GetAddressSerializer(BaseSchema):
     address2 = fields.Str(required=False)
     
     state = fields.Str(required=False)
+    
+    state_code = fields.Str(required=False)
+    
+    sector = fields.Str(required=False)
     
     address1 = fields.Str(required=False)
     
@@ -533,7 +561,35 @@ class GetBrandResponseSerializer(BaseSchema):
     
 
 
-class CreateUpdateBrandRequestSerializer(BaseSchema):
+class CreateBrandRequestSerializer(BaseSchema):
+    # CompanyProfile swagger.json
+
+    
+    _custom_json = fields.Dict(required=False)
+    
+    _locale_language = fields.Dict(required=False)
+    
+    synonyms = fields.List(fields.Str(required=False), required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    description = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
+    
+    brand_tier = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    banner = fields.Nested(BrandBannerSerializer, required=False)
+    
+    name = fields.Str(required=False)
+    
+    slug_key = fields.Str(required=False)
+    
+
+
+class UpdateBrandRequestSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -883,6 +939,8 @@ class GetLocationSerializer(BaseSchema):
     
     bulk_shipment = fields.Boolean(required=False)
     
+    auto_assign_courier_partner = fields.Boolean(required=False)
+    
 
 
 class LocationListSerializer(BaseSchema):
@@ -914,6 +972,10 @@ class AddressSerializer(BaseSchema):
     address2 = fields.Str(required=False)
     
     state = fields.Str(required=False)
+    
+    sector = fields.Str(required=False)
+    
+    state_code = fields.Str(required=False)
     
     address1 = fields.Str(required=False)
     
@@ -976,6 +1038,8 @@ class LocationSerializer(BaseSchema):
     avg_order_processing_time = fields.Nested(AverageOrderProcessingTime, required=False)
     
     bulk_shipment = fields.Boolean(required=False)
+    
+    auto_assign_courier_partner = fields.Boolean(required=False)
     
 
 

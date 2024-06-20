@@ -22,6 +22,8 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
     
     
         
@@ -65,7 +67,11 @@ class ShareValidator:
         
         active = fields.Str(required=False)
         
-        q = fields.Str(required=False)
+        short_url = fields.Str(required=False)
+        
+        original_url = fields.Str(required=False)
+        
+        title = fields.Str(required=False)
          
         
     

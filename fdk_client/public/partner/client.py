@@ -24,7 +24,7 @@ class Partner:
         self._urls.update(urls)
     
     async def getPanelExtensionDetails(self, slug=None, body="", request_headers:Dict={}):
-        """Use this API to get extension details
+        """Retrieve detailed information about panel extensions in the public server setup.
         :param slug : pass the slug of the extension : type string
         """
         payload = {}
@@ -37,7 +37,7 @@ class Partner:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPanelExtensionDetails"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"pass the slug of the extension","required":true,"schema":{"type":"string"},"example":"example-extension-1"}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"pass the slug of the extension","required":true,"schema":{"type":"string"},"example":"example-extension-1"}]}""", slug=slug)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPanelExtensionDetails"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"pass the slug of the extension","required":true,"schema":{"type":"string"},"example":"example-extension-1"}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"pass the slug of the extension","required":true,"schema":{"type":"string"},"example":"example-extension-1"}]}""", serverType="public", slug=slug)
         query_string = await create_query_string(slug=slug)
 
         headers = {
@@ -55,7 +55,7 @@ class Partner:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPanelExtensionDetails"]).netloc, "get", await create_url_without_domain("/service/panel/partners/v1.0/extensions/{slug}", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPanelExtensionDetails"]).netloc, "get", await create_url_without_domain("/service/panel/partners/v1.0/extensions/{slug}", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ExtensionUsingSlug

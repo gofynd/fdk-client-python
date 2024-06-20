@@ -3,6 +3,8 @@
 from ..common.exceptions import FDKClientValidationError
 
 
+from .analytics.applicationClient import Analytics
+
 from .cart.applicationClient import Cart
 
 from .catalog.applicationClient import Catalog
@@ -17,6 +19,8 @@ from .filestorage.applicationClient import FileStorage
 
 from .lead.applicationClient import Lead
 
+from .serviceability.applicationClient import Serviceability
+
 from .order.applicationClient import Order
 
 from .partner.applicationClient import Partner
@@ -24,8 +28,6 @@ from .partner.applicationClient import Partner
 from .payment.applicationClient import Payment
 
 from .rewards.applicationClient import Rewards
-
-from .serviceability.applicationClient import Serviceability
 
 from .share.applicationClient import Share
 
@@ -37,6 +39,8 @@ from .user.applicationClient import User
 class PlatformApplicationClient:
     def __init__(self, applicationId, config):
         self._conf = config
+        
+        self.analytics = Analytics(config, applicationId)
         
         self.cart = Cart(config, applicationId)
         
@@ -52,6 +56,8 @@ class PlatformApplicationClient:
         
         self.lead = Lead(config, applicationId)
         
+        self.serviceability = Serviceability(config, applicationId)
+        
         self.order = Order(config, applicationId)
         
         self.partner = Partner(config, applicationId)
@@ -59,8 +65,6 @@ class PlatformApplicationClient:
         self.payment = Payment(config, applicationId)
         
         self.rewards = Rewards(config, applicationId)
-        
-        self.serviceability = Serviceability(config, applicationId)
         
         self.share = Share(config, applicationId)
         

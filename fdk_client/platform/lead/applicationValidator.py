@@ -55,19 +55,6 @@ from .models import PriorityEnum
     
         
         
-    
-    
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
         
     
     
@@ -75,14 +62,13 @@ from .models import PriorityEnum
         
     
     
-        
         
         
 
 class LeadValidator:
     
     
-    class getTickets(BaseSchema):
+    class getNewTickets(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -103,7 +89,7 @@ class LeadValidator:
          
         
     
-    class getTicket(BaseSchema):
+    class getNewTicket(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -114,7 +100,7 @@ class LeadValidator:
          
         
     
-    class editTicket(BaseSchema):
+    class editNewTicket(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -125,7 +111,7 @@ class LeadValidator:
          
         
     
-    class createHistory(BaseSchema):
+    class createNewHistory(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -136,7 +122,7 @@ class LeadValidator:
          
         
     
-    class getTicketHistory(BaseSchema):
+    class getNewTicketHistory(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -169,6 +155,17 @@ class LeadValidator:
          
         
     
+    class deleteCustomForm(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
+         
+        
+    
     class getCustomForms(BaseSchema):
         
         
@@ -184,48 +181,6 @@ class LeadValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
-         
-        
-    
-    class getTokenForVideoRoom(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        unique_name = fields.Str(required=False)
-         
-        
-    
-    class getVideoParticipants(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        unique_name = fields.Str(required=False)
-         
-        
-    
-    class openVideoRoom(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class closeVideoRoom(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        unique_name = fields.Str(required=False)
          
         
     

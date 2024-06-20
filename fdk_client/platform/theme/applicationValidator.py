@@ -46,42 +46,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
     
     
         
@@ -145,6 +109,12 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
+        
+    
+    
+        
         
         
         
@@ -224,91 +194,12 @@ class ThemeValidator:
          
         
     
-    class getThemeLibrary(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-         
-        
-    
-    class addToThemeLibrary(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getPublicThemes(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-         
-        
-    
     class getFonts(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-         
-        
-    
-    class publishTheme(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        theme_id = fields.Str(required=False)
-         
-        
-    
-    class unpublishTheme(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        theme_id = fields.Str(required=False)
-         
-        
-    
-    class archiveTheme(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        theme_id = fields.Str(required=False)
-         
-        
-    
-    class unarchiveTheme(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        theme_id = fields.Str(required=False)
          
         
     
@@ -455,6 +346,19 @@ class ThemeValidator:
         application_id = fields.Str(required=False)
         
         theme_id = fields.Str(required=False)
+         
+        
+    
+    class getExtensionSections(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+        
+        company_mode = fields.Str(required=False)
          
         
     

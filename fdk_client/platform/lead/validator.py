@@ -53,14 +53,6 @@ from .models import PriorityEnum
     
     
         
-        
-    
-    
-        
-        
-    
-    
-        
 
 
 
@@ -148,24 +140,6 @@ class LeadValidator:
         company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
-         
-        
-    
-    class getTokenForPlatformVideoRoom(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        unique_name = fields.Str(required=False)
-         
-        
-    
-    class getPlatformVideoParticipants(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        unique_name = fields.Str(required=False)
          
         
     

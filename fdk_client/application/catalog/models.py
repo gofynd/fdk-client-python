@@ -917,6 +917,8 @@ class ProductSizes(BaseSchema):
     
     price = fields.Nested(ProductSizesPrice, required=False)
     
+    price_per_piece = fields.Nested(ProductSizesPrice, required=False)
+    
     size_chart = fields.Nested(SizeChart, required=False)
     
     sellable = fields.Boolean(required=False)
@@ -1009,6 +1011,8 @@ class ProductVariantItemResponse(BaseSchema):
     
     slug = fields.Str(required=False)
     
+    _custom_json = fields.Dict(required=False)
+    
     action = fields.Nested(ProductListingAction, required=False)
     
 
@@ -1021,9 +1025,13 @@ class ProductVariantResponse(BaseSchema):
     
     header = fields.Str(required=False)
     
+    group_id = fields.Str(required=False)
+    
     items = fields.List(fields.Nested(ProductVariantItemResponse, required=False), required=False)
     
     key = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
     
 
 
@@ -1643,7 +1651,7 @@ class GetCollectionDetailNest(BaseSchema):
     
     priority = fields.Int(required=False)
     
-    tag = fields.List(fields.Str(required=False), required=False)
+    tags = fields.List(fields.Str(required=False), required=False)
     
     app_id = fields.Str(required=False)
     

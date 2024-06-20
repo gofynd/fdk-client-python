@@ -26,8 +26,6 @@ from .order.client import Order
 
 from .payment.client import Payment
 
-from .poscart.client import PosCart
-
 from .rewards.client import Rewards
 
 from .share.client import Share
@@ -35,6 +33,8 @@ from .share.client import Share
 from .theme.client import Theme
 
 from .user.client import User
+
+from .webhook.client import Webhook
 
 
 class ApplicationClient:
@@ -51,11 +51,11 @@ class ApplicationClient:
         self.logistic = Logistic(config)
         self.order = Order(config)
         self.payment = Payment(config)
-        self.posCart = PosCart(config)
         self.rewards = Rewards(config)
         self.share = Share(config)
         self.theme = Theme(config)
         self.user = User(config)
+        self.webhook = Webhook(config)
         
 
     def setCookie(self, cookie):

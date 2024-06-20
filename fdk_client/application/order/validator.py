@@ -17,14 +17,16 @@ from ..ApplicationModel import BaseSchema
         
         
         
-    
-    
+        
+        
         
     
     
         
+        
     
     
+        
         
     
     
@@ -71,7 +73,13 @@ class OrderValidator:
         
         to_date = fields.Str(required=False)
         
+        start_date = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
+        
         custom_meta = fields.Str(required=False)
+        
+        allow_inactive = fields.Boolean(required=False)
          
         
     
@@ -79,13 +87,8 @@ class OrderValidator:
         
         
         order_id = fields.Str(required=False)
-         
         
-    
-    class getPosOrderById(BaseSchema):
-        
-        
-        order_id = fields.Str(required=False)
+        allow_inactive = fields.Boolean(required=False)
          
         
     
@@ -93,6 +96,8 @@ class OrderValidator:
         
         
         shipment_id = fields.Str(required=False)
+        
+        allow_inactive = fields.Boolean(required=False)
          
         
     

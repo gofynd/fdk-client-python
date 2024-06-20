@@ -24,6 +24,10 @@ class ShipmentPayment(BaseSchema):
     pass
 
 
+class ShipmentPaymentInfo(BaseSchema):
+    pass
+
+
 class ShipmentUserInfo(BaseSchema):
     pass
 
@@ -100,7 +104,11 @@ class FulfillingCompany(BaseSchema):
     pass
 
 
-class DeliveryAddress(BaseSchema):
+class Article(BaseSchema):
+    pass
+
+
+class Address(BaseSchema):
     pass
 
 
@@ -248,6 +256,10 @@ class StatuesRequest(BaseSchema):
     pass
 
 
+class OrderRequest(BaseSchema):
+    pass
+
+
 class UpdateShipmentStatusRequest(BaseSchema):
     pass
 
@@ -332,6 +344,26 @@ class ShipmentPayment(BaseSchema):
     logo = fields.Str(required=False)
     
     display_name = fields.Str(required=False)
+    
+
+
+class ShipmentPaymentInfo(BaseSchema):
+    # Order swagger.json
+
+    
+    mop = fields.Str(required=False)
+    
+    payment_mode = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    mode = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    amount = fields.Float(required=False)
     
 
 
@@ -421,6 +453,8 @@ class TrackingDetails(BaseSchema):
     
     time = fields.Str(required=False)
     
+    created_ts = fields.Str(required=False)
+    
     tracking_details = fields.List(fields.Nested(NestedTrackingDetails, required=False), required=False)
     
 
@@ -504,6 +538,8 @@ class Prices(BaseSchema):
     currency_code = fields.Str(required=False)
     
     fynd_credits = fields.Float(required=False)
+    
+    amount_to_be_collected = fields.Float(required=False)
     
 
 
@@ -649,6 +685,8 @@ class FinancialBreakup(BaseSchema):
     
     fynd_credits = fields.Float(required=False)
     
+    amount_to_be_collected = fields.Float(required=False)
+    
 
 
 class CurrentStatus(BaseSchema):
@@ -703,6 +741,8 @@ class Bags(BaseSchema):
     
     current_status = fields.Nested(CurrentStatus, required=False)
     
+    article = fields.Nested(Article, required=False)
+    
 
 
 class FulfillingCompany(BaseSchema):
@@ -715,7 +755,15 @@ class FulfillingCompany(BaseSchema):
     
 
 
-class DeliveryAddress(BaseSchema):
+class Article(BaseSchema):
+    # Order swagger.json
+
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class Address(BaseSchema):
     # Order swagger.json
 
     
@@ -747,6 +795,8 @@ class DeliveryAddress(BaseSchema):
     
     address1 = fields.Str(required=False)
     
+    display_address = fields.Str(required=False)
+    
     name = fields.Str(required=False)
     
     contact_person = fields.Str(required=False)
@@ -770,6 +820,8 @@ class Shipments(BaseSchema):
 
     
     payment = fields.Nested(ShipmentPayment, required=False)
+    
+    payment_info = fields.List(fields.Nested(ShipmentPaymentInfo, required=False), required=False)
     
     order_type = fields.Str(required=False, allow_none=True)
     
@@ -815,6 +867,8 @@ class Shipments(BaseSchema):
     
     shipment_created_at = fields.Str(required=False)
     
+    shipment_created_ts = fields.Str(required=False)
+    
     size_info = fields.Dict(required=False)
     
     bags = fields.List(fields.Nested(Bags, required=False), required=False)
@@ -829,7 +883,9 @@ class Shipments(BaseSchema):
     
     can_return = fields.Boolean(required=False)
     
-    delivery_address = fields.Nested(DeliveryAddress, required=False)
+    delivery_address = fields.Nested(Address, required=False)
+    
+    billing_address = fields.Nested(Address, required=False)
     
     track_url = fields.Str(required=False)
     
@@ -840,6 +896,8 @@ class Shipments(BaseSchema):
     return_meta = fields.Dict(required=False)
     
     delivery_date = fields.Str(required=False, allow_none=True)
+    
+    order = fields.Nested(OrderRequest, required=False)
     
 
 
@@ -877,17 +935,23 @@ class OrderSchema(BaseSchema):
     
     total_shipments_in_order = fields.Int(required=False)
     
+    gstin_code = fields.Str(required=False)
+    
     user_info = fields.Nested(UserInfo, required=False)
     
     breakup_values = fields.List(fields.Nested(BreakupValues, required=False), required=False)
     
     order_created_time = fields.Str(required=False)
     
+    order_created_ts = fields.Str(required=False)
+    
     order_id = fields.Str(required=False)
     
     shipments = fields.List(fields.Nested(Shipments, required=False), required=False)
     
     bags_for_reorder = fields.List(fields.Nested(BagsForReorder, required=False), required=False)
+    
+    meta = fields.Dict(required=False)
     
 
 
@@ -1250,6 +1314,14 @@ class StatuesRequest(BaseSchema):
     exclude_bags_next_state = fields.Str(required=False)
     
     status = fields.Str(required=False)
+    
+
+
+class OrderRequest(BaseSchema):
+    # Order swagger.json
+
+    
+    meta = fields.Dict(required=False)
     
 
 

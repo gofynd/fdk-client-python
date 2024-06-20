@@ -45,7 +45,7 @@ class Inventory:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getJobCodesMetrics"], proccessed_params="""{"required":[],"optional":[{"name":"daily_job","in":"query","description":"Daily Job Flag","required":false,"schema":{"type":"boolean"}},{"name":"job_code","in":"query","description":"Email Job Code","required":false,"schema":{"type":"string"}}],"query":[{"name":"daily_job","in":"query","description":"Daily Job Flag","required":false,"schema":{"type":"boolean"}},{"name":"job_code","in":"query","description":"Email Job Code","required":false,"schema":{"type":"string"}}],"headers":[],"path":[]}""", daily_job=daily_job, job_code=job_code)
+        url_with_params = await create_url_with_params(api_url=self._urls["getJobCodesMetrics"], proccessed_params="""{"required":[],"optional":[{"name":"daily_job","in":"query","description":"Daily Job Flag","required":false,"schema":{"type":"boolean"}},{"name":"job_code","in":"query","description":"Email Job Code","required":false,"schema":{"type":"string"}}],"query":[{"name":"daily_job","in":"query","description":"Daily Job Flag","required":false,"schema":{"type":"boolean"}},{"name":"job_code","in":"query","description":"Email Job Code","required":false,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="public", daily_job=daily_job, job_code=job_code)
         query_string = await create_query_string(daily_job=daily_job, job_code=job_code)
 
         headers = {
@@ -63,7 +63,7 @@ class Inventory:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getJobCodesMetrics"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/email/jobCode", daily_job=daily_job, job_code=job_code), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getJobCodesMetrics"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/email/jobCode", daily_job=daily_job, job_code=job_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ResponseEnvelopeObject
@@ -91,7 +91,7 @@ class Inventory:
         schema = EmailJobMetrics()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["saveJobCodesMetrics"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        url_with_params = await create_url_with_params(api_url=self._urls["saveJobCodesMetrics"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
         query_string = await create_query_string()
 
         headers = {
@@ -109,7 +109,7 @@ class Inventory:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["saveJobCodesMetrics"]).netloc, "post", await create_url_without_domain("/service/common/inventory/v1.0/company/email/jobCode", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["saveJobCodesMetrics"]).netloc, "post", await create_url_without_domain("/service/common/inventory/v1.0/company/email/jobCode", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ResponseEnvelopeEmailJobMetrics
@@ -136,7 +136,7 @@ class Inventory:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getConfigByApiKey"], proccessed_params="""{"required":[{"name":"apikey","in":"query","description":"Api key","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"apikey","in":"query","description":"Api key","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", apikey=apikey)
+        url_with_params = await create_url_with_params(api_url=self._urls["getConfigByApiKey"], proccessed_params="""{"required":[{"name":"apikey","in":"query","description":"Api key","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"apikey","in":"query","description":"Api key","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="public", apikey=apikey)
         query_string = await create_query_string(apikey=apikey)
 
         headers = {
@@ -154,7 +154,7 @@ class Inventory:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getConfigByApiKey"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/slingshot", apikey=apikey), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getConfigByApiKey"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/slingshot", apikey=apikey), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ResponseEnvelopeSlingshotConfigurationDetail
@@ -184,7 +184,7 @@ class Inventory:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getApiKey"], proccessed_params="""{"required":[{"name":"user_name","in":"query","description":"Integration id","required":true,"schema":{"type":"string"}},{"name":"password","in":"query","description":"company/store token","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"user_name","in":"query","description":"Integration id","required":true,"schema":{"type":"string"}},{"name":"password","in":"query","description":"company/store token","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", user_name=user_name, password=password)
+        url_with_params = await create_url_with_params(api_url=self._urls["getApiKey"], proccessed_params="""{"required":[{"name":"user_name","in":"query","description":"Integration id","required":true,"schema":{"type":"string"}},{"name":"password","in":"query","description":"company/store token","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"user_name","in":"query","description":"Integration id","required":true,"schema":{"type":"string"}},{"name":"password","in":"query","description":"company/store token","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="public", user_name=user_name, password=password)
         query_string = await create_query_string(user_name=user_name, password=password)
 
         headers = {
@@ -202,7 +202,7 @@ class Inventory:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getApiKey"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/slingshot/apikey", user_name=user_name, password=password), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getApiKey"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/slingshot/apikey", user_name=user_name, password=password), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ResponseEnvelopeApikeyModel
@@ -229,7 +229,7 @@ class Inventory:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getJobByCode"], proccessed_params="""{"required":[{"name":"code","in":"path","description":"Job Code","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"code","in":"path","description":"Job Code","required":true,"schema":{"type":"string"}}]}""", code=code)
+        url_with_params = await create_url_with_params(api_url=self._urls["getJobByCode"], proccessed_params="""{"required":[{"name":"code","in":"path","description":"Job Code","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"code","in":"path","description":"Job Code","required":true,"schema":{"type":"string"}}]}""", serverType="public", code=code)
         query_string = await create_query_string(code=code)
 
         headers = {
@@ -247,7 +247,7 @@ class Inventory:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getJobByCode"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/jobs/code/{code}", code=code), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getJobByCode"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/jobs/code/{code}", code=code), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ResponseEnvelopeJobConfigDTO
@@ -277,7 +277,7 @@ class Inventory:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getJobConfigByIntegrationType"], proccessed_params="""{"required":[{"name":"integration_type","in":"query","description":"Integration Type","required":true,"schema":{"type":"string"}}],"optional":[{"name":"disable","in":"query","description":"JobConfig current state","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"name":"integration_type","in":"query","description":"Integration Type","required":true,"schema":{"type":"string"}},{"name":"disable","in":"query","description":"JobConfig current state","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[]}""", integration_type=integration_type, disable=disable)
+        url_with_params = await create_url_with_params(api_url=self._urls["getJobConfigByIntegrationType"], proccessed_params="""{"required":[{"name":"integration_type","in":"query","description":"Integration Type","required":true,"schema":{"type":"string"}}],"optional":[{"name":"disable","in":"query","description":"JobConfig current state","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"name":"integration_type","in":"query","description":"Integration Type","required":true,"schema":{"type":"string"}},{"name":"disable","in":"query","description":"JobConfig current state","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[]}""", serverType="public", integration_type=integration_type, disable=disable)
         query_string = await create_query_string(integration_type=integration_type, disable=disable)
 
         headers = {
@@ -295,7 +295,7 @@ class Inventory:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getJobConfigByIntegrationType"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/job/config", integration_type=integration_type, disable=disable), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getJobConfigByIntegrationType"]).netloc, "get", await create_url_without_domain("/service/common/inventory/v1.0/company/job/config", integration_type=integration_type, disable=disable), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ResponseEnvelopeListJobConfigDTO

@@ -13,7 +13,7 @@ class Finance:
 
     
     async def generateReport(self, body="", request_headers:Dict={}):
-        """Generate finance reports.
+        """Create a financial report with relevant data.
         """
         payload = {}
         
@@ -23,11 +23,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GenerateReportRequest
-        schema = GenerateReportRequest()
+        from .models import GenerateReportReq
+        schema = GenerateReportReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/generate-report", """{"required":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/generate-report", """{"required":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"invoice_report_200":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"invoice_report_200":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -42,7 +42,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/generate-report", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/generate-report", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GenerateReportJson
@@ -56,7 +56,7 @@ class Finance:
         return response
     
     async def downloadReport(self, body="", request_headers:Dict={}):
-        """Gives list of all downloaded reports.
+        """Retrieve and save a financial report.
         """
         payload = {}
         
@@ -70,7 +70,7 @@ class Finance:
         schema = DownloadReport()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/download-report", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/download-report", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"success":{"value":"61"},"status_400":{"value":"61s"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"success":{"value":"61"},"status_400":{"value":"61s"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -85,7 +85,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/download-report", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/download-report", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import DownloadReportList
@@ -99,7 +99,7 @@ class Finance:
         return response
     
     async def getData(self, body="", request_headers:Dict={}):
-        """Gives list of columns for table provided.
+        """Retrieve financial data for analysis.
         """
         payload = {}
         
@@ -109,11 +109,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GetEngineRequest
-        schema = GetEngineRequest()
+        from .models import GetEngineReq
+        schema = GetEngineReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-data", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-data", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"settlement_rule":{"value":"61"},"data_400":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"settlement_rule":{"value":"61"},"data_400":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -128,7 +128,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-data", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-data", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetEngineResponse
@@ -142,7 +142,7 @@ class Finance:
         return response
     
     async def getReason(self, body="", request_headers:Dict={}):
-        """Gives list of the reasons.
+        """Retrieve the reason behind a transaction.
         """
         payload = {}
         
@@ -152,11 +152,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GetReasonRequest
-        schema = GetReasonRequest()
+        from .models import GetReasonReq
+        schema = GetReasonReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-reason", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-reason", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"dispute_reason":{"value":"61"},"status_400":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"dispute_reason":{"value":"61"},"status_400":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -171,7 +171,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-reason", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-reason", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetReasonResponse
@@ -185,7 +185,7 @@ class Finance:
         return response
     
     async def getReportList(self, body="", request_headers:Dict={}):
-        """Gives list of reports.
+        """Retrieve a list of available financial reports.
         """
         payload = {}
         
@@ -195,11 +195,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GetReportListRequest
-        schema = GetReportListRequest()
+        from .models import GetReportListReq
+        schema = GetReportListReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-report-list", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned. Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned. Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-report-list", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned. Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"finance_admin":{"value":"61"},"status_400":{"value":"61s"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned. Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"finance_admin":{"value":"61"},"status_400":{"value":"61s"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -214,7 +214,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-report-list", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-report-list", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetReportListResponse
@@ -228,7 +228,7 @@ class Finance:
         return response
     
     async def getAffiliate(self, body="", request_headers:Dict={}):
-        """Gives list of affiliates for company.
+        """Retrieve information about an affiliate.
         """
         payload = {}
         
@@ -242,7 +242,7 @@ class Finance:
         schema = GetAffiliate()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-affiliate-list", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is reqired.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is reqired.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-affiliate-list", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is reqired.","schema":{"type":"string"},"required":true,"examples":{"success_200_aff_list":{"value":"20"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is reqired.","schema":{"type":"string"},"required":true,"examples":{"success_200_aff_list":{"value":"20"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -257,7 +257,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-affiliate-list", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-affiliate-list", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetAffiliateResponse
@@ -271,7 +271,7 @@ class Finance:
         return response
     
     async def downloadCreditDebitNote(self, body="", request_headers:Dict={}):
-        """Download credit debit note pdf.
+        """Retrieve and save credit/debit notes.
         """
         payload = {}
         
@@ -281,11 +281,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DownloadCreditDebitNoteRequest
-        schema = DownloadCreditDebitNoteRequest()
+        from .models import DownloadCreditDebitNoteReq
+        schema = DownloadCreditDebitNoteReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/download-credit-debit-note", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/download-credit-debit-note", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"success":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"success":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -300,7 +300,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/download-credit-debit-note", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/download-credit-debit-note", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import DownloadCreditDebitNoteResponse
@@ -314,7 +314,7 @@ class Finance:
         return response
     
     async def paymentProcess(self, body="", request_headers:Dict={}):
-        """Payment Processing API.
+        """Initiate and manage payment processes.
         """
         payload = {}
         
@@ -324,11 +324,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PaymentProcessRequest
-        schema = PaymentProcessRequest()
+        from .models import PaymentProcessReq
+        schema = PaymentProcessReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/payment-process", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/payment-process", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"invoice_payment":{"value":"61"},"status_400":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"invoice_payment":{"value":"61"},"status_400":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -343,7 +343,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/payment-process", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/payment-process", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import PaymentProcessResponse
@@ -357,7 +357,7 @@ class Finance:
         return response
     
     async def creditlineDataplatform(self, body="", request_headers:Dict={}):
-        """Used to fetch creditline data.
+        """Connect to the credit line data platform.
         """
         payload = {}
         
@@ -367,11 +367,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreditlineDataPlatformRequest
-        schema = CreditlineDataPlatformRequest()
+        from .models import CreditlineDataPlatformReq
+        schema = CreditlineDataPlatformReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-line-data", """{"required":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-line-data", """{"required":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"get_seller_data":{"value":"61"},"status_400":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"get_seller_data":{"value":"61"},"status_400":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -386,7 +386,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-line-data", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-line-data", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CreditlineDataPlatformResponse
@@ -400,7 +400,7 @@ class Finance:
         return response
     
     async def isCreditlinePlatform(self, body="", request_headers:Dict={}):
-        """Checks if seller has opted for creditline or not.
+        """Determine if the credit line platform is operational.
         """
         payload = {}
         
@@ -410,11 +410,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import IsCreditlinePlatformRequest
-        schema = IsCreditlinePlatformRequest()
+        from .models import IsCreditlinePlatformReq
+        schema = IsCreditlinePlatformReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/creditline-opted", """{"required":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/creditline-opted", """{"required":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"success_200":{"value":"101"},"failure_200":{"value":"12"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"success_200":{"value":"101"},"failure_200":{"value":"12"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -429,7 +429,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/creditline-opted", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/creditline-opted", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import IsCreditlinePlatformResponse
@@ -443,7 +443,7 @@ class Finance:
         return response
     
     async def invoiceType(self, body="", request_headers:Dict={}):
-        """Gives list of active invoice type.
+        """Retrieve a list of available invoice types.
         """
         payload = {}
         
@@ -453,11 +453,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import InvoiceTypeRequest
-        schema = InvoiceTypeRequest()
+        from .models import InvoiceTypeReq
+        schema = InvoiceTypeReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice-type", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice-type", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"is_active_true":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"is_active_true":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -472,7 +472,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice-type", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice-type", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import InvoiceTypeResponse
@@ -496,11 +496,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import InvoiceListingRequest
-        schema = InvoiceListingRequest()
+        from .models import InvoiceListingReq
+        schema = InvoiceListingReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/listing", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/listing", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"invoice_listing":{"value":"61"},"status_500":{"value":"61"},"status_400":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"invoice_listing":{"value":"61"},"status_500":{"value":"61"},"status_400":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -515,7 +515,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/listing", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/listing", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import InvoiceListingResponse
@@ -529,7 +529,7 @@ class Finance:
         return response
     
     async def invoicePDF(self, body="", request_headers:Dict={}):
-        """Gives pdf view of invoice.
+        """Retrieve the PDF version of an invoice.
         """
         payload = {}
         
@@ -539,11 +539,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import InvoicePdfRequest
-        schema = InvoicePdfRequest()
+        from .models import InvoicePdfReq
+        schema = InvoicePdfReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/pdf-view", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/pdf-view", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"success_200_pdf":{"value":"61"},"status_500":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"success_200_pdf":{"value":"61"},"status_500":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -558,7 +558,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/pdf-view", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/pdf-view", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import InvoicePdfResponse
@@ -572,7 +572,7 @@ class Finance:
         return response
     
     async def isCnRefundMethod(self, body="", request_headers:Dict={}):
-        """Checks if seller has obtained cn as refund method or not.
+        """Verify the refund method for credit notes.
         """
         payload = {}
         
@@ -582,11 +582,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import IsCnRefundMethodRequest
-        schema = IsCnRefundMethodRequest()
+        from .models import IsCnRefundMethodReq
+        schema = IsCnRefundMethodReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/cn-as-refund-method", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/cn-as-refund-method", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"cn_as_refund_method_200":{"value":"61"},"status_400":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"cn_as_refund_method_200":{"value":"61"},"status_400":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -601,7 +601,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/cn-as-refund-method", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/cn-as-refund-method", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import IsCnRefundMethodResponse
@@ -615,7 +615,7 @@ class Finance:
         return response
     
     async def createSellerCreditNoteConfig(self, body="", request_headers:Dict={}):
-        """Creates credit note config.
+        """Set up configuration for seller credit notes.
         """
         payload = {}
         
@@ -625,11 +625,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateSellerCreditNoteConfigRequest
-        schema = CreateSellerCreditNoteConfigRequest()
+        from .models import CreateSellerCreditNoteConfigReq
+        schema = CreateSellerCreditNoteConfigReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/create-update-credit-note-config", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/create-update-credit-note-config", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"create_update_cnc_200":{"value":"61"},"status_400":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"create_update_cnc_200":{"value":"61"},"status_400":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -644,7 +644,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/create-update-credit-note-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/create-update-credit-note-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CreateSellerCreditNoteConfigResponse
@@ -668,11 +668,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DeleteConfigRequest
-        schema = DeleteConfigRequest()
+        from .models import DeleteConfigReq
+        schema = DeleteConfigReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/delete-seller-config", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/delete-seller-config", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"delete_seller_config_200":{"value":"167"},"status_400":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"delete_seller_config_200":{"value":"167"},"status_400":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -687,7 +687,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/delete-seller-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/delete-seller-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import DeleteConfigResponse
@@ -701,7 +701,7 @@ class Finance:
         return response
     
     async def channelDisplayName(self, filter_key=None, request_headers:Dict={}):
-        """Provide channel display name dict.
+        """Retrieve the display name for a channel.
         :param filter_key : gives display name for channel. : type string
         """
         payload = {}
@@ -714,7 +714,7 @@ class Finance:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/channel-display-names", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true},{"in":"query","name":"filter_key","description":"gives display name for channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[{"in":"query","name":"filter_key","description":"gives display name for channel.","schema":{"type":"string"},"required":true}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", filter_key=filter_key)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/channel-display-names", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"channel_display_200":{"value":"61"}}},{"in":"query","name":"filter_key","description":"gives display name for channel.","schema":{"type":"string"},"required":true,"examples":{"channel_display_200":{"value":"channel_display"}}}],"optional":[],"query":[{"in":"query","name":"filter_key","description":"gives display name for channel.","schema":{"type":"string"},"required":true,"examples":{"channel_display_200":{"value":"channel_display"}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"channel_display_200":{"value":"61"}}}]}""", serverType="platform", filter_key=filter_key)
         query_string = await create_query_string(filter_key=filter_key)
 
         headers = {}
@@ -729,7 +729,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/channel-display-names", filter_key=filter_key), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/channel-display-names", filter_key=filter_key), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ChannelDisplayNameResponse
@@ -743,7 +743,7 @@ class Finance:
         return response
     
     async def getPdfUrlView(self, body="", request_headers:Dict={}):
-        """Gives cn pdf url.
+        """Retrieve a URL to view a PDF document.
         """
         payload = {}
         
@@ -753,11 +753,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GetPdfUrlViewRequest
-        schema = GetPdfUrlViewRequest()
+        from .models import GetPdfUrlViewReq
+        schema = GetPdfUrlViewReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-cn-pdf-link", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-cn-pdf-link", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"cn_pdf_link_200":{"value":"61"},"status_400":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"cn_pdf_link_200":{"value":"61"},"status_400":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -772,7 +772,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-cn-pdf-link", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-cn-pdf-link", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetPdfUrlViewResponse
@@ -786,7 +786,7 @@ class Finance:
         return response
     
     async def creditNoteDetails(self, body="", request_headers:Dict={}):
-        """Gives credit note details.
+        """Retrieve detailed information about a credit note.
         """
         payload = {}
         
@@ -796,11 +796,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreditNoteDetailsRequest
-        schema = CreditNoteDetailsRequest()
+        from .models import CreditNoteDetailsReq
+        schema = CreditNoteDetailsReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-note-details", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-note-details", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"cn_details_200":{"value":"61"},"status_400":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"cn_details_200":{"value":"61"},"status_400":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -815,7 +815,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-note-details", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-note-details", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CreditNoteDetailsResponse
@@ -829,7 +829,7 @@ class Finance:
         return response
     
     async def getCustomerCreditBalance(self, body="", request_headers:Dict={}):
-        """Gives customer credit balance.
+        """Retrieve the credit balance of a customer.
         """
         payload = {}
         
@@ -839,11 +839,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GetCustomerCreditBalanceRequest
-        schema = GetCustomerCreditBalanceRequest()
+        from .models import GetCustomerCreditBalanceReq
+        schema = GetCustomerCreditBalanceReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/customer-credit-balance", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/customer-credit-balance", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"cn_balance_200":{"value":"61"},"status_400":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"cn_balance_200":{"value":"61"},"status_400":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -858,7 +858,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/customer-credit-balance", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/customer-credit-balance", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetCustomerCreditBalanceResponse
@@ -872,7 +872,7 @@ class Finance:
         return response
     
     async def getCnConfig(self, body="", request_headers:Dict={}):
-        """Gives credit note config.
+        """Retrieve configuration settings for credit notes.
         """
         payload = {}
         
@@ -882,11 +882,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GetCnConfigRequest
-        schema = GetCnConfigRequest()
+        from .models import GetCnConfigReq
+        schema = GetCnConfigReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-seller-cn-config", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-seller-cn-config", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"get_seller_cn_conf_200":{"value":"61"},"status_400":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"get_seller_cn_conf_200":{"value":"61"},"status_400":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -901,7 +901,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-seller-cn-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-seller-cn-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetCnConfigResponse
@@ -915,7 +915,7 @@ class Finance:
         return response
     
     async def generateReportCustomerCn(self, body="", request_headers:Dict={}):
-        """Generate Credit Note report and gives Note details.
+        """Create a report specifically for customer credit notes.
         """
         payload = {}
         
@@ -925,11 +925,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GenerateReportCustomerCnRequest
-        schema = GenerateReportCustomerCnRequest()
+        from .models import GenerateReportCustomerCnReq
+        schema = GenerateReportCustomerCnReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/generate-report-customer-cn", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/generate-report-customer-cn", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"generate_report_cn_200":{"value":"61"},"status_400":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"generate_report_cn_200":{"value":"61"},"status_400":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -944,7 +944,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/generate-report-customer-cn", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/generate-report-customer-cn", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GenerateReportCustomerCnResponse
@@ -958,7 +958,7 @@ class Finance:
         return response
     
     async def downloadReportCustomerCn(self, body="", request_headers:Dict={}):
-        """Gives list of downloaded reports.
+        """Retrieve and save a report for customer credit notes.
         """
         payload = {}
         
@@ -968,11 +968,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DownloadReportCustomerCnRequest
-        schema = DownloadReportCustomerCnRequest()
+        from .models import DownloadReportCustomerCnReq
+        schema = DownloadReportCustomerCnReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/download-report-customer-cn", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/download-report-customer-cn", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"download_report_cndn_200":{"value":"61"},"status_400":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"download_report_cndn_200":{"value":"61"},"status_400":{"value":"61"}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -987,7 +987,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/download-report-customer-cn", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/download-report-customer-cn", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import DownloadReportCustomerCnResponse
@@ -1001,7 +1001,7 @@ class Finance:
         return response
     
     async def getReportingFilters(self, filter_key=None, affiliate_id=None, request_headers:Dict={}):
-        """Gets all customer Cn filters and search.
+        """Retrieve available filters for financial reporting.
         :param filter_key : filter type. : type string
         :param affiliate_id : affiliate id. : type string
         """
@@ -1017,7 +1017,7 @@ class Finance:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/reporting-filters", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true},{"in":"query","name":"filter_key","description":"filter type.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"affiliate_id","description":"affiliate id.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"filter_key","description":"filter type.","schema":{"type":"string"},"required":true},{"in":"query","name":"affiliate_id","description":"affiliate id.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", filter_key=filter_key, affiliate_id=affiliate_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/reporting-filters", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"success":{"value":"61"}}},{"in":"query","name":"filter_key","description":"filter type.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"affiliate_id","description":"affiliate id.","schema":{"type":"string"},"required":false,"examples":{"success":{"value":"1234"}}}],"query":[{"in":"query","name":"filter_key","description":"filter type.","schema":{"type":"string"},"required":true},{"in":"query","name":"affiliate_id","description":"affiliate id.","schema":{"type":"string"},"required":false,"examples":{"success":{"value":"1234"}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"success":{"value":"61"}}}]}""", serverType="platform", filter_key=filter_key, affiliate_id=affiliate_id)
         query_string = await create_query_string(filter_key=filter_key, affiliate_id=affiliate_id)
 
         headers = {}
@@ -1032,7 +1032,7 @@ class Finance:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/reporting-filters", filter_key=filter_key, affiliate_id=affiliate_id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/reporting-filters", filter_key=filter_key, affiliate_id=affiliate_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetReportingFiltersResponse
@@ -1041,6 +1041,215 @@ class Finance:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getReportingFilters")
+                print(e)
+
+        return response
+    
+    async def invoicePaymentOptions(self, body="", request_headers:Dict={}):
+        """Display all payment options for an invoice.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = FinanceValidator.invoicePaymentOptions()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import InvoicePaymentOptionsReq
+        schema = InvoicePaymentOptionsReq()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice-payment-options", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"success":{"value":"61"},"status_400":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"success":{"value":"61"},"status_400":{"value":"61"}}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice-payment-options", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InvoicePaymentOptionsResponse
+            schema = InvoicePaymentOptionsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for invoicePaymentOptions")
+                print(e)
+
+        return response
+    
+    async def invoicePaymentDetails(self, invoice_number=None, request_headers:Dict={}):
+        """Display payment details of invoice.
+        :param invoice_number : Invoice Number for which the data will be returned.Invoice_Number is required. : type string
+        """
+        payload = {}
+        
+        if invoice_number is not None:
+            payload["invoice_number"] = invoice_number
+
+        # Parameter validation
+        schema = FinanceValidator.invoicePaymentDetails()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/{invoice_number}/payment", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"payment_details_not_visible":{"value":"61"},"payment_details_visible":{"value":"61"},"status_500":{"value":"61"}}},{"in":"path","name":"invoice_number","description":"Invoice Number for which the data will be returned.Invoice_Number is required.","schema":{"type":"string"},"required":true,"examples":{"payment_details_not_visible":{"value":"FY-P27-A10005-23"},"payment_details_visible":{"value":"FY-P27-A10005-23"},"status_500":{"value":"abc"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"payment_details_not_visible":{"value":"61"},"payment_details_visible":{"value":"61"},"status_500":{"value":"61"}}},{"in":"path","name":"invoice_number","description":"Invoice Number for which the data will be returned.Invoice_Number is required.","schema":{"type":"string"},"required":true,"examples":{"payment_details_not_visible":{"value":"FY-P27-A10005-23"},"payment_details_visible":{"value":"FY-P27-A10005-23"},"status_500":{"value":"abc"}}}]}""", serverType="platform", invoice_number=invoice_number)
+        query_string = await create_query_string(invoice_number=invoice_number)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/{invoice_number}/payment", invoice_number=invoice_number), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InvoicePaymentDetailsResponse
+            schema = InvoicePaymentDetailsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for invoicePaymentDetails")
+                print(e)
+
+        return response
+    
+    async def invoiceActivityLogs(self, invoice_number=None, request_headers:Dict={}):
+        """Display activity log details of invoice.
+        :param invoice_number : Invoice Number for which the data will be returned. Invoice_number is required. : type string
+        """
+        payload = {}
+        
+        if invoice_number is not None:
+            payload["invoice_number"] = invoice_number
+
+        # Parameter validation
+        schema = FinanceValidator.invoiceActivityLogs()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/{invoice_number}/activity", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"success_invoice_activity":{"value":"46"},"status_400":{"value":"61"}}},{"in":"path","name":"invoice_number","description":"Invoice Number for which the data will be returned. Invoice_number is required.","schema":{"type":"string"},"required":true,"examples":{"success_invoice_activity":{"value":"UN-I-A00296-FY24"},"status_400":{"value":"abc"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"success_invoice_activity":{"value":"46"},"status_400":{"value":"61"}}},{"in":"path","name":"invoice_number","description":"Invoice Number for which the data will be returned. Invoice_number is required.","schema":{"type":"string"},"required":true,"examples":{"success_invoice_activity":{"value":"UN-I-A00296-FY24"},"status_400":{"value":"abc"}}}]}""", serverType="platform", invoice_number=invoice_number)
+        query_string = await create_query_string(invoice_number=invoice_number)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/{invoice_number}/activity", invoice_number=invoice_number), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InvoiceActivityLogsResponse
+            schema = InvoiceActivityLogsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for invoiceActivityLogs")
+                print(e)
+
+        return response
+    
+    async def unlockCreditNote(self, body="", request_headers:Dict={}):
+        """Used to unlock all request credit notes.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = FinanceValidator.unlockCreditNote()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import UnlockCreditNoteReq
+        schema = UnlockCreditNoteReq()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-notes/unlock", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"success":{"value":"61"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"success":{"value":"61"}}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-notes/unlock", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UnlockCreditNoteResponse
+            schema = UnlockCreditNoteResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for unlockCreditNote")
+                print(e)
+
+        return response
+    
+    async def orderFreeze(self, request_headers:Dict={}):
+        """Used to get status of oms freeze.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = FinanceValidator.orderFreeze()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/order/freeze", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"freeze_true_200":{"value":"61"},"freeze_false_200":{"value":"611"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true,"examples":{"freeze_true_200":{"value":"61"},"freeze_false_200":{"value":"611"}}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/order/freeze", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrederFreezeResponse
+            schema = OrederFreezeResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for orderFreeze")
                 print(e)
 
         return response

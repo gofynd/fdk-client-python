@@ -8,6 +8,10 @@ from ..PlatformModel import BaseSchema
 
 
 
+class OrederFreezeResponse(BaseSchema):
+    pass
+
+
 class GenerateReportMeta(BaseSchema):
     pass
 
@@ -20,11 +24,15 @@ class GenerateReportPlatform(BaseSchema):
     pass
 
 
-class GenerateReportRequest(BaseSchema):
+class GenerateReportReq(BaseSchema):
     pass
 
 
 class Page(BaseSchema):
+    pass
+
+
+class Currency(BaseSchema):
     pass
 
 
@@ -36,7 +44,19 @@ class Error(BaseSchema):
     pass
 
 
+class ErrorMeta(BaseSchema):
+    pass
+
+
+class ErrorMetaItems(BaseSchema):
+    pass
+
+
 class DownloadReport(BaseSchema):
+    pass
+
+
+class DownloadReportData(BaseSchema):
     pass
 
 
@@ -48,11 +68,15 @@ class DownloadReportList(BaseSchema):
     pass
 
 
+class GetEngineFilters(BaseSchema):
+    pass
+
+
 class GetEngineData(BaseSchema):
     pass
 
 
-class GetEngineRequest(BaseSchema):
+class GetEngineReq(BaseSchema):
     pass
 
 
@@ -64,7 +88,7 @@ class GetReason(BaseSchema):
     pass
 
 
-class GetReasonRequest(BaseSchema):
+class GetReasonReq(BaseSchema):
     pass
 
 
@@ -80,7 +104,7 @@ class GetReportListData(BaseSchema):
     pass
 
 
-class GetReportListRequest(BaseSchema):
+class GetReportListReq(BaseSchema):
     pass
 
 
@@ -104,7 +128,7 @@ class DownloadCreditDebitNote(BaseSchema):
     pass
 
 
-class DownloadCreditDebitNoteRequest(BaseSchema):
+class DownloadCreditDebitNoteReq(BaseSchema):
     pass
 
 
@@ -120,7 +144,7 @@ class PaymentProcessPayload(BaseSchema):
     pass
 
 
-class PaymentProcessRequest(BaseSchema):
+class PaymentProcessReq(BaseSchema):
     pass
 
 
@@ -132,7 +156,7 @@ class CreditlineDataPlatformPayload(BaseSchema):
     pass
 
 
-class CreditlineDataPlatformRequest(BaseSchema):
+class CreditlineDataPlatformReq(BaseSchema):
     pass
 
 
@@ -144,7 +168,7 @@ class IsCreditlinePayload(BaseSchema):
     pass
 
 
-class IsCreditlinePlatformRequest(BaseSchema):
+class IsCreditlinePlatformReq(BaseSchema):
     pass
 
 
@@ -156,7 +180,7 @@ class InvoiceTypePayloadData(BaseSchema):
     pass
 
 
-class InvoiceTypeRequest(BaseSchema):
+class InvoiceTypeReq(BaseSchema):
     pass
 
 
@@ -176,7 +200,7 @@ class InvoiceListingPayloadData(BaseSchema):
     pass
 
 
-class InvoiceListingRequest(BaseSchema):
+class InvoiceListingReq(BaseSchema):
     pass
 
 
@@ -196,7 +220,7 @@ class InvoicePdfPayloadData(BaseSchema):
     pass
 
 
-class InvoicePdfRequest(BaseSchema):
+class InvoicePdfReq(BaseSchema):
     pass
 
 
@@ -208,7 +232,7 @@ class IsCnRefundMethodData(BaseSchema):
     pass
 
 
-class IsCnRefundMethodRequest(BaseSchema):
+class IsCnRefundMethodReq(BaseSchema):
     pass
 
 
@@ -228,7 +252,7 @@ class CreateSellerCreditNoteConfig(BaseSchema):
     pass
 
 
-class CreateSellerCreditNoteConfigRequest(BaseSchema):
+class CreateSellerCreditNoteConfigReq(BaseSchema):
     pass
 
 
@@ -240,7 +264,7 @@ class DeleteConfig(BaseSchema):
     pass
 
 
-class DeleteConfigRequest(BaseSchema):
+class DeleteConfigReq(BaseSchema):
     pass
 
 
@@ -248,7 +272,7 @@ class DeleteConfigResponse(BaseSchema):
     pass
 
 
-class ChannelDisplayName(BaseSchema):
+class ChannelDisplayNameItems(BaseSchema):
     pass
 
 
@@ -260,7 +284,7 @@ class CnReferenceNumber(BaseSchema):
     pass
 
 
-class GetPdfUrlViewRequest(BaseSchema):
+class GetPdfUrlViewReq(BaseSchema):
     pass
 
 
@@ -272,7 +296,7 @@ class GetPdfUrlViewResponse(BaseSchema):
     pass
 
 
-class CreditNoteDetailsRequest(BaseSchema):
+class CreditNoteDetailsReq(BaseSchema):
     pass
 
 
@@ -296,7 +320,7 @@ class GetCustomerCreditBalance(BaseSchema):
     pass
 
 
-class GetCustomerCreditBalanceRequest(BaseSchema):
+class GetCustomerCreditBalanceReq(BaseSchema):
     pass
 
 
@@ -308,7 +332,7 @@ class GetCustomerCreditBalanceResponse(BaseSchema):
     pass
 
 
-class GetCnConfigRequest(BaseSchema):
+class GetCnConfigReq(BaseSchema):
     pass
 
 
@@ -332,7 +356,7 @@ class CnGenerateReport(BaseSchema):
     pass
 
 
-class GenerateReportCustomerCnRequest(BaseSchema):
+class GenerateReportCustomerCnReq(BaseSchema):
     pass
 
 
@@ -352,7 +376,7 @@ class CnDownloadReport(BaseSchema):
     pass
 
 
-class DownloadReportCustomerCnRequest(BaseSchema):
+class DownloadReportCustomerCnReq(BaseSchema):
     pass
 
 
@@ -372,11 +396,99 @@ class GetReportingNestedFilters(BaseSchema):
     pass
 
 
+class GetReportingFiltersReasonOptions(BaseSchema):
+    pass
+
+
+class GetReportingFiltersReason(BaseSchema):
+    pass
+
+
 class GetReportingFiltersResponse(BaseSchema):
     pass
 
 
+class InvoicePaymentOptionsPayloadData(BaseSchema):
+    pass
 
+
+class InvoicePaymentOptionsReq(BaseSchema):
+    pass
+
+
+class InvoicePaymentOptionsResponsePayableAmounts(BaseSchema):
+    pass
+
+
+class InvoicePaymentOptionsResponseDeductedAmounts(BaseSchema):
+    pass
+
+
+class InvoicePaymentOptionsResponseData(BaseSchema):
+    pass
+
+
+class InvoicePaymentOptionsResponse(BaseSchema):
+    pass
+
+
+class PaymentDetail(BaseSchema):
+    pass
+
+
+class PaidInvoicePaymentDetail(BaseSchema):
+    pass
+
+
+class InvoicePaymentDetailsResponseData(BaseSchema):
+    pass
+
+
+class InvoicePaymentDetailsResponse(BaseSchema):
+    pass
+
+
+class InvoiceActivityLogsResponseData(BaseSchema):
+    pass
+
+
+class InvoiceActivityLogsResponse(BaseSchema):
+    pass
+
+
+class InvoiceActivityLogError(BaseSchema):
+    pass
+
+
+class UnlockCreditNoteRequestData(BaseSchema):
+    pass
+
+
+class UnlockCreditNoteReq(BaseSchema):
+    pass
+
+
+class UnlockCreditNoteResponseData(BaseSchema):
+    pass
+
+
+class UnlockCreditNoteResponse(BaseSchema):
+    pass
+
+
+
+
+
+class OrederFreezeResponse(BaseSchema):
+    # Finance swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    oms_freeze = fields.Boolean(required=False)
+    
+    source = fields.Str(required=False, allow_none=True)
+    
 
 
 class GenerateReportMeta(BaseSchema):
@@ -419,7 +531,7 @@ class GenerateReportPlatform(BaseSchema):
     
 
 
-class GenerateReportRequest(BaseSchema):
+class GenerateReportReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -447,21 +559,35 @@ class Page(BaseSchema):
     
 
 
+class Currency(BaseSchema):
+    # Finance swagger.json
+
+    
+    code = fields.Str(required=False)
+    
+    symbol = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+
+
 class GenerateReportJson(BaseSchema):
     # Finance swagger.json
 
     
-    items = fields.List(fields.List(fields.Str(required=False), required=False), required=False)
+    data = fields.Dict(required=False)
+    
+    item_count = fields.Int(required=False)
     
     page = fields.Nested(Page, required=False)
     
     end_date = fields.Str(required=False)
     
-    headers = fields.List(fields.Str(required=False), required=False)
-    
     start_date = fields.Str(required=False)
     
-    item_count = fields.Int(required=False)
+    items = fields.List(fields.List(fields.Str(required=False), required=False), required=False)
+    
+    headers = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -469,9 +595,43 @@ class Error(BaseSchema):
     # Finance swagger.json
 
     
+    status = fields.Int(required=False)
+    
     reason = fields.Str(required=False)
     
     success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
+    code = fields.Str(required=False, allow_none=True)
+    
+    exception = fields.Str(required=False)
+    
+    info = fields.Str(required=False, allow_none=True)
+    
+    request_id = fields.Str(required=False, allow_none=True)
+    
+    stack_trace = fields.Str(required=False, allow_none=True)
+    
+    meta = fields.Nested(ErrorMeta, required=False)
+    
+
+
+class ErrorMeta(BaseSchema):
+    # Finance swagger.json
+
+    
+    columns_errors = fields.List(fields.Nested(ErrorMetaItems, required=False), required=False)
+    
+
+
+class ErrorMetaItems(BaseSchema):
+    # Finance swagger.json
+
+    
+    code = fields.Int(required=False, allow_none=True)
+    
+    message = fields.Str(required=False, allow_none=True)
     
 
 
@@ -479,9 +639,17 @@ class DownloadReport(BaseSchema):
     # Finance swagger.json
 
     
+    data = fields.Nested(DownloadReportData, required=False)
+    
+
+
+class DownloadReportData(BaseSchema):
+    # Finance swagger.json
+
+    
     page = fields.Int(required=False)
     
-    pagesize = fields.Int(required=False)
+    page_size = fields.Int(required=False)
     
     start_date = fields.Str(required=False)
     
@@ -519,19 +687,43 @@ class DownloadReportList(BaseSchema):
     
 
 
+class GetEngineFilters(BaseSchema):
+    # Finance swagger.json
+
+    
+    config_field = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    seller_id = fields.Str(required=False)
+    
+
+
 class GetEngineData(BaseSchema):
     # Finance swagger.json
 
     
-    table_name = fields.Str(required=False)
+    status = fields.Str(required=False)
+    
+    filters = fields.Nested(GetEngineFilters, required=False)
     
     project = fields.List(fields.Str(required=False), required=False)
     
-    filters = fields.Dict(required=False)
+    table_name = fields.Str(required=False)
+    
+    search = fields.Dict(required=False)
+    
+    page = fields.Int(required=False)
+    
+    page_size = fields.Int(required=False)
+    
+    order_by = fields.Str(required=False)
     
 
 
-class GetEngineRequest(BaseSchema):
+class GetEngineReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -561,7 +753,7 @@ class GetReason(BaseSchema):
     
 
 
-class GetReasonRequest(BaseSchema):
+class GetReasonReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -605,7 +797,7 @@ class GetReportListData(BaseSchema):
     
 
 
-class GetReportListRequest(BaseSchema):
+class GetReportListReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -659,6 +851,8 @@ class GetAffiliateResponse(BaseSchema):
     # Finance swagger.json
 
     
+    reason = fields.Str(required=False)
+    
     success = fields.Boolean(required=False)
     
     docs = fields.List(fields.Dict(required=False), required=False)
@@ -673,7 +867,7 @@ class DownloadCreditDebitNote(BaseSchema):
     
 
 
-class DownloadCreditDebitNoteRequest(BaseSchema):
+class DownloadCreditDebitNoteReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -707,13 +901,13 @@ class PaymentProcessPayload(BaseSchema):
     
     platform = fields.Str(required=False)
     
-    amount = fields.Str(required=False)
+    amount = fields.Float(required=False)
     
     transaction_type = fields.Str(required=False)
     
     source_reference = fields.Str(required=False)
     
-    total_amount = fields.Str(required=False)
+    total_amount = fields.Float(required=False)
     
     meta = fields.Dict(required=False)
     
@@ -727,7 +921,7 @@ class PaymentProcessPayload(BaseSchema):
     
 
 
-class PaymentProcessRequest(BaseSchema):
+class PaymentProcessReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -759,15 +953,15 @@ class CreditlineDataPlatformPayload(BaseSchema):
     
     seller_id = fields.Str(required=False)
     
-    end_end = fields.Str(required=False)
+    end_date = fields.Str(required=False)
     
-    start_end = fields.Str(required=False)
+    start_date = fields.Str(required=False)
     
-    pagesize = fields.Int(required=False)
+    page_size = fields.Int(required=False)
     
 
 
-class CreditlineDataPlatformRequest(BaseSchema):
+class CreditlineDataPlatformReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -785,7 +979,7 @@ class CreditlineDataPlatformResponse(BaseSchema):
     
     show_mr = fields.Boolean(required=False)
     
-    page = fields.Dict(required=False)
+    page = fields.Nested(Page, required=False)
     
     message = fields.Str(required=False)
     
@@ -803,7 +997,7 @@ class IsCreditlinePayload(BaseSchema):
     
 
 
-class IsCreditlinePlatformRequest(BaseSchema):
+class IsCreditlinePlatformReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -829,7 +1023,7 @@ class InvoiceTypePayloadData(BaseSchema):
     
 
 
-class InvoiceTypeRequest(BaseSchema):
+class InvoiceTypeReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -889,7 +1083,7 @@ class InvoiceListingPayloadData(BaseSchema):
     
 
 
-class InvoiceListingRequest(BaseSchema):
+class InvoiceListingReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -913,7 +1107,7 @@ class InvoiceListingResponseItems(BaseSchema):
     # Finance swagger.json
 
     
-    amount = fields.Str(required=False)
+    amount = fields.Float(required=False)
     
     company = fields.Str(required=False)
     
@@ -933,11 +1127,17 @@ class InvoiceListingResponseItems(BaseSchema):
     
     invoice_id = fields.Str(required=False)
     
+    currency = fields.Nested(Currency, required=False)
+    
 
 
 class InvoiceListingResponse(BaseSchema):
     # Finance swagger.json
 
+    
+    success = fields.Boolean(required=False)
+    
+    headers = fields.List(fields.Str(required=False), required=False)
     
     unpaid_invoice_data = fields.Nested(UnpaidInvoiceDataItems, required=False)
     
@@ -957,7 +1157,7 @@ class InvoicePdfPayloadData(BaseSchema):
     
 
 
-class InvoicePdfRequest(BaseSchema):
+class InvoicePdfReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -989,7 +1189,7 @@ class IsCnRefundMethodData(BaseSchema):
     
 
 
-class IsCnRefundMethodRequest(BaseSchema):
+class IsCnRefundMethodReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -1049,7 +1249,7 @@ class CreateSellerCreditNoteConfig(BaseSchema):
     
 
 
-class CreateSellerCreditNoteConfigRequest(BaseSchema):
+class CreateSellerCreditNoteConfigReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -1079,7 +1279,7 @@ class DeleteConfig(BaseSchema):
     
 
 
-class DeleteConfigRequest(BaseSchema):
+class DeleteConfigReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -1097,11 +1297,13 @@ class DeleteConfigResponse(BaseSchema):
     
 
 
-class ChannelDisplayName(BaseSchema):
+class ChannelDisplayNameItems(BaseSchema):
     # Finance swagger.json
 
     
-    platform_pos = fields.Str(required=False)
+    key = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
     
 
 
@@ -1111,7 +1313,7 @@ class ChannelDisplayNameResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    data = fields.Nested(ChannelDisplayName, required=False)
+    items = fields.List(fields.Nested(ChannelDisplayNameItems, required=False), required=False)
     
 
 
@@ -1123,7 +1325,7 @@ class CnReferenceNumber(BaseSchema):
     
 
 
-class GetPdfUrlViewRequest(BaseSchema):
+class GetPdfUrlViewReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -1151,7 +1353,7 @@ class GetPdfUrlViewResponse(BaseSchema):
     
 
 
-class CreditNoteDetailsRequest(BaseSchema):
+class CreditNoteDetailsReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -1187,6 +1389,8 @@ class RedemptionDetails(BaseSchema):
     # Finance swagger.json
 
     
+    meta = fields.Dict(required=False)
+    
     staff_id = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
@@ -1209,13 +1413,17 @@ class CreditNoteDetails(BaseSchema):
     # Finance swagger.json
 
     
+    currency = fields.Str(required=False, allow_none=True)
+    
+    current_amount_used = fields.Float(required=False)
+    
     cn_status = fields.Str(required=False)
     
     customer_mobile_number = fields.Str(required=False)
     
     cn_reference_number = fields.Str(required=False)
     
-    cn_details = fields.Dict(required=False)
+    cn_details = fields.Nested(CnDetails, required=False)
     
     redemption_details = fields.List(fields.Nested(RedemptionDetails, required=False), required=False)
     
@@ -1249,7 +1457,7 @@ class GetCustomerCreditBalance(BaseSchema):
     
 
 
-class GetCustomerCreditBalanceRequest(BaseSchema):
+class GetCustomerCreditBalanceReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -1277,7 +1485,7 @@ class GetCustomerCreditBalanceResponse(BaseSchema):
     
 
 
-class GetCnConfigRequest(BaseSchema):
+class GetCnConfigReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -1289,7 +1497,7 @@ class GetCnConfigResponseMeta(BaseSchema):
     # Finance swagger.json
 
     
-    reason = fields.Str(required=False)
+    reason = fields.Str(required=False, allow_none=True)
     
     source_channel = fields.List(fields.Str(required=False), required=False)
     
@@ -1303,7 +1511,7 @@ class GetCnConfigResponseData(BaseSchema):
     
     affiliate_id = fields.Str(required=False)
     
-    meta = fields.Nested(GetCnConfigResponseMeta, required=False)
+    meta = fields.Raw(required=False)
     
     seller_id = fields.Int(required=False)
     
@@ -1341,7 +1549,9 @@ class CnGenerateReportFilters(BaseSchema):
     
     store_id = fields.List(fields.Int(required=False), required=False)
     
-    types_of_transaction = fields.List(fields.Str(required=False), required=False)
+    type_of_transaction = fields.List(fields.Str(required=False), required=False)
+    
+    issuance_channel = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -1353,7 +1563,7 @@ class CnGenerateReport(BaseSchema):
     
     end_date = fields.Str(required=False)
     
-    pagesize = fields.Int(required=False)
+    page_size = fields.Int(required=False)
     
     filters = fields.Nested(CnGenerateReportFilters, required=False)
     
@@ -1371,7 +1581,7 @@ class CnGenerateReport(BaseSchema):
     
 
 
-class GenerateReportCustomerCnRequest(BaseSchema):
+class GenerateReportCustomerCnReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -1404,6 +1614,10 @@ class CnGenerateReportItems(BaseSchema):
 class GenerateReportCustomerCnResponseData(BaseSchema):
     # Finance swagger.json
 
+    
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
     
     items = fields.List(fields.Nested(CnGenerateReportItems, required=False), required=False)
     
@@ -1447,15 +1661,15 @@ class CnDownloadReport(BaseSchema):
     
     search = fields.Str(required=False)
     
-    status = fields.List(fields.Str(required=False), required=False)
+    status = fields.Str(required=False)
     
     search_type = fields.Str(required=False)
     
-    pagesize = fields.Int(required=False)
+    page_size = fields.Int(required=False)
     
 
 
-class DownloadReportCustomerCnRequest(BaseSchema):
+class DownloadReportCustomerCnReq(BaseSchema):
     # Finance swagger.json
 
     
@@ -1501,7 +1715,13 @@ class DownloadReportCustomerCnResponse(BaseSchema):
     # Finance swagger.json
 
     
+    items = fields.List(fields.Nested(DownloadReportResponseData, required=False), required=False)
+    
     data = fields.List(fields.Nested(DownloadReportResponseData, required=False), required=False)
+    
+    item_count = fields.Int(required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 
 
@@ -1537,15 +1757,239 @@ class GetReportingNestedFilters(BaseSchema):
     
 
 
+class GetReportingFiltersReasonOptions(BaseSchema):
+    # Finance swagger.json
+
+    
+    text = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+    placeholder_text = fields.Str(required=False)
+    
+
+
+class GetReportingFiltersReason(BaseSchema):
+    # Finance swagger.json
+
+    
+    text = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+    options = fields.List(fields.Nested(GetReportingFiltersReasonOptions, required=False), required=False)
+    
+
+
 class GetReportingFiltersResponse(BaseSchema):
     # Finance swagger.json
 
+    
+    reason = fields.Nested(GetReportingFiltersReason, required=False)
     
     search = fields.Nested(GetReportingFilters, required=False)
     
     filters = fields.List(fields.Nested(GetReportingNestedFilters, required=False), required=False)
     
     status = fields.Nested(GetReportingFilters, required=False)
+    
+
+
+class InvoicePaymentOptionsPayloadData(BaseSchema):
+    # Finance swagger.json
+
+    
+    invoice_number = fields.Str(required=False)
+    
+
+
+class InvoicePaymentOptionsReq(BaseSchema):
+    # Finance swagger.json
+
+    
+    data = fields.Nested(InvoicePaymentOptionsPayloadData, required=False)
+    
+
+
+class InvoicePaymentOptionsResponsePayableAmounts(BaseSchema):
+    # Finance swagger.json
+
+    
+    amount = fields.Float(required=False)
+    
+    amount_key = fields.Str(required=False)
+    
+    header = fields.Str(required=False)
+    
+
+
+class InvoicePaymentOptionsResponseDeductedAmounts(BaseSchema):
+    # Finance swagger.json
+
+    
+    amount = fields.Float(required=False)
+    
+    header = fields.Str(required=False)
+    
+    amount_key = fields.Str(required=False)
+    
+    is_payable = fields.Boolean(required=False)
+    
+    symbol = fields.Str(required=False)
+    
+
+
+class InvoicePaymentOptionsResponseData(BaseSchema):
+    # Finance swagger.json
+
+    
+    currency = fields.Nested(Currency, required=False)
+    
+    invoice_type = fields.Str(required=False)
+    
+    display_amounts = fields.List(fields.Nested(InvoicePaymentOptionsResponsePayableAmounts, required=False), required=False)
+    
+    total_amount = fields.Dict(required=False)
+    
+    deducted_amounts = fields.Raw(required=False)
+    
+    payable_amounts = fields.List(fields.Nested(InvoicePaymentOptionsResponsePayableAmounts, required=False), required=False)
+    
+
+
+class InvoicePaymentOptionsResponse(BaseSchema):
+    # Finance swagger.json
+
+    
+    reason = fields.Str(required=False)
+    
+    data = fields.Nested(InvoicePaymentOptionsResponseData, required=False)
+    
+    success = fields.Boolean(required=False)
+    
+
+
+class PaymentDetail(BaseSchema):
+    # Finance swagger.json
+
+    
+    display_name = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+
+
+class PaidInvoicePaymentDetail(BaseSchema):
+    # Finance swagger.json
+
+    
+    payment_details = fields.List(fields.Nested(PaymentDetail, required=False), required=False)
+    
+    date_of_payment = fields.Str(required=False)
+    
+    amount = fields.Float(required=False)
+    
+
+
+class InvoicePaymentDetailsResponseData(BaseSchema):
+    # Finance swagger.json
+
+    
+    paid_invoice_payment_details = fields.List(fields.Nested(PaidInvoicePaymentDetail, required=False), required=False)
+    
+    failed_attempts_details = fields.List(fields.Dict(required=False), required=False)
+    
+
+
+class InvoicePaymentDetailsResponse(BaseSchema):
+    # Finance swagger.json
+
+    
+    reason = fields.Str(required=False)
+    
+    data = fields.Nested(InvoicePaymentDetailsResponseData, required=False)
+    
+    success = fields.Boolean(required=False)
+    
+    payment_details_visible = fields.Boolean(required=False)
+    
+
+
+class InvoiceActivityLogsResponseData(BaseSchema):
+    # Finance swagger.json
+
+    
+    performed_by = fields.Str(required=False, allow_none=True)
+    
+    status = fields.Str(required=False)
+    
+    reason = fields.Str(required=False, allow_none=True)
+    
+    is_resolved = fields.Boolean(required=False)
+    
+    retry_attempts = fields.Float(required=False)
+    
+    max_retry_attempts = fields.Float(required=False, allow_none=True)
+    
+
+
+class InvoiceActivityLogsResponse(BaseSchema):
+    # Finance swagger.json
+
+    
+    data = fields.List(fields.Nested(InvoiceActivityLogsResponseData, required=False), required=False)
+    
+
+
+class InvoiceActivityLogError(BaseSchema):
+    # Finance swagger.json
+
+    
+    reason = fields.Str(required=False)
+    
+
+
+class UnlockCreditNoteRequestData(BaseSchema):
+    # Finance swagger.json
+
+    
+    seller_id = fields.Str(required=False)
+    
+    locked_credit_notes = fields.List(fields.Str(required=False), required=False)
+    
+    unlock_reason = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+
+
+class UnlockCreditNoteReq(BaseSchema):
+    # Finance swagger.json
+
+    
+    data = fields.Nested(UnlockCreditNoteRequestData, required=False)
+    
+
+
+class UnlockCreditNoteResponseData(BaseSchema):
+    # Finance swagger.json
+
+    
+    is_cn_unlocked = fields.Boolean(required=False)
+    
+    status = fields.Str(required=False)
+    
+
+
+class UnlockCreditNoteResponse(BaseSchema):
+    # Finance swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    data = fields.Nested(UnlockCreditNoteResponseData, required=False)
     
 
 

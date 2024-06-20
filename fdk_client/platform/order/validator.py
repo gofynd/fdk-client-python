@@ -41,10 +41,28 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
+    
+    
+        
+        
+        
+    
+    
         
+    
+    
         
+    
+    
         
+    
+    
         
+    
+    
         
     
     
@@ -87,25 +105,55 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+        
+        
+        
+        
+        
+        
     
     
         
+        
     
     
+        
         
+        
+        
+        
     
     
+        
+        
+        
+        
+        
+        
+        
         
         
         
+        
     
     
+        
+        
+        
+        
+        
+        
+        
+        
         
+        
     
     
         
     
     
+        
         
     
     
@@ -113,8 +161,10 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
     
     
+        
         
     
     
@@ -131,10 +181,19 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
+    
+    
+        
         
+    
+    
         
     
     
+        
+        
         
         
         
@@ -170,13 +229,18 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
     
     
         
         
         
+        
     
     
+        
+        
         
         
         
@@ -218,6 +282,9 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
     
     
         
@@ -271,8 +338,15 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
         
         
+    
+    
+        
+    
+    
         
         
 
@@ -342,38 +416,7 @@ class OrderValidator:
          
         
     
-    class click2Call(BaseSchema):
-        
-        
-        caller = fields.Str(required=False)
-        
-        receiver = fields.Str(required=False)
-        
-        bag_id = fields.Str(required=False)
-        
-        caller_id = fields.Str(required=False)
-        
-        method = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class updateShipmentStatus(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class processManifest(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class dispatchManifest(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -434,13 +477,6 @@ class OrderValidator:
         
     
     class createChannelConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class uploadConsent(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -521,6 +557,151 @@ class OrderValidator:
          
         
     
+    class bulkStateTransistion(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class bulkListing(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        start_date = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
+        
+        status = fields.Str(required=False)
+        
+        bulk_action_type = fields.Str(required=False)
+        
+        search_key = fields.Str(required=False)
+         
+        
+    
+    class jobDetails(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        batch_id = fields.Str(required=False)
+         
+        
+    
+    class getFileByStatus(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        batch_id = fields.Str(required=False)
+        
+        status = fields.Str(required=False)
+        
+        file_type = fields.Str(required=False)
+        
+        report_type = fields.Str(required=False)
+         
+        
+    
+    class getManifestShipments(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        dp_ids = fields.Str(required=False)
+        
+        stores = fields.Int(required=False)
+        
+        to_date = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        dp_name = fields.Str(required=False)
+        
+        sales_channels = fields.Str(required=False)
+        
+        search_type = fields.Str(required=False)
+        
+        search_value = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class getManifests(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        status = fields.Str(required=False)
+        
+        start_date = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
+        
+        search_type = fields.Str(required=False)
+        
+        store_id = fields.Int(required=False)
+        
+        search_value = fields.Str(required=False)
+        
+        dp_ids = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class processManifests(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class getManifestDetails(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        manifest_id = fields.Str(required=False)
+         
+        
+    
+    class dispatchManifests(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class uploadConsents(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        manifest_id = fields.Str(required=False)
+         
+        
+    
+    class getManifestfilters(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        view = fields.Str(required=False)
+         
+        
+    
     class eInvoiceRetry(BaseSchema):
         
         
@@ -559,6 +740,22 @@ class OrderValidator:
          
         
     
+    class failedOrderLogDetails(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        log_id = fields.Str(required=False)
+         
+        
+    
+    class generateProcessManifest(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
     class getShipments(BaseSchema):
         
         
@@ -579,6 +776,10 @@ class OrderValidator:
         from_date = fields.Str(required=False)
         
         to_date = fields.Str(required=False)
+        
+        start_date = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
         
         dp_ids = fields.Str(required=False)
         
@@ -632,6 +833,10 @@ class OrderValidator:
         channel_shipment_id = fields.Str(required=False)
         
         shipment_id = fields.Str(required=False)
+        
+        fetch_active_shipment = fields.Boolean(required=False)
+        
+        allow_inactive = fields.Boolean(required=False)
          
         
     
@@ -643,6 +848,8 @@ class OrderValidator:
         order_id = fields.Str(required=False)
         
         my_orders = fields.Boolean(required=False)
+        
+        allow_inactive = fields.Boolean(required=False)
          
         
     
@@ -658,6 +865,10 @@ class OrderValidator:
         from_date = fields.Str(required=False)
         
         to_date = fields.Str(required=False)
+        
+        start_date = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
         
         dp_ids = fields.Str(required=False)
         
@@ -710,6 +921,10 @@ class OrderValidator:
         
         to_date = fields.Str(required=False)
         
+        start_date = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
+        
         dp_ids = fields.Str(required=False)
         
         stores = fields.Str(required=False)
@@ -731,6 +946,8 @@ class OrderValidator:
         customer_id = fields.Str(required=False)
         
         order_type = fields.Str(required=False)
+        
+        allow_inactive = fields.Boolean(required=False)
          
         
     
@@ -754,9 +971,9 @@ class OrderValidator:
         
         dp_ids = fields.Str(required=False)
         
-        from_date = fields.Str(required=False)
+        start_date = fields.Str(required=False)
         
-        to_date = fields.Str(required=False)
+        end_date = fields.Str(required=False)
         
         stores = fields.Str(required=False)
         
@@ -853,6 +1070,22 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
         
         document_type = fields.Str(required=False)
+         
+        
+    
+    class getAllowedTemplatesForBulk(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class getTemplate(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        template_name = fields.Str(required=False)
          
         
     

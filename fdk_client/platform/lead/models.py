@@ -10,6 +10,22 @@ from .enums import *
 
 
 
+class GeneralConfigResponse(BaseSchema):
+    pass
+
+
+class SupportCommunicationSchema(BaseSchema):
+    pass
+
+
+class SupportSchema(BaseSchema):
+    pass
+
+
+class GeneralConfigIntegrationSchema(BaseSchema):
+    pass
+
+
 class TicketList(BaseSchema):
     pass
 
@@ -42,55 +58,11 @@ class AgentChangePayload(BaseSchema):
     pass
 
 
-class CreateVideoRoomResponse(BaseSchema):
-    pass
-
-
-class CloseVideoRoomResponse(BaseSchema):
-    pass
-
-
-class CreateVideoRoomPayload(BaseSchema):
-    pass
-
-
-class NotifyUser(BaseSchema):
-    pass
-
-
 class Filter(BaseSchema):
     pass
 
 
 class TicketHistoryPayload(BaseSchema):
-    pass
-
-
-class GetTokenForVideoRoomResponse(BaseSchema):
-    pass
-
-
-class GetParticipantsInsideVideoRoomResponse(BaseSchema):
-    pass
-
-
-class Participant(BaseSchema):
-    pass
-
-
-class UserSchema(BaseSchema):
-    pass
-
-
-class PhoneNumber(BaseSchema):
-    pass
-
-
-class Email(BaseSchema):
-    pass
-
-
-class Debug(BaseSchema):
     pass
 
 
@@ -115,6 +87,10 @@ class AddTicketPayload(BaseSchema):
 
 
 class Priority(BaseSchema):
+    pass
+
+
+class SLA(BaseSchema):
     pass
 
 
@@ -166,7 +142,77 @@ class Ticket(BaseSchema):
     pass
 
 
+class ErrorMessage(BaseSchema):
+    pass
 
+
+
+
+
+class GeneralConfigResponse(BaseSchema):
+    # Lead swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    support_communication = fields.List(fields.Nested(SupportCommunicationSchema, required=False), required=False)
+    
+    show_communication_info = fields.Boolean(required=False)
+    
+    show_support_dris = fields.Boolean(required=False)
+    
+    type = fields.Str(required=False)
+    
+    integration = fields.Nested(GeneralConfigIntegrationSchema, required=False)
+    
+    allow_ticket_creation = fields.Boolean(required=False)
+    
+    show_listing = fields.Boolean(required=False)
+    
+    available_integration = fields.List(fields.Str(required=False), required=False)
+    
+    enable_dris = fields.Boolean(required=False)
+    
+    support_email = fields.Nested(SupportSchema, required=False)
+    
+    support_phone = fields.Nested(SupportSchema, required=False)
+    
+    support_faq = fields.Nested(SupportSchema, required=False)
+    
+
+
+class SupportCommunicationSchema(BaseSchema):
+    # Lead swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    title = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    enabled = fields.Boolean(required=False)
+    
+
+
+class SupportSchema(BaseSchema):
+    # Lead swagger.json
+
+    
+    value = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    enabled = fields.Boolean(required=False)
+    
+
+
+class GeneralConfigIntegrationSchema(BaseSchema):
+    # Lead swagger.json
+
+    
+    type = fields.Str(required=False)
+    
 
 
 class TicketList(BaseSchema):
@@ -299,42 +345,6 @@ class AgentChangePayload(BaseSchema):
     
 
 
-class CreateVideoRoomResponse(BaseSchema):
-    # Lead swagger.json
-
-    
-    unique_name = fields.Str(required=False)
-    
-
-
-class CloseVideoRoomResponse(BaseSchema):
-    # Lead swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class CreateVideoRoomPayload(BaseSchema):
-    # Lead swagger.json
-
-    
-    unique_name = fields.Str(required=False)
-    
-    notify = fields.List(fields.Nested(NotifyUser, required=False), required=False)
-    
-
-
-class NotifyUser(BaseSchema):
-    # Lead swagger.json
-
-    
-    country_code = fields.Str(required=False)
-    
-    phone_number = fields.Str(required=False)
-    
-
-
 class Filter(BaseSchema):
     # Lead swagger.json
 
@@ -356,114 +366,6 @@ class TicketHistoryPayload(BaseSchema):
     value = fields.Dict(required=False)
     
     type = fields.Str(required=False, validate=OneOf([val.value for val in HistoryTypeEnum.__members__.values()]))
-    
-
-
-class GetTokenForVideoRoomResponse(BaseSchema):
-    # Lead swagger.json
-
-    
-    access_token = fields.Str(required=False)
-    
-
-
-class GetParticipantsInsideVideoRoomResponse(BaseSchema):
-    # Lead swagger.json
-
-    
-    participants = fields.List(fields.Nested(Participant, required=False), required=False)
-    
-
-
-class Participant(BaseSchema):
-    # Lead swagger.json
-
-    
-    user = fields.Nested(UserSchema, required=False)
-    
-    identity = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-
-
-class UserSchema(BaseSchema):
-    # Lead swagger.json
-
-    
-    application_id = fields.Str(required=False)
-    
-    user_id = fields.Str(required=False)
-    
-    first_name = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    last_name = fields.Str(required=False)
-    
-    phone_numbers = fields.List(fields.Nested(PhoneNumber, required=False), required=False)
-    
-    emails = fields.List(fields.Nested(Email, required=False), required=False)
-    
-    gender = fields.Str(required=False)
-    
-    dob = fields.Str(required=False)
-    
-    active = fields.Boolean(required=False)
-    
-    profile_pic_url = fields.Str(required=False)
-    
-    username = fields.Str(required=False)
-    
-    account_type = fields.Str(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    external_id = fields.Str(required=False)
-    
-
-
-class PhoneNumber(BaseSchema):
-    # Lead swagger.json
-
-    
-    active = fields.Boolean(required=False)
-    
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-    phone = fields.Str(required=False)
-    
-    country_code = fields.Int(required=False)
-    
-
-
-class Email(BaseSchema):
-    # Lead swagger.json
-
-    
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-    email = fields.Str(required=False)
-    
-    active = fields.Boolean(required=False)
-    
-
-
-class Debug(BaseSchema):
-    # Lead swagger.json
-
-    
-    source = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
     
 
 
@@ -536,6 +438,14 @@ class Priority(BaseSchema):
     display = fields.Str(required=False)
     
     color = fields.Str(required=False)
+    
+
+
+class SLA(BaseSchema):
+    # Lead swagger.json
+
+    
+    resolution_time = fields.Str(required=False)
     
 
 
@@ -733,6 +643,8 @@ class Ticket(BaseSchema):
     
     priority = fields.Nested(Priority, required=False)
     
+    sla = fields.Nested(SLA, required=False)
+    
     created_by = fields.Dict(required=False)
     
     assigned_to = fields.Dict(required=False)
@@ -750,6 +662,14 @@ class Ticket(BaseSchema):
     updated_at = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
+    
+
+
+class ErrorMessage(BaseSchema):
+    # Lead swagger.json
+
+    
+    message = fields.Str(required=False)
     
 
 

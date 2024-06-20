@@ -17,6 +17,7 @@ class ApplicationConfig:
         self.cookies = cookies or {}
         self.extraHeaders = []
         self.locationDetails = _conf.get("locationDetails")
+        self.logLevel=_conf.get("logLevel", "ERROR")
         self.validate()
 
     def validate(self):

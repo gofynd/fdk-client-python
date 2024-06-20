@@ -12,6 +12,10 @@ class ApplicationInventory(BaseSchema):
     pass
 
 
+class PiiMasking(BaseSchema):
+    pass
+
+
 class AppInventoryConfig(BaseSchema):
     pass
 
@@ -57,6 +61,10 @@ class StorePriority(BaseSchema):
 
 
 class AppCartConfig(BaseSchema):
+    pass
+
+
+class InternationalDeliveryCharges(BaseSchema):
     pass
 
 
@@ -324,6 +332,10 @@ class App(BaseSchema):
     pass
 
 
+class InventoryConfig(BaseSchema):
+    pass
+
+
 class AppInventory(BaseSchema):
     pass
 
@@ -508,6 +520,10 @@ class LandingPageFeature(BaseSchema):
     pass
 
 
+class ListingPageFeature(BaseSchema):
+    pass
+
+
 class RegistrationPageFeature(BaseSchema):
     pass
 
@@ -521,6 +537,10 @@ class HomePageFeature(BaseSchema):
 
 
 class CommonFeature(BaseSchema):
+    pass
+
+
+class InternationalShipping(BaseSchema):
     pass
 
 
@@ -608,6 +628,18 @@ class Application(BaseSchema):
     pass
 
 
+class ApplicationById(BaseSchema):
+    pass
+
+
+class TokenSchemaID(BaseSchema):
+    pass
+
+
+class TokenSchema(BaseSchema):
+    pass
+
+
 class InvalidPayloadRequest(BaseSchema):
     pass
 
@@ -656,7 +688,19 @@ class InformationPhone(BaseSchema):
     pass
 
 
+class InformationLoc(BaseSchema):
+    pass
+
+
 class InformationSupport(BaseSchema):
+    pass
+
+
+class InformationSupportPhone(BaseSchema):
+    pass
+
+
+class InformationSupportEmail(BaseSchema):
     pass
 
 
@@ -763,6 +807,12 @@ class ApplicationInventory(BaseSchema):
     
     logistics = fields.Nested(AppLogisticsConfig, required=False)
     
+    pii_masking = fields.Nested(PiiMasking, required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    __v = fields.Int(required=False)
+    
     business = fields.Str(required=False)
     
     comms_enabled = fields.Boolean(required=False)
@@ -779,9 +829,17 @@ class ApplicationInventory(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    updated_at = fields.Str(required=False)
+    modified_at = fields.Str(required=False)
     
     modified_by = fields.Str(required=False)
+    
+
+
+class PiiMasking(BaseSchema):
+    # Configuration swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
     
 
 
@@ -811,6 +869,8 @@ class AppInventoryConfig(BaseSchema):
     
     company_store = fields.List(fields.Raw(required=False), required=False)
     
+    company_id = fields.Int(required=False)
+    
 
 
 class InventoryBrand(BaseSchema):
@@ -819,7 +879,7 @@ class InventoryBrand(BaseSchema):
     
     criteria = fields.Str(required=False)
     
-    brands = fields.List(fields.Raw(required=False), required=False)
+    brands = fields.List(fields.Int(required=False), required=False)
     
 
 
@@ -841,7 +901,7 @@ class AppStoreRules(BaseSchema):
     
     companies = fields.List(fields.Int(required=False), required=False)
     
-    brands = fields.List(fields.Raw(required=False), required=False)
+    brands = fields.List(fields.Int(required=False), required=False)
     
 
 
@@ -893,6 +953,8 @@ class ArticleAssignmentConfig(BaseSchema):
     
     post_order_reassignment = fields.Boolean(required=False)
     
+    enforced_stores = fields.List(fields.Int(required=False), required=False)
+    
 
 
 class ArticleAssignmentRules(BaseSchema):
@@ -919,6 +981,8 @@ class AppCartConfig(BaseSchema):
     
     delivery_charges = fields.Nested(DeliveryCharges, required=False)
     
+    international_delivery_charges = fields.Nested(InternationalDeliveryCharges, required=False)
+    
     enabled = fields.Boolean(required=False)
     
     max_cart_items = fields.Int(required=False)
@@ -930,6 +994,16 @@ class AppCartConfig(BaseSchema):
     revenue_engine_coupon = fields.Boolean(required=False)
     
     pan_card = fields.Nested(PanCardConfig, required=False)
+    
+
+
+class InternationalDeliveryCharges(BaseSchema):
+    # Configuration swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
+    
+    charges = fields.List(fields.Nested(Charges, required=False), required=False)
     
 
 
@@ -974,6 +1048,8 @@ class AppPaymentConfig(BaseSchema):
     cod_charges = fields.Float(required=False)
     
     anonymous_cod = fields.Boolean(required=False)
+    
+    user_cod_limit = fields.Float(required=False)
     
 
 
@@ -1195,7 +1271,7 @@ class BrandsByCompanyResponse(BaseSchema):
     # Configuration swagger.json
 
     
-    brands = fields.Nested(CompanyBrandInfo, required=False)
+    brands = fields.List(fields.Nested(CompanyBrandInfo, required=False), required=False)
     
 
 
@@ -1212,6 +1288,8 @@ class NotFound(BaseSchema):
 
     
     message = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     
 
 
@@ -1253,7 +1331,7 @@ class CreateApplicationRequest(BaseSchema):
     
     app = fields.Nested(App, required=False)
     
-    configuration = fields.Nested(AppInventory, required=False)
+    configuration = fields.Nested(ApplicationInventory, required=False)
     
     domain = fields.Nested(AppDomain, required=False)
     
@@ -1299,7 +1377,7 @@ class MobileAppConfiguration(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    updated_at = fields.Str(required=False)
+    modified_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
     
@@ -1345,7 +1423,7 @@ class BuildVersionHistory(BaseSchema):
     # Configuration swagger.json
 
     
-    versions = fields.Nested(BuildVersion, required=False)
+    versions = fields.List(fields.Nested(BuildVersion, required=False), required=False)
     
     latest_available_version_name = fields.Str(required=False)
     
@@ -1367,9 +1445,11 @@ class BuildVersion(BaseSchema):
     
     version_code = fields.Int(required=False)
     
+    download_url = fields.Nested(LandingImage, required=False)
+    
     created_at = fields.Str(required=False)
     
-    updated_at = fields.Str(required=False)
+    modified_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
     
@@ -1389,7 +1469,7 @@ class AppSupportedCurrency(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    updated_at = fields.Str(required=False)
+    modified_at = fields.Str(required=False)
     
 
 
@@ -1446,6 +1526,8 @@ class Domain(BaseSchema):
     is_shortlink = fields.Boolean(required=False)
     
     is_predefined = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
     
 
 
@@ -1577,13 +1659,17 @@ class IntegrationOptIn(BaseSchema):
     
     constants = fields.Str(required=False)
     
-    companies = fields.List(fields.Dict(required=False), required=False)
+    companies = fields.List(fields.Str(required=False), required=False)
     
     support = fields.List(fields.Str(required=False), required=False)
     
     _id = fields.Str(required=False)
     
     name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    hidden = fields.Boolean(required=False)
     
     meta = fields.List(fields.Nested(IntegrationMeta, required=False), required=False)
     
@@ -1593,7 +1679,7 @@ class IntegrationOptIn(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    updated_at = fields.Str(required=False)
+    modified_at = fields.Str(required=False)
     
     token = fields.Str(required=False)
     
@@ -1697,7 +1783,7 @@ class Integration(BaseSchema):
     
     constants = fields.Dict(required=False)
     
-    companies = fields.List(fields.Dict(required=False), required=False)
+    companies = fields.List(fields.Str(required=False), required=False)
     
     support = fields.List(fields.Str(required=False), required=False)
     
@@ -1705,15 +1791,19 @@ class Integration(BaseSchema):
     
     name = fields.Str(required=False)
     
+    slug = fields.Str(required=False)
+    
     meta = fields.List(fields.Nested(IntegrationMeta, required=False), required=False)
     
     icon = fields.Str(required=False)
+    
+    hidden = fields.Boolean(required=False)
     
     owner = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
     
-    updated_at = fields.Str(required=False)
+    modified_at = fields.Str(required=False)
     
     token = fields.Str(required=False)
     
@@ -1749,17 +1839,23 @@ class IntegrationLevel(BaseSchema):
     
     uid = fields.Int(required=False)
     
+    company_id = fields.Int(required=False)
+    
     meta = fields.List(fields.Nested(IntegrationMeta, required=False), required=False)
     
     token = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
     
-    updated_at = fields.Str(required=False)
+    modified_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
     
     data = fields.Dict(required=False)
+    
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
     
 
 
@@ -1809,7 +1905,7 @@ class OtherEntity(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    updated_at = fields.Str(required=False)
+    modified_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
     
@@ -1851,7 +1947,7 @@ class App(BaseSchema):
     
 
 
-class AppInventory(BaseSchema):
+class InventoryConfig(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1866,6 +1962,14 @@ class AppInventory(BaseSchema):
     out_of_stock = fields.Boolean(required=False)
     
     only_verified_products = fields.Boolean(required=False)
+    
+
+
+class AppInventory(BaseSchema):
+    # Configuration swagger.json
+
+    
+    inventory = fields.Nested(InventoryConfig, required=False)
     
     payment = fields.Nested(InventoryPaymentConfig, required=False)
     
@@ -1885,7 +1989,7 @@ class CompaniesResponse(BaseSchema):
     # Configuration swagger.json
 
     
-    items = fields.Nested(AppInventoryCompanies, required=False)
+    items = fields.List(fields.Nested(AppInventoryCompanies, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
@@ -1907,7 +2011,7 @@ class StoresResponse(BaseSchema):
     # Configuration swagger.json
 
     
-    items = fields.Nested(AppInventoryStores, required=False)
+    items = fields.List(fields.Nested(AppInventoryStores, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
@@ -1932,6 +2036,10 @@ class AppInventoryStores(BaseSchema):
     store_code = fields.Str(required=False)
     
     company_id = fields.Int(required=False)
+    
+    address = fields.Dict(required=False)
+    
+    integration_type = fields.Dict(required=False)
     
 
 
@@ -1962,6 +2070,8 @@ class DeploymentMeta(BaseSchema):
     _id = fields.Str(required=False)
     
     app = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
     
 
 
@@ -2055,6 +2165,8 @@ class OptedCompany(BaseSchema):
     
     name = fields.Str(required=False)
     
+    id = fields.Int(required=False)
+    
 
 
 class OptedInventory(BaseSchema):
@@ -2063,7 +2175,7 @@ class OptedInventory(BaseSchema):
     
     opt_type = fields.Nested(OptType, required=False)
     
-    items = fields.Raw(required=False)
+    items = fields.List(fields.Raw(required=False), required=False)
     
 
 
@@ -2123,7 +2235,7 @@ class TokenResponse(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    updated_at = fields.Str(required=False)
+    modified_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
     
@@ -2307,6 +2419,8 @@ class FyndRewardsCredentials(BaseSchema):
     
     public_key = fields.Str(required=False)
     
+    private_key = fields.Str(required=False)
+    
 
 
 class GoogleMap(BaseSchema):
@@ -2397,6 +2511,14 @@ class LandingPageFeature(BaseSchema):
     
 
 
+class ListingPageFeature(BaseSchema):
+    # Configuration swagger.json
+
+    
+    sort_on = fields.Str(required=False)
+    
+
+
 class RegistrationPageFeature(BaseSchema):
     # Configuration swagger.json
 
@@ -2433,7 +2555,7 @@ class AppFeature(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    updated_at = fields.Str(required=False)
+    modified_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
     
@@ -2457,6 +2579,8 @@ class CommonFeature(BaseSchema):
     
     listing_price = fields.Nested(ListingPriceFeature, required=False)
     
+    listing_page = fields.Nested(ListingPageFeature, required=False)
+    
     currency = fields.Nested(CurrencyFeature, required=False)
     
     revenue_engine = fields.Nested(RevenueEngineFeature, required=False)
@@ -2466,6 +2590,16 @@ class CommonFeature(BaseSchema):
     compare_products = fields.Nested(CompareProductsFeature, required=False)
     
     reward_points = fields.Nested(RewardPointsConfig, required=False)
+    
+    international_shipping = fields.Nested(InternationalShipping, required=False)
+    
+
+
+class InternationalShipping(BaseSchema):
+    # Configuration swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
     
 
 
@@ -2607,11 +2741,15 @@ class Currency(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    updated_at = fields.Str(required=False)
+    modified_at = fields.Str(required=False)
     
     decimal_digits = fields.Int(required=False)
     
     symbol = fields.Str(required=False)
+    
+    country_name = fields.Str(required=False)
+    
+    country_code = fields.Str(required=False)
     
 
 
@@ -2707,7 +2845,7 @@ class Application(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    updated_at = fields.Str(required=False)
+    modified_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
     
@@ -2727,6 +2865,104 @@ class Application(BaseSchema):
     
     slug = fields.Str(required=False)
     
+    mode = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    tokens = fields.List(fields.Nested(TokenSchema, required=False), required=False)
+    
+    secret = fields.Str(required=False)
+    
+
+
+class ApplicationById(BaseSchema):
+    # Configuration swagger.json
+
+    
+    website = fields.Nested(ApplicationWebsite, required=False)
+    
+    cors = fields.Nested(ApplicationCors, required=False)
+    
+    auth = fields.Nested(ApplicationAuth, required=False)
+    
+    description = fields.Str(required=False)
+    
+    channel_type = fields.Str(required=False)
+    
+    cache_ttl = fields.Int(required=False)
+    
+    is_internal = fields.Boolean(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    owner = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    token = fields.Str(required=False)
+    
+    redirections = fields.List(fields.Nested(ApplicationRedirections, required=False), required=False)
+    
+    meta = fields.List(fields.Nested(ApplicationMeta, required=False), required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    modified_at = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+    banner = fields.Nested(SecureUrl, required=False)
+    
+    logo = fields.Nested(SecureUrl, required=False)
+    
+    favicon = fields.Nested(SecureUrl, required=False)
+    
+    domains = fields.List(fields.Nested(Domain, required=False), required=False)
+    
+    app_type = fields.Str(required=False)
+    
+    mobile_logo = fields.Nested(SecureUrl, required=False)
+    
+    domain = fields.Nested(Domain, required=False)
+    
+    slug = fields.Str(required=False)
+    
+    mode = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    tokens = fields.List(fields.Nested(TokenSchemaID, required=False), required=False)
+    
+    secret = fields.Str(required=False)
+    
+
+
+class TokenSchemaID(BaseSchema):
+    # Configuration swagger.json
+
+    
+    token = fields.Str(required=False)
+    
+    created_by = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+
+
+class TokenSchema(BaseSchema):
+    # Configuration swagger.json
+
+    
+    token = fields.Str(required=False)
+    
+    created_by = fields.Dict(required=False)
+    
+    created_at = fields.Str(required=False)
+    
 
 
 class InvalidPayloadRequest(BaseSchema):
@@ -2734,6 +2970,8 @@ class InvalidPayloadRequest(BaseSchema):
 
     
     message = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     
 
 
@@ -2843,13 +3081,13 @@ class ApplicationInformation(BaseSchema):
     
     _id = fields.Str(required=False)
     
-    business_highlights = fields.Nested(BusinessHighlights, required=False)
+    business_highlights = fields.List(fields.Nested(BusinessHighlights, required=False), required=False)
     
     application = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
     
-    updated_at = fields.Str(required=False)
+    modified_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
     
@@ -2859,7 +3097,7 @@ class InformationAddress(BaseSchema):
     # Configuration swagger.json
 
     
-    loc = fields.Str(required=False)
+    loc = fields.Nested(InformationLoc, required=False)
     
     address_line = fields.List(fields.Str(required=False), required=False)
     
@@ -2883,15 +3121,47 @@ class InformationPhone(BaseSchema):
     
 
 
+class InformationLoc(BaseSchema):
+    # Configuration swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    coordinates = fields.List(fields.Int(required=False), required=False)
+    
+
+
 class InformationSupport(BaseSchema):
     # Configuration swagger.json
 
     
-    phone = fields.List(fields.Str(required=False), required=False)
+    phone = fields.List(fields.Nested(InformationSupportPhone, required=False), required=False)
     
-    email = fields.List(fields.Str(required=False), required=False)
+    email = fields.List(fields.Nested(InformationSupportEmail, required=False), required=False)
     
     timing = fields.Str(required=False)
+    
+
+
+class InformationSupportPhone(BaseSchema):
+    # Configuration swagger.json
+
+    
+    code = fields.Str(required=False)
+    
+    number = fields.Str(required=False)
+    
+    key = fields.Str(required=False)
+    
+
+
+class InformationSupportEmail(BaseSchema):
+    # Configuration swagger.json
+
+    
+    value = fields.Str(required=False)
+    
+    key = fields.Str(required=False)
     
 
 
@@ -3073,6 +3343,10 @@ class ApplicationDetail(BaseSchema):
     
     _id = fields.Str(required=False)
     
+    slug = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
 
 
 class CurrenciesResponse(BaseSchema):
@@ -3087,11 +3361,17 @@ class AppCurrencyResponse(BaseSchema):
     # Configuration swagger.json
 
     
+    _id = fields.Str(required=False)
+    
     application = fields.Str(required=False)
     
     default_currency = fields.Nested(DefaultCurrency, required=False)
     
     supported_currency = fields.List(fields.Nested(Currency, required=False), required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    modified_at = fields.Str(required=False)
     
 
 
@@ -3122,6 +3402,12 @@ class OptedStoreAddress(BaseSchema):
     country = fields.Str(required=False)
     
     city = fields.Str(required=False)
+    
+    sector = fields.Str(required=False)
+    
+    country_code = fields.Str(required=False)
+    
+    state_code = fields.Str(required=False)
     
 
 

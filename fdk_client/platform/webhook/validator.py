@@ -25,8 +25,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
         
     
     
@@ -43,15 +41,11 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
     
     
         
         
         
-        
-    
-    
         
     
     
@@ -72,41 +66,6 @@ from ..PlatformModel import BaseSchema
 class WebhookValidator:
     
     
-    class manualRetryOfFailedEvent(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getEventCounts(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getManualRetryStatus(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class manualRetryCancel(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getDeliveryReports(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class downloadDeliveryReport(BaseSchema):
         
         
@@ -115,13 +74,6 @@ class WebhookValidator:
         
     
     class pingWebhook(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class fetchAllEventConfigurations(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -151,14 +103,29 @@ class WebhookValidator:
          
         
     
-    class getSubscribersByCompany(BaseSchema):
+    class getDeliveryReports(BaseSchema):
         
         
-        page_no = fields.Int(required=False)
+        company_id = fields.Int(required=False)
+         
         
-        page_size = fields.Int(required=False)
+    
+    class fetchAllEventConfigurations(BaseSchema):
         
-        extension_id = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class registerSubscriberToEventV2(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class updateSubscriberV2(BaseSchema):
+        
         
         company_id = fields.Int(required=False)
          
@@ -168,6 +135,19 @@ class WebhookValidator:
         
         
         company_id = fields.Int(required=False)
+         
+        
+    
+    class getSubscribersByCompany(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        extension_id = fields.Str(required=False)
          
         
     

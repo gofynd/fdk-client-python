@@ -28,25 +28,7 @@ class FileStorage:
         self._urls.update(urls)
     
     async def startUpload(self, namespace=None, body="", request_headers:Dict={}):
-        """Use this API to perform the first step of uploading (i.e. **Start**) an arbitrarily sized buffer or blob.
-
-The three major steps are:
-* Start
-* Upload
-* Complete
-
-### Start
-Initiates the assets upload using `startUpload`.
-It returns a storage link in response.
-
-### Upload
-Use the storage link to upload a file (Buffer or Blob) to the File Storage.
-Make a `PUT` request on storage link received from `startUpload` API with the file (Buffer or Blob) in the request body.
-
-### Complete
-After successfully upload, call the `completeUpload` API to finish the upload process.
-This operation will return the URL of the uploaded file.
-
+        """Get a signed url for uploading a file
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
@@ -63,7 +45,7 @@ This operation will return the URL of the uploaded file.
         schema = StartRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["startUpload"], proccessed_params="""{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"test"},"failure":{"value":"test123"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"test"},"failure":{"value":"test123"}}}]}""", namespace=namespace)
+        url_with_params = await create_url_with_params(api_url=self._urls["startUpload"], proccessed_params="""{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"test"},"failure":{"value":"test123"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"test"},"failure":{"value":"test123"}}}]}""", serverType="application", namespace=namespace)
         query_string = await create_query_string(namespace=namespace)
 
         headers={}
@@ -80,7 +62,7 @@ This operation will return the URL of the uploaded file.
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["startUpload"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/namespaces/{namespace}/upload/start", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["startUpload"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/namespaces/{namespace}/upload/start", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import StartResponse
@@ -94,25 +76,8 @@ This operation will return the URL of the uploaded file.
         return response
     
     async def completeUpload(self, namespace=None, body="", request_headers:Dict={}):
-        """Use this API to perform the third step of uploading (i.e. **Complete**) an arbitrarily sized buffer or blob.
-
-The three major steps are:
-* Start
-* Upload
-* Complete
-
-### Start
-Initiates the assets upload using `startUpload`.
-It returns a storage link in response.
-
-### Upload
-Use the storage link to upload a file (Buffer or Blob) to the File Storage.
-Make a `PUT` request on storage link received from `startUpload` API with the file (Buffer or Blob) in the request body.
-
-### Complete
-After successfully upload, call the `completeUpload` API to finish the upload process.
-This operation will return the URL of the uploaded file.
-
+        """
+Complete the file upload and store the file details such as name, size, content type, and namespace to maintain integrity within the system's database
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
@@ -129,7 +94,7 @@ This operation will return the URL of the uploaded file.
         schema = StartResponse()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["completeUpload"], proccessed_params="""{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"test"},"failure":{"value":"test123"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"test"},"failure":{"value":"test123"}}}]}""", namespace=namespace)
+        url_with_params = await create_url_with_params(api_url=self._urls["completeUpload"], proccessed_params="""{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"test"},"failure":{"value":"test123"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"},"examples":{"success":{"value":"test"},"failure":{"value":"test123"}}}]}""", serverType="application", namespace=namespace)
         query_string = await create_query_string(namespace=namespace)
 
         headers={}
@@ -146,7 +111,7 @@ This operation will return the URL of the uploaded file.
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["completeUpload"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/namespaces/{namespace}/upload/complete", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["completeUpload"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/namespaces/{namespace}/upload/complete", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CompleteResponse
@@ -160,7 +125,7 @@ This operation will return the URL of the uploaded file.
         return response
     
     async def signUrls(self, body="", request_headers:Dict={}):
-        """Describe here
+        """Generates secure, signed URLs that is valid for certain expiry time for accessing stored files.
         """
         payload = {}
         
@@ -174,7 +139,7 @@ This operation will return the URL of the uploaded file.
         schema = SignUrlRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["signUrls"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", )
+        url_with_params = await create_url_with_params(api_url=self._urls["signUrls"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
 
         headers={}
@@ -191,7 +156,7 @@ This operation will return the URL of the uploaded file.
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["signUrls"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/sign-urls", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["signUrls"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/sign-urls", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SignUrlResponse

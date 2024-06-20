@@ -13,7 +13,7 @@ class Configuration:
 
     
     async def createApplication(self, body="", request_headers:Dict={}):
-        """Applications are sales channel websites which can be configured, personalized and customized. Use this API to create a new application in the current company.
+        """Generate and add a new sales channel. sales channels are sales channel websites which can be configured, personalized and customized. Use this API to create a new sales channel in the current company.
         """
         payload = {}
         
@@ -27,7 +27,7 @@ class Configuration:
         schema = CreateApplicationRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -42,7 +42,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CreateAppResponse
@@ -56,7 +56,7 @@ class Configuration:
         return response
     
     async def getApplications(self, page_no=None, page_size=None, q=None, request_headers:Dict={}):
-        """Applications are sales channel websites which can be configured, personalized and customised. Use this API to fetch a list of applications created within a company.
+        """Retrieve a list of available sales channels. sales channels are sales channel websites which can be configured, personalized and customised. Use this API to fetch a list of sales channels created within a company.
         :param page_no :  : type integer
         :param page_size :  : type integer
         :param q : Search param by name or domain : type string
@@ -75,7 +75,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}],"optional":[{"in":"query","name":"page_no","schema":{"type":"integer"}},{"name":"page_size","schema":{"type":"integer"},"in":"query"},{"name":"q","schema":{"type":"string"},"in":"query","description":"Search param by name or domain"}],"query":[{"in":"query","name":"page_no","schema":{"type":"integer"}},{"name":"page_size","schema":{"type":"integer"},"in":"query"},{"name":"q","schema":{"type":"string"},"in":"query","description":"Search param by name or domain"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}]}""", page_no=page_no, page_size=page_size, q=q)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}],"optional":[{"in":"query","name":"page_no","schema":{"type":"integer"}},{"name":"page_size","schema":{"type":"integer"},"in":"query"},{"name":"q","schema":{"type":"string"},"in":"query","description":"Search param by name or domain"}],"query":[{"in":"query","name":"page_no","schema":{"type":"integer"}},{"name":"page_size","schema":{"type":"integer"},"in":"query"},{"name":"q","schema":{"type":"string"},"in":"query","description":"Search param by name or domain"}],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}]}""", serverType="platform", page_no=page_no, page_size=page_size, q=q)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q)
 
         headers = {}
@@ -90,7 +90,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ApplicationsResponse
@@ -104,7 +104,7 @@ class Configuration:
         return response
     
     async def getCurrencies(self, request_headers:Dict={}):
-        """Use this API to get a list of currencies allowed in the company. Moreover, get the name, code, symbol, and the decimal digits of the currencies.
+        """Retrieve a list of available currencies.
         """
         payload = {}
         
@@ -114,7 +114,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/currencies", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/currencies", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -129,7 +129,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/currencies", ), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/currencies", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CurrenciesResponse
@@ -143,7 +143,7 @@ class Configuration:
         return response
     
     async def getDomainAvailibility(self, body="", request_headers:Dict={}):
-        """Use this API to check the domain availability before linking it to application. Also sends domain suggestions that are similar to the queried domain. Note - Custom domain search is currently powered by GoDaddy provider.
+        """Check the availability of a specific domain. Use this API to check the domain availability before linking it to sales channel. Also sends domain suggestions that are similar to the queried domain. Note - Custom domain search is currently powered by GoDaddy provider.
         """
         payload = {}
         
@@ -157,7 +157,7 @@ class Configuration:
         schema = DomainSuggestionsRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/domain/suggestions", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}]}""", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/domain/suggestions", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -172,7 +172,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/domain/suggestions", ), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/domain/suggestions", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import DomainSuggestionsResponse
@@ -186,8 +186,8 @@ class Configuration:
         return response
     
     async def getIntegrationById(self, id=None, request_headers:Dict={}):
-        """Use this API to fetch the details of an integration (such as Ginesys, SAP, etc.) using its ID
-        :param id : Integration id : type integer
+        """Retrieve detailed information about a specific integration. Retrieve the details of an integration (such as Ginesys, SAP, etc.) using its ID.
+        :param id : Integration id : type string
         """
         payload = {}
         
@@ -199,7 +199,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration/{id}", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"id","in":"path","schema":{"type":"integer"},"description":"Integration id","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"id","in":"path","schema":{"type":"integer"},"description":"Integration id","required":true}]}""", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration/{id}", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"404":{"value":2},"success":{"value":2}}},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration id","required":true,"examples":{"404":{"value":"652c0a61d25ec5b4acd798c2"},"success":{"value":"6524d9e195f3c8e3d36b6977"}}}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"404":{"value":2},"success":{"value":2}}},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration id","required":true,"examples":{"404":{"value":"652c0a61d25ec5b4acd798c2"},"success":{"value":"6524d9e195f3c8e3d36b6977"}}}]}""", serverType="platform", id=id)
         query_string = await create_query_string(id=id)
 
         headers = {}
@@ -214,7 +214,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import Integration
@@ -228,7 +228,7 @@ class Configuration:
         return response
     
     async def getAvailableOptIns(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Use this API to get a list of all available integrations in a company
+        """Retrieve a list of available opt-ins.  Retrieve a list of all available integrations in a company.
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -244,7 +244,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/available", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}]}""", page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/available", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}]}""", serverType="platform", page_no=page_no, page_size=page_size)
         query_string = await create_query_string(page_no=page_no, page_size=page_size)
 
         headers = {}
@@ -259,7 +259,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/available", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/available", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetIntegrationsOptInsResponse
@@ -273,7 +273,7 @@ class Configuration:
         return response
     
     async def getSelectedOptIns(self, level=None, uid=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Use this API to get the store-level/company-level integrations configured in a company
+        """Retrieve a list of selected opt-ins. Retrieve the store-level/company-level integrations configured in a company
         :param level : store or company : type string
         :param uid : Unique identifier of the selected integration level. : type integer
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
@@ -295,7 +295,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/selected/{level}/{uid}", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"level","in":"path","schema":{"type":"string"},"description":"store or company","required":true},{"name":"uid","in":"path","schema":{"type":"integer"},"description":"Unique identifier of the selected integration level.","required":true}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"level","in":"path","schema":{"type":"string"},"description":"store or company","required":true},{"name":"uid","in":"path","schema":{"type":"integer"},"description":"Unique identifier of the selected integration level.","required":true}]}""", level=level, uid=uid, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/selected/{level}/{uid}", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}},{"name":"level","in":"path","schema":{"type":"string"},"description":"store or company","required":true,"examples":{"success":{"value":"store"}}},{"name":"uid","in":"path","schema":{"type":"integer"},"description":"Unique identifier of the selected integration level.","required":true,"examples":{"success":{"value":2}}}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}},{"name":"level","in":"path","schema":{"type":"string"},"description":"store or company","required":true,"examples":{"success":{"value":"store"}}},{"name":"uid","in":"path","schema":{"type":"integer"},"description":"Unique identifier of the selected integration level.","required":true,"examples":{"success":{"value":2}}}]}""", serverType="platform", level=level, uid=uid, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(level=level, uid=uid, page_no=page_no, page_size=page_size)
 
         headers = {}
@@ -310,7 +310,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/selected/{level}/{uid}", level=level, uid=uid, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/selected/{level}/{uid}", level=level, uid=uid, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetIntegrationsOptInsResponse
@@ -324,7 +324,7 @@ class Configuration:
         return response
     
     async def getIntegrationLevelConfig(self, id=None, level=None, opted=None, check_permission=None, request_headers:Dict={}):
-        """Use this API to get the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc.
+        """Retrieve configuration settings for integration levels. Retrieve the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc.
         :param id : Integration ID (24-digit Mongo Object ID) : type string
         :param level : store or company : type string
         :param opted : True means get the opted stores. False means get the stores that aren't opted. : type boolean
@@ -346,7 +346,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true},{"name":"level","in":"path","schema":{"type":"string"},"description":"store or company","required":true}],"optional":[{"name":"opted","in":"query","schema":{"type":"boolean"},"description":"True means get the opted stores. False means get the stores that aren't opted.","required":false},{"name":"check_permission","in":"query","schema":{"type":"boolean"},"description":"Filter on if permissions (for inventory/order) are present","required":false}],"query":[{"name":"opted","in":"query","schema":{"type":"boolean"},"description":"True means get the opted stores. False means get the stores that aren't opted.","required":false},{"name":"check_permission","in":"query","schema":{"type":"boolean"},"description":"Filter on if permissions (for inventory/order) are present","required":false}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true},{"name":"level","in":"path","schema":{"type":"string"},"description":"store or company","required":true}]}""", id=id, level=level, opted=opted, check_permission=check_permission)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true,"examples":{"success":{"value":"6524d9e195f3c8e3d36b6977"}}},{"name":"level","in":"path","schema":{"type":"string"},"description":"store or company","required":true,"examples":{"success":{"value":"company"}}}],"optional":[{"name":"opted","in":"query","schema":{"type":"boolean"},"description":"True means get the opted stores. False means get the stores that aren't opted.","required":false},{"name":"check_permission","in":"query","schema":{"type":"boolean"},"description":"Filter on if permissions (for inventory/order) are present","required":false}],"query":[{"name":"opted","in":"query","schema":{"type":"boolean"},"description":"True means get the opted stores. False means get the stores that aren't opted.","required":false},{"name":"check_permission","in":"query","schema":{"type":"boolean"},"description":"Filter on if permissions (for inventory/order) are present","required":false}],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true,"examples":{"success":{"value":"6524d9e195f3c8e3d36b6977"}}},{"name":"level","in":"path","schema":{"type":"string"},"description":"store or company","required":true,"examples":{"success":{"value":"company"}}}]}""", serverType="platform", id=id, level=level, opted=opted, check_permission=check_permission)
         query_string = await create_query_string(id=id, level=level, opted=opted, check_permission=check_permission)
 
         headers = {}
@@ -361,7 +361,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}", id=id, level=level, opted=opted, check_permission=check_permission), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}", id=id, level=level, opted=opted, check_permission=check_permission), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import IntegrationConfigResponse
@@ -375,7 +375,7 @@ class Configuration:
         return response
     
     async def updateLevelIntegration(self, id=None, level=None, body="", request_headers:Dict={}):
-        """Use this API to update the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc. at a particular level (store/company).
+        """Modify level integration. Update the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc. at a particular level (store/company).
         :param id : Integration ID (24-digit Mongo Object ID) : type string
         :param level : Integration level, `store` or `company` : type string
         """
@@ -395,7 +395,7 @@ class Configuration:
         schema = UpdateIntegrationLevelRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true},{"name":"level","in":"path","schema":{"type":"string"},"description":"Integration level, `store` or `company`","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true},{"name":"level","in":"path","schema":{"type":"string"},"description":"Integration level, `store` or `company`","required":true}]}""", id=id, level=level)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true,"examples":{"success":{"value":"000000000000000000000001"}}},{"name":"level","in":"path","schema":{"type":"string"},"description":"Integration level, `store` or `company`","required":true,"examples":{"success":{"value":"company"}}}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true,"examples":{"success":{"value":"000000000000000000000001"}}},{"name":"level","in":"path","schema":{"type":"string"},"description":"Integration level, `store` or `company`","required":true,"examples":{"success":{"value":"company"}}}]}""", serverType="platform", id=id, level=level)
         query_string = await create_query_string(id=id, level=level)
 
         headers = {}
@@ -410,7 +410,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}", id=id, level=level), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}", id=id, level=level), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import IntegrationLevel
@@ -424,7 +424,7 @@ class Configuration:
         return response
     
     async def getIntegrationByLevelId(self, id=None, level=None, uid=None, request_headers:Dict={}):
-        """Use this API to get the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc. at a particular level (store/company).
+        """Retrieve integration details for a specific level. Retrieve the configuration details of an integration such as token, permissions, level, opted value, uid, meta, location ID, etc. at a particular level (store/company).
         :param id : Integration ID (24-digit Mongo Object ID) : type string
         :param level : Integration level, `store` or `company` : type string
         :param uid : Unique identifier of integration level (store/company) : type integer
@@ -443,7 +443,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}/{uid}", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true},{"name":"level","in":"path","schema":{"type":"string"},"description":"Integration level, `store` or `company`","required":true},{"name":"uid","in":"path","schema":{"type":"integer"},"description":"Unique identifier of integration level (store/company)","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true},{"name":"level","in":"path","schema":{"type":"string"},"description":"Integration level, `store` or `company`","required":true},{"name":"uid","in":"path","schema":{"type":"integer"},"description":"Unique identifier of integration level (store/company)","required":true}]}""", id=id, level=level, uid=uid)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}/{uid}", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true,"examples":{"success":{"value":"6524d9e195f3c8e3d36b6977"}}},{"name":"level","in":"path","schema":{"type":"string"},"description":"Integration level, `store` or `company`","required":true,"examples":{"success":{"value":"company"}}},{"name":"uid","in":"path","schema":{"type":"integer"},"description":"Unique identifier of integration level (store/company)","required":true,"examples":{"success":{"value":2}}}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true,"examples":{"success":{"value":"6524d9e195f3c8e3d36b6977"}}},{"name":"level","in":"path","schema":{"type":"string"},"description":"Integration level, `store` or `company`","required":true,"examples":{"success":{"value":"company"}}},{"name":"uid","in":"path","schema":{"type":"integer"},"description":"Unique identifier of integration level (store/company)","required":true,"examples":{"success":{"value":2}}}]}""", serverType="platform", id=id, level=level, uid=uid)
         query_string = await create_query_string(id=id, level=level, uid=uid)
 
         headers = {}
@@ -458,7 +458,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}/{uid}", id=id, level=level, uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}/{uid}", id=id, level=level, uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import IntegrationLevel
@@ -472,7 +472,7 @@ class Configuration:
         return response
     
     async def updateLevelUidIntegration(self, id=None, level=None, uid=None, body="", request_headers:Dict={}):
-        """Update the level of integration by store UID
+        """Modify UID-based integration. Update the level of integration by store UID
         :param id : Integration ID (24-digit Mongo Object ID) : type string
         :param level : Integration level, `store` or `company` : type string
         :param uid : Unique identifier of integration level (store/company) : type integer
@@ -495,7 +495,7 @@ class Configuration:
         schema = IntegrationLevel()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}/{uid}", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true},{"name":"level","in":"path","schema":{"type":"string"},"description":"Integration level, `store` or `company`","required":true},{"name":"uid","in":"path","schema":{"type":"integer"},"description":"Unique identifier of integration level (store/company)","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true},{"name":"level","in":"path","schema":{"type":"string"},"description":"Integration level, `store` or `company`","required":true},{"name":"uid","in":"path","schema":{"type":"integer"},"description":"Unique identifier of integration level (store/company)","required":true}]}""", id=id, level=level, uid=uid)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}/{uid}", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true,"examples":{"success":{"value":"000000000000000000000001"}}},{"name":"level","in":"path","schema":{"type":"string"},"description":"Integration level, `store` or `company`","required":true,"examples":{"success":{"value":"company"}}},{"name":"uid","in":"path","schema":{"type":"integer"},"description":"Unique identifier of integration level (store/company)","required":true,"examples":{"success":{"value":2}}}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true,"examples":{"success":{"value":"000000000000000000000001"}}},{"name":"level","in":"path","schema":{"type":"string"},"description":"Integration level, `store` or `company`","required":true,"examples":{"success":{"value":"company"}}},{"name":"uid","in":"path","schema":{"type":"integer"},"description":"Unique identifier of integration level (store/company)","required":true,"examples":{"success":{"value":2}}}]}""", serverType="platform", id=id, level=level, uid=uid)
         query_string = await create_query_string(id=id, level=level, uid=uid)
 
         headers = {}
@@ -510,7 +510,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}/{uid}", id=id, level=level, uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/configuration/{id}/{level}/{uid}", id=id, level=level, uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import IntegrationLevel
@@ -524,7 +524,7 @@ class Configuration:
         return response
     
     async def getLevelActiveIntegrations(self, id=None, level=None, uid=None, request_headers:Dict={}):
-        """Use this API to check if a store is already opted-in for any integration
+        """Check if a store is already opted-in for any integration
         :param id : Integration ID (24-digit Mongo Object ID) : type string
         :param level : Integration level, `store` or `company` : type string
         :param uid : Unique identifier of integration level (store/company) : type integer
@@ -543,7 +543,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/check/configuration/{id}/{level}/{uid}", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true},{"name":"level","in":"path","schema":{"type":"string"},"description":"Integration level, `store` or `company`","required":true},{"name":"uid","in":"path","schema":{"type":"integer"},"description":"Unique identifier of integration level (store/company)","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true},{"name":"level","in":"path","schema":{"type":"string"},"description":"Integration level, `store` or `company`","required":true},{"name":"uid","in":"path","schema":{"type":"integer"},"description":"Unique identifier of integration level (store/company)","required":true}]}""", id=id, level=level, uid=uid)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/check/configuration/{id}/{level}/{uid}", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true,"examples":{"success":{"value":"6524d9e195f3c8e3d36b6977"}}},{"name":"level","in":"path","schema":{"type":"string"},"description":"Integration level, `store` or `company`","required":true,"examples":{"success":{"value":"company"}}},{"name":"uid","in":"path","schema":{"type":"integer"},"description":"Unique identifier of integration level (store/company)","required":true,"examples":{"success":{"value":11081}}}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}},{"name":"id","in":"path","schema":{"type":"string"},"description":"Integration ID (24-digit Mongo Object ID)","required":true,"examples":{"success":{"value":"6524d9e195f3c8e3d36b6977"}}},{"name":"level","in":"path","schema":{"type":"string"},"description":"Integration level, `store` or `company`","required":true,"examples":{"success":{"value":"company"}}},{"name":"uid","in":"path","schema":{"type":"integer"},"description":"Unique identifier of integration level (store/company)","required":true,"examples":{"success":{"value":11081}}}]}""", serverType="platform", id=id, level=level, uid=uid)
         query_string = await create_query_string(id=id, level=level, uid=uid)
 
         headers = {}
@@ -558,7 +558,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/check/configuration/{id}/{level}/{uid}", id=id, level=level, uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/integration-opt-in/check/configuration/{id}/{level}/{uid}", id=id, level=level, uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OptedStoreIntegration
@@ -572,7 +572,7 @@ class Configuration:
         return response
     
     async def getBrandsByCompany(self, q=None, request_headers:Dict={}):
-        """Use this API to get all the brands added in a company. Get all the brand names, along with URLs of their logo, banner, and portrait image.
+        """Retrieve all the brands added in a company. Get all the brand names, along with URLs of their logo, banner, and portrait image. can be searched on brand_name.
         :param q : Search text for brand name : type string
         """
         payload = {}
@@ -585,7 +585,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/brands-by-companies", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}],"optional":[{"name":"q","in":"query","schema":{"type":"string"},"description":"Search text for brand name"}],"query":[{"name":"q","in":"query","schema":{"type":"string"},"description":"Search text for brand name"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}]}""", q=q)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/brands-by-companies", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}],"optional":[{"name":"q","in":"query","schema":{"type":"string"},"description":"Search text for brand name"}],"query":[{"name":"q","in":"query","schema":{"type":"string"},"description":"Search text for brand name"}],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}]}""", serverType="platform", q=q)
         query_string = await create_query_string(q=q)
 
         headers = {}
@@ -600,7 +600,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/brands-by-companies", q=q), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/brands-by-companies", q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import BrandsByCompanyResponse
@@ -614,7 +614,7 @@ class Configuration:
         return response
     
     async def getCompanyByBrands(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Use this API to get a list of companies by the brands they deal
+        """Retrieve a paginated list of companies associated with specific brands. Can be searched using the brand ID and company name
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -634,7 +634,7 @@ class Configuration:
         schema = CompanyByBrandsRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/companies-by-brands", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}]}""", page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/companies-by-brands", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}]}""", serverType="platform", page_no=page_no, page_size=page_size)
         query_string = await create_query_string(page_no=page_no, page_size=page_size)
 
         headers = {}
@@ -649,7 +649,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/companies-by-brands", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/companies-by-brands", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CompanyByBrandsResponse
@@ -663,7 +663,7 @@ class Configuration:
         return response
     
     async def getStoreByBrands(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Use this API to get a list of selling locations (stores) by the brands they deal. Store has information about store name, store type, store code, store address, and company detail.
+        """Retrieve stores associated with specific brands. Retrieve a list of selling locations (stores) by the brands they deal. Store has information about store name, store type, store code, store address, and company detail. filtering can be done on brand id and brand names
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -683,7 +683,7 @@ class Configuration:
         schema = StoreByBrandsRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/stores-by-brands", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}]}""", page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/stores-by-brands", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}]}""", serverType="platform", page_no=page_no, page_size=page_size)
         query_string = await create_query_string(page_no=page_no, page_size=page_size)
 
         headers = {}
@@ -698,7 +698,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/stores-by-brands", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/stores-by-brands", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import StoreByBrandsResponse
@@ -712,7 +712,7 @@ class Configuration:
         return response
     
     async def getOtherSellerApplications(self, page_no=None, page_size=None, request_headers:Dict={}):
-        """Use this API to fetch all other seller applications that were not created within the current company. but have opted for the current company's inventory
+        """Retrieve sales channels of  other sellers. Retrieve all other seller sales channels that were not created within the current company. but have opted for the current company's inventory.
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
         """
@@ -728,7 +728,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}]}""", page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"success":{"value":2}}}]}""", serverType="platform", page_no=page_no, page_size=page_size)
         query_string = await create_query_string(page_no=page_no, page_size=page_size)
 
         headers = {}
@@ -743,7 +743,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OtherSellerApplications
@@ -757,7 +757,7 @@ class Configuration:
         return response
     
     async def getOtherSellerApplicationById(self, id=None, request_headers:Dict={}):
-        """Use application ID to fetch details of a seller application that was not created within the current company. but has opted for the current company's inventory
+        """Retrieve details of a seller sales channel that was not created within the current company but has opted for the current company's inventory and searched via the sales channel ID of another sales channel
         :param id : Application Id : type string
         """
         payload = {}
@@ -770,7 +770,7 @@ class Configuration:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications/{id}", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Application Id","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Application Id","required":true}]}""", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications/{id}", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"404":{"value":2},"success":{"value":2}}},{"name":"id","in":"path","schema":{"type":"string"},"description":"Application Id","required":true,"examples":{"404":{"value":"000000000000000000000005"},"success":{"value":"000000000000000000000001"}}}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"404":{"value":2},"success":{"value":2}}},{"name":"id","in":"path","schema":{"type":"string"},"description":"Application Id","required":true,"examples":{"404":{"value":"000000000000000000000005"},"success":{"value":"000000000000000000000001"}}}]}""", serverType="platform", id=id)
         query_string = await create_query_string(id=id)
 
         headers = {}
@@ -785,7 +785,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="")
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OptedApplicationResponse
@@ -799,7 +799,7 @@ class Configuration:
         return response
     
     async def optOutFromApplication(self, id=None, body="", request_headers:Dict={}):
-        """Use this API to opt-out your company or store from other seller application. The specific seller application will no longer fetch inventory from your company or store.
+        """This API allows businesses to opt out of sharing their inventory with external seller sales channels. By using this API, companies or stores can prevent specific seller sales channels from fetching their inventory data. This feature is useful for businesses that want to control who  can access their product listings and other inventory information. It helps maintain privacy and control over data distribution, ensuring that sensitive information is only shared with authorized partners.
         :param id : Alphanumeric ID allotted to an application (sales channel website) created within a business account. : type string
         """
         payload = {}
@@ -816,7 +816,7 @@ class Configuration:
         schema = OptOutInventory()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications/{id}/opt_out", """{"required":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account.","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account.","required":true}]}""", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications/{id}/opt_out", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"404":{"value":2},"success":{"value":2},"Missing parameter":{"value":2},"Company other than current company sent for opt out":{"value":2},"Store other than current company sent for opt out":{"value":2},"Inventory not configured for sent application id":{"value":2}}},{"name":"id","in":"path","schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account.","required":true,"examples":{"404":{"value":"000000000000000000000005"},"success":{"value":"000000000000000000000001"},"Missing parameter":{"value":"000000000000000000000001"},"Company other than current company sent for opt out":{"value":"000000000000000000000001"},"Store other than current company sent for opt out":{"value":"000000000000000000000001"},"Inventory not configured for sent application id":{"value":"000000000000000000000002"}}}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id","examples":{"404":{"value":2},"success":{"value":2},"Missing parameter":{"value":2},"Company other than current company sent for opt out":{"value":2},"Store other than current company sent for opt out":{"value":2},"Inventory not configured for sent application id":{"value":2}}},{"name":"id","in":"path","schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account.","required":true,"examples":{"404":{"value":"000000000000000000000005"},"success":{"value":"000000000000000000000001"},"Missing parameter":{"value":"000000000000000000000001"},"Company other than current company sent for opt out":{"value":"000000000000000000000001"},"Store other than current company sent for opt out":{"value":"000000000000000000000001"},"Inventory not configured for sent application id":{"value":"000000000000000000000002"}}}]}""", serverType="platform", id=id)
         query_string = await create_query_string(id=id)
 
         headers = {}
@@ -831,7 +831,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications/{id}/opt_out", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body)
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications/{id}/opt_out", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SuccessMessageResponse
