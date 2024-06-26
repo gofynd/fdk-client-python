@@ -140,6 +140,10 @@ class DownloadCreditDebitNoteResponse(BaseSchema):
     pass
 
 
+class InvoiceBillingItem(BaseSchema):
+    pass
+
+
 class PaymentProcessPayload(BaseSchema):
     pass
 
@@ -895,6 +899,16 @@ class DownloadCreditDebitNoteResponse(BaseSchema):
     
 
 
+class InvoiceBillingItem(BaseSchema):
+    # Finance swagger.json
+
+    
+    invoice_number = fields.Str(required=False)
+    
+    amount = fields.Float(required=False)
+    
+
+
 class PaymentProcessPayload(BaseSchema):
     # Finance swagger.json
 
@@ -917,7 +931,7 @@ class PaymentProcessPayload(BaseSchema):
     
     mode_of_payment = fields.Str(required=False)
     
-    invoice_number = fields.Str(required=False)
+    invoice_billing_items = fields.List(fields.Nested(InvoiceBillingItem, required=False), required=False)
     
 
 
@@ -1801,7 +1815,7 @@ class InvoicePaymentOptionsPayloadData(BaseSchema):
     # Finance swagger.json
 
     
-    invoice_number = fields.Str(required=False)
+    invoice_numbers = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -1845,7 +1859,7 @@ class InvoicePaymentOptionsResponseData(BaseSchema):
     # Finance swagger.json
 
     
-    currency = fields.Nested(Currency, required=False)
+    invoice_number = fields.Str(required=False)
     
     invoice_type = fields.Str(required=False)
     
@@ -1857,6 +1871,8 @@ class InvoicePaymentOptionsResponseData(BaseSchema):
     
     payable_amounts = fields.List(fields.Nested(InvoicePaymentOptionsResponsePayableAmounts, required=False), required=False)
     
+    currency = fields.Nested(Currency, required=False)
+    
 
 
 class InvoicePaymentOptionsResponse(BaseSchema):
@@ -1865,7 +1881,11 @@ class InvoicePaymentOptionsResponse(BaseSchema):
     
     reason = fields.Str(required=False)
     
-    data = fields.Nested(InvoicePaymentOptionsResponseData, required=False)
+    data = fields.List(fields.Nested(InvoicePaymentOptionsResponseData, required=False), required=False)
+    
+    total_payable_amount = fields.Float(required=False)
+    
+    invoice_count = fields.Int(required=False)
     
     success = fields.Boolean(required=False)
     

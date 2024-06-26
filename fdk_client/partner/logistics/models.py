@@ -48,6 +48,10 @@ class CourierAccount(BaseSchema):
     pass
 
 
+class CourierAccountRequestBody(BaseSchema):
+    pass
+
+
 class CourierPartnerAccountFailureResponse(BaseSchema):
     pass
 
@@ -61,6 +65,10 @@ class CourierAccountResponse(BaseSchema):
 
 
 class CourierPartnerSchemeModel(BaseSchema):
+    pass
+
+
+class CourierPartnerSchemeRequestModel(BaseSchema):
     pass
 
 
@@ -245,6 +253,24 @@ class CourierAccount(BaseSchema):
     
 
 
+class CourierAccountRequestBody(BaseSchema):
+    # Logistics swagger.json
+
+    
+    extension_id = fields.Str(required=False)
+    
+    account_id = fields.Str(required=False)
+    
+    scheme_id = fields.Str(required=False)
+    
+    is_self_ship = fields.Boolean(required=False)
+    
+    stage = fields.Str(required=False)
+    
+    is_own_account = fields.Boolean(required=False)
+    
+
+
 class CourierPartnerAccountFailureResponse(BaseSchema):
     # Logistics swagger.json
 
@@ -284,6 +310,32 @@ class CourierAccountResponse(BaseSchema):
 
 
 class CourierPartnerSchemeModel(BaseSchema):
+    # Logistics swagger.json
+
+    
+    extension_id = fields.Str(required=False)
+    
+    scheme_id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    weight = fields.Nested(ArithmeticOperations, required=False)
+    
+    transport_type = fields.Str(required=False)
+    
+    region = fields.Str(required=False)
+    
+    delivery_type = fields.Str(required=False)
+    
+    payment_mode = fields.List(fields.Str(required=False), required=False)
+    
+    stage = fields.Str(required=False)
+    
+    feature = fields.Nested(CourierPartnerSchemeFeatures, required=False)
+    
+
+
+class CourierPartnerSchemeRequestModel(BaseSchema):
     # Logistics swagger.json
 
     

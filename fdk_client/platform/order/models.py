@@ -5025,6 +5025,8 @@ class ShipmentItem(BaseSchema):
     
     currency_info = fields.Nested(CurrencyInfo, required=False)
     
+    is_lapa_enabled = fields.Boolean(required=False)
+    
 
 
 class ShipmentInternalPlatformViewResponse(BaseSchema):
@@ -5912,6 +5914,8 @@ class PlatformShipment(BaseSchema):
     is_self_ship = fields.Boolean(required=False, allow_none=True)
     
     mode_of_payment = fields.Str(required=False, allow_none=True)
+    
+    is_lapa_enabled = fields.Boolean(required=False)
     
 
 

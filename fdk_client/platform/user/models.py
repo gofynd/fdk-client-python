@@ -697,8 +697,6 @@ class CreateUserSessionRequestSchema(BaseSchema):
     
     domain = fields.Str(required=False)
     
-    max_age = fields.Float(required=False)
-    
     user_id = fields.Str(required=False)
     
 

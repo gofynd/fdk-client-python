@@ -1141,6 +1141,8 @@ class PhoneProperties(BaseSchema):
     
     number = fields.Str(required=False)
     
+    phone_type = fields.Str(required=False)
+    
 
 
 class PhoneSchema(BaseSchema):

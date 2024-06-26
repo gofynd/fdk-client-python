@@ -359,8 +359,8 @@ class Logistics:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CourierAccount
-        schema = CourierAccount()
+        from .models import CourierAccountRequestBody
+        schema = CourierAccountRequestBody()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/company/{company_id}/courier-partner/account", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="partner", company_id=company_id)
@@ -553,8 +553,8 @@ class Logistics:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CourierPartnerSchemeModel
-        schema = CourierPartnerSchemeModel()
+        from .models import CourierPartnerSchemeRequestModel
+        schema = CourierPartnerSchemeRequestModel()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/scheme/", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}]}""", serverType="partner", )

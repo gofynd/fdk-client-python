@@ -825,6 +825,8 @@ class Shipments(BaseSchema):
     
     order_type = fields.Str(required=False, allow_none=True)
     
+    gstin_code = fields.Str(required=False)
+    
     show_download_invoice = fields.Boolean(required=False)
     
     can_cancel = fields.Boolean(required=False)

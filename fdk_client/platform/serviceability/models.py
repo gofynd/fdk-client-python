@@ -300,6 +300,10 @@ class CourierAccount(BaseSchema):
     pass
 
 
+class CourierAccountRequestBody(BaseSchema):
+    pass
+
+
 class ErrorResponse(BaseSchema):
     pass
 
@@ -1558,6 +1562,24 @@ class SchemeRules(BaseSchema):
 
 
 class CourierAccount(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    extension_id = fields.Str(required=False)
+    
+    account_id = fields.Str(required=False)
+    
+    scheme_id = fields.Str(required=False)
+    
+    is_self_ship = fields.Boolean(required=False)
+    
+    stage = fields.Str(required=False)
+    
+    is_own_account = fields.Boolean(required=False)
+    
+
+
+class CourierAccountRequestBody(BaseSchema):
     # Serviceability swagger.json
 
     

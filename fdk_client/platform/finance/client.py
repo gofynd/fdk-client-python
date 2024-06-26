@@ -1046,7 +1046,7 @@ class Finance:
         return response
     
     async def invoicePaymentOptions(self, body="", request_headers:Dict={}):
-        """Display all payment options for an invoice.
+        """Display all payment options for invoice.
         """
         payload = {}
         
