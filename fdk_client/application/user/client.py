@@ -68,8 +68,8 @@ class User:
         self._urls.update(urls)
     
     async def loginWithFacebook(self, platform=None, body="", request_headers:Dict={}):
-        """Enables users to log in to the system using their Facebook accounts.
-        :param platform : ID of the application : type string
+        """Enable users to log in to the system using their facebook accounts.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -85,7 +85,7 @@ class User:
         schema = OAuthRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["loginWithFacebook"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"facebook token login success":{"value":"5eda528b97457fe43a733ace"},"facebook token login failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"facebook token login success":{"value":"5eda528b97457fe43a733ace"},"facebook token login failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["loginWithFacebook"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -116,8 +116,8 @@ class User:
         return response
     
     async def loginWithGoogle(self, platform=None, body="", request_headers:Dict={}):
-        """Enables website users to log in to the system using their Google accounts.
-        :param platform : ID of the application : type string
+        """Enable website users to log in to the system using their google accounts.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -133,7 +133,7 @@ class User:
         schema = OAuthRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["loginWithGoogle"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"google token login success":{"value":"5eda528b97457fe43a733ace"}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"google token login success":{"value":"5eda528b97457fe43a733ace"}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["loginWithGoogle"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -164,8 +164,8 @@ class User:
         return response
     
     async def loginWithGoogleAndroid(self, platform=None, body="", request_headers:Dict={}):
-        """Enables Android users to log in to the system using their Facebook accounts.
-        :param platform : ID of the application : type string
+        """Enable android users to log in to the system using their facebook accounts.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -181,7 +181,7 @@ class User:
         schema = OAuthRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["loginWithGoogleAndroid"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"google android token login success":{"value":"5eda528b97457fe43a733ace"}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"google android token login success":{"value":"5eda528b97457fe43a733ace"}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["loginWithGoogleAndroid"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -212,8 +212,8 @@ class User:
         return response
     
     async def loginWithGoogleIOS(self, platform=None, body="", request_headers:Dict={}):
-        """Enables iOS users to log in to the system using their Facebook accounts.
-        :param platform : ID of the application : type string
+        """Enable ios users to log in to the system using their facebook accounts.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -229,7 +229,7 @@ class User:
         schema = OAuthRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["loginWithGoogleIOS"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"google android token login success":{"value":"5eda528b97457fe43a733ace"}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"google android token login success":{"value":"5eda528b97457fe43a733ace"}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["loginWithGoogleIOS"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -260,8 +260,8 @@ class User:
         return response
     
     async def loginWithAppleIOS(self, platform=None, body="", request_headers:Dict={}):
-        """Enables iOS users to log in to the system using their Apple ID.
-        :param platform : ID of the application : type string
+        """Enable ios users to log in to the system using their apple id.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -277,7 +277,7 @@ class User:
         schema = OAuthRequestAppleSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["loginWithAppleIOS"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"apple ios login success":{"value":"5eda528b97457fe43a733ace"}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"apple ios login success":{"value":"5eda528b97457fe43a733ace"}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["loginWithAppleIOS"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -308,8 +308,8 @@ class User:
         return response
     
     async def loginWithOTP(self, platform=None, body="", request_headers:Dict={}):
-        """Allows users to log in using a one-time password sent to their mobile
-        :param platform : ID of the application : type string
+        """Allow users to log in using a one-time password sent to their mobile.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -325,7 +325,7 @@ class User:
         schema = SendOtpRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["loginWithOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"login otp success":{"value":"5eda528b97457fe43a733ace"},"login otp failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"login otp success":{"value":"5eda528b97457fe43a733ace"},"login otp failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["loginWithOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -356,7 +356,7 @@ class User:
         return response
     
     async def loginWithEmailAndPassword(self, body="", request_headers:Dict={}):
-        """Allows login using an email and password combination.
+        """Allow login using an email and password combination.
         """
         payload = {}
         
@@ -401,8 +401,8 @@ class User:
         return response
     
     async def sendResetPasswordEmail(self, platform=None, body="", request_headers:Dict={}):
-        """Sends a password reset link to the user's email.
-        :param platform : ID of the application : type string
+        """Send a password reset link to the user's email.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -418,7 +418,7 @@ class User:
         schema = SendResetPasswordEmailRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["sendResetPasswordEmail"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"reset password success":{"value":"5eda528b97457fe43a733ace"},"reset password failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"reset password success":{"value":"5eda528b97457fe43a733ace"},"reset password failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["sendResetPasswordEmail"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -449,8 +449,8 @@ class User:
         return response
     
     async def sendResetPasswordMobile(self, platform=None, body="", request_headers:Dict={}):
-        """Sends a password reset link to the user's Mobile.
-        :param platform : ID of the application : type string
+        """Send a password reset link to the user's mobile.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -466,7 +466,7 @@ class User:
         schema = SendResetPasswordMobileRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["sendResetPasswordMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"reset password mobile failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"reset password mobile failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["sendResetPasswordMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -488,7 +488,7 @@ class User:
         return response
     
     async def sendResetToken(self, body="", request_headers:Dict={}):
-        """Validate Password Reset link Code
+        """Validate password reset link code.
         """
         payload = {}
         
@@ -533,7 +533,7 @@ class User:
         return response
     
     async def forgotPassword(self, body="", request_headers:Dict={}):
-        """Reset a password using the code sent on email or SMS the Login.
+        """Reset a password using the code sent on email or sms the login.
         """
         payload = {}
         
@@ -578,7 +578,7 @@ class User:
         return response
     
     async def resetForgotPassword(self, body="", request_headers:Dict={}):
-        """Reset a password using the code sent on email or SMS.
+        """Reset a password using the code sent on email or sms.
         """
         payload = {}
         
@@ -623,7 +623,7 @@ class User:
         return response
     
     async def loginWithToken(self, body="", request_headers:Dict={}):
-        """Login User using a token for authentication.
+        """Login user using a token for authentication.
         """
         payload = {}
         
@@ -668,8 +668,8 @@ class User:
         return response
     
     async def registerWithForm(self, platform=None, body="", request_headers:Dict={}):
-        """Enables new users to register using a form.
-        :param platform : ID of the application : type string
+        """Enable new users to register using a form.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -685,7 +685,7 @@ class User:
         schema = FormRegisterRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["registerWithForm"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"register form success":{"value":"5eda528b97457fe43a733ace"},"register form failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"register form success":{"value":"5eda528b97457fe43a733ace"},"register form failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["registerWithForm"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -716,7 +716,7 @@ class User:
         return response
     
     async def verifyEmail(self, body="", request_headers:Dict={}):
-        """Verifies user email with a code sent within a link sent to their email.
+        """Verify user email with a code sent within a link sent to their email.
         """
         payload = {}
         
@@ -761,7 +761,7 @@ class User:
         return response
     
     async def verifyMobile(self, body="", request_headers:Dict={}):
-        """Verifies user mobile with a code sent within a link sent to their mobile.
+        """Verify user mobile with a code sent within a link sent to their mobile.
         """
         payload = {}
         
@@ -806,7 +806,7 @@ class User:
         return response
     
     async def hasPassword(self, body="", request_headers:Dict={}):
-        """Check if user has set an account password
+        """Check if user has set an account password.
         """
         payload = {}
         
@@ -892,8 +892,8 @@ class User:
         return response
     
     async def sendOTPOnMobile(self, platform=None, body="", request_headers:Dict={}):
-        """Sends a one-time password to the user's mobile for verification.
-        :param platform : ID of the application : type string
+        """Send a one-time password to the user's mobile for verification.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -909,7 +909,7 @@ class User:
         schema = SendMobileOtpRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["sendOTPOnMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"send mobile otp success":{"value":"5eda528b97457fe43a733ace"},"send mobile otp failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"send mobile otp success":{"value":"5eda528b97457fe43a733ace"},"send mobile otp failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["sendOTPOnMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -940,8 +940,8 @@ class User:
         return response
     
     async def sendForgotOTPOnMobile(self, platform=None, body="", request_headers:Dict={}):
-        """Sends a one-time password to the user's mobile for verification when resetting a forgotten password.
-        :param platform : ID of the application : type string
+        """Send a one-time password to the user's mobile for verification when resetting a forgotten password.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -957,7 +957,7 @@ class User:
         schema = SendMobileForgotOtpRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["sendForgotOTPOnMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"send forgot otp on mobile success":{"value":"5eda528b97457fe43a733ace"},"send forgot otp on mobile failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"send forgot otp on mobile success":{"value":"5eda528b97457fe43a733ace"},"send forgot otp on mobile failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["sendForgotOTPOnMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -989,7 +989,7 @@ class User:
     
     async def verifyMobileOTP(self, platform=None, body="", request_headers:Dict={}):
         """Verify one-time password sent to user's mobile.
-        :param platform : ID of the application : type string
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -1005,7 +1005,7 @@ class User:
         schema = VerifyOtpRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["verifyMobileOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"verify mobile otp success":{"value":"5eda528b97457fe43a733ace"},"verify mobile otp failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"verify mobile otp success":{"value":"5eda528b97457fe43a733ace"},"verify mobile otp failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["verifyMobileOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -1036,8 +1036,8 @@ class User:
         return response
     
     async def verifyMobileForgotOTP(self, platform=None, body="", request_headers:Dict={}):
-        """Verify one-time password sent to user's mobile for resetting a forgotten password
-        :param platform : ID of the application : type string
+        """Verify one-time password sent to user's mobile for resetting a forgotten password.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -1053,7 +1053,7 @@ class User:
         schema = VerifyMobileForgotOtpRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["verifyMobileForgotOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"verify forgot otp on mobile success":{"value":"5eda528b97457fe43a733ace"},"verify forgot otp on mobile failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"verify forgot otp on mobile success":{"value":"5eda528b97457fe43a733ace"},"verify forgot otp on mobile failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["verifyMobileForgotOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -1084,8 +1084,8 @@ class User:
         return response
     
     async def sendOTPOnEmail(self, platform=None, body="", request_headers:Dict={}):
-        """Sends a one-time password to the user's email for verification.
-        :param platform : ID of the application : type string
+        """Send a one-time password to the user's email for verification.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -1101,7 +1101,7 @@ class User:
         schema = SendEmailOtpRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["sendOTPOnEmail"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"send email otp success":{"value":"5eda528b97457fe43a733ace"},"send email otp failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"send email otp success":{"value":"5eda528b97457fe43a733ace"},"send email otp failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["sendOTPOnEmail"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -1132,8 +1132,8 @@ class User:
         return response
     
     async def sendForgotOTPOnEmail(self, platform=None, body="", request_headers:Dict={}):
-        """Sends a one-time password to the user's email for verification when resetting a forgotten password.
-        :param platform : ID of the application : type string
+        """Send a one-time password to the user's email for verification when resetting a forgotten password.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -1149,7 +1149,7 @@ class User:
         schema = SendEmailForgotOtpRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["sendForgotOTPOnEmail"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"send forgot otp on email success":{"value":"5eda528b97457fe43a733ace"},"send forgot otp on email failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"send forgot otp on email success":{"value":"5eda528b97457fe43a733ace"},"send forgot otp on email failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["sendForgotOTPOnEmail"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -1181,7 +1181,7 @@ class User:
     
     async def verifyEmailOTP(self, platform=None, body="", request_headers:Dict={}):
         """Verify one-time password sent to user's email.
-        :param platform : ID of the application : type string
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -1197,7 +1197,7 @@ class User:
         schema = VerifyEmailOtpRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["verifyEmailOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"verify email otp success":{"value":"5eda528b97457fe43a733ace"},"verify email otp failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"verify email otp success":{"value":"5eda528b97457fe43a733ace"},"verify email otp failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["verifyEmailOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -1228,8 +1228,8 @@ class User:
         return response
     
     async def verifyEmailForgotOTP(self, platform=None, body="", request_headers:Dict={}):
-        """Verify one-time password sent to user's email for resetting a forgotten password
-        :param platform : ID of the application : type string
+        """Verify one-time password sent to user's email for resetting a forgotten password.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -1245,7 +1245,7 @@ class User:
         schema = VerifyEmailForgotOtpRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["verifyEmailForgotOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"verify forgot otp on email success":{"value":"5eda528b97457fe43a733ace"},"verify forgot otp on email failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"verify forgot otp on email success":{"value":"5eda528b97457fe43a733ace"},"verify forgot otp on email failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["verifyEmailForgotOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -1359,7 +1359,7 @@ class User:
     
     async def getPlatformConfig(self, name=None, body="", request_headers:Dict={}):
         """Retrieve platform sales channel authentication configuration.
-        :param name : Name of the application, e.g. Fynd : type string
+        :param name : Name of the application, e.g. Fynd. : type string
         """
         payload = {}
         
@@ -1371,7 +1371,7 @@ class User:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPlatformConfig"], proccessed_params="""{"required":[],"optional":[{"name":"name","in":"query","description":"Name of the application, e.g. Fynd","schema":{"type":"string"},"examples":{"get platform config success":{"value":"5eda528b97457fe43a733ace"}}}],"query":[{"name":"name","in":"query","description":"Name of the application, e.g. Fynd","schema":{"type":"string"},"examples":{"get platform config success":{"value":"5eda528b97457fe43a733ace"}}}],"headers":[],"path":[]}""", serverType="application", name=name)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPlatformConfig"], proccessed_params="""{"required":[],"optional":[{"name":"name","in":"query","description":"Name of the application, e.g. Fynd.","schema":{"type":"string"}}],"query":[{"name":"name","in":"query","description":"Name of the application, e.g. Fynd.","schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", name=name)
         query_string = await create_query_string(name=name)
 
         headers={}
@@ -1402,8 +1402,8 @@ class User:
         return response
     
     async def updateProfile(self, platform=None, body="", request_headers:Dict={}):
-        """Allows users to modify and update their profile details
-        :param platform : ID of the application : type string
+        """Allow users to modify and update their profile details.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -1419,7 +1419,7 @@ class User:
         schema = EditProfileRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["updateProfile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"edit profile success":{"value":"5eda528b97457fe43a733ace"},"edit profile failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"edit profile success":{"value":"5eda528b97457fe43a733ace"},"edit profile failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["updateProfile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -1450,8 +1450,8 @@ class User:
         return response
     
     async def addMobileNumber(self, platform=None, body="", request_headers:Dict={}):
-        """Adds a new mobile number to the user's profile.
-        :param platform : ID of the application : type string
+        """Add a new mobile number to the user's profile.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -1467,7 +1467,7 @@ class User:
         schema = EditMobileRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["addMobileNumber"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"add mobile number to profile success":{"value":"5eda528b97457fe43a733ace"},"add mobile number to profile failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"add mobile number to profile success":{"value":"5eda528b97457fe43a733ace"},"add mobile number to profile failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["addMobileNumber"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -1498,13 +1498,13 @@ class User:
         return response
     
     async def deleteMobileNumber(self, platform=None, active=None, primary=None, verified=None, country_code=None, phone=None, body="", request_headers:Dict={}):
-        """Delete Mobile Number From Profile.
-        :param platform : ID of the application : type string
-        :param active : This is a boolean value to check if mobile number is active 1.True - Number is active 2. False - Number is inactive : type boolean
-        :param primary : This is a boolean value to check if mobile number is primary number (main number) 1. True - Number is primary 2. False - Number is not primary : type boolean
-        :param verified : This is a boolean value to check if mobile number is verified 1. True - Number is verified 2.False - Number is not verified yet : type boolean
-        :param country_code : Country code of the phone number, e.g. 91 : type string
-        :param phone : Phone number : type string
+        """Delete mobile number from profile.
+        :param platform : ID of the application. : type string
+        :param active : This is a boolean value to check if mobile number is active 1.True - number is active 2. False - number is inactive. : type boolean
+        :param primary : This is a boolean value to check if mobile number is primary number (main number) 1. True - number is primary 2. False - number is not primary. : type boolean
+        :param verified : This is a boolean value to check if mobile number is verified 1. True - number is verified 2.False - number is not verified yet. : type boolean
+        :param country_code : Country code of the phone number, e.g. 91. : type string
+        :param phone : Phone number. : type string
         """
         payload = {}
         
@@ -1526,7 +1526,7 @@ class User:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["deleteMobileNumber"], proccessed_params="""{"required":[{"name":"active","in":"query","required":true,"description":"This is a boolean value to check if mobile number is active 1.True - Number is active 2. False - Number is inactive","schema":{"type":"boolean"},"examples":{"Delete mobile number from profile success":{"value":true},"Delete mobile number from profile failure":{"value":false}}},{"name":"primary","in":"query","description":"This is a boolean value to check if mobile number is primary number (main number) 1. True - Number is primary 2. False - Number is not primary","required":true,"schema":{"type":"boolean"},"examples":{"Delete mobile number from profile success":{"value":true},"Delete mobile number from profile failure":{"value":false}}},{"name":"verified","in":"query","description":"This is a boolean value to check if mobile number is verified 1. True - Number is verified 2.False - Number is not verified yet","required":true,"schema":{"type":"boolean"},"examples":{"Delete mobile number from profile success":{"value":true},"Delete mobile number from profile failure":{"value":false}}},{"name":"country_code","in":"query","description":"Country code of the phone number, e.g. 91","required":true,"schema":{"type":"string"},"examples":{"Delete mobile number from profile success":{"value":"91"},"Delete mobile number from profile failure":{"value":""}}},{"name":"phone","in":"query","description":"Phone number","required":true,"schema":{"type":"string"},"examples":{"Delete mobile number from profile success":{"value":"9987568530"},"Delete mobile number from profile failure":{"value":""}}}],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"Delete mobile number from profile success":{"value":"5eda528b97457fe43a733ace"},"Delete mobile number from profile failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"Delete mobile number from profile success":{"value":"5eda528b97457fe43a733ace"},"Delete mobile number from profile failure":{"value":""}}},{"name":"active","in":"query","required":true,"description":"This is a boolean value to check if mobile number is active 1.True - Number is active 2. False - Number is inactive","schema":{"type":"boolean"},"examples":{"Delete mobile number from profile success":{"value":true},"Delete mobile number from profile failure":{"value":false}}},{"name":"primary","in":"query","description":"This is a boolean value to check if mobile number is primary number (main number) 1. True - Number is primary 2. False - Number is not primary","required":true,"schema":{"type":"boolean"},"examples":{"Delete mobile number from profile success":{"value":true},"Delete mobile number from profile failure":{"value":false}}},{"name":"verified","in":"query","description":"This is a boolean value to check if mobile number is verified 1. True - Number is verified 2.False - Number is not verified yet","required":true,"schema":{"type":"boolean"},"examples":{"Delete mobile number from profile success":{"value":true},"Delete mobile number from profile failure":{"value":false}}},{"name":"country_code","in":"query","description":"Country code of the phone number, e.g. 91","required":true,"schema":{"type":"string"},"examples":{"Delete mobile number from profile success":{"value":"91"},"Delete mobile number from profile failure":{"value":""}}},{"name":"phone","in":"query","description":"Phone number","required":true,"schema":{"type":"string"},"examples":{"Delete mobile number from profile success":{"value":"9987568530"},"Delete mobile number from profile failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform, active=active, primary=primary, verified=verified, country_code=country_code, phone=phone)
+        url_with_params = await create_url_with_params(api_url=self._urls["deleteMobileNumber"], proccessed_params="""{"required":[{"name":"active","in":"query","required":true,"description":"This is a boolean value to check if mobile number is active 1.True - number is active 2. False - number is inactive.","schema":{"type":"boolean"}},{"name":"primary","in":"query","description":"This is a boolean value to check if mobile number is primary number (main number) 1. True - number is primary 2. False - number is not primary.","required":true,"schema":{"type":"boolean"}},{"name":"verified","in":"query","description":"This is a boolean value to check if mobile number is verified 1. True - number is verified 2.False - number is not verified yet.","required":true,"schema":{"type":"boolean"}},{"name":"country_code","in":"query","description":"Country code of the phone number, e.g. 91.","required":true,"schema":{"type":"string"}},{"name":"phone","in":"query","description":"Phone number.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}},{"name":"active","in":"query","required":true,"description":"This is a boolean value to check if mobile number is active 1.True - number is active 2. False - number is inactive.","schema":{"type":"boolean"}},{"name":"primary","in":"query","description":"This is a boolean value to check if mobile number is primary number (main number) 1. True - number is primary 2. False - number is not primary.","required":true,"schema":{"type":"boolean"}},{"name":"verified","in":"query","description":"This is a boolean value to check if mobile number is verified 1. True - number is verified 2.False - number is not verified yet.","required":true,"schema":{"type":"boolean"}},{"name":"country_code","in":"query","description":"Country code of the phone number, e.g. 91.","required":true,"schema":{"type":"string"}},{"name":"phone","in":"query","description":"Phone number.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", platform=platform, active=active, primary=primary, verified=verified, country_code=country_code, phone=phone)
         query_string = await create_query_string(platform=platform, active=active, primary=primary, verified=verified, country_code=country_code, phone=phone)
 
         headers={}
@@ -1557,7 +1557,7 @@ class User:
         return response
     
     async def setMobileNumberAsPrimary(self, body="", request_headers:Dict={}):
-        """Sets a mobile number as the primary contact for the user.
+        """Set a mobile number as the primary contact for the user.
         """
         payload = {}
         
@@ -1602,8 +1602,8 @@ class User:
         return response
     
     async def sendVerificationLinkToMobile(self, platform=None, body="", request_headers:Dict={}):
-        """Sends a verification link to a newly added mobile number.
-        :param platform : ID of the application : type string
+        """Send a verification link to a newly added mobile number.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -1619,7 +1619,7 @@ class User:
         schema = SendVerificationLinkMobileRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["sendVerificationLinkToMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"send verification link to mobile success":{"value":"5eda528b97457fe43a733ace"},"send verification link to mobile failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"send verification link to mobile success":{"value":"5eda528b97457fe43a733ace"},"send verification link to mobile failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["sendVerificationLinkToMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -1650,8 +1650,8 @@ class User:
         return response
     
     async def addEmail(self, platform=None, body="", request_headers:Dict={}):
-        """Adds a new email address to the user's profile.
-        :param platform : ID of the application : type string
+        """Add a new email address to the user's profile.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -1667,7 +1667,7 @@ class User:
         schema = EditEmailRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["addEmail"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"add email to profile success":{"value":"5eda528b97457fe43a733ace"},"add email to profile failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"add email to profile success":{"value":"5eda528b97457fe43a733ace"},"add email to profile failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["addEmail"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -1698,12 +1698,12 @@ class User:
         return response
     
     async def deleteEmail(self, platform=None, active=None, primary=None, verified=None, email=None, body="", request_headers:Dict={}):
-        """Delete Email From Profile
-        :param platform : ID of the application : type string
-        :param active : This is a boolean value to check if email ID is active 1. True - Email ID is active 2.False - Email ID is inactive : type boolean
-        :param primary : This is a boolean value to check if email ID is primary (main email ID) 1. True - Email ID is primary 2.False - Email ID is not primary : type boolean
-        :param verified : This is a boolean value to check if email ID is verified 1. True - Email ID is verified 2.False - Email ID is not verified yet : type boolean
-        :param email : The email ID to delete : type string
+        """Delete email from profile.
+        :param platform : ID of the application. : type string
+        :param active : Boolean value to check if email id is active 1. True - email id is active 2.False - email id is inactive. : type boolean
+        :param primary : Boolean value to check if email id is primary (main email id) 1. True - email id is primary 2.False - email id is not primary. : type boolean
+        :param verified : Boolean value to check if email id is verified 1. True - email id is verified 2.False - email id is not verified yet. : type boolean
+        :param email : The email id to delete. : type string
         """
         payload = {}
         
@@ -1723,7 +1723,7 @@ class User:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["deleteEmail"], proccessed_params="""{"required":[{"name":"active","in":"query","description":"This is a boolean value to check if email ID is active 1. True - Email ID is active 2.False - Email ID is inactive","required":true,"schema":{"type":"boolean"},"examples":{"Delete email from profile success":{"value":true},"Delete email from profile failure":{"value":false}}},{"name":"primary","in":"query","description":"This is a boolean value to check if email ID is primary (main email ID) 1. True - Email ID is primary 2.False - Email ID is not primary","required":true,"schema":{"type":"boolean"},"examples":{"Delete email from profile success":{"value":true},"Delete email from profile failure":{"value":false}}},{"name":"verified","in":"query","description":"This is a boolean value to check if email ID is verified 1. True - Email ID is verified 2.False - Email ID is not verified yet","required":true,"schema":{"type":"boolean"},"examples":{"Delete email from profile success":{"value":true},"Delete email from profile failure":{"value":false}}},{"name":"email","in":"query","description":"The email ID to delete","required":true,"schema":{"type":"string"},"examples":{"Delete email from profile success":{"value":"vinit.mav12345@gofynd.com"},"Delete email from profile failure":{"value":""}}}],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"Delete email from profile success":{"value":"5eda528b97457fe43a733ace"},"Delete email from profile failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"Delete email from profile success":{"value":"5eda528b97457fe43a733ace"},"Delete email from profile failure":{"value":""}}},{"name":"active","in":"query","description":"This is a boolean value to check if email ID is active 1. True - Email ID is active 2.False - Email ID is inactive","required":true,"schema":{"type":"boolean"},"examples":{"Delete email from profile success":{"value":true},"Delete email from profile failure":{"value":false}}},{"name":"primary","in":"query","description":"This is a boolean value to check if email ID is primary (main email ID) 1. True - Email ID is primary 2.False - Email ID is not primary","required":true,"schema":{"type":"boolean"},"examples":{"Delete email from profile success":{"value":true},"Delete email from profile failure":{"value":false}}},{"name":"verified","in":"query","description":"This is a boolean value to check if email ID is verified 1. True - Email ID is verified 2.False - Email ID is not verified yet","required":true,"schema":{"type":"boolean"},"examples":{"Delete email from profile success":{"value":true},"Delete email from profile failure":{"value":false}}},{"name":"email","in":"query","description":"The email ID to delete","required":true,"schema":{"type":"string"},"examples":{"Delete email from profile success":{"value":"vinit.mav12345@gofynd.com"},"Delete email from profile failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform, active=active, primary=primary, verified=verified, email=email)
+        url_with_params = await create_url_with_params(api_url=self._urls["deleteEmail"], proccessed_params="""{"required":[{"name":"active","in":"query","description":"Boolean value to check if email id is active 1. True - email id is active 2.False - email id is inactive.","required":true,"schema":{"type":"boolean"}},{"name":"primary","in":"query","description":"Boolean value to check if email id is primary (main email id) 1. True - email id is primary 2.False - email id is not primary.","required":true,"schema":{"type":"boolean"}},{"name":"verified","in":"query","description":"Boolean value to check if email id is verified 1. True - email id is verified 2.False - email id is not verified yet.","required":true,"schema":{"type":"boolean"}},{"name":"email","in":"query","description":"The email id to delete.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}},{"name":"active","in":"query","description":"Boolean value to check if email id is active 1. True - email id is active 2.False - email id is inactive.","required":true,"schema":{"type":"boolean"}},{"name":"primary","in":"query","description":"Boolean value to check if email id is primary (main email id) 1. True - email id is primary 2.False - email id is not primary.","required":true,"schema":{"type":"boolean"}},{"name":"verified","in":"query","description":"Boolean value to check if email id is verified 1. True - email id is verified 2.False - email id is not verified yet.","required":true,"schema":{"type":"boolean"}},{"name":"email","in":"query","description":"The email id to delete.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", platform=platform, active=active, primary=primary, verified=verified, email=email)
         query_string = await create_query_string(platform=platform, active=active, primary=primary, verified=verified, email=email)
 
         headers={}
@@ -1754,7 +1754,7 @@ class User:
         return response
     
     async def setEmailAsPrimary(self, body="", request_headers:Dict={}):
-        """Sets an email address as the primary contact for the user.
+        """Set an email address as the primary contact for the user.
         """
         payload = {}
         
@@ -1799,8 +1799,8 @@ class User:
         return response
     
     async def sendVerificationLinkToEmail(self, platform=None, body="", request_headers:Dict={}):
-        """Sends a verification link to a newly added email address.
-        :param platform : ID of the application : type string
+        """Send a verification link to a newly added email address.
+        :param platform : ID of the application. : type string
         """
         payload = {}
         
@@ -1816,7 +1816,7 @@ class User:
         schema = EditEmailRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["sendVerificationLinkToEmail"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"send verification link to email success":{"value":"5eda528b97457fe43a733ace"},"send verification link to email failure":{"value":""}}}],"query":[{"name":"platform","in":"query","description":"ID of the application","schema":{"type":"string","default":"Fynd"},"examples":{"send verification link to email success":{"value":"5eda528b97457fe43a733ace"},"send verification link to email failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        url_with_params = await create_url_with_params(api_url=self._urls["sendVerificationLinkToEmail"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
 
         headers={}
@@ -1848,7 +1848,7 @@ class User:
     
     async def userExists(self, q=None, body="", request_headers:Dict={}):
         """Check whether user is already registered or not to the sales channel.
-        :param q : email id or phone number of user : type string
+        :param q : Email id or phone number of user. : type string
         """
         payload = {}
         
@@ -1860,7 +1860,7 @@ class User:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["userExists"], proccessed_params="""{"required":[{"in":"query","name":"q","description":"email id or phone number of user","schema":{"type":"string"},"required":true,"examples":{"user exists success":{"value":"vinit.mav12@gofynd.com"},"user exists failure":{"value":""}}}],"optional":[],"query":[{"in":"query","name":"q","description":"email id or phone number of user","schema":{"type":"string"},"required":true,"examples":{"user exists success":{"value":"vinit.mav12@gofynd.com"},"user exists failure":{"value":""}}}],"headers":[],"path":[]}""", serverType="application", q=q)
+        url_with_params = await create_url_with_params(api_url=self._urls["userExists"], proccessed_params="""{"required":[{"in":"query","name":"q","description":"Email id or phone number of user.","schema":{"type":"string"},"required":true}],"optional":[],"query":[{"in":"query","name":"q","description":"Email id or phone number of user.","schema":{"type":"string"},"required":true}],"headers":[],"path":[]}""", serverType="application", q=q)
         query_string = await create_query_string(q=q)
 
         headers={}
@@ -1891,7 +1891,7 @@ class User:
         return response
     
     async def deleteUser(self, body="", request_headers:Dict={}):
-        """Verify OTP sent to mobile/email and Delete the user's account.
+        """Verify OTP sent to mobile/email and delete the user's account.
         """
         payload = {}
         
@@ -1936,7 +1936,7 @@ class User:
         return response
     
     async def logout(self, body="", request_headers:Dict={}):
-        """Logout currently logged-in user
+        """Logout currently logged-in user.
         """
         payload = {}
         
@@ -1977,7 +1977,7 @@ class User:
         return response
     
     async def getUserAttributes(self, slug=None, body="", request_headers:Dict={}):
-        """Get the list of user attributes
+        """Get the list of user attributes.
         :param slug : Filter by attribute slug. : type string
         """
         payload = {}
@@ -2021,7 +2021,7 @@ class User:
         return response
     
     async def updateUserAttributes(self, body="", request_headers:Dict={}):
-        """Update user attributes
+        """Update user attributes.
         """
         payload = {}
         

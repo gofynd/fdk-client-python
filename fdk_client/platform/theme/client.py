@@ -136,7 +136,7 @@ class Theme:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/{theme_id}", """{"required":[{"in":"path","name":"company_id","schema":{"type":"integer","example":19243},"required":true,"description":"The ID of the company."},{"in":"path","name":"theme_id","schema":{"type":"string"},"required":true,"description":"The ID of the theme."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","schema":{"type":"integer","example":19243},"required":true,"description":"The ID of the company."},{"in":"path","name":"theme_id","schema":{"type":"string"},"required":true,"description":"The ID of the theme."}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"

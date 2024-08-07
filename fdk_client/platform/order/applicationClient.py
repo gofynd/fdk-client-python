@@ -82,7 +82,7 @@ class Order:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/orders/shipments/{shipment_id}/line_number/{line_number}/reasons", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","example":37}},{"in":"path","name":"application_id","description":"Application ID of company","required":true,"schema":{"type":"string","example":"5d63686df2a4f7806b76bb32"}},{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"path","description":"line number of bag.","name":"line_number","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","example":37}},{"in":"path","name":"application_id","description":"Application ID of company","required":true,"schema":{"type":"string","example":"5d63686df2a4f7806b76bb32"}},{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"path","description":"line number of bag.","name":"line_number","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", shipment_id=shipment_id, line_number=line_number)
-        query_string = await create_query_string(shipment_id=shipment_id, line_number=line_number)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -208,7 +208,7 @@ class Order:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/orders/shipments/{shipment_id}/track", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Id of application","required":true,"schema":{"type":"string"}},{"in":"path","name":"shipment_id","description":"Shipment Id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Id of application","required":true,"schema":{"type":"string"}},{"in":"path","name":"shipment_id","description":"Shipment Id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", shipment_id=shipment_id)
-        query_string = await create_query_string(shipment_id=shipment_id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -250,7 +250,7 @@ class Order:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/orders/shipments/reasons/{action}", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"action","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"action","required":true,"schema":{"type":"string"}}]}""", serverType="platform", action=action)
-        query_string = await create_query_string(action=action)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"

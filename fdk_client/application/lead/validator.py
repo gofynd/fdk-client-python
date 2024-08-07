@@ -22,12 +22,6 @@ from ..ApplicationModel import BaseSchema
     
     
         
-    
-    
-        
-    
-    
-        
 
 class LeadValidator:
     
@@ -62,20 +56,6 @@ class LeadValidator:
         
         
         slug = fields.Str(required=False)
-         
-        
-    
-    class getParticipantsInsideVideoRoom(BaseSchema):
-        
-        
-        unique_name = fields.Str(required=False)
-         
-        
-    
-    class getTokenForVideoRoom(BaseSchema):
-        
-        
-        unique_name = fields.Str(required=False)
          
         
     

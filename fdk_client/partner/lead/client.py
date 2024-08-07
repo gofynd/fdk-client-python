@@ -133,7 +133,7 @@ class Lead:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/lead/v1.0/organization/{self._conf.organizationId}/ticket/{id}", """{"required":[{"name":"organization_id","in":"path","description":"Partner ID for which the data will be returned","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Tiket ID of the ticket to be fetched","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"Partner ID for which the data will be returned","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Tiket ID of the ticket to be fetched","required":true,"schema":{"type":"string"}}]}""", serverType="partner", id=id)
-        query_string = await create_query_string(id=id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -179,7 +179,7 @@ class Lead:
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/lead/v1.0/organization/{self._conf.organizationId}/ticket/{id}", """{"required":[{"name":"organization_id","in":"path","description":"Partner ID for ticket","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Ticket ID of ticket to be edited","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"Partner ID for ticket","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Ticket ID of ticket to be edited","required":true,"schema":{"type":"string"}}]}""", serverType="partner", id=id)
-        query_string = await create_query_string(id=id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -225,7 +225,7 @@ class Lead:
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/lead/v1.0/organization/{self._conf.organizationId}/ticket/{id}/history", """{"required":[{"name":"organization_id","in":"path","description":"Partner ID for ticket","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Ticket ID for which history is created","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"Partner ID for ticket","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Ticket ID for which history is created","required":true,"schema":{"type":"string"}}]}""", serverType="partner", id=id)
-        query_string = await create_query_string(id=id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -267,7 +267,7 @@ class Lead:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/lead/v1.0/organization/{self._conf.organizationId}/ticket/{id}/history", """{"required":[{"name":"organization_id","in":"path","description":"Partner ID for ticket","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Ticket ID for which history is to be fetched","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"Partner ID for ticket","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Ticket ID for which history is to be fetched","required":true,"schema":{"type":"string"}}]}""", serverType="partner", id=id)
-        query_string = await create_query_string(id=id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -290,90 +290,6 @@ class Lead:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getTicketHistory")
-                print(e)
-
-        return response
-    
-    async def getTokenForVideoRoom(self, unique_name=None, request_headers:Dict={}):
-        """Get Token to join a specific Video Room using it's unqiue name, this Token is your ticket to Room and also creates your identity there.
-        :param unique_name : Unique name of video room : type string
-        """
-        payload = {}
-        
-        if unique_name is not None:
-            payload["unique_name"] = unique_name
-
-        # Parameter validation
-        schema = LeadValidator.getTokenForVideoRoom()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/lead/v1.0/organization/{self._conf.organizationId}/video/room/{unique_name}/token", """{"required":[{"name":"organization_id","in":"path","description":"Partner Id for video room","required":true,"schema":{"type":"string"}},{"name":"unique_name","in":"path","description":"Unique name of video room","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"Partner Id for video room","required":true,"schema":{"type":"string"}},{"name":"unique_name","in":"path","description":"Unique name of video room","required":true,"schema":{"type":"string"}}]}""", serverType="partner", unique_name=unique_name)
-        query_string = await create_query_string(unique_name=unique_name)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/lead/v1.0/organization/{self._conf.organizationId}/video/room/{unique_name}/token", unique_name=unique_name), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetTokenForVideoRoomResponse
-            schema = GetTokenForVideoRoomResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getTokenForVideoRoom")
-                print(e)
-
-        return response
-    
-    async def getVideoParticipants(self, unique_name=None, request_headers:Dict={}):
-        """Get participants of a specific Video Room using it's unique name, this can be used to check if people are already there in the room and also to show their names.
-        :param unique_name : Unique name of Video Room : type string
-        """
-        payload = {}
-        
-        if unique_name is not None:
-            payload["unique_name"] = unique_name
-
-        # Parameter validation
-        schema = LeadValidator.getVideoParticipants()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/lead/v1.0/organization/{self._conf.organizationId}/video/room/{unique_name}/participants", """{"required":[{"name":"organization_id","in":"path","description":"Partner Id for video room","required":true,"schema":{"type":"string"}},{"name":"unique_name","in":"path","description":"Unique name of Video Room","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"Partner Id for video room","required":true,"schema":{"type":"string"}},{"name":"unique_name","in":"path","description":"Unique name of Video Room","required":true,"schema":{"type":"string"}}]}""", serverType="partner", unique_name=unique_name)
-        query_string = await create_query_string(unique_name=unique_name)
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/lead/v1.0/organization/{self._conf.organizationId}/video/room/{unique_name}/participants", unique_name=unique_name), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetParticipantsInsideVideoRoomResponse
-            schema = GetParticipantsInsideVideoRoomResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getVideoParticipants")
                 print(e)
 
         return response

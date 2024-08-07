@@ -26,7 +26,7 @@ class Webhook:
         self._urls.update(urls)
     
     async def saveClickEvent(self, body="", request_headers:Dict={}):
-        """Endpoint to capture click events from sales channels.
+        """Send click events from sales channels.
         """
         payload = {}
         

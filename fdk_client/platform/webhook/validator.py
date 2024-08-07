@@ -25,18 +25,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
         
     
     
@@ -77,34 +65,6 @@ from ..PlatformModel import BaseSchema
 
 class WebhookValidator:
     
-    
-    class manualRetryOfFailedEvent(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getEventCounts(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getManualRetryStatus(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class manualRetryCancel(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
     
     class downloadDeliveryReport(BaseSchema):
         

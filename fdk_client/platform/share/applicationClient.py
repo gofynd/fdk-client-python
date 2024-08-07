@@ -131,7 +131,7 @@ class Share:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/{hash}/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"hash","in":"path","description":"Hash of short url","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"hash","in":"path","description":"Hash of short url","required":true,"schema":{"type":"string"}}]}""", serverType="platform", hash=hash)
-        query_string = await create_query_string(hash=hash)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -177,7 +177,7 @@ class Share:
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/{id}/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Short link document identifier","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Short link document identifier","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
-        query_string = await create_query_string(id=id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"

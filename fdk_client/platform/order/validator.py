@@ -193,6 +193,15 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
+        
+        
+        
+    
+    
+        
         
         
         
@@ -753,6 +762,26 @@ class OrderValidator:
         
         
         company_id = fields.Int(required=False)
+         
+        
+    
+    class addStateManagerConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class getStateManagerConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        app_id = fields.Str(required=False)
+        
+        ordering_channel = fields.Str(required=False)
+        
+        entity = fields.Str(required=False)
          
         
     

@@ -12,6 +12,13 @@ from ..PublicModel import BaseSchema
     
     
         
+    
+    
+        
+    
+    
+    
+        
 
 class BillingValidator:
     
@@ -20,6 +27,25 @@ class BillingValidator:
         
         
         platform = fields.Str(required=False)
+         
+        
+    
+    class getPlanDetails(BaseSchema):
+        
+        
+        plan_id = fields.Str(required=False)
+         
+        
+    
+    class planList(BaseSchema):
+        
+        pass 
+        
+    
+    class getTenureConfig(BaseSchema):
+        
+        
+        country_code = fields.Str(required=False)
          
         
     

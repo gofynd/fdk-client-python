@@ -13,41 +13,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-    
-    
-        
-        
-    
-    
-        
     
     
         
@@ -62,6 +27,118 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
     
     
         
@@ -77,9 +154,40 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
         
         
         
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
         
         
 
@@ -87,6 +195,69 @@ from ..PlatformModel import BaseSchema
 
 class BillingValidator:
     
+    
+    class getCustomerDetail(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class upsertCustomerDetail(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class getSubscription(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class currentAppLimit(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        product_suite = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+         
+        
+    
+    class currentLimit(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        product_suite = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+         
+        
+    
+    class getInvoices(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class globalSettings(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        query = fields.Dict(required=False)
+         
+        
     
     class checkCouponValidity(BaseSchema):
         
@@ -99,12 +270,110 @@ class BillingValidator:
          
         
     
-    class createSubscriptionCharge(BaseSchema):
+    class paymentStatus(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        order_id = fields.Str(required=False)
+         
+        
+    
+    class creditTransaction(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        unique_id = fields.Int(required=False)
+        
+        product_suite = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        start_date = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
+        
+        search_type = fields.Str(required=False)
+        
+        search_value = fields.Str(required=False)
+         
+        
+    
+    class updateConsent(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        subscriber_id = fields.Str(required=False)
+         
+        
+    
+    class getEnterprisePlans(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class subscriptionConfigs(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class getBankList(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class getPaymentTransaction(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        transaction_id = fields.Str(required=False)
+         
+        
+    
+    class getPaymentOptions(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        transaction_id = fields.Str(required=False)
+         
+        
+    
+    class paymentInitiate(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class planStatusUpdate(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class getChargeDetails(BaseSchema):
         
         
         company_id = fields.Str(required=False)
         
         extension_id = fields.Str(required=False)
+        
+        charge_id = fields.Str(required=False)
          
         
     
@@ -130,71 +399,68 @@ class BillingValidator:
          
         
     
-    class createOneTimeCharge(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        extension_id = fields.Str(required=False)
-         
-        
-    
-    class getChargeDetails(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        extension_id = fields.Str(required=False)
-        
-        charge_id = fields.Str(required=False)
-         
-        
-    
-    class getInvoices(BaseSchema):
+    class upgradePlan(BaseSchema):
         
         
         company_id = fields.Str(required=False)
          
         
     
-    class getInvoiceById(BaseSchema):
+    class subscriptionMethods(BaseSchema):
         
         
         company_id = fields.Str(required=False)
         
-        invoice_id = fields.Str(required=False)
+        unique_external_id = fields.Str(required=False)
          
         
     
-    class getCustomerDetail(BaseSchema):
+    class subscriptionMethodsDelete(BaseSchema):
         
         
         company_id = fields.Str(required=False)
+        
+        unique_external_id = fields.Str(required=False)
+        
+        payment_method_id = fields.Str(required=False)
          
         
     
-    class upsertCustomerDetail(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-         
-        
-    
-    class getSubscription(BaseSchema):
+    class planDowngradeGet(BaseSchema):
         
         
         company_id = fields.Str(required=False)
          
         
     
-    class getFeatureLimitConfig(BaseSchema):
+    class planDowngrade(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class subscriptionPlanChange(BaseSchema):
         
         
         company_id = fields.Str(required=False)
         
         product_suite = fields.Str(required=False)
         
-        type = fields.Str(required=False)
+        coupon = fields.Str(required=False)
+        
+        unique_id = fields.Int(required=False)
+        
+        platform = fields.Str(required=False)
+        
+        plan_id = fields.Str(required=False)
+         
+        
+    
+    class changePlan(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
          
         
     
@@ -205,31 +471,75 @@ class BillingValidator:
          
         
     
-    class cancelSubscriptionPlan(BaseSchema):
+    class methodDefault(BaseSchema):
         
         
         company_id = fields.Str(required=False)
          
         
     
-    class getEnterprisePlans(BaseSchema):
+    class topupCredit(BaseSchema):
         
         
         company_id = fields.Str(required=False)
          
         
     
-    class planStatusUpdate(BaseSchema):
+    class topupCancelCredit(BaseSchema):
         
         
         company_id = fields.Str(required=False)
          
         
     
-    class subscripePlan(BaseSchema):
+    class setupPayment(BaseSchema):
         
         
         company_id = fields.Str(required=False)
+         
+        
+    
+    class setupMandate(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class setupIntent(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class updateSetupIntent(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class subscriptionRenew(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class paymentCollect(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class createOneTimeCharge(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
          
         
     
@@ -247,6 +557,47 @@ class BillingValidator:
         component = fields.Str(required=False)
         
         component_name = fields.Str(required=False)
+         
+        
+    
+    class cancelSubscriptionPlan(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class paymentOptions(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        code = fields.Str(required=False)
+         
+        
+    
+    class verifyPayment(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class getInvoiceById(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        invoice_id = fields.Str(required=False)
+         
+        
+    
+    class createSubscriptionCharge(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        extension_id = fields.Str(required=False)
          
         
     

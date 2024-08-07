@@ -18,6 +18,8 @@ from ..ApplicationModel import BaseSchema
     
         
         
+        
+        
     
     
     
@@ -89,6 +91,10 @@ class ContentValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+        
+        tags = fields.Str(required=False)
+        
+        search = fields.Str(required=False)
          
         
     

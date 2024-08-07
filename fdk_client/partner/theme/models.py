@@ -14,6 +14,46 @@ class AvailablePageSchema(BaseSchema):
     pass
 
 
+class DraftExtensionSectionRequest(BaseSchema):
+    pass
+
+
+class DraftExtensionSectionResponse(BaseSchema):
+    pass
+
+
+class SectionsResponse(BaseSchema):
+    pass
+
+
+class ExtensionSection(BaseSchema):
+    pass
+
+
+class PropExtension(BaseSchema):
+    pass
+
+
+class AssetsExtension(BaseSchema):
+    pass
+
+
+class PublishExtensionSectionRequest(BaseSchema):
+    pass
+
+
+class ExtensionPreviewRequest(BaseSchema):
+    pass
+
+
+class ExtensionPreviewResponse(BaseSchema):
+    pass
+
+
+class PublishExtensionSectionResponse(BaseSchema):
+    pass
+
+
 class AvailablePageSectionMetaAttributes(BaseSchema):
     pass
 
@@ -352,6 +392,134 @@ class AvailablePageSchema(BaseSchema):
     created_at = fields.Str(required=False)
     
     updated_at = fields.Str(required=False)
+    
+
+
+class DraftExtensionSectionRequest(BaseSchema):
+    # Theme swagger.json
+
+    
+    extension_id = fields.Str(required=False)
+    
+    bundle_name = fields.Str(required=False)
+    
+    organization_id = fields.Str(required=False)
+    
+    sections = fields.List(fields.Nested(ExtensionSection, required=False), required=False)
+    
+    assets = fields.Nested(AssetsExtension, required=False)
+    
+    type = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+
+
+class DraftExtensionSectionResponse(BaseSchema):
+    # Theme swagger.json
+
+    
+    sections = fields.Nested(SectionsResponse, required=False)
+    
+
+
+class SectionsResponse(BaseSchema):
+    # Theme swagger.json
+
+    
+    acknowledged = fields.Boolean(required=False)
+    
+    matched_count = fields.Int(required=False)
+    
+    modified_count = fields.Int(required=False)
+    
+    upserted_id = fields.Str(required=False)
+    
+    upserted_count = fields.Int(required=False)
+    
+
+
+class ExtensionSection(BaseSchema):
+    # Theme swagger.json
+
+    
+    label = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    props = fields.List(fields.Nested(PropExtension, required=False), required=False)
+    
+    blocks = fields.List(fields.Dict(required=False), required=False)
+    
+
+
+class PropExtension(BaseSchema):
+    # Theme swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    label = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    info = fields.Str(required=False)
+    
+
+
+class AssetsExtension(BaseSchema):
+    # Theme swagger.json
+
+    
+    js = fields.Str(required=False)
+    
+    css = fields.Str(required=False)
+    
+
+
+class PublishExtensionSectionRequest(BaseSchema):
+    # Theme swagger.json
+
+    
+    extension_id = fields.Str(required=False)
+    
+    bundle_name = fields.Str(required=False)
+    
+    organization_id = fields.Str(required=False)
+    
+    sections = fields.List(fields.Nested(ExtensionSection, required=False), required=False)
+    
+    assets = fields.Nested(AssetsExtension, required=False)
+    
+    type = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+
+
+class ExtensionPreviewRequest(BaseSchema):
+    # Theme swagger.json
+
+    
+    application_id = fields.Str(required=False)
+    
+    section_preview_hash = fields.Str(required=False)
+    
+
+
+class ExtensionPreviewResponse(BaseSchema):
+    # Theme swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+
+
+class PublishExtensionSectionResponse(BaseSchema):
+    # Theme swagger.json
+
+    
+    sections = fields.Nested(SectionsResponse, required=False)
     
 
 

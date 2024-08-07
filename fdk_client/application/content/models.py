@@ -62,6 +62,10 @@ class BlogGetResponse(BaseSchema):
     pass
 
 
+class BlogFilters(BaseSchema):
+    pass
+
+
 class ResourceContent(BaseSchema):
     pass
 
@@ -215,10 +219,6 @@ class PageSchema(BaseSchema):
 
 
 class CreatedBySchema(BaseSchema):
-    pass
-
-
-class CronSchedule(BaseSchema):
     pass
 
 
@@ -479,6 +479,16 @@ class BlogGetResponse(BaseSchema):
     
     page = fields.Nested(Page, required=False)
     
+    filters = fields.Nested(BlogFilters, required=False)
+    
+
+
+class BlogFilters(BaseSchema):
+    # Content swagger.json
+
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class ResourceContent(BaseSchema):
@@ -545,11 +555,11 @@ class BlogSchema(BaseSchema):
     
     seo = fields.Nested(SEO, required=False)
     
-    _schedule = fields.Nested(CronSchedule, required=False)
-    
     title = fields.Str(required=False)
     
     date_meta = fields.Nested(DateMeta, required=False)
+    
+    summary = fields.Str(required=False)
     
 
 
@@ -1077,20 +1087,6 @@ class CreatedBySchema(BaseSchema):
     
 
 
-class CronSchedule(BaseSchema):
-    # Content swagger.json
-
-    
-    cron = fields.Str(required=False)
-    
-    start = fields.Str(required=False)
-    
-    end = fields.Str(required=False)
-    
-    duration = fields.Float(required=False)
-    
-
-
 class SlideshowGetResponse(BaseSchema):
     # Content swagger.json
 
@@ -1135,8 +1131,6 @@ class Support(BaseSchema):
     
     _id = fields.Str(required=False)
     
-    config_type = fields.Str(required=False)
-    
     application = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
@@ -1156,6 +1150,8 @@ class PhoneProperties(BaseSchema):
     code = fields.Str(required=False)
     
     number = fields.Str(required=False)
+    
+    phone_type = fields.Str(required=False)
     
 
 

@@ -1277,9 +1277,11 @@ class LinkStatus(BaseSchema):
     # Payment swagger.json
 
     
-    status = fields.Boolean(required=False)
+    status = fields.Str(required=False)
     
     message = fields.Str(required=False)
+    
+    is_payment_done = fields.Boolean(required=False)
     
 
 

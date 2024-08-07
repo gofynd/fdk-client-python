@@ -10,6 +10,22 @@ from .enums import *
 
 
 
+class GetExtensionSectionRes(BaseSchema):
+    pass
+
+
+class ExtensionSection(BaseSchema):
+    pass
+
+
+class PropExtension(BaseSchema):
+    pass
+
+
+class AssetsExtension(BaseSchema):
+    pass
+
+
 class ThemeReq(BaseSchema):
     pass
 
@@ -315,6 +331,68 @@ class ActionPage(BaseSchema):
 
 
 
+
+
+class GetExtensionSectionRes(BaseSchema):
+    # Theme swagger.json
+
+    
+    extension_id = fields.Str(required=False)
+    
+    bundle_name = fields.Str(required=False)
+    
+    organization_id = fields.Str(required=False)
+    
+    sections = fields.List(fields.Nested(ExtensionSection, required=False), required=False)
+    
+    assets = fields.Nested(AssetsExtension, required=False)
+    
+    status = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+
+
+class ExtensionSection(BaseSchema):
+    # Theme swagger.json
+
+    
+    label = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    props = fields.List(fields.Nested(PropExtension, required=False), required=False)
+    
+    blocks = fields.List(fields.Dict(required=False), required=False)
+    
+
+
+class PropExtension(BaseSchema):
+    # Theme swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    label = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    info = fields.Str(required=False)
+    
+
+
+class AssetsExtension(BaseSchema):
+    # Theme swagger.json
+
+    
+    js = fields.Str(required=False)
+    
+    css = fields.Str(required=False)
+    
 
 
 class ThemeReq(BaseSchema):

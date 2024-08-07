@@ -22,31 +22,11 @@ class TicketHistoryList(BaseSchema):
     pass
 
 
-class CustomFormList(BaseSchema):
-    pass
-
-
-class CreateCustomFormPayload(BaseSchema):
-    pass
-
-
-class EditCustomFormPayload(BaseSchema):
-    pass
-
-
 class EditTicketPayload(BaseSchema):
     pass
 
 
 class AgentChangePayload(BaseSchema):
-    pass
-
-
-class CreateVideoRoomResponse(BaseSchema):
-    pass
-
-
-class CloseVideoRoomResponse(BaseSchema):
     pass
 
 
@@ -62,47 +42,11 @@ class GeneralConfigIntegrationSchema(BaseSchema):
     pass
 
 
-class CreateVideoRoomPayload(BaseSchema):
-    pass
-
-
-class NotifyUser(BaseSchema):
-    pass
-
-
 class Filter(BaseSchema):
     pass
 
 
 class TicketHistoryPayload(BaseSchema):
-    pass
-
-
-class GetTokenForVideoRoomResponse(BaseSchema):
-    pass
-
-
-class GetParticipantsInsideVideoRoomResponse(BaseSchema):
-    pass
-
-
-class Participant(BaseSchema):
-    pass
-
-
-class UserSchema(BaseSchema):
-    pass
-
-
-class PhoneNumber(BaseSchema):
-    pass
-
-
-class Email(BaseSchema):
-    pass
-
-
-class Debug(BaseSchema):
     pass
 
 
@@ -130,27 +74,11 @@ class Priority(BaseSchema):
     pass
 
 
+class SLA(BaseSchema):
+    pass
+
+
 class Status(BaseSchema):
-    pass
-
-
-class TicketFeedbackList(BaseSchema):
-    pass
-
-
-class TicketFeedbackPayload(BaseSchema):
-    pass
-
-
-class SubmitButton(BaseSchema):
-    pass
-
-
-class PollForAssignment(BaseSchema):
-    pass
-
-
-class CustomForm(BaseSchema):
     pass
 
 
@@ -159,14 +87,6 @@ class FeedbackForm(BaseSchema):
 
 
 class TicketCategory(BaseSchema):
-    pass
-
-
-class FeedbackResponseItem(BaseSchema):
-    pass
-
-
-class TicketFeedback(BaseSchema):
     pass
 
 
@@ -223,64 +143,6 @@ class TicketHistoryList(BaseSchema):
     
 
 
-class CustomFormList(BaseSchema):
-    # Lead swagger.json
-
-    
-    items = fields.List(fields.Nested(CustomForm, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
-    
-
-
-class CreateCustomFormPayload(BaseSchema):
-    # Lead swagger.json
-
-    
-    slug = fields.Str(required=False)
-    
-    title = fields.Str(required=False)
-    
-    inputs = fields.List(fields.Dict(required=False), required=False)
-    
-    description = fields.Str(required=False)
-    
-    header_image = fields.Str(required=False)
-    
-    priority = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
-    
-    should_notify = fields.Boolean(required=False)
-    
-    success_message = fields.Str(required=False)
-    
-    poll_for_assignment = fields.Nested(PollForAssignment, required=False)
-    
-
-
-class EditCustomFormPayload(BaseSchema):
-    # Lead swagger.json
-
-    
-    title = fields.Str(required=False)
-    
-    inputs = fields.List(fields.Dict(required=False), required=False)
-    
-    description = fields.Str(required=False)
-    
-    priority = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
-    
-    header_image = fields.Str(required=False)
-    
-    should_notify = fields.Boolean(required=False)
-    
-    login_required = fields.Boolean(required=False)
-    
-    success_message = fields.Str(required=False)
-    
-    poll_for_assignment = fields.Nested(PollForAssignment, required=False)
-    
-
-
 class EditTicketPayload(BaseSchema):
     # Lead swagger.json
 
@@ -308,22 +170,6 @@ class AgentChangePayload(BaseSchema):
 
     
     agent_id = fields.Str(required=False)
-    
-
-
-class CreateVideoRoomResponse(BaseSchema):
-    # Lead swagger.json
-
-    
-    unique_name = fields.Str(required=False)
-    
-
-
-class CloseVideoRoomResponse(BaseSchema):
-    # Lead swagger.json
-
-    
-    success = fields.Boolean(required=False)
     
 
 
@@ -365,26 +211,6 @@ class GeneralConfigIntegrationSchema(BaseSchema):
     
 
 
-class CreateVideoRoomPayload(BaseSchema):
-    # Lead swagger.json
-
-    
-    unique_name = fields.Str(required=False)
-    
-    notify = fields.List(fields.Nested(NotifyUser, required=False), required=False)
-    
-
-
-class NotifyUser(BaseSchema):
-    # Lead swagger.json
-
-    
-    country_code = fields.Str(required=False)
-    
-    phone_number = fields.Str(required=False)
-    
-
-
 class Filter(BaseSchema):
     # Lead swagger.json
 
@@ -406,110 +232,6 @@ class TicketHistoryPayload(BaseSchema):
     value = fields.Dict(required=False)
     
     type = fields.Str(required=False, validate=OneOf([val.value for val in HistoryTypeEnum.__members__.values()]))
-    
-
-
-class GetTokenForVideoRoomResponse(BaseSchema):
-    # Lead swagger.json
-
-    
-    access_token = fields.Str(required=False)
-    
-
-
-class GetParticipantsInsideVideoRoomResponse(BaseSchema):
-    # Lead swagger.json
-
-    
-    participants = fields.List(fields.Nested(Participant, required=False), required=False)
-    
-
-
-class Participant(BaseSchema):
-    # Lead swagger.json
-
-    
-    user = fields.Nested(UserSchema, required=False)
-    
-    identity = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-
-
-class UserSchema(BaseSchema):
-    # Lead swagger.json
-
-    
-    first_name = fields.Str(required=False)
-    
-    last_name = fields.Str(required=False)
-    
-    phone_numbers = fields.List(fields.Nested(PhoneNumber, required=False), required=False)
-    
-    emails = fields.List(fields.Nested(Email, required=False), required=False)
-    
-    gender = fields.Str(required=False)
-    
-    active = fields.Boolean(required=False)
-    
-    profile_pic_url = fields.Str(required=False)
-    
-    username = fields.Str(required=False)
-    
-    account_type = fields.Str(required=False)
-    
-    uid = fields.Str(required=False)
-    
-    debug = fields.Nested(Debug, required=False)
-    
-    has_old_password_hash = fields.Boolean(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-
-
-class PhoneNumber(BaseSchema):
-    # Lead swagger.json
-
-    
-    active = fields.Boolean(required=False)
-    
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-    phone = fields.Str(required=False)
-    
-    country_code = fields.Int(required=False)
-    
-
-
-class Email(BaseSchema):
-    # Lead swagger.json
-
-    
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-    email = fields.Str(required=False)
-    
-    active = fields.Boolean(required=False)
-    
-
-
-class Debug(BaseSchema):
-    # Lead swagger.json
-
-    
-    source = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
     
 
 
@@ -585,6 +307,14 @@ class Priority(BaseSchema):
     
 
 
+class SLA(BaseSchema):
+    # Lead swagger.json
+
+    
+    resolution_time = fields.Str(required=False)
+    
+
+
 class Status(BaseSchema):
     # Lead swagger.json
 
@@ -594,82 +324,6 @@ class Status(BaseSchema):
     display = fields.Str(required=False)
     
     color = fields.Str(required=False)
-    
-
-
-class TicketFeedbackList(BaseSchema):
-    # Lead swagger.json
-
-    
-    items = fields.List(fields.Nested(TicketFeedback, required=False), required=False)
-    
-
-
-class TicketFeedbackPayload(BaseSchema):
-    # Lead swagger.json
-
-    
-    form_response = fields.Dict(required=False)
-    
-
-
-class SubmitButton(BaseSchema):
-    # Lead swagger.json
-
-    
-    title = fields.Str(required=False)
-    
-    title_color = fields.Str(required=False)
-    
-    background_color = fields.Str(required=False)
-    
-
-
-class PollForAssignment(BaseSchema):
-    # Lead swagger.json
-
-    
-    duration = fields.Float(required=False)
-    
-    message = fields.Str(required=False)
-    
-    success_message = fields.Str(required=False)
-    
-    failure_message = fields.Str(required=False)
-    
-
-
-class CustomForm(BaseSchema):
-    # Lead swagger.json
-
-    
-    application_id = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    header_image = fields.Str(required=False)
-    
-    title = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    priority = fields.Nested(Priority, required=False)
-    
-    login_required = fields.Boolean(required=False)
-    
-    should_notify = fields.Boolean(required=False)
-    
-    success_message = fields.Str(required=False)
-    
-    submit_button = fields.Nested(SubmitButton, required=False)
-    
-    inputs = fields.List(fields.Dict(required=False), required=False)
-    
-    created_on = fields.Nested(CreatedOn, required=False)
-    
-    poll_for_assignment = fields.Nested(PollForAssignment, required=False)
-    
-    _id = fields.Str(required=False)
     
 
 
@@ -698,40 +352,6 @@ class TicketCategory(BaseSchema):
     group_id = fields.Float(required=False)
     
     feedback_form = fields.Nested(FeedbackForm, required=False)
-    
-
-
-class FeedbackResponseItem(BaseSchema):
-    # Lead swagger.json
-
-    
-    display = fields.Str(required=False)
-    
-    key = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-
-
-class TicketFeedback(BaseSchema):
-    # Lead swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    ticket_id = fields.Str(required=False)
-    
-    partner_id = fields.Str(required=False)
-    
-    response = fields.List(fields.Nested(FeedbackResponseItem, required=False), required=False)
-    
-    category = fields.Str(required=False)
-    
-    user = fields.Dict(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
     
 
 
@@ -778,6 +398,8 @@ class Ticket(BaseSchema):
     status = fields.Nested(Status, required=False)
     
     priority = fields.Nested(Priority, required=False)
+    
+    sla = fields.Nested(SLA, required=False)
     
     created_by = fields.Dict(required=False)
     

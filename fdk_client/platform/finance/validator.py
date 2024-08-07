@@ -88,10 +88,16 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
         
     
     
         
+        
+    
+    
         
     
     
@@ -276,6 +282,13 @@ class FinanceValidator:
          
         
     
+    class invoicePaymentOptions(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
     class invoicePaymentDetails(BaseSchema):
         
         
@@ -295,6 +308,13 @@ class FinanceValidator:
         
     
     class unlockCreditNote(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class orderFreeze(BaseSchema):
         
         
         company_id = fields.Str(required=False)

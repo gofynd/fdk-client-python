@@ -49,8 +49,8 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
+        
+        
         
         
         
@@ -599,6 +599,16 @@ class ContentValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+        
+        tags = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
+        
+        title = fields.Str(required=False)
+        
+        status = fields.Str(required=False)
          
         
     
@@ -621,17 +631,6 @@ class ContentValidator:
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
-         
-        
-    
-    class getComponentById(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        slug = fields.Str(required=False)
          
         
     

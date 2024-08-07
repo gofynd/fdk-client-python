@@ -142,6 +142,11 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+        
+        
     
     
         
@@ -679,6 +684,16 @@ class CatalogValidator:
         page_size = fields.Int(required=False)
         
         page_id = fields.Str(required=False)
+        
+        qty_gt = fields.Int(required=False)
+        
+        qty_lt = fields.Int(required=False)
+        
+        qty_type = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
          
         
     

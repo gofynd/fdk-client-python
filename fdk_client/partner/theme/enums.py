@@ -27,6 +27,8 @@ class PageType(Enum):
     
     COLLECTIONS = "collections"
     
+    CUSTOM = "custom"
+    
     CONTACT_US = "contact-us"
     
     EXTERNAL = "external"

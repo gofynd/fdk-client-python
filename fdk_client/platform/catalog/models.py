@@ -4859,6 +4859,8 @@ class InventoryExportJobListResponse(BaseSchema):
     
     items = fields.Nested(InventoryJobDetailResponse, required=False)
     
+    page = fields.Nested(Page, required=False)
+    
 
 
 class InventoryExportQuantityFilter(BaseSchema):
@@ -6320,6 +6322,8 @@ class ProductDownloadsResponse(BaseSchema):
 
     
     items = fields.List(fields.Nested(ProductTemplateExportResponse, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 
 

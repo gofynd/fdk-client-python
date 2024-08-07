@@ -112,6 +112,12 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+        
 
 class ThemeValidator:
     
@@ -340,6 +346,19 @@ class ThemeValidator:
         application_id = fields.Str(required=False)
         
         theme_id = fields.Str(required=False)
+         
+        
+    
+    class getExtensionSections(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+        
+        company_mode = fields.Str(required=False)
          
         
     

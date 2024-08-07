@@ -1407,6 +1407,8 @@ class SetCODForUserRequest(BaseSchema):
     # Payment swagger.json
 
     
+    business_unit = fields.Str(required=False)
+    
     mobileno = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False)
@@ -1732,6 +1734,8 @@ class LinkStatus(BaseSchema):
     status = fields.Str(required=False)
     
     message = fields.Str(required=False)
+    
+    is_payment_done = fields.Boolean(required=False)
     
 
 

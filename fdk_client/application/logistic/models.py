@@ -903,6 +903,8 @@ class Localities(BaseSchema):
     
     type = fields.Str(required=False)
     
+    localities = fields.List(fields.Nested(LocalityParent, required=False), required=False)
+    
 
 
 class LocalityParent(BaseSchema):
@@ -954,6 +956,8 @@ class ErrorResponse(BaseSchema):
 
     
     error = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     
 
 

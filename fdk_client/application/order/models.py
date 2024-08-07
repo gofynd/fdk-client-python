@@ -825,6 +825,8 @@ class Shipments(BaseSchema):
     
     order_type = fields.Str(required=False, allow_none=True)
     
+    gstin_code = fields.Str(required=False)
+    
     show_download_invoice = fields.Boolean(required=False)
     
     can_cancel = fields.Boolean(required=False)
@@ -950,6 +952,8 @@ class OrderSchema(BaseSchema):
     shipments = fields.List(fields.Nested(Shipments, required=False), required=False)
     
     bags_for_reorder = fields.List(fields.Nested(BagsForReorder, required=False), required=False)
+    
+    meta = fields.Dict(required=False)
     
 
 

@@ -28,7 +28,7 @@ class Theme:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/page", """{"required":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID of the theme to be retrieved","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID of the theme to be retrieved","required":true,"schema":{"type":"string"}}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -74,7 +74,7 @@ class Theme:
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/page", """{"required":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID of the theme","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID of the theme","required":true,"schema":{"type":"string"}}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -120,7 +120,7 @@ class Theme:
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/page", """{"required":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID of the theme to be retrieved","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID of the theme to be retrieved","required":true,"schema":{"type":"string"}}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -165,7 +165,7 @@ class Theme:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/{page_value}", """{"required":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID of the theme to be retrieved","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID of the theme to be retrieved","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved","required":true,"schema":{"type":"string"}}]}""", serverType="platform", theme_id=theme_id, page_value=page_value)
-        query_string = await create_query_string(theme_id=theme_id, page_value=page_value)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -214,7 +214,7 @@ class Theme:
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/{page_value}", """{"required":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID of the theme","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be updated","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID of the theme","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be updated","required":true,"schema":{"type":"string"}}]}""", serverType="platform", theme_id=theme_id, page_value=page_value)
-        query_string = await create_query_string(theme_id=theme_id, page_value=page_value)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -259,7 +259,7 @@ class Theme:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/{page_value}", """{"required":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID of the theme","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be updated","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID of the theme","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be updated","required":true,"schema":{"type":"string"}}]}""", serverType="platform", theme_id=theme_id, page_value=page_value)
-        query_string = await create_query_string(theme_id=theme_id, page_value=page_value)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -336,7 +336,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/themes", """{"required":[{"in":"path","name":"company_id","required":true,"description":"The ID of the company","schema":{"type":"integer"},"examples":{"example1":{"summary":"Example 1 - Company ID","value":19243},"example2":{"summary":"Example 2 - Company ID","value":98765}}},{"in":"path","name":"application_id","required":true,"description":"The ID of the application","schema":{"type":"string"},"examples":{"example1":{"summary":"Example 1 - Application ID","value":"6487ea376e1442284917c44e"},"example2":{"summary":"Example 2 - Application ID","value":"7487ea376e1442284917c44e"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"The ID of the company","schema":{"type":"integer"},"examples":{"example1":{"summary":"Example 1 - Company ID","value":19243},"example2":{"summary":"Example 2 - Company ID","value":98765}}},{"in":"path","name":"application_id","required":true,"description":"The ID of the application","schema":{"type":"string"},"examples":{"example1":{"summary":"Example 1 - Application ID","value":"6487ea376e1442284917c44e"},"example2":{"summary":"Example 2 - Application ID","value":"7487ea376e1442284917c44e"}}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/themes", """{"required":[{"in":"path","name":"company_id","required":true,"description":"The ID of the company","schema":{"type":"integer"}},{"in":"path","name":"application_id","required":true,"description":"The ID of the application","schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"The ID of the company","schema":{"type":"integer"}},{"in":"path","name":"application_id","required":true,"description":"The ID of the application","schema":{"type":"string"}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -400,7 +400,7 @@ class Theme:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}", """{"required":[{"in":"path","name":"company_id","required":true,"description":"The ID of the company","schema":{"type":"integer","example":19243}},{"in":"path","name":"application_id","required":true,"description":"The ID of the application","schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"in":"path","name":"theme_id","required":true,"description":"The ID of the theme","schema":{"type":"string","example":"64be4423bc7b28003211322e"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"The ID of the company","schema":{"type":"integer","example":19243}},{"in":"path","name":"application_id","required":true,"description":"The ID of the application","schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"in":"path","name":"theme_id","required":true,"description":"The ID of the theme","schema":{"type":"string","example":"64be4423bc7b28003211322e"}}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -446,7 +446,7 @@ class Theme:
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}", """{"required":[{"in":"path","name":"company_id","schema":{"type":"integer","example":19243},"required":true,"description":"The ID of the company."},{"in":"path","name":"application_id","schema":{"type":"string","example":"6487ea376e1442284917c44e"},"required":true,"description":"The ID of the application."},{"in":"path","name":"theme_id","schema":{"type":"string","example":"64be4423bc7b28003211322e"},"required":true,"description":"The ID of the theme."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","schema":{"type":"integer","example":19243},"required":true,"description":"The ID of the company."},{"in":"path","name":"application_id","schema":{"type":"string","example":"6487ea376e1442284917c44e"},"required":true,"description":"The ID of the application."},{"in":"path","name":"theme_id","schema":{"type":"string","example":"64be4423bc7b28003211322e"},"required":true,"description":"The ID of the theme."}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -488,7 +488,7 @@ class Theme:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","example":19243},"description":"The ID of the company."},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"},"description":"The ID of the application."},{"name":"theme_id","in":"path","required":true,"schema":{"type":"string","example":"64be4423bc7b28003211322e"},"description":"The ID of the theme to be deleted."}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","example":19243},"description":"The ID of the company."},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"},"description":"The ID of the application."},{"name":"theme_id","in":"path","required":true,"schema":{"type":"string","example":"64be4423bc7b28003211322e"},"description":"The ID of the theme to be deleted."}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -577,7 +577,7 @@ class Theme:
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/name", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer","example":19243},"description":"The ID of the company."},{"in":"path","name":"application_id","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"},"description":"The ID of the application."},{"in":"path","name":"theme_id","required":true,"schema":{"type":"string"},"description":"The ID of the theme to be updated."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer","example":19243},"description":"The ID of the company."},{"in":"path","name":"application_id","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"},"description":"The ID of the application."},{"in":"path","name":"theme_id","required":true,"schema":{"type":"string"},"description":"The ID of the theme to be updated."}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -618,8 +618,8 @@ class Theme:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/apply", """{"required":[{"in":"path","name":"company_id","description":"The ID of the company","required":true,"schema":{"type":"integer","example":19243}},{"in":"path","name":"application_id","description":"The ID of the application","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"in":"path","name":"theme_id","description":"The ID of the apply","required":true,"schema":{"type":"string"},"examples":{"example1":{"summary":"Example 1 - Theme ID","value":"648832dcb99296ab200fbaaa"},"example2":{"summary":"Example 2 - Theme ID","value":"64b91fe317422a1e1392f85b"}}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The ID of the company","required":true,"schema":{"type":"integer","example":19243}},{"in":"path","name":"application_id","description":"The ID of the application","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"in":"path","name":"theme_id","description":"The ID of the apply","required":true,"schema":{"type":"string"},"examples":{"example1":{"summary":"Example 1 - Theme ID","value":"648832dcb99296ab200fbaaa"},"example2":{"summary":"Example 2 - Theme ID","value":"64b91fe317422a1e1392f85b"}}}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/apply", """{"required":[{"in":"path","name":"company_id","description":"The ID of the company","required":true,"schema":{"type":"integer","example":19243}},{"in":"path","name":"application_id","description":"The ID of the application","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"in":"path","name":"theme_id","description":"The ID of the apply","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The ID of the company","required":true,"schema":{"type":"integer","example":19243}},{"in":"path","name":"application_id","description":"The ID of the application","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"in":"path","name":"theme_id","description":"The ID of the apply","required":true,"schema":{"type":"string"}}]}""", serverType="platform", theme_id=theme_id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -660,8 +660,8 @@ class Theme:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/duplicate", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"The ID of the application","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"The ID of the theme to be duplicated","required":true,"schema":{"type":"string"},"examples":{"example1":{"summary":"Example 1 - Theme ID","value":"648832dcb99296ab200fbaaa"},"example2":{"summary":"Example 2 - Theme ID","value":"64b91fe317422a1e1392f85b"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"The ID of the application","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"The ID of the theme to be duplicated","required":true,"schema":{"type":"string"},"examples":{"example1":{"summary":"Example 1 - Theme ID","value":"648832dcb99296ab200fbaaa"},"example2":{"summary":"Example 2 - Theme ID","value":"64b91fe317422a1e1392f85b"}}}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/duplicate", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"The ID of the application","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"The ID of the theme to be duplicated","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"The ID of the application","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"The ID of the theme to be duplicated","required":true,"schema":{"type":"string"}}]}""", serverType="platform", theme_id=theme_id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -742,7 +742,7 @@ class Theme:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/preview", """{"required":[{"in":"path","name":"company_id","required":true,"description":"The ID of the company","schema":{"type":"integer","example":19243}},{"in":"path","name":"application_id","required":true,"description":"The ID of the application","schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"in":"path","name":"theme_id","required":true,"description":"The ID of the theme","schema":{"type":"string","example":"6487ea376e1442284917c44e"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"The ID of the company","schema":{"type":"integer","example":19243}},{"in":"path","name":"application_id","required":true,"description":"The ID of the application","schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"in":"path","name":"theme_id","required":true,"description":"The ID of the theme","schema":{"type":"string","example":"6487ea376e1442284917c44e"}}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -784,7 +784,7 @@ class Theme:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/polling", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID allotted to the theme.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID allotted to the theme.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -817,7 +817,7 @@ class Theme:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/upgradable", """{"required":[{"name":"company_id","in":"path","required":true,"description":"The ID of the company","schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","required":true,"description":"The ID of the application","schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","required":true,"description":"The ID of the theme","schema":{"type":"string","example":"648832dcb99296ab200fbaaa"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"The ID of the company","schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","required":true,"description":"The ID of the application","schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","required":true,"description":"The ID of the theme","schema":{"type":"string","example":"648832dcb99296ab200fbaaa"}}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -859,7 +859,7 @@ class Theme:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/upgrade", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"The ID of the application","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"The ID of the upgrade","required":true,"schema":{"type":"string","example":"64883302baad790ae4898314"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"The ID of the application","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"The ID of the upgrade","required":true,"schema":{"type":"string","example":"64883302baad790ae4898314"}}]}""", serverType="platform", theme_id=theme_id)
-        query_string = await create_query_string(theme_id=theme_id)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -883,6 +883,42 @@ class Theme:
             except Exception as e:
                 print("Response Validation failed for upgradeTheme")
                 print(e)
+
+        return response
+    
+    async def getExtensionSections(self, type=None, company_mode=None, request_headers:Dict={}):
+        """Retrieve the list of extension sections for a given application in the specified company.
+        :param type : The type of the theme : type string
+        :param company_mode : The mode of the company : type string
+        """
+        payload = {}
+        
+        if type is not None:
+            payload["type"] = type
+        if company_mode is not None:
+            payload["company_mode"] = company_mode
+
+        # Parameter validation
+        schema = ThemeValidator.getExtensionSections()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/extension-section", """{"required":[{"in":"path","name":"company_id","required":true,"description":"The ID of the company","schema":{"type":"integer","example":1}},{"in":"path","name":"application_id","required":true,"description":"The ID of the application","schema":{"type":"string","example":"6399ba8924ab1be7c21314b5"}}],"optional":[{"in":"query","name":"type","required":false,"description":"The type of the theme","schema":{"type":"string","example":"react"}},{"in":"query","name":"company_mode","required":false,"description":"The mode of the company","schema":{"type":"string","example":"live"}}],"query":[{"in":"query","name":"type","required":false,"description":"The type of the theme","schema":{"type":"string","example":"react"}},{"in":"query","name":"company_mode","required":false,"description":"The mode of the company","schema":{"type":"string","example":"live"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"The ID of the company","schema":{"type":"integer","example":1}},{"in":"path","name":"application_id","required":true,"description":"The ID of the application","schema":{"type":"string","example":"6399ba8924ab1be7c21314b5"}}]}""", serverType="platform", type=type, company_mode=company_mode)
+        query_string = await create_query_string(type=type, company_mode=company_mode)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/extension-section", type=type, company_mode=company_mode), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         return response
     

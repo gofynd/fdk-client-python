@@ -109,6 +109,22 @@ from ..PartnerModel import BaseSchema
     
         
         
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
         
         
     
@@ -318,6 +334,42 @@ class ThemeValidator:
         organization_id = fields.Str(required=False)
         
         slug = fields.Str(required=False)
+         
+        
+    
+    class createExtensionSectionDraft(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
+         
+        
+    
+    class publishExtensionSections(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
+         
+        
+    
+    class applyExtensionPreview(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        extension_section_id = fields.Str(required=False)
+         
+        
+    
+    class removeExtensionPreview(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        extension_section_id = fields.Str(required=False)
          
         
     

@@ -38,7 +38,7 @@ class Partner:
         
 
         url_with_params = await create_url_with_params(api_url=self._urls["getPanelExtensionDetails"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"pass the slug of the extension","required":true,"schema":{"type":"string"},"example":"example-extension-1"}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"pass the slug of the extension","required":true,"schema":{"type":"string"},"example":"example-extension-1"}]}""", serverType="public", slug=slug)
-        query_string = await create_query_string(slug=slug)
+        query_string = await create_query_string()
 
         headers = {
             "User-Agent": self._conf.userAgent,

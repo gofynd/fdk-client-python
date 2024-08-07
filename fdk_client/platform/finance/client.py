@@ -23,8 +23,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GenerateReportRequest
-        schema = GenerateReportRequest()
+        from .models import GenerateReportReq
+        schema = GenerateReportReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/generate-report", """{"required":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -109,8 +109,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GetEngineRequest
-        schema = GetEngineRequest()
+        from .models import GetEngineReq
+        schema = GetEngineReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-data", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -152,8 +152,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GetReasonRequest
-        schema = GetReasonRequest()
+        from .models import GetReasonReq
+        schema = GetReasonReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-reason", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -195,8 +195,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GetReportListRequest
-        schema = GetReportListRequest()
+        from .models import GetReportListReq
+        schema = GetReportListReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-report-list", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned. Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned. Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -281,8 +281,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DownloadCreditDebitNoteRequest
-        schema = DownloadCreditDebitNoteRequest()
+        from .models import DownloadCreditDebitNoteReq
+        schema = DownloadCreditDebitNoteReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/download-credit-debit-note", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -324,8 +324,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PaymentProcessRequest
-        schema = PaymentProcessRequest()
+        from .models import PaymentProcessReq
+        schema = PaymentProcessReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/payment-process", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -367,8 +367,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreditlineDataPlatformRequest
-        schema = CreditlineDataPlatformRequest()
+        from .models import CreditlineDataPlatformReq
+        schema = CreditlineDataPlatformReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-line-data", """{"required":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -410,8 +410,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import IsCreditlinePlatformRequest
-        schema = IsCreditlinePlatformRequest()
+        from .models import IsCreditlinePlatformReq
+        schema = IsCreditlinePlatformReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/creditline-opted", """{"required":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -453,8 +453,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import InvoiceTypeRequest
-        schema = InvoiceTypeRequest()
+        from .models import InvoiceTypeReq
+        schema = InvoiceTypeReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice-type", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -496,11 +496,11 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import InvoiceListingRequest
-        schema = InvoiceListingRequest()
+        from .models import InvoiceListingReq
+        schema = InvoiceListingReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/listing", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned. Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned. Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/listing", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -539,8 +539,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import InvoicePdfRequest
-        schema = InvoicePdfRequest()
+        from .models import InvoicePdfReq
+        schema = InvoicePdfReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/pdf-view", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -582,8 +582,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import IsCnRefundMethodRequest
-        schema = IsCnRefundMethodRequest()
+        from .models import IsCnRefundMethodReq
+        schema = IsCnRefundMethodReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/cn-as-refund-method", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -625,8 +625,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateSellerCreditNoteConfigRequest
-        schema = CreateSellerCreditNoteConfigRequest()
+        from .models import CreateSellerCreditNoteConfigReq
+        schema = CreateSellerCreditNoteConfigReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/create-update-credit-note-config", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -668,8 +668,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DeleteConfigRequest
-        schema = DeleteConfigRequest()
+        from .models import DeleteConfigReq
+        schema = DeleteConfigReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/delete-seller-config", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -753,8 +753,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GetPdfUrlViewRequest
-        schema = GetPdfUrlViewRequest()
+        from .models import GetPdfUrlViewReq
+        schema = GetPdfUrlViewReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-cn-pdf-link", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -796,8 +796,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreditNoteDetailsRequest
-        schema = CreditNoteDetailsRequest()
+        from .models import CreditNoteDetailsReq
+        schema = CreditNoteDetailsReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-note-details", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -839,8 +839,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GetCustomerCreditBalanceRequest
-        schema = GetCustomerCreditBalanceRequest()
+        from .models import GetCustomerCreditBalanceReq
+        schema = GetCustomerCreditBalanceReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/customer-credit-balance", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -882,8 +882,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GetCnConfigRequest
-        schema = GetCnConfigRequest()
+        from .models import GetCnConfigReq
+        schema = GetCnConfigReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/get-seller-cn-config", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -925,8 +925,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GenerateReportCustomerCnRequest
-        schema = GenerateReportCustomerCnRequest()
+        from .models import GenerateReportCustomerCnReq
+        schema = GenerateReportCustomerCnReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/generate-report-customer-cn", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -968,8 +968,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DownloadReportCustomerCnRequest
-        schema = DownloadReportCustomerCnRequest()
+        from .models import DownloadReportCustomerCnReq
+        schema = DownloadReportCustomerCnReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/download-report-customer-cn", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -1045,6 +1045,49 @@ class Finance:
 
         return response
     
+    async def invoicePaymentOptions(self, body="", request_headers:Dict={}):
+        """Display all payment options for invoice.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = FinanceValidator.invoicePaymentOptions()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import InvoicePaymentOptionsReq
+        schema = InvoicePaymentOptionsReq()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice-payment-options", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice-payment-options", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import InvoicePaymentOptionsResponse
+            schema = InvoicePaymentOptionsResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for invoicePaymentOptions")
+                print(e)
+
+        return response
+    
     async def invoicePaymentDetails(self, invoice_number=None, request_headers:Dict={}):
         """Display payment details of invoice.
         :param invoice_number : Invoice Number for which the data will be returned.Invoice_Number is required. : type string
@@ -1060,7 +1103,7 @@ class Finance:
         
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/{invoice_number}/payment", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true},{"in":"path","name":"invoice_number","description":"Invoice Number for which the data will be returned.Invoice_Number is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true},{"in":"path","name":"invoice_number","description":"Invoice Number for which the data will be returned.Invoice_Number is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", invoice_number=invoice_number)
-        query_string = await create_query_string(invoice_number=invoice_number)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -1101,8 +1144,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/{invoice_number}/activity", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned. Company_id is required.","schema":{"type":"string"},"required":true},{"in":"path","name":"invoice_number","description":"Invoice Number for which the data will be returned. Invoice_number is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned. Company_id is required.","schema":{"type":"string"},"required":true},{"in":"path","name":"invoice_number","description":"Invoice Number for which the data will be returned. Invoice_number is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", invoice_number=invoice_number)
-        query_string = await create_query_string(invoice_number=invoice_number)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/invoice/{invoice_number}/activity", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true},{"in":"path","name":"invoice_number","description":"Invoice Number for which the data will be returned. Invoice_number is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true},{"in":"path","name":"invoice_number","description":"Invoice Number for which the data will be returned. Invoice_number is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", invoice_number=invoice_number)
+        query_string = await create_query_string()
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -1140,8 +1183,8 @@ class Finance:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UnlockCreditNoteRequest
-        schema = UnlockCreditNoteRequest()
+        from .models import UnlockCreditNoteReq
+        schema = UnlockCreditNoteReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/credit-notes/unlock", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -1168,6 +1211,45 @@ class Finance:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for unlockCreditNote")
+                print(e)
+
+        return response
+    
+    async def orderFreeze(self, request_headers:Dict={}):
+        """Used to get status of oms freeze.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = FinanceValidator.orderFreeze()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/finance/v1.0/company/{self._conf.companyId}/order/freeze", """{"required":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID for which the data will be returned.Company_id is required.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/finance/v1.0/company/{self._conf.companyId}/order/freeze", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrederFreezeResponse
+            schema = OrederFreezeResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for orderFreeze")
                 print(e)
 
         return response
