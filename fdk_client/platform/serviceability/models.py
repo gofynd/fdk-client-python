@@ -316,6 +316,14 @@ class Page(BaseSchema):
     pass
 
 
+class CourierPartnerRuleCPListResponse(BaseSchema):
+    pass
+
+
+class CourierPartnerRuleResponse(BaseSchema):
+    pass
+
+
 class CourierPartnerList(BaseSchema):
     pass
 
@@ -734,6 +742,8 @@ class ListViewItems(BaseSchema):
     regions_count = fields.Int(required=False)
     
     company_id = fields.Int(required=False)
+    
+    store_ids = fields.List(fields.Int(required=False), required=False)
     
     channels = fields.List(fields.Nested(ListViewChannels, required=False), required=False)
     
@@ -1639,6 +1649,50 @@ class Page(BaseSchema):
     
 
 
+class CourierPartnerRuleCPListResponse(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    account_id = fields.Str(required=False)
+    
+    extension_id = fields.Str(required=False)
+    
+    is_self_ship = fields.Boolean(required=False)
+    
+    scheme_rules = fields.Dict(required=False)
+    
+
+
+class CourierPartnerRuleResponse(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    is_active = fields.Boolean(required=False)
+    
+    application_id = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    conditions = fields.Nested(CourierPartnerRuleConditions, required=False)
+    
+    sort = fields.List(fields.Str(required=False), required=False)
+    
+    created_by = fields.Dict(required=False, allow_none=True)
+    
+    id = fields.Str(required=False)
+    
+    modified_by = fields.Dict(required=False, allow_none=True)
+    
+    modified_on = fields.Str(required=False, allow_none=True)
+    
+    name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    cp_list = fields.List(fields.Nested(CourierPartnerRuleCPListResponse, required=False), required=False)
+    
+
+
 class CourierPartnerList(BaseSchema):
     # Serviceability swagger.json
 
@@ -1646,10 +1700,6 @@ class CourierPartnerList(BaseSchema):
     extension_id = fields.Str(required=False)
     
     account_id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    is_self_ship = fields.Boolean(required=False)
     
 
 
@@ -1765,7 +1815,7 @@ class CourierPartnerRulesListResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    items = fields.List(fields.Nested(CourierPartnerRule, required=False), required=False)
+    items = fields.List(fields.Nested(CourierPartnerRuleResponse, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     

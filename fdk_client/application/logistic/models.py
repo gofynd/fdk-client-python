@@ -903,6 +903,8 @@ class Localities(BaseSchema):
     
     type = fields.Str(required=False)
     
+    localities = fields.List(fields.Nested(LocalityParent, required=False), required=False)
+    
 
 
 class LocalityParent(BaseSchema):

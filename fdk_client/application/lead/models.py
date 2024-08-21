@@ -22,6 +22,14 @@ class SubmitCustomFormResponse(BaseSchema):
     pass
 
 
+class FormFieldResponse(BaseSchema):
+    pass
+
+
+class FormFieldResponseValues(BaseSchema):
+    pass
+
+
 class TicketContext(BaseSchema):
     pass
 
@@ -108,6 +116,34 @@ class SubmitCustomFormResponse(BaseSchema):
     message = fields.Str(required=False)
     
     ticket = fields.Nested(Ticket, required=False)
+    
+    response = fields.Nested(FormFieldResponse, required=False)
+    
+
+
+class FormFieldResponse(BaseSchema):
+    # Lead swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    __v = fields.Float(required=False)
+    
+    application_id = fields.Str(required=False)
+    
+    form_slug = fields.Str(required=False)
+    
+    created_on = fields.Nested(CreatedOn, required=False)
+    
+    response = fields.List(fields.Nested(FormFieldResponseValues, required=False), required=False)
+    
+
+
+class FormFieldResponseValues(BaseSchema):
+    # Lead swagger.json
+
+    
+    key = fields.Str(required=False)
     
 
 

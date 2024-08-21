@@ -108,15 +108,15 @@ class GetReportListReq(BaseSchema):
     pass
 
 
-class GetAffiliate(BaseSchema):
-    pass
-
-
 class GetReportListResponse(BaseSchema):
     pass
 
 
 class ReportItem(BaseSchema):
+    pass
+
+
+class GetAffiliate(BaseSchema):
     pass
 
 
@@ -675,8 +675,6 @@ class DownloadReportItems(BaseSchema):
     
     filters = fields.Nested(GenerateReportFilters, required=False)
     
-    type_of_request = fields.Str(required=False)
-    
 
 
 class DownloadReportList(BaseSchema):
@@ -809,14 +807,6 @@ class GetReportListReq(BaseSchema):
     
 
 
-class GetAffiliate(BaseSchema):
-    # Finance swagger.json
-
-    
-    company_id = fields.Int(required=False)
-    
-
-
 class GetReportListResponse(BaseSchema):
     # Finance swagger.json
 
@@ -848,6 +838,14 @@ class ReportItem(BaseSchema):
     report_type = fields.Str(required=False)
     
     display_date = fields.Str(required=False, allow_none=True)
+    
+
+
+class GetAffiliate(BaseSchema):
+    # Finance swagger.json
+
+    
+    company_id = fields.Int(required=False)
     
 
 
@@ -1730,8 +1728,6 @@ class DownloadReportCustomerCnResponse(BaseSchema):
 
     
     items = fields.List(fields.Nested(DownloadReportResponseData, required=False), required=False)
-    
-    data = fields.List(fields.Nested(DownloadReportResponseData, required=False), required=False)
     
     item_count = fields.Int(required=False)
     

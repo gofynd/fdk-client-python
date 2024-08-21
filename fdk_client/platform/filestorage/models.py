@@ -627,6 +627,8 @@ class CompanyDetail(BaseSchema):
     
     business_country_currency = fields.Dict(required=False)
     
+    meta = fields.Dict(required=False)
+    
 
 
 class StoreDetail(BaseSchema):
@@ -1104,6 +1106,10 @@ class DummyTemplateDataPayload(BaseSchema):
     mode = fields.Str(required=False)
     
     is_self_pickup = fields.Boolean(required=False)
+    
+    shipment_meta = fields.Dict(required=False)
+    
+    order_meta = fields.Dict(required=False)
     
     platform_name = fields.Str(required=False)
     

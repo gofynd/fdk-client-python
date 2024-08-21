@@ -31,7 +31,7 @@ class Lead:
     
     async def getTicket(self, id=None, body="", request_headers:Dict={}):
         """Get details of a specific customer support ticket.
-        :param id : ID of ticket to be retrieved : type string
+        :param id : ID of ticket to be retrieved. : type string
         """
         payload = {}
         
@@ -43,8 +43,8 @@ class Lead:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getTicket"], proccessed_params="""{"required":[{"name":"id","in":"path","description":"ID of ticket to be retrieved","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","description":"ID of ticket to be retrieved","required":true,"schema":{"type":"string"}}]}""", serverType="application", id=id)
-        query_string = await create_query_string(id=id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getTicket"], proccessed_params="""{"required":[{"name":"id","in":"path","description":"ID of ticket to be retrieved.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","description":"ID of ticket to be retrieved.","required":true,"schema":{"type":"string"}}]}""", serverType="application", id=id)
+        query_string = await create_query_string()
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -74,8 +74,8 @@ class Lead:
         return response
     
     async def createHistory(self, id=None, body="", request_headers:Dict={}):
-        """Adds a history entry for a specific support ticket.
-        :param id : Ticket ID for which history is created : type string
+        """Create a history entry for a specific support ticket.
+        :param id : Ticket ID for which history is created. : type string
         """
         payload = {}
         
@@ -91,8 +91,8 @@ class Lead:
         schema = TicketHistoryPayload()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["createHistory"], proccessed_params="""{"required":[{"name":"id","in":"path","description":"Ticket ID for which history is created","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","description":"Ticket ID for which history is created","required":true,"schema":{"type":"string"}}]}""", serverType="application", id=id)
-        query_string = await create_query_string(id=id)
+        url_with_params = await create_url_with_params(api_url=self._urls["createHistory"], proccessed_params="""{"required":[{"name":"id","in":"path","description":"Ticket ID for which history is created.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","description":"Ticket ID for which history is created.","required":true,"schema":{"type":"string"}}]}""", serverType="application", id=id)
+        query_string = await create_query_string()
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -122,7 +122,7 @@ class Lead:
         return response
     
     async def createTicket(self, body="", request_headers:Dict={}):
-        """Generates a new customer support ticket for a user query.
+        """Create a new customer support ticket for a user query.
         """
         payload = {}
         
@@ -168,7 +168,7 @@ class Lead:
     
     async def getCustomForm(self, slug=None, body="", request_headers:Dict={}):
         """Get a customizable form template for data collection.
-        :param slug : Slug of form whose response is getting submitted : type string
+        :param slug : Slug of form whose response is getting submitted. : type string
         """
         payload = {}
         
@@ -180,8 +180,8 @@ class Lead:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCustomForm"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug)
-        query_string = await create_query_string(slug=slug)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCustomForm"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted.","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug)
+        query_string = await create_query_string()
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -211,8 +211,8 @@ class Lead:
         return response
     
     async def submitCustomForm(self, slug=None, body="", request_headers:Dict={}):
-        """Sends user-entered data from a custom form for processing.
-        :param slug : Slug of form whose response is getting submitted : type string
+        """Create user-entered data from a custom form for processing.
+        :param slug : Slug of form whose response is getting submitted. : type string
         """
         payload = {}
         
@@ -228,8 +228,8 @@ class Lead:
         schema = CustomFormSubmissionPayload()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["submitCustomForm"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug)
-        query_string = await create_query_string(slug=slug)
+        url_with_params = await create_url_with_params(api_url=self._urls["submitCustomForm"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted.","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug)
+        query_string = await create_query_string()
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'

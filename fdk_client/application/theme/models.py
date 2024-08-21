@@ -979,9 +979,9 @@ class SectionItem(BaseSchema):
     # Theme swagger.json
 
     
-    props = fields.List(fields.Raw(required=False), required=False)
+    props = fields.List(fields.Dict(required=False), required=False)
     
-    blocks = fields.List(fields.Raw(required=False), required=False)
+    blocks = fields.List(fields.Dict(required=False), required=False)
     
     name = fields.Str(required=False)
     

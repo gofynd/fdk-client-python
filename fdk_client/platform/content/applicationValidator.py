@@ -68,11 +68,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-    
-    
-        
-        
     
     
         
@@ -636,17 +631,6 @@ class ContentValidator:
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
-         
-        
-    
-    class getComponentById(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        slug = fields.Str(required=False)
          
         
     

@@ -760,6 +760,50 @@ class ManifestErrorResponse(BaseSchema):
     pass
 
 
+class ConfigData(BaseSchema):
+    pass
+
+
+class ConfigUpdatedResponse(BaseSchema):
+    pass
+
+
+class FlagData(BaseSchema):
+    pass
+
+
+class Flags(BaseSchema):
+    pass
+
+
+class Filter(BaseSchema):
+    pass
+
+
+class PostHook(BaseSchema):
+    pass
+
+
+class PreHook(BaseSchema):
+    pass
+
+
+class Config(BaseSchema):
+    pass
+
+
+class TransitionConfigCondition(BaseSchema):
+    pass
+
+
+class TransitionConfigData(BaseSchema):
+    pass
+
+
+class TransitionConfigPayload(BaseSchema):
+    pass
+
+
 class Page(BaseSchema):
     pass
 
@@ -1173,10 +1217,6 @@ class Store(BaseSchema):
 
 
 class Brand(BaseSchema):
-    pass
-
-
-class Attributes(BaseSchema):
     pass
 
 
@@ -4169,6 +4209,180 @@ class ManifestErrorResponse(BaseSchema):
     
 
 
+class ConfigData(BaseSchema):
+    # Order swagger.json
+
+    
+    acknowledged = fields.Boolean(required=False)
+    
+    is_upserted = fields.Boolean(required=False)
+    
+    is_inserted = fields.Boolean(required=False)
+    
+
+
+class ConfigUpdatedResponse(BaseSchema):
+    # Order swagger.json
+
+    
+    data = fields.List(fields.Nested(ConfigData, required=False), required=False)
+    
+    success = fields.Boolean(required=False)
+    
+
+
+class FlagData(BaseSchema):
+    # Order swagger.json
+
+    
+    value = fields.Raw(required=False)
+    
+    filter = fields.Dict(required=False)
+    
+
+
+class Flags(BaseSchema):
+    # Order swagger.json
+
+    
+    allow_partial_transition = fields.List(fields.Nested(FlagData, required=False), required=False)
+    
+    can_break_entity = fields.List(fields.Nested(FlagData, required=False), required=False)
+    
+    allowed_bag_updates = fields.List(fields.Nested(FlagData, required=False), required=False)
+    
+    allowed_bag_status_updates = fields.List(fields.Nested(FlagData, required=False), required=False)
+    
+    allowed_entity_updates = fields.List(fields.Nested(FlagData, required=False), required=False)
+    
+    allowed_entity_status_updates = fields.List(fields.Nested(FlagData, required=False), required=False)
+    
+    status_update_type = fields.List(fields.Nested(FlagData, required=False), required=False)
+    
+    is_bag_status_reason_allowed = fields.List(fields.Nested(FlagData, required=False), required=False)
+    
+    is_entity_status_reason_allowed = fields.List(fields.Nested(FlagData, required=False), required=False)
+    
+    transition_strategy = fields.List(fields.Nested(FlagData, required=False), required=False)
+    
+
+
+class Filter(BaseSchema):
+    # Order swagger.json
+
+    
+    order_type = fields.Str(required=False)
+    
+    is_partial_transition = fields.Boolean(required=False)
+    
+    auto_trigger_dp_assignment_acf = fields.Boolean(required=False)
+    
+    lock_status = fields.Str(required=False)
+    
+    lock_after_transition = fields.Boolean(required=False)
+    
+    resume_tasks_after_unlock = fields.Boolean(required=False)
+    
+    is_invoice_id_present = fields.Boolean(required=False)
+    
+    is_credit_note_generated = fields.Boolean(required=False)
+    
+    fulfill_virtual_invoice = fields.Boolean(required=False)
+    
+    next_status = fields.Str(required=False)
+    
+    is_hook_enabled = fields.Boolean(required=False)
+    
+    pos_credit_note_check = fields.Boolean(required=False)
+    
+    order_platform = fields.Str(required=False)
+    
+    refund_type = fields.Str(required=False)
+    
+    is_non_pos_platform = fields.Boolean(required=False)
+    
+    is_self_ship = fields.Boolean(required=False)
+    
+    seller_country_code = fields.Str(required=False)
+    
+    customer_country_code = fields.Str(required=False)
+    
+    is_test_order = fields.Boolean(required=False)
+    
+    task_trigger_condition = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class PostHook(BaseSchema):
+    # Order swagger.json
+
+    
+    task = fields.Str(required=False)
+    
+    kwargs = fields.Dict(required=False)
+    
+    filters = fields.Nested(Filter, required=False)
+    
+
+
+class PreHook(BaseSchema):
+    # Order swagger.json
+
+    
+    task = fields.Str(required=False)
+    
+    kwargs = fields.Dict(required=False)
+    
+    filters = fields.Nested(Filter, required=False)
+    
+
+
+class Config(BaseSchema):
+    # Order swagger.json
+
+    
+    from_state = fields.Str(required=False)
+    
+    to_state = fields.Str(required=False)
+    
+    pre_hooks = fields.List(fields.Nested(PreHook, required=False), required=False)
+    
+    post_hooks = fields.List(fields.Nested(PostHook, required=False), required=False)
+    
+    flags = fields.Nested(Flags, required=False)
+    
+
+
+class TransitionConfigCondition(BaseSchema):
+    # Order swagger.json
+
+    
+    app_id = fields.Str(required=False)
+    
+    ordering_channel = fields.Str(required=False)
+    
+    entity = fields.Str(required=False)
+    
+
+
+class TransitionConfigData(BaseSchema):
+    # Order swagger.json
+
+    
+    conditions = fields.Nested(TransitionConfigCondition, required=False)
+    
+    configs = fields.List(fields.Nested(Config, required=False), required=False)
+    
+
+
+class TransitionConfigPayload(BaseSchema):
+    # Order swagger.json
+
+    
+    data = fields.Nested(TransitionConfigData, required=False)
+    
+
+
 class Page(BaseSchema):
     # Order swagger.json
 
@@ -6509,35 +6723,11 @@ class Brand(BaseSchema):
     
 
 
-class Attributes(BaseSchema):
-    # Order swagger.json
-
-    
-    primary_material = fields.Str(required=False, allow_none=True)
-    
-    essential = fields.Str(required=False, allow_none=True)
-    
-    marketer_name = fields.Str(required=False, allow_none=True)
-    
-    primary_color = fields.Str(required=False, allow_none=True)
-    
-    marketer_address = fields.Str(required=False, allow_none=True)
-    
-    primary_color_hex = fields.Str(required=False, allow_none=True)
-    
-    brand_name = fields.Str(required=False, allow_none=True)
-    
-    name = fields.Str(required=False, allow_none=True)
-    
-    gender = fields.List(fields.Str(required=False), required=False)
-    
-
-
 class Item(BaseSchema):
     # Order swagger.json
 
     
-    attributes = fields.Nested(Attributes, required=False)
+    attributes = fields.Dict(required=False)
     
     brand_id = fields.Int(required=False)
     

@@ -62,6 +62,10 @@ class BlogGetResponse(BaseSchema):
     pass
 
 
+class BlogFilters(BaseSchema):
+    pass
+
+
 class ResourceContent(BaseSchema):
     pass
 
@@ -475,7 +479,15 @@ class BlogGetResponse(BaseSchema):
     
     page = fields.Nested(Page, required=False)
     
-    filters = fields.List(fields.Str(required=False), required=False)
+    filters = fields.Nested(BlogFilters, required=False)
+    
+
+
+class BlogFilters(BaseSchema):
+    # Content swagger.json
+
+    
+    tags = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -1118,8 +1130,6 @@ class Support(BaseSchema):
     created = fields.Boolean(required=False)
     
     _id = fields.Str(required=False)
-    
-    config_type = fields.Str(required=False)
     
     application = fields.Str(required=False)
     

@@ -42,6 +42,14 @@ class PublishExtensionSectionRequest(BaseSchema):
     pass
 
 
+class ExtensionPreviewRequest(BaseSchema):
+    pass
+
+
+class ExtensionPreviewResponse(BaseSchema):
+    pass
+
+
 class PublishExtensionSectionResponse(BaseSchema):
     pass
 
@@ -486,6 +494,24 @@ class PublishExtensionSectionRequest(BaseSchema):
     type = fields.Str(required=False)
     
     status = fields.Str(required=False)
+    
+
+
+class ExtensionPreviewRequest(BaseSchema):
+    # Theme swagger.json
+
+    
+    application_id = fields.Str(required=False)
+    
+    section_preview_hash = fields.Str(required=False)
+    
+
+
+class ExtensionPreviewResponse(BaseSchema):
+    # Theme swagger.json
+
+    
+    message = fields.Str(required=False)
     
 
 

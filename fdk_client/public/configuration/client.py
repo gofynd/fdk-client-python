@@ -42,7 +42,7 @@ class Configuration:
         
 
         url_with_params = await create_url_with_params(api_url=self._urls["searchApplication"], proccessed_params="""{"required":[],"optional":[{"in":"header","name":"authorization","schema":{"type":"string"}},{"in":"query","name":"query","schema":{"type":"string"},"description":"Provide application name"}],"query":[{"in":"query","name":"query","schema":{"type":"string"},"description":"Provide application name"}],"headers":[{"in":"header","name":"authorization","schema":{"type":"string"}}],"path":[]}""", serverType="public", authorization=authorization, query=query)
-        query_string = await create_query_string(authorization=authorization, query=query)
+        query_string = await create_query_string(query=query)
 
         headers = {
             "User-Agent": self._conf.userAgent,
