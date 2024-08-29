@@ -2,6 +2,7 @@
 
 from ..common.exceptions import FDKClientValidationError
 from .ApplicationValidator import LocationValidator
+from ..common.custom_request import custom_request
 
 
 from .cart.client import Cart
@@ -71,3 +72,6 @@ class ApplicationClient:
             self.config.extraHeaders.append(header)
         else:
             raise FDKClientValidationError("Context value should be an dict")
+
+    async def request(self, method, url, query={}, body={}, headers={}):
+        return await custom_request(self, method, url, query, body, headers, "application")

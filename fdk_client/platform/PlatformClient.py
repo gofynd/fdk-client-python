@@ -2,6 +2,7 @@
 
 from .PlatformApplicationClient import PlatformApplicationClient
 from ..common.exceptions import FDKClientValidationError
+from ..common.custom_request import custom_request
 
 
 from .audittrail.client import AuditTrail
@@ -86,3 +87,6 @@ class PlatformClient:
             self.config.extraHeaders.append(header)
         else:
             raise FDKClientValidationError("Context value should be an dict")
+
+    async def request(self, method, url, query={}, body={}, headers={}):
+        return await custom_request(self, method, url, query, body, headers)
