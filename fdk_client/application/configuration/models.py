@@ -785,6 +785,8 @@ class GoogleMap(BaseSchema):
     # Configuration swagger.json
 
     
+    enabled = fields.Boolean(required=False)
+    
     credentials = fields.Nested(GoogleMapCredentials, required=False)
     
 

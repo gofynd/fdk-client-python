@@ -240,6 +240,18 @@ class OrderConfig(BaseSchema):
     pass
 
 
+class DPConfiguration(BaseSchema):
+    pass
+
+
+class PaymentConfig(BaseSchema):
+    pass
+
+
+class CreateOrderConfig(BaseSchema):
+    pass
+
+
 class CreateOrderPayload(BaseSchema):
     pass
 
@@ -353,10 +365,6 @@ class ProcessingDates(BaseSchema):
 
 
 class Shipment(BaseSchema):
-    pass
-
-
-class ShipmentRequestData(BaseSchema):
     pass
 
 
@@ -2135,6 +2143,40 @@ class OrderConfig(BaseSchema):
     
 
 
+class DPConfiguration(BaseSchema):
+    # Order swagger.json
+
+    
+    shipping_by = fields.Str(required=False)
+    
+
+
+class PaymentConfig(BaseSchema):
+    # Order swagger.json
+
+    
+    mode_of_payment = fields.Str(required=False)
+    
+    source = fields.Str(required=False)
+    
+
+
+class CreateOrderConfig(BaseSchema):
+    # Order swagger.json
+
+    
+    dp_configuration = fields.Nested(DPConfiguration, required=False)
+    
+    integration_type = fields.Str(required=False)
+    
+    location_reassignment = fields.Boolean(required=False)
+    
+    payment = fields.Nested(PaymentConfig, required=False)
+    
+    optimal_shipment_creation = fields.Boolean(required=False)
+    
+
+
 class CreateOrderPayload(BaseSchema):
     # Order swagger.json
 
@@ -2677,22 +2719,6 @@ class Shipment(BaseSchema):
     
 
 
-class ShipmentRequestData(BaseSchema):
-    # Order swagger.json
-
-    
-    line_items = fields.List(fields.Nested(LineItem, required=False), required=False)
-    
-    processing_dates = fields.Nested(ProcessingDates, required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    priority = fields.Int(required=False)
-    
-    order_type = fields.Str(required=False)
-    
-
-
 class ShippingInfo(BaseSchema):
     # Order swagger.json
 
@@ -2881,8 +2907,6 @@ class CreateOrderAPI(BaseSchema):
     
     shipments = fields.List(fields.Nested(Shipment, required=False), required=False)
     
-    shipment_request_data = fields.Nested(ShipmentRequestData, required=False)
-    
     shipping_info = fields.Nested(ShippingInfo, required=False)
     
     billing_info = fields.Nested(BillingInfo, required=False)
@@ -2899,7 +2923,7 @@ class CreateOrderAPI(BaseSchema):
     
     tax_info = fields.Nested(TaxInfo, required=False)
     
-    config = fields.Dict(required=False)
+    config = fields.Nested(CreateOrderConfig, required=False)
     
     payment_info = fields.Nested(PaymentInfo, required=False)
     
