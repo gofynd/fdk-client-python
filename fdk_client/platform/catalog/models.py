@@ -258,10 +258,6 @@ class Category(BaseSchema):
     pass
 
 
-class CategoryCreateResponse(BaseSchema):
-    pass
-
-
 class CategoryItems(BaseSchema):
     pass
 
@@ -278,15 +274,7 @@ class CategoryMappingValues(BaseSchema):
     pass
 
 
-class CategoryRequestBody(BaseSchema):
-    pass
-
-
 class CategoryResponse(BaseSchema):
-    pass
-
-
-class CategoryUpdateResponse(BaseSchema):
     pass
 
 
@@ -482,27 +470,11 @@ class DepartmentCategoryTree(BaseSchema):
     pass
 
 
-class DepartmentCreateErrorResponse(BaseSchema):
-    pass
-
-
-class DepartmentCreateResponse(BaseSchema):
-    pass
-
-
-class DepartmentCreateUpdate(BaseSchema):
-    pass
-
-
 class DepartmentErrorResponse(BaseSchema):
     pass
 
 
 class DepartmentIdentifier(BaseSchema):
-    pass
-
-
-class DepartmentModel(BaseSchema):
     pass
 
 
@@ -550,7 +522,7 @@ class GTIN(BaseSchema):
     pass
 
 
-class GenderDetail(BaseSchema):
+class AttributeDetail(BaseSchema):
     pass
 
 
@@ -2465,16 +2437,6 @@ class Category(BaseSchema):
     
 
 
-class CategoryCreateResponse(BaseSchema):
-    # Catalog swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
-    
-
-
 class CategoryItems(BaseSchema):
     # Catalog swagger.json
 
@@ -2525,34 +2487,6 @@ class CategoryMappingValues(BaseSchema):
     
 
 
-class CategoryRequestBody(BaseSchema):
-    # Catalog swagger.json
-
-    
-    departments = fields.List(fields.Int(required=False), required=False)
-    
-    hierarchy = fields.List(fields.Nested(Hierarchy, required=False), required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    level = fields.Int(required=False)
-    
-    marketplaces = fields.Nested(CategoryMapping, required=False)
-    
-    media = fields.Nested(Media1, required=False)
-    
-    name = fields.Str(required=False)
-    
-    priority = fields.Int(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    synonyms = fields.List(fields.Str(required=False), required=False)
-    
-    tryouts = fields.List(fields.Str(required=False), required=False)
-    
-
-
 class CategoryResponse(BaseSchema):
     # Catalog swagger.json
 
@@ -2560,16 +2494,6 @@ class CategoryResponse(BaseSchema):
     items = fields.List(fields.Nested(Category, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
-    
-
-
-class CategoryUpdateResponse(BaseSchema):
-    # Catalog swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    success = fields.Boolean(required=False)
     
 
 
@@ -3297,52 +3221,6 @@ class DepartmentCategoryTree(BaseSchema):
     
 
 
-class DepartmentCreateErrorResponse(BaseSchema):
-    # Catalog swagger.json
-
-    
-    error = fields.Str(required=False)
-    
-
-
-class DepartmentCreateResponse(BaseSchema):
-    # Catalog swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
-    
-
-
-class DepartmentCreateUpdate(BaseSchema):
-    # Catalog swagger.json
-
-    
-    _cls = fields.Str(required=False)
-    
-    _custom_json = fields.Dict(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    logo = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    platforms = fields.Dict(required=False)
-    
-    priority_order = fields.Int(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    synonyms = fields.List(fields.Str(required=False), required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-    uid = fields.Int(required=False)
-    
-
-
 class DepartmentErrorResponse(BaseSchema):
     # Catalog swagger.json
 
@@ -3366,44 +3244,6 @@ class DepartmentIdentifier(BaseSchema):
     slug = fields.Str(required=False)
     
     uid = fields.Int(required=False)
-    
-
-
-class DepartmentModel(BaseSchema):
-    # Catalog swagger.json
-
-    
-    _cls = fields.Str(required=False)
-    
-    _custom_json = fields.Dict(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    created_by = fields.Nested(UserDetail, required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    logo = fields.Str(required=False)
-    
-    modified_by = fields.Nested(UserDetail, required=False)
-    
-    modified_on = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    priority_order = fields.Int(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    synonyms = fields.List(fields.Str(required=False), required=False)
-    
-    uid = fields.Int(required=False)
-    
-    verified_by = fields.Nested(UserDetail, required=False)
-    
-    verified_on = fields.Str(required=False)
     
 
 
@@ -3669,7 +3509,7 @@ class GTIN(BaseSchema):
     
 
 
-class GenderDetail(BaseSchema):
+class AttributeDetail(BaseSchema):
     # Catalog swagger.json
 
     
