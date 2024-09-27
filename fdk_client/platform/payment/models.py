@@ -1339,6 +1339,8 @@ class MultiTenderPaymentMeta(BaseSchema):
     
     payment_gateway = fields.Str(required=False)
     
+    payment_gateway_slug = fields.Str(required=False)
+    
 
 
 class MultiTenderPaymentMethod(BaseSchema):
@@ -2476,6 +2478,8 @@ class CartDetailsSerializer(BaseSchema):
     cart_value = fields.Float(required=False)
     
     total_quantity = fields.Int(required=False)
+    
+    custom_cart_meta = fields.Dict(required=False)
     
 
 

@@ -304,19 +304,11 @@ class CartShipmentsResponse(BaseSchema):
     pass
 
 
-class CartCheckoutCustomMeta(BaseSchema):
-    pass
-
-
 class CustomerDetails(BaseSchema):
     pass
 
 
 class StaffCheckout(BaseSchema):
-    pass
-
-
-class CartCheckoutDetailRequest(BaseSchema):
     pass
 
 
@@ -1711,16 +1703,6 @@ class CartShipmentsResponse(BaseSchema):
     
 
 
-class CartCheckoutCustomMeta(BaseSchema):
-    # Cart swagger.json
-
-    
-    key = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-
-
 class CustomerDetails(BaseSchema):
     # Cart swagger.json
 
@@ -1746,60 +1728,6 @@ class StaffCheckout(BaseSchema):
     first_name = fields.Str(required=False)
     
     _id = fields.Str(required=False)
-    
-
-
-class CartCheckoutDetailRequest(BaseSchema):
-    # Cart swagger.json
-
-    
-    custom_meta = fields.List(fields.Nested(CartCheckoutCustomMeta, required=False), required=False)
-    
-    customer_details = fields.Dict(required=False)
-    
-    merchant_code = fields.Str(required=False)
-    
-    id = fields.Str(required=False)
-    
-    payment_auto_confirm = fields.Boolean(required=False)
-    
-    payment_mode = fields.Str(required=False)
-    
-    aggregator = fields.Str(required=False)
-    
-    address_id = fields.Str(required=False)
-    
-    callback_url = fields.Str(required=False)
-    
-    delivery_address = fields.Dict(required=False)
-    
-    staff = fields.Nested(StaffCheckout, required=False)
-    
-    order_type = fields.Str(required=False)
-    
-    ordering_store = fields.Int(required=False)
-    
-    extra_meta = fields.Dict(required=False)
-    
-    payment_identifier = fields.Str(required=False)
-    
-    billing_address = fields.Dict(required=False)
-    
-    payment_params = fields.Dict(required=False)
-    
-    billing_address_id = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    payment_extra_identifiers = fields.Dict(required=False)
-    
-    iin = fields.Str(required=False)
-    
-    network = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    card_id = fields.Str(required=False)
     
 
 

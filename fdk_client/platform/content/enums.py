@@ -112,6 +112,8 @@ class PageType(Enum):
     
     ORDER_STATUS = "order-status"
     
+    LOCATE_US = "locate-us"
+    
     @classmethod
     async def is_valid(cls, value):
         if value in cls._value2member_map_:

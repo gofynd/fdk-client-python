@@ -72,49 +72,6 @@ class Catalog:
 
         return response
     
-    async def createCategories(self, body="", request_headers:Dict={}):
-        """Allows to create product categories for specific company.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = CatalogValidator.createCategories()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CategoryRequestBody
-        schema = CategoryRequestBody()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CategoryCreateResponse
-            schema = CategoryCreateResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createCategories")
-                print(e)
-
-        return response
-    
     async def getCategoryData(self, uid=None, request_headers:Dict={}):
         """Retrieve detailed information about a specific category by its uid for a specific company.
         :param uid : Category unique id : type string
@@ -153,52 +110,6 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getCategoryData")
-                print(e)
-
-        return response
-    
-    async def updateCategory(self, uid=None, body="", request_headers:Dict={}):
-        """Modify data for an existing category by its uid for a specific company.
-        :param uid : Category unique id : type string
-        """
-        payload = {}
-        
-        if uid is not None:
-            payload["uid"] = uid
-
-        # Parameter validation
-        schema = CatalogValidator.updateCategory()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CategoryRequestBody
-        schema = CategoryRequestBody()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Category unique id","in":"path","name":"uid","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Category unique id","in":"path","name":"uid","required":true,"schema":{"type":"string"}}]}""", serverType="platform", uid=uid)
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/category/{uid}/", uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CategoryUpdateResponse
-            schema = CategoryUpdateResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateCategory")
                 print(e)
 
         return response
@@ -305,49 +216,6 @@ class Catalog:
 
         return response
     
-    async def createDepartments(self, body="", request_headers:Dict={}):
-        """Create departments for a specific company.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = CatalogValidator.createDepartments()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import DepartmentCreateUpdate
-        schema = DepartmentCreateUpdate()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DepartmentCreateResponse
-            schema = DepartmentCreateResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createDepartments")
-                print(e)
-
-        return response
-    
     async def getDepartmentData(self, uid=None, request_headers:Dict={}):
         """Retrieve detailed information about a specific department for a specific company by uid.
         :param uid : A `uid` is a unique identifier of a department. : type string
@@ -386,52 +254,6 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getDepartmentData")
-                print(e)
-
-        return response
-    
-    async def updateDepartment(self, uid=None, body="", request_headers:Dict={}):
-        """Modify the department data by their uid for a specifc company.
-        :param uid : A `uid` is a unique identifier of a department. : type string
-        """
-        payload = {}
-        
-        if uid is not None:
-            payload["uid"] = uid
-
-        # Parameter validation
-        schema = CatalogValidator.updateDepartment()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import DepartmentCreateUpdate
-        schema = DepartmentCreateUpdate()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `uid` is a unique identifier of a department.","in":"path","name":"uid","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `uid` is a unique identifier of a department.","in":"path","name":"uid","required":true,"schema":{"type":"string"}}]}""", serverType="platform", uid=uid)
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/departments/{uid}/", uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import DepartmentModel
-            schema = DepartmentModel()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateDepartment")
                 print(e)
 
         return response
@@ -1362,7 +1184,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/", """{"required":[{"description":"company for which you want to view the genders","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"It is the name of the l3 cateogry","in":"query","name":"category","required":true,"schema":{"type":"string"}}],"optional":[{"description":"If true, returns filtered values, else returns all the attributes","in":"query","name":"filter","required":false,"schema":{"type":"boolean"}}],"query":[{"description":"It is the name of the l3 cateogry","in":"query","name":"category","required":true,"schema":{"type":"string"}},{"description":"If true, returns filtered values, else returns all the attributes","in":"query","name":"filter","required":false,"schema":{"type":"boolean"}}],"headers":[],"path":[{"description":"company for which you want to view the genders","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", category=category, filter=filter)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/", """{"required":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"It is the name of the l3 cateogry","in":"query","name":"category","required":true,"schema":{"type":"string"}}],"optional":[{"description":"If true, returns filtered values, else returns all the attributes","in":"query","name":"filter","required":false,"schema":{"type":"boolean"}}],"query":[{"description":"It is the name of the l3 cateogry","in":"query","name":"category","required":true,"schema":{"type":"string"}},{"description":"If true, returns filtered values, else returns all the attributes","in":"query","name":"filter","required":false,"schema":{"type":"boolean"}}],"headers":[],"path":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", category=category, filter=filter)
         query_string = await create_query_string(category=category, filter=filter)
 
         headers = {}
@@ -1390,9 +1212,9 @@ class Catalog:
 
         return response
     
-    async def getGenderAttribute(self, attribute_slug=None, request_headers:Dict={}):
-        """Retrieve the gender attribute for catalog listings by attribute slug passed for a specific company.
-        :param attribute_slug : slug of the attribute for which you want to view the genders : type string
+    async def getAttribute(self, attribute_slug=None, request_headers:Dict={}):
+        """Retrieve the attribute detail for catalog listings by attribute slug passed for a specific company.
+        :param attribute_slug : Slug of the attribute for which you want to view the details : type string
         """
         payload = {}
         
@@ -1400,11 +1222,11 @@ class Catalog:
             payload["attribute_slug"] = attribute_slug
 
         # Parameter validation
-        schema = CatalogValidator.getGenderAttribute()
+        schema = CatalogValidator.getAttribute()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/{attribute_slug}", """{"required":[{"description":"company for which you want to view the genders","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"slug of the attribute for which you want to view the genders","in":"path","name":"attribute_slug","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"company for which you want to view the genders","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"slug of the attribute for which you want to view the genders","in":"path","name":"attribute_slug","required":true,"schema":{"type":"string"}}]}""", serverType="platform", attribute_slug=attribute_slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/{attribute_slug}", """{"required":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Slug of the attribute for which you want to view the details","in":"path","name":"attribute_slug","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"The company id for which the detail needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Slug of the attribute for which you want to view the details","in":"path","name":"attribute_slug","required":true,"schema":{"type":"string"}}]}""", serverType="platform", attribute_slug=attribute_slug)
         query_string = await create_query_string()
 
         headers = {}
@@ -1422,12 +1244,12 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-attributes/{attribute_slug}", attribute_slug=attribute_slug), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GenderDetail
-            schema = GenderDetail()
+            from .models import AttributeDetail
+            schema = AttributeDetail()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getGenderAttribute")
+                print("Response Validation failed for getAttribute")
                 print(e)
 
         return response

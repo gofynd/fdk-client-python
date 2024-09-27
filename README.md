@@ -14,7 +14,7 @@ Get started with the python Development SDK for Fynd Platform
 ### Usage
 
 ```bash
-pip install "git+https://github.com/gofynd/fdk-client-python.git@1.4.10-beta.2#egg=fdk_client"
+pip install "git+https://github.com/gofynd/fdk-client-python.git@1.4.12-beta.1#egg=fdk_client"
 ```
 
 Using this method, you can `import` fdk-client-python like so:
@@ -175,6 +175,57 @@ try:
     # use res
 except Exception as e:
     print(e)
+```
+
+---
+
+### Sample Usage - request function
+
+The request function allows you to make custom API requests with ease. It is available on both `platform` and `application` client.
+
+#### Method Signature
+
+```python
+async def request(self, method, url, query={}, body={}, headers={}):
+```
+
+#### Parameters
+
+-   `method`: A `str` representing the HTTP method (e.g., `'GET'`, `'POST'`, `'PUT'`,`'PATCH'`,`'DELETE'`).
+-   `url`: A `str` representing the target URL for the HTTP request.
+-   `query`: An optional `dict` containing key-value pairs for the URL's query parameters. Defaults to an empty dictionary.
+-   `body`: An optional `dict` representing the body of the request, typically used in `POST`, `PUT`, or `PATCH` requests. Defaults to an empty dictionary.
+-   `headers`: An optional `dict` representing any HTTP headers to include with the request. Defaults to an empty dictionary.
+
+#### Return Value
+
+-   The method returns HTTP response object 
+
+#### Example
+
+```python
+url = '/service/platform/catalog/v1.0/company/1/products/'
+method = 'GET'
+query = {
+    "company_id": "1",
+    "page_no": 1,
+    "page_size": 10,
+    "name": "Jeans"
+}
+response = await platformClient.request(method, url, query=query)
+
+url_post = '/service/platform/logistics/v1.0/company/1/packaging-materials'
+method_post = 'POST'
+body_post = {
+    "name": "Pack Big",
+    "width": "24",
+    "height": "24",
+    "length": "24",
+    "package_type": "box",
+    "weight": 100
+}
+response = await platformClient.request(method_post, url_post, body = body_post)
+
 ```
 
 ---

@@ -1,6 +1,7 @@
 """Partner Client."""
 
 from ..common.exceptions import FDKClientValidationError
+from ..common.custom_request import custom_request
 
 
 from .filestorage.client import FileStorage
@@ -34,3 +35,6 @@ class PartnerClient:
             self.config.extraHeaders.append(header)
         else:
             raise FDKClientValidationError("Header value should be an dict")
+
+    async def request(self, method, url, query={}, body={}, headers={}):
+        return await custom_request(self, method, url, query, body, headers)

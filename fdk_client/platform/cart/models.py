@@ -676,14 +676,6 @@ class Files(BaseSchema):
     pass
 
 
-class CartCheckoutCustomMeta(BaseSchema):
-    pass
-
-
-class PlatformCartCheckoutDetailRequest(BaseSchema):
-    pass
-
-
 class CheckCart(BaseSchema):
     pass
 
@@ -3766,84 +3758,6 @@ class Files(BaseSchema):
     key = fields.Str(required=False)
     
     values = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class CartCheckoutCustomMeta(BaseSchema):
-    # Cart swagger.json
-
-    
-    key = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-
-
-class PlatformCartCheckoutDetailRequest(BaseSchema):
-    # Cart swagger.json
-
-    
-    custom_meta = fields.List(fields.Nested(CartCheckoutCustomMeta, required=False), required=False)
-    
-    address_id = fields.Str(required=False)
-    
-    payment_identifier = fields.Str(required=False, allow_none=True)
-    
-    payment_params = fields.Dict(required=False, allow_none=True)
-    
-    payment_auto_confirm = fields.Boolean(required=False)
-    
-    id = fields.Str(required=False)
-    
-    pos = fields.Boolean(required=False)
-    
-    billing_address_id = fields.Str(required=False)
-    
-    merchant_code = fields.Str(required=False)
-    
-    aggregator = fields.Str(required=False)
-    
-    pick_at_store_uid = fields.Int(required=False, allow_none=True)
-    
-    device_id = fields.Str(required=False, allow_none=True)
-    
-    delivery_address = fields.Dict(required=False)
-    
-    payment_mode = fields.Str(required=False)
-    
-    checkout_mode = fields.Str(required=False)
-    
-    customer_details = fields.Dict(required=False, allow_none=True)
-    
-    meta = fields.Dict(required=False)
-    
-    staff = fields.Nested(StaffCheckout, required=False)
-    
-    employee_code = fields.Str(required=False, allow_none=True)
-    
-    billing_address = fields.Dict(required=False)
-    
-    callback_url = fields.Str(required=False, allow_none=True)
-    
-    user_id = fields.Str(required=False, allow_none=True)
-    
-    extra_meta = fields.Dict(required=False)
-    
-    order_type = fields.Str(required=False)
-    
-    files = fields.List(fields.Nested(Files, required=False), required=False)
-    
-    ordering_store = fields.Int(required=False, allow_none=True)
-    
-    payment_extra_identifiers = fields.Dict(required=False)
-    
-    iin = fields.Str(required=False)
-    
-    network = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    card_id = fields.Str(required=False)
     
 
 
