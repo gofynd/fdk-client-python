@@ -436,7 +436,7 @@ class CatalogValidator:
         
         application_id = fields.Str(required=False)
         
-        brand_uid = fields.Str(required=False)
+        brand_uid = fields.Int(required=False)
          
         
     

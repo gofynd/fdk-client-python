@@ -73,16 +73,7 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
         
-    
-    
-        
-        
-        
-    
-    
         
     
     
@@ -155,22 +146,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
-    
-    
         
         
         
@@ -182,13 +157,30 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
     
     
         
         
     
     
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
         
     
     
@@ -478,20 +470,6 @@ class OrderValidator:
          
         
     
-    class getChannelConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class createChannelConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class orderUpdate(BaseSchema):
         
         
@@ -521,13 +499,6 @@ class OrderValidator:
         ordering_channel = fields.Str(required=False)
         
         status = fields.Str(required=False)
-         
-        
-    
-    class fetchCreditBalanceDetail(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
          
         
     
@@ -670,7 +641,7 @@ class OrderValidator:
          
         
     
-    class processManifests(BaseSchema):
+    class generateProcessManifest(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -683,6 +654,16 @@ class OrderValidator:
         company_id = fields.Int(required=False)
         
         manifest_id = fields.Str(required=False)
+        
+        dp_ids = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
+        
+        start_date = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     
@@ -697,8 +678,6 @@ class OrderValidator:
         
         
         company_id = fields.Int(required=False)
-        
-        manifest_id = fields.Str(required=False)
          
         
     
@@ -721,7 +700,7 @@ class OrderValidator:
     class trackShipment(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         shipment_id = fields.Str(required=False)
         
@@ -755,13 +734,6 @@ class OrderValidator:
         company_id = fields.Int(required=False)
         
         log_id = fields.Str(required=False)
-         
-        
-    
-    class generateProcessManifest(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
          
         
     
