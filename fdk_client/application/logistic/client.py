@@ -20,9 +20,11 @@ class Logistic:
             "getAllCountries": "/service/application/logistics/v1.0/country-list",
             "getPincodeZones": "/service/application/logistics/v1.0/pincode/zones",
             "getOptimalLocations": "/service/application/logistics/v1.0/reassign_stores",
+            "getCourierPartners": "/service/application/logistics/v1.0/company/{company_id}/application/{application_id}/shipment/courier-partners",
             "getLocations": "/service/application/logistics/v1.0/locations",
             "getCountries": "/service/application/logistics/v2.0/countries",
             "getCountry": "/service/application/logistics/v1.0/countries/{country_iso_code}",
+            "getDeliveryPromise": "/service/application/logistics/v1.0/delivery-promise",
             "getLocalities": "/service/application/logistics/v1.0/localities/{locality_type}",
             "getLocality": "/service/application/logistics/v1.0/localities/{locality_type}/{locality_value}",
             "validateAddress": "/service/application/logistics/v1.0/country/{country_iso_code}/address/templates/{template_name}/validate"
@@ -69,8 +71,8 @@ class Logistic:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPincodeCity"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/pincode/{pincode}", pincode=pincode), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PincodeApiResponse
-            schema = PincodeApiResponse()
+            from .models import PincodeDetails
+            schema = PincodeDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -90,8 +92,8 @@ class Logistic:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import TATViewRequest
-        schema = TATViewRequest()
+        from .models import TATViewDetails
+        schema = TATViewDetails()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["getTatProduct"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -114,8 +116,8 @@ class Logistic:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTatProduct"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import TATViewResponse
-            schema = TATViewResponse()
+            from .models import TATViewResult
+            schema = TATViewResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -155,8 +157,8 @@ class Logistic:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllCountries"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/country-list", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CountryListResponse
-            schema = CountryListResponse()
+            from .models import CountryListResult
+            schema = CountryListResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -176,8 +178,8 @@ class Logistic:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GetZoneFromPincodeViewRequest
-        schema = GetZoneFromPincodeViewRequest()
+        from .models import GetZoneFromPincodeViewDetails
+        schema = GetZoneFromPincodeViewDetails()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["getPincodeZones"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -200,8 +202,8 @@ class Logistic:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPincodeZones"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/pincode/zones", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetZoneFromPincodeViewResponse
-            schema = GetZoneFromPincodeViewResponse()
+            from .models import GetZoneFromPincodeViewResult
+            schema = GetZoneFromPincodeViewResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -221,8 +223,8 @@ class Logistic:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ReAssignStoreRequest
-        schema = ReAssignStoreRequest()
+        from .models import ReAssignStoreDetails
+        schema = ReAssignStoreDetails()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["getOptimalLocations"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -245,12 +247,63 @@ class Logistic:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOptimalLocations"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/reassign_stores", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ReAssignStoreResponse
-            schema = ReAssignStoreResponse()
+            from .models import ReAssignStoreResult
+            schema = ReAssignStoreResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getOptimalLocations")
+                print(e)
+
+        return response
+    
+    async def getCourierPartners(self, company_id=None, application_id=None, body="", request_headers:Dict={}):
+        """Get all the serviceable courier partners of a destination and the shipments.
+        :param company_id : Unique identifier of the company. : type integer
+        :param application_id : Unique identifier of the sales channel. : type string
+        """
+        payload = {}
+        
+        if company_id is not None:
+            payload["company_id"] = company_id
+        if application_id is not None:
+            payload["application_id"] = application_id
+
+        # Parameter validation
+        schema = LogisticValidator.getCourierPartners()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ShipmentCourierPartnerDetails
+        schema = ShipmentCourierPartnerDetails()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getCourierPartners"], proccessed_params="""{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true}]}""", serverType="application", company_id=company_id, application_id=application_id)
+        query_string = await create_query_string()
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCourierPartners"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/company/{company_id}/application/{application_id}/shipment/courier-partners", company_id=company_id, application_id=application_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShipmentCourierPartnerResult
+            schema = ShipmentCourierPartnerResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCourierPartners")
                 print(e)
 
         return response
@@ -313,8 +366,8 @@ class Logistic:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocations"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/locations", x_application_id=x_application_id, x_application_data=x_application_data, country=country, state=state, city=city, pincode=pincode, sector=sector, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetStoreResponse
-            schema = GetStoreResponse()
+            from .models import GetStoreResult
+            schema = GetStoreResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -323,12 +376,13 @@ class Logistic:
 
         return response
     
-    async def getCountries(self, onboarding=None, page_no=None, page_size=None, q=None, body="", request_headers:Dict={}):
+    async def getCountries(self, onboarding=None, page_no=None, page_size=None, q=None, hierarchy=None, body="", request_headers:Dict={}):
         """List of supported countries.
         :param onboarding : List countries which allowed for onboard on Platform. : type boolean
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 12. : type integer
         :param q : The number of items to retrieve in each page. Default value is 12. : type string
+        :param hierarchy : fetch countries that has certain heirarchy present. : type string
         """
         payload = {}
         
@@ -340,14 +394,16 @@ class Logistic:
             payload["page_size"] = page_size
         if q is not None:
             payload["q"] = q
+        if hierarchy is not None:
+            payload["hierarchy"] = hierarchy
 
         # Parameter validation
         schema = LogisticValidator.getCountries()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCountries"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"onboarding","description":"List countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12,"maximum":250},"required":false},{"in":"query","name":"q","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"onboarding","description":"List countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12,"maximum":250},"required":false},{"in":"query","name":"q","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"string"},"required":false}],"headers":[],"path":[]}""", serverType="application", onboarding=onboarding, page_no=page_no, page_size=page_size, q=q)
-        query_string = await create_query_string(onboarding=onboarding, page_no=page_no, page_size=page_size, q=q)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCountries"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"onboarding","description":"List countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12,"maximum":250},"required":false},{"in":"query","name":"q","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"string"},"required":false},{"in":"query","name":"hierarchy","description":"fetch countries that has certain heirarchy present.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"onboarding","description":"List countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12,"maximum":250},"required":false},{"in":"query","name":"q","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"string"},"required":false},{"in":"query","name":"hierarchy","description":"fetch countries that has certain heirarchy present.","schema":{"type":"string"},"required":false}],"headers":[],"path":[]}""", serverType="application", onboarding=onboarding, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy)
+        query_string = await create_query_string(onboarding=onboarding, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -363,7 +419,7 @@ class Logistic:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCountries"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v2.0/countries", onboarding=onboarding, page_no=page_no, page_size=page_size, q=q), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCountries"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v2.0/countries", onboarding=onboarding, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetCountries
@@ -390,7 +446,7 @@ class Logistic:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCountry"], proccessed_params="""{"required":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string"},"required":true}]}""", serverType="application", country_iso_code=country_iso_code)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCountry"], proccessed_params="""{"required":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string","x-not-enum":true},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string","x-not-enum":true},"required":true}]}""", serverType="application", country_iso_code=country_iso_code)
         query_string = await create_query_string()
 
         headers={}
@@ -416,6 +472,53 @@ class Logistic:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getCountry")
+                print(e)
+
+        return response
+    
+    async def getDeliveryPromise(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
+        """Get delivery promises for both global and store levels based on a specific locality type.
+        :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
+        :param page_size : The number of items to retrieve in each page. Default value is 12. : type integer
+        """
+        payload = {}
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+
+        # Parameter validation
+        schema = LogisticValidator.getDeliveryPromise()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getDeliveryPromise"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getDeliveryPromise"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/delivery-promise", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetPromiseDetails
+            schema = GetPromiseDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDeliveryPromise")
                 print(e)
 
         return response
@@ -555,11 +658,11 @@ class Logistic:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ValidateAddressRequest
-        schema = ValidateAddressRequest()
+        from .models import ValidateAddressDetails
+        schema = ValidateAddressDetails()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["validateAddress"], proccessed_params="""{"required":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string"},"required":true},{"in":"path","name":"template_name","description":"The type of address form.","schema":{"type":"string","enum":["checkout_form","store_os_form","default_display"]},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string"},"required":true},{"in":"path","name":"template_name","description":"The type of address form.","schema":{"type":"string","enum":["checkout_form","store_os_form","default_display"]},"required":true}]}""", serverType="application", country_iso_code=country_iso_code, template_name=template_name)
+        url_with_params = await create_url_with_params(api_url=self._urls["validateAddress"], proccessed_params="""{"required":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string","x-not-enum":true},"required":true},{"in":"path","name":"template_name","description":"The type of address form.","schema":{"type":"string","enum":["checkout_form","store_os_form","default_display"]},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string","x-not-enum":true},"required":true},{"in":"path","name":"template_name","description":"The type of address form.","schema":{"type":"string","enum":["checkout_form","store_os_form","default_display"]},"required":true}]}""", serverType="application", country_iso_code=country_iso_code, template_name=template_name)
         query_string = await create_query_string()
 
         headers={}
@@ -579,8 +682,8 @@ class Logistic:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["validateAddress"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/country/{country_iso_code}/address/templates/{template_name}/validate", country_iso_code=country_iso_code, template_name=template_name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ValidateAddressRequest
-            schema = ValidateAddressRequest()
+            from .models import ValidateAddressDetails
+            schema = ValidateAddressDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:

@@ -26,7 +26,7 @@ class Webhook:
         self._urls.update(urls)
     
     async def saveClickEvent(self, body="", request_headers:Dict={}):
-        """Send click events from sales channels.
+        """Send click events from various sales channels to enable insightful data collection and analysis.
         """
         payload = {}
         
@@ -36,8 +36,8 @@ class Webhook:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ClickEventRequest
-        schema = ClickEventRequest()
+        from .models import ClickEventPayload
+        schema = ClickEventPayload()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["saveClickEvent"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -60,8 +60,8 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["saveClickEvent"]).netloc, "post", await create_url_without_domain("/service/application/webhook/v1.0/click-analytics/events", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ClickEventResponse
-            schema = ClickEventResponse()
+            from .models import ClickEventDetails
+            schema = ClickEventDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:

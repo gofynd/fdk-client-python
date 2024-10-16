@@ -36,7 +36,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/orders/failed", """{"required":[{"in":"path","name":"company_id","description":"Company ID","required":true,"schema":{"type":"integer","example":2}}],"optional":[{"in":"query","name":"application_id","description":"Application ID","required":false,"schema":{"type":"string","example":"64aed475db2cfb5b8a9f623d"}},{"in":"query","name":"page_no","required":false,"description":"Page Number","schema":{"type":"integer","example":1}},{"in":"query","name":"page_size","required":false,"description":"Page Size","schema":{"type":"integer","example":10}},{"in":"query","name":"search_type","required":false,"description":"Search type for filter","schema":{"type":"string","example":"email_id"}},{"in":"query","name":"search_value","required":false,"description":"Search value for filter","schema":{"type":"string","example":"employee@gofynd.com"}}],"query":[{"in":"query","name":"application_id","description":"Application ID","required":false,"schema":{"type":"string","example":"64aed475db2cfb5b8a9f623d"}},{"in":"query","name":"page_no","required":false,"description":"Page Number","schema":{"type":"integer","example":1}},{"in":"query","name":"page_size","required":false,"description":"Page Size","schema":{"type":"integer","example":10}},{"in":"query","name":"search_type","required":false,"description":"Search type for filter","schema":{"type":"string","example":"email_id"}},{"in":"query","name":"search_value","required":false,"description":"Search value for filter","schema":{"type":"string","example":"employee@gofynd.com"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID","required":true,"schema":{"type":"integer","example":2}}]}""", serverType="platform", page_no=page_no, page_size=page_size, search_type=search_type, search_value=search_value)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/orders/failed", """{"required":[{"in":"path","name":"company_id","description":"Company ID","required":true,"schema":{"type":"integer","example":2}}],"optional":[{"in":"query","name":"application_id","description":"Application ID","required":false,"schema":{"type":"string","example":"64aed475db2cfb5b8a9f623d"}},{"in":"query","name":"page_no","required":false,"description":"Page Number","schema":{"type":"integer","example":1}},{"in":"query","name":"page_size","required":false,"description":"Page Size","schema":{"type":"integer","example":10}},{"in":"query","name":"search_type","required":false,"description":"Search type for filter","schema":{"type":"string","example":"email_id","x-not-enum":true}},{"in":"query","name":"search_value","required":false,"description":"Search value for filter","schema":{"type":"string","example":"employee@gofynd.com"}}],"query":[{"in":"query","name":"application_id","description":"Application ID","required":false,"schema":{"type":"string","example":"64aed475db2cfb5b8a9f623d"}},{"in":"query","name":"page_no","required":false,"description":"Page Number","schema":{"type":"integer","example":1}},{"in":"query","name":"page_size","required":false,"description":"Page Size","schema":{"type":"integer","example":10}},{"in":"query","name":"search_type","required":false,"description":"Search type for filter","schema":{"type":"string","example":"email_id","x-not-enum":true}},{"in":"query","name":"search_value","required":false,"description":"Search value for filter","schema":{"type":"string","example":"employee@gofynd.com"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID","required":true,"schema":{"type":"integer","example":2}}]}""", serverType="platform", page_no=page_no, page_size=page_size, search_type=search_type, search_value=search_value)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, search_type=search_type, search_value=search_value)
 
         headers = {}
@@ -60,6 +60,49 @@ class Order:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for failedOrderLogs")
+                print(e)
+
+        return response
+    
+    async def getRules(self, body="", request_headers:Dict={}):
+        """Retrieves a comprehensive list of RMA (Return Merchandise Authorization) rules associated with  a specific company and application. These rules dictate the processes for handling returns,  including actions, reasons, quality control (QC) types, and associated questions.  The endpoint allows for filtering and pagination based on input conditions, providing a tailored set of rules that match the criteria specified.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = OrderValidator.getRules()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import RuleListRequestSchema
+        schema = RuleListRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/rule_list", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/rule_list", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RuleListResponseSchema
+            schema = RuleListResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getRules")
                 print(e)
 
         return response
@@ -112,10 +155,10 @@ class Order:
     async def getApplicationShipments(self, lane=None, search_type=None, search_id=None, from_date=None, to_date=None, dp_ids=None, ordering_company_id=None, stores=None, sales_channel=None, request_by_ext=None, page_no=None, page_size=None, customer_id=None, is_priority_sort=None, exclude_locked_shipments=None, request_headers:Dict={}):
         """Get shipments of a particular sales channel based on the filters provided
         :param lane :  : type string
-        :param search_type :  : type string
+        :param search_type : search_type refers to the field that will be used as the target for the search operation : type string
         :param search_id :  : type string
-        :param from_date :  : type string
-        :param to_date :  : type string
+        :param from_date : Date time in UTC timezone as per ISO format. : type string
+        :param to_date : Date time in UTC timezone as per ISO format. : type string
         :param dp_ids :  : type string
         :param ordering_company_id :  : type string
         :param stores :  : type string
@@ -165,7 +208,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipments/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[{"name":"lane","in":"query","required":false,"schema":{"type":"string"}},{"name":"search_type","in":"query","required":false,"schema":{"type":"string"}},{"name":"search_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"from_date","in":"query","required":false,"schema":{"type":"string"}},{"name":"to_date","in":"query","required":false,"schema":{"type":"string"}},{"name":"dp_ids","in":"query","required":false,"schema":{"type":"string"}},{"name":"ordering_company_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"stores","in":"query","required":false,"schema":{"type":"string"}},{"name":"sales_channel","in":"query","required":false,"schema":{"type":"string"}},{"name":"request_by_ext","in":"query","required":false,"schema":{"type":"string"}},{"name":"page_no","in":"query","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","required":false,"schema":{"type":"integer"}},{"name":"customer_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"is_priority_sort","in":"query","required":false,"schema":{"type":"boolean","default":true}},{"name":"exclude_locked_shipments","in":"query","required":false,"schema":{"type":"boolean","default":true}}],"query":[{"name":"lane","in":"query","required":false,"schema":{"type":"string"}},{"name":"search_type","in":"query","required":false,"schema":{"type":"string"}},{"name":"search_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"from_date","in":"query","required":false,"schema":{"type":"string"}},{"name":"to_date","in":"query","required":false,"schema":{"type":"string"}},{"name":"dp_ids","in":"query","required":false,"schema":{"type":"string"}},{"name":"ordering_company_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"stores","in":"query","required":false,"schema":{"type":"string"}},{"name":"sales_channel","in":"query","required":false,"schema":{"type":"string"}},{"name":"request_by_ext","in":"query","required":false,"schema":{"type":"string"}},{"name":"page_no","in":"query","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","required":false,"schema":{"type":"integer"}},{"name":"customer_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"is_priority_sort","in":"query","required":false,"schema":{"type":"boolean","default":true}},{"name":"exclude_locked_shipments","in":"query","required":false,"schema":{"type":"boolean","default":true}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort, exclude_locked_shipments=exclude_locked_shipments)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipments/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[{"name":"lane","in":"query","required":false,"schema":{"type":"string"}},{"name":"search_type","in":"query","description":"search_type refers to the field that will be used as the target for the search operation","required":false,"schema":{"type":"string","enum":["shipment_id","order_id","channel_name","fynd_order_id"]}},{"name":"search_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"from_date","in":"query","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date"}},{"name":"to_date","in":"query","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date"}},{"name":"dp_ids","in":"query","required":false,"schema":{"type":"string"}},{"name":"ordering_company_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"stores","in":"query","required":false,"schema":{"type":"string"}},{"name":"sales_channel","in":"query","required":false,"schema":{"type":"string"}},{"name":"request_by_ext","in":"query","required":false,"schema":{"type":"string"}},{"name":"page_no","in":"query","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","required":false,"schema":{"type":"integer"}},{"name":"customer_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"is_priority_sort","in":"query","required":false,"schema":{"type":"boolean","default":true}},{"name":"exclude_locked_shipments","in":"query","required":false,"schema":{"type":"boolean","default":true}}],"query":[{"name":"lane","in":"query","required":false,"schema":{"type":"string"}},{"name":"search_type","in":"query","description":"search_type refers to the field that will be used as the target for the search operation","required":false,"schema":{"type":"string","enum":["shipment_id","order_id","channel_name","fynd_order_id"]}},{"name":"search_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"from_date","in":"query","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date"}},{"name":"to_date","in":"query","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date"}},{"name":"dp_ids","in":"query","required":false,"schema":{"type":"string"}},{"name":"ordering_company_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"stores","in":"query","required":false,"schema":{"type":"string"}},{"name":"sales_channel","in":"query","required":false,"schema":{"type":"string"}},{"name":"request_by_ext","in":"query","required":false,"schema":{"type":"string"}},{"name":"page_no","in":"query","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","required":false,"schema":{"type":"integer"}},{"name":"customer_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"is_priority_sort","in":"query","required":false,"schema":{"type":"boolean","default":true}},{"name":"exclude_locked_shipments","in":"query","required":false,"schema":{"type":"boolean","default":true}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort, exclude_locked_shipments=exclude_locked_shipments)
         query_string = await create_query_string(lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort, exclude_locked_shipments=exclude_locked_shipments)
 
         headers = {}
@@ -183,8 +226,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipments/", lane=lane, search_type=search_type, search_id=search_id, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort, exclude_locked_shipments=exclude_locked_shipments), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentInternalPlatformViewResponse
-            schema = ShipmentInternalPlatformViewResponse()
+            from .models import ShipmentInternalPlatformViewResponseSchema
+            schema = ShipmentInternalPlatformViewResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -267,8 +310,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/orders/shipments/reasons/{action}", action=action), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentReasonsResponse
-            schema = ShipmentReasonsResponse()
+            from .models import ShipmentReasonsResponseSchema
+            schema = ShipmentReasonsResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:

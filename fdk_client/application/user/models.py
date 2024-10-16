@@ -8,7 +8,7 @@ from ..ApplicationModel import BaseSchema
 
 
 
-class UpdateUserAttributesRequest(BaseSchema):
+class UpdateUserAttributes(BaseSchema):
     pass
 
 
@@ -124,11 +124,11 @@ class AuthSuccess(BaseSchema):
     pass
 
 
-class UserExistsResponse(BaseSchema):
+class UserExistsDetails(BaseSchema):
     pass
 
 
-class SendOtpResponse(BaseSchema):
+class SendOtp(BaseSchema):
     pass
 
 
@@ -176,7 +176,7 @@ class DeleteUserSuccess(BaseSchema):
     pass
 
 
-class OtpSuccess(BaseSchema):
+class SendOtpSuccess(BaseSchema):
     pass
 
 
@@ -319,7 +319,7 @@ class Email(BaseSchema):
 
 
 
-class UpdateUserAttributesRequest(BaseSchema):
+class UpdateUserAttributes(BaseSchema):
     # User swagger.json
 
     
@@ -675,7 +675,7 @@ class AuthSuccess(BaseSchema):
     
 
 
-class UserExistsResponse(BaseSchema):
+class UserExistsDetails(BaseSchema):
     # User swagger.json
 
     
@@ -683,7 +683,7 @@ class UserExistsResponse(BaseSchema):
     
 
 
-class SendOtpResponse(BaseSchema):
+class SendOtp(BaseSchema):
     # User swagger.json
 
     
@@ -865,7 +865,7 @@ class DeleteUserSuccess(BaseSchema):
     
 
 
-class OtpSuccess(BaseSchema):
+class SendOtpSuccess(BaseSchema):
     # User swagger.json
 
     

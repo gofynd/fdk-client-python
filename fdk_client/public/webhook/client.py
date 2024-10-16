@@ -59,8 +59,8 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["fetchAllWebhookEvents"]).netloc, "get", await create_url_without_domain("/service/common/webhook/v1.0/events", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import EventConfigResponse
-            schema = EventConfigResponse()
+            from .models import EventDetails
+            schema = EventDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -101,8 +101,8 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["queryWebhookEventDetails"]).netloc, "post", await create_url_without_domain("/service/common/webhook/v1.0/events/query-event-details", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import EventConfigResponse
-            schema = EventConfigResponse()
+            from .models import EventDetails
+            schema = EventDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -164,8 +164,8 @@ class Webhook:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import TransformEventRequest
-        schema = TransformEventRequest()
+        from .models import TransformEventPayload
+        schema = TransformEventPayload()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["testHandlerTransformation"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
@@ -189,8 +189,8 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["testHandlerTransformation"]).netloc, "post", await create_url_without_domain("/service/common/webhook/v1.0/events/transform-event", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import TransformEventResponse
-            schema = TransformEventResponse()
+            from .models import TransformEventResult
+            schema = TransformEventResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -210,8 +210,8 @@ class Webhook:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ValidateSchemaRequest
-        schema = ValidateSchemaRequest()
+        from .models import ValidateSchemaPayload
+        schema = ValidateSchemaPayload()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["validateSchema"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
@@ -235,8 +235,8 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["validateSchema"]).netloc, "post", await create_url_without_domain("/service/common/webhook/v1.0/events/validate-event-schema", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ValidateSchemaResponse
-            schema = ValidateSchemaResponse()
+            from .models import ValidateSchemaResult
+            schema = ValidateSchemaResult()
             try:
                 schema.load(response["json"])
             except Exception as e:

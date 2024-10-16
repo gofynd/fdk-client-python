@@ -69,8 +69,8 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import MobileAppConfigRequest
-        schema = MobileAppConfigRequest()
+        from .models import MobileAppConfigRequestSchema
+        schema = MobileAppConfigRequestSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/build/{platform_type}/configuration", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string","enum":["android","ios"]},"description":"The device platform for which the mobile app is built, e.g. android, ios.","in":"path","required":true,"name":"platform_type"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string","enum":["android","ios"]},"description":"The device platform for which the mobile app is built, e.g. android, ios.","in":"path","required":true,"name":"platform_type"}]}""", serverType="platform", platform_type=platform_type)
@@ -172,8 +172,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/feature", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AppFeatureResponse
-            schema = AppFeatureResponse()
+            from .models import AppFeatureResponseSchema
+            schema = AppFeatureResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -193,8 +193,8 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import AppFeatureRequest
-        schema = AppFeatureRequest()
+        from .models import AppFeatureRequestSchema
+        schema = AppFeatureRequestSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/feature", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
@@ -236,8 +236,8 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import AppFeatureRequest
-        schema = AppFeatureRequest()
+        from .models import AppFeatureRequestSchema
+        schema = AppFeatureRequestSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/feature", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
@@ -461,8 +461,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/token", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import TokenResponse
-            schema = TokenResponse()
+            from .models import TokenResponseSchema
+            schema = TokenResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -482,8 +482,8 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import TokenResponse
-        schema = TokenResponse()
+        from .models import TokenResponseSchema
+        schema = TokenResponseSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/token", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
@@ -504,8 +504,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/token", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import TokenResponse
-            schema = TokenResponse()
+            from .models import TokenResponseSchema
+            schema = TokenResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -552,8 +552,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/companies", uid=uid, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CompaniesResponse
-            schema = CompaniesResponse()
+            from .models import CompaniesResponseSchema
+            schema = CompaniesResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -597,8 +597,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/stores", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import StoresResponse
-            schema = StoresResponse()
+            from .models import StoresResponseSchema
+            schema = StoresResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -843,8 +843,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/currency/supported", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AppCurrencyResponse
-            schema = AppCurrencyResponse()
+            from .models import AppCurrencyResponseSchema
+            schema = AppCurrencyResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -870,8 +870,8 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import FilterOrderingStoreRequest
-        schema = FilterOrderingStoreRequest()
+        from .models import FilterOrderingStoreRequestSchema
+        schema = FilterOrderingStoreRequestSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-store/stores/filter", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", page_no=page_no, page_size=page_size)
@@ -1022,8 +1022,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-store/staff-stores", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OrderingStoresResponse
-            schema = OrderingStoresResponse()
+            from .models import OrderingStoresResponseSchema
+            schema = OrderingStoresResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1043,8 +1043,8 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import OrderingStoreSelectRequest
-        schema = OrderingStoreSelectRequest()
+        from .models import OrderingStoreSelectRequestSchema
+        schema = OrderingStoreSelectRequestSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-store/select", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
@@ -1065,8 +1065,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-store/select", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessMessageResponse
-            schema = SuccessMessageResponse()
+            from .models import SuccessMessageResponseSchema
+            schema = SuccessMessageResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1104,8 +1104,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-store/select", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessMessageResponse
-            schema = SuccessMessageResponse()
+            from .models import SuccessMessageResponseSchema
+            schema = SuccessMessageResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1143,8 +1143,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DomainsResponse
-            schema = DomainsResponse()
+            from .models import DomainsResponseSchema
+            schema = DomainsResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1164,8 +1164,8 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DomainAddRequest
-        schema = DomainAddRequest()
+        from .models import DomainAddRequestSchema
+        schema = DomainAddRequestSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
@@ -1228,8 +1228,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessMessageResponse
-            schema = SuccessMessageResponse()
+            from .models import SuccessMessageResponseSchema
+            schema = SuccessMessageResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1249,8 +1249,8 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateDomainTypeRequest
-        schema = UpdateDomainTypeRequest()
+        from .models import UpdateDomainTypeRequestSchema
+        schema = UpdateDomainTypeRequestSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain/set-domain", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
@@ -1271,8 +1271,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain/set-domain", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DomainsResponse
-            schema = DomainsResponse()
+            from .models import DomainsResponseSchema
+            schema = DomainsResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1292,8 +1292,8 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DomainStatusRequest
-        schema = DomainStatusRequest()
+        from .models import DomainStatusRequestSchema
+        schema = DomainStatusRequestSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain/domain-status", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Alphanumeric ID allotted to an application (sales channel website) created within a business account","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
@@ -1314,8 +1314,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/domain/domain-status", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DomainStatusResponse
-            schema = DomainStatusResponse()
+            from .models import DomainStatusResponseSchema
+            schema = DomainStatusResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:

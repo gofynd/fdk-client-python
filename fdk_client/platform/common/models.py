@@ -8,7 +8,7 @@ from ..PlatformModel import BaseSchema
 
 
 
-class ApplicationResponse(BaseSchema):
+class ApplicationResponseSchema(BaseSchema):
     pass
 
 
@@ -48,7 +48,7 @@ class NotFound(BaseSchema):
     pass
 
 
-class BadRequest(BaseSchema):
+class BadRequestSchema(BaseSchema):
     pass
 
 
@@ -71,7 +71,7 @@ class Locations(BaseSchema):
 
 
 
-class ApplicationResponse(BaseSchema):
+class ApplicationResponseSchema(BaseSchema):
     # Common swagger.json
 
     
@@ -233,7 +233,7 @@ class NotFound(BaseSchema):
     
 
 
-class BadRequest(BaseSchema):
+class BadRequestSchema(BaseSchema):
     # Common swagger.json
 
     

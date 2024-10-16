@@ -8,31 +8,31 @@ from ..ApplicationModel import BaseSchema
 
 
 
-class GetStoreResponse(BaseSchema):
+class GetStoreResult(BaseSchema):
     pass
 
 
-class StoreItemResponse(BaseSchema):
+class StoreItemResult(BaseSchema):
     pass
 
 
-class ValidateAddressRequest(BaseSchema):
+class ValidateAddressDetails(BaseSchema):
     pass
 
 
-class PincodeParentsResponse(BaseSchema):
+class PincodeParentsResult(BaseSchema):
     pass
 
 
-class PincodeMetaResponse(BaseSchema):
+class PincodeMetaResult(BaseSchema):
     pass
 
 
-class PincodeErrorSchemaResponse(BaseSchema):
+class PincodeErrorSchemaResult(BaseSchema):
     pass
 
 
-class CountryMetaResponse(BaseSchema):
+class CountryMetaResult(BaseSchema):
     pass
 
 
@@ -40,55 +40,55 @@ class PincodeLatLongData(BaseSchema):
     pass
 
 
-class PincodeDataResponse(BaseSchema):
+class PincodeDataResult(BaseSchema):
     pass
 
 
-class PincodeApiResponse(BaseSchema):
+class PincodeDetails(BaseSchema):
     pass
 
 
-class TATCategoryRequest(BaseSchema):
+class TATCategoryDetails(BaseSchema):
     pass
 
 
-class TATArticlesRequest(BaseSchema):
+class TATArticlesDetails(BaseSchema):
     pass
 
 
-class TATLocationDetailsRequest(BaseSchema):
+class TATLocationDetailsDetails(BaseSchema):
     pass
 
 
-class TATViewRequest(BaseSchema):
+class TATViewDetails(BaseSchema):
     pass
 
 
-class TATErrorSchemaResponse(BaseSchema):
+class TATErrorSchemaResult(BaseSchema):
     pass
 
 
-class TATTimestampResponse(BaseSchema):
+class TATTimestampResult(BaseSchema):
     pass
 
 
-class TATFormattedResponse(BaseSchema):
+class TATFormattedResult(BaseSchema):
     pass
 
 
-class TATPromiseResponse(BaseSchema):
+class TATPromiseResult(BaseSchema):
     pass
 
 
-class TATArticlesResponse(BaseSchema):
+class TATArticlesResult(BaseSchema):
     pass
 
 
-class TATLocationDetailsResponse(BaseSchema):
+class TATLocationDetailsResult(BaseSchema):
     pass
 
 
-class TATViewResponse(BaseSchema):
+class TATViewResult(BaseSchema):
     pass
 
 
@@ -96,31 +96,31 @@ class DP(BaseSchema):
     pass
 
 
-class LogisticsResponse(BaseSchema):
+class LogisticsResult(BaseSchema):
     pass
 
 
-class CountryEntityResponse(BaseSchema):
+class CountryEntityResult(BaseSchema):
     pass
 
 
-class CountryListResponse(BaseSchema):
+class CountryListResult(BaseSchema):
     pass
 
 
-class GetZoneFromPincodeViewRequest(BaseSchema):
+class GetZoneFromPincodeViewDetails(BaseSchema):
     pass
 
 
-class GetZoneFromPincodeViewResponse(BaseSchema):
+class GetZoneFromPincodeViewResult(BaseSchema):
     pass
 
 
-class ReAssignStoreRequest(BaseSchema):
+class ReAssignStoreDetails(BaseSchema):
     pass
 
 
-class ReAssignStoreResponse(BaseSchema):
+class ReAssignStoreResult(BaseSchema):
     pass
 
 
@@ -208,24 +208,84 @@ class GetLocality(BaseSchema):
     pass
 
 
-class ErrorResponse(BaseSchema):
+class ShipmentsArticles(BaseSchema):
+    pass
+
+
+class ShipmentDimension(BaseSchema):
+    pass
+
+
+class Shipments(BaseSchema):
+    pass
+
+
+class ShipmentCourierPartnerDetails(BaseSchema):
+    pass
+
+
+class CourierPartnerPromise(BaseSchema):
+    pass
+
+
+class CourierPartners(BaseSchema):
+    pass
+
+
+class ShipmentCourierPartners(BaseSchema):
+    pass
+
+
+class ShipmentCourierPartnerResult(BaseSchema):
+    pass
+
+
+class ShipmentsCourierPartnersServiceability(BaseSchema):
+    pass
+
+
+class ServiceabilityLocation(BaseSchema):
+    pass
+
+
+class GetPromiseDetails(BaseSchema):
+    pass
+
+
+class StorePromise(BaseSchema):
+    pass
+
+
+class Promise(BaseSchema):
+    pass
+
+
+class ErrorResult(BaseSchema):
+    pass
+
+
+class ValidationError(BaseSchema):
+    pass
+
+
+class StandardError(BaseSchema):
     pass
 
 
 
 
 
-class GetStoreResponse(BaseSchema):
+class GetStoreResult(BaseSchema):
     # Logistic swagger.json
 
     
-    items = fields.List(fields.Nested(StoreItemResponse, required=False), required=False)
+    items = fields.List(fields.Nested(StoreItemResult, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
 
 
-class StoreItemResponse(BaseSchema):
+class StoreItemResult(BaseSchema):
     # Logistic swagger.json
 
     
@@ -247,7 +307,7 @@ class StoreItemResponse(BaseSchema):
     
 
 
-class ValidateAddressRequest(BaseSchema):
+class ValidateAddressDetails(BaseSchema):
     # Logistic swagger.json
 
     
@@ -277,7 +337,7 @@ class ValidateAddressRequest(BaseSchema):
     
 
 
-class PincodeParentsResponse(BaseSchema):
+class PincodeParentsResult(BaseSchema):
     # Logistic swagger.json
 
     
@@ -291,7 +351,7 @@ class PincodeParentsResponse(BaseSchema):
     
 
 
-class PincodeMetaResponse(BaseSchema):
+class PincodeMetaResult(BaseSchema):
     # Logistic swagger.json
 
     
@@ -301,7 +361,7 @@ class PincodeMetaResponse(BaseSchema):
     
 
 
-class PincodeErrorSchemaResponse(BaseSchema):
+class PincodeErrorSchemaResult(BaseSchema):
     # Logistic swagger.json
 
     
@@ -313,7 +373,7 @@ class PincodeErrorSchemaResponse(BaseSchema):
     
 
 
-class CountryMetaResponse(BaseSchema):
+class CountryMetaResult(BaseSchema):
     # Logistic swagger.json
 
     
@@ -333,19 +393,19 @@ class PincodeLatLongData(BaseSchema):
     
 
 
-class PincodeDataResponse(BaseSchema):
+class PincodeDataResult(BaseSchema):
     # Logistic swagger.json
 
     
-    parents = fields.List(fields.Nested(PincodeParentsResponse, required=False), required=False)
+    parents = fields.List(fields.Nested(PincodeParentsResult, required=False), required=False)
     
-    meta = fields.Nested(PincodeMetaResponse, required=False)
+    meta = fields.Nested(PincodeMetaResult, required=False)
     
     display_name = fields.Str(required=False)
     
-    error = fields.Nested(PincodeErrorSchemaResponse, required=False)
+    error = fields.Nested(PincodeErrorSchemaResult, required=False)
     
-    meta_code = fields.Nested(CountryMetaResponse, required=False)
+    meta_code = fields.Nested(CountryMetaResult, required=False)
     
     lat_long = fields.Nested(PincodeLatLongData, required=False)
     
@@ -357,19 +417,19 @@ class PincodeDataResponse(BaseSchema):
     
 
 
-class PincodeApiResponse(BaseSchema):
+class PincodeDetails(BaseSchema):
     # Logistic swagger.json
 
     
     success = fields.Boolean(required=False)
     
-    data = fields.List(fields.Nested(PincodeDataResponse, required=False), required=False)
+    data = fields.List(fields.Nested(PincodeDataResult, required=False), required=False)
     
-    error = fields.Nested(PincodeErrorSchemaResponse, required=False)
+    error = fields.Nested(PincodeErrorSchemaResult, required=False)
     
 
 
-class TATCategoryRequest(BaseSchema):
+class TATCategoryDetails(BaseSchema):
     # Logistic swagger.json
 
     
@@ -379,11 +439,11 @@ class TATCategoryRequest(BaseSchema):
     
 
 
-class TATArticlesRequest(BaseSchema):
+class TATArticlesDetails(BaseSchema):
     # Logistic swagger.json
 
     
-    category = fields.Nested(TATCategoryRequest, required=False)
+    category = fields.Nested(TATCategoryDetails, required=False)
     
     manufacturing_time_unit = fields.Str(required=False)
     
@@ -391,7 +451,7 @@ class TATArticlesRequest(BaseSchema):
     
 
 
-class TATLocationDetailsRequest(BaseSchema):
+class TATLocationDetailsDetails(BaseSchema):
     # Logistic swagger.json
 
     
@@ -399,11 +459,11 @@ class TATLocationDetailsRequest(BaseSchema):
     
     from_pincode = fields.Str(required=False)
     
-    articles = fields.List(fields.Nested(TATArticlesRequest, required=False), required=False)
+    articles = fields.List(fields.Nested(TATArticlesDetails, required=False), required=False)
     
 
 
-class TATViewRequest(BaseSchema):
+class TATViewDetails(BaseSchema):
     # Logistic swagger.json
 
     
@@ -415,13 +475,13 @@ class TATViewRequest(BaseSchema):
     
     identifier = fields.Str(required=False)
     
-    location_details = fields.List(fields.Nested(TATLocationDetailsRequest, required=False), required=False)
+    location_details = fields.List(fields.Nested(TATLocationDetailsDetails, required=False), required=False)
     
     journey = fields.Str(required=False)
     
 
 
-class TATErrorSchemaResponse(BaseSchema):
+class TATErrorSchemaResult(BaseSchema):
     # Logistic swagger.json
 
     
@@ -433,7 +493,7 @@ class TATErrorSchemaResponse(BaseSchema):
     
 
 
-class TATTimestampResponse(BaseSchema):
+class TATTimestampResult(BaseSchema):
     # Logistic swagger.json
 
     
@@ -443,7 +503,7 @@ class TATTimestampResponse(BaseSchema):
     
 
 
-class TATFormattedResponse(BaseSchema):
+class TATFormattedResult(BaseSchema):
     # Logistic swagger.json
 
     
@@ -453,37 +513,37 @@ class TATFormattedResponse(BaseSchema):
     
 
 
-class TATPromiseResponse(BaseSchema):
+class TATPromiseResult(BaseSchema):
     # Logistic swagger.json
 
     
-    timestamp = fields.Nested(TATTimestampResponse, required=False)
+    timestamp = fields.Nested(TATTimestampResult, required=False)
     
-    formatted = fields.Nested(TATFormattedResponse, required=False)
+    formatted = fields.Nested(TATFormattedResult, required=False)
     
 
 
-class TATArticlesResponse(BaseSchema):
+class TATArticlesResult(BaseSchema):
     # Logistic swagger.json
 
     
     manufacturing_time_unit = fields.Str(required=False)
     
-    error = fields.Nested(TATErrorSchemaResponse, required=False)
+    error = fields.Nested(TATErrorSchemaResult, required=False)
     
     is_cod_available = fields.Boolean(required=False)
     
-    promise = fields.Nested(TATPromiseResponse, required=False)
+    promise = fields.Nested(TATPromiseResult, required=False)
     
     manufacturing_time = fields.Int(required=False)
     
-    category = fields.Nested(TATCategoryRequest, required=False)
+    category = fields.Nested(TATCategoryDetails, required=False)
     
     _manufacturing_time_seconds = fields.Int(required=False)
     
 
 
-class TATLocationDetailsResponse(BaseSchema):
+class TATLocationDetailsResult(BaseSchema):
     # Logistic swagger.json
 
     
@@ -491,11 +551,11 @@ class TATLocationDetailsResponse(BaseSchema):
     
     from_pincode = fields.Str(required=False)
     
-    articles = fields.List(fields.Nested(TATArticlesResponse, required=False), required=False)
+    articles = fields.List(fields.Nested(TATArticlesResult, required=False), required=False)
     
 
 
-class TATViewResponse(BaseSchema):
+class TATViewResult(BaseSchema):
     # Logistic swagger.json
 
     
@@ -507,7 +567,7 @@ class TATViewResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    error = fields.Nested(TATErrorSchemaResponse, required=False)
+    error = fields.Nested(TATErrorSchemaResult, required=False)
     
     is_cod_available = fields.Boolean(required=False)
     
@@ -521,7 +581,7 @@ class TATViewResponse(BaseSchema):
     
     identifier = fields.Str(required=False)
     
-    location_details = fields.List(fields.Nested(TATLocationDetailsResponse, required=False), required=False)
+    location_details = fields.List(fields.Nested(TATLocationDetailsResult, required=False), required=False)
     
     journey = fields.Str(required=False)
     
@@ -553,21 +613,21 @@ class DP(BaseSchema):
     
 
 
-class LogisticsResponse(BaseSchema):
+class LogisticsResult(BaseSchema):
     # Logistic swagger.json
 
     
-    dp = fields.Dict(required=False)
+    dp = fields.Nested(DP, required=False)
     
 
 
-class CountryEntityResponse(BaseSchema):
+class CountryEntityResult(BaseSchema):
     # Logistic swagger.json
 
     
-    meta = fields.Nested(CountryMetaResponse, required=False)
+    meta = fields.Nested(CountryMetaResult, required=False)
     
-    logistics = fields.Nested(LogisticsResponse, required=False)
+    logistics = fields.Nested(LogisticsResult, required=False)
     
     display_name = fields.Str(required=False)
     
@@ -585,15 +645,15 @@ class CountryEntityResponse(BaseSchema):
     
 
 
-class CountryListResponse(BaseSchema):
+class CountryListResult(BaseSchema):
     # Logistic swagger.json
 
     
-    results = fields.List(fields.Nested(CountryEntityResponse, required=False), required=False)
+    results = fields.List(fields.Nested(CountryEntityResult, required=False), required=False)
     
 
 
-class GetZoneFromPincodeViewRequest(BaseSchema):
+class GetZoneFromPincodeViewDetails(BaseSchema):
     # Logistic swagger.json
 
     
@@ -603,7 +663,7 @@ class GetZoneFromPincodeViewRequest(BaseSchema):
     
 
 
-class GetZoneFromPincodeViewResponse(BaseSchema):
+class GetZoneFromPincodeViewResult(BaseSchema):
     # Logistic swagger.json
 
     
@@ -613,7 +673,7 @@ class GetZoneFromPincodeViewResponse(BaseSchema):
     
 
 
-class ReAssignStoreRequest(BaseSchema):
+class ReAssignStoreDetails(BaseSchema):
     # Logistic swagger.json
 
     
@@ -629,7 +689,7 @@ class ReAssignStoreRequest(BaseSchema):
     
 
 
-class ReAssignStoreResponse(BaseSchema):
+class ReAssignStoreResult(BaseSchema):
     # Logistic swagger.json
 
     
@@ -897,6 +957,8 @@ class Localities(BaseSchema):
     
     name = fields.Str(required=False)
     
+    custom_meta = fields.Dict(required=False)
+    
     display_name = fields.Str(required=False)
     
     parent_ids = fields.List(fields.Str(required=False), required=False)
@@ -916,6 +978,10 @@ class LocalityParent(BaseSchema):
     name = fields.Str(required=False)
     
     display_name = fields.Str(required=False)
+    
+    code = fields.Str(required=False)
+    
+    custom_meta = fields.Dict(required=False)
     
     parent_ids = fields.List(fields.Str(required=False), required=False)
     
@@ -943,6 +1009,10 @@ class GetLocality(BaseSchema):
     
     display_name = fields.Str(required=False)
     
+    code = fields.Str(required=False)
+    
+    custom_meta = fields.Dict(required=False)
+    
     parent_ids = fields.List(fields.Str(required=False), required=False)
     
     type = fields.Str(required=False)
@@ -951,11 +1021,203 @@ class GetLocality(BaseSchema):
     
 
 
-class ErrorResponse(BaseSchema):
+class ShipmentsArticles(BaseSchema):
+    # Logistic swagger.json
+
+    
+    item_id = fields.Int(required=False)
+    
+    category_id = fields.Int(required=False)
+    
+    brand_id = fields.Int(required=False)
+    
+    department_id = fields.Int(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class ShipmentDimension(BaseSchema):
+    # Logistic swagger.json
+
+    
+    height = fields.Float(required=False)
+    
+    length = fields.Float(required=False)
+    
+    width = fields.Float(required=False)
+    
+
+
+class Shipments(BaseSchema):
+    # Logistic swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    location_id = fields.Float(required=False)
+    
+    location_tags = fields.List(fields.Str(required=False), required=False)
+    
+    shipment_weight = fields.Float(required=False)
+    
+    shipment_volumetric_weight = fields.Float(required=False)
+    
+    shipment_cost = fields.Float(required=False)
+    
+    shipment_dimension = fields.Nested(ShipmentDimension, required=False)
+    
+    courier_partner_schemes = fields.List(fields.Str(required=False), required=False)
+    
+    articles = fields.List(fields.Nested(ShipmentsArticles, required=False), required=False)
+    
+
+
+class ShipmentCourierPartnerDetails(BaseSchema):
+    # Logistic swagger.json
+
+    
+    from_location = fields.Nested(ShipmentsCourierPartnersServiceability, required=False)
+    
+    to_location = fields.Nested(ShipmentsCourierPartnersServiceability, required=False)
+    
+    shipments = fields.List(fields.Nested(Shipments, required=False), required=False)
+    
+    journey = fields.Str(required=False)
+    
+    payment_mode = fields.Str(required=False)
+    
+
+
+class CourierPartnerPromise(BaseSchema):
+    # Logistic swagger.json
+
+    
+    min = fields.Str(required=False)
+    
+    max = fields.Str(required=False)
+    
+
+
+class CourierPartners(BaseSchema):
+    # Logistic swagger.json
+
+    
+    extension_id = fields.Str(required=False)
+    
+    scheme_id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    delivery_promise = fields.Nested(CourierPartnerPromise, required=False)
+    
+
+
+class ShipmentCourierPartners(BaseSchema):
+    # Logistic swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    courier_partners = fields.List(fields.Nested(CourierPartners, required=False), required=False)
+    
+
+
+class ShipmentCourierPartnerResult(BaseSchema):
+    # Logistic swagger.json
+
+    
+    courier_partners = fields.List(fields.Nested(CourierPartners, required=False), required=False)
+    
+    shipments = fields.List(fields.Nested(ShipmentCourierPartners, required=False), required=False)
+    
+
+
+class ShipmentsCourierPartnersServiceability(BaseSchema):
+    # Logistic swagger.json
+
+    
+    pincode = fields.Str(required=False)
+    
+    sector_code = fields.Str(required=False)
+    
+    state_code = fields.Str(required=False)
+    
+    city_code = fields.Str(required=False)
+    
+    country_code = fields.Str(required=False)
+    
+
+
+class ServiceabilityLocation(BaseSchema):
+    # Logistic swagger.json
+
+    
+    longitude = fields.Str(required=False)
+    
+    latitude = fields.Str(required=False)
+    
+
+
+class GetPromiseDetails(BaseSchema):
+    # Logistic swagger.json
+
+    
+    items = fields.List(fields.Nested(StorePromise, required=False), required=False)
+    
+    delivery_promise = fields.Nested(Promise, required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class StorePromise(BaseSchema):
+    # Logistic swagger.json
+
+    
+    uid = fields.Int(required=False)
+    
+    code = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    delivery_promise = fields.Nested(Promise, required=False)
+    
+
+
+class Promise(BaseSchema):
+    # Logistic swagger.json
+
+    
+    min = fields.Str(required=False)
+    
+    max = fields.Str(required=False)
+    
+
+
+class ErrorResult(BaseSchema):
     # Logistic swagger.json
 
     
     error = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
+class ValidationError(BaseSchema):
+    # Logistic swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    field = fields.Str(required=False)
+    
+
+
+class StandardError(BaseSchema):
+    # Logistic swagger.json
+
     
     message = fields.Str(required=False)
     

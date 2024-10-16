@@ -49,8 +49,8 @@ class Partner:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/partners/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/proxy/{extension_id}", extension_id=extension_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AddProxyResponse
-            schema = AddProxyResponse()
+            from .models import ExtensionProxyPathCreation
+            schema = ExtensionProxyPathCreation()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -94,8 +94,8 @@ class Partner:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/partners/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/proxy/{extension_id}/{attached_path}", extension_id=extension_id, attached_path=attached_path), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RemoveProxyResponse
-            schema = RemoveProxyResponse()
+            from .models import ExtensionProxyPathDelete
+            schema = ExtensionProxyPathDelete()
             try:
                 schema.load(response["json"])
             except Exception as e:

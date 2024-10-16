@@ -46,8 +46,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pincode-mop-update", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PincodeMOPresponse
-            schema = PincodeMOPresponse()
+            from .models import PincodeMOPResult
+            schema = PincodeMOPResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -89,8 +89,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pincode-mop-bulk-update", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PincodeBulkViewResponse
-            schema = PincodeBulkViewResponse()
+            from .models import PincodeBulkViewResult
+            schema = PincodeBulkViewResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -110,8 +110,8 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PincodeCodStatusListingRequest
-        schema = PincodeCodStatusListingRequest()
+        from .models import PincodeCodStatusListingDetails
+        schema = PincodeCodStatusListingDetails()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pincode-mop-data", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -132,8 +132,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pincode-mop-data", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PincodeCodStatusListingResponse
-            schema = PincodeCodStatusListingResponse()
+            from .models import PincodeCodStatusListingResult
+            schema = PincodeCodStatusListingResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -153,8 +153,8 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PincodeMopUpdateAuditHistoryRequest
-        schema = PincodeMopUpdateAuditHistoryRequest()
+        from .models import PincodeMopUpdateAuditHistoryDetails
+        schema = PincodeMopUpdateAuditHistoryDetails()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/history", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -175,8 +175,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/history", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PincodeMopUpdateAuditHistoryResponseData
-            schema = PincodeMopUpdateAuditHistoryResponseData()
+            from .models import PincodeMopUpdateAuditHistoryResultData
+            schema = PincodeMopUpdateAuditHistoryResultData()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -221,8 +221,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/{rule_id}", rule_id=rule_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierPartnerRuleResponse
-            schema = CourierPartnerRuleResponse()
+            from .models import CourierPartnerRuleResult
+            schema = CourierPartnerRuleResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -263,8 +263,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/{rule_id}", rule_id=rule_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierPartnerRuleResponse
-            schema = CourierPartnerRuleResponse()
+            from .models import CourierPartnerRuleResult
+            schema = CourierPartnerRuleResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -306,8 +306,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierPartnerRuleResponse
-            schema = CourierPartnerRuleResponse()
+            from .models import CourierPartnerRuleResult
+            schema = CourierPartnerRuleResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -354,12 +354,55 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules", page_no=page_no, page_size=page_size, status=status), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierPartnerRulesListResponse
-            schema = CourierPartnerRulesListResponse()
+            from .models import CourierPartnerRulesListResult
+            schema = CourierPartnerRulesListResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getCourierPartnerRules")
+                print(e)
+
+        return response
+    
+    async def getCourierPartners(self, body="", request_headers:Dict={}):
+        """Get all the serviceable courier partners of a destination and the shipments.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getCourierPartners()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ShipmentCourierPartnerDetails
+        schema = ShipmentCourierPartnerDetails()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipment/courier-partners", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipment/courier-partners", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShipmentCourierPartnerResult
+            schema = ShipmentCourierPartnerResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCourierPartners")
                 print(e)
 
         return response
@@ -457,8 +500,8 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import SelfShipResponse
-        schema = SelfShipResponse()
+        from .models import SelfShipResult
+        schema = SelfShipResult()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/selfship", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller account.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"A `application_id` is a unique identifier for a particular sale channel.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller account.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"A `application_id` is a unique identifier for a particular sale channel.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
@@ -479,8 +522,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/selfship", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationSelfShipConfigResponse
-            schema = ApplicationSelfShipConfigResponse()
+            from .models import ApplicationSelfShipConfigResult
+            schema = ApplicationSelfShipConfigResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -518,8 +561,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/selfship", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationSelfShipConfigResponse
-            schema = ApplicationSelfShipConfigResponse()
+            from .models import ApplicationSelfShipConfigResult
+            schema = ApplicationSelfShipConfigResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -691,8 +734,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules", page_no=page_no, page_size=page_size, status=status), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetStoreRulesApiResponse
-            schema = GetStoreRulesApiResponse()
+            from .models import GetStoreRulesApiResult
+            schema = GetStoreRulesApiResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -712,8 +755,8 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateStoreRuleRequestSchema
-        schema = CreateStoreRuleRequestSchema()
+        from .models import CreateStoreRuleDetailsSchema
+        schema = CreateStoreRuleDetailsSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -734,8 +777,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import StoreRuleResponseSchema
-            schema = StoreRuleResponseSchema()
+            from .models import StoreRuleResultSchema
+            schema = StoreRuleResultSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -800,8 +843,8 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateStoreRuleRequestSchema
-        schema = CreateStoreRuleRequestSchema()
+        from .models import CreateStoreRuleDetailsSchema
+        schema = CreateStoreRuleDetailsSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules/{rule_uid}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"rule_uid","description":"A `rule_uid` is a unique identifier for a particular rule object.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"rule_uid","description":"A `rule_uid` is a unique identifier for a particular rule object.","schema":{"type":"string"},"required":true}]}""", serverType="platform", rule_uid=rule_uid)
@@ -822,8 +865,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules/{rule_uid}", rule_uid=rule_uid), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import StoreRuleUpdateResponseSchema
-            schema = StoreRuleUpdateResponseSchema()
+            from .models import StoreRuleUpdateResultSchema
+            schema = StoreRuleUpdateResultSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -843,8 +886,8 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import RulePriorityRequest
-        schema = RulePriorityRequest()
+        from .models import RulePriorityDetails
+        schema = RulePriorityDetails()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/priority", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -865,8 +908,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/priority", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RulePriorityResponse
-            schema = RulePriorityResponse()
+            from .models import RulePriorityResult
+            schema = RulePriorityResult()
             try:
                 schema.load(response["json"])
             except Exception as e:

@@ -17,6 +17,7 @@ class Order:
         self._relativeUrls = {
             "getOrders": "/service/application/order/v1.0/orders",
             "getOrderById": "/service/application/order/v1.0/orders/{order_id}",
+            "getPosOrderById": "/service/application/order/v1.0/orders/pos-order/{order_id}",
             "getShipmentById": "/service/application/order/v1.0/orders/shipments/{shipment_id}",
             "getInvoiceByShipmentId": "/service/application/order/v1.0/orders/shipments/{shipment_id}/invoice",
             "trackShipment": "/service/application/order/v1.0/orders/shipments/{shipment_id}/track",
@@ -73,7 +74,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getOrders"], proccessed_params="""{"required":[],"optional":[{"in":"query","description":"A filter to retrieve orders by their current status such as 'placed', 'delivered' etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The date from which the orders should be retrieved.","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"The date till which the orders should be retrieved.","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"Start date in UTC (ISO-8601 format).","name":"start_date","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-29T10:49:36.804Z"}},{"in":"query","description":"End date in UTC (ISO-8601 format).","name":"end_date","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-30T10:49:36.804Z"}},{"in":"query","description":"A filter and retrieve data using special fields included for special use-cases.","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed.","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","description":"A filter to retrieve orders by their current status such as 'placed', 'delivered' etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The date from which the orders should be retrieved.","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"The date till which the orders should be retrieved.","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"Start date in UTC (ISO-8601 format).","name":"start_date","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-29T10:49:36.804Z"}},{"in":"query","description":"End date in UTC (ISO-8601 format).","name":"end_date","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-30T10:49:36.804Z"}},{"in":"query","description":"A filter and retrieve data using special fields included for special use-cases.","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed.","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[]}""", serverType="application", status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, custom_meta=custom_meta, allow_inactive=allow_inactive)
+        url_with_params = await create_url_with_params(api_url=self._urls["getOrders"], proccessed_params="""{"required":[],"optional":[{"in":"query","description":"A filter to retrieve orders by their current status such as 'placed', 'delivered' etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The date from which the orders should be retrieved.","name":"from_date","required":false,"schema":{"type":"string","format":"date"}},{"in":"query","description":"The date till which the orders should be retrieved.","name":"to_date","required":false,"schema":{"type":"string","format":"date"}},{"in":"query","description":"Start date in UTC (ISO-8601 format).","name":"start_date","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-29T10:49:36.804Z"}},{"in":"query","description":"End date in UTC (ISO-8601 format).","name":"end_date","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-30T10:49:36.804Z"}},{"in":"query","description":"A filter and retrieve data using special fields included for special use-cases.","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed.","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","description":"A filter to retrieve orders by their current status such as 'placed', 'delivered' etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The date from which the orders should be retrieved.","name":"from_date","required":false,"schema":{"type":"string","format":"date"}},{"in":"query","description":"The date till which the orders should be retrieved.","name":"to_date","required":false,"schema":{"type":"string","format":"date"}},{"in":"query","description":"Start date in UTC (ISO-8601 format).","name":"start_date","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-29T10:49:36.804Z"}},{"in":"query","description":"End date in UTC (ISO-8601 format).","name":"end_date","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-30T10:49:36.804Z"}},{"in":"query","description":"A filter and retrieve data using special fields included for special use-cases.","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed.","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[]}""", serverType="application", status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, custom_meta=custom_meta, allow_inactive=allow_inactive)
         query_string = await create_query_string(status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, custom_meta=custom_meta, allow_inactive=allow_inactive)
 
         headers={}
@@ -146,6 +147,50 @@ class Order:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getOrderById")
+                print(e)
+
+        return response
+    
+    async def getPosOrderById(self, order_id=None, body="", request_headers:Dict={}):
+        """Retrieve a POS order and all its details such as tracking details, shipment, store information using Fynd Order ID.
+        :param order_id : A unique number used for identifying and tracking your orders. : type string
+        """
+        payload = {}
+        
+        if order_id is not None:
+            payload["order_id"] = order_id
+
+        # Parameter validation
+        schema = OrderValidator.getPosOrderById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getPosOrderById"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string"}}]}""", serverType="application", order_id=order_id)
+        query_string = await create_query_string()
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPosOrderById"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/pos-order/{order_id}", order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderById
+            schema = OrderById()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPosOrderById")
                 print(e)
 
         return response
@@ -322,8 +367,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCustomerDetailsByShipmentId"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/customer-details", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CustomerDetailsResponse
-            schema = CustomerDetailsResponse()
+            from .models import CustomerDetailsResponseSchema
+            schema = CustomerDetailsResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -369,8 +414,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendOtpToShipmentCustomer"]).netloc, "post", await create_url_without_domain("/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/send/", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SendOtpToCustomerResponse
-            schema = SendOtpToCustomerResponse()
+            from .models import SendOtpToCustomerResponseSchema
+            schema = SendOtpToCustomerResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -420,8 +465,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyOtpShipmentCustomer"]).netloc, "post", await create_url_without_domain("/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/verify/", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import VerifyOtpResponse
-            schema = VerifyOtpResponse()
+            from .models import VerifyOtpResponseSchema
+            schema = VerifyOtpResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -535,8 +580,8 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateShipmentStatusRequest
-        schema = UpdateShipmentStatusRequest()
+        from .models import UpdateShipmentStatusRequestSchema
+        schema = UpdateShipmentStatusRequestSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["updateShipmentStatus"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id)
@@ -559,8 +604,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateShipmentStatus"]).netloc, "put", await create_url_without_domain("/service/application/order/v1.0/orders/shipments/{shipment_id}/status", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentApplicationStatusResponse
-            schema = ShipmentApplicationStatusResponse()
+            from .models import ShipmentApplicationStatusResponseSchema
+            schema = ShipmentApplicationStatusResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:

@@ -78,6 +78,10 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
         
         
         
@@ -182,6 +186,15 @@ class ServiceabilityValidator:
         page_size = fields.Int(required=False)
         
         status = fields.Str(required=False)
+         
+        
+    
+    class getCourierPartners(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     
