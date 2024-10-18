@@ -561,6 +561,10 @@ class Item(BaseSchema):
     
     l1_categories = fields.List(fields.Str(required=False), required=False)
     
+    l2_category = fields.List(fields.Str(required=False), required=False)
+    
+    l2_category_id = fields.Float(required=False)
+    
     brand = fields.Nested(ItemBrand, required=False)
     
     seller_identifier = fields.Str(required=False)

@@ -216,6 +216,18 @@ class CODdata(BaseSchema):
     pass
 
 
+class CODLimitConfig(BaseSchema):
+    pass
+
+
+class CODPaymentLimitConfig(BaseSchema):
+    pass
+
+
+class GetUserBULimitResponse(BaseSchema):
+    pass
+
+
 class GetUserCODLimitResponse(BaseSchema):
     pass
 
@@ -1395,13 +1407,55 @@ class CODdata(BaseSchema):
     
 
 
+class CODLimitConfig(BaseSchema):
+    # Payment swagger.json
+
+    
+    storefront = fields.Float(required=False)
+    
+    pos = fields.Float(required=False)
+    
+
+
+class CODPaymentLimitConfig(BaseSchema):
+    # Payment swagger.json
+
+    
+    is_active = fields.Boolean(required=False)
+    
+    usages = fields.Float(required=False)
+    
+    user_id = fields.Int(required=False)
+    
+    merchant_user_id = fields.Str(required=False)
+    
+    remaining_limit = fields.Int(required=False)
+    
+    limit = fields.Nested(CODLimitConfig, required=False)
+    
+
+
+class GetUserBULimitResponse(BaseSchema):
+    # Payment swagger.json
+
+    
+    business_unit = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    config = fields.Nested(CODPaymentLimitConfig, required=False)
+    
+
+
 class GetUserCODLimitResponse(BaseSchema):
     # Payment swagger.json
 
     
-    user_cod_data = fields.Nested(CODdata, required=False)
+    items = fields.List(fields.Nested(GetUserBULimitResponse, required=False), required=False)
     
     success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
     
 
 
@@ -2328,6 +2382,8 @@ class PaymentSessionRequestSerializer(BaseSchema):
     total_amount = fields.Int(required=False)
     
     checksum = fields.Str(required=False)
+    
+    source = fields.Str(required=False)
     
 
 
