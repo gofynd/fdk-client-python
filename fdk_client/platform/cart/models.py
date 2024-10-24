@@ -1793,6 +1793,8 @@ class PriceAdjustmentUpdate(BaseSchema):
     
     article_ids = fields.List(fields.Nested(Article, required=False), required=False)
     
+    auto_remove = fields.Boolean(required=False)
+    
     meta = fields.Dict(required=False)
     
     cart_id = fields.Str(required=False)
@@ -1824,6 +1826,8 @@ class PriceAdjustment(BaseSchema):
     is_authenticated = fields.Boolean(required=False)
     
     article_ids = fields.List(fields.Nested(Article, required=False), required=False)
+    
+    auto_remove = fields.Boolean(required=False)
     
     meta = fields.Dict(required=False)
     
@@ -1876,6 +1880,8 @@ class PriceAdjustmentAdd(BaseSchema):
     meta = fields.Dict(required=False)
     
     cart_id = fields.Str(required=False)
+    
+    auto_remove = fields.Boolean(required=False)
     
 
 

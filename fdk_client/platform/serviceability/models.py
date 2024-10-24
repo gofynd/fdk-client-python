@@ -92,7 +92,15 @@ class ZoneProductTypes(BaseSchema):
     pass
 
 
+class ZoneMappingDetailType(BaseSchema):
+    pass
+
+
 class ZoneMappingType(BaseSchema):
+    pass
+
+
+class ZoneMappingRegions(BaseSchema):
     pass
 
 
@@ -805,15 +813,39 @@ class ZoneProductTypes(BaseSchema):
     
 
 
+class ZoneMappingDetailType(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    country = fields.Str(required=False)
+    
+    regions = fields.List(fields.Nested(ZoneMappingRegions, required=False), required=False)
+    
+
+
 class ZoneMappingType(BaseSchema):
     # Serviceability swagger.json
 
     
     country = fields.Str(required=False)
     
-    pincode = fields.List(fields.Str(required=False), required=False)
+    regions = fields.List(fields.Str(required=False), required=False)
     
-    state = fields.List(fields.Str(required=False), required=False)
+
+
+class ZoneMappingRegions(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    display_name = fields.Str(required=False)
+    
+    parent_id = fields.List(fields.Str(required=False), required=False)
+    
+    parent_uid = fields.Str(required=False)
+    
+    sub_type = fields.Str(required=False)
+    
+    uid = fields.Str(required=False)
     
 
 
@@ -840,8 +872,6 @@ class UpdateZoneData(BaseSchema):
     region_type = fields.Str(required=False)
     
     mapping = fields.List(fields.Nested(ZoneMappingType, required=False), required=False)
-    
-    assignment_preference = fields.Str(required=False)
     
 
 
@@ -889,8 +919,6 @@ class GetZoneDataViewItems(BaseSchema):
     
     mapping = fields.List(fields.Nested(ZoneMappingType, required=False), required=False)
     
-    assignment_preference = fields.Str(required=False)
-    
     stores_count = fields.Int(required=False)
     
 
@@ -925,11 +953,7 @@ class GetZoneByIdSchema(BaseSchema):
     
     region_type = fields.Str(required=False)
     
-    mapping = fields.List(fields.Nested(ZoneMappingType, required=False), required=False)
-    
-    assignment_preference = fields.Str(required=False)
-    
-    stores_count = fields.Int(required=False)
+    mapping = fields.List(fields.Nested(ZoneMappingDetailType, required=False), required=False)
     
 
 
@@ -949,11 +973,11 @@ class CreateZoneData(BaseSchema):
     
     store_ids = fields.List(fields.Int(required=False), required=False)
     
+    product = fields.Nested(ZoneProductTypes, required=False)
+    
     region_type = fields.Str(required=False)
     
     mapping = fields.List(fields.Nested(ZoneMappingType, required=False), required=False)
-    
-    assignment_preference = fields.Str(required=False)
     
 
 
@@ -996,8 +1020,6 @@ class Zone(BaseSchema):
     is_active = fields.Boolean(required=False)
     
     store_ids = fields.List(fields.Int(required=False), required=False)
-    
-    assignment_preference = fields.Str(required=False)
     
 
 
