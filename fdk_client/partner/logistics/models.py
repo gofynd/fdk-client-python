@@ -32,6 +32,10 @@ class Page(BaseSchema):
     pass
 
 
+class CourierAccountUpdateDetails(BaseSchema):
+    pass
+
+
 class RegionTatItemResult(BaseSchema):
     pass
 
@@ -171,7 +175,7 @@ class BulkRegionServiceabilityTatResultItemData(BaseSchema):
     
     failed_records = fields.List(fields.Dict(required=False), required=False)
     
-    file_path = fields.Str(required=False)
+    file_path = fields.Str(required=False, allow_none=True)
     
 
 
@@ -224,6 +228,22 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+
+
+class CourierAccountUpdateDetails(BaseSchema):
+    # Logistics swagger.json
+
+    
+    extension_id = fields.Str(required=False)
+    
+    scheme_id = fields.Str(required=False)
+    
+    is_self_ship = fields.Boolean(required=False)
+    
+    stage = fields.Str(required=False)
+    
+    is_own_account = fields.Boolean(required=False)
     
 
 
@@ -427,7 +447,7 @@ class BulkRegionJobDetails(BaseSchema):
     # Logistics swagger.json
 
     
-    file_path = fields.Str(required=False)
+    file_path = fields.Str(required=False, allow_none=True)
     
     country = fields.Str(required=False)
     

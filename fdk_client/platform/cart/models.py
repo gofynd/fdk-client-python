@@ -280,6 +280,18 @@ class PriceAdjustmentAdd(BaseSchema):
     pass
 
 
+class DistributionRule(BaseSchema):
+    pass
+
+
+class Distribution(BaseSchema):
+    pass
+
+
+class DistributionLogic(BaseSchema):
+    pass
+
+
 class CartItem(BaseSchema):
     pass
 
@@ -2023,9 +2035,13 @@ class PriceAdjustmentUpdate(BaseSchema):
     
     article_ids = fields.List(fields.Nested(Article, required=False), required=False)
     
+    auto_remove = fields.Boolean(required=False)
+    
     meta = fields.Dict(required=False)
     
     cart_id = fields.Str(required=False)
+    
+    distribution_logic = fields.Nested(DistributionLogic, required=False)
     
 
 
@@ -2055,9 +2071,13 @@ class PriceAdjustment(BaseSchema):
     
     article_ids = fields.List(fields.Nested(Article, required=False), required=False)
     
+    auto_remove = fields.Boolean(required=False)
+    
     meta = fields.Dict(required=False)
     
     cart_id = fields.Str(required=False)
+    
+    distribution_logic = fields.Nested(DistributionLogic, required=False)
     
 
 
@@ -2106,6 +2126,40 @@ class PriceAdjustmentAdd(BaseSchema):
     meta = fields.Dict(required=False)
     
     cart_id = fields.Str(required=False)
+    
+    auto_remove = fields.Boolean(required=False)
+    
+    distribution_logic = fields.Nested(DistributionLogic, required=False)
+    
+
+
+class DistributionRule(BaseSchema):
+    # Cart swagger.json
+
+    
+    conditions = fields.Dict(required=False)
+    
+
+
+class Distribution(BaseSchema):
+    # Cart swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    logic = fields.Str(required=False)
+    
+    rule = fields.Nested(DistributionRule, required=False)
+    
+
+
+class DistributionLogic(BaseSchema):
+    # Cart swagger.json
+
+    
+    distribution_level = fields.Str(required=False)
+    
+    distribution = fields.Nested(Distribution, required=False)
     
 
 

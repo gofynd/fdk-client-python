@@ -91,33 +91,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
         
         
         
@@ -129,35 +102,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-    
-    
-        
-        
-    
-    
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
     
     
         
@@ -167,54 +111,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -233,11 +129,65 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+        
+        
+    
+    
+        
     
     
         
         
         
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
+    
+    
         
     
     
@@ -261,8 +211,58 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
         
         
         
@@ -496,13 +496,6 @@ class OrderValidator:
          
         
     
-    class fetchCreditBalanceDetail(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class fetchRefundModeConfig(BaseSchema):
         
         
@@ -642,7 +635,7 @@ class OrderValidator:
          
         
     
-    class processManifests(BaseSchema):
+    class generateProcessManifest(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -655,6 +648,16 @@ class OrderValidator:
         company_id = fields.Int(required=False)
         
         manifest_id = fields.Str(required=False)
+        
+        dp_ids = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
+        
+        start_date = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     
@@ -669,8 +672,6 @@ class OrderValidator:
         
         
         company_id = fields.Int(required=False)
-        
-        manifest_id = fields.Str(required=False)
          
         
     
@@ -693,7 +694,7 @@ class OrderValidator:
     class trackShipment(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         shipment_id = fields.Str(required=False)
         
@@ -727,13 +728,6 @@ class OrderValidator:
         company_id = fields.Int(required=False)
         
         log_id = fields.Str(required=False)
-         
-        
-    
-    class generateProcessManifest(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
          
         
     
@@ -832,6 +826,8 @@ class OrderValidator:
         order_type = fields.Str(required=False)
         
         group_entity = fields.Str(required=False)
+        
+        enforce_date_filter = fields.Boolean(required=False)
          
         
     
@@ -960,6 +956,8 @@ class OrderValidator:
         allow_inactive = fields.Boolean(required=False)
         
         group_entity = fields.Str(required=False)
+        
+        enforce_date_filter = fields.Boolean(required=False)
          
         
     

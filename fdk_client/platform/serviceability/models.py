@@ -92,7 +92,15 @@ class ZoneProductTypes(BaseSchema):
     pass
 
 
+class ZoneMappingDetailType(BaseSchema):
+    pass
+
+
 class ZoneMappingType(BaseSchema):
+    pass
+
+
+class ZoneMappingRegions(BaseSchema):
     pass
 
 
@@ -252,6 +260,10 @@ class PincodeCodStatusListingDetails(BaseSchema):
     pass
 
 
+class PincodeCodStatusItem(BaseSchema):
+    pass
+
+
 class PincodeCodStatusListingResult(BaseSchema):
     pass
 
@@ -293,6 +305,10 @@ class SchemeRulesFeatures(BaseSchema):
 
 
 class SchemeRules(BaseSchema):
+    pass
+
+
+class CourierAccountUpdateDetails(BaseSchema):
     pass
 
 
@@ -849,15 +865,39 @@ class ZoneProductTypes(BaseSchema):
     
 
 
+class ZoneMappingDetailType(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    country = fields.Str(required=False)
+    
+    regions = fields.List(fields.Nested(ZoneMappingRegions, required=False), required=False)
+    
+
+
 class ZoneMappingType(BaseSchema):
     # Serviceability swagger.json
 
     
     country = fields.Str(required=False)
     
-    pincode = fields.List(fields.Str(required=False), required=False)
+    regions = fields.List(fields.Str(required=False), required=False)
     
-    state = fields.List(fields.Str(required=False), required=False)
+
+
+class ZoneMappingRegions(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    display_name = fields.Str(required=False)
+    
+    parent_id = fields.List(fields.Str(required=False), required=False)
+    
+    parent_uid = fields.Str(required=False)
+    
+    sub_type = fields.Str(required=False)
+    
+    uid = fields.Str(required=False)
     
 
 
@@ -884,8 +924,6 @@ class UpdateZoneData(BaseSchema):
     region_type = fields.Str(required=False)
     
     mapping = fields.List(fields.Nested(ZoneMappingType, required=False), required=False)
-    
-    assignment_preference = fields.Str(required=False)
     
 
 
@@ -969,9 +1007,7 @@ class GetZoneByIdSchema(BaseSchema):
     
     region_type = fields.Str(required=False)
     
-    mapping = fields.List(fields.Nested(ZoneMappingType, required=False), required=False)
-    
-    assignment_preference = fields.Str(required=False)
+    mapping = fields.List(fields.Nested(ZoneMappingDetailType, required=False), required=False)
     
     stores_count = fields.Int(required=False)
     
@@ -997,7 +1033,7 @@ class CreateZoneData(BaseSchema):
     
     mapping = fields.List(fields.Nested(ZoneMappingType, required=False), required=False)
     
-    assignment_preference = fields.Str(required=False)
+    product = fields.Nested(ZoneProductTypes, required=False)
     
 
 
@@ -1040,8 +1076,6 @@ class Zone(BaseSchema):
     is_active = fields.Boolean(required=False)
     
     store_ids = fields.List(fields.Int(required=False), required=False)
-    
-    assignment_preference = fields.Str(required=False)
     
 
 
@@ -1449,6 +1483,16 @@ class PincodeCodStatusListingDetails(BaseSchema):
     
 
 
+class PincodeCodStatusItem(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    active = fields.Boolean(required=False)
+    
+    pincode = fields.Str(required=False)
+    
+
+
 class PincodeCodStatusListingResult(BaseSchema):
     # Serviceability swagger.json
 
@@ -1615,9 +1659,27 @@ class SchemeRules(BaseSchema):
     
 
 
+class CourierAccountUpdateDetails(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    extension_id = fields.Str(required=False)
+    
+    scheme_id = fields.Str(required=False)
+    
+    is_self_ship = fields.Boolean(required=False)
+    
+    stage = fields.Str(required=False)
+    
+    is_own_account = fields.Boolean(required=False)
+    
+
+
 class CourierAccount(BaseSchema):
     # Serviceability swagger.json
 
+    
+    company_id = fields.Int(required=False)
     
     extension_id = fields.Str(required=False)
     
@@ -1630,6 +1692,8 @@ class CourierAccount(BaseSchema):
     stage = fields.Str(required=False)
     
     is_own_account = fields.Boolean(required=False)
+    
+    scheme_rules = fields.Nested(CourierPartnerSchemeModel, required=False)
     
 
 
@@ -1843,6 +1907,8 @@ class CourierPartnerRule(BaseSchema):
     
     sort = fields.List(fields.Str(required=False), required=False)
     
+    type = fields.Str(required=False)
+    
 
 
 class FailureResult(BaseSchema):
@@ -2001,7 +2067,11 @@ class CompanyConfig(BaseSchema):
     
     sort = fields.List(fields.Str(required=False), required=False)
     
-    logistics_as_actual = fields.Boolean(required=False)
+    logistics_as_actual = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    application_id = fields.Str(required=False)
     
 
 
@@ -2010,6 +2080,10 @@ class ZoneConfig(BaseSchema):
 
     
     serviceability_type = fields.Str(required=False)
+    
+    active_count = fields.Int(required=False)
+    
+    total_count = fields.Int(required=False)
     
 
 
@@ -2029,7 +2103,7 @@ class BulkRegionJobDetails(BaseSchema):
     # Serviceability swagger.json
 
     
-    file_path = fields.Str(required=False)
+    file_path = fields.Str(required=False, allow_none=True)
     
     country = fields.Str(required=False)
     
@@ -2197,7 +2271,7 @@ class StorePrioritySchema(BaseSchema):
     # Serviceability swagger.json
 
     
-    id = fields.Str(required=False)
+    id = fields.Int(required=False)
     
     name = fields.Str(required=False)
     
@@ -2353,9 +2427,13 @@ class CourierPartnerSchemeModel(BaseSchema):
     # Serviceability swagger.json
 
     
+    name = fields.Str(required=False)
+    
     extension_id = fields.Str(required=False)
     
     scheme_id = fields.Str(required=False)
+    
+    volumetric_weight = fields.Nested(ArithmeticOperations, required=False)
     
     weight = fields.Nested(ArithmeticOperations, required=False)
     
@@ -2376,6 +2454,10 @@ class CourierPartnerSchemeModel(BaseSchema):
 class CourierAccountResult(BaseSchema):
     # Serviceability swagger.json
 
+    
+    company_id = fields.Int(required=False)
+    
+    extension_id = fields.Str(required=False)
     
     account_id = fields.Str(required=False)
     
@@ -2450,6 +2532,8 @@ class PackageMaterialResult(BaseSchema):
     id = fields.Str(required=False)
     
     item_id = fields.Int(required=False)
+    
+    company_id = fields.Int(required=False)
     
     width = fields.Float(required=False)
     
