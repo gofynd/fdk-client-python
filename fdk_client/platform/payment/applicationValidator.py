@@ -27,6 +27,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -308,6 +309,8 @@ class PaymentValidator:
         order_id = fields.Str(required=False)
         
         shipment_id = fields.Str(required=False)
+        
+        amount = fields.Int(required=False)
          
         
     

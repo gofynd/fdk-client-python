@@ -7,7 +7,7 @@ import ujson
 async def custom_request(self, method, url, query={}, body={}, headers={}, client_type=""):
         cookies = None
         url = self.config.domain + url
-        query = parse.urlencode(query)
+        query = parse.urlencode(query, doseq=True)
         if query:
             url += "?" + query
 

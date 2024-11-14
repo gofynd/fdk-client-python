@@ -144,11 +144,23 @@ class BagsForReorder(BaseSchema):
     pass
 
 
+class CurrencySchema(BaseSchema):
+    pass
+
+
 class OrderSchema(BaseSchema):
     pass
 
 
 class OrderStatuses(BaseSchema):
+    pass
+
+
+class OrderGlobalFilterOption(BaseSchema):
+    pass
+
+
+class OrderGlobalFilter(BaseSchema):
     pass
 
 
@@ -637,6 +649,10 @@ class Item(BaseSchema):
     
     l1_categories = fields.List(fields.Str(required=False), required=False)
     
+    l2_category = fields.List(fields.Str(required=False), required=False)
+    
+    l2_category_id = fields.Float(required=False)
+    
     brand = fields.Nested(ItemBrand, required=False)
     
     seller_identifier = fields.Str(required=False)
@@ -1011,6 +1027,16 @@ class BagsForReorder(BaseSchema):
     
 
 
+class CurrencySchema(BaseSchema):
+    # Order swagger.json
+
+    
+    currency_code = fields.Str(required=False)
+    
+    currency_symbol = fields.Str(required=False)
+    
+
+
 class OrderSchema(BaseSchema):
     # Order swagger.json
 
@@ -1037,6 +1063,8 @@ class OrderSchema(BaseSchema):
     
     meta = fields.Dict(required=False)
     
+    currency = fields.Nested(CurrencySchema, required=False)
+    
 
 
 class OrderStatuses(BaseSchema):
@@ -1048,6 +1076,30 @@ class OrderStatuses(BaseSchema):
     is_selected = fields.Boolean(required=False)
     
     display = fields.Str(required=False)
+    
+
+
+class OrderGlobalFilterOption(BaseSchema):
+    # Order swagger.json
+
+    
+    display_text = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+    is_selected = fields.Boolean(required=False)
+    
+
+
+class OrderGlobalFilter(BaseSchema):
+    # Order swagger.json
+
+    
+    display_test = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+    options = fields.List(fields.Nested(OrderGlobalFilterOption, required=False), required=False)
     
 
 
@@ -1131,6 +1183,8 @@ class Track(BaseSchema):
     
     awb = fields.Str(required=False)
     
+    meta = fields.Dict(required=False)
+    
 
 
 class ShipmentTrack(BaseSchema):
@@ -1186,6 +1240,8 @@ class VerifyOtpResponseSchema(BaseSchema):
 
     
     success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
     
 
 

@@ -69,7 +69,7 @@ async def create_query_string(**kwargs):
     final_params = {}
     for key in query_keys:
         final_params[key] = params[key]
-    query_string = parse.urlencode(final_params)
+    query_string = parse.urlencode(final_params, doseq=True)
     return query_string
 
 

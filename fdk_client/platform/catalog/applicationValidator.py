@@ -68,6 +68,13 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
+        
+        
+        
+        
+        
     
     
         
@@ -99,6 +106,7 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
@@ -436,7 +444,7 @@ class CatalogValidator:
         
         application_id = fields.Str(required=False)
         
-        brand_uid = fields.Str(required=False)
+        brand_uid = fields.Int(required=False)
          
         
     
@@ -527,6 +535,20 @@ class CatalogValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
+        
+        schedule_status = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+        
+        tags = fields.List(fields.Str(required=False), required=False)
+        
+        is_active = fields.Boolean(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     
@@ -574,7 +596,7 @@ class CatalogValidator:
     class deleteCollection(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
@@ -585,7 +607,7 @@ class CatalogValidator:
     class updateCollection(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
@@ -596,7 +618,7 @@ class CatalogValidator:
     class getCollectionItems(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
@@ -607,13 +629,15 @@ class CatalogValidator:
         page_id = fields.Str(required=False)
         
         page_size = fields.Int(required=False)
+        
+        page_no = fields.Int(required=False)
          
         
     
     class addCollectionItems(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
@@ -624,7 +648,7 @@ class CatalogValidator:
     class getCollectionDetail(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         

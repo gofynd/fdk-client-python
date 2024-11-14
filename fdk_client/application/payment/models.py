@@ -847,6 +847,8 @@ class PaymentInitializationDetails(BaseSchema):
     
     bqr_image = fields.Str(required=False, allow_none=True)
     
+    status_code = fields.Str(required=False, allow_none=True)
+    
 
 
 class PaymentStatusUpdate(BaseSchema):
@@ -878,6 +880,10 @@ class PaymentStatusUpdate(BaseSchema):
     amount = fields.Int(required=False, allow_none=True)
     
     email = fields.Str(required=False)
+    
+    razorpay_payment_id = fields.Str(required=False)
+    
+    merchant_url = fields.Str(required=False)
     
 
 
@@ -1689,6 +1695,8 @@ class SetDefaultBeneficiary(BaseSchema):
     
     beneficiary_id = fields.Str(required=False)
     
+    shipment_id = fields.Str(required=False)
+    
 
 
 class SetDefaultBeneficiaryDetails(BaseSchema):
@@ -2023,7 +2031,9 @@ class RedirectURL(BaseSchema):
     
     status = fields.Boolean(required=False)
     
-    signup_url = fields.Str(required=False)
+    redirect_url = fields.Str(required=False)
+    
+    extra = fields.Str(required=False)
     
 
 
@@ -2046,6 +2056,8 @@ class CreditDetail(BaseSchema):
     is_registered = fields.Boolean(required=False)
     
     signup_url = fields.Str(required=False)
+    
+    available_credit = fields.Float(required=False)
     
 
 

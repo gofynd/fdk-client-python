@@ -104,6 +104,10 @@ class CountryEntityResult(BaseSchema):
     pass
 
 
+class ServiceabilityModel(BaseSchema):
+    pass
+
+
 class CountryListResult(BaseSchema):
     pass
 
@@ -205,6 +209,14 @@ class GetLocalities(BaseSchema):
 
 
 class GetLocality(BaseSchema):
+    pass
+
+
+class Error(BaseSchema):
+    pass
+
+
+class ErrorSchema(BaseSchema):
     pass
 
 
@@ -359,6 +371,8 @@ class PincodeMetaResult(BaseSchema):
     
     internal_zone_id = fields.Int(required=False)
     
+    deliverables = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class PincodeErrorSchemaResult(BaseSchema):
@@ -376,6 +390,26 @@ class PincodeErrorSchemaResult(BaseSchema):
 class CountryMetaResult(BaseSchema):
     # Logistic swagger.json
 
+    
+    iso2 = fields.Str(required=False)
+    
+    iso3 = fields.Str(required=False)
+    
+    currency = fields.Nested(CurrencyObject, required=False)
+    
+    phone_code = fields.Str(required=False)
+    
+    parent_id = fields.Str(required=False, allow_none=True)
+    
+    zone = fields.Str(required=False)
+    
+    deliverables = fields.List(fields.Str(required=False), required=False)
+    
+    hierarchy = fields.List(fields.Nested(CountryHierarchy, required=False), required=False)
+    
+    latitude = fields.Str(required=False)
+    
+    longitude = fields.Str(required=False)
     
     country_code = fields.Str(required=False)
     
@@ -426,6 +460,10 @@ class PincodeDetails(BaseSchema):
     data = fields.List(fields.Nested(PincodeDataResult, required=False), required=False)
     
     error = fields.Nested(PincodeErrorSchemaResult, required=False)
+    
+    request_uuid = fields.Str(required=False)
+    
+    stormbreaker_uuid = fields.Str(required=False)
     
 
 
@@ -643,6 +681,34 @@ class CountryEntityResult(BaseSchema):
     
     uid = fields.Str(required=False)
     
+    onboarding_allowed = fields.Boolean(required=False)
+    
+    serviceability = fields.Raw(required=False)
+    
+    lat_long = fields.Nested(PincodeLatLongData, required=False)
+    
+
+
+class ServiceabilityModel(BaseSchema):
+    # Logistic swagger.json
+
+    
+    lm_cod_limit = fields.Int(required=False, allow_none=True)
+    
+    is_qc = fields.Boolean(required=False)
+    
+    pickup_cutoff = fields.Str(required=False, allow_none=True)
+    
+    route_code = fields.Str(required=False, allow_none=True)
+    
+    is_first_mile = fields.Boolean(required=False)
+    
+    is_return = fields.Boolean(required=False)
+    
+    is_installation = fields.Boolean(required=False)
+    
+    is_last_mile = fields.Boolean(required=False)
+    
 
 
 class CountryListResult(BaseSchema):
@@ -709,7 +775,7 @@ class CountryHierarchy(BaseSchema):
     # Logistic swagger.json
 
     
-    name = fields.Str(required=False)
+    display_name = fields.Str(required=False)
     
     slug = fields.Str(required=False)
     
@@ -957,9 +1023,17 @@ class Localities(BaseSchema):
     
     name = fields.Str(required=False)
     
+    meta = fields.Dict(required=False)
+    
+    lat_long = fields.Nested(PincodeLatLongData, required=False)
+    
+    parent_uid = fields.Str(required=False, allow_none=True)
+    
     custom_meta = fields.Dict(required=False)
     
     display_name = fields.Str(required=False)
+    
+    serviceability = fields.Raw(required=False)
     
     parent_ids = fields.List(fields.Str(required=False), required=False)
     
@@ -978,6 +1052,12 @@ class LocalityParent(BaseSchema):
     name = fields.Str(required=False)
     
     display_name = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    parent_uid = fields.Str(required=False, allow_none=True)
+    
+    serviceability = fields.Raw(required=False)
     
     code = fields.Str(required=False)
     
@@ -1009,6 +1089,12 @@ class GetLocality(BaseSchema):
     
     display_name = fields.Str(required=False)
     
+    meta = fields.Dict(required=False)
+    
+    parent_uid = fields.Str(required=False, allow_none=True)
+    
+    serviceability = fields.Raw(required=False)
+    
     code = fields.Str(required=False)
     
     custom_meta = fields.Dict(required=False)
@@ -1018,6 +1104,28 @@ class GetLocality(BaseSchema):
     type = fields.Str(required=False)
     
     localities = fields.List(fields.Nested(LocalityParent, required=False), required=False)
+    
+
+
+class Error(BaseSchema):
+    # Logistic swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    value = fields.Str(required=False, allow_none=True)
+    
+    message = fields.Str(required=False)
+    
+
+
+class ErrorSchema(BaseSchema):
+    # Logistic swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    error = fields.Nested(Error, required=False)
     
 
 
