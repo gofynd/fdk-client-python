@@ -186,85 +186,277 @@
 #### getProductDetailBySlug
 
 - ##### What's New
+	- [Added] property <code>category_map.l1._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>category_map.l2._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>category_map.l3._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
 	- [Breaking] [Added] Possible values <code>set,standard,composite,digital</code> to property <code>item_type</code> of schema <code>ProductDetail</code> in response with status code 200
+	- [Added] property <code>categories[]._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>brand._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>promo_meta</code> of schema <code>ProductDetail</code> in response with status code 200
+	- [Added] property <code>no_of_boxes</code> of schema <code>ProductDetail</code> in response with status code 200
+	- [Added] property <code>country_of_origin</code> of schema <code>ProductDetail</code> in response with status code 200
+
+
+#### getProductSizesBySlug
+
+- ##### What's New
+	- [Added] property <code>moq</code> of schema <code>ProductSizes</code> in response with status code 200
+	- [Added] property <code>tags</code> of schema <code>ProductSizes</code> in response with status code 200
+	- [Added] property <code>custom_order</code> of schema <code>ProductSizes</code> in response with status code 200
+	- [Added] property <code>no_of_boxes</code> of schema <code>ProductSizes</code> in response with status code 200
+	- [Added] property <code>teaser_tag</code> of schema <code>ProductSizes</code> in response with status code 200
 
 
 #### getProductComparisonBySlugs
 
 - ##### What's New
-	- [Breaking] [Added] Possible values <code>set,standard,composite,digital</code> to property <code>items[].item_type</code> of schema <code>ProductDetail</code> in response with status code 200
+	- [Breaking] [Added] Possible values <code>standard,composite,set,digital</code> to property <code>items[].item_type</code> of schema <code>ProductCompareDetail</code> in response with status code 200
+	- [Added] property <code>items[].categories[]._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].brand._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].template_tag</code> of schema <code>ProductCompareDetail</code> in response with status code 200
+	- [Added] property <code>items[].sellable</code> of schema <code>ProductCompareDetail</code> in response with status code 200
+	- [Added] property <code>items[].country_of_origin</code> of schema <code>ProductCompareDetail</code> in response with status code 200
+
+- ##### What's Deprecated
+	- [Breaking] [Deleted] property <code>items[].category_map</code> of schema <code>ProductDetail</code> in response with status code 200
+	- [Breaking] [Deleted] property <code>items[].color</code> of schema <code>ProductDetail</code> in response with status code 200
+	- [Breaking] [Deleted] property <code>items[].product_online_date</code> of schema <code>ProductDetail</code> in response with status code 200
 
 
 #### getSimilarComparisonProductBySlug
 
 - ##### What's New
+	- [Added] property <code>items[].category_map.l1._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].category_map.l2._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].category_map.l3._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
 	- [Breaking] [Added] Possible values <code>set,standard,composite,digital</code> to property <code>items[].item_type</code> of schema <code>ProductDetail</code> in response with status code 200
+	- [Added] property <code>items[].categories[]._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].brand._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].promo_meta</code> of schema <code>ProductDetail</code> in response with status code 200
+	- [Added] property <code>items[].no_of_boxes</code> of schema <code>ProductDetail</code> in response with status code 200
+	- [Added] property <code>items[].country_of_origin</code> of schema <code>ProductDetail</code> in response with status code 200
 
 
 #### getComparedFrequentlyProductBySlug
 
 - ##### What's New
+	- [Added] property <code>similars.items[].category_map.l1._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>similars.items[].category_map.l2._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>similars.items[].category_map.l3._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
 	- [Breaking] [Added] Possible values <code>set,standard,composite,digital</code> to property <code>similars.items[].item_type</code> of schema <code>ProductDetail</code> in response with status code 200
+	- [Added] property <code>similars.items[].categories[]._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>similars.items[].brand._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>similars.items[].promo_meta</code> of schema <code>ProductDetail</code> in response with status code 200
+	- [Added] property <code>similars.items[].no_of_boxes</code> of schema <code>ProductDetail</code> in response with status code 200
+	- [Added] property <code>similars.items[].country_of_origin</code> of schema <code>ProductDetail</code> in response with status code 200
 
 
 #### getProductStockByIds
 
 - ##### What's New
-	- [Added] properties <code>items[].identifier.ean</code>, <code>items[].identifier.sku_code</code>, <code>items[].identifier.alu</code>, <code>items[].identifier.upc</code>, <code>items[].identifier.isbn</code> in response with status code 200
-
-- ##### What's Deprecated
-	- [Deleted] Type from <code>object</code> from property <code>items[].identifier</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
+	- [Added] properties <code>items[].identifier.ean</code>, <code>items[].identifier.alu</code>, <code>items[].identifier.upc</code>, <code>items[].identifier.sku_code</code> in response with status code 200
+	- [Added] property <code>items[].seller_identifier</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
+	- [Added] property <code>items[].brand</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
+	- [Added] property <code>items[].company_id</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
+	- [Added] property <code>items[].brand_id</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
+	- [Added] property <code>items[].store_id</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
+	- [Added] property <code>items[].price_marked</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
+	- [Added] property <code>items[].price_effective</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
+	- [Added] property <code>items[].currency</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
 
 
 #### getProductStockForTimeByIds
 
 - ##### What's New
-	- [Added] properties <code>items[].identifier.ean</code>, <code>items[].identifier.sku_code</code>, <code>items[].identifier.alu</code>, <code>items[].identifier.upc</code>, <code>items[].identifier.isbn</code> in response with status code 200
-
-- ##### What's Deprecated
-	- [Deleted] Type from <code>object</code> from property <code>items[].identifier</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
+	- [Added] properties <code>items[].identifier.ean</code>, <code>items[].identifier.alu</code>, <code>items[].identifier.upc</code>, <code>items[].identifier.sku_code</code> in response with status code 200
+	- [Added] property <code>items[].seller_identifier</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
+	- [Added] property <code>items[].brand</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
+	- [Added] property <code>items[].company_id</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
+	- [Added] property <code>items[].brand_id</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
+	- [Added] property <code>items[].store_id</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
+	- [Added] property <code>items[].price_marked</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
+	- [Added] property <code>items[].price_effective</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
+	- [Added] property <code>items[].currency</code> of schema <code>ProductStockStatusItem</code> in response with status code 200
 
 
 #### getProducts
 
 - ##### What's New
+	- [Added] property <code>items[].category_map.l1._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].category_map.l2._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].category_map.l3._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
 	- [Breaking] [Added] Possible values <code>set,standard,composite,digital</code> to property <code>items[].item_type</code> of schema <code>ProductListingDetail</code> in response with status code 200
+	- [Added] property <code>items[].categories[]._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].brand._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].country_of_origin</code> of schema <code>ProductListingDetail</code> in response with status code 200
+	- [Added] property <code>items[].is_tryout</code> of schema <code>ProductListingDetail</code> in response with status code 200
+	- [Added] property <code>items[].channel</code> of schema <code>ProductListingDetail</code> in response with status code 200
+	- [Added] property <code>filters[].values[].logo</code> of schema <code>ProductFiltersValue</code> in response with status code 200
+
+
+#### getBrandDetailBySlug
+
+- ##### What's New
+	- [Added] property <code>slug</code> of schema <code>BrandDetailResponseSchema</code> in response with status code 200
+	- [Added] property <code>_app</code> of schema <code>BrandDetailResponseSchema</code> in response with status code 200
+
+
+#### getCategories
+
+- ##### What's New
+	- [Added] property <code>data[].items[].childs[].childs[].childs[].priority</code> of schema <code>ThirdLevelChild</code> in response with status code 200
+	- [Added] property <code>data[].items[].childs[].childs[].priority</code> of schema <code>SecondLevelChild</code> in response with status code 200
+	- [Added] property <code>data[].items[].childs[].priority</code> of schema <code>Child</code> in response with status code 200
+	- [Added] property <code>data[].items[].priority</code> of schema <code>CategoryItems</code> in response with status code 200
+	- [Added] property <code>data[].items[]._custom_json</code> of schema <code>CategoryItems</code> in response with status code 200
+
+
+#### getCategoryDetailBySlug
+
+- ##### What's New
+	- [Added] property <code>_app</code> of schema <code>CategoryMetaResponseSchema</code> in response with status code 200
 
 
 #### getHomeProducts
 
 - ##### What's New
+	- [Added] property <code>items[].category_map.l1._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].category_map.l2._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].category_map.l3._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
 	- [Breaking] [Added] Possible values <code>set,standard,composite,digital</code> to property <code>items[].item_type</code> of schema <code>ProductListingDetail</code> in response with status code 200
+	- [Added] property <code>items[].categories[]._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].brand._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].country_of_origin</code> of schema <code>ProductListingDetail</code> in response with status code 200
+	- [Added] property <code>items[].is_tryout</code> of schema <code>ProductListingDetail</code> in response with status code 200
+	- [Added] property <code>items[].channel</code> of schema <code>ProductListingDetail</code> in response with status code 200
+	- [Added] property <code>sort_on</code> of schema <code>HomeListingResponseSchema</code> in response with status code 200
+
+
+#### getCollections
+
+- ##### What's New
+	- [Added] properties <code>items[]._schedule.cron</code>, <code>items[]._schedule.next_schedule</code>, <code>items[]._schedule.duration</code>, <code>items[]._schedule.start</code>, <code>items[]._schedule.end</code>, <code>items[]._schedule.metadata</code> in response with status code 200
+	- [Breaking] [Added] Type <code>string</code> to property <code>items[].query[].value[]</code> of schema <code>CollectionQuery</code> in response with status code 200
+	- [Added] property <code>items[].published</code> of schema <code>GetCollectionDetailNest</code> in response with status code 200
+	- [Added] property <code>items[]._id</code> of schema <code>GetCollectionDetailNest</code> in response with status code 200
+	- [Added] property <code>items[]._locale_language</code> of schema <code>GetCollectionDetailNest</code> in response with status code 200
+	- [Added] property <code>items[].seo</code> of schema <code>GetCollectionDetailNest</code> in response with status code 200
+	- [Added] property <code>items[].is_visible</code> of schema <code>GetCollectionDetailNest</code> in response with status code 200
 
 
 #### getCollectionItemsBySlug
 
 - ##### What's New
+	- [Added] property <code>items[].category_map.l1._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].category_map.l2._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].category_map.l3._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
 	- [Breaking] [Added] Possible values <code>set,standard,composite,digital</code> to property <code>items[].item_type</code> of schema <code>ProductListingDetail</code> in response with status code 200
+	- [Added] property <code>items[].categories[]._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].brand._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].country_of_origin</code> of schema <code>ProductListingDetail</code> in response with status code 200
+	- [Added] property <code>items[].is_tryout</code> of schema <code>ProductListingDetail</code> in response with status code 200
+	- [Added] property <code>items[].channel</code> of schema <code>ProductListingDetail</code> in response with status code 200
+	- [Added] property <code>filters[].values[].logo</code> of schema <code>ProductFiltersValue</code> in response with status code 200
+
+
+#### getCollectionDetailBySlug
+
+- ##### What's New
+	- [Breaking] [Added] Type <code>string</code> to property <code>query[].value[]</code> of schema <code>CollectionQuery</code> in response with status code 200
+	- [Added] property <code>uid</code> of schema <code>CollectionDetailResponseSchema</code> in response with status code 200
+	- [Added] property <code>_id</code> of schema <code>CollectionDetailResponseSchema</code> in response with status code 200
+	- [Added] property <code>published</code> of schema <code>CollectionDetailResponseSchema</code> in response with status code 200
+	- [Added] property <code>tags</code> of schema <code>CollectionDetailResponseSchema</code> in response with status code 200
+	- [Added] property <code>action</code> of schema <code>CollectionDetailResponseSchema</code> in response with status code 200
+	- [Added] property <code>_locale_language</code> of schema <code>CollectionDetailResponseSchema</code> in response with status code 200
+	- [Added] property <code>seo</code> of schema <code>CollectionDetailResponseSchema</code> in response with status code 200
+	- [Added] property <code>is_visible</code> of schema <code>CollectionDetailResponseSchema</code> in response with status code 200
 
 
 #### getFollowedListing
 
 - ##### What's New
+	- [Added] property <code>items[].category_map.l1._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].category_map.l2._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].category_map.l3._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
 	- [Breaking] [Added] Possible values <code>set,standard,composite,digital</code> to property <code>items[].item_type</code> of schema <code>ProductListingDetail</code> in response with status code 200
+	- [Added] property <code>items[].categories[]._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].brand._custom_json</code> of schema <code>ProductBrand</code> in response with status code 200
+	- [Added] property <code>items[].country_of_origin</code> of schema <code>ProductListingDetail</code> in response with status code 200
+	- [Added] property <code>items[].is_tryout</code> of schema <code>ProductListingDetail</code> in response with status code 200
+	- [Added] property <code>items[].channel</code> of schema <code>ProductListingDetail</code> in response with status code 200
 
 
 #### getStores
 
 - ##### What's New
+	- [Added] property <code>items[].manager_contact</code> of schema <code>Store</code> in response with status code 200
 	- [Added] property <code>items[].contacts</code> of schema <code>Store</code> in response with status code 200
+
+
+#### getInStockLocations
+
+- ##### What's New
+	- [Added] properties <code>filters[].slug</code>, <code>filters[].uid</code>, <code>filters[].is_active</code>, <code>filters[].priority_order</code>, <code>filters[].name</code>, <code>filters[].logo</code>, <code>filters[].modified_by</code>, <code>filters[].modified_on</code> in response with status code 200
+	- [Added] properties <code>items[].departments[].logo.url</code>, <code>items[].departments[].logo.type</code>, <code>items[].departments[].logo.meta</code>, <code>items[].departments[].logo.alt</code> in response with status code 200
+	- [Added] property <code>items[].departments[].is_active</code> of schema <code>AppStoreDepartment</code> in response with status code 200
+	- [Added] property <code>items[].address.lat_long</code> of schema <code>StoreAddressSchema</code> in response with status code 200
+	- [Added] property <code>items[].address.country_code</code> of schema <code>StoreAddressSchema</code> in response with status code 200
+	- [Added] property <code>items[].address.address_meta</code> of schema <code>StoreAddressSchema</code> in response with status code 200
+	- [Added] property <code>items[]._custom_json</code> of schema <code>AppStore</code> in response with status code 200
+	- [Added] property <code>items[].additional_contacts</code> of schema <code>AppStore</code> in response with status code 200
+	- [Added] property <code>items[].company_id</code> of schema <code>AppStore</code> in response with status code 200
+	- [Added] property <code>items[].display_name</code> of schema <code>AppStore</code> in response with status code 200
+	- [Added] property <code>items[].store_type</code> of schema <code>AppStore</code> in response with status code 200
+	- [Added] property <code>items[].auto_invoice</code> of schema <code>AppStore</code> in response with status code 200
+	- [Added] property <code>items[].credit_note</code> of schema <code>AppStore</code> in response with status code 200
+	- [Added] property <code>items[].stage</code> of schema <code>AppStore</code> in response with status code 200
+	- [Added] property <code>items[].gst_credentials</code> of schema <code>AppStore</code> in response with status code 200
+	- [Added] property <code>items[].product_return_config</code> of schema <code>AppStore</code> in response with status code 200
+	- [Added] property <code>items[].avg_order_processing_time</code> of schema <code>AppStore</code> in response with status code 200
+	- [Added] property <code>items[].bulk_shipment</code> of schema <code>AppStore</code> in response with status code 200
+	- [Added] property <code>items[].default_order_acceptance_timing</code> of schema <code>AppStore</code> in response with status code 200
+	- [Added] property <code>items[].order_acceptance_timing</code> of schema <code>AppStore</code> in response with status code 200
+	- [Added] property <code>items[].auto_assign_courier_partner</code> of schema <code>AppStore</code> in response with status code 200
+
+
+#### getLocationDetailsById
+
+- ##### What's New
+	- [Added] property <code>address.lat_long</code> of schema <code>StoreAddressSchema</code> in response with status code 200
+	- [Added] property <code>address.country_code</code> of schema <code>StoreAddressSchema</code> in response with status code 200
+	- [Added] property <code>address.address_meta</code> of schema <code>StoreAddressSchema</code> in response with status code 200
+	- [Added] property <code>additional_contacts</code> of schema <code>StoreDetails</code> in response with status code 200
+	- [Added] property <code>company_id</code> of schema <code>StoreDetails</code> in response with status code 200
+	- [Added] property <code>display_name</code> of schema <code>StoreDetails</code> in response with status code 200
+	- [Added] property <code>store_type</code> of schema <code>StoreDetails</code> in response with status code 200
+	- [Added] property <code>auto_invoice</code> of schema <code>StoreDetails</code> in response with status code 200
+	- [Added] property <code>credit_note</code> of schema <code>StoreDetails</code> in response with status code 200
+	- [Added] property <code>stage</code> of schema <code>StoreDetails</code> in response with status code 200
+	- [Added] property <code>gst_credentials</code> of schema <code>StoreDetails</code> in response with status code 200
+	- [Added] property <code>product_return_config</code> of schema <code>StoreDetails</code> in response with status code 200
+	- [Added] property <code>avg_order_processing_time</code> of schema <code>StoreDetails</code> in response with status code 200
+	- [Added] property <code>bulk_shipment</code> of schema <code>StoreDetails</code> in response with status code 200
+	- [Added] property <code>default_order_acceptance_timing</code> of schema <code>StoreDetails</code> in response with status code 200
+	- [Added] property <code>order_acceptance_timing</code> of schema <code>StoreDetails</code> in response with status code 200
+	- [Added] property <code>auto_assign_courier_partner</code> of schema <code>StoreDetails</code> in response with status code 200
 
 
 #### getProductPriceBySlug
 
 - ##### What's New
 	- [Breaking] [Added] Possible values <code>set,standard,composite,digital</code> to property <code>item_type</code> of schema <code>ProductSizePriceResponseV3</code> in response with status code 200
+	- [Added] property <code>trader</code> of schema <code>ProductSizePriceResponseV3</code> in response with status code 200
+	- [Added] property <code>_custom_json</code> of schema <code>ProductSizePriceResponseV3</code> in response with status code 200
+	- [Added] property <code>tags</code> of schema <code>ProductSizePriceResponseV3</code> in response with status code 200
+	- [Added] property <code>inventory_updated_on</code> of schema <code>ProductSizePriceResponseV3</code> in response with status code 200
+	- [Added] property <code>is_serviceable</code> of schema <code>ProductSizePriceResponseV3</code> in response with status code 200
 
 
 #### getProductSellersBySlug
 
 - ##### What's New
-	- [Breaking] [Added] Possible values <code>set,standard,composite,digital</code> to property <code>items[].item_type</code> of schema <code>ProductSizePriceResponseV3</code> in response with status code 200
+	- [Breaking] [Added] Possible values <code>standard,set,composite,digital</code> to property <code>items[].item_type</code> of schema <code>ProductSellersPriceResponseV3</code> in response with status code 200
 
 
 ### Common
@@ -2888,6 +3080,10 @@
 
 #### getApplicationBrandListing
 
+- ##### What's New
+	- [Added] <code>page</code> made required in response with status code 200
+	- [Breaking] [Added] Type <code>object</code> to property <code></code> of schema <code>ApplicationBrandListingSchema</code> in response with status code 200
+
 - ##### What's Deprecated
 	- [Breaking] [Deleted] property <code>items[].active</code> of schema <code>ApplicationBrandListingItemSchema</code> in response with status code 200
 
@@ -3164,9 +3360,11 @@
 	- [Breaking] [Added] Value format <code>date-time</code> to property <code>items[].company.modified_on</code> of schema <code>GetCompanySchema</code> in response with status code 200
 	- [Breaking] [Added] Value format <code>date-time</code> to property <code>items[].company.verified_on</code> of schema <code>GetCompanySchema</code> in response with status code 200
 	- [Breaking] [Added] Possible values <code>high_street,warehouse,mall</code> to property <code>items[].store_type</code> of schema <code>GetLocationSchema</code> in response with status code 200
+	- [Added] property <code>items[].store_code</code> of schema <code>GetLocationSchema</code> in response with status code 200
+	- [Added] property <code>items[].company_id</code> of schema <code>GetLocationSchema</code> in response with status code 200
 
 - ##### What's Deprecated
-	- [Breaking] [Deleted] property <code>items[].integration_type.order</code> of schema <code>LocationIntegrationType</code> in response with status code 200
+	- [Breaking] [Deleted] property <code>items[].code</code> of schema <code>GetLocationSerializer</code> in response with status code 200
 
 - ##### What's Changed
 	- [Breaking] [Changed] Type from <code>string</code> to <code>number</code> of property <code>code</code> of schema <code>ErrorResponse</code> in response with status code 4XX
@@ -3228,9 +3426,19 @@
 #### getDiscountedInventoryBySizeIdentifier
 
 - ##### What's New
+	- [Added] properties <code>items[].return_config.returnable</code>, <code>items[].return_config.time</code>, <code>items[].return_config.unit</code> in response with status code 200
+	- [Breaking] [Added] Type <code>object</code> to property <code>items[].return_config</code> of schema <code>InventoryReturnConfig</code> in response with status code 200
 	- [Added] properties <code>items[].tax_identifier.hsn_code</code>, <code>items[].tax_identifier.hsn_code_id</code>, <code>items[].tax_identifier.reporting_hsn</code> in response with status code 200
+	- [Breaking] [Added] maxLength validator for items[].trader[].name in response with status code 200
+	- [Breaking] [Added] minLength validator for items[].trader[].name in response with status code 200
+
+- ##### What's Deprecated
+	- [Breaking] [Deleted] <code>query</code> parameter <code>q</code> (type: <code>string</code>)
+
 
 - ##### What's Changed
+	- [Breaking] [Changed] <code>items[].trader[].address</code> made optional in response with status code 200
+	- [Breaking] [Changed] <code>items[].trader[].type</code> made optional in response with status code 200
 	- [Breaking] [Changed] Type from <code>string</code> to <code>number</code> of property <code>code</code> of schema <code>ErrorResponse</code> in response with status code 4XX
 
 
@@ -3244,6 +3452,14 @@
 	- [Breaking] [Added] Possible values <code>image,video,3d_model</code> to property <code>medias[].type</code> of schema <code>Media</code> in response with status code 200
 	- [Added] property <code>medias[].alt</code> of schema <code>Media</code> in response with status code 200
 	- [Added] property <code>medias[].thumbnail</code> of schema <code>Media</code> in response with status code 200
+	- [Added] property <code>country_of_origin</code> of schema <code>ProductDetail</code> in response with status code 200
+	- [Added] property <code>categories</code> of schema <code>ProductDetail</code> in response with status code 200
+	- [Added] property <code>tags</code> of schema <code>ProductDetail</code> in response with status code 200
+	- [Added] property <code>no_of_boxes</code> of schema <code>ProductDetail</code> in response with status code 200
+	- [Added] property <code>custom_order</code> of schema <code>ProductDetail</code> in response with status code 200
+
+- ##### What's Deprecated
+	- [Breaking] [Deleted] property <code>color</code> of schema <code>ProductDetail</code> in response with status code 200
 
 - ##### What's Changed
 	- [Breaking] [Changed] Type from <code>string</code> to <code>number</code> of property <code>code</code> of schema <code>ErrorResponse</code> in response with status code 4XX
@@ -3258,6 +3474,10 @@
 	- [Added] property <code>items[].media[].thumbnail</code> of schema <code>Media</code> in response with status code 200
 	- [Added] properties <code>items[].tax_identifier.hsn_code</code>, <code>items[].tax_identifier.hsn_code_id</code>, <code>items[].tax_identifier.reporting_hsn</code> in response with status code 200
 	- [Breaking] [Added] Value format <code>date-time</code> to property <code>items[].verified_on</code> of schema <code>RawProduct</code> in response with status code 200
+	- [Added] property <code>items[].action</code> of schema <code>RawProduct</code> in response with status code 200
+
+- ##### What's Deprecated
+	- [Breaking] [Deleted] property <code>items[].color</code> of schema <code>RawProduct</code> in response with status code 200
 
 - ##### What's Changed
 	- [Breaking] [Changed] Type from <code>string</code> to <code>number</code> of property <code>code</code> of schema <code>ErrorResponse</code> in response with status code 4XX
@@ -3308,6 +3528,7 @@
 #### getAppCategoryReturnConfig
 
 - ##### What's Changed
+	- [Breaking] [Changed] Type from <code>string</code> to <code>integer</code> of property <code>page.current</code> of schema <code>PageResponse</code> in response with status code 200
 	- [Breaking] [Changed] Type from <code>string</code> to <code>number</code> of property <code>code</code> of schema <code>ErrorResponse</code> in response with status code 4XX
 
 
@@ -3606,13 +3827,9 @@
 
 - ##### What's New
 	- [Added] property <code>_id</code> of schema <code>AttributeDetail</code> in response with status code 200
-	- [Added] property <code>created_by</code> of schema <code>AttributeDetail</code> in response with status code 200
-	- [Added] property <code>modified_by</code> of schema <code>AttributeDetail</code> in response with status code 200
-	- [Added] property <code>created_on</code> of schema <code>AttributeDetail</code> in response with status code 200
-	- [Added] property <code>modified_on</code> of schema <code>AttributeDetail</code> in response with status code 200
-	- [Added] property <code>variant</code> of schema <code>AttributeDetail</code> in response with status code 200
 
 - ##### What's Deprecated
+	- [Breaking] [Deleted] property <code>departments</code> of schema <code>AttributeDetail</code> in response with status code 200
 	- [Breaking] [Deleted] property <code>id</code> of schema <code>AttributeDetail</code> in response with status code 200
 
 - ##### What's Changed
@@ -3760,9 +3977,15 @@
 #### getInventoryBySizeIdentifier
 
 - ##### What's New
+	- [Added] properties <code>items[].return_config.returnable</code>, <code>items[].return_config.time</code>, <code>items[].return_config.unit</code> in response with status code 200
+	- [Breaking] [Added] Type <code>object</code> to property <code>items[].return_config</code> of schema <code>InventoryReturnConfig</code> in response with status code 200
 	- [Added] properties <code>items[].tax_identifier.hsn_code</code>, <code>items[].tax_identifier.hsn_code_id</code>, <code>items[].tax_identifier.reporting_hsn</code> in response with status code 200
+	- [Breaking] [Added] maxLength validator for items[].trader[].name in response with status code 200
+	- [Breaking] [Added] minLength validator for items[].trader[].name in response with status code 200
 
 - ##### What's Changed
+	- [Breaking] [Changed] <code>items[].trader[].address</code> made optional in response with status code 200
+	- [Breaking] [Changed] <code>items[].trader[].type</code> made optional in response with status code 200
 	- [Breaking] [Changed] Type from <code>string</code> to <code>number</code> of property <code>code</code> of schema <code>ErrorResponse</code> in response with status code 4XX
 
 
@@ -3821,6 +4044,10 @@
 
 #### getSizeGuides
 
+- ##### What's New
+	- [Added] properties <code>items[].active</code>, <code>items[].brand_id</code>, <code>items[].company_id</code>, <code>items[].created_by</code>, <code>items[].created_on</code>, <code>items[].guide</code>, <code>items[].id</code>, <code>items[].modified_by</code>, <code>items[].modified_on</code>, <code>items[].name</code>, <code>items[].subtitle</code>, <code>items[].tag</code>, <code>items[].title</code>, <code>items[].description</code>, <code>items[].image</code> in response with status code 200
+	- [Added] properties <code>page.current</code>, <code>page.has_next</code>, <code>page.has_previous</code>, <code>page.item_total</code>, <code>page.size</code> in response with status code 200
+
 - ##### What's Changed
 	- [Breaking] [Changed] Type from <code>string</code> to <code>number</code> of property <code>code</code> of schema <code>ErrorResponse</code> in response with status code 4XX
 
@@ -3828,14 +4055,20 @@
 #### createSizeGuide
 
 - ##### What's Changed
+	- [Breaking] [Changed] Type from <code>integer</code> to <code>string</code> of property <code>company_id</code> of schema <code>ValidateSizeGuide</code> in request body
 	- [Breaking] [Changed] Type from <code>string</code> to <code>number</code> of property <code>code</code> of schema <code>ErrorResponse</code> in response with status code 4XX
 
 
 #### getSizeGuide
 
 - ##### What's New
+	- [Added] properties <code>created_by.user_id</code>, <code>created_by.username</code> in response with status code 200
+	- [Added] <code>created_by.user_id</code>, <code>created_by.username</code> made required in response with status code 200
 	- [Breaking] [Added] Value format <code>date-time</code> to property <code>created_on</code> of schema <code>SizeGuideResponseSchema</code> in response with status code 200
+	- [Added] properties <code>modified_by.user_id</code>, <code>modified_by.username</code> in response with status code 200
+	- [Added] <code>modified_by.user_id</code>, <code>modified_by.username</code> made required in response with status code 200
 	- [Breaking] [Added] Value format <code>date-time</code> to property <code>modified_on</code> of schema <code>SizeGuideResponseSchema</code> in response with status code 200
+	- [Added] property <code>image</code> of schema <code>SizeGuideResponseSchema</code> in response with status code 200
 
 - ##### What's Changed
 	- [Breaking] [Changed] Type from <code>string</code> to <code>number</code> of property <code>code</code> of schema <code>ErrorResponse</code> in response with status code 4XX
@@ -3844,6 +4077,7 @@
 #### updateSizeGuide
 
 - ##### What's Changed
+	- [Breaking] [Changed] Type from <code>integer</code> to <code>string</code> of property <code>company_id</code> of schema <code>ValidateSizeGuide</code> in request body
 	- [Breaking] [Changed] Type from <code>string</code> to <code>number</code> of property <code>code</code> of schema <code>ErrorResponse</code> in response with status code 4XX
 
 
@@ -3879,11 +4113,32 @@
 
 #### getAllProductHsnCodes
 
+- ##### What's New
+	- [Added] properties <code>items[].created_by.user_id</code>, <code>items[].created_by.username</code> in response with status code 200
+	- [Added] <code>items[].created_by.user_id</code>, <code>items[].created_by.username</code> made required in response with status code 200
+	- [Added] properties <code>items[].modified_by.user_id</code>, <code>items[].modified_by.username</code> in response with status code 200
+	- [Added] <code>items[].modified_by.user_id</code>, <code>items[].modified_by.username</code> made required in response with status code 200
+	- [Added] property <code>items[].id</code> of schema <code>HSNDataInsertV2</code> in response with status code 200
+
+- ##### What's Deprecated
+	- [Deleted] Type from <code>string</code> from property <code>items[].reporting_hsn</code> of schema <code>HSNDataInsertV2</code> in response with status code 200
+
 - ##### What's Changed
+	- [Breaking] [Changed] Type from <code>string</code> to <code>integer</code> of property <code>page.current</code> of schema <code>PageResponse</code> in response with status code 200
 	- [Breaking] [Changed] Type from <code>string</code> to <code>number</code> of property <code>code</code> of schema <code>ErrorResponse</code> in response with status code 4XX
 
 
 #### getSingleProductHSNCode
+
+- ##### What's New
+	- [Added] properties <code>created_by.user_id</code>, <code>created_by.username</code> in response with status code 200
+	- [Added] <code>created_by.user_id</code>, <code>created_by.username</code> made required in response with status code 200
+	- [Added] properties <code>modified_by.user_id</code>, <code>modified_by.username</code> in response with status code 200
+	- [Added] <code>modified_by.user_id</code>, <code>modified_by.username</code> made required in response with status code 200
+	- [Added] property <code>id</code> of schema <code>HSNDataInsertV2</code> in response with status code 200
+
+- ##### What's Deprecated
+	- [Deleted] Type from <code>string</code> from property <code>reporting_hsn</code> of schema <code>HSNDataInsertV2</code> in response with status code 200
 
 - ##### What's Changed
 	- [Breaking] [Changed] Type from <code>string</code> to <code>number</code> of property <code>code</code> of schema <code>ErrorResponse</code> in response with status code 4XX
