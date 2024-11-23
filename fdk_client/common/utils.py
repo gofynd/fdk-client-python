@@ -38,7 +38,7 @@ async def create_url_with_params(domain: Text = "", api_url: Text = "", proccess
                 final_url.replace(new_key, key)
     await validate_required_query_params(json.loads(proccessed_params), params, serverType)
     final_url = final_url.format(**params)
-    query_string = parse.urlencode(params)
+    query_string = parse.urlencode(params, doseq=True)
     if query_string:
         final_url += "?" + query_string
     return final_url
@@ -69,7 +69,7 @@ async def create_query_string(**kwargs):
     final_params = {}
     for key in query_keys:
         final_params[key] = params[key]
-    query_string = parse.urlencode(final_params)
+    query_string = parse.urlencode(final_params, doseq=True)
     return query_string
 
 

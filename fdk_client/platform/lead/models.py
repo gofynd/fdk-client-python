@@ -10,7 +10,7 @@ from .enums import *
 
 
 
-class GeneralConfigResponse(BaseSchema):
+class GeneralConfigDetails(BaseSchema):
     pass
 
 
@@ -149,7 +149,7 @@ class ErrorMessage(BaseSchema):
 
 
 
-class GeneralConfigResponse(BaseSchema):
+class GeneralConfigDetails(BaseSchema):
     # Lead swagger.json
 
     

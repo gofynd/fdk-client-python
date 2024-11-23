@@ -82,7 +82,7 @@ class OAuthClient:
             "scope": ",".join(options.get("scope", [])),
             "state": options.get("state", "")
         }
-        queryString = parse.urlencode(query)
+        queryString = parse.urlencode(query, doseq=True)
         reqPath = f"/service/panel/authentication/v1.0/company/{self.config.companyId}/oauth/authorize"
         signingOptions = {
           "method": "GET",

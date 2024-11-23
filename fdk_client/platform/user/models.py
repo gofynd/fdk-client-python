@@ -8,7 +8,7 @@ from ..PlatformModel import BaseSchema
 
 
 
-class SuccessMessageResponse(BaseSchema):
+class SuccessMessage(BaseSchema):
     pass
 
 
@@ -16,7 +16,7 @@ class UserAttributeDefinition(BaseSchema):
     pass
 
 
-class UserAttributeDefinitionResponse(BaseSchema):
+class UserAttributeDefinitionDetails(BaseSchema):
     pass
 
 
@@ -24,11 +24,11 @@ class UserAttributeDefinitionValidation(BaseSchema):
     pass
 
 
-class UserAttributeResponse(BaseSchema):
+class UserAttribute(BaseSchema):
     pass
 
 
-class CreateUserAttributeRequest(BaseSchema):
+class CreateUserAttribute(BaseSchema):
     pass
 
 
@@ -251,7 +251,7 @@ class Email(BaseSchema):
 
 
 
-class SuccessMessageResponse(BaseSchema):
+class SuccessMessage(BaseSchema):
     # User swagger.json
 
     
@@ -297,7 +297,7 @@ class UserAttributeDefinition(BaseSchema):
     
 
 
-class UserAttributeDefinitionResponse(BaseSchema):
+class UserAttributeDefinitionDetails(BaseSchema):
     # User swagger.json
 
     
@@ -347,7 +347,7 @@ class UserAttributeDefinitionValidation(BaseSchema):
     
 
 
-class UserAttributeResponse(BaseSchema):
+class UserAttribute(BaseSchema):
     # User swagger.json
 
     
@@ -361,7 +361,7 @@ class UserAttributeResponse(BaseSchema):
     
     type = fields.Str(required=False)
     
-    customer_overriden = fields.Boolean(required=False)
+    customer_overridden = fields.Boolean(required=False)
     
     attribute = fields.Dict(required=False)
     
@@ -369,11 +369,11 @@ class UserAttributeResponse(BaseSchema):
     
 
 
-class CreateUserAttributeRequest(BaseSchema):
+class CreateUserAttribute(BaseSchema):
     # User swagger.json
 
     
-    customer_overriden = fields.Boolean(required=False)
+    customer_overridden = fields.Boolean(required=False)
     
     attribute = fields.Dict(required=False)
     

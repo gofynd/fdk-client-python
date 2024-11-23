@@ -345,8 +345,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["loginWithOTP"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/otp", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SendOtpResponse
-            schema = SendOtpResponse()
+            from .models import SendOtp
+            schema = SendOtp()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -929,8 +929,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendOTPOnMobile"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/otp/mobile/send", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OtpSuccess
-            schema = OtpSuccess()
+            from .models import SendOtpSuccess
+            schema = SendOtpSuccess()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -977,8 +977,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendForgotOTPOnMobile"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/otp/forgot/mobile/send", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OtpSuccess
-            schema = OtpSuccess()
+            from .models import SendOtpSuccess
+            schema = SendOtpSuccess()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1526,7 +1526,7 @@ class User:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["deleteMobileNumber"], proccessed_params="""{"required":[{"name":"active","in":"query","required":true,"description":"This is a boolean value to check if mobile number is active 1.True - number is active 2. False - number is inactive.","schema":{"type":"boolean"}},{"name":"primary","in":"query","description":"This is a boolean value to check if mobile number is primary number (main number) 1. True - number is primary 2. False - number is not primary.","required":true,"schema":{"type":"boolean"}},{"name":"verified","in":"query","description":"This is a boolean value to check if mobile number is verified 1. True - number is verified 2.False - number is not verified yet.","required":true,"schema":{"type":"boolean"}},{"name":"country_code","in":"query","description":"Country code of the phone number, e.g. 91.","required":true,"schema":{"type":"string"}},{"name":"phone","in":"query","description":"Phone number.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}},{"name":"active","in":"query","required":true,"description":"This is a boolean value to check if mobile number is active 1.True - number is active 2. False - number is inactive.","schema":{"type":"boolean"}},{"name":"primary","in":"query","description":"This is a boolean value to check if mobile number is primary number (main number) 1. True - number is primary 2. False - number is not primary.","required":true,"schema":{"type":"boolean"}},{"name":"verified","in":"query","description":"This is a boolean value to check if mobile number is verified 1. True - number is verified 2.False - number is not verified yet.","required":true,"schema":{"type":"boolean"}},{"name":"country_code","in":"query","description":"Country code of the phone number, e.g. 91.","required":true,"schema":{"type":"string"}},{"name":"phone","in":"query","description":"Phone number.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", platform=platform, active=active, primary=primary, verified=verified, country_code=country_code, phone=phone)
+        url_with_params = await create_url_with_params(api_url=self._urls["deleteMobileNumber"], proccessed_params="""{"required":[{"name":"active","in":"query","required":true,"description":"This is a boolean value to check if mobile number is active 1.True - number is active 2. False - number is inactive.","schema":{"type":"boolean"}},{"name":"primary","in":"query","description":"This is a boolean value to check if mobile number is primary number (main number) 1. True - number is primary 2. False - number is not primary.","required":true,"schema":{"type":"boolean"}},{"name":"verified","in":"query","description":"This is a boolean value to check if mobile number is verified 1. True - number is verified 2.False - number is not verified yet.","required":true,"schema":{"type":"boolean"}},{"name":"country_code","in":"query","description":"Country code of the phone number, e.g. 91.","required":true,"schema":{"type":"string","x-not-enum":true}},{"name":"phone","in":"query","description":"Phone number.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}},{"name":"active","in":"query","required":true,"description":"This is a boolean value to check if mobile number is active 1.True - number is active 2. False - number is inactive.","schema":{"type":"boolean"}},{"name":"primary","in":"query","description":"This is a boolean value to check if mobile number is primary number (main number) 1. True - number is primary 2. False - number is not primary.","required":true,"schema":{"type":"boolean"}},{"name":"verified","in":"query","description":"This is a boolean value to check if mobile number is verified 1. True - number is verified 2.False - number is not verified yet.","required":true,"schema":{"type":"boolean"}},{"name":"country_code","in":"query","description":"Country code of the phone number, e.g. 91.","required":true,"schema":{"type":"string","x-not-enum":true}},{"name":"phone","in":"query","description":"Phone number.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", platform=platform, active=active, primary=primary, verified=verified, country_code=country_code, phone=phone)
         query_string = await create_query_string(platform=platform, active=active, primary=primary, verified=verified, country_code=country_code, phone=phone)
 
         headers={}
@@ -1880,8 +1880,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["userExists"]).netloc, "get", await create_url_without_domain("/service/application/user/authentication/v1.0/user-exists", q=q), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UserExistsResponse
-            schema = UserExistsResponse()
+            from .models import UserExistsDetails
+            schema = UserExistsDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2031,8 +2031,8 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateUserAttributesRequest
-        schema = UpdateUserAttributesRequest()
+        from .models import UpdateUserAttributes
+        schema = UpdateUserAttributes()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["updateUserAttributes"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )

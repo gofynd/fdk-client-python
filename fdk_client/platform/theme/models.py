@@ -86,6 +86,10 @@ class AvailablePageSchemaSections(BaseSchema):
     pass
 
 
+class SectionSource(BaseSchema):
+    pass
+
+
 class AvailablePagePredicate(BaseSchema):
     pass
 
@@ -142,7 +146,7 @@ class ThemesSchema(BaseSchema):
     pass
 
 
-class ThemeUpgradableResponse(BaseSchema):
+class ThemeUpgradable(BaseSchema):
     pass
 
 
@@ -314,7 +318,7 @@ class ThemeVersions(BaseSchema):
     pass
 
 
-class DummyResponse(BaseSchema):
+class DummyTheme(BaseSchema):
     pass
 
 
@@ -601,7 +605,19 @@ class AvailablePageSchemaSections(BaseSchema):
     
     predicate = fields.Nested(AvailablePagePredicate, required=False)
     
-    source = fields.Str(required=False)
+    __source = fields.Nested(SectionSource, required=False)
+    
+
+
+class SectionSource(BaseSchema):
+    # Theme swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    bundle_name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
     
 
 
@@ -803,7 +819,7 @@ class ThemesSchema(BaseSchema):
     
 
 
-class ThemeUpgradableResponse(BaseSchema):
+class ThemeUpgradable(BaseSchema):
     # Theme swagger.json
 
     
@@ -1337,7 +1353,7 @@ class ThemeVersions(BaseSchema):
     
 
 
-class DummyResponse(BaseSchema):
+class DummyTheme(BaseSchema):
     # Theme swagger.json
 
     

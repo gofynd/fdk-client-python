@@ -10,6 +10,10 @@ from .enums import *
 
 
 
+class ValidationError(BaseSchema):
+    pass
+
+
 class GenerateSEOContent(BaseSchema):
     pass
 
@@ -94,7 +98,7 @@ class NextSchedule(BaseSchema):
     pass
 
 
-class BlogGetResponse(BaseSchema):
+class BlogGetDetails(BaseSchema):
     pass
 
 
@@ -146,7 +150,7 @@ class DateMeta(BaseSchema):
     pass
 
 
-class BlogRequest(BaseSchema):
+class BlogPayload(BaseSchema):
     pass
 
 
@@ -226,7 +230,7 @@ class DataLoadersSchema(BaseSchema):
     pass
 
 
-class TagDeleteSuccessResponse(BaseSchema):
+class TagDeleteSuccessDetails(BaseSchema):
     pass
 
 
@@ -298,7 +302,7 @@ class Page(BaseSchema):
     pass
 
 
-class LandingPageGetResponse(BaseSchema):
+class LandingPageGetDetails(BaseSchema):
     pass
 
 
@@ -306,11 +310,11 @@ class LandingPageSchema(BaseSchema):
     pass
 
 
-class DefaultNavigationResponse(BaseSchema):
+class DefaultNavigationDetails(BaseSchema):
     pass
 
 
-class NavigationGetResponse(BaseSchema):
+class NavigationGetDetails(BaseSchema):
     pass
 
 
@@ -322,11 +326,11 @@ class NavigationSchema(BaseSchema):
     pass
 
 
-class NavigationRequest(BaseSchema):
+class NavigationPayload(BaseSchema):
     pass
 
 
-class PageGetResponse(BaseSchema):
+class PageGetDetails(BaseSchema):
     pass
 
 
@@ -350,7 +354,7 @@ class CreatedBySchema(BaseSchema):
     pass
 
 
-class PageRequest(BaseSchema):
+class PagePayload(BaseSchema):
     pass
 
 
@@ -358,7 +362,7 @@ class CronSchedule(BaseSchema):
     pass
 
 
-class PagePublishRequest(BaseSchema):
+class PagePublishPayload(BaseSchema):
     pass
 
 
@@ -366,7 +370,7 @@ class PageMetaSchema(BaseSchema):
     pass
 
 
-class SlideshowGetResponse(BaseSchema):
+class SlideshowGetDetails(BaseSchema):
     pass
 
 
@@ -374,7 +378,7 @@ class SlideshowSchema(BaseSchema):
     pass
 
 
-class SlideshowRequest(BaseSchema):
+class SlideshowPayload(BaseSchema):
     pass
 
 
@@ -450,6 +454,10 @@ class CustomFieldDefinitionDetailResSchema(BaseSchema):
     pass
 
 
+class MetaFieldDefinitionDetailResSchema(BaseSchema):
+    pass
+
+
 class CustomDataDeleteSchema(BaseSchema):
     pass
 
@@ -463,6 +471,10 @@ class CustomFieldSchema(BaseSchema):
 
 
 class CustomFieldsResponseSchema(BaseSchema):
+    pass
+
+
+class CustomFieldsDeleteSchema(BaseSchema):
     pass
 
 
@@ -486,11 +498,7 @@ class CustomObjectDefinitionRequestSchema(BaseSchema):
     pass
 
 
-class CustomObjectCustomFieldDefinitionResSchema(BaseSchema):
-    pass
-
-
-class CustomObjectDefinitionSchema(BaseSchema):
+class CustomObjectDefinitionSlugSchema(BaseSchema):
     pass
 
 
@@ -498,11 +506,11 @@ class CustomObjectDefinitionDeleteResponseSchema(BaseSchema):
     pass
 
 
-class CustomObjectEntryBulkUploadResponse(BaseSchema):
+class CustomObjectEntryBulkUploadDetails(BaseSchema):
     pass
 
 
-class CustomObjectListItemDefinationSchema(BaseSchema):
+class CustomObjectListItemDefinitionModel(BaseSchema):
     pass
 
 
@@ -514,11 +522,11 @@ class CustomObjectsSchema(BaseSchema):
     pass
 
 
-class CustomObjectFieldSchema(BaseSchema):
+class CustomObjectFieldDefinition(BaseSchema):
     pass
 
 
-class CustomObjectByIdSchema(BaseSchema):
+class CustomObjectBySlugSchema(BaseSchema):
     pass
 
 
@@ -530,11 +538,19 @@ class CustomObjectMetaSchema(BaseSchema):
     pass
 
 
-class CustomObjectJobSchema(BaseSchema):
+class JobSchema(BaseSchema):
+    pass
+
+
+class CustomFieldBulkEntry(BaseSchema):
     pass
 
 
 class CustomObjectBulkEntry(BaseSchema):
+    pass
+
+
+class MetafieldTypesSchema(BaseSchema):
     pass
 
 
@@ -551,6 +567,14 @@ class SupportedValidationsMetaSchema(BaseSchema):
 
 
 class SupportedValidationsSchema(BaseSchema):
+    pass
+
+
+class Duration(BaseSchema):
+    pass
+
+
+class HTML(BaseSchema):
     pass
 
 
@@ -618,7 +642,15 @@ class CustomObjectEntryFieldSchema(BaseSchema):
     pass
 
 
+class CustomObjectEntryFieldSchemaWithoutID(BaseSchema):
+    pass
+
+
 class CustomObjectRequestSchema(BaseSchema):
+    pass
+
+
+class CustomObjectRequestSchemaWithoutId(BaseSchema):
     pass
 
 
@@ -631,6 +663,16 @@ class ActionPage(BaseSchema):
 
 
 
+
+
+class ValidationError(BaseSchema):
+    # Content swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    field = fields.Str(required=False)
+    
 
 
 class GenerateSEOContent(BaseSchema):
@@ -945,7 +987,7 @@ class NextSchedule(BaseSchema):
     
 
 
-class BlogGetResponse(BaseSchema):
+class BlogGetDetails(BaseSchema):
     # Content swagger.json
 
     
@@ -1115,7 +1157,7 @@ class DateMeta(BaseSchema):
     
 
 
-class BlogRequest(BaseSchema):
+class BlogPayload(BaseSchema):
     # Content swagger.json
 
     
@@ -1413,7 +1455,7 @@ class DataLoadersSchema(BaseSchema):
     
 
 
-class TagDeleteSuccessResponse(BaseSchema):
+class TagDeleteSuccessDetails(BaseSchema):
     # Content swagger.json
 
     
@@ -1639,7 +1681,7 @@ class Page(BaseSchema):
     
 
 
-class LandingPageGetResponse(BaseSchema):
+class LandingPageGetDetails(BaseSchema):
     # Content swagger.json
 
     
@@ -1673,7 +1715,7 @@ class LandingPageSchema(BaseSchema):
     
 
 
-class DefaultNavigationResponse(BaseSchema):
+class DefaultNavigationDetails(BaseSchema):
     # Content swagger.json
 
     
@@ -1681,7 +1723,7 @@ class DefaultNavigationResponse(BaseSchema):
     
 
 
-class NavigationGetResponse(BaseSchema):
+class NavigationGetDetails(BaseSchema):
     # Content swagger.json
 
     
@@ -1729,7 +1771,7 @@ class NavigationSchema(BaseSchema):
     
 
 
-class NavigationRequest(BaseSchema):
+class NavigationPayload(BaseSchema):
     # Content swagger.json
 
     
@@ -1745,7 +1787,7 @@ class NavigationRequest(BaseSchema):
     
 
 
-class PageGetResponse(BaseSchema):
+class PageGetDetails(BaseSchema):
     # Content swagger.json
 
     
@@ -1845,7 +1887,7 @@ class CreatedBySchema(BaseSchema):
     
 
 
-class PageRequest(BaseSchema):
+class PagePayload(BaseSchema):
     # Content swagger.json
 
     
@@ -1891,7 +1933,7 @@ class CronSchedule(BaseSchema):
     
 
 
-class PagePublishRequest(BaseSchema):
+class PagePublishPayload(BaseSchema):
     # Content swagger.json
 
     
@@ -1911,7 +1953,7 @@ class PageMetaSchema(BaseSchema):
     
 
 
-class SlideshowGetResponse(BaseSchema):
+class SlideshowGetDetails(BaseSchema):
     # Content swagger.json
 
     
@@ -1947,7 +1989,7 @@ class SlideshowSchema(BaseSchema):
     
 
 
-class SlideshowRequest(BaseSchema):
+class SlideshowPayload(BaseSchema):
     # Content swagger.json
 
     
@@ -2119,9 +2161,7 @@ class FieldDefinitionSchema(BaseSchema):
     # Content swagger.json
 
     
-    _id = fields.Str(required=False)
-    
-    creator = fields.Str(required=False)
+    id = fields.Str(required=False)
     
     resource = fields.Str(required=False)
     
@@ -2129,7 +2169,7 @@ class FieldDefinitionSchema(BaseSchema):
     
     namespace = fields.Str(required=False)
     
-    key = fields.Str(required=False)
+    slug = fields.Str(required=False)
     
     description = fields.Str(required=False)
     
@@ -2141,17 +2181,9 @@ class FieldDefinitionSchema(BaseSchema):
     
     company_id = fields.Str(required=False)
     
-    created_by = fields.Str(required=False)
-    
-    updated_by = fields.Str(required=False)
-    
     required = fields.Boolean(required=False)
     
     is_deleted = fields.Boolean(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
     
     type_name = fields.Str(required=False)
     
@@ -2173,11 +2205,9 @@ class CustomFieldDefinitionRequestSchema(BaseSchema):
     # Content swagger.json
 
     
-    resource = fields.Str(required=False)
-    
     type = fields.Str(required=False)
     
-    key = fields.Str(required=False)
+    slug = fields.Str(required=False)
     
     namespace = fields.Str(required=False)
     
@@ -2207,7 +2237,7 @@ class CustomObjectCustomFieldDefinitions(BaseSchema):
     
     required = fields.Boolean(required=False)
     
-    key = fields.Str(required=False)
+    slug = fields.Str(required=False)
     
     validations = fields.List(fields.Nested(FieldValidations, required=False), required=False)
     
@@ -2218,8 +2248,6 @@ class CustomObjectCustomFieldDefinitions(BaseSchema):
 class CustomObjectDefinitionUpdateRequestSchema(BaseSchema):
     # Content swagger.json
 
-    
-    type = fields.Str(required=False)
     
     description = fields.Str(required=False)
     
@@ -2235,15 +2263,13 @@ class CustomFieldDefinitionDetailResSchema(BaseSchema):
     # Content swagger.json
 
     
-    creator = fields.Str(required=False)
-    
     resource = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
     namespace = fields.Str(required=False)
     
-    key = fields.Str(required=False)
+    slug = fields.Str(required=False)
     
     description = fields.Str(required=False)
     
@@ -2255,15 +2281,47 @@ class CustomFieldDefinitionDetailResSchema(BaseSchema):
     
     application_id = fields.Str(required=False)
     
-    created_by = fields.Str(required=False)
+    required = fields.Boolean(required=False)
     
-    updated_by = fields.Str(required=False)
+    is_deleted = fields.Boolean(required=False)
+    
+    id = fields.Str(required=False)
+    
+    validations = fields.List(fields.Raw(required=False), required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+
+
+class MetaFieldDefinitionDetailResSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    resource = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    namespace = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    multi_value = fields.Boolean(required=False)
+    
+    company_id = fields.Str(required=False)
+    
+    application_id = fields.Str(required=False)
     
     required = fields.Boolean(required=False)
     
     is_deleted = fields.Boolean(required=False)
     
-    _id = fields.Str(required=False)
+    id = fields.Str(required=False)
     
     validations = fields.List(fields.Raw(required=False), required=False)
     
@@ -2295,19 +2353,17 @@ class CustomFieldSchema(BaseSchema):
     # Content swagger.json
 
     
-    _id = fields.Str(required=False)
+    id = fields.Str(required=False)
     
     namespace = fields.Str(required=False)
     
-    key = fields.Str(required=False)
+    slug = fields.Str(required=False)
     
     resource = fields.Str(required=False)
     
-    creator = fields.Str(required=False)
-    
     value = fields.List(fields.Nested(CustomFieldValue, required=False), required=False)
     
-    resource_id = fields.Str(required=False)
+    resource_slug = fields.Str(required=False)
     
     type = fields.Str(required=False)
     
@@ -2315,13 +2371,9 @@ class CustomFieldSchema(BaseSchema):
     
     company_id = fields.Str(required=False)
     
-    definition_id = fields.Str(required=False)
-    
     has_invalid_values = fields.Boolean(required=False)
     
     invalid_value_errors = fields.List(fields.Raw(required=False), required=False)
-    
-    created_by = fields.Str(required=False)
     
     is_deleted = fields.Boolean(required=False)
     
@@ -2341,6 +2393,16 @@ class CustomFieldsResponseSchema(BaseSchema):
     
 
 
+class CustomFieldsDeleteSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
 class CustomFieldsResponseByResourceIdSchema(BaseSchema):
     # Content swagger.json
 
@@ -2355,7 +2417,9 @@ class CustomField(BaseSchema):
     
     value = fields.List(fields.Raw(required=False), required=False)
     
-    definition_id = fields.Str(required=False)
+    namespace = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
     
 
 
@@ -2371,25 +2435,19 @@ class CustomObjectSchema(BaseSchema):
     # Content swagger.json
 
     
-    _id = fields.Str(required=False)
-    
-    creator = fields.Str(required=False)
+    id = fields.Str(required=False)
     
     company_id = fields.Str(required=False)
     
     application_id = fields.Str(required=False)
     
-    created_by = fields.Str(required=False)
-    
-    updated_by = fields.Str(required=False)
-    
     status = fields.Str(required=False)
     
     type = fields.Str(required=False)
     
-    display_name = fields.Str(required=False)
+    definition_slug = fields.Str(required=False)
     
-    definition_id = fields.Str(required=False)
+    display_name = fields.Str(required=False)
     
     fields = fields.List(fields.Nested(CustomFieldSchema, required=False), required=False)
     
@@ -2401,6 +2459,8 @@ class CustomObjectDefinitionRequestSchema(BaseSchema):
     
     type = fields.Str(required=False)
     
+    definition_slug = fields.Str(required=False)
+    
     description = fields.Str(required=False)
     
     name = fields.Str(required=False)
@@ -2411,67 +2471,23 @@ class CustomObjectDefinitionRequestSchema(BaseSchema):
     
 
 
-class CustomObjectCustomFieldDefinitionResSchema(BaseSchema):
+class CustomObjectDefinitionSlugSchema(BaseSchema):
     # Content swagger.json
 
     
-    creator = fields.Str(required=False)
-    
-    resource = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    namespace = fields.Str(required=False)
-    
-    key = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    multi_value = fields.Boolean(required=False)
-    
-    validations = fields.List(fields.Nested(FieldValidations, required=False), required=False)
-    
-    company_id = fields.Str(required=False)
-    
-    created_by = fields.Str(required=False)
-    
-    metaobject_definition_id = fields.Str(required=False)
-    
-    required = fields.Boolean(required=False)
-    
-    is_deleted = fields.Boolean(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-
-
-class CustomObjectDefinitionSchema(BaseSchema):
-    # Content swagger.json
-
-    
-    _id = fields.Str(required=False)
+    id = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
     type = fields.Str(required=False)
+    
+    definition_slug = fields.Str(required=False)
     
     display_name_key = fields.Str(required=False)
     
     description = fields.Str(required=False)
     
-    creator = fields.Str(required=False)
-    
-    created_by = fields.Str(required=False)
-    
-    updated_by = fields.Str(required=False)
-    
-    field_definitions = fields.List(fields.Nested(CustomObjectCustomFieldDefinitionResSchema, required=False), required=False)
+    field_definitions = fields.List(fields.Nested(CustomFieldDefinitionDetailResSchema, required=False), required=False)
     
 
 
@@ -2485,7 +2501,7 @@ class CustomObjectDefinitionDeleteResponseSchema(BaseSchema):
     
 
 
-class CustomObjectEntryBulkUploadResponse(BaseSchema):
+class CustomObjectEntryBulkUploadDetails(BaseSchema):
     # Content swagger.json
 
     
@@ -2495,11 +2511,11 @@ class CustomObjectEntryBulkUploadResponse(BaseSchema):
     
 
 
-class CustomObjectListItemDefinationSchema(BaseSchema):
+class CustomObjectListItemDefinitionModel(BaseSchema):
     # Content swagger.json
 
     
-    _id = fields.Str(required=False)
+    id = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
@@ -2511,17 +2527,17 @@ class CustomObjectListItemSchema(BaseSchema):
     # Content swagger.json
 
     
-    _id = fields.Str(required=False)
-    
-    definition_id = fields.Str(required=False)
+    id = fields.Str(required=False)
     
     status = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
     
     updated_at = fields.Str(required=False)
     
     display_name = fields.Str(required=False)
     
-    definition = fields.Nested(CustomObjectListItemDefinationSchema, required=False)
+    definition = fields.Nested(CustomObjectListItemDefinitionModel, required=False)
     
     references = fields.Int(required=False)
     
@@ -2537,37 +2553,41 @@ class CustomObjectsSchema(BaseSchema):
     
 
 
-class CustomObjectFieldSchema(BaseSchema):
+class CustomObjectFieldDefinition(BaseSchema):
     # Content swagger.json
 
     
-    _id = fields.Str(required=False)
+    id = fields.Str(required=False)
     
-    key = fields.Str(required=False)
+    slug = fields.Str(required=False)
+    
+    namespace = fields.Str(required=False)
     
     value = fields.List(fields.Raw(required=False), required=False)
     
     type = fields.Str(required=False)
     
-    definition_id = fields.Str(required=False)
-    
 
 
-class CustomObjectByIdSchema(BaseSchema):
+class CustomObjectBySlugSchema(BaseSchema):
     # Content swagger.json
 
     
-    _id = fields.Str(required=False)
+    id = fields.Str(required=False)
     
     status = fields.Str(required=False)
     
     display_name = fields.Str(required=False)
     
-    definition = fields.Nested(CustomObjectListItemDefinationSchema, required=False)
+    definition = fields.Nested(CustomObjectListItemDefinitionModel, required=False)
     
     references = fields.List(fields.Raw(required=False), required=False)
     
-    fields = fields.List(fields.Nested(CustomObjectFieldSchema, required=False), required=False)
+    slug = fields.Str(required=False)
+    
+    definition_slug = fields.Str(required=False)
+    
+    fields = fields.List(fields.Nested(CustomObjectFieldDefinition, required=False), required=False)
     
 
 
@@ -2595,11 +2615,11 @@ class CustomObjectMetaSchema(BaseSchema):
     
 
 
-class CustomObjectJobSchema(BaseSchema):
+class JobSchema(BaseSchema):
     # Content swagger.json
 
     
-    _id = fields.Str(required=False)
+    id = fields.Str(required=False)
     
     jobs = fields.List(fields.Str(required=False), required=False)
     
@@ -2610,10 +2630,6 @@ class CustomObjectJobSchema(BaseSchema):
     errors_occured = fields.List(fields.Str(required=False), required=False)
     
     company_id = fields.Str(required=False)
-    
-    creator = fields.Str(required=False)
-    
-    url = fields.Str(required=False)
     
     status = fields.Str(required=False)
     
@@ -2639,15 +2655,35 @@ class CustomObjectJobSchema(BaseSchema):
     
     updated_at = fields.Str(required=False)
     
+    application_id = fields.Str(required=False)
+    
+
+
+class CustomFieldBulkEntry(BaseSchema):
+    # Content swagger.json
+
+    
+    items = fields.List(fields.Nested(JobSchema, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
 
 
 class CustomObjectBulkEntry(BaseSchema):
     # Content swagger.json
 
     
-    items = fields.List(fields.Nested(CustomObjectJobSchema, required=False), required=False)
+    items = fields.List(fields.Nested(JobSchema, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class MetafieldTypesSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    metafield_types = fields.Nested(CustomFieldTypeSchema, required=False)
     
 
 
@@ -2680,6 +2716,10 @@ class CustomFieldTypeSchema(BaseSchema):
     metaobject = fields.Nested(Metaobject, required=False)
     
     product = fields.Nested(Product, required=False)
+    
+    html = fields.Nested(HTML, required=False)
+    
+    duration = fields.Nested(Duration, required=False)
     
 
 
@@ -2714,6 +2754,36 @@ class SupportedValidationsSchema(BaseSchema):
     required = fields.Boolean(required=False)
     
     meta = fields.Nested(SupportedValidationsMetaSchema, required=False)
+    
+
+
+class Duration(BaseSchema):
+    # Content swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    list_enabled = fields.Boolean(required=False)
+    
+    type = fields.Str(required=False)
+    
+    category = fields.Str(required=False)
+    
+    supported_validations = fields.List(fields.Nested(SupportedValidationsSchema, required=False), required=False)
+    
+
+
+class HTML(BaseSchema):
+    # Content swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    list_enabled = fields.Boolean(required=False)
+    
+    type = fields.Str(required=False)
+    
+    supported_validations = fields.List(fields.Nested(SupportedValidationsSchema, required=False), required=False)
     
 
 
@@ -2927,7 +2997,7 @@ class CustomObjectEntry(BaseSchema):
     # Content swagger.json
 
     
-    _id = fields.Str(required=False)
+    id = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
@@ -2955,9 +3025,19 @@ class CustomObjectEntryFieldSchema(BaseSchema):
     # Content swagger.json
 
     
-    definition_id = fields.Str(required=False)
+    namespace = fields.Str(required=False)
     
-    value = fields.List(fields.Raw(required=False), required=False)
+    slug = fields.Str(required=False)
+    
+
+
+class CustomObjectEntryFieldSchemaWithoutID(BaseSchema):
+    # Content swagger.json
+
+    
+    slug = fields.Str(required=False)
+    
+    value = fields.Raw(required=False)
     
 
 
@@ -2967,9 +3047,19 @@ class CustomObjectRequestSchema(BaseSchema):
     
     status = fields.Str(required=False)
     
-    definition_id = fields.Str(required=False)
+    slug = fields.Str(required=False)
     
     fields = fields.List(fields.Nested(CustomObjectEntryFieldSchema, required=False), required=False)
+    
+
+
+class CustomObjectRequestSchemaWithoutId(BaseSchema):
+    # Content swagger.json
+
+    
+    status = fields.Str(required=False)
+    
+    fields = fields.List(fields.Nested(CustomObjectEntryFieldSchemaWithoutID, required=False), required=False)
     
 
 

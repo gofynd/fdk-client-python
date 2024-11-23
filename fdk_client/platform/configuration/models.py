@@ -8,11 +8,31 @@ from ..PlatformModel import BaseSchema
 
 
 
+class CurrencyExchangeResponseV2(BaseSchema):
+    pass
+
+
+class CurrencyExchangeItem(BaseSchema):
+    pass
+
+
 class ApplicationInventory(BaseSchema):
     pass
 
 
 class PiiMasking(BaseSchema):
+    pass
+
+
+class FstIdentification(BaseSchema):
+    pass
+
+
+class QuerySuggestions(BaseSchema):
+    pass
+
+
+class SearchConfig(BaseSchema):
     pass
 
 
@@ -116,19 +136,19 @@ class BrandCompanyInfo(BaseSchema):
     pass
 
 
-class CompanyByBrandsRequest(BaseSchema):
+class CompanyByBrandsRequestSchema(BaseSchema):
     pass
 
 
-class CompanyByBrandsResponse(BaseSchema):
+class CompanyByBrandsResponseSchema(BaseSchema):
     pass
 
 
-class StoreByBrandsRequest(BaseSchema):
+class StoreByBrandsRequestSchema(BaseSchema):
     pass
 
 
-class StoreByBrandsResponse(BaseSchema):
+class StoreByBrandsResponseSchema(BaseSchema):
     pass
 
 
@@ -140,11 +160,11 @@ class CompanyBrandInfo(BaseSchema):
     pass
 
 
-class BrandsByCompanyResponse(BaseSchema):
+class BrandsByCompanyResponseSchema(BaseSchema):
     pass
 
 
-class ValidationFailedResponse(BaseSchema):
+class ValidationFailedResponseSchema(BaseSchema):
     pass
 
 
@@ -164,15 +184,15 @@ class PanCardConfig(BaseSchema):
     pass
 
 
-class CreateApplicationRequest(BaseSchema):
+class CreateApplicationRequestSchema(BaseSchema):
     pass
 
 
-class CreateAppResponse(BaseSchema):
+class CreateAppResponseSchema(BaseSchema):
     pass
 
 
-class ApplicationsResponse(BaseSchema):
+class ApplicationsResponseSchema(BaseSchema):
     pass
 
 
@@ -188,7 +208,7 @@ class SplashImage(BaseSchema):
     pass
 
 
-class MobileAppConfigRequest(BaseSchema):
+class MobileAppConfigRequestSchema(BaseSchema):
     pass
 
 
@@ -212,7 +232,7 @@ class DomainAdd(BaseSchema):
     pass
 
 
-class DomainAddRequest(BaseSchema):
+class DomainAddRequestSchema(BaseSchema):
     pass
 
 
@@ -220,7 +240,7 @@ class Domain(BaseSchema):
     pass
 
 
-class DomainsResponse(BaseSchema):
+class DomainsResponseSchema(BaseSchema):
     pass
 
 
@@ -228,11 +248,11 @@ class UpdateDomain(BaseSchema):
     pass
 
 
-class UpdateDomainTypeRequest(BaseSchema):
+class UpdateDomainTypeRequestSchema(BaseSchema):
     pass
 
 
-class DomainStatusRequest(BaseSchema):
+class DomainStatusRequestSchema(BaseSchema):
     pass
 
 
@@ -240,11 +260,11 @@ class DomainStatus(BaseSchema):
     pass
 
 
-class DomainStatusResponse(BaseSchema):
+class DomainStatusResponseSchema(BaseSchema):
     pass
 
 
-class DomainSuggestionsRequest(BaseSchema):
+class DomainSuggestionsRequestSchema(BaseSchema):
     pass
 
 
@@ -252,11 +272,11 @@ class DomainSuggestion(BaseSchema):
     pass
 
 
-class DomainSuggestionsResponse(BaseSchema):
+class DomainSuggestionsResponseSchema(BaseSchema):
     pass
 
 
-class SuccessMessageResponse(BaseSchema):
+class SuccessMessageResponseSchema(BaseSchema):
     pass
 
 
@@ -268,7 +288,7 @@ class AppDomain(BaseSchema):
     pass
 
 
-class CompaniesResponse(BaseSchema):
+class CompaniesResponseSchema(BaseSchema):
     pass
 
 
@@ -276,7 +296,7 @@ class AppInventoryCompanies(BaseSchema):
     pass
 
 
-class StoresResponse(BaseSchema):
+class StoresResponseSchema(BaseSchema):
     pass
 
 
@@ -284,7 +304,7 @@ class AppInventoryStores(BaseSchema):
     pass
 
 
-class FilterOrderingStoreRequest(BaseSchema):
+class FilterOrderingStoreRequestSchema(BaseSchema):
     pass
 
 
@@ -296,7 +316,7 @@ class OrderingStoreConfig(BaseSchema):
     pass
 
 
-class OrderingStoreSelectRequest(BaseSchema):
+class OrderingStoreSelectRequestSchema(BaseSchema):
     pass
 
 
@@ -316,7 +336,7 @@ class OtherSellerApplications(BaseSchema):
     pass
 
 
-class OptedApplicationResponse(BaseSchema):
+class OptedApplicationResponseSchema(BaseSchema):
     pass
 
 
@@ -340,7 +360,7 @@ class OptOutInventory(BaseSchema):
     pass
 
 
-class TokenResponse(BaseSchema):
+class TokenResponseSchema(BaseSchema):
     pass
 
 
@@ -512,11 +532,11 @@ class OrderFeature(BaseSchema):
     pass
 
 
-class AppFeatureRequest(BaseSchema):
+class AppFeatureRequestSchema(BaseSchema):
     pass
 
 
-class AppFeatureResponse(BaseSchema):
+class AppFeatureResponseSchema(BaseSchema):
     pass
 
 
@@ -564,7 +584,7 @@ class TokenSchema(BaseSchema):
     pass
 
 
-class InvalidPayloadRequest(BaseSchema):
+class InvalidPayloadRequestSchema(BaseSchema):
     pass
 
 
@@ -652,11 +672,11 @@ class ApplicationDetail(BaseSchema):
     pass
 
 
-class CurrenciesResponse(BaseSchema):
+class CurrenciesResponseSchema(BaseSchema):
     pass
 
 
-class AppCurrencyResponse(BaseSchema):
+class AppCurrencyResponseSchema(BaseSchema):
     pass
 
 
@@ -676,16 +696,64 @@ class OrderingStores(BaseSchema):
     pass
 
 
-class OrderingStoresResponse(BaseSchema):
+class OrderingStoresResponseSchema(BaseSchema):
+    pass
+
+
+class ValidationErrors(BaseSchema):
+    pass
+
+
+class ValidationError(BaseSchema):
     pass
 
 
 
 
 
+class CurrencyExchangeResponseV2(BaseSchema):
+    # Configuration swagger.json
+
+    
+    base = fields.Str(required=False)
+    
+    base_currency_name = fields.Str(required=False)
+    
+    ttl_seconds = fields.Int(required=False)
+    
+    items = fields.List(fields.Nested(CurrencyExchangeItem, required=False), required=False)
+    
+    total = fields.Int(required=False)
+    
+
+
+class CurrencyExchangeItem(BaseSchema):
+    # Configuration swagger.json
+
+    
+    currency_code = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    rate = fields.Float(required=False)
+    
+    country_code = fields.Str(required=False)
+    
+    country_name = fields.Str(required=False)
+    
+    subunit = fields.Str(required=False)
+    
+    decimal_digits = fields.Int(required=False)
+    
+    symbol = fields.Str(required=False)
+    
+
+
 class ApplicationInventory(BaseSchema):
     # Configuration swagger.json
 
+    
+    search = fields.Nested(SearchConfig, required=False)
     
     inventory = fields.Nested(AppInventoryConfig, required=False)
     
@@ -739,6 +807,34 @@ class PiiMasking(BaseSchema):
     
 
 
+class FstIdentification(BaseSchema):
+    # Configuration swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
+    
+
+
+class QuerySuggestions(BaseSchema):
+    # Configuration swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
+    
+    max_limit = fields.Int(required=False)
+    
+
+
+class SearchConfig(BaseSchema):
+    # Configuration swagger.json
+
+    
+    fst_identification = fields.Nested(FstIdentification, required=False)
+    
+    query_suggestions = fields.Nested(QuerySuggestions, required=False)
+    
+
+
 class AppInventoryConfig(BaseSchema):
     # Configuration swagger.json
 
@@ -759,7 +855,7 @@ class AppInventoryConfig(BaseSchema):
     
     franchise_enabled = fields.Boolean(required=False)
     
-    exclude_category = fields.List(fields.Raw(required=False), required=False)
+    exclude_category = fields.List(fields.Dict(required=False), required=False)
     
     image = fields.List(fields.Str(required=False), required=False)
     
@@ -1063,6 +1159,8 @@ class AppInventoryPartialUpdate(BaseSchema):
     # Configuration swagger.json
 
     
+    search = fields.Nested(SearchConfig, required=False)
+    
     reward_points = fields.Nested(RewardPointsConfig, required=False)
     
     cart = fields.Nested(AppCartConfig, required=False)
@@ -1087,7 +1185,7 @@ class BrandCompanyInfo(BaseSchema):
     
 
 
-class CompanyByBrandsRequest(BaseSchema):
+class CompanyByBrandsRequestSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1097,7 +1195,7 @@ class CompanyByBrandsRequest(BaseSchema):
     
 
 
-class CompanyByBrandsResponse(BaseSchema):
+class CompanyByBrandsResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1107,7 +1205,7 @@ class CompanyByBrandsResponse(BaseSchema):
     
 
 
-class StoreByBrandsRequest(BaseSchema):
+class StoreByBrandsRequestSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1119,7 +1217,7 @@ class StoreByBrandsRequest(BaseSchema):
     
 
 
-class StoreByBrandsResponse(BaseSchema):
+class StoreByBrandsResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1163,7 +1261,7 @@ class CompanyBrandInfo(BaseSchema):
     
 
 
-class BrandsByCompanyResponse(BaseSchema):
+class BrandsByCompanyResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1171,7 +1269,7 @@ class BrandsByCompanyResponse(BaseSchema):
     
 
 
-class ValidationFailedResponse(BaseSchema):
+class ValidationFailedResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1221,7 +1319,7 @@ class PanCardConfig(BaseSchema):
     
 
 
-class CreateApplicationRequest(BaseSchema):
+class CreateApplicationRequestSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1233,7 +1331,7 @@ class CreateApplicationRequest(BaseSchema):
     
 
 
-class CreateAppResponse(BaseSchema):
+class CreateAppResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1243,7 +1341,7 @@ class CreateAppResponse(BaseSchema):
     
 
 
-class ApplicationsResponse(BaseSchema):
+class ApplicationsResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1301,7 +1399,7 @@ class SplashImage(BaseSchema):
     
 
 
-class MobileAppConfigRequest(BaseSchema):
+class MobileAppConfigRequestSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1399,7 +1497,7 @@ class DomainAdd(BaseSchema):
     
 
 
-class DomainAddRequest(BaseSchema):
+class DomainAddRequestSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1427,7 +1525,7 @@ class Domain(BaseSchema):
     
 
 
-class DomainsResponse(BaseSchema):
+class DomainsResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1451,7 +1549,7 @@ class UpdateDomain(BaseSchema):
     
 
 
-class UpdateDomainTypeRequest(BaseSchema):
+class UpdateDomainTypeRequestSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1461,7 +1559,7 @@ class UpdateDomainTypeRequest(BaseSchema):
     
 
 
-class DomainStatusRequest(BaseSchema):
+class DomainStatusRequestSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1479,7 +1577,7 @@ class DomainStatus(BaseSchema):
     
 
 
-class DomainStatusResponse(BaseSchema):
+class DomainStatusResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1489,13 +1587,13 @@ class DomainStatusResponse(BaseSchema):
     
 
 
-class DomainSuggestionsRequest(BaseSchema):
+class DomainSuggestionsRequestSchema(BaseSchema):
     # Configuration swagger.json
 
     
     domain_url = fields.Str(required=False)
     
-    custom = fields.Boolean(required=False)
+    custom_domain = fields.Boolean(required=False)
     
 
 
@@ -1515,7 +1613,7 @@ class DomainSuggestion(BaseSchema):
     
 
 
-class DomainSuggestionsResponse(BaseSchema):
+class DomainSuggestionsResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1523,7 +1621,7 @@ class DomainSuggestionsResponse(BaseSchema):
     
 
 
-class SuccessMessageResponse(BaseSchema):
+class SuccessMessageResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1557,7 +1655,7 @@ class AppDomain(BaseSchema):
     
 
 
-class CompaniesResponse(BaseSchema):
+class CompaniesResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1579,7 +1677,7 @@ class AppInventoryCompanies(BaseSchema):
     
 
 
-class StoresResponse(BaseSchema):
+class StoresResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1615,7 +1713,7 @@ class AppInventoryStores(BaseSchema):
     
 
 
-class FilterOrderingStoreRequest(BaseSchema):
+class FilterOrderingStoreRequestSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1655,7 +1753,7 @@ class OrderingStoreConfig(BaseSchema):
     
 
 
-class OrderingStoreSelectRequest(BaseSchema):
+class OrderingStoreSelectRequestSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1709,7 +1807,7 @@ class OtherSellerApplications(BaseSchema):
     
 
 
-class OptedApplicationResponse(BaseSchema):
+class OptedApplicationResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1795,7 +1893,7 @@ class OptOutInventory(BaseSchema):
     
 
 
-class TokenResponse(BaseSchema):
+class TokenResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -2285,7 +2383,7 @@ class OrderFeature(BaseSchema):
     
 
 
-class AppFeatureRequest(BaseSchema):
+class AppFeatureRequestSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -2293,7 +2391,7 @@ class AppFeatureRequest(BaseSchema):
     
 
 
-class AppFeatureResponse(BaseSchema):
+class AppFeatureResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -2539,7 +2637,7 @@ class TokenSchema(BaseSchema):
     
 
 
-class InvalidPayloadRequest(BaseSchema):
+class InvalidPayloadRequestSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -2853,7 +2951,7 @@ class ApplicationDetail(BaseSchema):
     
 
 
-class CurrenciesResponse(BaseSchema):
+class CurrenciesResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -2861,7 +2959,7 @@ class CurrenciesResponse(BaseSchema):
     
 
 
-class AppCurrencyResponse(BaseSchema):
+class AppCurrencyResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -2963,13 +3061,31 @@ class OrderingStores(BaseSchema):
     
 
 
-class OrderingStoresResponse(BaseSchema):
+class OrderingStoresResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
     page = fields.Nested(Page, required=False)
     
     items = fields.List(fields.Nested(OrderingStore, required=False), required=False)
+    
+
+
+class ValidationErrors(BaseSchema):
+    # Configuration swagger.json
+
+    
+    errors = fields.List(fields.Nested(ValidationError, required=False), required=False)
+    
+
+
+class ValidationError(BaseSchema):
+    # Configuration swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    field = fields.Str(required=False)
     
 
 
