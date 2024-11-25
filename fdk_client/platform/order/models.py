@@ -568,6 +568,10 @@ class VerifyOtpResponseSchema(BaseSchema):
     pass
 
 
+class BulkReportsFiltersSchema(BaseSchema):
+    pass
+
+
 class BulkReportsDownloadRequestSchema(BaseSchema):
     pass
 
@@ -3679,6 +3683,30 @@ class VerifyOtpResponseSchema(BaseSchema):
     
 
 
+class BulkReportsFiltersSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    bag_status = fields.Str(required=False)
+    
+    operational_status = fields.Str(required=False)
+    
+    stores = fields.Str(required=False)
+    
+    time_to_dispatch = fields.Str(required=False)
+    
+    payment_methods = fields.Str(required=False)
+    
+    dp_ids = fields.Str(required=False)
+    
+    sales_channels = fields.Str(required=False)
+    
+    tags = fields.Str(required=False)
+    
+    lock_status = fields.Str(required=False)
+    
+
+
 class BulkReportsDownloadRequestSchema(BaseSchema):
     # Order swagger.json
 
@@ -3702,6 +3730,8 @@ class BulkReportsDownloadRequestSchema(BaseSchema):
     is_cross_company_enabled = fields.Boolean(required=False)
     
     custom_filters_for_lane = fields.Dict(required=False)
+    
+    filters = fields.Nested(BulkReportsFiltersSchema, required=False)
     
 
 
@@ -5639,7 +5669,7 @@ class Article(BaseSchema):
     # Order swagger.json
 
     
-    child_details = fields.Dict(required=False, allow_none=True)
+    child_details = fields.List(fields.Dict(required=False), required=False)
     
     seller_identifier = fields.Str(required=False)
     

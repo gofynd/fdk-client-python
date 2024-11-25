@@ -4169,6 +4169,10 @@ class PlatformCartCheckoutDetailCreation(BaseSchema):
     
     card_id = fields.Str(required=False)
     
+    success_callback_url = fields.Str(required=False, allow_none=True)
+    
+    failure_callback_url = fields.Str(required=False, allow_none=True)
+    
 
 
 class CheckCart(BaseSchema):
@@ -4486,6 +4490,10 @@ class PlatformCartCheckoutDetailV2Creation(BaseSchema):
     type = fields.Str(required=False)
     
     card_id = fields.Str(required=False)
+    
+    success_callback_url = fields.Str(required=False, allow_none=True)
+    
+    failure_callback_url = fields.Str(required=False, allow_none=True)
     
 
 

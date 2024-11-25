@@ -87,7 +87,7 @@ class JobStatus(BaseSchema):
     
     start_date = fields.Str(required=False)
     
-    end_date = fields.Str(required=False)
+    end_date = fields.Str(required=False, allow_none=True)
     
     status = fields.Str(required=False)
     

@@ -54,6 +54,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
         
@@ -175,6 +176,8 @@ class LogisticValidator:
         page_size = fields.Int(required=False)
         
         q = fields.Str(required=False)
+        
+        sector = fields.Str(required=False)
          
         
     

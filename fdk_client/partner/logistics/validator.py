@@ -162,15 +162,26 @@ from ..PartnerModel import BaseSchema
     
     
         
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
+        
     
     
         
         
     
     
-        
-        
-        
         
         
 
@@ -497,22 +508,6 @@ class LogisticsValidator:
          
         
     
-    class createCourierPartnerScheme(BaseSchema):
-        
-        
-        organization_id = fields.Str(required=False)
-         
-        
-    
-    class updateCourierPartnerScheme(BaseSchema):
-        
-        
-        organization_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-         
-        
-    
     class getCountries(BaseSchema):
         
         
@@ -525,6 +520,46 @@ class LogisticsValidator:
         page_size = fields.Int(required=False)
         
         q = fields.Str(required=False)
+         
+        
+    
+    class createCourierPartnerScheme(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+         
+        
+    
+    class getCourierPartnerSchemes(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        scheme_type = fields.Str(required=False)
+        
+        payment_mode = fields.Str(required=False)
+        
+        capabilities = fields.List(fields.Str(required=False), required=False)
+        
+        scheme_ids = fields.List(fields.Str(required=False), required=False)
+         
+        
+    
+    class updateCourierPartnerScheme(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        scheme_id = fields.Str(required=False)
+         
+        
+    
+    class getCourierPartnerScheme(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        scheme_id = fields.Str(required=False)
          
         
     

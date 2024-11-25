@@ -116,11 +116,27 @@ class CourierPartnerSchemeFeatures(BaseSchema):
     pass
 
 
+class CourierPartnerSchemeV2Features(BaseSchema):
+    pass
+
+
+class CourierPartnerSchemeV2DetailsModel(BaseSchema):
+    pass
+
+
+class CourierPartnerV2SchemeModel(BaseSchema):
+    pass
+
+
+class courierPartnerSchemeV2List(BaseSchema):
+    pass
+
+
 class ArithmeticOperations(BaseSchema):
     pass
 
 
-class CourierPartnerSchemeUpdateDetails(BaseSchema):
+class CourierPartnerSchemeV2UpdateDetails(BaseSchema):
     pass
 
 
@@ -275,6 +291,8 @@ class ServiceabilityDetailsResult(BaseSchema):
     
     last_mile = fields.Boolean(required=False)
     
+    reverse_pickup = fields.Boolean(required=False, allow_none=True)
+    
     cod_limit = fields.Float(required=False)
     
     doorstep_return = fields.Boolean(required=False)
@@ -296,6 +314,8 @@ class ServiceabilityDetails(BaseSchema):
     first_mile = fields.Boolean(required=False)
     
     last_mile = fields.Boolean(required=False)
+    
+    reverse_pickup = fields.Boolean(required=False, allow_none=True)
     
     cod_limit = fields.Float(required=False)
     
@@ -326,6 +346,8 @@ class RegionServiceabilityResult(BaseSchema):
     first_mile = fields.Boolean(required=False)
     
     last_mile = fields.Boolean(required=False)
+    
+    reverse_pickup = fields.Boolean(required=False, allow_none=True)
     
     cod_limit = fields.Float(required=False)
     
@@ -358,6 +380,8 @@ class RegionServiceabilityDetails(BaseSchema):
     first_mile = fields.Boolean(required=False)
     
     last_mile = fields.Boolean(required=False)
+    
+    reverse_pickup = fields.Boolean(required=False, allow_none=True)
     
     cod_limit = fields.Float(required=False)
     
@@ -667,6 +691,128 @@ class CourierPartnerSchemeFeatures(BaseSchema):
     
 
 
+class CourierPartnerSchemeV2Features(BaseSchema):
+    # Logistics swagger.json
+
+    
+    doorstep_qc = fields.Boolean(required=False)
+    
+    qr = fields.Boolean(required=False)
+    
+    mps = fields.Boolean(required=False)
+    
+    ndr = fields.Boolean(required=False)
+    
+    dangerous_goods = fields.Boolean(required=False)
+    
+    fragile_goods = fields.Boolean(required=False)
+    
+    restricted_goods = fields.Boolean(required=False)
+    
+    cold_storage_goods = fields.Boolean(required=False)
+    
+    doorstep_exchange = fields.Boolean(required=False)
+    
+    doorstep_return = fields.Boolean(required=False)
+    
+    product_installation = fields.Boolean(required=False)
+    
+    openbox_delivery = fields.Boolean(required=False)
+    
+    multi_pick_single_drop = fields.Boolean(required=False)
+    
+    single_pick_multi_drop = fields.Boolean(required=False)
+    
+    multi_pick_multi_drop = fields.Boolean(required=False)
+    
+    ewaybill = fields.Boolean(required=False)
+    
+
+
+class CourierPartnerSchemeV2DetailsModel(BaseSchema):
+    # Logistics swagger.json
+
+    
+    extension_id = fields.Str(required=False)
+    
+    scheme_id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    weight = fields.Nested(ArithmeticOperations, required=False)
+    
+    volumetric_weight = fields.Nested(ArithmeticOperations, required=False)
+    
+    transport_type = fields.Str(required=False)
+    
+    region = fields.Str(required=False)
+    
+    delivery_type = fields.Str(required=False)
+    
+    payment_mode = fields.List(fields.Str(required=False), required=False)
+    
+    stage = fields.Str(required=False)
+    
+    status_updates = fields.Str(required=False)
+    
+    ndr_attempts = fields.Int(required=False)
+    
+    qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
+    
+    non_qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
+    
+    feature = fields.Nested(CourierPartnerSchemeV2Features, required=False)
+    
+
+
+class CourierPartnerV2SchemeModel(BaseSchema):
+    # Logistics swagger.json
+
+    
+    extension_id = fields.Str(required=False)
+    
+    scheme_id = fields.Str(required=False)
+    
+    company_id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    weight = fields.Nested(ArithmeticOperations, required=False)
+    
+    volumetric_weight = fields.Nested(ArithmeticOperations, required=False)
+    
+    transport_type = fields.Str(required=False)
+    
+    region = fields.Str(required=False)
+    
+    delivery_type = fields.Str(required=False)
+    
+    payment_mode = fields.List(fields.Str(required=False), required=False)
+    
+    stage = fields.Str(required=False)
+    
+    status_updates = fields.Str(required=False)
+    
+    ndr_attempts = fields.Int(required=False)
+    
+    qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
+    
+    non_qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
+    
+    feature = fields.Nested(CourierPartnerSchemeV2Features, required=False)
+    
+
+
+class courierPartnerSchemeV2List(BaseSchema):
+    # Logistics swagger.json
+
+    
+    items = fields.List(fields.Nested(CourierPartnerV2SchemeModel, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
 class ArithmeticOperations(BaseSchema):
     # Logistics swagger.json
 
@@ -681,13 +827,15 @@ class ArithmeticOperations(BaseSchema):
     
 
 
-class CourierPartnerSchemeUpdateDetails(BaseSchema):
+class CourierPartnerSchemeV2UpdateDetails(BaseSchema):
     # Logistics swagger.json
 
     
     name = fields.Str(required=False)
     
     weight = fields.Nested(ArithmeticOperations, required=False)
+    
+    volumetric_weight = fields.Nested(ArithmeticOperations, required=False)
     
     transport_type = fields.Str(required=False)
     
@@ -699,7 +847,15 @@ class CourierPartnerSchemeUpdateDetails(BaseSchema):
     
     stage = fields.Str(required=False)
     
-    feature = fields.Nested(CourierPartnerSchemeFeatures, required=False)
+    status_updates = fields.Str(required=False)
+    
+    ndr_attempts = fields.Int(required=False)
+    
+    qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
+    
+    non_qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
+    
+    feature = fields.Nested(CourierPartnerSchemeV2Features, required=False)
     
 
 

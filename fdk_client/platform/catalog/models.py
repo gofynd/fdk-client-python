@@ -14,6 +14,10 @@ class Action(BaseSchema):
     pass
 
 
+class ValidationErrors(BaseSchema):
+    pass
+
+
 class AllSizes(BaseSchema):
     pass
 
@@ -1046,6 +1050,18 @@ class NextSchedule(BaseSchema):
     pass
 
 
+class LocationPriceRequestSchema(BaseSchema):
+    pass
+
+
+class LocationQuantityRequestSchema(BaseSchema):
+    pass
+
+
+class LocationPriceQuantitySuccessResponseSchema(BaseSchema):
+    pass
+
+
 class OptInPostRequestSchema(BaseSchema):
     pass
 
@@ -1510,11 +1526,19 @@ class TemplateDetails(BaseSchema):
     pass
 
 
+class TemplateGlobalValidationData(BaseSchema):
+    pass
+
+
 class TemplateValidationData(BaseSchema):
     pass
 
 
 class TemplatesResponseSchema(BaseSchema):
+    pass
+
+
+class TemplatesGlobalValidationResponseSchema(BaseSchema):
     pass
 
 
@@ -1626,6 +1650,10 @@ class ActionPage(BaseSchema):
     pass
 
 
+class ValidationError(BaseSchema):
+    pass
+
+
 class Price1(BaseSchema):
     pass
 
@@ -1650,6 +1678,14 @@ class Action(BaseSchema):
     page = fields.Nested(ActionPage, required=False)
     
     popup = fields.Nested(ActionPage, required=False)
+    
+
+
+class ValidationErrors(BaseSchema):
+    # Catalog swagger.json
+
+    
+    errors = fields.List(fields.Nested(ValidationError, required=False), required=False)
     
 
 
@@ -6155,6 +6191,36 @@ class NextSchedule(BaseSchema):
     
 
 
+class LocationPriceRequestSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    price_effective = fields.Float(required=False)
+    
+    price_marked = fields.Float(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class LocationQuantityRequestSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    expiration_date = fields.Str(required=False)
+    
+    total_quantity = fields.Int(required=False)
+    
+
+
+class LocationPriceQuantitySuccessResponseSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+
+
 class OptInPostRequestSchema(BaseSchema):
     # Catalog swagger.json
 
@@ -7977,7 +8043,7 @@ class ApplicationItemSeoBreadcrumbs(BaseSchema):
     
     url = fields.Str(required=False)
     
-    action = fields.List(fields.Nested(ApplicationItemSeoAction, required=False), required=False)
+    action = fields.Nested(ApplicationItemSeoAction, required=False)
     
 
 
@@ -8385,6 +8451,14 @@ class TemplateDetails(BaseSchema):
     
 
 
+class TemplateGlobalValidationData(BaseSchema):
+    # Catalog swagger.json
+
+    
+    global_validation = fields.Nested(GlobalValidation, required=False)
+    
+
+
 class TemplateValidationData(BaseSchema):
     # Catalog swagger.json
 
@@ -8402,6 +8476,14 @@ class TemplatesResponseSchema(BaseSchema):
     items = fields.List(fields.Nested(ProductTemplate, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class TemplatesGlobalValidationResponseSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    data = fields.Nested(TemplateGlobalValidationData, required=False)
     
 
 
@@ -8856,6 +8938,16 @@ class ActionPage(BaseSchema):
     url = fields.Str(required=False)
     
     type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
+    
+
+
+class ValidationError(BaseSchema):
+    # Catalog swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    field = fields.Str(required=False)
     
 
 

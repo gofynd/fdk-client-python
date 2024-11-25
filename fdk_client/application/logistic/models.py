@@ -673,7 +673,7 @@ class CountryEntityResult(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    parent_id = fields.Str(required=False)
+    parent_id = fields.List(fields.Str(required=False), required=False)
     
     sub_type = fields.Str(required=False)
     
@@ -702,6 +702,8 @@ class ServiceabilityModel(BaseSchema):
     route_code = fields.Str(required=False, allow_none=True)
     
     is_first_mile = fields.Boolean(required=False)
+    
+    is_reverse_pickup = fields.Boolean(required=False, allow_none=True)
     
     is_return = fields.Boolean(required=False)
     

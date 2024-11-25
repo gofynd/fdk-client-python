@@ -108,6 +108,7 @@ from ..ApplicationModel import BaseSchema
     
         
     
+    
 
 class PaymentValidator:
     
@@ -410,6 +411,11 @@ class PaymentValidator:
         
     
     class createPaymentOrder(BaseSchema):
+        
+        pass 
+        
+    
+    class validateCustomerAndCreditSummary(BaseSchema):
         
         pass 
         

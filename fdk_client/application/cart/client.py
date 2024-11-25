@@ -19,6 +19,7 @@ class Cart:
             "getCartLastModified": "/service/application/cart/v1.0/detail",
             "addItems": "/service/application/cart/v1.0/detail",
             "updateCart": "/service/application/cart/v1.0/detail",
+            "updateCartBreakup": "/service/application/cart/v1.0/detail",
             "deleteCart": "/service/application/cart/v1.0/cart_archive",
             "getItemCount": "/service/application/cart/v1.0/basic",
             "getCoupons": "/service/application/cart/v1.0/coupon",
@@ -278,6 +279,66 @@ class Cart:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for updateCart")
+                print(e)
+
+        return response
+    
+    async def updateCartBreakup(self, id=None, i=None, b=None, buy_now=None, cart_type=None, body="", request_headers:Dict={}):
+        """Update cart. Customers can adjust the cart breakup by  applying or removing store credits as needed.
+        :param id : The unique identifier of the cart. : type string
+        :param i : Select `true` to retrieve all the items added in the cart. : type boolean
+        :param b : Select `true` to retrieve the price breakup of cart items. : type boolean
+        :param buy_now : Select `true` to set/initialize buy now cart. : type boolean
+        :param cart_type : The type of cart. : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+        if i is not None:
+            payload["i"] = i
+        if b is not None:
+            payload["b"] = b
+        if buy_now is not None:
+            payload["buy_now"] = buy_now
+        if cart_type is not None:
+            payload["cart_type"] = cart_type
+
+        # Parameter validation
+        schema = CartValidator.updateCartBreakup()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import UpdateCartBreakup
+        schema = UpdateCartBreakup()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["updateCartBreakup"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"name":"cart_type","in":"query","schema":{"type":"string","x-not-enum":true},"description":"The type of cart."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"name":"cart_type","in":"query","schema":{"type":"string","x-not-enum":true},"description":"The type of cart."}],"headers":[],"path":[]}""", serverType="application", id=id, i=i, b=b, buy_now=buy_now, cart_type=cart_type)
+        query_string = await create_query_string(id=id, i=i, b=b, buy_now=buy_now, cart_type=cart_type)
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateCartBreakup"]).netloc, "patch", await create_url_without_domain("/service/application/cart/v1.0/detail", id=id, i=i, b=b, buy_now=buy_now, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdateCartDetailResult
+            schema = UpdateCartDetailResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCartBreakup")
                 print(e)
 
         return response

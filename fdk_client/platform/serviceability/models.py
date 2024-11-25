@@ -600,6 +600,50 @@ class StandardError(BaseSchema):
     pass
 
 
+class CourierPartnerSchemeV2Features(BaseSchema):
+    pass
+
+
+class CourierPartnerSchemeV2DetailsModel(BaseSchema):
+    pass
+
+
+class CourierPartnerV2SchemeModel(BaseSchema):
+    pass
+
+
+class CourierPartnerSchemeV2UpdateDetails(BaseSchema):
+    pass
+
+
+class courierPartnerSchemeV2List(BaseSchema):
+    pass
+
+
+class BulkRegionServiceabilityTatDetails(BaseSchema):
+    pass
+
+
+class BulkRegionServiceabilityTatResultItemData(BaseSchema):
+    pass
+
+
+class BulkRegionServiceabilityTatResult(BaseSchema):
+    pass
+
+
+class HierarchyItems(BaseSchema):
+    pass
+
+
+class GetCountriesItems(BaseSchema):
+    pass
+
+
+class GetCountries(BaseSchema):
+    pass
+
+
 
 
 
@@ -1823,7 +1867,7 @@ class LocationRuleValues(BaseSchema):
     
     display_name = fields.Str(required=False)
     
-    parent_id = fields.Str(required=False)
+    parent_id = fields.List(fields.Str(required=False), required=False)
     
     parent_ids = fields.List(fields.Str(required=False), required=False)
     
@@ -2373,6 +2417,8 @@ class ServiceabilityModel(BaseSchema):
     
     is_first_mile = fields.Boolean(required=False)
     
+    is_reverse_pickup = fields.Boolean(required=False, allow_none=True)
+    
     is_return = fields.Boolean(required=False)
     
     is_installation = fields.Boolean(required=False)
@@ -2420,6 +2466,10 @@ class CourierPartnerSchemeFeatures(BaseSchema):
     multi_pick_multi_drop = fields.Boolean(required=False)
     
     ewaybill = fields.Boolean(required=False)
+    
+    qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
+    
+    non_qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
     
 
 
@@ -2856,6 +2906,254 @@ class StandardError(BaseSchema):
 
     
     message = fields.Str(required=False)
+    
+
+
+class CourierPartnerSchemeV2Features(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    doorstep_qc = fields.Boolean(required=False)
+    
+    qr = fields.Boolean(required=False)
+    
+    mps = fields.Boolean(required=False)
+    
+    ndr = fields.Boolean(required=False)
+    
+    dangerous_goods = fields.Boolean(required=False)
+    
+    fragile_goods = fields.Boolean(required=False)
+    
+    restricted_goods = fields.Boolean(required=False)
+    
+    cold_storage_goods = fields.Boolean(required=False)
+    
+    doorstep_exchange = fields.Boolean(required=False)
+    
+    doorstep_return = fields.Boolean(required=False)
+    
+    product_installation = fields.Boolean(required=False)
+    
+    openbox_delivery = fields.Boolean(required=False)
+    
+    multi_pick_single_drop = fields.Boolean(required=False)
+    
+    single_pick_multi_drop = fields.Boolean(required=False)
+    
+    multi_pick_multi_drop = fields.Boolean(required=False)
+    
+    ewaybill = fields.Boolean(required=False)
+    
+
+
+class CourierPartnerSchemeV2DetailsModel(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    extension_id = fields.Str(required=False)
+    
+    scheme_id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    weight = fields.Nested(ArithmeticOperations, required=False)
+    
+    volumetric_weight = fields.Nested(ArithmeticOperations, required=False)
+    
+    transport_type = fields.Str(required=False)
+    
+    region = fields.Str(required=False)
+    
+    delivery_type = fields.Str(required=False)
+    
+    payment_mode = fields.List(fields.Str(required=False), required=False)
+    
+    stage = fields.Str(required=False)
+    
+    status_updates = fields.Str(required=False)
+    
+    ndr_attempts = fields.Int(required=False)
+    
+    qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
+    
+    non_qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
+    
+    feature = fields.Nested(CourierPartnerSchemeV2Features, required=False)
+    
+
+
+class CourierPartnerV2SchemeModel(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    extension_id = fields.Str(required=False)
+    
+    scheme_id = fields.Str(required=False)
+    
+    company_id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    weight = fields.Nested(ArithmeticOperations, required=False)
+    
+    volumetric_weight = fields.Nested(ArithmeticOperations, required=False)
+    
+    transport_type = fields.Str(required=False)
+    
+    region = fields.Str(required=False)
+    
+    delivery_type = fields.Str(required=False)
+    
+    payment_mode = fields.List(fields.Str(required=False), required=False)
+    
+    stage = fields.Str(required=False)
+    
+    status_updates = fields.Str(required=False)
+    
+    ndr_attempts = fields.Int(required=False)
+    
+    qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
+    
+    non_qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
+    
+    feature = fields.Nested(CourierPartnerSchemeV2Features, required=False)
+    
+
+
+class CourierPartnerSchemeV2UpdateDetails(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    weight = fields.Nested(ArithmeticOperations, required=False)
+    
+    volumetric_weight = fields.Nested(ArithmeticOperations, required=False)
+    
+    transport_type = fields.Str(required=False)
+    
+    region = fields.Str(required=False)
+    
+    delivery_type = fields.Str(required=False)
+    
+    payment_mode = fields.List(fields.Str(required=False), required=False)
+    
+    stage = fields.Str(required=False)
+    
+    status_updates = fields.Str(required=False)
+    
+    ndr_attempts = fields.Int(required=False)
+    
+    qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
+    
+    non_qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
+    
+    feature = fields.Nested(CourierPartnerSchemeV2Features, required=False)
+    
+
+
+class courierPartnerSchemeV2List(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    items = fields.List(fields.Nested(CourierPartnerV2SchemeModel, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class BulkRegionServiceabilityTatDetails(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    country = fields.Str(required=False)
+    
+    region = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class BulkRegionServiceabilityTatResultItemData(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    country = fields.Str(required=False)
+    
+    region = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    batch_id = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    failed_records = fields.List(fields.Dict(required=False), required=False)
+    
+    file_path = fields.Str(required=False, allow_none=True)
+    
+
+
+class BulkRegionServiceabilityTatResult(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    items = fields.List(fields.Nested(BulkRegionServiceabilityTatResultItemData, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class HierarchyItems(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    display_name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+
+
+class GetCountriesItems(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    iso2 = fields.Str(required=False)
+    
+    iso3 = fields.Str(required=False)
+    
+    timezones = fields.List(fields.Str(required=False), required=False)
+    
+    hierarchy = fields.List(fields.Nested(HierarchyItems, required=False), required=False)
+    
+    phone_code = fields.Str(required=False)
+    
+    currency = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    latitude = fields.Str(required=False)
+    
+    longitude = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    has_next_hierarchy = fields.Boolean(required=False)
+    
+
+
+class GetCountries(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    items = fields.List(fields.Nested(GetCountriesItems, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 
 

@@ -523,7 +523,7 @@ class Logistic:
 
         return response
     
-    async def getLocalities(self, locality_type=None, country=None, state=None, city=None, page_no=None, page_size=None, q=None, body="", request_headers:Dict={}):
+    async def getLocalities(self, locality_type=None, country=None, state=None, city=None, page_no=None, page_size=None, q=None, sector=None, body="", request_headers:Dict={}):
         """Get geographical data for a specific type of locality based on the provided filters. For instance, obtain a list of cities for a given country and state.
         :param locality_type : Unique geographical division. : type string
         :param country : Country name. : type string
@@ -532,6 +532,7 @@ class Logistic:
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 12. : type integer
         :param q : This parameter is used to filter or search the records. : type string
+        :param sector : A `sector` is a distinct category or division within an area : type string
         """
         payload = {}
         
@@ -549,14 +550,16 @@ class Logistic:
             payload["page_size"] = page_size
         if q is not None:
             payload["q"] = q
+        if sector is not None:
+            payload["sector"] = sector
 
         # Parameter validation
         schema = LogisticValidator.getLocalities()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getLocalities"], proccessed_params="""{"required":[{"in":"path","name":"locality_type","description":"Unique geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true}],"optional":[{"in":"query","name":"country","description":"Country name.","schema":{"type":"string"},"required":false},{"in":"query","name":"state","description":"State or the province.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"City.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12,"maximum":1000},"required":false},{"in":"query","name":"q","description":"This parameter is used to filter or search the records.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"country","description":"Country name.","schema":{"type":"string"},"required":false},{"in":"query","name":"state","description":"State or the province.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"City.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12,"maximum":1000},"required":false},{"in":"query","name":"q","description":"This parameter is used to filter or search the records.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"locality_type","description":"Unique geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true}]}""", serverType="application", locality_type=locality_type, country=country, state=state, city=city, page_no=page_no, page_size=page_size, q=q)
-        query_string = await create_query_string(country=country, state=state, city=city, page_no=page_no, page_size=page_size, q=q)
+        url_with_params = await create_url_with_params(api_url=self._urls["getLocalities"], proccessed_params="""{"required":[{"in":"path","name":"locality_type","description":"Unique geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true}],"optional":[{"in":"query","name":"country","description":"Country name.","schema":{"type":"string"},"required":false},{"in":"query","name":"state","description":"State or the province.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"City.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12,"maximum":1000},"required":false},{"in":"query","name":"q","description":"This parameter is used to filter or search the records.","schema":{"type":"string"},"required":false},{"in":"query","name":"sector","description":"A `sector` is a distinct category or division within an area","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"country","description":"Country name.","schema":{"type":"string"},"required":false},{"in":"query","name":"state","description":"State or the province.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"City.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12,"maximum":1000},"required":false},{"in":"query","name":"q","description":"This parameter is used to filter or search the records.","schema":{"type":"string"},"required":false},{"in":"query","name":"sector","description":"A `sector` is a distinct category or division within an area","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"locality_type","description":"Unique geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true}]}""", serverType="application", locality_type=locality_type, country=country, state=state, city=city, page_no=page_no, page_size=page_size, q=q, sector=sector)
+        query_string = await create_query_string(country=country, state=state, city=city, page_no=page_no, page_size=page_size, q=q, sector=sector)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -572,7 +575,7 @@ class Logistic:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocalities"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/localities/{locality_type}", locality_type=locality_type, country=country, state=state, city=city, page_no=page_no, page_size=page_size, q=q), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocalities"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/localities/{locality_type}", locality_type=locality_type, country=country, state=state, city=city, page_no=page_no, page_size=page_size, q=q, sector=sector), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetLocalities

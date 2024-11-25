@@ -225,77 +225,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
-    
-    
         
         
     
@@ -313,6 +242,15 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+        
+        
+        
+    
+    
+        
+        
+        
     
     
         
@@ -322,20 +260,15 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-        
-        
-        
-        
+    
+    
         
         
         
     
     
         
-    
-    
+        
         
         
         
@@ -359,6 +292,11 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+        
         
         
     
@@ -367,6 +305,83 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
         
         
     
@@ -864,6 +879,17 @@ class CatalogValidator:
          
         
     
+    class validateProductGlobalTemplate(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        item_type = fields.Str(required=False)
+        
+        bulk = fields.Boolean(required=False)
+         
+        
+    
     class getProductValidation(BaseSchema):
         
         
@@ -1200,6 +1226,28 @@ class CatalogValidator:
         company_id = fields.Int(required=False)
         
         item_id = fields.Int(required=False)
+        
+        seller_identifier = fields.Str(required=False)
+         
+        
+    
+    class updateLocationPrice(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        store_id = fields.Int(required=False)
+        
+        seller_identifier = fields.Str(required=False)
+         
+        
+    
+    class updateLocationQuantity(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        store_id = fields.Int(required=False)
         
         seller_identifier = fields.Str(required=False)
          

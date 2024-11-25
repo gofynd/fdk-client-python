@@ -42,6 +42,13 @@ from ..ApplicationModel import BaseSchema
     
     
         
+        
+        
+        
+        
+    
+    
+        
     
     
         
@@ -234,6 +241,21 @@ class CartValidator:
         cart_type = fields.Str(required=False)
         
         order_type = fields.Str(required=False)
+         
+        
+    
+    class updateCartBreakup(BaseSchema):
+        
+        
+        id = fields.Str(required=False)
+        
+        i = fields.Boolean(required=False)
+        
+        b = fields.Boolean(required=False)
+        
+        buy_now = fields.Boolean(required=False)
+        
+        cart_type = fields.Str(required=False)
          
         
     

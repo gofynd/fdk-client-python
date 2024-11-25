@@ -151,6 +151,41 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
 
 
 
@@ -460,6 +495,83 @@ class ServiceabilityValidator:
     
     class getOptimalLocations(BaseSchema):
         
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class createCourierPartnerScheme(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class getCourierPartnerSchemes(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        scheme_type = fields.Str(required=False)
+        
+        payment_mode = fields.Str(required=False)
+        
+        capabilities = fields.List(fields.Str(required=False), required=False)
+        
+        scheme_ids = fields.List(fields.Str(required=False), required=False)
+         
+        
+    
+    class updateCourierPartnerScheme(BaseSchema):
+        
+        
+        scheme_id = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class getCourierPartnerScheme(BaseSchema):
+        
+        
+        scheme_id = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class sampleFileServiceability(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class getSampleFileServiceabilityStatus(BaseSchema):
+        
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        batch_id = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class getCountries(BaseSchema):
+        
+        
+        onboarding = fields.Boolean(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
+        
+        hierarchy = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
          

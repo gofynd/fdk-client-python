@@ -1128,95 +1128,6 @@ class Logistics:
 
         return response
     
-    async def createCourierPartnerScheme(self, body="", request_headers:Dict={}):
-        """Create Scheme for courier partner extension
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = LogisticsValidator.createCourierPartnerScheme()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CourierPartnerSchemeDetailsModel
-        schema = CourierPartnerSchemeDetailsModel()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/scheme/", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}]}""", serverType="partner", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/scheme/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CourierPartnerSchemeModel
-            schema = CourierPartnerSchemeModel()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createCourierPartnerScheme")
-                print(e)
-
-        return response
-    
-    async def updateCourierPartnerScheme(self, scheme_id=None, body="", request_headers:Dict={}):
-        """Update Scheme for courier partner extension
-        :param scheme_id : Unique Identifier of Scheme : type string
-        """
-        payload = {}
-        
-        if scheme_id is not None:
-            payload["scheme_id"] = scheme_id
-
-        # Parameter validation
-        schema = LogisticsValidator.updateCourierPartnerScheme()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CourierPartnerSchemeUpdateDetails
-        schema = CourierPartnerSchemeUpdateDetails()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/scheme/{scheme_id}", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique Identifier of Scheme","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique Identifier of Scheme","schema":{"type":"string"},"required":true}]}""", serverType="partner", scheme_id=scheme_id)
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/scheme/{scheme_id}", scheme_id=scheme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CourierPartnerSchemeUpdateDetails
-            schema = CourierPartnerSchemeUpdateDetails()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateCourierPartnerScheme")
-                print(e)
-
-        return response
-    
     async def getCountries(self, onboarding=None, page_no=None, page_size=None, q=None, request_headers:Dict={}):
         """Retrieve of all countries.
         :param onboarding : Only fetch countries which allowed for onboard on Platform. : type boolean
@@ -1264,6 +1175,188 @@ class Logistics:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getCountries")
+                print(e)
+
+        return response
+    
+    async def createCourierPartnerScheme(self, body="", request_headers:Dict={}):
+        """Create Scheme for courier partner extension
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = LogisticsValidator.createCourierPartnerScheme()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CourierPartnerSchemeV2DetailsModel
+        schema = CourierPartnerSchemeV2DetailsModel()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/scheme", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}]}""", serverType="partner", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/scheme", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CourierPartnerV2SchemeModel
+            schema = CourierPartnerV2SchemeModel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createCourierPartnerScheme")
+                print(e)
+
+        return response
+    
+    async def getCourierPartnerSchemes(self, scheme_type=None, payment_mode=None, capabilities=None, scheme_ids=None, request_headers:Dict={}):
+        """Get created Schemes for courier partner
+        :param scheme_type : Indicates whether a scheme is created by an admin for global purposes or customized for a specific company. : type string
+        :param payment_mode : Indicates payment mode for a scheme. : type string
+        :param capabilities : Indicates whether the scheme possesses certain capabilities. : type array
+        :param scheme_ids : List of scheme ids which need to be returned in the response. : type array
+        """
+        payload = {}
+        
+        if scheme_type is not None:
+            payload["scheme_type"] = scheme_type
+        if payment_mode is not None:
+            payload["payment_mode"] = payment_mode
+        if capabilities is not None:
+            payload["capabilities"] = capabilities
+        if scheme_ids is not None:
+            payload["scheme_ids"] = scheme_ids
+
+        # Parameter validation
+        schema = LogisticsValidator.getCourierPartnerSchemes()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/scheme", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"scheme_type","description":"Indicates whether a scheme is created by an admin for global purposes or customized for a specific company.","schema":{"type":"string","enum":["global","custom"]},"required":false},{"in":"query","name":"payment_mode","description":"Indicates payment mode for a scheme.","schema":{"type":"string","enum":["COD","PREPAID"]},"required":false},{"in":"query","name":"capabilities","description":"Indicates whether the scheme possesses certain capabilities.","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"scheme_ids","description":"List of scheme ids which need to be returned in the response.","schema":{"type":"array","items":{"type":"string"}},"required":false}],"query":[{"in":"query","name":"scheme_type","description":"Indicates whether a scheme is created by an admin for global purposes or customized for a specific company.","schema":{"type":"string","enum":["global","custom"]},"required":false},{"in":"query","name":"payment_mode","description":"Indicates payment mode for a scheme.","schema":{"type":"string","enum":["COD","PREPAID"]},"required":false},{"in":"query","name":"capabilities","description":"Indicates whether the scheme possesses certain capabilities.","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"scheme_ids","description":"List of scheme ids which need to be returned in the response.","schema":{"type":"array","items":{"type":"string"}},"required":false}],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}]}""", serverType="partner", scheme_type=scheme_type, payment_mode=payment_mode, capabilities=capabilities, scheme_ids=scheme_ids)
+        query_string = await create_query_string(scheme_type=scheme_type, payment_mode=payment_mode, capabilities=capabilities, scheme_ids=scheme_ids)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/scheme", scheme_type=scheme_type, payment_mode=payment_mode, capabilities=capabilities, scheme_ids=scheme_ids), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import courierPartnerSchemeV2List
+            schema = courierPartnerSchemeV2List()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCourierPartnerSchemes")
+                print(e)
+
+        return response
+    
+    async def updateCourierPartnerScheme(self, scheme_id=None, body="", request_headers:Dict={}):
+        """Update Scheme for courier partner extension
+        :param scheme_id : Unique Identifier of Scheme : type string
+        """
+        payload = {}
+        
+        if scheme_id is not None:
+            payload["scheme_id"] = scheme_id
+
+        # Parameter validation
+        schema = LogisticsValidator.updateCourierPartnerScheme()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CourierPartnerSchemeV2UpdateDetails
+        schema = CourierPartnerSchemeV2UpdateDetails()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/scheme/{scheme_id}", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique Identifier of Scheme","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique Identifier of Scheme","schema":{"type":"string"},"required":true}]}""", serverType="partner", scheme_id=scheme_id)
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/scheme/{scheme_id}", scheme_id=scheme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CourierPartnerV2SchemeModel
+            schema = CourierPartnerV2SchemeModel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCourierPartnerScheme")
+                print(e)
+
+        return response
+    
+    async def getCourierPartnerScheme(self, scheme_id=None, request_headers:Dict={}):
+        """Update Scheme for courier partner extension by Id
+        :param scheme_id : Unique Identifier of Scheme : type string
+        """
+        payload = {}
+        
+        if scheme_id is not None:
+            payload["scheme_id"] = scheme_id
+
+        # Parameter validation
+        schema = LogisticsValidator.getCourierPartnerScheme()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/scheme/{scheme_id}", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique Identifier of Scheme","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique Identifier of Scheme","schema":{"type":"string"},"required":true}]}""", serverType="partner", scheme_id=scheme_id)
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/scheme/{scheme_id}", scheme_id=scheme_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CourierPartnerV2SchemeModel
+            schema = CourierPartnerV2SchemeModel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCourierPartnerScheme")
                 print(e)
 
         return response

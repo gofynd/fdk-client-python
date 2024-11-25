@@ -225,18 +225,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
         
     
     
@@ -245,6 +233,19 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
         
         
         
@@ -262,6 +263,7 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
@@ -828,6 +830,8 @@ class OrderValidator:
         group_entity = fields.Str(required=False)
         
         enforce_date_filter = fields.Boolean(required=False)
+        
+        fulfillment_type = fields.Str(required=False)
          
         
     
@@ -958,6 +962,8 @@ class OrderValidator:
         group_entity = fields.Str(required=False)
         
         enforce_date_filter = fields.Boolean(required=False)
+        
+        fulfillment_type = fields.Str(required=False)
          
         
     

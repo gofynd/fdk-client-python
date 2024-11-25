@@ -130,14 +130,6 @@ class NavigationReference(BaseSchema):
     pass
 
 
-class ConfigurationSchema(BaseSchema):
-    pass
-
-
-class SlideshowMedia(BaseSchema):
-    pass
-
-
 class AnnouncementsResponseSchema(BaseSchema):
     pass
 
@@ -223,14 +215,6 @@ class PageSchema(BaseSchema):
 
 
 class CreatedBySchema(BaseSchema):
-    pass
-
-
-class SlideshowGetDetails(BaseSchema):
-    pass
-
-
-class SlideshowSchema(BaseSchema):
     pass
 
 
@@ -721,38 +705,6 @@ class NavigationReference(BaseSchema):
     
 
 
-class ConfigurationSchema(BaseSchema):
-    # Content swagger.json
-
-    
-    sleep_time = fields.Int(required=False)
-    
-    start_on_launch = fields.Boolean(required=False)
-    
-    duration = fields.Int(required=False)
-    
-    slide_direction = fields.Str(required=False)
-    
-
-
-class SlideshowMedia(BaseSchema):
-    # Content swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    url = fields.Str(required=False)
-    
-    bg_color = fields.Str(required=False)
-    
-    duration = fields.Int(required=False)
-    
-    auto_decide_duration = fields.Boolean(required=False)
-    
-    action = fields.Nested(Action, required=False)
-    
-
-
 class AnnouncementsResponseSchema(BaseSchema):
     # Content swagger.json
 
@@ -1106,42 +1058,6 @@ class CreatedBySchema(BaseSchema):
 
     
     id = fields.Str(required=False)
-    
-
-
-class SlideshowGetDetails(BaseSchema):
-    # Content swagger.json
-
-    
-    items = fields.List(fields.Nested(SlideshowSchema, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
-    
-
-
-class SlideshowSchema(BaseSchema):
-    # Content swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    date_meta = fields.Nested(DateMeta, required=False)
-    
-    application = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
-    
-    configuration = fields.Nested(ConfigurationSchema, required=False)
-    
-    media = fields.List(fields.Nested(SlideshowMedia, required=False), required=False)
-    
-    active = fields.Boolean(required=False)
-    
-    archived = fields.Boolean(required=False)
-    
-    _custom_json = fields.Dict(required=False)
     
 
 

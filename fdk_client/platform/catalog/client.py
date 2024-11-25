@@ -1994,6 +1994,51 @@ class Catalog:
 
         return response
     
+    async def validateProductGlobalTemplate(self, item_type=None, bulk=None, request_headers:Dict={}):
+        """Allows you to list all product templates global validation values for all the fields present in the database for a specific company.
+        :param item_type : An `item_type` defines the type of item. The default value is standard. : type string
+        :param bulk : This specification determines the schema type to be retrieved. When set to true, it will return the schema for bulk data; when set to false, it will provide the schema for a single product. The default value is false. : type boolean
+        """
+        payload = {}
+        
+        if item_type is not None:
+            payload["item_type"] = item_type
+        if bulk is not None:
+            payload["bulk"] = bulk
+
+        # Parameter validation
+        schema = CatalogValidator.validateProductGlobalTemplate()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/validation/schema/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"An `item_type` defines the type of item. The default value is standard.","in":"query","name":"item_type","schema":{"type":"string","enum":["set","standard","composite","digital"]}},{"description":"This specification determines the schema type to be retrieved. When set to true, it will return the schema for bulk data; when set to false, it will provide the schema for a single product. The default value is false.","in":"query","name":"bulk","schema":{"type":"boolean"}}],"query":[{"description":"An `item_type` defines the type of item. The default value is standard.","in":"query","name":"item_type","schema":{"type":"string","enum":["set","standard","composite","digital"]}},{"description":"This specification determines the schema type to be retrieved. When set to true, it will return the schema for bulk data; when set to false, it will provide the schema for a single product. The default value is false.","in":"query","name":"bulk","schema":{"type":"boolean"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", item_type=item_type, bulk=bulk)
+        query_string = await create_query_string(item_type=item_type, bulk=bulk)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/templates/validation/schema/", item_type=item_type, bulk=bulk), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TemplatesGlobalValidationResponseSchema
+            schema = TemplatesGlobalValidationResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for validateProductGlobalTemplate")
+                print(e)
+
+        return response
+    
     async def getProductValidation(self, request_headers:Dict={}):
         """Retrieve validation data for products at company level.
         """
@@ -3319,6 +3364,104 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for updateRealtimeInventory")
+                print(e)
+
+        return response
+    
+    async def updateLocationPrice(self, store_id=None, seller_identifier=None, body="", request_headers:Dict={}):
+        """enables you to update article price for a specific size and selling location (store). The price updates will be reflected instantly after the API call.
+        :param store_id : The Store Id to update price of size for specific store. : type integer
+        :param seller_identifier : Size Identifier (Seller Identifier or Primary Identifier) of which article price is to update. : type string
+        """
+        payload = {}
+        
+        if store_id is not None:
+            payload["store_id"] = store_id
+        if seller_identifier is not None:
+            payload["seller_identifier"] = seller_identifier
+
+        # Parameter validation
+        schema = CatalogValidator.updateLocationPrice()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import LocationPriceRequestSchema
+        schema = LocationPriceRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/store/{store_id}/identifier/{seller_identifier}/price", """{"required":[{"description":"Id of the company associated to product for that article price to be updated.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"The Store Id to update price of size for specific store.","in":"path","name":"store_id","required":true,"schema":{"type":"integer"}},{"description":"Size Identifier (Seller Identifier or Primary Identifier) of which article price is to update.","in":"path","name":"seller_identifier","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to product for that article price to be updated.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"The Store Id to update price of size for specific store.","in":"path","name":"store_id","required":true,"schema":{"type":"integer"}},{"description":"Size Identifier (Seller Identifier or Primary Identifier) of which article price is to update.","in":"path","name":"seller_identifier","required":true,"schema":{"type":"string"}}]}""", serverType="platform", store_id=store_id, seller_identifier=seller_identifier)
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/store/{store_id}/identifier/{seller_identifier}/price", store_id=store_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LocationPriceQuantitySuccessResponseSchema
+            schema = LocationPriceQuantitySuccessResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateLocationPrice")
+                print(e)
+
+        return response
+    
+    async def updateLocationQuantity(self, store_id=None, seller_identifier=None, body="", request_headers:Dict={}):
+        """enables you to update article quantity for a specific size and selling location (store). The quantity updates will be reflected instantly after the API call.
+        :param store_id : The Store Id to update quantity of size for specific store. : type integer
+        :param seller_identifier : Size Identifier (Seller Identifier or Primary Identifier) of which article quantity is to update. : type string
+        """
+        payload = {}
+        
+        if store_id is not None:
+            payload["store_id"] = store_id
+        if seller_identifier is not None:
+            payload["seller_identifier"] = seller_identifier
+
+        # Parameter validation
+        schema = CatalogValidator.updateLocationQuantity()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import LocationQuantityRequestSchema
+        schema = LocationQuantityRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/store/{store_id}/identifier/{seller_identifier}/quantity", """{"required":[{"description":"Id of the company associated to product for that article quantity to be updated.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"The Store Id to update quantity of size for specific store.","in":"path","name":"store_id","required":true,"schema":{"type":"integer"}},{"description":"Size Identifier (Seller Identifier or Primary Identifier) of which article quantity is to update.","in":"path","name":"seller_identifier","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to product for that article quantity to be updated.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"The Store Id to update quantity of size for specific store.","in":"path","name":"store_id","required":true,"schema":{"type":"integer"}},{"description":"Size Identifier (Seller Identifier or Primary Identifier) of which article quantity is to update.","in":"path","name":"seller_identifier","required":true,"schema":{"type":"string"}}]}""", serverType="platform", store_id=store_id, seller_identifier=seller_identifier)
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/store/{store_id}/identifier/{seller_identifier}/quantity", store_id=store_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import LocationPriceQuantitySuccessResponseSchema
+            schema = LocationPriceQuantitySuccessResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateLocationQuantity")
                 print(e)
 
         return response

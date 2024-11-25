@@ -1268,3 +1268,330 @@ Export locality wise CSV files.
 
         return response
     
+    async def createCourierPartnerScheme(self, body="", request_headers:Dict={}):
+        """Create Scheme for courier partner extension
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.createCourierPartnerScheme()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CourierPartnerSchemeV2DetailsModel
+        schema = CourierPartnerSchemeV2DetailsModel()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/courier-partner/scheme", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/courier-partner/scheme", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CourierPartnerV2SchemeModel
+            schema = CourierPartnerV2SchemeModel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createCourierPartnerScheme")
+                print(e)
+
+        return response
+    
+    async def getCourierPartnerSchemes(self, scheme_type=None, payment_mode=None, capabilities=None, scheme_ids=None, request_headers:Dict={}):
+        """Get created Schemes for courier partner
+        :param scheme_type : Indicates whether a scheme is created by an admin for global purposes or customized for a specific company. : type string
+        :param payment_mode : Indicates payment mode for a scheme. : type string
+        :param capabilities : Indicates whether the scheme possesses certain capabilities. : type array
+        :param scheme_ids : List of scheme ids which need to be returned in the response. : type array
+        """
+        payload = {}
+        
+        if scheme_type is not None:
+            payload["scheme_type"] = scheme_type
+        if payment_mode is not None:
+            payload["payment_mode"] = payment_mode
+        if capabilities is not None:
+            payload["capabilities"] = capabilities
+        if scheme_ids is not None:
+            payload["scheme_ids"] = scheme_ids
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getCourierPartnerSchemes()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/courier-partner/scheme", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"scheme_type","description":"Indicates whether a scheme is created by an admin for global purposes or customized for a specific company.","schema":{"type":"string","enum":["global","custom"]},"required":false},{"in":"query","name":"payment_mode","description":"Indicates payment mode for a scheme.","schema":{"type":"string","enum":["COD","PREPAID"]},"required":false},{"in":"query","name":"capabilities","description":"Indicates whether the scheme possesses certain capabilities.","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"scheme_ids","description":"List of scheme ids which need to be returned in the response.","schema":{"type":"array","items":{"type":"string"}},"required":false}],"query":[{"in":"query","name":"scheme_type","description":"Indicates whether a scheme is created by an admin for global purposes or customized for a specific company.","schema":{"type":"string","enum":["global","custom"]},"required":false},{"in":"query","name":"payment_mode","description":"Indicates payment mode for a scheme.","schema":{"type":"string","enum":["COD","PREPAID"]},"required":false},{"in":"query","name":"capabilities","description":"Indicates whether the scheme possesses certain capabilities.","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"scheme_ids","description":"List of scheme ids which need to be returned in the response.","schema":{"type":"array","items":{"type":"string"}},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", scheme_type=scheme_type, payment_mode=payment_mode, capabilities=capabilities, scheme_ids=scheme_ids)
+        query_string = await create_query_string(scheme_type=scheme_type, payment_mode=payment_mode, capabilities=capabilities, scheme_ids=scheme_ids)
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/courier-partner/scheme", scheme_type=scheme_type, payment_mode=payment_mode, capabilities=capabilities, scheme_ids=scheme_ids), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import courierPartnerSchemeV2List
+            schema = courierPartnerSchemeV2List()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCourierPartnerSchemes")
+                print(e)
+
+        return response
+    
+    async def updateCourierPartnerScheme(self, scheme_id=None, body="", request_headers:Dict={}):
+        """Update Scheme for courier partner extension
+        :param scheme_id : Unique Identifier of Scheme : type string
+        """
+        payload = {}
+        
+        if scheme_id is not None:
+            payload["scheme_id"] = scheme_id
+
+        # Parameter validation
+        schema = ServiceabilityValidator.updateCourierPartnerScheme()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CourierPartnerSchemeV2UpdateDetails
+        schema = CourierPartnerSchemeV2UpdateDetails()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/courier-partner/scheme/{scheme_id}", """{"required":[{"in":"path","name":"scheme_id","description":"Unique Identifier of Scheme","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"scheme_id","description":"Unique Identifier of Scheme","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", scheme_id=scheme_id, )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/courier-partner/scheme/{scheme_id}", scheme_id=scheme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CourierPartnerV2SchemeModel
+            schema = CourierPartnerV2SchemeModel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCourierPartnerScheme")
+                print(e)
+
+        return response
+    
+    async def getCourierPartnerScheme(self, scheme_id=None, request_headers:Dict={}):
+        """Update Scheme for courier partner extension by Id
+        :param scheme_id : Unique Identifier of Scheme : type string
+        """
+        payload = {}
+        
+        if scheme_id is not None:
+            payload["scheme_id"] = scheme_id
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getCourierPartnerScheme()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/courier-partner/scheme/{scheme_id}", """{"required":[{"in":"path","name":"scheme_id","description":"Unique Identifier of Scheme","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"scheme_id","description":"Unique Identifier of Scheme","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", scheme_id=scheme_id, )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/courier-partner/scheme/{scheme_id}", scheme_id=scheme_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CourierPartnerV2SchemeModel
+            schema = CourierPartnerV2SchemeModel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCourierPartnerScheme")
+                print(e)
+
+        return response
+    
+    async def sampleFileServiceability(self, body="", request_headers:Dict={}):
+        """Sample File Download
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.sampleFileServiceability()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import BulkRegionServiceabilityTatDetails
+        schema = BulkRegionServiceabilityTatDetails()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/localities/bulk-sample", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/localities/bulk-sample", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkRegionServiceabilityTatResultItemData
+            schema = BulkRegionServiceabilityTatResultItemData()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sampleFileServiceability")
+                print(e)
+
+        return response
+    
+    async def getSampleFileServiceabilityStatus(self, page_no=None, page_size=None, batch_id=None, request_headers:Dict={}):
+        """Get Serviceability TAT sample file generator status
+        :param page_no : index of the item to start returning with : type integer
+        :param page_size : determines the items to be displayed in a page : type integer
+        :param batch_id : Batch id of the execution : type string
+        """
+        payload = {}
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getSampleFileServiceabilityStatus()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/localities/bulk-sample", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Batch id of the execution","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Batch id of the execution","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, batch_id=batch_id, )
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, batch_id=batch_id, )
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/localities/bulk-sample", page_no=page_no, page_size=page_size, batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkRegionServiceabilityTatResult
+            schema = BulkRegionServiceabilityTatResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSampleFileServiceabilityStatus")
+                print(e)
+
+        return response
+    
+    async def getCountries(self, onboarding=None, page_no=None, page_size=None, q=None, hierarchy=None, request_headers:Dict={}):
+        """Retrieve a list of countries for logistical purposes.
+        :param onboarding : Only fetch countries which allowed for onboard on Platform. : type boolean
+        :param page_no : page number. : type integer
+        :param page_size : page size. : type integer
+        :param q : search. : type string
+        :param hierarchy : fetch countries that has certain heirarchy present. : type string
+        """
+        payload = {}
+        
+        if onboarding is not None:
+            payload["onboarding"] = onboarding
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+        if q is not None:
+            payload["q"] = q
+        if hierarchy is not None:
+            payload["hierarchy"] = hierarchy
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getCountries()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/countries", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"onboarding","description":"Only fetch countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"page number.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"page size.","schema":{"type":"integer","default":12,"maximum":48},"required":false},{"in":"query","name":"q","description":"search.","schema":{"type":"string"},"required":false},{"in":"query","name":"hierarchy","description":"fetch countries that has certain heirarchy present.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"onboarding","description":"Only fetch countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"page number.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"page size.","schema":{"type":"integer","default":12,"maximum":48},"required":false},{"in":"query","name":"q","description":"search.","schema":{"type":"string"},"required":false},{"in":"query","name":"hierarchy","description":"fetch countries that has certain heirarchy present.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", onboarding=onboarding, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy, )
+        query_string = await create_query_string(onboarding=onboarding, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy, )
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/countries", onboarding=onboarding, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetCountries
+            schema = GetCountries()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCountries")
+                print(e)
+
+        return response
+    

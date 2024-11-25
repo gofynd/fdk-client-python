@@ -60,7 +60,8 @@ class Payment:
             "customerOnboard": "/service/application/payment/v1.0/credit-onboard/",
             "outstandingOrderDetails": "/service/application/payment/v1.0/payment/outstanding-orders/",
             "paidOrderDetails": "/service/application/payment/v1.0/payment/paid-orders/",
-            "createPaymentOrder": "/service/application/payment/v1.0/payment-orders/"
+            "createPaymentOrder": "/service/application/payment/v1.0/payment-orders/",
+            "validateCustomerAndCreditSummary": "/service/application/payment/v1.0/payment/validate/customer-credits-v2"
             
         }
         self._urls = {
@@ -2164,6 +2165,51 @@ class Payment:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for createPaymentOrder")
+                print(e)
+
+        return response
+    
+    async def validateCustomerAndCreditSummary(self, body="", request_headers:Dict={}):
+        """Verify if the user is eligible for payment and also show credit summary if activated.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.validateCustomerAndCreditSummary()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CustomerValidationSchema
+        schema = CustomerValidationSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["validateCustomerAndCreditSummary"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
+        query_string = await create_query_string()
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["validateCustomerAndCreditSummary"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/validate/customer-credits-v2", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ValidateCustomerCreditSchema
+            schema = ValidateCustomerCreditSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for validateCustomerAndCreditSummary")
                 print(e)
 
         return response

@@ -46,13 +46,6 @@ from ..ApplicationModel import BaseSchema
         
     
     
-        
-        
-    
-    
-        
-    
-    
     
     
         
@@ -168,22 +161,6 @@ class ContentValidator:
         page_type = fields.Str(required=False)
         
         active = fields.Boolean(required=False)
-         
-        
-    
-    class getSlideshows(BaseSchema):
-        
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-         
-        
-    
-    class getSlideshow(BaseSchema):
-        
-        
-        slug = fields.Str(required=False)
          
         
     

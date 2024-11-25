@@ -220,6 +220,10 @@ class UpdateCartCreation(BaseSchema):
     pass
 
 
+class UpdateCartBreakup(BaseSchema):
+    pass
+
+
 class UpdateCartDetailResult(BaseSchema):
     pass
 
@@ -1363,6 +1367,14 @@ class UpdateCartCreation(BaseSchema):
     
 
 
+class UpdateCartBreakup(BaseSchema):
+    # Cart swagger.json
+
+    
+    store_credit = fields.Boolean(required=False)
+    
+
+
 class UpdateCartDetailResult(BaseSchema):
     # Cart swagger.json
 
@@ -1894,6 +1906,10 @@ class CartCheckoutDetailCreation(BaseSchema):
     type = fields.Str(required=False)
     
     card_id = fields.Str(required=False)
+    
+    success_callback_url = fields.Str(required=False, allow_none=True)
+    
+    failure_callback_url = fields.Str(required=False, allow_none=True)
     
 
 
@@ -2432,6 +2448,10 @@ class CartCheckoutDetailV2Creation(BaseSchema):
     type = fields.Str(required=False)
     
     card_id = fields.Str(required=False)
+    
+    success_callback_url = fields.Str(required=False, allow_none=True)
+    
+    failure_callback_url = fields.Str(required=False, allow_none=True)
     
 
 
