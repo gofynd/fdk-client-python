@@ -5669,7 +5669,7 @@ class Article(BaseSchema):
     # Order swagger.json
 
     
-    child_details = fields.List(fields.Dict(required=False), required=False)
+    child_details = fields.Dict(required=False, allow_none=True)
     
     seller_identifier = fields.Str(required=False)
     
