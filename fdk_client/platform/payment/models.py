@@ -440,6 +440,10 @@ class AddressDetail(BaseSchema):
     pass
 
 
+class ReasonDetail(BaseSchema):
+    pass
+
+
 class PaymentSessionDetail(BaseSchema):
     pass
 
@@ -2317,6 +2321,16 @@ class AddressDetail(BaseSchema):
     
 
 
+class ReasonDetail(BaseSchema):
+    # Payment swagger.json
+
+    
+    code = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+
+
 class PaymentSessionDetail(BaseSchema):
     # Payment swagger.json
 
@@ -2364,6 +2378,8 @@ class PaymentSessionDetail(BaseSchema):
     meta = fields.Dict(required=False)
     
     status = fields.Str(required=False)
+    
+    reason = fields.Nested(ReasonDetail, required=False)
     
 
 
