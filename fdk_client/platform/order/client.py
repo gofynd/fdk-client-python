@@ -45,8 +45,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/update-cache", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import InvalidateShipmentCacheResponseSchema
-            schema = InvalidateShipmentCacheResponseSchema()
+            from .models import InvalidateShipmentCacheResponse
+            schema = InvalidateShipmentCacheResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -88,8 +88,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/store/reassign-internal", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import StoreReassignResponseSchema
-            schema = StoreReassignResponseSchema()
+            from .models import StoreReassignResponse
+            schema = StoreReassignResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -131,8 +131,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/entity/lock-manager", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UpdateShipmentLockResponseSchema
-            schema = UpdateShipmentLockResponseSchema()
+            from .models import UpdateShipmentLockResponse
+            schema = UpdateShipmentLockResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -173,8 +173,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/announcements", date=date), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AnnouncementsResponseSchema
-            schema = AnnouncementsResponseSchema()
+            from .models import AnnouncementsResponse
+            schema = AnnouncementsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -183,26 +183,55 @@ class Order:
 
         return response
     
-    async def updateAddress(self, shipment_id=None, body="", request_headers:Dict={}):
-        """Update the address details of an existing shipment based on the provided address_category. This operation allows the modification of critical shipment details, potentially affecting delivery/billing accuracy and customer communication.
-        :param shipment_id : Unique shipment no. that is auto-generated : type string
+    async def updateAddress(self, shipment_id=None, name=None, address=None, address_type=None, pincode=None, phone=None, email=None, landmark=None, address_category=None, city=None, state=None, country=None, request_headers:Dict={}):
+        """Modify the address details of an existing shipment
+        :param shipment_id :  : type string
+        :param name :  : type string
+        :param address :  : type string
+        :param address_type :  : type string
+        :param pincode :  : type string
+        :param phone :  : type string
+        :param email :  : type string
+        :param landmark :  : type string
+        :param address_category :  : type string
+        :param city :  : type string
+        :param state :  : type string
+        :param country :  : type string
         """
         payload = {}
         
         if shipment_id is not None:
             payload["shipment_id"] = shipment_id
+        if name is not None:
+            payload["name"] = name
+        if address is not None:
+            payload["address"] = address
+        if address_type is not None:
+            payload["address_type"] = address_type
+        if pincode is not None:
+            payload["pincode"] = pincode
+        if phone is not None:
+            payload["phone"] = phone
+        if email is not None:
+            payload["email"] = email
+        if landmark is not None:
+            payload["landmark"] = landmark
+        if address_category is not None:
+            payload["address_category"] = address_category
+        if city is not None:
+            payload["city"] = city
+        if state is not None:
+            payload["state"] = state
+        if country is not None:
+            payload["country"] = country
 
         # Parameter validation
         schema = OrderValidator.updateAddress()
         schema.dump(schema.load(payload))
         
-        # Body validation
-        from .models import UpdateAddressRequestBody
-        schema = UpdateAddressRequestBody()
-        schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/{shipment_id}/address", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"ID of the company fulfilling the shipment"},{"in":"path","name":"shipment_id","required":true,"schema":{"type":"string"},"description":"Unique shipment no. that is auto-generated"}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"ID of the company fulfilling the shipment"},{"in":"path","name":"shipment_id","required":true,"schema":{"type":"string"},"description":"Unique shipment no. that is auto-generated"}]}""", serverType="platform", shipment_id=shipment_id)
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/delight/update-address", """{"required":[{"in":"query","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"address_category","required":true,"schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"name","required":false,"schema":{"type":"string"}},{"in":"query","name":"address","required":false,"schema":{"type":"string"}},{"in":"query","name":"address_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"pincode","required":false,"schema":{"type":"string"}},{"in":"query","name":"phone","required":false,"schema":{"type":"string"}},{"in":"query","name":"email","required":false,"schema":{"type":"string"}},{"in":"query","name":"landmark","required":false,"schema":{"type":"string"}},{"in":"query","name":"city","required":false,"schema":{"type":"string"}},{"in":"query","name":"state","required":false,"schema":{"type":"string"}},{"in":"query","name":"country","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"name","required":false,"schema":{"type":"string"}},{"in":"query","name":"address","required":false,"schema":{"type":"string"}},{"in":"query","name":"address_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"pincode","required":false,"schema":{"type":"string"}},{"in":"query","name":"phone","required":false,"schema":{"type":"string"}},{"in":"query","name":"email","required":false,"schema":{"type":"string"}},{"in":"query","name":"landmark","required":false,"schema":{"type":"string"}},{"in":"query","name":"address_category","required":true,"schema":{"type":"string"}},{"in":"query","name":"city","required":false,"schema":{"type":"string"}},{"in":"query","name":"state","required":false,"schema":{"type":"string"}},{"in":"query","name":"country","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", shipment_id=shipment_id, name=name, address=address, address_type=address_type, pincode=pincode, phone=phone, email=email, landmark=landmark, address_category=address_category, city=city, state=state, country=country, )
+        query_string = await create_query_string(shipment_id=shipment_id, name=name, address=address, address_type=address_type, pincode=pincode, phone=phone, email=email, landmark=landmark, address_category=address_category, city=city, state=state, country=country, )
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -216,11 +245,11 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/{shipment_id}/address", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/delight/update-address", shipment_id=shipment_id, name=name, address=address, address_type=address_type, pincode=pincode, phone=phone, email=email, landmark=landmark, address_category=address_category, city=city, state=state, country=country), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BaseResponseSchema
-            schema = BaseResponseSchema()
+            from .models import BaseResponse
+            schema = BaseResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -301,8 +330,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/roles", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetActionsResponseSchema
-            schema = GetActionsResponseSchema()
+            from .models import GetActionsResponse
+            schema = GetActionsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -346,8 +375,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", shipment_id=shipment_id, bag_id=bag_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentHistoryResponseSchema
-            schema = ShipmentHistoryResponseSchema()
+            from .models import ShipmentHistoryResponse
+            schema = ShipmentHistoryResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -389,8 +418,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/history", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentHistoryResponseSchema
-            schema = ShipmentHistoryResponseSchema()
+            from .models import ShipmentHistoryResponse
+            schema = ShipmentHistoryResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -432,8 +461,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/ninja/send-sms", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BaseResponseSchema
-            schema = BaseResponseSchema()
+            from .models import BaseResponse
+            schema = BaseResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -475,8 +504,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/update-packaging-dimension", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UpdatePackagingDimensionsResponseSchema
-            schema = UpdatePackagingDimensionsResponseSchema()
+            from .models import UpdatePackagingDimensionsResponse
+            schema = UpdatePackagingDimensionsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -518,94 +547,12 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/create-order", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreateOrderResponseSchema
-            schema = CreateOrderResponseSchema()
+            from .models import CreateOrderResponse
+            schema = CreateOrderResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for createOrder")
-                print(e)
-
-        return response
-    
-    async def getChannelConfig(self, request_headers:Dict={}):
-        """Retrieve configuration settings specific to orders for a channel
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.getChannelConfig()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CreateChannelConfigData
-            schema = CreateChannelConfigData()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getChannelConfig")
-                print(e)
-
-        return response
-    
-    async def createChannelConfig(self, body="", request_headers:Dict={}):
-        """Set up configuration for a channel specific to orders which has implications over how the order fulfilment happens in a channel
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.createChannelConfig()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CreateChannelConfigData
-        schema = CreateChannelConfigData()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/order-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CreateChannelConfigResponseSchema
-            schema = CreateChannelConfigResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createChannelConfig")
                 print(e)
 
         return response
@@ -856,8 +803,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/user/attach", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AttachOrderUserResponseSchema
-            schema = AttachOrderUserResponseSchema()
+            from .models import AttachOrderUserResponse
+            schema = AttachOrderUserResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -899,8 +846,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/user/send/otp/mobile", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SendUserMobileOtpResponseSchema
-            schema = SendUserMobileOtpResponseSchema()
+            from .models import SendUserMobileOtpResponse
+            schema = SendUserMobileOtpResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -942,8 +889,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/user/verify/otp", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import VerifyOtpResponseSchema
-            schema = VerifyOtpResponseSchema()
+            from .models import VerifyOtpResponse
+            schema = VerifyOtpResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -963,8 +910,8 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import BulkReportsDownloadRequestSchema
-        schema = BulkReportsDownloadRequestSchema()
+        from .models import BulkReportsDownloadRequest
+        schema = BulkReportsDownloadRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/reports/lanes/download", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Unique identifier of a company on the platform.","schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Unique identifier of a company on the platform.","schema":{"type":"integer"}}]}""", serverType="platform", )
@@ -985,8 +932,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/reports/lanes/download", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BulkReportsDownloadResponseSchema
-            schema = BulkReportsDownloadResponseSchema()
+            from .models import BulkReportsDownloadResponse
+            schema = BulkReportsDownloadResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1028,8 +975,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/jobs/state-transition", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BulkStateTransistionResponseSchema
-            schema = BulkStateTransistionResponseSchema()
+            from .models import BulkStateTransistionResponse
+            schema = BulkStateTransistionResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1088,8 +1035,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/jobs", page_size=page_size, page_no=page_no, start_date=start_date, end_date=end_date, status=status, bulk_action_type=bulk_action_type, search_key=search_key), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BulkListingResponseSchema
-            schema = BulkListingResponseSchema()
+            from .models import BulkListingResponse
+            schema = BulkListingResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1130,8 +1077,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/jobs/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import JobDetailsResponseSchema
-            schema = JobDetailsResponseSchema()
+            from .models import JobDetailsResponse
+            schema = JobDetailsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1144,7 +1091,7 @@ class Order:
         """Get the file download URL used for performing bulk operation
         :param batch_id : Batch Id to identify the bulk operation request. : type string
         :param status : The status of the jobs to filter the results. : type string
-        :param file_type :  : type string
+        :param file_type : The type of file to be downloaded. : type string
         :param report_type : The type of report to be downloaded. : type string
         """
         payload = {}
@@ -1163,7 +1110,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/jobs/{batch_id}/file", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of a company on the platform."},{"in":"path","name":"batch_id","required":true,"description":"Batch Id to identify the bulk operation request.","schema":{"type":"string"}},{"in":"query","name":"status","required":true,"schema":{"type":"string"},"description":"The status of the jobs to filter the results."},{"in":"query","name":"file_type","required":true,"schema":{"type":"string","default":"xlsx","enum":["xlsx","csv"]}}],"optional":[{"in":"query","name":"report_type","description":"The type of report to be downloaded.","schema":{"type":"string","default":"generation_report","enum":["generation_report","invoice_report"]}}],"query":[{"in":"query","name":"status","required":true,"schema":{"type":"string"},"description":"The status of the jobs to filter the results."},{"in":"query","name":"file_type","required":true,"schema":{"type":"string","default":"xlsx","enum":["xlsx","csv"]}},{"in":"query","name":"report_type","description":"The type of report to be downloaded.","schema":{"type":"string","default":"generation_report","enum":["generation_report","invoice_report"]}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of a company on the platform."},{"in":"path","name":"batch_id","required":true,"description":"Batch Id to identify the bulk operation request.","schema":{"type":"string"}}]}""", serverType="platform", batch_id=batch_id, status=status, file_type=file_type, report_type=report_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/jobs/{batch_id}/file", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of a company on the platform."},{"in":"path","name":"batch_id","required":true,"description":"Batch Id to identify the bulk operation request.","schema":{"type":"string"}},{"in":"query","name":"status","required":true,"schema":{"type":"string"},"description":"The status of the jobs to filter the results."},{"in":"query","name":"file_type","required":true,"description":"The type of file to be downloaded.","schema":{"type":"string","default":"xlsx","enum":["xlsx","csv"]}}],"optional":[{"in":"query","name":"report_type","description":"The type of report to be downloaded.","schema":{"type":"string","default":"generation_report","enum":["generation_report","invoice_report"]}}],"query":[{"in":"query","name":"status","required":true,"schema":{"type":"string"},"description":"The status of the jobs to filter the results."},{"in":"query","name":"file_type","required":true,"description":"The type of file to be downloaded.","schema":{"type":"string","default":"xlsx","enum":["xlsx","csv"]}},{"in":"query","name":"report_type","description":"The type of report to be downloaded.","schema":{"type":"string","default":"generation_report","enum":["generation_report","invoice_report"]}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of a company on the platform."},{"in":"path","name":"batch_id","required":true,"description":"Batch Id to identify the bulk operation request.","schema":{"type":"string"}}]}""", serverType="platform", batch_id=batch_id, status=status, file_type=file_type, report_type=report_type)
         query_string = await create_query_string(status=status, file_type=file_type, report_type=report_type)
 
         headers = {}
@@ -1181,8 +1128,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/jobs/{batch_id}/file", batch_id=batch_id, status=status, file_type=file_type, report_type=report_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import JobFailedResponseSchema
-            schema = JobFailedResponseSchema()
+            from .models import JobFailedResponse
+            schema = JobFailedResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1232,7 +1179,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/shipments-listing", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer"}},{"in":"query","name":"dp_ids","description":"Filter shipments with the specific Courier partner Ids which is a combination of courier partner extension and scheme Ids.","required":true,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Filter results based on specific store IDs.","required":true,"schema":{"type":"integer"}},{"in":"query","name":"to_date","description":"End date for the shipment search range.","required":true,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"from_date","description":"Start date for the shipment search range.","required":true,"schema":{"type":"string","format":"date-time"}}],"optional":[{"in":"query","name":"dp_name","description":"Filter results based on specific courier partner name.","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","description":"Filter results based on comma-separated list of sales channels.","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","description":"Filter results based on search type.","required":false,"schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"search_value","description":"Filter results based on the search value.","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"Page number for pagination.","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","description":"Number of records per page for pagination.","required":false,"schema":{"type":"integer"}}],"query":[{"in":"query","name":"dp_ids","description":"Filter shipments with the specific Courier partner Ids which is a combination of courier partner extension and scheme Ids.","required":true,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Filter results based on specific store IDs.","required":true,"schema":{"type":"integer"}},{"in":"query","name":"to_date","description":"End date for the shipment search range.","required":true,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"from_date","description":"Start date for the shipment search range.","required":true,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"dp_name","description":"Filter results based on specific courier partner name.","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","description":"Filter results based on comma-separated list of sales channels.","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","description":"Filter results based on search type.","required":false,"schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"search_value","description":"Filter results based on the search value.","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"Page number for pagination.","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","description":"Number of records per page for pagination.","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", dp_ids=dp_ids, stores=stores, to_date=to_date, from_date=from_date, dp_name=dp_name, sales_channels=sales_channels, search_type=search_type, search_value=search_value, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/shipments-listing", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer"}},{"in":"query","name":"dp_ids","description":"Filter shipments with the specific Courier partner Ids which is a combination of courier partner extension and scheme Ids.","required":true,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Filter results based on specific store IDs.","required":true,"schema":{"type":"integer"}},{"in":"query","name":"to_date","description":"End date for the shipment search range.","required":true,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"from_date","description":"Start date for the shipment search range.","required":true,"schema":{"type":"string","format":"date-time"}}],"optional":[{"in":"query","name":"dp_name","description":"Filter results based on specific courier partner name.","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","description":"Filter results based on comma-separated list of sales channels.","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","description":"Filter results based on search type.","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","description":"Filter results based on the search value.","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"Page number for pagination.","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","description":"Number of records per page for pagination.","required":false,"schema":{"type":"integer"}}],"query":[{"in":"query","name":"dp_ids","description":"Filter shipments with the specific Courier partner Ids which is a combination of courier partner extension and scheme Ids.","required":true,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Filter results based on specific store IDs.","required":true,"schema":{"type":"integer"}},{"in":"query","name":"to_date","description":"End date for the shipment search range.","required":true,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"from_date","description":"Start date for the shipment search range.","required":true,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"dp_name","description":"Filter results based on specific courier partner name.","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","description":"Filter results based on comma-separated list of sales channels.","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","description":"Filter results based on search type.","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","description":"Filter results based on the search value.","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"Page number for pagination.","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","description":"Number of records per page for pagination.","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", dp_ids=dp_ids, stores=stores, to_date=to_date, from_date=from_date, dp_name=dp_name, sales_channels=sales_channels, search_type=search_type, search_value=search_value, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(dp_ids=dp_ids, stores=stores, to_date=to_date, from_date=from_date, dp_name=dp_name, sales_channels=sales_channels, search_type=search_type, search_value=search_value, page_no=page_no, page_size=page_size)
 
         headers = {}
@@ -1298,7 +1245,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/listing", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Unique identifier for the company on the platform.","schema":{"type":"integer"}}],"optional":[{"in":"query","name":"status","required":false,"description":"Filter for the status of manifests.","schema":{"type":"string","enum":["active","closed"],"default":"active"}},{"in":"query","name":"start_date","description":"The starting date for filtering manifests in ISO format","required":false,"schema":{"type":"string","x-not-date":true}},{"in":"query","name":"end_date","description":"The end date for filtering manifests in ISO format","required":false,"schema":{"type":"string","x-not-date":true}},{"in":"query","name":"search_type","required":false,"description":"Specifies the type of search to perform.","schema":{"type":"string","enum":["fynd_order_id","shipment_id","manifest_id","dp_name","awb_no"]}},{"in":"query","name":"store_id","required":false,"description":"Filter to fetch manifests for a specific store by its ID.","schema":{"type":"integer"}},{"in":"query","name":"search_value","required":false,"description":"The value to search for based on the selected search type.","schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"description":"A comma-separated list of courier partner IDs (DP IDs) to filter the manifests.","schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"description":"The number of the page to fetch data.","schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"},"description":"The number of records to return per page for pagination."}],"query":[{"in":"query","name":"status","required":false,"description":"Filter for the status of manifests.","schema":{"type":"string","enum":["active","closed"],"default":"active"}},{"in":"query","name":"start_date","description":"The starting date for filtering manifests in ISO format","required":false,"schema":{"type":"string","x-not-date":true}},{"in":"query","name":"end_date","description":"The end date for filtering manifests in ISO format","required":false,"schema":{"type":"string","x-not-date":true}},{"in":"query","name":"search_type","required":false,"description":"Specifies the type of search to perform.","schema":{"type":"string","enum":["fynd_order_id","shipment_id","manifest_id","dp_name","awb_no"]}},{"in":"query","name":"store_id","required":false,"description":"Filter to fetch manifests for a specific store by its ID.","schema":{"type":"integer"}},{"in":"query","name":"search_value","required":false,"description":"The value to search for based on the selected search type.","schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"description":"A comma-separated list of courier partner IDs (DP IDs) to filter the manifests.","schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"description":"The number of the page to fetch data.","schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"},"description":"The number of records to return per page for pagination."}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Unique identifier for the company on the platform.","schema":{"type":"integer"}}]}""", serverType="platform", status=status, start_date=start_date, end_date=end_date, search_type=search_type, store_id=store_id, search_value=search_value, dp_ids=dp_ids, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/listing", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Unique identifier for the company on the platform.","schema":{"type":"integer"}}],"optional":[{"in":"query","name":"status","required":false,"description":"Filter for the status of manifests.","schema":{"type":"string","enum":["active","closed"],"default":"active"}},{"in":"query","name":"start_date","description":"The starting date for filtering manifests in ISO format","required":false,"schema":{"type":"string"}},{"in":"query","name":"end_date","description":"The end date for filtering manifests in ISO format","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"description":"Specifies the type of search to perform.","schema":{"type":"string","enum":["fynd_order_id","shipment_id","manifest_id","dp_name","awb_no"]}},{"in":"query","name":"store_id","required":false,"description":"Filter to fetch manifests for a specific store by its ID.","schema":{"type":"integer"}},{"in":"query","name":"search_value","required":false,"description":"The value to search for based on the selected search type.","schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"description":"A comma-separated list of courier partner IDs (DP IDs) to filter the manifests.","schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"description":"The number of the page to fetch data.","schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"},"description":"The number of records to return per page for pagination."}],"query":[{"in":"query","name":"status","required":false,"description":"Filter for the status of manifests.","schema":{"type":"string","enum":["active","closed"],"default":"active"}},{"in":"query","name":"start_date","description":"The starting date for filtering manifests in ISO format","required":false,"schema":{"type":"string"}},{"in":"query","name":"end_date","description":"The end date for filtering manifests in ISO format","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"description":"Specifies the type of search to perform.","schema":{"type":"string","enum":["fynd_order_id","shipment_id","manifest_id","dp_name","awb_no"]}},{"in":"query","name":"store_id","required":false,"description":"Filter to fetch manifests for a specific store by its ID.","schema":{"type":"integer"}},{"in":"query","name":"search_value","required":false,"description":"The value to search for based on the selected search type.","schema":{"type":"string"}},{"in":"query","name":"dp_ids","required":false,"description":"A comma-separated list of courier partner IDs (DP IDs) to filter the manifests.","schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"description":"The number of the page to fetch data.","schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"},"description":"The number of records to return per page for pagination."}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Unique identifier for the company on the platform.","schema":{"type":"integer"}}]}""", serverType="platform", status=status, start_date=start_date, end_date=end_date, search_type=search_type, store_id=store_id, search_value=search_value, dp_ids=dp_ids, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(status=status, start_date=start_date, end_date=end_date, search_type=search_type, store_id=store_id, search_value=search_value, dp_ids=dp_ids, page_no=page_no, page_size=page_size)
 
         headers = {}
@@ -1337,8 +1284,8 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ProcessManifestRequestSchema
-        schema = ProcessManifestRequestSchema()
+        from .models import ProcessManifestRequest
+        schema = ProcessManifestRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/process-manifest", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier of a company on the platform.","schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier of a company on the platform.","schema":{"type":"integer"}}]}""", serverType="platform", )
@@ -1359,8 +1306,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/process-manifest", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ManifestResponseSchema
-            schema = ManifestResponseSchema()
+            from .models import ManifestResponse
+            schema = ManifestResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1459,8 +1406,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/dispatch", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponseSchema
-            schema = SuccessResponseSchema()
+            from .models import SuccessResponse
+            schema = SuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1502,8 +1449,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/manifest/uploadConsent", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponseSchema
-            schema = SuccessResponseSchema()
+            from .models import SuccessResponse
+            schema = SuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1544,8 +1491,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/filter/listing", view=view), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ManifestFiltersResponseSchema
-            schema = ManifestFiltersResponseSchema()
+            from .models import ManifestFiltersResponse
+            schema = ManifestFiltersResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1587,8 +1534,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/einvoice/retry/irn", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import EInvoiceRetryResponseSchema
-            schema = EInvoiceRetryResponseSchema()
+            from .models import EInvoiceRetryResponse
+            schema = EInvoiceRetryResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1638,8 +1585,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/tracking", shipment_id=shipment_id, awb=awb, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierPartnerTrackingResponseSchema
-            schema = CourierPartnerTrackingResponseSchema()
+            from .models import CourierPartnerTrackingResponse
+            schema = CourierPartnerTrackingResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1709,7 +1656,7 @@ class Order:
         schema = GenerateInvoiceIDRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/{invoice_type}/id/generate", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer"}},{"in":"path","name":"invoice_type","description":"mention the type of invoice id to generate","required":true,"schema":{"type":"string","enum":["invoice","credit_note"]}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer"}},{"in":"path","name":"invoice_type","description":"mention the type of invoice id to generate","required":true,"schema":{"type":"string","enum":["invoice","credit_note"]}}]}""", serverType="platform", invoice_type=invoice_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/{invoice_type}/id/generate", """{"required":[{"in":"path","name":"company_id","description":"company id from where are transitioning the shipment state or data","required":true,"schema":{"type":"integer"}},{"in":"path","name":"invoice_type","description":"mention the type of invoice id to generate","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"company id from where are transitioning the shipment state or data","required":true,"schema":{"type":"integer"}},{"in":"path","name":"invoice_type","description":"mention the type of invoice id to generate","required":true,"schema":{"type":"string"}}]}""", serverType="platform", invoice_type=invoice_type)
         query_string = await create_query_string()
 
         headers = {}
@@ -1727,8 +1674,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/{invoice_type}/id/generate", invoice_type=invoice_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GenerateInvoiceIDResponseSchema
-            schema = GenerateInvoiceIDResponseSchema()
+            from .models import GenerateInvoiceIDResponse
+            schema = GenerateInvoiceIDResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1794,7 +1741,7 @@ class Order:
         schema = TransitionConfigPayload()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/manager/config", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier of a company on the platform.","schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier of a company on the platform.","schema":{"type":"integer"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/manager/config", """{"required":[{"name":"company_id","in":"path","required":true,"description":"The Id Of The Company.","schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"The Id Of The Company.","schema":{"type":"integer"}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -1812,8 +1759,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/manager/config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ConfigUpdatedResponseSchema
-            schema = ConfigUpdatedResponseSchema()
+            from .models import ConfigUpdatedResponse
+            schema = ConfigUpdatedResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1844,7 +1791,7 @@ The ESM config stores order processing configuration. Each document in the ESM c
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/manager/config", """{"required":[{"name":"company_id","in":"path","required":true,"description":"The unique identifier of the company on the platform.","schema":{"type":"integer"}}],"optional":[{"name":"app_id","in":"query","required":false,"description":"The unique identifier of the application.","schema":{"type":"string"}},{"name":"ordering_channel","in":"query","required":false,"description":"The channel through which orders are placed.","schema":{"type":"string"}},{"name":"entity","in":"query","required":false,"description":"The entity for which the configuration is applied.","schema":{"type":"string"}}],"query":[{"name":"app_id","in":"query","required":false,"description":"The unique identifier of the application.","schema":{"type":"string"}},{"name":"ordering_channel","in":"query","required":false,"description":"The channel through which orders are placed.","schema":{"type":"string"}},{"name":"entity","in":"query","required":false,"description":"The entity for which the configuration is applied.","schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"The unique identifier of the company on the platform.","schema":{"type":"integer"}}]}""", serverType="platform", app_id=app_id, ordering_channel=ordering_channel, entity=entity)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/manager/config", """{"required":[{"name":"company_id","in":"path","required":true,"description":"The unique identifier of the company.","schema":{"type":"integer"}}],"optional":[{"name":"app_id","in":"query","required":false,"description":"The unique identifier of the application.","schema":{"type":"string"}},{"name":"ordering_channel","in":"query","required":false,"description":"The channel through which orders are placed.","schema":{"type":"string"}},{"name":"entity","in":"query","required":false,"description":"The entity for which the configuration is applied.","schema":{"type":"string"}}],"query":[{"name":"app_id","in":"query","required":false,"description":"The unique identifier of the application.","schema":{"type":"string"}},{"name":"ordering_channel","in":"query","required":false,"description":"The channel through which orders are placed.","schema":{"type":"string"}},{"name":"entity","in":"query","required":false,"description":"The entity for which the configuration is applied.","schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"The unique identifier of the company.","schema":{"type":"integer"}}]}""", serverType="platform", app_id=app_id, ordering_channel=ordering_channel, entity=entity)
         query_string = await create_query_string(app_id=app_id, ordering_channel=ordering_channel, entity=entity)
 
         headers = {}
@@ -1863,74 +1810,39 @@ The ESM config stores order processing configuration. Each document in the ESM c
 
         return response
     
-    async def updatePaymentInfo(self, body="", request_headers:Dict={}):
-        """Updates the payment mode for an order, its shipments and its bags. This endpoint allows for modifying payment methods, and associated details but not amount.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.updatePaymentInfo()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import UpdateShipmentPaymentMode
-        schema = UpdateShipmentPaymentMode()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/payment/update", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/payment/update", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        return response
-    
-    async def getShipments(self, lane=None, bag_status=None, status_override_lane=None, time_to_dispatch=None, search_type=None, search_value=None, from_date=None, to_date=None, start_date=None, end_date=None, dp_ids=None, stores=None, sales_channels=None, page_no=None, page_size=None, fetch_active_shipment=None, allow_inactive=None, exclude_locked_shipments=None, payment_methods=None, channel_shipment_id=None, channel_order_id=None, custom_meta=None, ordering_channel=None, company_affiliate_tag=None, my_orders=None, platform_user_id=None, sort_type=None, show_cross_company_data=None, tags=None, customer_id=None, order_type=None, group_entity=None, enforce_date_filter=None, request_headers:Dict={}):
+    async def getShipments(self, lane=None, bag_status=None, status_override_lane=None, time_to_dispatch=None, search_type=None, search_value=None, from_date=None, to_date=None, start_date=None, end_date=None, dp_ids=None, stores=None, sales_channels=None, page_no=None, page_size=None, fetch_active_shipment=None, allow_inactive=None, exclude_locked_shipments=None, payment_methods=None, channel_shipment_id=None, channel_order_id=None, custom_meta=None, ordering_channel=None, company_affiliate_tag=None, my_orders=None, platform_user_id=None, sort_type=None, show_cross_company_data=None, tags=None, customer_id=None, order_type=None, enforce_date_filter=None, request_headers:Dict={}):
         """Get a list of shipments based on the filters provided
         :param lane : Name of lane for which data is to be fetched : type string
-        :param bag_status : Comma separated values of bag statuses. : type string
-        :param status_override_lane : Use this flag to fetch by bag_status and override lane. : type boolean
-        :param time_to_dispatch : Indicates the time to dispatch. : type integer
-        :param search_type : Specifies the key used to determine the type of search being performed. : type string
-        :param search_value : The value corresponding to the search type, such as a specific shipment ID or order ID. : type string
+        :param bag_status : Comma separated values of bag statuses : type string
+        :param status_override_lane : Use this flag to fetch by bag_status and override lane : type boolean
+        :param time_to_dispatch :  : type integer
+        :param search_type : Search type key : type string
+        :param search_value : Search type value : type string
         :param from_date : Start Date in DD-MM-YYYY format : type string
         :param to_date : End Date in DD-MM-YYYY format : type string
-        :param start_date : The UTC start date in ISO format (YYYY-MM-DDTHH:MM:SSZ) for filtering results. : type string
-        :param end_date : The UTC end date in ISO format (YYYY-MM-DDTHH:MM:SSZ) for filtering results. : type string
-        :param dp_ids : A comma-separated list of delivery partner IDs to filter results by specific delivery partners. : type string
-        :param stores : A comma-separated list of store IDs used to filter results to only those related to specific stores. : type string
-        :param sales_channels : A comma-separated list of sales channel IDs to filter results based on the sales channels involved. : type string
-        :param page_no : Specifies the page number for paginated results. : type integer
-        :param page_size : Determines the number of results returned per page. : type integer
-        :param fetch_active_shipment : A boolean flag that indicates whether to include only active shipments in the results. : type boolean
-        :param allow_inactive : A flag indicating whether to allow the inclusion of inactive shipments in the results. : type boolean
-        :param exclude_locked_shipments : A flag to specify whether to exclude shipments that are locked from the results. : type boolean
-        :param payment_methods : A comma-separated list of payment methods. : type string
-        :param channel_shipment_id : The shipment ID used in the application, which can be used to reference specific shipments. : type string
-        :param channel_order_id : The order ID used in the application. : type string
-        :param custom_meta : Custom metadata associated with the query, allowing for additional filtering or information to be passed. : type string
-        :param ordering_channel : The channel through which the order was placed. : type string
-        :param company_affiliate_tag : A tag used to identify the company's affiliation for filtering or reporting purposes. : type string
-        :param my_orders : A boolean flag indicating whether the query should return only the user's orders. : type boolean
-        :param platform_user_id : The unique identifier of the user on the platform, useful for filtering orders related to a specific user. : type string
-        :param sort_type : Determines the sorting order of the results based on specific criteria. : type string
-        :param show_cross_company_data : A flag indicating whether to include data from both cross-company and non-cross-company orders in the results. : type boolean
-        :param tags : A comma-separated list of tags associated with the orders to filter results based on specific characteristics. : type string
-        :param customer_id : The unique identifier for the customer associated with the query, useful for filtering results to a specific customer. : type string
-        :param order_type : The type of order being queried. : type string
-        :param group_entity : Defines the grouping criterion for retrieving shipments or orders. It specifies whether the results should be organized based on shipment groups or order groups.  For example, using 'shipments' groups results by shipment, while an invalid value like 'abcd' may not be recognized, leading to errors or default behavior. : type string
+        :param start_date : UTC Start Date in ISO format : type string
+        :param end_date : UTC End Date in ISO format : type string
+        :param dp_ids : Comma separated values of delivery partner ids : type string
+        :param stores : Comma separated values of store ids : type string
+        :param sales_channels : Comma separated values of sales channel ids : type string
+        :param page_no : Page number for paginated data : type integer
+        :param page_size : Page size of data received per page : type integer
+        :param fetch_active_shipment : flag to fetch active shipments : type boolean
+        :param allow_inactive : Flag to allow inactive shipments : type boolean
+        :param exclude_locked_shipments : flag to fetch locked shipments : type boolean
+        :param payment_methods : Comma separated values of payment methods : type string
+        :param channel_shipment_id : App Shipment Id : type string
+        :param channel_order_id : App Order Id : type string
+        :param custom_meta :  : type string
+        :param ordering_channel :  : type string
+        :param company_affiliate_tag :  : type string
+        :param my_orders :  : type boolean
+        :param platform_user_id :  : type string
+        :param sort_type : Sort the result data on basis of input : type string
+        :param show_cross_company_data : Flag to view cross & non-cross company order : type boolean
+        :param tags : Comma separated values of tags : type string
+        :param customer_id :  : type string
+        :param order_type :  : type string
         :param enforce_date_filter : Applies a date filter for listing shipments. This is useful when fetching data  for a specific date range while performing searches. : type boolean
         """
         payload = {}
@@ -1997,8 +1909,6 @@ The ESM config stores order processing configuration. Each document in the ESM c
             payload["customer_id"] = customer_id
         if order_type is not None:
             payload["order_type"] = order_type
-        if group_entity is not None:
-            payload["group_entity"] = group_entity
         if enforce_date_filter is not None:
             payload["enforce_date_filter"] = enforce_date_filter
 
@@ -2007,8 +1917,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipments-listing", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of a company on the platform."}],"optional":[{"in":"query","name":"lane","description":"Name of lane for which data is to be fetched","required":false,"schema":{"type":"string","enum":["new","confirmed","to_be_packed","ready_for_dispatch","in_transit","handed_over_to_customer","delivered","cancelled","return_initiated","return_in_transit","return_delivered","return_accepted"]}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses.","required":false,"schema":{"type":"string"}},{"in":"query","name":"status_override_lane","description":"Use this flag to fetch by bag_status and override lane.","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"time_to_dispatch","required":false,"description":"Indicates the time to dispatch.","schema":{"type":"integer","enum":[1,-1]}},{"in":"query","name":"search_type","description":"Specifies the key used to determine the type of search being performed.","required":false,"schema":{"type":"string","enum":["shipment_id","order_id","channel_name","fynd_order_id"]}},{"in":"query","name":"search_value","description":"The value corresponding to the search type, such as a specific shipment ID or order ID.","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date"}},{"in":"query","name":"start_date","description":"The UTC start date in ISO format (YYYY-MM-DDTHH:MM:SSZ) for filtering results.","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"The UTC end date in ISO format (YYYY-MM-DDTHH:MM:SSZ) for filtering results.","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"dp_ids","description":"A comma-separated list of delivery partner IDs to filter results by specific delivery partners.","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"A comma-separated list of store IDs used to filter results to only those related to specific stores.","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","description":"A comma-separated list of sales channel IDs to filter results based on the sales channels involved.","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"Specifies the page number for paginated results.","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Determines the number of results returned per page.","required":false,"schema":{"type":"integer","default":10}},{"in":"query","name":"fetch_active_shipment","description":"A boolean flag that indicates whether to include only active shipments in the results.","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"allow_inactive","description":"A flag indicating whether to allow the inclusion of inactive shipments in the results.","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"exclude_locked_shipments","description":"A flag to specify whether to exclude shipments that are locked from the results.","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"payment_methods","description":"A comma-separated list of payment methods.","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_shipment_id","description":"The shipment ID used in the application, which can be used to reference specific shipments.","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_order_id","description":"The order ID used in the application.","required":false,"schema":{"type":"string"}},{"in":"query","name":"custom_meta","required":false,"description":"Custom metadata associated with the query, allowing for additional filtering or information to be passed.","schema":{"type":"string"}},{"in":"query","name":"ordering_channel","required":false,"description":"The channel through which the order was placed.","schema":{"type":"string"}},{"in":"query","name":"company_affiliate_tag","required":false,"description":"A tag used to identify the company's affiliation for filtering or reporting purposes.","schema":{"type":"string"}},{"in":"query","name":"my_orders","required":false,"description":"A boolean flag indicating whether the query should return only the user's orders.","schema":{"type":"boolean"}},{"in":"query","name":"platform_user_id","required":false,"description":"The unique identifier of the user on the platform, useful for filtering orders related to a specific user.","schema":{"type":"string"}},{"in":"query","name":"sort_type","description":"Determines the sorting order of the results based on specific criteria.","required":false,"schema":{"type":"string","enum":["sla_asc","created_date_asc","created_date_desc"],"default":"sla_asc"}},{"in":"query","name":"show_cross_company_data","description":"A flag indicating whether to include data from both cross-company and non-cross-company orders in the results.","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"tags","description":"A comma-separated list of tags associated with the orders to filter results based on specific characteristics.","required":false,"schema":{"type":"string"}},{"in":"query","name":"customer_id","description":"The unique identifier for the customer associated with the query, useful for filtering results to a specific customer.","required":false,"schema":{"type":"string"}},{"in":"query","name":"order_type","description":"The type of order being queried.","required":false,"schema":{"type":"string","example":"HomeDelivery","enum":["HomeDelivery","PickAtStore","Digital"]}},{"in":"query","name":"group_entity","description":"Defines the grouping criterion for retrieving shipments or orders. It specifies whether the results should be organized based on shipment groups or order groups.  For example, using 'shipments' groups results by shipment, while an invalid value like 'abcd' may not be recognized, leading to errors or default behavior.","required":false,"schema":{"type":"string"}},{"in":"query","name":"enforce_date_filter","description":"Applies a date filter for listing shipments. This is useful when fetching data  for a specific date range while performing searches.","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","name":"lane","description":"Name of lane for which data is to be fetched","required":false,"schema":{"type":"string","enum":["new","confirmed","to_be_packed","ready_for_dispatch","in_transit","handed_over_to_customer","delivered","cancelled","return_initiated","return_in_transit","return_delivered","return_accepted"]}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses.","required":false,"schema":{"type":"string"}},{"in":"query","name":"status_override_lane","description":"Use this flag to fetch by bag_status and override lane.","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"time_to_dispatch","required":false,"description":"Indicates the time to dispatch.","schema":{"type":"integer","enum":[1,-1]}},{"in":"query","name":"search_type","description":"Specifies the key used to determine the type of search being performed.","required":false,"schema":{"type":"string","enum":["shipment_id","order_id","channel_name","fynd_order_id"]}},{"in":"query","name":"search_value","description":"The value corresponding to the search type, such as a specific shipment ID or order ID.","required":false,"schema":{"type":"string"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date"}},{"in":"query","name":"start_date","description":"The UTC start date in ISO format (YYYY-MM-DDTHH:MM:SSZ) for filtering results.","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"The UTC end date in ISO format (YYYY-MM-DDTHH:MM:SSZ) for filtering results.","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"dp_ids","description":"A comma-separated list of delivery partner IDs to filter results by specific delivery partners.","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"A comma-separated list of store IDs used to filter results to only those related to specific stores.","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","description":"A comma-separated list of sales channel IDs to filter results based on the sales channels involved.","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"Specifies the page number for paginated results.","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Determines the number of results returned per page.","required":false,"schema":{"type":"integer","default":10}},{"in":"query","name":"fetch_active_shipment","description":"A boolean flag that indicates whether to include only active shipments in the results.","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"allow_inactive","description":"A flag indicating whether to allow the inclusion of inactive shipments in the results.","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"exclude_locked_shipments","description":"A flag to specify whether to exclude shipments that are locked from the results.","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"payment_methods","description":"A comma-separated list of payment methods.","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_shipment_id","description":"The shipment ID used in the application, which can be used to reference specific shipments.","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_order_id","description":"The order ID used in the application.","required":false,"schema":{"type":"string"}},{"in":"query","name":"custom_meta","required":false,"description":"Custom metadata associated with the query, allowing for additional filtering or information to be passed.","schema":{"type":"string"}},{"in":"query","name":"ordering_channel","required":false,"description":"The channel through which the order was placed.","schema":{"type":"string"}},{"in":"query","name":"company_affiliate_tag","required":false,"description":"A tag used to identify the company's affiliation for filtering or reporting purposes.","schema":{"type":"string"}},{"in":"query","name":"my_orders","required":false,"description":"A boolean flag indicating whether the query should return only the user's orders.","schema":{"type":"boolean"}},{"in":"query","name":"platform_user_id","required":false,"description":"The unique identifier of the user on the platform, useful for filtering orders related to a specific user.","schema":{"type":"string"}},{"in":"query","name":"sort_type","description":"Determines the sorting order of the results based on specific criteria.","required":false,"schema":{"type":"string","enum":["sla_asc","created_date_asc","created_date_desc"],"default":"sla_asc"}},{"in":"query","name":"show_cross_company_data","description":"A flag indicating whether to include data from both cross-company and non-cross-company orders in the results.","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"tags","description":"A comma-separated list of tags associated with the orders to filter results based on specific characteristics.","required":false,"schema":{"type":"string"}},{"in":"query","name":"customer_id","description":"The unique identifier for the customer associated with the query, useful for filtering results to a specific customer.","required":false,"schema":{"type":"string"}},{"in":"query","name":"order_type","description":"The type of order being queried.","required":false,"schema":{"type":"string","example":"HomeDelivery","enum":["HomeDelivery","PickAtStore","Digital"]}},{"in":"query","name":"group_entity","description":"Defines the grouping criterion for retrieving shipments or orders. It specifies whether the results should be organized based on shipment groups or order groups.  For example, using 'shipments' groups results by shipment, while an invalid value like 'abcd' may not be recognized, leading to errors or default behavior.","required":false,"schema":{"type":"string"}},{"in":"query","name":"enforce_date_filter","description":"Applies a date filter for listing shipments. This is useful when fetching data  for a specific date range while performing searches.","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of a company on the platform."}]}""", serverType="platform", lane=lane, bag_status=bag_status, status_override_lane=status_override_lane, time_to_dispatch=time_to_dispatch, search_type=search_type, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, fetch_active_shipment=fetch_active_shipment, allow_inactive=allow_inactive, exclude_locked_shipments=exclude_locked_shipments, payment_methods=payment_methods, channel_shipment_id=channel_shipment_id, channel_order_id=channel_order_id, custom_meta=custom_meta, ordering_channel=ordering_channel, company_affiliate_tag=company_affiliate_tag, my_orders=my_orders, platform_user_id=platform_user_id, sort_type=sort_type, show_cross_company_data=show_cross_company_data, tags=tags, customer_id=customer_id, order_type=order_type, group_entity=group_entity, enforce_date_filter=enforce_date_filter)
-        query_string = await create_query_string(lane=lane, bag_status=bag_status, status_override_lane=status_override_lane, time_to_dispatch=time_to_dispatch, search_type=search_type, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, fetch_active_shipment=fetch_active_shipment, allow_inactive=allow_inactive, exclude_locked_shipments=exclude_locked_shipments, payment_methods=payment_methods, channel_shipment_id=channel_shipment_id, channel_order_id=channel_order_id, custom_meta=custom_meta, ordering_channel=ordering_channel, company_affiliate_tag=company_affiliate_tag, my_orders=my_orders, platform_user_id=platform_user_id, sort_type=sort_type, show_cross_company_data=show_cross_company_data, tags=tags, customer_id=customer_id, order_type=order_type, group_entity=group_entity, enforce_date_filter=enforce_date_filter)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipments-listing", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","example":37}}],"optional":[{"in":"query","name":"lane","description":"Name of lane for which data is to be fetched","required":false,"schema":{"type":"string","enum":["new","confirmed","to_be_packed","ready_for_dispatch","in_transit","handed_over_to_customer","delivered","cancelled","return_initiated","return_in_transit","return_delivered","return_accepted"],"example":"new"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string","example":"placed, bag_confirmed, bag_invoiced"}},{"in":"query","name":"status_override_lane","description":"Use this flag to fetch by bag_status and override lane","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"time_to_dispatch","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"search_type","description":"Search type key","required":false,"schema":{"type":"string","example":"shipment_id"}},{"in":"query","name":"search_value","description":"Search type value","required":false,"schema":{"type":"string","example":"16578901076461551493K"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date","example":"2023-05-10T00:00:00.000Z"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date","example":"2023-05-13T00:00:00.000Z"}},{"in":"query","name":"start_date","description":"UTC Start Date in ISO format","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-21T09:48:40.000Z"}},{"in":"query","name":"end_date","description":"UTC End Date in ISO format","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-21T09:48:40.000Z"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string","example":"19,26"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string","example":"12,34"}},{"in":"query","name":"sales_channels","description":"Comma separated values of sales channel ids","required":false,"schema":{"type":"string","example":"000000000000000000000001,614b42d1ea943427b5f46d1e"}},{"in":"query","name":"page_no","description":"Page number for paginated data","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Page size of data received per page","required":false,"schema":{"type":"integer","default":10}},{"in":"query","name":"fetch_active_shipment","description":"flag to fetch active shipments","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"exclude_locked_shipments","description":"flag to fetch locked shipments","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"payment_methods","description":"Comma separated values of payment methods","required":false,"schema":{"type":"string","example":"COD,PREPAID"}},{"in":"query","name":"channel_shipment_id","description":"App Shipment Id","required":false,"schema":{"type":"string","example":"16731535496121004000"}},{"in":"query","name":"channel_order_id","description":"App Order Id","required":false,"schema":{"type":"string","example":"FY63BA4C0D0125F8A075"}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"company_affiliate_tag","required":false,"schema":{"type":"string"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"platform_user_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"sort_type","description":"Sort the result data on basis of input","required":false,"schema":{"type":"string","enum":["sla_asc","created_date_asc","created_date_desc"],"default":"sla_asc"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"tags","description":"Comma separated values of tags","required":false,"schema":{"type":"string","example":"gifting,international"}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string","example":"63a2ce177e9f59d3166dd700"}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}},{"in":"query","name":"enforce_date_filter","description":"Applies a date filter for listing shipments. This is useful when fetching data  for a specific date range while performing searches.","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","name":"lane","description":"Name of lane for which data is to be fetched","required":false,"schema":{"type":"string","enum":["new","confirmed","to_be_packed","ready_for_dispatch","in_transit","handed_over_to_customer","delivered","cancelled","return_initiated","return_in_transit","return_delivered","return_accepted"],"example":"new"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string","example":"placed, bag_confirmed, bag_invoiced"}},{"in":"query","name":"status_override_lane","description":"Use this flag to fetch by bag_status and override lane","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"time_to_dispatch","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"search_type","description":"Search type key","required":false,"schema":{"type":"string","example":"shipment_id"}},{"in":"query","name":"search_value","description":"Search type value","required":false,"schema":{"type":"string","example":"16578901076461551493K"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date","example":"2023-05-10T00:00:00.000Z"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date","example":"2023-05-13T00:00:00.000Z"}},{"in":"query","name":"start_date","description":"UTC Start Date in ISO format","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-21T09:48:40.000Z"}},{"in":"query","name":"end_date","description":"UTC End Date in ISO format","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-21T09:48:40.000Z"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string","example":"19,26"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string","example":"12,34"}},{"in":"query","name":"sales_channels","description":"Comma separated values of sales channel ids","required":false,"schema":{"type":"string","example":"000000000000000000000001,614b42d1ea943427b5f46d1e"}},{"in":"query","name":"page_no","description":"Page number for paginated data","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Page size of data received per page","required":false,"schema":{"type":"integer","default":10}},{"in":"query","name":"fetch_active_shipment","description":"flag to fetch active shipments","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"exclude_locked_shipments","description":"flag to fetch locked shipments","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"payment_methods","description":"Comma separated values of payment methods","required":false,"schema":{"type":"string","example":"COD,PREPAID"}},{"in":"query","name":"channel_shipment_id","description":"App Shipment Id","required":false,"schema":{"type":"string","example":"16731535496121004000"}},{"in":"query","name":"channel_order_id","description":"App Order Id","required":false,"schema":{"type":"string","example":"FY63BA4C0D0125F8A075"}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string"}},{"in":"query","name":"ordering_channel","required":false,"schema":{"type":"string"}},{"in":"query","name":"company_affiliate_tag","required":false,"schema":{"type":"string"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"platform_user_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"sort_type","description":"Sort the result data on basis of input","required":false,"schema":{"type":"string","enum":["sla_asc","created_date_asc","created_date_desc"],"default":"sla_asc"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"tags","description":"Comma separated values of tags","required":false,"schema":{"type":"string","example":"gifting,international"}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string","example":"63a2ce177e9f59d3166dd700"}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}},{"in":"query","name":"enforce_date_filter","description":"Applies a date filter for listing shipments. This is useful when fetching data  for a specific date range while performing searches.","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","example":37}}]}""", serverType="platform", lane=lane, bag_status=bag_status, status_override_lane=status_override_lane, time_to_dispatch=time_to_dispatch, search_type=search_type, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, fetch_active_shipment=fetch_active_shipment, allow_inactive=allow_inactive, exclude_locked_shipments=exclude_locked_shipments, payment_methods=payment_methods, channel_shipment_id=channel_shipment_id, channel_order_id=channel_order_id, custom_meta=custom_meta, ordering_channel=ordering_channel, company_affiliate_tag=company_affiliate_tag, my_orders=my_orders, platform_user_id=platform_user_id, sort_type=sort_type, show_cross_company_data=show_cross_company_data, tags=tags, customer_id=customer_id, order_type=order_type, enforce_date_filter=enforce_date_filter)
+        query_string = await create_query_string(lane=lane, bag_status=bag_status, status_override_lane=status_override_lane, time_to_dispatch=time_to_dispatch, search_type=search_type, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, fetch_active_shipment=fetch_active_shipment, allow_inactive=allow_inactive, exclude_locked_shipments=exclude_locked_shipments, payment_methods=payment_methods, channel_shipment_id=channel_shipment_id, channel_order_id=channel_order_id, custom_meta=custom_meta, ordering_channel=ordering_channel, company_affiliate_tag=company_affiliate_tag, my_orders=my_orders, platform_user_id=platform_user_id, sort_type=sort_type, show_cross_company_data=show_cross_company_data, tags=tags, customer_id=customer_id, order_type=order_type, enforce_date_filter=enforce_date_filter)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -2022,11 +1932,11 @@ The ESM config stores order processing configuration. Each document in the ESM c
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipments-listing", lane=lane, bag_status=bag_status, status_override_lane=status_override_lane, time_to_dispatch=time_to_dispatch, search_type=search_type, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, fetch_active_shipment=fetch_active_shipment, allow_inactive=allow_inactive, exclude_locked_shipments=exclude_locked_shipments, payment_methods=payment_methods, channel_shipment_id=channel_shipment_id, channel_order_id=channel_order_id, custom_meta=custom_meta, ordering_channel=ordering_channel, company_affiliate_tag=company_affiliate_tag, my_orders=my_orders, platform_user_id=platform_user_id, sort_type=sort_type, show_cross_company_data=show_cross_company_data, tags=tags, customer_id=customer_id, order_type=order_type, group_entity=group_entity, enforce_date_filter=enforce_date_filter), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipments-listing", lane=lane, bag_status=bag_status, status_override_lane=status_override_lane, time_to_dispatch=time_to_dispatch, search_type=search_type, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, fetch_active_shipment=fetch_active_shipment, allow_inactive=allow_inactive, exclude_locked_shipments=exclude_locked_shipments, payment_methods=payment_methods, channel_shipment_id=channel_shipment_id, channel_order_id=channel_order_id, custom_meta=custom_meta, ordering_channel=ordering_channel, company_affiliate_tag=company_affiliate_tag, my_orders=my_orders, platform_user_id=platform_user_id, sort_type=sort_type, show_cross_company_data=show_cross_company_data, tags=tags, customer_id=customer_id, order_type=order_type, enforce_date_filter=enforce_date_filter), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentInternalPlatformViewResponseSchema
-            schema = ShipmentInternalPlatformViewResponseSchema()
+            from .models import ShipmentInternalPlatformViewResponse
+            schema = ShipmentInternalPlatformViewResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2037,8 +1947,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
     
     async def getShipmentById(self, channel_shipment_id=None, shipment_id=None, fetch_active_shipment=None, allow_inactive=None, request_headers:Dict={}):
         """Get detailed information about a specific shipment
-        :param channel_shipment_id : The shipment ID used in the application, which can be used to reference specific shipments. : type string
-        :param shipment_id : The unique identifier for a shipment. : type string
+        :param channel_shipment_id : App Shipment Id : type string
+        :param shipment_id : Shipment Id : type string
         :param fetch_active_shipment : flag to fetch active or deactivated shipments : type boolean
         :param allow_inactive : Flag indicating whether inactive shipments are allowed : type boolean
         """
@@ -2058,7 +1968,7 @@ The ESM config stores order processing configuration. Each document in the ESM c
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipment-details", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"channel_shipment_id","description":"The shipment ID used in the application, which can be used to reference specific shipments.","required":false,"schema":{"type":"string"}},{"in":"query","name":"shipment_id","description":"The unique identifier for a shipment.","required":false,"schema":{"type":"string"}},{"in":"query","name":"fetch_active_shipment","description":"flag to fetch active or deactivated shipments","required":false,"schema":{"type":"boolean","example":false}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","name":"channel_shipment_id","description":"The shipment ID used in the application, which can be used to reference specific shipments.","required":false,"schema":{"type":"string"}},{"in":"query","name":"shipment_id","description":"The unique identifier for a shipment.","required":false,"schema":{"type":"string"}},{"in":"query","name":"fetch_active_shipment","description":"flag to fetch active or deactivated shipments","required":false,"schema":{"type":"boolean","example":false}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", channel_shipment_id=channel_shipment_id, shipment_id=shipment_id, fetch_active_shipment=fetch_active_shipment, allow_inactive=allow_inactive)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipment-details", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","example":37}}],"optional":[{"in":"query","name":"channel_shipment_id","description":"App Shipment Id","required":false,"schema":{"type":"string","example":"16731535496121004000"}},{"in":"query","name":"shipment_id","description":"Shipment Id","required":false,"schema":{"type":"string","example":"16731535496121004000"}},{"in":"query","name":"fetch_active_shipment","description":"flag to fetch active or deactivated shipments","required":false,"schema":{"type":"boolean","example":false}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","name":"channel_shipment_id","description":"App Shipment Id","required":false,"schema":{"type":"string","example":"16731535496121004000"}},{"in":"query","name":"shipment_id","description":"Shipment Id","required":false,"schema":{"type":"string","example":"16731535496121004000"}},{"in":"query","name":"fetch_active_shipment","description":"flag to fetch active or deactivated shipments","required":false,"schema":{"type":"boolean","example":false}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","example":37}}]}""", serverType="platform", channel_shipment_id=channel_shipment_id, shipment_id=shipment_id, fetch_active_shipment=fetch_active_shipment, allow_inactive=allow_inactive)
         query_string = await create_query_string(channel_shipment_id=channel_shipment_id, shipment_id=shipment_id, fetch_active_shipment=fetch_active_shipment, allow_inactive=allow_inactive)
 
         headers = {}
@@ -2076,8 +1986,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipment-details", channel_shipment_id=channel_shipment_id, shipment_id=shipment_id, fetch_active_shipment=fetch_active_shipment, allow_inactive=allow_inactive), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentInfoResponseSchema
-            schema = ShipmentInfoResponseSchema()
+            from .models import ShipmentInfoResponse
+            schema = ShipmentInfoResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2124,8 +2034,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/order-details", order_id=order_id, my_orders=my_orders, allow_inactive=allow_inactive), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OrderDetailsResponseSchema
-            schema = OrderDetailsResponseSchema()
+            from .models import OrderDetailsResponse
+            schema = OrderDetailsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2147,18 +2057,14 @@ The ESM config stores order processing configuration. Each document in the ESM c
         :param sales_channels :  : type string
         :param payment_mode : Comma separated values of payment modes : type string
         :param bag_status : Comma separated values of bag statuses : type string
-        :param search_type : search_type refers to the field that will be used as the target for the search operation : type string
+        :param search_type :  : type string
         :param search_value :  : type string
         :param tags :  : type string
-        :param time_to_dispatch : time_to_dispatch refers to estimated SLA time. : type integer
+        :param time_to_dispatch :  : type integer
         :param payment_methods :  : type string
         :param my_orders :  : type boolean
         :param show_cross_company_data : Flag to view cross & non-cross company order : type boolean
-        :param order_type : Defines the specific journey a shipment will follow based on the application's operational needs and customer preferences. This field categorizes orders into distinct types, each associated with a unique processing flow. For example:
-- "HomeDelivery": The order goes through all the steps needed for delivery, from being packed to arriving at the customer’s address.
-- "PickAtStore": The order is prepared for pickup at the store, skipping shipping steps to make it ready faster for the customer to collect in person.
-- "Digital": This order type likely refers to orders that involve digital goods or services, such as software, digital subscriptions, e-books, online courses, or any other item that can be delivered electronically.
- : type string
+        :param order_type :  : type string
         """
         payload = {}
         
@@ -2206,7 +2112,7 @@ The ESM config stores order processing configuration. Each document in the ESM c
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/lane-config/", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"super_lane","description":"Name of lane for which data is to be fetched","required":false,"schema":{"type":"string","enum":["unfulfilled","processed","returns","action_centre"],"default":"unfulfilled"}},{"in":"query","name":"group_entity","description":"Name of group entity","required":false,"schema":{"type":"string","enum":["shipments","orders","bags"],"default":"shipments"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date"}},{"in":"query","name":"start_date","description":"UTC Start Date in ISO format","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"UTC End Date in ISO format","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_mode","description":"Comma separated values of payment modes","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","description":"search_type refers to the field that will be used as the target for the search operation","required":false,"schema":{"type":"string","enum":["shipment_id","order_id","channel_name","fynd_order_id"]}},{"in":"query","name":"search_value","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"time_to_dispatch refers to estimated SLA time.","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"order_type","description":"Defines the specific journey a shipment will follow based on the application's operational needs and customer preferences. This field categorizes orders into distinct types, each associated with a unique processing flow. For example:\n- \"HomeDelivery\": The order goes through all the steps needed for delivery, from being packed to arriving at the customer’s address.\n- \"PickAtStore\": The order is prepared for pickup at the store, skipping shipping steps to make it ready faster for the customer to collect in person.\n- \"Digital\": This order type likely refers to orders that involve digital goods or services, such as software, digital subscriptions, e-books, online courses, or any other item that can be delivered electronically.\n","required":false,"schema":{"type":"string","example":"HomeDelivery","enum":["HomeDelivery","PickAtStore","Digital"]}}],"query":[{"in":"query","name":"super_lane","description":"Name of lane for which data is to be fetched","required":false,"schema":{"type":"string","enum":["unfulfilled","processed","returns","action_centre"],"default":"unfulfilled"}},{"in":"query","name":"group_entity","description":"Name of group entity","required":false,"schema":{"type":"string","enum":["shipments","orders","bags"],"default":"shipments"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string","format":"date"}},{"in":"query","name":"start_date","description":"UTC Start Date in ISO format","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"UTC End Date in ISO format","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_mode","description":"Comma separated values of payment modes","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","description":"search_type refers to the field that will be used as the target for the search operation","required":false,"schema":{"type":"string","enum":["shipment_id","order_id","channel_name","fynd_order_id"]}},{"in":"query","name":"search_value","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"time_to_dispatch refers to estimated SLA time.","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"order_type","description":"Defines the specific journey a shipment will follow based on the application's operational needs and customer preferences. This field categorizes orders into distinct types, each associated with a unique processing flow. For example:\n- \"HomeDelivery\": The order goes through all the steps needed for delivery, from being packed to arriving at the customer’s address.\n- \"PickAtStore\": The order is prepared for pickup at the store, skipping shipping steps to make it ready faster for the customer to collect in person.\n- \"Digital\": This order type likely refers to orders that involve digital goods or services, such as software, digital subscriptions, e-books, online courses, or any other item that can be delivered electronically.\n","required":false,"schema":{"type":"string","example":"HomeDelivery","enum":["HomeDelivery","PickAtStore","Digital"]}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", super_lane=super_lane, group_entity=group_entity, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, payment_mode=payment_mode, bag_status=bag_status, search_type=search_type, search_value=search_value, tags=tags, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, my_orders=my_orders, show_cross_company_data=show_cross_company_data, order_type=order_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/lane-config/", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"super_lane","description":"Name of lane for which data is to be fetched","required":false,"schema":{"type":"string","enum":["unfulfilled","processed","returns","action_centre"],"default":"unfulfilled"}},{"in":"query","name":"group_entity","description":"Name of group entity","required":false,"schema":{"type":"string","enum":["shipments","orders","bags"],"default":"shipments"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"start_date","description":"UTC Start Date in ISO format","required":false,"schema":{"type":"string"}},{"in":"query","name":"end_date","description":"UTC End Date in ISO format","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_mode","description":"Comma separated values of payment modes","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}}],"query":[{"in":"query","name":"super_lane","description":"Name of lane for which data is to be fetched","required":false,"schema":{"type":"string","enum":["unfulfilled","processed","returns","action_centre"],"default":"unfulfilled"}},{"in":"query","name":"group_entity","description":"Name of group entity","required":false,"schema":{"type":"string","enum":["shipments","orders","bags"],"default":"shipments"}},{"in":"query","name":"from_date","description":"Start Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","description":"End Date in DD-MM-YYYY format","required":false,"schema":{"type":"string"}},{"in":"query","name":"start_date","description":"UTC Start Date in ISO format","required":false,"schema":{"type":"string"}},{"in":"query","name":"end_date","description":"UTC End Date in ISO format","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_mode","description":"Comma separated values of payment modes","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_type","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", super_lane=super_lane, group_entity=group_entity, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, payment_mode=payment_mode, bag_status=bag_status, search_type=search_type, search_value=search_value, tags=tags, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, my_orders=my_orders, show_cross_company_data=show_cross_company_data, order_type=order_type)
         query_string = await create_query_string(super_lane=super_lane, group_entity=group_entity, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, payment_mode=payment_mode, bag_status=bag_status, search_type=search_type, search_value=search_value, tags=tags, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, my_orders=my_orders, show_cross_company_data=show_cross_company_data, order_type=order_type)
 
         headers = {}
@@ -2224,8 +2130,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/lane-config/", super_lane=super_lane, group_entity=group_entity, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, payment_mode=payment_mode, bag_status=bag_status, search_type=search_type, search_value=search_value, tags=tags, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, my_orders=my_orders, show_cross_company_data=show_cross_company_data, order_type=order_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import LaneConfigResponseSchema
-            schema = LaneConfigResponseSchema()
+            from .models import LaneConfigResponse
+            schema = LaneConfigResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2234,32 +2140,31 @@ The ESM config stores order processing configuration. Each document in the ESM c
 
         return response
     
-    async def getOrders(self, lane=None, search_type=None, bag_status=None, time_to_dispatch=None, payment_methods=None, tags=None, search_value=None, from_date=None, to_date=None, start_date=None, end_date=None, dp_ids=None, stores=None, sales_channels=None, page_no=None, page_size=None, is_priority_sort=None, custom_meta=None, my_orders=None, show_cross_company_data=None, customer_id=None, order_type=None, allow_inactive=None, group_entity=None, enforce_date_filter=None, request_headers:Dict={}):
-        """Get a list of orders based on the filters provided.
-        :param lane : lane refers to a section where orders are assigned, indicating its grouping. : type string
-        :param search_type : search_type refers to the field that will be used as the target for the search operation. : type string
+    async def getOrders(self, lane=None, search_type=None, bag_status=None, time_to_dispatch=None, payment_methods=None, tags=None, search_value=None, from_date=None, to_date=None, start_date=None, end_date=None, dp_ids=None, stores=None, sales_channels=None, page_no=None, page_size=None, is_priority_sort=None, custom_meta=None, my_orders=None, show_cross_company_data=None, customer_id=None, order_type=None, allow_inactive=None, enforce_date_filter=None, request_headers:Dict={}):
+        """Get a list of orders based on the filters provided
+        :param lane : lane refers to a section where orders are assigned, indicating its grouping : type string
+        :param search_type : search_type refers to the field that will be used as the target for the search operation : type string
         :param bag_status : bag_status refers to status of the entity. Filters orders based on the status. : type string
         :param time_to_dispatch : time_to_dispatch refers to estimated SLA time. : type integer
-        :param payment_methods : Comma separated values of payment methods that were used to place order. : type string
+        :param payment_methods :  : type string
         :param tags : tags refers to additional descriptive labels associated with the order : type string
         :param search_value : search_value is matched against the field specified by the search_type : type string
-        :param from_date : Date time in UTC timezone as per ISO format. : type string
-        :param to_date : Date time in UTC timezone as per ISO format. : type string
-        :param start_date : Date time in UTC timezone as per ISO format. : type string
-        :param end_date : Date time in UTC timezone as per ISO format. : type string
+        :param from_date :  : type string
+        :param to_date :  : type string
+        :param start_date :  : type string
+        :param end_date :  : type string
         :param dp_ids : Delivery Partner IDs to which shipments are assigned. : type string
-        :param stores : A comma-separated list of store IDs used to filter results to only those related to specific stores. : type string
-        :param sales_channels : A comma-separated list of sales channel IDs to filter results based on the sales channels involved. : type string
-        :param page_no : Specifies the page number for paginated results. : type integer
-        :param page_size : Determines the number of results returned per page. : type integer
+        :param stores :  : type string
+        :param sales_channels :  : type string
+        :param page_no :  : type integer
+        :param page_size :  : type integer
         :param is_priority_sort :  : type boolean
         :param custom_meta :  : type string
         :param my_orders :  : type boolean
         :param show_cross_company_data : Flag to view cross & non-cross company order : type boolean
-        :param customer_id : The unique identifier for the customer associated with the query, useful for filtering results to a specific customer. : type string
+        :param customer_id :  : type string
         :param order_type :  : type string
         :param allow_inactive : Flag indicating whether inactive shipments are allowed : type boolean
-        :param group_entity : Defines the grouping criterion for retrieving shipments or orders. It specifies whether the results should be organized based on shipment groups or order groups.  For example, using 'shipments' groups results by shipment, while an invalid value like 'abcd' may not be recognized, leading to errors or default behavior. : type string
         :param enforce_date_filter : Applies a date filter for listing orders. This is useful when fetching data  for a specific date range while performing searches. : type boolean
         """
         payload = {}
@@ -2310,8 +2215,6 @@ The ESM config stores order processing configuration. Each document in the ESM c
             payload["order_type"] = order_type
         if allow_inactive is not None:
             payload["allow_inactive"] = allow_inactive
-        if group_entity is not None:
-            payload["group_entity"] = group_entity
         if enforce_date_filter is not None:
             payload["enforce_date_filter"] = enforce_date_filter
 
@@ -2320,8 +2223,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders-listing", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer","default":37}}],"optional":[{"in":"query","name":"lane","description":"lane refers to a section where orders are assigned, indicating its grouping.","required":false,"schema":{"type":"string","enum":["new","confirmed","to_be_packed","ready_for_dispatch","in_transit","handed_over_to_customer","delivered","cancelled","return_initiated","return_in_transit","return_delivered","return_accepted"]}},{"in":"query","name":"search_type","description":"search_type refers to the field that will be used as the target for the search operation.","required":false,"schema":{"type":"string","enum":["shipment_id","order_id","channel_name","fynd_order_id"]}},{"in":"query","name":"bag_status","description":"bag_status refers to status of the entity. Filters orders based on the status.","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"time_to_dispatch refers to estimated SLA time.","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"payment_methods","description":"Comma separated values of payment methods that were used to place order.","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"tags refers to additional descriptive labels associated with the order","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","description":"search_value is matched against the field specified by the search_type","required":false,"schema":{"type":"string","default":"16854460524441037000"}},{"in":"query","name":"from_date","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date"}},{"in":"query","name":"to_date","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date"}},{"in":"query","name":"start_date","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"dp_ids","description":"Delivery Partner IDs to which shipments are assigned.","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"A comma-separated list of store IDs used to filter results to only those related to specific stores.","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","description":"A comma-separated list of sales channel IDs to filter results based on the sales channels involved.","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"Specifies the page number for paginated results.","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Determines the number of results returned per page.","required":false,"schema":{"type":"integer","default":10}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"customer_id","description":"The unique identifier for the customer associated with the query, useful for filtering results to a specific customer.","required":false,"schema":{"type":"string","example":"63a2ce177e9f59d3166dd700"}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","description":"Defines the specific journey a shipment will follow based on the application's operational needs and customer preferences. This field categorizes orders into distinct types, each associated with a unique processing flow. For example\n- \"HomeDelivery\": The order goes through all the steps needed for delivery, from being packed to arriving at the customer’s address.\n- \"PickAtStore\": The order is prepared for pickup at the store, skipping shipping steps to make it ready faster for the customer to collect in person.\n- \"Digital\": This order type likely refers to orders that involve digital goods or services, such as software, digital subscriptions, e-books, online courses, or any other item that can be delivered electronically.\n","example":"HomeDelivery","enum":["HomeDelivery","PickAtStore","Digital"]}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"group_entity","description":"Defines the grouping criterion for retrieving shipments or orders. It specifies whether the results should be organized based on shipment groups or order groups.  For example, using 'shipments' groups results by shipment, while an invalid value like 'abcd' may not be recognized, leading to errors or default behavior.","required":false,"schema":{"type":"string"}},{"in":"query","name":"enforce_date_filter","description":"Applies a date filter for listing orders. This is useful when fetching data  for a specific date range while performing searches.","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","name":"lane","description":"lane refers to a section where orders are assigned, indicating its grouping.","required":false,"schema":{"type":"string","enum":["new","confirmed","to_be_packed","ready_for_dispatch","in_transit","handed_over_to_customer","delivered","cancelled","return_initiated","return_in_transit","return_delivered","return_accepted"]}},{"in":"query","name":"search_type","description":"search_type refers to the field that will be used as the target for the search operation.","required":false,"schema":{"type":"string","enum":["shipment_id","order_id","channel_name","fynd_order_id"]}},{"in":"query","name":"bag_status","description":"bag_status refers to status of the entity. Filters orders based on the status.","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"time_to_dispatch refers to estimated SLA time.","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"payment_methods","description":"Comma separated values of payment methods that were used to place order.","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"tags refers to additional descriptive labels associated with the order","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","description":"search_value is matched against the field specified by the search_type","required":false,"schema":{"type":"string","default":"16854460524441037000"}},{"in":"query","name":"from_date","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date"}},{"in":"query","name":"to_date","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date"}},{"in":"query","name":"start_date","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"dp_ids","description":"Delivery Partner IDs to which shipments are assigned.","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","description":"A comma-separated list of store IDs used to filter results to only those related to specific stores.","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","description":"A comma-separated list of sales channel IDs to filter results based on the sales channels involved.","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"Specifies the page number for paginated results.","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Determines the number of results returned per page.","required":false,"schema":{"type":"integer","default":10}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"customer_id","description":"The unique identifier for the customer associated with the query, useful for filtering results to a specific customer.","required":false,"schema":{"type":"string","example":"63a2ce177e9f59d3166dd700"}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","description":"Defines the specific journey a shipment will follow based on the application's operational needs and customer preferences. This field categorizes orders into distinct types, each associated with a unique processing flow. For example\n- \"HomeDelivery\": The order goes through all the steps needed for delivery, from being packed to arriving at the customer’s address.\n- \"PickAtStore\": The order is prepared for pickup at the store, skipping shipping steps to make it ready faster for the customer to collect in person.\n- \"Digital\": This order type likely refers to orders that involve digital goods or services, such as software, digital subscriptions, e-books, online courses, or any other item that can be delivered electronically.\n","example":"HomeDelivery","enum":["HomeDelivery","PickAtStore","Digital"]}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"group_entity","description":"Defines the grouping criterion for retrieving shipments or orders. It specifies whether the results should be organized based on shipment groups or order groups.  For example, using 'shipments' groups results by shipment, while an invalid value like 'abcd' may not be recognized, leading to errors or default behavior.","required":false,"schema":{"type":"string"}},{"in":"query","name":"enforce_date_filter","description":"Applies a date filter for listing orders. This is useful when fetching data  for a specific date range while performing searches.","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer","default":37}}]}""", serverType="platform", lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, my_orders=my_orders, show_cross_company_data=show_cross_company_data, customer_id=customer_id, order_type=order_type, allow_inactive=allow_inactive, group_entity=group_entity, enforce_date_filter=enforce_date_filter)
-        query_string = await create_query_string(lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, my_orders=my_orders, show_cross_company_data=show_cross_company_data, customer_id=customer_id, order_type=order_type, allow_inactive=allow_inactive, group_entity=group_entity, enforce_date_filter=enforce_date_filter)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders-listing", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","default":37}}],"optional":[{"in":"query","name":"lane","description":"lane refers to a section where orders are assigned, indicating its grouping","required":false,"schema":{"type":"string","default":"new"}},{"in":"query","name":"search_type","description":"search_type refers to the field that will be used as the target for the search operation","required":false,"schema":{"type":"string","default":"shipment_id"}},{"in":"query","name":"bag_status","description":"bag_status refers to status of the entity. Filters orders based on the status.","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"time_to_dispatch refers to estimated SLA time.","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"tags refers to additional descriptive labels associated with the order","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","description":"search_value is matched against the field specified by the search_type","required":false,"schema":{"type":"string","default":"16854460524441037000"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"start_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"end_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Delivery Partner IDs to which shipments are assigned.","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string","example":"63a2ce177e9f59d3166dd700"}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"enforce_date_filter","description":"Applies a date filter for listing orders. This is useful when fetching data  for a specific date range while performing searches.","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","name":"lane","description":"lane refers to a section where orders are assigned, indicating its grouping","required":false,"schema":{"type":"string","default":"new"}},{"in":"query","name":"search_type","description":"search_type refers to the field that will be used as the target for the search operation","required":false,"schema":{"type":"string","default":"shipment_id"}},{"in":"query","name":"bag_status","description":"bag_status refers to status of the entity. Filters orders based on the status.","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"time_to_dispatch refers to estimated SLA time.","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"payment_methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"tags refers to additional descriptive labels associated with the order","required":false,"schema":{"type":"string"}},{"in":"query","name":"search_value","description":"search_value is matched against the field specified by the search_type","required":false,"schema":{"type":"string","default":"16854460524441037000"}},{"in":"query","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"start_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"end_date","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Delivery Partner IDs to which shipments are assigned.","required":false,"schema":{"type":"string"}},{"in":"query","name":"stores","required":false,"schema":{"type":"string"}},{"in":"query","name":"sales_channels","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"is_priority_sort","required":false,"schema":{"type":"boolean","default":true}},{"in":"query","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"my_orders","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"show_cross_company_data","description":"Flag to view cross & non-cross company order","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"customer_id","required":false,"schema":{"type":"string","example":"63a2ce177e9f59d3166dd700"}},{"in":"query","name":"order_type","required":false,"schema":{"type":"string","example":"HomeDelivery"}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed","required":false,"schema":{"type":"boolean","default":false}},{"in":"query","name":"enforce_date_filter","description":"Applies a date filter for listing orders. This is useful when fetching data  for a specific date range while performing searches.","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer","default":37}}]}""", serverType="platform", lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, my_orders=my_orders, show_cross_company_data=show_cross_company_data, customer_id=customer_id, order_type=order_type, allow_inactive=allow_inactive, enforce_date_filter=enforce_date_filter)
+        query_string = await create_query_string(lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, my_orders=my_orders, show_cross_company_data=show_cross_company_data, customer_id=customer_id, order_type=order_type, allow_inactive=allow_inactive, enforce_date_filter=enforce_date_filter)
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -2335,11 +2238,11 @@ The ESM config stores order processing configuration. Each document in the ESM c
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders-listing", lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, my_orders=my_orders, show_cross_company_data=show_cross_company_data, customer_id=customer_id, order_type=order_type, allow_inactive=allow_inactive, group_entity=group_entity, enforce_date_filter=enforce_date_filter), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders-listing", lane=lane, search_type=search_type, bag_status=bag_status, time_to_dispatch=time_to_dispatch, payment_methods=payment_methods, tags=tags, search_value=search_value, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, dp_ids=dp_ids, stores=stores, sales_channels=sales_channels, page_no=page_no, page_size=page_size, is_priority_sort=is_priority_sort, custom_meta=custom_meta, my_orders=my_orders, show_cross_company_data=show_cross_company_data, customer_id=customer_id, order_type=order_type, allow_inactive=allow_inactive, enforce_date_filter=enforce_date_filter), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OrderListingResponseSchema
-            schema = OrderListingResponseSchema()
+            from .models import OrderListingResponse
+            schema = OrderListingResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2383,8 +2286,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/filter-listing", view=view, group_entity=group_entity), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FiltersResponseSchema
-            schema = FiltersResponseSchema()
+            from .models import FiltersResponse
+            schema = FiltersResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2397,8 +2300,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         """Generates the report which can be filled and uploaded to perform the bulk operation based on the filters provided
         :param sales_channels : Comma separated values of sales channel ids : type string
         :param dp_ids : Comma separated values of delivery partner ids : type string
-        :param start_date : Date time in UTC timezone as per ISO format. : type string
-        :param end_date : Date time in UTC timezone as per ISO format. : type string
+        :param start_date : UTC start date in ISO format : type string
+        :param end_date : UTC end date in ISO format : type string
         :param stores : Comma separated values of store ids : type string
         :param tags : Comma separated values of tags : type string
         :param bag_status : Comma separated values of bag statuses : type string
@@ -2440,7 +2343,7 @@ The ESM config stores order processing configuration. Each document in the ESM c
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/generate/file", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"sales_channels","description":"Comma separated values of sales channel ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"start_date","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"Comma separated values of tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_methods","description":"Comma separated values of payment methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"file_type","description":"File type to be downloaded","required":false,"schema":{"type":"string","enum":["xlsx","csv"]}},{"in":"query","name":"time_to_dispatch","description":"Sla breached or not breached","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":10}}],"query":[{"in":"query","name":"sales_channels","description":"Comma separated values of sales channel ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"start_date","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"Comma separated values of tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_methods","description":"Comma separated values of payment methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"file_type","description":"File type to be downloaded","required":false,"schema":{"type":"string","enum":["xlsx","csv"]}},{"in":"query","name":"time_to_dispatch","description":"Sla breached or not breached","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", sales_channels=sales_channels, dp_ids=dp_ids, start_date=start_date, end_date=end_date, stores=stores, tags=tags, bag_status=bag_status, payment_methods=payment_methods, file_type=file_type, time_to_dispatch=time_to_dispatch, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/generate/file", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"sales_channels","description":"Comma separated values of sales channel ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"start_date","description":"UTC start date in ISO format","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"UTC end date in ISO format","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"Comma separated values of tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_methods","description":"Comma separated values of payment methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"file_type","description":"File type to be downloaded","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"Sla breached or not breached","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":10}}],"query":[{"in":"query","name":"sales_channels","description":"Comma separated values of sales channel ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"dp_ids","description":"Comma separated values of delivery partner ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"start_date","description":"UTC start date in ISO format","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"UTC end date in ISO format","required":false,"schema":{"type":"string","format":"date-time"}},{"in":"query","name":"stores","description":"Comma separated values of store ids","required":false,"schema":{"type":"string"}},{"in":"query","name":"tags","description":"Comma separated values of tags","required":false,"schema":{"type":"string"}},{"in":"query","name":"bag_status","description":"Comma separated values of bag statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"payment_methods","description":"Comma separated values of payment methods","required":false,"schema":{"type":"string"}},{"in":"query","name":"file_type","description":"File type to be downloaded","required":false,"schema":{"type":"string"}},{"in":"query","name":"time_to_dispatch","description":"Sla breached or not breached","required":false,"schema":{"type":"integer","example":1,"enum":[1,-1]}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", sales_channels=sales_channels, dp_ids=dp_ids, start_date=start_date, end_date=end_date, stores=stores, tags=tags, bag_status=bag_status, payment_methods=payment_methods, file_type=file_type, time_to_dispatch=time_to_dispatch, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(sales_channels=sales_channels, dp_ids=dp_ids, start_date=start_date, end_date=end_date, stores=stores, tags=tags, bag_status=bag_status, payment_methods=payment_methods, file_type=file_type, time_to_dispatch=time_to_dispatch, page_no=page_no, page_size=page_size)
 
         headers = {}
@@ -2458,8 +2361,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/generate/file", sales_channels=sales_channels, dp_ids=dp_ids, start_date=start_date, end_date=end_date, stores=stores, tags=tags, bag_status=bag_status, payment_methods=payment_methods, file_type=file_type, time_to_dispatch=time_to_dispatch, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FileResponseSchema
-            schema = FileResponseSchema()
+            from .models import FileResponse
+            schema = FileResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2497,8 +2400,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/bulk-action/get-seller-templates", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BulkActionTemplateResponseSchema
-            schema = BulkActionTemplateResponseSchema()
+            from .models import BulkActionTemplateResponse
+            schema = BulkActionTemplateResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2539,8 +2442,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/bulk-action/download-seller-templates", template_slug=template_slug), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FileResponseSchema
-            schema = FileResponseSchema()
+            from .models import FileResponse
+            schema = FileResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2569,7 +2472,7 @@ The ESM config stores order processing configuration. Each document in the ESM c
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipments/{shipment_id}/bags/{bag_id}/state/{state}/reasons", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of a company on the platform."},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}},{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"bag_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"state","description":"State for which reasons are required.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of a company on the platform."},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}},{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"bag_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"state","description":"State for which reasons are required.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", shipment_id=shipment_id, bag_id=bag_id, state=state)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipments/{shipment_id}/bags/{bag_id}/state/{state}/reasons", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}},{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"bag_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"state","description":"State for which reasons are required.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}},{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"bag_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"state","description":"State for which reasons are required.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", shipment_id=shipment_id, bag_id=bag_id, state=state)
         query_string = await create_query_string()
 
         headers = {}
@@ -2587,8 +2490,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/shipments/{shipment_id}/bags/{bag_id}/state/{state}/reasons", shipment_id=shipment_id, bag_id=bag_id, state=state), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PlatformShipmentReasonsResponseSchema
-            schema = PlatformShipmentReasonsResponseSchema()
+            from .models import PlatformShipmentReasonsResponse
+            schema = PlatformShipmentReasonsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2599,7 +2502,7 @@ The ESM config stores order processing configuration. Each document in the ESM c
     
     async def getBagById(self, bag_id=None, channel_bag_id=None, channel_id=None, request_headers:Dict={}):
         """Retrieve detailed information about a specific bag
-        :param bag_id : Unique identifier of a bag : type string
+        :param bag_id : Id of bag : type string
         :param channel_bag_id : Id of application bag : type string
         :param channel_id : Id of application : type string
         """
@@ -2617,7 +2520,7 @@ The ESM config stores order processing configuration. Each document in the ESM c
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/bag-details/", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of a company","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"bag_id","description":"Unique identifier of a bag","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_bag_id","description":"Id of application bag","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_id","description":"Id of application","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"bag_id","description":"Unique identifier of a bag","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_bag_id","description":"Id of application bag","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_id","description":"Id of application","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of a company","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", bag_id=bag_id, channel_bag_id=channel_bag_id, channel_id=channel_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/bag-details/", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"bag_id","description":"Id of bag","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_bag_id","description":"Id of application bag","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_id","description":"Id of application","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"bag_id","description":"Id of bag","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_bag_id","description":"Id of application bag","required":false,"schema":{"type":"string"}},{"in":"query","name":"channel_id","description":"Id of application","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", bag_id=bag_id, channel_bag_id=channel_bag_id, channel_id=channel_id)
         query_string = await create_query_string(bag_id=bag_id, channel_bag_id=channel_bag_id, channel_id=channel_id)
 
         headers = {}
@@ -2635,8 +2538,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/bag-details/", bag_id=bag_id, channel_bag_id=channel_bag_id, channel_id=channel_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BagDetailsPlatformResponseSchema
-            schema = BagDetailsPlatformResponseSchema()
+            from .models import BagDetailsPlatformResponse
+            schema = BagDetailsPlatformResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2701,8 +2604,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/bags", bag_ids=bag_ids, shipment_ids=shipment_ids, order_ids=order_ids, channel_bag_ids=channel_bag_ids, channel_shipment_ids=channel_shipment_ids, channel_order_ids=channel_order_ids, channel_id=channel_id, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetBagsPlatformResponseSchema
-            schema = GetBagsPlatformResponseSchema()
+            from .models import GetBagsPlatformResponse
+            schema = GetBagsPlatformResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2731,7 +2634,7 @@ The ESM config stores order processing configuration. Each document in the ESM c
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders/{order_id}/generate/pos-receipt", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"order_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"shipment_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"document_type","required":false,"schema":{"type":"string","default":"a4","description":"A document type denotes the format for which the file type is streamed.","enum":["a4","a6","pos"]}}],"query":[{"in":"query","name":"shipment_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"document_type","required":false,"schema":{"type":"string","default":"a4","description":"A document type denotes the format for which the file type is streamed.","enum":["a4","a6","pos"]}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"order_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", order_id=order_id, shipment_id=shipment_id, document_type=document_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders/{order_id}/generate/pos-receipt", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"order_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"shipment_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"document_type","required":false,"schema":{"type":"string","default":"invoice_receipt"}}],"query":[{"in":"query","name":"shipment_id","required":false,"schema":{"type":"string"}},{"in":"query","name":"document_type","required":false,"schema":{"type":"string","default":"invoice_receipt"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"order_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", order_id=order_id, shipment_id=shipment_id, document_type=document_type)
         query_string = await create_query_string(shipment_id=shipment_id, document_type=document_type)
 
         headers = {}
@@ -2749,8 +2652,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/orders/{order_id}/generate/pos-receipt", order_id=order_id, shipment_id=shipment_id, document_type=document_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GeneratePosOrderReceiptResponseSchema
-            schema = GeneratePosOrderReceiptResponseSchema()
+            from .models import GeneratePosOrderReceiptResponse
+            schema = GeneratePosOrderReceiptResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2788,8 +2691,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/jobs/templates", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AllowedTemplatesResponseSchema
-            schema = AllowedTemplatesResponseSchema()
+            from .models import AllowedTemplatesResponse
+            schema = AllowedTemplatesResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2830,8 +2733,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/jobs/templates/{template_name}", template_name=template_name), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import TemplateDownloadResponseSchema
-            schema = TemplateDownloadResponseSchema()
+            from .models import TemplateDownloadResponse
+            schema = TemplateDownloadResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

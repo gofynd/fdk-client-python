@@ -112,8 +112,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOwnerInfo"]).netloc, "get", await create_url_without_domain("/service/application/configuration/v1.0/about", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationAboutResponseSchema
-            schema = ApplicationAboutResponseSchema()
+            from .models import ApplicationAboutResponse
+            schema = ApplicationAboutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -194,8 +194,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getIntegrationTokens"]).netloc, "get", await create_url_without_domain("/service/application/configuration/v1.0/token", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AppTokenResponseSchema
-            schema = AppTokenResponseSchema()
+            from .models import AppTokenResponse
+            schema = AppTokenResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -329,8 +329,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getFeatures"]).netloc, "get", await create_url_without_domain("/service/application/configuration/v1.0/feature", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AppFeatureResponseSchema
-            schema = AppFeatureResponseSchema()
+            from .models import AppFeatureResponse
+            schema = AppFeatureResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -411,8 +411,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCurrencies"]).netloc, "get", await create_url_without_domain("/service/application/configuration/v1.0/currencies", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CurrenciesResponseSchema
-            schema = CurrenciesResponseSchema()
+            from .models import CurrenciesResponse
+            schema = CurrenciesResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -496,8 +496,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAppCurrencies"]).netloc, "get", await create_url_without_domain("/service/application/configuration/v1.0/currency", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AppCurrencyResponseSchema
-            schema = AppCurrencyResponseSchema()
+            from .models import AppCurrencyResponse
+            schema = AppCurrencyResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -537,8 +537,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLanguages"]).netloc, "get", await create_url_without_domain("/service/application/configuration/v1.0/languages", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import LanguageResponseSchema
-            schema = LanguageResponseSchema()
+            from .models import LanguageResponse
+            schema = LanguageResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -558,8 +558,8 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import OrderingStoreSelectRequestSchema
-        schema = OrderingStoreSelectRequestSchema()
+        from .models import OrderingStoreSelectRequest
+        schema = OrderingStoreSelectRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["getOrderingStoreCookie"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -582,8 +582,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrderingStoreCookie"]).netloc, "post", await create_url_without_domain("/service/application/configuration/v1.0/ordering-store/select", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessMessageResponseSchema
-            schema = SuccessMessageResponseSchema()
+            from .models import SuccessMessageResponse
+            schema = SuccessMessageResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -623,8 +623,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["removeOrderingStoreCookie"]).netloc, "delete", await create_url_without_domain("/service/application/configuration/v1.0/ordering-store/select", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessMessageResponseSchema
-            schema = SuccessMessageResponseSchema()
+            from .models import SuccessMessageResponse
+            schema = SuccessMessageResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -682,8 +682,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAppStaffList"]).netloc, "get", await create_url_without_domain("/service/application/configuration/v1.0/staff/list", page_no=page_no, page_size=page_size, order_incent=order_incent, ordering_store=ordering_store, user=user, user_name=user_name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AppStaffListResponseSchema
-            schema = AppStaffListResponseSchema()
+            from .models import AppStaffListResponse
+            schema = AppStaffListResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -732,8 +732,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAppStaffs"]).netloc, "get", await create_url_without_domain("/service/application/configuration/v1.0/staff", order_incent=order_incent, ordering_store=ordering_store, user=user), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AppStaffResponseSchema
-            schema = AppStaffResponseSchema()
+            from .models import AppStaffResponse
+            schema = AppStaffResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

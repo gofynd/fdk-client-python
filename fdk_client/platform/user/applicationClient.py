@@ -851,8 +851,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/definition", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UserAttributeDefinitionDetails
-            schema = UserAttributeDefinitionDetails()
+            from .models import UserAttributeDefinitionResponse
+            schema = UserAttributeDefinitionResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1002,8 +1002,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/definition/{attribute_def_id}", attribute_def_id=attribute_def_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessMessage
-            schema = SuccessMessage()
+            from .models import SuccessMessageResponse
+            schema = SuccessMessageResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1071,8 +1071,8 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateUserAttribute
-        schema = CreateUserAttribute()
+        from .models import CreateUserAttributeRequest
+        schema = CreateUserAttributeRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/definition/{attribute_def_id}/user/{user_id}", """{"required":[{"in":"path","name":"attribute_def_id","required":true,"schema":{"type":"string"},"description":"The unique identifier of the attribute definition to update."},{"in":"path","name":"user_id","required":true,"schema":{"type":"string"},"description":"The unique identifier of the user to update."},{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"Application ID."},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"Company ID."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"attribute_def_id","required":true,"schema":{"type":"string"},"description":"The unique identifier of the attribute definition to update."},{"in":"path","name":"user_id","required":true,"schema":{"type":"string"},"description":"The unique identifier of the user to update."},{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"Application ID."},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"Company ID."}]}""", serverType="platform", attribute_def_id=attribute_def_id, user_id=user_id, )
@@ -1093,8 +1093,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/definition/{attribute_def_id}/user/{user_id}", attribute_def_id=attribute_def_id, user_id=user_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UserAttribute
-            schema = UserAttribute()
+            from .models import UserAttributeResponse
+            schema = UserAttributeResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1138,8 +1138,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/definition/{attribute_def_id}/user/{user_id}", attribute_def_id=attribute_def_id, user_id=user_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UserAttribute
-            schema = UserAttribute()
+            from .models import UserAttributeResponse
+            schema = UserAttributeResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1183,8 +1183,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/definition/{attribute_def_id}/user/{user_id}", attribute_def_id=attribute_def_id, user_id=user_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessMessage
-            schema = SuccessMessage()
+            from .models import SuccessMessageResponse
+            schema = SuccessMessageResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1264,8 +1264,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/attribute/{attribute_id}", attribute_id=attribute_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UserAttribute
-            schema = UserAttribute()
+            from .models import UserAttributeResponse
+            schema = UserAttributeResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

@@ -20,10 +20,6 @@ class Ownership(BaseSchema):
     pass
 
 
-class FreeGiftItem(BaseSchema):
-    pass
-
-
 class AppliedFreeArticles(BaseSchema):
     pass
 
@@ -116,14 +112,6 @@ class ActionQuery(BaseSchema):
     pass
 
 
-class ProductActionParams(BaseSchema):
-    pass
-
-
-class ProductActionPage(BaseSchema):
-    pass
-
-
 class ProductAction(BaseSchema):
     pass
 
@@ -192,7 +180,7 @@ class CartCommonConfig(BaseSchema):
     pass
 
 
-class CartDetailResult(BaseSchema):
+class CartDetailResponse(BaseSchema):
     pass
 
 
@@ -200,11 +188,11 @@ class AddProductCart(BaseSchema):
     pass
 
 
-class AddCartCreation(BaseSchema):
+class AddCartRequest(BaseSchema):
     pass
 
 
-class AddCartDetailResult(BaseSchema):
+class AddCartDetailResponse(BaseSchema):
     pass
 
 
@@ -212,23 +200,19 @@ class UpdateProductCart(BaseSchema):
     pass
 
 
-class FreeGiftItemCreation(BaseSchema):
+class UpdateCartRequest(BaseSchema):
     pass
 
 
-class UpdateCartCreation(BaseSchema):
+class UpdateCartDetailResponse(BaseSchema):
     pass
 
 
-class UpdateCartDetailResult(BaseSchema):
+class DeleteCartDetailResponse(BaseSchema):
     pass
 
 
-class DeleteCartDetailResult(BaseSchema):
-    pass
-
-
-class CartItemCountResult(BaseSchema):
+class CartItemCountResponse(BaseSchema):
     pass
 
 
@@ -240,11 +224,11 @@ class Coupon(BaseSchema):
     pass
 
 
-class GetCouponResult(BaseSchema):
+class GetCouponResponse(BaseSchema):
     pass
 
 
-class ApplyCoupon(BaseSchema):
+class ApplyCouponRequest(BaseSchema):
     pass
 
 
@@ -264,11 +248,11 @@ class BulkPriceOffer(BaseSchema):
     pass
 
 
-class BulkPriceResult(BaseSchema):
+class BulkPriceResponse(BaseSchema):
     pass
 
 
-class RewardPointCreation(BaseSchema):
+class RewardPointRequest(BaseSchema):
     pass
 
 
@@ -280,31 +264,27 @@ class Address(BaseSchema):
     pass
 
 
-class ValidationConfig(BaseSchema):
+class GetAddressesResponse(BaseSchema):
     pass
 
 
-class GetAddressesResult(BaseSchema):
+class SaveAddressResponse(BaseSchema):
     pass
 
 
-class SaveAddressResult(BaseSchema):
+class UpdateAddressResponse(BaseSchema):
     pass
 
 
-class UpdateAddressResult(BaseSchema):
+class DeleteAddressResponse(BaseSchema):
     pass
 
 
-class DeleteAddressResult(BaseSchema):
+class SelectCartAddressRequest(BaseSchema):
     pass
 
 
-class SelectCartAddressCreation(BaseSchema):
-    pass
-
-
-class UpdateCartPaymentCreation(BaseSchema):
+class UpdateCartPaymentRequest(BaseSchema):
     pass
 
 
@@ -316,15 +296,11 @@ class PaymentCouponValidate(BaseSchema):
     pass
 
 
-class ShipmentResult(BaseSchema):
+class ShipmentResponse(BaseSchema):
     pass
 
 
-class CartShipmentsResult(BaseSchema):
-    pass
-
-
-class CartCheckoutCustomMeta(BaseSchema):
+class CartShipmentsResponse(BaseSchema):
     pass
 
 
@@ -336,15 +312,11 @@ class StaffCheckout(BaseSchema):
     pass
 
 
-class CartCheckoutDetailCreation(BaseSchema):
-    pass
-
-
 class CheckCart(BaseSchema):
     pass
 
 
-class CartCheckoutResult(BaseSchema):
+class CartCheckoutResponse(BaseSchema):
     pass
 
 
@@ -356,23 +328,23 @@ class ArticleGiftDetail(BaseSchema):
     pass
 
 
-class CartMetaCreation(BaseSchema):
+class CartMetaRequest(BaseSchema):
     pass
 
 
-class CartMetaResult(BaseSchema):
+class CartMetaResponse(BaseSchema):
     pass
 
 
-class CartMetaMissingResult(BaseSchema):
+class CartMetaMissingResponse(BaseSchema):
     pass
 
 
-class GetShareCartLinkCreation(BaseSchema):
+class GetShareCartLinkRequest(BaseSchema):
     pass
 
 
-class GetShareCartLinkResult(BaseSchema):
+class GetShareCartLinkResponse(BaseSchema):
     pass
 
 
@@ -384,7 +356,7 @@ class SharedCart(BaseSchema):
     pass
 
 
-class SharedCartResult(BaseSchema):
+class SharedCartResponse(BaseSchema):
     pass
 
 
@@ -396,10 +368,6 @@ class ItemPriceDetails(BaseSchema):
     pass
 
 
-class ArticlePriceDetails(BaseSchema):
-    pass
-
-
 class FreeGiftItems(BaseSchema):
     pass
 
@@ -408,7 +376,7 @@ class PromotionOffer(BaseSchema):
     pass
 
 
-class PromotionOffersResult(BaseSchema):
+class PromotionOffersResponse(BaseSchema):
     pass
 
 
@@ -416,11 +384,11 @@ class PromotionPaymentOffer(BaseSchema):
     pass
 
 
-class PromotionPaymentOffersResult(BaseSchema):
+class PromotionPaymentOffersResponse(BaseSchema):
     pass
 
 
-class OperationErrorResult(BaseSchema):
+class OperationErrorResponse(BaseSchema):
     pass
 
 
@@ -452,19 +420,7 @@ class PaymentMethod(BaseSchema):
     pass
 
 
-class CartCheckoutDetailV2Creation(BaseSchema):
-    pass
-
-
-class Promotions(BaseSchema):
-    pass
-
-
-class Page(BaseSchema):
-    pass
-
-
-class ValidationError(BaseSchema):
+class CartCheckoutDetailV2Request(BaseSchema):
     pass
 
 
@@ -502,24 +458,6 @@ class Ownership(BaseSchema):
     payable_category = fields.Str(required=False)
     
     payable_by = fields.Str(required=False)
-    
-
-
-class FreeGiftItem(BaseSchema):
-    # Cart swagger.json
-
-    
-    item_slug = fields.Str(required=False)
-    
-    item_name = fields.Str(required=False)
-    
-    item_price_details = fields.Dict(required=False)
-    
-    item_brand_name = fields.Str(required=False)
-    
-    item_id = fields.Int(required=False)
-    
-    item_images_url = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -855,24 +793,6 @@ class ActionQuery(BaseSchema):
     
 
 
-class ProductActionParams(BaseSchema):
-    # Cart swagger.json
-
-    
-    slug = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class ProductActionPage(BaseSchema):
-    # Cart swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    params = fields.Nested(ProductActionParams, required=False)
-    
-
-
 class ProductAction(BaseSchema):
     # Cart swagger.json
 
@@ -882,8 +802,6 @@ class ProductAction(BaseSchema):
     url = fields.Str(required=False)
     
     type = fields.Str(required=False)
-    
-    page = fields.Nested(ProductActionPage, required=False)
     
 
 
@@ -1203,7 +1121,7 @@ class CartCommonConfig(BaseSchema):
     
 
 
-class CartDetailResult(BaseSchema):
+class CartDetailResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -1299,7 +1217,7 @@ class AddProductCart(BaseSchema):
     
 
 
-class AddCartCreation(BaseSchema):
+class AddCartRequest(BaseSchema):
     # Cart swagger.json
 
     
@@ -1309,7 +1227,7 @@ class AddCartCreation(BaseSchema):
     
 
 
-class AddCartDetailResult(BaseSchema):
+class AddCartDetailResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -1317,7 +1235,7 @@ class AddCartDetailResult(BaseSchema):
     
     partial = fields.Boolean(required=False)
     
-    cart = fields.Nested(CartDetailResult, required=False)
+    cart = fields.Nested(CartDetailResponse, required=False)
     
     success = fields.Boolean(required=False)
     
@@ -1349,43 +1267,29 @@ class UpdateProductCart(BaseSchema):
     
 
 
-class FreeGiftItemCreation(BaseSchema):
-    # Cart swagger.json
-
-    
-    promotion_id = fields.Str(required=False)
-    
-    item_id = fields.Str(required=False)
-    
-    item_size = fields.Str(required=False)
-    
-
-
-class UpdateCartCreation(BaseSchema):
+class UpdateCartRequest(BaseSchema):
     # Cart swagger.json
 
     
     items = fields.List(fields.Nested(UpdateProductCart, required=False), required=False)
     
-    free_gift_items = fields.List(fields.Nested(FreeGiftItemCreation, required=False), required=False)
-    
     operation = fields.Str(required=False)
     
 
 
-class UpdateCartDetailResult(BaseSchema):
+class UpdateCartDetailResponse(BaseSchema):
     # Cart swagger.json
 
     
     message = fields.Str(required=False)
     
-    cart = fields.Nested(CartDetailResult, required=False)
+    cart = fields.Nested(CartDetailResponse, required=False)
     
     success = fields.Boolean(required=False)
     
 
 
-class DeleteCartDetailResult(BaseSchema):
+class DeleteCartDetailResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -1395,7 +1299,7 @@ class DeleteCartDetailResult(BaseSchema):
     
 
 
-class CartItemCountResult(BaseSchema):
+class CartItemCountResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -1461,7 +1365,7 @@ class Coupon(BaseSchema):
     
 
 
-class GetCouponResult(BaseSchema):
+class GetCouponResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -1471,7 +1375,7 @@ class GetCouponResult(BaseSchema):
     
 
 
-class ApplyCoupon(BaseSchema):
+class ApplyCouponRequest(BaseSchema):
     # Cart swagger.json
 
     
@@ -1535,7 +1439,7 @@ class BulkPriceOffer(BaseSchema):
     
 
 
-class BulkPriceResult(BaseSchema):
+class BulkPriceResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -1543,7 +1447,7 @@ class BulkPriceResult(BaseSchema):
     
 
 
-class RewardPointCreation(BaseSchema):
+class RewardPointRequest(BaseSchema):
     # Cart swagger.json
 
     
@@ -1623,17 +1527,7 @@ class Address(BaseSchema):
     
 
 
-class ValidationConfig(BaseSchema):
-    # Cart swagger.json
-
-    
-    address_max_limit = fields.Int(required=False)
-    
-    user_address_count = fields.Int(required=False)
-    
-
-
-class GetAddressesResult(BaseSchema):
+class GetAddressesResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -1641,11 +1535,9 @@ class GetAddressesResult(BaseSchema):
     
     address = fields.List(fields.Nested(Address, required=False), required=False)
     
-    validation_config = fields.Nested(ValidationConfig, required=False)
-    
 
 
-class SaveAddressResult(BaseSchema):
+class SaveAddressResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -1657,7 +1549,7 @@ class SaveAddressResult(BaseSchema):
     
 
 
-class UpdateAddressResult(BaseSchema):
+class UpdateAddressResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -1671,7 +1563,7 @@ class UpdateAddressResult(BaseSchema):
     
 
 
-class DeleteAddressResult(BaseSchema):
+class DeleteAddressResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -1681,7 +1573,7 @@ class DeleteAddressResult(BaseSchema):
     
 
 
-class SelectCartAddressCreation(BaseSchema):
+class SelectCartAddressRequest(BaseSchema):
     # Cart swagger.json
 
     
@@ -1693,7 +1585,7 @@ class SelectCartAddressCreation(BaseSchema):
     
 
 
-class UpdateCartPaymentCreation(BaseSchema):
+class UpdateCartPaymentRequest(BaseSchema):
     # Cart swagger.json
 
     
@@ -1727,8 +1619,6 @@ class CouponValidity(BaseSchema):
     
     code = fields.Str(required=False, allow_none=True)
     
-    error_en = fields.Str(required=False, allow_none=True)
-    
 
 
 class PaymentCouponValidate(BaseSchema):
@@ -1743,7 +1633,7 @@ class PaymentCouponValidate(BaseSchema):
     
 
 
-class ShipmentResult(BaseSchema):
+class ShipmentResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -1769,7 +1659,7 @@ class ShipmentResult(BaseSchema):
     
 
 
-class CartShipmentsResult(BaseSchema):
+class CartShipmentsResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -1795,7 +1685,7 @@ class CartShipmentsResult(BaseSchema):
     
     id = fields.Str(required=False)
     
-    shipments = fields.List(fields.Nested(ShipmentResult, required=False), required=False)
+    shipments = fields.List(fields.Nested(ShipmentResponse, required=False), required=False)
     
     payment_selection_lock = fields.Nested(PaymentSelectionLock, required=False)
     
@@ -1812,16 +1702,6 @@ class CartShipmentsResult(BaseSchema):
     uid = fields.Str(required=False)
     
     custom_cart_meta = fields.Dict(required=False)
-    
-
-
-class CartCheckoutCustomMeta(BaseSchema):
-    # Cart swagger.json
-
-    
-    key = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
     
 
 
@@ -1850,60 +1730,6 @@ class StaffCheckout(BaseSchema):
     first_name = fields.Str(required=False)
     
     _id = fields.Str(required=False)
-    
-
-
-class CartCheckoutDetailCreation(BaseSchema):
-    # Cart swagger.json
-
-    
-    custom_meta = fields.List(fields.Nested(CartCheckoutCustomMeta, required=False), required=False)
-    
-    customer_details = fields.Nested(CustomerDetails, required=False)
-    
-    merchant_code = fields.Str(required=False)
-    
-    id = fields.Str(required=False)
-    
-    payment_auto_confirm = fields.Boolean(required=False)
-    
-    payment_mode = fields.Str(required=False)
-    
-    aggregator = fields.Str(required=False)
-    
-    address_id = fields.Str(required=False)
-    
-    callback_url = fields.Str(required=False)
-    
-    delivery_address = fields.Dict(required=False)
-    
-    staff = fields.Nested(StaffCheckout, required=False)
-    
-    order_type = fields.Str(required=False)
-    
-    ordering_store = fields.Int(required=False)
-    
-    extra_meta = fields.Dict(required=False)
-    
-    payment_identifier = fields.Str(required=False)
-    
-    billing_address = fields.Dict(required=False)
-    
-    payment_params = fields.Dict(required=False)
-    
-    billing_address_id = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    payment_extra_identifiers = fields.Dict(required=False)
-    
-    iin = fields.Str(required=False)
-    
-    network = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    card_id = fields.Str(required=False)
     
 
 
@@ -1973,7 +1799,7 @@ class CheckCart(BaseSchema):
     
 
 
-class CartCheckoutResult(BaseSchema):
+class CartCheckoutResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -2013,7 +1839,7 @@ class ArticleGiftDetail(BaseSchema):
     
 
 
-class CartMetaCreation(BaseSchema):
+class CartMetaRequest(BaseSchema):
     # Cart swagger.json
 
     
@@ -2033,7 +1859,7 @@ class CartMetaCreation(BaseSchema):
     
 
 
-class CartMetaResult(BaseSchema):
+class CartMetaResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -2043,7 +1869,7 @@ class CartMetaResult(BaseSchema):
     
 
 
-class CartMetaMissingResult(BaseSchema):
+class CartMetaMissingResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -2051,7 +1877,7 @@ class CartMetaMissingResult(BaseSchema):
     
 
 
-class GetShareCartLinkCreation(BaseSchema):
+class GetShareCartLinkRequest(BaseSchema):
     # Cart swagger.json
 
     
@@ -2061,7 +1887,7 @@ class GetShareCartLinkCreation(BaseSchema):
     
 
 
-class GetShareCartLinkResult(BaseSchema):
+class GetShareCartLinkResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -2133,7 +1959,7 @@ class SharedCart(BaseSchema):
     
 
 
-class SharedCartResult(BaseSchema):
+class SharedCartResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -2165,16 +1991,6 @@ class ItemPriceDetails(BaseSchema):
     
 
 
-class ArticlePriceDetails(BaseSchema):
-    # Cart swagger.json
-
-    
-    marked = fields.Float(required=False)
-    
-    effective = fields.Float(required=False)
-    
-
-
 class FreeGiftItems(BaseSchema):
     # Cart swagger.json
 
@@ -2185,15 +2001,9 @@ class FreeGiftItems(BaseSchema):
     
     item_price_details = fields.Nested(ItemPriceDetails, required=False)
     
-    article_price = fields.Nested(ArticlePriceDetails, required=False)
-    
     item_brand_name = fields.Str(required=False)
     
     item_id = fields.Int(required=False)
-    
-    available_sizes = fields.List(fields.Str(required=False), required=False)
-    
-    size = fields.Str(required=False)
     
     item_images_url = fields.List(fields.Str(required=False), required=False)
     
@@ -2223,11 +2033,9 @@ class PromotionOffer(BaseSchema):
     
     description = fields.Str(required=False)
     
-    is_bank_offer = fields.Boolean(required=False)
-    
 
 
-class PromotionOffersResult(BaseSchema):
+class PromotionOffersResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -2261,7 +2069,7 @@ class PromotionPaymentOffer(BaseSchema):
     
 
 
-class PromotionPaymentOffersResult(BaseSchema):
+class PromotionPaymentOffersResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -2271,7 +2079,7 @@ class PromotionPaymentOffersResult(BaseSchema):
     
 
 
-class OperationErrorResult(BaseSchema):
+class OperationErrorResponse(BaseSchema):
     # Cart swagger.json
 
     
@@ -2391,13 +2199,13 @@ class PaymentMethod(BaseSchema):
     
 
 
-class CartCheckoutDetailV2Creation(BaseSchema):
+class CartCheckoutDetailV2Request(BaseSchema):
     # Cart swagger.json
 
     
-    custom_meta = fields.List(fields.Nested(CartCheckoutCustomMeta, required=False), required=False)
+    custom_meta = fields.Dict(required=False)
     
-    customer_details = fields.Nested(CustomerDetails, required=False)
+    customer_details = fields.Dict(required=False, allow_none=True)
     
     merchant_code = fields.Str(required=False)
     
@@ -2444,46 +2252,6 @@ class CartCheckoutDetailV2Creation(BaseSchema):
     type = fields.Str(required=False)
     
     card_id = fields.Str(required=False)
-    
-
-
-class Promotions(BaseSchema):
-    # Cart swagger.json
-
-    
-    items = fields.List(fields.Nested(PromotionOffersResult, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
-    
-
-
-class Page(BaseSchema):
-    # Cart swagger.json
-
-    
-    item_total = fields.Int(required=False)
-    
-    next_id = fields.Str(required=False)
-    
-    has_previous = fields.Boolean(required=False)
-    
-    has_next = fields.Boolean(required=False)
-    
-    current = fields.Int(required=False)
-    
-    type = fields.Str(required=False)
-    
-    size = fields.Int(required=False)
-    
-
-
-class ValidationError(BaseSchema):
-    # Cart swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    field = fields.Str(required=False)
     
 
 

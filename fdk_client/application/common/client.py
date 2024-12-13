@@ -63,8 +63,8 @@ class Common:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["searchApplication"]).netloc, "get", await create_url_without_domain("/service/common/configuration/v1.0/application/search-application", authorization=authorization, query=query), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationResponseSchema
-            schema = ApplicationResponseSchema()
+            from .models import ApplicationResponse
+            schema = ApplicationResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

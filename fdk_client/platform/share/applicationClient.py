@@ -236,8 +236,8 @@ class Share:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/click-stats", surl_id=surl_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ClickStatsResult
-            schema = ClickStatsResult()
+            from .models import ClickStatsResponse
+            schema = ClickStatsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

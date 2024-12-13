@@ -48,8 +48,8 @@ class Rewards:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/giveaways", page_id=page_id, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ListGiveaway
-            schema = ListGiveaway()
+            from .models import GiveawayResponse
+            schema = GiveawayResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -493,8 +493,8 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import SetConfiguration
-        schema = SetConfiguration()
+        from .models import ConfigurationRequest
+        schema = ConfigurationRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/rewards/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration/", """{"required":[{"name":"company_id","in":"path","description":"company id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"company id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"application id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )

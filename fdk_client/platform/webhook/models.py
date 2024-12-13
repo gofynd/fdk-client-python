@@ -10,11 +10,35 @@ from .enums import *
 
 
 
+class Event(BaseSchema):
+    pass
+
+
+class EventProcessRequest(BaseSchema):
+    pass
+
+
+class DownloadReportResponse(BaseSchema):
+    pass
+
+
+class EventProcessReports(BaseSchema):
+    pass
+
+
+class EventProcessReportObject(BaseSchema):
+    pass
+
+
 class Page(BaseSchema):
     pass
 
 
-class BroadcasterConfig(BaseSchema):
+class PingWebhook(BaseSchema):
+    pass
+
+
+class PingWebhookResponse(BaseSchema):
     pass
 
 
@@ -26,7 +50,51 @@ class EventConfig(BaseSchema):
     pass
 
 
-class EventConfigResult(BaseSchema):
+class EventConfigResponse(BaseSchema):
+    pass
+
+
+class ReportFiltersPayload(BaseSchema):
+    pass
+
+
+class ReportFilterResponse(BaseSchema):
+    pass
+
+
+class HistoryPayload(BaseSchema):
+    pass
+
+
+class HistoryFilters(BaseSchema):
+    pass
+
+
+class Url(BaseSchema):
+    pass
+
+
+class CdnObject(BaseSchema):
+    pass
+
+
+class UploadServiceObject(BaseSchema):
+    pass
+
+
+class HistoryAssociation(BaseSchema):
+    pass
+
+
+class HistoryItems(BaseSchema):
+    pass
+
+
+class HistoryResponse(BaseSchema):
+    pass
+
+
+class CancelResponse(BaseSchema):
     pass
 
 
@@ -42,7 +110,7 @@ class AuthMeta(BaseSchema):
     pass
 
 
-class SubscriberDetails(BaseSchema):
+class SubscriberResponse(BaseSchema):
     pass
 
 
@@ -66,7 +134,7 @@ class SubscriberConfigUpdate(BaseSchema):
     pass
 
 
-class SubscriberConfigResult(BaseSchema):
+class SubscriberConfigResponse(BaseSchema):
     pass
 
 
@@ -74,67 +142,87 @@ class SubscriberConfigList(BaseSchema):
     pass
 
 
-class RestEventData(BaseSchema):
-    pass
-
-
-class RestConfig(BaseSchema):
-    pass
-
-
-class QueueEventData(BaseSchema):
-    pass
-
-
-class KafkaConfig(BaseSchema):
-    pass
-
-
-class PubSubConfig(BaseSchema):
-    pass
-
-
-class TemporalEventData(BaseSchema):
-    pass
-
-
-class TemporalConfig(BaseSchema):
-    pass
-
-
-class SqsEventData(BaseSchema):
-    pass
-
-
-class SqsConfig(BaseSchema):
-    pass
-
-
-class EventBridgeData(BaseSchema):
-    pass
-
-
-class EventBridgeConfig(BaseSchema):
-    pass
-
-
-class EventMapBody(BaseSchema):
-    pass
-
-
-class WebhookConfig(BaseSchema):
-    pass
-
-
-class UpsertSubscriberConfig(BaseSchema):
-    pass
-
-
-class UpsertSubscriberConfigResult(BaseSchema):
-    pass
 
 
 
+class Event(BaseSchema):
+    # Webhook swagger.json
+
+    
+    event_name = fields.Str(required=False)
+    
+    event_type = fields.Str(required=False)
+    
+    event_category = fields.Str(required=False)
+    
+    version = fields.Str(required=False)
+    
+
+
+class EventProcessRequest(BaseSchema):
+    # Webhook swagger.json
+
+    
+    search_text = fields.Str(required=False)
+    
+    end_date = fields.Str(required=False)
+    
+    start_date = fields.Str(required=False)
+    
+    subscriber_ids = fields.List(fields.Int(required=False), required=False)
+    
+    status = fields.Str(required=False)
+    
+    event = fields.List(fields.Nested(Event, required=False), required=False)
+    
+
+
+class DownloadReportResponse(BaseSchema):
+    # Webhook swagger.json
+
+    
+    file_name = fields.Str(required=False)
+    
+
+
+class EventProcessReports(BaseSchema):
+    # Webhook swagger.json
+
+    
+    rows = fields.List(fields.Nested(EventProcessReportObject, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class EventProcessReportObject(BaseSchema):
+    # Webhook swagger.json
+
+    
+    event_name = fields.Str(required=False)
+    
+    response_code = fields.Int(required=False)
+    
+    response_message = fields.Str(required=False)
+    
+    data = fields.Str(required=False)
+    
+    attempt = fields.Int(required=False)
+    
+    last_attempted_on = fields.Float(required=False)
+    
+    status = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    webhook_url = fields.Str(required=False)
+    
+    response_time = fields.Int(required=False)
+    
+    message_id = fields.Str(required=False)
+    
+    event_trace_id = fields.Str(required=False)
+    
 
 
 class Page(BaseSchema):
@@ -157,21 +245,27 @@ class Page(BaseSchema):
     
 
 
-class BroadcasterConfig(BaseSchema):
+class PingWebhook(BaseSchema):
     # Webhook swagger.json
 
     
-    topic = fields.Str(required=False)
+    webhook_url = fields.Str(required=False)
     
-    queue = fields.Str(required=False)
+    auth_meta = fields.Dict(required=False)
     
-    event_bridge_name = fields.Str(required=False)
+    custom_headers = fields.Dict(required=False)
     
-    workflow_name = fields.Str(required=False)
+
+
+class PingWebhookResponse(BaseSchema):
+    # Webhook swagger.json
+
     
-    account_id = fields.Str(required=False)
+    status = fields.Str(required=False)
     
-    detail_type = fields.Str(required=False)
+    message = fields.Str(required=False)
+    
+    code = fields.Int(required=False)
     
 
 
@@ -185,7 +279,7 @@ class SubscriberEventMapping(BaseSchema):
     
     subscriber_id = fields.Float(required=False)
     
-    broadcaster_config = fields.Nested(BroadcasterConfig, required=False)
+    topic = fields.Str(required=False, allow_none=True)
     
     created_on = fields.Str(required=False)
     
@@ -197,15 +291,11 @@ class EventConfig(BaseSchema):
     
     id = fields.Int(required=False)
     
-    type = fields.Str(required=False, allow_none=True)
-    
     event_name = fields.Str(required=False)
     
     event_type = fields.Str(required=False)
     
     event_category = fields.Str(required=False)
-    
-    modified_by = fields.Str(required=False)
     
     subscriber_event_mapping = fields.Nested(SubscriberEventMapping, required=False)
     
@@ -225,11 +315,139 @@ class EventConfig(BaseSchema):
     
 
 
-class EventConfigResult(BaseSchema):
+class EventConfigResponse(BaseSchema):
     # Webhook swagger.json
 
     
     event_configs = fields.List(fields.Nested(EventConfig, required=False), required=False)
+    
+
+
+class ReportFiltersPayload(BaseSchema):
+    # Webhook swagger.json
+
+    
+    subscriber_ids = fields.List(fields.Int(required=False), required=False)
+    
+
+
+class ReportFilterResponse(BaseSchema):
+    # Webhook swagger.json
+
+    
+    filter_name = fields.Str(required=False)
+    
+    values = fields.List(fields.Dict(required=False), required=False)
+    
+
+
+class HistoryPayload(BaseSchema):
+    # Webhook swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    page_no = fields.Int(required=False)
+    
+    page_size = fields.Int(required=False)
+    
+
+
+class HistoryFilters(BaseSchema):
+    # Webhook swagger.json
+
+    
+    events = fields.List(fields.Str(required=False), required=False)
+    
+    search_text = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    end_date = fields.Str(required=False)
+    
+    start_date = fields.Str(required=False)
+    
+    subscribers = fields.List(fields.Int(required=False), required=False)
+    
+    webhook_type = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class Url(BaseSchema):
+    # Webhook swagger.json
+
+    
+    url = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+
+
+class CdnObject(BaseSchema):
+    # Webhook swagger.json
+
+    
+    urls = fields.List(fields.Nested(Url, required=False), required=False)
+    
+
+
+class UploadServiceObject(BaseSchema):
+    # Webhook swagger.json
+
+    
+    cdn = fields.Nested(CdnObject, required=False)
+    
+
+
+class HistoryAssociation(BaseSchema):
+    # Webhook swagger.json
+
+    
+    company_id = fields.Int(required=False)
+    
+    subscriber_ids = fields.List(fields.Int(required=False), required=False)
+    
+
+
+class HistoryItems(BaseSchema):
+    # Webhook swagger.json
+
+    
+    id = fields.Int(required=False)
+    
+    association = fields.Nested(HistoryAssociation, required=False)
+    
+    filters = fields.Nested(HistoryFilters, required=False)
+    
+    filename = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    upload_service_response = fields.Nested(UploadServiceObject, required=False)
+    
+    created_on = fields.Str(required=False)
+    
+    updated_on = fields.Str(required=False, allow_none=True)
+    
+    message = fields.Str(required=False)
+    
+
+
+class HistoryResponse(BaseSchema):
+    # Webhook swagger.json
+
+    
+    items = fields.List(fields.Nested(HistoryItems, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class CancelResponse(BaseSchema):
+    # Webhook swagger.json
+
+    
+    message = fields.Str(required=False)
     
 
 
@@ -269,7 +487,7 @@ class AuthMeta(BaseSchema):
     
 
 
-class SubscriberDetails(BaseSchema):
+class SubscriberResponse(BaseSchema):
     # Webhook swagger.json
 
     
@@ -285,7 +503,7 @@ class SubscriberDetails(BaseSchema):
     
     association = fields.Nested(AssociationResp, required=False)
     
-    custom_headers = fields.Dict(required=False, allow_none=True)
+    custom_headers = fields.Dict(required=False)
     
     status = fields.Str(required=False, validate=OneOf([val.value for val in SubscriberStatus.__members__.values()]))
     
@@ -311,14 +529,6 @@ class Events(BaseSchema):
     
     topic = fields.Str(required=False)
     
-    queue = fields.Str(required=False)
-    
-    event_bridge_name = fields.Str(required=False)
-    
-    workflow_name = fields.Str(required=False)
-    
-    detail_type = fields.Str(required=False)
-    
 
 
 class SubscriberConfigPostRequestV2(BaseSchema):
@@ -326,8 +536,6 @@ class SubscriberConfigPostRequestV2(BaseSchema):
 
     
     name = fields.Str(required=False)
-    
-    type = fields.Str(required=False, allow_none=True)
     
     webhook_url = fields.Str(required=False)
     
@@ -355,8 +563,6 @@ class SubscriberConfigUpdateRequestV2(BaseSchema):
     
     name = fields.Str(required=False)
     
-    type = fields.Str(required=False, allow_none=True)
-    
     webhook_url = fields.Str(required=False)
     
     provider = fields.Str(required=False)
@@ -380,8 +586,6 @@ class SubscriberConfigPost(BaseSchema):
 
     
     name = fields.Str(required=False)
-    
-    type = fields.Str(required=False, allow_none=True)
     
     webhook_url = fields.Str(required=False)
     
@@ -407,8 +611,6 @@ class SubscriberConfigUpdate(BaseSchema):
     
     name = fields.Str(required=False)
     
-    type = fields.Str(required=False, allow_none=True)
-    
     webhook_url = fields.Str(required=False)
     
     association = fields.Nested(Association, required=False)
@@ -425,7 +627,7 @@ class SubscriberConfigUpdate(BaseSchema):
     
 
 
-class SubscriberConfigResult(BaseSchema):
+class SubscriberConfigResponse(BaseSchema):
     # Webhook swagger.json
 
     
@@ -463,207 +665,9 @@ class SubscriberConfigList(BaseSchema):
     # Webhook swagger.json
 
     
-    items = fields.List(fields.Nested(SubscriberDetails, required=False), required=False)
+    items = fields.List(fields.Nested(SubscriberResponse, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
-    
-
-
-class RestEventData(BaseSchema):
-    # Webhook swagger.json
-
-    
-    event_category = fields.Str(required=False)
-    
-    event_name = fields.Str(required=False)
-    
-    event_type = fields.Str(required=False)
-    
-    version = fields.Float(required=False)
-    
-
-
-class RestConfig(BaseSchema):
-    # Webhook swagger.json
-
-    
-    webhook_url = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    custom_headers = fields.Dict(required=False)
-    
-    auth_meta = fields.Nested(AuthMeta, required=False)
-    
-    events = fields.List(fields.Nested(RestEventData, required=False), required=False)
-    
-
-
-class QueueEventData(BaseSchema):
-    # Webhook swagger.json
-
-    
-    event_category = fields.Str(required=False)
-    
-    event_name = fields.Str(required=False)
-    
-    event_type = fields.Str(required=False)
-    
-    version = fields.Float(required=False)
-    
-    topic = fields.Str(required=False)
-    
-
-
-class KafkaConfig(BaseSchema):
-    # Webhook swagger.json
-
-    
-    type = fields.Str(required=False, allow_none=True)
-    
-    events = fields.List(fields.Nested(QueueEventData, required=False), required=False)
-    
-
-
-class PubSubConfig(BaseSchema):
-    # Webhook swagger.json
-
-    
-    type = fields.Str(required=False, allow_none=True)
-    
-    events = fields.List(fields.Nested(QueueEventData, required=False), required=False)
-    
-
-
-class TemporalEventData(BaseSchema):
-    # Webhook swagger.json
-
-    
-    event_category = fields.Str(required=False)
-    
-    event_name = fields.Str(required=False)
-    
-    event_type = fields.Str(required=False)
-    
-    version = fields.Float(required=False)
-    
-    queue = fields.Str(required=False)
-    
-    workflow_name = fields.Str(required=False)
-    
-
-
-class TemporalConfig(BaseSchema):
-    # Webhook swagger.json
-
-    
-    type = fields.Str(required=False, allow_none=True)
-    
-    events = fields.List(fields.Nested(TemporalEventData, required=False), required=False)
-    
-
-
-class SqsEventData(BaseSchema):
-    # Webhook swagger.json
-
-    
-    event_category = fields.Str(required=False)
-    
-    event_name = fields.Str(required=False)
-    
-    event_type = fields.Str(required=False)
-    
-    version = fields.Float(required=False)
-    
-    queue = fields.Str(required=False)
-    
-
-
-class SqsConfig(BaseSchema):
-    # Webhook swagger.json
-
-    
-    type = fields.Str(required=False, allow_none=True)
-    
-    events = fields.List(fields.Nested(SqsEventData, required=False), required=False)
-    
-
-
-class EventBridgeData(BaseSchema):
-    # Webhook swagger.json
-
-    
-    event_category = fields.Str(required=False)
-    
-    event_name = fields.Str(required=False)
-    
-    event_type = fields.Str(required=False)
-    
-    version = fields.Float(required=False)
-    
-    event_bridge_name = fields.Str(required=False)
-    
-
-
-class EventBridgeConfig(BaseSchema):
-    # Webhook swagger.json
-
-    
-    type = fields.Str(required=False, allow_none=True)
-    
-    events = fields.List(fields.Nested(EventBridgeData, required=False), required=False)
-    
-
-
-class EventMapBody(BaseSchema):
-    # Webhook swagger.json
-
-    
-    rest = fields.Nested(RestConfig, required=False)
-    
-    kafka = fields.Nested(KafkaConfig, required=False)
-    
-    pub_sub = fields.Nested(PubSubConfig, required=False)
-    
-    temporal = fields.Nested(TemporalConfig, required=False)
-    
-    sqs = fields.Nested(SqsConfig, required=False)
-    
-    event_bridge = fields.Nested(EventBridgeConfig, required=False)
-    
-
-
-class WebhookConfig(BaseSchema):
-    # Webhook swagger.json
-
-    
-    notification_email = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-    association = fields.Nested(Association, required=False)
-    
-    event_map = fields.Nested(EventMapBody, required=False)
-    
-
-
-class UpsertSubscriberConfig(BaseSchema):
-    # Webhook swagger.json
-
-    
-    webhook_config = fields.Nested(WebhookConfig, required=False)
-    
-
-
-class UpsertSubscriberConfigResult(BaseSchema):
-    # Webhook swagger.json
-
-    
-    status = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
     
 
 
