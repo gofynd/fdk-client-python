@@ -210,10 +210,6 @@ class GlobalSchema(BaseSchema):
     pass
 
 
-class Prop(BaseSchema):
-    pass
-
-
 class Preset(BaseSchema):
     pass
 
@@ -993,23 +989,7 @@ class GlobalSchema(BaseSchema):
     # Theme swagger.json
 
     
-    props = fields.List(fields.Nested(Prop, required=False), required=False)
-    
-
-
-class Prop(BaseSchema):
-    # Theme swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    category = fields.Str(required=False)
-    
-    id = fields.Str(required=False)
-    
-    label = fields.Str(required=False)
-    
-    info = fields.Str(required=False)
+    props = fields.List(fields.Dict(required=False), required=False)
     
 
 
