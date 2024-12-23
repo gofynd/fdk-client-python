@@ -208,6 +208,10 @@ class AddCartDetailResult(BaseSchema):
     pass
 
 
+class CartItemInfo(BaseSchema):
+    pass
+
+
 class UpdateProductCart(BaseSchema):
     pass
 
@@ -1315,6 +1319,26 @@ class AddCartDetailResult(BaseSchema):
     
     success = fields.Boolean(required=False)
     
+    result = fields.Dict(required=False)
+    
+    items = fields.List(fields.Nested(CartItemInfo, required=False), required=False)
+    
+
+
+class CartItemInfo(BaseSchema):
+    # Cart swagger.json
+
+    
+    item_id = fields.Int(required=False)
+    
+    size = fields.Str(required=False)
+    
+    store_id = fields.Int(required=False)
+    
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
 
 
 class UpdateProductCart(BaseSchema):
@@ -1384,6 +1408,10 @@ class UpdateCartDetailResult(BaseSchema):
     cart = fields.Nested(CartDetailResult, required=False)
     
     success = fields.Boolean(required=False)
+    
+    result = fields.Dict(required=False)
+    
+    items = fields.List(fields.Nested(CartItemInfo, required=False), required=False)
     
 
 

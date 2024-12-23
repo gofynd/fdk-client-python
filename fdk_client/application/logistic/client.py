@@ -376,13 +376,14 @@ class Logistic:
 
         return response
     
-    async def getCountries(self, onboarding=None, page_no=None, page_size=None, q=None, hierarchy=None, body="", request_headers:Dict={}):
+    async def getCountries(self, onboarding=None, page_no=None, page_size=None, q=None, hierarchy=None, phone_code=None, body="", request_headers:Dict={}):
         """List of supported countries.
         :param onboarding : List countries which allowed for onboard on Platform. : type boolean
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 12. : type integer
         :param q : Search countries by pincode, city, country name etc : type string
         :param hierarchy : Fetch countries that has certain heirarchy present. : type string
+        :param phone_code : Filter countries by phone code (e.g., +1 for United States, +91 for India, etc.). : type string
         """
         payload = {}
         
@@ -396,14 +397,16 @@ class Logistic:
             payload["q"] = q
         if hierarchy is not None:
             payload["hierarchy"] = hierarchy
+        if phone_code is not None:
+            payload["phone_code"] = phone_code
 
         # Parameter validation
         schema = LogisticValidator.getCountries()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCountries"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"onboarding","description":"List countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12,"maximum":250},"required":false},{"in":"query","name":"q","description":"Search countries by pincode, city, country name etc","schema":{"type":"string"},"required":false},{"in":"query","name":"hierarchy","description":"Fetch countries that has certain heirarchy present.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"onboarding","description":"List countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12,"maximum":250},"required":false},{"in":"query","name":"q","description":"Search countries by pincode, city, country name etc","schema":{"type":"string"},"required":false},{"in":"query","name":"hierarchy","description":"Fetch countries that has certain heirarchy present.","schema":{"type":"string"},"required":false}],"headers":[],"path":[]}""", serverType="application", onboarding=onboarding, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy)
-        query_string = await create_query_string(onboarding=onboarding, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCountries"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"onboarding","description":"List countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12,"maximum":250},"required":false},{"in":"query","name":"q","description":"Search countries by pincode, city, country name etc","schema":{"type":"string"},"required":false},{"in":"query","name":"hierarchy","description":"Fetch countries that has certain heirarchy present.","schema":{"type":"string"},"required":false},{"in":"query","name":"phone_code","description":"Filter countries by phone code (e.g., +1 for United States, +91 for India, etc.).","schema":{"type":"string","x-not-enum":true},"required":false}],"query":[{"in":"query","name":"onboarding","description":"List countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12,"maximum":250},"required":false},{"in":"query","name":"q","description":"Search countries by pincode, city, country name etc","schema":{"type":"string"},"required":false},{"in":"query","name":"hierarchy","description":"Fetch countries that has certain heirarchy present.","schema":{"type":"string"},"required":false},{"in":"query","name":"phone_code","description":"Filter countries by phone code (e.g., +1 for United States, +91 for India, etc.).","schema":{"type":"string","x-not-enum":true},"required":false}],"headers":[],"path":[]}""", serverType="application", onboarding=onboarding, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy, phone_code=phone_code)
+        query_string = await create_query_string(onboarding=onboarding, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy, phone_code=phone_code)
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -419,7 +422,7 @@ class Logistic:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCountries"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v2.0/countries", onboarding=onboarding, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCountries"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v2.0/countries", onboarding=onboarding, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy, phone_code=phone_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetCountries

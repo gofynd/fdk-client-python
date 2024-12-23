@@ -53,35 +53,35 @@ class WebhookValidator:
     class fetchAllEventConfigurations(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Float(required=False)
          
         
     
     class registerSubscriberToEventV2(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Float(required=False)
          
         
     
     class updateSubscriberV2(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Float(required=False)
          
         
     
     class registerSubscriberToEvent(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Float(required=False)
          
         
     
     class getSubscribersByCompany(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Float(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -94,21 +94,21 @@ class WebhookValidator:
     class updateSubscriberConfig(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Float(required=False)
          
         
     
     class upsertSubscriberEvent(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Float(required=False)
          
         
     
     class getSubscriberById(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Float(required=False)
         
         subscriber_id = fields.Int(required=False)
          
@@ -121,7 +121,7 @@ class WebhookValidator:
         
         page_size = fields.Int(required=False)
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Float(required=False)
         
         extension_id = fields.Str(required=False)
          

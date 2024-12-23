@@ -580,6 +580,22 @@ class PaymentCustomConfigResponseSchema(BaseSchema):
     pass
 
 
+class CustomerValidationSchema(BaseSchema):
+    pass
+
+
+class UserCreditSchema(BaseSchema):
+    pass
+
+
+class CreditAccountSummary(BaseSchema):
+    pass
+
+
+class ValidateCustomerCreditSchema(BaseSchema):
+    pass
+
+
 
 
 
@@ -2902,6 +2918,64 @@ class PaymentCustomConfigResponseSchema(BaseSchema):
     message = fields.Str(required=False)
     
     items = fields.List(fields.Nested(PaymentModeCustomConfigSchema, required=False), required=False)
+    
+
+
+class CustomerValidationSchema(BaseSchema):
+    # Payment swagger.json
+
+    
+    aggregator = fields.Str(required=False)
+    
+    transaction_amount = fields.Float(required=False)
+    
+    cart_id = fields.Str(required=False)
+    
+
+
+class UserCreditSchema(BaseSchema):
+    # Payment swagger.json
+
+    
+    amount = fields.Float(required=False)
+    
+    currency = fields.Str(required=False)
+    
+    unique_id = fields.Str(required=False)
+    
+
+
+class CreditAccountSummary(BaseSchema):
+    # Payment swagger.json
+
+    
+    account_id = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    redeemable_balance = fields.Nested(UserCreditSchema, required=False)
+    
+    available_balance = fields.Nested(UserCreditSchema, required=False)
+    
+    amount_on_hold = fields.Nested(UserCreditSchema, required=False)
+    
+
+
+class ValidateCustomerCreditSchema(BaseSchema):
+    # Payment swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    is_eligible = fields.Boolean(required=False)
+    
+    is_applied = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
+    cart_id = fields.Str(required=False)
+    
+    account = fields.Nested(CreditAccountSummary, required=False)
     
 
 

@@ -38,6 +38,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
         
@@ -141,6 +142,8 @@ class LogisticValidator:
         q = fields.Str(required=False)
         
         hierarchy = fields.Str(required=False)
+        
+        phone_code = fields.Str(required=False)
          
         
     

@@ -64,6 +64,18 @@ class FailedBrowseFilesResult(BaseSchema):
     pass
 
 
+class SignedUrl(BaseSchema):
+    pass
+
+
+class SignUrlResult(BaseSchema):
+    pass
+
+
+class SignUrl(BaseSchema):
+    pass
+
+
 
 
 
@@ -254,6 +266,36 @@ class FailedBrowseFilesResult(BaseSchema):
 
     
     message = fields.Str(required=False)
+    
+
+
+class SignedUrl(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    url = fields.Str(required=False)
+    
+    signed_url = fields.Str(required=False)
+    
+    expiry = fields.Int(required=False)
+    
+
+
+class SignUrlResult(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    urls = fields.List(fields.Nested(SignedUrl, required=False), required=False)
+    
+
+
+class SignUrl(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    expiry = fields.Int(required=False)
+    
+    urls = fields.List(fields.Str(required=False), required=False)
     
 
 

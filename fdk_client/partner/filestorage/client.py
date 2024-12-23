@@ -487,3 +487,46 @@ This operation will return the url for the uploaded file.
 
         return response
     
+    async def signUrls(self, body="", request_headers:Dict={}):
+        """Generates secure, signed URLs that is valid for certain expiry time for accessing stored files.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = FileStorageValidator.signUrls()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SignUrl
+        schema = SignUrl()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/assets/v1.0/organization/{self._conf.organizationId}/sign-urls", """{"required":[{"name":"organization_id","in":"path","required":true,"schema":{"type":"string","description":"This is organization id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","required":true,"schema":{"type":"string","description":"This is organization id"}}]}""", serverType="partner", )
+        query_string = await create_query_string()
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/assets/v1.0/organization/{self._conf.organizationId}/sign-urls", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SignUrlResult
+            schema = SignUrlResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for signUrls")
+                print(e)
+
+        return response
+    

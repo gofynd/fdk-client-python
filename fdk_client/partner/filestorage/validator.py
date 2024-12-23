@@ -56,6 +56,9 @@ from ..PartnerModel import BaseSchema
     
     
         
+    
+    
+        
 
 class FileStorageValidator:
     
@@ -158,6 +161,13 @@ class FileStorageValidator:
         
     
     class saveProxyDetails(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+         
+        
+    
+    class signUrls(BaseSchema):
         
         
         organization_id = fields.Str(required=False)

@@ -23,7 +23,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/events", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/events", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -67,7 +67,7 @@ class Webhook:
         schema = SubscriberConfigPostRequestV2()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v2.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v2.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -111,7 +111,7 @@ class Webhook:
         schema = SubscriberConfigUpdateRequestV2()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v2.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v2.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -154,7 +154,7 @@ class Webhook:
         schema = SubscriberConfigPost()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -202,7 +202,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"}},{"name":"extension_id","in":"query","description":"extension_id","required":false,"schema":{"type":"string"}}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"}},{"name":"extension_id","in":"query","description":"extension_id","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, extension_id=extension_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"}},{"name":"extension_id","in":"query","description":"extension_id","required":false,"schema":{"type":"string"}}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"}},{"name":"extension_id","in":"query","description":"extension_id","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, extension_id=extension_id)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, extension_id=extension_id)
 
         headers = {}
@@ -245,7 +245,7 @@ class Webhook:
         schema = SubscriberConfigUpdate()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -289,7 +289,7 @@ class Webhook:
         schema = UpsertSubscriberConfig()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v3.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v3.0/company/{self._conf.companyId}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}}]}""", serverType="platform", )
         query_string = await create_query_string()
 
         headers = {}
@@ -331,7 +331,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/{subscriber_id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}},{"name":"subscriber_id","in":"path","description":"subscriber id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}},{"name":"subscriber_id","in":"path","description":"subscriber id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", subscriber_id=subscriber_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/subscriber/{subscriber_id}", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}},{"name":"subscriber_id","in":"path","description":"subscriber id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}},{"name":"subscriber_id","in":"path","description":"subscriber id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", subscriber_id=subscriber_id)
         query_string = await create_query_string()
 
         headers = {}
@@ -379,7 +379,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"}}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, extension_id=extension_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/webhook/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscriber/", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"}}],"query":[{"name":"page_no","in":"query","description":"Page Number","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"Page Size","required":false,"schema":{"type":"integer","format":"int32"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier for the company.","schema":{"type":"number"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, extension_id=extension_id)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, )
 
         headers = {}
