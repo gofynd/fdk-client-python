@@ -44,6 +44,8 @@ class Theme:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getAllPages"], proccessed_params="""{"required":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}}]}""", serverType="application", theme_id=theme_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -100,6 +102,8 @@ class Theme:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getPage"], proccessed_params="""{"required":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"string"}},{"name":"section_preview_hash","in":"query","description":"Unique hash id on sections preview.","required":false,"schema":{"type":"string"}},{"name":"company","in":"query","description":"Company id of the application.","required":false,"schema":{"type":"integer"}}],"query":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"string"}},{"name":"section_preview_hash","in":"query","description":"Unique hash id on sections preview.","required":false,"schema":{"type":"string"}},{"name":"company","in":"query","description":"Company id of the application.","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved.","required":true,"schema":{"type":"string"}}]}""", serverType="application", theme_id=theme_id, page_value=page_value, filters=filters, section_preview_hash=section_preview_hash, company=company)
         query_string = await create_query_string(filters=filters, section_preview_hash=section_preview_hash, company=company)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -144,6 +148,8 @@ class Theme:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getAppliedTheme"], proccessed_params="""{"required":[],"optional":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"boolean","example":true}}],"query":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"boolean","example":true}}],"headers":[],"path":[]}""", serverType="application", filters=filters)
         query_string = await create_query_string(filters=filters)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -191,6 +197,8 @@ class Theme:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getThemeForPreview"], proccessed_params="""{"required":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"boolean","example":true}}],"query":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"boolean","example":true}}],"headers":[],"path":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}}]}""", serverType="application", theme_id=theme_id, filters=filters)
         query_string = await create_query_string(filters=filters)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'

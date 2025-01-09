@@ -53,6 +53,8 @@ class Logistic:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getPincodeCity"], proccessed_params="""{"required":[{"in":"path","name":"pincode","description":"Postal code or PIN code of the address area.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"pincode","description":"Postal code or PIN code of the address area.","schema":{"type":"string"},"required":true}]}""", serverType="application", pincode=pincode)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -98,6 +100,8 @@ class Logistic:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getTatProduct"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -139,6 +143,8 @@ class Logistic:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getAllCountries"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -184,6 +190,8 @@ class Logistic:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getPincodeZones"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -229,6 +237,8 @@ class Logistic:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getOptimalLocations"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -280,6 +290,8 @@ class Logistic:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCourierPartners"], proccessed_params="""{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true}]}""", serverType="application", company_id=company_id, application_id=application_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -348,6 +360,8 @@ class Logistic:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getLocations"], proccessed_params="""{"required":[{"in":"query","name":"x-application-id","description":"Unique identifier for a particular sales channel.","schema":{"type":"string"},"required":true},{"in":"query","name":"x-application-data","description":"Sales channel details.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"country","description":"The country `iso2` code.","schema":{"type":"string"},"required":false},{"in":"query","name":"state","description":"State or the province.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"City.","schema":{"type":"string"},"required":false},{"in":"query","name":"pincode","description":"Pincode of the area.","schema":{"type":"integer"},"required":false},{"in":"query","name":"sector","description":"Specific sector of the city.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer"},"required":false}],"query":[{"in":"query","name":"x-application-id","description":"Unique identifier for a particular sales channel.","schema":{"type":"string"},"required":true},{"in":"query","name":"x-application-data","description":"Sales channel details.","schema":{"type":"string"},"required":true},{"in":"query","name":"country","description":"The country `iso2` code.","schema":{"type":"string"},"required":false},{"in":"query","name":"state","description":"State or the province.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"City.","schema":{"type":"string"},"required":false},{"in":"query","name":"pincode","description":"Pincode of the area.","schema":{"type":"integer"},"required":false},{"in":"query","name":"sector","description":"Specific sector of the city.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer"},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer"},"required":false}],"headers":[],"path":[]}""", serverType="application", x_application_id=x_application_id, x_application_data=x_application_data, country=country, state=state, city=city, pincode=pincode, sector=sector, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(x_application_id=x_application_id, x_application_data=x_application_data, country=country, state=state, city=city, pincode=pincode, sector=sector, page_no=page_no, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -407,6 +421,8 @@ class Logistic:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCountries"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"onboarding","description":"List countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12,"maximum":250},"required":false},{"in":"query","name":"q","description":"Search countries by pincode, city, country name etc","schema":{"type":"string"},"required":false},{"in":"query","name":"hierarchy","description":"Fetch countries that has certain heirarchy present.","schema":{"type":"string"},"required":false},{"in":"query","name":"phone_code","description":"Filter countries by phone code (e.g., +1 for United States, +91 for India, etc.).","schema":{"type":"string","x-not-enum":true},"required":false}],"query":[{"in":"query","name":"onboarding","description":"List countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12,"maximum":250},"required":false},{"in":"query","name":"q","description":"Search countries by pincode, city, country name etc","schema":{"type":"string"},"required":false},{"in":"query","name":"hierarchy","description":"Fetch countries that has certain heirarchy present.","schema":{"type":"string"},"required":false},{"in":"query","name":"phone_code","description":"Filter countries by phone code (e.g., +1 for United States, +91 for India, etc.).","schema":{"type":"string","x-not-enum":true},"required":false}],"headers":[],"path":[]}""", serverType="application", onboarding=onboarding, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy, phone_code=phone_code)
         query_string = await create_query_string(onboarding=onboarding, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy, phone_code=phone_code)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -451,6 +467,8 @@ class Logistic:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCountry"], proccessed_params="""{"required":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string","x-not-enum":true},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string","x-not-enum":true},"required":true}]}""", serverType="application", country_iso_code=country_iso_code)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -498,6 +516,8 @@ class Logistic:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getDeliveryPromise"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size)
         query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -563,6 +583,8 @@ class Logistic:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getLocalities"], proccessed_params="""{"required":[{"in":"path","name":"locality_type","description":"Unique geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true}],"optional":[{"in":"query","name":"country","description":"Country name.","schema":{"type":"string"},"required":false},{"in":"query","name":"state","description":"State or the province.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"City.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12,"maximum":1000},"required":false},{"in":"query","name":"q","description":"This parameter is used to filter or search the records.","schema":{"type":"string"},"required":false},{"in":"query","name":"sector","description":"A `sector` is a distinct category or division within an area","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"country","description":"Country name.","schema":{"type":"string"},"required":false},{"in":"query","name":"state","description":"State or the province.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"City.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12,"maximum":1000},"required":false},{"in":"query","name":"q","description":"This parameter is used to filter or search the records.","schema":{"type":"string"},"required":false},{"in":"query","name":"sector","description":"A `sector` is a distinct category or division within an area","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"locality_type","description":"Unique geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true}]}""", serverType="application", locality_type=locality_type, country=country, state=state, city=city, page_no=page_no, page_size=page_size, q=q, sector=sector)
         query_string = await create_query_string(country=country, state=state, city=city, page_no=page_no, page_size=page_size, q=q, sector=sector)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -619,6 +641,8 @@ class Logistic:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getLocality"], proccessed_params="""{"required":[{"in":"path","name":"locality_type","description":"Geographical division.","schema":{"type":"string","enum":["pincode","sector"]},"required":true},{"in":"path","name":"locality_value","description":"Name of the locality.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"country","description":"Country name.","schema":{"type":"string"},"required":false},{"in":"query","name":"state","description":"State or the province.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"City.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"country","description":"Country name.","schema":{"type":"string"},"required":false},{"in":"query","name":"state","description":"State or the province.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"City.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"locality_type","description":"Geographical division.","schema":{"type":"string","enum":["pincode","sector"]},"required":true},{"in":"path","name":"locality_value","description":"Name of the locality.","schema":{"type":"string"},"required":true}]}""", serverType="application", locality_type=locality_type, locality_value=locality_value, country=country, state=state, city=city)
         query_string = await create_query_string(country=country, state=state, city=city)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -670,6 +694,8 @@ class Logistic:
 
         url_with_params = await create_url_with_params(api_url=self._urls["validateAddress"], proccessed_params="""{"required":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string","x-not-enum":true},"required":true},{"in":"path","name":"template_name","description":"The type of address form.","schema":{"type":"string","enum":["checkout_form","store_os_form","default_display"]},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string","x-not-enum":true},"required":true},{"in":"path","name":"template_name","description":"The type of address form.","schema":{"type":"string","enum":["checkout_form","store_os_form","default_display"]},"required":true}]}""", serverType="application", country_iso_code=country_iso_code, template_name=template_name)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'

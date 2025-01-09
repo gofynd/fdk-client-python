@@ -45,6 +45,8 @@ class Common:
 
         url_with_params = await create_url_with_params(api_url=self._urls["searchApplication"], proccessed_params="""{"required":[],"optional":[{"in":"header","name":"authorization","schema":{"type":"string"},"description":"Basic auth string to access the api endpoint."},{"in":"query","name":"query","schema":{"type":"string"},"description":"Provide application name."}],"query":[{"in":"query","name":"query","schema":{"type":"string"},"description":"Provide application name."}],"headers":[{"in":"header","name":"authorization","schema":{"type":"string"},"description":"Basic auth string to access the api endpoint."}],"path":[]}""", serverType="application", authorization=authorization, query=query)
         query_string = await create_query_string(query=query)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -92,6 +94,8 @@ class Common:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getLocations"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"location_type","schema":{"type":"string","enum":["country","state","city"]},"description":"Provide location type to query on. Possible values : country, state, city."},{"in":"query","name":"id","schema":{"type":"string"},"description":"Field is optional when location_type is country. If querying for state, provide id of country. If querying for city, provide id of state."}],"query":[{"in":"query","name":"location_type","schema":{"type":"string","enum":["country","state","city"]},"description":"Provide location type to query on. Possible values : country, state, city."},{"in":"query","name":"id","schema":{"type":"string"},"description":"Field is optional when location_type is country. If querying for state, provide id of country. If querying for city, provide id of state."}],"headers":[],"path":[]}""", serverType="application", location_type=location_type, id=id)
         query_string = await create_query_string(location_type=location_type, id=id)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'

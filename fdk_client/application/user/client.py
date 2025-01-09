@@ -87,6 +87,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["loginWithFacebook"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -135,6 +137,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["loginWithGoogle"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -183,6 +187,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["loginWithGoogleAndroid"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -231,6 +237,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["loginWithGoogleIOS"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -279,6 +287,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["loginWithAppleIOS"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -327,6 +337,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["loginWithOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -372,6 +384,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["loginWithEmailAndPassword"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -420,6 +434,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["sendResetPasswordEmail"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -468,6 +484,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["sendResetPasswordMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -504,6 +522,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["sendResetToken"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -549,6 +569,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["forgotPassword"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -594,6 +616,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["resetForgotPassword"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -639,6 +663,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["loginWithToken"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -687,6 +713,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["registerWithForm"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -732,6 +760,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["verifyEmail"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -777,6 +807,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["verifyMobile"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -818,6 +850,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["hasPassword"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -863,6 +897,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["updatePassword"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -911,6 +947,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["sendOTPOnMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -959,6 +997,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["sendForgotOTPOnMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1007,6 +1047,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["verifyMobileOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1055,6 +1097,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["verifyMobileForgotOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1103,6 +1147,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["sendOTPOnEmail"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1151,6 +1197,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["sendForgotOTPOnEmail"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1199,6 +1247,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["verifyEmailOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1247,6 +1297,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["verifyEmailForgotOTP"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1288,6 +1340,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getLoggedInUser"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1329,6 +1383,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getListOfActiveSessions"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1373,6 +1429,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getPlatformConfig"], proccessed_params="""{"required":[],"optional":[{"name":"name","in":"query","description":"Name of the application, e.g. Fynd.","schema":{"type":"string"}}],"query":[{"name":"name","in":"query","description":"Name of the application, e.g. Fynd.","schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", name=name)
         query_string = await create_query_string(name=name)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1421,6 +1479,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["updateProfile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1469,6 +1529,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["addMobileNumber"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1528,6 +1590,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["deleteMobileNumber"], proccessed_params="""{"required":[{"name":"active","in":"query","required":true,"description":"This is a boolean value to check if mobile number is active 1.True - number is active 2. False - number is inactive.","schema":{"type":"boolean"}},{"name":"primary","in":"query","description":"This is a boolean value to check if mobile number is primary number (main number) 1. True - number is primary 2. False - number is not primary.","required":true,"schema":{"type":"boolean"}},{"name":"verified","in":"query","description":"This is a boolean value to check if mobile number is verified 1. True - number is verified 2.False - number is not verified yet.","required":true,"schema":{"type":"boolean"}},{"name":"country_code","in":"query","description":"Country code of the phone number, e.g. 91.","required":true,"schema":{"type":"string","x-not-enum":true}},{"name":"phone","in":"query","description":"Phone number.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}},{"name":"active","in":"query","required":true,"description":"This is a boolean value to check if mobile number is active 1.True - number is active 2. False - number is inactive.","schema":{"type":"boolean"}},{"name":"primary","in":"query","description":"This is a boolean value to check if mobile number is primary number (main number) 1. True - number is primary 2. False - number is not primary.","required":true,"schema":{"type":"boolean"}},{"name":"verified","in":"query","description":"This is a boolean value to check if mobile number is verified 1. True - number is verified 2.False - number is not verified yet.","required":true,"schema":{"type":"boolean"}},{"name":"country_code","in":"query","description":"Country code of the phone number, e.g. 91.","required":true,"schema":{"type":"string","x-not-enum":true}},{"name":"phone","in":"query","description":"Phone number.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", platform=platform, active=active, primary=primary, verified=verified, country_code=country_code, phone=phone)
         query_string = await create_query_string(platform=platform, active=active, primary=primary, verified=verified, country_code=country_code, phone=phone)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1573,6 +1637,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["setMobileNumberAsPrimary"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1621,6 +1687,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["sendVerificationLinkToMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1669,6 +1737,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["addEmail"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1725,6 +1795,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["deleteEmail"], proccessed_params="""{"required":[{"name":"active","in":"query","description":"Boolean value to check if email id is active 1. True - email id is active 2.False - email id is inactive.","required":true,"schema":{"type":"boolean"}},{"name":"primary","in":"query","description":"Boolean value to check if email id is primary (main email id) 1. True - email id is primary 2.False - email id is not primary.","required":true,"schema":{"type":"boolean"}},{"name":"verified","in":"query","description":"Boolean value to check if email id is verified 1. True - email id is verified 2.False - email id is not verified yet.","required":true,"schema":{"type":"boolean"}},{"name":"email","in":"query","description":"The email id to delete.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}},{"name":"active","in":"query","description":"Boolean value to check if email id is active 1. True - email id is active 2.False - email id is inactive.","required":true,"schema":{"type":"boolean"}},{"name":"primary","in":"query","description":"Boolean value to check if email id is primary (main email id) 1. True - email id is primary 2.False - email id is not primary.","required":true,"schema":{"type":"boolean"}},{"name":"verified","in":"query","description":"Boolean value to check if email id is verified 1. True - email id is verified 2.False - email id is not verified yet.","required":true,"schema":{"type":"boolean"}},{"name":"email","in":"query","description":"The email id to delete.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", platform=platform, active=active, primary=primary, verified=verified, email=email)
         query_string = await create_query_string(platform=platform, active=active, primary=primary, verified=verified, email=email)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1770,6 +1842,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["setEmailAsPrimary"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1818,6 +1892,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["sendVerificationLinkToEmail"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
         query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1862,6 +1938,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["userExists"], proccessed_params="""{"required":[{"in":"query","name":"q","description":"Email id or phone number of user.","schema":{"type":"string"},"required":true}],"optional":[],"query":[{"in":"query","name":"q","description":"Email id or phone number of user.","schema":{"type":"string"},"required":true}],"headers":[],"path":[]}""", serverType="application", q=q)
         query_string = await create_query_string(q=q)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1907,6 +1985,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["deleteUser"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1948,6 +2028,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["logout"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1992,6 +2074,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getUserAttributes"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"slug","schema":{"type":"string"},"description":"Filter by attribute slug."}],"query":[{"in":"query","name":"slug","schema":{"type":"string"},"description":"Filter by attribute slug."}],"headers":[],"path":[]}""", serverType="application", slug=slug)
         query_string = await create_query_string(slug=slug)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -2037,6 +2121,8 @@ class User:
 
         url_with_params = await create_url_with_params(api_url=self._urls["updateUserAttributes"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'

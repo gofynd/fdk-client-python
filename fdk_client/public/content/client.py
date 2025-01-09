@@ -46,6 +46,8 @@ class Content:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getBasicDetails"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,
@@ -88,6 +90,8 @@ class Content:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getMenuContent"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,
@@ -133,6 +137,8 @@ class Content:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getMenuContentByType"], proccessed_params="""{"required":[{"name":"type","in":"path","description":"type param is type of device ","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"type","in":"path","description":"type param is type of device ","required":true,"schema":{"type":"string"}}]}""", serverType="public", type=type)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,
@@ -175,6 +181,8 @@ class Content:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getAnalyticsTags"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,
@@ -220,6 +228,8 @@ class Content:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCustomPage"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"unique identifier created for each feature object in the schema.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"unique identifier created for each feature object in the schema.","required":true,"schema":{"type":"string"}}]}""", serverType="public", slug=slug)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,
@@ -262,6 +272,8 @@ class Content:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getFooterContent"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,
@@ -307,6 +319,8 @@ class Content:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getHomePageContent"], proccessed_params="""{"required":[{"name":"page_type","in":"query","description":"The type of the page (e.g., pricing).","required":true,"schema":{"type":"string","enum":["home","features","pricing","theme"]}}],"optional":[],"query":[{"name":"page_type","in":"query","description":"The type of the page (e.g., pricing).","required":true,"schema":{"type":"string","enum":["home","features","pricing","theme"]}}],"headers":[],"path":[]}""", serverType="public", page_type=page_type)
         query_string = await create_query_string(page_type=page_type)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,
@@ -349,6 +363,8 @@ class Content:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getNavbar"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,
@@ -391,6 +407,8 @@ class Content:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getPricingBanner"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,
@@ -433,6 +451,8 @@ class Content:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getAllTags"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,
@@ -478,6 +498,8 @@ class Content:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCredentialsByEntity"], proccessed_params="""{"required":[{"name":"entity_type","in":"path","description":"Server Type","required":true,"schema":{"type":"string","enum":["partner","platform"]}}],"optional":[],"query":[],"headers":[],"path":[{"name":"entity_type","in":"path","description":"Server Type","required":true,"schema":{"type":"string","enum":["partner","platform"]}}]}""", serverType="public", entity_type=entity_type)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,

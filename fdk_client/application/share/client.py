@@ -44,6 +44,8 @@ class Share:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getApplicationQRCode"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -88,6 +90,8 @@ class Share:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getProductQRCodeBySlug"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint.","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -132,6 +136,8 @@ class Share:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCollectionQRCodeBySlug"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint.","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -176,6 +182,8 @@ class Share:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getUrlQRCode"], proccessed_params="""{"required":[{"name":"url","in":"query","description":"A link or a web address of a given URL transformed into a scannable QR code.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"url","in":"query","description":"A link or a web address of a given URL transformed into a scannable QR code.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", url=url)
         query_string = await create_query_string(url=url)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -221,6 +229,8 @@ class Share:
 
         url_with_params = await create_url_with_params(api_url=self._urls["createShortLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -265,6 +275,8 @@ class Share:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getShortLinkByHash"], proccessed_params="""{"required":[{"name":"hash","in":"path","description":"A string value used for converting long URL to short URL and vice-versa.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"hash","in":"path","description":"A string value used for converting long URL to short URL and vice-versa.","required":true,"schema":{"type":"string"}}]}""", serverType="application", hash=hash)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -309,6 +321,8 @@ class Share:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getOriginalShortLinkByHash"], proccessed_params="""{"required":[{"name":"hash","in":"path","description":"A string value used for converting long URL to short URL and vice-versa.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"hash","in":"path","description":"A string value used for converting long URL to short URL and vice-versa.","required":true,"schema":{"type":"string"}}]}""", serverType="application", hash=hash)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
