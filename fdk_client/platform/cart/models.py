@@ -728,6 +728,10 @@ class CartCheckoutCustomMeta(BaseSchema):
     pass
 
 
+class OrderTag(BaseSchema):
+    pass
+
+
 class PlatformCartCheckoutDetailCreation(BaseSchema):
     pass
 
@@ -4131,6 +4135,16 @@ class CartCheckoutCustomMeta(BaseSchema):
     
 
 
+class OrderTag(BaseSchema):
+    # Cart swagger.json
+
+    
+    display_text = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+
+
 class PlatformCartCheckoutDetailCreation(BaseSchema):
     # Cart swagger.json
 
@@ -4200,6 +4214,8 @@ class PlatformCartCheckoutDetailCreation(BaseSchema):
     success_callback_url = fields.Str(required=False, allow_none=True)
     
     failure_callback_url = fields.Str(required=False, allow_none=True)
+    
+    order_tags = fields.List(fields.Nested(OrderTag, required=False), required=False)
     
 
 
@@ -4522,6 +4538,8 @@ class PlatformCartCheckoutDetailV2Creation(BaseSchema):
     success_callback_url = fields.Str(required=False, allow_none=True)
     
     failure_callback_url = fields.Str(required=False, allow_none=True)
+    
+    order_tags = fields.List(fields.Nested(OrderTag, required=False), required=False)
     
 
 

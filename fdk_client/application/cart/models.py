@@ -344,6 +344,10 @@ class StaffCheckout(BaseSchema):
     pass
 
 
+class OrderTag(BaseSchema):
+    pass
+
+
 class CartCheckoutDetailCreation(BaseSchema):
     pass
 
@@ -1883,6 +1887,16 @@ class StaffCheckout(BaseSchema):
     
 
 
+class OrderTag(BaseSchema):
+    # Cart swagger.json
+
+    
+    display_text = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+
+
 class CartCheckoutDetailCreation(BaseSchema):
     # Cart swagger.json
 
@@ -1938,6 +1952,8 @@ class CartCheckoutDetailCreation(BaseSchema):
     success_callback_url = fields.Str(required=False, allow_none=True)
     
     failure_callback_url = fields.Str(required=False, allow_none=True)
+    
+    order_tags = fields.List(fields.Nested(OrderTag, required=False), required=False)
     
 
 
@@ -2480,6 +2496,8 @@ class CartCheckoutDetailV2Creation(BaseSchema):
     success_callback_url = fields.Str(required=False, allow_none=True)
     
     failure_callback_url = fields.Str(required=False, allow_none=True)
+    
+    order_tags = fields.List(fields.Nested(OrderTag, required=False), required=False)
     
 
 

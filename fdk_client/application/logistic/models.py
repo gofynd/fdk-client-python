@@ -925,13 +925,15 @@ class GetCountryFieldsAddress(BaseSchema):
     
     display_name = fields.Str(required=False)
     
+    next = fields.Str(required=False, allow_none=True)
+    
     slug = fields.Str(required=False)
     
     required = fields.Boolean(required=False)
     
     edit = fields.Boolean(required=False)
     
-    input = fields.Str(required=False)
+    input = fields.Str(required=False, allow_none=True)
     
     validation = fields.Nested(FieldValidation, required=False)
     
