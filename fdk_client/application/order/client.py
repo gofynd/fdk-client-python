@@ -75,6 +75,8 @@ class Order:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getOrders"], proccessed_params="""{"required":[],"optional":[{"in":"query","description":"A filter to retrieve orders by their current status such as 'placed', 'delivered' etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The date from which the orders should be retrieved.","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"The date till which the orders should be retrieved.","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"Start date in UTC (ISO-8601 format).","name":"start_date","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-29T10:49:36.804Z"}},{"in":"query","description":"End date in UTC (ISO-8601 format).","name":"end_date","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-30T10:49:36.804Z"}},{"in":"query","description":"A filter and retrieve data using special fields included for special use-cases.","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed.","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","description":"A filter to retrieve orders by their current status such as 'placed', 'delivered' etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The date from which the orders should be retrieved.","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"The date till which the orders should be retrieved.","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"Start date in UTC (ISO-8601 format).","name":"start_date","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-29T10:49:36.804Z"}},{"in":"query","description":"End date in UTC (ISO-8601 format).","name":"end_date","required":false,"schema":{"type":"string","format":"date-time","example":"2023-08-30T10:49:36.804Z"}},{"in":"query","description":"A filter and retrieve data using special fields included for special use-cases.","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed.","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[]}""", serverType="application", status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, custom_meta=custom_meta, allow_inactive=allow_inactive)
         query_string = await create_query_string(status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, custom_meta=custom_meta, allow_inactive=allow_inactive)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -122,6 +124,8 @@ class Order:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getOrderById"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking an order.","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments.","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments.","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking an order.","required":true,"schema":{"type":"string"}}]}""", serverType="application", order_id=order_id, allow_inactive=allow_inactive)
         query_string = await create_query_string(allow_inactive=allow_inactive)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -169,6 +173,8 @@ class Order:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getShipmentById"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments.","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments.","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id, allow_inactive=allow_inactive)
         query_string = await create_query_string(allow_inactive=allow_inactive)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -213,6 +219,8 @@ class Order:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getInvoiceByShipmentId"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -257,6 +265,8 @@ class Order:
 
         url_with_params = await create_url_with_params(api_url=self._urls["trackShipment"], proccessed_params="""{"required":[{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16544950215681060915J"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16544950215681060915J"}}]}""", serverType="application", shipment_id=shipment_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -304,6 +314,8 @@ class Order:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCustomerDetailsByShipmentId"], proccessed_params="""{"required":[{"in":"path","description":"A unique number used for identifying and tracking your orders.","name":"order_id","required":true,"schema":{"type":"string","default":"16544950215681060915J"}},{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"A unique number used for identifying and tracking your orders.","name":"order_id","required":true,"schema":{"type":"string","default":"16544950215681060915J"}},{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}}]}""", serverType="application", order_id=order_id, shipment_id=shipment_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -351,6 +363,8 @@ class Order:
 
         url_with_params = await create_url_with_params(api_url=self._urls["sendOtpToShipmentCustomer"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16544950215681060915J"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16544950215681060915J"}}]}""", serverType="application", order_id=order_id, shipment_id=shipment_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -402,6 +416,8 @@ class Order:
 
         url_with_params = await create_url_with_params(api_url=self._urls["verifyOtpShipmentCustomer"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FYMP6294545C010B89FD"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16538880933361957252J"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FYMP6294545C010B89FD"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16538880933361957252J"}}]}""", serverType="application", order_id=order_id, shipment_id=shipment_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -449,6 +465,8 @@ class Order:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getShipmentBagReasons"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"path","description":"ID of the bag. An shipment may contain multiple items and may get divided into one or more bags, each having its own ID.","name":"bag_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"path","description":"ID of the bag. An shipment may contain multiple items and may get divided into one or more bags, each having its own ID.","name":"bag_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id, bag_id=bag_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -493,6 +511,8 @@ class Order:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getShipmentReasons"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -541,6 +561,8 @@ class Order:
 
         url_with_params = await create_url_with_params(api_url=self._urls["updateShipmentStatus"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'

@@ -70,6 +70,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getProductDetailBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/.","schema":{"type":"string"},"required":true}]}""", serverType="application", slug=slug)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -117,6 +119,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getProductSizesBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false}],"query":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false}],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/.","schema":{"type":"string"},"required":true}]}""", serverType="application", slug=slug, store_id=store_id)
         query_string = await create_query_string(store_id=store_id)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -161,6 +165,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getProductComparisonBySlugs"], proccessed_params="""{"required":[{"in":"query","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/.","schema":{"type":"array","items":{"type":"string"},"minItems":1},"required":true}],"optional":[],"query":[{"in":"query","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/.","schema":{"type":"array","items":{"type":"string"},"minItems":1},"required":true}],"headers":[],"path":[]}""", serverType="application", slug=slug)
         query_string = await create_query_string(slug=slug)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -205,6 +211,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getSimilarComparisonProductBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/.","schema":{"type":"string"},"required":true}]}""", serverType="application", slug=slug)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -249,6 +257,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getComparedFrequentlyProductBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/.","schema":{"type":"string"},"required":true}]}""", serverType="application", slug=slug)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -293,6 +303,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getProductVariantsBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/.","schema":{"type":"string"},"required":true}]}""", serverType="application", slug=slug)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -349,6 +361,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getProductStockByIds"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"item_id","description":"The Item ID of the product (Max. 50 allowed).","schema":{"type":"string"},"required":false},{"in":"query","name":"alu","description":"ALU of the product (limited upto 50 ALU identifier in a single request).","schema":{"type":"string"},"required":false},{"in":"query","name":"sku_code","description":"Stock-keeping Unit of the product (limited upto 50 SKU Code in a single request).","schema":{"type":"string"},"required":false},{"in":"query","name":"ean","description":"European Article Number of the product (limited upto 50 EAN identifier in a single request).","schema":{"type":"string"},"required":false},{"in":"query","name":"upc","description":"Universal Product Code of the product (limited upto 50 UPC identifier in a single request).","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"item_id","description":"The Item ID of the product (Max. 50 allowed).","schema":{"type":"string"},"required":false},{"in":"query","name":"alu","description":"ALU of the product (limited upto 50 ALU identifier in a single request).","schema":{"type":"string"},"required":false},{"in":"query","name":"sku_code","description":"Stock-keeping Unit of the product (limited upto 50 SKU Code in a single request).","schema":{"type":"string"},"required":false},{"in":"query","name":"ean","description":"European Article Number of the product (limited upto 50 EAN identifier in a single request).","schema":{"type":"string"},"required":false},{"in":"query","name":"upc","description":"Universal Product Code of the product (limited upto 50 UPC identifier in a single request).","schema":{"type":"string"},"required":false}],"headers":[],"path":[]}""", serverType="application", item_id=item_id, alu=alu, sku_code=sku_code, ean=ean, upc=upc)
         query_string = await create_query_string(item_id=item_id, alu=alu, sku_code=sku_code, ean=ean, upc=upc)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -399,6 +413,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getProductStockForTimeByIds"], proccessed_params="""{"required":[{"in":"query","name":"timestamp","description":"Timestamp in UTC format (2020-07-23T10:27:50Z).","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"timestamp","description":"Timestamp in UTC format (2020-07-23T10:27:50Z).","schema":{"type":"string"},"required":true},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string"},"required":false}],"headers":[],"path":[]}""", serverType="application", timestamp=timestamp, page_size=page_size, page_id=page_id)
         query_string = await create_query_string(timestamp=timestamp, page_size=page_size, page_id=page_id)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -464,6 +480,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getProducts"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"q","description":"The search query for entering partial or full name of product, brand, category, or collection.","schema":{"type":"string"},"required":false},{"in":"query","name":"f","description":"The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter parameter applied as an AND condition.","schema":{"type":"string","example":"brand:voi-jeans||reliance:::l3_categories:t-shirts||shirts"},"required":false},{"in":"query","name":"filters","description":"True for fetching all filter parameters and False for disabling the filter parameters.","schema":{"type":"boolean","default":true},"required":false},{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted, e.g. popularity, price, latest and discount, in either ascending or descending order. See the supported values below.","schema":{"type":"string","enum":["latest","popular","price_asc","price_dsc","discount_asc","discount_dsc"]},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_type","description":"Available pagination types are cursor or number.","schema":{"type":"string","default":"cursor"},"required":false}],"query":[{"in":"query","name":"q","description":"The search query for entering partial or full name of product, brand, category, or collection.","schema":{"type":"string"},"required":false},{"in":"query","name":"f","description":"The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter parameter applied as an AND condition.","schema":{"type":"string","example":"brand:voi-jeans||reliance:::l3_categories:t-shirts||shirts"},"required":false},{"in":"query","name":"filters","description":"True for fetching all filter parameters and False for disabling the filter parameters.","schema":{"type":"boolean","default":true},"required":false},{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted, e.g. popularity, price, latest and discount, in either ascending or descending order. See the supported values below.","schema":{"type":"string","enum":["latest","popular","price_asc","price_dsc","discount_asc","discount_dsc"]},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_type","description":"Available pagination types are cursor or number.","schema":{"type":"string","default":"cursor"},"required":false}],"headers":[],"path":[]}""", serverType="application", q=q, f=f, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type)
         query_string = await create_query_string(q=q, f=f, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -514,6 +532,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getBrands"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"department","description":"The name of the department. Use this parameter to filter products by a particular department. See the list of available departments below. Also, you can get available departments from the endpoint /service/application/catalog/v1.0/departments/.","schema":{"type":"string","enum":["baby-care-kids-essentials","beauty-personal-care","home-living","fashion","others","toys"]},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"department","description":"The name of the department. Use this parameter to filter products by a particular department. See the list of available departments below. Also, you can get available departments from the endpoint /service/application/catalog/v1.0/departments/.","schema":{"type":"string","enum":["baby-care-kids-essentials","beauty-personal-care","home-living","fashion","others","toys"]},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[]}""", serverType="application", department=department, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(department=department, page_no=page_no, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -558,6 +578,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getBrandDetailBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a brand. You can get slug value from the endpoint /service/application/catalog/v1.0/brands/.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a brand. You can get slug value from the endpoint /service/application/catalog/v1.0/brands/.","schema":{"type":"string"},"required":true}]}""", serverType="application", slug=slug)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -602,6 +624,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCategories"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"department","description":"The name of the department. Use this parameter to filter products by a particular department. See the list of available departments below. Also, you can get available departments from the endpoint /service/application/catalog/v1.0/departments/.","schema":{"type":"string","enum":["baby-care-kids-essentials","beauty-personal-care","home-living","fashion","others","toys"]},"required":false}],"query":[{"in":"query","name":"department","description":"The name of the department. Use this parameter to filter products by a particular department. See the list of available departments below. Also, you can get available departments from the endpoint /service/application/catalog/v1.0/departments/.","schema":{"type":"string","enum":["baby-care-kids-essentials","beauty-personal-care","home-living","fashion","others","toys"]},"required":false}],"headers":[],"path":[]}""", serverType="application", department=department)
         query_string = await create_query_string(department=department)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -646,6 +670,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCategoryDetailBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a brand. You can get slug value from the endpoint /service/application/catalog/v1.0/brands/.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a brand. You can get slug value from the endpoint /service/application/catalog/v1.0/brands/.","schema":{"type":"string"},"required":true}]}""", serverType="application", slug=slug)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -696,6 +722,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getHomeProducts"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted, e.g. popularity, price, latest and discount, in either ascending or descending order.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string","default":"1"},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted, e.g. popularity, price, latest and discount, in either ascending or descending order.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string","default":"1"},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[]}""", serverType="application", sort_on=sort_on, page_id=page_id, page_size=page_size)
         query_string = await create_query_string(sort_on=sort_on, page_id=page_id, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -737,6 +765,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getDepartments"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -781,6 +811,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getSearchResults"], proccessed_params="""{"required":[{"in":"query","name":"q","description":"The search query for entering partial or full name of a product, brand or category. For example, if the given search query `q` is _ski_, the relevant search suggestions could be _skirt_, _ski shoes_, __skin cream_ etc.","schema":{"type":"string"},"required":true}],"optional":[],"query":[{"in":"query","name":"q","description":"The search query for entering partial or full name of a product, brand or category. For example, if the given search query `q` is _ski_, the relevant search suggestions could be _skirt_, _ski shoes_, __skin cream_ etc.","schema":{"type":"string"},"required":true}],"headers":[],"path":[]}""", serverType="application", q=q)
         query_string = await create_query_string(q=q)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -834,6 +866,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCollections"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"tag","description":"List of tags  to filter collections.","schema":{"type":"array","items":{"type":"string"},"minItems":1},"required":false},{"in":"query","name":"q","description":"Name of the collection to filter collection.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"tag","description":"List of tags  to filter collections.","schema":{"type":"array","items":{"type":"string"},"minItems":1},"required":false},{"in":"query","name":"q","description":"Name of the collection to filter collection.","schema":{"type":"string"},"required":false}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size, tag=tag, q=q)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, tag=tag, q=q)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -902,6 +936,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCollectionItemsBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"f","description":"The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter parameter applied as an AND condition.","schema":{"type":"string","example":"brand:voi-jeans||reliance:::l3_categories:t-shirts||shirts"},"required":false},{"in":"query","name":"q","description":"The search query for entering partial or full name of product, brand, category, or collection.","schema":{"type":"string","example":"shirts"},"required":false},{"in":"query","name":"filters","description":"True for fetching all filter parameters and False for disabling the filter parameters.","schema":{"type":"boolean","default":true},"required":false},{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted, e.g. popularity, price, latest and discount, in either ascending or descending order. See the supported values below.","schema":{"type":"string","enum":["latest","popular","price_asc","price_dsc","discount_asc","discount_dsc"]},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string","default":"1"},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"page_no","description":"Page Number to retrieve next set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_type","description":"Page Type to retrieve set of results can be cursor or number.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"f","description":"The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter parameter applied as an AND condition.","schema":{"type":"string","example":"brand:voi-jeans||reliance:::l3_categories:t-shirts||shirts"},"required":false},{"in":"query","name":"q","description":"The search query for entering partial or full name of product, brand, category, or collection.","schema":{"type":"string","example":"shirts"},"required":false},{"in":"query","name":"filters","description":"True for fetching all filter parameters and False for disabling the filter parameters.","schema":{"type":"boolean","default":true},"required":false},{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted, e.g. popularity, price, latest and discount, in either ascending or descending order. See the supported values below.","schema":{"type":"string","enum":["latest","popular","price_asc","price_dsc","discount_asc","discount_dsc"]},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string","default":"1"},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"page_no","description":"Page Number to retrieve next set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_type","description":"Page Type to retrieve set of results can be cursor or number.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/.","schema":{"type":"string"},"required":true}]}""", serverType="application", slug=slug, f=f, q=q, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type)
         query_string = await create_query_string(f=f, q=q, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -946,6 +982,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCollectionDetailBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/.","schema":{"type":"string"},"required":true}]}""", serverType="application", slug=slug)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -996,6 +1034,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getFollowedListing"], proccessed_params="""{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string","default":"1"},"required":false},{"in":"query","name":"page_size","description":"Page ID to retrieve next set of results.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string","default":"1"},"required":false},{"in":"query","name":"page_size","description":"Page ID to retrieve next set of results.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true}]}""", serverType="application", collection_type=collection_type, page_id=page_id, page_size=page_size)
         query_string = await create_query_string(page_id=page_id, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1043,6 +1083,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["unfollowById"], proccessed_params="""{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", serverType="application", collection_type=collection_type, collection_id=collection_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1090,6 +1132,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["followById"], proccessed_params="""{"required":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection followed, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", serverType="application", collection_type=collection_type, collection_id=collection_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1137,6 +1181,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getFollowerCountById"], proccessed_params="""{"required":[{"in":"path","name":"collection_type","description":"Type of collection, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"collection_type","description":"Type of collection, i.e. products, brands, or collections.","schema":{"type":"string"},"required":true},{"in":"path","name":"collection_id","description":"The ID of the collection type.","schema":{"type":"string"},"required":true}]}""", serverType="application", collection_type=collection_type, collection_id=collection_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1181,6 +1227,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getFollowIds"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"collection_type","description":"Type of collection, i.e. products, brands, collections.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"collection_type","description":"Type of collection, i.e. products, brands, collections.","schema":{"type":"string"},"required":false}],"headers":[],"path":[]}""", serverType="application", collection_type=collection_type)
         query_string = await create_query_string(collection_type=collection_type)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1246,6 +1294,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getStores"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"q","description":"Search a store by its name or store_code.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"Search stores by the city in which they are situated.","schema":{"type":"string"},"required":false},{"in":"query","name":"range","description":"Use this to retrieve stores within a particular range in meters, e.g. 10000, to indicate a 10km range.","schema":{"type":"integer","default":20000},"required":false},{"in":"query","name":"latitude","description":"Latitude of the location from where one wants to retrieve the nearest stores, e.g. 72.8691788.","schema":{"type":"number"},"required":false},{"in":"query","name":"longitude","description":"Longitude of the location from where one wants to retrieve the nearest stores, e.g. 19.1174114.","schema":{"type":"number"},"required":false},{"in":"query","name":"tags","description":"Search stores based on tags.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"q","description":"Search a store by its name or store_code.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"Search stores by the city in which they are situated.","schema":{"type":"string"},"required":false},{"in":"query","name":"range","description":"Use this to retrieve stores within a particular range in meters, e.g. 10000, to indicate a 10km range.","schema":{"type":"integer","default":20000},"required":false},{"in":"query","name":"latitude","description":"Latitude of the location from where one wants to retrieve the nearest stores, e.g. 72.8691788.","schema":{"type":"number"},"required":false},{"in":"query","name":"longitude","description":"Longitude of the location from where one wants to retrieve the nearest stores, e.g. 19.1174114.","schema":{"type":"number"},"required":false},{"in":"query","name":"tags","description":"Search stores based on tags.","schema":{"type":"string"},"required":false}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size, q=q, city=city, range=range, latitude=latitude, longitude=longitude, tags=tags)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q, city=city, range=range, latitude=latitude, longitude=longitude, tags=tags)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1308,6 +1358,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getInStockLocations"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"q","description":"Search a store by its name or store_code.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"Search stores by the city in which they are situated.","schema":{"type":"string"},"required":false},{"in":"query","name":"range","description":"Use this to retrieve stores within a particular range in meters, e.g. 10000, to indicate a 10km range.","schema":{"type":"integer","default":20000},"required":false},{"in":"query","name":"latitude","description":"Latitude of the location from where one wants to retrieve the nearest stores, e.g. 72.8691788.","schema":{"type":"number"},"required":false},{"in":"query","name":"longitude","description":"Longitude of the location from where one wants to retrieve the nearest stores, e.g. 19.1174114.","schema":{"type":"number"},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"q","description":"Search a store by its name or store_code.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"Search stores by the city in which they are situated.","schema":{"type":"string"},"required":false},{"in":"query","name":"range","description":"Use this to retrieve stores within a particular range in meters, e.g. 10000, to indicate a 10km range.","schema":{"type":"integer","default":20000},"required":false},{"in":"query","name":"latitude","description":"Latitude of the location from where one wants to retrieve the nearest stores, e.g. 72.8691788.","schema":{"type":"number"},"required":false},{"in":"query","name":"longitude","description":"Longitude of the location from where one wants to retrieve the nearest stores, e.g. 19.1174114.","schema":{"type":"number"},"required":false}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size, q=q, city=city, range=range, latitude=latitude, longitude=longitude)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q, city=city, range=range, latitude=latitude, longitude=longitude)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1352,6 +1404,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getLocationDetailsById"], proccessed_params="""{"required":[{"in":"path","name":"location_id","description":"Unique Location ID.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"location_id","description":"Unique Location ID.","schema":{"type":"integer"},"required":true}]}""", serverType="application", location_id=location_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1399,6 +1453,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getProductBundlesBySlug"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"slug","description":"Product slug for which bundles need to be fetched.","schema":{"type":"string"},"required":false},{"in":"query","name":"id","description":"Product uid.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"slug","description":"Product slug for which bundles need to be fetched.","schema":{"type":"string"},"required":false},{"in":"query","name":"id","description":"Product uid.","schema":{"type":"string"},"required":false}],"headers":[],"path":[]}""", serverType="application", slug=slug, id=id)
         query_string = await create_query_string(slug=slug, id=id)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1452,6 +1508,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getProductPriceBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/.","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false},{"in":"query","name":"moq","description":"An Integer indication the Minimum Order Quantity of a product, e.g. 100.","schema":{"type":"integer"},"required":false}],"query":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the product, e.g. 1,2,3.","schema":{"type":"integer"},"required":false},{"in":"query","name":"moq","description":"An Integer indication the Minimum Order Quantity of a product, e.g. 100.","schema":{"type":"integer"},"required":false}],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/.","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes.","schema":{"type":"string"},"required":true}]}""", serverType="application", slug=slug, size=size, store_id=store_id, moq=moq)
         query_string = await create_query_string(store_id=store_id, moq=moq)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1508,6 +1566,8 @@ class Catalog:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getProductSellersBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/.","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"strategy","description":"Sort stores on the basis of strategy. eg, fast-delivery, low-price, optimal.","schema":{"type":"string"}},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"strategy","description":"Sort stores on the basis of strategy. eg, fast-delivery, low-price, optimal.","schema":{"type":"string"}},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/.","schema":{"type":"string"},"required":true},{"in":"path","name":"size","description":"A string indicating the size of the product, e.g. S, M, XL. You can get slug value from the endpoint /service/application/catalog/v1.0/products/sizes.","schema":{"type":"string"},"required":true}]}""", serverType="application", slug=slug, size=size, strategy=strategy, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(strategy=strategy, page_no=page_no, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'

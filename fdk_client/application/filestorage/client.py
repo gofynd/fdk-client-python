@@ -47,6 +47,8 @@ class FileStorage:
 
         url_with_params = await create_url_with_params(api_url=self._urls["startUpload"], proccessed_params="""{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}}]}""", serverType="application", namespace=namespace)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -96,6 +98,8 @@ Complete the file upload and store the file details such as name, size, content 
 
         url_with_params = await create_url_with_params(api_url=self._urls["completeUpload"], proccessed_params="""{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}}]}""", serverType="application", namespace=namespace)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -141,6 +145,8 @@ Complete the file upload and store the file details such as name, size, content 
 
         url_with_params = await create_url_with_params(api_url=self._urls["signUrls"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'

@@ -47,6 +47,8 @@ class Rewards:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getOfferByName"], proccessed_params="""{"required":[{"name":"name","in":"path","description":"The name given to the offer.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"name","in":"path","description":"The name given to the offer.","required":true,"schema":{"type":"string"}}]}""", serverType="application", name=name)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -92,6 +94,8 @@ class Rewards:
 
         url_with_params = await create_url_with_params(api_url=self._urls["catalogueOrder"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -139,6 +143,8 @@ class Rewards:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getUserPointsHistory"], proccessed_params="""{"required":[],"optional":[{"name":"page_id","in":"query","description":"PageID is the ID of the requested page. For first request it should be kept empty.","schema":{"type":"string"}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","schema":{"type":"integer"}}],"query":[{"name":"page_id","in":"query","description":"PageID is the ID of the requested page. For first request it should be kept empty.","schema":{"type":"string"}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","schema":{"type":"integer"}}],"headers":[],"path":[]}""", serverType="application", page_id=page_id, page_size=page_size)
         query_string = await create_query_string(page_id=page_id, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -180,6 +186,8 @@ class Rewards:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getUserPoints"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -221,6 +229,8 @@ class Rewards:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getUserReferralDetails"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -266,6 +276,8 @@ class Rewards:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getOrderDiscount"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -311,6 +323,8 @@ class Rewards:
 
         url_with_params = await create_url_with_params(api_url=self._urls["redeemReferralCode"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'

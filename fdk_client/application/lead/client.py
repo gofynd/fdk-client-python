@@ -45,6 +45,8 @@ class Lead:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getTicket"], proccessed_params="""{"required":[{"name":"id","in":"path","description":"ID of ticket to be retrieved.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","description":"ID of ticket to be retrieved.","required":true,"schema":{"type":"string"}}]}""", serverType="application", id=id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -93,6 +95,8 @@ class Lead:
 
         url_with_params = await create_url_with_params(api_url=self._urls["createHistory"], proccessed_params="""{"required":[{"name":"id","in":"path","description":"Ticket ID for which history is created.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","description":"Ticket ID for which history is created.","required":true,"schema":{"type":"string"}}]}""", serverType="application", id=id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -138,6 +142,8 @@ class Lead:
 
         url_with_params = await create_url_with_params(api_url=self._urls["createTicket"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -182,6 +188,8 @@ class Lead:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCustomForm"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted.","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -230,6 +238,8 @@ class Lead:
 
         url_with_params = await create_url_with_params(api_url=self._urls["submitCustomForm"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted.","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'

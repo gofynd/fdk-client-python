@@ -28,6 +28,9 @@ class Theme:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/themes", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company to retrieve the themes associated with it.","required":true,"schema":{"type":"integer","example":19243}}],"optional":[{"name":"search_text","in":"query","description":"Search Text to match the Theme Names and return the response.","required":false,"schema":{"type":"string","example":"Astra"}}],"query":[{"name":"search_text","in":"query","description":"Search Text to match the Theme Names and return the response.","required":false,"schema":{"type":"string","example":"Astra"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company to retrieve the themes associated with it.","required":true,"schema":{"type":"integer","example":19243}}]}""", serverType="platform", search_text=search_text)
         query_string = await create_query_string(search_text=search_text)
+        if query_string:
+            url_with_params += "?" + query_string
+
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -61,6 +64,9 @@ class Theme:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/private_themes", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company to retrieve the themes associated with it.","required":true,"schema":{"type":"integer","example":19243}}],"optional":[{"name":"search_text","in":"query","description":"Search Text to match the Theme Names and return the response.","schema":{"type":"string","example":"Astra"}}],"query":[{"name":"search_text","in":"query","description":"Search Text to match the Theme Names and return the response.","schema":{"type":"string","example":"Astra"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company to retrieve the themes associated with it.","required":true,"schema":{"type":"integer","example":19243}}]}""", serverType="platform", search_text=search_text)
         query_string = await create_query_string(search_text=search_text)
+        if query_string:
+            url_with_params += "?" + query_string
+
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -95,6 +101,9 @@ class Theme:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company to apply the theme to.","required":true,"schema":{"type":"integer","example":19243}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company to apply the theme to.","required":true,"schema":{"type":"integer","example":19243}}]}""", serverType="platform", )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -137,6 +146,9 @@ class Theme:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/{theme_id}", """{"required":[{"in":"path","name":"company_id","schema":{"type":"integer","example":19243},"required":true,"description":"The ID of the company."},{"in":"path","name":"theme_id","schema":{"type":"string"},"required":true,"description":"The ID of the theme."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","schema":{"type":"integer","example":19243},"required":true,"description":"The ID of the company."},{"in":"path","name":"theme_id","schema":{"type":"string"},"required":true,"description":"The ID of the theme."}]}""", serverType="platform", theme_id=theme_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"

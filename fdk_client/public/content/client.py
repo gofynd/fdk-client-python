@@ -39,6 +39,8 @@ class Content:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCredentialsByEntity"], proccessed_params="""{"required":[{"in":"path","name":"entity","description":"Server Type","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"entity","description":"Server Type","required":true,"schema":{"type":"string"}}]}""", serverType="public", entity=entity)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,

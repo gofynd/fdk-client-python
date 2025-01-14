@@ -33,6 +33,8 @@ class Partner:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/partners/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/proxy/{extension_id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"},{"name":"extension_id","in":"path","description":"Extension id for which a proxy URL will be generated","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"},{"name":"extension_id","in":"path","description":"Extension id for which a proxy URL will be generated","required":true,"schema":{"type":"string"}}]}""", serverType="platform", extension_id=extension_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -78,6 +80,8 @@ class Partner:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/partners/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/proxy/{extension_id}/{attached_path}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"},{"name":"extension_id","in":"path","description":"Extension id for which proxy URL needs to be removed","required":true,"schema":{"type":"string"}},{"name":"attached_path","in":"path","description":"Attached path slug","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current application id","in":"path","required":true,"name":"application_id"},{"name":"extension_id","in":"path","description":"Extension id for which proxy URL needs to be removed","required":true,"schema":{"type":"string"}},{"name":"attached_path","in":"path","description":"Attached path slug","required":true,"schema":{"type":"string"}}]}""", serverType="platform", extension_id=extension_id, attached_path=attached_path)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"

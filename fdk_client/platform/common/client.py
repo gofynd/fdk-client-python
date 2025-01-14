@@ -31,6 +31,9 @@ class Common:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/common/configuration/v1.0/application/search-application", """{"required":[],"optional":[{"in":"header","name":"authorization","schema":{"type":"string"}},{"in":"query","name":"query","schema":{"type":"string"},"description":"Provide application name"}],"query":[{"in":"query","name":"query","schema":{"type":"string"},"description":"Provide application name"}],"headers":[{"in":"header","name":"authorization","schema":{"type":"string"}}],"path":[]}""", serverType="platform", authorization=authorization, query=query)
         query_string = await create_query_string(query=query)
+        if query_string:
+            url_with_params += "?" + query_string
+
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -76,6 +79,9 @@ class Common:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/common/configuration/v1.0/location", """{"required":[],"optional":[{"in":"query","name":"location_type","schema":{"type":"string","enum":["country","state","city"]}},{"in":"query","name":"id","schema":{"type":"string"},"description":"Field is optional when location_type is country. If querying for state, provide id of the country. If querying for city, provide id of the state."}],"query":[{"in":"query","name":"location_type","schema":{"type":"string","enum":["country","state","city"]}},{"in":"query","name":"id","schema":{"type":"string"},"description":"Field is optional when location_type is country. If querying for state, provide id of the country. If querying for city, provide id of the state."}],"headers":[],"path":[]}""", serverType="platform", location_type=location_type, id=id)
         query_string = await create_query_string(location_type=location_type, id=id)
+        if query_string:
+            url_with_params += "?" + query_string
+
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"

@@ -40,6 +40,8 @@ class Webhook:
 
         url_with_params = await create_url_with_params(api_url=self._urls["fetchAllWebhookEvents"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,
@@ -82,6 +84,8 @@ class Webhook:
 
         url_with_params = await create_url_with_params(api_url=self._urls["queryWebhookEventDetails"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,
@@ -124,6 +128,8 @@ class Webhook:
 
         url_with_params = await create_url_with_params(api_url=self._urls["notifyDepricatedEvent"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,
@@ -170,6 +176,8 @@ class Webhook:
 
         url_with_params = await create_url_with_params(api_url=self._urls["testHandlerTransformation"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,
@@ -216,6 +224,8 @@ class Webhook:
 
         url_with_params = await create_url_with_params(api_url=self._urls["validateSchema"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {
             "User-Agent": self._conf.userAgent,

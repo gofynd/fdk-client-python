@@ -89,6 +89,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCart"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"c","schema":{"type":"boolean"},"description":"Select `true` to retrieve the cod charges in breakup of cart items."},{"in":"query","name":"assign_card_id","schema":{"type":"integer"},"description":"Token of user's debit or credit card."},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"in":"query","name":"order_type","schema":{"type":"string"},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"c","schema":{"type":"boolean"},"description":"Select `true` to retrieve the cod charges in breakup of cart items."},{"in":"query","name":"assign_card_id","schema":{"type":"integer"},"description":"Token of user's debit or credit card."},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"in":"query","name":"order_type","schema":{"type":"string"},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"headers":[],"path":[]}""", serverType="application", id=id, i=i, b=b, c=c, assign_card_id=assign_card_id, area_code=area_code, buy_now=buy_now, order_type=order_type)
         query_string = await create_query_string(id=id, i=i, b=b, c=c, assign_card_id=assign_card_id, area_code=area_code, buy_now=buy_now, order_type=order_type)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -133,6 +135,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCartLastModified"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."}],"headers":[],"path":[]}""", serverType="application", id=id)
         query_string = await create_query_string(id=id)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -187,6 +191,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["addItems"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"order_type","schema":{"type":"string"},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"query":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"order_type","schema":{"type":"string"},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"headers":[],"path":[]}""", serverType="application", i=i, b=b, area_code=area_code, buy_now=buy_now, id=id, order_type=order_type)
         query_string = await create_query_string(i=i, b=b, area_code=area_code, buy_now=buy_now, id=id, order_type=order_type)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -253,6 +259,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["updateCart"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"name":"cart_type","in":"query","schema":{"type":"string"},"description":"The type of cart."},{"in":"query","name":"order_type","schema":{"type":"string"},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"name":"cart_type","in":"query","schema":{"type":"string"},"description":"The type of cart."},{"in":"query","name":"order_type","schema":{"type":"string"},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"headers":[],"path":[]}""", serverType="application", id=id, i=i, b=b, area_code=area_code, buy_now=buy_now, cart_type=cart_type, order_type=order_type)
         query_string = await create_query_string(id=id, i=i, b=b, area_code=area_code, buy_now=buy_now, cart_type=cart_type, order_type=order_type)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -297,6 +305,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["deleteCart"], proccessed_params="""{"required":[],"optional":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}}],"query":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", id=id)
         query_string = await create_query_string(id=id)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -344,6 +354,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getItemCount"], proccessed_params="""{"required":[],"optional":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Boolean value to get buy_now cart."}],"query":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Boolean value to get buy_now cart."}],"headers":[],"path":[]}""", serverType="application", id=id, buy_now=buy_now)
         query_string = await create_query_string(id=id, buy_now=buy_now)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -397,6 +409,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCoupons"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"in":"query","name":"slug","schema":{"type":"string"},"description":"Product slug to fetch the available coupons."},{"in":"query","name":"store_id","schema":{"type":"string"},"description":"Unique identifier of a store."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"in":"query","name":"slug","schema":{"type":"string"},"description":"Product slug to fetch the available coupons."},{"in":"query","name":"store_id","schema":{"type":"string"},"description":"Unique identifier of a store."}],"headers":[],"path":[]}""", serverType="application", id=id, buy_now=buy_now, slug=slug, store_id=store_id)
         query_string = await create_query_string(id=id, buy_now=buy_now, slug=slug, store_id=store_id)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -460,6 +474,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["applyCoupon"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"p","schema":{"type":"boolean"},"description":"Select `true` for getting a payment option in response."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."},{"in":"query","name":"cart_type","schema":{"type":"string"},"description":"The type of cart."}],"query":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"p","schema":{"type":"boolean"},"description":"Select `true` for getting a payment option in response."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."},{"in":"query","name":"cart_type","schema":{"type":"string"},"description":"The type of cart."}],"headers":[],"path":[]}""", serverType="application", i=i, b=b, p=p, id=id, buy_now=buy_now, cart_type=cart_type)
         query_string = await create_query_string(i=i, b=b, p=p, id=id, buy_now=buy_now, cart_type=cart_type)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -507,6 +523,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["removeCoupon"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Wheter to get buy_now cart."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Wheter to get buy_now cart."}],"headers":[],"path":[]}""", serverType="application", id=id, buy_now=buy_now)
         query_string = await create_query_string(id=id, buy_now=buy_now)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -560,6 +578,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getBulkDiscountOffers"], proccessed_params="""{"required":[],"optional":[{"name":"item_id","description":"The Item ID of the product.","in":"query","schema":{"type":"integer"}},{"name":"article_id","description":"Article Mongo ID.","in":"query","schema":{"type":"string"}},{"name":"uid","description":"UID of the product.","in":"query","schema":{"type":"integer"}},{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product.","in":"query","schema":{"type":"string"}}],"query":[{"name":"item_id","description":"The Item ID of the product.","in":"query","schema":{"type":"integer"}},{"name":"article_id","description":"Article Mongo ID.","in":"query","schema":{"type":"string"}},{"name":"uid","description":"UID of the product.","in":"query","schema":{"type":"integer"}},{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product.","in":"query","schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", item_id=item_id, article_id=article_id, uid=uid, slug=slug)
         query_string = await create_query_string(item_id=item_id, article_id=article_id, uid=uid, slug=slug)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -617,6 +637,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["applyRewardPoints"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."}],"headers":[],"path":[]}""", serverType="application", id=id, i=i, b=b, buy_now=buy_now)
         query_string = await create_query_string(id=id, i=i, b=b, buy_now=buy_now)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -676,6 +698,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getAddresses"], proccessed_params="""{"required":[],"optional":[{"name":"cart_id","in":"query","schema":{"type":"string"},"description":"The unique identifier of the user cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"in":"query","name":"mobile_no","schema":{"type":"string"},"description":"Mobile number of the customer."},{"in":"query","name":"checkout_mode","schema":{"type":"string"},"description":"Option to checkout for self or for others."},{"in":"query","name":"tags","schema":{"type":"string"},"description":"Tag given to an address, e.g. work, home, office, shop."},{"in":"query","name":"is_default","schema":{"type":"boolean"},"description":"Select `true` to fetch the default address."}],"query":[{"name":"cart_id","in":"query","schema":{"type":"string"},"description":"The unique identifier of the user cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"in":"query","name":"mobile_no","schema":{"type":"string"},"description":"Mobile number of the customer."},{"in":"query","name":"checkout_mode","schema":{"type":"string"},"description":"Option to checkout for self or for others."},{"in":"query","name":"tags","schema":{"type":"string"},"description":"Tag given to an address, e.g. work, home, office, shop."},{"in":"query","name":"is_default","schema":{"type":"boolean"},"description":"Select `true` to fetch the default address."}],"headers":[],"path":[]}""", serverType="application", cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default)
         query_string = await create_query_string(cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -721,6 +745,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["addAddress"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -783,6 +809,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getAddressById"], proccessed_params="""{"required":[{"name":"id","in":"path","schema":{"type":"string"},"required":true,"description":"ID allotted to the selected address."}],"optional":[{"name":"cart_id","in":"query","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."},{"in":"query","name":"mobile_no","schema":{"type":"string"},"description":"Mobile number of the customer."},{"in":"query","name":"checkout_mode","schema":{"type":"string"},"description":"Option to checkout for self or for others."},{"in":"query","name":"tags","schema":{"type":"string"},"description":"Tag given to an address, e.g. work, home, office, shop."},{"in":"query","name":"is_default","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to fetch the default address."}],"query":[{"name":"cart_id","in":"query","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."},{"in":"query","name":"mobile_no","schema":{"type":"string"},"description":"Mobile number of the customer."},{"in":"query","name":"checkout_mode","schema":{"type":"string"},"description":"Option to checkout for self or for others."},{"in":"query","name":"tags","schema":{"type":"string"},"description":"Tag given to an address, e.g. work, home, office, shop."},{"in":"query","name":"is_default","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to fetch the default address."}],"headers":[],"path":[{"name":"id","in":"path","schema":{"type":"string"},"required":true,"description":"ID allotted to the selected address."}]}""", serverType="application", id=id, cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default)
         query_string = await create_query_string(cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -831,6 +859,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["updateAddress"], proccessed_params="""{"required":[{"name":"id","description":"ID allotted to the selected address.","schema":{"type":"string"},"in":"path","required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","description":"ID allotted to the selected address.","schema":{"type":"string"},"in":"path","required":true}]}""", serverType="application", id=id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -875,6 +905,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["removeAddress"], proccessed_params="""{"required":[{"name":"id","description":"ID allotted to the selected address.","schema":{"type":"string"},"in":"path","required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","description":"ID allotted to the selected address.","schema":{"type":"string"},"in":"path","required":true}]}""", serverType="application", id=id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -932,6 +964,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["selectAddress"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"cart_id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."}],"query":[{"in":"query","name":"cart_id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."}],"headers":[],"path":[]}""", serverType="application", cart_id=cart_id, buy_now=buy_now, i=i, b=b)
         query_string = await create_query_string(cart_id=cart_id, buy_now=buy_now, i=i, b=b)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -983,6 +1017,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["selectPaymentMode"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."}],"headers":[],"path":[]}""", serverType="application", id=id, buy_now=buy_now)
         query_string = await create_query_string(id=id, buy_now=buy_now)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1060,6 +1096,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["validateCouponForPayment"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"in":"query","name":"address_id","schema":{"type":"string"},"description":"ID allotted to an address."},{"in":"query","name":"payment_mode","schema":{"type":"string"},"description":"Payment mode selected by the customer."},{"in":"query","name":"payment_identifier","schema":{"type":"string"},"description":"Identifier of payment like ICIC, PAYTM."},{"in":"query","name":"aggregator_name","schema":{"type":"string"},"description":"Payment gateway identifier."},{"in":"query","name":"merchant_code","schema":{"type":"string"},"description":"Identifier used by payment gateway for a given payment mode, e.g. NB_ICIC, PAYTM."},{"in":"query","name":"iin","schema":{"type":"string"},"description":"Debit/Credit card prefix (first 6 digit)."},{"in":"query","name":"network","schema":{"type":"string"},"description":"Credit/Debit card issuer, e.g. VISA, MASTERCARD, RUPAY."},{"in":"query","name":"type","schema":{"type":"string"},"description":"Card type, e.g. Credit, Debit."},{"in":"query","name":"card_id","schema":{"type":"string"},"description":"Saved card token reference id."},{"in":"query","name":"cart_type","schema":{"type":"string"},"description":"Type of the cart."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"in":"query","name":"address_id","schema":{"type":"string"},"description":"ID allotted to an address."},{"in":"query","name":"payment_mode","schema":{"type":"string"},"description":"Payment mode selected by the customer."},{"in":"query","name":"payment_identifier","schema":{"type":"string"},"description":"Identifier of payment like ICIC, PAYTM."},{"in":"query","name":"aggregator_name","schema":{"type":"string"},"description":"Payment gateway identifier."},{"in":"query","name":"merchant_code","schema":{"type":"string"},"description":"Identifier used by payment gateway for a given payment mode, e.g. NB_ICIC, PAYTM."},{"in":"query","name":"iin","schema":{"type":"string"},"description":"Debit/Credit card prefix (first 6 digit)."},{"in":"query","name":"network","schema":{"type":"string"},"description":"Credit/Debit card issuer, e.g. VISA, MASTERCARD, RUPAY."},{"in":"query","name":"type","schema":{"type":"string"},"description":"Card type, e.g. Credit, Debit."},{"in":"query","name":"card_id","schema":{"type":"string"},"description":"Saved card token reference id."},{"in":"query","name":"cart_type","schema":{"type":"string"},"description":"Type of the cart."}],"headers":[],"path":[]}""", serverType="application", id=id, buy_now=buy_now, address_id=address_id, payment_mode=payment_mode, payment_identifier=payment_identifier, aggregator_name=aggregator_name, merchant_code=merchant_code, iin=iin, network=network, type=type, card_id=card_id, cart_type=cart_type)
         query_string = await create_query_string(id=id, buy_now=buy_now, address_id=address_id, payment_mode=payment_mode, payment_identifier=payment_identifier, aggregator_name=aggregator_name, merchant_code=merchant_code, iin=iin, network=network, type=type, card_id=card_id, cart_type=cart_type)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1119,6 +1157,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getShipments"], proccessed_params="""{"required":[],"optional":[{"name":"p","description":"Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart.","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."},{"name":"address_id","description":"ID allotted to the selected address.","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059.","in":"query","schema":{"type":"string"}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. Digital - If the customer wants to buy digital voucher ( for jiogames ).","in":"query","schema":{"type":"string"}}],"query":[{"name":"p","description":"Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart.","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."},{"name":"address_id","description":"ID allotted to the selected address.","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059.","in":"query","schema":{"type":"string"}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. Digital - If the customer wants to buy digital voucher ( for jiogames ).","in":"query","schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code, order_type=order_type)
         query_string = await create_query_string(p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code, order_type=order_type)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1170,6 +1210,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["updateCartMeta"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."}],"headers":[],"path":[]}""", serverType="application", id=id, buy_now=buy_now)
         query_string = await create_query_string(id=id, buy_now=buy_now)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1215,6 +1257,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCartShareLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1259,6 +1303,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCartSharedItems"], proccessed_params="""{"required":[{"name":"token","description":"Token of the shared short link.","schema":{"type":"string"},"in":"path","required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"token","description":"Token of the shared short link.","schema":{"type":"string"},"in":"path","required":true}]}""", serverType="application", token=token)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1306,6 +1352,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["updateCartWithSharedItems"], proccessed_params="""{"required":[{"name":"token","description":"Token of the shared short link.","schema":{"type":"string"},"in":"path","required":true},{"name":"action","description":"Operation to perform on the existing cart merge or replace.","schema":{"type":"string","enum":["merge","replace"]},"in":"path","required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"token","description":"Token of the shared short link.","schema":{"type":"string"},"in":"path","required":true},{"name":"action","description":"Operation to perform on the existing cart merge or replace.","schema":{"type":"string","enum":["merge","replace"]},"in":"path","required":true}]}""", serverType="application", token=token, action=action)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1362,6 +1410,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getPromotionOffers"], proccessed_params="""{"required":[],"optional":[{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product.","in":"query","schema":{"type":"string"}},{"name":"page_size","description":"Number of offers to be fetched to show.","in":"query","schema":{"type":"integer"}},{"name":"promotion_group","description":"Type of promotion groups.","in":"query","schema":{"type":"string"}},{"name":"store_id","description":"Unique identifier of a store.","in":"query","schema":{"type":"integer"}},{"name":"cart_type","in":"query","schema":{"type":"string"},"description":"The type of cart."}],"query":[{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product.","in":"query","schema":{"type":"string"}},{"name":"page_size","description":"Number of offers to be fetched to show.","in":"query","schema":{"type":"integer"}},{"name":"promotion_group","description":"Type of promotion groups.","in":"query","schema":{"type":"string"}},{"name":"store_id","description":"Unique identifier of a store.","in":"query","schema":{"type":"integer"}},{"name":"cart_type","in":"query","schema":{"type":"string"},"description":"The type of cart."}],"headers":[],"path":[]}""", serverType="application", slug=slug, page_size=page_size, promotion_group=promotion_group, store_id=store_id, cart_type=cart_type)
         query_string = await create_query_string(slug=slug, page_size=page_size, promotion_group=promotion_group, store_id=store_id, cart_type=cart_type)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1415,6 +1465,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getLadderOffers"], proccessed_params="""{"required":[{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product.","in":"query","required":true,"schema":{"type":"string"}}],"optional":[{"name":"store_id","description":"Store uid of assigned store on PDP page. If not passed default first created ladder will be returned.","in":"query","schema":{"type":"string"}},{"name":"promotion_id","description":"Get ladder information of given promotion id explicitely.","in":"query","required":false,"schema":{"type":"string"}},{"name":"page_size","description":"Number of offers to be fetched to show.","in":"query","schema":{"type":"integer"}}],"query":[{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product.","in":"query","required":true,"schema":{"type":"string"}},{"name":"store_id","description":"Store uid of assigned store on PDP page. If not passed default first created ladder will be returned.","in":"query","schema":{"type":"string"}},{"name":"promotion_id","description":"Get ladder information of given promotion id explicitely.","in":"query","required":false,"schema":{"type":"string"}},{"name":"page_size","description":"Number of offers to be fetched to show.","in":"query","schema":{"type":"integer"}}],"headers":[],"path":[]}""", serverType="application", slug=slug, store_id=store_id, promotion_id=promotion_id, page_size=page_size)
         query_string = await create_query_string(slug=slug, store_id=store_id, promotion_id=promotion_id, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1462,6 +1514,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["getPromotionPaymentOffers"], proccessed_params="""{"required":[],"optional":[{"name":"id","schema":{"type":"string"},"in":"query","description":"Cart id of the user cart ."},{"name":"uid","schema":{"type":"integer"},"in":"query","description":"Cart uid of the user cart ."}],"query":[{"name":"id","schema":{"type":"string"},"in":"query","description":"Cart id of the user cart ."},{"name":"uid","schema":{"type":"integer"},"in":"query","description":"Cart uid of the user cart ."}],"headers":[],"path":[]}""", serverType="application", id=id, uid=uid)
         query_string = await create_query_string(id=id, uid=uid)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
@@ -1513,6 +1567,8 @@ class Cart:
 
         url_with_params = await create_url_with_params(api_url=self._urls["checkoutCartV2"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"buy_now","description":"This indicates the type of cart to checkout.","schema":{"type":"boolean"}},{"name":"cart_type","in":"query","schema":{"type":"string"},"description":"The type of cart."}],"query":[{"in":"query","name":"buy_now","description":"This indicates the type of cart to checkout.","schema":{"type":"boolean"}},{"name":"cart_type","in":"query","schema":{"type":"string"},"description":"The type of cart."}],"headers":[],"path":[]}""", serverType="application", buy_now=buy_now, cart_type=cart_type)
         query_string = await create_query_string(buy_now=buy_now, cart_type=cart_type)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers={}
         headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'

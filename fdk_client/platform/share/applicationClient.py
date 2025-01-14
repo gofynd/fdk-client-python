@@ -30,6 +30,8 @@ class Share:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -90,6 +92,8 @@ class Share:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"Current page number","required":false,"schema":{"default":1,"type":"integer"}},{"name":"page_size","in":"query","description":"Current page size","required":false,"schema":{"default":10,"type":"integer"}},{"name":"created_by","in":"query","description":"Short link creator","required":false,"schema":{"type":"string","enum":["team"]}},{"name":"active","in":"query","description":"Short link active status","required":false,"schema":{"type":"string","enum":["true","false"]}},{"name":"short_url","in":"query","description":"Search for short url","required":false,"schema":{"type":"string"}},{"name":"original_url","in":"query","description":"Search for original url","required":false,"schema":{"type":"string"}},{"name":"title","in":"query","description":"Search text for title","required":false,"schema":{"type":"string"}}],"query":[{"name":"page_no","in":"query","description":"Current page number","required":false,"schema":{"default":1,"type":"integer"}},{"name":"page_size","in":"query","description":"Current page size","required":false,"schema":{"default":10,"type":"integer"}},{"name":"created_by","in":"query","description":"Short link creator","required":false,"schema":{"type":"string","enum":["team"]}},{"name":"active","in":"query","description":"Short link active status","required":false,"schema":{"type":"string","enum":["true","false"]}},{"name":"short_url","in":"query","description":"Search for short url","required":false,"schema":{"type":"string"}},{"name":"original_url","in":"query","description":"Search for original url","required":false,"schema":{"type":"string"}},{"name":"title","in":"query","description":"Search text for title","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, created_by=created_by, active=active, short_url=short_url, original_url=original_url, title=title)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, created_by=created_by, active=active, short_url=short_url, original_url=original_url, title=title)
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -132,6 +136,8 @@ class Share:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/{hash}/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"hash","in":"path","description":"Hash of short url","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"hash","in":"path","description":"Hash of short url","required":true,"schema":{"type":"string"}}]}""", serverType="platform", hash=hash)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -178,6 +184,8 @@ class Share:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/{id}/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Short link document identifier","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Short link document identifier","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -220,6 +228,8 @@ class Share:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/click-stats", """{"required":[{"in":"query","name":"surl_id","schema":{"type":"string","example":"52Bfbf"},"required":true,"description":"Short link ID for which click statistics are to be retrieved."},{"in":"path","name":"company_id","description":"Company Id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application Id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"surl_id","schema":{"type":"string","example":"52Bfbf"},"required":true,"description":"Short link ID for which click statistics are to be retrieved."}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application Id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", surl_id=surl_id, )
         query_string = await create_query_string(surl_id=surl_id, )
+        if query_string:
+            url_with_params += "?" + query_string
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"

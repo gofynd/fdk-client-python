@@ -31,6 +31,9 @@ class Billing:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/charge/{charge_id}", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string"}},{"in":"path","name":"charge_id","description":"Standalone charge _id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string"}},{"in":"path","name":"charge_id","description":"Standalone charge _id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", extension_id=extension_id, charge_id=charge_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -76,6 +79,9 @@ class Billing:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscription/{subscription_id}", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string"}},{"in":"path","name":"subscription_id","description":"Subscription charge _id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string"}},{"in":"path","name":"subscription_id","description":"Subscription charge _id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", extension_id=extension_id, subscription_id=subscription_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -121,6 +127,9 @@ class Billing:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscription/{subscription_id}/cancel", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string"}},{"in":"path","name":"subscription_id","description":"Subscription charge _id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string"}},{"in":"path","name":"subscription_id","description":"Subscription charge _id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", extension_id=extension_id, subscription_id=subscription_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -167,6 +176,9 @@ class Billing:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/one_time_charge", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"string"}},{"in":"path","name":"extension_id","description":"Extension _id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", extension_id=extension_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -213,6 +225,9 @@ class Billing:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/billing/v1.0/company/{self._conf.companyId}/extension/{extension_id}/subscription", """{"required":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"integer"}},{"in":"path","name":"extension_id","description":"Extension Id for which we need to crete new subscription","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Customer unique id. In case of company it will be company id.","required":true,"schema":{"type":"integer"}},{"in":"path","name":"extension_id","description":"Extension Id for which we need to crete new subscription","required":true,"schema":{"type":"string"}}]}""", serverType="platform", extension_id=extension_id)
         query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
