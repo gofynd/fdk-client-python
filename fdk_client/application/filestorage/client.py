@@ -15,8 +15,8 @@ class FileStorage:
     def __init__(self, config: ApplicationConfig):
         self._conf = config
         self._relativeUrls = {
-            "startUpload": "/service/application/assets/v1.0/namespaces/{namespace}/upload/start",
-            "completeUpload": "/service/application/assets/v1.0/namespaces/{namespace}/upload/complete",
+            "startUpload": "/service/application/assets/v2.0/namespaces/{namespace}/upload/start",
+            "completeUpload": "/service/application/assets/v2.0/namespaces/{namespace}/upload/complete",
             "signUrls": "/service/application/assets/v1.0/sign-urls"
             
         }
@@ -41,8 +41,8 @@ class FileStorage:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import StartRequest
-        schema = StartRequest()
+        from .models import FileUploadStart
+        schema = FileUploadStart()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["startUpload"], proccessed_params="""{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}}]}""", serverType="application", namespace=namespace)
@@ -64,11 +64,11 @@ class FileStorage:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["startUpload"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/namespaces/{namespace}/upload/start", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["startUpload"]).netloc, "post", await create_url_without_domain("/service/application/assets/v2.0/namespaces/{namespace}/upload/start", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import StartResponse
-            schema = StartResponse()
+            from .models import FileUpload
+            schema = FileUpload()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -92,8 +92,8 @@ Complete the file upload and store the file details such as name, size, content 
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import StartResponse
-        schema = StartResponse()
+        from .models import FileUpload
+        schema = FileUpload()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["completeUpload"], proccessed_params="""{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}}]}""", serverType="application", namespace=namespace)
@@ -115,11 +115,11 @@ Complete the file upload and store the file details such as name, size, content 
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["completeUpload"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/namespaces/{namespace}/upload/complete", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["completeUpload"]).netloc, "post", await create_url_without_domain("/service/application/assets/v2.0/namespaces/{namespace}/upload/complete", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CompleteResponse
-            schema = CompleteResponse()
+            from .models import FileUploadComplete
+            schema = FileUploadComplete()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -139,8 +139,8 @@ Complete the file upload and store the file details such as name, size, content 
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import SignUrlRequest
-        schema = SignUrlRequest()
+        from .models import SignUrl
+        schema = SignUrl()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["signUrls"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -165,8 +165,8 @@ Complete the file upload and store the file details such as name, size, content 
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["signUrls"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/sign-urls", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SignUrlResponse
-            schema = SignUrlResponse()
+            from .models import SignUrlResult
+            schema = SignUrlResult()
             try:
                 schema.load(response["json"])
             except Exception as e:

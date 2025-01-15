@@ -856,8 +856,8 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DraftExtensionSectionRequest
-        schema = DraftExtensionSectionRequest()
+        from .models import DraftExtensionSection
+        schema = DraftExtensionSection()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/theme/v1.0/organization/{self._conf.organizationId}/extension-section/{extension_id}/draft", """{"required":[{"name":"organization_id","in":"path","description":"Organization ID","required":true,"schema":{"type":"string","example":"661cc798e51d7b8ea1f75f25"}},{"name":"extension_id","in":"path","description":"Extension ID","required":true,"schema":{"type":"string","example":"64b3dc661a1b16dea7fadc23"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"Organization ID","required":true,"schema":{"type":"string","example":"661cc798e51d7b8ea1f75f25"}},{"name":"extension_id","in":"path","description":"Extension ID","required":true,"schema":{"type":"string","example":"64b3dc661a1b16dea7fadc23"}}]}""", serverType="partner", extension_id=extension_id)
@@ -880,8 +880,8 @@ class Theme:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/theme/v1.0/organization/{self._conf.organizationId}/extension-section/{extension_id}/draft", extension_id=extension_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DraftExtensionSectionResponse
-            schema = DraftExtensionSectionResponse()
+            from .models import ExtensionSectionDraft
+            schema = ExtensionSectionDraft()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -904,8 +904,8 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PublishExtensionSectionRequest
-        schema = PublishExtensionSectionRequest()
+        from .models import PublishExtensionSection
+        schema = PublishExtensionSection()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/theme/v1.0/organization/{self._conf.organizationId}/extension-section/{extension_id}/publish", """{"required":[{"name":"organization_id","in":"path","description":"Organization ID","required":true,"schema":{"type":"string","example":"661cc798e51d7b8ea1f75f25"}},{"name":"extension_id","in":"path","description":"Extension ID","required":true,"schema":{"type":"string","example":"64b3dc661a1b16dea7fadc23"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"Organization ID","required":true,"schema":{"type":"string","example":"661cc798e51d7b8ea1f75f25"}},{"name":"extension_id","in":"path","description":"Extension ID","required":true,"schema":{"type":"string","example":"64b3dc661a1b16dea7fadc23"}}]}""", serverType="partner", extension_id=extension_id)
@@ -928,8 +928,8 @@ class Theme:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/theme/v1.0/organization/{self._conf.organizationId}/extension-section/{extension_id}/publish", extension_id=extension_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PublishExtensionSectionResponse
-            schema = PublishExtensionSectionResponse()
+            from .models import ExtensionSectionPublish
+            schema = ExtensionSectionPublish()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -952,8 +952,8 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ExtensionPreviewRequest
-        schema = ExtensionPreviewRequest()
+        from .models import PreviewExtension
+        schema = PreviewExtension()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/theme/v1.0/organization/{self._conf.organizationId}/extension-section/{extension_section_id}/preview", """{"required":[{"name":"organization_id","in":"path","description":"Organization ID","required":true,"schema":{"type":"string","example":"5f8d04c12345f8b1234d5678"}},{"name":"extension_section_id","in":"path","description":"Extension Section ID","required":true,"schema":{"type":"string","example":"60b8d7e54f4d2e7b55c4d013"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"Organization ID","required":true,"schema":{"type":"string","example":"5f8d04c12345f8b1234d5678"}},{"name":"extension_section_id","in":"path","description":"Extension Section ID","required":true,"schema":{"type":"string","example":"60b8d7e54f4d2e7b55c4d013"}}]}""", serverType="partner", extension_section_id=extension_section_id)
@@ -976,8 +976,8 @@ class Theme:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/theme/v1.0/organization/{self._conf.organizationId}/extension-section/{extension_section_id}/preview", extension_section_id=extension_section_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ExtensionPreviewResponse
-            schema = ExtensionPreviewResponse()
+            from .models import ExtensionPreview
+            schema = ExtensionPreview()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1000,8 +1000,8 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ExtensionPreviewRequest
-        schema = ExtensionPreviewRequest()
+        from .models import PreviewExtension
+        schema = PreviewExtension()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/theme/v1.0/organization/{self._conf.organizationId}/extension-section/{extension_section_id}/preview", """{"required":[{"name":"organization_id","in":"path","description":"Organization ID","required":true,"schema":{"type":"string","example":"5f8d04c12345f8b1234d5678"}},{"name":"extension_section_id","in":"path","description":"Extension Section ID","required":true,"schema":{"type":"string","example":"60b8d7e54f4d2e7b55c4d013"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"Organization ID","required":true,"schema":{"type":"string","example":"5f8d04c12345f8b1234d5678"}},{"name":"extension_section_id","in":"path","description":"Extension Section ID","required":true,"schema":{"type":"string","example":"60b8d7e54f4d2e7b55c4d013"}}]}""", serverType="partner", extension_section_id=extension_section_id)
@@ -1024,8 +1024,8 @@ class Theme:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/partner/theme/v1.0/organization/{self._conf.organizationId}/extension-section/{extension_section_id}/preview", extension_section_id=extension_section_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ExtensionPreviewResponse
-            schema = ExtensionPreviewResponse()
+            from .models import ExtensionPreview
+            schema = ExtensionPreview()
             try:
                 schema.load(response["json"])
             except Exception as e:

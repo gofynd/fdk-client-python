@@ -22,6 +22,10 @@ class SeoComponent(BaseSchema):
     pass
 
 
+class ValidationError(BaseSchema):
+    pass
+
+
 class SeoSchema(BaseSchema):
     pass
 
@@ -58,7 +62,7 @@ class ScheduleStartSchema(BaseSchema):
     pass
 
 
-class BlogGetResponse(BaseSchema):
+class BlogGetDetails(BaseSchema):
     pass
 
 
@@ -198,7 +202,7 @@ class LandingPageSchema(BaseSchema):
     pass
 
 
-class NavigationGetResponse(BaseSchema):
+class NavigationGetDetails(BaseSchema):
     pass
 
 
@@ -210,7 +214,7 @@ class NavigationSchema(BaseSchema):
     pass
 
 
-class PageGetResponse(BaseSchema):
+class PageGetDetails(BaseSchema):
     pass
 
 
@@ -222,7 +226,7 @@ class CreatedBySchema(BaseSchema):
     pass
 
 
-class SlideshowGetResponse(BaseSchema):
+class SlideshowGetDetails(BaseSchema):
     pass
 
 
@@ -294,6 +298,14 @@ class CustomFieldsResponseByResourceIdSchema(BaseSchema):
     pass
 
 
+class CustomObjectListItemSchema(BaseSchema):
+    pass
+
+
+class CustomObjectsSchema(BaseSchema):
+    pass
+
+
 class ActionPage(BaseSchema):
     pass
 
@@ -340,6 +352,16 @@ class SeoComponent(BaseSchema):
 
     
     seo = fields.Nested(SeoSchema, required=False)
+    
+
+
+class ValidationError(BaseSchema):
+    # Content swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    field = fields.Str(required=False)
     
 
 
@@ -471,7 +493,7 @@ class ScheduleStartSchema(BaseSchema):
     
 
 
-class BlogGetResponse(BaseSchema):
+class BlogGetDetails(BaseSchema):
     # Content swagger.json
 
     
@@ -971,7 +993,7 @@ class LandingPageSchema(BaseSchema):
     
 
 
-class NavigationGetResponse(BaseSchema):
+class NavigationGetDetails(BaseSchema):
     # Content swagger.json
 
     
@@ -1019,7 +1041,7 @@ class NavigationSchema(BaseSchema):
     
 
 
-class PageGetResponse(BaseSchema):
+class PageGetDetails(BaseSchema):
     # Content swagger.json
 
     
@@ -1087,7 +1109,7 @@ class CreatedBySchema(BaseSchema):
     
 
 
-class SlideshowGetResponse(BaseSchema):
+class SlideshowGetDetails(BaseSchema):
     # Content swagger.json
 
     
@@ -1269,7 +1291,7 @@ class CustomObjectFieldSchema(BaseSchema):
     
     _id = fields.Str(required=False)
     
-    key = fields.Str(required=False)
+    slug = fields.Str(required=False)
     
     value = fields.List(fields.Nested(CustomObjectFieldValue, required=False), required=False)
     
@@ -1283,7 +1305,7 @@ class CustomObjectByIdSchema(BaseSchema):
     # Content swagger.json
 
     
-    _id = fields.Str(required=False)
+    id = fields.Str(required=False)
     
     status = fields.Str(required=False)
     
@@ -1313,11 +1335,9 @@ class CustomFieldSchema(BaseSchema):
     
     namespace = fields.Str(required=False)
     
-    key = fields.Str(required=False)
+    slug = fields.Str(required=False)
     
     resource = fields.Str(required=False)
-    
-    creator = fields.Str(required=False)
     
     value = fields.List(fields.Nested(CustomFieldValue, required=False), required=False)
     
@@ -1337,8 +1357,6 @@ class CustomFieldSchema(BaseSchema):
     
     invalid_value_errors = fields.List(fields.Raw(required=False), required=False)
     
-    created_by = fields.Str(required=False)
-    
     is_deleted = fields.Boolean(required=False)
     
     created_at = fields.Str(required=False)
@@ -1352,6 +1370,36 @@ class CustomFieldsResponseByResourceIdSchema(BaseSchema):
 
     
     items = fields.List(fields.Nested(CustomFieldSchema, required=False), required=False)
+    
+
+
+class CustomObjectListItemSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    definition_id = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    definition = fields.Nested(CustomObjectListItemDefinationSchema, required=False)
+    
+    references = fields.Int(required=False)
+    
+
+
+class CustomObjectsSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    items = fields.List(fields.Nested(CustomObjectListItemSchema, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 
 

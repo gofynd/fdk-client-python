@@ -19,6 +19,12 @@ from ..PartnerModel import BaseSchema
     
         
         
+        
+        
+    
+    
+        
+        
     
     
         
@@ -58,6 +64,19 @@ from ..PartnerModel import BaseSchema
 
 class WebhookValidator:
     
+    
+    class responseTimeSummary(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
+        
+        start_date = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
+         
+        
     
     class fetchDeliverySummary(BaseSchema):
         

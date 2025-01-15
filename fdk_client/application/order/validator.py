@@ -27,6 +27,9 @@ from ..ApplicationModel import BaseSchema
     
     
         
+    
+    
+        
         
     
     
@@ -89,6 +92,13 @@ class OrderValidator:
         order_id = fields.Str(required=False)
         
         allow_inactive = fields.Boolean(required=False)
+         
+        
+    
+    class getPosOrderById(BaseSchema):
+        
+        
+        order_id = fields.Str(required=False)
          
         
     

@@ -337,8 +337,8 @@ class Lead:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/lead/v1.0/organization/{self._conf.organizationId}/general-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GeneralConfigResponse
-            schema = GeneralConfigResponse()
+            from .models import GeneralConfigDetails
+            schema = GeneralConfigDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:

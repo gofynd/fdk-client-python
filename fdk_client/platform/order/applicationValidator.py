@@ -21,6 +21,10 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
         
         
     
@@ -70,6 +74,15 @@ class OrderValidator:
         search_type = fields.Str(required=False)
         
         search_value = fields.Str(required=False)
+         
+        
+    
+    class getRules(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     
