@@ -5189,7 +5189,7 @@ class UserDataInfo(BaseSchema):
     
     email = fields.Str(required=False, allow_none=True)
     
-    meta = fields.Str(required=False, allow_none=True)
+    meta = fields.Dict(required=False, allow_none=True)
     
     is_anonymous_user = fields.Boolean(required=False, allow_none=True)
     
