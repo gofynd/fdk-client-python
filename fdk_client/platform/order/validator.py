@@ -226,6 +226,9 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
     
     
         
@@ -769,6 +772,8 @@ class OrderValidator:
         
         bag_status = fields.Str(required=False)
         
+        status_assigned = fields.Str(required=False)
+        
         status_override_lane = fields.Boolean(required=False)
         
         time_to_dispatch = fields.Int(required=False)
@@ -784,6 +789,10 @@ class OrderValidator:
         start_date = fields.Str(required=False)
         
         end_date = fields.Str(required=False)
+        
+        status_assigned_start_date = fields.Str(required=False)
+        
+        status_assigned_end_date = fields.Str(required=False)
         
         dp_ids = fields.Str(required=False)
         
