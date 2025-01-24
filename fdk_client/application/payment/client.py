@@ -109,8 +109,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAggregatorsConfig"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/config/aggregators/key", x_api_token=x_api_token, refresh=refresh), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AggregatorsConfigDetail
-            schema = AggregatorsConfigDetail()
+            from .models import AggregatorsConfigDetailResponse
+            schema = AggregatorsConfigDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -130,8 +130,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import AttachCard
-        schema = AttachCard()
+        from .models import AttachCardRequest
+        schema = AttachCardRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["attachCardToCustomer"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -156,8 +156,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["attachCardToCustomer"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/card/attach", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AttachCardsDetails
-            schema = AttachCardsDetails()
+            from .models import AttachCardsResponse
+            schema = AttachCardsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -202,8 +202,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getActiveCardAggregator"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/card/aggregator", refresh=refresh), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ActiveCardPaymentGatewayDetails
-            schema = ActiveCardPaymentGatewayDetails()
+            from .models import ActiveCardPaymentGatewayResponse
+            schema = ActiveCardPaymentGatewayResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -248,8 +248,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getActiveUserCards"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/cards", force_refresh=force_refresh), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ListCardsDetails
-            schema = ListCardsDetails()
+            from .models import ListCardsResponse
+            schema = ListCardsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -269,8 +269,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DeleteCard
-        schema = DeleteCard()
+        from .models import DeletehCardRequest
+        schema = DeletehCardRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["deleteUserCard"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -295,8 +295,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["deleteUserCard"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/card/remove", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeleteCardsDetails
-            schema = DeleteCardsDetails()
+            from .models import DeleteCardsResponse
+            schema = DeleteCardsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -316,8 +316,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ValidateCustomer
-        schema = ValidateCustomer()
+        from .models import ValidateCustomerRequest
+        schema = ValidateCustomerRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["verifyCustomerForPayment"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -342,8 +342,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyCustomerForPayment"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/customer/validation", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ValidateCustomerDetails
-            schema = ValidateCustomerDetails()
+            from .models import ValidateCustomerResponse
+            schema = ValidateCustomerResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -363,8 +363,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ChargeCustomer
-        schema = ChargeCustomer()
+        from .models import ChargeCustomerRequest
+        schema = ChargeCustomerRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["verifyAndChargePayment"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -389,8 +389,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyAndChargePayment"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/confirm/charge", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ChargeCustomerDetails
-            schema = ChargeCustomerDetails()
+            from .models import ChargeCustomerResponse
+            schema = ChargeCustomerResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -410,8 +410,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PaymentInitialization
-        schema = PaymentInitialization()
+        from .models import PaymentInitializationRequest
+        schema = PaymentInitializationRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["initialisePayment"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -436,8 +436,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["initialisePayment"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/request", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PaymentInitializationDetails
-            schema = PaymentInitializationDetails()
+            from .models import PaymentInitializationResponse
+            schema = PaymentInitializationResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -457,8 +457,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PaymentStatusUpdate
-        schema = PaymentStatusUpdate()
+        from .models import PaymentStatusUpdateRequest
+        schema = PaymentStatusUpdateRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["checkAndUpdatePaymentStatus"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -483,8 +483,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkAndUpdatePaymentStatus"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/confirm/polling", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PaymentStatusUpdateDetails
-            schema = PaymentStatusUpdateDetails()
+            from .models import PaymentStatusUpdateResponse
+            schema = PaymentStatusUpdateResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -534,7 +534,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPaymentModeRoutes"], proccessed_params="""{"required":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"order_id","in":"query","required":false,"schema":{"type":"string"},"description":"Identifier of the order, order_id."},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"user_details","in":"query","description":"URLencoded JSON containing details of an anonymous user.","schema":{"type":"string"}},{"name":"display_split","in":"query","description":"Display Split Payment Option or not.","schema":{"type":"boolean"}},{"name":"advance_payment","in":"query","description":"Display Advance Payment Options or Normal.","schema":{"type":"boolean"}},{"name":"shipment_id","in":"query","required":false,"schema":{"type":"string"},"description":"Identifier of the shipment, shipment_id."}],"query":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":true,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"order_id","in":"query","required":false,"schema":{"type":"string"},"description":"Identifier of the order, order_id."},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"user_details","in":"query","description":"URLencoded JSON containing details of an anonymous user.","schema":{"type":"string"}},{"name":"display_split","in":"query","description":"Display Split Payment Option or not.","schema":{"type":"boolean"}},{"name":"advance_payment","in":"query","description":"Display Advance Payment Options or Normal.","schema":{"type":"boolean"}},{"name":"shipment_id","in":"query","required":false,"schema":{"type":"string"},"description":"Identifier of the shipment, shipment_id."}],"headers":[],"path":[]}""", serverType="application", amount=amount, cart_id=cart_id, checkout_mode=checkout_mode, refresh=refresh, order_id=order_id, card_reference=card_reference, user_details=user_details, display_split=display_split, advance_payment=advance_payment, shipment_id=shipment_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPaymentModeRoutes"], proccessed_params="""{"required":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}}],"optional":[{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":false,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"order_id","in":"query","required":false,"schema":{"type":"string"},"description":"Identifier of the order, order_id."},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"user_details","in":"query","description":"URLencoded JSON containing details of an anonymous user.","example":"%7B%22first_name%22:%22Fynd%22,%22last_name%22:%22Dummy%22,%22mobile%22:%229999999999%22,%22email%22:%22paymentsdummy@gofynd.com%22%7D","schema":{"type":"string"}},{"name":"display_split","in":"query","description":"Display Split Payment Option or not.","schema":{"type":"boolean"}},{"name":"advance_payment","in":"query","description":"Display Advance Payment Options or Normal.","schema":{"type":"boolean"}},{"name":"shipment_id","in":"query","required":false,"schema":{"type":"string"},"description":"Identifier of the shipment, shipment_id."}],"query":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":false,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"order_id","in":"query","required":false,"schema":{"type":"string"},"description":"Identifier of the order, order_id."},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"user_details","in":"query","description":"URLencoded JSON containing details of an anonymous user.","example":"%7B%22first_name%22:%22Fynd%22,%22last_name%22:%22Dummy%22,%22mobile%22:%229999999999%22,%22email%22:%22paymentsdummy@gofynd.com%22%7D","schema":{"type":"string"}},{"name":"display_split","in":"query","description":"Display Split Payment Option or not.","schema":{"type":"boolean"}},{"name":"advance_payment","in":"query","description":"Display Advance Payment Options or Normal.","schema":{"type":"boolean"}},{"name":"shipment_id","in":"query","required":false,"schema":{"type":"string"},"description":"Identifier of the shipment, shipment_id."}],"headers":[],"path":[]}""", serverType="application", amount=amount, cart_id=cart_id, checkout_mode=checkout_mode, refresh=refresh, order_id=order_id, card_reference=card_reference, user_details=user_details, display_split=display_split, advance_payment=advance_payment, shipment_id=shipment_id)
         query_string = await create_query_string(amount=amount, cart_id=cart_id, checkout_mode=checkout_mode, refresh=refresh, order_id=order_id, card_reference=card_reference, user_details=user_details, display_split=display_split, advance_payment=advance_payment, shipment_id=shipment_id)
         if query_string:
             url_with_params += "?" + query_string
@@ -556,8 +556,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPaymentModeRoutes"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/options", amount=amount, cart_id=cart_id, checkout_mode=checkout_mode, refresh=refresh, order_id=order_id, card_reference=card_reference, user_details=user_details, display_split=display_split, advance_payment=advance_payment, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PaymentModeRouteDetails
-            schema = PaymentModeRouteDetails()
+            from .models import PaymentModeRouteResponse
+            schema = PaymentModeRouteResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -574,7 +574,9 @@ class Payment:
         :param checkout_mode : Option to checkout for self or for others. : type string
         :param refresh : Select `true` to remove temporary cache files on payment gateway and replace with the latest one. : type boolean
         :param card_reference : Card reference id of user's debit or credit card. : type string
-        :param order_type : The order type of shipment  HomeDelivery - If the customer wants the order home-delivered  PickAtStore - If the customer wants the handover of an order at the store itself. : type string
+        :param order_type : The order type of shipment 
+HomeDelivery - If the customer wants the order home-delivered 
+PickAtStore - If the customer wants the handover of an order at the store itself. : type string
         :param user_details : URLencoded JSON containing details of an anonymous user. : type string
         """
         payload = {}
@@ -601,7 +603,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPosPaymentModeRoutes"], proccessed_params="""{"required":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":true,"schema":{"type":"string"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059.","required":true,"schema":{"type":"string"}},{"name":"order_type","in":"query","required":true,"description":"The order type of shipment  HomeDelivery - If the customer wants the order home-delivered  PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"x-not-enum":true,"type":"string"}}],"optional":[{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"},"required":false},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"},"required":false},{"name":"user_details","in":"query","description":"URLencoded JSON containing details of an anonymous user.","schema":{"type":"string"},"required":false}],"query":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":true,"schema":{"type":"string"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059.","required":true,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"},"required":false},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"},"required":false},{"name":"order_type","in":"query","required":true,"description":"The order type of shipment  HomeDelivery - If the customer wants the order home-delivered  PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"x-not-enum":true,"type":"string"}},{"name":"user_details","in":"query","description":"URLencoded JSON containing details of an anonymous user.","schema":{"type":"string"},"required":false}],"headers":[],"path":[]}""", serverType="application", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, order_type=order_type, user_details=user_details)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPosPaymentModeRoutes"], proccessed_params="""{"required":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059.","required":true,"schema":{"type":"string"}},{"name":"order_type","in":"query","required":true,"description":"The order type of shipment \nHomeDelivery - If the customer wants the order home-delivered \nPickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"type":"string"}}],"optional":[{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":false,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"user_details","in":"query","description":"URLencoded JSON containing details of an anonymous user.","example":"%7B%22first_name%22:%22Fynd%22,%22last_name%22:%22Dummy%22,%22mobile%22:%229999999999%22,%22email%22:%22paymentsdummy@gofynd.com%22%7D","schema":{"type":"string"}}],"query":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":false,"schema":{"type":"string"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059.","required":true,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"order_type","in":"query","required":true,"description":"The order type of shipment \nHomeDelivery - If the customer wants the order home-delivered \nPickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"type":"string"}},{"name":"user_details","in":"query","description":"URLencoded JSON containing details of an anonymous user.","example":"%7B%22first_name%22:%22Fynd%22,%22last_name%22:%22Dummy%22,%22mobile%22:%229999999999%22,%22email%22:%22paymentsdummy@gofynd.com%22%7D","schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, order_type=order_type, user_details=user_details)
         query_string = await create_query_string(amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, order_type=order_type, user_details=user_details)
         if query_string:
             url_with_params += "?" + query_string
@@ -623,8 +625,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPosPaymentModeRoutes"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/options/pos", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, order_type=order_type, user_details=user_details), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PaymentModeRouteDetails
-            schema = PaymentModeRouteDetails()
+            from .models import PaymentModeRouteResponse
+            schema = PaymentModeRouteResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -807,8 +809,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getRupifiBannerDetails"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/rupifi/banner", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RupifiBannerDetails
-            schema = RupifiBannerDetails()
+            from .models import RupifiBannerResponse
+            schema = RupifiBannerResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -850,8 +852,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getEpaylaterBannerDetails"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/epaylater/banner", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import EpaylaterBannerDetails
-            schema = EpaylaterBannerDetails()
+            from .models import EpaylaterBannerResponse
+            schema = EpaylaterBannerResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -871,8 +873,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ResendOrCancelPayment
-        schema = ResendOrCancelPayment()
+        from .models import ResendOrCancelPaymentRequest
+        schema = ResendOrCancelPaymentRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["resendOrCancelPayment"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -897,8 +899,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["resendOrCancelPayment"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/resend_or_cancel", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ResendOrCancelPaymentDetails
-            schema = ResendOrCancelPaymentDetails()
+            from .models import ResendOrCancelPaymentResponse
+            schema = ResendOrCancelPaymentResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -918,8 +920,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import RenderHTML
-        schema = RenderHTML()
+        from .models import renderHTMLRequest
+        schema = renderHTMLRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["renderHTML"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -944,8 +946,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["renderHTML"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/html/render/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RenderHTMLDetails
-            schema = RenderHTMLDetails()
+            from .models import renderHTMLResponse
+            schema = renderHTMLResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -965,8 +967,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ValidateVPA
-        schema = ValidateVPA()
+        from .models import ValidateVPARequest
+        schema = ValidateVPARequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["validateVPA"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -991,8 +993,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["validateVPA"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/validate-vpa", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ValidateVPADetails
-            schema = ValidateVPADetails()
+            from .models import ValidateVPAResponse
+            schema = ValidateVPAResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1040,8 +1042,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["cardDetails"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/cards/info/{card_info}", card_info=card_info, aggregator=aggregator), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CardDetailsFetchedDetails
-            schema = CardDetailsFetchedDetails()
+            from .models import CardDetailsResponse
+            schema = CardDetailsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1083,8 +1085,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getActiveRefundTransferModes"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/refund/transfer-mode", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import TransferModeFetchDetails
-            schema = TransferModeFetchDetails()
+            from .models import TransferModeResponse
+            schema = TransferModeResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1104,8 +1106,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateRefundTransferMode
-        schema = UpdateRefundTransferMode()
+        from .models import UpdateRefundTransferModeRequest
+        schema = UpdateRefundTransferModeRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["enableOrDisableRefundTransferMode"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -1130,8 +1132,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["enableOrDisableRefundTransferMode"]).netloc, "put", await create_url_without_domain("/service/application/payment/v1.0/refund/transfer-mode", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RefundTransferModeUpdateDetails
-            schema = RefundTransferModeUpdateDetails()
+            from .models import UpdateRefundTransferModeResponse
+            schema = UpdateRefundTransferModeResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1176,8 +1178,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserBeneficiariesDetail"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/refund/user/beneficiary", order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OrderBeneficiaryFetchDetails
-            schema = OrderBeneficiaryFetchDetails()
+            from .models import OrderBeneficiaryResponse
+            schema = OrderBeneficiaryResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1200,7 +1202,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["verifyIfscCode"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"ifsc_code","schema":{"x-not-enum":true,"type":"string"},"description":"A 11-digit alphanumeric code that uniquely identifies a bank branch."}],"query":[{"in":"query","name":"ifsc_code","schema":{"x-not-enum":true,"type":"string"},"description":"A 11-digit alphanumeric code that uniquely identifies a bank branch."}],"headers":[],"path":[]}""", serverType="application", ifsc_code=ifsc_code)
+        url_with_params = await create_url_with_params(api_url=self._urls["verifyIfscCode"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"ifsc_code","schema":{"type":"string"},"description":"A 11-digit alphanumeric code that uniquely identifies a bank branch."}],"query":[{"in":"query","name":"ifsc_code","schema":{"type":"string"},"description":"A 11-digit alphanumeric code that uniquely identifies a bank branch."}],"headers":[],"path":[]}""", serverType="application", ifsc_code=ifsc_code)
         query_string = await create_query_string(ifsc_code=ifsc_code)
         if query_string:
             url_with_params += "?" + query_string
@@ -1222,8 +1224,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyIfscCode"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/ifsc-code/verify", ifsc_code=ifsc_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import IfscCodeDetails
-            schema = IfscCodeDetails()
+            from .models import IfscCodeResponse
+            schema = IfscCodeResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1268,8 +1270,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrderBeneficiariesDetail"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/refund/order/beneficiaries", order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OrderBeneficiaryFetchDetails
-            schema = OrderBeneficiaryFetchDetails()
+            from .models import OrderBeneficiaryResponse
+            schema = OrderBeneficiaryResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1289,8 +1291,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import AddBeneficiaryViaOtpVerification
-        schema = AddBeneficiaryViaOtpVerification()
+        from .models import AddBeneficiaryViaOtpVerificationRequest
+        schema = AddBeneficiaryViaOtpVerificationRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["verifyOtpAndAddBeneficiaryForBank"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -1315,8 +1317,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyOtpAndAddBeneficiaryForBank"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/verification/bank", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AddBeneficiaryViaOtpVerificationDetails
-            schema = AddBeneficiaryViaOtpVerificationDetails()
+            from .models import AddBeneficiaryViaOtpVerificationResponse
+            schema = AddBeneficiaryViaOtpVerificationResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1336,8 +1338,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import AddBeneficiaryDetails
-        schema = AddBeneficiaryDetails()
+        from .models import AddBeneficiaryDetailsRequest
+        schema = AddBeneficiaryDetailsRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["addBeneficiaryDetails"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -1362,8 +1364,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addBeneficiaryDetails"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/account", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RefundAccountDetails
-            schema = RefundAccountDetails()
+            from .models import RefundAccountResponse
+            schema = RefundAccountResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1383,8 +1385,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import AddBeneficiaryDetailsOTP
-        schema = AddBeneficiaryDetailsOTP()
+        from .models import AddBeneficiaryDetailsOTPRequest
+        schema = AddBeneficiaryDetailsOTPRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["addRefundBankAccountUsingOTP"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -1409,8 +1411,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addRefundBankAccountUsingOTP"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/account/otp", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RefundAccountDetails
-            schema = RefundAccountDetails()
+            from .models import RefundAccountResponse
+            schema = RefundAccountResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1430,8 +1432,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import WalletOtp
-        schema = WalletOtp()
+        from .models import WalletOtpRequest
+        schema = WalletOtpRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["verifyOtpAndAddBeneficiaryForWallet"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -1456,8 +1458,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyOtpAndAddBeneficiaryForWallet"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/verification/wallet", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import WalletOtpDetails
-            schema = WalletOtpDetails()
+            from .models import WalletOtpResponse
+            schema = WalletOtpResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1477,8 +1479,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import SetDefaultBeneficiary
-        schema = SetDefaultBeneficiary()
+        from .models import SetDefaultBeneficiaryRequest
+        schema = SetDefaultBeneficiaryRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["updateDefaultBeneficiary"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -1503,8 +1505,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateDefaultBeneficiary"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/refund/beneficiary/default", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SetDefaultBeneficiaryDetails
-            schema = SetDefaultBeneficiaryDetails()
+            from .models import SetDefaultBeneficiaryResponse
+            schema = SetDefaultBeneficiaryResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1549,8 +1551,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/create-payment-link/", payment_link_id=payment_link_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetPaymentLinkDetails
-            schema = GetPaymentLinkDetails()
+            from .models import GetPaymentLinkResponse
+            schema = GetPaymentLinkResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1570,8 +1572,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreatePaymentLink
-        schema = CreatePaymentLink()
+        from .models import CreatePaymentLinkRequest
+        schema = CreatePaymentLinkRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["createPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -1596,8 +1598,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/create-payment-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreatePaymentLinkDetails
-            schema = CreatePaymentLinkDetails()
+            from .models import CreatePaymentLinkResponse
+            schema = CreatePaymentLinkResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1617,8 +1619,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CancelOrResendPaymentLink
-        schema = CancelOrResendPaymentLink()
+        from .models import CancelOrResendPaymentLinkRequest
+        schema = CancelOrResendPaymentLinkRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["resendPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -1643,8 +1645,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["resendPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/resend-payment-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ResendPaymentLinkDetails
-            schema = ResendPaymentLinkDetails()
+            from .models import ResendPaymentLinkResponse
+            schema = ResendPaymentLinkResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1664,8 +1666,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CancelOrResendPaymentLink
-        schema = CancelOrResendPaymentLink()
+        from .models import CancelOrResendPaymentLinkRequest
+        schema = CancelOrResendPaymentLinkRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["cancelPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -1690,8 +1692,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["cancelPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/cancel-payment-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CancelPaymentLinkDetails
-            schema = CancelPaymentLinkDetails()
+            from .models import CancelPaymentLinkResponse
+            schema = CancelPaymentLinkResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1736,8 +1738,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPaymentModeRoutesPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/options/link/", payment_link_id=payment_link_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PaymentModeRouteDetails
-            schema = PaymentModeRouteDetails()
+            from .models import PaymentModeRouteResponse
+            schema = PaymentModeRouteResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1782,8 +1784,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["pollingPaymentLink"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/polling-payment-link/", payment_link_id=payment_link_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PollingPaymentLinkDetails
-            schema = PollingPaymentLinkDetails()
+            from .models import PollingPaymentLinkResponse
+            schema = PollingPaymentLinkResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1803,8 +1805,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateOrderUser
-        schema = CreateOrderUser()
+        from .models import CreateOrderUserRequest
+        schema = CreateOrderUserRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["createOrderHandlerPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -1829,8 +1831,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createOrderHandlerPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/create-order/link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreateOrderUserDetails
-            schema = CreateOrderUserDetails()
+            from .models import CreateOrderUserResponse
+            schema = CreateOrderUserResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1850,8 +1852,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PaymentInitialization
-        schema = PaymentInitialization()
+        from .models import PaymentInitializationRequest
+        schema = PaymentInitializationRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["initialisePaymentPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -1876,8 +1878,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["initialisePaymentPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/request/link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PaymentInitializationDetails
-            schema = PaymentInitializationDetails()
+            from .models import PaymentInitializationResponse
+            schema = PaymentInitializationResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1897,8 +1899,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PaymentStatusUpdate
-        schema = PaymentStatusUpdate()
+        from .models import PaymentStatusUpdateRequest
+        schema = PaymentStatusUpdateRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["checkAndUpdatePaymentStatusPaymentLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -1923,8 +1925,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkAndUpdatePaymentStatusPaymentLink"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/confirm/polling/link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PaymentStatusUpdateDetails
-            schema = PaymentStatusUpdateDetails()
+            from .models import PaymentStatusUpdateResponse
+            schema = PaymentStatusUpdateResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1969,8 +1971,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["customerCreditSummary"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/credit-summary/", aggregator=aggregator), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CustomerCreditSummaryDetails
-            schema = CustomerCreditSummaryDetails()
+            from .models import CustomerCreditSummaryResponse
+            schema = CustomerCreditSummaryResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1980,7 +1982,7 @@ class Payment:
         return response
     
     async def redirectToAggregator(self, source=None, aggregator=None, body="", request_headers:Dict={}):
-        """This endpoint is used to redirect users to the payment aggregator's platform where they can complete the payment process. The request may include necessary details for initiating the payment on the aggregator’s side, and the user is transferred seamlessly to their interface.
+        """Get details about the active card aggregator used by the user, including the aggregator's name. You can refresh the data by setting the 'refresh' parameter to true if needed.
         :param source : Callback URL to get callback from aggregator. : type string
         :param aggregator : Aggregator name. : type string
         """
@@ -1996,7 +1998,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["redirectToAggregator"], proccessed_params="""{"required":[{"name":"aggregator","in":"query","description":"Aggregator name.","schema":{"type":"string"},"required":true}],"optional":[{"name":"source","in":"query","description":"Callback URL to get callback from aggregator.","schema":{"type":"string"}}],"query":[{"name":"source","in":"query","description":"Callback URL to get callback from aggregator.","schema":{"type":"string"}},{"name":"aggregator","in":"query","description":"Aggregator name.","schema":{"type":"string"},"required":true}],"headers":[],"path":[]}""", serverType="application", source=source, aggregator=aggregator)
+        url_with_params = await create_url_with_params(api_url=self._urls["redirectToAggregator"], proccessed_params="""{"required":[],"optional":[{"name":"source","in":"query","description":"Callback URL to get callback from aggregator.","schema":{"type":"string"}},{"name":"aggregator","in":"query","description":"Aggregator name.","schema":{"type":"string"}}],"query":[{"name":"source","in":"query","description":"Callback URL to get callback from aggregator.","schema":{"type":"string"}},{"name":"aggregator","in":"query","description":"Aggregator name.","schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", source=source, aggregator=aggregator)
         query_string = await create_query_string(source=source, aggregator=aggregator)
         if query_string:
             url_with_params += "?" + query_string
@@ -2018,8 +2020,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["redirectToAggregator"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/redirect-to-aggregator/", source=source, aggregator=aggregator), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RedirectToAggregatorDetails
-            schema = RedirectToAggregatorDetails()
+            from .models import RedirectToAggregatorResponse
+            schema = RedirectToAggregatorResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2064,8 +2066,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkCredit"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/check-credits/", aggregator=aggregator), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CheckCreditDetails
-            schema = CheckCreditDetails()
+            from .models import CheckCreditResponse
+            schema = CheckCreditResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2085,8 +2087,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CustomerOnboarding
-        schema = CustomerOnboarding()
+        from .models import CustomerOnboardingRequest
+        schema = CustomerOnboardingRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["customerOnboard"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -2111,8 +2113,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["customerOnboard"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/credit-onboard/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CustomerOnboardingDetails
-            schema = CustomerOnboardingDetails()
+            from .models import CustomerOnboardingResponse
+            schema = CustomerOnboardingResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2157,8 +2159,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["outstandingOrderDetails"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/outstanding-orders/", aggregator=aggregator), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OutstandingOrderDetails
-            schema = OutstandingOrderDetails()
+            from .models import OutstandingOrderDetailsResponse
+            schema = OutstandingOrderDetailsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2203,8 +2205,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["paidOrderDetails"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/paid-orders/", aggregator=aggregator), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PaidOrderDetails
-            schema = PaidOrderDetails()
+            from .models import PaidOrderDetailsResponse
+            schema = PaidOrderDetailsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2224,8 +2226,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PaymentOrder
-        schema = PaymentOrder()
+        from .models import PaymentOrderRequest
+        schema = PaymentOrderRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["createPaymentOrder"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -2250,8 +2252,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createPaymentOrder"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment-orders/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PaymentOrderDetails
-            schema = PaymentOrderDetails()
+            from .models import PaymentOrderResponse
+            schema = PaymentOrderResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

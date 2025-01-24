@@ -138,10 +138,6 @@ from ..ApplicationModel import BaseSchema
         
     
     
-        
-        
-    
-    
     
         
     
@@ -155,15 +151,10 @@ from ..ApplicationModel import BaseSchema
         
         
         
-        
     
     
         
         
-        
-        
-    
-    
         
         
     
@@ -446,15 +437,6 @@ class CartValidator:
          
         
     
-    class checkoutCart(BaseSchema):
-        
-        
-        buy_now = fields.Boolean(required=False)
-        
-        cart_type = fields.Str(required=False)
-         
-        
-    
     class updateCartMeta(BaseSchema):
         
         
@@ -497,8 +479,6 @@ class CartValidator:
         store_id = fields.Int(required=False)
         
         cart_type = fields.Str(required=False)
-        
-        sort_by = fields.Str(required=False)
          
         
     
@@ -530,15 +510,6 @@ class CartValidator:
         buy_now = fields.Boolean(required=False)
         
         cart_type = fields.Str(required=False)
-         
-        
-    
-    class getPromotions(BaseSchema):
-        
-        
-        page_size = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
          
         
     

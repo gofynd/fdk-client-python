@@ -14,7 +14,6 @@ from ..ApplicationModel import BaseSchema
     
         
         
-        
     
     
         
@@ -63,7 +62,6 @@ from ..ApplicationModel import BaseSchema
         
     
     
-        
         
     
     
@@ -84,8 +82,6 @@ class ContentValidator:
         slug = fields.Str(required=False)
         
         root_id = fields.Str(required=False)
-        
-        preview = fields.Boolean(required=False)
          
         
     
@@ -215,21 +211,19 @@ class ContentValidator:
          
         
     
-    class getCustomObjectBySlug(BaseSchema):
+    class getCustomObject(BaseSchema):
         
         
-        definition_slug = fields.Str(required=False)
-        
-        slug = fields.Str(required=False)
+        metaobject_id = fields.Str(required=False)
          
         
     
-    class getCustomFieldsByResourceId(BaseSchema):
+    class getCustomFields(BaseSchema):
         
         
         resource = fields.Str(required=False)
         
-        resource_slug = fields.Str(required=False)
+        resource_id = fields.Str(required=False)
          
         
     
