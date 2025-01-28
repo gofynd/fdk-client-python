@@ -166,6 +166,41 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
 
 class UserValidator:
     
@@ -509,6 +544,81 @@ class UserValidator:
         application_id = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
+         
+        
+    
+    class bulkImportStoreFrontUsers(BaseSchema):
+        
+        
+        application_id = fields.Str(required=False)
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class getBulkImportUsersList(BaseSchema):
+        
+        
+        application_id = fields.Str(required=False)
+        
+        company_id = fields.Str(required=False)
+        
+        page_no = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
+        
+        search = fields.Str(required=False)
+        
+        start_date = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
+        
+        status = fields.Str(required=False)
+        
+        file_format = fields.Str(required=False)
+         
+        
+    
+    class createBulkExportUsers(BaseSchema):
+        
+        
+        application_id = fields.Str(required=False)
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class getBulkExportUsersList(BaseSchema):
+        
+        
+        application_id = fields.Str(required=False)
+        
+        company_id = fields.Str(required=False)
+        
+        page_no = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
+        
+        file_format = fields.Str(required=False)
+        
+        search = fields.Str(required=False)
+        
+        start_date = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
+        
+        status = fields.Str(required=False)
+         
+        
+    
+    class getUsersJobByJobId(BaseSchema):
+        
+        
+        application_id = fields.Str(required=False)
+        
+        company_id = fields.Str(required=False)
+        
+        job_id = fields.Str(required=False)
          
         
     

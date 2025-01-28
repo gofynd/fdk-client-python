@@ -128,6 +128,10 @@ class DataUpdates(BaseSchema):
     pass
 
 
+class TransitionComments(BaseSchema):
+    pass
+
+
 class ShipmentsRequestSchema(BaseSchema):
     pass
 
@@ -1857,6 +1861,16 @@ class DataUpdates(BaseSchema):
     
 
 
+class TransitionComments(BaseSchema):
+    # Order swagger.json
+
+    
+    title = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
 class ShipmentsRequestSchema(BaseSchema):
     # Order swagger.json
 
@@ -1868,6 +1882,8 @@ class ShipmentsRequestSchema(BaseSchema):
     products = fields.List(fields.Nested(Products, required=False), required=False)
     
     data_updates = fields.Nested(DataUpdates, required=False)
+    
+    transition_comments = fields.List(fields.Nested(TransitionComments, required=False), required=False)
     
 
 
