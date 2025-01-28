@@ -15,8 +15,8 @@ class FileStorage:
     def __init__(self, config: ApplicationConfig):
         self._conf = config
         self._relativeUrls = {
-            "startUpload": "/service/application/assets/v1.0/namespaces/{namespace}/upload/start",
-            "completeUpload": "/service/application/assets/v1.0/namespaces/{namespace}/upload/complete",
+            "startUpload": "/service/application/assets/v2.0/namespaces/{namespace}/upload/start",
+            "completeUpload": "/service/application/assets/v2.0/namespaces/{namespace}/upload/complete",
             "signUrls": "/service/application/assets/v1.0/sign-urls"
             
         }
@@ -64,7 +64,7 @@ class FileStorage:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["startUpload"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/namespaces/{namespace}/upload/start", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["startUpload"]).netloc, "post", await create_url_without_domain("/service/application/assets/v2.0/namespaces/{namespace}/upload/start", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import StartResponse
@@ -115,7 +115,7 @@ Complete the file upload and store the file details such as name, size, content 
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["completeUpload"]).netloc, "post", await create_url_without_domain("/service/application/assets/v1.0/namespaces/{namespace}/upload/complete", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["completeUpload"]).netloc, "post", await create_url_without_domain("/service/application/assets/v2.0/namespaces/{namespace}/upload/complete", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CompleteResponse

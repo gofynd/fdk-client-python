@@ -8,6 +8,10 @@ from ..PartnerModel import BaseSchema
 
 
 
+class ErrorResponseV1(BaseSchema):
+    pass
+
+
 class BulkRegionServiceabilityTatRequest(BaseSchema):
     pass
 
@@ -48,10 +52,6 @@ class CourierAccount(BaseSchema):
     pass
 
 
-class CourierAccountRequestBody(BaseSchema):
-    pass
-
-
 class CourierPartnerAccountFailureResponse(BaseSchema):
     pass
 
@@ -60,15 +60,15 @@ class CompanyCourierPartnerAccountListResponse(BaseSchema):
     pass
 
 
+class CourierAccountSchemeResponse(BaseSchema):
+    pass
+
+
 class CourierAccountResponse(BaseSchema):
     pass
 
 
 class CourierPartnerSchemeModel(BaseSchema):
-    pass
-
-
-class CourierPartnerSchemeRequestModel(BaseSchema):
     pass
 
 
@@ -84,19 +84,31 @@ class CourierPartnerSchemeUpdateRequest(BaseSchema):
     pass
 
 
+class CountryHierarchy(BaseSchema):
+    pass
+
+
+class CurrencyObject(BaseSchema):
+    pass
+
+
+class CountryObject(BaseSchema):
+    pass
+
+
 class GetCountries(BaseSchema):
     pass
 
 
-class GetCountriesItems(BaseSchema):
-    pass
-
-
-class HierarchyItems(BaseSchema):
-    pass
 
 
 
+class ErrorResponseV1(BaseSchema):
+    # Logistics swagger.json
+
+    
+    error = fields.Str(required=False)
+    
 
 
 class BulkRegionServiceabilityTatRequest(BaseSchema):
@@ -127,7 +139,7 @@ class BulkRegionServiceabilityTatResponseItemData(BaseSchema):
     
     failed_records = fields.List(fields.Dict(required=False), required=False)
     
-    file_path = fields.Str(required=False)
+    file_path = fields.Str(required=False, allow_none=True)
     
 
 
@@ -180,6 +192,8 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+    total = fields.Int(required=False)
     
 
 
@@ -253,24 +267,6 @@ class CourierAccount(BaseSchema):
     
 
 
-class CourierAccountRequestBody(BaseSchema):
-    # Logistics swagger.json
-
-    
-    extension_id = fields.Str(required=False)
-    
-    account_id = fields.Str(required=False)
-    
-    scheme_id = fields.Str(required=False)
-    
-    is_self_ship = fields.Boolean(required=False)
-    
-    stage = fields.Str(required=False)
-    
-    is_own_account = fields.Boolean(required=False)
-    
-
-
 class CourierPartnerAccountFailureResponse(BaseSchema):
     # Logistics swagger.json
 
@@ -291,25 +287,7 @@ class CompanyCourierPartnerAccountListResponse(BaseSchema):
     
 
 
-class CourierAccountResponse(BaseSchema):
-    # Logistics swagger.json
-
-    
-    account_id = fields.Str(required=False)
-    
-    scheme_id = fields.Str(required=False)
-    
-    is_self_ship = fields.Boolean(required=False)
-    
-    stage = fields.Str(required=False)
-    
-    is_own_account = fields.Boolean(required=False)
-    
-    scheme_rules = fields.Nested(CourierPartnerSchemeModel, required=False)
-    
-
-
-class CourierPartnerSchemeModel(BaseSchema):
+class CourierAccountSchemeResponse(BaseSchema):
     # Logistics swagger.json
 
     
@@ -335,7 +313,29 @@ class CourierPartnerSchemeModel(BaseSchema):
     
 
 
-class CourierPartnerSchemeRequestModel(BaseSchema):
+class CourierAccountResponse(BaseSchema):
+    # Logistics swagger.json
+
+    
+    company_id = fields.Int(required=False)
+    
+    extension_id = fields.Str(required=False)
+    
+    account_id = fields.Str(required=False)
+    
+    scheme_id = fields.Str(required=False)
+    
+    is_self_ship = fields.Boolean(required=False)
+    
+    stage = fields.Str(required=False)
+    
+    is_own_account = fields.Boolean(required=False)
+    
+    scheme_rules = fields.Nested(CourierAccountSchemeResponse, required=False)
+    
+
+
+class CourierPartnerSchemeModel(BaseSchema):
     # Logistics swagger.json
 
     
@@ -346,6 +346,8 @@ class CourierPartnerSchemeRequestModel(BaseSchema):
     name = fields.Str(required=False)
     
     weight = fields.Nested(ArithmeticOperations, required=False)
+    
+    volumetric_weight = fields.Nested(ArithmeticOperations, required=False)
     
     transport_type = fields.Str(required=False)
     
@@ -425,6 +427,8 @@ class CourierPartnerSchemeUpdateRequest(BaseSchema):
     
     weight = fields.Nested(ArithmeticOperations, required=False)
     
+    volumetric_weight = fields.Nested(ArithmeticOperations, required=False)
+    
     transport_type = fields.Str(required=False)
     
     region = fields.Str(required=False)
@@ -439,17 +443,29 @@ class CourierPartnerSchemeUpdateRequest(BaseSchema):
     
 
 
-class GetCountries(BaseSchema):
+class CountryHierarchy(BaseSchema):
     # Logistics swagger.json
 
     
-    items = fields.List(fields.Nested(GetCountriesItems, required=False), required=False)
+    display_name = fields.Str(required=False)
     
-    page = fields.Nested(Page, required=False)
+    slug = fields.Str(required=False)
     
 
 
-class GetCountriesItems(BaseSchema):
+class CurrencyObject(BaseSchema):
+    # Logistics swagger.json
+
+    
+    code = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    symbol = fields.Str(required=False)
+    
+
+
+class CountryObject(BaseSchema):
     # Logistics swagger.json
 
     
@@ -457,35 +473,35 @@ class GetCountriesItems(BaseSchema):
     
     name = fields.Str(required=False)
     
+    display_name = fields.Str(required=False)
+    
     iso2 = fields.Str(required=False)
     
     iso3 = fields.Str(required=False)
     
     timezones = fields.List(fields.Str(required=False), required=False)
     
-    hierarchy = fields.List(fields.Nested(HierarchyItems, required=False), required=False)
+    hierarchy = fields.List(fields.Nested(CountryHierarchy, required=False), required=False)
     
     phone_code = fields.Str(required=False)
-    
-    currency = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
     
     latitude = fields.Str(required=False)
     
     longitude = fields.Str(required=False)
     
-    display_name = fields.Str(required=False)
+    currency = fields.Nested(CurrencyObject, required=False)
+    
+    type = fields.Str(required=False)
     
 
 
-class HierarchyItems(BaseSchema):
+class GetCountries(BaseSchema):
     # Logistics swagger.json
 
     
-    display_name = fields.Str(required=False)
+    items = fields.List(fields.Nested(CountryObject, required=False), required=False)
     
-    slug = fields.Str(required=False)
+    page = fields.Nested(Page, required=False)
     
 
 

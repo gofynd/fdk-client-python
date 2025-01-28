@@ -12,6 +12,56 @@ class Webhook:
         self._conf = config
 
     
+    async def responseTimeSummary(self, extension_id=None, start_date=None, end_date=None, request_headers:Dict={}):
+        """Response time summary
+        :param extension_id : extension_id : type string
+        :param start_date : start_date : type string
+        :param end_date : end_date : type string
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+        if start_date is not None:
+            payload["start_date"] = start_date
+        if end_date is not None:
+            payload["end_date"] = end_date
+
+        # Parameter validation
+        schema = WebhookValidator.responseTimeSummary()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/response_time_ts", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}},{"name":"start_date","in":"query","description":"start_date","required":true,"schema":{"type":"string"}},{"name":"end_date","in":"query","description":"end_date","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"start_date","in":"query","description":"start_date","required":true,"schema":{"type":"string"}},{"name":"end_date","in":"query","description":"end_date","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}]}""", serverType="partner", extension_id=extension_id, start_date=start_date, end_date=end_date)
+        query_string = await create_query_string(start_date=start_date, end_date=end_date)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/response_time_ts", extension_id=extension_id, start_date=start_date, end_date=end_date), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseTimeTs
+            schema = ResponseTimeTs()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for responseTimeSummary")
+                print(e)
+
+        return response
+    
     async def fetchDeliverySummary(self, extension_id=None, start_date=None, end_date=None, request_headers:Dict={}):
         """Webhook delivery summary
         :param extension_id : extension_id : type string

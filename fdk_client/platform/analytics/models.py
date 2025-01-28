@@ -20,6 +20,14 @@ class JobExecute(BaseSchema):
     pass
 
 
+class JobExecutionResult(BaseSchema):
+    pass
+
+
+class JobStatus(BaseSchema):
+    pass
+
+
 
 
 
@@ -41,6 +49,8 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
+    total = fields.Int(required=False)
+    
 
 
 class FileDownloadRequestBody(BaseSchema):
@@ -60,6 +70,32 @@ class JobExecute(BaseSchema):
     query = fields.Str(required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class JobExecutionResult(BaseSchema):
+    # Analytics swagger.json
+
+    
+    rows = fields.List(fields.Dict(required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class JobStatus(BaseSchema):
+    # Analytics swagger.json
+
+    
+    start_date = fields.Str(required=False)
+    
+    end_date = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+    file_metadata = fields.List(fields.Dict(required=False), required=False)
     
 
 

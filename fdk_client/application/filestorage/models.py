@@ -93,8 +93,6 @@ class StartResponse(BaseSchema):
     
     upload = fields.Nested(Upload, required=False)
     
-    cdn = fields.Nested(CDN, required=False)
-    
     tags = fields.List(fields.Str(required=False), required=False)
     
 

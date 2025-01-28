@@ -88,11 +88,7 @@ class GetBrandResponseSerializer(BaseSchema):
     pass
 
 
-class CreateBrandRequestSerializer(BaseSchema):
-    pass
-
-
-class UpdateBrandRequestSerializer(BaseSchema):
+class CreateUpdateBrandRequestSerializer(BaseSchema):
     pass
 
 
@@ -301,7 +297,7 @@ class GetAddressSerializer(BaseSchema):
     
     country_code = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     address_type = fields.Str(required=False)
     
@@ -381,13 +377,15 @@ class ErrorResponse(BaseSchema):
     # CompanyProfile swagger.json
 
     
+    code = fields.Float(required=False)
+    
+    error = fields.Str(required=False)
+    
     message = fields.Str(required=False)
     
-    code = fields.Str(required=False)
+    meta = fields.Dict(required=False)
     
     status = fields.Int(required=False)
-    
-    meta = fields.Dict(required=False)
     
 
 
@@ -411,7 +409,7 @@ class CreateUpdateAddressSerializer(BaseSchema):
     
     country_code = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     address_type = fields.Str(required=False)
     
@@ -470,6 +468,8 @@ class ProfileSuccessResponse(BaseSchema):
 
     
     uid = fields.Int(required=False)
+    
+    data = fields.List(fields.Dict(required=False), required=False)
     
     message = fields.Str(required=False)
     
@@ -561,7 +561,7 @@ class GetBrandResponseSerializer(BaseSchema):
     
 
 
-class CreateBrandRequestSerializer(BaseSchema):
+class CreateUpdateBrandRequestSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -586,32 +586,6 @@ class CreateBrandRequestSerializer(BaseSchema):
     name = fields.Str(required=False)
     
     slug_key = fields.Str(required=False)
-    
-
-
-class UpdateBrandRequestSerializer(BaseSchema):
-    # CompanyProfile swagger.json
-
-    
-    _custom_json = fields.Dict(required=False)
-    
-    _locale_language = fields.Dict(required=False)
-    
-    synonyms = fields.List(fields.Str(required=False), required=False)
-    
-    company_id = fields.Int(required=False)
-    
-    description = fields.Str(required=False)
-    
-    logo = fields.Str(required=False)
-    
-    brand_tier = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
-    
-    banner = fields.Nested(BrandBannerSerializer, required=False)
-    
-    name = fields.Str(required=False)
     
 
 
@@ -724,6 +698,8 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+    total = fields.Int(required=False)
     
 
 
@@ -961,7 +937,7 @@ class AddressSerializer(BaseSchema):
     
     country_code = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     address_type = fields.Str(required=False)
     

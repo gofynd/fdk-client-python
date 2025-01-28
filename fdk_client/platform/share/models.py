@@ -8,10 +8,6 @@ from ..PlatformModel import BaseSchema
 
 
 
-class ClickStatsResponse(BaseSchema):
-    pass
-
-
 class ClickStatsItem(BaseSchema):
     pass
 
@@ -65,14 +61,6 @@ class ErrorRes(BaseSchema):
 
 
 
-
-
-class ClickStatsResponse(BaseSchema):
-    # Share swagger.json
-
-    
-    click_stats = fields.List(fields.Nested(ClickStatsItem, required=False), required=False)
-    
 
 
 class ClickStatsItem(BaseSchema):
@@ -183,11 +171,7 @@ class UrlInfo(BaseSchema):
     # Share swagger.json
 
     
-    original = fields.Str(required=False)
-    
     hash = fields.Str(required=False)
-    
-    short_url = fields.Str(required=False)
     
 
 
@@ -254,6 +238,8 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+    total = fields.Int(required=False)
     
 
 

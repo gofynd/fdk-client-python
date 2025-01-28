@@ -19,6 +19,7 @@ from ..ApplicationModel import BaseSchema
         
     
     
+    
         
     
     
@@ -26,17 +27,6 @@ from ..ApplicationModel import BaseSchema
     
     
     
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     
     
         
@@ -47,6 +37,18 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
     
     
     
@@ -64,23 +66,6 @@ from ..ApplicationModel import BaseSchema
     
     
         
-    
-    
-        
-    
-    
-        
-    
-    
-    
-    
-    
-    
-    
-        
-    
-    
-    
     
     
         
@@ -92,6 +77,32 @@ from ..ApplicationModel import BaseSchema
     
     
     
+    
+        
+        
+    
+    
+    
+    
+    
+        
+    
+    
+    
+        
+        
+    
+    
+    
+        
+    
+    
+        
+    
+    
+    
+    
+    
         
     
     
@@ -106,7 +117,20 @@ from ..ApplicationModel import BaseSchema
         
     
     
+    
         
+    
+    
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
     
 
 class PaymentValidator:
@@ -133,11 +157,21 @@ class PaymentValidator:
          
         
     
+    class updateUserCard(BaseSchema):
+        
+        pass 
+        
+    
     class getActiveUserCards(BaseSchema):
         
         
         force_refresh = fields.Boolean(required=False)
          
+        
+    
+    class updateActiveCards(BaseSchema):
+        
+        pass 
         
     
     class deleteUserCard(BaseSchema):
@@ -291,12 +325,17 @@ class PaymentValidator:
          
         
     
-    class verifyOtpAndAddBeneficiaryForBank(BaseSchema):
+    class addBeneficiaryDetails(BaseSchema):
         
         pass 
         
     
-    class addBeneficiaryDetails(BaseSchema):
+    class deleteBeneficiaryDetails(BaseSchema):
+        
+        pass 
+        
+    
+    class verifyOtpAndAddBeneficiaryForBank(BaseSchema):
         
         pass 
         
@@ -306,12 +345,26 @@ class PaymentValidator:
         pass 
         
     
+    class getotpOrderBeneficiariesDetail(BaseSchema):
+        
+        
+        order_id = fields.Str(required=False)
+        
+        request_hash = fields.Str(required=False)
+         
+        
+    
     class verifyOtpAndAddBeneficiaryForWallet(BaseSchema):
         
         pass 
         
     
     class updateDefaultBeneficiary(BaseSchema):
+        
+        pass 
+        
+    
+    class getBenficiaryOrder(BaseSchema):
         
         pass 
         
@@ -328,12 +381,16 @@ class PaymentValidator:
         pass 
         
     
-    class resendPaymentLink(BaseSchema):
+    class getPaymentLinkId(BaseSchema):
         
-        pass 
+        
+        id = fields.Str(required=False)
+        
+        payment_link_id = fields.Str(required=False)
+         
         
     
-    class cancelPaymentLink(BaseSchema):
+    class resendPaymentLink(BaseSchema):
         
         pass 
         
@@ -402,6 +459,11 @@ class PaymentValidator:
          
         
     
+    class cancelPaymentLink(BaseSchema):
+        
+        pass 
+        
+    
     class paidOrderDetails(BaseSchema):
         
         
@@ -410,6 +472,41 @@ class PaymentValidator:
         
     
     class createPaymentOrder(BaseSchema):
+        
+        pass 
+        
+    
+    class setRefundOptionforShipment(BaseSchema):
+        
+        pass 
+        
+    
+    class getSelectedRefundOption(BaseSchema):
+        
+        
+        shipment_id = fields.Str(required=False)
+        
+        order_id = fields.Str(required=False)
+         
+        
+    
+    class getUserBeneficiariesDetailV2(BaseSchema):
+        
+        
+        order_id = fields.Str(required=False)
+        
+        shipment_id = fields.Str(required=False)
+        
+        mop = fields.Str(required=False)
+         
+        
+    
+    class validateBeneficiaryAddress(BaseSchema):
+        
+        pass 
+        
+    
+    class confirmPayment(BaseSchema):
         
         pass 
         

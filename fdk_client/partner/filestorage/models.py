@@ -8,6 +8,30 @@ from ..PartnerModel import BaseSchema
 
 
 
+class SizeConstraints(BaseSchema):
+    pass
+
+
+class FetchProxyResponse(BaseSchema):
+    pass
+
+
+class FetchProxyRequest(BaseSchema):
+    pass
+
+
+class ProxyResponse(BaseSchema):
+    pass
+
+
+class NamespaceDetails(BaseSchema):
+    pass
+
+
+class AllNamespaceDetails(BaseSchema):
+    pass
+
+
 class CDN(BaseSchema):
     pass
 
@@ -37,6 +61,72 @@ class FailedResponse(BaseSchema):
 
 
 
+
+
+class SizeConstraints(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    max = fields.Int(required=False)
+    
+
+
+class FetchProxyResponse(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+
+
+class FetchProxyRequest(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    id = fields.Int(required=False)
+    
+    customer = fields.Str(required=False)
+    
+    quantity = fields.Int(required=False)
+    
+    price = fields.Float(required=False)
+    
+    url = fields.Str(required=False)
+    
+
+
+class ProxyResponse(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    data = fields.Dict(required=False)
+    
+    support = fields.Dict(required=False)
+    
+
+
+class NamespaceDetails(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    namespace = fields.Str(required=False)
+    
+    valid_content_types = fields.List(fields.Str(required=False), required=False)
+    
+    size = fields.Nested(SizeConstraints, required=False)
+    
+    file_acl = fields.Str(required=False)
+    
+
+
+class AllNamespaceDetails(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    items = fields.List(fields.Nested(NamespaceDetails, required=False), required=False)
+    
 
 
 class CDN(BaseSchema):
@@ -80,8 +170,6 @@ class StartResponse(BaseSchema):
     size = fields.Int(required=False)
     
     upload = fields.Nested(Upload, required=False)
-    
-    cdn = fields.Nested(CDN, required=False)
     
     tags = fields.List(fields.Str(required=False), required=False)
     

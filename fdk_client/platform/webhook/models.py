@@ -243,6 +243,8 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
+    total = fields.Int(required=False)
+    
 
 
 class PingWebhook(BaseSchema):
@@ -537,6 +539,8 @@ class SubscriberConfigPostRequestV2(BaseSchema):
     
     name = fields.Str(required=False)
     
+    type = fields.Str(required=False, allow_none=True)
+    
     webhook_url = fields.Str(required=False)
     
     provider = fields.Str(required=False)
@@ -563,6 +567,8 @@ class SubscriberConfigUpdateRequestV2(BaseSchema):
     
     name = fields.Str(required=False)
     
+    type = fields.Str(required=False, allow_none=True)
+    
     webhook_url = fields.Str(required=False)
     
     provider = fields.Str(required=False)
@@ -587,6 +593,8 @@ class SubscriberConfigPost(BaseSchema):
     
     name = fields.Str(required=False)
     
+    type = fields.Str(required=False, allow_none=True)
+    
     webhook_url = fields.Str(required=False)
     
     association = fields.Nested(Association, required=False)
@@ -610,6 +618,8 @@ class SubscriberConfigUpdate(BaseSchema):
     id = fields.Int(required=False)
     
     name = fields.Str(required=False)
+    
+    type = fields.Str(required=False, allow_none=True)
     
     webhook_url = fields.Str(required=False)
     
