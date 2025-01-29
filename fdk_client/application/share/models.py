@@ -163,11 +163,11 @@ class UrlInfo(BaseSchema):
     # Share swagger.json
 
     
+    original = fields.Str(required=False)
+    
     hash = fields.Str(required=False)
     
-    url_hash = fields.Str(required=False)
-    
-    alias = fields.Str(required=False)
+    short_url = fields.Str(required=False)
     
 
 

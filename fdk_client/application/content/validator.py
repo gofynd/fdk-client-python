@@ -59,6 +59,9 @@ from ..ApplicationModel import BaseSchema
     
     
         
+    
+    
+        
         
         
         
@@ -197,6 +200,13 @@ class ContentValidator:
         slug = fields.Str(required=False)
         
         root_id = fields.Str(required=False)
+         
+        
+    
+    class getWellKnownUrl(BaseSchema):
+        
+        
+        slug = fields.Str(required=False)
          
         
     

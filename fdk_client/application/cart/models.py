@@ -336,6 +336,10 @@ class Address(BaseSchema):
     pass
 
 
+class ValidationConfig(BaseSchema):
+    pass
+
+
 class GetAddressesResponse(BaseSchema):
     pass
 
@@ -573,6 +577,10 @@ class AllAddressForSelectAddress(BaseSchema):
 
 
 class DeleteCartRequest(BaseSchema):
+    pass
+
+
+class ValidationError(BaseSchema):
     pass
 
 
@@ -1939,6 +1947,8 @@ class BulkPriceOffer(BaseSchema):
     
     seller = fields.Nested(OfferSeller, required=False)
     
+    article_id = fields.Str(required=False)
+    
 
 
 class BulkPriceResponse(BaseSchema):
@@ -2045,6 +2055,16 @@ class Address(BaseSchema):
     
 
 
+class ValidationConfig(BaseSchema):
+    # Cart swagger.json
+
+    
+    address_max_limit = fields.Int(required=False)
+    
+    user_address_count = fields.Int(required=False)
+    
+
+
 class GetAddressesResponse(BaseSchema):
     # Cart swagger.json
 
@@ -2052,6 +2072,8 @@ class GetAddressesResponse(BaseSchema):
     pii_masking = fields.Boolean(required=False)
     
     address = fields.List(fields.Nested(Address, required=False), required=False)
+    
+    validation_config = fields.Nested(ValidationConfig, required=False)
     
 
 
@@ -2967,6 +2989,8 @@ class LadderPriceOffer(BaseSchema):
     
     description = fields.Str(required=False)
     
+    promotion_type = fields.Str(required=False)
+    
 
 
 class CurrencyInfo(BaseSchema):
@@ -3227,6 +3251,8 @@ class AllAddressForSelectAddress(BaseSchema):
     
     pii_masking = fields.Boolean(required=False)
     
+    validation_config = fields.Nested(ValidationConfig, required=False)
+    
 
 
 class DeleteCartRequest(BaseSchema):
@@ -3234,6 +3260,16 @@ class DeleteCartRequest(BaseSchema):
 
     
     cart_id_list = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class ValidationError(BaseSchema):
+    # Cart swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    field = fields.Str(required=False)
     
 
 

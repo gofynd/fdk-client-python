@@ -16,7 +16,7 @@ class Upload(BaseSchema):
     pass
 
 
-class StartResponse(BaseSchema):
+class FileUpload(BaseSchema):
     pass
 
 
@@ -24,7 +24,7 @@ class Params(BaseSchema):
     pass
 
 
-class StartRequest(BaseSchema):
+class FileUploadStart(BaseSchema):
     pass
 
 
@@ -32,7 +32,7 @@ class CreatedBy(BaseSchema):
     pass
 
 
-class CompleteResponse(BaseSchema):
+class FileUploadComplete(BaseSchema):
     pass
 
 
@@ -40,11 +40,11 @@ class Urls(BaseSchema):
     pass
 
 
-class SignUrlResponse(BaseSchema):
+class SignUrlResult(BaseSchema):
     pass
 
 
-class SignUrlRequest(BaseSchema):
+class SignUrl(BaseSchema):
     pass
 
 
@@ -73,7 +73,7 @@ class Upload(BaseSchema):
     
 
 
-class StartResponse(BaseSchema):
+class FileUpload(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -105,7 +105,7 @@ class Params(BaseSchema):
     
 
 
-class StartRequest(BaseSchema):
+class FileUploadStart(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -129,7 +129,7 @@ class CreatedBy(BaseSchema):
     
 
 
-class CompleteResponse(BaseSchema):
+class FileUploadComplete(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -175,7 +175,7 @@ class Urls(BaseSchema):
     
 
 
-class SignUrlResponse(BaseSchema):
+class SignUrlResult(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -183,7 +183,7 @@ class SignUrlResponse(BaseSchema):
     
 
 
-class SignUrlRequest(BaseSchema):
+class SignUrl(BaseSchema):
     # FileStorage swagger.json
 
     

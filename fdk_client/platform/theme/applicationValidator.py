@@ -305,7 +305,7 @@ class ThemeValidator:
          
         
     
-    class getAppliedTheme(BaseSchema):
+    class createTheme(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -314,7 +314,7 @@ class ThemeValidator:
          
         
     
-    class addThemeToApplication(BaseSchema):
+    class getAppliedTheme(BaseSchema):
         
         
         company_id = fields.Int(required=False)
