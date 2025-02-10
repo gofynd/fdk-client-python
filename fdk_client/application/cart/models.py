@@ -1187,6 +1187,14 @@ class CartProduct(BaseSchema):
     
     attributes = fields.Dict(required=False, allow_none=True)
     
+    l1_categories = fields.List(fields.Float(required=False), required=False)
+    
+    l2_categories = fields.List(fields.Float(required=False), required=False)
+    
+    l3_categories = fields.List(fields.Float(required=False), required=False)
+    
+    departments = fields.List(fields.Float(required=False), required=False)
+    
 
 
 class CouponDetails(BaseSchema):
