@@ -1536,7 +1536,7 @@ class Catalog:
 
         return response
     
-    async def getApplicationProducts(self, q=None, f=None, c=None, filters=None, is_dependent=None, sort_on=None, page_id=None, page_size=None, page_no=None, page_type=None, item_ids=None, request_headers:Dict={}):
+    async def getAppicationProducts(self, q=None, f=None, c=None, filters=None, is_dependent=None, sort_on=None, page_id=None, page_size=None, page_no=None, page_type=None, item_ids=None, request_headers:Dict={}):
         """Retrieve products associated with the application. List all the products associated with a brand, collection or category in a requested sort order.
         :param q : The search query. This can be a partial or complete name of a either a product, brand or category : type string
         :param f : The search filter parameters. All the parameter filtered from filter parameters will be passed in **f** parameter in this format. **?f=brand:voi-jeans||and:::category:t-shirts||shirts** : type string
@@ -1576,7 +1576,7 @@ class Catalog:
             payload["item_ids"] = item_ids
 
         # Parameter validation
-        schema = CatalogValidator.getApplicationProducts()
+        schema = CatalogValidator.getAppicationProducts()
         schema.dump(schema.load(payload))
         
 
@@ -1605,7 +1605,7 @@ class Catalog:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getApplicationProducts")
+                print("Response Validation failed for getAppicationProducts")
                 print(e)
 
         return response
@@ -5198,40 +5198,22 @@ class Catalog:
 
         return response
     
-    async def pollPriceFactoryJobs(self, id=None, start_date=None, end_date=None, stage=None, is_active=None, q=None, type=None, request_headers:Dict={}):
+    async def pollPriceFactoryJobs(self, id=None, request_headers:Dict={}):
         """This API allows to poll job for adding products in price factory.
         :param id : An `id` is a unique identifier for a particular price factory. : type string
-        :param start_date : Date that filters the jobs created after this date : type string
-        :param end_date : Date that filters the jobs created before this date : type string
-        :param stage : Filter jobs by the stage : type array
-        :param is_active : Filter active or inactive jobs : type boolean
-        :param q : Pass unique identifier for a particular job to poll : type string
-        :param type : Pass type for a particular job to poll : type array
         """
         payload = {}
         
         if id is not None:
             payload["id"] = id
-        if start_date is not None:
-            payload["start_date"] = start_date
-        if end_date is not None:
-            payload["end_date"] = end_date
-        if stage is not None:
-            payload["stage"] = stage
-        if is_active is not None:
-            payload["is_active"] = is_active
-        if q is not None:
-            payload["q"] = q
-        if type is not None:
-            payload["type"] = type
 
         # Parameter validation
         schema = CatalogValidator.pollPriceFactoryJobs()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/poll", """{"required":[{"description":"A `company_id` is a unique identifier for a particular company.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","schema":{"type":"string"},"required":true},{"description":"An `id` is a unique identifier for a particular price factory.","in":"path","name":"id","schema":{"type":"string"},"required":true}],"optional":[{"description":"Date that filters the jobs created after this date","in":"query","name":"start_date","schema":{"type":"string","format":"date"},"required":false},{"description":"Date that filters the jobs created before this date","in":"query","name":"end_date","schema":{"type":"string","format":"date"},"required":false},{"description":"Filter jobs by the stage","in":"query","name":"stage","schema":{"type":"array","items":{"type":"string","enum":["pending","validated","processed"]}},"required":false},{"description":"Filter active or inactive jobs","in":"query","name":"is_active","schema":{"type":"boolean"},"required":false},{"description":"Pass unique identifier for a particular job to poll","in":"query","name":"q","schema":{"type":"string"},"required":false},{"description":"Pass type for a particular job to poll","in":"query","name":"type","schema":{"type":"array","items":{"type":"string","enum":["export","upload"]}},"required":false}],"query":[{"description":"Date that filters the jobs created after this date","in":"query","name":"start_date","schema":{"type":"string","format":"date"},"required":false},{"description":"Date that filters the jobs created before this date","in":"query","name":"end_date","schema":{"type":"string","format":"date"},"required":false},{"description":"Filter jobs by the stage","in":"query","name":"stage","schema":{"type":"array","items":{"type":"string","enum":["pending","validated","processed"]}},"required":false},{"description":"Filter active or inactive jobs","in":"query","name":"is_active","schema":{"type":"boolean"},"required":false},{"description":"Pass unique identifier for a particular job to poll","in":"query","name":"q","schema":{"type":"string"},"required":false},{"description":"Pass type for a particular job to poll","in":"query","name":"type","schema":{"type":"array","items":{"type":"string","enum":["export","upload"]}},"required":false}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular company.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","schema":{"type":"string"},"required":true},{"description":"An `id` is a unique identifier for a particular price factory.","in":"path","name":"id","schema":{"type":"string"},"required":true}]}""", serverType="platform", id=id, start_date=start_date, end_date=end_date, stage=stage, is_active=is_active, q=q, type=type)
-        query_string = await create_query_string(start_date=start_date, end_date=end_date, stage=stage, is_active=is_active, q=q, type=type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/poll", """{"required":[{"description":"A `company_id` is a unique identifier for a particular company.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","schema":{"type":"string"},"required":true},{"description":"An `id` is a unique identifier for a particular price factory.","in":"path","name":"id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular company.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","schema":{"type":"string"},"required":true},{"description":"An `id` is a unique identifier for a particular price factory.","in":"path","name":"id","schema":{"type":"string"},"required":true}]}""", serverType="platform", id=id)
+        query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
 
@@ -5247,7 +5229,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/poll", id=id, start_date=start_date, end_date=end_date, stage=stage, is_active=is_active, q=q, type=type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/poll", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CreateAppPriceFactoryProductExportJobPollResponse

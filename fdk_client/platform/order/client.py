@@ -13,7 +13,7 @@ class Order:
 
     
     async def invalidateShipmentCache(self, body="", request_headers:Dict={}):
-        """Clear the existing shipment cache data stored in Redis  and serialize the updated data for subsequent use.
+        """Invalidate shipment Cache.
         """
         payload = {}
         
@@ -395,7 +395,7 @@ class Order:
         return response
     
     async def getAnnouncements(self, date=None, request_headers:Dict={}):
-        """Retrieve announcements related to orders fulfilment configured by platform or company admin
+        """Retrieve announcements related to orders or shipments.
         :param date : Date On which the announcement is Active (Date should in ISO Datetime format IST Time) : type string
         """
         payload = {}
@@ -637,7 +637,7 @@ class Order:
         return response
     
     async def sendSmsNinja(self, body="", request_headers:Dict={}):
-        """Send SMS to customer based on the template that is selected
+        """Send SMS Ninja Panel.
         """
         payload = {}
         
@@ -729,7 +729,7 @@ class Order:
         return response
     
     async def orderUpdate(self, body="", request_headers:Dict={}):
-        """Used to update an order's meta information. These meta information can be accessed via order or shipment details API.
+        """Modify the details and status of an order. 
         """
         payload = {}
         
@@ -775,7 +775,7 @@ class Order:
         return response
     
     async def getStateTransitionMap(self, request_headers:Dict={}):
-        """Retrieve a map of state transitions for orders
+        """Retrieve a map of state transitions for orders.
         """
         payload = {}
         
@@ -865,7 +865,7 @@ class Order:
         return response
     
     async def fetchCreditBalanceDetail(self, body="", request_headers:Dict={}):
-        """Retrieve details about credit balance on the basis of customer mobile number
+        """Retrieve details about credit balance.
         """
         payload = {}
         
@@ -911,7 +911,7 @@ class Order:
         return response
     
     async def fetchRefundModeConfig(self, body="", request_headers:Dict={}):
-        """Get list of refund modes to trigger refunds
+        """Retrieve configuration for refund modes.
         """
         payload = {}
         
@@ -1095,7 +1095,7 @@ class Order:
         return response
     
     async def downloadLanesReport(self, body="", request_headers:Dict={}):
-        """Downloads shipments/orders present in the provided lane
+        """Downloads lanes shipment/orders.
         """
         payload = {}
         
@@ -1296,7 +1296,7 @@ class Order:
         return response
     
     async def getFileByStatus(self, batch_id=None, status=None, file_type=None, report_type=None, request_headers:Dict={}):
-        """Get the file download URL used for performing bulk operation
+        """Get the file URL consisting Records of the provided status.
         :param batch_id :  : type string
         :param status :  : type string
         :param file_type :  : type string
@@ -1463,7 +1463,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/tracking", """{"required":[{"description":"Company ID","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"Shipment ID","example":"16908065964581066182","in":"query","name":"shipment_id","required":false,"schema":{"type":"string"}},{"description":"AWB number","example":"581066182","in":"query","name":"awb","required":false,"schema":{"type":"string"}},{"description":"Page number","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Page size","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"query":[{"description":"Shipment ID","example":"16908065964581066182","in":"query","name":"shipment_id","required":false,"schema":{"type":"string"}},{"description":"AWB number","example":"581066182","in":"query","name":"awb","required":false,"schema":{"type":"string"}},{"description":"Page number","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Page size","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"description":"Company ID","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", shipment_id=shipment_id, awb=awb, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/tracking", """{"required":[{"description":"Company ID","example":"1","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"Shipment ID","example":"16908065964581066182","in":"query","name":"shipment_id","required":false,"schema":{"type":"string"}},{"description":"AWB number","example":"581066182","in":"query","name":"awb","required":false,"schema":{"type":"string"}},{"description":"Page number","example":1,"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Page size","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"query":[{"description":"Shipment ID","example":"16908065964581066182","in":"query","name":"shipment_id","required":false,"schema":{"type":"string"}},{"description":"AWB number","example":"581066182","in":"query","name":"awb","required":false,"schema":{"type":"string"}},{"description":"Page number","example":1,"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Page size","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"description":"Company ID","example":"1","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", shipment_id=shipment_id, awb=awb, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(shipment_id=shipment_id, awb=awb, page_no=page_no, page_size=page_size)
         if query_string:
             url_with_params += "?" + query_string
@@ -1640,7 +1640,7 @@ class Order:
         return response
     
     async def getRoleBasedActions(self, request_headers:Dict={}):
-        """Retrieve permissible actions based on user roles such as company_admin,  company_operation, customer_care, and read_only.
+        """Retrieve role based actions.
         """
         payload = {}
         
@@ -2671,7 +2671,7 @@ class Order:
         return response
     
     async def getfilters(self, view=None, group_entity=None, request_headers:Dict={}):
-        """Get supported filters for various listing operations
+        """Retrieve listing filters.
         :param view : Name of view : type string
         :param group_entity : Name of group entity : type string
         """
@@ -2719,7 +2719,7 @@ class Order:
         return response
     
     async def getBulkShipmentExcelFile(self, sales_channels=None, dp_ids=None, start_date=None, end_date=None, stores=None, tags=None, bag_status=None, payment_methods=None, file_type=None, time_to_dispatch=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Generates the report which can be filled and uploaded to perform the bulk operation based on the filters provided
+        """Generate Bulk Shipment Excel Report.
         :param sales_channels : Comma separated values of sales channel ids : type string
         :param dp_ids : Comma separated values of delivery partner ids : type string
         :param start_date : UTC start date in ISO format : type string
@@ -2797,7 +2797,7 @@ class Order:
         return response
     
     async def getBulkActionTemplate(self, request_headers:Dict={}):
-        """Get list of templates so that users can download the required template
+        """Get Bulk Action seller templates.
         """
         payload = {}
         
@@ -2839,7 +2839,7 @@ class Order:
         return response
     
     async def downloadBulkActionTemplate(self, template_slug=None, request_headers:Dict={}):
-        """Download bulk seller templates which can be used to perform operations in bulk
+        """Download bulk actions seller templates.
         :param template_slug : Slug name of template to be downloaded : type string
         """
         payload = {}
@@ -3055,7 +3055,7 @@ class Order:
         return response
     
     async def generatePOSReceiptByOrderId(self, order_id=None, shipment_id=None, document_type=None, request_headers:Dict={}):
-        """Create a point-of-sale (POS) receipt for a specific order by order Id.
+        """Generate POS recipt by order id.
         :param order_id :  : type string
         :param shipment_id :  : type string
         :param document_type :  : type string
@@ -3148,7 +3148,7 @@ class Order:
         return response
     
     async def getTemplate(self, template_name=None, request_headers:Dict={}):
-        """Get the Excel or CSV file URL for the Template.
+        """Get the Excel file URL for the Template.
         :param template_name :  : type string
         """
         payload = {}

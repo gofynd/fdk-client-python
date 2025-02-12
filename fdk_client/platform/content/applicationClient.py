@@ -4304,8 +4304,8 @@ class Content:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metaobjects", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CustomObjectApplicationSchema
-            schema = CustomObjectApplicationSchema()
+            from .models import CustomObjectSchema
+            schema = CustomObjectSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -4396,8 +4396,8 @@ class Content:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metaobjects/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CustomObjectApplicationSchema
-            schema = CustomObjectApplicationSchema()
+            from .models import CustomObjectSchema
+            schema = CustomObjectSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:

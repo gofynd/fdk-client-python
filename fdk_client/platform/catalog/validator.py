@@ -13,6 +13,9 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
         
         
         
@@ -31,10 +34,21 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+    
+    
         
         
         
         
+        
+        
+        
+        
+    
+    
         
         
     
@@ -418,6 +432,13 @@ from ..PlatformModel import BaseSchema
 class CatalogValidator:
     
     
+    class createCategories(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
     class listCategories(BaseSchema):
         
         
@@ -446,12 +467,28 @@ class CatalogValidator:
          
         
     
+    class updateCategory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        uid = fields.Str(required=False)
+         
+        
+    
     class getSellerInsights(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         seller_app_id = fields.Str(required=False)
+         
+        
+    
+    class createDepartments(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     
@@ -477,6 +514,15 @@ class CatalogValidator:
         
     
     class getDepartmentData(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        uid = fields.Str(required=False)
+         
+        
+    
+    class updateDepartment(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -716,7 +762,7 @@ class CatalogValidator:
          
         
     
-    class getAttribute(BaseSchema):
+    class getGenderAttribute(BaseSchema):
         
         
         company_id = fields.Int(required=False)

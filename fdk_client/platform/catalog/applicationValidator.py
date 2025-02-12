@@ -636,12 +636,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-        
-        
-        
-        
     
     
         
@@ -1132,7 +1126,7 @@ class CatalogValidator:
          
         
     
-    class getApplicationProducts(BaseSchema):
+    class getAppicationProducts(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -2069,18 +2063,6 @@ class CatalogValidator:
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
-        
-        start_date = fields.Str(required=False)
-        
-        end_date = fields.Str(required=False)
-        
-        stage = fields.List(fields.Str(required=False), required=False)
-        
-        is_active = fields.Boolean(required=False)
-        
-        q = fields.Str(required=False)
-        
-        type = fields.List(fields.Str(required=False), required=False)
          
         
     

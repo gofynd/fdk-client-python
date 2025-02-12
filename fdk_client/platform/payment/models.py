@@ -2291,8 +2291,6 @@ class MultiTenderPaymentMeta(BaseSchema):
     
     key = fields.Str(required=False)
     
-    payment_gateway_slug = fields.Str(required=False)
-    
 
 
 class MultiTenderPaymentMethod(BaseSchema):

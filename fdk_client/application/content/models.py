@@ -302,10 +302,6 @@ class CustomObjectsSchema(BaseSchema):
     pass
 
 
-class WellKnownResponse(BaseSchema):
-    pass
-
-
 class ActionPage(BaseSchema):
     pass
 
@@ -1488,26 +1484,6 @@ class CustomObjectsSchema(BaseSchema):
     items = fields.List(fields.Nested(CustomObjectListItemSchema, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
-    
-
-
-class WellKnownResponse(BaseSchema):
-    # Content swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    content = fields.Str(required=False)
-    
-    content_type = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
     
 
 

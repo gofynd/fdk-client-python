@@ -228,15 +228,7 @@ class PromotionAdd(BaseSchema):
     pass
 
 
-class PromotionAddResult(BaseSchema):
-    pass
-
-
 class PromotionUpdate(BaseSchema):
-    pass
-
-
-class PromotionUpdateResult(BaseSchema):
     pass
 
 
@@ -764,10 +756,6 @@ class AddressCustomJson(BaseSchema):
     pass
 
 
-class ValidationConfig(BaseSchema):
-    pass
-
-
 class PlatformGetAddressesResponse(BaseSchema):
     pass
 
@@ -985,10 +973,6 @@ class SelectAddressResponseError(BaseSchema):
 
 
 class AllAddressForSelectAddress(BaseSchema):
-    pass
-
-
-class ValidationError(BaseSchema):
     pass
 
 
@@ -1855,8 +1839,6 @@ class PromotionListItem(BaseSchema):
     
     _id = fields.Str(required=False)
     
-    is_processed = fields.Boolean(required=False)
-    
     code = fields.Str(required=False)
     
     tags = fields.List(fields.Str(required=False), required=False)
@@ -1929,131 +1911,17 @@ class PromotionAdd(BaseSchema):
     
 
 
-class PromotionAddResult(BaseSchema):
-    # Cart swagger.json
-
-    
-    stackable = fields.Boolean(required=False)
-    
-    calculate_on = fields.Str(required=False)
-    
-    apply_exclusive = fields.Str(required=False, allow_none=True)
-    
-    promo_group = fields.Str(required=False)
-    
-    mode = fields.Str(required=False)
-    
-    is_processed = fields.Boolean(required=False)
-    
-    apply_all_discount = fields.Boolean(required=False)
-    
-    display_meta = fields.Nested(DisplayMeta1, required=False)
-    
-    ownership = fields.Nested(Ownership, required=False)
-    
-    promotion_type = fields.Str(required=False)
-    
-    discount_rules = fields.List(fields.Nested(DiscountRule, required=False), required=False)
-    
-    restrictions = fields.Nested(Restrictions1, required=False)
-    
-    currency = fields.Str(required=False)
-    
-    code = fields.Str(required=False)
-    
-    _schedule = fields.Nested(PromotionSchedule, required=False)
-    
-    post_order_action = fields.Nested(PromotionAction, required=False)
-    
-    apply_priority = fields.Int(required=False)
-    
-    author = fields.Nested(PromotionAuthor, required=False)
-    
-    visiblility = fields.Nested(Visibility, required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    buy_rules = fields.Dict(required=False)
-    
-    _custom_json = fields.Dict(required=False)
-    
-    date_meta = fields.Nested(PromotionDateMeta, required=False)
-    
-    indexed_criteria = fields.List(fields.Nested(PromoIndexedCriteria, required=False), required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-    _id = fields.Str(required=False)
-    
-
-
 class PromotionUpdate(BaseSchema):
     # Cart swagger.json
 
     
-    stackable = fields.Boolean(required=False)
-    
-    calculate_on = fields.Str(required=False)
-    
-    apply_exclusive = fields.Str(required=False, allow_none=True)
-    
-    reason = fields.Str(required=False, allow_none=True)
-    
-    promo_group = fields.Str(required=False)
-    
-    mode = fields.Str(required=False)
-    
-    apply_all_discount = fields.Boolean(required=False)
-    
-    display_meta = fields.Nested(DisplayMeta1, required=False)
-    
-    ownership = fields.Nested(Ownership, required=False)
-    
-    promotion_type = fields.Str(required=False)
-    
-    discount_rules = fields.List(fields.Nested(DiscountRule, required=False), required=False)
-    
-    restrictions = fields.Nested(Restrictions1, required=False)
-    
-    currency = fields.Str(required=False)
-    
-    code = fields.Str(required=False)
-    
-    _schedule = fields.Nested(PromotionSchedule, required=False)
-    
-    post_order_action = fields.Nested(PromotionAction, required=False)
-    
-    apply_priority = fields.Int(required=False)
-    
-    author = fields.Nested(PromotionAuthor, required=False)
-    
-    visiblility = fields.Nested(Visibility, required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    buy_rules = fields.Dict(required=False)
-    
-    _custom_json = fields.Dict(required=False)
-    
-    date_meta = fields.Nested(PromotionDateMeta, required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class PromotionUpdateResult(BaseSchema):
-    # Cart swagger.json
-
+    _id = fields.Str(required=False)
     
     stackable = fields.Boolean(required=False)
     
     calculate_on = fields.Str(required=False)
     
     apply_exclusive = fields.Str(required=False, allow_none=True)
-    
-    reason = fields.Str(required=False, allow_none=True)
-    
-    is_processed = fields.Boolean(required=False)
     
     promo_group = fields.Str(required=False)
     
@@ -2096,8 +1964,6 @@ class PromotionUpdateResult(BaseSchema):
     indexed_criteria = fields.List(fields.Nested(PromoIndexedCriteria, required=False), required=False)
     
     tags = fields.List(fields.Str(required=False), required=False)
-    
-    _id = fields.Str(required=False)
     
 
 
@@ -2856,14 +2722,6 @@ class CartProduct(BaseSchema):
     categories = fields.List(fields.Nested(CategoryInfo, required=False), required=False)
     
     attributes = fields.Dict(required=False, allow_none=True)
-    
-    l1_categories = fields.List(fields.Float(required=False), required=False)
-    
-    l2_categories = fields.List(fields.Float(required=False), required=False)
-    
-    l3_categories = fields.List(fields.Float(required=False), required=False)
-    
-    departments = fields.List(fields.Float(required=False), required=False)
     
 
 
@@ -4711,16 +4569,6 @@ class AddressCustomJson(BaseSchema):
     
 
 
-class ValidationConfig(BaseSchema):
-    # Cart swagger.json
-
-    
-    address_max_limit = fields.Int(required=False)
-    
-    user_address_count = fields.Int(required=False)
-    
-
-
 class PlatformGetAddressesResponse(BaseSchema):
     # Cart swagger.json
 
@@ -4728,8 +4576,6 @@ class PlatformGetAddressesResponse(BaseSchema):
     address = fields.List(fields.Nested(PlatformAddress, required=False), required=False)
     
     pii_masking = fields.Boolean(required=False)
-    
-    validation_config = fields.Nested(ValidationConfig, required=False)
     
 
 
@@ -5834,18 +5680,6 @@ class AllAddressForSelectAddress(BaseSchema):
     address = fields.List(fields.Nested(PlatformAddress, required=False), required=False)
     
     pii_masking = fields.Boolean(required=False)
-    
-    validation_config = fields.Nested(ValidationConfig, required=False)
-    
-
-
-class ValidationError(BaseSchema):
-    # Cart swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    field = fields.Str(required=False)
     
 
 

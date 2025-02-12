@@ -534,15 +534,15 @@ class CustomFieldsResponseByResourceIdSchema(BaseSchema):
     pass
 
 
+class CustomField(BaseSchema):
+    pass
+
+
 class CustomFieldRequestSchema(BaseSchema):
     pass
 
 
 class CustomObjectSchema(BaseSchema):
-    pass
-
-
-class CustomObjectApplicationSchema(BaseSchema):
     pass
 
 
@@ -2639,11 +2639,19 @@ class CustomFieldsResponseByResourceIdSchema(BaseSchema):
     
 
 
+class CustomField(BaseSchema):
+    # Content swagger.json
+
+    
+    definition_id = fields.Str(required=False)
+    
+
+
 class CustomFieldRequestSchema(BaseSchema):
     # Content swagger.json
 
     
-    fields = fields.List(fields.Dict(required=False), required=False)
+    fields = fields.List(fields.Nested(CustomField, required=False), required=False)
     
 
 
@@ -2652,44 +2660,6 @@ class CustomObjectSchema(BaseSchema):
 
     
     _id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    creator = fields.Str(required=False)
-    
-    company_id = fields.Str(required=False)
-    
-    created_by = fields.Str(required=False)
-    
-    updated_by = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    definition_id = fields.Str(required=False)
-    
-    is_deleted = fields.Boolean(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    fields = fields.List(fields.Nested(CustomFieldSchema, required=False), required=False)
-    
-
-
-class CustomObjectApplicationSchema(BaseSchema):
-    # Content swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
     
     creator = fields.Str(required=False)
     

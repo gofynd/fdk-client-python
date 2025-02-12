@@ -534,6 +534,10 @@ class LocationValidation(BaseSchema):
     pass
 
 
+class CategoryCreateResponse(BaseSchema):
+    pass
+
+
 class CategoryItems(BaseSchema):
     pass
 
@@ -550,7 +554,15 @@ class CategoryMappingValues(BaseSchema):
     pass
 
 
+class CategoryRequestBody(BaseSchema):
+    pass
+
+
 class CategoryResponse(BaseSchema):
+    pass
+
+
+class CategoryUpdateResponse(BaseSchema):
     pass
 
 
@@ -814,7 +826,19 @@ class PollErrorResponse(BaseSchema):
     pass
 
 
+class DepartmentCreateErrorResponse(BaseSchema):
+    pass
+
+
 class ProductBundleCreateErrorResponse(BaseSchema):
+    pass
+
+
+class DepartmentCreateResponse(BaseSchema):
+    pass
+
+
+class DepartmentCreateUpdate(BaseSchema):
     pass
 
 
@@ -823,6 +847,10 @@ class DepartmentErrorResponse(BaseSchema):
 
 
 class DepartmentIdentifier(BaseSchema):
+    pass
+
+
+class DepartmentModel(BaseSchema):
     pass
 
 
@@ -878,7 +906,7 @@ class GTIN(BaseSchema):
     pass
 
 
-class AttributeDetail(BaseSchema):
+class GenderDetail(BaseSchema):
     pass
 
 
@@ -4333,6 +4361,16 @@ class LocationValidation(BaseSchema):
     
 
 
+class CategoryCreateResponse(BaseSchema):
+    # Catalog swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+
+
 class CategoryItems(BaseSchema):
     # Catalog swagger.json
 
@@ -4385,6 +4423,34 @@ class CategoryMappingValues(BaseSchema):
     
 
 
+class CategoryRequestBody(BaseSchema):
+    # Catalog swagger.json
+
+    
+    departments = fields.List(fields.Int(required=False), required=False)
+    
+    hierarchy = fields.List(fields.Nested(Hierarchy, required=False), required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    level = fields.Int(required=False)
+    
+    marketplaces = fields.Dict(required=False)
+    
+    media = fields.Dict(required=False)
+    
+    name = fields.Str(required=False)
+    
+    priority = fields.Int(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    synonyms = fields.List(fields.Str(required=False), required=False)
+    
+    tryouts = fields.List(fields.Str(required=False), required=False)
+    
+
+
 class CategoryResponse(BaseSchema):
     # Catalog swagger.json
 
@@ -4392,6 +4458,16 @@ class CategoryResponse(BaseSchema):
     items = fields.List(fields.Nested(Category, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class CategoryUpdateResponse(BaseSchema):
+    # Catalog swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     
 
 
@@ -5395,11 +5471,55 @@ class PollErrorResponse(BaseSchema):
     
 
 
+class DepartmentCreateErrorResponse(BaseSchema):
+    # Catalog swagger.json
+
+    
+    error = fields.Dict(required=False)
+    
+
+
 class ProductBundleCreateErrorResponse(BaseSchema):
     # Catalog swagger.json
 
     
     error = fields.Dict(required=False)
+    
+
+
+class DepartmentCreateResponse(BaseSchema):
+    # Catalog swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+
+
+class DepartmentCreateUpdate(BaseSchema):
+    # Catalog swagger.json
+
+    
+    _cls = fields.Str(required=False)
+    
+    _custom_json = fields.Dict(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    logo = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    platforms = fields.Dict(required=False)
+    
+    priority_order = fields.Int(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    uid = fields.Int(required=False)
     
 
 
@@ -5428,6 +5548,40 @@ class DepartmentIdentifier(BaseSchema):
     slug = fields.Str(required=False)
     
     uid = fields.Int(required=False)
+    
+
+
+class DepartmentModel(BaseSchema):
+    # Catalog swagger.json
+
+    
+    _cls = fields.Str(required=False)
+    
+    _custom_json = fields.Dict(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    created_by = fields.Dict(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    logo = fields.Str(required=False)
+    
+    modified_by = fields.Dict(required=False)
+    
+    name = fields.Str(required=False)
+    
+    priority_order = fields.Int(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    synonyms = fields.List(fields.Str(required=False), required=False)
+    
+    uid = fields.Int(required=False)
+    
+    verified_by = fields.Dict(required=False)
+    
+    verified_on = fields.Str(required=False)
     
 
 
@@ -5713,7 +5867,7 @@ class GTIN(BaseSchema):
     
 
 
-class AttributeDetail(BaseSchema):
+class GenderDetail(BaseSchema):
     # Catalog swagger.json
 
     
@@ -7530,8 +7684,6 @@ class InventoryPayload(BaseSchema):
     tags = fields.List(fields.Str(required=False), required=False)
     
     total_quantity = fields.Int(required=False, allow_none=True)
-    
-    sellable_quantity = fields.Int(required=False)
     
     trace_id = fields.Str(required=False)
     
@@ -11712,8 +11864,6 @@ class AppPriceFactoryProductExportPollJobResponse(BaseSchema):
     success_records = fields.Int(required=False)
     
     failed_records = fields.Int(required=False)
-    
-    job_type = fields.Str(required=False)
     
 
 

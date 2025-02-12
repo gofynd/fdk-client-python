@@ -64,7 +64,7 @@ class ShipmentPayment(BaseSchema):
     pass
 
 
-class PaymentInfo(BaseSchema):
+class ShipmentPaymentInfo(BaseSchema):
     pass
 
 
@@ -513,8 +513,6 @@ class UserInfo(BaseSchema):
     
     email = fields.Str(required=False)
     
-    user_id = fields.Str(required=False)
-    
 
 
 class BreakupValues(BaseSchema):
@@ -551,7 +549,7 @@ class ShipmentPayment(BaseSchema):
     
 
 
-class PaymentInfo(BaseSchema):
+class ShipmentPaymentInfo(BaseSchema):
     # Order swagger.json
 
     
@@ -586,8 +584,6 @@ class ShipmentUserInfo(BaseSchema):
     mobile = fields.Str(required=False)
     
     email = fields.Str(required=False)
-    
-    user_id = fields.Str(required=False)
     
 
 
@@ -993,7 +989,7 @@ class Bags(BaseSchema):
     
     applied_promos = fields.List(fields.Nested(AppliedPromos, required=False), required=False)
     
-    quantity = fields.Float(required=False)
+    quantity = fields.Int(required=False)
     
     prices = fields.Nested(Prices, required=False)
     
@@ -1115,7 +1111,7 @@ class Shipments(BaseSchema):
     
     payment = fields.Nested(ShipmentPayment, required=False)
     
-    payment_info = fields.List(fields.Nested(PaymentInfo, required=False), required=False)
+    payment_info = fields.List(fields.Nested(ShipmentPaymentInfo, required=False), required=False)
     
     order_type = fields.Str(required=False, allow_none=True)
     
@@ -1304,8 +1300,6 @@ class OrderSchema(BaseSchema):
     meta = fields.Dict(required=False)
     
     external_order_id = fields.Str(required=False, allow_none=True)
-    
-    payment_info = fields.List(fields.Nested(PaymentInfo, required=False), required=False)
     
 
 

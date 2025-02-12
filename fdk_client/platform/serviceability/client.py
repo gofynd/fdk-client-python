@@ -893,57 +893,6 @@ class Serviceability:
 
         return response
     
-    async def getLocalitiesByPrefix(self, page_no=None, page_size=None, q=None, request_headers:Dict={}):
-        """Get localities that start with a specified prefix.
-        :param page_no : Starting index of the items. : type integer
-        :param page_size : Number of items per page. : type integer
-        :param q : Localities starting with the specified prefix. : type string
-        """
-        payload = {}
-        
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if q is not None:
-            payload["q"] = q
-
-        # Parameter validation
-        schema = ServiceabilityValidator.getLocalitiesByPrefix()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/localities", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"Starting index of the items.","schema":{"type":"integer","default":1,"minimum":1},"required":false},{"in":"query","name":"page_size","description":"Number of items per page.","required":false,"schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"q","description":"Localities starting with the specified prefix.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"page_no","description":"Starting index of the items.","schema":{"type":"integer","default":1,"minimum":1},"required":false},{"in":"query","name":"page_size","description":"Number of items per page.","required":false,"schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"q","description":"Localities starting with the specified prefix.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, q=q)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q)
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/localities", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetLocalities
-            schema = GetLocalities()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getLocalitiesByPrefix")
-                print(e)
-
-        return response
-    
     async def getLocality(self, locality_type=None, locality_value=None, country=None, state=None, city=None, request_headers:Dict={}):
         """Get Locality data
         :param locality_type : A `locality_type` contains value geographical division. : type string

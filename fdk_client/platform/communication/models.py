@@ -308,22 +308,6 @@ class EventSubscription(BaseSchema):
     pass
 
 
-class EventSubscriptionTemplateSmsObj(BaseSchema):
-    pass
-
-
-class EventSubscriptionTemplateEmailObj(BaseSchema):
-    pass
-
-
-class EventSubscriptionTemplateObj(BaseSchema):
-    pass
-
-
-class EventSubscriptionObj(BaseSchema):
-    pass
-
-
 class EventSubscriptions(BaseSchema):
     pass
 
@@ -393,6 +377,10 @@ class Log(BaseSchema):
 
 
 class Logs(BaseSchema):
+    pass
+
+
+class SendOtpSmsCommsTemplate(BaseSchema):
     pass
 
 
@@ -485,10 +473,6 @@ class SmsTemplateReq(BaseSchema):
 
 
 class Notification(BaseSchema):
-    pass
-
-
-class SystemNotificationSetting(BaseSchema):
     pass
 
 
@@ -995,9 +979,9 @@ class Stats(BaseSchema):
     
     _id = fields.Str(required=False)
     
-    imported = fields.Nested(StatsImported, required=False)
+    imported = fields.Raw(required=False)
     
-    processed = fields.Nested(StatsProcessed, required=False)
+    processed = fields.Raw(required=False)
     
 
 
@@ -1557,7 +1541,7 @@ class EventSubscriptionTemplateSms(BaseSchema):
     
     subscribed = fields.Boolean(required=False)
     
-    template = fields.Str(required=False, allow_none=True)
+    template = fields.Raw(required=False)
     
 
 
@@ -1567,7 +1551,7 @@ class EventSubscriptionTemplateEmail(BaseSchema):
     
     subscribed = fields.Boolean(required=False)
     
-    template = fields.Str(required=False, allow_none=True)
+    template = fields.Raw(required=False)
     
 
 
@@ -1617,69 +1601,11 @@ class EventSubscription(BaseSchema):
     
 
 
-class EventSubscriptionTemplateSmsObj(BaseSchema):
-    # Communication swagger.json
-
-    
-    subscribed = fields.Boolean(required=False)
-    
-    template = fields.Dict(required=False, allow_none=True)
-    
-
-
-class EventSubscriptionTemplateEmailObj(BaseSchema):
-    # Communication swagger.json
-
-    
-    subscribed = fields.Boolean(required=False)
-    
-    template = fields.Str(required=False, allow_none=True)
-    
-
-
-class EventSubscriptionTemplateObj(BaseSchema):
-    # Communication swagger.json
-
-    
-    sms = fields.Nested(EventSubscriptionTemplateSmsObj, required=False)
-    
-    email = fields.Nested(EventSubscriptionTemplateEmailObj, required=False)
-    
-    pushnotification = fields.Nested(EventSubscriptionTemplatePushnotification, required=False)
-    
-
-
-class EventSubscriptionObj(BaseSchema):
-    # Communication swagger.json
-
-    
-    template = fields.Nested(EventSubscriptionTemplateObj, required=False)
-    
-    is_default = fields.Boolean(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    application = fields.Str(required=False)
-    
-    category = fields.Str(required=False)
-    
-    event = fields.Raw(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
-    
-
-
 class EventSubscriptions(BaseSchema):
     # Communication swagger.json
 
     
-    items = fields.List(fields.Nested(EventSubscriptionObj, required=False), required=False)
+    items = fields.List(fields.Nested(EventSubscription, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
@@ -1801,9 +1727,9 @@ class JobLog(BaseSchema):
     # Communication swagger.json
 
     
-    imported = fields.Nested(StatsImported, required=False)
+    imported = fields.Raw(required=False)
     
-    processed = fields.Nested(StatsProcessed, required=False)
+    processed = fields.Raw(required=False)
     
     _id = fields.Str(required=False)
     
@@ -1927,6 +1853,16 @@ class Logs(BaseSchema):
     
 
 
+class SendOtpSmsCommsTemplate(BaseSchema):
+    # Communication swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    value = fields.Raw(required=False)
+    
+
+
 class SendOtpSmsCommsProvider(BaseSchema):
     # Communication swagger.json
 
@@ -1979,7 +1915,7 @@ class SendOtpCommsReqSms(BaseSchema):
     
     expiry = fields.Int(required=False)
     
-    template = fields.Dict(required=False)
+    template = fields.Nested(SendOtpSmsCommsTemplate, required=False)
     
     provider = fields.Nested(SendOtpSmsCommsProvider, required=False)
     
@@ -2339,18 +2275,6 @@ class Notification(BaseSchema):
     
 
 
-class SystemNotificationSetting(BaseSchema):
-    # Communication swagger.json
-
-    
-    sound = fields.Boolean(required=False)
-    
-    priority = fields.Str(required=False)
-    
-    time_to_live = fields.Str(required=False)
-    
-
-
 class SystemNotificationUser(BaseSchema):
     # Communication swagger.json
 
@@ -2369,7 +2293,7 @@ class SystemNotification(BaseSchema):
     
     user = fields.Nested(SystemNotificationUser, required=False)
     
-    settings = fields.Nested(SystemNotificationSetting, required=False)
+    settings = fields.Nested(SystemNotificationUser, required=False)
     
     _id = fields.Str(required=False)
     

@@ -519,7 +519,7 @@ class Finance:
         return response
     
     async def invoiceListing(self, body="", request_headers:Dict={}):
-        """Provides list of invoices generated for a company.
+        """Gives list of invoices.
         """
         payload = {}
         

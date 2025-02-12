@@ -241,8 +241,6 @@ class Page(BaseSchema):
     
     total = fields.Int(required=False)
     
-    page = fields.Int(required=False)
-    
 
 
 class ShortLinkList(BaseSchema):

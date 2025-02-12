@@ -21,12 +21,10 @@ class Logistic:
             "getGeoAreas": "/service/application/logistics/v1.0/company/{company_id}/application/{application_id}/geoareas",
             "getCountries": "/service/application/logistics/v2.0/countries",
             "getCountry": "/service/application/logistics/v1.0/countries/{country_iso_code}",
-            "getLocalitiesByPrefix": "/service/application/logistics/v1.0/localities",
             "getLocalities": "/service/application/logistics/v1.0/localities/{locality_type}",
             "getLocality": "/service/application/logistics/v1.0/localities/{locality_type}/{locality_value}",
             "validateAddress": "/service/application/logistics/v1.0/country/{country_iso_code}/address/templates/{template_name}/validate",
-            "createShipments": "/service/application/logistics/v1.0/company/{company_id}/application/{application_id}/shipments",
-            "getDeliveryPromise": "/service/application/logistics/v1.0/delivery-promise"
+            "createShipments": "/service/application/logistics/v1.0/company/{company_id}/application/{application_id}/shipments"
             
         }
         self._urls = {
@@ -390,61 +388,6 @@ class Logistic:
 
         return response
     
-    async def getLocalitiesByPrefix(self, company_id=None, page_no=None, page_size=None, q=None, body="", request_headers:Dict={}):
-        """Get localities that start with a specified prefix.
-        :param company_id : The unique identifier of the company. : type integer
-        :param page_no : Starting index of the items. : type integer
-        :param page_size : Number of items per page. : type integer
-        :param q : Localities starting with the specified prefix. : type string
-        """
-        payload = {}
-        
-        if company_id is not None:
-            payload["company_id"] = company_id
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if q is not None:
-            payload["q"] = q
-
-        # Parameter validation
-        schema = LogisticValidator.getLocalitiesByPrefix()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getLocalitiesByPrefix"], proccessed_params="""{"required":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"Starting index of the items.","schema":{"type":"integer","default":1,"minimum":1},"required":false},{"in":"query","name":"page_size","description":"Number of items per page.","required":false,"schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"q","description":"Localities starting with the specified prefix.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"page_no","description":"Starting index of the items.","schema":{"type":"integer","default":1,"minimum":1},"required":false},{"in":"query","name":"page_size","description":"Number of items per page.","required":false,"schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"q","description":"Localities starting with the specified prefix.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="application", company_id=company_id, page_no=page_no, page_size=page_size, q=q)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocalitiesByPrefix"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/localities", company_id=company_id, page_no=page_no, page_size=page_size, q=q), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetLocalities
-            schema = GetLocalities()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getLocalitiesByPrefix")
-                print(e)
-
-        return response
-    
     async def getLocalities(self, locality_type=None, country=None, state=None, city=None, page_no=None, page_size=None, q=None, name=None, body="", request_headers:Dict={}):
         """Get geographical data for a specific type of locality based on the provided filters. For instance, obtain a list of cities for a given country and state.
         :param locality_type : Unique geographical division. : type string
@@ -672,55 +615,6 @@ class Logistic:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for createShipments")
-                print(e)
-
-        return response
-    
-    async def getDeliveryPromise(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Get delivery promises for both global and store levels based on a specific locality type.
-        :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
-        :param page_size : The number of items to retrieve in each page. Default value is 12. : type integer
-        """
-        payload = {}
-        
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-
-        # Parameter validation
-        schema = LogisticValidator.getDeliveryPromise()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getDeliveryPromise"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12},"required":false}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getDeliveryPromise"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/delivery-promise", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetPromiseDetails
-            schema = GetPromiseDetails()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getDeliveryPromise")
                 print(e)
 
         return response

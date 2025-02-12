@@ -58,12 +58,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
         
         
         
@@ -73,10 +67,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-        
-        
-    
-    
         
         
     
@@ -185,19 +175,6 @@ class LogisticValidator:
          
         
     
-    class getLocalitiesByPrefix(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        q = fields.Str(required=False)
-         
-        
-    
     class getLocalities(BaseSchema):
         
         
@@ -249,15 +226,6 @@ class LogisticValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-         
-        
-    
-    class getDeliveryPromise(BaseSchema):
-        
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
          
         
     
