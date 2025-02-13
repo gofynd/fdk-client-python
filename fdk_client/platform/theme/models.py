@@ -10,6 +10,58 @@ from .enums import *
 
 
 
+class MarketplaceTheme(BaseSchema):
+    pass
+
+
+class PaymentInfo(BaseSchema):
+    pass
+
+
+class ContactInfo(BaseSchema):
+    pass
+
+
+class CatalogSize(BaseSchema):
+    pass
+
+
+class MarketplaceThemeImages(BaseSchema):
+    pass
+
+
+class CarouselItem(BaseSchema):
+    pass
+
+
+class ExploreInfo(BaseSchema):
+    pass
+
+
+class Feature(BaseSchema):
+    pass
+
+
+class FeatureItem(BaseSchema):
+    pass
+
+
+class Highlight(BaseSchema):
+    pass
+
+
+class Variation(BaseSchema):
+    pass
+
+
+class Documentation(BaseSchema):
+    pass
+
+
+class Comments(BaseSchema):
+    pass
+
+
 class GetExtensionSectionRes(BaseSchema):
     pass
 
@@ -31,6 +83,14 @@ class ThemeReq(BaseSchema):
 
 
 class CompanyThemeSchema(BaseSchema):
+    pass
+
+
+class CompanyThemeReqSchema(BaseSchema):
+    pass
+
+
+class CompanyThemeResponse(BaseSchema):
     pass
 
 
@@ -146,7 +206,7 @@ class ThemesSchema(BaseSchema):
     pass
 
 
-class ThemeUpgradable(BaseSchema):
+class ThemeUpgradableResponse(BaseSchema):
     pass
 
 
@@ -223,6 +283,10 @@ class CustomProps(BaseSchema):
 
 
 class GlobalSchema(BaseSchema):
+    pass
+
+
+class Prop(BaseSchema):
     pass
 
 
@@ -314,7 +378,7 @@ class ThemeVersions(BaseSchema):
     pass
 
 
-class DummyTheme(BaseSchema):
+class DummyResponse(BaseSchema):
     pass
 
 
@@ -326,11 +390,205 @@ class CompanyPrivateTheme(BaseSchema):
     pass
 
 
+class Option(BaseSchema):
+    pass
+
+
 class ActionPage(BaseSchema):
     pass
 
 
 
+
+
+class MarketplaceTheme(BaseSchema):
+    # Theme swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    payment = fields.Nested(PaymentInfo, required=False)
+    
+    contact = fields.Nested(ContactInfo, required=False)
+    
+    industry = fields.List(fields.Str(required=False), required=False)
+    
+    is_update = fields.Boolean(required=False)
+    
+    is_default = fields.Boolean(required=False)
+    
+    name = fields.Str(required=False)
+    
+    tagline = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    catalog_size = fields.Nested(CatalogSize, required=False)
+    
+    images = fields.Nested(MarketplaceThemeImages, required=False)
+    
+    carousel = fields.List(fields.Nested(CarouselItem, required=False), required=False)
+    
+    src = fields.Str(required=False)
+    
+    explore = fields.Nested(ExploreInfo, required=False)
+    
+    features = fields.List(fields.Nested(Feature, required=False), required=False)
+    
+    highlights = fields.List(fields.Nested(Highlight, required=False), required=False)
+    
+    variations = fields.List(fields.Nested(Variation, required=False), required=False)
+    
+    documentation = fields.Nested(Documentation, required=False)
+    
+    status = fields.Str(required=False)
+    
+    step = fields.Int(required=False)
+    
+    comments = fields.Nested(Comments, required=False)
+    
+    release = fields.Nested(Release, required=False)
+    
+    slug = fields.Str(required=False)
+    
+    organization_id = fields.Str(required=False)
+    
+    user_id = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    template_theme_id = fields.Str(required=False)
+    
+    theme_type = fields.Str(required=False)
+    
+
+
+class PaymentInfo(BaseSchema):
+    # Theme swagger.json
+
+    
+    is_paid = fields.Boolean(required=False)
+    
+    amount = fields.Float(required=False)
+    
+
+
+class ContactInfo(BaseSchema):
+    # Theme swagger.json
+
+    
+    developer_contact = fields.List(fields.Str(required=False), required=False)
+    
+    seller_contact = fields.Str(required=False)
+    
+
+
+class CatalogSize(BaseSchema):
+    # Theme swagger.json
+
+    
+    min = fields.Int(required=False)
+    
+    max = fields.Int(required=False)
+    
+
+
+class MarketplaceThemeImages(BaseSchema):
+    # Theme swagger.json
+
+    
+    desktop = fields.Str(required=False)
+    
+    mobile = fields.Str(required=False)
+    
+
+
+class CarouselItem(BaseSchema):
+    # Theme swagger.json
+
+    
+    desktop = fields.Str(required=False)
+    
+    mobile = fields.Str(required=False)
+    
+
+
+class ExploreInfo(BaseSchema):
+    # Theme swagger.json
+
+    
+    title = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+
+
+class Feature(BaseSchema):
+    # Theme swagger.json
+
+    
+    category = fields.Str(required=False)
+    
+    list = fields.List(fields.Nested(FeatureItem, required=False), required=False)
+    
+
+
+class FeatureItem(BaseSchema):
+    # Theme swagger.json
+
+    
+    label = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+
+
+class Highlight(BaseSchema):
+    # Theme swagger.json
+
+    
+    title = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    image = fields.Str(required=False)
+    
+
+
+class Variation(BaseSchema):
+    # Theme swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    color = fields.Str(required=False)
+    
+    demo_url = fields.Str(required=False)
+    
+    images = fields.Nested(MarketplaceThemeImages, required=False)
+    
+
+
+class Documentation(BaseSchema):
+    # Theme swagger.json
+
+    
+    notes = fields.Str(required=False)
+    
+    url = fields.Str(required=False)
+    
+
+
+class Comments(BaseSchema):
+    # Theme swagger.json
+
+    
+    developer_remark = fields.Str(required=False)
+    
+    reviewer_feedback = fields.Str(required=False)
+    
 
 
 class GetExtensionSectionRes(BaseSchema):
@@ -425,6 +683,34 @@ class CompanyThemeSchema(BaseSchema):
     
 
 
+class CompanyThemeReqSchema(BaseSchema):
+    # Theme swagger.json
+
+    
+    marketplace_theme_id = fields.Str(required=False)
+    
+
+
+class CompanyThemeResponse(BaseSchema):
+    # Theme swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    marketplace_theme_id = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    meta = fields.Nested(CompanyThemeMeta, required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+
+
 class MarketplaceThemeId(BaseSchema):
     # Theme swagger.json
 
@@ -505,6 +791,8 @@ class AvailablePageSchema(BaseSchema):
     
     updated_at = fields.Str(required=False)
     
+    application = fields.Str(required=False)
+    
 
 
 class AvailablePageSectionMetaAttributes(BaseSchema):
@@ -579,15 +867,19 @@ class AvailablePageSeo(BaseSchema):
     
     sitemap = fields.Nested(SEOSitemap, required=False)
     
-    breadcrumb = fields.List(fields.Nested(SEObreadcrumb, required=False), required=False)
+    breadcrumbs = fields.List(fields.Nested(SEObreadcrumb, required=False), required=False)
     
     _id = fields.Str(required=False)
+    
+    canonical_url = fields.Str(required=False)
     
 
 
 class AvailablePageSchemaSections(BaseSchema):
     # Theme swagger.json
 
+    
+    _id = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
@@ -713,7 +1005,7 @@ class FontsSchema(BaseSchema):
     # Theme swagger.json
 
     
-    items = fields.Nested(FontsSchemaItems, required=False)
+    items = fields.List(fields.Dict(required=False), required=False)
     
     kind = fields.Str(required=False)
     
@@ -754,6 +1046,8 @@ class FontsSchemaItems(BaseSchema):
     category = fields.Str(required=False)
     
     kind = fields.Str(required=False)
+    
+    menu = fields.Str(required=False)
     
 
 
@@ -803,6 +1097,8 @@ class ThemesSchema(BaseSchema):
     
     updated_at = fields.Str(required=False)
     
+    global_sections = fields.List(fields.Dict(required=False), required=False)
+    
     assets = fields.Nested(Assets, required=False)
     
     available_sections = fields.List(fields.Nested(SectionItem, required=False), required=False)
@@ -815,13 +1111,13 @@ class ThemesSchema(BaseSchema):
     
 
 
-class ThemeUpgradable(BaseSchema):
+class ThemeUpgradableResponse(BaseSchema):
     # Theme swagger.json
 
     
     upgrade = fields.Boolean(required=False)
     
-    versions = fields.Nested(ThemeVersions, required=False)
+    versions = fields.Dict(required=False)
     
     message = fields.Str(required=False)
     
@@ -891,7 +1187,7 @@ class Config(BaseSchema):
     
     global_schema = fields.Nested(GlobalSchema, required=False)
     
-    preset = fields.Nested(Preset, required=False)
+    preset = fields.Dict(required=False)
     
 
 
@@ -1091,7 +1387,27 @@ class GlobalSchema(BaseSchema):
     # Theme swagger.json
 
     
-    props = fields.List(fields.Dict(required=False), required=False)
+    props = fields.List(fields.Nested(Prop, required=False), required=False)
+    
+
+
+class Prop(BaseSchema):
+    # Theme swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    options = fields.List(fields.Nested(Option, required=False), required=False)
+    
+    category = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
+    
+    label = fields.Str(required=False)
+    
+    info = fields.Str(required=False)
     
 
 
@@ -1139,11 +1455,13 @@ class SectionItem(BaseSchema):
     # Theme swagger.json
 
     
-    props = fields.List(fields.Raw(required=False), required=False)
+    props = fields.List(fields.Dict(required=False), required=False)
     
-    blocks = fields.List(fields.Raw(required=False), required=False)
+    blocks = fields.List(fields.Dict(required=False), required=False)
     
     name = fields.Str(required=False)
+    
+    preset = fields.Nested(SectionPreset, required=False)
     
     label = fields.Str(required=False)
     
@@ -1331,7 +1649,7 @@ class ThemeVersions(BaseSchema):
     
 
 
-class DummyTheme(BaseSchema):
+class DummyResponse(BaseSchema):
     # Theme swagger.json
 
     
@@ -1372,6 +1690,16 @@ class CompanyPrivateTheme(BaseSchema):
     is_private = fields.Boolean(required=False)
     
     meta = fields.Nested(CompanyThemeMeta, required=False)
+    
+
+
+class Option(BaseSchema):
+    # Theme swagger.json
+
+    
+    text = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
     
 
 

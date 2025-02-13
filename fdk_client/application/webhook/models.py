@@ -12,11 +12,11 @@ class ClickEventBatch(BaseSchema):
     pass
 
 
-class ClickEventPayload(BaseSchema):
+class ClickEventRequest(BaseSchema):
     pass
 
 
-class ClickEventDetails(BaseSchema):
+class ClickEventResponse(BaseSchema):
     pass
 
 
@@ -31,17 +31,15 @@ class ClickEventBatch(BaseSchema):
     
 
 
-class ClickEventPayload(BaseSchema):
+class ClickEventRequest(BaseSchema):
     # Webhook swagger.json
 
     
     batch = fields.List(fields.Nested(ClickEventBatch, required=False), required=False)
     
-    sent_at = fields.Str(required=False)
-    
 
 
-class ClickEventDetails(BaseSchema):
+class ClickEventResponse(BaseSchema):
     # Webhook swagger.json
 
     

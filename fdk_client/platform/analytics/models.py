@@ -49,6 +49,8 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
+    total = fields.Int(required=False)
+    
 
 
 class FileDownloadRequestBody(BaseSchema):

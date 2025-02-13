@@ -61,7 +61,7 @@ class Share:
     async def getShortLinks(self, page_no=None, page_size=None, created_by=None, active=None, short_url=None, original_url=None, title=None, request_headers:Dict={}):
         """Retrieve a list of all generated short links.
         :param page_no : Current page number : type integer
-        :param page_size : Current page size : type integer
+        :param page_size : Number of items displayed per page : type integer
         :param created_by : Short link creator : type string
         :param active : Short link active status : type string
         :param short_url : Search for short url : type string
@@ -90,7 +90,7 @@ class Share:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link", """{"required":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"Current page number","required":false,"schema":{"default":1,"type":"integer"}},{"name":"page_size","in":"query","description":"Current page size","required":false,"schema":{"default":10,"type":"integer"}},{"name":"created_by","in":"query","description":"Short link creator","required":false,"schema":{"type":"string","enum":["team"]}},{"name":"active","in":"query","description":"Short link active status","required":false,"schema":{"type":"string","enum":["true","false"]}},{"name":"short_url","in":"query","description":"Search for short url","required":false,"schema":{"type":"string"}},{"name":"original_url","in":"query","description":"Search for original url","required":false,"schema":{"type":"string"}},{"name":"title","in":"query","description":"Search text for title","required":false,"schema":{"type":"string"}}],"query":[{"name":"page_no","in":"query","description":"Current page number","required":false,"schema":{"default":1,"type":"integer"}},{"name":"page_size","in":"query","description":"Current page size","required":false,"schema":{"default":10,"type":"integer"}},{"name":"created_by","in":"query","description":"Short link creator","required":false,"schema":{"type":"string","enum":["team"]}},{"name":"active","in":"query","description":"Short link active status","required":false,"schema":{"type":"string","enum":["true","false"]}},{"name":"short_url","in":"query","description":"Search for short url","required":false,"schema":{"type":"string"}},{"name":"original_url","in":"query","description":"Search for original url","required":false,"schema":{"type":"string"}},{"name":"title","in":"query","description":"Search text for title","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application Id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, created_by=created_by, active=active, short_url=short_url, original_url=original_url, title=title)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"The unique identifier for the company."}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}],"optional":[{"name":"page_no","in":"query","description":"Current page number","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"Number of items displayed per page","required":false,"schema":{"type":"integer"}},{"name":"created_by","in":"query","description":"Short link creator","required":false,"schema":{"type":"string","enum":["team"]}},{"name":"active","in":"query","description":"Short link active status","required":false,"schema":{"type":"string","enum":["true","false"]}},{"name":"short_url","in":"query","description":"Search for short url","required":false,"schema":{"type":"string"}},{"name":"original_url","in":"query","description":"Search for original url","required":false,"schema":{"type":"string"}},{"name":"title","in":"query","description":"Search text for title","required":false,"schema":{"type":"string"}}],"query":[{"name":"page_no","in":"query","description":"Current page number","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"Number of items displayed per page","required":false,"schema":{"type":"integer"}},{"name":"created_by","in":"query","description":"Short link creator","required":false,"schema":{"type":"string","enum":["team"]}},{"name":"active","in":"query","description":"Short link active status","required":false,"schema":{"type":"string","enum":["true","false"]}},{"name":"short_url","in":"query","description":"Search for short url","required":false,"schema":{"type":"string"}},{"name":"original_url","in":"query","description":"Search for original url","required":false,"schema":{"type":"string"}},{"name":"title","in":"query","description":"Search text for title","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"The unique identifier for the company."}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, created_by=created_by, active=active, short_url=short_url, original_url=original_url, title=title)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, created_by=created_by, active=active, short_url=short_url, original_url=original_url, title=title)
         if query_string:
             url_with_params += "?" + query_string
@@ -208,50 +208,6 @@ class Share:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for updateShortLinkById")
-                print(e)
-
-        return response
-    
-    async def getShortLinkClickStats(self, surl_id=None, request_headers:Dict={}):
-        """Retrieve statistics and analytics for clicks on a short link.
-        :param surl_id : Short link ID for which click statistics are to be retrieved. : type string
-        """
-        payload = {}
-        
-        if surl_id is not None:
-            payload["surl_id"] = surl_id
-
-        # Parameter validation
-        schema = ShareValidator.getShortLinkClickStats()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/click-stats", """{"required":[{"in":"query","name":"surl_id","schema":{"type":"string","example":"52Bfbf"},"required":true,"description":"Short link ID for which click statistics are to be retrieved."},{"in":"path","name":"company_id","description":"Company Id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application Id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"surl_id","schema":{"type":"string","example":"52Bfbf"},"required":true,"description":"Short link ID for which click statistics are to be retrieved."}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company Id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application Id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", surl_id=surl_id, )
-        query_string = await create_query_string(surl_id=surl_id, )
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/share/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/links/short-link/click-stats", surl_id=surl_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ClickStatsResult
-            schema = ClickStatsResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getShortLinkClickStats")
                 print(e)
 
         return response

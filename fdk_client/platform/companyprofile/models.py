@@ -8,11 +8,11 @@ from ..PlatformModel import BaseSchema
 
 
 
-class CompanyTaxesSchema(BaseSchema):
+class CompanyTaxesSerializer(BaseSchema):
     pass
 
 
-class UserSchema(BaseSchema):
+class UserSerializer(BaseSchema):
     pass
 
 
@@ -44,15 +44,15 @@ class Document(BaseSchema):
     pass
 
 
-class GetAddressSchema(BaseSchema):
+class GetAddressSerializer(BaseSchema):
     pass
 
 
-class GetCompanyProfileSerializerResponseSchema(BaseSchema):
+class GetCompanyProfileSerializerResponse(BaseSchema):
     pass
 
 
-class ErrorResponseSchema(BaseSchema):
+class ErrorResponse(BaseSchema):
     pass
 
 
@@ -60,7 +60,7 @@ class CompanyTaxesSerializer1(BaseSchema):
     pass
 
 
-class CreateUpdateAddressSchema(BaseSchema):
+class CreateUpdateAddressSerializer(BaseSchema):
     pass
 
 
@@ -68,7 +68,7 @@ class UpdateCompany(BaseSchema):
     pass
 
 
-class ProfileSuccessResponseSchema(BaseSchema):
+class ProfileSuccessResponse(BaseSchema):
     pass
 
 
@@ -76,23 +76,19 @@ class DocumentsObj(BaseSchema):
     pass
 
 
-class MetricsSchema(BaseSchema):
+class MetricsSerializer(BaseSchema):
     pass
 
 
-class BrandBannerSchema(BaseSchema):
+class BrandBannerSerializer(BaseSchema):
     pass
 
 
-class GetBrandResponseSchema(BaseSchema):
+class GetBrandResponseSerializer(BaseSchema):
     pass
 
 
-class CreateBrandRequestSchema(BaseSchema):
-    pass
-
-
-class UpdateBrandRequestSchema(BaseSchema):
+class CreateUpdateBrandRequestSerializer(BaseSchema):
     pass
 
 
@@ -104,11 +100,11 @@ class CompanyDetails(BaseSchema):
     pass
 
 
-class CompanySchema(BaseSchema):
+class CompanySerializer(BaseSchema):
     pass
 
 
-class CompanyBrandSchema(BaseSchema):
+class CompanyBrandSerializer(BaseSchema):
     pass
 
 
@@ -116,67 +112,67 @@ class Page(BaseSchema):
     pass
 
 
-class CompanyBrandListSchema(BaseSchema):
+class CompanyBrandListSerializer(BaseSchema):
     pass
 
 
-class CompanyBrandPostRequestSchema(BaseSchema):
+class CompanyBrandPostRequestSerializer(BaseSchema):
     pass
 
 
-class InvoiceCredSchema(BaseSchema):
+class InvoiceCredSerializer(BaseSchema):
     pass
 
 
-class InvoiceDetailsSchema(BaseSchema):
+class InvoiceDetailsSerializer(BaseSchema):
     pass
 
 
-class GetCompanySchema(BaseSchema):
+class GetCompanySerializer(BaseSchema):
     pass
 
 
-class LocationManagerSchema(BaseSchema):
+class LocationManagerSerializer(BaseSchema):
     pass
 
 
-class LocationTimingSchema(BaseSchema):
+class LocationTimingSerializer(BaseSchema):
     pass
 
 
-class LocationDayWiseSchema(BaseSchema):
+class LocationDayWiseSerializer(BaseSchema):
     pass
 
 
-class HolidayDateSchema(BaseSchema):
+class HolidayDateSerializer(BaseSchema):
     pass
 
 
-class HolidaySchemaSchema(BaseSchema):
+class HolidaySchemaSerializer(BaseSchema):
     pass
 
 
-class ProductReturnConfigSchema(BaseSchema):
+class ProductReturnConfigSerializer(BaseSchema):
     pass
 
 
-class GetLocationSchema(BaseSchema):
+class GetLocationSerializer(BaseSchema):
     pass
 
 
-class LocationListSchema(BaseSchema):
+class LocationListSerializer(BaseSchema):
     pass
 
 
-class AddressSchema(BaseSchema):
+class AddressSerializer(BaseSchema):
     pass
 
 
-class LocationSchema(BaseSchema):
+class LocationSerializer(BaseSchema):
     pass
 
 
-class BulkLocationSchema(BaseSchema):
+class BulkLocationSerializer(BaseSchema):
     pass
 
 
@@ -191,7 +187,7 @@ class StoreTagsResponseSchema(BaseSchema):
 
 
 
-class CompanyTaxesSchema(BaseSchema):
+class CompanyTaxesSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -203,7 +199,7 @@ class CompanyTaxesSchema(BaseSchema):
     
 
 
-class UserSchema(BaseSchema):
+class UserSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -293,7 +289,7 @@ class Document(BaseSchema):
     
 
 
-class GetAddressSchema(BaseSchema):
+class GetAddressSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -301,7 +297,7 @@ class GetAddressSchema(BaseSchema):
     
     country_code = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     address_type = fields.Str(required=False)
     
@@ -325,13 +321,13 @@ class GetAddressSchema(BaseSchema):
     
 
 
-class GetCompanyProfileSerializerResponseSchema(BaseSchema):
+class GetCompanyProfileSerializerResponse(BaseSchema):
     # CompanyProfile swagger.json
 
     
     business_info = fields.Str(required=False)
     
-    taxes = fields.List(fields.Nested(CompanyTaxesSchema, required=False), required=False)
+    taxes = fields.List(fields.Nested(CompanyTaxesSerializer, required=False), required=False)
     
     business_type = fields.Str(required=False)
     
@@ -341,7 +337,7 @@ class GetCompanyProfileSerializerResponseSchema(BaseSchema):
     
     verified_on = fields.Str(required=False)
     
-    created_by = fields.Nested(UserSchema, required=False)
+    created_by = fields.Nested(UserSerializer, required=False)
     
     created_on = fields.Str(required=False)
     
@@ -367,27 +363,29 @@ class GetCompanyProfileSerializerResponseSchema(BaseSchema):
     
     documents = fields.List(fields.Nested(Document, required=False), required=False)
     
-    addresses = fields.List(fields.Nested(GetAddressSchema, required=False), required=False)
+    addresses = fields.List(fields.Nested(GetAddressSerializer, required=False), required=False)
     
-    verified_by = fields.Nested(UserSchema, required=False)
+    verified_by = fields.Nested(UserSerializer, required=False)
     
     notification_emails = fields.List(fields.Str(required=False), required=False)
     
-    modified_by = fields.Nested(UserSchema, required=False)
+    modified_by = fields.Nested(UserSerializer, required=False)
     
 
 
-class ErrorResponseSchema(BaseSchema):
+class ErrorResponse(BaseSchema):
     # CompanyProfile swagger.json
 
     
+    code = fields.Float(required=False)
+    
+    error = fields.Str(required=False)
+    
     message = fields.Str(required=False)
     
-    code = fields.Str(required=False)
+    meta = fields.Dict(required=False)
     
     status = fields.Int(required=False)
-    
-    meta = fields.Dict(required=False)
     
 
 
@@ -403,7 +401,7 @@ class CompanyTaxesSerializer1(BaseSchema):
     
 
 
-class CreateUpdateAddressSchema(BaseSchema):
+class CreateUpdateAddressSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -411,7 +409,7 @@ class CreateUpdateAddressSchema(BaseSchema):
     
     country_code = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     address_type = fields.Str(required=False)
     
@@ -453,7 +451,7 @@ class UpdateCompany(BaseSchema):
     
     business_type = fields.Str(required=False)
     
-    addresses = fields.List(fields.Nested(CreateUpdateAddressSchema, required=False), required=False)
+    addresses = fields.List(fields.Nested(CreateUpdateAddressSerializer, required=False), required=False)
     
     notification_emails = fields.List(fields.Str(required=False), required=False)
     
@@ -465,11 +463,13 @@ class UpdateCompany(BaseSchema):
     
 
 
-class ProfileSuccessResponseSchema(BaseSchema):
+class ProfileSuccessResponse(BaseSchema):
     # CompanyProfile swagger.json
 
     
     uid = fields.Int(required=False)
+    
+    data = fields.List(fields.Dict(required=False), required=False)
     
     message = fields.Str(required=False)
     
@@ -487,7 +487,7 @@ class DocumentsObj(BaseSchema):
     
 
 
-class MetricsSchema(BaseSchema):
+class MetricsSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -507,7 +507,7 @@ class MetricsSchema(BaseSchema):
     
 
 
-class BrandBannerSchema(BaseSchema):
+class BrandBannerSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -517,13 +517,13 @@ class BrandBannerSchema(BaseSchema):
     
 
 
-class GetBrandResponseSchema(BaseSchema):
+class GetBrandResponseSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    modified_by = fields.Nested(UserSchema, required=False)
+    modified_by = fields.Nested(UserSerializer, required=False)
     
-    banner = fields.Nested(BrandBannerSchema, required=False)
+    banner = fields.Nested(BrandBannerSerializer, required=False)
     
     name = fields.Str(required=False)
     
@@ -531,7 +531,7 @@ class GetBrandResponseSchema(BaseSchema):
     
     verified_on = fields.Str(required=False)
     
-    created_by = fields.Nested(UserSchema, required=False)
+    created_by = fields.Nested(UserSerializer, required=False)
     
     created_on = fields.Str(required=False)
     
@@ -551,7 +551,7 @@ class GetBrandResponseSchema(BaseSchema):
     
     stage = fields.Str(required=False)
     
-    verified_by = fields.Nested(UserSchema, required=False)
+    verified_by = fields.Nested(UserSerializer, required=False)
     
     slug_key = fields.Str(required=False)
     
@@ -561,7 +561,7 @@ class GetBrandResponseSchema(BaseSchema):
     
 
 
-class CreateBrandRequestSchema(BaseSchema):
+class CreateUpdateBrandRequestSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -581,37 +581,11 @@ class CreateBrandRequestSchema(BaseSchema):
     
     uid = fields.Int(required=False)
     
-    banner = fields.Nested(BrandBannerSchema, required=False)
+    banner = fields.Nested(BrandBannerSerializer, required=False)
     
     name = fields.Str(required=False)
     
     slug_key = fields.Str(required=False)
-    
-
-
-class UpdateBrandRequestSchema(BaseSchema):
-    # CompanyProfile swagger.json
-
-    
-    _custom_json = fields.Dict(required=False)
-    
-    _locale_language = fields.Dict(required=False)
-    
-    synonyms = fields.List(fields.Str(required=False), required=False)
-    
-    company_id = fields.Int(required=False)
-    
-    description = fields.Str(required=False)
-    
-    logo = fields.Str(required=False)
-    
-    brand_tier = fields.Str(required=False)
-    
-    uid = fields.Int(required=False)
-    
-    banner = fields.Nested(BrandBannerSchema, required=False)
-    
-    name = fields.Str(required=False)
     
 
 
@@ -635,7 +609,7 @@ class CompanyDetails(BaseSchema):
     
 
 
-class CompanySchema(BaseSchema):
+class CompanySerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -645,11 +619,11 @@ class CompanySchema(BaseSchema):
     
     verified_on = fields.Str(required=False)
     
-    verified_by = fields.Nested(UserSchema, required=False)
+    verified_by = fields.Nested(UserSerializer, required=False)
     
     created_on = fields.Str(required=False)
     
-    created_by = fields.Nested(UserSchema, required=False)
+    created_by = fields.Nested(UserSerializer, required=False)
     
     company_type = fields.Str(required=False)
     
@@ -659,7 +633,7 @@ class CompanySchema(BaseSchema):
     
     business_type = fields.Str(required=False)
     
-    addresses = fields.List(fields.Nested(GetAddressSchema, required=False), required=False)
+    addresses = fields.List(fields.Nested(GetAddressSerializer, required=False), required=False)
     
     notification_emails = fields.List(fields.Str(required=False), required=False)
     
@@ -673,11 +647,11 @@ class CompanySchema(BaseSchema):
     
     name = fields.Str(required=False)
     
-    modified_by = fields.Nested(UserSchema, required=False)
+    modified_by = fields.Nested(UserSerializer, required=False)
     
 
 
-class CompanyBrandSchema(BaseSchema):
+class CompanyBrandSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -685,13 +659,13 @@ class CompanyBrandSchema(BaseSchema):
     
     verified_on = fields.Str(required=False)
     
-    verified_by = fields.Nested(UserSchema, required=False)
+    verified_by = fields.Nested(UserSerializer, required=False)
     
     created_on = fields.Str(required=False)
     
-    created_by = fields.Nested(UserSchema, required=False)
+    created_by = fields.Nested(UserSerializer, required=False)
     
-    company = fields.Nested(CompanySchema, required=False)
+    company = fields.Nested(CompanySerializer, required=False)
     
     warnings = fields.Dict(required=False)
     
@@ -701,9 +675,9 @@ class CompanyBrandSchema(BaseSchema):
     
     reject_reason = fields.Str(required=False)
     
-    brand = fields.Nested(GetBrandResponseSchema, required=False)
+    brand = fields.Nested(GetBrandResponseSerializer, required=False)
     
-    modified_by = fields.Nested(UserSchema, required=False)
+    modified_by = fields.Nested(UserSerializer, required=False)
     
 
 
@@ -725,19 +699,21 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
+    total = fields.Int(required=False)
+    
 
 
-class CompanyBrandListSchema(BaseSchema):
+class CompanyBrandListSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    items = fields.List(fields.Nested(CompanyBrandSchema, required=False), required=False)
+    items = fields.List(fields.Nested(CompanyBrandSerializer, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
 
 
-class CompanyBrandPostRequestSchema(BaseSchema):
+class CompanyBrandPostRequestSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -749,7 +725,7 @@ class CompanyBrandPostRequestSchema(BaseSchema):
     
 
 
-class InvoiceCredSchema(BaseSchema):
+class InvoiceCredSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -761,17 +737,17 @@ class InvoiceCredSchema(BaseSchema):
     
 
 
-class InvoiceDetailsSchema(BaseSchema):
+class InvoiceDetailsSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    e_invoice = fields.Nested(InvoiceCredSchema, required=False)
+    e_invoice = fields.Nested(InvoiceCredSerializer, required=False)
     
-    e_waybill = fields.Nested(InvoiceCredSchema, required=False)
+    e_waybill = fields.Nested(InvoiceCredSerializer, required=False)
     
 
 
-class GetCompanySchema(BaseSchema):
+class GetCompanySerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -779,11 +755,11 @@ class GetCompanySchema(BaseSchema):
     
     verified_on = fields.Str(required=False)
     
-    verified_by = fields.Nested(UserSchema, required=False)
+    verified_by = fields.Nested(UserSerializer, required=False)
     
     created_on = fields.Str(required=False)
     
-    created_by = fields.Nested(UserSchema, required=False)
+    created_by = fields.Nested(UserSerializer, required=False)
     
     company_type = fields.Str(required=False)
     
@@ -791,7 +767,7 @@ class GetCompanySchema(BaseSchema):
     
     business_type = fields.Str(required=False)
     
-    addresses = fields.List(fields.Nested(GetAddressSchema, required=False), required=False)
+    addresses = fields.List(fields.Nested(GetAddressSerializer, required=False), required=False)
     
     uid = fields.Int(required=False)
     
@@ -799,11 +775,11 @@ class GetCompanySchema(BaseSchema):
     
     name = fields.Str(required=False)
     
-    modified_by = fields.Nested(UserSchema, required=False)
+    modified_by = fields.Nested(UserSerializer, required=False)
     
 
 
-class LocationManagerSchema(BaseSchema):
+class LocationManagerSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -815,7 +791,7 @@ class LocationManagerSchema(BaseSchema):
     
 
 
-class LocationTimingSchema(BaseSchema):
+class LocationTimingSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -825,7 +801,7 @@ class LocationTimingSchema(BaseSchema):
     
 
 
-class LocationDayWiseSchema(BaseSchema):
+class LocationDayWiseSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -833,13 +809,13 @@ class LocationDayWiseSchema(BaseSchema):
     
     weekday = fields.Str(required=False)
     
-    opening = fields.Nested(LocationTimingSchema, required=False)
+    opening = fields.Nested(LocationTimingSerializer, required=False)
     
-    closing = fields.Nested(LocationTimingSchema, required=False)
+    closing = fields.Nested(LocationTimingSerializer, required=False)
     
 
 
-class HolidayDateSchema(BaseSchema):
+class HolidayDateSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -849,11 +825,11 @@ class HolidayDateSchema(BaseSchema):
     
 
 
-class HolidaySchemaSchema(BaseSchema):
+class HolidaySchemaSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    date = fields.Nested(HolidayDateSchema, required=False)
+    date = fields.Nested(HolidayDateSerializer, required=False)
     
     title = fields.Str(required=False)
     
@@ -861,7 +837,7 @@ class HolidaySchemaSchema(BaseSchema):
     
 
 
-class ProductReturnConfigSchema(BaseSchema):
+class ProductReturnConfigSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -871,7 +847,7 @@ class ProductReturnConfigSchema(BaseSchema):
     
 
 
-class GetLocationSchema(BaseSchema):
+class GetLocationSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -881,7 +857,7 @@ class GetLocationSchema(BaseSchema):
     
     contact_numbers = fields.List(fields.Nested(SellerPhoneNumber, required=False), required=False)
     
-    gst_credentials = fields.Nested(InvoiceDetailsSchema, required=False)
+    gst_credentials = fields.Nested(InvoiceDetailsSerializer, required=False)
     
     name = fields.Str(required=False)
     
@@ -889,19 +865,19 @@ class GetLocationSchema(BaseSchema):
     
     verified_on = fields.Str(required=False)
     
-    created_by = fields.Nested(UserSchema, required=False)
+    created_by = fields.Nested(UserSerializer, required=False)
     
     created_on = fields.Str(required=False)
     
-    company = fields.Nested(GetCompanySchema, required=False)
+    company = fields.Nested(GetCompanySerializer, required=False)
     
-    address = fields.Nested(GetAddressSchema, required=False)
+    address = fields.Nested(GetAddressSerializer, required=False)
     
     warnings = fields.Dict(required=False)
     
     store_type = fields.Str(required=False)
     
-    manager = fields.Nested(LocationManagerSchema, required=False)
+    manager = fields.Nested(LocationManagerSerializer, required=False)
     
     auto_invoice = fields.Boolean(required=False)
     
@@ -909,7 +885,7 @@ class GetLocationSchema(BaseSchema):
     
     uid = fields.Int(required=False)
     
-    timing = fields.List(fields.Nested(LocationDayWiseSchema, required=False), required=False)
+    timing = fields.List(fields.Nested(LocationDayWiseSerializer, required=False), required=False)
     
     stage = fields.Str(required=False)
     
@@ -917,23 +893,23 @@ class GetLocationSchema(BaseSchema):
     
     credit_note = fields.Boolean(required=False)
     
-    holiday = fields.List(fields.Nested(HolidaySchemaSchema, required=False), required=False)
+    holiday = fields.List(fields.Nested(HolidaySchemaSerializer, required=False), required=False)
     
     display_name = fields.Str(required=False)
     
-    product_return_config = fields.Nested(ProductReturnConfigSchema, required=False)
+    product_return_config = fields.Nested(ProductReturnConfigSerializer, required=False)
     
-    verified_by = fields.Nested(UserSchema, required=False)
+    verified_by = fields.Nested(UserSerializer, required=False)
     
     notification_emails = fields.List(fields.Str(required=False), required=False)
     
-    modified_by = fields.Nested(UserSchema, required=False)
+    modified_by = fields.Nested(UserSerializer, required=False)
     
     tags = fields.List(fields.Str(required=False), required=False)
     
     default_order_acceptance_timing = fields.Boolean(required=False)
     
-    order_acceptance_timing = fields.List(fields.Nested(LocationDayWiseSchema, required=False), required=False)
+    order_acceptance_timing = fields.List(fields.Nested(LocationDayWiseSerializer, required=False), required=False)
     
     avg_order_processing_time = fields.Nested(AverageOrderProcessingTime, required=False)
     
@@ -943,17 +919,17 @@ class GetLocationSchema(BaseSchema):
     
 
 
-class LocationListSchema(BaseSchema):
+class LocationListSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    items = fields.List(fields.Nested(GetLocationSchema, required=False), required=False)
+    items = fields.List(fields.Nested(GetLocationSerializer, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
 
 
-class AddressSchema(BaseSchema):
+class AddressSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -961,7 +937,7 @@ class AddressSchema(BaseSchema):
     
     country_code = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     address_type = fields.Str(required=False)
     
@@ -985,13 +961,13 @@ class AddressSchema(BaseSchema):
     
 
 
-class LocationSchema(BaseSchema):
+class LocationSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
     code = fields.Str(required=False)
     
-    gst_credentials = fields.Nested(InvoiceDetailsSchema, required=False)
+    gst_credentials = fields.Nested(InvoiceDetailsSerializer, required=False)
     
     contact_numbers = fields.List(fields.Nested(SellerPhoneNumber, required=False), required=False)
     
@@ -1001,19 +977,19 @@ class LocationSchema(BaseSchema):
     
     warnings = fields.Dict(required=False)
     
-    address = fields.Nested(AddressSchema, required=False)
+    address = fields.Nested(AddressSerializer, required=False)
     
     company = fields.Int(required=False)
     
     store_type = fields.Str(required=False)
     
-    manager = fields.Nested(LocationManagerSchema, required=False)
+    manager = fields.Nested(LocationManagerSerializer, required=False)
     
     auto_invoice = fields.Boolean(required=False)
     
     uid = fields.Int(required=False)
     
-    timing = fields.List(fields.Nested(LocationDayWiseSchema, required=False), required=False)
+    timing = fields.List(fields.Nested(LocationDayWiseSerializer, required=False), required=False)
     
     stage = fields.Str(required=False)
     
@@ -1021,9 +997,9 @@ class LocationSchema(BaseSchema):
     
     credit_note = fields.Boolean(required=False)
     
-    holiday = fields.List(fields.Nested(HolidaySchemaSchema, required=False), required=False)
+    holiday = fields.List(fields.Nested(HolidaySchemaSerializer, required=False), required=False)
     
-    product_return_config = fields.Nested(ProductReturnConfigSchema, required=False)
+    product_return_config = fields.Nested(ProductReturnConfigSerializer, required=False)
     
     display_name = fields.Str(required=False)
     
@@ -1033,7 +1009,7 @@ class LocationSchema(BaseSchema):
     
     default_order_acceptance_timing = fields.Boolean(required=False)
     
-    order_acceptance_timing = fields.List(fields.Nested(LocationDayWiseSchema, required=False), required=False)
+    order_acceptance_timing = fields.List(fields.Nested(LocationDayWiseSerializer, required=False), required=False)
     
     avg_order_processing_time = fields.Nested(AverageOrderProcessingTime, required=False)
     
@@ -1043,11 +1019,11 @@ class LocationSchema(BaseSchema):
     
 
 
-class BulkLocationSchema(BaseSchema):
+class BulkLocationSerializer(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    data = fields.List(fields.Nested(LocationSchema, required=False), required=False)
+    data = fields.List(fields.Nested(LocationSerializer, required=False), required=False)
     
 
 

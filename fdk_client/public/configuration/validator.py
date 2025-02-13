@@ -17,6 +17,7 @@ from ..PublicModel import BaseSchema
     
         
         
+    
 
 class ConfigurationValidator:
     
@@ -37,6 +38,11 @@ class ConfigurationValidator:
         
         id = fields.Str(required=False)
          
+        
+    
+    class checkVersionIsUpToDate(BaseSchema):
+        
+        pass 
         
     
     
