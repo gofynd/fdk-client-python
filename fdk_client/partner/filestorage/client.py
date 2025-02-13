@@ -129,8 +129,8 @@ This operation will return the url for the uploaded file.
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import StartResponse
-        schema = StartResponse()
+        from .models import FileUpload
+        schema = FileUpload()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/assets/v2.0/organization/{self._conf.organizationId}/namespaces/{namespace}/upload/complete", """{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"organization_id","in":"path","required":true,"schema":{"type":"string","description":"This is organization id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"organization_id","in":"path","required":true,"schema":{"type":"string","description":"This is organization id"}}]}""", serverType="partner", namespace=namespace, )
@@ -153,8 +153,8 @@ This operation will return the url for the uploaded file.
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/assets/v2.0/organization/{self._conf.organizationId}/namespaces/{namespace}/upload/complete", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CompleteResponse
-            schema = CompleteResponse()
+            from .models import FileUploadComplete
+            schema = FileUploadComplete()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -195,8 +195,8 @@ This operation will return the url for the uploaded file.
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import StartRequest
-        schema = StartRequest()
+        from .models import FileUploadStart
+        schema = FileUploadStart()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/assets/v2.0/organization/{self._conf.organizationId}/namespaces/{namespace}/upload/start", """{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"organization_id","in":"path","required":true,"schema":{"type":"string","description":"This is organization id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"organization_id","in":"path","required":true,"schema":{"type":"string","description":"This is organization id"}}]}""", serverType="partner", namespace=namespace, )
@@ -219,8 +219,8 @@ This operation will return the url for the uploaded file.
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/assets/v2.0/organization/{self._conf.organizationId}/namespaces/{namespace}/upload/start", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import StartResponse
-            schema = StartResponse()
+            from .models import FileUpload
+            schema = FileUpload()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -357,8 +357,8 @@ This operation will return the url for the uploaded file.
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/assets/v1.0/organization/{self._conf.organizationId}/company/{company_id}/application/{application_id}/proxy/fetch", application_id=application_id, company_id=company_id, url=url), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProxyResponse
-            schema = ProxyResponse()
+            from .models import FetchProxyDetails
+            schema = FetchProxyDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -384,8 +384,8 @@ This operation will return the url for the uploaded file.
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import FetchProxyRequest
-        schema = FetchProxyRequest()
+        from .models import ProxyFile
+        schema = ProxyFile()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/assets/v1.0/organization/{self._conf.organizationId}/company/{company_id}/application/{application_id}/proxy/fetch", """{"required":[{"name":"organization_id","in":"path","required":true,"schema":{"type":"string","description":"This is organization id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","required":true,"schema":{"type":"string","description":"This is organization id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}]}""", serverType="partner", application_id=application_id, company_id=company_id)
@@ -408,8 +408,8 @@ This operation will return the url for the uploaded file.
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/assets/v1.0/organization/{self._conf.organizationId}/company/{company_id}/application/{application_id}/proxy/fetch", application_id=application_id, company_id=company_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FetchProxyResponse
-            schema = FetchProxyResponse()
+            from .models import SaveProxy
+            schema = SaveProxy()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -452,8 +452,8 @@ This operation will return the url for the uploaded file.
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/assets/v1.0/organization/{self._conf.organizationId}/proxy/fetch", url=url), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProxyResponse
-            schema = ProxyResponse()
+            from .models import FetchProxyDetails
+            schema = FetchProxyDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -473,8 +473,8 @@ This operation will return the url for the uploaded file.
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import FetchProxyRequest
-        schema = FetchProxyRequest()
+        from .models import ProxyFile
+        schema = ProxyFile()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/assets/v1.0/organization/{self._conf.organizationId}/proxy/fetch", """{"required":[{"name":"organization_id","in":"path","required":true,"schema":{"type":"string","description":"This is organization id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","required":true,"schema":{"type":"string","description":"This is organization id"}}]}""", serverType="partner", )
@@ -497,8 +497,8 @@ This operation will return the url for the uploaded file.
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/assets/v1.0/organization/{self._conf.organizationId}/proxy/fetch", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FetchProxyResponse
-            schema = FetchProxyResponse()
+            from .models import SaveProxy
+            schema = SaveProxy()
             try:
                 schema.load(response["json"])
             except Exception as e:

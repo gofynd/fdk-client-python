@@ -33,6 +33,7 @@ class Content:
             "getTags": "/service/application/content/v1.0/tags",
             "getPages": "/service/application/content/v2.0/pages",
             "getPage": "/service/application/content/v2.0/pages/{slug}",
+            "getWellKnownUrl": "/service/application/content/v1.0/well-known/{slug}",
             "getCustomObject": "/service/application/content/v1.0/metaobjects/{id}",
             "getCustomObjects": "/service/application/content/v1.0/metaobjects",
             "getCustomFieldDefinitions": "/service/application/content/v1.0/metafields/definitions",
@@ -868,6 +869,52 @@ class Content:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getPage")
+                print(e)
+
+        return response
+    
+    async def getWellKnownUrl(self, slug=None, body="", request_headers:Dict={}):
+        """Retrieves the details of a specific well-known URL by its slug.
+        :param slug : The unique identifier/path of the well-known URL (e.g., assetlinks.json) : type string
+        """
+        payload = {}
+        
+        if slug is not None:
+            payload["slug"] = slug
+
+        # Parameter validation
+        schema = ContentValidator.getWellKnownUrl()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getWellKnownUrl"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"The unique identifier/path of the well-known URL (e.g., assetlinks.json)","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"The unique identifier/path of the well-known URL (e.g., assetlinks.json)","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getWellKnownUrl"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/well-known/{slug}", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import WellKnownResponse
+            schema = WellKnownResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getWellKnownUrl")
                 print(e)
 
         return response

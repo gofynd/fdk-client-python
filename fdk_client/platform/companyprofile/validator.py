@@ -50,6 +50,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -145,6 +146,8 @@ class CompanyProfileValidator:
         company_id = fields.Int(required=False)
         
         store_type = fields.Str(required=False)
+        
+        store_codes = fields.List(fields.Str(required=False), required=False)
         
         q = fields.Str(required=False)
         

@@ -2547,6 +2547,8 @@ class GoogleMap(BaseSchema):
     # Configuration swagger.json
 
     
+    enabled = fields.Boolean(required=False)
+    
     credentials = fields.Nested(GoogleMapCredentials, required=False)
     
 
@@ -3478,6 +3480,8 @@ class OptedStoreAddress(BaseSchema):
     country_code = fields.Str(required=False)
     
     state_code = fields.Str(required=False)
+    
+    landmark = fields.Str(required=False)
     
 
 

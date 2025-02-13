@@ -101,6 +101,12 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+        
         
         
     
@@ -325,6 +331,19 @@ class ServiceabilityValidator:
         page_size = fields.Int(required=False)
         
         is_installed = fields.Str(required=False)
+         
+        
+    
+    class getLocalitiesByPrefix(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
          
         
     

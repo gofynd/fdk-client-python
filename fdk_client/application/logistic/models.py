@@ -408,6 +408,10 @@ class ErrorResponseV3(BaseSchema):
     pass
 
 
+class StandardError(BaseSchema):
+    pass
+
+
 class ShipmentRequest(BaseSchema):
     pass
 
@@ -477,6 +481,14 @@ class PromiseDetails(BaseSchema):
 
 
 class Packaging(BaseSchema):
+    pass
+
+
+class StorePromise(BaseSchema):
+    pass
+
+
+class GetPromiseDetails(BaseSchema):
     pass
 
 
@@ -987,6 +999,8 @@ class ListViewItemsV2(BaseSchema):
     
     type = fields.Str(required=False)
     
+    access_level = fields.Str(required=False)
+    
     geo_areas = fields.List(fields.Nested(GeoArea, required=False), required=False)
     
     slug = fields.Str(required=False)
@@ -994,6 +1008,10 @@ class ListViewItemsV2(BaseSchema):
     stores = fields.Nested(ListViewProductV2, required=False)
     
     is_active = fields.Boolean(required=False)
+    
+    is_opted = fields.Boolean(required=False)
+    
+    is_public_opted = fields.Boolean(required=False)
     
     product = fields.Nested(ListViewProductV2, required=False)
     
@@ -1923,7 +1941,23 @@ class Localities(BaseSchema):
     
     parent_uid = fields.Str(required=False, allow_none=True)
     
+    code = fields.Str(required=False)
+    
     localities = fields.List(fields.Nested(LocalityParent, required=False), required=False)
+    
+    iso2 = fields.Str(required=False)
+    
+    iso3 = fields.Str(required=False)
+    
+    currency = fields.Dict(required=False)
+    
+    phone_code = fields.Str(required=False)
+    
+    hierarchy = fields.Dict(required=False)
+    
+    latitude = fields.Str(required=False)
+    
+    longitude = fields.Str(required=False)
     
 
 
@@ -1946,6 +1980,22 @@ class LocalityParent(BaseSchema):
     serviceability = fields.Dict(required=False)
     
     parent_uid = fields.Str(required=False, allow_none=True)
+    
+    code = fields.Str(required=False)
+    
+    iso2 = fields.Str(required=False)
+    
+    iso3 = fields.Str(required=False)
+    
+    currency = fields.Dict(required=False)
+    
+    phone_code = fields.Str(required=False)
+    
+    hierarchy = fields.Dict(required=False)
+    
+    latitude = fields.Str(required=False)
+    
+    longitude = fields.Str(required=False)
     
 
 
@@ -1989,6 +2039,8 @@ class GetLocality(BaseSchema):
     
     type = fields.Str(required=False)
     
+    code = fields.Str(required=False)
+    
     localities = fields.List(fields.Nested(LocalityParent, required=False), required=False)
     
 
@@ -2018,6 +2070,14 @@ class ErrorResponseV3(BaseSchema):
     success = fields.Boolean(required=False)
     
     error = fields.Nested(ErrorObject, required=False)
+    
+
+
+class StandardError(BaseSchema):
+    # Logistic swagger.json
+
+    
+    message = fields.Str(required=False)
     
 
 
@@ -2324,6 +2384,32 @@ class Packaging(BaseSchema):
     id = fields.Str(required=False)
     
     dimension = fields.Nested(PackagingDimension, required=False)
+    
+
+
+class StorePromise(BaseSchema):
+    # Logistic swagger.json
+
+    
+    uid = fields.Int(required=False)
+    
+    code = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    promise = fields.Nested(PromiseDetails, required=False)
+    
+
+
+class GetPromiseDetails(BaseSchema):
+    # Logistic swagger.json
+
+    
+    items = fields.List(fields.Nested(StorePromise, required=False), required=False)
+    
+    promise = fields.Nested(PromiseDetails, required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 
 

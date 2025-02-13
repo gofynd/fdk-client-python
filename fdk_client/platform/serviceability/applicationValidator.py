@@ -28,6 +28,8 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
     
     
         
@@ -249,6 +251,10 @@ class ServiceabilityValidator:
         stage = fields.Str(required=False)
         
         type = fields.Str(required=False)
+        
+        access_level = fields.Str(required=False)
+        
+        status = fields.Str(required=False)
         
         page_size = fields.Int(required=False)
         

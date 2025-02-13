@@ -304,6 +304,10 @@ class ListViewItemsV2(BaseSchema):
     pass
 
 
+class SummaryRegions(BaseSchema):
+    pass
+
+
 class Summary(BaseSchema):
     pass
 
@@ -561,6 +565,10 @@ class ReAssignStoreRequest(BaseSchema):
 
 
 class ServiceabilityZoneErrorResult(BaseSchema):
+    pass
+
+
+class ServiceabilityZoneNonMarketplaceErrorResult(BaseSchema):
     pass
 
 
@@ -1667,7 +1675,23 @@ class Localities(BaseSchema):
     
     parent_uid = fields.Str(required=False, allow_none=True)
     
+    code = fields.Str(required=False)
+    
     localities = fields.List(fields.Nested(LocalityParent, required=False), required=False)
+    
+    iso2 = fields.Str(required=False)
+    
+    iso3 = fields.Str(required=False)
+    
+    currency = fields.Dict(required=False)
+    
+    phone_code = fields.Str(required=False)
+    
+    hierarchy = fields.Dict(required=False)
+    
+    latitude = fields.Str(required=False)
+    
+    longitude = fields.Str(required=False)
     
 
 
@@ -1699,7 +1723,23 @@ class LocalityParent(BaseSchema):
     
     serviceability = fields.Dict(required=False)
     
+    code = fields.Str(required=False)
+    
     parent_uid = fields.Str(required=False, allow_none=True)
+    
+    iso2 = fields.Str(required=False)
+    
+    iso3 = fields.Str(required=False)
+    
+    currency = fields.Dict(required=False)
+    
+    phone_code = fields.Str(required=False)
+    
+    hierarchy = fields.Dict(required=False)
+    
+    latitude = fields.Str(required=False)
+    
+    longitude = fields.Str(required=False)
     
 
 
@@ -1720,6 +1760,8 @@ class GetLocality(BaseSchema):
     parent_uid = fields.Str(required=False, allow_none=True)
     
     type = fields.Str(required=False)
+    
+    code = fields.Str(required=False)
     
     localities = fields.List(fields.Nested(LocalityParent, required=False), required=False)
     
@@ -2135,6 +2177,8 @@ class ListViewItemsV2(BaseSchema):
     
     type = fields.Str(required=False)
     
+    access_level = fields.Str(required=False)
+    
     geo_areas = fields.List(fields.Nested(GeoArea, required=False), required=False)
     
     slug = fields.Str(required=False)
@@ -2142,6 +2186,10 @@ class ListViewItemsV2(BaseSchema):
     stores = fields.Nested(ListViewProductV2, required=False)
     
     is_active = fields.Boolean(required=False)
+    
+    is_opted = fields.Boolean(required=False)
+    
+    is_public_opted = fields.Boolean(required=False)
     
     product = fields.Nested(ListViewProductV2, required=False)
     
@@ -2160,6 +2208,14 @@ class ListViewItemsV2(BaseSchema):
     stage = fields.Str(required=False)
     
     summary = fields.Nested(Summary, required=False)
+    
+
+
+class SummaryRegions(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    regions = fields.List(fields.Nested(RegionSchema, required=False), required=False)
     
 
 
@@ -2333,6 +2389,8 @@ class UpdateZoneDataV2(BaseSchema):
     
     type = fields.Str(required=False)
     
+    access_level = fields.Str(required=False)
+    
     slug = fields.Str(required=False)
     
     geo_areas = fields.List(fields.Str(required=False), required=False)
@@ -2342,6 +2400,8 @@ class UpdateZoneDataV2(BaseSchema):
     application_id = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False)
+    
+    is_opted = fields.Boolean(required=False)
     
     product = fields.Nested(ProductSchema, required=False)
     
@@ -2361,9 +2421,13 @@ class ZoneUpdateSuccessResponse(BaseSchema):
     
     type = fields.Str(required=False)
     
+    access_level = fields.Str(required=False)
+    
     application_id = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False)
+    
+    is_opted = fields.Boolean(required=False)
     
     geo_areas = fields.List(fields.Str(required=False), required=False)
     
@@ -2380,6 +2444,10 @@ class ZoneUpdateSuccessResponse(BaseSchema):
     modified_by = fields.Str(required=False)
     
     modified_on = fields.Str(required=False)
+    
+    stage = fields.Str(required=False)
+    
+    summary = fields.Nested(Summary, required=False)
     
 
 
@@ -2489,6 +2557,8 @@ class GetZoneByIdSchema(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
+    is_opted = fields.Boolean(required=False)
+    
     product = fields.Nested(ProductSchema, required=False)
     
     stores = fields.Nested(StoresSchema, required=False)
@@ -2525,6 +2595,8 @@ class GetZoneByIdDetailsSchema(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
+    is_opted = fields.Boolean(required=False)
+    
     product = fields.Nested(ProductDetailsSchema, required=False)
     
     stores = fields.Nested(StoresDetailsSchema, required=False)
@@ -2536,6 +2608,8 @@ class GetZoneByIdDetailsSchema(BaseSchema):
     geo_areas = fields.List(fields.Nested(GeoAreaDetailsSchema, required=False), required=False)
     
     type = fields.Str(required=False)
+    
+    access_level = fields.Str(required=False)
     
     overlapping_zone_names = fields.List(fields.Str(required=False), required=False)
     
@@ -2560,6 +2634,8 @@ class CreateZoneV2Data(BaseSchema):
     slug = fields.Str(required=False)
     
     type = fields.Str(required=False)
+    
+    access_level = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
@@ -2659,9 +2735,15 @@ class ZoneResponseV2(BaseSchema):
     
     type = fields.Str(required=False)
     
+    access_level = fields.Str(required=False)
+    
     application_id = fields.Str(required=False)
     
     is_active = fields.Boolean(required=False)
+    
+    is_public_opted = fields.Boolean(required=False)
+    
+    is_opted = fields.Boolean(required=False)
     
     geo_areas = fields.List(fields.Str(required=False), required=False)
     
@@ -2680,6 +2762,8 @@ class ZoneResponseV2(BaseSchema):
     stage = fields.Str(required=False)
     
     zone_id = fields.Str(required=False)
+    
+    summary = fields.Nested(SummaryRegions, required=False)
     
 
 
@@ -3146,6 +3230,14 @@ class ServiceabilityZoneErrorResult(BaseSchema):
 
     
     error = fields.List(fields.Nested(ServiceabilityErrorResponse, required=False), required=False)
+    
+
+
+class ServiceabilityZoneNonMarketplaceErrorResult(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    error = fields.Str(required=False)
     
 
 
