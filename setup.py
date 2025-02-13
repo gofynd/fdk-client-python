@@ -11,7 +11,7 @@ with open('README.md', 'r') as fh:
 
 setup(
     name='fdk_client',
-    version='v3.1.0-beta.7',
+    version='v3.1.0-beta.8',
     author='Manish Magnani',
     description=description,
     long_description=long_description,
