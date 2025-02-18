@@ -149,6 +149,10 @@ from ..PartnerModel import BaseSchema
         
         
         
+        
+        
+        
+        
     
     
         
@@ -161,6 +165,7 @@ from ..PartnerModel import BaseSchema
         
     
     
+        
         
         
         
@@ -483,6 +488,14 @@ class LogisticsValidator:
         payment_mode = fields.Str(required=False)
         
         transport_type = fields.Str(required=False)
+        
+        account_ids = fields.List(fields.Str(required=False), required=False)
+        
+        self_ship = fields.Boolean(required=False)
+        
+        own_account = fields.Boolean(required=False)
+        
+        q = fields.Str(required=False)
          
         
     
@@ -513,13 +526,15 @@ class LogisticsValidator:
         
         organization_id = fields.Str(required=False)
         
-        onboarding = fields.Boolean(required=False)
+        onboard = fields.Boolean(required=False)
         
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
         
         q = fields.Str(required=False)
+        
+        hierarchy = fields.Str(required=False)
          
         
     

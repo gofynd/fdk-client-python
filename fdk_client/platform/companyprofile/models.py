@@ -56,7 +56,7 @@ class ErrorResponseSchema(BaseSchema):
     pass
 
 
-class CompanyTaxesSerializer1(BaseSchema):
+class CompanyRequestTaxesSchema(BaseSchema):
     pass
 
 
@@ -301,7 +301,7 @@ class GetAddressSchema(BaseSchema):
     
     country_code = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     address_type = fields.Str(required=False)
     
@@ -383,15 +383,11 @@ class ErrorResponseSchema(BaseSchema):
     
     message = fields.Str(required=False)
     
-    code = fields.Str(required=False)
-    
-    status = fields.Int(required=False)
-    
-    meta = fields.Dict(required=False)
+    error = fields.Dict(required=False)
     
 
 
-class CompanyTaxesSerializer1(BaseSchema):
+class CompanyRequestTaxesSchema(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -411,7 +407,7 @@ class CreateUpdateAddressSchema(BaseSchema):
     
     country_code = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     address_type = fields.Str(required=False)
     
@@ -445,7 +441,7 @@ class UpdateCompany(BaseSchema):
     
     _custom_json = fields.Dict(required=False)
     
-    taxes = fields.List(fields.Nested(CompanyTaxesSerializer1, required=False), required=False)
+    taxes = fields.List(fields.Nested(CompanyRequestTaxesSchema, required=False), required=False)
     
     business_details = fields.Nested(BusinessDetails, required=False)
     
@@ -725,6 +721,8 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
+    page_size = fields.Int(required=False)
+    
 
 
 class CompanyBrandListSchema(BaseSchema):
@@ -961,7 +959,7 @@ class AddressSchema(BaseSchema):
     
     country_code = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     address_type = fields.Str(required=False)
     

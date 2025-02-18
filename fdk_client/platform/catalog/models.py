@@ -1662,6 +1662,10 @@ class MultiCategoriesSchema(BaseSchema):
     pass
 
 
+class NetQuantitySchema(BaseSchema):
+    pass
+
+
 class CustomMeta(BaseSchema):
     pass
 
@@ -2019,7 +2023,7 @@ class ApplicationProductsSchema(BaseSchema):
     
     category_uid = fields.Int(required=False)
     
-    verification_status = fields.Int(required=False)
+    verification_status = fields.Str(required=False)
     
     channel_identifier = fields.Str(required=False)
     
@@ -2067,7 +2071,7 @@ class ApplicationProductsSchema(BaseSchema):
     
     template_tag = fields.Str(required=False)
     
-    net_quantity = fields.Dict(required=False)
+    net_quantity = fields.Nested(NetQuantitySchema, required=False)
     
     custom_order = fields.Nested(CustomOrder, required=False)
     
@@ -2082,6 +2086,12 @@ class ApplicationProductsSchema(BaseSchema):
     _custom_meta = fields.List(fields.Nested(CustomMeta, required=False), required=False)
     
     discount_percentage = fields.Int(required=False)
+    
+    no_of_boxes = fields.Int(required=False)
+    
+    created_on = fields.Str(required=False)
+    
+    modified_on = fields.Str(required=False)
     
 
 
@@ -4029,7 +4039,7 @@ class GetAddressSchema(BaseSchema):
     
     longitude = fields.Float(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     state = fields.Str(required=False)
     
@@ -6338,6 +6348,8 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+    page_size = fields.Int(required=False)
     
 
 
@@ -8978,6 +8990,16 @@ class MultiCategoriesSchema(BaseSchema):
     is_active = fields.Boolean(required=False)
     
     department = fields.Int(required=False)
+    
+
+
+class NetQuantitySchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    unit = fields.Str(required=False)
+    
+    value = fields.Float(required=False)
     
 
 

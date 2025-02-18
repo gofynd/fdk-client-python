@@ -472,6 +472,14 @@ class RegistrationPageFeature(BaseSchema):
     pass
 
 
+class BuyboxFeature(BaseSchema):
+    pass
+
+
+class DeliveryStrategy(BaseSchema):
+    pass
+
+
 class AppFeature(BaseSchema):
     pass
 
@@ -838,6 +846,8 @@ class SearchConfig(BaseSchema):
 class AppInventoryConfig(BaseSchema):
     # Configuration swagger.json
 
+    
+    delivery_strategy = fields.Nested(DeliveryStrategy, required=False)
     
     brand = fields.Nested(InventoryBrand, required=False)
     
@@ -2199,6 +2209,26 @@ class RegistrationPageFeature(BaseSchema):
     
 
 
+class BuyboxFeature(BaseSchema):
+    # Configuration swagger.json
+
+    
+    show_name = fields.Boolean(required=False)
+    
+    enable_selection = fields.Boolean(required=False)
+    
+    is_seller_buybox_enabled = fields.Boolean(required=False)
+    
+
+
+class DeliveryStrategy(BaseSchema):
+    # Configuration swagger.json
+
+    
+    value = fields.Str(required=False)
+    
+
+
 class AppFeature(BaseSchema):
     # Configuration swagger.json
 
@@ -2220,6 +2250,10 @@ class AppFeature(BaseSchema):
     pcr = fields.Nested(PcrFeature, required=False)
     
     order = fields.Nested(OrderFeature, required=False)
+    
+    buybox = fields.Nested(BuyboxFeature, required=False)
+    
+    delivery_strategy = fields.Nested(DeliveryStrategy, required=False)
     
     _id = fields.Str(required=False)
     
@@ -2665,6 +2699,8 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
+    page_size = fields.Int(required=False)
+    
 
 
 class ApplicationInformation(BaseSchema):
@@ -2999,7 +3035,7 @@ class OptedStoreAddress(BaseSchema):
     
     address2 = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     country = fields.Str(required=False)
     
@@ -3031,7 +3067,7 @@ class OrderingStore(BaseSchema):
     
     store_code = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     code = fields.Str(required=False)
     

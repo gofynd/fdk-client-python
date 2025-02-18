@@ -256,6 +256,18 @@ class EventSubscription(BaseSchema):
     pass
 
 
+class EventSubscriptionEvents(BaseSchema):
+    pass
+
+
+class EventTemplate(BaseSchema):
+    pass
+
+
+class EventProviderTemplates(BaseSchema):
+    pass
+
+
 class EventSubscriptions(BaseSchema):
     pass
 
@@ -409,6 +421,10 @@ class SmsTemplate(BaseSchema):
 
 
 class SystemSmsTemplates(BaseSchema):
+    pass
+
+
+class SystemSmsTemplate(BaseSchema):
     pass
 
 
@@ -1323,7 +1339,7 @@ class EventSubscriptionTemplateSms(BaseSchema):
     
     subscribed = fields.Boolean(required=False)
     
-    template = fields.Str(required=False)
+    template = fields.Nested(SmsTemplate, required=False)
     
 
 
@@ -1333,7 +1349,7 @@ class EventSubscriptionTemplateEmail(BaseSchema):
     
     subscribed = fields.Boolean(required=False)
     
-    template = fields.Str(required=False)
+    template = fields.Nested(EmailTemplate, required=False)
     
 
 
@@ -1359,7 +1375,7 @@ class EventSubscription(BaseSchema):
     
     application = fields.Str(required=False)
     
-    event = fields.Str(required=False)
+    event = fields.Nested(EventSubscriptionEvents, required=False)
     
     slug = fields.Str(required=False)
     
@@ -1368,6 +1384,44 @@ class EventSubscription(BaseSchema):
     updated_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
+    
+
+
+class EventSubscriptionEvents(BaseSchema):
+    # Communication swagger.json
+
+    
+    category = fields.Str(required=False)
+    
+    event_name = fields.Str(required=False)
+    
+    group = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    template = fields.Nested(EventTemplate, required=False)
+    
+
+
+class EventTemplate(BaseSchema):
+    # Communication swagger.json
+
+    
+    email = fields.Nested(EventProviderTemplates, required=False)
+    
+    pushnotification = fields.Nested(EventProviderTemplates, required=False)
+    
+    sms = fields.Nested(EventProviderTemplates, required=False)
+    
+
+
+class EventProviderTemplates(BaseSchema):
+    # Communication swagger.json
+
+    
+    provider_type = fields.Str(required=False, allow_none=True)
+    
+    template = fields.Str(required=False, allow_none=True)
     
 
 
@@ -1953,6 +2007,14 @@ class SystemSmsTemplates(BaseSchema):
     # Communication swagger.json
 
     
+    items = fields.List(fields.Nested(SystemSmsTemplate, required=False), required=False)
+    
+
+
+class SystemSmsTemplate(BaseSchema):
+    # Communication swagger.json
+
+    
     url_shorten = fields.Nested(EnabledObj, required=False)
     
     _id = fields.Str(required=False)
@@ -2098,6 +2160,8 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+    page_size = fields.Int(required=False)
     
 
 

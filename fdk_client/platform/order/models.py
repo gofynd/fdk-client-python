@@ -2485,7 +2485,7 @@ class HistoryReason(BaseSchema):
     
     state = fields.Str(required=False, allow_none=True)
     
-    dislay_name = fields.Str(required=False, allow_none=True)
+    display_name = fields.Str(required=False, allow_none=True)
     
     code = fields.Int(required=False, allow_none=True)
     
@@ -5105,6 +5105,8 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
+    page_size = fields.Int(required=False)
+    
 
 
 class BagReasonMeta(BaseSchema):
@@ -5282,6 +5284,8 @@ class Address(BaseSchema):
     uid = fields.Str(required=False)
     
     user_id = fields.Str(required=False)
+    
+    code = fields.Str(required=False, allow_none=True)
     
 
 
@@ -6291,6 +6295,10 @@ class OrderingStoreDetails(BaseSchema):
     
     city = fields.Str(required=False, allow_none=True)
     
+    name = fields.Str(required=False, allow_none=True)
+    
+    store_email = fields.Str(required=False, allow_none=True)
+    
 
 
 class DPDetailsData(BaseSchema):
@@ -6587,6 +6595,8 @@ class OrderBagArticle(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
+    _custom_json = fields.Dict(required=False, allow_none=True)
+    
 
 
 class OrderBrandName(BaseSchema):
@@ -6864,6 +6874,8 @@ class FulfillingStore(BaseSchema):
     state = fields.Str(required=False)
     
     city = fields.Str(required=False)
+    
+    store_email = fields.Str(required=False, allow_none=True)
     
 
 

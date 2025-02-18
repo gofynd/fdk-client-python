@@ -3159,7 +3159,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metafields/types", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metafields/types", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3200,7 +3200,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metafields/resources", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metafields/resources", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3262,7 +3262,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"optional":[{"name":"resources","in":"query","required":false,"schema":{"type":"string","description":"This is the resource for which we are fetching definitions"}},{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}},{"name":"slugs","in":"query","required":false,"schema":{"type":"string","description":"This is the slug list to filter custom fields definitions, it will come comma separated"}},{"name":"namespaces","in":"query","required":false,"schema":{"type":"string","description":"This is the namespace list to filter custom fields definitions, it needs to be comma separated"}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"resources","in":"query","required":false,"schema":{"type":"string","description":"This is the resource for which we are fetching definitions"}},{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}},{"name":"slugs","in":"query","required":false,"schema":{"type":"string","description":"This is the slug list to filter custom fields definitions, it will come comma separated"}},{"name":"namespaces","in":"query","required":false,"schema":{"type":"string","description":"This is the namespace list to filter custom fields definitions, it needs to be comma separated"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, resources=resources, types=types, search=search, slugs=slugs, namespaces=namespaces)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"optional":[{"name":"resources","in":"query","required":false,"schema":{"type":"string","description":"This is the resource for which we are fetching definitions"}},{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}},{"name":"slugs","in":"query","required":false,"schema":{"type":"string","description":"This is the slug list to filter custom fields definitions, it will come comma separated"}},{"name":"namespaces","in":"query","required":false,"schema":{"type":"string","description":"This is the namespace list to filter custom fields definitions, it needs to be comma separated"}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"resources","in":"query","required":false,"schema":{"type":"string","description":"This is the resource for which we are fetching definitions"}},{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}},{"name":"slugs","in":"query","required":false,"schema":{"type":"string","description":"This is the slug list to filter custom fields definitions, it will come comma separated"}},{"name":"namespaces","in":"query","required":false,"schema":{"type":"string","description":"This is the namespace list to filter custom fields definitions, it needs to be comma separated"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", page_no=page_no, page_size=page_size, resources=resources, types=types, search=search, slugs=slugs, namespaces=namespaces)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, resources=resources, types=types, search=search, slugs=slugs, namespaces=namespaces)
         if query_string:
             url_with_params += "?" + query_string
@@ -3324,7 +3324,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}}],"optional":[{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}},{"name":"slugs","in":"query","required":false,"schema":{"type":"string","description":"This is the slug list to filter custom fields definitions, it will come comma separated"}},{"name":"namespaces","in":"query","required":false,"schema":{"type":"string","description":"This is the namespace list to filter custom fields definitions, it needs to be comma separated"}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}},{"name":"slugs","in":"query","required":false,"schema":{"type":"string","description":"This is the slug list to filter custom fields definitions, it will come comma separated"}},{"name":"namespaces","in":"query","required":false,"schema":{"type":"string","description":"This is the namespace list to filter custom fields definitions, it needs to be comma separated"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}}]}""", serverType="platform", page_no=page_no, page_size=page_size, resource=resource, types=types, search=search, slugs=slugs, namespaces=namespaces)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}}],"optional":[{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}},{"name":"slugs","in":"query","required":false,"schema":{"type":"string","description":"This is the slug list to filter custom fields definitions, it will come comma separated"}},{"name":"namespaces","in":"query","required":false,"schema":{"type":"string","description":"This is the namespace list to filter custom fields definitions, it needs to be comma separated"}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}},{"name":"slugs","in":"query","required":false,"schema":{"type":"string","description":"This is the slug list to filter custom fields definitions, it will come comma separated"}},{"name":"namespaces","in":"query","required":false,"schema":{"type":"string","description":"This is the namespace list to filter custom fields definitions, it needs to be comma separated"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}}]}""", serverType="platform", page_no=page_no, page_size=page_size, resource=resource, types=types, search=search, slugs=slugs, namespaces=namespaces)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, types=types, search=search, slugs=slugs, namespaces=namespaces)
         if query_string:
             url_with_params += "?" + query_string
@@ -3372,7 +3372,7 @@ class Content:
         schema = CustomFieldDefinitionRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}}]}""", serverType="platform", resource=resource)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}}]}""", serverType="platform", resource=resource)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3422,7 +3422,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/namespace/{namespace}/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}]}""", serverType="platform", slug=slug, resource=resource, namespace=namespace)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/namespace/{namespace}/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}]}""", serverType="platform", slug=slug, resource=resource, namespace=namespace)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3476,7 +3476,7 @@ class Content:
         schema = CustomFieldDefinitionRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/namespace/{namespace}/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}]}""", serverType="platform", slug=slug, resource=resource, namespace=namespace)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/namespace/{namespace}/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}]}""", serverType="platform", slug=slug, resource=resource, namespace=namespace)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3526,7 +3526,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/namespace/{namespace}/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}]}""", serverType="platform", slug=slug, resource=resource, namespace=namespace)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/namespace/{namespace}/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}]}""", serverType="platform", slug=slug, resource=resource, namespace=namespace)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3573,7 +3573,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/{resource_slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}]}""", serverType="platform", resource=resource, resource_slug=resource_slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/{resource_slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}]}""", serverType="platform", resource=resource, resource_slug=resource_slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3624,7 +3624,7 @@ class Content:
         schema = CustomFieldRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/{resource_slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}]}""", serverType="platform", resource=resource, resource_slug=resource_slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/{resource_slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}]}""", serverType="platform", resource=resource, resource_slug=resource_slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3669,7 +3669,7 @@ class Content:
         schema = CustomObjectDefinitionRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3719,7 +3719,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"optional":[{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, search=search)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"optional":[{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", page_no=page_no, page_size=page_size, search=search)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, search=search)
         if query_string:
             url_with_params += "?" + query_string
@@ -3763,7 +3763,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3811,7 +3811,7 @@ class Content:
         schema = CustomObjectDefinitionUpdateRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3855,7 +3855,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3905,7 +3905,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, definition_slug=definition_slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, definition_slug=definition_slug)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, )
         if query_string:
             url_with_params += "?" + query_string
@@ -3953,7 +3953,7 @@ class Content:
         schema = CustomObjectRequestSchemaWithoutId()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", definition_slug=definition_slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", definition_slug=definition_slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -4000,7 +4000,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}]}""", serverType="platform", definition_slug=definition_slug, slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}]}""", serverType="platform", definition_slug=definition_slug, slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -4047,7 +4047,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}]}""", serverType="platform", definition_slug=definition_slug, slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}]}""", serverType="platform", definition_slug=definition_slug, slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -4098,7 +4098,7 @@ class Content:
         schema = CustomObjectRequestSchemaWithoutId()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}]}""", serverType="platform", definition_slug=definition_slug, slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}]}""", serverType="platform", definition_slug=definition_slug, slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -4148,7 +4148,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metaobjects/jobs", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"page","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"action_type","in":"query","required":true,"schema":{"type":"string","enum":["download","upload"],"description":"This is the action type"}}],"optional":[],"query":[{"name":"page","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"action_type","in":"query","required":true,"schema":{"type":"string","enum":["download","upload"],"description":"This is the action type"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", page=page, page_size=page_size, action_type=action_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metaobjects/jobs", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"page","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"action_type","in":"query","required":true,"schema":{"type":"string","enum":["download","upload"],"description":"This is the action type"}}],"optional":[],"query":[{"name":"page","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"action_type","in":"query","required":true,"schema":{"type":"string","enum":["download","upload"],"description":"This is the action type"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", page=page, page_size=page_size, action_type=action_type)
         query_string = await create_query_string(page=page, page_size=page_size, action_type=action_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -4196,7 +4196,7 @@ class Content:
         schema = CustomObjectBulkSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}/bulk/upload", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}/bulk/upload", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -4240,7 +4240,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}/bulk/download", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}/bulk/download", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -4284,7 +4284,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}/bulk/sample", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}/bulk/sample", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -4302,6 +4302,606 @@ class Content:
                 exclude_headers.append(key)
 
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}/bulk/sample", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        return response
+    
+    async def getTranslateUILabels(self, template_theme_id=None, theme_id=None, locale=None, type=None, request_headers:Dict={}):
+        """Retrieves Translate Ui Labels with optional filtering by type, application, and company identifiers.
+        :param template_theme_id : unique id of template theme : type string
+        :param theme_id : unique id of theme : type string
+        :param locale : Multilingual locale : type string
+        :param type : Filter Translate Ui Labels by type : type string
+        """
+        payload = {}
+        
+        if template_theme_id is not None:
+            payload["template_theme_id"] = template_theme_id
+        if theme_id is not None:
+            payload["theme_id"] = theme_id
+        if locale is not None:
+            payload["locale"] = locale
+        if type is not None:
+            payload["type"] = type
+
+        # Parameter validation
+        schema = ContentValidator.getTranslateUILabels()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/translate-ui-labels", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}],"optional":[{"name":"template_theme_id","in":"query","description":"unique id of template theme","required":false,"schema":{"type":"string","description":"template theme id"}},{"name":"theme_id","in":"query","description":"unique id of theme","required":false,"schema":{"type":"string","description":"theme id"}},{"name":"locale","in":"query","description":"Multilingual locale","required":false,"schema":{"type":"string","description":"Multilingual locale"}},{"name":"type","in":"query","description":"Filter Translate Ui Labels by type","required":false,"schema":{"type":"string","enum":["locale_schema","locale"],"example":"locale"}}],"query":[{"name":"template_theme_id","in":"query","description":"unique id of template theme","required":false,"schema":{"type":"string","description":"template theme id"}},{"name":"theme_id","in":"query","description":"unique id of theme","required":false,"schema":{"type":"string","description":"theme id"}},{"name":"locale","in":"query","description":"Multilingual locale","required":false,"schema":{"type":"string","description":"Multilingual locale"}},{"name":"type","in":"query","description":"Filter Translate Ui Labels by type","required":false,"schema":{"type":"string","enum":["locale_schema","locale"],"example":"locale"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", template_theme_id=template_theme_id, theme_id=theme_id, locale=locale, type=type)
+        query_string = await create_query_string(template_theme_id=template_theme_id, theme_id=theme_id, locale=locale, type=type)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/translate-ui-labels", template_theme_id=template_theme_id, theme_id=theme_id, locale=locale, type=type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TranslateUiLabelsPage
+            schema = TranslateUiLabelsPage()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getTranslateUILabels")
+                print(e)
+
+        return response
+    
+    async def createTranslateUILabels(self, body="", request_headers:Dict={}):
+        """Creates a new Translate Ui Labels entry with specified configuration and locale settings.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.createTranslateUILabels()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import TranslateUiLabelsCreate
+        schema = TranslateUiLabelsCreate()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/translate-ui-labels", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/translate-ui-labels", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TranslateUiLabels
+            schema = TranslateUiLabels()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createTranslateUILabels")
+                print(e)
+
+        return response
+    
+    async def getTranslateUILabelsById(self, id=None, request_headers:Dict={}):
+        """Fetches detailed information for a specific Translate Ui Labels using its unique identifier.
+        :param id : ID of the Translate Ui Labels : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = ContentValidator.getTranslateUILabelsById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/translate-ui-labels/{id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"id","in":"path","required":true,"description":"ID of the Translate Ui Labels","schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"id","in":"path","required":true,"description":"ID of the Translate Ui Labels","schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/translate-ui-labels/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TranslateUiLabels
+            schema = TranslateUiLabels()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getTranslateUILabelsById")
+                print(e)
+
+        return response
+    
+    async def updateTranslateUILabels(self, id=None, body="", request_headers:Dict={}):
+        """Modifies existing Translate Ui Labels properties including locale, type, and associated configurations.
+        :param id : The unique identifier of the Translate Ui Labels to update : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = ContentValidator.updateTranslateUILabels()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import StaticResourceUpdate
+        schema = StaticResourceUpdate()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/translate-ui-labels/{id}", """{"required":[{"name":"id","in":"path","required":true,"description":"The unique identifier of the Translate Ui Labels to update","schema":{"type":"string","example":"60c72b2f9b1d8e35d8dca123"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","required":true,"description":"The unique identifier of the Translate Ui Labels to update","schema":{"type":"string","example":"60c72b2f9b1d8e35d8dca123"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", id=id, )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/translate-ui-labels/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TranslateUiLabels
+            schema = TranslateUiLabels()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateTranslateUILabels")
+                print(e)
+
+        return response
+    
+    async def getApplicationLanguages(self, request_headers:Dict={}):
+        """Fetch all languages configured for the specified application.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.getApplicationLanguages()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        return response
+    
+    async def addApplicationLanguage(self, body="", request_headers:Dict={}):
+        """Add new languages to application's supported language list.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.addApplicationLanguage()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ApplicationLanguageCreate
+        schema = ApplicationLanguageCreate()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        return response
+    
+    async def bulkUnPublishApplicationLanguage(self, body="", request_headers:Dict={}):
+        """Unpublish all application's published languages of specific sales channel.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.bulkUnPublishApplicationLanguage()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import unPublishApplicationLanguage
+        schema = unPublishApplicationLanguage()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        return response
+    
+    async def updateApplicationLanguageStatus(self, locale=None, body="", request_headers:Dict={}):
+        """Update language status and settings for the application.
+        :param locale :  : type string
+        """
+        payload = {}
+        
+        if locale is not None:
+            payload["locale"] = locale
+
+        # Parameter validation
+        schema = ContentValidator.updateApplicationLanguageStatus()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ApplicationLanguageUpdate
+        schema = ApplicationLanguageUpdate()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages/{locale}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", locale=locale)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages/{locale}", locale=locale), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ApplicationLanguage
+            schema = ApplicationLanguage()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateApplicationLanguageStatus")
+                print(e)
+
+        return response
+    
+    async def deleteApplicationLanguage(self, locale=None, request_headers:Dict={}):
+        """Remove a language from application's supported languages.
+        :param locale :  : type string
+        """
+        payload = {}
+        
+        if locale is not None:
+            payload["locale"] = locale
+
+        # Parameter validation
+        schema = ContentValidator.deleteApplicationLanguage()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages/{locale}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", locale=locale)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages/{locale}", locale=locale), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        return response
+    
+    async def getApplicationResourceTranslations(self, locale=None, type=None, resource_id=None, request_headers:Dict={}):
+        """Fetch translations for application-level resources.
+        :param locale :  : type string
+        :param type :  : type string
+        :param resource_id :  : type string
+        """
+        payload = {}
+        
+        if locale is not None:
+            payload["locale"] = locale
+        if type is not None:
+            payload["type"] = type
+        if resource_id is not None:
+            payload["resource_id"] = resource_id
+
+        # Parameter validation
+        schema = ContentValidator.getApplicationResourceTranslations()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string","example":"1"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","example":"66ed4e88aefcf6dd7dfb0f16"}},{"name":"locale","in":"query","required":true,"schema":{"type":"string","example":"hi"}},{"name":"type","in":"query","required":true,"schema":{"type":"string","example":"company.product"}},{"name":"resource_id","in":"query","required":true,"schema":{"type":"string","example":"235466,66ed4e88aefcf6dd7dfb0f16"}}],"optional":[],"query":[{"name":"locale","in":"query","required":true,"schema":{"type":"string","example":"hi"}},{"name":"type","in":"query","required":true,"schema":{"type":"string","example":"company.product"}},{"name":"resource_id","in":"query","required":true,"schema":{"type":"string","example":"235466,66ed4e88aefcf6dd7dfb0f16"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string","example":"1"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","example":"66ed4e88aefcf6dd7dfb0f16"}}]}""", serverType="platform", locale=locale, type=type, resource_id=resource_id)
+        query_string = await create_query_string(locale=locale, type=type, resource_id=resource_id)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations", locale=locale, type=type, resource_id=resource_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        return response
+    
+    async def createApplicationResourceTranslation(self, body="", request_headers:Dict={}):
+        """Create new translations for application resources.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.createApplicationResourceTranslation()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ResourceTranslationCreate
+        schema = ResourceTranslationCreate()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResourceTranslation
+            schema = ResourceTranslation()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createApplicationResourceTranslation")
+                print(e)
+
+        return response
+    
+    async def upsertApplicationResourceTranslationInBulk(self, body="", request_headers:Dict={}):
+        """Create or update multiple translations in a single request.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.upsertApplicationResourceTranslationInBulk()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ResourceTranslationList
+        schema = ResourceTranslationList()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations/bulk", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations/bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResourceTranslationBulkUpsert
+            schema = ResourceTranslationBulkUpsert()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for upsertApplicationResourceTranslationInBulk")
+                print(e)
+
+        return response
+    
+    async def updateApplicationResourceTranslation(self, id=None, body="", request_headers:Dict={}):
+        """Update existing translations for application resources.
+        :param id :  : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = ContentValidator.updateApplicationResourceTranslation()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ResourceTranslationUpdate
+        schema = ResourceTranslationUpdate()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations/{id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResourceTranslation
+            schema = ResourceTranslation()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateApplicationResourceTranslation")
+                print(e)
+
+        return response
+    
+    async def deleteApplicationResourceTranslation(self, id=None, request_headers:Dict={}):
+        """Remove translations for application resources.
+        :param id :  : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = ContentValidator.deleteApplicationResourceTranslation()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations/{id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeletedResource
+            schema = DeletedResource()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteApplicationResourceTranslation")
+                print(e)
 
         return response
     

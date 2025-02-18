@@ -173,6 +173,14 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
+        
+        
+    
+    
+        
+        
     
     
         
@@ -715,6 +723,23 @@ class OrderValidator:
         
         
         company_id = fields.Int(required=False)
+         
+        
+    
+    class failedOrderLogs(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        search_type = fields.Str(required=False)
+        
+        search_value = fields.Str(required=False)
          
         
     

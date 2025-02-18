@@ -420,6 +420,10 @@ class ProductPriceInfo(BaseSchema):
     pass
 
 
+class ProductMaxQuantityInfo(BaseSchema):
+    pass
+
+
 class CartProductIdentifer(BaseSchema):
     pass
 
@@ -1184,6 +1188,8 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+    page_size = fields.Int(required=False)
     
 
 
@@ -1997,6 +2003,8 @@ class Article(BaseSchema):
     
     meta = fields.Dict(required=False)
     
+    allowed_refund = fields.Boolean(required=False)
+    
 
 
 class PriceAdjustmentRestrictions(BaseSchema):
@@ -2563,6 +2571,8 @@ class AppliedPromotion(BaseSchema):
     
     amount = fields.Float(required=False)
     
+    float_amount = fields.Str(required=False)
+    
     promotion_type = fields.Str(required=False)
     
     mrp_promotion = fields.Boolean(required=False)
@@ -2659,6 +2669,18 @@ class ProductPriceInfo(BaseSchema):
     
 
 
+class ProductMaxQuantityInfo(BaseSchema):
+    # Cart swagger.json
+
+    
+    item = fields.Float(required=False, allow_none=True)
+    
+    item_seller = fields.Float(required=False, allow_none=True)
+    
+    item_store = fields.Float(required=False, allow_none=True)
+    
+
+
 class CartProductIdentifer(BaseSchema):
     # Cart swagger.json
 
@@ -2744,6 +2766,8 @@ class CartProductInfo(BaseSchema):
     availability = fields.Nested(ProductAvailability, required=False)
     
     moq = fields.Dict(required=False)
+    
+    max_quantity = fields.Nested(ProductMaxQuantityInfo, required=False)
     
     price_per_unit = fields.Nested(ProductPriceInfo, required=False)
     
@@ -3878,6 +3902,8 @@ class ValidationConfig(BaseSchema):
 class PlatformGetAddressesDetails(BaseSchema):
     # Cart swagger.json
 
+    
+    pii_masking = fields.Boolean(required=False)
     
     address = fields.List(fields.Nested(PlatformAddress, required=False), required=False)
     

@@ -24,6 +24,10 @@ class ContactInfo(BaseSchema):
     pass
 
 
+class CommingSoon(BaseSchema):
+    pass
+
+
 class ExtensionUsingSlug(BaseSchema):
     pass
 
@@ -71,17 +75,7 @@ class CategoryL1(BaseSchema):
     # Partner swagger.json
 
     
-    description = fields.Str(required=False)
-    
-    display = fields.Str(required=False)
-    
-    level = fields.Float(required=False)
-    
-    logo = fields.Str(required=False)
-    
     slug = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
     
     _id = fields.Str(required=False)
     
@@ -93,13 +87,7 @@ class CategoryL2(BaseSchema):
     
     parent = fields.Str(required=False)
     
-    display = fields.Str(required=False)
-    
-    level = fields.Float(required=False)
-    
     slug = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
     
     _id = fields.Str(required=False)
     
@@ -109,9 +97,9 @@ class CategoryCommon(BaseSchema):
     # Partner swagger.json
 
     
-    category_l1 = fields.List(fields.Nested(CategoryL1, required=False), required=False)
+    categories_l1 = fields.List(fields.Nested(CategoryL1, required=False), required=False)
     
-    category_l2 = fields.List(fields.Nested(CategoryL2, required=False), required=False)
+    categories_l2 = fields.List(fields.Nested(CategoryL2, required=False), required=False)
     
 
 
@@ -120,6 +108,16 @@ class ContactInfo(BaseSchema):
 
     
     support = fields.Nested(Support, required=False)
+    
+
+
+class CommingSoon(BaseSchema):
+    # Partner swagger.json
+
+    
+    is_coming_soon = fields.Boolean(required=False)
+    
+    upvote_count = fields.Float(required=False)
     
 
 
@@ -139,7 +137,7 @@ class ExtensionUsingSlug(BaseSchema):
     
     extension_id = fields.Str(required=False)
     
-    is_coming_soon = fields.Boolean(required=False)
+    coming_soon = fields.Nested(CommingSoon, required=False)
     
     listing_info = fields.Nested(ListingInfo, required=False)
     
@@ -154,8 +152,6 @@ class ExtensionUsingSlug(BaseSchema):
     plans = fields.List(fields.Nested(Plans, required=False), required=False)
     
     plans_url = fields.Str(required=False)
-    
-    review_instructions = fields.Str(required=False)
     
     scope = fields.List(fields.Str(required=False), required=False)
     
@@ -242,6 +238,10 @@ class Support(BaseSchema):
     privacy_policy_url = fields.Str(required=False)
     
     website_url = fields.Str(required=False)
+    
+    terms_of_service = fields.Str(required=False)
+    
+    country_code = fields.Str(required=False)
     
 
 

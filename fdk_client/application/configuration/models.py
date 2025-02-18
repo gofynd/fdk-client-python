@@ -1279,7 +1279,7 @@ class CompanyAboutAddress(BaseSchema):
     # Configuration swagger.json
 
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     address1 = fields.Str(required=False)
     
@@ -1342,6 +1342,8 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+    page_size = fields.Int(required=False)
     
 
 
@@ -1687,7 +1689,7 @@ class OptedStoreAddress(BaseSchema):
     
     address2 = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     country = fields.Str(required=False)
     
@@ -1713,7 +1715,7 @@ class OrderingStore(BaseSchema):
     
     store_code = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     code = fields.Str(required=False)
     

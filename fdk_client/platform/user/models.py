@@ -224,6 +224,14 @@ class DeleteAccountConsent(BaseSchema):
     pass
 
 
+class GetUserTimeline(BaseSchema):
+    pass
+
+
+class UserTimeline(BaseSchema):
+    pass
+
+
 class Facebook(BaseSchema):
     pass
 
@@ -1055,6 +1063,32 @@ class DeleteAccountConsent(BaseSchema):
     
 
 
+class GetUserTimeline(BaseSchema):
+    # User swagger.json
+
+    
+    delete_on = fields.Str(required=False)
+    
+    timeline = fields.List(fields.Nested(UserTimeline, required=False), required=False)
+    
+
+
+class UserTimeline(BaseSchema):
+    # User swagger.json
+
+    
+    date = fields.Str(required=False)
+    
+    title = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    visible = fields.Boolean(required=False)
+    
+    sub_title = fields.Str(required=False, allow_none=True)
+    
+
+
 class Facebook(BaseSchema):
     # User swagger.json
 
@@ -1280,6 +1314,8 @@ class UserSearchSchema(BaseSchema):
     archive = fields.Boolean(required=False)
     
     status = fields.Str(required=False)
+    
+    deleted_on = fields.Str(required=False)
     
 
 

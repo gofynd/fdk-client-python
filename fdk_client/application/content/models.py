@@ -294,6 +294,34 @@ class ActionPage(BaseSchema):
     pass
 
 
+class TranslateUiLabel(BaseSchema):
+    pass
+
+
+class TranslateUiLabelsPage(BaseSchema):
+    pass
+
+
+class Error(BaseSchema):
+    pass
+
+
+class ResourceTranslations(BaseSchema):
+    pass
+
+
+class StandardError(BaseSchema):
+    pass
+
+
+class ApplicationLanguage(BaseSchema):
+    pass
+
+
+class ResourcePayload(BaseSchema):
+    pass
+
+
 
 
 
@@ -919,6 +947,8 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
+    page_size = fields.Int(required=False)
+    
 
 
 class LandingPageSchema(BaseSchema):
@@ -1330,6 +1360,98 @@ class ActionPage(BaseSchema):
     url = fields.Str(required=False)
     
     type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
+    
+
+
+class TranslateUiLabel(BaseSchema):
+    # Content swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    company_id = fields.Str(required=False)
+    
+    application_id = fields.Str(required=False)
+    
+    template_theme_id = fields.Str(required=False)
+    
+    theme_id = fields.Str(required=False)
+    
+    locale = fields.Str(required=False)
+    
+    resource = fields.Dict(required=False)
+    
+    type = fields.Str(required=False)
+    
+    template = fields.Boolean(required=False)
+    
+
+
+class TranslateUiLabelsPage(BaseSchema):
+    # Content swagger.json
+
+    
+    items = fields.List(fields.Nested(TranslateUiLabel, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class Error(BaseSchema):
+    # Content swagger.json
+
+    
+    error = fields.Str(required=False)
+    
+
+
+class ResourceTranslations(BaseSchema):
+    # Content swagger.json
+
+    
+    resource_id = fields.Str(required=False)
+    
+    value = fields.Dict(required=False)
+    
+
+
+class StandardError(BaseSchema):
+    # Content swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+
+
+class ApplicationLanguage(BaseSchema):
+    # Content swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    company_id = fields.Str(required=False)
+    
+    application_id = fields.Str(required=False)
+    
+    locale = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    direction = fields.Str(required=False)
+    
+    is_default = fields.Boolean(required=False)
+    
+    published = fields.Boolean(required=False)
+    
+
+
+class ResourcePayload(BaseSchema):
+    # Content swagger.json
+
+    
+    payload = fields.List(fields.Dict(required=False), required=False)
     
 
 

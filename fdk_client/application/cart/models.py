@@ -96,6 +96,10 @@ class ProductPriceInfo(BaseSchema):
     pass
 
 
+class ProductMaxQuantityInfo(BaseSchema):
+    pass
+
+
 class ProductPricePerUnit(BaseSchema):
     pass
 
@@ -559,6 +563,8 @@ class AppliedPromotion(BaseSchema):
     
     amount = fields.Float(required=False)
     
+    float_amount = fields.Str(required=False)
+    
     discount_rules = fields.List(fields.Nested(DiscountRulesApp, required=False), required=False)
     
     ownership = fields.Nested(Ownership, required=False)
@@ -791,6 +797,18 @@ class ProductPriceInfo(BaseSchema):
     
 
 
+class ProductMaxQuantityInfo(BaseSchema):
+    # Cart swagger.json
+
+    
+    item = fields.Float(required=False, allow_none=True)
+    
+    item_seller = fields.Float(required=False, allow_none=True)
+    
+    item_store = fields.Float(required=False, allow_none=True)
+    
+
+
 class ProductPricePerUnit(BaseSchema):
     # Cart swagger.json
 
@@ -970,6 +988,8 @@ class CartProductInfo(BaseSchema):
     article = fields.Nested(ProductArticle, required=False)
     
     moq = fields.Dict(required=False)
+    
+    max_quantity = fields.Nested(ProductMaxQuantityInfo, required=False)
     
     identifiers = fields.Nested(CartProductIdentifer, required=False)
     

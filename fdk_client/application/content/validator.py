@@ -62,6 +62,24 @@ from ..ApplicationModel import BaseSchema
     
         
         
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
 
 class ContentValidator:
     
@@ -208,6 +226,48 @@ class ContentValidator:
         
         resource_slug = fields.Str(required=False)
          
+        
+    
+    class getTranslateUILabels(BaseSchema):
+        
+        
+        template = fields.Boolean(required=False)
+        
+        template_theme_id = fields.Str(required=False)
+        
+        theme_id = fields.Str(required=False)
+        
+        locale = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+         
+        
+    
+    class fetchResourceTranslations(BaseSchema):
+        
+        
+        type = fields.Str(required=False)
+        
+        locale = fields.Str(required=False)
+        
+        resource_id = fields.Str(required=False)
+         
+        
+    
+    class fetchResourceTranslationsWithPayload(BaseSchema):
+        
+        
+        type = fields.Str(required=False)
+        
+        locale = fields.Str(required=False)
+        
+        resource_id = fields.Str(required=False)
+         
+        
+    
+    class getSupportedLanguages(BaseSchema):
+        
+        pass 
         
     
     

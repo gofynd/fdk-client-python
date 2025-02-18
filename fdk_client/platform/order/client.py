@@ -1802,6 +1802,63 @@ class Order:
 
         return response
     
+    async def failedOrderLogs(self, application_id=None, page_no=None, page_size=None, search_type=None, search_value=None, request_headers:Dict={}):
+        """Get failed order logs listing for filters based on order Id, user contact number, user email Id and sales channel Id.
+        :param application_id : Application ID : type string
+        :param page_no : Page Number : type integer
+        :param page_size : Page Size : type integer
+        :param search_type : Search type for filter : type string
+        :param search_value : Search value for filter : type string
+        """
+        payload = {}
+        
+        if application_id is not None:
+            payload["application_id"] = application_id
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+        if search_type is not None:
+            payload["search_type"] = search_type
+        if search_value is not None:
+            payload["search_value"] = search_value
+
+        # Parameter validation
+        schema = OrderValidator.failedOrderLogs()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/orders/failed", """{"required":[{"in":"path","name":"company_id","description":"Company ID","required":true,"schema":{"type":"integer","example":2}}],"optional":[{"in":"query","name":"application_id","description":"Application ID","required":false,"schema":{"type":"string","example":"64aed475db2cfb5b8a9f623d"}},{"in":"query","name":"page_no","required":false,"description":"Page Number","schema":{"type":"integer","example":1}},{"in":"query","name":"page_size","required":false,"description":"Page Size","schema":{"type":"integer","example":10}},{"in":"query","name":"search_type","required":false,"description":"Search type for filter","schema":{"type":"string","example":"email_id","x-not-enum":true}},{"in":"query","name":"search_value","required":false,"description":"Search value for filter","schema":{"type":"string","example":"employee@gofynd.com"}}],"query":[{"in":"query","name":"application_id","description":"Application ID","required":false,"schema":{"type":"string","example":"64aed475db2cfb5b8a9f623d"}},{"in":"query","name":"page_no","required":false,"description":"Page Number","schema":{"type":"integer","example":1}},{"in":"query","name":"page_size","required":false,"description":"Page Size","schema":{"type":"integer","example":10}},{"in":"query","name":"search_type","required":false,"description":"Search type for filter","schema":{"type":"string","example":"email_id","x-not-enum":true}},{"in":"query","name":"search_value","required":false,"description":"Search value for filter","schema":{"type":"string","example":"employee@gofynd.com"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company ID","required":true,"schema":{"type":"integer","example":2}}]}""", serverType="platform", application_id=application_id, page_no=page_no, page_size=page_size, search_type=search_type, search_value=search_value)
+        query_string = await create_query_string(application_id=application_id, page_no=page_no, page_size=page_size, search_type=search_type, search_value=search_value)
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/orders/failed", application_id=application_id, page_no=page_no, page_size=page_size, search_type=search_type, search_value=search_value), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FailedOrderLogs
+            schema = FailedOrderLogs()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for failedOrderLogs")
+                print(e)
+
+        return response
+    
     async def generateInvoiceID(self, invoice_type=None, body="", request_headers:Dict={}):
         """Generate and attach Invoice Ids against shipments.
         :param invoice_type : mention the type of invoice id to generate : type string

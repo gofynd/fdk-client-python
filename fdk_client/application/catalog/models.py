@@ -540,7 +540,7 @@ class PromiseSchema(BaseSchema):
     pass
 
 
-class ProductSizePriceResponseV3(BaseSchema):
+class ProductSizePriceResponseV4(BaseSchema):
     pass
 
 
@@ -556,7 +556,7 @@ class ProductSizeSellerFilterSchemaV3(BaseSchema):
     pass
 
 
-class ProductSizeSellersResponseV3(BaseSchema):
+class ProductSizeSellersResponseV4(BaseSchema):
     pass
 
 
@@ -1011,6 +1011,14 @@ class SizeChartValues(BaseSchema):
     
     col_6 = fields.Str(required=False)
     
+    col_7 = fields.Str(required=False)
+    
+    col_8 = fields.Str(required=False)
+    
+    col_9 = fields.Str(required=False)
+    
+    col_10 = fields.Str(required=False)
+    
     col_2 = fields.Str(required=False)
     
     col_4 = fields.Str(required=False)
@@ -1047,6 +1055,14 @@ class ColumnHeaders(BaseSchema):
     
     col_5 = fields.Nested(ColumnHeader, required=False)
     
+    col_7 = fields.Nested(ColumnHeader, required=False)
+    
+    col_8 = fields.Nested(ColumnHeader, required=False)
+    
+    col_9 = fields.Nested(ColumnHeader, required=False)
+    
+    col_10 = fields.Nested(ColumnHeader, required=False)
+    
 
 
 class SizeChart(BaseSchema):
@@ -1066,6 +1082,8 @@ class SizeChart(BaseSchema):
     title = fields.Str(required=False)
     
     headers = fields.Nested(ColumnHeaders, required=False)
+    
+    id = fields.Str(required=False)
     
 
 
@@ -1368,6 +1386,8 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+    page_size = fields.Int(required=False)
     
 
 
@@ -2147,7 +2167,7 @@ class Store(BaseSchema):
     
     country = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     city = fields.Str(required=False)
     
@@ -2271,7 +2291,7 @@ class StoreAddressSchema(BaseSchema):
     
     address1 = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     city = fields.Str(required=False)
     
@@ -2703,7 +2723,7 @@ class StrategyWiseListingSchemaV3(BaseSchema):
     
     distance = fields.Int(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     tat = fields.Int(required=False)
     
@@ -2835,7 +2855,7 @@ class PromiseSchema(BaseSchema):
     
 
 
-class ProductSizePriceResponseV3(BaseSchema):
+class ProductSizePriceResponseV4(BaseSchema):
     # Catalog swagger.json
 
     
@@ -2877,7 +2897,7 @@ class ProductSizePriceResponseV3(BaseSchema):
     
     price_per_unit = fields.Nested(ProductStockUnitPriceV3, required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     marketplace_attributes = fields.List(fields.Nested(MarketPlaceSttributesSchemaV3, required=False), required=False)
     
@@ -2939,7 +2959,7 @@ class ProductSellersPriceResponseV3(BaseSchema):
     
     price_per_unit = fields.Nested(ProductStockUnitPriceV3, required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     marketplace_attributes = fields.List(fields.Nested(MarketPlaceSttributesSchemaV3, required=False), required=False)
     
@@ -2971,7 +2991,7 @@ class ProductSizeSellerFilterSchemaV3(BaseSchema):
     
 
 
-class ProductSizeSellersResponseV3(BaseSchema):
+class ProductSizeSellersResponseV4(BaseSchema):
     # Catalog swagger.json
 
     

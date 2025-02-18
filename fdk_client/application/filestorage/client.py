@@ -29,7 +29,13 @@ class FileStorage:
     
     async def startUpload(self, namespace=None, body="", request_headers:Dict={}):
         """Starts the process of uploading a file to storage location, and returns a signed url in response.
-        :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
+        :param namespace : A classification value that categorizes files based on the namespace used to determine their storage location and validate their data before upload. The namespace  also acts as a directory structure within the storage bucket and enforces file-specific rules.
+Available namespaces:
+  - misc: Public namespace allowing all file types up to 100Mb
+  - user-profile-pic: Public namespace allowing images up to 15Mb
+  - feedback-media: Public namespace allowing images and videos up to 1Gb
+  - users-vto-images: Private namespace allowing images up to 40Mb
+  - application-audience: Private namespace allowing images and PDFs up to 50Mb : type string
         """
         payload = {}
         
@@ -45,7 +51,7 @@ class FileStorage:
         schema = FileUploadStart()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["startUpload"], proccessed_params="""{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}}]}""", serverType="application", namespace=namespace)
+        url_with_params = await create_url_with_params(api_url=self._urls["startUpload"], proccessed_params="""{"required":[{"name":"namespace","in":"path","description":"A classification value that categorizes files based on the namespace used to determine their storage location and validate their data before upload. The namespace  also acts as a directory structure within the storage bucket and enforces file-specific rules.\nAvailable namespaces:\n  - misc: Public namespace allowing all file types up to 100Mb\n  - user-profile-pic: Public namespace allowing images up to 15Mb\n  - feedback-media: Public namespace allowing images and videos up to 1Gb\n  - users-vto-images: Private namespace allowing images up to 40Mb\n  - application-audience: Private namespace allowing images and PDFs up to 50Mb","required":true,"schema":{"type":"string","enum":["misc","user-profile-pic","feedback-media","users-vto-images","application-audience","test","test123"]}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"A classification value that categorizes files based on the namespace used to determine their storage location and validate their data before upload. The namespace  also acts as a directory structure within the storage bucket and enforces file-specific rules.\nAvailable namespaces:\n  - misc: Public namespace allowing all file types up to 100Mb\n  - user-profile-pic: Public namespace allowing images up to 15Mb\n  - feedback-media: Public namespace allowing images and videos up to 1Gb\n  - users-vto-images: Private namespace allowing images up to 40Mb\n  - application-audience: Private namespace allowing images and PDFs up to 50Mb","required":true,"schema":{"type":"string","enum":["misc","user-profile-pic","feedback-media","users-vto-images","application-audience","test","test123"]}}]}""", serverType="application", namespace=namespace)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -80,7 +86,13 @@ class FileStorage:
     async def completeUpload(self, namespace=None, body="", request_headers:Dict={}):
         """
 Complete the file upload and store the file details such as name, size, content type, and namespace to maintain integrity within the system's database.
-        :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
+        :param namespace : A classification value that categorizes files based on the namespace used to determine their storage location and validate their data before upload. The namespace  also acts as a directory structure within the storage bucket and enforces file-specific rules.
+Available namespaces:
+  - misc: Public namespace allowing all file types up to 100Mb
+  - user-profile-pic: Public namespace allowing images up to 15Mb
+  - feedback-media: Public namespace allowing images and videos up to 1Gb
+  - users-vto-images: Private namespace allowing images up to 40Mb
+  - application-audience: Private namespace allowing images and PDFs up to 50Mb : type string
         """
         payload = {}
         
@@ -96,7 +108,7 @@ Complete the file upload and store the file details such as name, size, content 
         schema = FileUpload()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["completeUpload"], proccessed_params="""{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}}]}""", serverType="application", namespace=namespace)
+        url_with_params = await create_url_with_params(api_url=self._urls["completeUpload"], proccessed_params="""{"required":[{"name":"namespace","in":"path","description":"A classification value that categorizes files based on the namespace used to determine their storage location and validate their data before upload. The namespace  also acts as a directory structure within the storage bucket and enforces file-specific rules.\nAvailable namespaces:\n  - misc: Public namespace allowing all file types up to 100Mb\n  - user-profile-pic: Public namespace allowing images up to 15Mb\n  - feedback-media: Public namespace allowing images and videos up to 1Gb\n  - users-vto-images: Private namespace allowing images up to 40Mb\n  - application-audience: Private namespace allowing images and PDFs up to 50Mb","required":true,"schema":{"type":"string","enum":["misc","user-profile-pic","feedback-media","users-vto-images","application-audience","test","test123"]}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"A classification value that categorizes files based on the namespace used to determine their storage location and validate their data before upload. The namespace  also acts as a directory structure within the storage bucket and enforces file-specific rules.\nAvailable namespaces:\n  - misc: Public namespace allowing all file types up to 100Mb\n  - user-profile-pic: Public namespace allowing images up to 15Mb\n  - feedback-media: Public namespace allowing images and videos up to 1Gb\n  - users-vto-images: Private namespace allowing images up to 40Mb\n  - application-audience: Private namespace allowing images and PDFs up to 50Mb","required":true,"schema":{"type":"string","enum":["misc","user-profile-pic","feedback-media","users-vto-images","application-audience","test","test123"]}}]}""", serverType="application", namespace=namespace)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string

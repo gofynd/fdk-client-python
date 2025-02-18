@@ -34,7 +34,11 @@ class Content:
             "getPage": "/service/application/content/v2.0/pages/{slug}",
             "getPages": "/service/application/content/v2.0/pages",
             "getCustomObjectBySlug": "/service/application/content/v2.0/customobjects/definition/{definition_slug}/entries/{slug}",
-            "getCustomFieldsByResourceId": "/service/application/content/v2.0/customfields/resource/{resource}/{resource_slug}"
+            "getCustomFieldsByResourceId": "/service/application/content/v2.0/customfields/resource/{resource}/{resource_slug}",
+            "getTranslateUILabels": "/service/application/content/v1.0/translate-ui-labels",
+            "fetchResourceTranslations": "/service/application/content/v1.0/resource/translations/{type}/{locale}",
+            "fetchResourceTranslationsWithPayload": "/service/application/content/v1.0/resource/translations/{type}/{locale}",
+            "getSupportedLanguages": "/service/application/content/v1.0/languages"
             
         }
         self._urls = {
@@ -967,6 +971,206 @@ class Content:
             except Exception as e:
                 print("Response Validation failed for getCustomFieldsByResourceId")
                 print(e)
+
+        return response
+    
+    async def getTranslateUILabels(self, template=None, template_theme_id=None, theme_id=None, locale=None, type=None, body="", request_headers:Dict={}):
+        """Retrieve Translate Ui Labels with filtering options for type, template, and locale settings.
+        :param template : template : type boolean
+        :param template_theme_id : unique id of template theme : type string
+        :param theme_id : unique id of theme : type string
+        :param locale : Multilingual locale : type string
+        :param type : Filter Translate Ui Labels by type : type string
+        """
+        payload = {}
+        
+        if template is not None:
+            payload["template"] = template
+        if template_theme_id is not None:
+            payload["template_theme_id"] = template_theme_id
+        if theme_id is not None:
+            payload["theme_id"] = theme_id
+        if locale is not None:
+            payload["locale"] = locale
+        if type is not None:
+            payload["type"] = type
+
+        # Parameter validation
+        schema = ContentValidator.getTranslateUILabels()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getTranslateUILabels"], proccessed_params="""{"required":[],"optional":[{"name":"template","in":"query","description":"template","required":false,"schema":{"type":"boolean","enum":[true,false],"description":"template"}},{"name":"template_theme_id","in":"query","description":"unique id of template theme","required":false,"schema":{"type":"string","description":"template theme"}},{"name":"theme_id","in":"query","description":"unique id of theme","required":false,"schema":{"type":"string","description":"theme"}},{"name":"locale","in":"query","description":"Multilingual locale","required":false,"schema":{"type":"string","description":"Multilingual locale"}},{"name":"type","in":"query","description":"Filter Translate Ui Labels by type","required":false,"schema":{"type":"string","example":"locale"}}],"query":[{"name":"template","in":"query","description":"template","required":false,"schema":{"type":"boolean","enum":[true,false],"description":"template"}},{"name":"template_theme_id","in":"query","description":"unique id of template theme","required":false,"schema":{"type":"string","description":"template theme"}},{"name":"theme_id","in":"query","description":"unique id of theme","required":false,"schema":{"type":"string","description":"theme"}},{"name":"locale","in":"query","description":"Multilingual locale","required":false,"schema":{"type":"string","description":"Multilingual locale"}},{"name":"type","in":"query","description":"Filter Translate Ui Labels by type","required":false,"schema":{"type":"string","example":"locale"}}],"headers":[],"path":[]}""", serverType="application", template=template, template_theme_id=template_theme_id, theme_id=theme_id, locale=locale, type=type)
+        query_string = await create_query_string(template=template, template_theme_id=template_theme_id, theme_id=theme_id, locale=locale, type=type)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTranslateUILabels"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/translate-ui-labels", template=template, template_theme_id=template_theme_id, theme_id=theme_id, locale=locale, type=type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TranslateUiLabelsPage
+            schema = TranslateUiLabelsPage()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getTranslateUILabels")
+                print(e)
+
+        return response
+    
+    async def fetchResourceTranslations(self, type=None, locale=None, resource_id=None, body="", request_headers:Dict={}):
+        """Fetch translations for specific resource IDs based on type and locale settings.
+        :param type : Type of resource for which translations are required (e.g., `application.product`). : type string
+        :param locale : Locale code for the translations (e.g., `hi-IN` for Hindi). : type string
+        :param resource_id : Comma-separated list of resource IDs to fetch translations for. : type string
+        """
+        payload = {}
+        
+        if type is not None:
+            payload["type"] = type
+        if locale is not None:
+            payload["locale"] = locale
+        if resource_id is not None:
+            payload["resource_id"] = resource_id
+
+        # Parameter validation
+        schema = ContentValidator.fetchResourceTranslations()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["fetchResourceTranslations"], proccessed_params="""{"required":[{"name":"type","in":"path","required":true,"description":"Type of resource for which translations are required (e.g., `application.product`).","schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"description":"Locale code for the translations (e.g., `hi-IN` for Hindi).","schema":{"type":"string"}},{"name":"resource_id","in":"query","required":true,"description":"Comma-separated list of resource IDs to fetch translations for.","schema":{"type":"string"}}],"optional":[],"query":[{"name":"resource_id","in":"query","required":true,"description":"Comma-separated list of resource IDs to fetch translations for.","schema":{"type":"string"}}],"headers":[],"path":[{"name":"type","in":"path","required":true,"description":"Type of resource for which translations are required (e.g., `application.product`).","schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"description":"Locale code for the translations (e.g., `hi-IN` for Hindi).","schema":{"type":"string"}}]}""", serverType="application", type=type, locale=locale, resource_id=resource_id)
+        query_string = await create_query_string(resource_id=resource_id)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["fetchResourceTranslations"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/resource/translations/{type}/{locale}", type=type, locale=locale, resource_id=resource_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResourceTranslations
+            schema = ResourceTranslations()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for fetchResourceTranslations")
+                print(e)
+
+        return response
+    
+    async def fetchResourceTranslationsWithPayload(self, type=None, locale=None, resource_id=None, body="", request_headers:Dict={}):
+        """Submit and retrieve translations for resources using payload data and locale settings.
+        :param type : Type of resource for which translations are required (e.g., `application.product`). : type string
+        :param locale : Locale code for the translations (e.g., `hi-IN` for Hindi). : type string
+        :param resource_id : Comma-separated list of resource IDs to fetch translations for. : type string
+        """
+        payload = {}
+        
+        if type is not None:
+            payload["type"] = type
+        if locale is not None:
+            payload["locale"] = locale
+        if resource_id is not None:
+            payload["resource_id"] = resource_id
+
+        # Parameter validation
+        schema = ContentValidator.fetchResourceTranslationsWithPayload()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ResourcePayload
+        schema = ResourcePayload()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["fetchResourceTranslationsWithPayload"], proccessed_params="""{"required":[{"name":"type","in":"path","required":true,"description":"Type of resource for which translations are required (e.g., `application.product`).","schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"description":"Locale code for the translations (e.g., `hi-IN` for Hindi).","schema":{"type":"string"}},{"name":"resource_id","in":"query","required":true,"description":"Comma-separated list of resource IDs to fetch translations for.","schema":{"type":"string"}}],"optional":[],"query":[{"name":"resource_id","in":"query","required":true,"description":"Comma-separated list of resource IDs to fetch translations for.","schema":{"type":"string"}}],"headers":[],"path":[{"name":"type","in":"path","required":true,"description":"Type of resource for which translations are required (e.g., `application.product`).","schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"description":"Locale code for the translations (e.g., `hi-IN` for Hindi).","schema":{"type":"string"}}]}""", serverType="application", type=type, locale=locale, resource_id=resource_id)
+        query_string = await create_query_string(resource_id=resource_id)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["fetchResourceTranslationsWithPayload"]).netloc, "post", await create_url_without_domain("/service/application/content/v1.0/resource/translations/{type}/{locale}", type=type, locale=locale, resource_id=resource_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResourceTranslations
+            schema = ResourceTranslations()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for fetchResourceTranslationsWithPayload")
+                print(e)
+
+        return response
+    
+    async def getSupportedLanguages(self, body="", request_headers:Dict={}):
+        """Retrieve available languages and their configurations for the specified application.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.getSupportedLanguages()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getSupportedLanguages"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSupportedLanguages"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/languages", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         return response
     

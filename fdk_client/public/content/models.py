@@ -148,6 +148,26 @@ class ContentAPIError(BaseSchema):
     pass
 
 
+class Language(BaseSchema):
+    pass
+
+
+class Error(BaseSchema):
+    pass
+
+
+class TranslatableResource(BaseSchema):
+    pass
+
+
+class Meta(BaseSchema):
+    pass
+
+
+class ResourceTranslation(BaseSchema):
+    pass
+
+
 
 
 
@@ -706,6 +726,72 @@ class ContentAPIError(BaseSchema):
     stack_trace = fields.Str(required=False)
     
     meta = fields.Dict(required=False)
+    
+
+
+class Language(BaseSchema):
+    # Content swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    locale = fields.Str(required=False)
+    
+    direction = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+
+
+class Error(BaseSchema):
+    # Content swagger.json
+
+    
+    error = fields.Str(required=False)
+    
+
+
+class TranslatableResource(BaseSchema):
+    # Content swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    meta = fields.Nested(Meta, required=False)
+    
+
+
+class Meta(BaseSchema):
+    # Content swagger.json
+
+    
+    created_by = fields.Str(required=False)
+    
+    updated_by = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+
+
+class ResourceTranslation(BaseSchema):
+    # Content swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    locale = fields.Str(required=False)
+    
+    value = fields.Dict(required=False)
     
 
 

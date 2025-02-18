@@ -15,20 +15,6 @@ from ..ApplicationModel import BaseSchema
     
     
     
-    
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
         
         
     
@@ -46,18 +32,21 @@ from ..ApplicationModel import BaseSchema
     
         
         
-    
-    
-        
-        
-        
-        
-        
-        
         
         
     
     
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
         
         
         
@@ -78,22 +67,7 @@ class LogisticValidator:
          
         
     
-    class getTatProduct(BaseSchema):
-        
-        pass 
-        
-    
     class getAllCountries(BaseSchema):
-        
-        pass 
-        
-    
-    class getPincodeZones(BaseSchema):
-        
-        pass 
-        
-    
-    class getOptimalLocations(BaseSchema):
         
         pass 
         
@@ -104,29 +78,6 @@ class LogisticValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-         
-        
-    
-    class getLocations(BaseSchema):
-        
-        
-        x__application__id = fields.Str(required=False)
-        
-        x__application__data = fields.Str(required=False)
-        
-        country = fields.Str(required=False)
-        
-        state = fields.Str(required=False)
-        
-        city = fields.Str(required=False)
-        
-        pincode = fields.Int(required=False)
-        
-        sector = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
          
         
     
@@ -156,6 +107,10 @@ class LogisticValidator:
     
     class getDeliveryPromise(BaseSchema):
         
+        
+        x__location__detail = fields.Str(required=False)
+        
+        x__application__data = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -196,6 +151,8 @@ class LogisticValidator:
         state = fields.Str(required=False)
         
         city = fields.Str(required=False)
+        
+        sector = fields.Str(required=False)
          
         
     

@@ -498,6 +498,75 @@ from .models import GenerationEntityType
         
         
         
+    
+    
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
 
 class ContentValidator:
     
@@ -1566,6 +1635,158 @@ class ContentValidator:
         application_id = fields.Str(required=False)
         
         slug = fields.Str(required=False)
+         
+        
+    
+    class getTranslateUILabels(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        template_theme_id = fields.Str(required=False)
+        
+        theme_id = fields.Str(required=False)
+        
+        locale = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+         
+        
+    
+    class createTranslateUILabels(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getTranslateUILabelsById(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class updateTranslateUILabels(BaseSchema):
+        
+        
+        id = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getApplicationLanguages(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class addApplicationLanguage(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class bulkUnPublishApplicationLanguage(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateApplicationLanguageStatus(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        locale = fields.Str(required=False)
+         
+        
+    
+    class deleteApplicationLanguage(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        locale = fields.Str(required=False)
+         
+        
+    
+    class getApplicationResourceTranslations(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        locale = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+        
+        resource_id = fields.Str(required=False)
+         
+        
+    
+    class createApplicationResourceTranslation(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class upsertApplicationResourceTranslationInBulk(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateApplicationResourceTranslation(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class deleteApplicationResourceTranslation(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
          
         
     

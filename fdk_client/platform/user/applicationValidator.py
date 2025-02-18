@@ -43,6 +43,11 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+    
+    
+        
+        
     
     
         
@@ -257,6 +262,17 @@ class UserValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+         
+        
+    
+    class getUserTimeline(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        user_id = fields.Str(required=False)
          
         
     

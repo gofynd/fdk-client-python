@@ -1657,6 +1657,8 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
+    page_size = fields.Int(required=False)
+    
 
 
 class EdcDeviceListDetails(BaseSchema):
@@ -2931,6 +2933,8 @@ class CustomerValidationSchema(BaseSchema):
     
     cart_id = fields.Str(required=False)
     
+    user_id = fields.Str(required=False)
+    
 
 
 class UserCreditSchema(BaseSchema):
@@ -2957,7 +2961,7 @@ class CreditAccountSummary(BaseSchema):
     
     available_balance = fields.Nested(UserCreditSchema, required=False)
     
-    amount_on_hold = fields.Nested(UserCreditSchema, required=False)
+    amount_on_hold = fields.List(fields.Nested(UserCreditSchema, required=False), required=False)
     
 
 

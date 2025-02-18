@@ -131,6 +131,8 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
+    page_size = fields.Int(required=False)
+    
 
 
 class TicketHistoryList(BaseSchema):
