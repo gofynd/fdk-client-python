@@ -8,99 +8,11 @@ from ..PlatformModel import BaseSchema
 
 
 
-class AppProvidersGlobalProviderRequestObjProvider(BaseSchema):
+class EventSubscriptionsBulkUpdatePayload(BaseSchema):
     pass
 
 
-class AppProvidersGlobalProviderRequestObj(BaseSchema):
-    pass
-
-
-class AppProvidersGlobalProviderRequest(BaseSchema):
-    pass
-
-
-class UpdateAppProvidersGlobalProviderResponseEmailSmsObj(BaseSchema):
-    pass
-
-
-class UpdateAppProvidersGlobalProviderResponse(BaseSchema):
-    pass
-
-
-class DefaultEmailProvidersFromAddresses(BaseSchema):
-    pass
-
-
-class DefaultEmailProviders(BaseSchema):
-    pass
-
-
-class PushtokenReq(BaseSchema):
-    pass
-
-
-class PushtokenRes(BaseSchema):
-    pass
-
-
-class SendInstantResponse(BaseSchema):
-    pass
-
-
-class MetaStructure(BaseSchema):
-    pass
-
-
-class PayloadSmsTemplateStructure(BaseSchema):
-    pass
-
-
-class PayloadSmsProviderStructure(BaseSchema):
-    pass
-
-
-class PayloadEmailTemplateStructure(BaseSchema):
-    pass
-
-
-class PayloadEmailProviderStructure(BaseSchema):
-    pass
-
-
-class PayloadEmailStructure(BaseSchema):
-    pass
-
-
-class PayloadSmsStructure(BaseSchema):
-    pass
-
-
-class SendSyncData(BaseSchema):
-    pass
-
-
-class SendSyncRequest(BaseSchema):
-    pass
-
-
-class EngineRequest(BaseSchema):
-    pass
-
-
-class EngineResponse(BaseSchema):
-    pass
-
-
-class EventSubscriptionsBulkUpdateRequest(BaseSchema):
-    pass
-
-
-class EventSubscriptionsBulkUpdateResponse(BaseSchema):
-    pass
-
-
-class SubscriptionsObjectRequest(BaseSchema):
+class EventSubscriptionsBulkUpdateResult(BaseSchema):
     pass
 
 
@@ -196,6 +108,14 @@ class Campaigns(BaseSchema):
     pass
 
 
+class BadRequestSchema(BaseSchema):
+    pass
+
+
+class NotFound(BaseSchema):
+    pass
+
+
 class AudienceReq(BaseSchema):
     pass
 
@@ -264,10 +184,6 @@ class TemplateAndType(BaseSchema):
     pass
 
 
-class TemplateKeys(BaseSchema):
-    pass
-
-
 class EmailTemplate(BaseSchema):
     pass
 
@@ -280,11 +196,47 @@ class EmailTemplates(BaseSchema):
     pass
 
 
-class SubscribedSmsTemplates(BaseSchema):
+class SystemEmailTemplates(BaseSchema):
     pass
 
 
-class SubscribedEmailTemplates(BaseSchema):
+class PayloadEmailTemplateStructure(BaseSchema):
+    pass
+
+
+class PayloadEmailProviderStructure(BaseSchema):
+    pass
+
+
+class PayloadEmailStructure(BaseSchema):
+    pass
+
+
+class PayloadSmsTemplateStructure(BaseSchema):
+    pass
+
+
+class PayloadSmsProviderStructure(BaseSchema):
+    pass
+
+
+class PayloadSmsStructure(BaseSchema):
+    pass
+
+
+class PayloadStructure(BaseSchema):
+    pass
+
+
+class MetaStructure(BaseSchema):
+    pass
+
+
+class EnginePayload(BaseSchema):
+    pass
+
+
+class EngineResult(BaseSchema):
     pass
 
 
@@ -293,10 +245,6 @@ class EventSubscriptionTemplateSms(BaseSchema):
 
 
 class EventSubscriptionTemplateEmail(BaseSchema):
-    pass
-
-
-class EventSubscriptionTemplatePushnotification(BaseSchema):
     pass
 
 
@@ -312,19 +260,19 @@ class EventSubscriptions(BaseSchema):
     pass
 
 
-class TriggerJobResponse(BaseSchema):
+class TriggerJobResult(BaseSchema):
     pass
 
 
-class TriggerJobRequest(BaseSchema):
+class TriggerJobPayload(BaseSchema):
     pass
 
 
-class GlobalVariablesGetResponse(BaseSchema):
+class GetGlobalVariablesResult(BaseSchema):
     pass
 
 
-class GlobalVariablesPostResponse(BaseSchema):
+class CreateGlobalVariablesResult(BaseSchema):
     pass
 
 
@@ -357,10 +305,6 @@ class JobLogs(BaseSchema):
 
 
 class LogEmail(BaseSchema):
-    pass
-
-
-class LogSms(BaseSchema):
     pass
 
 
@@ -432,6 +376,10 @@ class VerifyOtpCommsSuccessRes(BaseSchema):
     pass
 
 
+class VerifyOtpCommsErrorRes(BaseSchema):
+    pass
+
+
 class SmsProviderReq(BaseSchema):
     pass
 
@@ -492,7 +440,15 @@ class Page(BaseSchema):
     pass
 
 
-class BasicDelete(BaseSchema):
+class GenericError(BaseSchema):
+    pass
+
+
+class GenericDelete(BaseSchema):
+    pass
+
+
+class Message(BaseSchema):
     pass
 
 
@@ -508,10 +464,6 @@ class OtpConfigurationExpiry(BaseSchema):
     pass
 
 
-class OtpConfigRateLimit(BaseSchema):
-    pass
-
-
 class OtpConfiguration(BaseSchema):
     pass
 
@@ -519,253 +471,7 @@ class OtpConfiguration(BaseSchema):
 
 
 
-class AppProvidersGlobalProviderRequestObjProvider(BaseSchema):
-    # Communication swagger.json
-
-    
-    provider = fields.Str(required=False)
-    
-
-
-class AppProvidersGlobalProviderRequestObj(BaseSchema):
-    # Communication swagger.json
-
-    
-    transaction = fields.Nested(AppProvidersGlobalProviderRequestObjProvider, required=False)
-    
-    otp = fields.Nested(AppProvidersGlobalProviderRequestObjProvider, required=False)
-    
-
-
-class AppProvidersGlobalProviderRequest(BaseSchema):
-    # Communication swagger.json
-
-    
-    email = fields.Nested(AppProvidersGlobalProviderRequestObj, required=False)
-    
-    sms = fields.Nested(AppProvidersGlobalProviderRequestObj, required=False)
-    
-
-
-class UpdateAppProvidersGlobalProviderResponseEmailSmsObj(BaseSchema):
-    # Communication swagger.json
-
-    
-    default_provider = fields.Str(required=False, allow_none=True)
-    
-    otp_provider = fields.Str(required=False, allow_none=True)
-    
-
-
-class UpdateAppProvidersGlobalProviderResponse(BaseSchema):
-    # Communication swagger.json
-
-    
-    email = fields.Nested(UpdateAppProvidersGlobalProviderResponseEmailSmsObj, required=False)
-    
-    sms = fields.Nested(UpdateAppProvidersGlobalProviderResponseEmailSmsObj, required=False)
-    
-    _id = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-
-
-class DefaultEmailProvidersFromAddresses(BaseSchema):
-    # Communication swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    email = fields.Str(required=False)
-    
-    is_default = fields.Boolean(required=False)
-    
-
-
-class DefaultEmailProviders(BaseSchema):
-    # Communication swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    from_address = fields.List(fields.Nested(DefaultEmailProvidersFromAddresses, required=False), required=False)
-    
-    name = fields.Str(required=False)
-    
-    is_default = fields.Boolean(required=False)
-    
-
-
-class PushtokenReq(BaseSchema):
-    # Communication swagger.json
-
-    
-    action = fields.Str(required=False)
-    
-    bundle_identifier = fields.Str(required=False)
-    
-    push_token = fields.Str(required=False)
-    
-    unique_device_id = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-
-
-class PushtokenRes(BaseSchema):
-    # Communication swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    bundle_identifier = fields.Str(required=False)
-    
-    push_token = fields.Str(required=False)
-    
-    unique_device_id = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    user_id = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    expired_at = fields.Str(required=False)
-    
-
-
-class SendInstantResponse(BaseSchema):
-    # Communication swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    provider = fields.Str(required=False, allow_none=True)
-    
-    response = fields.Boolean(required=False, allow_none=True)
-    
-
-
-class MetaStructure(BaseSchema):
-    # Communication swagger.json
-
-    
-    job_type = fields.Str(required=False)
-    
-    action = fields.Str(required=False)
-    
-    trace = fields.Str(required=False)
-    
-    timestamp = fields.Str(required=False)
-    
-
-
-class PayloadSmsTemplateStructure(BaseSchema):
-    # Communication swagger.json
-
-    
-    key = fields.Str(required=False)
-    
-    value = fields.Raw(required=False)
-    
-
-
-class PayloadSmsProviderStructure(BaseSchema):
-    # Communication swagger.json
-
-    
-    slug = fields.Str(required=False)
-    
-
-
-class PayloadEmailTemplateStructure(BaseSchema):
-    # Communication swagger.json
-
-    
-    key = fields.Str(required=False)
-    
-    value = fields.Raw(required=False)
-    
-
-
-class PayloadEmailProviderStructure(BaseSchema):
-    # Communication swagger.json
-
-    
-    slug = fields.Str(required=False)
-    
-
-
-class PayloadEmailStructure(BaseSchema):
-    # Communication swagger.json
-
-    
-    template = fields.Nested(PayloadEmailTemplateStructure, required=False)
-    
-    provider = fields.Nested(PayloadEmailProviderStructure, required=False)
-    
-
-
-class PayloadSmsStructure(BaseSchema):
-    # Communication swagger.json
-
-    
-    template = fields.Nested(PayloadSmsTemplateStructure, required=False)
-    
-    provider = fields.Nested(PayloadSmsProviderStructure, required=False)
-    
-
-
-class SendSyncData(BaseSchema):
-    # Communication swagger.json
-
-    
-    phone_number = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
-    
-    to = fields.Str(required=False)
-    
-
-
-class SendSyncRequest(BaseSchema):
-    # Communication swagger.json
-
-    
-    data = fields.List(fields.Nested(SendSyncData, required=False), required=False)
-    
-    email = fields.Nested(PayloadEmailStructure, required=False)
-    
-    sms = fields.Nested(PayloadSmsStructure, required=False)
-    
-
-
-class EngineRequest(BaseSchema):
-    # Communication swagger.json
-
-    
-    payload = fields.Nested(SendSyncRequest, required=False)
-    
-    meta = fields.Nested(MetaStructure, required=False)
-    
-
-
-class EngineResponse(BaseSchema):
-    # Communication swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class EventSubscriptionsBulkUpdateRequest(BaseSchema):
+class EventSubscriptionsBulkUpdatePayload(BaseSchema):
     # Communication swagger.json
 
     
@@ -773,7 +479,7 @@ class EventSubscriptionsBulkUpdateRequest(BaseSchema):
     
 
 
-class EventSubscriptionsBulkUpdateResponse(BaseSchema):
+class EventSubscriptionsBulkUpdateResult(BaseSchema):
     # Communication swagger.json
 
     
@@ -797,27 +503,11 @@ class EventSubscriptionsBulkUpdateResponse(BaseSchema):
     
 
 
-class SubscriptionsObjectRequest(BaseSchema):
-    # Communication swagger.json
-
-    
-    event = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    template = fields.Nested(TemplateObject, required=False)
-    
-
-
 class SubscriptionsObject(BaseSchema):
     # Communication swagger.json
 
     
     _id = fields.Str(required=False)
-    
-    event = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
     
     template = fields.Nested(TemplateObject, required=False)
     
@@ -997,12 +687,6 @@ class CampaignReq(BaseSchema):
     # Communication swagger.json
 
     
-    recipient_headers = fields.Nested(RecipientHeaders, required=False)
-    
-    email = fields.Nested(CampaignEmail, required=False)
-    
-    datasource = fields.Str(required=False)
-    
     description = fields.Str(required=False)
     
     tags = fields.List(fields.Str(required=False), required=False)
@@ -1073,7 +757,7 @@ class Campaign(BaseSchema):
     
     description = fields.Str(required=False)
     
-    tags = fields.List(fields.Str(required=False), required=False)
+    tags = fields.List(fields.Raw(required=False), required=False)
     
     is_active = fields.Boolean(required=False)
     
@@ -1104,6 +788,24 @@ class Campaigns(BaseSchema):
     items = fields.List(fields.Nested(Campaign, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class BadRequestSchema(BaseSchema):
+    # Communication swagger.json
+
+    
+    status = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
+class NotFound(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Str(required=False)
     
 
 
@@ -1381,18 +1083,6 @@ class TemplateAndType(BaseSchema):
     
 
 
-class TemplateKeys(BaseSchema):
-    # Communication swagger.json
-
-    
-    to = fields.Str(required=False)
-    
-    cc = fields.Str(required=False)
-    
-    bcc = fields.Str(required=False)
-    
-
-
 class EmailTemplate(BaseSchema):
     # Communication swagger.json
 
@@ -1422,8 +1112,6 @@ class EmailTemplate(BaseSchema):
     tags = fields.List(fields.Str(required=False), required=False)
     
     subject = fields.Nested(TemplateAndType, required=False)
-    
-    keys = fields.Nested(TemplateKeys, required=False)
     
     html = fields.Nested(TemplateAndType, required=False)
     
@@ -1519,19 +1207,113 @@ class EmailTemplates(BaseSchema):
     
 
 
-class SubscribedSmsTemplates(BaseSchema):
+class SystemEmailTemplates(BaseSchema):
     # Communication swagger.json
 
     
-    items = fields.List(fields.Nested(SmsTemplates, required=False), required=False)
+    items = fields.List(fields.Nested(SystemEmailTemplate, required=False), required=False)
     
 
 
-class SubscribedEmailTemplates(BaseSchema):
+class PayloadEmailTemplateStructure(BaseSchema):
     # Communication swagger.json
 
     
-    items = fields.List(fields.Nested(EmailTemplate, required=False), required=False)
+    key = fields.Str(required=False)
+    
+    value = fields.Raw(required=False)
+    
+
+
+class PayloadEmailProviderStructure(BaseSchema):
+    # Communication swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+
+
+class PayloadEmailStructure(BaseSchema):
+    # Communication swagger.json
+
+    
+    template = fields.Nested(PayloadEmailTemplateStructure, required=False)
+    
+    provider = fields.Nested(PayloadEmailProviderStructure, required=False)
+    
+
+
+class PayloadSmsTemplateStructure(BaseSchema):
+    # Communication swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    value = fields.Raw(required=False)
+    
+
+
+class PayloadSmsProviderStructure(BaseSchema):
+    # Communication swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+
+
+class PayloadSmsStructure(BaseSchema):
+    # Communication swagger.json
+
+    
+    template = fields.Nested(PayloadSmsTemplateStructure, required=False)
+    
+    provider = fields.Nested(PayloadSmsProviderStructure, required=False)
+    
+
+
+class PayloadStructure(BaseSchema):
+    # Communication swagger.json
+
+    
+    data = fields.List(fields.Dict(required=False), required=False)
+    
+    email = fields.Nested(PayloadEmailStructure, required=False)
+    
+    sms = fields.Nested(PayloadSmsStructure, required=False)
+    
+    application = fields.Str(required=False)
+    
+
+
+class MetaStructure(BaseSchema):
+    # Communication swagger.json
+
+    
+    job_type = fields.Str(required=False)
+    
+    action = fields.Str(required=False)
+    
+    trace = fields.Str(required=False)
+    
+    timestamp = fields.Str(required=False)
+    
+
+
+class EnginePayload(BaseSchema):
+    # Communication swagger.json
+
+    
+    payload = fields.Nested(PayloadStructure, required=False)
+    
+    meta = fields.Nested(MetaStructure, required=False)
+    
+
+
+class EngineResult(BaseSchema):
+    # Communication swagger.json
+
+    
+    success = fields.Boolean(required=False)
     
 
 
@@ -1541,7 +1323,7 @@ class EventSubscriptionTemplateSms(BaseSchema):
     
     subscribed = fields.Boolean(required=False)
     
-    template = fields.Raw(required=False)
+    template = fields.Str(required=False)
     
 
 
@@ -1551,15 +1333,7 @@ class EventSubscriptionTemplateEmail(BaseSchema):
     
     subscribed = fields.Boolean(required=False)
     
-    template = fields.Raw(required=False)
-    
-
-
-class EventSubscriptionTemplatePushnotification(BaseSchema):
-    # Communication swagger.json
-
-    
-    subscribed = fields.Boolean(required=False)
+    template = fields.Str(required=False)
     
 
 
@@ -1570,8 +1344,6 @@ class EventSubscriptionTemplate(BaseSchema):
     sms = fields.Nested(EventSubscriptionTemplateSms, required=False)
     
     email = fields.Nested(EventSubscriptionTemplateEmail, required=False)
-    
-    pushnotification = fields.Nested(EventSubscriptionTemplatePushnotification, required=False)
     
 
 
@@ -1587,9 +1359,7 @@ class EventSubscription(BaseSchema):
     
     application = fields.Str(required=False)
     
-    category = fields.Str(required=False)
-    
-    event = fields.Raw(required=False)
+    event = fields.Str(required=False)
     
     slug = fields.Str(required=False)
     
@@ -1611,7 +1381,7 @@ class EventSubscriptions(BaseSchema):
     
 
 
-class TriggerJobResponse(BaseSchema):
+class TriggerJobResult(BaseSchema):
     # Communication swagger.json
 
     
@@ -1619,7 +1389,7 @@ class TriggerJobResponse(BaseSchema):
     
 
 
-class TriggerJobRequest(BaseSchema):
+class TriggerJobPayload(BaseSchema):
     # Communication swagger.json
 
     
@@ -1627,7 +1397,7 @@ class TriggerJobRequest(BaseSchema):
     
 
 
-class GlobalVariablesGetResponse(BaseSchema):
+class GetGlobalVariablesResult(BaseSchema):
     # Communication swagger.json
 
     
@@ -1637,7 +1407,7 @@ class GlobalVariablesGetResponse(BaseSchema):
     
 
 
-class GlobalVariablesPostResponse(BaseSchema):
+class CreateGlobalVariablesResult(BaseSchema):
     # Communication swagger.json
 
     
@@ -1761,24 +1531,6 @@ class LogEmail(BaseSchema):
     
     template = fields.Str(required=False)
     
-    provider = fields.Str(required=False)
-    
-    to = fields.Str(required=False)
-    
-
-
-class LogSms(BaseSchema):
-    # Communication swagger.json
-
-    
-    template = fields.Str(required=False)
-    
-    provider = fields.Str(required=False)
-    
-    phone_number = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
-    
 
 
 class LogPushnotification(BaseSchema):
@@ -1793,13 +1545,9 @@ class LogMeta(BaseSchema):
     # Communication swagger.json
 
     
-    identifier = fields.Str(required=False)
-    
     type = fields.Str(required=False)
     
-    job = fields.Str(required=False)
-    
-    campaign = fields.Str(required=False)
+    identifier = fields.Str(required=False)
     
     key = fields.Str(required=False)
     
@@ -1817,29 +1565,25 @@ class Log(BaseSchema):
     
     email = fields.Nested(LogEmail, required=False)
     
-    sms = fields.Nested(LogSms, required=False)
-    
     pushnotification = fields.Nested(LogPushnotification, required=False)
+    
+    meta = fields.Nested(LogMeta, required=False)
     
     _id = fields.Str(required=False)
     
-    pod = fields.Str(required=False)
+    application = fields.Str(required=False)
     
     service = fields.Str(required=False)
     
     step = fields.Str(required=False)
     
-    source = fields.Str(required=False)
-    
     status = fields.Str(required=False)
+    
+    data = fields.Raw(required=False)
     
     expire_at = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
-    
-    meta = fields.Nested(LogMeta, required=False)
-    
-    application = fields.Str(required=False)
     
 
 
@@ -2017,11 +1761,23 @@ class VerifyOtpCommsSuccessRes(BaseSchema):
     
 
 
+class VerifyOtpCommsErrorRes(BaseSchema):
+    # Communication swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
 class SmsProviderReq(BaseSchema):
     # Communication swagger.json
 
     
     name = fields.Str(required=False)
+    
+    token = fields.Str(required=False)
     
     description = fields.Str(required=False)
     
@@ -2059,11 +1815,23 @@ class SmsProviderReq(BaseSchema):
     
     api_key = fields.Str(required=False)
     
+    tenant_name_1 = fields.Str(required=False)
+    
+    tenant_name_2 = fields.Str(required=False)
+    
 
 
 class SmsProvider(BaseSchema):
     # Communication swagger.json
 
+    
+    token = fields.Str(required=False)
+    
+    sender_id = fields.Str(required=False)
+    
+    api_key = fields.Str(required=False)
+    
+    expiry_date = fields.Int(required=False)
     
     rpt = fields.Int(required=False)
     
@@ -2082,8 +1850,6 @@ class SmsProvider(BaseSchema):
     username = fields.Str(required=False)
     
     authkey = fields.Str(required=False)
-    
-    entity_id = fields.Str(required=False)
     
     application = fields.Str(required=False)
     
@@ -2333,17 +2099,43 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
-    total = fields.Int(required=False)
-    
 
 
-class BasicDelete(BaseSchema):
+class GenericError(BaseSchema):
     # Communication swagger.json
 
     
+    message = fields.Nested(Message, required=False)
+    
+    sentry = fields.Str(required=False)
+    
+
+
+class GenericDelete(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Str(required=False)
+    
     acknowledged = fields.Boolean(required=False)
     
-    deleted_count = fields.Int(required=False)
+    affected = fields.Int(required=False)
+    
+    operation = fields.Str(required=False)
+    
+
+
+class Message(BaseSchema):
+    # Communication swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
+    
+    info = fields.Str(required=False)
+    
+    operation = fields.Str(required=False)
     
 
 
@@ -2375,16 +2167,6 @@ class OtpConfigurationExpiry(BaseSchema):
     
 
 
-class OtpConfigRateLimit(BaseSchema):
-    # Communication swagger.json
-
-    
-    duration = fields.Float(required=False)
-    
-    limit = fields.Float(required=False)
-    
-
-
 class OtpConfiguration(BaseSchema):
     # Communication swagger.json
 
@@ -2394,8 +2176,6 @@ class OtpConfiguration(BaseSchema):
     type = fields.Str(required=False)
     
     expiry = fields.Nested(OtpConfigurationExpiry, required=False)
-    
-    rate_limit = fields.Nested(OtpConfigRateLimit, required=False)
     
     application_id = fields.Str(required=False)
     

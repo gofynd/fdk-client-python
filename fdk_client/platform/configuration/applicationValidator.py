@@ -13,28 +13,15 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
-    
-    
         
-        
     
     
         
-        
-    
-    
         
         
     
     
         
-        
-    
-    
         
         
     
@@ -47,15 +34,10 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
         
         
-        
     
     
-        
-        
         
         
     
@@ -82,23 +64,14 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
         
-    
-    
         
         
     
     
-        
         
         
         
-    
-    
-        
         
     
     
@@ -106,9 +79,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
-        
         
         
     
@@ -123,27 +93,20 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
     
     
-        
-        
         
         
-        
     
     
         
         
-    
-    
         
         
     
     
         
         
-        
     
     
         
@@ -151,13 +114,8 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-    
-    
         
         
-    
-    
         
         
     
@@ -176,33 +134,59 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
     
     
         
-        
-    
-    
         
         
     
     
-        
         
         
     
     
         
         
-        
     
     
-        
         
         
 
 class ConfigurationValidator:
     
+    
+    class getBuildConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        platform_type = fields.Str(required=False)
+         
+        
+    
+    class updateBuildConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        platform_type = fields.Str(required=False)
+         
+        
+    
+    class getPreviousVersions(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        platform_type = fields.Str(required=False)
+         
+        
     
     class getAppFeatures(BaseSchema):
         
@@ -340,25 +324,7 @@ class ConfigurationValidator:
          
         
     
-    class getApplicationConfiguration(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
     class getAppCurrencyConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class createAppCurrencyConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -449,32 +415,6 @@ class ConfigurationValidator:
          
         
     
-    class getStoreDetailById(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        store_id = fields.Int(required=False)
-         
-        
-    
-    class getOrderingStores(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        q = fields.Str(required=False)
-         
-        
-    
     class getDomains(BaseSchema):
         
         
@@ -500,7 +440,7 @@ class ConfigurationValidator:
         
         application_id = fields.Str(required=False)
         
-        domain_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
         
     
@@ -524,104 +464,6 @@ class ConfigurationValidator:
     
     class getApplicationById(BaseSchema):
         
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateApplication(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getApplicationDomainAvailibility(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateApplicationVersion(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class createTokens(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class deleteToken(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        token = fields.Str(required=False)
-         
-        
-    
-    class getUrlRedirections(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class createUrlRedirection(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getUrlRedirection(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        redirection_domain_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateUrlRedirection(BaseSchema):
-        
-        
-        redirection_domain_id = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class deleteUrlRedirection(BaseSchema):
-        
-        
-        redirection_domain_id = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
         

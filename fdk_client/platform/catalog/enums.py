@@ -107,3 +107,18 @@ class PageType(Enum):
             return None
         raise Exception("Invalid PageType type")
 
+
+class CurrencyCodeEnum(Enum):
+    
+    INR = "INR"
+    
+    USD = "USD"
+    
+    EUR = "EUR"
+    
+    @classmethod
+    async def is_valid(cls, value):
+        if value in cls._value2member_map_:
+            return None
+        raise Exception("Invalid CurrencyCodeEnum type")
+

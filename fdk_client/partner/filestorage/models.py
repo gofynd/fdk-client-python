@@ -12,15 +12,19 @@ class SizeConstraints(BaseSchema):
     pass
 
 
-class FetchProxyResponse(BaseSchema):
+class SaveProxy(BaseSchema):
     pass
 
 
-class FetchProxyRequest(BaseSchema):
+class ProxyFileData(BaseSchema):
     pass
 
 
-class ProxyResponse(BaseSchema):
+class ProxyFile(BaseSchema):
+    pass
+
+
+class FetchProxyDetails(BaseSchema):
     pass
 
 
@@ -40,11 +44,11 @@ class Upload(BaseSchema):
     pass
 
 
-class StartResponse(BaseSchema):
+class FileUpload(BaseSchema):
     pass
 
 
-class StartRequest(BaseSchema):
+class FileUploadStart(BaseSchema):
     pass
 
 
@@ -52,11 +56,11 @@ class CreatedBy(BaseSchema):
     pass
 
 
-class CompleteResponse(BaseSchema):
+class FileUploadComplete(BaseSchema):
     pass
 
 
-class FailedResponse(BaseSchema):
+class FailedBrowseFilesResult(BaseSchema):
     pass
 
 
@@ -71,17 +75,27 @@ class SizeConstraints(BaseSchema):
     
 
 
-class FetchProxyResponse(BaseSchema):
+class SaveProxy(BaseSchema):
     # FileStorage swagger.json
 
     
-    id = fields.Str(required=False)
+    id = fields.Int(required=False)
     
-    created_at = fields.Str(required=False)
+    token = fields.Str(required=False)
     
 
 
-class FetchProxyRequest(BaseSchema):
+class ProxyFileData(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    email = fields.Str(required=False)
+    
+    password = fields.Str(required=False)
+    
+
+
+class ProxyFile(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -93,11 +107,13 @@ class FetchProxyRequest(BaseSchema):
     
     price = fields.Float(required=False)
     
+    data = fields.Nested(ProxyFileData, required=False)
+    
     url = fields.Str(required=False)
     
 
 
-class ProxyResponse(BaseSchema):
+class FetchProxyDetails(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -151,7 +167,7 @@ class Upload(BaseSchema):
     
 
 
-class StartResponse(BaseSchema):
+class FileUpload(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -175,7 +191,7 @@ class StartResponse(BaseSchema):
     
 
 
-class StartRequest(BaseSchema):
+class FileUploadStart(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -199,7 +215,7 @@ class CreatedBy(BaseSchema):
     
 
 
-class CompleteResponse(BaseSchema):
+class FileUploadComplete(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -233,7 +249,7 @@ class CompleteResponse(BaseSchema):
     
 
 
-class FailedResponse(BaseSchema):
+class FailedBrowseFilesResult(BaseSchema):
     # FileStorage swagger.json
 
     

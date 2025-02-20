@@ -14,6 +14,7 @@ from ..ApplicationModel import BaseSchema
     
         
         
+        
     
     
         
@@ -23,9 +24,6 @@ from ..ApplicationModel import BaseSchema
     
     
     
-    
-    
-        
     
     
         
@@ -34,14 +32,6 @@ from ..ApplicationModel import BaseSchema
         
     
     
-    
-    
-        
-        
-    
-    
-    
-        
         
     
     
@@ -49,6 +39,12 @@ from ..ApplicationModel import BaseSchema
     
         
         
+    
+    
+    
+        
+        
+    
     
     
         
@@ -60,13 +56,22 @@ from ..ApplicationModel import BaseSchema
     
         
         
-        
-        
-        
+    
+    
         
     
     
     
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
         
     
     
@@ -87,6 +92,8 @@ class ContentValidator:
         slug = fields.Str(required=False)
         
         root_id = fields.Str(required=False)
+        
+        preview = fields.Boolean(required=False)
          
         
     
@@ -172,6 +179,43 @@ class ContentValidator:
          
         
     
+    class getDefaultSitemapConfig(BaseSchema):
+        
+        pass 
+        
+    
+    class getSitemaps(BaseSchema):
+        
+        
+        page_no = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
+         
+        
+    
+    class getSitemap(BaseSchema):
+        
+        
+        name = fields.Str(required=False)
+         
+        
+    
+    class getSlideshows(BaseSchema):
+        
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class getSlideshow(BaseSchema):
+        
+        
+        slug = fields.Str(required=False)
+         
+        
+    
     class getSupportInformation(BaseSchema):
         
         pass 
@@ -180,15 +224,6 @@ class ContentValidator:
     class getTags(BaseSchema):
         
         pass 
-        
-    
-    class getPages(BaseSchema):
-        
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-         
         
     
     class getPage(BaseSchema):
@@ -200,48 +235,30 @@ class ContentValidator:
          
         
     
-    class getCustomObject(BaseSchema):
+    class getPages(BaseSchema):
         
         
-        id = fields.Str(required=False)
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     
-    class getCustomObjects(BaseSchema):
+    class getCustomObjectBySlug(BaseSchema):
         
         
-        definition_id = fields.Str(required=False)
+        definition_slug = fields.Str(required=False)
         
-        page_no = fields.Str(required=False)
-        
-        page_size = fields.Str(required=False)
-        
-        type = fields.Str(required=False)
-        
-        ids = fields.Str(required=False)
-        
-        search = fields.Str(required=False)
+        slug = fields.Str(required=False)
          
         
     
-    class getCustomFieldDefinitions(BaseSchema):
-        
-        pass 
-        
-    
-    class getCustomFieldDefinition(BaseSchema):
-        
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class getCustomFields(BaseSchema):
+    class getCustomFieldsByResourceId(BaseSchema):
         
         
         resource = fields.Str(required=False)
         
-        resource_ids = fields.Str(required=False)
+        resource_slug = fields.Str(required=False)
          
         
     

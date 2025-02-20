@@ -13,7 +13,7 @@ class Discount:
 
     
     async def getDiscounts(self, view=None, q=None, page_no=None, page_size=None, archived=None, month=None, year=None, type=None, app_ids=None, request_headers:Dict={}):
-        """Retrieve a list of available discounts.
+        """Retrieve a list of discounts. You can also retrieve discounts using filter query parameters. There are additional optional parameters that can be specified in the parameters of the request when retrieving discount
         :param view : listing or calender.  Default is listing. : type string
         :param q : The search query. This can be a partial or complete name of a discount. : type string
         :param page_no : page number. Default is 1. : type integer
@@ -82,7 +82,7 @@ class Discount:
         return response
     
     async def createDiscount(self, body="", request_headers:Dict={}):
-        """Create discount.
+        """Creates a discount. There are additional optional parameters that can be specified in the body of the request when creating a discount
         """
         payload = {}
         
@@ -128,7 +128,7 @@ class Discount:
         return response
     
     async def getDiscount(self, id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific discount.
+        """Retrieve a single discount by its id.
         :param id : unique id. : type string
         """
         payload = {}
@@ -173,7 +173,7 @@ class Discount:
         return response
     
     async def updateDiscount(self, id=None, body="", request_headers:Dict={}):
-        """Create discount.
+        """Update an existing discount by its id. Discount can only be updated after 5 min from last updated time stamp (modified_on).
         :param id : id : type string
         """
         payload = {}
@@ -222,7 +222,7 @@ class Discount:
         return response
     
     async def upsertDiscountItems(self, id=None, body="", request_headers:Dict={}):
-        """Create custom discounts.
+        """Enables users to create custom discounts in bulk by providing the multiple products in requestBody. It allows for the efficient creation of multiple discounts simultaneously, streamlining the discount management process.
         :param id : Job ID of the discount. : type string
         """
         payload = {}
@@ -262,7 +262,7 @@ class Discount:
         return response
     
     async def validateDiscountFile(self, discount=None, body="", request_headers:Dict={}):
-        """Validate file.
+        """Validates the discount file for any discrepancies. like item should be valid etc..
         :param discount : discount : type string
         """
         payload = {}
@@ -275,8 +275,8 @@ class Discount:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import FileJobRequest
-        schema = FileJobRequest()
+        from .models import FileJobRequestSchema
+        schema = FileJobRequestSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/validation/", """{"required":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"name":"discount","in":"query","description":"discount","required":false,"schema":{"type":"string"}}],"query":[{"name":"discount","in":"query","description":"discount","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", discount=discount)
@@ -300,8 +300,8 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/validation/", discount=discount), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FileJobResponse
-            schema = FileJobResponse()
+            from .models import FileJobResponseSchema
+            schema = FileJobResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -311,7 +311,7 @@ class Discount:
         return response
     
     async def downloadDiscountFile(self, type=None, body="", request_headers:Dict={}):
-        """Validate file.
+        """Retrieve a discount file by its type, it could be product or inventory.
         :param type : type : type string
         """
         payload = {}
@@ -349,8 +349,8 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/{type}/download/", type=type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FileJobResponse
-            schema = FileJobResponse()
+            from .models import FileJobResponseSchema
+            schema = FileJobResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -360,7 +360,7 @@ class Discount:
         return response
     
     async def getValidationJob(self, id=None, request_headers:Dict={}):
-        """Validate file.
+        """Retrieve a validation job of a discount by its id.
         :param id : id : type string
         """
         payload = {}
@@ -394,8 +394,8 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/validation/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FileJobResponse
-            schema = FileJobResponse()
+            from .models import FileJobResponseSchema
+            schema = FileJobResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -405,7 +405,7 @@ class Discount:
         return response
     
     async def cancelValidationJob(self, id=None, request_headers:Dict={}):
-        """Validate file.
+        """Cancel validation job of a discount by its id.
         :param id : id : type string
         """
         payload = {}
@@ -439,8 +439,8 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/validation/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CancelJobResponse
-            schema = CancelJobResponse()
+            from .models import CancelJobResponseSchema
+            schema = CancelJobResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -450,7 +450,7 @@ class Discount:
         return response
     
     async def getDownloadJob(self, id=None, request_headers:Dict={}):
-        """Download file Job.
+        """Retrieve a discount download job by its id.
         :param id : id : type string
         """
         payload = {}
@@ -484,8 +484,8 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/download/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FileJobResponse
-            schema = FileJobResponse()
+            from .models import FileJobResponseSchema
+            schema = FileJobResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -495,7 +495,7 @@ class Discount:
         return response
     
     async def cancelDownloadJob(self, id=None, request_headers:Dict={}):
-        """Cancel download Job.
+        """Cancel a discount download job by its id.
         :param id : id : type string
         """
         payload = {}
@@ -529,8 +529,8 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/download/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CancelJobResponse
-            schema = CancelJobResponse()
+            from .models import CancelJobResponseSchema
+            schema = CancelJobResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:

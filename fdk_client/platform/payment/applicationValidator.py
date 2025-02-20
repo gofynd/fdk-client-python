@@ -163,51 +163,7 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
     
-        
-        
-        
-    
-    
-        
-        
-        
-    
     
         
         
@@ -215,8 +171,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-        
     
     
         
@@ -224,7 +178,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
         
@@ -237,15 +190,9 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
         
     
     
-        
-        
-        
         
         
     
@@ -253,36 +200,24 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
         
     
     
         
         
         
-        
     
     
-        
-        
         
         
-    
-    
         
         
     
     
-        
         
         
-        
     
     
-        
-        
         
         
     
@@ -290,13 +225,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-    
-    
-        
-        
-    
-    
         
         
     
@@ -306,11 +234,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
-        
-        
-        
         
         
     
@@ -321,13 +244,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-    
-    
-        
-        
-    
-    
         
         
     
@@ -335,28 +251,17 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
-        
         
         
-        
-        
     
     
-        
         
-    
-    
         
         
-    
-    
         
         
-    
-    
         
         
     
@@ -399,13 +304,13 @@ class PaymentValidator:
         
         refresh = fields.Boolean(required=False)
         
-        amount = fields.Int(required=False)
-        
         request_type = fields.Str(required=False)
         
         order_id = fields.Str(required=False)
         
         shipment_id = fields.Str(required=False)
+        
+        amount = fields.Int(required=False)
          
         
     
@@ -694,19 +599,6 @@ class PaymentValidator:
          
         
     
-    class getPaymentLinkId(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-        
-        payment_link_id = fields.Str(required=False)
-         
-        
-    
     class pollingPaymentLink(BaseSchema):
         
         
@@ -728,28 +620,6 @@ class PaymentValidator:
         
     
     class cancelPaymentLink(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getPaymentModeSequencing(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        business_unit = fields.Str(required=False)
-        
-        device = fields.Str(required=False)
-         
-        
-    
-    class patchPaymentModeSequencing(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -854,21 +724,10 @@ class PaymentValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-        
-        payment_option_type = fields.Str(required=False)
          
         
     
     class patchMerchantPaymentOption(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getDevices(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -912,41 +771,6 @@ class PaymentValidator:
          
         
     
-    class getAggregatorCredentialHistory(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        aggregator = fields.Str(required=False)
-        
-        config_type = fields.Str(required=False)
-         
-        
-    
-    class getAggregatorCredential(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        aggregator = fields.Str(required=False)
-        
-        config_type = fields.Str(required=False)
-         
-        
-    
-    class updateAggregatorCredential(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
     class getMerchantRefundPriority(BaseSchema):
         
         
@@ -955,8 +779,6 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
         
         config_type = fields.Str(required=False)
-        
-        business_unit = fields.Str(required=False)
          
         
     
@@ -968,8 +790,6 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
         
         config_type = fields.Str(required=False)
-        
-        business_unit = fields.Str(required=False)
          
         
     
@@ -981,8 +801,6 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
         
         config_type = fields.Str(required=False)
-        
-        business_unit = fields.Str(required=False)
          
         
     
@@ -992,26 +810,6 @@ class PaymentValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-         
-        
-    
-    class copyConfigPaymentModes(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class copyConfigAggPaymentModes(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        aggregator_id = fields.Str(required=False)
          
         
     
@@ -1042,108 +840,6 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
         
         aggregator_id = fields.Int(required=False)
-         
-        
-    
-    class addRefundBankAccount(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class deleteBeneficiaryDetails(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class setRefundOptionforShipment(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getSelectedRefundOption(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
-        
-        order_id = fields.Str(required=False)
-         
-        
-    
-    class getUserBeneficiariesDetailV2(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        order_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
-        
-        mop = fields.Str(required=False)
-         
-        
-    
-    class validateBeneficiaryAddress(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateDefaultBeneficiary(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getPennyDropValidation(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updatePennyDropValidation(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getShipmentBeneficiary(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
          
         
     

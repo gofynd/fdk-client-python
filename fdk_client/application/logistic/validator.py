@@ -15,24 +15,13 @@ from ..ApplicationModel import BaseSchema
     
     
     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    
     
     
         
         
-        
+    
+    
         
         
         
@@ -56,6 +45,9 @@ from ..ApplicationModel import BaseSchema
     
         
         
+    
+    
+        
         
         
         
@@ -67,10 +59,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-        
-        
-    
-    
         
         
     
@@ -88,75 +76,62 @@ class LogisticValidator:
          
         
     
+    class getTatProduct(BaseSchema):
+        
+        pass 
+        
+    
     class getAllCountries(BaseSchema):
         
         pass 
         
     
-    class getZones(BaseSchema):
+    class getPincodeZones(BaseSchema):
+        
+        pass 
+        
+    
+    class getOptimalLocations(BaseSchema):
+        
+        pass 
+        
+    
+    class getCourierPartners(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-        
-        stage = fields.Str(required=False)
-        
-        type = fields.Str(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        is_active = fields.Boolean(required=False)
-        
-        q = fields.Str(required=False)
-        
-        country_iso_code = fields.Str(required=False)
-        
-        pincode = fields.Str(required=False)
-        
-        state = fields.Str(required=False)
-        
-        city = fields.Str(required=False)
-        
-        sector = fields.Str(required=False)
          
         
     
-    class getGeoAreas(BaseSchema):
+    class getLocations(BaseSchema):
         
         
-        application_id = fields.Str(required=False)
+        x__application__id = fields.Str(required=False)
         
-        company_id = fields.Int(required=False)
+        x__application__data = fields.Str(required=False)
         
-        page_size = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        type = fields.Str(required=False)
-        
-        is_active = fields.Boolean(required=False)
-        
-        q = fields.Str(required=False)
-        
-        country_iso_code = fields.Str(required=False)
+        country = fields.Str(required=False)
         
         state = fields.Str(required=False)
         
         city = fields.Str(required=False)
         
-        pincode = fields.Str(required=False)
+        pincode = fields.Int(required=False)
         
         sector = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     
     class getCountries(BaseSchema):
         
         
-        onboard = fields.Boolean(required=False)
+        onboarding = fields.Boolean(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -172,6 +147,15 @@ class LogisticValidator:
         
         
         country_iso_code = fields.Str(required=False)
+         
+        
+    
+    class getDeliveryPromise(BaseSchema):
+        
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     
@@ -191,8 +175,6 @@ class LogisticValidator:
         page_size = fields.Int(required=False)
         
         q = fields.Str(required=False)
-        
-        name = fields.Str(required=False)
          
         
     
@@ -217,15 +199,6 @@ class LogisticValidator:
         country_iso_code = fields.Str(required=False)
         
         template_name = fields.Str(required=False)
-         
-        
-    
-    class createShipments(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
          
         
     

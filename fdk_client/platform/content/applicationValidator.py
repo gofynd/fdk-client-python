@@ -68,18 +68,8 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-    
-    
-        
-        
-    
-    
-        
-        
     
     
-        
         
         
     
@@ -162,7 +152,9 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
+                
+from .models import GenerationEntityType
+
     
     
         
@@ -319,8 +311,12 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
+        
+        
+        
     
     
         
@@ -332,14 +328,19 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
     
     
         
         
+        
     
     
+        
+        
+        
         
         
     
@@ -351,19 +352,27 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
+        
         
         
     
     
         
         
+        
+    
+    
         
         
     
     
+        
         
+    
+    
         
         
     
@@ -384,15 +393,21 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
         
         
         
+    
+    
         
         
     
     
         
         
+        
+        
     
     
         
@@ -406,15 +421,29 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+    
+    
         
         
     
     
+        
+        
+        
         
         
         
+        
+        
+        
     
     
+        
+        
+        
+        
+        
         
         
         
@@ -424,13 +453,20 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
         
+        
+        
     
     
         
         
         
         
+        
     
     
         
@@ -440,9 +476,14 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
+    
+    
+        
+        
         
         
     
@@ -482,8 +523,10 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
     
     
+        
         
         
         
@@ -492,8 +535,10 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
+        
         
         
         
@@ -643,17 +688,6 @@ class ContentValidator:
          
         
     
-    class getComponentById(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        slug = fields.Str(required=False)
-         
-        
-    
     class addDataLoader(BaseSchema):
         
         
@@ -669,17 +703,6 @@ class ContentValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
-         
-        
-    
-    class getDataLoaderApiSpecs(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        data_loader = fields.Str(required=False)
          
         
     
@@ -857,7 +880,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        type = fields.Str(required=False)
+        type = fields.Nested(GenerationEntityType, required=False)
          
         
     
@@ -1157,7 +1180,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        schema_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
         
     
@@ -1168,7 +1191,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        schema_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
         
     
@@ -1179,16 +1202,143 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        schema_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
         
     
-    class addInjectableTag(BaseSchema):
+    class getDefaultSitemapConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateDefaultSitemapConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getSitemaps(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_no = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
+        
+        is_active = fields.Boolean(required=False)
+        
+        name = fields.Str(required=False)
+         
+        
+    
+    class createSitemap(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getSitemap(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        name = fields.Str(required=False)
+         
+        
+    
+    class updateSitemap(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        name = fields.Str(required=False)
+         
+        
+    
+    class deleteSitemap(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        name = fields.Str(required=False)
+         
+        
+    
+    class getSlideshows(BaseSchema):
         
         
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+        
+        device_platform = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class createSlideshow(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getSlideshowBySlug(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
+        
+        device_platform = fields.Str(required=False)
+         
+        
+    
+    class updateSlideshow(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class deleteSlideshow(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
          
         
     
@@ -1202,6 +1352,35 @@ class ContentValidator:
         
     
     class updateSupportInformation(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateInjectableTag(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getInjectableTags(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        all = fields.Boolean(required=False)
+         
+        
+    
+    class addInjectableTag(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -1227,42 +1406,6 @@ class ContentValidator:
         application_id = fields.Str(required=False)
         
         tag_id = fields.Str(required=False)
-         
-        
-    
-    class createInjectableTag(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateInjectableTag(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class deleteAllInjectableTags(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getInjectableTags(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
          
         
     
@@ -1357,6 +1500,31 @@ class ContentValidator:
         search = fields.Str(required=False)
         
         slugs = fields.Str(required=False)
+        
+        namespaces = fields.Str(required=False)
+         
+        
+    
+    class getAppCustomFieldDefinitionByResource(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_no = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
+        
+        resource = fields.Str(required=False)
+        
+        types = fields.Str(required=False)
+        
+        search = fields.Str(required=False)
+        
+        slugs = fields.Str(required=False)
+        
+        namespaces = fields.Str(required=False)
          
         
     
@@ -1366,67 +1534,57 @@ class ContentValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-         
-        
-    
-    class getAppCustomFieldDefinition(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class updateAppCustomFieldDefinition(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class deleteAppCustomFieldDefinition(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class getAppCustomFields(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
         
         resource = fields.Str(required=False)
          
         
     
-    class getAppCustomFieldsByResourceId(BaseSchema):
+    class getAppCustomFieldDefinitionBySlug(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
+        slug = fields.Str(required=False)
+        
         resource = fields.Str(required=False)
         
-        resource_id = fields.Str(required=False)
+        namespace = fields.Str(required=False)
          
         
     
-    class createAppCustomFieldByResourceId(BaseSchema):
+    class updateAppCustomFieldDefinitionBySlug(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
+        
+        resource = fields.Str(required=False)
+        
+        namespace = fields.Str(required=False)
+         
+        
+    
+    class deleteAppCustomFieldDefinitionBySlug(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
+        
+        resource = fields.Str(required=False)
+        
+        namespace = fields.Str(required=False)
+         
+        
+    
+    class getAppCustomFieldsByResourceSlug(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -1435,11 +1593,11 @@ class ContentValidator:
         
         resource = fields.Str(required=False)
         
-        resource_id = fields.Str(required=False)
+        resource_slug = fields.Str(required=False)
          
         
     
-    class updateAppCustomFieldByResourceId(BaseSchema):
+    class updateAppCustomFieldByResourceSlug(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -1448,37 +1606,7 @@ class ContentValidator:
         
         resource = fields.Str(required=False)
         
-        resource_id = fields.Str(required=False)
-         
-        
-    
-    class deleteAppCustomFieldsByResourceId(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        resource = fields.Str(required=False)
-        
-        resource_id = fields.Str(required=False)
-        
-        ids = fields.Str(required=False)
-         
-        
-    
-    class getAppCustomFieldJobs(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        page = fields.Str(required=False)
-        
-        page_size = fields.Str(required=False)
-        
-        action_type = fields.Str(required=False)
+        resource_slug = fields.Str(required=False)
          
         
     
@@ -1506,93 +1634,101 @@ class ContentValidator:
          
         
     
-    class getAppCustomObjectDefinition(BaseSchema):
+    class getAppCustomObjectDefinitionBySlug(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        slug = fields.Str(required=False)
          
         
     
-    class updateAppCustomObjectDefinition(BaseSchema):
+    class updateAppCustomObjectDefinitionBySlug(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        slug = fields.Str(required=False)
          
         
     
-    class deleteAppCustomObjectDefinition(BaseSchema):
+    class deleteAppCustomObjectDefinitionBySlug(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        slug = fields.Str(required=False)
          
         
     
-    class getAppCustomObjects(BaseSchema):
+    class getAppCustomObjectsBySlug(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-        
-        definition_id = fields.Str(required=False)
         
         page_no = fields.Str(required=False)
         
         page_size = fields.Str(required=False)
+        
+        definition_slug = fields.Str(required=False)
          
         
     
-    class createAppCustomObject(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getAppCustomObject(BaseSchema):
+    class createAppCustomObjectBySlug(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        definition_slug = fields.Str(required=False)
          
         
     
-    class updateAppCustomObject(BaseSchema):
+    class getAppCustomObjectBySlug(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        definition_slug = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
          
         
     
-    class deleteAppCustomObject(BaseSchema):
+    class deleteAppCustomObjectBySlug(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        definition_slug = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
+         
+        
+    
+    class updateAppCustomObjectBySlug(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        definition_slug = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
          
         
     
@@ -1611,36 +1747,36 @@ class ContentValidator:
          
         
     
-    class importAppCustomObjectEntries(BaseSchema):
+    class importAppCustomObjectEntriesBySlug(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        definition_id = fields.Str(required=False)
+        slug = fields.Str(required=False)
          
         
     
-    class exportAppCustomObjectEntries(BaseSchema):
+    class exportAppCustomObjectEntriesBySlug(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        definition_id = fields.Str(required=False)
+        slug = fields.Str(required=False)
          
         
     
-    class sampleAppCustomObjectBulkEntry(BaseSchema):
+    class sampleAppCustomObjectBulkEntryBySlug(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        definition_id = fields.Str(required=False)
+        slug = fields.Str(required=False)
          
         
     

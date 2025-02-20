@@ -234,7 +234,7 @@ class FileStorageValidator:
          
         
     
-    class deletePdfGeneratorConfig(BaseSchema):
+    class updateHtmlTemplate(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -245,7 +245,7 @@ class FileStorageValidator:
          
         
     
-    class updateHtmlTemplate(BaseSchema):
+    class deletePdfGeneratorConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)

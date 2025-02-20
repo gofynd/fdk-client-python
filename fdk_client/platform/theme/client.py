@@ -62,7 +62,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/private_themes", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company to retrieve the themes associated with it.","required":true,"schema":{"type":"integer","example":19243}}],"optional":[{"name":"search_text","in":"query","description":"Search Text to match the Theme Names and return the response.","required":false,"schema":{"type":"string","example":"Astra"}}],"query":[{"name":"search_text","in":"query","description":"Search Text to match the Theme Names and return the response.","required":false,"schema":{"type":"string","example":"Astra"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company to retrieve the themes associated with it.","required":true,"schema":{"type":"integer","example":19243}}]}""", serverType="platform", search_text=search_text)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/private_themes", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company to retrieve the themes associated with it.","required":true,"schema":{"type":"integer","example":19243}}],"optional":[{"name":"search_text","in":"query","description":"Search Text to match the Theme Names and return the response.","schema":{"type":"string","example":"Astra"}}],"query":[{"name":"search_text","in":"query","description":"Search Text to match the Theme Names and return the response.","schema":{"type":"string","example":"Astra"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company to retrieve the themes associated with it.","required":true,"schema":{"type":"integer","example":19243}}]}""", serverType="platform", search_text=search_text)
         query_string = await create_query_string(search_text=search_text)
         if query_string:
             url_with_params += "?" + query_string
@@ -95,8 +95,8 @@ class Theme:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CompanyThemeReqSchema
-        schema = CompanyThemeReqSchema()
+        from .models import ThemeReq
+        schema = ThemeReq()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company to apply the theme to.","required":true,"schema":{"type":"integer","example":19243}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company to apply the theme to.","required":true,"schema":{"type":"integer","example":19243}}]}""", serverType="platform", )
@@ -120,8 +120,8 @@ class Theme:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/theme/v2.0/company/{self._conf.companyId}", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ThemesSchema
-            schema = ThemesSchema()
+            from .models import CompanyThemeSchema
+            schema = CompanyThemeSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -165,54 +165,12 @@ class Theme:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/theme/v2.0/company/{self._conf.companyId}/{theme_id}", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ThemesSchema
-            schema = ThemesSchema()
+            from .models import CompanyThemeSchema
+            schema = CompanyThemeSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for deleteCompanyTheme")
-                print(e)
-
-        return response
-    
-    async def getDefaultMarketplaceTheme(self, request_headers:Dict={}):
-        """Retrieve the most recent version of a theme using its slug.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ThemeValidator.getDefaultMarketplaceTheme()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v2.0/company/{self._conf.companyId}/default", """{"required":[{"name":"company_id","in":"path","description":"The ID of the company","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"The ID of the company","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v2.0/company/{self._conf.companyId}/default", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import MarketplaceTheme
-            schema = MarketplaceTheme()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getDefaultMarketplaceTheme")
                 print(e)
 
         return response
