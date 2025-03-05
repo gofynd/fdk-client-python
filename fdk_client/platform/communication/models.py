@@ -8,11 +8,11 @@ from ..PlatformModel import BaseSchema
 
 
 
-class EventSubscriptionsBulkUpdatePayload(BaseSchema):
+class EventSubscriptionsBulkUpdateRequest(BaseSchema):
     pass
 
 
-class EventSubscriptionsBulkUpdateResult(BaseSchema):
+class EventSubscriptionsBulkUpdateResponse(BaseSchema):
     pass
 
 
@@ -232,11 +232,11 @@ class MetaStructure(BaseSchema):
     pass
 
 
-class EnginePayload(BaseSchema):
+class EngineRequest(BaseSchema):
     pass
 
 
-class EngineResult(BaseSchema):
+class EngineResponse(BaseSchema):
     pass
 
 
@@ -260,19 +260,19 @@ class EventSubscriptions(BaseSchema):
     pass
 
 
-class TriggerJobResult(BaseSchema):
+class TriggerJobResponse(BaseSchema):
     pass
 
 
-class TriggerJobPayload(BaseSchema):
+class TriggerJobRequest(BaseSchema):
     pass
 
 
-class GetGlobalVariablesResult(BaseSchema):
+class GlobalVariablesGetResponse(BaseSchema):
     pass
 
 
-class CreateGlobalVariablesResult(BaseSchema):
+class GlobalVariablesPostResponse(BaseSchema):
     pass
 
 
@@ -471,7 +471,7 @@ class OtpConfiguration(BaseSchema):
 
 
 
-class EventSubscriptionsBulkUpdatePayload(BaseSchema):
+class EventSubscriptionsBulkUpdateRequest(BaseSchema):
     # Communication swagger.json
 
     
@@ -479,7 +479,7 @@ class EventSubscriptionsBulkUpdatePayload(BaseSchema):
     
 
 
-class EventSubscriptionsBulkUpdateResult(BaseSchema):
+class EventSubscriptionsBulkUpdateResponse(BaseSchema):
     # Communication swagger.json
 
     
@@ -1299,7 +1299,7 @@ class MetaStructure(BaseSchema):
     
 
 
-class EnginePayload(BaseSchema):
+class EngineRequest(BaseSchema):
     # Communication swagger.json
 
     
@@ -1309,7 +1309,7 @@ class EnginePayload(BaseSchema):
     
 
 
-class EngineResult(BaseSchema):
+class EngineResponse(BaseSchema):
     # Communication swagger.json
 
     
@@ -1381,7 +1381,7 @@ class EventSubscriptions(BaseSchema):
     
 
 
-class TriggerJobResult(BaseSchema):
+class TriggerJobResponse(BaseSchema):
     # Communication swagger.json
 
     
@@ -1389,7 +1389,7 @@ class TriggerJobResult(BaseSchema):
     
 
 
-class TriggerJobPayload(BaseSchema):
+class TriggerJobRequest(BaseSchema):
     # Communication swagger.json
 
     
@@ -1397,7 +1397,7 @@ class TriggerJobPayload(BaseSchema):
     
 
 
-class GetGlobalVariablesResult(BaseSchema):
+class GlobalVariablesGetResponse(BaseSchema):
     # Communication swagger.json
 
     
@@ -1407,7 +1407,7 @@ class GetGlobalVariablesResult(BaseSchema):
     
 
 
-class CreateGlobalVariablesResult(BaseSchema):
+class GlobalVariablesPostResponse(BaseSchema):
     # Communication swagger.json
 
     
@@ -1814,10 +1814,6 @@ class SmsProviderReq(BaseSchema):
     sender_id = fields.Str(required=False)
     
     api_key = fields.Str(required=False)
-    
-    tenant_name_1 = fields.Str(required=False)
-    
-    tenant_name_2 = fields.Str(required=False)
     
 
 

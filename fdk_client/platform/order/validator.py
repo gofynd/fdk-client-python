@@ -27,23 +27,28 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
         
-    
-    
         
-    
-    
+        
+        
+        
+        
+        
         
         
         
+        
+    
     
+        
     
+    
         
     
     
+        
         
+        
     
     
         
@@ -193,9 +198,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-    
-    
         
     
     
@@ -232,7 +234,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
@@ -270,7 +271,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
         
@@ -399,9 +399,31 @@ class OrderValidator:
     class updateAddress(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
-        
         shipment_id = fields.Str(required=False)
+        
+        name = fields.Str(required=False)
+        
+        address = fields.Str(required=False)
+        
+        address_type = fields.Str(required=False)
+        
+        pincode = fields.Str(required=False)
+        
+        phone = fields.Str(required=False)
+        
+        email = fields.Str(required=False)
+        
+        landmark = fields.Str(required=False)
+        
+        address_category = fields.Str(required=False)
+        
+        city = fields.Str(required=False)
+        
+        state = fields.Str(required=False)
+        
+        country = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
          
         
     
@@ -452,20 +474,6 @@ class OrderValidator:
         
     
     class createOrder(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getChannelConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class createChannelConfig(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -776,13 +784,6 @@ class OrderValidator:
          
         
     
-    class updatePaymentInfo(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-         
-        
-    
     class getShipments(BaseSchema):
         
         
@@ -849,8 +850,6 @@ class OrderValidator:
         customer_id = fields.Str(required=False)
         
         order_type = fields.Str(required=False)
-        
-        group_entity = fields.Str(required=False)
         
         enforce_date_filter = fields.Boolean(required=False)
          
@@ -979,8 +978,6 @@ class OrderValidator:
         order_type = fields.Str(required=False)
         
         allow_inactive = fields.Boolean(required=False)
-        
-        group_entity = fields.Str(required=False)
         
         enforce_date_filter = fields.Boolean(required=False)
          

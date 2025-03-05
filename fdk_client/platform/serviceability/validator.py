@@ -168,7 +168,7 @@ class ServiceabilityValidator:
         
         is_active = fields.Boolean(required=False)
         
-        application_id = fields.Str(required=False)
+        application_ids = fields.Str(required=False)
         
         q = fields.Str(required=False)
         
