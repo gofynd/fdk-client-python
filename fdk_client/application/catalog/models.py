@@ -1009,6 +1009,8 @@ class ProductDetail(BaseSchema):
     
     country_of_origin = fields.Str(required=False)
     
+    modified_on = fields.Str(required=False)
+    
 
 
 class ErrorResponseSchema(BaseSchema):
@@ -1565,6 +1567,8 @@ class ProductListingDetail(BaseSchema):
     
     channel = fields.Str(required=False)
     
+    modified_on = fields.Str(required=False)
+    
 
 
 class ProductFiltersValue(BaseSchema):
@@ -1670,6 +1674,8 @@ class BrandItem(BaseSchema):
     uid = fields.Int(required=False)
     
     logo = fields.Nested(Media, required=False)
+    
+    seo = fields.Nested(ApplicationItemSEO, required=False)
     
     description = fields.Str(required=False)
     
@@ -2027,6 +2033,8 @@ class GetCollectionDetailNest(BaseSchema):
     
     is_visible = fields.Boolean(required=False)
     
+    modified_on = fields.Str(required=False)
+    
 
 
 class CollectionListingFilterTag(BaseSchema):
@@ -2090,6 +2098,8 @@ class CollectionDetailResponseSchema(BaseSchema):
     cron = fields.Dict(required=False)
     
     _schedule = fields.Dict(required=False)
+    
+    modified_on = fields.Str(required=False)
     
     query = fields.List(fields.Nested(CollectionQuery, required=False), required=False)
     

@@ -132,6 +132,10 @@ class Address(BaseSchema):
     pass
 
 
+class CouponDetails(BaseSchema):
+    pass
+
+
 class Shipments(BaseSchema):
     pass
 
@@ -909,9 +913,27 @@ class Address(BaseSchema):
     
 
 
+class CouponDetails(BaseSchema):
+    # Order swagger.json
+
+    
+    display = fields.Str(required=False)
+    
+    code = fields.Str(required=False)
+    
+    currency_symbol = fields.Str(required=False)
+    
+    currency_code = fields.Str(required=False)
+    
+    value = fields.Float(required=False)
+    
+
+
 class Shipments(BaseSchema):
     # Order swagger.json
 
+    
+    coupon_details = fields.List(fields.Nested(CouponDetails, required=False), required=False)
     
     payment = fields.Nested(ShipmentPayment, required=False)
     
@@ -1040,6 +1062,8 @@ class CurrencySchema(BaseSchema):
 class OrderSchema(BaseSchema):
     # Order swagger.json
 
+    
+    coupon_details = fields.List(fields.Nested(CouponDetails, required=False), required=False)
     
     total_shipments_in_order = fields.Int(required=False)
     

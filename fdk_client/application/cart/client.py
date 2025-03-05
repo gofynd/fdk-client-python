@@ -1655,11 +1655,12 @@ class Cart:
 
         return response
     
-    async def getPromotions(self, page_size=None, page_no=None, promotion_type=None, body="", request_headers:Dict={}):
+    async def getPromotions(self, page_size=None, page_no=None, promotion_type=None, is_bank_offer=None, body="", request_headers:Dict={}):
         """List all promotional offers available for the sales channel, including details such as offer text, unique promotion ID, and validity period.
         :param page_size : Number of offers to be fetched to show. : type integer
         :param page_no : Page number to be fetched to show : type integer
         :param promotion_type : Promotion type of promotions to be fetched : type string
+        :param is_bank_offer : Boolean flag stating if promotions with bank offer need to be fetched. : type boolean
         """
         payload = {}
         
@@ -1669,14 +1670,16 @@ class Cart:
             payload["page_no"] = page_no
         if promotion_type is not None:
             payload["promotion_type"] = promotion_type
+        if is_bank_offer is not None:
+            payload["is_bank_offer"] = is_bank_offer
 
         # Parameter validation
         schema = CartValidator.getPromotions()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPromotions"], proccessed_params="""{"required":[],"optional":[{"name":"page_size","description":"Number of offers to be fetched to show.","in":"query","schema":{"type":"integer"}},{"name":"page_no","description":"Page number to be fetched to show","in":"query","schema":{"type":"integer"}},{"name":"promotion_type","description":"Promotion type of promotions to be fetched","in":"query","schema":{"type":"string"}}],"query":[{"name":"page_size","description":"Number of offers to be fetched to show.","in":"query","schema":{"type":"integer"}},{"name":"page_no","description":"Page number to be fetched to show","in":"query","schema":{"type":"integer"}},{"name":"promotion_type","description":"Promotion type of promotions to be fetched","in":"query","schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", page_size=page_size, page_no=page_no, promotion_type=promotion_type)
-        query_string = await create_query_string(page_size=page_size, page_no=page_no, promotion_type=promotion_type)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPromotions"], proccessed_params="""{"required":[],"optional":[{"name":"page_size","description":"Number of offers to be fetched to show.","in":"query","schema":{"type":"integer"}},{"name":"page_no","description":"Page number to be fetched to show","in":"query","schema":{"type":"integer"}},{"name":"promotion_type","description":"Promotion type of promotions to be fetched","in":"query","schema":{"type":"string"}},{"name":"is_bank_offer","description":"Boolean flag stating if promotions with bank offer need to be fetched.","in":"query","schema":{"type":"boolean"}}],"query":[{"name":"page_size","description":"Number of offers to be fetched to show.","in":"query","schema":{"type":"integer"}},{"name":"page_no","description":"Page number to be fetched to show","in":"query","schema":{"type":"integer"}},{"name":"promotion_type","description":"Promotion type of promotions to be fetched","in":"query","schema":{"type":"string"}},{"name":"is_bank_offer","description":"Boolean flag stating if promotions with bank offer need to be fetched.","in":"query","schema":{"type":"boolean"}}],"headers":[],"path":[]}""", serverType="application", page_size=page_size, page_no=page_no, promotion_type=promotion_type, is_bank_offer=is_bank_offer)
+        query_string = await create_query_string(page_size=page_size, page_no=page_no, promotion_type=promotion_type, is_bank_offer=is_bank_offer)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -1694,7 +1697,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPromotions"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/promotion", page_size=page_size, page_no=page_no, promotion_type=promotion_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPromotions"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/promotion", page_size=page_size, page_no=page_no, promotion_type=promotion_type, is_bank_offer=is_bank_offer), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import Promotions

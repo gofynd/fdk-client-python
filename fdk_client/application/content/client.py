@@ -26,7 +26,7 @@ class Content:
             "getFaqsByCategorySlug": "/service/application/content/v1.0/faq/category/{slug}/faqs",
             "getLandingPage": "/service/application/content/v1.0/landing-page",
             "getLegalInformation": "/service/application/content/v1.0/legal",
-            "getNavigations": "/service/application/content/v1.0/navigations",
+            "getNavigations": "/service/application/content/v2.0/navigations",
             "getSEOConfiguration": "/service/application/content/v1.0/seo",
             "getSEOMarkupSchemas": "/service/application/content/v1.0/seo/schema",
             "getDefaultSitemapConfig": "/service/application/content/v1.0/seo/sitemap/default",
@@ -588,7 +588,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getNavigations"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/navigations", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getNavigations"]).netloc, "get", await create_url_without_domain("/service/application/content/v2.0/navigations", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import NavigationGetDetails

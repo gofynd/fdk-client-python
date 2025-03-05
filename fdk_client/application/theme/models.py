@@ -363,6 +363,8 @@ class SEOSitemap(BaseSchema):
     # Theme swagger.json
 
     
+    modified_on = fields.Str(required=False)
+    
     priority = fields.Float(required=False)
     
     frequency = fields.Str(required=False)
