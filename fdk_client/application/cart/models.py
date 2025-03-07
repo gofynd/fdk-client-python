@@ -555,6 +555,8 @@ class AppliedPromotion(BaseSchema):
     
     offer_text = fields.Str(required=False)
     
+    offer_label = fields.Str(required=False)
+    
     promotion_group = fields.Str(required=False)
     
     mrp_promotion = fields.Boolean(required=False)

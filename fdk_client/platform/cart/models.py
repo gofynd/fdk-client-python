@@ -2569,6 +2569,8 @@ class AppliedPromotion(BaseSchema):
     
     offer_text = fields.Str(required=False)
     
+    offer_label = fields.Str(required=False)
+    
     amount = fields.Float(required=False)
     
     float_amount = fields.Str(required=False)

@@ -256,7 +256,7 @@ class ServiceabilityValidator:
         
         action = fields.Str(required=False)
         
-        status = fields.Str(required=False)
+        status = fields.Str(required=False, allow_none=True)
         
         country = fields.Str(required=False)
         
@@ -296,7 +296,7 @@ class ServiceabilityValidator:
         
         action = fields.Str(required=False)
         
-        status = fields.Str(required=False)
+        status = fields.Str(required=False, allow_none=True)
         
         country = fields.Str(required=False)
         

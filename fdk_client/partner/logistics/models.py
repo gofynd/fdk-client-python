@@ -577,6 +577,10 @@ class BulkRegionResultItemData(BaseSchema):
     
     error_file_path = fields.Str(required=False)
     
+    modified_on = fields.Str(required=False)
+    
+    created_on = fields.Str(required=False)
+    
 
 
 class BulkRegionResult(BaseSchema):

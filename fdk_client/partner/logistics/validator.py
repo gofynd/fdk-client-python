@@ -229,7 +229,7 @@ class LogisticsValidator:
         
         organization_id = fields.Str(required=False)
         
-        extension_id = fields.Str(required=False)
+        extension_id = fields.Str(required=False, allow_none=True)
         
         scheme_id = fields.Str(required=False)
         
@@ -241,7 +241,7 @@ class LogisticsValidator:
         
         action = fields.Str(required=False)
         
-        status = fields.Str(required=False)
+        status = fields.Str(required=False, allow_none=True)
         
         country = fields.Str(required=False)
         
@@ -451,7 +451,7 @@ class LogisticsValidator:
         
         action = fields.Str(required=False)
         
-        status = fields.Str(required=False)
+        status = fields.Str(required=False, allow_none=True)
         
         country = fields.Str(required=False)
         
