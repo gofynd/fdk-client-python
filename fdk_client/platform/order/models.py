@@ -2401,6 +2401,8 @@ class CreateOrderAPI(BaseSchema):
     
     external_shipment_id = fields.Str(required=False)
     
+    custom_json = fields.Dict(required=False, allow_none=True)
+    
 
 
 class CreateOrderErrorReponse(BaseSchema):
