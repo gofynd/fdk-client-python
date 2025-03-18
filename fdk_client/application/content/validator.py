@@ -14,6 +14,7 @@ from ..ApplicationModel import BaseSchema
     
         
         
+        
     
     
         
@@ -23,29 +24,11 @@ from ..ApplicationModel import BaseSchema
     
     
     
-    
-    
-        
     
     
         
     
     
-        
-    
-    
-    
-    
-        
-        
-    
-    
-    
-        
-        
-    
-    
-        
         
     
     
@@ -58,10 +41,37 @@ from ..ApplicationModel import BaseSchema
         
     
     
+    
         
         
     
     
+    
+        
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+    
+    
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
         
     
     
@@ -82,6 +92,8 @@ class ContentValidator:
         slug = fields.Str(required=False)
         
         root_id = fields.Str(required=False)
+        
+        preview = fields.Boolean(required=False)
          
         
     
@@ -167,6 +179,27 @@ class ContentValidator:
          
         
     
+    class getDefaultSitemapConfig(BaseSchema):
+        
+        pass 
+        
+    
+    class getSitemaps(BaseSchema):
+        
+        
+        page_no = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
+         
+        
+    
+    class getSitemap(BaseSchema):
+        
+        
+        name = fields.Str(required=False)
+         
+        
+    
     class getSlideshows(BaseSchema):
         
         
@@ -211,19 +244,21 @@ class ContentValidator:
          
         
     
-    class getCustomObject(BaseSchema):
+    class getCustomObjectBySlug(BaseSchema):
         
         
-        metaobject_id = fields.Str(required=False)
+        definition_slug = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
          
         
     
-    class getCustomFields(BaseSchema):
+    class getCustomFieldsByResourceId(BaseSchema):
         
         
         resource = fields.Str(required=False)
         
-        resource_id = fields.Str(required=False)
+        resource_slug = fields.Str(required=False)
          
         
     

@@ -50,6 +50,14 @@ class AvailablePageSchemaSections(BaseSchema):
     pass
 
 
+class SectionAssets(BaseSchema):
+    pass
+
+
+class SectionSource(BaseSchema):
+    pass
+
+
 class AvailablePagePredicate(BaseSchema):
     pass
 
@@ -99,10 +107,6 @@ class CustomConfig(BaseSchema):
 
 
 class CustomProps(BaseSchema):
-    pass
-
-
-class GlobalConfig(BaseSchema):
     pass
 
 
@@ -359,6 +363,8 @@ class SEOSitemap(BaseSchema):
     # Theme swagger.json
 
     
+    modified_on = fields.Str(required=False)
+    
     priority = fields.Float(required=False)
     
     frequency = fields.Str(required=False)
@@ -415,8 +421,6 @@ class AvailablePageSchemaSections(BaseSchema):
     
     label = fields.Str(required=False)
     
-    source = fields.Str(required=False)
-    
     props = fields.Dict(required=False)
     
     blocks = fields.List(fields.Dict(required=False), required=False)
@@ -424,6 +428,32 @@ class AvailablePageSchemaSections(BaseSchema):
     preset = fields.Dict(required=False)
     
     predicate = fields.Nested(AvailablePagePredicate, required=False)
+    
+    __source = fields.Nested(SectionSource, required=False)
+    
+    assets = fields.Nested(SectionAssets, required=False)
+    
+
+
+class SectionAssets(BaseSchema):
+    # Theme swagger.json
+
+    
+    js = fields.Str(required=False)
+    
+    css = fields.Str(required=False)
+    
+
+
+class SectionSource(BaseSchema):
+    # Theme swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    bundle_name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
     
 
 
@@ -668,16 +698,6 @@ class CustomProps(BaseSchema):
     is_menu_below_logo = fields.Boolean(required=False)
     
     menu_position = fields.Str(required=False)
-    
-
-
-class GlobalConfig(BaseSchema):
-    # Theme swagger.json
-
-    
-    statics = fields.Nested(StaticConfig, required=False)
-    
-    custom = fields.Nested(CustomConfig, required=False)
     
 
 

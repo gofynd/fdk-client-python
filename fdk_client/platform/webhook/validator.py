@@ -26,26 +26,10 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
         
         
-        
+    
+    
         
     
     
@@ -65,50 +49,6 @@ from ..PlatformModel import BaseSchema
 
 class WebhookValidator:
     
-    
-    class downloadDeliveryReport(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class pingWebhook(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getReportFilters(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getHistoricalReports(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class cancelJobByName(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        filename = fields.Str(required=False)
-         
-        
-    
-    class getDeliveryReports(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
     
     class fetchAllEventConfigurations(BaseSchema):
         
@@ -152,6 +92,13 @@ class WebhookValidator:
         
     
     class updateSubscriberConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class upsertSubscriberEvent(BaseSchema):
         
         
         company_id = fields.Int(required=False)

@@ -21,6 +21,24 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
     
     
         
@@ -30,20 +48,10 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
         
         
     
     
-        
-        
-    
-    
-        
-        
-        
         
         
     
@@ -127,6 +135,10 @@ class ServiceabilityValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+        
+        page_number = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     
@@ -136,6 +148,10 @@ class ServiceabilityValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+        
+        page_number = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     
@@ -182,6 +198,15 @@ class ServiceabilityValidator:
         page_size = fields.Int(required=False)
         
         status = fields.Str(required=False)
+         
+        
+    
+    class getCourierPartners(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     

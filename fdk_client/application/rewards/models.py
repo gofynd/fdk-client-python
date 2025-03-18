@@ -12,15 +12,15 @@ class RewardsArticle(BaseSchema):
     pass
 
 
-class CatalogueOrderResponse(BaseSchema):
+class CatalogueOrderDetails(BaseSchema):
     pass
 
 
-class CatalogueOrderRequest(BaseSchema):
+class CatalogueOrderCreation(BaseSchema):
     pass
 
 
-class PointsResponse(BaseSchema):
+class PointsDetails(BaseSchema):
     pass
 
 
@@ -48,11 +48,11 @@ class ShareMessages(BaseSchema):
     pass
 
 
-class ReferralDetailsResponse(BaseSchema):
+class ReferralDetails(BaseSchema):
     pass
 
 
-class OrderDiscountRequest(BaseSchema):
+class RetrieveOrderDiscount(BaseSchema):
     pass
 
 
@@ -64,19 +64,19 @@ class DiscountProperties(BaseSchema):
     pass
 
 
-class OrderDiscountResponse(BaseSchema):
+class OrderDiscountDetails(BaseSchema):
     pass
 
 
-class RedeemReferralCodeRequest(BaseSchema):
+class RedeemReferralCode(BaseSchema):
     pass
 
 
-class RedeemReferralCodeResponse(BaseSchema):
+class RedeemReferralCodeDetails(BaseSchema):
     pass
 
 
-class PointsHistoryResponse(BaseSchema):
+class PointsHistoryDetails(BaseSchema):
     pass
 
 
@@ -103,7 +103,7 @@ class RewardsArticle(BaseSchema):
     
 
 
-class CatalogueOrderResponse(BaseSchema):
+class CatalogueOrderDetails(BaseSchema):
     # Rewards swagger.json
 
     
@@ -111,7 +111,7 @@ class CatalogueOrderResponse(BaseSchema):
     
 
 
-class CatalogueOrderRequest(BaseSchema):
+class CatalogueOrderCreation(BaseSchema):
     # Rewards swagger.json
 
     
@@ -119,7 +119,7 @@ class CatalogueOrderRequest(BaseSchema):
     
 
 
-class PointsResponse(BaseSchema):
+class PointsDetails(BaseSchema):
     # Rewards swagger.json
 
     
@@ -239,7 +239,7 @@ class ShareMessages(BaseSchema):
     
 
 
-class ReferralDetailsResponse(BaseSchema):
+class ReferralDetails(BaseSchema):
     # Rewards swagger.json
 
     
@@ -255,7 +255,7 @@ class ReferralDetailsResponse(BaseSchema):
     
 
 
-class OrderDiscountRequest(BaseSchema):
+class RetrieveOrderDiscount(BaseSchema):
     # Rewards swagger.json
 
     
@@ -297,7 +297,7 @@ class DiscountProperties(BaseSchema):
     
 
 
-class OrderDiscountResponse(BaseSchema):
+class OrderDiscountDetails(BaseSchema):
     # Rewards swagger.json
 
     
@@ -313,7 +313,7 @@ class OrderDiscountResponse(BaseSchema):
     
 
 
-class RedeemReferralCodeRequest(BaseSchema):
+class RedeemReferralCode(BaseSchema):
     # Rewards swagger.json
 
     
@@ -323,7 +323,7 @@ class RedeemReferralCodeRequest(BaseSchema):
     
 
 
-class RedeemReferralCodeResponse(BaseSchema):
+class RedeemReferralCodeDetails(BaseSchema):
     # Rewards swagger.json
 
     
@@ -339,7 +339,7 @@ class RedeemReferralCodeResponse(BaseSchema):
     
 
 
-class PointsHistoryResponse(BaseSchema):
+class PointsHistoryDetails(BaseSchema):
     # Rewards swagger.json
 
     
