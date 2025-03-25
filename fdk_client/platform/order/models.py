@@ -2723,6 +2723,8 @@ class OrderDetails(BaseSchema):
     
     ordering_channel = fields.Str(required=False)
     
+    ordering_source = fields.Str(required=False, allow_none=True)
+    
     meta = fields.Dict(required=False, allow_none=True)
     
     cod_charges = fields.Float(required=False, allow_none=True)
@@ -4803,6 +4805,8 @@ class TransitionConfigCondition(BaseSchema):
     
     ordering_channel = fields.Str(required=False)
     
+    ordering_source = fields.Str(required=False, allow_none=True)
+    
     entity = fields.Str(required=False)
     
 
@@ -6081,6 +6085,8 @@ class ShipmentItem(BaseSchema):
     
     ordering_channnel = fields.Str(required=False, allow_none=True)
     
+    ordering_source = fields.Str(required=False, allow_none=True)
+    
     shipment_id = fields.Str(required=False, allow_none=True)
     
     customer_note = fields.Str(required=False, allow_none=True)
@@ -6184,6 +6190,8 @@ class OrderDetailsData(BaseSchema):
     order_value = fields.Str(required=False, allow_none=True)
     
     ordering_channel = fields.Str(required=False, allow_none=True)
+    
+    ordering_source = fields.Str(required=False, allow_none=True)
     
     meta = fields.Dict(required=False)
     
@@ -7132,6 +7140,8 @@ class OrderData(BaseSchema):
 
     
     ordering_channel = fields.Str(required=False)
+    
+    ordering_source = fields.Str(required=False, allow_none=True)
     
     order_date = fields.Str(required=False)
     

@@ -518,11 +518,14 @@ class Order:
 
         return response
     
-    async def createOrder(self, body="", request_headers:Dict={}):
+    async def createOrder(self, x_ordering_source=None, body="", request_headers:Dict={}):
         """Creates an order
+        :param x-ordering-source : To uniquely identify the source through which order has been placed. : type string
         """
         payload = {}
         
+        if x_ordering_source is not None:
+            payload["x_ordering_source"] = x_ordering_source
 
         # Parameter validation
         schema = OrderValidator.createOrder()
@@ -533,7 +536,7 @@ class Order:
         schema = CreateOrderAPI()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/create-order", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of a company on the platform."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of a company on the platform."}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/create-order", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of a company on the platform."}],"optional":[{"in":"header","name":"x-ordering-source","description":"To uniquely identify the source through which order has been placed.","required":false,"schema":{"type":"string","enum":["storefront","store_os_pos","kiosk","scan_go","smart_trolley","marketplace","social_commerce","ondc"]}}],"query":[],"headers":[{"in":"header","name":"x-ordering-source","description":"To uniquely identify the source through which order has been placed.","required":false,"schema":{"type":"string","enum":["storefront","store_os_pos","kiosk","scan_go","smart_trolley","marketplace","social_commerce","ondc"]}}],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of a company on the platform."}]}""", serverType="platform", x_ordering_source=x_ordering_source, )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -551,7 +554,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/create-order", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/create-order", x_ordering_source=x_ordering_source), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CreateOrderResponseSchema
@@ -786,15 +789,18 @@ class Order:
 
         return response
     
-    async def getAllowedStateTransition(self, ordering_channel=None, status=None, request_headers:Dict={}):
+    async def getAllowedStateTransition(self, ordering_channel=None, ordering_source=None, status=None, request_headers:Dict={}):
         """Retrieve next possible states based on logged in user's role
-        :param ordering_channel : The channel through which orders are placed. : type string
+        :param ordering_channel : The specific channel through which your order was placed. This field will be phased out after version 2.4.0. Please use ordering_source instead to ensure accurate order tracking and processing. : type string
+        :param ordering_source : To uniquely identify the source through which order has been placed. : type string
         :param status : The status key indicates the current status for which the API will provide a list of possible next state transitions. : type string
         """
         payload = {}
         
         if ordering_channel is not None:
             payload["ordering_channel"] = ordering_channel
+        if ordering_source is not None:
+            payload["ordering_source"] = ordering_source
         if status is not None:
             payload["status"] = status
 
@@ -803,8 +809,8 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/allowed/state/transition", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer"}},{"in":"query","name":"ordering_channel","description":"The channel through which orders are placed.","required":true,"schema":{"type":"string","enum":["fynd","affiliate"]}},{"in":"query","name":"status","description":"The status key indicates the current status for which the API will provide a list of possible next state transitions.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"in":"query","name":"ordering_channel","description":"The channel through which orders are placed.","required":true,"schema":{"type":"string","enum":["fynd","affiliate"]}},{"in":"query","name":"status","description":"The status key indicates the current status for which the API will provide a list of possible next state transitions.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", ordering_channel=ordering_channel, status=status)
-        query_string = await create_query_string(ordering_channel=ordering_channel, status=status)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/allowed/state/transition", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer"}},{"in":"query","name":"status","description":"The status key indicates the current status for which the API will provide a list of possible next state transitions.","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"ordering_channel","description":"The specific channel through which your order was placed. This field will be phased out after version 2.4.0. Please use ordering_source instead to ensure accurate order tracking and processing.","required":false,"schema":{"type":"string","enum":["fynd","affiliate"]}},{"in":"query","name":"ordering_source","description":"To uniquely identify the source through which order has been placed.","required":false,"schema":{"type":"string","enum":["storefront","store_os_pos","kiosk","scan_go","smart_trolley","marketplace","social_commerce","ondc"]}}],"query":[{"in":"query","name":"ordering_channel","description":"The specific channel through which your order was placed. This field will be phased out after version 2.4.0. Please use ordering_source instead to ensure accurate order tracking and processing.","required":false,"schema":{"type":"string","enum":["fynd","affiliate"]}},{"in":"query","name":"ordering_source","description":"To uniquely identify the source through which order has been placed.","required":false,"schema":{"type":"string","enum":["storefront","store_os_pos","kiosk","scan_go","smart_trolley","marketplace","social_commerce","ondc"]}},{"in":"query","name":"status","description":"The status key indicates the current status for which the API will provide a list of possible next state transitions.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", ordering_channel=ordering_channel, ordering_source=ordering_source, status=status)
+        query_string = await create_query_string(ordering_channel=ordering_channel, ordering_source=ordering_source, status=status)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -821,7 +827,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/allowed/state/transition", ordering_channel=ordering_channel, status=status), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/allowed/state/transition", ordering_channel=ordering_channel, ordering_source=ordering_source, status=status), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import RoleBaseStateTransitionMapping
@@ -1999,12 +2005,13 @@ class Order:
 
         return response
     
-    async def getStateManagerConfig(self, app_id=None, ordering_channel=None, entity=None, request_headers:Dict={}):
+    async def getStateManagerConfig(self, app_id=None, ordering_channel=None, ordering_source=None, entity=None, request_headers:Dict={}):
         """This endpoint retrieves the ESM (Entity State Manager) configuration for a specific application within a company. The retrieval is based on parameters such as application ID, ordering channel, and entity type.
 The ESM config stores order processing configuration. Each document in the ESM config collection of  Order Management System - OMS's database is a JSON object representing the configuration of a specific application ID. This includes filters, hooks, flags set on different state-transitions.  This configuration is picked and accordingly features are enabled. 
 
         :param app_id : The unique identifier of the application. : type string
         :param ordering_channel : The channel through which orders are placed. : type string
+        :param ordering_source : To uniquely identify the source through which order has been placed. : type string
         :param entity : The entity for which the configuration is applied. : type string
         """
         payload = {}
@@ -2013,6 +2020,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
             payload["app_id"] = app_id
         if ordering_channel is not None:
             payload["ordering_channel"] = ordering_channel
+        if ordering_source is not None:
+            payload["ordering_source"] = ordering_source
         if entity is not None:
             payload["entity"] = entity
 
@@ -2021,8 +2030,8 @@ The ESM config stores order processing configuration. Each document in the ESM c
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/manager/config", """{"required":[{"name":"company_id","in":"path","required":true,"description":"The unique identifier of the company on the platform.","schema":{"type":"integer"}}],"optional":[{"name":"app_id","in":"query","required":false,"description":"The unique identifier of the application.","schema":{"type":"string"}},{"name":"ordering_channel","in":"query","required":false,"description":"The channel through which orders are placed.","schema":{"type":"string"}},{"name":"entity","in":"query","required":false,"description":"The entity for which the configuration is applied.","schema":{"type":"string"}}],"query":[{"name":"app_id","in":"query","required":false,"description":"The unique identifier of the application.","schema":{"type":"string"}},{"name":"ordering_channel","in":"query","required":false,"description":"The channel through which orders are placed.","schema":{"type":"string"}},{"name":"entity","in":"query","required":false,"description":"The entity for which the configuration is applied.","schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"The unique identifier of the company on the platform.","schema":{"type":"integer"}}]}""", serverType="platform", app_id=app_id, ordering_channel=ordering_channel, entity=entity)
-        query_string = await create_query_string(app_id=app_id, ordering_channel=ordering_channel, entity=entity)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/manager/config", """{"required":[{"name":"company_id","in":"path","required":true,"description":"The unique identifier of the company on the platform.","schema":{"type":"integer"}}],"optional":[{"name":"app_id","in":"query","required":false,"description":"The unique identifier of the application.","schema":{"type":"string"}},{"name":"ordering_channel","in":"query","required":false,"description":"The channel through which orders are placed.","schema":{"type":"string"}},{"name":"ordering_source","in":"query","required":false,"description":"To uniquely identify the source through which order has been placed.","schema":{"type":"string","enum":["storefront","store_os_pos","kiosk","scan_go","smart_trolley","marketplace","social_commerce","ondc"]}},{"name":"entity","in":"query","required":false,"description":"The entity for which the configuration is applied.","schema":{"type":"string"}}],"query":[{"name":"app_id","in":"query","required":false,"description":"The unique identifier of the application.","schema":{"type":"string"}},{"name":"ordering_channel","in":"query","required":false,"description":"The channel through which orders are placed.","schema":{"type":"string"}},{"name":"ordering_source","in":"query","required":false,"description":"To uniquely identify the source through which order has been placed.","schema":{"type":"string","enum":["storefront","store_os_pos","kiosk","scan_go","smart_trolley","marketplace","social_commerce","ondc"]}},{"name":"entity","in":"query","required":false,"description":"The entity for which the configuration is applied.","schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"The unique identifier of the company on the platform.","schema":{"type":"integer"}}]}""", serverType="platform", app_id=app_id, ordering_channel=ordering_channel, ordering_source=ordering_source, entity=entity)
+        query_string = await create_query_string(app_id=app_id, ordering_channel=ordering_channel, ordering_source=ordering_source, entity=entity)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -2039,7 +2048,7 @@ The ESM config stores order processing configuration. Each document in the ESM c
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/manager/config", app_id=app_id, ordering_channel=ordering_channel, entity=entity), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/state/manager/config", app_id=app_id, ordering_channel=ordering_channel, ordering_source=ordering_source, entity=entity), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         return response
     

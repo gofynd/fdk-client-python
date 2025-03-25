@@ -9041,7 +9041,7 @@ class Price1(BaseSchema):
     # Catalog swagger.json
 
     
-    currency_code = fields.Str(required=False, validate=OneOf([val.value for val in CurrencyCodeEnum.__members__.values()]))
+    currency_code = fields.Str(required=False)
     
     currency_symbol = fields.Str(required=False)
     

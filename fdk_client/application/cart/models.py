@@ -6,6 +6,8 @@ from marshmallow.validate import OneOf
 from ..ApplicationModel import BaseSchema
 
 
+from .enums import *
+
 
 
 class BuyRules(BaseSchema):

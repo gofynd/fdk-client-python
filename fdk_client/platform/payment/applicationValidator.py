@@ -109,6 +109,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -463,6 +464,8 @@ class PaymentValidator:
     
     class getPosPaymentModeRoutes(BaseSchema):
         
+        
+        x__ordering__source = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
         

@@ -6,6 +6,8 @@ from marshmallow.validate import OneOf
 from ..PlatformModel import BaseSchema
 
 
+from .enums import *
+
 
 
 class CouponDateMeta(BaseSchema):

@@ -50,28 +50,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-        
-        
-    
-    
         
     
     
@@ -94,6 +72,30 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
         
         
         
@@ -190,6 +192,7 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
@@ -459,6 +462,8 @@ class OrderValidator:
     class createOrder(BaseSchema):
         
         
+        x__ordering__source = fields.Str(required=False)
+        
         company_id = fields.Int(required=False)
          
         
@@ -504,6 +509,8 @@ class OrderValidator:
         company_id = fields.Int(required=False)
         
         ordering_channel = fields.Str(required=False)
+        
+        ordering_source = fields.Str(required=False)
         
         status = fields.Str(required=False)
          
@@ -776,6 +783,8 @@ class OrderValidator:
         app_id = fields.Str(required=False)
         
         ordering_channel = fields.Str(required=False)
+        
+        ordering_source = fields.Str(required=False)
         
         entity = fields.Str(required=False)
          
