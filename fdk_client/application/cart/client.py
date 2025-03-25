@@ -620,7 +620,7 @@ class Cart:
     async def getBulkDiscountOffers(self, item_id=None, article_id=None, uid=None, slug=None, body="", request_headers:Dict={}):
         """List offer discounts with information about quantity and seller. One offer is marked with a "best" flag, indicating it as the best offer among the list.
         :param item_id : The Item ID of the product. : type integer
-        :param article_id : Article Mongo ID. : type string
+        :param article_id : Article ID. : type string
         :param uid : UID of the product. : type integer
         :param slug : A short, human-readable, URL-friendly identifier of a product. : type string
         """
@@ -640,7 +640,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getBulkDiscountOffers"], proccessed_params="""{"required":[],"optional":[{"name":"item_id","description":"The Item ID of the product.","in":"query","schema":{"type":"integer"}},{"name":"article_id","description":"Article Mongo ID.","in":"query","schema":{"type":"string"}},{"name":"uid","description":"UID of the product.","in":"query","schema":{"type":"integer"}},{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product.","in":"query","schema":{"type":"string"}}],"query":[{"name":"item_id","description":"The Item ID of the product.","in":"query","schema":{"type":"integer"}},{"name":"article_id","description":"Article Mongo ID.","in":"query","schema":{"type":"string"}},{"name":"uid","description":"UID of the product.","in":"query","schema":{"type":"integer"}},{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product.","in":"query","schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", item_id=item_id, article_id=article_id, uid=uid, slug=slug)
+        url_with_params = await create_url_with_params(api_url=self._urls["getBulkDiscountOffers"], proccessed_params="""{"required":[],"optional":[{"name":"item_id","description":"The Item ID of the product.","in":"query","schema":{"type":"integer"}},{"name":"article_id","description":"Article ID.","in":"query","schema":{"type":"string"}},{"name":"uid","description":"UID of the product.","in":"query","schema":{"type":"integer"}},{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product.","in":"query","schema":{"type":"string"}}],"query":[{"name":"item_id","description":"The Item ID of the product.","in":"query","schema":{"type":"integer"}},{"name":"article_id","description":"Article ID.","in":"query","schema":{"type":"string"}},{"name":"uid","description":"UID of the product.","in":"query","schema":{"type":"integer"}},{"name":"slug","description":"A short, human-readable, URL-friendly identifier of a product.","in":"query","schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", item_id=item_id, article_id=article_id, uid=uid, slug=slug)
         query_string = await create_query_string(item_id=item_id, article_id=article_id, uid=uid, slug=slug)
         if query_string:
             url_with_params += "?" + query_string

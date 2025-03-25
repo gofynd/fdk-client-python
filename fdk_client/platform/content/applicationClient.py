@@ -4680,6 +4680,15 @@ class Content:
 
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages/{locale}", locale=locale), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OperationResponseSchema
+            schema = OperationResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteApplicationLanguage")
+                print(e)
+
         return response
     
     async def getApplicationResourceTranslations(self, locale=None, type=None, resource_id=None, request_headers:Dict={}):
@@ -4895,8 +4904,8 @@ class Content:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeletedResource
-            schema = DeletedResource()
+            from .models import OperationResponseSchema
+            schema = OperationResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:

@@ -1299,7 +1299,7 @@ Export locality wise CSV files.
         return response
     
     async def getInstalledCourierPartnerExtensions(self, page_no=None, page_size=None, is_installed=None, request_headers:Dict={}):
-        """This API returns response of Package Materials Rules from mongo database.
+        """This API returns response of Package Materials Rules.
         :param page_no : The current page number for paginated results. : type integer
         :param page_size : Determines the items to be displayed in a page : type integer
         :param is_installed : Filter to get installed extensions only : type string

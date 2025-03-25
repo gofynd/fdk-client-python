@@ -750,10 +750,6 @@ class TranslationSeo(BaseSchema):
     pass
 
 
-class DeletedResource(BaseSchema):
-    pass
-
-
 class ResourceTranslationList(BaseSchema):
     pass
 
@@ -783,6 +779,10 @@ class ResourceTranslationBulkUpsert(BaseSchema):
 
 
 class StandardError(BaseSchema):
+    pass
+
+
+class OperationResponseSchema(BaseSchema):
     pass
 
 
@@ -3483,14 +3483,6 @@ class TranslationSeo(BaseSchema):
     
 
 
-class DeletedResource(BaseSchema):
-    # Content swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
 class ResourceTranslationList(BaseSchema):
     # Content swagger.json
 
@@ -3578,6 +3570,16 @@ class ResourceTranslationBulkUpsert(BaseSchema):
 class StandardError(BaseSchema):
     # Content swagger.json
 
+    
+    message = fields.Str(required=False)
+    
+
+
+class OperationResponseSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    success = fields.Boolean(required=False)
     
     message = fields.Str(required=False)
     

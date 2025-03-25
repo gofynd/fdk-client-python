@@ -1314,11 +1314,14 @@ class Content:
 
         return response
     
-    async def updateCompanyLanguageDefault(self, body="", request_headers:Dict={}):
+    async def updateCompanyLanguageDefault(self, locale=None, body="", request_headers:Dict={}):
         """Update default language settings for the company.
+        :param locale :  : type string
         """
         payload = {}
         
+        if locale is not None:
+            payload["locale"] = locale
 
         # Parameter validation
         schema = ContentValidator.updateCompanyLanguageDefault()
@@ -1329,7 +1332,7 @@ class Content:
         schema = CompanyLanguageUpdate()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/languages", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Company ID","schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Company ID","schema":{"type":"string"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/languages/{locale}", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Company ID","schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Company ID","schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", locale=locale)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1347,7 +1350,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/languages", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/languages/{locale}", locale=locale), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CompanyLanguage
@@ -1393,6 +1396,15 @@ class Content:
                 exclude_headers.append(key)
 
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/languages/{locale}", locale=locale), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OperationResponseSchema
+            schema = OperationResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteCompanyLanguage")
+                print(e)
 
         return response
     
@@ -1602,7 +1614,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/translatable/sections/{id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/translatable/section/{id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1620,7 +1632,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/translatable/sections/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/translatable/section/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import TranslatableSection
@@ -1850,8 +1862,8 @@ class Content:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/resource/translations/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeletedResource
-            schema = DeletedResource()
+            from .models import OperationResponseSchema
+            schema = OperationResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:

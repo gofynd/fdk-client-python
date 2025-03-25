@@ -147,6 +147,7 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
     
     
         
@@ -499,6 +500,8 @@ class ContentValidator:
         
         
         company_id = fields.Str(required=False)
+        
+        locale = fields.Str(required=False)
          
         
     
