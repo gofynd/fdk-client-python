@@ -224,6 +224,10 @@ class OrderFeature(BaseSchema):
     pass
 
 
+class BuyboxFeature(BaseSchema):
+    pass
+
+
 class AppFeatureResponseSchema(BaseSchema):
     pass
 
@@ -401,6 +405,10 @@ class OrderingStore(BaseSchema):
 
 
 class OrderingStores(BaseSchema):
+    pass
+
+
+class PricingStrategy(BaseSchema):
     pass
 
 
@@ -897,6 +905,8 @@ class AppFeature(BaseSchema):
     
     order = fields.Nested(OrderFeature, required=False)
     
+    buybox = fields.Nested(BuyboxFeature, required=False)
+    
     _id = fields.Str(required=False)
     
     app = fields.Str(required=False)
@@ -906,6 +916,8 @@ class AppFeature(BaseSchema):
     modified_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
+    
+    pricing_strategy = fields.Nested(PricingStrategy, required=False)
     
 
 
@@ -1067,6 +1079,18 @@ class OrderFeature(BaseSchema):
     
 
 
+class BuyboxFeature(BaseSchema):
+    # Configuration swagger.json
+
+    
+    show_name = fields.Boolean(required=False)
+    
+    enable_selection = fields.Boolean(required=False)
+    
+    is_seller_buybox_enabled = fields.Boolean(required=False)
+    
+
+
 class AppFeatureResponseSchema(BaseSchema):
     # Configuration swagger.json
 
@@ -1094,6 +1118,8 @@ class Currency(BaseSchema):
     decimal_digits = fields.Int(required=False)
     
     symbol = fields.Str(required=False)
+    
+    subunit = fields.Str(required=False)
     
     country_name = fields.Str(required=False)
     
@@ -1343,7 +1369,7 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
-    page_size = fields.Int(required=False)
+    total = fields.Int(required=False)
     
 
 
@@ -1742,6 +1768,14 @@ class OrderingStores(BaseSchema):
     app = fields.Str(required=False)
     
     __v = fields.Int(required=False)
+    
+
+
+class PricingStrategy(BaseSchema):
+    # Configuration swagger.json
+
+    
+    value = fields.Str(required=False)
     
 
 

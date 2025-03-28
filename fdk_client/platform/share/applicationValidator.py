@@ -46,7 +46,7 @@ class ShareValidator:
     class createShortLink(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
          
@@ -78,7 +78,7 @@ class ShareValidator:
     class getShortLinkByHash(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
@@ -89,7 +89,7 @@ class ShareValidator:
     class updateShortLinkById(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         

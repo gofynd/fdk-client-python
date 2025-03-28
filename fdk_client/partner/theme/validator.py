@@ -113,12 +113,34 @@ from ..PartnerModel import BaseSchema
     
         
         
+        
+        
     
     
         
         
     
     
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
         
         
     
@@ -337,12 +359,34 @@ class ThemeValidator:
          
         
     
+    class getThemeRejectionReasons(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        theme_id = fields.Str(required=False)
+         
+        
+    
     class createExtensionSectionDraft(BaseSchema):
         
         
         organization_id = fields.Str(required=False)
         
         extension_id = fields.Str(required=False)
+         
+        
+    
+    class getExtensionbinding(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
+        
+        bundle_name = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
          
         
     
@@ -373,15 +417,6 @@ class ThemeValidator:
          
         
     
-    class getThemeRejectionReasons(BaseSchema):
-        
-        
-        organization_id = fields.Str(required=False)
-        
-        theme_id = fields.Str(required=False)
-         
-        
-    
     class getThemeVersions(BaseSchema):
         
         
@@ -403,6 +438,41 @@ class ThemeValidator:
         application_id = fields.Str(required=False)
         
         organization_id = fields.Str(required=False)
+         
+        
+    
+    class getOrgnaizationDefaultTheme(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getSystemPage(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_value = fields.Str(required=False)
+         
+        
+    
+    class getAppliedTheme(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     

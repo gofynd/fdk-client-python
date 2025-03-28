@@ -70,7 +70,7 @@ class DiscountValidator:
     class getDiscounts(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         view = fields.Str(required=False)
         
@@ -95,14 +95,14 @@ class DiscountValidator:
     class createDiscount(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
          
         
     
     class getDiscount(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         id = fields.Str(required=False)
          
@@ -111,7 +111,7 @@ class DiscountValidator:
     class updateDiscount(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         id = fields.Str(required=False)
          
@@ -120,7 +120,7 @@ class DiscountValidator:
     class upsertDiscountItems(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         id = fields.Str(required=False)
          
@@ -129,7 +129,7 @@ class DiscountValidator:
     class validateDiscountFile(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         discount = fields.Str(required=False)
          
@@ -138,7 +138,7 @@ class DiscountValidator:
     class downloadDiscountFile(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         type = fields.Str(required=False)
          
@@ -147,7 +147,7 @@ class DiscountValidator:
     class getValidationJob(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         id = fields.Str(required=False)
          
@@ -156,7 +156,7 @@ class DiscountValidator:
     class cancelValidationJob(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         id = fields.Str(required=False)
          
@@ -165,7 +165,7 @@ class DiscountValidator:
     class getDownloadJob(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         id = fields.Str(required=False)
          
@@ -174,7 +174,7 @@ class DiscountValidator:
     class cancelDownloadJob(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         id = fields.Str(required=False)
          

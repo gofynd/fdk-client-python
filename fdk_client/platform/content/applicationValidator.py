@@ -68,8 +68,18 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+    
+    
+        
+        
+    
+    
+        
+        
     
     
+        
         
         
     
@@ -152,9 +162,7 @@ from ..PlatformModel import BaseSchema
     
         
         
-                
-from .models import GenerationEntityType
-
+        
     
     
         
@@ -211,9 +219,13 @@ from .models import GenerationEntityType
         
     
     
+        
         
         
+    
+    
         
+        
     
     
         
@@ -309,17 +321,17 @@ from .models import GenerationEntityType
     
         
         
-    
-    
         
         
         
+        
     
     
         
         
     
     
+        
         
         
     
@@ -340,13 +352,14 @@ from .models import GenerationEntityType
     
         
         
+    
+    
         
         
     
     
         
         
-        
     
     
         
@@ -362,13 +375,10 @@ from .models import GenerationEntityType
         
     
     
-        
-        
-        
-        
         
         
-        
+    
+    
         
         
     
@@ -376,8 +386,12 @@ from .models import GenerationEntityType
         
         
         
+    
+    
         
         
+    
+    
         
         
         
@@ -389,8 +403,6 @@ from .models import GenerationEntityType
         
     
     
-        
-        
         
         
         
@@ -398,7 +410,8 @@ from .models import GenerationEntityType
     
         
         
-        
+    
+    
         
         
     
@@ -408,24 +421,16 @@ from .models import GenerationEntityType
         
         
         
-    
-    
         
         
         
         
     
     
-        
         
         
-        
-    
-    
         
         
-    
-    
         
         
         
@@ -438,11 +443,8 @@ from .models import GenerationEntityType
         
     
     
-        
         
         
-    
-    
         
         
         
@@ -458,6 +460,8 @@ from .models import GenerationEntityType
         
         
         
+        
+        
     
     
         
@@ -472,10 +476,8 @@ from .models import GenerationEntityType
         
     
     
-        
         
         
-        
     
     
         
@@ -500,14 +502,9 @@ from .models import GenerationEntityType
         
     
     
-        
-        
-        
         
         
         
-    
-    
         
         
     
@@ -519,26 +516,17 @@ from .models import GenerationEntityType
     
         
         
-        
-    
-    
         
         
     
     
         
         
-    
-    
         
         
     
     
-        
-        
         
-    
-    
         
         
         
@@ -552,9 +540,6 @@ from .models import GenerationEntityType
     
     
         
-        
-    
-    
         
         
     
@@ -691,6 +676,17 @@ class ContentValidator:
          
         
     
+    class getComponentById(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
+         
+        
+    
     class addDataLoader(BaseSchema):
         
         
@@ -706,6 +702,17 @@ class ContentValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+         
+        
+    
+    class getDataLoaderApiSpecs(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        data_loader = fields.Str(required=False)
          
         
     
@@ -883,7 +890,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        type = fields.Nested(GenerationEntityType, required=False)
+        type = fields.Str(required=False)
          
         
     
@@ -1035,6 +1042,15 @@ class ContentValidator:
          
         
     
+    class createPagePreview(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class updatePagePreview(BaseSchema):
         
         
@@ -1174,7 +1190,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        schema_id = fields.Str(required=False)
          
         
     
@@ -1185,7 +1201,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        schema_id = fields.Str(required=False)
          
         
     
@@ -1196,7 +1212,93 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        schema_id = fields.Str(required=False)
+         
+        
+    
+    class getDefaultSitemapConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateDefaultSitemapConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getSitemaps(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_no = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
+        
+        is_active = fields.Boolean(required=False)
+        
+        name = fields.Str(required=False)
+         
+        
+    
+    class createSitemap(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getSitemap(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        name = fields.Str(required=False)
+         
+        
+    
+    class updateSitemap(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        name = fields.Str(required=False)
+         
+        
+    
+    class deleteSitemap(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        name = fields.Str(required=False)
+         
+        
+    
+    class addInjectableTag(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     
@@ -1210,35 +1312,6 @@ class ContentValidator:
         
     
     class updateSupportInformation(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateInjectableTag(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getInjectableTags(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        all = fields.Boolean(required=False)
-         
-        
-    
-    class addInjectableTag(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -1264,6 +1337,42 @@ class ContentValidator:
         application_id = fields.Str(required=False)
         
         tag_id = fields.Str(required=False)
+         
+        
+    
+    class createInjectableTag(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateInjectableTag(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class deleteAllInjectableTags(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getInjectableTags(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     
@@ -1597,7 +1706,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        page = fields.Str(required=False)
+        page_no = fields.Str(required=False)
         
         page_size = fields.Str(required=False)
         
@@ -1635,158 +1744,6 @@ class ContentValidator:
         application_id = fields.Str(required=False)
         
         slug = fields.Str(required=False)
-         
-        
-    
-    class getTranslateUILabels(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        template_theme_id = fields.Str(required=False)
-        
-        theme_id = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-        
-        type = fields.Str(required=False)
-         
-        
-    
-    class createTranslateUILabels(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getTranslateUILabelsById(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class updateTranslateUILabels(BaseSchema):
-        
-        
-        id = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getApplicationLanguages(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class addApplicationLanguage(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class bulkUnPublishApplicationLanguage(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateApplicationLanguageStatus(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-         
-        
-    
-    class deleteApplicationLanguage(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-         
-        
-    
-    class getApplicationResourceTranslations(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-        
-        type = fields.Str(required=False)
-        
-        resource_id = fields.Str(required=False)
-         
-        
-    
-    class createApplicationResourceTranslation(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class upsertApplicationResourceTranslationInBulk(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateApplicationResourceTranslation(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class deleteApplicationResourceTranslation(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
          
         
     
