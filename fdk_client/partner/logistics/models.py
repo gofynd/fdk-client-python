@@ -8,23 +8,27 @@ from ..PartnerModel import BaseSchema
 
 
 
-class BulkRegionServiceabilityTatDetails(BaseSchema):
+class ErrorResponseV1(BaseSchema):
     pass
 
 
-class BulkRegionServiceabilityTatResultItemData(BaseSchema):
+class BulkRegionServiceabilityTatRequestSchema(BaseSchema):
     pass
 
 
-class ErrorResult(BaseSchema):
+class BulkRegionServiceabilityTatResponseItemData(BaseSchema):
     pass
 
 
-class FailureResult(BaseSchema):
+class ErrorResponseSchema(BaseSchema):
     pass
 
 
-class BulkRegionServiceabilityTatResult(BaseSchema):
+class FailureResponseSchema(BaseSchema):
+    pass
+
+
+class BulkRegionServiceabilityTatResponseSchema(BaseSchema):
     pass
 
 
@@ -32,55 +36,15 @@ class Page(BaseSchema):
     pass
 
 
-class CourierAccountUpdateDetails(BaseSchema):
+class BulkRegionJobSerializerSchema(BaseSchema):
     pass
 
 
-class RegionTatItemResult(BaseSchema):
+class BulkRegionResponseItemData(BaseSchema):
     pass
 
 
-class RegionServiceabilityItemResult(BaseSchema):
-    pass
-
-
-class ServiceabilityDetailsResult(BaseSchema):
-    pass
-
-
-class ServiceabilityDetails(BaseSchema):
-    pass
-
-
-class RegionServiceabilityResult(BaseSchema):
-    pass
-
-
-class RegionServiceabilityDetails(BaseSchema):
-    pass
-
-
-class RegionTatDetails(BaseSchema):
-    pass
-
-
-class RegionTatUpdateDetails(BaseSchema):
-    pass
-
-
-class RegionTatResult(BaseSchema):
-    pass
-
-
-class BulkRegionJobDetails(BaseSchema):
-    pass
-
-
-class BulkRegionResultItemData(BaseSchema):
-    pass
-
-
-class BulkRegionResult(BaseSchema):
+class BulkRegionResponseSchema(BaseSchema):
     pass
 
 
@@ -88,27 +52,23 @@ class CourierAccount(BaseSchema):
     pass
 
 
-class CourierAccountDetailsBody(BaseSchema):
+class CourierPartnerAccountFailureResponseSchema(BaseSchema):
     pass
 
 
-class CourierPartnerAccountFailureResult(BaseSchema):
+class CompanyCourierPartnerAccountListResponseSchema(BaseSchema):
     pass
 
 
-class CompanyCourierPartnerAccountListResult(BaseSchema):
+class CourierAccountSchemeResponseSchema(BaseSchema):
     pass
 
 
-class CourierAccountResult(BaseSchema):
+class CourierAccountResponseSchema(BaseSchema):
     pass
 
 
 class CourierPartnerSchemeModel(BaseSchema):
-    pass
-
-
-class CourierPartnerSchemeDetailsModel(BaseSchema):
     pass
 
 
@@ -120,7 +80,23 @@ class ArithmeticOperations(BaseSchema):
     pass
 
 
-class CourierPartnerSchemeUpdateDetails(BaseSchema):
+class ArithmeticOperationsV2(BaseSchema):
+    pass
+
+
+class CourierPartnerSchemeUpdateRequestSchema(BaseSchema):
+    pass
+
+
+class CountryHierarchy(BaseSchema):
+    pass
+
+
+class CurrencyObject(BaseSchema):
+    pass
+
+
+class CountryObject(BaseSchema):
     pass
 
 
@@ -128,26 +104,18 @@ class GetCountries(BaseSchema):
     pass
 
 
-class GetCountriesItems(BaseSchema):
-    pass
-
-
-class HierarchyItems(BaseSchema):
-    pass
-
-
-class ValidationError(BaseSchema):
-    pass
-
-
-class StandardError(BaseSchema):
-    pass
 
 
 
+class ErrorResponseV1(BaseSchema):
+    # Logistics swagger.json
+
+    
+    error = fields.Str(required=False)
+    
 
 
-class BulkRegionServiceabilityTatDetails(BaseSchema):
+class BulkRegionServiceabilityTatRequestSchema(BaseSchema):
     # Logistics swagger.json
 
     
@@ -159,7 +127,7 @@ class BulkRegionServiceabilityTatDetails(BaseSchema):
     
 
 
-class BulkRegionServiceabilityTatResultItemData(BaseSchema):
+class BulkRegionServiceabilityTatResponseItemData(BaseSchema):
     # Logistics swagger.json
 
     
@@ -179,7 +147,7 @@ class BulkRegionServiceabilityTatResultItemData(BaseSchema):
     
 
 
-class ErrorResult(BaseSchema):
+class ErrorResponseSchema(BaseSchema):
     # Logistics swagger.json
 
     
@@ -191,21 +159,21 @@ class ErrorResult(BaseSchema):
     
 
 
-class FailureResult(BaseSchema):
+class FailureResponseSchema(BaseSchema):
     # Logistics swagger.json
 
     
     success = fields.Boolean(required=False)
     
-    error = fields.List(fields.Nested(ErrorResult, required=False), required=False)
+    error = fields.List(fields.Nested(ErrorResponseSchema, required=False), required=False)
     
 
 
-class BulkRegionServiceabilityTatResult(BaseSchema):
+class BulkRegionServiceabilityTatResponseSchema(BaseSchema):
     # Logistics swagger.json
 
     
-    items = fields.List(fields.Nested(BulkRegionServiceabilityTatResultItemData, required=False), required=False)
+    items = fields.List(fields.Nested(BulkRegionServiceabilityTatResponseItemData, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
@@ -229,225 +197,15 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
+    total = fields.Int(required=False)
+    
 
 
-class CourierAccountUpdateDetails(BaseSchema):
+class BulkRegionJobSerializerSchema(BaseSchema):
     # Logistics swagger.json
 
     
-    extension_id = fields.Str(required=False)
-    
-    scheme_id = fields.Str(required=False)
-    
-    is_self_ship = fields.Boolean(required=False)
-    
-    stage = fields.Str(required=False)
-    
-    is_own_account = fields.Boolean(required=False)
-    
-
-
-class RegionTatItemResult(BaseSchema):
-    # Logistics swagger.json
-
-    
-    items = fields.List(fields.Nested(RegionTatResult, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
-    
-
-
-class RegionServiceabilityItemResult(BaseSchema):
-    # Logistics swagger.json
-
-    
-    items = fields.List(fields.Nested(RegionServiceabilityResult, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
-    
-
-
-class ServiceabilityDetailsResult(BaseSchema):
-    # Logistics swagger.json
-
-    
-    first_mile = fields.Boolean(required=False)
-    
-    last_mile = fields.Boolean(required=False)
-    
-    cod_limit = fields.Float(required=False)
-    
-    doorstep_return = fields.Boolean(required=False)
-    
-    doorstep_qc = fields.Boolean(required=False)
-    
-    pickup_cutoff = fields.Str(required=False)
-    
-    installation = fields.Boolean(required=False)
-    
-    id = fields.Str(required=False)
-    
-
-
-class ServiceabilityDetails(BaseSchema):
-    # Logistics swagger.json
-
-    
-    first_mile = fields.Boolean(required=False)
-    
-    last_mile = fields.Boolean(required=False)
-    
-    cod_limit = fields.Float(required=False)
-    
-    doorstep_return = fields.Boolean(required=False)
-    
-    doorstep_qc = fields.Boolean(required=False)
-    
-    pickup_cutoff = fields.Str(required=False)
-    
-    installation = fields.Boolean(required=False)
-    
-
-
-class RegionServiceabilityResult(BaseSchema):
-    # Logistics swagger.json
-
-    
-    country_code = fields.Str(required=False)
-    
-    state_code = fields.Str(required=False)
-    
-    city_code = fields.Str(required=False)
-    
-    sector_code = fields.Str(required=False)
-    
-    pincode = fields.Str(required=False)
-    
-    first_mile = fields.Boolean(required=False)
-    
-    last_mile = fields.Boolean(required=False)
-    
-    cod_limit = fields.Float(required=False)
-    
-    doorstep_return = fields.Boolean(required=False)
-    
-    doorstep_qc = fields.Boolean(required=False)
-    
-    pickup_cutoff = fields.Str(required=False)
-    
-    installation = fields.Boolean(required=False)
-    
-    id = fields.Str(required=False)
-    
-
-
-class RegionServiceabilityDetails(BaseSchema):
-    # Logistics swagger.json
-
-    
-    country_code = fields.Str(required=False)
-    
-    state_code = fields.Str(required=False)
-    
-    city_code = fields.Str(required=False)
-    
-    sector_code = fields.Str(required=False)
-    
-    pincode = fields.Str(required=False)
-    
-    first_mile = fields.Boolean(required=False)
-    
-    last_mile = fields.Boolean(required=False)
-    
-    cod_limit = fields.Float(required=False)
-    
-    doorstep_return = fields.Boolean(required=False)
-    
-    doorstep_qc = fields.Boolean(required=False)
-    
-    pickup_cutoff = fields.Str(required=False)
-    
-    installation = fields.Boolean(required=False)
-    
-
-
-class RegionTatDetails(BaseSchema):
-    # Logistics swagger.json
-
-    
-    from_country_code = fields.Str(required=False)
-    
-    from_state_code = fields.Str(required=False)
-    
-    from_city_code = fields.Str(required=False)
-    
-    from_sector_code = fields.Str(required=False)
-    
-    from_pincode = fields.Str(required=False)
-    
-    to_country_code = fields.Str(required=False)
-    
-    to_state_code = fields.Str(required=False)
-    
-    to_city_code = fields.Str(required=False)
-    
-    to_sector_code = fields.Str(required=False)
-    
-    to_pincode = fields.Str(required=False)
-    
-    max_delivery_time = fields.Int(required=False)
-    
-    min_delivery_time = fields.Int(required=False)
-    
-
-
-class RegionTatUpdateDetails(BaseSchema):
-    # Logistics swagger.json
-
-    
-    max_delivery_time = fields.Int(required=False)
-    
-    min_delivery_time = fields.Int(required=False)
-    
-
-
-class RegionTatResult(BaseSchema):
-    # Logistics swagger.json
-
-    
-    from_country_code = fields.Str(required=False)
-    
-    from_state_code = fields.Str(required=False)
-    
-    from_city_code = fields.Str(required=False)
-    
-    from_sector_code = fields.Str(required=False)
-    
-    from_pincode = fields.Str(required=False)
-    
-    to_country_code = fields.Str(required=False)
-    
-    to_state_code = fields.Str(required=False)
-    
-    to_city_code = fields.Str(required=False)
-    
-    to_sector_code = fields.Str(required=False)
-    
-    to_pincode = fields.Str(required=False)
-    
-    max_delivery_time = fields.Int(required=False)
-    
-    min_delivery_time = fields.Int(required=False)
-    
-    id = fields.Str(required=False)
-    
-
-
-class BulkRegionJobDetails(BaseSchema):
-    # Logistics swagger.json
-
-    
-    file_path = fields.Str(required=False, allow_none=True)
+    file_path = fields.Str(required=False)
     
     country = fields.Str(required=False)
     
@@ -457,7 +215,7 @@ class BulkRegionJobDetails(BaseSchema):
     
 
 
-class BulkRegionResultItemData(BaseSchema):
+class BulkRegionResponseItemData(BaseSchema):
     # Logistics swagger.json
 
     
@@ -485,11 +243,11 @@ class BulkRegionResultItemData(BaseSchema):
     
 
 
-class BulkRegionResult(BaseSchema):
+class BulkRegionResponseSchema(BaseSchema):
     # Logistics swagger.json
 
     
-    items = fields.List(fields.Nested(BulkRegionResultItemData, required=False), required=False)
+    items = fields.List(fields.Nested(BulkRegionResponseItemData, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
@@ -513,63 +271,27 @@ class CourierAccount(BaseSchema):
     
 
 
-class CourierAccountDetailsBody(BaseSchema):
-    # Logistics swagger.json
-
-    
-    extension_id = fields.Str(required=False)
-    
-    account_id = fields.Str(required=False)
-    
-    scheme_id = fields.Str(required=False)
-    
-    is_self_ship = fields.Boolean(required=False)
-    
-    stage = fields.Str(required=False)
-    
-    is_own_account = fields.Boolean(required=False)
-    
-
-
-class CourierPartnerAccountFailureResult(BaseSchema):
+class CourierPartnerAccountFailureResponseSchema(BaseSchema):
     # Logistics swagger.json
 
     
     success = fields.Boolean(required=False)
     
-    error = fields.List(fields.Nested(ErrorResult, required=False), required=False)
+    error = fields.List(fields.Nested(ErrorResponseSchema, required=False), required=False)
     
 
 
-class CompanyCourierPartnerAccountListResult(BaseSchema):
+class CompanyCourierPartnerAccountListResponseSchema(BaseSchema):
     # Logistics swagger.json
 
     
-    items = fields.List(fields.Nested(CourierAccountResult, required=False), required=False)
+    items = fields.List(fields.Nested(CourierAccountResponseSchema, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
 
 
-class CourierAccountResult(BaseSchema):
-    # Logistics swagger.json
-
-    
-    account_id = fields.Str(required=False)
-    
-    scheme_id = fields.Str(required=False)
-    
-    is_self_ship = fields.Boolean(required=False)
-    
-    stage = fields.Str(required=False)
-    
-    is_own_account = fields.Boolean(required=False)
-    
-    scheme_rules = fields.Nested(CourierPartnerSchemeModel, required=False)
-    
-
-
-class CourierPartnerSchemeModel(BaseSchema):
+class CourierAccountSchemeResponseSchema(BaseSchema):
     # Logistics swagger.json
 
     
@@ -579,7 +301,7 @@ class CourierPartnerSchemeModel(BaseSchema):
     
     name = fields.Str(required=False)
     
-    weight = fields.Nested(ArithmeticOperations, required=False)
+    weight = fields.Nested(ArithmeticOperationsV2, required=False)
     
     transport_type = fields.Str(required=False)
     
@@ -595,7 +317,29 @@ class CourierPartnerSchemeModel(BaseSchema):
     
 
 
-class CourierPartnerSchemeDetailsModel(BaseSchema):
+class CourierAccountResponseSchema(BaseSchema):
+    # Logistics swagger.json
+
+    
+    company_id = fields.Int(required=False)
+    
+    extension_id = fields.Str(required=False)
+    
+    account_id = fields.Str(required=False)
+    
+    scheme_id = fields.Str(required=False)
+    
+    is_self_ship = fields.Boolean(required=False)
+    
+    stage = fields.Str(required=False)
+    
+    is_own_account = fields.Boolean(required=False)
+    
+    scheme_rules = fields.Nested(CourierAccountSchemeResponseSchema, required=False)
+    
+
+
+class CourierPartnerSchemeModel(BaseSchema):
     # Logistics swagger.json
 
     
@@ -605,7 +349,9 @@ class CourierPartnerSchemeDetailsModel(BaseSchema):
     
     name = fields.Str(required=False)
     
-    weight = fields.Nested(ArithmeticOperations, required=False)
+    weight = fields.Nested(ArithmeticOperationsV2, required=False)
+    
+    volumetric_weight = fields.Nested(ArithmeticOperations, required=False)
     
     transport_type = fields.Str(required=False)
     
@@ -661,10 +407,6 @@ class CourierPartnerSchemeFeatures(BaseSchema):
     
     ewaybill = fields.Boolean(required=False)
     
-    qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
-    
-    non_qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
-    
 
 
 class ArithmeticOperations(BaseSchema):
@@ -681,13 +423,29 @@ class ArithmeticOperations(BaseSchema):
     
 
 
-class CourierPartnerSchemeUpdateDetails(BaseSchema):
+class ArithmeticOperationsV2(BaseSchema):
+    # Logistics swagger.json
+
+    
+    lt = fields.Int(required=False, allow_none=True)
+    
+    gt = fields.Int(required=False, allow_none=True)
+    
+    lte = fields.Int(required=False, allow_none=True)
+    
+    gte = fields.Int(required=False, allow_none=True)
+    
+
+
+class CourierPartnerSchemeUpdateRequestSchema(BaseSchema):
     # Logistics swagger.json
 
     
     name = fields.Str(required=False)
     
-    weight = fields.Nested(ArithmeticOperations, required=False)
+    weight = fields.Nested(ArithmeticOperationsV2, required=False)
+    
+    volumetric_weight = fields.Nested(ArithmeticOperations, required=False)
     
     transport_type = fields.Str(required=False)
     
@@ -703,49 +461,7 @@ class CourierPartnerSchemeUpdateDetails(BaseSchema):
     
 
 
-class GetCountries(BaseSchema):
-    # Logistics swagger.json
-
-    
-    items = fields.List(fields.Nested(GetCountriesItems, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
-    
-
-
-class GetCountriesItems(BaseSchema):
-    # Logistics swagger.json
-
-    
-    id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    iso2 = fields.Str(required=False)
-    
-    iso3 = fields.Str(required=False)
-    
-    timezones = fields.List(fields.Str(required=False), required=False)
-    
-    hierarchy = fields.List(fields.Nested(HierarchyItems, required=False), required=False)
-    
-    phone_code = fields.Str(required=False)
-    
-    currency = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    latitude = fields.Str(required=False)
-    
-    longitude = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    has_next_hierarchy = fields.Boolean(required=False)
-    
-
-
-class HierarchyItems(BaseSchema):
+class CountryHierarchy(BaseSchema):
     # Logistics swagger.json
 
     
@@ -755,21 +471,55 @@ class HierarchyItems(BaseSchema):
     
 
 
-class ValidationError(BaseSchema):
+class CurrencyObject(BaseSchema):
     # Logistics swagger.json
 
     
-    message = fields.Str(required=False)
+    code = fields.Str(required=False)
     
-    field = fields.Str(required=False)
+    name = fields.Str(required=False)
+    
+    symbol = fields.Str(required=False)
     
 
 
-class StandardError(BaseSchema):
+class CountryObject(BaseSchema):
     # Logistics swagger.json
 
     
-    message = fields.Str(required=False)
+    id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    iso2 = fields.Str(required=False)
+    
+    iso3 = fields.Str(required=False)
+    
+    timezones = fields.List(fields.Str(required=False), required=False)
+    
+    hierarchy = fields.List(fields.Nested(CountryHierarchy, required=False), required=False)
+    
+    phone_code = fields.Str(required=False)
+    
+    latitude = fields.Str(required=False)
+    
+    longitude = fields.Str(required=False)
+    
+    currency = fields.Nested(CurrencyObject, required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class GetCountries(BaseSchema):
+    # Logistics swagger.json
+
+    
+    items = fields.List(fields.Nested(CountryObject, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 
 

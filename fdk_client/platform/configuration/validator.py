@@ -33,6 +33,17 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+        
         
     
     
@@ -51,6 +62,18 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+    
+    
         
     
     
@@ -88,6 +111,31 @@ class ConfigurationValidator:
         
         
         company_id = fields.Int(required=False)
+         
+        
+    
+    class createCurrency(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class getCurrency(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class updateCurrency(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        id = fields.Str(required=False)
          
         
     
@@ -145,7 +193,7 @@ class ConfigurationValidator:
         
         company_id = fields.Int(required=False)
         
-        id = fields.Str(required=False)
+        app_id = fields.Str(required=False)
          
         
     
@@ -154,7 +202,34 @@ class ConfigurationValidator:
         
         company_id = fields.Int(required=False)
         
+        app_id = fields.Str(required=False)
+         
+        
+    
+    class getLocations(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        location_type = fields.Str(required=False)
+        
         id = fields.Str(required=False)
+         
+        
+    
+    class getStoresForACompany(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        company = fields.Int(required=False)
+         
+        
+    
+    class getDomainOptions(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     

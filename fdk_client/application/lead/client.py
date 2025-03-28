@@ -17,7 +17,7 @@ class Lead:
         self._relativeUrls = {
             "getTicket": "/service/application/lead/v1.0/ticket/{id}",
             "createHistory": "/service/application/lead/v1.0/ticket/{id}/history",
-            "createTicket": "/service/application/lead/v1.0/ticket/",
+            "createTicket": "/service/application/lead/v1.0/ticket",
             "getCustomForm": "/service/application/lead/v1.0/form/{slug}",
             "submitCustomForm": "/service/application/lead/v1.0/form/{slug}/submit"
             
@@ -31,7 +31,7 @@ class Lead:
     
     async def getTicket(self, id=None, body="", request_headers:Dict={}):
         """Get details of a specific customer support ticket.
-        :param id : ID of ticket to be retrieved. : type string
+        :param id : ID of ticket to be retrieved : type string
         """
         payload = {}
         
@@ -43,7 +43,7 @@ class Lead:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getTicket"], proccessed_params="""{"required":[{"name":"id","in":"path","description":"ID of ticket to be retrieved.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","description":"ID of ticket to be retrieved.","required":true,"schema":{"type":"string"}}]}""", serverType="application", id=id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getTicket"], proccessed_params="""{"required":[{"name":"id","in":"path","description":"ID of ticket to be retrieved","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","description":"ID of ticket to be retrieved","required":true,"schema":{"type":"string"}}]}""", serverType="application", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -77,7 +77,7 @@ class Lead:
     
     async def createHistory(self, id=None, body="", request_headers:Dict={}):
         """Create a history entry for a specific support ticket.
-        :param id : Ticket ID for which history is created. : type string
+        :param id : Ticket ID for which history is created : type string
         """
         payload = {}
         
@@ -93,7 +93,7 @@ class Lead:
         schema = TicketHistoryPayload()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["createHistory"], proccessed_params="""{"required":[{"name":"id","in":"path","description":"Ticket ID for which history is created.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","description":"Ticket ID for which history is created.","required":true,"schema":{"type":"string"}}]}""", serverType="application", id=id)
+        url_with_params = await create_url_with_params(api_url=self._urls["createHistory"], proccessed_params="""{"required":[{"name":"id","in":"path","description":"Ticket ID for which history is created","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","description":"Ticket ID for which history is created","required":true,"schema":{"type":"string"}}]}""", serverType="application", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -159,7 +159,7 @@ class Lead:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createTicket"]).netloc, "post", await create_url_without_domain("/service/application/lead/v1.0/ticket/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createTicket"]).netloc, "post", await create_url_without_domain("/service/application/lead/v1.0/ticket", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import Ticket
@@ -174,7 +174,7 @@ class Lead:
     
     async def getCustomForm(self, slug=None, body="", request_headers:Dict={}):
         """Get a customizable form template for data collection.
-        :param slug : Slug of form whose response is getting submitted. : type string
+        :param slug : Slug of form whose response is getting submitted : type string
         """
         payload = {}
         
@@ -186,7 +186,7 @@ class Lead:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCustomForm"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted.","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCustomForm"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -220,7 +220,7 @@ class Lead:
     
     async def submitCustomForm(self, slug=None, body="", request_headers:Dict={}):
         """Create user-entered data from a custom form for processing.
-        :param slug : Slug of form whose response is getting submitted. : type string
+        :param slug : Slug of form whose response is getting submitted : type string
         """
         payload = {}
         
@@ -236,7 +236,7 @@ class Lead:
         schema = CustomFormSubmissionPayload()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["submitCustomForm"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted.","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug)
+        url_with_params = await create_url_with_params(api_url=self._urls["submitCustomForm"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"Slug of form whose response is getting submitted","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -258,8 +258,8 @@ class Lead:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["submitCustomForm"]).netloc, "post", await create_url_without_domain("/service/application/lead/v1.0/form/{slug}/submit", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SubmitCustomFormDetails
-            schema = SubmitCustomFormDetails()
+            from .models import SubmitCustomFormResponseSchema
+            schema = SubmitCustomFormResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:

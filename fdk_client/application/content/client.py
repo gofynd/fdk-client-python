@@ -32,14 +32,13 @@ class Content:
             "getDefaultSitemapConfig": "/service/application/content/v1.0/seo/sitemap/default",
             "getSitemaps": "/service/application/content/v1.0/seo/sitemaps",
             "getSitemap": "/service/application/content/v1.0/seo/sitemaps/{name}",
-            "getSlideshows": "/service/application/content/v1.0/slideshow",
-            "getSlideshow": "/service/application/content/v1.0/slideshow/{slug}",
             "getSupportInformation": "/service/application/content/v1.0/support",
             "getTags": "/service/application/content/v1.0/tags",
-            "getPage": "/service/application/content/v2.0/pages/{slug}",
             "getPages": "/service/application/content/v2.0/pages",
+            "getPage": "/service/application/content/v2.0/pages/{slug}",
             "getCustomObjectBySlug": "/service/application/content/v2.0/customobjects/definition/{definition_slug}/entries/{slug}",
-            "getCustomFieldsByResourceId": "/service/application/content/v2.0/customfields/resource/{resource}/{resource_slug}"
+            "getCustomFieldsByResourceId": "/service/application/content/v2.0/customfields/resource/{resource}/{resource_slug}",
+            "getWellKnownUrl": "/service/application/content/v1.0/well-known/{slug}"
             
         }
         self._urls = {
@@ -92,11 +91,10 @@ class Content:
 
         return response
     
-    async def getBlog(self, slug=None, root_id=None, preview=None, body="", request_headers:Dict={}):
+    async def getBlog(self, slug=None, root_id=None, body="", request_headers:Dict={}):
         """Get information related to a specific blog such as it's contents, author, publish date, SEO related information.
         :param slug : A short, human-readable, URL-friendly identifier of a blog. You can get slug value from the endpoint /service/application/content/v1.0/blogs/. : type string
-        :param root_id : ID given to the HTML element. : type string
-        :param preview : Boolean value to get the preview for the blogs. : type boolean
+        :param root_id : ID given to the HTML element : type string
         """
         payload = {}
         
@@ -104,16 +102,14 @@ class Content:
             payload["slug"] = slug
         if root_id is not None:
             payload["root_id"] = root_id
-        if preview is not None:
-            payload["preview"] = preview
 
         # Parameter validation
         schema = ContentValidator.getBlog()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getBlog"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a blog. You can get slug value from the endpoint /service/application/content/v1.0/blogs/.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"root_id","in":"query","description":"ID given to the HTML element.","required":false,"schema":{"type":"string"}},{"name":"preview","schema":{"type":"boolean"},"in":"query","description":"Boolean value to get the preview for the blogs.","required":false}],"query":[{"name":"root_id","in":"query","description":"ID given to the HTML element.","required":false,"schema":{"type":"string"}},{"name":"preview","schema":{"type":"boolean"},"in":"query","description":"Boolean value to get the preview for the blogs.","required":false}],"headers":[],"path":[{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a blog. You can get slug value from the endpoint /service/application/content/v1.0/blogs/.","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug, root_id=root_id, preview=preview)
-        query_string = await create_query_string(root_id=root_id, preview=preview)
+        url_with_params = await create_url_with_params(api_url=self._urls["getBlog"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a blog. You can get slug value from the endpoint /service/application/content/v1.0/blogs/.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"root_id","in":"query","description":"ID given to the HTML element","required":false,"schema":{"type":"string"}}],"query":[{"name":"root_id","in":"query","description":"ID given to the HTML element","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a blog. You can get slug value from the endpoint /service/application/content/v1.0/blogs/.","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug, root_id=root_id)
+        query_string = await create_query_string(root_id=root_id)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -131,7 +127,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getBlog"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/blogs/{slug}", slug=slug, root_id=root_id, preview=preview), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getBlog"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/blogs/{slug}", slug=slug, root_id=root_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import BlogSchema
@@ -146,7 +142,7 @@ class Content:
     
     async def getBlogs(self, page_no=None, page_size=None, tags=None, search=None, body="", request_headers:Dict={}):
         """List all the blogs against an application.
-        :param page_no : The page number to navigate through the given set of results. Default value is 1. . : type integer
+        :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. : type integer
         :param tags : Blogs retrieve based on the list of tags passed. : type string
         :param search : Blogs retrieve based on the title. : type string
@@ -167,7 +163,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getBlogs"], proccessed_params="""{"required":[],"optional":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. .","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","required":false,"schema":{"type":"integer","default":10}},{"name":"tags","in":"query","description":"Blogs retrieve based on the list of tags passed.","required":false,"schema":{"type":"string"},"style":"form","explode":false},{"name":"search","in":"query","description":"Blogs retrieve based on the title.","required":false,"schema":{"type":"string"}}],"query":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. .","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","required":false,"schema":{"type":"integer","default":10}},{"name":"tags","in":"query","description":"Blogs retrieve based on the list of tags passed.","required":false,"schema":{"type":"string"},"style":"form","explode":false},{"name":"search","in":"query","description":"Blogs retrieve based on the title.","required":false,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size, tags=tags, search=search)
+        url_with_params = await create_url_with_params(api_url=self._urls["getBlogs"], proccessed_params="""{"required":[],"optional":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","required":false,"schema":{"type":"integer","default":10}},{"name":"tags","in":"query","description":"Blogs retrieve based on the list of tags passed.","required":false,"schema":{"type":"string","description":"Comma separated list of tags."},"style":"form","explode":false},{"name":"search","in":"query","description":"Blogs retrieve based on the title.","required":false,"schema":{"type":"string"}}],"query":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","required":false,"schema":{"type":"integer","default":10}},{"name":"tags","in":"query","description":"Blogs retrieve based on the list of tags passed.","required":false,"schema":{"type":"string","description":"Comma separated list of tags."},"style":"form","explode":false},{"name":"search","in":"query","description":"Blogs retrieve based on the title.","required":false,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size, tags=tags, search=search)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, tags=tags, search=search)
         if query_string:
             url_with_params += "?" + query_string
@@ -189,8 +185,8 @@ class Content:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getBlogs"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/blogs", page_no=page_no, page_size=page_size, tags=tags, search=search), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BlogGetDetails
-            schema = BlogGetDetails()
+            from .models import BlogGetResponseSchema
+            schema = BlogGetResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -467,7 +463,7 @@ class Content:
         return response
     
     async def getLandingPage(self, body="", request_headers:Dict={}):
-        """Get content of the application's landing page.
+        """Gets the content of the application's landing page.
         """
         payload = {}
         
@@ -554,7 +550,7 @@ class Content:
     
     async def getNavigations(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
         """Get the navigation link items which can be powered to generate menus on application's website or equivalent mobile apps.
-        :param page_no : The page number to navigate through the given set of results. Default value is 1. . : type integer
+        :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. : type integer
         """
         payload = {}
@@ -569,7 +565,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getNavigations"], proccessed_params="""{"required":[],"optional":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. .","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","required":false,"schema":{"type":"integer","default":10}}],"query":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. .","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(api_url=self._urls["getNavigations"], proccessed_params="""{"required":[],"optional":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","required":false,"schema":{"type":"integer","default":10}}],"query":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size)
         query_string = await create_query_string(page_no=page_no, page_size=page_size)
         if query_string:
             url_with_params += "?" + query_string
@@ -591,8 +587,8 @@ class Content:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getNavigations"]).netloc, "get", await create_url_without_domain("/service/application/content/v2.0/navigations", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import NavigationGetDetails
-            schema = NavigationGetDetails()
+            from .models import NavigationGetResponseSchema
+            schema = NavigationGetResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -646,7 +642,7 @@ class Content:
     
     async def getSEOMarkupSchemas(self, page_type=None, active=None, body="", request_headers:Dict={}):
         """Get all SEO Markup schema Templates setup for an application.
-        :param page_type : The type of page against which schema template was created. : type string
+        :param page_type : The type of page against which schema template was created : type string
         :param active : Boolean value for fetching seo schema. : type boolean
         """
         payload = {}
@@ -661,7 +657,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getSEOMarkupSchemas"], proccessed_params="""{"required":[],"optional":[{"name":"page_type","in":"query","description":"The type of page against which schema template was created.","required":false,"schema":{"type":"string","enum":["about-us","addresses","blog","brands","cards","cart","categories","brand","category","collection","collections","contact-us","external","faq","freshchat","home","notification-settings","orders","page","policy","product","product-request","products","profile","profile-order-shipment","profile-basic","profile-company","profile-emails","profile-phones","rate-us","refer-earn","settings","shared-cart","tnc","track-order","wishlist","sections","form","cart-delivery","cart-payment","cart-review","login","register","shipping-policy","return-policy","order-status"]}},{"name":"active","in":"query","description":"Boolean value for fetching seo schema.","required":false,"schema":{"type":"boolean","default":true}}],"query":[{"name":"page_type","in":"query","description":"The type of page against which schema template was created.","required":false,"schema":{"type":"string","enum":["about-us","addresses","blog","brands","cards","cart","categories","brand","category","collection","collections","contact-us","external","faq","freshchat","home","notification-settings","orders","page","policy","product","product-request","products","profile","profile-order-shipment","profile-basic","profile-company","profile-emails","profile-phones","rate-us","refer-earn","settings","shared-cart","tnc","track-order","wishlist","sections","form","cart-delivery","cart-payment","cart-review","login","register","shipping-policy","return-policy","order-status"]}},{"name":"active","in":"query","description":"Boolean value for fetching seo schema.","required":false,"schema":{"type":"boolean","default":true}}],"headers":[],"path":[]}""", serverType="application", page_type=page_type, active=active)
+        url_with_params = await create_url_with_params(api_url=self._urls["getSEOMarkupSchemas"], proccessed_params="""{"required":[],"optional":[{"name":"page_type","in":"query","description":"The type of page against which schema template was created","required":false,"schema":{"type":"string","enum":["about-us","addresses","blog","brands","cards","cart","categories","brand","category","collection","collections","contact-us","external","faq","freshchat","home","notification-settings","orders","page","policy","product","product-request","products","profile","profile-order-shipment","profile-basic","profile-company","profile-emails","profile-phones","rate-us","refer-earn","settings","shared-cart","tnc","track-order","wishlist","sections","form","cart-delivery","cart-payment","cart-review","login","register","shipping-policy","return-policy","order-status"]}},{"name":"active","in":"query","description":"Boolean value for fetching seo schema.","required":false,"schema":{"type":"boolean","default":true}}],"query":[{"name":"page_type","in":"query","description":"The type of page against which schema template was created","required":false,"schema":{"type":"string","enum":["about-us","addresses","blog","brands","cards","cart","categories","brand","category","collection","collections","contact-us","external","faq","freshchat","home","notification-settings","orders","page","policy","product","product-request","products","profile","profile-order-shipment","profile-basic","profile-company","profile-emails","profile-phones","rate-us","refer-earn","settings","shared-cart","tnc","track-order","wishlist","sections","form","cart-delivery","cart-payment","cart-review","login","register","shipping-policy","return-policy","order-status"]}},{"name":"active","in":"query","description":"Boolean value for fetching seo schema.","required":false,"schema":{"type":"boolean","default":true}}],"headers":[],"path":[]}""", serverType="application", page_type=page_type, active=active)
         query_string = await create_query_string(page_type=page_type, active=active)
         if query_string:
             url_with_params += "?" + query_string
@@ -736,11 +732,13 @@ class Content:
 
         return response
     
-    async def getSitemaps(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Retrieve a list of sitemap configurations for a specific application. Each configuration contains the sitemap XML data. 
+    async def getSitemaps(self, page_no=None, page_size=None, is_active=None, name=None, body="", request_headers:Dict={}):
+        """Retrieve a list of sitemap configurations for a specific company and application. Each configuration contains the sitemap XML data and its activation status. 
 
         :param page_no :  : type string
         :param page_size :  : type string
+        :param is_active : Boolean flag for checking if sitemap is active or not in storefront : type boolean
+        :param name : Query parameter to search sitemaps with name : type string
         """
         payload = {}
         
@@ -748,14 +746,18 @@ class Content:
             payload["page_no"] = page_no
         if page_size is not None:
             payload["page_size"] = page_size
+        if is_active is not None:
+            payload["is_active"] = is_active
+        if name is not None:
+            payload["name"] = name
 
         # Parameter validation
         schema = ContentValidator.getSitemaps()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getSitemaps"], proccessed_params="""{"required":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"optional":[],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(api_url=self._urls["getSitemaps"], proccessed_params="""{"required":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"optional":[{"name":"is_active","in":"query","description":"Boolean flag for checking if sitemap is active or not in storefront","required":false,"schema":{"type":"boolean"}},{"name":"name","in":"query","description":"Query parameter to search sitemaps with name","required":false,"schema":{"type":"string"}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"is_active","in":"query","description":"Boolean flag for checking if sitemap is active or not in storefront","required":false,"schema":{"type":"boolean"}},{"name":"name","in":"query","description":"Query parameter to search sitemaps with name","required":false,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size, is_active=is_active, name=name)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, is_active=is_active, name=name)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -773,7 +775,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSitemaps"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/seo/sitemaps", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSitemaps"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/seo/sitemaps", page_no=page_no, page_size=page_size, is_active=is_active, name=name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SitemapConfigurationList
@@ -801,7 +803,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getSitemap"], proccessed_params="""{"required":[{"name":"name","schema":{"type":"string","description":"Unique identifier for the sitemap configuration"},"in":"path","required":true,"example":{"success":{"value":"main-sitemap"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"name","schema":{"type":"string","description":"Unique identifier for the sitemap configuration"},"in":"path","required":true,"example":{"success":{"value":"main-sitemap"}}}]}""", serverType="application", name=name)
+        url_with_params = await create_url_with_params(api_url=self._urls["getSitemap"], proccessed_params="""{"required":[{"name":"name","schema":{"type":"string","description":"Unique identifier for the sitemap configuration"},"in":"path","required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"name","schema":{"type":"string","description":"Unique identifier for the sitemap configuration"},"in":"path","required":true}]}""", serverType="application", name=name)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -829,101 +831,6 @@ class Content:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getSitemap")
-                print(e)
-
-        return response
-    
-    async def getSlideshows(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """List slideshows along with their details.
-        :param page_no : The page number to navigate through the given set of results. Default value is 1. . : type integer
-        :param page_size : The number of items to retrieve in each page. : type integer
-        """
-        payload = {}
-        
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-
-        # Parameter validation
-        schema = ContentValidator.getSlideshows()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getSlideshows"], proccessed_params="""{"required":[],"optional":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. .","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","required":false,"schema":{"type":"integer","default":10}}],"query":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. .","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSlideshows"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/slideshow", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SlideshowGetDetails
-            schema = SlideshowGetDetails()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSlideshows")
-                print(e)
-
-        return response
-    
-    async def getSlideshow(self, slug=None, body="", request_headers:Dict={}):
-        """Get a slideshow using its `slug`.
-        :param slug : A short, human-readable, URL-friendly identifier of a slideshow. You can get slug value from the endpoint /service/application/content/v1.0/slideshow/. : type string
-        """
-        payload = {}
-        
-        if slug is not None:
-            payload["slug"] = slug
-
-        # Parameter validation
-        schema = ContentValidator.getSlideshow()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getSlideshow"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a slideshow. You can get slug value from the endpoint /service/application/content/v1.0/slideshow/.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a slideshow. You can get slug value from the endpoint /service/application/content/v1.0/slideshow/.","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSlideshow"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/slideshow/{slug}", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SlideshowSchema
-            schema = SlideshowSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getSlideshow")
                 print(e)
 
         return response
@@ -1014,10 +921,59 @@ class Content:
 
         return response
     
+    async def getPages(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
+        """Lists all Custom Pages
+        :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
+        :param page_size : The number of items to retrieve in each page. : type integer
+        """
+        payload = {}
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+
+        # Parameter validation
+        schema = ContentValidator.getPages()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getPages"], proccessed_params="""{"required":[],"optional":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","required":false,"schema":{"type":"integer","default":10}}],"query":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPages"]).netloc, "get", await create_url_without_domain("/service/application/content/v2.0/pages", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PageGetResponseSchema
+            schema = PageGetResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPages")
+                print(e)
+
+        return response
+    
     async def getPage(self, slug=None, root_id=None, body="", request_headers:Dict={}):
-        """Get detailed information for a specific page within the theme.
+        """Get detailed information about a specific page using its slug.
         :param slug : A short, human-readable, URL-friendly identifier of a page. You can get slug value from the endpoint /service/application/content/v2.0/pages/. : type string
-        :param root_id : ID given to the HTML element. : type string
+        :param root_id : ID given to the HTML element : type string
         """
         payload = {}
         
@@ -1031,7 +987,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPage"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a page. You can get slug value from the endpoint /service/application/content/v2.0/pages/.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"root_id","in":"query","description":"ID given to the HTML element.","required":false,"schema":{"type":"string"}}],"query":[{"name":"root_id","in":"query","description":"ID given to the HTML element.","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a page. You can get slug value from the endpoint /service/application/content/v2.0/pages/.","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug, root_id=root_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPage"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a page. You can get slug value from the endpoint /service/application/content/v2.0/pages/.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"root_id","in":"query","description":"ID given to the HTML element","required":false,"schema":{"type":"string"}}],"query":[{"name":"root_id","in":"query","description":"ID given to the HTML element","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a page. You can get slug value from the endpoint /service/application/content/v2.0/pages/.","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug, root_id=root_id)
         query_string = await create_query_string(root_id=root_id)
         if query_string:
             url_with_params += "?" + query_string
@@ -1059,55 +1015,6 @@ class Content:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getPage")
-                print(e)
-
-        return response
-    
-    async def getPages(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Lists all Custom Pages.
-        :param page_no : The page number to navigate through the given set of results. Default value is 1. . : type integer
-        :param page_size : The number of items to retrieve in each page. : type integer
-        """
-        payload = {}
-        
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-
-        # Parameter validation
-        schema = ContentValidator.getPages()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getPages"], proccessed_params="""{"required":[],"optional":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. .","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","required":false,"schema":{"type":"integer","default":10}}],"query":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. .","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPages"]).netloc, "get", await create_url_without_domain("/service/application/content/v2.0/pages", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PageGetDetails
-            schema = PageGetDetails()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getPages")
                 print(e)
 
         return response
@@ -1206,6 +1113,52 @@ class Content:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getCustomFieldsByResourceId")
+                print(e)
+
+        return response
+    
+    async def getWellKnownUrl(self, slug=None, body="", request_headers:Dict={}):
+        """Retrieves the details of a specific well-known URL by its slug.
+        :param slug : The unique identifier/path of the well-known URL (e.g., assetlinks.json) : type string
+        """
+        payload = {}
+        
+        if slug is not None:
+            payload["slug"] = slug
+
+        # Parameter validation
+        schema = ContentValidator.getWellKnownUrl()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getWellKnownUrl"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"The unique identifier/path of the well-known URL (e.g., assetlinks.json)","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"The unique identifier/path of the well-known URL (e.g., assetlinks.json)","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getWellKnownUrl"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/well-known/{slug}", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import WellKnownResponseSchema
+            schema = WellKnownResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getWellKnownUrl")
                 print(e)
 
         return response

@@ -528,57 +528,6 @@ class Content:
 
         return response
     
-    async def deleteCustomFieldsByResourceSlug(self, resource=None, resource_slug=None, ids=None, request_headers:Dict={}):
-        """Use this API to delete the custom fields for given resource in param.
-        :param resource :  : type string
-        :param resource_slug :  : type string
-        :param ids :  : type string
-        """
-        payload = {}
-        
-        if resource is not None:
-            payload["resource"] = resource
-        if resource_slug is not None:
-            payload["resource_slug"] = resource_slug
-        if ids is not None:
-            payload["ids"] = ids
-
-        # Parameter validation
-        schema = ContentValidator.deleteCustomFieldsByResourceSlug()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/customfields/resource/{resource}/{resource_slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}},{"name":"ids","in":"query","required":true,"schema":{"type":"string","description":"This is the ids of to filter custom fields"}}],"optional":[],"query":[{"name":"ids","in":"query","required":true,"schema":{"type":"string","description":"This is the ids of to filter custom fields"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}]}""", serverType="platform", resource=resource, resource_slug=resource_slug, ids=ids)
-        query_string = await create_query_string(ids=ids)
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v2.0/company/{self._conf.companyId}/customfields/resource/{resource}/{resource_slug}", resource=resource, resource_slug=resource_slug, ids=ids), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CustomFieldsDeleteSchema
-            schema = CustomFieldsDeleteSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deleteCustomFieldsByResourceSlug")
-                print(e)
-
-        return response
-    
     async def createCustomObjectDefinition(self, body="", request_headers:Dict={}):
         """Create a custom object that will have a collection of custom fields and can be used anywhere in the custom field for any resource.
         """
@@ -1063,16 +1012,16 @@ class Content:
 
         return response
     
-    async def getJobs(self, page=None, page_size=None, action_type=None, request_headers:Dict={}):
+    async def getJobs(self, page_no=None, page_size=None, action_type=None, request_headers:Dict={}):
         """Custom object bulk import and export jobs status and details can be obtained using this endpoint.
-        :param page :  : type string
+        :param page_no :  : type string
         :param page_size :  : type string
         :param action_type :  : type string
         """
         payload = {}
         
-        if page is not None:
-            payload["page"] = page
+        if page_no is not None:
+            payload["page_no"] = page_no
         if page_size is not None:
             payload["page_size"] = page_size
         if action_type is not None:
@@ -1083,8 +1032,8 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/metaobjects/jobs", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"page","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"action_type","in":"query","required":true,"schema":{"type":"string","enum":["download","upload"],"description":"This is the action type"}}],"optional":[],"query":[{"name":"page","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"action_type","in":"query","required":true,"schema":{"type":"string","enum":["download","upload"],"description":"This is the action type"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}]}""", serverType="platform", page=page, page_size=page_size, action_type=action_type)
-        query_string = await create_query_string(page=page, page_size=page_size, action_type=action_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/metaobjects/jobs", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"action_type","in":"query","required":true,"schema":{"type":"string","enum":["download","upload"],"description":"This is the action type"}}],"optional":[],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"action_type","in":"query","required":true,"schema":{"type":"string","enum":["download","upload"],"description":"This is the action type"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, action_type=action_type)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, action_type=action_type)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -1101,7 +1050,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/metaobjects/jobs", page=page, page_size=page_size, action_type=action_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/metaobjects/jobs", page_no=page_no, page_size=page_size, action_type=action_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CustomObjectBulkEntry

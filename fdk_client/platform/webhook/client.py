@@ -56,7 +56,6 @@ class Webhook:
     
     async def registerSubscriberToEventV2(self, body="", request_headers:Dict={}):
         """Register Subscriber.
-
         """
         payload = {}
         
@@ -103,7 +102,6 @@ class Webhook:
     
     async def updateSubscriberV2(self, body="", request_headers:Dict={}):
         """Update Subscriber.
-
         """
         payload = {}
         

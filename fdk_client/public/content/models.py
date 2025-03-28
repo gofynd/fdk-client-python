@@ -112,10 +112,6 @@ class PricingBannerSchema(BaseSchema):
     pass
 
 
-class SdkReadmeSchema(BaseSchema):
-    pass
-
-
 class TagsSchema(BaseSchema):
     pass
 
@@ -141,6 +137,18 @@ class ConfigurationSchema(BaseSchema):
 
 
 class CredentialsSchema(BaseSchema):
+    pass
+
+
+class SDKLinksResponseSchema(BaseSchema):
+    pass
+
+
+class SDKLinkObjectSchema(BaseSchema):
+    pass
+
+
+class SDKbyTypeResponseSchema(BaseSchema):
     pass
 
 
@@ -575,14 +583,6 @@ class PricingBannerSchema(BaseSchema):
     
 
 
-class SdkReadmeSchema(BaseSchema):
-    # Content swagger.json
-
-    
-    data = fields.Str(required=False)
-    
-
-
 class TagsSchema(BaseSchema):
     # Content swagger.json
 
@@ -684,6 +684,40 @@ class CredentialsSchema(BaseSchema):
 
     
     items = fields.List(fields.Nested(CredentialSchema, required=False), required=False)
+    
+
+
+class SDKLinksResponseSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    readmes = fields.List(fields.Nested(SDKLinkObjectSchema, required=False), required=False)
+    
+
+
+class SDKLinkObjectSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    owner = fields.Str(required=False)
+    
+    repo = fields.Str(required=False)
+    
+    path = fields.Str(required=False)
+    
+    image = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class SDKbyTypeResponseSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    readme_content = fields.Str(required=False)
     
 
 

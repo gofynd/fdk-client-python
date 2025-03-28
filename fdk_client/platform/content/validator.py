@@ -71,12 +71,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
-        
-    
-    
-        
     
     
         
@@ -270,19 +264,6 @@ class ContentValidator:
          
         
     
-    class deleteCustomFieldsByResourceSlug(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        resource = fields.Str(required=False)
-        
-        resource_slug = fields.Str(required=False)
-        
-        ids = fields.Str(required=False)
-         
-        
-    
     class createCustomObjectDefinition(BaseSchema):
         
         
@@ -390,7 +371,7 @@ class ContentValidator:
         
         company_id = fields.Int(required=False)
         
-        page = fields.Str(required=False)
+        page_no = fields.Str(required=False)
         
         page_size = fields.Str(required=False)
         

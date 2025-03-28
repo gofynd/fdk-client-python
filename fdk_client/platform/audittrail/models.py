@@ -24,10 +24,6 @@ class EntityObject(BaseSchema):
     pass
 
 
-class BadRequestSchema(BaseSchema):
-    pass
-
-
 
 
 
@@ -78,14 +74,6 @@ class EntityObject(BaseSchema):
     type = fields.Str(required=False)
     
     action = fields.Str(required=False)
-    
-
-
-class BadRequestSchema(BaseSchema):
-    # AuditTrail swagger.json
-
-    
-    message = fields.Str(required=False)
     
 
 

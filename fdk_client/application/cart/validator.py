@@ -19,16 +19,9 @@ from ..ApplicationModel import BaseSchema
         
         
         
-    
-    
         
     
     
-        
-        
-        
-        
-        
         
     
     
@@ -42,22 +35,18 @@ from ..ApplicationModel import BaseSchema
     
     
         
-    
-    
+        
+        
+        
+        
         
         
     
     
         
         
-        
-        
     
     
-        
-        
-        
-        
         
         
     
@@ -76,38 +65,11 @@ from ..ApplicationModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
-        
-        
-    
-    
-    
-        
-        
-        
-        
-        
         
         
     
     
         
-    
-    
-        
-    
-    
-        
-        
-        
-        
-    
-    
         
         
     
@@ -117,8 +79,8 @@ from ..ApplicationModel import BaseSchema
         
         
         
-        
-        
+    
+    
         
         
         
@@ -132,29 +94,23 @@ from ..ApplicationModel import BaseSchema
         
         
         
-    
-    
-        
-        
-    
-    
-        
         
     
     
     
         
-    
-    
+        
+        
+        
+        
+        
         
         
     
     
         
-        
-        
-        
-        
+    
+    
         
     
     
@@ -166,6 +122,70 @@ from ..ApplicationModel import BaseSchema
     
         
         
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+    
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
     
     
         
@@ -197,6 +217,8 @@ class CartValidator:
         
         buy_now = fields.Boolean(required=False)
         
+        cart_type = fields.Str(required=False)
+        
         order_type = fields.Str(required=False)
          
         
@@ -220,6 +242,8 @@ class CartValidator:
         buy_now = fields.Boolean(required=False)
         
         id = fields.Str(required=False)
+        
+        cart_type = fields.Str(required=False)
         
         order_type = fields.Str(required=False)
          
@@ -248,10 +272,21 @@ class CartValidator:
         
         
         id = fields.Str(required=False)
+        
+        cart_type = fields.Str(required=False)
          
         
     
     class getItemCount(BaseSchema):
+        
+        
+        id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
+         
+        
+    
+    class getItemCountV2(BaseSchema):
         
         
         id = fields.Str(required=False)
@@ -296,6 +331,8 @@ class CartValidator:
         id = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
+        
+        cart_type = fields.Str(required=False)
          
         
     
@@ -309,6 +346,8 @@ class CartValidator:
         uid = fields.Int(required=False)
         
         slug = fields.Str(required=False)
+        
+        cart_type = fields.Str(required=False)
          
         
     
@@ -322,6 +361,8 @@ class CartValidator:
         b = fields.Boolean(required=False)
         
         buy_now = fields.Boolean(required=False)
+        
+        cart_type = fields.Str(required=False)
          
         
     
@@ -339,6 +380,8 @@ class CartValidator:
         tags = fields.Str(required=False)
         
         is_default = fields.Boolean(required=False)
+        
+        user_id = fields.Str(required=False)
          
         
     
@@ -363,6 +406,8 @@ class CartValidator:
         tags = fields.Str(required=False)
         
         is_default = fields.Boolean(required=False)
+        
+        user_id = fields.Str(required=False)
          
         
     
@@ -399,6 +444,8 @@ class CartValidator:
         id = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
+        
+        order_type = fields.Str(required=False)
          
         
     
@@ -431,32 +478,6 @@ class CartValidator:
          
         
     
-    class getShipments(BaseSchema):
-        
-        
-        p = fields.Boolean(required=False)
-        
-        id = fields.Str(required=False)
-        
-        buy_now = fields.Boolean(required=False)
-        
-        address_id = fields.Str(required=False)
-        
-        area_code = fields.Str(required=False)
-        
-        order_type = fields.Str(required=False)
-         
-        
-    
-    class checkoutCart(BaseSchema):
-        
-        
-        buy_now = fields.Boolean(required=False)
-        
-        cart_type = fields.Str(required=False)
-         
-        
-    
     class updateCartMeta(BaseSchema):
         
         
@@ -484,6 +505,8 @@ class CartValidator:
         token = fields.Str(required=False)
         
         action = fields.Str(required=False)
+        
+        cart_id = fields.Str(required=False)
          
         
     
@@ -497,10 +520,6 @@ class CartValidator:
         promotion_group = fields.Str(required=False)
         
         store_id = fields.Int(required=False)
-        
-        cart_type = fields.Str(required=False)
-        
-        sort_by = fields.Str(required=False)
          
         
     
@@ -517,12 +536,35 @@ class CartValidator:
          
         
     
-    class getPromotionPaymentOffers(BaseSchema):
+    class getShipments(BaseSchema):
         
+        
+        pick_at_store_uid = fields.Int(required=False)
+        
+        ordering_store_id = fields.Int(required=False)
+        
+        i = fields.Boolean(required=False)
+        
+        p = fields.Boolean(required=False)
         
         id = fields.Str(required=False)
         
-        uid = fields.Int(required=False)
+        buy_now = fields.Boolean(required=False)
+        
+        address_id = fields.Str(required=False)
+        
+        area_code = fields.Str(required=False)
+        
+        order_type = fields.Str(required=False)
+         
+        
+    
+    class checkoutCart(BaseSchema):
+        
+        
+        buy_now = fields.Boolean(required=False)
+        
+        cart_type = fields.Str(required=False)
          
         
     
@@ -535,16 +577,39 @@ class CartValidator:
          
         
     
-    class getPromotions(BaseSchema):
+    class getPaymentPromotionOffers(BaseSchema):
         
         
-        page_size = fields.Int(required=False)
+        id = fields.Str(required=False)
         
-        page_no = fields.Int(required=False)
+        uid = fields.Int(required=False)
+         
         
-        promotion_type = fields.Str(required=False)
+    
+    class getCartMetaConfigs(BaseSchema):
+        
+        pass 
+        
+    
+    class getCartMetaConfig(BaseSchema):
+        
+        
+        cart_meta_id = fields.Str(required=False)
         
         is_bank_offer = fields.Boolean(required=False)
+         
+        
+    
+    class addItemsv2(BaseSchema):
+        
+        
+        buy_now = fields.Boolean(required=False)
+        
+        id = fields.Str(required=False)
+        
+        cart_type = fields.Str(required=False)
+        
+        order_type = fields.Str(required=False)
          
         
     

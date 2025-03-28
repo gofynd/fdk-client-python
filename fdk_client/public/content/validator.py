@@ -28,6 +28,10 @@ from ..PublicModel import BaseSchema
     
     
         
+    
+    
+    
+        
 
 class ContentValidator:
     
@@ -92,6 +96,18 @@ class ContentValidator:
         
         
         entity_type = fields.Str(required=False)
+         
+        
+    
+    class getSDKDocumentation(BaseSchema):
+        
+        pass 
+        
+    
+    class getSDKDocumentationByType(BaseSchema):
+        
+        
+        type = fields.Str(required=False)
          
         
     

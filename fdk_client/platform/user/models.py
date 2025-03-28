@@ -16,7 +16,7 @@ class UserAttributeDefinition(BaseSchema):
     pass
 
 
-class UserAttributeDefinitionDetails(BaseSchema):
+class UserAttributeDefinitionResp(BaseSchema):
     pass
 
 
@@ -28,7 +28,7 @@ class UserAttribute(BaseSchema):
     pass
 
 
-class CreateUserAttribute(BaseSchema):
+class CreateUserAttributePayload(BaseSchema):
     pass
 
 
@@ -140,6 +140,26 @@ class LookAndFeel(BaseSchema):
     pass
 
 
+class PasswordConfigs(BaseSchema):
+    pass
+
+
+class PasswordHistory(BaseSchema):
+    pass
+
+
+class PasswordExpiry(BaseSchema):
+    pass
+
+
+class PasswordSettings(BaseSchema):
+    pass
+
+
+class AccountLockout(BaseSchema):
+    pass
+
+
 class Login(BaseSchema):
     pass
 
@@ -149,6 +169,10 @@ class MetaSchema(BaseSchema):
 
 
 class Social(BaseSchema):
+    pass
+
+
+class PlatformPassword(BaseSchema):
     pass
 
 
@@ -232,11 +256,19 @@ class UserPhoneNumbers(BaseSchema):
     pass
 
 
+class UserPasswordHistory(BaseSchema):
+    pass
+
+
 class UserSchema(BaseSchema):
     pass
 
 
 class UserSearchSchema(BaseSchema):
+    pass
+
+
+class DebugInfo(BaseSchema):
     pass
 
 
@@ -297,7 +329,7 @@ class UserAttributeDefinition(BaseSchema):
     
 
 
-class UserAttributeDefinitionDetails(BaseSchema):
+class UserAttributeDefinitionResp(BaseSchema):
     # User swagger.json
 
     
@@ -361,7 +393,7 @@ class UserAttribute(BaseSchema):
     
     type = fields.Str(required=False)
     
-    customer_overridden = fields.Boolean(required=False)
+    customer_overriden = fields.Boolean(required=False)
     
     attribute = fields.Dict(required=False)
     
@@ -369,11 +401,11 @@ class UserAttribute(BaseSchema):
     
 
 
-class CreateUserAttribute(BaseSchema):
+class CreateUserAttributePayload(BaseSchema):
     # User swagger.json
 
     
-    customer_overridden = fields.Boolean(required=False)
+    customer_overriden = fields.Boolean(required=False)
     
     attribute = fields.Dict(required=False)
     
@@ -401,7 +433,7 @@ class CreateUserAttributeDefinition(BaseSchema):
     
     pin_order = fields.Float(required=False)
     
-    default_value = fields.Str(required=False)
+    default_value = fields.Dict(required=False)
     
     validations = fields.List(fields.Dict(required=False), required=False)
     
@@ -571,7 +603,7 @@ class Conditions(BaseSchema):
     
     type = fields.Str(required=False)
     
-    value = fields.Str(required=False)
+    value = fields.Dict(required=False)
     
     key = fields.Str(required=False)
     
@@ -593,6 +625,8 @@ class UserGroupResponseSchema(BaseSchema):
     
     conditions = fields.List(fields.Nested(Conditions, required=False), required=False)
     
+    blacklisted_users = fields.List(fields.Str(required=False), required=False)
+    
     error = fields.Nested(UserResponseErrorSchema, required=False)
     
     name = fields.Str(required=False)
@@ -612,6 +646,8 @@ class UserGroupResponseSchema(BaseSchema):
     uid = fields.Int(required=False)
     
     application_id = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
     
     created_at = fields.Str(required=False)
     
@@ -639,7 +675,7 @@ class ConditionsSchema(BaseSchema):
     
     type = fields.Str(required=False)
     
-    value = fields.Str(required=False)
+    value = fields.Dict(required=False)
     
 
 
@@ -656,6 +692,8 @@ class CreateUserGroup(BaseSchema):
     description = fields.Str(required=False)
     
     file_url = fields.Str(required=False)
+    
+    blacklisted_users = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -699,6 +737,8 @@ class CreateUserSessionRequestSchema(BaseSchema):
     
     user_id = fields.Str(required=False)
     
+    max_age = fields.Float(required=False)
+    
 
 
 class CreateUserSessionResponseSchema(BaseSchema):
@@ -733,6 +773,10 @@ class PlatformSchema(BaseSchema):
     
     login = fields.Nested(Login, required=False)
     
+    account_lockout = fields.Nested(AccountLockout, required=False)
+    
+    password_settings = fields.Nested(PasswordSettings, required=False)
+    
     skip_captcha = fields.Boolean(required=False)
     
     name = fields.Str(required=False)
@@ -759,9 +803,9 @@ class PlatformSchema(BaseSchema):
     
     register = fields.Boolean(required=False)
     
-    mobile_image = fields.Str(required=False)
+    mobile_image = fields.Str(required=False, allow_none=True)
     
-    desktop_image = fields.Str(required=False)
+    desktop_image = fields.Str(required=False, allow_none=True)
     
     delete_account_day = fields.Int(required=False)
     
@@ -785,6 +829,64 @@ class LookAndFeel(BaseSchema):
     
 
 
+class PasswordConfigs(BaseSchema):
+    # User swagger.json
+
+    
+    length = fields.Float(required=False)
+    
+    require_special_character = fields.Boolean(required=False)
+    
+    require_number = fields.Boolean(required=False)
+    
+    require_capital_character = fields.Boolean(required=False)
+    
+
+
+class PasswordHistory(BaseSchema):
+    # User swagger.json
+
+    
+    required = fields.Boolean(required=False)
+    
+    count = fields.Float(required=False)
+    
+
+
+class PasswordExpiry(BaseSchema):
+    # User swagger.json
+
+    
+    required = fields.Boolean(required=False)
+    
+    duration = fields.Float(required=False)
+    
+
+
+class PasswordSettings(BaseSchema):
+    # User swagger.json
+
+    
+    configs = fields.Nested(PasswordConfigs, required=False)
+    
+    history = fields.Nested(PasswordHistory, required=False)
+    
+    expiry = fields.Nested(PasswordExpiry, required=False)
+    
+
+
+class AccountLockout(BaseSchema):
+    # User swagger.json
+
+    
+    enable = fields.Boolean(required=False)
+    
+    attempts = fields.Float(required=False)
+    
+    duration = fields.Float(required=False)
+    
+
+
 class Login(BaseSchema):
     # User swagger.json
 
@@ -792,6 +894,8 @@ class Login(BaseSchema):
     password = fields.Boolean(required=False)
     
     otp = fields.Boolean(required=False)
+    
+    via = fields.Str(required=False)
     
 
 
@@ -817,6 +921,14 @@ class Social(BaseSchema):
     
 
 
+class PlatformPassword(BaseSchema):
+    # User swagger.json
+
+    
+    is_required = fields.Boolean(required=False)
+    
+
+
 class RequiredFields(BaseSchema):
     # User swagger.json
 
@@ -824,6 +936,8 @@ class RequiredFields(BaseSchema):
     email = fields.Nested(PlatformEmail, required=False)
     
     mobile = fields.Nested(PlatformMobile, required=False)
+    
+    password = fields.Nested(PlatformPassword, required=False)
     
 
 
@@ -854,6 +968,8 @@ class RegisterRequiredFields(BaseSchema):
     email = fields.Nested(RegisterRequiredFieldsEmail, required=False)
     
     mobile = fields.Nested(RegisterRequiredFieldsMobile, required=False)
+    
+    password = fields.Nested(PlatformPassword, required=False)
     
 
 
@@ -895,7 +1011,7 @@ class SocialTokens(BaseSchema):
     
     facebook = fields.Nested(Facebook, required=False)
     
-    account_kit = fields.Nested(Accountkit, required=False)
+    accountkit = fields.Nested(Accountkit, required=False)
     
     google = fields.Nested(Google, required=False)
     
@@ -993,6 +1109,10 @@ class PartialUserGroupUpdateSchema(BaseSchema):
     
     user_data = fields.List(fields.Nested(UserGroupUpdateData, required=False), required=False)
     
+    whitelisted_users = fields.List(fields.Str(required=False), required=False)
+    
+    blacklisted_users = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class UserGroupUpdateData(BaseSchema):
@@ -1061,6 +1181,16 @@ class UserPhoneNumbers(BaseSchema):
     
 
 
+class UserPasswordHistory(BaseSchema):
+    # User swagger.json
+
+    
+    salt = fields.Str(required=False)
+    
+    hash = fields.Str(required=False)
+    
+
+
 class UserSchema(BaseSchema):
     # User swagger.json
 
@@ -1068,6 +1198,10 @@ class UserSchema(BaseSchema):
     application_id = fields.Str(required=False)
     
     user_id = fields.Str(required=False)
+    
+    password_last_modified = fields.Str(required=False)
+    
+    password_history = fields.List(fields.Nested(UserPasswordHistory, required=False), required=False)
     
     first_name = fields.Str(required=False)
     
@@ -1079,7 +1213,7 @@ class UserSchema(BaseSchema):
     
     emails = fields.List(fields.Nested(Email, required=False), required=False)
     
-    gender = fields.Str(required=False)
+    gender = fields.Str(required=False, allow_none=True)
     
     dob = fields.Str(required=False)
     
@@ -1107,6 +1241,12 @@ class UserSearchSchema(BaseSchema):
     # User swagger.json
 
     
+    __v = fields.Float(required=False)
+    
+    has_old_password_hash = fields.Boolean(required=False)
+    
+    debug = fields.Nested(DebugInfo, required=False)
+    
     application_id = fields.Str(required=False)
     
     user_id = fields.Str(required=False)
@@ -1121,7 +1261,7 @@ class UserSearchSchema(BaseSchema):
     
     emails = fields.List(fields.Nested(Email, required=False), required=False)
     
-    gender = fields.Str(required=False)
+    gender = fields.Str(required=False, allow_none=True)
     
     dob = fields.Str(required=False)
     
@@ -1146,6 +1286,16 @@ class UserSearchSchema(BaseSchema):
     archive = fields.Boolean(required=False)
     
     status = fields.Str(required=False)
+    
+
+
+class DebugInfo(BaseSchema):
+    # User swagger.json
+
+    
+    source = fields.Str(required=False)
+    
+    platform = fields.Str(required=False)
     
 
 

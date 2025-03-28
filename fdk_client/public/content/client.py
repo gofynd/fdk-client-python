@@ -23,7 +23,9 @@ class Content:
             "getNavbar": "/service/public/content/navbar",
             "getPricingBanner": "/service/public/content/pricing-banner",
             "getAllTags": "/service/public/content/tags",
-            "getCredentialsByEntity": "/service/public/content/credentials/{entity_type}"
+            "getCredentialsByEntity": "/service/public/content/credentials/{entity_type}",
+            "getSDKDocumentation": "/service/public/content/sdk-readme",
+            "getSDKDocumentationByType": "/service/public/content/sdk-readme/{type}"
             
         }
         self._urls = {
@@ -317,7 +319,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getHomePageContent"], proccessed_params="""{"required":[{"name":"page_type","in":"query","description":"The type of the page (e.g., pricing).","required":true,"schema":{"type":"string","enum":["home","features","pricing","theme"]}}],"optional":[],"query":[{"name":"page_type","in":"query","description":"The type of the page (e.g., pricing).","required":true,"schema":{"type":"string","enum":["home","features","pricing","theme"]}}],"headers":[],"path":[]}""", serverType="public", page_type=page_type)
+        url_with_params = await create_url_with_params(api_url=self._urls["getHomePageContent"], proccessed_params="""{"required":[{"name":"page_type","in":"query","description":"The type of the page (e.g., pricing).","required":true,"schema":{"type":"string","x-not-enum":true}}],"optional":[],"query":[{"name":"page_type","in":"query","description":"The type of the page (e.g., pricing).","required":true,"schema":{"type":"string","x-not-enum":true}}],"headers":[],"path":[]}""", serverType="public", page_type=page_type)
         query_string = await create_query_string(page_type=page_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -496,7 +498,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCredentialsByEntity"], proccessed_params="""{"required":[{"name":"entity_type","in":"path","description":"Server Type","required":true,"schema":{"type":"string","enum":["partner","platform"]}}],"optional":[],"query":[],"headers":[],"path":[{"name":"entity_type","in":"path","description":"Server Type","required":true,"schema":{"type":"string","enum":["partner","platform"]}}]}""", serverType="public", entity_type=entity_type)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCredentialsByEntity"], proccessed_params="""{"required":[{"name":"entity_type","in":"path","description":"Server Type","required":true,"schema":{"type":"string","x-not-enum":true}}],"optional":[],"query":[],"headers":[],"path":[{"name":"entity_type","in":"path","description":"Server Type","required":true,"schema":{"type":"string","x-not-enum":true}}]}""", serverType="public", entity_type=entity_type)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -525,6 +527,97 @@ class Content:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getCredentialsByEntity")
+                print(e)
+
+        return response
+    
+    async def getSDKDocumentation(self, body="", request_headers:Dict={}):
+        """Get documentation of SDK
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.getSDKDocumentation()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getSDKDocumentation"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {
+            "User-Agent": self._conf.userAgent,
+            "Accept-Language": self._conf.language,
+            "x-currency-code":   self._conf.currency
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSDKDocumentation"]).netloc, "get", await create_url_without_domain("/service/public/content/sdk-readme", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SDKLinksResponseSchema
+            schema = SDKLinksResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSDKDocumentation")
+                print(e)
+
+        return response
+    
+    async def getSDKDocumentationByType(self, type=None, body="", request_headers:Dict={}):
+        """Get documentation of SDK by its type
+        :param type : Type of SDK : type string
+        """
+        payload = {}
+        
+        if type is not None:
+            payload["type"] = type
+
+        # Parameter validation
+        schema = ContentValidator.getSDKDocumentationByType()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getSDKDocumentationByType"], proccessed_params="""{"required":[{"name":"type","in":"path","description":"Type of SDK","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"type","in":"path","description":"Type of SDK","schema":{"type":"string"},"required":true}]}""", serverType="public", type=type)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {
+            "User-Agent": self._conf.userAgent,
+            "Accept-Language": self._conf.language,
+            "x-currency-code":   self._conf.currency
+        }
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSDKDocumentationByType"]).netloc, "get", await create_url_without_domain("/service/public/content/sdk-readme/{type}", type=type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SDKbyTypeResponseSchema
+            schema = SDKbyTypeResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSDKDocumentationByType")
                 print(e)
 
         return response

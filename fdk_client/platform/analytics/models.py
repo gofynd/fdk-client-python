@@ -49,6 +49,8 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
+    total = fields.Int(required=False)
+    
 
 
 class FileDownloadRequestBody(BaseSchema):
@@ -87,7 +89,7 @@ class JobStatus(BaseSchema):
     
     start_date = fields.Str(required=False)
     
-    end_date = fields.Str(required=False)
+    end_date = fields.Str(required=False, allow_none=True)
     
     status = fields.Str(required=False)
     

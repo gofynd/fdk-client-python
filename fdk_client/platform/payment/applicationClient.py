@@ -30,7 +30,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/aggregator/request", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"query","description":"aggregator slug","schema":{"type":"string"},"required":true}],"optional":[{"name":"config_type","in":"query","required":false,"schema":{"type":"string","enum":["self","partner","fynd"]}}],"query":[{"name":"aggregator","in":"query","description":"aggregator slug","schema":{"type":"string"},"required":true},{"name":"config_type","in":"query","required":false,"schema":{"type":"string","enum":["self","partner","fynd"]}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", aggregator=aggregator, config_type=config_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/aggregator/request", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"query","description":"aggregator slug","schema":{"type":"string"},"required":true}],"optional":[{"name":"config_type","in":"query","schema":{"type":"string","enum":["self","partner","fynd"]}}],"query":[{"name":"aggregator","in":"query","description":"aggregator slug","schema":{"type":"string"},"required":true},{"name":"config_type","in":"query","schema":{"type":"string","enum":["self","partner","fynd"]}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", aggregator=aggregator, config_type=config_type)
         query_string = await create_query_string(aggregator=aggregator, config_type=config_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -61,7 +61,7 @@ class Payment:
         return response
     
     async def saveBrandPaymentGatewayConfig(self, body="", request_headers:Dict={}):
-        """Store and update configuration settings for brand payment gateways i.e required for payment for a payment gateway like key, secret, merchant salt.
+        """Store and update configuration settings for brand payment gateways i.e required for payment for a payment gateway like key, secret, merchant salt. - Payment
         """
         payload = {}
         
@@ -105,34 +105,34 @@ class Payment:
 
         return response
     
-    async def getPaymentModeRoutes(self, refresh=None, request_type=None, order_id=None, shipment_id=None, amount=None, request_headers:Dict={}):
+    async def getPaymentModeRoutes(self, refresh=None, amount=None, request_type=None, order_id=None, shipment_id=None, request_headers:Dict={}):
         """Get available payment methods on the payment page, specifying the aggregator for each option, such as 'Netbanking powered by Juspay' and 'Card powered by Razorpay'.
         :param refresh : Flag to refresh the cache and retrieve the updated payment option : type boolean
+        :param amount :  : type integer
         :param request_type : type of payment request, i.e. self : type string
         :param order_id : order id for the payment : type string
         :param shipment_id : shipment id for the payment : type string
-        :param amount : amount for the payment : type integer
         """
         payload = {}
         
         if refresh is not None:
             payload["refresh"] = refresh
+        if amount is not None:
+            payload["amount"] = amount
         if request_type is not None:
             payload["request_type"] = request_type
         if order_id is not None:
             payload["order_id"] = order_id
         if shipment_id is not None:
             payload["shipment_id"] = shipment_id
-        if amount is not None:
-            payload["amount"] = amount
 
         # Parameter validation
         schema = PaymentValidator.getPaymentModeRoutes()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[{"name":"refresh","in":"query","description":"Flag to refresh the cache and retrieve the updated payment option","required":false,"schema":{"type":"boolean"}},{"name":"request_type","in":"query","required":false,"description":"type of payment request, i.e. self","schema":{"x-not-enum":true,"type":"string"}},{"name":"order_id","in":"query","required":false,"description":"order id for the payment","schema":{"type":"string"}},{"name":"shipment_id","in":"query","required":false,"description":"shipment id for the payment","schema":{"type":"string"}},{"name":"amount","in":"query","required":false,"description":"amount for the payment","schema":{"type":"integer"}}],"query":[{"name":"refresh","in":"query","description":"Flag to refresh the cache and retrieve the updated payment option","required":false,"schema":{"type":"boolean"}},{"name":"request_type","in":"query","required":false,"description":"type of payment request, i.e. self","schema":{"x-not-enum":true,"type":"string"}},{"name":"order_id","in":"query","required":false,"description":"order id for the payment","schema":{"type":"string"}},{"name":"shipment_id","in":"query","required":false,"description":"shipment id for the payment","schema":{"type":"string"}},{"name":"amount","in":"query","required":false,"description":"amount for the payment","schema":{"type":"integer"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", refresh=refresh, request_type=request_type, order_id=order_id, shipment_id=shipment_id, amount=amount)
-        query_string = await create_query_string(refresh=refresh, request_type=request_type, order_id=order_id, shipment_id=shipment_id, amount=amount)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"amount","in":"query","required":true,"schema":{"type":"integer"}}],"optional":[{"name":"refresh","in":"query","description":"Flag to refresh the cache and retrieve the updated payment option","required":false,"schema":{"type":"boolean"}},{"name":"request_type","in":"query","required":false,"description":"type of payment request, i.e. self","schema":{"x-not-enum":true,"type":"string"}},{"name":"order_id","in":"query","required":false,"description":"order id for the payment","schema":{"type":"string"}},{"name":"shipment_id","in":"query","required":false,"description":"shipment id for the payment","schema":{"type":"string"}}],"query":[{"name":"refresh","in":"query","description":"Flag to refresh the cache and retrieve the updated payment option","required":false,"schema":{"type":"boolean"}},{"name":"amount","in":"query","required":true,"schema":{"type":"integer"}},{"name":"request_type","in":"query","required":false,"description":"type of payment request, i.e. self","schema":{"x-not-enum":true,"type":"string"}},{"name":"order_id","in":"query","required":false,"description":"order id for the payment","schema":{"type":"string"}},{"name":"shipment_id","in":"query","required":false,"description":"shipment id for the payment","schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", refresh=refresh, amount=amount, request_type=request_type, order_id=order_id, shipment_id=shipment_id)
+        query_string = await create_query_string(refresh=refresh, amount=amount, request_type=request_type, order_id=order_id, shipment_id=shipment_id)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -148,7 +148,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options", refresh=refresh, request_type=request_type, order_id=order_id, shipment_id=shipment_id, amount=amount), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options", refresh=refresh, amount=amount, request_type=request_type, order_id=order_id, shipment_id=shipment_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import PaymentOptionsDetails
@@ -162,7 +162,7 @@ class Payment:
         return response
     
     async def getBankAccountDetailsOpenAPI(self, order_id=None, request_hash=None, request_headers:Dict={}):
-        """Retrieve bank account information 
+        """Retrieve bank account information
         :param order_id :  : type string
         :param request_hash :  : type string
         """
@@ -178,7 +178,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/account", """{"required":[{"in":"query","name":"order_id","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"request_hash","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"order_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"request_hash","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", order_id=order_id, request_hash=request_hash, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/account", """{"required":[{"in":"query","name":"order_id","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"request_hash","schema":{"type":"string"}}],"query":[{"in":"query","name":"order_id","required":true,"schema":{"type":"string"}},{"in":"query","name":"request_hash","schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", order_id=order_id, request_hash=request_hash, )
         query_string = await create_query_string(order_id=order_id, request_hash=request_hash, )
         if query_string:
             url_with_params += "?" + query_string
@@ -198,8 +198,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/account", order_id=order_id, request_hash=request_hash), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RefundAccountDetails
-            schema = RefundAccountDetails()
+            from .models import GetRefundAccountDetails
+            schema = GetRefundAccountDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -209,7 +209,7 @@ class Payment:
         return response
     
     async def addRefundBankAccountUsingOTP(self, body="", request_headers:Dict={}):
-        """The addition of a bank account specifically for refunds, employing OTP verification for security
+        """The addition of a bank account specifically for refunds, employing OTP verification for security - Payment
         """
         payload = {}
         
@@ -254,7 +254,7 @@ class Payment:
         return response
     
     async def getUserOrderBeneficiaries(self, order_id=None, request_headers:Dict={}):
-        """Retrieve beneficiary details like bank name , ifsc code , branch name associated with a specific order for refund processing 
+        """Retrieve beneficiary details like bank name , ifsc code , branch name associated with a specific order for refund processing
         :param order_id :  : type string
         """
         payload = {}
@@ -387,7 +387,7 @@ class Payment:
         return response
     
     async def getUserCODlimitRoutes(self, merchant_user_id=None, mobile_no=None, request_headers:Dict={}):
-        """Retrieve user cod limt data of user i.e cod is active or not for user and remaining limit 
+        """Retrieve user cod limt data of user i.e cod is active or not for user and remaining limit
         :param merchant_user_id :  : type string
         :param mobile_no :  : type string
         """
@@ -448,7 +448,7 @@ class Payment:
         schema = SetCODForUserCreation()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/user-cod", """{"required":[{"name":"company_id","in":"path","description":"Company ID","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/user-cod", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -468,8 +468,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/user-cod", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SetCODOptionDetails
-            schema = SetCODOptionDetails()
+            from .models import GetUserCODLimitDetails
+            schema = GetUserCODLimitDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -723,7 +723,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/edc-device-list", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"is_active","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"store_id","required":false,"schema":{"type":"integer"}},{"in":"query","name":"device_tag","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"is_active","required":false,"schema":{"type":"boolean"}},{"in":"query","name":"store_id","required":false,"schema":{"type":"integer"}},{"in":"query","name":"device_tag","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, is_active=is_active, store_id=store_id, device_tag=device_tag, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/edc-device-list", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","schema":{"type":"integer"}},{"in":"query","name":"page_size","schema":{"type":"integer"}},{"in":"query","name":"is_active","schema":{"type":"boolean"}},{"in":"query","name":"store_id","schema":{"type":"integer"}},{"in":"query","name":"device_tag","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_no","schema":{"type":"integer"}},{"in":"query","name":"page_size","schema":{"type":"integer"}},{"in":"query","name":"is_active","schema":{"type":"boolean"}},{"in":"query","name":"store_id","schema":{"type":"integer"}},{"in":"query","name":"device_tag","schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, is_active=is_active, store_id=store_id, device_tag=device_tag, )
         query_string = await create_query_string(page_no=page_no, page_size=page_size, is_active=is_active, store_id=store_id, device_tag=device_tag, )
         if query_string:
             url_with_params += "?" + query_string
@@ -754,7 +754,7 @@ class Payment:
         return response
     
     async def getPosPaymentModeRoutes(self, amount=None, cart_id=None, pincode=None, checkout_mode=None, refresh=None, order_id=None, card_reference=None, order_type=None, user_details=None, display_split=None, advance_payment=None, shipment_id=None, request_headers:Dict={}):
-        """Available payment methods on the payment page for POS, specifying the aggregator for each option, such as 'CARD powered by Juspay' and 'QR powered by Razorpay'.
+        """Retrieve payment options and aggregator for point-of-sale (POS).
         :param amount : Payable amount. : type integer
         :param cart_id : Identifier of the cart. : type string
         :param pincode : The PIN Code of the destination address, e.g. 400059 : type string
@@ -800,7 +800,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/pos", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059","required":true,"schema":{"type":"string"}},{"name":"order_type","in":"query","required":true,"description":"The order type of shipment * HomeDelivery - If the customer wants the order home-delivered * PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"x-not-enum":true,"type":"string"}}],"optional":[{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":false,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"order_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"user_details","in":"query","description":"URIencoded JSON containing details of an anonymous user.","example":"%7B%22first_name%22:%22Fynd%22,%22last_name%22:%22Dummy%22,%22mobile%22:%229999999999%22,%22email%22:%22paymentsdummy@gofynd.com%22%7D","schema":{"type":"string"}},{"name":"display_split","in":"query","description":"Display Split Payment Option or not","schema":{"type":"boolean"}},{"name":"advance_payment","in":"query","description":"Display Advance Payment Options or Normal","schema":{"type":"boolean"}},{"name":"shipment_id","in":"query","required":false,"schema":{"type":"string"}}],"query":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":false,"schema":{"type":"string"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059","required":true,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"order_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"order_type","in":"query","required":true,"description":"The order type of shipment * HomeDelivery - If the customer wants the order home-delivered * PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"x-not-enum":true,"type":"string"}},{"name":"user_details","in":"query","description":"URIencoded JSON containing details of an anonymous user.","example":"%7B%22first_name%22:%22Fynd%22,%22last_name%22:%22Dummy%22,%22mobile%22:%229999999999%22,%22email%22:%22paymentsdummy@gofynd.com%22%7D","schema":{"type":"string"}},{"name":"display_split","in":"query","description":"Display Split Payment Option or not","schema":{"type":"boolean"}},{"name":"advance_payment","in":"query","description":"Display Advance Payment Options or Normal","schema":{"type":"boolean"}},{"name":"shipment_id","in":"query","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, order_id=order_id, card_reference=card_reference, order_type=order_type, user_details=user_details, display_split=display_split, advance_payment=advance_payment, shipment_id=shipment_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/pos", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059","required":true,"schema":{"type":"string"}},{"name":"order_type","in":"query","required":true,"description":"The order type of shipment * HomeDelivery - If the customer wants the order home-delivered * PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"x-not-enum":true,"type":"string"}}],"optional":[{"name":"cart_id","in":"query","description":"Identifier of the cart.","schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","schema":{"type":"string"}},{"name":"refresh","in":"query","description":"This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"order_id","in":"query","schema":{"type":"string"}},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"user_details","in":"query","description":"URIencoded JSON containing details of an anonymous user.","schema":{"type":"string"}},{"name":"display_split","in":"query","description":"Display Split Payment Option or not","schema":{"type":"boolean"}},{"name":"advance_payment","in":"query","description":"Display Advance Payment Options or Normal","schema":{"type":"boolean"}},{"name":"shipment_id","in":"query","schema":{"type":"string"}}],"query":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","schema":{"type":"string"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059","required":true,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","schema":{"type":"string"}},{"name":"refresh","in":"query","description":"This is a boolean value. Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}},{"name":"order_id","in":"query","schema":{"type":"string"}},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"}},{"name":"order_type","in":"query","required":true,"description":"The order type of shipment * HomeDelivery - If the customer wants the order home-delivered * PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"x-not-enum":true,"type":"string"}},{"name":"user_details","in":"query","description":"URIencoded JSON containing details of an anonymous user.","schema":{"type":"string"}},{"name":"display_split","in":"query","description":"Display Split Payment Option or not","schema":{"type":"boolean"}},{"name":"advance_payment","in":"query","description":"Display Advance Payment Options or Normal","schema":{"type":"boolean"}},{"name":"shipment_id","in":"query","schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, order_id=order_id, card_reference=card_reference, order_type=order_type, user_details=user_details, display_split=display_split, advance_payment=advance_payment, shipment_id=shipment_id)
         query_string = await create_query_string(amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, order_id=order_id, card_reference=card_reference, order_type=order_type, user_details=user_details, display_split=display_split, advance_payment=advance_payment, shipment_id=shipment_id)
         if query_string:
             url_with_params += "?" + query_string
@@ -980,7 +980,7 @@ class Payment:
         schema = PaymentStatusBulkHandlerCreation()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/payment-status-bulk/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/payment-status-bulk", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -997,7 +997,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/payment-status-bulk/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/payment-status-bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import PaymentStatusBulkHandlerDetails
@@ -1030,7 +1030,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/onboard/{aggregator}/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"path","description":"aggregator","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"success_redirect_url","schema":{"type":"string","description":"This is the url which will come back to after success authorization complete"}},{"in":"query","name":"failure_redirect_url","schema":{"type":"string","description":"This is the url which will come back to after failure authorization"}}],"query":[{"in":"query","name":"success_redirect_url","schema":{"type":"string","description":"This is the url which will come back to after success authorization complete"}},{"in":"query","name":"failure_redirect_url","schema":{"type":"string","description":"This is the url which will come back to after failure authorization"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"path","description":"aggregator","schema":{"type":"string"},"required":true}]}""", serverType="platform", aggregator=aggregator, success_redirect_url=success_redirect_url, failure_redirect_url=failure_redirect_url)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/onboard/{aggregator}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"path","description":"aggregator","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"success_redirect_url","schema":{"type":"string","description":"This is the url which will come back to after success authorization complete"}},{"in":"query","name":"failure_redirect_url","schema":{"type":"string","description":"This is the url which will come back to after failure authorization"}}],"query":[{"in":"query","name":"success_redirect_url","schema":{"type":"string","description":"This is the url which will come back to after success authorization complete"}},{"in":"query","name":"failure_redirect_url","schema":{"type":"string","description":"This is the url which will come back to after failure authorization"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"path","description":"aggregator","schema":{"type":"string"},"required":true}]}""", serverType="platform", aggregator=aggregator, success_redirect_url=success_redirect_url, failure_redirect_url=failure_redirect_url)
         query_string = await create_query_string(success_redirect_url=success_redirect_url, failure_redirect_url=failure_redirect_url)
         if query_string:
             url_with_params += "?" + query_string
@@ -1047,7 +1047,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/onboard/{aggregator}/", aggregator=aggregator, success_redirect_url=success_redirect_url, failure_redirect_url=failure_redirect_url), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/onboard/{aggregator}", aggregator=aggregator, success_redirect_url=success_redirect_url, failure_redirect_url=failure_redirect_url), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetOauthUrlDetails
@@ -1061,7 +1061,7 @@ class Payment:
         return response
     
     async def revokeOauthToken(self, aggregator=None, request_headers:Dict={}):
-        """Revoke the creds  for payment aggregator razropay.
+        """Revoke the creds  for payment aggregator
         :param aggregator : aggregator_slug : type string
         """
         payload = {}
@@ -1074,7 +1074,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/revoke/{aggregator}/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"path","description":"aggregator_slug","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"path","description":"aggregator_slug","schema":{"type":"string"},"required":true}]}""", serverType="platform", aggregator=aggregator)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/revoke/{aggregator}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"path","description":"aggregator_slug","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"path","description":"aggregator_slug","schema":{"type":"string"},"required":true}]}""", serverType="platform", aggregator=aggregator)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1091,7 +1091,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/revoke/{aggregator}/", aggregator=aggregator), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/revoke/{aggregator}", aggregator=aggregator), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import RevokeOAuthToken
@@ -1240,7 +1240,7 @@ class Payment:
         return response
     
     async def getPaymentLink(self, payment_link_id=None, request_headers:Dict={}):
-        """Retrieve a payment link for making payments.
+        """Retrieve a payment link for making payments - Payment
         :param payment_link_id :  : type string
         """
         payload = {}
@@ -1253,7 +1253,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/create-payment-link/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"in":"query","name":"payment_link_id","schema":{"type":"string","description":"Unique payment link id"},"required":true}],"optional":[],"query":[{"in":"query","name":"payment_link_id","schema":{"type":"string","description":"Unique payment link id"},"required":true}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", payment_link_id=payment_link_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/create-payment-link", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"in":"query","name":"payment_link_id","required":true,"schema":{"type":"string","description":"Unique payment link id"}}],"optional":[],"query":[{"in":"query","name":"payment_link_id","required":true,"schema":{"type":"string","description":"Unique payment link id"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", payment_link_id=payment_link_id)
         query_string = await create_query_string(payment_link_id=payment_link_id)
         if query_string:
             url_with_params += "?" + query_string
@@ -1270,7 +1270,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/create-payment-link/", payment_link_id=payment_link_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/create-payment-link", payment_link_id=payment_link_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetPaymentLinkDetails
@@ -1298,7 +1298,7 @@ class Payment:
         schema = CreatePaymentLinkCreation()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/create-payment-link/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/create-payment-link", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1315,7 +1315,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/create-payment-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/create-payment-link", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CreatePaymentLinkDetails
@@ -1328,21 +1328,24 @@ class Payment:
 
         return response
     
-    async def pollingPaymentLink(self, payment_link_id=None, request_headers:Dict={}):
-        """Periodically checks the status of a payment link to monitor for any updates or changes.retrieve real-time information about the payment link's current status, such as whether it has been processed, cancelled, or expired. 
+    async def getPaymentLinkId(self, id=None, payment_link_id=None, request_headers:Dict={}):
+        """get a payment link
+        :param id :  : type string
         :param payment_link_id :  : type string
         """
         payload = {}
         
+        if id is not None:
+            payload["id"] = id
         if payment_link_id is not None:
             payload["payment_link_id"] = payment_link_id
 
         # Parameter validation
-        schema = PaymentValidator.pollingPaymentLink()
+        schema = PaymentValidator.getPaymentLinkId()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/polling-payment-link/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"in":"query","name":"payment_link_id","schema":{"type":"string","description":"Unique payment link id"},"required":true}],"optional":[],"query":[{"in":"query","name":"payment_link_id","schema":{"type":"string","description":"Unique payment link id"},"required":true}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", payment_link_id=payment_link_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/create-payment-link/{id}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"in":"path","name":"id","schema":{"type":"string","description":"Unique payment link id"},"required":true},{"in":"query","name":"payment_link_id","required":true,"schema":{"type":"string","description":"Unique payment link id"}}],"optional":[],"query":[{"in":"query","name":"payment_link_id","required":true,"schema":{"type":"string","description":"Unique payment link id"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"in":"path","name":"id","schema":{"type":"string","description":"Unique payment link id"},"required":true}]}""", serverType="platform", id=id, payment_link_id=payment_link_id)
         query_string = await create_query_string(payment_link_id=payment_link_id)
         if query_string:
             url_with_params += "?" + query_string
@@ -1359,7 +1362,51 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/polling-payment-link/", payment_link_id=payment_link_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/create-payment-link/{id}", id=id, payment_link_id=payment_link_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetPaymentLinkDetails
+            schema = GetPaymentLinkDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPaymentLinkId")
+                print(e)
+
+        return response
+    
+    async def pollingPaymentLink(self, payment_link_id=None, request_headers:Dict={}):
+        """Periodically checks the status of a payment link to monitor for any updates or changes.retrieve real-time information about the payment link's current status, such as whether it has been processed, cancelled, or expired
+        :param payment_link_id :  : type string
+        """
+        payload = {}
+        
+        if payment_link_id is not None:
+            payload["payment_link_id"] = payment_link_id
+
+        # Parameter validation
+        schema = PaymentValidator.pollingPaymentLink()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/polling-payment-link", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"in":"query","name":"payment_link_id","schema":{"type":"string","description":"Unique payment link id"},"required":true}],"optional":[],"query":[{"in":"query","name":"payment_link_id","schema":{"type":"string","description":"Unique payment link id"},"required":true}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", payment_link_id=payment_link_id)
+        query_string = await create_query_string(payment_link_id=payment_link_id)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/polling-payment-link", payment_link_id=payment_link_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import PollingPaymentLinkDetails
@@ -1373,7 +1420,7 @@ class Payment:
         return response
     
     async def resendPaymentLink(self, body="", request_headers:Dict={}):
-        """Resends an existing payment link to the user to complete the payment.
+        """Resends an existing payment link to the user to complete the payment
         """
         payload = {}
         
@@ -1387,7 +1434,7 @@ class Payment:
         schema = CancelOrResendPaymentLinkCreation()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resend-payment-link/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resend-payment-link", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1404,7 +1451,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resend-payment-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resend-payment-link", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ResendPaymentLinkDetails
@@ -1432,7 +1479,7 @@ class Payment:
         schema = CancelOrResendPaymentLinkCreation()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cancel-payment-link/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cancel-payment-link", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1449,7 +1496,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cancel-payment-link/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cancel-payment-link", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CancelPaymentLinkDetails
@@ -1458,6 +1505,98 @@ class Payment:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for cancelPaymentLink")
+                print(e)
+
+        return response
+    
+    async def getPaymentModeSequencing(self, business_unit=None, device=None, request_headers:Dict={}):
+        """get details for the given payment modes and its sequencingfor merchant
+        :param business_unit :  : type string
+        :param device :  : type string
+        """
+        payload = {}
+        
+        if business_unit is not None:
+            payload["business_unit"] = business_unit
+        if device is not None:
+            payload["device"] = device
+
+        # Parameter validation
+        schema = PaymentValidator.getPaymentModeSequencing()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment_modes/sequencing", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"business_unit","in":"query","required":true,"schema":{"type":"string"}},{"name":"device","in":"query","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"business_unit","in":"query","required":true,"schema":{"type":"string"}},{"name":"device","in":"query","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", business_unit=business_unit, device=device)
+        query_string = await create_query_string(business_unit=business_unit, device=device)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment_modes/sequencing", business_unit=business_unit, device=device), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PaymentModeDetails
+            schema = PaymentModeDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPaymentModeSequencing")
+                print(e)
+
+        return response
+    
+    async def patchPaymentModeSequencing(self, body="", request_headers:Dict={}):
+        """Update sequencing of payment modes for the merchant
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.patchPaymentModeSequencing()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PlatformPaymentMode
+        schema = PlatformPaymentMode()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment_modes/sequencing", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment_modes/sequencing", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AggregatorConfigDetails
+            schema = AggregatorConfigDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for patchPaymentModeSequencing")
                 print(e)
 
         return response
@@ -1496,8 +1635,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/modes/{mode}", mode=mode), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PlatformPaymentModeDetails
-            schema = PlatformPaymentModeDetails()
+            from .models import PlatformOfflineAdvanceDetails
+            schema = PlatformOfflineAdvanceDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1507,8 +1646,8 @@ class Payment:
         return response
     
     async def setMerchantModeControlRoutes(self, mode=None, body="", request_headers:Dict={}):
-        """Update offline payment mode details for the merchant like update for cod  offline payment mode get user level cod limit, order level cod limit, cod charge, enable/disable device for cod.
-        :param mode : offline / advance payment mode : type string
+        """Update details of offline / advance payment mode like for cod  offline payment mode get user level cod limit, order level cod limit, cod charge.
+        :param mode : offline / advance  modes to get the payment modes : type string
         """
         payload = {}
         
@@ -1520,11 +1659,11 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import MerchantPaymentModeCreation
-        schema = MerchantPaymentModeCreation()
+        from .models import PlatformOfflineAdvance
+        schema = PlatformOfflineAdvance()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/modes/{mode}", """{"required":[{"name":"company_id","in":"path","description":"Company ID","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"mode","in":"path","description":"offline / advance payment mode","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"mode","in":"path","description":"offline / advance payment mode","schema":{"type":"string"},"required":true}]}""", serverType="platform", mode=mode)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/modes/{mode}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"mode","in":"path","description":"offline / advance  modes to get the payment modes","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"mode","in":"path","description":"offline / advance  modes to get the payment modes","schema":{"type":"string"},"required":true}]}""", serverType="platform", mode=mode)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1544,8 +1683,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/modes/{mode}", mode=mode), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PlatformPaymentModeDetails
-            schema = PlatformPaymentModeDetails()
+            from .models import PlatformOfflineAdvanceDetails
+            schema = PlatformOfflineAdvanceDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1616,7 +1755,7 @@ class Payment:
         schema = PaymentCustomConfigRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/modes/{mode}/custom-config", """{"required":[{"name":"company_id","in":"path","description":"Company ID","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"mode","in":"path","description":"offline / advance payment mode","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"mode","in":"path","description":"offline / advance payment mode","schema":{"type":"string"},"required":true}]}""", serverType="platform", mode=mode)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/modes/{mode}/custom-config", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"mode","in":"path","description":"offline / advance payment mode","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"mode","in":"path","description":"offline / advance payment mode","schema":{"type":"string"},"required":true}]}""", serverType="platform", mode=mode)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1689,7 +1828,7 @@ class Payment:
     
     async def getPaymentSession(self, gid=None, line_item=None, request_headers:Dict={}):
         """Allows users to fetch the payment session details associated with a given order ID or transaction ID
-        :param gid : global identifier of the entity (e.g. order, cart etc.) against which payment session was initiated. This is generated by Fynd payments platform and is unique. : type string
+        :param gid : transaction id : type string
         :param line-item : A boolean flag to include detailed cart and line item information in the response. When set to true, the response will contain comprehensive details about the cart, including each line item's product or service descriptions, quantities, unit prices, applicable taxes, discounts, total cart value, and total quantity. This provides a clear breakdown of charges to the customer, helping to understand the total amount billed in a more granular way. : type boolean
         """
         payload = {}
@@ -1704,7 +1843,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/session/{gid}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"gid","in":"path","description":"global identifier of the entity (e.g. order, cart etc.) against which payment session was initiated. This is generated by Fynd payments platform and is unique.","schema":{"type":"string"},"required":true}],"optional":[{"name":"line-item","in":"query","description":"A boolean flag to include detailed cart and line item information in the response. When set to true, the response will contain comprehensive details about the cart, including each line item's product or service descriptions, quantities, unit prices, applicable taxes, discounts, total cart value, and total quantity. This provides a clear breakdown of charges to the customer, helping to understand the total amount billed in a more granular way.","schema":{"type":"boolean"}}],"query":[{"name":"line-item","in":"query","description":"A boolean flag to include detailed cart and line item information in the response. When set to true, the response will contain comprehensive details about the cart, including each line item's product or service descriptions, quantities, unit prices, applicable taxes, discounts, total cart value, and total quantity. This provides a clear breakdown of charges to the customer, helping to understand the total amount billed in a more granular way.","schema":{"type":"boolean"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"gid","in":"path","description":"global identifier of the entity (e.g. order, cart etc.) against which payment session was initiated. This is generated by Fynd payments platform and is unique.","schema":{"type":"string"},"required":true}]}""", serverType="platform", gid=gid, line_item=line_item)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/session/{gid}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"gid","in":"path","description":"transaction id","schema":{"type":"string"},"required":true}],"optional":[{"name":"line-item","in":"query","description":"A boolean flag to include detailed cart and line item information in the response. When set to true, the response will contain comprehensive details about the cart, including each line item's product or service descriptions, quantities, unit prices, applicable taxes, discounts, total cart value, and total quantity. This provides a clear breakdown of charges to the customer, helping to understand the total amount billed in a more granular way.","schema":{"type":"boolean"}}],"query":[{"name":"line-item","in":"query","description":"A boolean flag to include detailed cart and line item information in the response. When set to true, the response will contain comprehensive details about the cart, including each line item's product or service descriptions, quantities, unit prices, applicable taxes, discounts, total cart value, and total quantity. This provides a clear breakdown of charges to the customer, helping to understand the total amount billed in a more granular way.","schema":{"type":"boolean"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"gid","in":"path","description":"transaction id","schema":{"type":"string"},"required":true}]}""", serverType="platform", gid=gid, line_item=line_item)
         query_string = await create_query_string(line_item=line_item)
         if query_string:
             url_with_params += "?" + query_string
@@ -1724,8 +1863,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/session/{gid}", gid=gid, line_item=line_item), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PaymentSessionFetchDetails
-            schema = PaymentSessionFetchDetails()
+            from .models import GetPaymentSessionDetails
+            schema = GetPaymentSessionDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1833,19 +1972,22 @@ class Payment:
 
         return response
     
-    async def getMerchantPaymentOption(self, request_headers:Dict={}):
+    async def getMerchantPaymentOption(self, payment_option_type=None, request_headers:Dict={}):
         """Retrieve available payment gateways and offline payment mode details for a merchant by providing company ID and application ID, returning a list of active payment gateways and their configurations, including online and offline options.
+        :param payment_option_type : Payment Option Type, Expected value - advance (Optional) : type string
         """
         payload = {}
         
+        if payment_option_type is not None:
+            payload["payment_option_type"] = payment_option_type
 
         # Parameter validation
         schema = PaymentValidator.getMerchantPaymentOption()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/configuration", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/configuration", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[{"name":"payment_option_type","in":"query","description":"Payment Option Type, Expected value - advance (Optional)","schema":{"type":"string","x-not-enum":true}}],"query":[{"name":"payment_option_type","in":"query","description":"Payment Option Type, Expected value - advance (Optional)","schema":{"type":"string","x-not-enum":true}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", payment_option_type=payment_option_type)
+        query_string = await create_query_string(payment_option_type=payment_option_type)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -1861,11 +2003,11 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/configuration", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/configuration", payment_option_type=payment_option_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PlatformPaymentModeDetails
-            schema = PlatformPaymentModeDetails()
+            from .models import PlatformOnlineOfflinePaymentDetails
+            schema = PlatformOnlineOfflinePaymentDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1909,8 +2051,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PlatformPaymentModeDetails
-            schema = PlatformPaymentModeDetails()
+            from .models import PatchPlatformOnlineOfflinePaymentDetails
+            schema = PatchPlatformOnlineOfflinePaymentDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1919,8 +2061,49 @@ class Payment:
 
         return response
     
+    async def getDevices(self, request_headers:Dict={}):
+        """Get all business units and it's devices.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.getDevices()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/aggregators/all-devices", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/aggregators/all-devices", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetDevice
+            schema = GetDevice()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDevices")
+                print(e)
+
+        return response
+    
     async def getMerchantAggregatorPaymentModeDetails(self, aggregator_id=None, business_unit=None, device=None, request_headers:Dict={}):
-        """Get available payment gateways and payment mode and it's sub payment mode details like for razorpay their active/inactive payment modes netbanking , wallet, upi are shown. 
+        """swagger not found. so operationId not found
         :param aggregator_id : Aggregators Id : type integer
         :param business_unit :  : type string
         :param device :  : type string
@@ -1959,8 +2142,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/aggregators/{aggregator_id}", aggregator_id=aggregator_id, business_unit=business_unit, device=device), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PlatformPaymentModeDetails
-            schema = PlatformPaymentModeDetails()
+            from .models import AggregatorPlatformPaymentModeDetails
+            schema = AggregatorPlatformPaymentModeDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1983,8 +2166,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PlatformPaymentModeDetails
-        schema = PlatformPaymentModeDetails()
+        from .models import PlatformPaymentMode
+        schema = PlatformPaymentMode()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/aggregators/{aggregator_id}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator_id","in":"path","description":"Aggregators Id","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator_id","in":"path","description":"Aggregators Id","schema":{"type":"integer"},"required":true}]}""", serverType="platform", aggregator_id=aggregator_id)
@@ -2048,8 +2231,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/configuration/aggregator", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PlatformPaymentModeDetails
-            schema = PlatformPaymentModeDetails()
+            from .models import AggregatorConfigDetails
+            schema = AggregatorConfigDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2058,21 +2241,116 @@ class Payment:
 
         return response
     
-    async def getMerchantRefundPriority(self, config_type=None, request_headers:Dict={}):
-        """Retrieve merchant refund priority configurations, returning the status of the update and the refund sources priority with their descriptions and priorities.
-        :param config_type : configuration for merchant or customer : type string
+    async def getAggregatorCredentialHistory(self, aggregator=None, config_type=None, request_headers:Dict={}):
+        """Get merchant refund priority.
+        :param aggregator : The aggregator for which credentials are requested : type string
+        :param config_type : The configuration type for which credentials are requested : type string
         """
         payload = {}
         
+        if aggregator is not None:
+            payload["aggregator"] = aggregator
         if config_type is not None:
             payload["config_type"] = config_type
 
         # Parameter validation
-        schema = PaymentValidator.getMerchantRefundPriority()
+        schema = PaymentValidator.getAggregatorCredentialHistory()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"required":true}]}""", serverType="platform", config_type=config_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/configuration/aggregator/credential/history", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"query","required":true,"schema":{"type":"string"},"description":"The aggregator for which credentials are requested"},{"name":"config_type","in":"query","required":true,"x-not-enum":true,"schema":{"type":"string","x-not-enum":true},"description":"The configuration type for which credentials are requested"}],"optional":[],"query":[{"name":"aggregator","in":"query","required":true,"schema":{"type":"string"},"description":"The aggregator for which credentials are requested"},{"name":"config_type","in":"query","required":true,"x-not-enum":true,"schema":{"type":"string","x-not-enum":true},"description":"The configuration type for which credentials are requested"}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", aggregator=aggregator, config_type=config_type)
+        query_string = await create_query_string(aggregator=aggregator, config_type=config_type)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/configuration/aggregator/credential/history", aggregator=aggregator, config_type=config_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AggregatorHistoryDetails
+            schema = AggregatorHistoryDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAggregatorCredentialHistory")
+                print(e)
+
+        return response
+    
+    async def getAggregatorCredential(self, aggregator=None, config_type=None, request_headers:Dict={}):
+        """API to get merchant refund priority
+        :param aggregator : The aggregator for which credentials are requested : type string
+        :param config_type : The configuration type for which credentials are requested : type string
+        """
+        payload = {}
+        
+        if aggregator is not None:
+            payload["aggregator"] = aggregator
+        if config_type is not None:
+            payload["config_type"] = config_type
+
+        # Parameter validation
+        schema = PaymentValidator.getAggregatorCredential()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/configuration/aggregator/credential", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"query","required":true,"schema":{"type":"string"},"description":"The aggregator for which credentials are requested"},{"name":"config_type","in":"query","required":true,"schema":{"type":"string","x-not-enum":true},"description":"The configuration type for which credentials are requested"}],"optional":[],"query":[{"name":"aggregator","in":"query","required":true,"schema":{"type":"string"},"description":"The aggregator for which credentials are requested"},{"name":"config_type","in":"query","required":true,"schema":{"type":"string","x-not-enum":true},"description":"The configuration type for which credentials are requested"}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", aggregator=aggregator, config_type=config_type)
+        query_string = await create_query_string(aggregator=aggregator, config_type=config_type)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/configuration/aggregator/credential", aggregator=aggregator, config_type=config_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AggregatorCredentialRes
+            schema = AggregatorCredentialRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAggregatorCredential")
+                print(e)
+
+        return response
+    
+    async def updateAggregatorCredential(self, body="", request_headers:Dict={}):
+        """
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.updateAggregatorCredential()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import AggregatorCredentialReq
+        schema = AggregatorCredentialReq()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/configuration/aggregator/credential", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -2089,7 +2367,54 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}", config_type=config_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/configuration/aggregator/credential", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PatchAggregatorCredentialDetails
+            schema = PatchAggregatorCredentialDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAggregatorCredential")
+                print(e)
+
+        return response
+    
+    async def getMerchantRefundPriority(self, config_type=None, business_unit=None, request_headers:Dict={}):
+        """Retrieve merchant refund priority configurations, returning the status of the update and the refund sources priority with their descriptions and priorities.
+        :param config_type : configuration for merchant or customer : type string
+        :param business_unit : Business unit storefront or pos : type string
+        """
+        payload = {}
+        
+        if config_type is not None:
+            payload["config_type"] = config_type
+        if business_unit is not None:
+            payload["business_unit"] = business_unit
+
+        # Parameter validation
+        schema = PaymentValidator.getMerchantRefundPriority()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}/{business_unit}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"required":true},{"name":"business_unit","in":"path","description":"Business unit storefront or pos","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"required":true},{"name":"business_unit","in":"path","description":"Business unit storefront or pos","schema":{"type":"string"},"required":true}]}""", serverType="platform", config_type=config_type, business_unit=business_unit)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}/{business_unit}", config_type=config_type, business_unit=business_unit), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import RefundPriorityDetails
@@ -2102,14 +2427,17 @@ class Payment:
 
         return response
     
-    async def createMerchantRefundPriority(self, config_type=None, body="", request_headers:Dict={}):
+    async def createMerchantRefundPriority(self, config_type=None, business_unit=None, body="", request_headers:Dict={}):
         """Create merchant refund priority configurations, with the provided refund sources priority details, and return the status of the operation.
         :param config_type : configuration for merchant or customer : type string
+        :param business_unit : Business unit storefront or pos : type string
         """
         payload = {}
         
         if config_type is not None:
             payload["config_type"] = config_type
+        if business_unit is not None:
+            payload["business_unit"] = business_unit
 
         # Parameter validation
         schema = PaymentValidator.createMerchantRefundPriority()
@@ -2120,7 +2448,7 @@ class Payment:
         schema = RefundPriorityCreation()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"required":true}]}""", serverType="platform", config_type=config_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}/{business_unit}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"required":true},{"name":"business_unit","in":"path","description":"Business unit storefront or pos","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"required":true},{"name":"business_unit","in":"path","description":"Business unit storefront or pos","schema":{"type":"string"},"required":true}]}""", serverType="platform", config_type=config_type, business_unit=business_unit)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -2137,7 +2465,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}", config_type=config_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}/{business_unit}", config_type=config_type, business_unit=business_unit), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import RefundPriorityDetails
@@ -2150,14 +2478,17 @@ class Payment:
 
         return response
     
-    async def updateMerchantRefundPriority(self, config_type=None, body="", request_headers:Dict={}):
+    async def updateMerchantRefundPriority(self, config_type=None, business_unit=None, body="", request_headers:Dict={}):
         """Update merchant refund priority configurations, with the provided refund sources priority details, and return the status of the operation.
         :param config_type : configuration for merchant or customer : type string
+        :param business_unit : Business unit storefront or pos : type string
         """
         payload = {}
         
         if config_type is not None:
             payload["config_type"] = config_type
+        if business_unit is not None:
+            payload["business_unit"] = business_unit
 
         # Parameter validation
         schema = PaymentValidator.updateMerchantRefundPriority()
@@ -2168,7 +2499,7 @@ class Payment:
         schema = RefundPriorityCreation()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"required":true}]}""", serverType="platform", config_type=config_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}/{business_unit}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"required":true},{"name":"business_unit","in":"path","description":"Business unit storefront or pos","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"config_type","in":"path","description":"configuration for merchant or customer","schema":{"type":"string","enum":["merchant","customer","default"]},"required":true},{"name":"business_unit","in":"path","description":"Business unit storefront or pos","schema":{"type":"string"},"required":true}]}""", serverType="platform", config_type=config_type, business_unit=business_unit)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -2185,7 +2516,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}", config_type=config_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund_priority/config/{config_type}/{business_unit}", config_type=config_type, business_unit=business_unit), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import RefundPriorityDetails
@@ -2213,7 +2544,7 @@ class Payment:
         schema = PaymentOrderCreation()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment-orders/", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment-orders", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -2230,7 +2561,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment-orders/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment-orders", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import PaymentOrderDetails
@@ -2239,6 +2570,99 @@ class Payment:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for createPaymentOrder")
+                print(e)
+
+        return response
+    
+    async def copyConfigPaymentModes(self, body="", request_headers:Dict={}):
+        """Copy aggregator config like Wallet, NB, paylater from one device of an aggregator like razorpay to another device.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.copyConfigPaymentModes()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PlatformPaymentModeCopyConfigCreation
+        schema = PlatformPaymentModeCopyConfigCreation()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment_modes/sequencing/copy-config", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment_modes/sequencing/copy-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AggregatorConfigDetails
+            schema = AggregatorConfigDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for copyConfigPaymentModes")
+                print(e)
+
+        return response
+    
+    async def copyConfigAggPaymentModes(self, aggregator_id=None, body="", request_headers:Dict={}):
+        """Copy aggregator config like Wallet, NB, paylater from one device of an aggregator like razorpay to another device.
+        :param aggregator_id : Aggregator Id : type string
+        """
+        payload = {}
+        
+        if aggregator_id is not None:
+            payload["aggregator_id"] = aggregator_id
+
+        # Parameter validation
+        schema = PaymentValidator.copyConfigAggPaymentModes()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PlatformPaymentModeCopyConfigCreation
+        schema = PlatformPaymentModeCopyConfigCreation()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/aggregators/{aggregator_id}/copy-config", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator_id","in":"path","description":"Aggregator Id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator_id","in":"path","description":"Aggregator Id","schema":{"type":"string"},"required":true}]}""", serverType="platform", aggregator_id=aggregator_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/aggregators/{aggregator_id}/copy-config", aggregator_id=aggregator_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AggregatorConfigDetails
+            schema = AggregatorConfigDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for copyConfigAggPaymentModes")
                 print(e)
 
         return response
@@ -2269,7 +2693,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/aggregators/{aggregator_id}/version", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator_id","in":"path","description":"Aggregators Id","schema":{"type":"integer"},"required":true},{"name":"business_unit","in":"query","required":true,"schema":{"type":"string"}},{"name":"device","in":"query","required":true,"schema":{"type":"string"}}],"optional":[{"name":"payment_mode_id","in":"query","required":false,"schema":{"type":"integer"}},{"name":"sub_payment_mode","in":"query","required":false,"schema":{"type":"string"}}],"query":[{"name":"business_unit","in":"query","required":true,"schema":{"type":"string"}},{"name":"device","in":"query","required":true,"schema":{"type":"string"}},{"name":"payment_mode_id","in":"query","required":false,"schema":{"type":"integer"}},{"name":"sub_payment_mode","in":"query","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator_id","in":"path","description":"Aggregators Id","schema":{"type":"integer"},"required":true}]}""", serverType="platform", aggregator_id=aggregator_id, business_unit=business_unit, device=device, payment_mode_id=payment_mode_id, sub_payment_mode=sub_payment_mode)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/aggregators/{aggregator_id}/version", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator_id","in":"path","description":"Aggregators Id","schema":{"type":"integer"},"required":true},{"name":"business_unit","in":"query","required":true,"schema":{"type":"string"}},{"name":"device","in":"query","required":true,"schema":{"type":"string"}}],"optional":[{"name":"payment_mode_id","in":"query","schema":{"type":"integer"}},{"name":"sub_payment_mode","in":"query","schema":{"type":"string"}}],"query":[{"name":"business_unit","in":"query","required":true,"schema":{"type":"string"}},{"name":"device","in":"query","required":true,"schema":{"type":"string"}},{"name":"payment_mode_id","in":"query","schema":{"type":"integer"}},{"name":"sub_payment_mode","in":"query","schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator_id","in":"path","description":"Aggregators Id","schema":{"type":"integer"},"required":true}]}""", serverType="platform", aggregator_id=aggregator_id, business_unit=business_unit, device=device, payment_mode_id=payment_mode_id, sub_payment_mode=sub_payment_mode)
         query_string = await create_query_string(business_unit=business_unit, device=device, payment_mode_id=payment_mode_id, sub_payment_mode=sub_payment_mode)
         if query_string:
             url_with_params += "?" + query_string
@@ -2337,12 +2761,464 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/options/aggregators/{aggregator_id}/version", aggregator_id=aggregator_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PlatformPaymentModeDetails
-            schema = PlatformPaymentModeDetails()
+            from .models import AggregatorConfigDetails
+            schema = AggregatorConfigDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for patchMerchantPaymentOptionVersion")
+                print(e)
+
+        return response
+    
+    async def addRefundBankAccount(self, body="", request_headers:Dict={}):
+        """save bank details for returned/cancelled order to refund amount in his account.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.addRefundBankAccount()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import AddBeneficiaryDetailsOTPCreation
+        schema = AddBeneficiaryDetailsOTPCreation()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/account_create", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/account_create", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RefundAccountDetails
+            schema = RefundAccountDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addRefundBankAccount")
+                print(e)
+
+        return response
+    
+    async def deleteBeneficiaryDetails(self, body="", request_headers:Dict={}):
+        """Delete the saved beneficiary details provided beneficiary Id.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.deleteBeneficiaryDetails()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import DeleteBeneficiary
+        schema = DeleteBeneficiary()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/account_create", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/account_create", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeleteRefundAccountDetails
+            schema = DeleteRefundAccountDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteBeneficiaryDetails")
+                print(e)
+
+        return response
+    
+    async def setRefundOptionforShipment(self, body="", request_headers:Dict={}):
+        """Save refund source against shipment and order
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.setRefundOptionforShipment()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ShipmentRefundDetails
+        schema = ShipmentRefundDetails()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/refundoptions", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/refundoptions", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShipmentRefundRes
+            schema = ShipmentRefundRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for setRefundOptionforShipment")
+                print(e)
+
+        return response
+    
+    async def getSelectedRefundOption(self, shipment_id=None, order_id=None, request_headers:Dict={}):
+        """get the selected refund options for shipment id
+        :param shipment_id : shipment Id : type string
+        :param order_id : Order Id : type string
+        """
+        payload = {}
+        
+        if shipment_id is not None:
+            payload["shipment_id"] = shipment_id
+        if order_id is not None:
+            payload["order_id"] = order_id
+
+        # Parameter validation
+        schema = PaymentValidator.getSelectedRefundOption()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/selected_refund_options", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"shipment_id","in":"query","description":"shipment Id","required":true,"schema":{"type":"string"}},{"name":"order_id","in":"query","description":"Order Id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"shipment_id","in":"query","description":"shipment Id","required":true,"schema":{"type":"string"}},{"name":"order_id","in":"query","description":"Order Id","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", shipment_id=shipment_id, order_id=order_id)
+        query_string = await create_query_string(shipment_id=shipment_id, order_id=order_id)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/selected_refund_options", shipment_id=shipment_id, order_id=order_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SelectedRefundOptionDetails
+            schema = SelectedRefundOptionDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSelectedRefundOption")
+                print(e)
+
+        return response
+    
+    async def getUserBeneficiariesDetailV2(self, order_id=None, shipment_id=None, mop=None, request_headers:Dict={}):
+        """get the details of all active beneficiary added by a user for refund.
+        :param order_id : A unique number used for identifying and tracking your orders. : type string
+        :param shipment_id : A unique number used for identifying and tracking your orders. : type string
+        :param mop : Mode of payment for which beneficiary data required : type string
+        """
+        payload = {}
+        
+        if order_id is not None:
+            payload["order_id"] = order_id
+        if shipment_id is not None:
+            payload["shipment_id"] = shipment_id
+        if mop is not None:
+            payload["mop"] = mop
+
+        # Parameter validation
+        schema = PaymentValidator.getUserBeneficiariesDetailV2()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/user/beneficiary", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","description":"A unique number used for identifying and tracking your orders.","name":"order_id","schema":{"type":"string"}},{"in":"query","description":"A unique number used for identifying and tracking your orders.","name":"shipment_id","schema":{"type":"string"}},{"in":"query","description":"Mode of payment for which beneficiary data required","name":"mop","schema":{"type":"string"}}],"query":[{"in":"query","description":"A unique number used for identifying and tracking your orders.","name":"order_id","schema":{"type":"string"}},{"in":"query","description":"A unique number used for identifying and tracking your orders.","name":"shipment_id","schema":{"type":"string"}},{"in":"query","description":"Mode of payment for which beneficiary data required","name":"mop","schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", order_id=order_id, shipment_id=shipment_id, mop=mop)
+        query_string = await create_query_string(order_id=order_id, shipment_id=shipment_id, mop=mop)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/user/beneficiary", order_id=order_id, shipment_id=shipment_id, mop=mop), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderBeneficiaryResponseSchemaV2
+            schema = OrderBeneficiaryResponseSchemaV2()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserBeneficiariesDetailV2")
+                print(e)
+
+        return response
+    
+    async def validateBeneficiaryAddress(self, body="", request_headers:Dict={}):
+        """Validate UPI ID and IFSC code
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.validateBeneficiaryAddress()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ValidateValidateAddress
+        schema = ValidateValidateAddress()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/validate/beneficiary-address", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/validate/beneficiary-address", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ValidateValidateAddressDetails
+            schema = ValidateValidateAddressDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for validateBeneficiaryAddress")
+                print(e)
+
+        return response
+    
+    async def updateDefaultBeneficiary(self, body="", request_headers:Dict={}):
+        """set a default beneficiary for getting a refund.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.updateDefaultBeneficiary()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SetDefaultBeneficiary
+        schema = SetDefaultBeneficiary()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/beneficiary/default", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refund/beneficiary/default", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SetDefaultBeneficiaryDetails
+            schema = SetDefaultBeneficiaryDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateDefaultBeneficiary")
+                print(e)
+
+        return response
+    
+    async def getPennyDropValidation(self, request_headers:Dict={}):
+        """get pennydrop validation for bank account
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.getPennyDropValidation()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pennydrop/validation", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pennydrop/validation", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PennyDropValidationDetails
+            schema = PennyDropValidationDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPennyDropValidation")
+                print(e)
+
+        return response
+    
+    async def updatePennyDropValidation(self, body="", request_headers:Dict={}):
+        """update penny drop validation for application ID
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.updatePennyDropValidation()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import UpdatePennyDropValidation
+        schema = UpdatePennyDropValidation()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pennydrop/validation", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pennydrop/validation", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PennyDropValidationDetails
+            schema = PennyDropValidationDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePennyDropValidation")
+                print(e)
+
+        return response
+    
+    async def getShipmentBeneficiary(self, shipment_id=None, request_headers:Dict={}):
+        """get beneficiary details
+        :param shipment_id : Shipment id : type string
+        """
+        payload = {}
+        
+        if shipment_id is not None:
+            payload["shipment_id"] = shipment_id
+
+        # Parameter validation
+        schema = PaymentValidator.getShipmentBeneficiary()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refunds/beneficiary-details/{shipment_id}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"shipment_id","in":"path","description":"Shipment id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"shipment_id","in":"path","description":"Shipment id","schema":{"type":"string"},"required":true}]}""", serverType="platform", shipment_id=shipment_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/refunds/beneficiary-details/{shipment_id}", shipment_id=shipment_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ShipmentBeneficiaryDetailsRes
+            schema = ShipmentBeneficiaryDetailsRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getShipmentBeneficiary")
                 print(e)
 
         return response
