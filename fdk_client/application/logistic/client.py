@@ -26,7 +26,8 @@ class Logistic:
             "getLocality": "/service/application/logistics/v1.0/localities/{locality_type}/{locality_value}",
             "validateAddress": "/service/application/logistics/v1.0/country/{country_iso_code}/address/templates/{template_name}/validate",
             "createShipments": "/service/application/logistics/v1.0/company/{company_id}/application/{application_id}/shipments",
-            "getDeliveryPromise": "/service/application/logistics/v1.0/delivery-promise"
+            "getDeliveryPromise": "/service/application/logistics/v1.0/delivery-promise",
+            "getQCPromise": "/service/application/logistics/v1.0/qc-promise"
             
         }
         self._urls = {
@@ -72,8 +73,8 @@ class Logistic:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPincodeCity"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/pincode/{pincode}", pincode=pincode), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PincodeApiResponseSchema
-            schema = PincodeApiResponseSchema()
+            from .models import PincodeApiResponse
+            schema = PincodeApiResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -115,8 +116,8 @@ class Logistic:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllCountries"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/country-list", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CountryListResponseSchema
-            schema = CountryListResponseSchema()
+            from .models import CountryListResponse
+            schema = CountryListResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -125,7 +126,7 @@ class Logistic:
 
         return response
     
-    async def getZones(self, company_id=None, application_id=None, stage=None, type=None, page_size=None, page_no=None, is_active=None, q=None, country_iso_code=None, pincode=None, state=None, city=None, sector=None, store_uid=None, region_uid=None, body="", request_headers:Dict={}):
+    async def getZones(self, company_id=None, application_id=None, stage=None, type=None, page_size=None, page_no=None, is_active=None, q=None, country_iso_code=None, pincode=None, state=None, city=None, sector=None, body="", request_headers:Dict={}):
         """Displays the list of zones defined at the application level.
         :param company_id : The unique identifier for the company. : type integer
         :param application_id : A `application_id` is a unique identifier for a particular sale channel. : type string
@@ -140,8 +141,6 @@ class Logistic:
         :param state : State of the country. : type string
         :param city : City of the country. : type string
         :param sector : Sector name of mentioned address. : type string
-        :param store_uid : Unique identifier for a specific store. : type integer
-        :param region_uid : Unique identifier for a geographical region. : type string
         """
         payload = {}
         
@@ -171,18 +170,14 @@ class Logistic:
             payload["city"] = city
         if sector is not None:
             payload["sector"] = sector
-        if store_uid is not None:
-            payload["store_uid"] = store_uid
-        if region_uid is not None:
-            payload["region_uid"] = region_uid
 
         # Parameter validation
         schema = LogisticValidator.getZones()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getZones"], proccessed_params="""{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"stage","description":"Identifies the specific stage of zone bing requested.","schema":{"type":"string","enum":["in_progress","failed","completed"]}},{"in":"query","name":"type","description":"Using type, you can filter custom or default zones","schema":{"type":"string","enum":["default","custom"]}},{"in":"query","name":"page_size","description":"Defines the number of items displayed per page.","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"page_no","description":"current page number.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"is_active","description":"Status of Zone (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"q","description":"Search with name as a free text.","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country.","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"pincode","description":"PIN Code of the country.","schema":{"type":"string"}},{"in":"query","name":"state","description":"State of the country.","schema":{"type":"string"}},{"in":"query","name":"city","description":"City of the country.","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector name of mentioned address.","schema":{"type":"string"}},{"in":"query","name":"store_uid","description":"Unique identifier for a specific store.","schema":{"type":"integer"}},{"in":"query","name":"region_uid","description":"Unique identifier for a geographical region.","schema":{"type":"string"}}],"query":[{"in":"query","name":"stage","description":"Identifies the specific stage of zone bing requested.","schema":{"type":"string","enum":["in_progress","failed","completed"]}},{"in":"query","name":"type","description":"Using type, you can filter custom or default zones","schema":{"type":"string","enum":["default","custom"]}},{"in":"query","name":"page_size","description":"Defines the number of items displayed per page.","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"page_no","description":"current page number.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"is_active","description":"Status of Zone (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"q","description":"Search with name as a free text.","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country.","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"pincode","description":"PIN Code of the country.","schema":{"type":"string"}},{"in":"query","name":"state","description":"State of the country.","schema":{"type":"string"}},{"in":"query","name":"city","description":"City of the country.","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector name of mentioned address.","schema":{"type":"string"}},{"in":"query","name":"store_uid","description":"Unique identifier for a specific store.","schema":{"type":"integer"}},{"in":"query","name":"region_uid","description":"Unique identifier for a geographical region.","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", serverType="application", company_id=company_id, application_id=application_id, stage=stage, type=type, page_size=page_size, page_no=page_no, is_active=is_active, q=q, country_iso_code=country_iso_code, pincode=pincode, state=state, city=city, sector=sector, store_uid=store_uid, region_uid=region_uid)
-        query_string = await create_query_string(stage=stage, type=type, page_size=page_size, page_no=page_no, is_active=is_active, q=q, country_iso_code=country_iso_code, pincode=pincode, state=state, city=city, sector=sector, store_uid=store_uid, region_uid=region_uid)
+        url_with_params = await create_url_with_params(api_url=self._urls["getZones"], proccessed_params="""{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"stage","description":"Identifies the specific stage of zone bing requested.","schema":{"type":"string","enum":["in_progress","failed","completed"]}},{"in":"query","name":"type","description":"Using type, you can filter custom or default zones","schema":{"type":"string","enum":["default","custom"]}},{"in":"query","name":"page_size","description":"Defines the number of items displayed per page.","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"page_no","description":"current page number.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"is_active","description":"Status of Zone (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"q","description":"Search with name as a free text.","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country.","schema":{"type":"string"}},{"in":"query","name":"pincode","description":"PIN Code of the country.","schema":{"type":"string"}},{"in":"query","name":"state","description":"State of the country.","schema":{"type":"string"}},{"in":"query","name":"city","description":"City of the country.","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector name of mentioned address.","schema":{"type":"string"}}],"query":[{"in":"query","name":"stage","description":"Identifies the specific stage of zone bing requested.","schema":{"type":"string","enum":["in_progress","failed","completed"]}},{"in":"query","name":"type","description":"Using type, you can filter custom or default zones","schema":{"type":"string","enum":["default","custom"]}},{"in":"query","name":"page_size","description":"Defines the number of items displayed per page.","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"page_no","description":"current page number.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"is_active","description":"Status of Zone (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"q","description":"Search with name as a free text.","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country.","schema":{"type":"string"}},{"in":"query","name":"pincode","description":"PIN Code of the country.","schema":{"type":"string"}},{"in":"query","name":"state","description":"State of the country.","schema":{"type":"string"}},{"in":"query","name":"city","description":"City of the country.","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector name of mentioned address.","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", serverType="application", company_id=company_id, application_id=application_id, stage=stage, type=type, page_size=page_size, page_no=page_no, is_active=is_active, q=q, country_iso_code=country_iso_code, pincode=pincode, state=state, city=city, sector=sector)
+        query_string = await create_query_string(stage=stage, type=type, page_size=page_size, page_no=page_no, is_active=is_active, q=q, country_iso_code=country_iso_code, pincode=pincode, state=state, city=city, sector=sector)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -200,11 +195,11 @@ class Logistic:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getZones"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v2.0/company/{company_id}/application/{application_id}/zones", company_id=company_id, application_id=application_id, stage=stage, type=type, page_size=page_size, page_no=page_no, is_active=is_active, q=q, country_iso_code=country_iso_code, pincode=pincode, state=state, city=city, sector=sector, store_uid=store_uid, region_uid=region_uid), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getZones"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v2.0/company/{company_id}/application/{application_id}/zones", company_id=company_id, application_id=application_id, stage=stage, type=type, page_size=page_size, page_no=page_no, is_active=is_active, q=q, country_iso_code=country_iso_code, pincode=pincode, state=state, city=city, sector=sector), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ListViewResponseSchemaV2
-            schema = ListViewResponseSchemaV2()
+            from .models import ListViewResponseV2
+            schema = ListViewResponseV2()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -260,7 +255,7 @@ class Logistic:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getGeoAreas"], proccessed_params="""{"required":[{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for an application.","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"page_no","description":"Current page number","schema":{"type":"integer"}},{"in":"query","name":"type","description":"To fetch the type of a specific geoarea.","schema":{"type":"string"}},{"in":"query","name":"is_active","description":"Status of GeoAreas (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"q","description":"search with name as a free text","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"state","description":"State name","schema":{"type":"string"}},{"in":"query","name":"city","description":"City name","schema":{"type":"string"}},{"in":"query","name":"pincode","description":"Pincode value to search geoareas","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector value to search geoareas","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"page_no","description":"Current page number","schema":{"type":"integer"}},{"in":"query","name":"type","description":"To fetch the type of a specific geoarea.","schema":{"type":"string"}},{"in":"query","name":"is_active","description":"Status of GeoAreas (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"q","description":"search with name as a free text","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"state","description":"State name","schema":{"type":"string"}},{"in":"query","name":"city","description":"City name","schema":{"type":"string"}},{"in":"query","name":"pincode","description":"Pincode value to search geoareas","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector value to search geoareas","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for an application.","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="application", application_id=application_id, company_id=company_id, page_size=page_size, page_no=page_no, type=type, is_active=is_active, q=q, country_iso_code=country_iso_code, state=state, city=city, pincode=pincode, sector=sector)
+        url_with_params = await create_url_with_params(api_url=self._urls["getGeoAreas"], proccessed_params="""{"required":[{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for an application.","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"page_no","description":"Current page number","schema":{"type":"integer"}},{"in":"query","name":"type","description":"To fetch the type of a specific geoarea.","schema":{"type":"string"}},{"in":"query","name":"is_active","description":"Status of GeoAreas (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"q","description":"search with name as a free text","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country","schema":{"type":"string"}},{"in":"query","name":"state","description":"State name","schema":{"type":"string"}},{"in":"query","name":"city","description":"City name","schema":{"type":"string"}},{"in":"query","name":"pincode","description":"Pincode value to search geoareas","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector value to search geoareas","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"page_no","description":"Current page number","schema":{"type":"integer"}},{"in":"query","name":"type","description":"To fetch the type of a specific geoarea.","schema":{"type":"string"}},{"in":"query","name":"is_active","description":"Status of GeoAreas (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"q","description":"search with name as a free text","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country","schema":{"type":"string"}},{"in":"query","name":"state","description":"State name","schema":{"type":"string"}},{"in":"query","name":"city","description":"City name","schema":{"type":"string"}},{"in":"query","name":"pincode","description":"Pincode value to search geoareas","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector value to search geoareas","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for an application.","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="application", application_id=application_id, company_id=company_id, page_size=page_size, page_no=page_no, type=type, is_active=is_active, q=q, country_iso_code=country_iso_code, state=state, city=city, pincode=pincode, sector=sector)
         query_string = await create_query_string(page_size=page_size, page_no=page_no, type=type, is_active=is_active, q=q, country_iso_code=country_iso_code, state=state, city=city, pincode=pincode, sector=sector)
         if query_string:
             url_with_params += "?" + query_string
@@ -364,7 +359,7 @@ class Logistic:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCountry"], proccessed_params="""{"required":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string","x-not-enum":true},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string","x-not-enum":true},"required":true}]}""", serverType="application", country_iso_code=country_iso_code)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCountry"], proccessed_params="""{"required":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string"},"required":true}]}""", serverType="application", country_iso_code=country_iso_code)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -396,14 +391,17 @@ class Logistic:
 
         return response
     
-    async def getLocalitiesByPrefix(self, page_no=None, page_size=None, q=None, body="", request_headers:Dict={}):
+    async def getLocalitiesByPrefix(self, company_id=None, page_no=None, page_size=None, q=None, body="", request_headers:Dict={}):
         """Get localities that start with a specified prefix.
+        :param company_id : The unique identifier of the company. : type integer
         :param page_no : Starting index of the items. : type integer
         :param page_size : Number of items per page. : type integer
         :param q : Localities starting with the specified prefix. : type string
         """
         payload = {}
         
+        if company_id is not None:
+            payload["company_id"] = company_id
         if page_no is not None:
             payload["page_no"] = page_no
         if page_size is not None:
@@ -416,7 +414,7 @@ class Logistic:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getLocalitiesByPrefix"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"page_no","description":"Starting index of the items.","schema":{"type":"integer","default":1,"minimum":1},"required":false},{"in":"query","name":"page_size","description":"Number of items per page.","required":false,"schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"q","description":"Localities starting with the specified prefix.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"page_no","description":"Starting index of the items.","schema":{"type":"integer","default":1,"minimum":1},"required":false},{"in":"query","name":"page_size","description":"Number of items per page.","required":false,"schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"q","description":"Localities starting with the specified prefix.","schema":{"type":"string"},"required":false}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size, q=q)
+        url_with_params = await create_url_with_params(api_url=self._urls["getLocalitiesByPrefix"], proccessed_params="""{"required":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"Starting index of the items.","schema":{"type":"integer","default":1,"minimum":1},"required":false},{"in":"query","name":"page_size","description":"Number of items per page.","required":false,"schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"q","description":"Localities starting with the specified prefix.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"page_no","description":"Starting index of the items.","schema":{"type":"integer","default":1,"minimum":1},"required":false},{"in":"query","name":"page_size","description":"Number of items per page.","required":false,"schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"q","description":"Localities starting with the specified prefix.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="application", company_id=company_id, page_no=page_no, page_size=page_size, q=q)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q)
         if query_string:
             url_with_params += "?" + query_string
@@ -435,7 +433,7 @@ class Logistic:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocalitiesByPrefix"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/localities", page_no=page_no, page_size=page_size, q=q), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocalitiesByPrefix"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/localities", company_id=company_id, page_no=page_no, page_size=page_size, q=q), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetLocalities
@@ -590,11 +588,11 @@ class Logistic:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ValidateAddressRequestSchema
-        schema = ValidateAddressRequestSchema()
+        from .models import ValidateAddressRequest
+        schema = ValidateAddressRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["validateAddress"], proccessed_params="""{"required":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string","x-not-enum":true},"required":true},{"in":"path","name":"template_name","description":"The type of address form.","schema":{"type":"string","enum":["checkout_form","store_os_form","default_display"]},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string","x-not-enum":true},"required":true},{"in":"path","name":"template_name","description":"The type of address form.","schema":{"type":"string","enum":["checkout_form","store_os_form","default_display"]},"required":true}]}""", serverType="application", country_iso_code=country_iso_code, template_name=template_name)
+        url_with_params = await create_url_with_params(api_url=self._urls["validateAddress"], proccessed_params="""{"required":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string"},"required":true},{"in":"path","name":"template_name","description":"The type of address form.","schema":{"type":"string","enum":["checkout_form","store_os_form","default_display"]},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"country_iso_code","description":"The ISO 3166-1 alpha-2 code representing the country (e.g., \"IN\" for India, \"US\" for the United States).","schema":{"type":"string"},"required":true},{"in":"path","name":"template_name","description":"The type of address form.","schema":{"type":"string","enum":["checkout_form","store_os_form","default_display"]},"required":true}]}""", serverType="application", country_iso_code=country_iso_code, template_name=template_name)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -616,8 +614,8 @@ class Logistic:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["validateAddress"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/country/{country_iso_code}/address/templates/{template_name}/validate", country_iso_code=country_iso_code, template_name=template_name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ValidateAddressRequestSchema
-            schema = ValidateAddressRequestSchema()
+            from .models import ValidateAddressRequest
+            schema = ValidateAddressRequest()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -643,8 +641,8 @@ class Logistic:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GenerateShipmentsRequestSchema
-        schema = GenerateShipmentsRequestSchema()
+        from .models import GenerateShipmentsRequest
+        schema = GenerateShipmentsRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["createShipments"], proccessed_params="""{"required":[{"in":"path","name":"company_id","description":"The ID of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The ID of the application.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The ID of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The ID of the application.","schema":{"type":"string"},"required":true}]}""", serverType="application", company_id=company_id, application_id=application_id)
@@ -669,8 +667,8 @@ class Logistic:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["createShipments"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/company/{company_id}/application/{application_id}/shipments", company_id=company_id, application_id=application_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GenerateShipmentsAndCourierPartnerResponseSchema
-            schema = GenerateShipmentsAndCourierPartnerResponseSchema()
+            from .models import GenerateShipmentsAndCourierPartnerResponse
+            schema = GenerateShipmentsAndCourierPartnerResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -724,6 +722,49 @@ class Logistic:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getDeliveryPromise")
+                print(e)
+
+        return response
+    
+    async def getQCPromise(self, body="", request_headers:Dict={}):
+        """Get QC promises for the pincode.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = LogisticValidator.getQCPromise()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getQCPromise"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getQCPromise"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/qc-promise", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetQCPromiseDetails
+            schema = GetQCPromiseDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getQCPromise")
                 print(e)
 
         return response

@@ -8,14 +8,6 @@ from ..PlatformModel import BaseSchema
 
 
 
-class CurrencyExchangeResponseV2(BaseSchema):
-    pass
-
-
-class CurrencyExchangeItem(BaseSchema):
-    pass
-
-
 class ApplicationInventory(BaseSchema):
     pass
 
@@ -132,19 +124,19 @@ class BrandCompanyInfo(BaseSchema):
     pass
 
 
-class CompanyByBrandsRequestSchema(BaseSchema):
+class CompanyByBrandsRequest(BaseSchema):
     pass
 
 
-class CompanyByBrandsResponseSchema(BaseSchema):
+class CompanyByBrandsResponse(BaseSchema):
     pass
 
 
-class StoreByBrandsRequestSchema(BaseSchema):
+class StoreByBrandsRequest(BaseSchema):
     pass
 
 
-class StoreByBrandsResponseSchema(BaseSchema):
+class StoreByBrandsResponse(BaseSchema):
     pass
 
 
@@ -156,11 +148,11 @@ class CompanyBrandInfo(BaseSchema):
     pass
 
 
-class BrandsByCompanyResponseSchema(BaseSchema):
+class BrandsByCompanyResponse(BaseSchema):
     pass
 
 
-class ValidationFailedResponseSchema(BaseSchema):
+class ValidationFailedResponse(BaseSchema):
     pass
 
 
@@ -180,15 +172,39 @@ class PanCardConfig(BaseSchema):
     pass
 
 
-class CreateApplicationRequestSchema(BaseSchema):
+class CreateApplicationRequest(BaseSchema):
     pass
 
 
-class CreateAppResponseSchema(BaseSchema):
+class CreateAppResponse(BaseSchema):
     pass
 
 
-class ApplicationsResponseSchema(BaseSchema):
+class ApplicationsResponse(BaseSchema):
+    pass
+
+
+class MobileAppConfiguration(BaseSchema):
+    pass
+
+
+class LandingImage(BaseSchema):
+    pass
+
+
+class SplashImage(BaseSchema):
+    pass
+
+
+class MobileAppConfigRequest(BaseSchema):
+    pass
+
+
+class BuildVersionHistory(BaseSchema):
+    pass
+
+
+class BuildVersion(BaseSchema):
     pass
 
 
@@ -204,7 +220,7 @@ class DomainAdd(BaseSchema):
     pass
 
 
-class DomainAddRequestSchema(BaseSchema):
+class DomainAddRequest(BaseSchema):
     pass
 
 
@@ -212,7 +228,7 @@ class Domain(BaseSchema):
     pass
 
 
-class DomainsResponseSchema(BaseSchema):
+class DomainsResponse(BaseSchema):
     pass
 
 
@@ -220,11 +236,11 @@ class UpdateDomain(BaseSchema):
     pass
 
 
-class UpdateDomainTypeRequestSchema(BaseSchema):
+class UpdateDomainTypeRequest(BaseSchema):
     pass
 
 
-class DomainStatusRequestSchema(BaseSchema):
+class DomainStatusRequest(BaseSchema):
     pass
 
 
@@ -232,11 +248,11 @@ class DomainStatus(BaseSchema):
     pass
 
 
-class DomainStatusResponseSchema(BaseSchema):
+class DomainStatusResponse(BaseSchema):
     pass
 
 
-class DomainSuggestionsRequestSchema(BaseSchema):
+class DomainSuggestionsRequest(BaseSchema):
     pass
 
 
@@ -244,15 +260,15 @@ class DomainSuggestion(BaseSchema):
     pass
 
 
-class DomainSuggestionsResponseSchema(BaseSchema):
+class DomainSuggestionsResponse(BaseSchema):
     pass
 
 
-class SuccessMessageResponseSchema(BaseSchema):
+class SuccessMessageResponse(BaseSchema):
     pass
 
 
-class GetIntegrationsOptInsResponseSchema(BaseSchema):
+class GetIntegrationsOptInsResponse(BaseSchema):
     pass
 
 
@@ -288,11 +304,19 @@ class IntegrationMeta(BaseSchema):
     pass
 
 
+class Integration(BaseSchema):
+    pass
+
+
+class IntegrationConfigResponse(BaseSchema):
+    pass
+
+
 class IntegrationLevel(BaseSchema):
     pass
 
 
-class UpdateIntegrationLevelRequestSchema(BaseSchema):
+class UpdateIntegrationLevelRequest(BaseSchema):
     pass
 
 
@@ -328,7 +352,7 @@ class AppDomain(BaseSchema):
     pass
 
 
-class CompaniesResponseSchema(BaseSchema):
+class CompaniesResponse(BaseSchema):
     pass
 
 
@@ -336,11 +360,15 @@ class AppInventoryCompanies(BaseSchema):
     pass
 
 
-class StoresResponseSchema(BaseSchema):
+class StoresResponse(BaseSchema):
     pass
 
 
-class ListStoreResponseSchemaSchema(BaseSchema):
+class ListStoreResponse(BaseSchema):
+    pass
+
+
+class ArrayStoreResponse(BaseSchema):
     pass
 
 
@@ -348,7 +376,7 @@ class AppInventoryStores(BaseSchema):
     pass
 
 
-class FilterOrderingStoreRequestSchemaSchema(BaseSchema):
+class FilterOrderingStoreRequest(BaseSchema):
     pass
 
 
@@ -360,7 +388,7 @@ class OrderingStoreConfig(BaseSchema):
     pass
 
 
-class OrderingStoreSelectRequestSchema(BaseSchema):
+class OrderingStoreSelectRequest(BaseSchema):
     pass
 
 
@@ -380,7 +408,7 @@ class OtherSellerApplications(BaseSchema):
     pass
 
 
-class OptedApplicationResponseSchema(BaseSchema):
+class OptedApplicationResponse(BaseSchema):
     pass
 
 
@@ -404,7 +432,7 @@ class OptOutInventory(BaseSchema):
     pass
 
 
-class TokenResponseSchema(BaseSchema):
+class TokenResponse(BaseSchema):
     pass
 
 
@@ -580,11 +608,11 @@ class BuyboxFeature(BaseSchema):
     pass
 
 
-class AppFeatureRequestSchema(BaseSchema):
+class AppFeatureRequest(BaseSchema):
     pass
 
 
-class AppFeatureResponseSchema(BaseSchema):
+class AppFeatureResponse(BaseSchema):
     pass
 
 
@@ -624,7 +652,7 @@ class TokenSchema(BaseSchema):
     pass
 
 
-class InvalidPayloadRequestSchema(BaseSchema):
+class InvalidPayloadRequest(BaseSchema):
     pass
 
 
@@ -744,11 +772,11 @@ class ApplicationDetail(BaseSchema):
     pass
 
 
-class CurrenciesResponseSchema(BaseSchema):
+class CurrenciesResponse(BaseSchema):
     pass
 
 
-class AppCurrencyResponseSchema(BaseSchema):
+class AppCurrencyResponse(BaseSchema):
     pass
 
 
@@ -772,7 +800,7 @@ class UpdateDiealog(BaseSchema):
     pass
 
 
-class PlatformVersionRequestSchema(BaseSchema):
+class PlatformVersionRequest(BaseSchema):
     pass
 
 
@@ -780,7 +808,7 @@ class PlatformVersion(BaseSchema):
     pass
 
 
-class OrderingStoresResponseSchema(BaseSchema):
+class OrderingStoresResponse(BaseSchema):
     pass
 
 
@@ -800,11 +828,11 @@ class Locations(BaseSchema):
     pass
 
 
-class UrlRedirectionResponseSchema(BaseSchema):
+class UrlRedirectionResponse(BaseSchema):
     pass
 
 
-class UrlRedirectionRequestSchema(BaseSchema):
+class UrlRedirectionRequest(BaseSchema):
     pass
 
 
@@ -812,11 +840,11 @@ class UrlRedirection(BaseSchema):
     pass
 
 
-class StoreForConfigurationRequestSchema(BaseSchema):
+class StoreForConfigurationRequest(BaseSchema):
     pass
 
 
-class DomainOptionsResponseSchema(BaseSchema):
+class DomainOptionsResponse(BaseSchema):
     pass
 
 
@@ -828,57 +856,15 @@ class DomainValue(BaseSchema):
     pass
 
 
-class StoreRequestSchema(BaseSchema):
+class StoreRequest(BaseSchema):
     pass
 
 
-class StoreResponseSchema(BaseSchema):
-    pass
-
-
-class ValidationError(BaseSchema):
+class StoreResponse(BaseSchema):
     pass
 
 
 
-
-
-class CurrencyExchangeResponseV2(BaseSchema):
-    # Configuration swagger.json
-
-    
-    base = fields.Str(required=False)
-    
-    base_currency_name = fields.Str(required=False)
-    
-    ttl_seconds = fields.Int(required=False)
-    
-    items = fields.List(fields.Nested(CurrencyExchangeItem, required=False), required=False)
-    
-    total = fields.Int(required=False)
-    
-
-
-class CurrencyExchangeItem(BaseSchema):
-    # Configuration swagger.json
-
-    
-    currency_code = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    rate = fields.Float(required=False)
-    
-    country_code = fields.Str(required=False)
-    
-    country_name = fields.Str(required=False)
-    
-    subunit = fields.Str(required=False)
-    
-    decimal_digits = fields.Int(required=False)
-    
-    symbol = fields.Str(required=False)
-    
 
 
 class ApplicationInventory(BaseSchema):
@@ -982,6 +968,10 @@ class AppInventoryConfig(BaseSchema):
     company_store = fields.List(fields.Int(required=False), required=False)
     
     company_id = fields.Int(required=False)
+    
+    enable_zone_overlapping = fields.Boolean(required=False)
+    
+    sort_popular_first = fields.Boolean(required=False)
     
 
 
@@ -1303,7 +1293,7 @@ class BrandCompanyInfo(BaseSchema):
     
 
 
-class CompanyByBrandsRequestSchema(BaseSchema):
+class CompanyByBrandsRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1313,7 +1303,7 @@ class CompanyByBrandsRequestSchema(BaseSchema):
     
 
 
-class CompanyByBrandsResponseSchema(BaseSchema):
+class CompanyByBrandsResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1323,7 +1313,7 @@ class CompanyByBrandsResponseSchema(BaseSchema):
     
 
 
-class StoreByBrandsRequestSchema(BaseSchema):
+class StoreByBrandsRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1335,7 +1325,7 @@ class StoreByBrandsRequestSchema(BaseSchema):
     
 
 
-class StoreByBrandsResponseSchema(BaseSchema):
+class StoreByBrandsResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1379,7 +1369,7 @@ class CompanyBrandInfo(BaseSchema):
     
 
 
-class BrandsByCompanyResponseSchema(BaseSchema):
+class BrandsByCompanyResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1387,7 +1377,7 @@ class BrandsByCompanyResponseSchema(BaseSchema):
     
 
 
-class ValidationFailedResponseSchema(BaseSchema):
+class ValidationFailedResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1443,7 +1433,7 @@ class PanCardConfig(BaseSchema):
     
 
 
-class CreateApplicationRequestSchema(BaseSchema):
+class CreateApplicationRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1455,7 +1445,7 @@ class CreateApplicationRequestSchema(BaseSchema):
     
 
 
-class CreateAppResponseSchema(BaseSchema):
+class CreateAppResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1465,13 +1455,111 @@ class CreateAppResponseSchema(BaseSchema):
     
 
 
-class ApplicationsResponseSchema(BaseSchema):
+class ApplicationsResponse(BaseSchema):
     # Configuration swagger.json
 
     
     items = fields.List(fields.Nested(Application, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class MobileAppConfiguration(BaseSchema):
+    # Configuration swagger.json
+
+    
+    is_active = fields.Boolean(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    app_name = fields.Str(required=False)
+    
+    landing_image = fields.Nested(LandingImage, required=False)
+    
+    splash_image = fields.Nested(SplashImage, required=False)
+    
+    application = fields.Str(required=False)
+    
+    platform_type = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    modified_at = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+    package_name = fields.Str(required=False)
+    
+
+
+class LandingImage(BaseSchema):
+    # Configuration swagger.json
+
+    
+    aspect_ratio = fields.Str(required=False)
+    
+    secure_url = fields.Str(required=False)
+    
+
+
+class SplashImage(BaseSchema):
+    # Configuration swagger.json
+
+    
+    aspect_ratio = fields.Str(required=False)
+    
+    secure_url = fields.Str(required=False)
+    
+
+
+class MobileAppConfigRequest(BaseSchema):
+    # Configuration swagger.json
+
+    
+    app_name = fields.Str(required=False)
+    
+    landing_image = fields.Nested(LandingImage, required=False)
+    
+    splash_image = fields.Nested(SplashImage, required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+
+
+class BuildVersionHistory(BaseSchema):
+    # Configuration swagger.json
+
+    
+    versions = fields.List(fields.Nested(BuildVersion, required=False), required=False)
+    
+    latest_available_version_name = fields.Str(required=False)
+    
+
+
+class BuildVersion(BaseSchema):
+    # Configuration swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    application = fields.Str(required=False)
+    
+    platform_type = fields.Str(required=False)
+    
+    build_status = fields.Str(required=False)
+    
+    version_name = fields.Str(required=False)
+    
+    version_code = fields.Int(required=False)
+    
+    download_url = fields.Nested(LandingImage, required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    modified_at = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
     
 
 
@@ -1523,7 +1611,7 @@ class DomainAdd(BaseSchema):
     
 
 
-class DomainAddRequestSchema(BaseSchema):
+class DomainAddRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1551,7 +1639,7 @@ class Domain(BaseSchema):
     
 
 
-class DomainsResponseSchema(BaseSchema):
+class DomainsResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1575,7 +1663,7 @@ class UpdateDomain(BaseSchema):
     
 
 
-class UpdateDomainTypeRequestSchema(BaseSchema):
+class UpdateDomainTypeRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1585,7 +1673,7 @@ class UpdateDomainTypeRequestSchema(BaseSchema):
     
 
 
-class DomainStatusRequestSchema(BaseSchema):
+class DomainStatusRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1603,7 +1691,7 @@ class DomainStatus(BaseSchema):
     
 
 
-class DomainStatusResponseSchema(BaseSchema):
+class DomainStatusResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1613,13 +1701,11 @@ class DomainStatusResponseSchema(BaseSchema):
     
 
 
-class DomainSuggestionsRequestSchema(BaseSchema):
+class DomainSuggestionsRequest(BaseSchema):
     # Configuration swagger.json
 
     
     domain_url = fields.Str(required=False)
-    
-    is_custom_domain = fields.Boolean(required=False)
     
 
 
@@ -1639,7 +1725,7 @@ class DomainSuggestion(BaseSchema):
     
 
 
-class DomainSuggestionsResponseSchema(BaseSchema):
+class DomainSuggestionsResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1647,7 +1733,7 @@ class DomainSuggestionsResponseSchema(BaseSchema):
     
 
 
-class SuccessMessageResponseSchema(BaseSchema):
+class SuccessMessageResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1657,7 +1743,7 @@ class SuccessMessageResponseSchema(BaseSchema):
     
 
 
-class GetIntegrationsOptInsResponseSchema(BaseSchema):
+class GetIntegrationsOptInsResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1791,6 +1877,56 @@ class IntegrationMeta(BaseSchema):
     
 
 
+class Integration(BaseSchema):
+    # Configuration swagger.json
+
+    
+    validators = fields.Nested(Validators, required=False)
+    
+    description = fields.Str(required=False)
+    
+    description_html = fields.Str(required=False)
+    
+    constants = fields.Dict(required=False)
+    
+    companies = fields.List(fields.Str(required=False), required=False)
+    
+    support = fields.List(fields.Str(required=False), required=False)
+    
+    _id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    meta = fields.List(fields.Nested(IntegrationMeta, required=False), required=False)
+    
+    icon = fields.Str(required=False)
+    
+    hidden = fields.Boolean(required=False)
+    
+    owner = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    modified_at = fields.Str(required=False)
+    
+    token = fields.Str(required=False)
+    
+    secret = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+
+
+class IntegrationConfigResponse(BaseSchema):
+    # Configuration swagger.json
+
+    
+    items = fields.List(fields.Nested(IntegrationLevel, required=False), required=False)
+    
+
+
 class IntegrationLevel(BaseSchema):
     # Configuration swagger.json
 
@@ -1829,7 +1965,7 @@ class IntegrationLevel(BaseSchema):
     
 
 
-class UpdateIntegrationLevelRequestSchema(BaseSchema):
+class UpdateIntegrationLevelRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1957,7 +2093,7 @@ class AppDomain(BaseSchema):
     
 
 
-class CompaniesResponseSchema(BaseSchema):
+class CompaniesResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1979,7 +2115,7 @@ class AppInventoryCompanies(BaseSchema):
     
 
 
-class StoresResponseSchema(BaseSchema):
+class StoresResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1989,11 +2125,19 @@ class StoresResponseSchema(BaseSchema):
     
 
 
-class ListStoreResponseSchemaSchema(BaseSchema):
+class ListStoreResponse(BaseSchema):
     # Configuration swagger.json
 
     
     stores = fields.List(fields.Nested(AppInventoryStores, required=False), required=False)
+    
+
+
+class ArrayStoreResponse(BaseSchema):
+    # Configuration swagger.json
+
+    
+    data = fields.List(fields.Nested(AppInventoryStores, required=False), required=False)
     
 
 
@@ -2023,7 +2167,7 @@ class AppInventoryStores(BaseSchema):
     
 
 
-class FilterOrderingStoreRequestSchemaSchema(BaseSchema):
+class FilterOrderingStoreRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -2063,7 +2207,7 @@ class OrderingStoreConfig(BaseSchema):
     
 
 
-class OrderingStoreSelectRequestSchema(BaseSchema):
+class OrderingStoreSelectRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -2117,7 +2261,7 @@ class OtherSellerApplications(BaseSchema):
     
 
 
-class OptedApplicationResponseSchema(BaseSchema):
+class OptedApplicationResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -2203,7 +2347,7 @@ class OptOutInventory(BaseSchema):
     
 
 
-class TokenResponseSchema(BaseSchema):
+class TokenResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -2709,7 +2853,7 @@ class BuyboxFeature(BaseSchema):
     
 
 
-class AppFeatureRequestSchema(BaseSchema):
+class AppFeatureRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -2717,7 +2861,7 @@ class AppFeatureRequestSchema(BaseSchema):
     
 
 
-class AppFeatureResponseSchema(BaseSchema):
+class AppFeatureResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -2746,8 +2890,6 @@ class Currency(BaseSchema):
     symbol = fields.Str(required=False)
     
     country_name = fields.Str(required=False)
-    
-    subunit = fields.Str(required=False)
     
     country_code = fields.Str(required=False)
     
@@ -2887,7 +3029,7 @@ class TokenSchema(BaseSchema):
     
 
 
-class InvalidPayloadRequestSchema(BaseSchema):
+class InvalidPayloadRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -3283,7 +3425,7 @@ class ApplicationDetail(BaseSchema):
     
 
 
-class CurrenciesResponseSchema(BaseSchema):
+class CurrenciesResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -3291,7 +3433,7 @@ class CurrenciesResponseSchema(BaseSchema):
     
 
 
-class AppCurrencyResponseSchema(BaseSchema):
+class AppCurrencyResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -3405,7 +3547,7 @@ class UpdateDiealog(BaseSchema):
     
 
 
-class PlatformVersionRequestSchema(BaseSchema):
+class PlatformVersionRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -3449,7 +3591,7 @@ class PlatformVersion(BaseSchema):
     
 
 
-class OrderingStoresResponseSchema(BaseSchema):
+class OrderingStoresResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -3529,7 +3671,7 @@ class Locations(BaseSchema):
     
 
 
-class UrlRedirectionResponseSchema(BaseSchema):
+class UrlRedirectionResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -3537,7 +3679,7 @@ class UrlRedirectionResponseSchema(BaseSchema):
     
 
 
-class UrlRedirectionRequestSchema(BaseSchema):
+class UrlRedirectionRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -3559,7 +3701,7 @@ class UrlRedirection(BaseSchema):
     
 
 
-class StoreForConfigurationRequestSchema(BaseSchema):
+class StoreForConfigurationRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -3567,7 +3709,7 @@ class StoreForConfigurationRequestSchema(BaseSchema):
     
 
 
-class DomainOptionsResponseSchema(BaseSchema):
+class DomainOptionsResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -3601,7 +3743,7 @@ class DomainValue(BaseSchema):
     
 
 
-class StoreRequestSchema(BaseSchema):
+class StoreRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -3609,21 +3751,11 @@ class StoreRequestSchema(BaseSchema):
     
 
 
-class StoreResponseSchema(BaseSchema):
+class StoreResponse(BaseSchema):
     # Configuration swagger.json
 
     
     data = fields.List(fields.Int(required=False), required=False)
-    
-
-
-class ValidationError(BaseSchema):
-    # Configuration swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    field = fields.Str(required=False)
     
 
 

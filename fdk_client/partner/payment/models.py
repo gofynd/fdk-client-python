@@ -48,15 +48,15 @@ class RefundTo(BaseSchema):
     pass
 
 
-class PaymentConfigDetails(BaseSchema):
+class PaymentConfigResponse(BaseSchema):
     pass
 
 
-class PostPayoutDetails(BaseSchema):
+class PostPayoutResponse(BaseSchema):
     pass
 
 
-class PostPayout(BaseSchema):
+class PostPayoutRequest(BaseSchema):
     pass
 
 
@@ -76,11 +76,11 @@ class ErrorCodeAndDescription(BaseSchema):
     pass
 
 
-class HttpErrorCodeAndMessage(BaseSchema):
+class HttpErrorCodeAndResponse(BaseSchema):
     pass
 
 
-class PayoutDetails(BaseSchema):
+class PayoutResponse(BaseSchema):
     pass
 
 
@@ -215,7 +215,7 @@ class RefundTo(BaseSchema):
     
 
 
-class PaymentConfigDetails(BaseSchema):
+class PaymentConfigResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -239,7 +239,7 @@ class PaymentConfigDetails(BaseSchema):
     
 
 
-class PostPayoutDetails(BaseSchema):
+class PostPayoutResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -267,7 +267,7 @@ class PostPayoutDetails(BaseSchema):
     
 
 
-class PostPayout(BaseSchema):
+class PostPayoutRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -351,7 +351,7 @@ class ErrorCodeAndDescription(BaseSchema):
     
 
 
-class HttpErrorCodeAndMessage(BaseSchema):
+class HttpErrorCodeAndResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -361,7 +361,7 @@ class HttpErrorCodeAndMessage(BaseSchema):
     
 
 
-class PayoutDetails(BaseSchema):
+class PayoutResponse(BaseSchema):
     # Payment swagger.json
 
     

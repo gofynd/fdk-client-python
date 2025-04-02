@@ -22,15 +22,15 @@ class AvailablePageSchema(BaseSchema):
     pass
 
 
-class DraftExtensionSection(BaseSchema):
+class ExtensionBinding(BaseSchema):
     pass
 
 
-class ExtensionSectionDraft(BaseSchema):
+class DraftExtensionSectionResponse(BaseSchema):
     pass
 
 
-class Sections(BaseSchema):
+class SectionsResponse(BaseSchema):
     pass
 
 
@@ -46,23 +46,19 @@ class AssetsExtension(BaseSchema):
     pass
 
 
-class PublishExtensionSection(BaseSchema):
+class PublishExtensionSectionRequest(BaseSchema):
     pass
 
 
-class PreviewExtension(BaseSchema):
+class ExtensionPreviewRequest(BaseSchema):
     pass
 
 
-class ExtensionPreview(BaseSchema):
+class ExtensionPreviewResponse(BaseSchema):
     pass
 
 
-class ExtensionSectionPublish(BaseSchema):
-    pass
-
-
-class PublishExtensionSectionResponseSchema(BaseSchema):
+class PublishExtensionSectionResponse(BaseSchema):
     pass
 
 
@@ -183,14 +179,6 @@ class Comments(BaseSchema):
 
 
 class ThemeRejectionReasons(BaseSchema):
-    pass
-
-
-class RejectedMessages(BaseSchema):
-    pass
-
-
-class ThemeReviewRequestMessage(BaseSchema):
     pass
 
 
@@ -449,11 +437,9 @@ class AvailablePageSchema(BaseSchema):
     
     application = fields.Str(required=False)
     
-    __v = fields.Float(required=False)
-    
 
 
-class DraftExtensionSection(BaseSchema):
+class ExtensionBinding(BaseSchema):
     # Theme swagger.json
 
     
@@ -479,7 +465,7 @@ class DraftExtensionSection(BaseSchema):
     
 
 
-class ExtensionSectionDraft(BaseSchema):
+class DraftExtensionSectionResponse(BaseSchema):
     # Theme swagger.json
 
     
@@ -487,7 +473,7 @@ class ExtensionSectionDraft(BaseSchema):
     
 
 
-class Sections(BaseSchema):
+class SectionsResponse(BaseSchema):
     # Theme swagger.json
 
     
@@ -541,7 +527,7 @@ class AssetsExtension(BaseSchema):
     
 
 
-class PublishExtensionSection(BaseSchema):
+class PublishExtensionSectionRequest(BaseSchema):
     # Theme swagger.json
 
     
@@ -561,7 +547,7 @@ class PublishExtensionSection(BaseSchema):
     
 
 
-class PreviewExtension(BaseSchema):
+class ExtensionPreviewRequest(BaseSchema):
     # Theme swagger.json
 
     
@@ -571,7 +557,7 @@ class PreviewExtension(BaseSchema):
     
 
 
-class ExtensionPreview(BaseSchema):
+class ExtensionPreviewResponse(BaseSchema):
     # Theme swagger.json
 
     
@@ -579,15 +565,7 @@ class ExtensionPreview(BaseSchema):
     
 
 
-class ExtensionSectionPublish(BaseSchema):
-    # Theme swagger.json
-
-    
-    sections = fields.Nested(Sections, required=False)
-    
-
-
-class PublishExtensionSectionResponseSchema(BaseSchema):
+class PublishExtensionSectionResponse(BaseSchema):
     # Theme swagger.json
 
     
@@ -650,8 +628,6 @@ class SEOSitemap(BaseSchema):
     priority = fields.Float(required=False)
     
     frequency = fields.Str(required=False)
-    
-    modified_on = fields.Str(required=False)
     
 
 
@@ -1005,39 +981,11 @@ class ThemeRejectionReasons(BaseSchema):
     
     status = fields.Str(required=False)
     
-    rejection_reasons = fields.Nested(RejectedMessages, required=False)
+    rejection_reasons = fields.Dict(required=False)
     
     created_at = fields.Str(required=False)
     
     updated_at = fields.Str(required=False)
-    
-
-
-class RejectedMessages(BaseSchema):
-    # Theme swagger.json
-
-    
-    theme_file = fields.Nested(ThemeReviewRequestMessage, required=False)
-    
-    theme_details = fields.Nested(ThemeReviewRequestMessage, required=False)
-    
-    theme_value_proposition = fields.Nested(ThemeReviewRequestMessage, required=False)
-    
-    theme_attributes = fields.Nested(ThemeReviewRequestMessage, required=False)
-    
-    theme_variations = fields.Nested(ThemeReviewRequestMessage, required=False)
-    
-    theme_docs = fields.Nested(ThemeReviewRequestMessage, required=False)
-    
-    theme_review = fields.Nested(ThemeReviewRequestMessage, required=False)
-    
-
-
-class ThemeReviewRequestMessage(BaseSchema):
-    # Theme swagger.json
-
-    
-    message = fields.Str(required=False)
     
 
 

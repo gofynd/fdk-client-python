@@ -43,8 +43,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payment/methods/configs", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PaymentConfigDetails
-            schema = PaymentConfigDetails()
+            from .models import PaymentConfigResponse
+            schema = PaymentConfigResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -87,8 +87,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payouts", unique_external_id=unique_external_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PayoutDetails
-            schema = PayoutDetails()
+            from .models import PayoutResponse
+            schema = PayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -108,8 +108,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PostPayout
-        schema = PostPayout()
+        from .models import PostPayoutRequest
+        schema = PostPayoutRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payouts", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","schema":{"type":"string"},"required":true}]}""", serverType="partner", )
@@ -132,8 +132,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payouts", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PostPayoutDetails
-            schema = PostPayoutDetails()
+            from .models import PostPayoutResponse
+            schema = PostPayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -153,8 +153,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PostPayout
-        schema = PostPayout()
+        from .models import PostPayoutRequest
+        schema = PostPayoutRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payouts", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","schema":{"type":"string"},"required":true}]}""", serverType="partner", )
@@ -177,8 +177,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payouts", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PostPayoutDetails
-            schema = PostPayoutDetails()
+            from .models import PostPayoutResponse
+            schema = PostPayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -198,8 +198,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PostPayout
-        schema = PostPayout()
+        from .models import PostPayoutRequest
+        schema = PostPayoutRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payouts", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","schema":{"type":"string"},"required":true}]}""", serverType="partner", )
@@ -222,8 +222,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payouts", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PostPayoutDetails
-            schema = PostPayoutDetails()
+            from .models import PostPayoutResponse
+            schema = PostPayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -266,8 +266,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payouts", unique_external_id=unique_external_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PayoutDetails
-            schema = PayoutDetails()
+            from .models import PayoutResponse
+            schema = PayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -313,8 +313,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payouts/{unique_transfer_no}", unique_transfer_no=unique_transfer_no, unique_external_id=unique_external_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PayoutDetails
-            schema = PayoutDetails()
+            from .models import PayoutResponse
+            schema = PayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -337,8 +337,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PostPayout
-        schema = PostPayout()
+        from .models import PostPayoutRequest
+        schema = PostPayoutRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payouts/{unique_transfer_no}", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","schema":{"type":"string"},"required":true},{"name":"unique_transfer_no","in":"path","description":"unique_transfer_no","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","schema":{"type":"string"},"required":true},{"name":"unique_transfer_no","in":"path","description":"unique_transfer_no","schema":{"type":"string"},"required":true}]}""", serverType="partner", unique_transfer_no=unique_transfer_no)
@@ -361,8 +361,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payouts/{unique_transfer_no}", unique_transfer_no=unique_transfer_no), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PostPayoutDetails
-            schema = PostPayoutDetails()
+            from .models import PostPayoutResponse
+            schema = PostPayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -385,8 +385,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PostPayout
-        schema = PostPayout()
+        from .models import PostPayoutRequest
+        schema = PostPayoutRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payouts/{unique_transfer_no}", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","schema":{"type":"string"},"required":true},{"name":"unique_transfer_no","in":"path","description":"unique_transfer_no","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","schema":{"type":"string"},"required":true},{"name":"unique_transfer_no","in":"path","description":"unique_transfer_no","schema":{"type":"string"},"required":true}]}""", serverType="partner", unique_transfer_no=unique_transfer_no)
@@ -409,8 +409,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payouts/{unique_transfer_no}", unique_transfer_no=unique_transfer_no), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PostPayoutDetails
-            schema = PostPayoutDetails()
+            from .models import PostPayoutResponse
+            schema = PostPayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -433,8 +433,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PostPayout
-        schema = PostPayout()
+        from .models import PostPayoutRequest
+        schema = PostPayoutRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payouts/{unique_transfer_no}", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","schema":{"type":"string"},"required":true},{"name":"unique_transfer_no","in":"path","description":"unique_transfer_no","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","schema":{"type":"string"},"required":true},{"name":"unique_transfer_no","in":"path","description":"unique_transfer_no","schema":{"type":"string"},"required":true}]}""", serverType="partner", unique_transfer_no=unique_transfer_no)
@@ -457,8 +457,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payouts/{unique_transfer_no}", unique_transfer_no=unique_transfer_no), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PostPayoutDetails
-            schema = PostPayoutDetails()
+            from .models import PostPayoutResponse
+            schema = PostPayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -501,8 +501,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/partner/payment/v1.0/organization/{self._conf.organizationId}/payouts/{unique_transfer_no}", unique_transfer_no=unique_transfer_no), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PayoutDetails
-            schema = PayoutDetails()
+            from .models import PayoutResponse
+            schema = PayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

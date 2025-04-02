@@ -90,7 +90,7 @@ class CompanyThemeReqSchema(BaseSchema):
     pass
 
 
-class CompanyTheme(BaseSchema):
+class CompanyThemeResponse(BaseSchema):
     pass
 
 
@@ -206,7 +206,7 @@ class ThemesSchema(BaseSchema):
     pass
 
 
-class ThemeUpgradable(BaseSchema):
+class ThemeUpgradableResponse(BaseSchema):
     pass
 
 
@@ -374,7 +374,7 @@ class ThemeVersions(BaseSchema):
     pass
 
 
-class DummyTheme(BaseSchema):
+class DummyResponse(BaseSchema):
     pass
 
 
@@ -687,7 +687,7 @@ class CompanyThemeReqSchema(BaseSchema):
     
 
 
-class CompanyTheme(BaseSchema):
+class CompanyThemeResponse(BaseSchema):
     # Theme swagger.json
 
     
@@ -826,8 +826,6 @@ class SEOSitemap(BaseSchema):
     priority = fields.Float(required=False)
     
     frequency = fields.Str(required=False)
-    
-    modified_on = fields.Str(required=False)
     
 
 
@@ -1107,11 +1105,9 @@ class ThemesSchema(BaseSchema):
     
     src = fields.Str(required=False)
     
-    applied_themes = fields.List(fields.Dict(required=False), required=False)
-    
 
 
-class ThemeUpgradable(BaseSchema):
+class ThemeUpgradableResponse(BaseSchema):
     # Theme swagger.json
 
     
@@ -1629,7 +1625,7 @@ class ThemeVersions(BaseSchema):
     
 
 
-class DummyTheme(BaseSchema):
+class DummyResponse(BaseSchema):
     # Theme swagger.json
 
     

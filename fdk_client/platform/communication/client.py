@@ -12,6 +12,153 @@ class Communication:
         self._conf = config
 
     
+    async def sendByCompanyCommunicationSynchronously(self, x_application_id=None, body="", request_headers:Dict={}):
+        """Initiate and send communication with the option for asynchronous processing.
+        :param x-application-id : Application id : type string
+        """
+        payload = {}
+        
+        if x_application_id is not None:
+            payload["x_application_id"] = x_application_id
+
+        # Parameter validation
+        schema = CommunicationValidator.sendByCompanyCommunicationSynchronously()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import EngineRequest
+        schema = EngineRequest()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/engine/send-sync", """{"required":[{"in":"header","name":"x-application-id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[{"in":"header","name":"x-application-id","description":"Application id","required":true,"schema":{"type":"string"}}],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", x_application_id=x_application_id, )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/engine/send-sync", x_application_id=x_application_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SendInstantResponse
+            schema = SendInstantResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendByCompanyCommunicationSynchronously")
+                print(e)
+
+        return response
+    
+    async def senByCompanyCommunicationAsynchronously(self, x_application_id=None, body="", request_headers:Dict={}):
+        """Initiate and send communication with the option for asynchronous processing.
+        :param x-application-id : Application id : type string
+        """
+        payload = {}
+        
+        if x_application_id is not None:
+            payload["x_application_id"] = x_application_id
+
+        # Parameter validation
+        schema = CommunicationValidator.senByCompanyCommunicationAsynchronously()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import EngineRequest
+        schema = EngineRequest()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/engine/send-async", """{"required":[{"in":"header","name":"x-application-id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[{"in":"header","name":"x-application-id","description":"Application id","required":true,"schema":{"type":"string"}}],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", x_application_id=x_application_id, )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/engine/send-async", x_application_id=x_application_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EngineResponse
+            schema = EngineResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for senByCompanyCommunicationAsynchronously")
+                print(e)
+
+        return response
+    
+    async def sendByCompanyCommunicationInstantly(self, x_application_id=None, body="", request_headers:Dict={}):
+        """Initiate and send communication in real-time.
+        :param x-application-id : Application id : type string
+        """
+        payload = {}
+        
+        if x_application_id is not None:
+            payload["x_application_id"] = x_application_id
+
+        # Parameter validation
+        schema = CommunicationValidator.sendByCompanyCommunicationInstantly()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import EngineRequest
+        schema = EngineRequest()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/engine/send-instant", """{"required":[{"in":"header","name":"x-application-id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[{"in":"header","name":"x-application-id","description":"Application id","required":true,"schema":{"type":"string"}}],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", x_application_id=x_application_id, )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/engine/send-instant", x_application_id=x_application_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SendInstantResponse
+            schema = SendInstantResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendByCompanyCommunicationInstantly")
+                print(e)
+
+        return response
+    
     async def getSystemNotifications(self, page_no=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
         """Retrieve system notifications related to communication.
         :param page_no : Current page no : type integer

@@ -21,13 +21,37 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
         
         
+    
+    
+        
+        
         
     
     
         
         
+        
     
     
         
@@ -68,16 +92,21 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
         
+        
+    
+    
         
         
     
     
         
         
+        
     
     
         
@@ -94,16 +123,21 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
         
+        
+    
+    
         
         
     
     
         
         
+        
     
     
         
@@ -120,16 +154,21 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
         
+        
+    
+    
         
         
     
     
         
         
+        
     
     
         
@@ -137,14 +176,20 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
+        
+    
+    
         
         
     
     
+        
         
         
         
+        
     
     
         
@@ -156,17 +201,26 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
         
     
     
+        
         
         
         
         
         
+    
+    
+        
+        
+    
+    
+        
         
     
     
@@ -187,8 +241,13 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+    
+    
         
         
+    
+    
         
         
         
@@ -198,8 +257,12 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
+        
         
         
+        
     
     
         
@@ -209,6 +272,8 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
         
         
         
@@ -216,27 +281,35 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
     
     
+        
         
         
         
+        
     
     
         
         
     
     
+        
         
         
         
         
+        
+    
+    
         
         
     
     
         
         
+        
     
     
         
@@ -254,7 +327,11 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
+        
+    
+    
         
         
     
@@ -272,6 +349,15 @@ from ..PlatformModel import BaseSchema
 
 class CommunicationValidator:
     
+    
+    class sendEngineCommunicationSynchronously(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
     
     class sendCommunicationAsynchronously(BaseSchema):
         
@@ -306,12 +392,56 @@ class CommunicationValidator:
          
         
     
+    class createEventSubscriptions(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class createEventSubscriptionsByBulk(BaseSchema):
         
         
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+         
+        
+    
+    class getEventSubscriptionsById(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        populate = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class editEventSubscriptions(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class deleteEventSubscriptionsById(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
          
         
     
@@ -446,6 +576,17 @@ class CommunicationValidator:
          
         
     
+    class deleteEmailProviderById(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
     class getDefaultEmailProviders(BaseSchema):
         
         
@@ -493,6 +634,17 @@ class CommunicationValidator:
         
     
     class updateSmsProviderById(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class deleteSmsProviderById(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -621,6 +773,15 @@ class CommunicationValidator:
          
         
     
+    class createJobs(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class getJobLogs(BaseSchema):
         
         
@@ -700,6 +861,35 @@ class CommunicationValidator:
          
         
     
+    class updateAppProvidersGlobalProvider(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getDummyDatasourcesMeta(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Int(required=False)
+         
+        
+    
+    class getDummyDatasources(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class getAudiences(BaseSchema):
         
         
@@ -734,6 +924,43 @@ class CommunicationValidator:
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
+         
+        
+    
+    class updateAudienceById(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class deleteAudienceById(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class getNSampleRecordsFromCsvByGet(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        count = fields.Int(required=False)
+        
+        header = fields.Boolean(required=False)
+        
+        url = fields.Str(required=False)
          
         
     
@@ -794,6 +1021,17 @@ class CommunicationValidator:
          
         
     
+    class deleteCampaignById(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
     class getStatsOfCampaignById(BaseSchema):
         
         
@@ -835,6 +1073,15 @@ class CommunicationValidator:
         
     
     class updateOtpConfiguration(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class createAppPushtoken(BaseSchema):
         
         
         company_id = fields.Str(required=False)

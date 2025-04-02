@@ -93,14 +93,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
-    
-    
-        
-        
         
         
     
@@ -311,15 +303,6 @@ class ServiceabilityValidator:
          
         
     
-    class deletePackageMaterialRule(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        rule_id = fields.Str(required=False)
-         
-        
-    
     class updatePackageMaterials(BaseSchema):
         
         
@@ -330,15 +313,6 @@ class ServiceabilityValidator:
         
     
     class getPackageMaterials(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        package_material_id = fields.Str(required=False)
-         
-        
-    
-    class deletePackageMaterials(BaseSchema):
         
         
         company_id = fields.Int(required=False)

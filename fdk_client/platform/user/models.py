@@ -8,7 +8,7 @@ from ..PlatformModel import BaseSchema
 
 
 
-class SuccessMessage(BaseSchema):
+class SuccessMessageResponse(BaseSchema):
     pass
 
 
@@ -16,7 +16,7 @@ class UserAttributeDefinition(BaseSchema):
     pass
 
 
-class UserAttributeDefinitionResp(BaseSchema):
+class UserAttributeDefinitionResponse(BaseSchema):
     pass
 
 
@@ -24,11 +24,11 @@ class UserAttributeDefinitionValidation(BaseSchema):
     pass
 
 
-class UserAttribute(BaseSchema):
+class UserAttributeResponse(BaseSchema):
     pass
 
 
-class CreateUserAttributePayload(BaseSchema):
+class CreateUserAttributeRequest(BaseSchema):
     pass
 
 
@@ -268,10 +268,6 @@ class UserSearchSchema(BaseSchema):
     pass
 
 
-class DebugInfo(BaseSchema):
-    pass
-
-
 class PhoneNumber(BaseSchema):
     pass
 
@@ -283,7 +279,7 @@ class Email(BaseSchema):
 
 
 
-class SuccessMessage(BaseSchema):
+class SuccessMessageResponse(BaseSchema):
     # User swagger.json
 
     
@@ -329,7 +325,7 @@ class UserAttributeDefinition(BaseSchema):
     
 
 
-class UserAttributeDefinitionResp(BaseSchema):
+class UserAttributeDefinitionResponse(BaseSchema):
     # User swagger.json
 
     
@@ -379,7 +375,7 @@ class UserAttributeDefinitionValidation(BaseSchema):
     
 
 
-class UserAttribute(BaseSchema):
+class UserAttributeResponse(BaseSchema):
     # User swagger.json
 
     
@@ -401,7 +397,7 @@ class UserAttribute(BaseSchema):
     
 
 
-class CreateUserAttributePayload(BaseSchema):
+class CreateUserAttributeRequest(BaseSchema):
     # User swagger.json
 
     
@@ -646,8 +642,6 @@ class UserGroupResponseSchema(BaseSchema):
     uid = fields.Int(required=False)
     
     application_id = fields.Str(required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
     
     created_at = fields.Str(required=False)
     
@@ -1241,12 +1235,6 @@ class UserSearchSchema(BaseSchema):
     # User swagger.json
 
     
-    __v = fields.Float(required=False)
-    
-    has_old_password_hash = fields.Boolean(required=False)
-    
-    debug = fields.Nested(DebugInfo, required=False)
-    
     application_id = fields.Str(required=False)
     
     user_id = fields.Str(required=False)
@@ -1286,16 +1274,6 @@ class UserSearchSchema(BaseSchema):
     archive = fields.Boolean(required=False)
     
     status = fields.Str(required=False)
-    
-
-
-class DebugInfo(BaseSchema):
-    # User swagger.json
-
-    
-    source = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
     
 
 

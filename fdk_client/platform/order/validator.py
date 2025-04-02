@@ -143,16 +143,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
         
     
     
@@ -168,22 +158,13 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-    
-    
-        
         
-    
-    
         
     
     
-        
         
         
         
-    
-    
         
         
         
@@ -221,7 +202,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
@@ -362,20 +342,12 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
         
-    
-    
-        
-    
-    
         
-        
     
     
-        
         
     
     
@@ -663,28 +635,6 @@ class OrderValidator:
          
         
     
-    class trackShipment(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        shipment_id = fields.Str(required=False)
-        
-        awb = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-         
-        
-    
-    class updateShipmentTracking(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class getFailedOrderLogs(BaseSchema):
         
         
@@ -710,13 +660,6 @@ class OrderValidator:
         
     
     class getRoleBasedActions(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class checkOrderStatus(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -753,26 +696,6 @@ class OrderValidator:
          
         
     
-    class addStateManagerConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getStateManagerConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        app_id = fields.Str(required=False)
-        
-        ordering_channel = fields.Str(required=False)
-        
-        entity = fields.Str(required=False)
-         
-        
-    
     class getShipments(BaseSchema):
         
         
@@ -789,6 +712,10 @@ class OrderValidator:
         search_type = fields.Str(required=False)
         
         search_value = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
         
         start_date = fields.Str(required=False)
         
@@ -1173,24 +1100,6 @@ class OrderValidator:
         company_id = fields.Int(required=False)
         
         template_name = fields.Str(required=False)
-         
-        
-    
-    class getOrderConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        app_id = fields.Str(required=False)
-         
-        
-    
-    class updateOrderConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        app_id = fields.Str(required=False)
          
         
     

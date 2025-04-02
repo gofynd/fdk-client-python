@@ -50,10 +50,6 @@ class AvailablePageSchemaSections(BaseSchema):
     pass
 
 
-class SectionAssets(BaseSchema):
-    pass
-
-
 class SectionSource(BaseSchema):
     pass
 
@@ -99,78 +95,6 @@ class Config(BaseSchema):
 
 
 class ThemeConfiguration(BaseSchema):
-    pass
-
-
-class CustomConfig(BaseSchema):
-    pass
-
-
-class CustomProps(BaseSchema):
-    pass
-
-
-class GeneralSetting(BaseSchema):
-    pass
-
-
-class AdvanceSetting(BaseSchema):
-    pass
-
-
-class UserAlertsSetting(BaseSchema):
-    pass
-
-
-class ThemeSetting(BaseSchema):
-    pass
-
-
-class TextSetting(BaseSchema):
-    pass
-
-
-class ButtonSetting(BaseSchema):
-    pass
-
-
-class SaleDiscountSetting(BaseSchema):
-    pass
-
-
-class HeaderSetting(BaseSchema):
-    pass
-
-
-class FooterSetting(BaseSchema):
-    pass
-
-
-class OverlayPopupSetting(BaseSchema):
-    pass
-
-
-class DividerStrokeHighlightSetting(BaseSchema):
-    pass
-
-
-class StaticConfig(BaseSchema):
-    pass
-
-
-class StaticProps(BaseSchema):
-    pass
-
-
-class Colors(BaseSchema):
-    pass
-
-
-class AuthConfig(BaseSchema):
-    pass
-
-
-class PaletteConfig(BaseSchema):
     pass
 
 
@@ -291,8 +215,6 @@ class AvailablePageSchema(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    __v = fields.Float(required=False)
-    
     _id = fields.Str(required=False)
     
 
@@ -328,8 +250,6 @@ class SEOMetaItems(BaseSchema):
 class SEOSitemap(BaseSchema):
     # Theme swagger.json
 
-    
-    modified_on = fields.Str(required=False)
     
     priority = fields.Float(required=False)
     
@@ -398,18 +318,6 @@ class AvailablePageSchemaSections(BaseSchema):
     predicate = fields.Nested(AvailablePagePredicate, required=False)
     
     __source = fields.Nested(SectionSource, required=False)
-    
-    assets = fields.Nested(SectionAssets, required=False)
-    
-
-
-class SectionAssets(BaseSchema):
-    # Theme swagger.json
-
-    
-    js = fields.Str(required=False)
-    
-    css = fields.Str(required=False)
     
 
 
@@ -599,284 +507,6 @@ class ThemeConfiguration(BaseSchema):
     
 
 
-class CustomConfig(BaseSchema):
-    # Theme swagger.json
-
-    
-    props = fields.Nested(CustomProps, required=False)
-    
-
-
-class CustomProps(BaseSchema):
-    # Theme swagger.json
-
-    
-    header_bg_color = fields.Str(required=False)
-    
-    header_text_color = fields.Str(required=False)
-    
-    header_border_color = fields.Str(required=False)
-    
-    header_icon_color = fields.Str(required=False)
-    
-    header_cart_notification_bg_color = fields.Str(required=False)
-    
-    header_cart_notification_text_color = fields.Str(required=False)
-    
-    header_nav_hover_color = fields.Str(required=False)
-    
-    button_primary_color = fields.Str(required=False)
-    
-    button_primary_label_color = fields.Str(required=False)
-    
-    button_add_to_cart_color = fields.Str(required=False)
-    
-    button_add_to_cart_label_color = fields.Str(required=False)
-    
-    button_secondary_color = fields.Str(required=False)
-    
-    button_secondary_label_color = fields.Str(required=False)
-    
-    button_tertiary_color = fields.Str(required=False)
-    
-    button_tertiary_label_color = fields.Str(required=False)
-    
-    button_tertiary_hover_color = fields.Str(required=False)
-    
-    button_tertiary_hover_text_color = fields.Str(required=False)
-    
-    text_heading_link_color = fields.Str(required=False)
-    
-    text_body_color = fields.Str(required=False)
-    
-    text_price_color = fields.Str(required=False)
-    
-    text_sale_price_color = fields.Str(required=False)
-    
-    text_strikethrough_price_color = fields.Str(required=False)
-    
-    text_discount_color = fields.Str(required=False)
-    
-    footer_bg_color = fields.Str(required=False)
-    
-    footer_text_color = fields.Str(required=False)
-    
-    footer_border_color = fields.Str(required=False)
-    
-    footer_nav_hover_color = fields.Str(required=False)
-    
-    disable_cart = fields.Boolean(required=False)
-    
-    is_menu_below_logo = fields.Boolean(required=False)
-    
-    menu_position = fields.Str(required=False)
-    
-
-
-class GeneralSetting(BaseSchema):
-    # Theme swagger.json
-
-    
-    theme = fields.Nested(ThemeSetting, required=False)
-    
-    text = fields.Nested(TextSetting, required=False)
-    
-    button = fields.Nested(ButtonSetting, required=False)
-    
-    sale_discount = fields.Nested(SaleDiscountSetting, required=False)
-    
-    header = fields.Nested(HeaderSetting, required=False)
-    
-    footer = fields.Nested(FooterSetting, required=False)
-    
-
-
-class AdvanceSetting(BaseSchema):
-    # Theme swagger.json
-
-    
-    overlay_popup = fields.Nested(OverlayPopupSetting, required=False)
-    
-    divider_stroke_highlight = fields.Nested(DividerStrokeHighlightSetting, required=False)
-    
-    user_alerts = fields.Nested(UserAlertsSetting, required=False)
-    
-
-
-class UserAlertsSetting(BaseSchema):
-    # Theme swagger.json
-
-    
-    success_background = fields.Str(required=False)
-    
-    success_text = fields.Str(required=False)
-    
-    error_background = fields.Str(required=False)
-    
-    error_text = fields.Str(required=False)
-    
-    info_background = fields.Str(required=False)
-    
-    info_text = fields.Str(required=False)
-    
-
-
-class ThemeSetting(BaseSchema):
-    # Theme swagger.json
-
-    
-    page_background = fields.Str(required=False)
-    
-    theme_accent = fields.Str(required=False)
-    
-
-
-class TextSetting(BaseSchema):
-    # Theme swagger.json
-
-    
-    text_heading = fields.Str(required=False)
-    
-    text_body = fields.Str(required=False)
-    
-    text_label = fields.Str(required=False)
-    
-    text_secondary = fields.Str(required=False)
-    
-
-
-class ButtonSetting(BaseSchema):
-    # Theme swagger.json
-
-    
-    button_primary = fields.Str(required=False)
-    
-    button_secondary = fields.Str(required=False)
-    
-    button_link = fields.Str(required=False)
-    
-
-
-class SaleDiscountSetting(BaseSchema):
-    # Theme swagger.json
-
-    
-    sale_badge_background = fields.Str(required=False)
-    
-    sale_badge_text = fields.Str(required=False)
-    
-    sale_discount_text = fields.Str(required=False)
-    
-    sale_timer = fields.Str(required=False)
-    
-
-
-class HeaderSetting(BaseSchema):
-    # Theme swagger.json
-
-    
-    header_background = fields.Str(required=False)
-    
-    header_nav = fields.Str(required=False)
-    
-    header_icon = fields.Str(required=False)
-    
-
-
-class FooterSetting(BaseSchema):
-    # Theme swagger.json
-
-    
-    footer_background = fields.Str(required=False)
-    
-    footer_bottom_background = fields.Str(required=False)
-    
-    footer_heading_text = fields.Str(required=False)
-    
-    footer_body_text = fields.Str(required=False)
-    
-    footer_icon = fields.Str(required=False)
-    
-
-
-class OverlayPopupSetting(BaseSchema):
-    # Theme swagger.json
-
-    
-    dialog_backgroung = fields.Str(required=False)
-    
-    overlay = fields.Str(required=False)
-    
-
-
-class DividerStrokeHighlightSetting(BaseSchema):
-    # Theme swagger.json
-
-    
-    divider_strokes = fields.Str(required=False)
-    
-    highlight = fields.Str(required=False)
-    
-
-
-class StaticConfig(BaseSchema):
-    # Theme swagger.json
-
-    
-    props = fields.Nested(StaticProps, required=False)
-    
-
-
-class StaticProps(BaseSchema):
-    # Theme swagger.json
-
-    
-    colors = fields.Nested(Colors, required=False)
-    
-    auth = fields.Nested(AuthConfig, required=False)
-    
-    palette = fields.Nested(PaletteConfig, required=False)
-    
-
-
-class Colors(BaseSchema):
-    # Theme swagger.json
-
-    
-    primary_color = fields.Str(required=False)
-    
-    secondary_color = fields.Str(required=False)
-    
-    accent_color = fields.Str(required=False)
-    
-    link_color = fields.Str(required=False)
-    
-    button_secondary_color = fields.Str(required=False)
-    
-    bg_color = fields.Str(required=False)
-    
-
-
-class AuthConfig(BaseSchema):
-    # Theme swagger.json
-
-    
-    show_header_auth = fields.Boolean(required=False)
-    
-    show_footer_auth = fields.Boolean(required=False)
-    
-
-
-class PaletteConfig(BaseSchema):
-    # Theme swagger.json
-
-    
-    general_setting = fields.Nested(GeneralSetting, required=False)
-    
-    advance_setting = fields.Nested(AdvanceSetting, required=False)
-    
-
-
 class ThemeMeta(BaseSchema):
     # Theme swagger.json
 
@@ -987,7 +617,7 @@ class GlobalSchema(BaseSchema):
     # Theme swagger.json
 
     
-    props = fields.List(fields.Nested(Prop, required=False), required=False)
+    props = fields.List(fields.Dict(required=False), required=False)
     
 
 

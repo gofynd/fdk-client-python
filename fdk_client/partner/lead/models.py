@@ -30,7 +30,7 @@ class AgentChangePayload(BaseSchema):
     pass
 
 
-class GeneralConfigResponseSchema(BaseSchema):
+class GeneralConfigResponse(BaseSchema):
     pass
 
 
@@ -187,7 +187,7 @@ class AgentChangePayload(BaseSchema):
     
 
 
-class GeneralConfigResponseSchema(BaseSchema):
+class GeneralConfigResponse(BaseSchema):
     # Lead swagger.json
 
     

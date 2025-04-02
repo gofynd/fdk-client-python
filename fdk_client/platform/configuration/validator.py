@@ -75,12 +75,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-        
-        
-        
 
 
 
@@ -228,19 +222,6 @@ class ConfigurationValidator:
     
     class getDomainOptions(BaseSchema):
         
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getCurrencyExchangeRates(BaseSchema):
-        
-        
-        currency_code = fields.Str(required=False)
-        
-        exchange_currency_code = fields.Str(required=False)
-        
-        exchange_country_code = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
          

@@ -30,8 +30,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
     
     
         
@@ -164,14 +162,8 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
-        
-        
         
         
-    
-    
         
         
         
@@ -211,22 +203,17 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
         
         
-    
-    
         
-        
     
     
         
         
     
     
-        
         
         
     
@@ -307,10 +294,6 @@ class ServiceabilityValidator:
         city = fields.Str(required=False)
         
         sector = fields.Str(required=False)
-        
-        store_uid = fields.Int(required=False)
-        
-        region_uid = fields.Str(required=False)
          
         
     
@@ -608,8 +591,6 @@ class ServiceabilityValidator:
         
         application_id = fields.Str(required=False)
         
-        q = fields.Str(required=False)
-        
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
@@ -630,17 +611,6 @@ class ServiceabilityValidator:
         
     
     class getCourierPartnerRule(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        rule_uid = fields.Str(required=False)
-         
-        
-    
-    class deleteCourierPartnerRule(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -750,17 +720,6 @@ class ServiceabilityValidator:
         
     
     class updateStoreRules(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        rule_uid = fields.Str(required=False)
-         
-        
-    
-    class deleteStoreRule(BaseSchema):
         
         
         company_id = fields.Int(required=False)

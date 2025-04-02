@@ -16,15 +16,15 @@ class AppProvidersGlobalProviderRequestObj(BaseSchema):
     pass
 
 
-class AppProvidersGlobalProviderReq(BaseSchema):
+class AppProvidersGlobalProviderRequest(BaseSchema):
     pass
 
 
-class UpdateAppProvidersGlobalProviderResEmailSmsObj(BaseSchema):
+class UpdateAppProvidersGlobalProviderResponseEmailSmsObj(BaseSchema):
     pass
 
 
-class UpdateAppProvidersGlobalProviderRes(BaseSchema):
+class UpdateAppProvidersGlobalProviderResponse(BaseSchema):
     pass
 
 
@@ -44,7 +44,7 @@ class PushtokenRes(BaseSchema):
     pass
 
 
-class SendInstantRes(BaseSchema):
+class SendInstantResponse(BaseSchema):
     pass
 
 
@@ -80,27 +80,27 @@ class SendSyncData(BaseSchema):
     pass
 
 
-class SendSyncReq(BaseSchema):
+class SendSyncRequest(BaseSchema):
     pass
 
 
-class EngineReq(BaseSchema):
+class EngineRequest(BaseSchema):
     pass
 
 
-class EngineRes(BaseSchema):
+class EngineResponse(BaseSchema):
     pass
 
 
-class EventSubscriptionsBulkUpdateReq(BaseSchema):
+class EventSubscriptionsBulkUpdateRequest(BaseSchema):
     pass
 
 
-class EventSubscriptionsBulkUpdateRes(BaseSchema):
+class EventSubscriptionsBulkUpdateResponse(BaseSchema):
     pass
 
 
-class SubscriptionsObjectReq(BaseSchema):
+class SubscriptionsObjectRequest(BaseSchema):
     pass
 
 
@@ -328,19 +328,19 @@ class EventSubscriptions(BaseSchema):
     pass
 
 
-class TriggerJobRes(BaseSchema):
+class TriggerJobResponse(BaseSchema):
     pass
 
 
-class TriggerJobReq(BaseSchema):
+class TriggerJobRequest(BaseSchema):
     pass
 
 
-class GlobalVariablesGetRes(BaseSchema):
+class GlobalVariablesGetResponse(BaseSchema):
     pass
 
 
-class GlobalVariablesPostRes(BaseSchema):
+class GlobalVariablesPostResponse(BaseSchema):
     pass
 
 
@@ -553,7 +553,7 @@ class AppProvidersGlobalProviderRequestObj(BaseSchema):
     
 
 
-class AppProvidersGlobalProviderReq(BaseSchema):
+class AppProvidersGlobalProviderRequest(BaseSchema):
     # Communication swagger.json
 
     
@@ -563,7 +563,7 @@ class AppProvidersGlobalProviderReq(BaseSchema):
     
 
 
-class UpdateAppProvidersGlobalProviderResEmailSmsObj(BaseSchema):
+class UpdateAppProvidersGlobalProviderResponseEmailSmsObj(BaseSchema):
     # Communication swagger.json
 
     
@@ -573,13 +573,13 @@ class UpdateAppProvidersGlobalProviderResEmailSmsObj(BaseSchema):
     
 
 
-class UpdateAppProvidersGlobalProviderRes(BaseSchema):
+class UpdateAppProvidersGlobalProviderResponse(BaseSchema):
     # Communication swagger.json
 
     
-    email = fields.Nested(UpdateAppProvidersGlobalProviderResEmailSmsObj, required=False)
+    email = fields.Nested(UpdateAppProvidersGlobalProviderResponseEmailSmsObj, required=False)
     
-    sms = fields.Nested(UpdateAppProvidersGlobalProviderResEmailSmsObj, required=False)
+    sms = fields.Nested(UpdateAppProvidersGlobalProviderResponseEmailSmsObj, required=False)
     
     _id = fields.Str(required=False)
     
@@ -657,7 +657,7 @@ class PushtokenRes(BaseSchema):
     
 
 
-class SendInstantRes(BaseSchema):
+class SendInstantResponse(BaseSchema):
     # Communication swagger.json
 
     
@@ -751,7 +751,7 @@ class SendSyncData(BaseSchema):
     
 
 
-class SendSyncReq(BaseSchema):
+class SendSyncRequest(BaseSchema):
     # Communication swagger.json
 
     
@@ -763,17 +763,17 @@ class SendSyncReq(BaseSchema):
     
 
 
-class EngineReq(BaseSchema):
+class EngineRequest(BaseSchema):
     # Communication swagger.json
 
     
-    payload = fields.Nested(SendSyncReq, required=False)
+    payload = fields.Nested(SendSyncRequest, required=False)
     
     meta = fields.Nested(MetaStructure, required=False)
     
 
 
-class EngineRes(BaseSchema):
+class EngineResponse(BaseSchema):
     # Communication swagger.json
 
     
@@ -781,7 +781,7 @@ class EngineRes(BaseSchema):
     
 
 
-class EventSubscriptionsBulkUpdateReq(BaseSchema):
+class EventSubscriptionsBulkUpdateRequest(BaseSchema):
     # Communication swagger.json
 
     
@@ -789,7 +789,7 @@ class EventSubscriptionsBulkUpdateReq(BaseSchema):
     
 
 
-class EventSubscriptionsBulkUpdateRes(BaseSchema):
+class EventSubscriptionsBulkUpdateResponse(BaseSchema):
     # Communication swagger.json
 
     
@@ -813,7 +813,7 @@ class EventSubscriptionsBulkUpdateRes(BaseSchema):
     
 
 
-class SubscriptionsObjectReq(BaseSchema):
+class SubscriptionsObjectRequest(BaseSchema):
     # Communication swagger.json
 
     
@@ -1685,7 +1685,7 @@ class EventSubscriptions(BaseSchema):
     
 
 
-class TriggerJobRes(BaseSchema):
+class TriggerJobResponse(BaseSchema):
     # Communication swagger.json
 
     
@@ -1693,7 +1693,7 @@ class TriggerJobRes(BaseSchema):
     
 
 
-class TriggerJobReq(BaseSchema):
+class TriggerJobRequest(BaseSchema):
     # Communication swagger.json
 
     
@@ -1701,7 +1701,7 @@ class TriggerJobReq(BaseSchema):
     
 
 
-class GlobalVariablesGetRes(BaseSchema):
+class GlobalVariablesGetResponse(BaseSchema):
     # Communication swagger.json
 
     
@@ -1711,7 +1711,7 @@ class GlobalVariablesGetRes(BaseSchema):
     
 
 
-class GlobalVariablesPostRes(BaseSchema):
+class GlobalVariablesPostResponse(BaseSchema):
     # Communication swagger.json
 
     

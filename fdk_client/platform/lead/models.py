@@ -10,7 +10,7 @@ from .enums import *
 
 
 
-class GeneralConfigResponseSchema(BaseSchema):
+class GeneralConfigResponse(BaseSchema):
     pass
 
 
@@ -58,6 +58,10 @@ class AgentChangePayload(BaseSchema):
     pass
 
 
+class NotifyUser(BaseSchema):
+    pass
+
+
 class Filter(BaseSchema):
     pass
 
@@ -102,6 +106,14 @@ class Status(BaseSchema):
     pass
 
 
+class TicketFeedbackList(BaseSchema):
+    pass
+
+
+class TicketFeedbackPayload(BaseSchema):
+    pass
+
+
 class SubmitButton(BaseSchema):
     pass
 
@@ -126,6 +138,10 @@ class FeedbackResponseItem(BaseSchema):
     pass
 
 
+class TicketFeedback(BaseSchema):
+    pass
+
+
 class TicketHistory(BaseSchema):
     pass
 
@@ -145,7 +161,7 @@ class NotFoundError(BaseSchema):
 
 
 
-class GeneralConfigResponseSchema(BaseSchema):
+class GeneralConfigResponse(BaseSchema):
     # Lead swagger.json
 
     
@@ -341,6 +357,16 @@ class AgentChangePayload(BaseSchema):
     
 
 
+class NotifyUser(BaseSchema):
+    # Lead swagger.json
+
+    
+    country_code = fields.Str(required=False)
+    
+    phone_number = fields.Str(required=False)
+    
+
+
 class Filter(BaseSchema):
     # Lead swagger.json
 
@@ -477,6 +503,22 @@ class Status(BaseSchema):
     
 
 
+class TicketFeedbackList(BaseSchema):
+    # Lead swagger.json
+
+    
+    items = fields.List(fields.Nested(TicketFeedback, required=False), required=False)
+    
+
+
+class TicketFeedbackPayload(BaseSchema):
+    # Lead swagger.json
+
+    
+    form_response = fields.Dict(required=False)
+    
+
+
 class SubmitButton(BaseSchema):
     # Lead swagger.json
 
@@ -580,6 +622,30 @@ class FeedbackResponseItem(BaseSchema):
     display = fields.Str(required=False)
     
     key = fields.Str(required=False)
+    
+
+
+class TicketFeedback(BaseSchema):
+    # Lead swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    ticket_id = fields.Str(required=False)
+    
+    company_id = fields.Str(required=False)
+    
+    response = fields.List(fields.Nested(FeedbackResponseItem, required=False), required=False)
+    
+    category = fields.Str(required=False)
+    
+    user = fields.Dict(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    __v = fields.Float(required=False)
     
 
 

@@ -399,13 +399,13 @@ class PaymentValidator:
         
         refresh = fields.Boolean(required=False)
         
-        amount = fields.Int(required=False)
-        
         request_type = fields.Str(required=False)
         
         order_id = fields.Str(required=False)
         
         shipment_id = fields.Str(required=False)
+        
+        amount = fields.Int(required=False)
          
         
     

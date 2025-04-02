@@ -13,6 +13,51 @@ class Communication:
         self.applicationId = applicationId
 
     
+    async def sendEngineCommunicationSynchronously(self, body="", request_headers:Dict={}):
+        """Initiate and send communication with the option for asynchronous processing.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CommunicationValidator.sendEngineCommunicationSynchronously()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import EngineRequest
+        schema = EngineRequest()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/engine/send-sync", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/engine/send-sync", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SendInstantResponse
+            schema = SendInstantResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendEngineCommunicationSynchronously")
+                print(e)
+
+        return response
+    
     async def sendCommunicationAsynchronously(self, body="", request_headers:Dict={}):
         """Initiate and send communication with the option for asynchronous processing.
         """
@@ -24,8 +69,8 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import EngineReq
-        schema = EngineReq()
+        from .models import EngineRequest
+        schema = EngineRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/engine/send-async", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
@@ -48,8 +93,8 @@ class Communication:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/engine/send-async", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import EngineRes
-            schema = EngineRes()
+            from .models import EngineResponse
+            schema = EngineResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -69,8 +114,8 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import EngineReq
-        schema = EngineReq()
+        from .models import EngineRequest
+        schema = EngineRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/engine/send-instant", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
@@ -93,8 +138,8 @@ class Communication:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/engine/send-instant", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SendInstantRes
-            schema = SendInstantRes()
+            from .models import SendInstantResponse
+            schema = SendInstantResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -153,6 +198,51 @@ class Communication:
 
         return response
     
+    async def createEventSubscriptions(self, body="", request_headers:Dict={}):
+        """Create event subscriptions
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CommunicationValidator.createEventSubscriptions()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SubscriptionsObject
+        schema = SubscriptionsObject()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EventSubscription
+            schema = EventSubscription()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createEventSubscriptions")
+                print(e)
+
+        return response
+    
     async def createEventSubscriptionsByBulk(self, body="", request_headers:Dict={}):
         """Create event subscriptions by bulk
         """
@@ -164,8 +254,8 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import EventSubscriptionsBulkUpdateReq
-        schema = EventSubscriptionsBulkUpdateReq()
+        from .models import EventSubscriptionsBulkUpdateRequest
+        schema = EventSubscriptionsBulkUpdateRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/bulkUpdate", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
@@ -186,6 +276,145 @@ class Communication:
                 exclude_headers.append(key)
 
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/bulkUpdate", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        return response
+    
+    async def getEventSubscriptionsById(self, populate=None, id=None, request_headers:Dict={}):
+        """Get event subscriptions by id
+        :param populate : Populate Fields : type string
+        :param id : Event subscription id : type string
+        """
+        payload = {}
+        
+        if populate is not None:
+            payload["populate"] = populate
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = CommunicationValidator.getEventSubscriptionsById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/{id}", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"populate","description":"Populate Fields","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"populate","description":"Populate Fields","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", populate=populate, id=id)
+        query_string = await create_query_string(populate=populate, )
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/{id}", populate=populate, id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EventSubscription
+            schema = EventSubscription()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getEventSubscriptionsById")
+                print(e)
+
+        return response
+    
+    async def editEventSubscriptions(self, id=None, body="", request_headers:Dict={}):
+        """Create event subscriptions
+        :param id : Event subscription id : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = CommunicationValidator.editEventSubscriptions()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SubscriptionsObjectRequest
+        schema = SubscriptionsObjectRequest()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/{id}", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EventSubscription
+            schema = EventSubscription()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for editEventSubscriptions")
+                print(e)
+
+        return response
+    
+    async def deleteEventSubscriptionsById(self, id=None, request_headers:Dict={}):
+        """Create event subscriptions
+        :param id : Event subscription id : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = CommunicationValidator.deleteEventSubscriptionsById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/{id}", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EventSubscription
+            schema = EventSubscription()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteEventSubscriptionsById")
+                print(e)
 
         return response
     
@@ -695,6 +924,50 @@ class Communication:
 
         return response
     
+    async def deleteEmailProviderById(self, id=None, request_headers:Dict={}):
+        """Remove a specific email communication provider from the platform.
+        :param id : Event subscription id : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = CommunicationValidator.deleteEmailProviderById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/providers/{id}", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/email/providers/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BasicDelete
+            schema = BasicDelete()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteEmailProviderById")
+                print(e)
+
+        return response
+    
     async def getDefaultEmailProviders(self, request_headers:Dict={}):
         """Retrieve a list of app  providers.
         """
@@ -913,6 +1186,50 @@ class Communication:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for updateSmsProviderById")
+                print(e)
+
+        return response
+    
+    async def deleteSmsProviderById(self, id=None, request_headers:Dict={}):
+        """Remove a specific SMS communication provider.
+        :param id : Event subscription id : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = CommunicationValidator.deleteSmsProviderById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/providers/{id}", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sms/providers/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BasicDelete
+            schema = BasicDelete()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteSmsProviderById")
                 print(e)
 
         return response
@@ -1276,8 +1593,8 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import TriggerJobReq
-        schema = TriggerJobReq()
+        from .models import TriggerJobRequest
+        schema = TriggerJobRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/trigger-job", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
@@ -1300,8 +1617,8 @@ class Communication:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/trigger-job", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import TriggerJobRes
-            schema = TriggerJobRes()
+            from .models import TriggerJobResponse
+            schema = TriggerJobResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1359,6 +1676,51 @@ class Communication:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getJobs")
+                print(e)
+
+        return response
+    
+    async def createJobs(self, body="", request_headers:Dict={}):
+        """Create jobs
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CommunicationValidator.createJobs()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CreateJobsReq
+        schema = CreateJobsReq()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/jobs", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/jobs", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateJobsRes
+            schema = CreateJobsRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createJobs")
                 print(e)
 
         return response
@@ -1447,8 +1809,8 @@ class Communication:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/global-variables", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GlobalVariablesGetRes
-            schema = GlobalVariablesGetRes()
+            from .models import GlobalVariablesGetResponse
+            schema = GlobalVariablesGetResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1492,8 +1854,8 @@ class Communication:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/global-variables", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GlobalVariablesPostRes
-            schema = GlobalVariablesPostRes()
+            from .models import GlobalVariablesPostResponse
+            schema = GlobalVariablesPostResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1682,6 +2044,127 @@ class Communication:
 
         return response
     
+    async def updateAppProvidersGlobalProvider(self, body="", request_headers:Dict={}):
+        """Retrieve a list of global app  providers.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CommunicationValidator.updateAppProvidersGlobalProvider()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import AppProvidersGlobalProviderRequest
+        schema = AppProvidersGlobalProviderRequest()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/app-provider/global-providers", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/app-provider/global-providers", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdateAppProvidersGlobalProviderResponse
+            schema = UpdateAppProvidersGlobalProviderResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAppProvidersGlobalProvider")
+                print(e)
+
+        return response
+    
+    async def getDummyDatasourcesMeta(self, id=None, request_headers:Dict={}):
+        """Retrieve metadata information about dummy data sources.
+        :param id : Dummy datasources meta ID : type integer
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = CommunicationValidator.getDummyDatasourcesMeta()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasource/dummy-data-source-meta", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"query","name":"id","description":"Dummy datasources meta ID","required":true,"schema":{"type":"integer","format":"int32"}}],"optional":[],"query":[{"in":"query","name":"id","description":"Dummy datasources meta ID","required":true,"schema":{"type":"integer","format":"int32"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        query_string = await create_query_string(id=id)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasource/dummy-data-source-meta", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DummyDatasourcesMeta
+            schema = DummyDatasourcesMeta()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDummyDatasourcesMeta")
+                print(e)
+
+        return response
+    
+    async def getDummyDatasources(self, request_headers:Dict={}):
+        """Retrieve a list of dummy data sources for testing.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CommunicationValidator.getDummyDatasources()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasource/dummy-data-sources", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasource/dummy-data-sources", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        return response
+    
     async def getAudiences(self, page_no=None, page_size=None, sort=None, query=None, request_headers:Dict={}):
         """Audience is used to import CSV files containing emails, phone numbers, and other variables in order to populate email/SMS templates for bulk delivery via a Campaign.
         :param page_no : Current page no : type integer
@@ -1820,6 +2303,152 @@ class Communication:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getAudienceById")
+                print(e)
+
+        return response
+    
+    async def updateAudienceById(self, id=None, body="", request_headers:Dict={}):
+        """Modify the settings of a specific custom communication audience.
+        :param id : Event subscription id : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = CommunicationValidator.updateAudienceById()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import AudienceReq
+        schema = AudienceReq()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources/{id}", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import Audience
+            schema = Audience()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAudienceById")
+                print(e)
+
+        return response
+    
+    async def deleteAudienceById(self, id=None, body="", request_headers:Dict={}):
+        """Remove a specific custom communication audience.
+        :param id : Event subscription id : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = CommunicationValidator.deleteAudienceById()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import AudienceReq
+        schema = AudienceReq()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources/{id}", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/datasources/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BasicDelete
+            schema = BasicDelete()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteAudienceById")
+                print(e)
+
+        return response
+    
+    async def getNSampleRecordsFromCsvByGet(self, count=None, header=None, url=None, request_headers:Dict={}):
+        """Retrieve a specified number of sample records from a CSV data source using a GET request.
+        :param count : number or records : type integer
+        :param header : header needed : type boolean
+        :param url : url of file : type string
+        """
+        payload = {}
+        
+        if count is not None:
+            payload["count"] = count
+        if header is not None:
+            payload["header"] = header
+        if url is not None:
+            payload["url"] = url
+
+        # Parameter validation
+        schema = CommunicationValidator.getNSampleRecordsFromCsvByGet()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/get-n-records", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"count","description":"number or records","schema":{"type":"integer"}},{"in":"query","name":"header","description":"header needed","schema":{"type":"boolean"}},{"in":"query","name":"url","description":"url of file","schema":{"type":"string"}}],"query":[{"in":"query","name":"count","description":"number or records","schema":{"type":"integer"}},{"in":"query","name":"header","description":"header needed","schema":{"type":"boolean"}},{"in":"query","name":"url","description":"url of file","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", count=count, header=header, url=url)
+        query_string = await create_query_string(count=count, header=header, url=url)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/sources/get-n-records", count=count, header=header, url=url), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetNRecordsCsvRes
+            schema = GetNRecordsCsvRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getNSampleRecordsFromCsvByGet")
                 print(e)
 
         return response
@@ -2059,6 +2688,50 @@ class Communication:
 
         return response
     
+    async def deleteCampaignById(self, id=None, request_headers:Dict={}):
+        """Modify the settings of a specific communication campaign.
+        :param id : Event subscription id : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = CommunicationValidator.deleteCampaignById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/campaigns/campaigns/{id}", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}},{"in":"path","name":"id","description":"Event subscription id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/campaigns/campaigns/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BasicDelete
+            schema = BasicDelete()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteCampaignById")
+                print(e)
+
+        return response
+    
     async def getStatsOfCampaignById(self, id=None, request_headers:Dict={}):
         """Retrieve statistical data for a specific communication campaign.
         :param id : Event subscription id : type string
@@ -2278,6 +2951,51 @@ class Communication:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for updateOtpConfiguration")
+                print(e)
+
+        return response
+    
+    async def createAppPushtoken(self, body="", request_headers:Dict={}):
+        """Create the push token of the user. 
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CommunicationValidator.createAppPushtoken()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PushtokenReq
+        schema = PushtokenReq()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pn/tokens", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pn/tokens", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PushtokenRes
+            schema = PushtokenRes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createAppPushtoken")
                 print(e)
 
         return response

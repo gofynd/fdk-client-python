@@ -258,8 +258,8 @@ class Lead:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["submitCustomForm"]).netloc, "post", await create_url_without_domain("/service/application/lead/v1.0/form/{slug}/submit", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SubmitCustomFormResponseSchema
-            schema = SubmitCustomFormResponseSchema()
+            from .models import SubmitCustomFormResponse
+            schema = SubmitCustomFormResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

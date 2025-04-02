@@ -12,11 +12,11 @@ class AddProxyReq(BaseSchema):
     pass
 
 
-class ExtensionProxyPathCreation(BaseSchema):
+class AddProxyResponse(BaseSchema):
     pass
 
 
-class ExtensionProxyPathDelete(BaseSchema):
+class RemoveProxyResponse(BaseSchema):
     pass
 
 
@@ -37,7 +37,7 @@ class AddProxyReq(BaseSchema):
     
 
 
-class ExtensionProxyPathCreation(BaseSchema):
+class AddProxyResponse(BaseSchema):
     # Partner swagger.json
 
     
@@ -59,7 +59,7 @@ class ExtensionProxyPathCreation(BaseSchema):
     
 
 
-class ExtensionProxyPathDelete(BaseSchema):
+class RemoveProxyResponse(BaseSchema):
     # Partner swagger.json
 
     

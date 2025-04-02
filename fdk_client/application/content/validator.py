@@ -46,16 +46,6 @@ from ..ApplicationModel import BaseSchema
     
     
     
-        
-        
-        
-        
-    
-    
-        
-    
-    
-    
     
         
         
@@ -66,13 +56,24 @@ from ..ApplicationModel import BaseSchema
     
     
         
+    
+    
+        
+    
+    
+        
+        
+        
+        
+        
+        
+    
+    
+    
         
     
     
         
-        
-    
-    
         
 
 class ContentValidator:
@@ -174,31 +175,6 @@ class ContentValidator:
          
         
     
-    class getDefaultSitemapConfig(BaseSchema):
-        
-        pass 
-        
-    
-    class getSitemaps(BaseSchema):
-        
-        
-        page_no = fields.Str(required=False)
-        
-        page_size = fields.Str(required=False)
-        
-        is_active = fields.Boolean(required=False)
-        
-        name = fields.Str(required=False)
-         
-        
-    
-    class getSitemap(BaseSchema):
-        
-        
-        name = fields.Str(required=False)
-         
-        
-    
     class getSupportInformation(BaseSchema):
         
         pass 
@@ -227,28 +203,55 @@ class ContentValidator:
          
         
     
-    class getCustomObjectBySlug(BaseSchema):
-        
-        
-        definition_slug = fields.Str(required=False)
-        
-        slug = fields.Str(required=False)
-         
-        
-    
-    class getCustomFieldsByResourceId(BaseSchema):
-        
-        
-        resource = fields.Str(required=False)
-        
-        resource_slug = fields.Str(required=False)
-         
-        
-    
     class getWellKnownUrl(BaseSchema):
         
         
         slug = fields.Str(required=False)
+         
+        
+    
+    class getCustomObject(BaseSchema):
+        
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class getCustomObjects(BaseSchema):
+        
+        
+        definition_id = fields.Str(required=False)
+        
+        page_no = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+        
+        ids = fields.Str(required=False)
+        
+        search = fields.Str(required=False)
+         
+        
+    
+    class getCustomFieldDefinitions(BaseSchema):
+        
+        pass 
+        
+    
+    class getCustomFieldDefinition(BaseSchema):
+        
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class getCustomFields(BaseSchema):
+        
+        
+        resource = fields.Str(required=False)
+        
+        resource_ids = fields.Str(required=False)
          
         
     
