@@ -15,8 +15,6 @@ class User:
     def __init__(self, config: ApplicationConfig):
         self._conf = config
         self._relativeUrls = {
-            "getUserAttributes": "/service/application/user/profile/v1.0/user-attributes",
-            "updateUserAttributes": "/service/application/user/profile/v1.0/user-attributes",
             "loginWithFacebook": "/service/application/user/authentication/v1.0/login/facebook-token",
             "loginWithGoogle": "/service/application/user/authentication/v1.0/login/google-token",
             "loginWithGoogleAndroid": "/service/application/user/authentication/v1.0/login/google-android",
@@ -25,6 +23,7 @@ class User:
             "loginWithOTP": "/service/application/user/authentication/v1.0/login/otp",
             "loginWithEmailAndPassword": "/service/application/user/authentication/v1.0/login/password",
             "sendResetPasswordEmail": "/service/application/user/authentication/v1.0/login/password/reset",
+            "sendResetPasswordMobile": "/service/application/user/authentication/v1.0/login/password/mobile/reset",
             "sendResetToken": "/service/application/user/authentication/v1.0/login/password/reset/token",
             "forgotPassword": "/service/application/user/authentication/v1.0/login/password/reset/forgot",
             "resetForgotPassword": "/service/application/user/authentication/v1.0/login/password/forgot",
@@ -56,7 +55,9 @@ class User:
             "sendVerificationLinkToEmail": "/service/application/user/profile/v1.0/email/link/send",
             "userExists": "/service/application/user/authentication/v1.0/user-exists",
             "deleteUser": "/service/application/user/authentication/v1.0/delete",
-            "logout": "/service/application/user/authentication/v1.0/logout"
+            "logout": "/service/application/user/authentication/v1.0/logout",
+            "getUserAttributes": "/service/application/user/profile/v1.0/user-attributes",
+            "updateUserAttributes": "/service/application/user/profile/v1.0/user-attributes"
             
         }
         self._urls = {
@@ -65,99 +66,6 @@ class User:
 
     async def updateUrls(self, urls):
         self._urls.update(urls)
-    
-    async def getUserAttributes(self, slug=None, body="", request_headers:Dict={}):
-        """Get the list of user attributes.
-        :param slug : Filter by attribute slug. : type string
-        """
-        payload = {}
-        
-        if slug is not None:
-            payload["slug"] = slug
-
-        # Parameter validation
-        schema = UserValidator.getUserAttributes()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getUserAttributes"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"slug","schema":{"type":"string"},"description":"Filter by attribute slug."}],"query":[{"in":"query","name":"slug","schema":{"type":"string"},"description":"Filter by attribute slug."}],"headers":[],"path":[]}""", serverType="application", slug=slug)
-        query_string = await create_query_string(slug=slug)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserAttributes"]).netloc, "get", await create_url_without_domain("/service/application/user/profile/v1.0/user-attributes", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import UserAttributes
-            schema = UserAttributes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getUserAttributes")
-                print(e)
-
-        return response
-    
-    async def updateUserAttributes(self, body="", request_headers:Dict={}):
-        """Update user attributes.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = UserValidator.updateUserAttributes()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import UpdateAttributesRequestPayload
-        schema = UpdateAttributesRequestPayload()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(api_url=self._urls["updateUserAttributes"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateUserAttributes"]).netloc, "patch", await create_url_without_domain("/service/application/user/profile/v1.0/user-attributes", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import UserAttributes
-            schema = UserAttributes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateUserAttributes")
-                print(e)
-
-        return response
     
     async def loginWithFacebook(self, platform=None, body="", request_headers:Dict={}):
         """Enable users to log in to the system using their facebook accounts.
@@ -553,6 +461,47 @@ class User:
             except Exception as e:
                 print("Response Validation failed for sendResetPasswordEmail")
                 print(e)
+
+        return response
+    
+    async def sendResetPasswordMobile(self, platform=None, body="", request_headers:Dict={}):
+        """Send a password reset link to the user's mobile.
+        :param platform : ID of the application. : type string
+        """
+        payload = {}
+        
+        if platform is not None:
+            payload["platform"] = platform
+
+        # Parameter validation
+        schema = UserValidator.sendResetPasswordMobile()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SendResetPasswordMobileRequestSchema
+        schema = SendResetPasswordMobileRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["sendResetPasswordMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendResetPasswordMobile"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/password/mobile/reset", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         return response
     
@@ -2105,6 +2054,99 @@ class User:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for logout")
+                print(e)
+
+        return response
+    
+    async def getUserAttributes(self, slug=None, body="", request_headers:Dict={}):
+        """Get the list of user attributes.
+        :param slug : Filter by attribute slug. : type string
+        """
+        payload = {}
+        
+        if slug is not None:
+            payload["slug"] = slug
+
+        # Parameter validation
+        schema = UserValidator.getUserAttributes()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getUserAttributes"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"slug","schema":{"type":"string"},"description":"Filter by attribute slug."}],"query":[{"in":"query","name":"slug","schema":{"type":"string"},"description":"Filter by attribute slug."}],"headers":[],"path":[]}""", serverType="application", slug=slug)
+        query_string = await create_query_string(slug=slug)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserAttributes"]).netloc, "get", await create_url_without_domain("/service/application/user/profile/v1.0/user-attributes", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UserAttributes
+            schema = UserAttributes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserAttributes")
+                print(e)
+
+        return response
+    
+    async def updateUserAttributes(self, body="", request_headers:Dict={}):
+        """Update user attributes.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = UserValidator.updateUserAttributes()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import UpdateUserAttributesRequest
+        schema = UpdateUserAttributesRequest()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["updateUserAttributes"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateUserAttributes"]).netloc, "patch", await create_url_without_domain("/service/application/user/profile/v1.0/user-attributes", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UserAttributes
+            schema = UserAttributes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateUserAttributes")
                 print(e)
 
         return response

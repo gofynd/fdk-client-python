@@ -45,6 +45,13 @@ from ..ApplicationModel import BaseSchema
         
     
     
+        
+        
+    
+    
+        
+    
+    
     
     
         
@@ -53,21 +60,6 @@ from ..ApplicationModel import BaseSchema
     
         
         
-    
-    
-        
-    
-    
-        
-    
-    
-        
-        
-        
-        
-        
-        
-    
     
     
         
@@ -175,6 +167,22 @@ class ContentValidator:
          
         
     
+    class getSlideshows(BaseSchema):
+        
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class getSlideshow(BaseSchema):
+        
+        
+        slug = fields.Str(required=False)
+         
+        
+    
     class getSupportInformation(BaseSchema):
         
         pass 
@@ -183,15 +191,6 @@ class ContentValidator:
     class getTags(BaseSchema):
         
         pass 
-        
-    
-    class getPages(BaseSchema):
-        
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-         
         
     
     class getPage(BaseSchema):
@@ -203,46 +202,19 @@ class ContentValidator:
          
         
     
-    class getWellKnownUrl(BaseSchema):
+    class getPages(BaseSchema):
         
         
-        slug = fields.Str(required=False)
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     
     class getCustomObject(BaseSchema):
         
         
-        id = fields.Str(required=False)
-         
-        
-    
-    class getCustomObjects(BaseSchema):
-        
-        
-        definition_id = fields.Str(required=False)
-        
-        page_no = fields.Str(required=False)
-        
-        page_size = fields.Str(required=False)
-        
-        type = fields.Str(required=False)
-        
-        ids = fields.Str(required=False)
-        
-        search = fields.Str(required=False)
-         
-        
-    
-    class getCustomFieldDefinitions(BaseSchema):
-        
-        pass 
-        
-    
-    class getCustomFieldDefinition(BaseSchema):
-        
-        
-        id = fields.Str(required=False)
+        metaobject_id = fields.Str(required=False)
          
         
     
@@ -251,7 +223,7 @@ class ContentValidator:
         
         resource = fields.Str(required=False)
         
-        resource_ids = fields.Str(required=False)
+        resource_id = fields.Str(required=False)
          
         
     

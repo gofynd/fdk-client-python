@@ -45,30 +45,9 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
         
         
         
@@ -97,11 +76,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
-    
-    
-        
         
         
 
@@ -183,19 +157,6 @@ class FileStorageValidator:
         application_id = fields.Str(required=False)
         
         country_code = fields.Str(required=False)
-        
-        store_os = fields.Boolean(required=False)
-         
-        
-    
-    class fetchPdfTypeById(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
          
         
     
@@ -212,39 +173,6 @@ class FileStorageValidator:
          
         
     
-    class getPdfPayloadById(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class getConfigHtmlTemplateById(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class deletePdfGeneratorConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
     class updateHtmlTemplate(BaseSchema):
         
         
@@ -256,7 +184,7 @@ class FileStorageValidator:
          
         
     
-    class getHtmlTemplateConfig(BaseSchema):
+    class getDefaultHtmlTemplate(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -301,17 +229,6 @@ class FileStorageValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-         
-        
-    
-    class fetchPdfDefaultTemplateById(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
          
         
     

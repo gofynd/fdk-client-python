@@ -68,18 +68,8 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-    
-    
-        
-        
-    
-    
-        
-        
     
     
-        
         
         
     
@@ -162,7 +152,9 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
+                
+from .models import GenerationEntityType
+
     
     
         
@@ -313,8 +305,7 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
+        
         
         
     
@@ -325,6 +316,8 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
     
     
         
@@ -332,6 +325,7 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
     
@@ -359,8 +353,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-        
     
     
         
@@ -377,6 +369,8 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
         
         
     
@@ -384,9 +378,13 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
         
         
         
+    
+    
         
         
     
@@ -398,14 +396,12 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
         
         
         
+        
     
     
-        
         
         
     
@@ -418,10 +414,8 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
-        
         
         
         
@@ -430,17 +424,14 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
         
         
         
-        
     
     
-        
         
         
         
@@ -643,17 +634,6 @@ class ContentValidator:
          
         
     
-    class getComponentById(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        slug = fields.Str(required=False)
-         
-        
-    
     class addDataLoader(BaseSchema):
         
         
@@ -669,17 +649,6 @@ class ContentValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
-         
-        
-    
-    class getDataLoaderApiSpecs(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        data_loader = fields.Str(required=False)
          
         
     
@@ -857,7 +826,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        type = fields.Str(required=False)
+        type = fields.Nested(GenerationEntityType, required=False)
          
         
     
@@ -1157,7 +1126,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        schema_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
         
     
@@ -1168,7 +1137,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        schema_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
         
     
@@ -1179,16 +1148,66 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        schema_id = fields.Str(required=False)
+        id = fields.Str(required=False)
          
         
     
-    class addInjectableTag(BaseSchema):
+    class getSlideshows(BaseSchema):
         
         
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+        
+        device_platform = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class createSlideshow(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getSlideshowBySlug(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
+        
+        device_platform = fields.Str(required=False)
+         
+        
+    
+    class updateSlideshow(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class deleteSlideshow(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
          
         
     
@@ -1202,6 +1221,35 @@ class ContentValidator:
         
     
     class updateSupportInformation(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateInjectableTag(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getInjectableTags(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        all = fields.Boolean(required=False)
+         
+        
+    
+    class addInjectableTag(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -1227,42 +1275,6 @@ class ContentValidator:
         application_id = fields.Str(required=False)
         
         tag_id = fields.Str(required=False)
-         
-        
-    
-    class createInjectableTag(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateInjectableTag(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class deleteAllInjectableTags(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getInjectableTags(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
          
         
     
@@ -1350,13 +1362,11 @@ class ContentValidator:
         
         page_size = fields.Str(required=False)
         
-        resources = fields.Str(required=False)
+        resource = fields.Str(required=False)
         
-        types = fields.Str(required=False)
+        type = fields.Str(required=False)
         
         search = fields.Str(required=False)
-        
-        slugs = fields.Str(required=False)
          
         
     
@@ -1376,7 +1386,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
@@ -1387,7 +1397,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
@@ -1398,7 +1408,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
@@ -1439,49 +1449,6 @@ class ContentValidator:
          
         
     
-    class updateAppCustomFieldByResourceId(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        resource = fields.Str(required=False)
-        
-        resource_id = fields.Str(required=False)
-         
-        
-    
-    class deleteAppCustomFieldsByResourceId(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        resource = fields.Str(required=False)
-        
-        resource_id = fields.Str(required=False)
-        
-        ids = fields.Str(required=False)
-         
-        
-    
-    class getAppCustomFieldJobs(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        page = fields.Str(required=False)
-        
-        page_size = fields.Str(required=False)
-        
-        action_type = fields.Str(required=False)
-         
-        
-    
     class createAppCustomObjectDefinition(BaseSchema):
         
         
@@ -1513,7 +1480,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
@@ -1524,7 +1491,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
@@ -1535,7 +1502,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
@@ -1570,18 +1537,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
-         
-        
-    
-    class updateAppCustomObject(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
+        metaobject_id = fields.Str(required=False)
          
         
     
@@ -1592,7 +1548,18 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        metaobject_id = fields.Str(required=False)
+         
+        
+    
+    class updateAppCustomObject(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        metaobject_id = fields.Str(required=False)
          
         
     

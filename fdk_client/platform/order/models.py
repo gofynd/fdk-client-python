@@ -28,78 +28,6 @@ class ErrorResponse(BaseSchema):
     pass
 
 
-class LogErrorResponse(BaseSchema):
-    pass
-
-
-class QuestionErrorResponse(BaseSchema):
-    pass
-
-
-class RefundStateConfigurationByPaymentType(BaseSchema):
-    pass
-
-
-class PostRefundStateConfiguration(BaseSchema):
-    pass
-
-
-class PostRefundStateConfigurationResponse(BaseSchema):
-    pass
-
-
-class GetRefundStateConfigurationResponse(BaseSchema):
-    pass
-
-
-class RefundStates(BaseSchema):
-    pass
-
-
-class GetRefundStates(BaseSchema):
-    pass
-
-
-class RefundStateManualWithoutMessage(BaseSchema):
-    pass
-
-
-class RefundStateManualWithMessage(BaseSchema):
-    pass
-
-
-class RefundStateManualWithMessageData(BaseSchema):
-    pass
-
-
-class RefundStateConfigurationManualSchema(BaseSchema):
-    pass
-
-
-class RefundStateConfigurationManualSchemaResponse(BaseSchema):
-    pass
-
-
-class RefundSubOption(BaseSchema):
-    pass
-
-
-class RefundBreakup(BaseSchema):
-    pass
-
-
-class RefundOptionShipmentResponse(BaseSchema):
-    pass
-
-
-class CurrencySchema(BaseSchema):
-    pass
-
-
-class RefundOptionsSchemaResponse(BaseSchema):
-    pass
-
-
 class StoreReassign(BaseSchema):
     pass
 
@@ -137,10 +65,6 @@ class AnnouncementResponse(BaseSchema):
 
 
 class AnnouncementsResponse(BaseSchema):
-    pass
-
-
-class Click2CallResponse(BaseSchema):
     pass
 
 
@@ -196,15 +120,7 @@ class EntitiesDataUpdates(BaseSchema):
     pass
 
 
-class RepricedProductsDataUpdates(BaseSchema):
-    pass
-
-
 class DataUpdates(BaseSchema):
-    pass
-
-
-class TransitionComments(BaseSchema):
     pass
 
 
@@ -216,15 +132,7 @@ class StatuesRequest(BaseSchema):
     pass
 
 
-class ActionRequest(BaseSchema):
-    pass
-
-
 class UpdateShipmentStatusRequestSchema(BaseSchema):
-    pass
-
-
-class UpdateShipmentActionRequest(BaseSchema):
     pass
 
 
@@ -260,7 +168,7 @@ class DispatchManifest(BaseSchema):
     pass
 
 
-class SuccessResponseSchema(BaseSchema):
+class SuccessResponse(BaseSchema):
     pass
 
 
@@ -269,10 +177,6 @@ class ActionInfo(BaseSchema):
 
 
 class GetActionsResponse(BaseSchema):
-    pass
-
-
-class RefundInformation(BaseSchema):
     pass
 
 
@@ -336,10 +240,6 @@ class OrderStatusResult(BaseSchema):
     pass
 
 
-class SendSmsResponse(BaseSchema):
-    pass
-
-
 class Dimension(BaseSchema):
     pass
 
@@ -356,39 +256,11 @@ class Tax(BaseSchema):
     pass
 
 
-class Charge(BaseSchema):
-    pass
-
-
-class CurrencyValueSchema(BaseSchema):
-    pass
-
-
 class AmountSchema(BaseSchema):
     pass
 
 
-class DynamicChargeTaxSchema(BaseSchema):
-    pass
-
-
-class RuleConditionsSchema(BaseSchema):
-    pass
-
-
-class RuleSchema(BaseSchema):
-    pass
-
-
-class DistributionSchema(BaseSchema):
-    pass
-
-
-class DistributionLogicSchema(BaseSchema):
-    pass
-
-
-class DynamicChargeSchema(BaseSchema):
+class Charge(BaseSchema):
     pass
 
 
@@ -412,10 +284,6 @@ class ShippingInfo(BaseSchema):
     pass
 
 
-class BillingInfo(BaseSchema):
-    pass
-
-
 class UserInfo(BaseSchema):
     pass
 
@@ -432,51 +300,11 @@ class PaymentInfo(BaseSchema):
     pass
 
 
-class CurrencyInfoCurrency(BaseSchema):
-    pass
-
-
-class CurrencyInfoConversionRate(BaseSchema):
-    pass
-
-
-class CurrencyInfo(BaseSchema):
-    pass
-
-
-class ConfigPayment(BaseSchema):
-    pass
-
-
-class ConfigDpConfiguration(BaseSchema):
-    pass
-
-
-class ConfigApplication(BaseSchema):
-    pass
-
-
 class CreateOrderAPI(BaseSchema):
     pass
 
 
 class CreateOrderErrorReponse(BaseSchema):
-    pass
-
-
-class DpConfiguration(BaseSchema):
-    pass
-
-
-class PaymentMethods(BaseSchema):
-    pass
-
-
-class CreateChannelPaymentInfo(BaseSchema):
-    pass
-
-
-class CreateChannelConfig(BaseSchema):
     pass
 
 
@@ -489,18 +317,6 @@ class PlatformOrderUpdate(BaseSchema):
 
 
 class ResponseDetail(BaseSchema):
-    pass
-
-
-class OrderData(BaseSchema):
-    pass
-
-
-class OrderUpdatePayload(BaseSchema):
-    pass
-
-
-class OrderUpdateResponseDetail(BaseSchema):
     pass
 
 
@@ -520,18 +336,6 @@ class RoleBaseStateTransitionMapping(BaseSchema):
     pass
 
 
-class FetchCreditBalanceRequestPayload(BaseSchema):
-    pass
-
-
-class CreditBalanceInfo(BaseSchema):
-    pass
-
-
-class FetchCreditBalanceResponsePayload(BaseSchema):
-    pass
-
-
 class RefundModeConfigRequestPayload(BaseSchema):
     pass
 
@@ -540,7 +344,7 @@ class RefundOption(BaseSchema):
     pass
 
 
-class RefundModeInfoFormat(BaseSchema):
+class RefundModeFormat(BaseSchema):
     pass
 
 
@@ -565,10 +369,6 @@ class AttachOrderUser(BaseSchema):
 
 
 class AttachOrderUserResponse(BaseSchema):
-    pass
-
-
-class AttachOrderUserErrorResponse(BaseSchema):
     pass
 
 
@@ -600,14 +400,6 @@ class VerifyOtpResponse(BaseSchema):
     pass
 
 
-class VerifyOtpErrorResponseData(BaseSchema):
-    pass
-
-
-class VerifyOtpErrorResponse(BaseSchema):
-    pass
-
-
 class BulkReportsDownloadRequest(BaseSchema):
     pass
 
@@ -617,10 +409,6 @@ class BulkReportsDownloadResponse(BaseSchema):
 
 
 class APIFailedResponse(BaseSchema):
-    pass
-
-
-class BulkFailedResponse(BaseSchema):
     pass
 
 
@@ -712,22 +500,6 @@ class ManifestDetails(BaseSchema):
     pass
 
 
-class FiltersRequest(BaseSchema):
-    pass
-
-
-class ProcessManifest(BaseSchema):
-    pass
-
-
-class ProcessManifestResponse(BaseSchema):
-    pass
-
-
-class ProcessManifestItemResponse(BaseSchema):
-    pass
-
-
 class FilterInfoOption(BaseSchema):
     pass
 
@@ -816,27 +588,11 @@ class FailedOrderLogDetails(BaseSchema):
     pass
 
 
-class OptionItem(BaseSchema):
+class GenerateInvoiceIDResponseData(BaseSchema):
     pass
 
 
-class SuperLaneItem(BaseSchema):
-    pass
-
-
-class RuleLaneConfigResponse(BaseSchema):
-    pass
-
-
-class RuleLaneConfigResponseSchema(BaseSchema):
-    pass
-
-
-class RuleLaneConfigErrorResponse(BaseSchema):
-    pass
-
-
-class QuestionSetItem(BaseSchema):
+class GenerateInvoiceIDErrorResponseData(BaseSchema):
     pass
 
 
@@ -844,83 +600,19 @@ class GenerateInvoiceIDRequestSchema(BaseSchema):
     pass
 
 
-class Reason(BaseSchema):
+class GenerateInvoiceIDResponse(BaseSchema):
     pass
 
 
-class RuleRequest(BaseSchema):
+class GenerateInvoiceIDErrorResponse(BaseSchema):
     pass
 
 
-class RuleResponse(BaseSchema):
+class ManifestResponse(BaseSchema):
     pass
 
 
-class RuleUpdateRequest(BaseSchema):
-    pass
-
-
-class Condition(BaseSchema):
-    pass
-
-
-class RuleMeta(BaseSchema):
-    pass
-
-
-class RuleAction(BaseSchema):
-    pass
-
-
-class Department(BaseSchema):
-    pass
-
-
-class L3(BaseSchema):
-    pass
-
-
-class Error(BaseSchema):
-    pass
-
-
-class RuleSuccessResponse(BaseSchema):
-    pass
-
-
-class UpdateRulePositionRequest(BaseSchema):
-    pass
-
-
-class RuleListResponse(BaseSchema):
-    pass
-
-
-class RuleItem(BaseSchema):
-    pass
-
-
-class RuleParametersResponse(BaseSchema):
-    pass
-
-
-class ParameterResponse(BaseSchema):
-    pass
-
-
-class RuleListRequest(BaseSchema):
-    pass
-
-
-class ErrorGenericWithStatus(BaseSchema):
-    pass
-
-
-class ManifestResponseSchema(BaseSchema):
-    pass
-
-
-class ProcessManifestRequestSchema(BaseSchema):
+class ProcessManifestRequest(BaseSchema):
     pass
 
 
@@ -929,22 +621,6 @@ class ManifestItems(BaseSchema):
 
 
 class ManifestErrorResponse(BaseSchema):
-    pass
-
-
-class RuleListItem(BaseSchema):
-    pass
-
-
-class RuleError(BaseSchema):
-    pass
-
-
-class RuleErrorResponse(BaseSchema):
-    pass
-
-
-class PageInfo(BaseSchema):
     pass
 
 
@@ -1028,7 +704,7 @@ class UserDataInfo(BaseSchema):
     pass
 
 
-class Address(BaseSchema):
+class PlatformDeliveryAddress(BaseSchema):
     pass
 
 
@@ -1037,26 +713,6 @@ class ShipmentListingChannel(BaseSchema):
 
 
 class Prices(BaseSchema):
-    pass
-
-
-class ChargeDistributionSchema(BaseSchema):
-    pass
-
-
-class ChargeDistributionLogic(BaseSchema):
-    pass
-
-
-class ChargeAmountCurrency(BaseSchema):
-    pass
-
-
-class ChargeAmount(BaseSchema):
-    pass
-
-
-class PriceAdjustmentCharge(BaseSchema):
     pass
 
 
@@ -1145,6 +801,10 @@ class OrderingCurrency(BaseSchema):
 
 
 class ConversionRate(BaseSchema):
+    pass
+
+
+class CurrencyInfo(BaseSchema):
     pass
 
 
@@ -1268,22 +928,6 @@ class BuyRules(BaseSchema):
     pass
 
 
-class PriceMinMax(BaseSchema):
-    pass
-
-
-class ItemPriceDetails(BaseSchema):
-    pass
-
-
-class FreeGiftItems(BaseSchema):
-    pass
-
-
-class AppliedFreeArticles(BaseSchema):
-    pass
-
-
 class AppliedPromos(BaseSchema):
     pass
 
@@ -1312,10 +956,6 @@ class ShipmentLockDetails(BaseSchema):
     pass
 
 
-class ShipmentPaymentInfoData(BaseSchema):
-    pass
-
-
 class PlatformShipment(BaseSchema):
     pass
 
@@ -1329,6 +969,10 @@ class TaxDetails(BaseSchema):
 
 
 class PaymentInfoData(BaseSchema):
+    pass
+
+
+class OrderData(BaseSchema):
     pass
 
 
@@ -1376,38 +1020,6 @@ class AdvanceFilterInfo(BaseSchema):
     pass
 
 
-class FilterOptions(BaseSchema):
-    pass
-
-
-class FiltersList(BaseSchema):
-    pass
-
-
-class GlobalFiltersResponse(BaseSchema):
-    pass
-
-
-class ViewDetails(BaseSchema):
-    pass
-
-
-class ParentViews(BaseSchema):
-    pass
-
-
-class UserViewsResponse(BaseSchema):
-    pass
-
-
-class UserViewPosition(BaseSchema):
-    pass
-
-
-class CreateUpdateDeleteResponse(BaseSchema):
-    pass
-
-
 class FiltersResponse(BaseSchema):
     pass
 
@@ -1425,6 +1037,10 @@ class BulkActionTemplate(BaseSchema):
 
 
 class BulkActionTemplateResponse(BaseSchema):
+    pass
+
+
+class Reason(BaseSchema):
     pass
 
 
@@ -1477,10 +1093,6 @@ class Store(BaseSchema):
 
 
 class Brand(BaseSchema):
-    pass
-
-
-class Attributes(BaseSchema):
     pass
 
 
@@ -1552,15 +1164,15 @@ class AllowedTemplatesResponse(BaseSchema):
     pass
 
 
-class CDN(BaseSchema):
-    pass
-
-
-class Upload(BaseSchema):
-    pass
-
-
 class TemplateDownloadResponse(BaseSchema):
+    pass
+
+
+class Error(BaseSchema):
+    pass
+
+
+class BulkFailedResponse(BaseSchema):
     pass
 
 
@@ -1623,227 +1235,7 @@ class ErrorResponse(BaseSchema):
     
     error_trace = fields.Str(required=False, allow_none=True)
     
-    error = fields.Str(required=False, allow_none=True)
-    
-    remarks = fields.Str(required=False, allow_none=True)
-    
-    status_code = fields.Int(required=False, allow_none=True)
-    
-
-
-class LogErrorResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    status = fields.Int(required=False)
-    
-    message = fields.Str(required=False)
-    
-
-
-class QuestionErrorResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    type = fields.Str(required=False, allow_none=True)
-    
-    value = fields.Str(required=False, allow_none=True)
-    
-    message = fields.Dict(required=False, allow_none=True)
-    
-
-
-class RefundStateConfigurationByPaymentType(BaseSchema):
-    # Order swagger.json
-
-    
-    states = fields.List(fields.Str(required=False), required=False)
-    
-    allow_refund_initiate = fields.Boolean(required=False)
-    
-
-
-class PostRefundStateConfiguration(BaseSchema):
-    # Order swagger.json
-
-    
-    prepaid = fields.Nested(RefundStateConfigurationByPaymentType, required=False)
-    
-    non_prepaid = fields.Nested(RefundStateConfigurationByPaymentType, required=False)
-    
-    mix_mop = fields.Nested(RefundStateConfigurationByPaymentType, required=False)
-    
-
-
-class PostRefundStateConfigurationResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    refund_config = fields.Str(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class GetRefundStateConfigurationResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    config = fields.Nested(PostRefundStateConfiguration, required=False)
-    
-
-
-class RefundStates(BaseSchema):
-    # Order swagger.json
-
-    
-    state = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-
-
-class GetRefundStates(BaseSchema):
-    # Order swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    items = fields.List(fields.Nested(RefundStates, required=False), required=False)
-    
-    status = fields.Int(required=False)
-    
-
-
-class RefundStateManualWithoutMessage(BaseSchema):
-    # Order swagger.json
-
-    
-    is_manual = fields.Boolean(required=False)
-    
-
-
-class RefundStateManualWithMessage(BaseSchema):
-    # Order swagger.json
-
-    
-    is_manual = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
-    
-
-
-class RefundStateManualWithMessageData(BaseSchema):
-    # Order swagger.json
-
-    
-    prepaid = fields.Nested(RefundStateManualWithMessage, required=False)
-    
-    non_prepaid = fields.Nested(RefundStateManualWithMessage, required=False)
-    
-    mix_mop = fields.Nested(RefundStateManualWithMessage, required=False)
-    
-
-
-class RefundStateConfigurationManualSchema(BaseSchema):
-    # Order swagger.json
-
-    
-    prepaid = fields.Nested(RefundStateManualWithoutMessage, required=False)
-    
-    non_prepaid = fields.Nested(RefundStateManualWithoutMessage, required=False)
-    
-    mix_mop = fields.Nested(RefundStateManualWithoutMessage, required=False)
-    
-
-
-class RefundStateConfigurationManualSchemaResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    data = fields.Nested(RefundStateManualWithMessageData, required=False)
-    
-
-
-class RefundSubOption(BaseSchema):
-    # Order swagger.json
-
-    
-    id = fields.Int(required=False)
-    
-    name = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-
-
-class RefundBreakup(BaseSchema):
-    # Order swagger.json
-
-    
-    mode = fields.Str(required=False)
-    
-    amount = fields.Float(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    offline = fields.Boolean(required=False)
-    
-
-
-class RefundOptionShipmentResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    id = fields.Int(required=False)
-    
-    name = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    breakups = fields.List(fields.Nested(RefundBreakup, required=False), required=False)
-    
-    option = fields.List(fields.Nested(RefundSubOption, required=False), required=False)
-    
-    offline = fields.Boolean(required=False)
-    
-    amount = fields.Float(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-
-
-class CurrencySchema(BaseSchema):
-    # Order swagger.json
-
-    
-    currency_code = fields.Str(required=False)
-    
-    currency_symbol = fields.Str(required=False)
-    
-
-
-class RefundOptionsSchemaResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    currency = fields.Nested(CurrencySchema, required=False)
-    
-    refund_options = fields.List(fields.Nested(RefundOptionShipmentResponse, required=False), required=False)
+    error = fields.Str(required=False)
     
 
 
@@ -1911,8 +1303,6 @@ class UpdateShipmentLockPayload(BaseSchema):
     
     action_type = fields.Str(required=False)
     
-    user_id = fields.Str(required=False)
-    
     entities = fields.List(fields.Nested(LockManagerEntities, required=False), required=False)
     
     resume_tasks_after_unlock = fields.Boolean(required=False, allow_none=True)
@@ -1930,8 +1320,6 @@ class OriginalFilter(BaseSchema):
     affiliate_shipment_id = fields.Str(required=False)
     
     affiliate_id = fields.Str(required=False)
-    
-    shipment_id = fields.Str(required=False)
     
 
 
@@ -1983,8 +1371,6 @@ class UpdateShipmentLockResponse(BaseSchema):
     
     check_response = fields.List(fields.Nested(CheckResponse, required=False), required=False)
     
-    status = fields.Int(required=False)
-    
 
 
 class AnnouncementResponse(BaseSchema):
@@ -2005,7 +1391,7 @@ class AnnouncementResponse(BaseSchema):
     
     title = fields.Str(required=False)
     
-    company_id = fields.Int(required=False, allow_none=True)
+    company_id = fields.Int(required=False)
     
     logo_url = fields.Str(required=False)
     
@@ -2021,19 +1407,7 @@ class AnnouncementsResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    message = fields.Str(required=False)
-    
     status = fields.Int(required=False)
-    
-
-
-class Click2CallResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    call_id = fields.Str(required=False)
-    
-    success = fields.Boolean(required=False)
     
 
 
@@ -2055,8 +1429,6 @@ class ErrorDetail(BaseSchema):
     
     message = fields.Str(required=False)
     
-    status = fields.Float(required=False)
-    
 
 
 class ProductsReasonsFilters(BaseSchema):
@@ -2067,7 +1439,7 @@ class ProductsReasonsFilters(BaseSchema):
     
     identifier = fields.Str(required=False)
     
-    quantity = fields.Float(required=False)
+    quantity = fields.Int(required=False)
     
 
 
@@ -2129,7 +1501,7 @@ class Products(BaseSchema):
     
     identifier = fields.Str(required=False)
     
-    quantity = fields.Float(required=False)
+    quantity = fields.Int(required=False)
     
 
 
@@ -2148,8 +1520,6 @@ class ProductsDataUpdatesFilters(BaseSchema):
     line_number = fields.Int(required=False)
     
     identifier = fields.Str(required=False)
-    
-    quantity = fields.Float(required=False)
     
 
 
@@ -2173,18 +1543,6 @@ class EntitiesDataUpdates(BaseSchema):
     
 
 
-class RepricedProductsDataUpdates(BaseSchema):
-    # Order swagger.json
-
-    
-    line_number = fields.Int(required=False)
-    
-    identifier = fields.Str(required=False)
-    
-    price = fields.Int(required=False)
-    
-
-
 class DataUpdates(BaseSchema):
     # Order swagger.json
 
@@ -2194,18 +1552,6 @@ class DataUpdates(BaseSchema):
     products = fields.List(fields.Nested(ProductsDataUpdates, required=False), required=False)
     
     entities = fields.List(fields.Nested(EntitiesDataUpdates, required=False), required=False)
-    
-    repriced_products = fields.List(fields.Nested(RepricedProductsDataUpdates, required=False), required=False)
-    
-
-
-class TransitionComments(BaseSchema):
-    # Order swagger.json
-
-    
-    title = fields.Str(required=False)
-    
-    message = fields.Str(required=False)
     
 
 
@@ -2221,8 +1567,6 @@ class ShipmentsRequest(BaseSchema):
     
     data_updates = fields.Nested(DataUpdates, required=False)
     
-    transition_comments = fields.List(fields.Nested(TransitionComments, required=False), required=False)
-    
 
 
 class StatuesRequest(BaseSchema):
@@ -2230,20 +1574,6 @@ class StatuesRequest(BaseSchema):
 
     
     status = fields.Str(required=False)
-    
-    shipments = fields.List(fields.Nested(ShipmentsRequest, required=False), required=False)
-    
-    exclude_bags_next_state = fields.Str(required=False)
-    
-    split_shipment = fields.Boolean(required=False)
-    
-
-
-class ActionRequest(BaseSchema):
-    # Order swagger.json
-
-    
-    action = fields.Str(required=False)
     
     shipments = fields.List(fields.Nested(ShipmentsRequest, required=False), required=False)
     
@@ -2268,22 +1598,6 @@ class UpdateShipmentStatusRequestSchema(BaseSchema):
     task = fields.Boolean(required=False)
     
     resume_tasks_after_unlock = fields.Boolean(required=False)
-    
-
-
-class UpdateShipmentActionRequest(BaseSchema):
-    # Order swagger.json
-
-    
-    force_transition = fields.Boolean(required=False)
-    
-    statuses = fields.List(fields.Nested(ActionRequest, required=False), required=False)
-    
-    lock_after_transition = fields.Boolean(required=False)
-    
-    unlock_before_transition = fields.Boolean(required=False)
-    
-    task = fields.Boolean(required=False)
     
 
 
@@ -2375,7 +1689,7 @@ class DispatchManifest(BaseSchema):
     
 
 
-class SuccessResponseSchema(BaseSchema):
+class SuccessResponse(BaseSchema):
     # Order swagger.json
 
     
@@ -2404,20 +1718,6 @@ class GetActionsResponse(BaseSchema):
 
     
     permissions = fields.List(fields.Nested(ActionInfo, required=False), required=False)
-    
-
-
-class RefundInformation(BaseSchema):
-    # Order swagger.json
-
-    
-    mode = fields.Str(required=False)
-    
-    amount = fields.Float(required=False)
-    
-    merchant_transaction_id = fields.Str(required=False)
-    
-    refund_status = fields.Str(required=False)
     
 
 
@@ -2475,7 +1775,7 @@ class HistoryMeta(BaseSchema):
     
     duration = fields.Str(required=False, allow_none=True)
     
-    channel_type = fields.Str(required=False)
+    channel_type = fields.Str(required=False, allow_none=True)
     
     activity_comment = fields.Str(required=False, allow_none=True)
     
@@ -2489,49 +1789,35 @@ class HistoryMeta(BaseSchema):
     
     message = fields.Str(required=False, allow_none=True)
     
-    type = fields.Str(required=False, allow_none=True)
-    
-    prev_store_name = fields.Str(required=False, allow_none=True)
-    
-    prev_store_code = fields.Str(required=False, allow_none=True)
-    
-    prev_store_id = fields.Str(required=False, allow_none=True)
-    
-    refund_to = fields.Str(required=False, allow_none=True)
-    
-    refund_information = fields.List(fields.Nested(RefundInformation, required=False), required=False)
-    
 
 
 class HistoryDict(BaseSchema):
     # Order swagger.json
 
     
-    user_details = fields.Dict(required=False)
-    
     display_message = fields.Str(required=False)
     
     bag_id = fields.Int(required=False)
     
-    ticket_url = fields.Str(required=False, allow_none=True)
+    ticket_url = fields.Str(required=False)
     
-    l3_detail = fields.Str(required=False, allow_none=True)
+    l3_detail = fields.Str(required=False)
     
     createdat = fields.Str(required=False)
     
-    created_ts = fields.Str(required=False, allow_none=True)
+    created_ts = fields.Str(required=False)
     
-    ticket_id = fields.Str(required=False, allow_none=True)
+    ticket_id = fields.Str(required=False)
     
     type = fields.Str(required=False)
     
-    l2_detail = fields.Str(required=False, allow_none=True)
+    l2_detail = fields.Str(required=False)
     
-    assigned_agent = fields.Str(required=False, allow_none=True)
+    assigned_agent = fields.Str(required=False)
     
     meta = fields.Nested(HistoryMeta, required=False)
     
-    l1_detail = fields.Str(required=False, allow_none=True)
+    l1_detail = fields.Str(required=False)
     
     message = fields.Str(required=False)
     
@@ -2593,15 +1879,11 @@ class SmsDataPayload(BaseSchema):
     # Order swagger.json
 
     
-    days = fields.Int(required=False)
+    shipment_id = fields.Int(required=False)
     
-    reason = fields.Str(required=False)
+    phone_number = fields.Int(required=False)
     
-    shipment_id = fields.Str(required=False)
-    
-    phone_number = fields.Str(required=False)
-    
-    amount_paid = fields.Float(required=False)
+    amount_paid = fields.Int(required=False)
     
     order_id = fields.Str(required=False)
     
@@ -2621,7 +1903,7 @@ class SendSmsPayload(BaseSchema):
     # Order swagger.json
 
     
-    bag_id = fields.Str(required=False)
+    bag_id = fields.Int(required=False)
     
     data = fields.Nested(SmsDataPayload, required=False)
     
@@ -2695,8 +1977,6 @@ class OrderDetails(BaseSchema):
     
     prices = fields.Nested(Prices, required=False)
     
-    charges = fields.List(fields.Nested(PriceAdjustmentCharge, required=False), required=False)
-    
 
 
 class Meta(BaseSchema):
@@ -2751,23 +2031,9 @@ class OrderStatusResult(BaseSchema):
     # Order swagger.json
 
     
-    status_code = fields.Int(required=False)
-    
-    remarks = fields.Str(required=False)
-    
-    success = fields.Boolean(required=False)
+    success = fields.Str(required=False)
     
     result = fields.List(fields.Nested(OrderStatusData, required=False), required=False)
-    
-
-
-class SendSmsResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
     
 
 
@@ -2777,9 +2043,9 @@ class Dimension(BaseSchema):
     
     packaging_type = fields.Str(required=False)
     
-    weight = fields.Str(required=False)
+    weight = fields.Float(required=False)
     
-    height = fields.Str(required=False)
+    height = fields.Float(required=False)
     
     length = fields.Float(required=False)
     
@@ -2817,7 +2083,17 @@ class Tax(BaseSchema):
     
     breakup = fields.List(fields.Dict(required=False), required=False)
     
-    amount = fields.Nested(AmountSchema, required=False)
+    amount = fields.Dict(required=False)
+    
+
+
+class AmountSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    currency = fields.Str(required=False)
+    
+    value = fields.Float(required=False)
     
 
 
@@ -2837,94 +2113,6 @@ class Charge(BaseSchema):
     
 
 
-class CurrencyValueSchema(BaseSchema):
-    # Order swagger.json
-
-    
-    value = fields.Float(required=False)
-    
-    currency = fields.Str(required=False)
-    
-
-
-class AmountSchema(BaseSchema):
-    # Order swagger.json
-
-    
-    ordering_currency = fields.Nested(CurrencyValueSchema, required=False)
-    
-    base_currency = fields.Nested(CurrencyValueSchema, required=False)
-    
-
-
-class DynamicChargeTaxSchema(BaseSchema):
-    # Order swagger.json
-
-    
-    reporting_hsn_code = fields.Str(required=False)
-    
-
-
-class RuleConditionsSchema(BaseSchema):
-    # Order swagger.json
-
-    
-    article_tag = fields.Str(required=False)
-    
-    department = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class RuleSchema(BaseSchema):
-    # Order swagger.json
-
-    
-    conditions = fields.Nested(RuleConditionsSchema, required=False)
-    
-
-
-class DistributionSchema(BaseSchema):
-    # Order swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    logic = fields.Str(required=False)
-    
-    rule = fields.Nested(RuleSchema, required=False)
-    
-
-
-class DistributionLogicSchema(BaseSchema):
-    # Order swagger.json
-
-    
-    distribution_level = fields.Str(required=False)
-    
-    distribution = fields.Nested(DistributionSchema, required=False)
-    
-
-
-class DynamicChargeSchema(BaseSchema):
-    # Order swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    code = fields.Str(required=False)
-    
-    amount = fields.Nested(AmountSchema, required=False)
-    
-    taxes = fields.Nested(DynamicChargeTaxSchema, required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    distribution_logic = fields.Nested(DistributionLogicSchema, required=False)
-    
-
-
 class LineItem(BaseSchema):
     # Order swagger.json
 
@@ -2940,8 +2128,6 @@ class LineItem(BaseSchema):
     seller_identifier = fields.Str(required=False)
     
     external_line_id = fields.Str(required=False)
-    
-    dynamic_charges = fields.List(fields.Nested(DynamicChargeSchema, required=False), required=False)
     
 
 
@@ -2971,8 +2157,6 @@ class Shipment(BaseSchema):
     
     external_shipment_id = fields.Str(required=False)
     
-    external_location_id = fields.Str(required=False)
-    
     processing_dates = fields.Nested(ProcessingDates, required=False)
     
     meta = fields.Dict(required=False, allow_none=True)
@@ -2991,7 +2175,7 @@ class Shipment(BaseSchema):
     
     type = fields.Str(required=False, allow_none=True)
     
-    billing_address_json = fields.Nested(Address, required=False)
+    billing_address_json = fields.Nested(PlatformDeliveryAddress, required=False)
     
     id = fields.Str(required=False)
     
@@ -3003,7 +2187,7 @@ class Shipment(BaseSchema):
     
     pdf_links = fields.Dict(required=False, allow_none=True)
     
-    delivery_address_json = fields.Nested(Address, required=False)
+    delivery_address_json = fields.Nested(PlatformDeliveryAddress, required=False)
     
     eway_bill_id = fields.Str(required=False, allow_none=True)
     
@@ -3017,7 +2201,7 @@ class Shipment(BaseSchema):
     
     delivery_awb_number = fields.Str(required=False, allow_none=True)
     
-    hand_over_contact_json = fields.Nested(Address, required=False)
+    hand_over_contact_json = fields.Nested(PlatformDeliveryAddress, required=False)
     
     credit_note_id = fields.Str(required=False, allow_none=True)
     
@@ -3052,8 +2236,6 @@ class GeoLocationSchema(BaseSchema):
 class ShippingInfo(BaseSchema):
     # Order swagger.json
 
-    
-    phone = fields.Str(required=False)
     
     alternate_mobile_number = fields.Str(required=False)
     
@@ -3115,62 +2297,6 @@ class ShippingInfo(BaseSchema):
     
 
 
-class BillingInfo(BaseSchema):
-    # Order swagger.json
-
-    
-    phone = fields.Str(required=False)
-    
-    alternate_mobile_number = fields.Str(required=False)
-    
-    state = fields.Str(required=False)
-    
-    customer_code = fields.Str(required=False)
-    
-    middle_name = fields.Str(required=False)
-    
-    primary_mobile_number = fields.Str(required=False)
-    
-    last_name = fields.Str(required=False)
-    
-    gender = fields.Str(required=False)
-    
-    house_no = fields.Str(required=False)
-    
-    first_name = fields.Str(required=False)
-    
-    title = fields.Str(required=False)
-    
-    country = fields.Str(required=False)
-    
-    state_code = fields.Str(required=False)
-    
-    city = fields.Str(required=False)
-    
-    external_customer_code = fields.Str(required=False)
-    
-    floor_no = fields.Str(required=False)
-    
-    alternate_email = fields.Str(required=False)
-    
-    address = fields.Str(required=False)
-    
-    area = fields.Str(required=False)
-    
-    address1 = fields.Str(required=False)
-    
-    pincode = fields.Str(required=False)
-    
-    primary_email = fields.Str(required=False)
-    
-    address2 = fields.Str(required=False)
-    
-    landmark = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
-    
-
-
 class UserInfo(BaseSchema):
     # Order swagger.json
 
@@ -3188,10 +2314,6 @@ class UserInfo(BaseSchema):
     last_name = fields.Str(required=False)
     
     primary_mobile_number = fields.Str(required=False)
-    
-    is_authenticated = fields.Boolean(required=False)
-    
-    meta = fields.Dict(required=False)
     
 
 
@@ -3225,12 +2347,6 @@ class PaymentMethod(BaseSchema):
     
     transaction_data = fields.Dict(required=False)
     
-    collected = fields.Boolean(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    merchant_transaction_id = fields.Str(required=False)
-    
 
 
 class PaymentInfo(BaseSchema):
@@ -3245,78 +2361,6 @@ class PaymentInfo(BaseSchema):
     
 
 
-class CurrencyInfoCurrency(BaseSchema):
-    # Order swagger.json
-
-    
-    currency_code = fields.Str(required=False)
-    
-    currency_name = fields.Str(required=False)
-    
-    currency_sub_unit = fields.Str(required=False)
-    
-    currency_symbol = fields.Str(required=False)
-    
-
-
-class CurrencyInfoConversionRate(BaseSchema):
-    # Order swagger.json
-
-    
-    rates = fields.Dict(required=False)
-    
-    base = fields.Str(required=False)
-    
-    timestamp = fields.Float(required=False)
-    
-
-
-class CurrencyInfo(BaseSchema):
-    # Order swagger.json
-
-    
-    currency = fields.Nested(CurrencyInfoCurrency, required=False)
-    
-    order_currency = fields.Str(required=False)
-    
-    conversion_rate = fields.Nested(ConversionRate, required=False)
-    
-    ordering_currency = fields.Nested(OrderingCurrency, required=False)
-    
-
-
-class ConfigPayment(BaseSchema):
-    # Order swagger.json
-
-    
-    source = fields.Str(required=False)
-    
-    mode_of_payment = fields.Str(required=False)
-    
-
-
-class ConfigDpConfiguration(BaseSchema):
-    # Order swagger.json
-
-    
-    shipping_by = fields.Str(required=False)
-    
-    refund_by = fields.Str(required=False)
-    
-    mode = fields.Str(required=False)
-    
-
-
-class ConfigApplication(BaseSchema):
-    # Order swagger.json
-
-    
-    id = fields.Str(required=False)
-    
-    logo = fields.Str(required=False)
-    
-
-
 class CreateOrderAPI(BaseSchema):
     # Order swagger.json
 
@@ -3327,7 +2371,7 @@ class CreateOrderAPI(BaseSchema):
     
     billing_info = fields.Nested(ShippingInfo, required=False)
     
-    currency_info = fields.Nested(CurrencyInfo, required=False)
+    currency_info = fields.Dict(required=False)
     
     external_order_id = fields.Str(required=False)
     
@@ -3344,12 +2388,6 @@ class CreateOrderAPI(BaseSchema):
     payment_info = fields.Nested(PaymentInfo, required=False)
     
     user_info = fields.Nested(UserInfo, required=False)
-    
-    unlock_before_transition = fields.Boolean(required=False)
-    
-    lock_after_transition = fields.Boolean(required=False)
-    
-    dynamic_charges = fields.List(fields.Nested(DynamicChargeSchema, required=False), required=False)
     
     ordering_store_id = fields.Int(required=False)
     
@@ -3372,54 +2410,6 @@ class CreateOrderErrorReponse(BaseSchema):
 
     
     success = fields.Boolean(required=False)
-    
-    errors = fields.Str(required=False)
-    
-    fynd_order_id = fields.Str(required=False)
-    
-
-
-class DpConfiguration(BaseSchema):
-    # Order swagger.json
-
-    
-    shipping_by = fields.Str(required=False)
-    
-
-
-class PaymentMethods(BaseSchema):
-    # Order swagger.json
-
-    
-    collect_by = fields.Str(required=False)
-    
-    refund_by = fields.Str(required=False)
-    
-    mode = fields.Str(required=False)
-    
-
-
-class CreateChannelPaymentInfo(BaseSchema):
-    # Order swagger.json
-
-    
-    source = fields.Str(required=False)
-    
-    payment_methods = fields.List(fields.Nested(PaymentMethods, required=False), required=False)
-    
-    mode_of_payment = fields.Str(required=False)
-    
-
-
-class CreateChannelConfig(BaseSchema):
-    # Order swagger.json
-
-    
-    dp_configuration = fields.Nested(DpConfiguration, required=False)
-    
-    shipment_assignment = fields.Str(required=False)
-    
-    location_reassignment = fields.Boolean(required=False)
     
     errors = fields.Str(required=False)
     
@@ -3456,56 +2446,6 @@ class ResponseDetail(BaseSchema):
     message = fields.Str(required=False)
     
     status = fields.Int(required=False)
-    
-
-
-class OrderData(BaseSchema):
-    # Order swagger.json
-
-    
-    key = fields.Str(required=False)
-    
-    value = fields.Raw(required=False)
-    
-    order_date = fields.Str(required=False, allow_none=True)
-    
-    created_ts = fields.Str(required=False)
-    
-    tax_details = fields.Nested(TaxDetails, required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    fynd_order_id = fields.Str(required=False, allow_none=True)
-    
-    prices = fields.Nested(Prices, required=False)
-    
-    charges = fields.List(fields.Nested(PriceAdjustmentCharge, required=False), required=False)
-    
-    payment_methods = fields.Dict(required=False, allow_none=True)
-    
-    payment_info = fields.List(fields.Nested(PaymentInfoData, required=False), required=False)
-    
-    affiliate_order_id = fields.Str(required=False, allow_none=True)
-    
-
-
-class OrderUpdatePayload(BaseSchema):
-    # Order swagger.json
-
-    
-    data = fields.List(fields.Nested(OrderData, required=False), required=False)
-    
-
-
-class OrderUpdateResponseDetail(BaseSchema):
-    # Order swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
-    
-    validation_errors = fields.Dict(required=False)
     
 
 
@@ -3551,50 +2491,6 @@ class RoleBaseStateTransitionMapping(BaseSchema):
     
 
 
-class FetchCreditBalanceRequestPayload(BaseSchema):
-    # Order swagger.json
-
-    
-    affiliate_id = fields.Str(required=False)
-    
-    seller_id = fields.Int(required=False)
-    
-    customer_mobile_number = fields.Str(required=False)
-    
-
-
-class CreditBalanceInfo(BaseSchema):
-    # Order swagger.json
-
-    
-    total_credited_balance = fields.Float(required=False)
-    
-    reason = fields.Str(required=False)
-    
-    customer_mobile_number = fields.Str(required=False)
-    
-    is_cn_locked = fields.Boolean(required=False)
-    
-    total_locked_amount = fields.Float(required=False)
-    
-    allowed_redemption_amount = fields.Float(required=False)
-    
-
-
-class FetchCreditBalanceResponsePayload(BaseSchema):
-    # Order swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    status = fields.Float(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-    data = fields.Nested(CreditBalanceInfo, required=False)
-    
-
-
 class RefundModeConfigRequestPayload(BaseSchema):
     # Order swagger.json
 
@@ -3623,21 +2519,17 @@ class RefundOption(BaseSchema):
     
 
 
-class RefundModeInfoFormat(BaseSchema):
+class RefundModeFormat(BaseSchema):
     # Order swagger.json
 
     
     refund_to = fields.Str(required=False)
-    
-    manual_refund_data = fields.Dict(required=False)
     
 
 
 class RefundModeInfo(BaseSchema):
     # Order swagger.json
 
-    
-    format = fields.Nested(RefundModeInfoFormat, required=False)
     
     is_active = fields.Boolean(required=False)
     
@@ -3646,6 +2538,8 @@ class RefundModeInfo(BaseSchema):
     options = fields.List(fields.Nested(RefundOption, required=False), required=False)
     
     display_name = fields.Str(required=False)
+    
+    format = fields.Nested(RefundModeFormat, required=False)
     
 
 
@@ -3705,20 +2599,6 @@ class AttachOrderUserResponse(BaseSchema):
     
     message = fields.Str(required=False)
     
-    status = fields.Int(required=False)
-    
-
-
-class AttachOrderUserErrorResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    status = fields.Int(required=False)
-    
-    message = fields.Str(required=False)
-    
 
 
 class SendUserMobileOTP(BaseSchema):
@@ -3767,7 +2647,7 @@ class VerifyOtpData(BaseSchema):
     
     mobile = fields.Str(required=False)
     
-    otp_code = fields.Str(required=False)
+    otp_code = fields.Int(required=False)
     
 
 
@@ -3786,8 +2666,6 @@ class VerifyOtpResponseData(BaseSchema):
 
     
     mobile = fields.Str(required=False)
-    
-    email = fields.Str(required=False)
     
     message = fields.Str(required=False)
     
@@ -3808,30 +2686,6 @@ class VerifyOtpResponse(BaseSchema):
     message = fields.Str(required=False)
     
     data = fields.Nested(VerifyOtpResponseData, required=False)
-    
-
-
-class VerifyOtpErrorResponseData(BaseSchema):
-    # Order swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
-    
-
-
-class VerifyOtpErrorResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    status = fields.Int(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
-    
-    data = fields.Nested(VerifyOtpErrorResponseData, required=False)
     
 
 
@@ -3859,8 +2713,6 @@ class BulkReportsDownloadRequest(BaseSchema):
     
     custom_filters_for_lane = fields.Dict(required=False)
     
-    filters = fields.Dict(required=False)
-    
 
 
 class BulkReportsDownloadResponse(BaseSchema):
@@ -3874,18 +2726,6 @@ class BulkReportsDownloadResponse(BaseSchema):
 
 
 class APIFailedResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    status = fields.Boolean(required=False)
-    
-    error = fields.Str(required=False)
-    
-
-
-class BulkFailedResponse(BaseSchema):
     # Order swagger.json
 
     
@@ -3971,7 +2811,7 @@ class BulkActionListingData(BaseSchema):
     
     updated_ts = fields.Int(required=False)
     
-    status = fields.Str(required=False)
+    status = fields.Boolean(required=False)
     
     store_code = fields.Str(required=False)
     
@@ -3992,8 +2832,6 @@ class BulkActionListingData(BaseSchema):
     batch_id = fields.Str(required=False)
     
     uploaded_by = fields.Str(required=False)
-    
-    total_shipments_count = fields.Int(required=False)
     
     invoicelabel_document_type = fields.Str(required=False)
     
@@ -4119,8 +2957,6 @@ class ManifestPageInfo(BaseSchema):
     
     type = fields.Str(required=False)
     
-    item_total = fields.Int(required=False)
-    
 
 
 class ManifestItemDetails(BaseSchema):
@@ -4169,10 +3005,6 @@ class DateRange(BaseSchema):
     
     to_date = fields.Str(required=False)
     
-    end_date = fields.Str(required=False)
-    
-    start_date = fields.Str(required=False)
-    
 
 
 class Filters(BaseSchema):
@@ -4200,8 +3032,6 @@ class Filters(BaseSchema):
     store_name = fields.Str(required=False)
     
     deselected_shipments = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
     
 
 
@@ -4321,68 +3151,6 @@ class ManifestDetails(BaseSchema):
     
 
 
-class FiltersRequest(BaseSchema):
-    # Order swagger.json
-
-    
-    date_range = fields.Nested(DateRange, required=False)
-    
-    logo = fields.Str(required=False)
-    
-    stores = fields.Int(required=False)
-    
-    dp_name = fields.Str(required=False)
-    
-    dp_ids = fields.Int(required=False)
-    
-    lane = fields.Str(required=False)
-    
-    store_name = fields.Str(required=False)
-    
-
-
-class ProcessManifest(BaseSchema):
-    # Order swagger.json
-
-    
-    filters = fields.Nested(FiltersRequest, required=False)
-    
-    action = fields.Str(required=False)
-    
-    unique_id = fields.Str(required=False)
-    
-    manifest_id = fields.Str(required=False)
-    
-
-
-class ProcessManifestResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    company_id = fields.Int(required=False)
-    
-    filters = fields.Nested(Filters, required=False)
-    
-    user_id = fields.Str(required=False)
-    
-    manifest_id = fields.Str(required=False)
-    
-    action = fields.Str(required=False)
-    
-    uid = fields.Str(required=False)
-    
-    created_by = fields.Str(required=False)
-    
-
-
-class ProcessManifestItemResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    items = fields.Nested(ProcessManifestResponse, required=False)
-    
-
-
 class FilterInfoOption(BaseSchema):
     # Order swagger.json
 
@@ -4423,7 +3191,9 @@ class ManifestFiltersResponse(BaseSchema):
     # Order swagger.json
 
     
-    advance = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
+    advance_filter = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
+    
+    global_filter = fields.List(fields.Nested(FiltersInfo, required=False), required=False)
     
 
 
@@ -4440,8 +3210,6 @@ class PageDetails(BaseSchema):
     item_total = fields.Int(required=False, allow_none=True)
     
     size = fields.Int(required=False, allow_none=True)
-    
-    total = fields.Int(required=False, allow_none=True)
     
     type = fields.Str(required=False, allow_none=True)
     
@@ -4589,7 +3357,7 @@ class CourierPartnerTrackingDetails(BaseSchema):
     
     journey = fields.Str(required=False)
     
-    meta = fields.Dict(required=False, allow_none=True)
+    meta = fields.Dict(required=False)
     
     operational_status = fields.Str(required=False)
     
@@ -4663,7 +3431,7 @@ class FailedOrderLogs(BaseSchema):
     # Order swagger.json
 
     
-    items = fields.List(fields.Nested(FailedOrdersItem, required=False), required=False)
+    items = fields.Nested(FailedOrdersItem, required=False)
     
     page = fields.Nested(PageDetails, required=False)
     
@@ -4679,65 +3447,31 @@ class FailedOrderLogDetails(BaseSchema):
     
 
 
-class OptionItem(BaseSchema):
+class GenerateInvoiceIDResponseData(BaseSchema):
     # Order swagger.json
 
     
-    text = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-    total_items = fields.Int(required=False)
-    
-
-
-class SuperLaneItem(BaseSchema):
-    # Order swagger.json
-
-    
-    text = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-    options = fields.List(fields.Nested(OptionItem, required=False), required=False)
-    
-    total_items = fields.Int(required=False)
-    
-
-
-class RuleLaneConfigResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    super_lanes = fields.List(fields.Nested(SuperLaneItem, required=False), required=False)
-    
-
-
-class RuleLaneConfigResponseSchema(BaseSchema):
-    # Order swagger.json
-
+    shipment_id = fields.Str(required=False)
     
     success = fields.Boolean(required=False)
     
-    error = fields.Str(required=False)
+    invoice_id = fields.Str(required=False, allow_none=True)
+    
+    error_message = fields.Boolean(required=False, allow_none=True)
     
 
 
-class RuleLaneConfigErrorResponse(BaseSchema):
+class GenerateInvoiceIDErrorResponseData(BaseSchema):
     # Order swagger.json
 
     
-    response = fields.Nested(RuleLaneConfigResponseSchema, required=False)
+    shipment_id = fields.Str(required=False)
     
-
-
-class QuestionSetItem(BaseSchema):
-    # Order swagger.json
-
+    success = fields.Boolean(required=False)
     
-    id = fields.Int(required=False)
+    invoice_id = fields.Boolean(required=False, allow_none=True)
     
-    display_name = fields.Str(required=False)
+    error_message = fields.Str(required=False, allow_none=True)
     
 
 
@@ -4745,311 +3479,27 @@ class GenerateInvoiceIDRequestSchema(BaseSchema):
     # Order swagger.json
 
     
-    id = fields.Int(required=False)
-    
-    display_name = fields.Str(required=False)
+    shipment_ids = fields.List(fields.Str(required=False), required=False)
     
 
 
-class Reason(BaseSchema):
+class GenerateInvoiceIDResponse(BaseSchema):
     # Order swagger.json
 
     
-    id = fields.Int(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    remark_required = fields.Boolean(required=False)
-    
-    show_text_area = fields.Boolean(required=False, allow_none=True)
-    
-    reasons = fields.List(fields.Nested(lambda: Reason(exclude=('reasons')), required=False), required=False)
-    
-    qc_type = fields.List(fields.Str(required=False), required=False)
-    
-    question_set = fields.List(fields.Nested(QuestionSet, required=False), required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    is_deleted = fields.Boolean(required=False)
+    items = fields.List(fields.Nested(GenerateInvoiceIDResponseData, required=False), required=False)
     
 
 
-class RuleRequest(BaseSchema):
+class GenerateInvoiceIDErrorResponse(BaseSchema):
     # Order swagger.json
 
     
-    flow_type = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    entity_type = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-    channel = fields.Str(required=False)
-    
-    rule_type = fields.Str(required=False)
-    
-    is_deleted = fields.Boolean(required=False)
-    
-    restrict_forward_serviceability = fields.Boolean(required=False)
-    
-    conditions = fields.List(fields.Nested(Condition, required=False), required=False)
-    
-    meta = fields.Nested(RuleMeta, required=False)
-    
-    qc_enabled = fields.Boolean(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    actions = fields.Nested(RuleAction, required=False)
+    items = fields.List(fields.Nested(GenerateInvoiceIDErrorResponseData, required=False), required=False)
     
 
 
-class RuleResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    id = fields.Int(required=False)
-    
-    items = fields.Nested(RuleItem, required=False)
-    
-    success = fields.Boolean(required=False)
-    
-    error = fields.Nested(RuleError, required=False)
-    
-
-
-class RuleUpdateRequest(BaseSchema):
-    # Order swagger.json
-
-    
-    flow_type = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    entity_type = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-    channel = fields.Str(required=False)
-    
-    rule_type = fields.Str(required=False)
-    
-    is_deleted = fields.Boolean(required=False)
-    
-    position = fields.Int(required=False)
-    
-    restrict_forward_serviceability = fields.Boolean(required=False)
-    
-    conditions = fields.List(fields.Nested(Condition, required=False), required=False)
-    
-    meta = fields.Nested(RuleMeta, required=False)
-    
-    qc_enabled = fields.Boolean(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    actions = fields.Nested(RuleAction, required=False)
-    
-
-
-class Condition(BaseSchema):
-    # Order swagger.json
-
-    
-    variable = fields.Str(required=False)
-    
-    operation = fields.Str(required=False)
-    
-
-
-class RuleMeta(BaseSchema):
-    # Order swagger.json
-
-    
-    department = fields.Nested(Department, required=False)
-    
-    l3 = fields.Nested(L3, required=False)
-    
-    restrict_forward_serviceability = fields.Boolean(required=False, allow_none=True)
-    
-
-
-class RuleAction(BaseSchema):
-    # Order swagger.json
-
-    
-    reasons = fields.List(fields.Nested(Reason, required=False), required=False)
-    
-
-
-class Department(BaseSchema):
-    # Order swagger.json
-
-    
-    id = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-
-
-class L3(BaseSchema):
-    # Order swagger.json
-
-    
-    id = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-
-
-class Error(BaseSchema):
-    # Order swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-    message = fields.Str(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class RuleSuccessResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    id = fields.Int(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-    error = fields.Nested(RuleError, required=False)
-    
-
-
-class UpdateRulePositionRequest(BaseSchema):
-    # Order swagger.json
-
-    
-    rule_id = fields.Int(required=False)
-    
-    page_no = fields.Int(required=False)
-    
-    page_size = fields.Int(required=False)
-    
-    position = fields.Int(required=False)
-    
-    flow_type = fields.Str(required=False)
-    
-
-
-class RuleListResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    page = fields.Nested(PageInfo, required=False)
-    
-    items = fields.List(fields.Nested(RuleItem, required=False), required=False)
-    
-    success = fields.Boolean(required=False)
-    
-    error = fields.Nested(RuleError, required=False)
-    
-
-
-class RuleItem(BaseSchema):
-    # Order swagger.json
-
-    
-    id = fields.Str(required=False)
-    
-    entity_type = fields.Str(required=False)
-    
-    value = fields.Str(required=False, allow_none=True)
-    
-    channel = fields.Str(required=False)
-    
-    actions = fields.Nested(RuleAction, required=False)
-    
-    qc_enabled = fields.Boolean(required=False)
-    
-    is_deleted = fields.Boolean(required=False)
-    
-    restrict_forward_serviceability = fields.Boolean(required=False)
-    
-    conditions = fields.List(fields.Nested(Condition, required=False), required=False)
-    
-    meta = fields.Nested(RuleMeta, required=False)
-    
-    rule_type = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    flow_type = fields.Str(required=False)
-    
-    position = fields.Int(required=False)
-    
-
-
-class RuleParametersResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    response = fields.List(fields.Nested(ParameterResponse, required=False), required=False)
-    
-
-
-class ParameterResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    text = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-
-
-class RuleListRequest(BaseSchema):
-    # Order swagger.json
-
-    
-    page_size = fields.Int(required=False)
-    
-    page_no = fields.Int(required=False)
-    
-    flow_type = fields.Str(required=False)
-    
-    lane_type = fields.Str(required=False)
-    
-
-
-class ErrorGenericWithStatus(BaseSchema):
-    # Order swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
-    
-    status = fields.Float(required=False)
-    
-
-
-class ManifestResponseSchema(BaseSchema):
+class ManifestResponse(BaseSchema):
     # Order swagger.json
 
     
@@ -5057,7 +3507,7 @@ class ManifestResponseSchema(BaseSchema):
     
 
 
-class ProcessManifestRequestSchema(BaseSchema):
+class ProcessManifestRequest(BaseSchema):
     # Order swagger.json
 
     
@@ -5101,93 +3551,7 @@ class ManifestErrorResponse(BaseSchema):
     
     success = fields.Boolean(required=False)
     
-    message = fields.Str(required=False)
-    
-    status = fields.Float(required=False)
-    
     error = fields.Str(required=False)
-    
-
-
-class RuleListItem(BaseSchema):
-    # Order swagger.json
-
-    
-    id = fields.Str(required=False)
-    
-    entity_type = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-    channel = fields.Str(required=False)
-    
-    actions = fields.Nested(RuleAction, required=False)
-    
-    qc_enabled = fields.Boolean(required=False)
-    
-    is_deleted = fields.Boolean(required=False)
-    
-    conditions = fields.Nested(Condition, required=False)
-    
-    meta = fields.Nested(Meta, required=False)
-    
-    rule_type = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    flow_type = fields.Str(required=False)
-    
-    position = fields.Int(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-    error = fields.Nested(RuleError, required=False)
-    
-
-
-class RuleError(BaseSchema):
-    # Order swagger.json
-
-    
-    type = fields.Str(required=False, allow_none=True)
-    
-    value = fields.Str(required=False, allow_none=True)
-    
-    message = fields.Str(required=False, allow_none=True)
-    
-
-
-class RuleErrorResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    success = fields.Boolean(required=False, allow_none=True)
-    
-    error = fields.Str(required=False, allow_none=True)
-    
-
-
-class PageInfo(BaseSchema):
-    # Order swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    current = fields.Int(required=False)
-    
-    size = fields.Int(required=False)
-    
-    item_total = fields.Int(required=False)
-    
-    has_previous = fields.Boolean(required=False)
-    
-    has_next = fields.Boolean(required=False)
-    
-    page_size = fields.Int(required=False)
     
 
 
@@ -5403,8 +3767,6 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
-    total = fields.Int(required=False)
-    
 
 
 class BagReasonMeta(BaseSchema):
@@ -5509,7 +3871,7 @@ class UserDataInfo(BaseSchema):
     
 
 
-class Address(BaseSchema):
+class PlatformDeliveryAddress(BaseSchema):
     # Order swagger.json
 
     
@@ -5614,62 +3976,6 @@ class Prices(BaseSchema):
     gift_price = fields.Float(required=False, allow_none=True)
     
     amount_to_be_collected = fields.Float(required=False, allow_none=True)
-    
-
-
-class ChargeDistributionSchema(BaseSchema):
-    # Order swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    logic = fields.Str(required=False)
-    
-
-
-class ChargeDistributionLogic(BaseSchema):
-    # Order swagger.json
-
-    
-    distribution = fields.Nested(ChargeDistributionSchema, required=False)
-    
-    distribution_level = fields.Str(required=False)
-    
-
-
-class ChargeAmountCurrency(BaseSchema):
-    # Order swagger.json
-
-    
-    value = fields.Float(required=False)
-    
-    currency = fields.Str(required=False)
-    
-
-
-class ChargeAmount(BaseSchema):
-    # Order swagger.json
-
-    
-    base_currency = fields.Nested(ChargeAmountCurrency, required=False)
-    
-    ordering_currency = fields.Nested(ChargeAmountCurrency, required=False)
-    
-
-
-class PriceAdjustmentCharge(BaseSchema):
-    # Order swagger.json
-
-    
-    code = fields.Str(required=False, allow_none=True)
-    
-    name = fields.Str(required=False, allow_none=True)
-    
-    type = fields.Str(required=False, allow_none=True)
-    
-    amount = fields.Nested(ChargeAmount, required=False)
-    
-    distribution_logic = fields.Nested(ChargeDistributionLogic, required=False)
     
 
 
@@ -5935,8 +4241,6 @@ class Article(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
-    variants = fields.Dict(required=False, allow_none=True)
-    
 
 
 class ShipmentListingBrand(BaseSchema):
@@ -6071,8 +4375,6 @@ class PlatformItem(BaseSchema):
     
     images = fields.List(fields.Str(required=False), required=False)
     
-    variants = fields.Dict(required=False, allow_none=True)
-    
 
 
 class Dates(BaseSchema):
@@ -6189,8 +4491,6 @@ class ShipmentItemFulFillingStore(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
-    company_id = fields.Int(required=False)
-    
 
 
 class Currency(BaseSchema):
@@ -6227,6 +4527,16 @@ class ConversionRate(BaseSchema):
     
 
 
+class CurrencyInfo(BaseSchema):
+    # Order swagger.json
+
+    
+    ordering_currency = fields.Nested(OrderingCurrency, required=False)
+    
+    conversion_rate = fields.Nested(ConversionRate, required=False)
+    
+
+
 class ShipmentItem(BaseSchema):
     # Order swagger.json
 
@@ -6243,11 +4553,7 @@ class ShipmentItem(BaseSchema):
     
     estimated_sla_ts = fields.Str(required=False, allow_none=True)
     
-    delivery_address = fields.Nested(Address, required=False)
-    
-    billing_address = fields.Nested(Address, required=False)
-    
-    is_active = fields.Boolean(required=False)
+    delivery_address = fields.Nested(PlatformDeliveryAddress, required=False)
     
     channel = fields.Nested(ShipmentListingChannel, required=False)
     
@@ -6300,12 +4606,6 @@ class ShipmentItem(BaseSchema):
     currency_info = fields.Nested(CurrencyInfo, required=False)
     
     is_lapa_enabled = fields.Boolean(required=False)
-    
-    logistics_meta = fields.Dict(required=False, allow_none=True)
-    
-    affiliate_shipment_id = fields.Str(required=False, allow_none=True)
-    
-    affiliate_order_id = fields.Str(required=False, allow_none=True)
     
 
 
@@ -6500,8 +4800,6 @@ class OrderingStoreDetails(BaseSchema):
     state = fields.Str(required=False, allow_none=True)
     
     city = fields.Str(required=False, allow_none=True)
-    
-    store_email = fields.Str(required=False, allow_none=True)
     
 
 
@@ -6807,8 +5105,6 @@ class OrderBagArticle(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
-    variants = fields.Dict(required=False, allow_none=True)
-    
 
 
 class OrderBrandName(BaseSchema):
@@ -6879,60 +5175,6 @@ class BuyRules(BaseSchema):
     
 
 
-class PriceMinMax(BaseSchema):
-    # Order swagger.json
-
-    
-    min = fields.Float(required=False)
-    
-    max = fields.Float(required=False)
-    
-
-
-class ItemPriceDetails(BaseSchema):
-    # Order swagger.json
-
-    
-    marked = fields.Nested(PriceMinMax, required=False)
-    
-    effective = fields.Nested(PriceMinMax, required=False)
-    
-    currency = fields.Str(required=False)
-    
-
-
-class FreeGiftItems(BaseSchema):
-    # Order swagger.json
-
-    
-    item_slug = fields.Str(required=False)
-    
-    item_name = fields.Str(required=False)
-    
-    item_price_details = fields.Nested(ItemPriceDetails, required=False)
-    
-    item_brand_name = fields.Str(required=False)
-    
-    item_id = fields.Int(required=False)
-    
-    item_images_url = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class AppliedFreeArticles(BaseSchema):
-    # Order swagger.json
-
-    
-    article_id = fields.Str(required=False)
-    
-    free_gift_item_details = fields.Dict(required=False)
-    
-    parent_item_identifier = fields.Str(required=False)
-    
-    quantity = fields.Float(required=False)
-    
-
-
 class AppliedPromos(BaseSchema):
     # Order swagger.json
 
@@ -6952,8 +5194,6 @@ class AppliedPromos(BaseSchema):
     promo_id = fields.Str(required=False, allow_none=True)
     
     mrp_promotion = fields.Boolean(required=False, allow_none=True)
-    
-    applied_free_articles = fields.List(fields.Nested(AppliedFreeArticles, required=False), required=False)
     
 
 
@@ -7007,7 +5247,7 @@ class OrderBags(BaseSchema):
     
     seller_identifier = fields.Str(required=False, allow_none=True)
     
-    delivery_address = fields.Nested(Address, required=False)
+    delivery_address = fields.Nested(PlatformDeliveryAddress, required=False)
     
     article = fields.Nested(OrderBagArticle, required=False)
     
@@ -7023,7 +5263,7 @@ class OrderBags(BaseSchema):
     
     payment_info = fields.List(fields.Nested(BagPaymentMethods, required=False), required=False)
     
-    quantity = fields.Float(required=False, allow_none=True)
+    quantity = fields.Int(required=False, allow_none=True)
     
     identifier = fields.Str(required=False, allow_none=True)
     
@@ -7041,8 +5281,6 @@ class OrderBags(BaseSchema):
     
     prices = fields.Nested(Prices, required=False)
     
-    charges = fields.List(fields.Nested(PriceAdjustmentCharge, required=False), required=False)
-    
     current_status = fields.Nested(CurrentStatus, required=False)
     
     bag_id = fields.Int(required=False)
@@ -7050,8 +5288,6 @@ class OrderBags(BaseSchema):
     entity_type = fields.Str(required=False, allow_none=True)
     
     is_parent = fields.Boolean(required=False, allow_none=True)
-    
-    variants = fields.Dict(required=False, allow_none=True)
     
 
 
@@ -7086,8 +5322,6 @@ class FulfillingStore(BaseSchema):
     state = fields.Str(required=False)
     
     city = fields.Str(required=False)
-    
-    store_email = fields.Str(required=False, allow_none=True)
     
 
 
@@ -7141,35 +5375,9 @@ class ShipmentLockDetails(BaseSchema):
     
 
 
-class ShipmentPaymentInfoData(BaseSchema):
-    # Order swagger.json
-
-    
-    mode = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    collect_by = fields.Str(required=False)
-    
-    refund_by = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    amount = fields.Float(required=False)
-    
-    unique_identifier = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    transaction_data = fields.Dict(required=False)
-    
-
-
 class PlatformShipment(BaseSchema):
     # Order swagger.json
 
-    
-    logistics_meta = fields.Dict(required=False, allow_none=True)
     
     picked_date = fields.Str(required=False, allow_none=True)
     
@@ -7201,9 +5409,9 @@ class PlatformShipment(BaseSchema):
     
     shipment_images = fields.List(fields.Str(required=False), required=False)
     
-    delivery_details = fields.Dict(required=False)
+    delivery_details = fields.Nested(UserDetailsData, required=False)
     
-    billing_details = fields.Dict(required=False)
+    billing_details = fields.Nested(UserDetailsData, required=False)
     
     forward_shipment_id = fields.Str(required=False, allow_none=True)
     
@@ -7219,6 +5427,8 @@ class PlatformShipment(BaseSchema):
     
     ordering_store = fields.Nested(OrderingStoreDetails, required=False)
     
+    order_platform = fields.Str(required=False)
+    
     lock_status = fields.Boolean(required=False, allow_none=True)
     
     platform_logo = fields.Str(required=False, allow_none=True)
@@ -7231,7 +5441,7 @@ class PlatformShipment(BaseSchema):
     
     payment_methods = fields.Dict(required=False, allow_none=True)
     
-    payment_info = fields.List(fields.Nested(ShipmentPaymentInfoData, required=False), required=False)
+    payment_info = fields.List(fields.Dict(required=False), required=False)
     
     coupon = fields.Dict(required=False, allow_none=True)
     
@@ -7263,8 +5473,6 @@ class PlatformShipment(BaseSchema):
     
     prices = fields.Nested(Prices, required=False)
     
-    charges = fields.List(fields.Nested(PriceAdjustmentCharge, required=False), required=False)
-    
     vertical = fields.Str(required=False, allow_none=True)
     
     shipment_id = fields.Str(required=False)
@@ -7285,13 +5493,11 @@ class PlatformShipment(BaseSchema):
     
     currency_info = fields.Nested(CurrencyInfo, required=False)
     
-    is_lapa_enabled = fields.Boolean(required=False)
-    
     previous_shipment_id = fields.Str(required=False, allow_none=True)
     
     shipment_update_time = fields.Float(required=False, allow_none=True)
     
-    rto_address = fields.Nested(Address, required=False)
+    rto_address = fields.Nested(PlatformDeliveryAddress, required=False)
     
     credit_note_id = fields.Str(required=False, allow_none=True)
     
@@ -7299,9 +5505,7 @@ class PlatformShipment(BaseSchema):
     
     mode_of_payment = fields.Str(required=False, allow_none=True)
     
-    affiliate_shipment_id = fields.Str(required=False, allow_none=True)
-    
-    tracking_url = fields.Str(required=False, allow_none=True)
+    is_lapa_enabled = fields.Boolean(required=False)
     
 
 
@@ -7349,7 +5553,27 @@ class PaymentInfoData(BaseSchema):
     
     merchant_transaction_id = fields.Str(required=False)
     
-    transaction_data = fields.Dict(required=False)
+
+
+class OrderData(BaseSchema):
+    # Order swagger.json
+
+    
+    order_date = fields.Str(required=False)
+    
+    created_ts = fields.Str(required=False)
+    
+    tax_details = fields.Nested(TaxDetails, required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    fynd_order_id = fields.Str(required=False)
+    
+    prices = fields.Nested(Prices, required=False)
+    
+    payment_methods = fields.Dict(required=False, allow_none=True)
+    
+    payment_info = fields.List(fields.Nested(PaymentInfoData, required=False), required=False)
     
 
 
@@ -7455,15 +5679,11 @@ class PlatformOrderItems(BaseSchema):
     
     currency_info = fields.Nested(CurrencyInfo, required=False)
     
-    affiliate_order_id = fields.Str(required=False, allow_none=True)
-    
 
 
 class OrderListingResponse(BaseSchema):
     # Order swagger.json
 
-    
-    filters = fields.Nested(Filters, required=False)
     
     total_count = fields.Int(required=False, allow_none=True)
     
@@ -7535,140 +5755,6 @@ class AdvanceFilterInfo(BaseSchema):
     
 
 
-class FilterOptions(BaseSchema):
-    # Order swagger.json
-
-    
-    label = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-    state_type = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    text = fields.Str(required=False)
-    
-    min_search_size = fields.Int(required=False)
-    
-    placeholder_text = fields.Str(required=False)
-    
-    show_ui = fields.Boolean(required=False)
-    
-
-
-class FiltersList(BaseSchema):
-    # Order swagger.json
-
-    
-    label = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-    filter_type = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    placeholder_text = fields.Str(required=False)
-    
-    required = fields.Boolean(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    options = fields.List(fields.Nested(FilterOptions, required=False), required=False)
-    
-
-
-class GlobalFiltersResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    config = fields.Str(required=False)
-    
-    filters = fields.List(fields.Nested(FiltersList, required=False), required=False)
-    
-    company_id = fields.Int(required=False, allow_none=True)
-    
-    show_in = fields.Str(required=False)
-    
-    request_source = fields.Str(required=False)
-    
-
-
-class ViewDetails(BaseSchema):
-    # Order swagger.json
-
-    
-    id = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    label = fields.Str(required=False)
-    
-    filters = fields.List(fields.Nested(FiltersList, required=False), required=False)
-    
-    is_editable = fields.Boolean(required=False)
-    
-    position = fields.Int(required=False)
-    
-    show_in = fields.Str(required=False)
-    
-
-
-class ParentViews(BaseSchema):
-    # Order swagger.json
-
-    
-    views = fields.List(fields.Nested(ViewDetails, required=False), required=False)
-    
-    slug = fields.Str(required=False)
-    
-    label = fields.Str(required=False)
-    
-    is_editable = fields.Boolean(required=False)
-    
-    position = fields.Int(required=False)
-    
-    show_in = fields.Str(required=False)
-    
-
-
-class UserViewsResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    parent_views = fields.List(fields.Nested(ParentViews, required=False), required=False)
-    
-
-
-class UserViewPosition(BaseSchema):
-    # Order swagger.json
-
-    
-    view_type = fields.Str(required=False)
-    
-    view_id = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    label = fields.Str(required=False)
-    
-    new_position = fields.Int(required=False)
-    
-    show_in = fields.Str(required=False)
-    
-
-
-class CreateUpdateDeleteResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    errors = fields.List(fields.Str(required=False), required=False)
-    
-
-
 class FiltersResponse(BaseSchema):
     # Order swagger.json
 
@@ -7712,6 +5798,20 @@ class BulkActionTemplateResponse(BaseSchema):
 
     
     template_x_slug = fields.List(fields.Nested(BulkActionTemplate, required=False), required=False)
+    
+
+
+class Reason(BaseSchema):
+    # Order swagger.json
+
+    
+    qc_type = fields.List(fields.Str(required=False), required=False)
+    
+    id = fields.Int(required=False)
+    
+    question_set = fields.List(fields.Nested(QuestionSet, required=False), required=False)
+    
+    display_name = fields.Str(required=False)
     
 
 
@@ -7999,35 +6099,11 @@ class Brand(BaseSchema):
     
 
 
-class Attributes(BaseSchema):
-    # Order swagger.json
-
-    
-    primary_material = fields.Str(required=False, allow_none=True)
-    
-    essential = fields.Str(required=False, allow_none=True)
-    
-    marketer_name = fields.Str(required=False, allow_none=True)
-    
-    primary_color = fields.Str(required=False, allow_none=True)
-    
-    marketer_address = fields.Str(required=False, allow_none=True)
-    
-    primary_color_hex = fields.Str(required=False, allow_none=True)
-    
-    brand_name = fields.Str(required=False, allow_none=True)
-    
-    name = fields.Str(required=False, allow_none=True)
-    
-    gender = fields.List(fields.Str(required=False), required=False)
-    
-
-
 class Item(BaseSchema):
     # Order swagger.json
 
     
-    attributes = fields.Nested(Attributes, required=False)
+    attributes = fields.Dict(required=False)
     
     brand_id = fields.Int(required=False)
     
@@ -8241,7 +6317,7 @@ class BagDetails(BaseSchema):
     
     dates = fields.Nested(Dates, required=False)
     
-    delivery_address = fields.Nested(Address, required=False)
+    delivery_address = fields.Nested(PlatformDeliveryAddress, required=False)
     
     delivery_slot = fields.Nested(DeliverySlotDetails, required=False)
     
@@ -8303,8 +6379,6 @@ class BagDetails(BaseSchema):
     
     prices = fields.Nested(Prices, required=False)
     
-    charges = fields.List(fields.Nested(PriceAdjustmentCharge, required=False), required=False)
-    
     qc_required = fields.Boolean(required=False, allow_none=True)
     
     quantity = fields.Float(required=False, allow_none=True)
@@ -8315,7 +6389,7 @@ class BagDetails(BaseSchema):
     
     restore_promos = fields.Dict(required=False, allow_none=True)
     
-    rto_address = fields.Nested(Address, required=False)
+    rto_address = fields.Nested(PlatformDeliveryAddress, required=False)
     
     seller_identifier = fields.Str(required=False, allow_none=True)
     
@@ -8443,51 +6517,33 @@ class AllowedTemplatesResponse(BaseSchema):
     
 
 
-class CDN(BaseSchema):
-    # Order swagger.json
-
-    
-    url = fields.Str(required=False)
-    
-    absolute_url = fields.Str(required=False)
-    
-    relative_url = fields.Str(required=False)
-    
-
-
-class Upload(BaseSchema):
-    # Order swagger.json
-
-    
-    expiry = fields.Int(required=False)
-    
-    url = fields.Str(required=False)
-    
-
-
 class TemplateDownloadResponse(BaseSchema):
     # Order swagger.json
 
     
     file_name = fields.Str(required=False)
     
-    file_path = fields.Str(required=False)
+    url = fields.Str(required=False)
     
-    content_type = fields.Str(required=False)
+
+
+class Error(BaseSchema):
+    # Order swagger.json
+
     
-    method = fields.Str(required=False)
+    message = fields.Str(required=False)
     
-    namespace = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
-    operation = fields.Str(required=False)
+
+
+class BulkFailedResponse(BaseSchema):
+    # Order swagger.json
+
     
-    size = fields.Int(required=False)
+    status = fields.Boolean(required=False)
     
-    upload = fields.Nested(Upload, required=False)
-    
-    cdn = fields.Nested(CDN, required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
+    error = fields.Str(required=False)
     
 
 

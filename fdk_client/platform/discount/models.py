@@ -99,7 +99,9 @@ class CreateUpdateDiscount(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    app_id = fields.Str(required=False)
+    app_ids = fields.List(fields.Str(required=False), required=False)
+    
+    extension_ids = fields.List(fields.Str(required=False), required=False)
     
     job_type = fields.Str(required=False)
     
@@ -115,7 +117,7 @@ class CreateUpdateDiscount(BaseSchema):
     
     store_ids = fields.List(fields.Int(required=False), required=False)
     
-    factory_type_ids = fields.List(fields.Str(required=False), required=False)
+    zone_ids = fields.List(fields.Str(required=False), required=False)
     
     validity = fields.Nested(ValidityObject, required=False)
     
@@ -147,7 +149,7 @@ class DiscountJob(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    app_id = fields.Str(required=False)
+    app_ids = fields.List(fields.Str(required=False), required=False)
     
     job_type = fields.Str(required=False)
     
@@ -163,7 +165,7 @@ class DiscountJob(BaseSchema):
     
     store_ids = fields.List(fields.Int(required=False), required=False)
     
-    factory_type_ids = fields.List(fields.Str(required=False), required=False)
+    zone_ids = fields.List(fields.Str(required=False), required=False)
     
     discount_meta = fields.Nested(DiscountMeta, required=False)
     
@@ -191,7 +193,7 @@ class FileJobBody(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    app_id = fields.Str(required=False)
+    app_ids = fields.List(fields.Str(required=False), required=False)
     
     job_type = fields.Str(required=False)
     
@@ -207,7 +209,9 @@ class FileJobBody(BaseSchema):
     
     store_ids = fields.List(fields.Int(required=False), required=False)
     
-    factory_type_ids = fields.List(fields.Str(required=False), required=False)
+    extension_ids = fields.List(fields.Str(required=False), required=False)
+    
+    zone_ids = fields.List(fields.Str(required=False), required=False)
     
     discount_meta = fields.Nested(DiscountMeta, required=False)
     
@@ -244,10 +248,6 @@ class DiscountItems(BaseSchema):
     brand_name = fields.Str(required=False)
     
     seller_identifier = fields.Str(required=False)
-    
-    store_code = fields.Str(required=False)
-    
-    price_zone = fields.Str(required=False)
     
     discount_type = fields.Str(required=False)
     
@@ -291,6 +291,10 @@ class FileJobResponse(BaseSchema):
     
     progress = fields.Int(required=False)
     
+    extension_ids = fields.List(fields.Str(required=False), required=False)
+    
+    zone_ids = fields.List(fields.Str(required=False), required=False)
+    
     created_on = fields.Str(required=False)
     
     modified_on = fields.Str(required=False)
@@ -309,7 +313,7 @@ class FileJobRequest(BaseSchema):
     
     company_id = fields.Int(required=False)
     
-    app_id = fields.Str(required=False)
+    app_ids = fields.List(fields.Str(required=False), required=False)
     
     job_type = fields.Str(required=False)
     
@@ -333,7 +337,9 @@ class DownloadFileJob(BaseSchema):
     # Discount swagger.json
 
     
-    app_id = fields.Str(required=False)
+    brand_ids = fields.List(fields.Int(required=False), required=False)
+    
+    store_ids = fields.List(fields.Int(required=False), required=False)
     
 
 
@@ -362,8 +368,6 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
-    
-    total = fields.Int(required=False)
     
 
 

@@ -24,7 +24,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
@@ -51,23 +50,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
         
         
         
@@ -160,13 +142,11 @@ class ContentValidator:
         
         page_size = fields.Str(required=False)
         
-        resources = fields.Str(required=False)
+        resource = fields.Str(required=False)
         
-        types = fields.Str(required=False)
+        type = fields.Str(required=False)
         
         search = fields.Str(required=False)
-        
-        slugs = fields.Str(required=False)
          
         
     
@@ -182,7 +162,7 @@ class ContentValidator:
         
         company_id = fields.Int(required=False)
         
-        id = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
@@ -191,7 +171,7 @@ class ContentValidator:
         
         company_id = fields.Int(required=False)
         
-        id = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
@@ -200,7 +180,7 @@ class ContentValidator:
         
         company_id = fields.Int(required=False)
         
-        id = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
@@ -235,43 +215,6 @@ class ContentValidator:
          
         
     
-    class updateCustomFieldByResourceId(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        resource = fields.Str(required=False)
-        
-        resource_id = fields.Str(required=False)
-         
-        
-    
-    class deleteCustomFieldsByResourceId(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        resource = fields.Str(required=False)
-        
-        resource_id = fields.Str(required=False)
-        
-        ids = fields.Str(required=False)
-         
-        
-    
-    class getCustomFieldJobs(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        page = fields.Str(required=False)
-        
-        page_size = fields.Str(required=False)
-        
-        action_type = fields.Str(required=False)
-         
-        
-    
     class createCustomObjectDefinition(BaseSchema):
         
         
@@ -297,7 +240,7 @@ class ContentValidator:
         
         company_id = fields.Int(required=False)
         
-        id = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
@@ -306,7 +249,7 @@ class ContentValidator:
         
         company_id = fields.Int(required=False)
         
-        id = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
@@ -315,7 +258,7 @@ class ContentValidator:
         
         company_id = fields.Int(required=False)
         
-        id = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
@@ -344,16 +287,7 @@ class ContentValidator:
         
         company_id = fields.Int(required=False)
         
-        id = fields.Str(required=False)
-         
-        
-    
-    class updateCustomObject(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        id = fields.Str(required=False)
+        metaobject_id = fields.Str(required=False)
          
         
     
@@ -362,7 +296,16 @@ class ContentValidator:
         
         company_id = fields.Int(required=False)
         
-        id = fields.Str(required=False)
+        metaobject_id = fields.Str(required=False)
+         
+        
+    
+    class updateCustomObject(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        metaobject_id = fields.Str(required=False)
          
         
     

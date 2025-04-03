@@ -10,19 +10,11 @@ from .enums import *
 
 
 
-class DefaultPageSchema(BaseSchema):
-    pass
-
-
-class DefaultPageProp(BaseSchema):
-    pass
-
-
 class AvailablePageSchema(BaseSchema):
     pass
 
 
-class ExtensionBinding(BaseSchema):
+class DraftExtensionSectionRequest(BaseSchema):
     pass
 
 
@@ -91,10 +83,6 @@ class Action(BaseSchema):
 
 
 class AvailablePageSchemaSections(BaseSchema):
-    pass
-
-
-class SectionSource(BaseSchema):
     pass
 
 
@@ -373,40 +361,6 @@ class ActionPage(BaseSchema):
 
 
 
-class DefaultPageSchema(BaseSchema):
-    # Theme swagger.json
-
-    
-    path = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    sections = fields.List(fields.Str(required=False), required=False)
-    
-    sections_meta = fields.List(fields.Str(required=False), required=False)
-    
-    text = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-    props = fields.List(fields.Nested(DefaultPageProp, required=False), required=False)
-    
-
-
-class DefaultPageProp(BaseSchema):
-    # Theme swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    id = fields.Str(required=False)
-    
-    label = fields.Str(required=False)
-    
-    info = fields.Str(required=False)
-    
-
-
 class AvailablePageSchema(BaseSchema):
     # Theme swagger.json
 
@@ -435,21 +389,13 @@ class AvailablePageSchema(BaseSchema):
     
     updated_at = fields.Str(required=False)
     
-    application = fields.Str(required=False)
-    
 
 
-class ExtensionBinding(BaseSchema):
+class DraftExtensionSectionRequest(BaseSchema):
     # Theme swagger.json
 
     
     extension_id = fields.Str(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
     
     bundle_name = fields.Str(required=False)
     
@@ -469,7 +415,7 @@ class DraftExtensionSectionResponse(BaseSchema):
     # Theme swagger.json
 
     
-    message = fields.Str(required=False)
+    sections = fields.Nested(SectionsResponse, required=False)
     
 
 
@@ -569,7 +515,7 @@ class PublishExtensionSectionResponse(BaseSchema):
     # Theme swagger.json
 
     
-    message = fields.Str(required=False)
+    sections = fields.Nested(SectionsResponse, required=False)
     
 
 
@@ -593,9 +539,7 @@ class AvailablePageSeo(BaseSchema):
     
     sitemap = fields.Nested(SEOSitemap, required=False)
     
-    breadcrumbs = fields.List(fields.Nested(SEObreadcrumb, required=False), required=False)
-    
-    canonical_url = fields.Str(required=False)
+    breadcrumb = fields.List(fields.Nested(SEObreadcrumb, required=False), required=False)
     
     _id = fields.Str(required=False)
     
@@ -657,8 +601,6 @@ class AvailablePageSchemaSections(BaseSchema):
     # Theme swagger.json
 
     
-    _id = fields.Str(required=False)
-    
     name = fields.Str(required=False)
     
     label = fields.Str(required=False)
@@ -671,19 +613,7 @@ class AvailablePageSchemaSections(BaseSchema):
     
     predicate = fields.Nested(AvailablePagePredicate, required=False)
     
-    __source = fields.Nested(SectionSource, required=False)
-    
-
-
-class SectionSource(BaseSchema):
-    # Theme swagger.json
-
-    
-    id = fields.Str(required=False)
-    
-    bundle_name = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
+    source = fields.Str(required=False)
     
 
 
@@ -767,7 +697,7 @@ class MarketplaceThemeSchema(BaseSchema):
     # Theme swagger.json
 
     
-    items = fields.List(fields.Nested(MarketplaceTheme, required=False), required=False)
+    themes = fields.List(fields.Nested(MarketplaceTheme, required=False), required=False)
     
     page = fields.Nested(PaginationSchema, required=False)
     
@@ -832,8 +762,6 @@ class MarketplaceTheme(BaseSchema):
     updated_at = fields.Str(required=False)
     
     template_theme_id = fields.Str(required=False)
-    
-    theme_type = fields.Str(required=False)
     
 
 
@@ -1019,8 +947,6 @@ class BlitzkriegApiErrorSchema(BaseSchema):
     
     message = fields.Str(required=False)
     
-    level = fields.Str(required=False)
-    
 
 
 class BlitzkriegInternalServerErrorSchema(BaseSchema):
@@ -1074,8 +1000,6 @@ class ThemesSchema(BaseSchema):
     company_id = fields.Float(required=False)
     
     src = fields.Str(required=False)
-    
-    global_sections = fields.List(fields.Dict(required=False), required=False)
     
 
 
@@ -1375,15 +1299,13 @@ class SectionItem(BaseSchema):
     # Theme swagger.json
 
     
-    props = fields.List(fields.Dict(required=False), required=False)
+    props = fields.List(fields.Raw(required=False), required=False)
     
-    blocks = fields.List(fields.Dict(required=False), required=False)
+    blocks = fields.List(fields.Raw(required=False), required=False)
     
     name = fields.Str(required=False)
     
     label = fields.Str(required=False)
-    
-    preset = fields.Dict(required=False)
     
 
 
