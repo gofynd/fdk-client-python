@@ -35,6 +35,7 @@ class Cart:
             "selectPaymentMode": "/service/application/cart/v1.0/payment",
             "validateCouponForPayment": "/service/application/cart/v1.0/payment/validate/",
             "getShipments": "/service/application/cart/v1.0/shipment",
+            "checkoutCart": "/service/application/cart/v1.0/checkout",
             "updateCartMeta": "/service/application/cart/v1.0/meta",
             "getCartShareLink": "/service/application/cart/v1.0/share-cart",
             "getCartSharedItems": "/service/application/cart/v1.0/share-cart/{token}",
@@ -1183,6 +1184,59 @@ class Cart:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getShipments")
+                print(e)
+
+        return response
+    
+    async def checkoutCart(self, buy_now=None, cart_type=None, body="", request_headers:Dict={}):
+        """The checkout cart initiates the order creation process based on the selected address and payment method. It revalidates the cart details to ensure safe and seamless order placement.
+        :param buy_now : This indicates the type of cart to checkout. : type boolean
+        :param cart_type : The type of cart. : type string
+        """
+        payload = {}
+        
+        if buy_now is not None:
+            payload["buy_now"] = buy_now
+        if cart_type is not None:
+            payload["cart_type"] = cart_type
+
+        # Parameter validation
+        schema = CartValidator.checkoutCart()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CartCheckoutDetailRequest
+        schema = CartCheckoutDetailRequest()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["checkoutCart"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"buy_now","description":"This indicates the type of cart to checkout.","schema":{"type":"boolean"}},{"name":"cart_type","in":"query","schema":{"type":"string","x-not-enum":true},"description":"The type of cart."}],"query":[{"in":"query","name":"buy_now","description":"This indicates the type of cart to checkout.","schema":{"type":"boolean"}},{"name":"cart_type","in":"query","schema":{"type":"string","x-not-enum":true},"description":"The type of cart."}],"headers":[],"path":[]}""", serverType="application", buy_now=buy_now, cart_type=cart_type)
+        query_string = await create_query_string(buy_now=buy_now, cart_type=cart_type)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkoutCart"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/checkout", buy_now=buy_now, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CartCheckoutResponse
+            schema = CartCheckoutResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for checkoutCart")
                 print(e)
 
         return response

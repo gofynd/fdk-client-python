@@ -355,6 +355,11 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
         
     
     
@@ -1140,6 +1145,17 @@ class CartValidator:
         id = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
+         
+        
+    
+    class platformCheckoutCart(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
          
         
     
