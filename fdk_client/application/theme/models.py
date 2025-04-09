@@ -214,6 +214,22 @@ class GlobalSchema(BaseSchema):
     pass
 
 
+class Prop(BaseSchema):
+    pass
+
+
+class Preset(BaseSchema):
+    pass
+
+
+class Page(BaseSchema):
+    pass
+
+
+class SectionProps(BaseSchema):
+    pass
+
+
 class SectionPreset(BaseSchema):
     pass
 
@@ -222,7 +238,7 @@ class ImagePickerProp(BaseSchema):
     pass
 
 
-class Block(BaseSchema):
+class UrlProp(BaseSchema):
     pass
 
 
@@ -230,11 +246,39 @@ class BlockProps(BaseSchema):
     pass
 
 
-class UrlProp(BaseSchema):
+class TextProp(BaseSchema):
     pass
 
 
-class Prop(BaseSchema):
+class CheckboxProp(BaseSchema):
+    pass
+
+
+class RangeProp(BaseSchema):
+    pass
+
+
+class Section(BaseSchema):
+    pass
+
+
+class Block(BaseSchema):
+    pass
+
+
+class Predicate(BaseSchema):
+    pass
+
+
+class Screen(BaseSchema):
+    pass
+
+
+class ThemeUserSchema(BaseSchema):
+    pass
+
+
+class Route(BaseSchema):
     pass
 
 
@@ -287,12 +331,6 @@ class AvailablePageSchema(BaseSchema):
     
     props = fields.List(fields.Dict(required=False), required=False)
     
-    updated_at = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    __v = fields.Float(required=False)
-    
     _id = fields.Str(required=False)
     
 
@@ -328,8 +366,6 @@ class SEOMetaItems(BaseSchema):
 class SEOSitemap(BaseSchema):
     # Theme swagger.json
 
-    
-    modified_on = fields.Str(required=False)
     
     priority = fields.Float(required=False)
     
@@ -373,7 +409,7 @@ class AvailablePageSeo(BaseSchema):
     
     sitemap = fields.Nested(SEOSitemap, required=False)
     
-    breadcrumbs = fields.List(fields.Nested(SEObreadcrumb, required=False), required=False)
+    breadcrumb = fields.List(fields.Nested(SEObreadcrumb, required=False), required=False)
     
     _id = fields.Str(required=False)
     
@@ -382,8 +418,6 @@ class AvailablePageSeo(BaseSchema):
 class AvailablePageSchemaSections(BaseSchema):
     # Theme swagger.json
 
-    
-    _id = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
@@ -531,10 +565,6 @@ class ThemesSchema(BaseSchema):
     
     company_id = fields.Float(required=False)
     
-    src = fields.Str(required=False)
-    
-    global_sections = fields.List(fields.Dict(required=False), required=False)
-    
 
 
 class Font(BaseSchema):
@@ -583,7 +613,7 @@ class Config(BaseSchema):
     
     global_schema = fields.Nested(GlobalSchema, required=False)
     
-    preset = fields.Dict(required=False)
+    preset = fields.Nested(Preset, required=False)
     
 
 
@@ -943,8 +973,6 @@ class UMDJs(BaseSchema):
     # Theme swagger.json
 
     
-    link = fields.Str(required=False)
-    
     links = fields.List(fields.Str(required=False), required=False)
     
 
@@ -961,8 +989,6 @@ class CSS(BaseSchema):
     # Theme swagger.json
 
     
-    link = fields.Str(required=False)
-    
     links = fields.List(fields.Str(required=False), required=False)
     
 
@@ -975,8 +1001,6 @@ class SectionItem(BaseSchema):
     
     blocks = fields.List(fields.Dict(required=False), required=False)
     
-    preset = fields.Nested(SectionPreset, required=False)
-    
     name = fields.Str(required=False)
     
     label = fields.Str(required=False)
@@ -988,6 +1012,54 @@ class GlobalSchema(BaseSchema):
 
     
     props = fields.List(fields.Nested(Prop, required=False), required=False)
+    
+
+
+class Prop(BaseSchema):
+    # Theme swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    category = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
+    
+    label = fields.Str(required=False)
+    
+    info = fields.Str(required=False)
+    
+
+
+class Preset(BaseSchema):
+    # Theme swagger.json
+
+    
+    pages = fields.List(fields.Nested(Page, required=False), required=False)
+    
+
+
+class Page(BaseSchema):
+    # Theme swagger.json
+
+    
+    sections = fields.List(fields.Nested(Section, required=False), required=False)
+    
+    value = fields.Str(required=False)
+    
+
+
+class SectionProps(BaseSchema):
+    # Theme swagger.json
+
+    
+    title = fields.Nested(TextProp, required=False)
+    
+    item_margin = fields.Nested(TextProp, required=False)
+    
+    autoplay = fields.Nested(CheckboxProp, required=False)
+    
+    slide_interval = fields.Nested(RangeProp, required=False)
     
 
 
@@ -1009,15 +1081,13 @@ class ImagePickerProp(BaseSchema):
     
 
 
-class Block(BaseSchema):
+class UrlProp(BaseSchema):
     # Theme swagger.json
 
     
     type = fields.Str(required=False)
     
-    name = fields.Str(required=False)
-    
-    props = fields.Nested(BlockProps, required=False)
+    value = fields.Str(required=False)
     
 
 
@@ -1031,29 +1101,105 @@ class BlockProps(BaseSchema):
     
 
 
-class UrlProp(BaseSchema):
+class TextProp(BaseSchema):
     # Theme swagger.json
 
-    
-    type = fields.Str(required=False)
     
     value = fields.Str(required=False)
     
+    type = fields.Str(required=False)
+    
 
 
-class Prop(BaseSchema):
+class CheckboxProp(BaseSchema):
+    # Theme swagger.json
+
+    
+    value = fields.Boolean(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class RangeProp(BaseSchema):
+    # Theme swagger.json
+
+    
+    value = fields.Int(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class Section(BaseSchema):
+    # Theme swagger.json
+
+    
+    blocks = fields.List(fields.Nested(Block, required=False), required=False)
+    
+    predicate = fields.Nested(Predicate, required=False)
+    
+    name = fields.Str(required=False)
+    
+    props = fields.Nested(SectionProps, required=False)
+    
+    preset = fields.Nested(SectionPreset, required=False)
+    
+
+
+class Block(BaseSchema):
     # Theme swagger.json
 
     
     type = fields.Str(required=False)
     
-    category = fields.Str(required=False)
+    name = fields.Str(required=False)
     
-    id = fields.Str(required=False)
+    props = fields.Nested(BlockProps, required=False)
     
-    label = fields.Str(required=False)
+
+
+class Predicate(BaseSchema):
+    # Theme swagger.json
+
     
-    info = fields.Str(required=False)
+    screen = fields.Nested(Screen, required=False)
+    
+    user = fields.Nested(ThemeUserSchema, required=False)
+    
+    route = fields.Nested(Route, required=False)
+    
+
+
+class Screen(BaseSchema):
+    # Theme swagger.json
+
+    
+    mobile = fields.Boolean(required=False)
+    
+    desktop = fields.Boolean(required=False)
+    
+    tablet = fields.Boolean(required=False)
+    
+
+
+class ThemeUserSchema(BaseSchema):
+    # Theme swagger.json
+
+    
+    authenticated = fields.Boolean(required=False)
+    
+    anonymous = fields.Boolean(required=False)
+    
+
+
+class Route(BaseSchema):
+    # Theme swagger.json
+
+    
+    selected = fields.Str(required=False)
+    
+    exact_url = fields.Str(required=False)
     
 
 

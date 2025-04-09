@@ -13,9 +13,8 @@ class Configuration:
     def __init__(self, config: PublicConfig):
         self._conf = config
         self._relativeUrls = {
-            "searchApplication": "/service/public/configuration/v1.0/application/search-application",
-            "getLocations": "/service/public/configuration/v1.0/location",
-            "checkVersionIsUpToDate": "/service/public/configuration/v1.0/version"
+            "searchApplication": "/service/common/configuration/v1.0/application/search-application",
+            "getLocations": "/service/common/configuration/v1.0/location"
             
         }
         self._urls = {
@@ -62,7 +61,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["searchApplication"]).netloc, "get", await create_url_without_domain("/service/public/configuration/v1.0/application/search-application", authorization=authorization, query=query), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["searchApplication"]).netloc, "get", await create_url_without_domain("/service/common/configuration/v1.0/application/search-application", authorization=authorization, query=query), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ApplicationResponseSchema
@@ -112,7 +111,7 @@ class Configuration:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocations"]).netloc, "get", await create_url_without_domain("/service/public/configuration/v1.0/location", location_type=location_type, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocations"]).netloc, "get", await create_url_without_domain("/service/common/configuration/v1.0/location", location_type=location_type, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import Locations
@@ -121,54 +120,6 @@ class Configuration:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getLocations")
-                print(e)
-
-        return response
-    
-    async def checkVersionIsUpToDate(self, body="", request_headers:Dict={}):
-        """Check if the application version is up to date.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ConfigurationValidator.checkVersionIsUpToDate()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import VersionRequestSchema
-        schema = VersionRequestSchema()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(api_url=self._urls["checkVersionIsUpToDate"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {
-            "User-Agent": self._conf.userAgent,
-            "Accept-Language": self._conf.language,
-            "x-currency-code":   self._conf.currency
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkVersionIsUpToDate"]).netloc, "post", await create_url_without_domain("/service/public/configuration/v1.0/version", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import VersionResponseSchema
-            schema = VersionResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for checkVersionIsUpToDate")
                 print(e)
 
         return response

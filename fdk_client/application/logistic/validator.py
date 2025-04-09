@@ -17,35 +17,9 @@ from ..ApplicationModel import BaseSchema
     
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     
     
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
         
         
         
@@ -56,6 +30,7 @@ from ..ApplicationModel import BaseSchema
         
     
     
+        
         
         
         
@@ -75,13 +50,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-        
-    
-    
-        
-        
-    
-    
         
         
     
@@ -104,74 +72,19 @@ class LogisticValidator:
         pass 
         
     
-    class getZones(BaseSchema):
+    class getCourierPartners(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-        
-        stage = fields.Str(required=False)
-        
-        type = fields.Str(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        is_active = fields.Boolean(required=False)
-        
-        q = fields.Str(required=False)
-        
-        country_iso_code = fields.Str(required=False)
-        
-        pincode = fields.Str(required=False)
-        
-        state = fields.Str(required=False)
-        
-        city = fields.Str(required=False)
-        
-        sector = fields.Str(required=False)
-        
-        store_uid = fields.Int(required=False)
-        
-        region_uid = fields.Str(required=False)
-         
-        
-    
-    class getGeoAreas(BaseSchema):
-        
-        
-        application_id = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        type = fields.Str(required=False)
-        
-        is_active = fields.Boolean(required=False)
-        
-        q = fields.Str(required=False)
-        
-        country_iso_code = fields.Str(required=False)
-        
-        state = fields.Str(required=False)
-        
-        city = fields.Str(required=False)
-        
-        pincode = fields.Str(required=False)
-        
-        sector = fields.Str(required=False)
          
         
     
     class getCountries(BaseSchema):
         
         
-        onboard = fields.Boolean(required=False)
+        onboarding = fields.Boolean(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -180,6 +93,8 @@ class LogisticValidator:
         q = fields.Str(required=False)
         
         hierarchy = fields.Str(required=False)
+        
+        phone_code = fields.Str(required=False)
          
         
     
@@ -190,14 +105,16 @@ class LogisticValidator:
          
         
     
-    class getLocalitiesByPrefix(BaseSchema):
+    class getDeliveryPromise(BaseSchema):
         
+        
+        x__location__detail = fields.Str(required=False)
+        
+        x__application__data = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
-        
-        q = fields.Str(required=False)
          
         
     
@@ -218,7 +135,7 @@ class LogisticValidator:
         
         q = fields.Str(required=False)
         
-        name = fields.Str(required=False)
+        sector = fields.Str(required=False)
          
         
     
@@ -234,6 +151,8 @@ class LogisticValidator:
         state = fields.Str(required=False)
         
         city = fields.Str(required=False)
+        
+        sector = fields.Str(required=False)
          
         
     
@@ -243,24 +162,6 @@ class LogisticValidator:
         country_iso_code = fields.Str(required=False)
         
         template_name = fields.Str(required=False)
-         
-        
-    
-    class createShipments(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getDeliveryPromise(BaseSchema):
-        
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
          
         
     

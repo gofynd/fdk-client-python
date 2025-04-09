@@ -199,6 +199,8 @@ class UrlInfo(BaseSchema):
     # Share swagger.json
 
     
+    original = fields.Str(required=False)
+    
     hash = fields.Str(required=False)
     
     short_url = fields.Str(required=False)
@@ -271,9 +273,7 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
-    total = fields.Int(required=False)
-    
-    page = fields.Int(required=False)
+    page_size = fields.Int(required=False)
     
 
 

@@ -26,10 +26,6 @@ from ..ApplicationModel import BaseSchema
     
         
         
-    
-    
-    
-        
 
 class ThemeValidator:
     
@@ -69,18 +65,6 @@ class ThemeValidator:
         theme_id = fields.Str(required=False)
         
         filters = fields.Boolean(required=False)
-         
-        
-    
-    class getAppliedThemeV1(BaseSchema):
-        
-        pass 
-        
-    
-    class getThemeForPreviewV1(BaseSchema):
-        
-        
-        theme_id = fields.Str(required=False)
          
         
     

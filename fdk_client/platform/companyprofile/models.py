@@ -56,7 +56,7 @@ class ErrorResponseSchema(BaseSchema):
     pass
 
 
-class CompanyTaxesSchema1(BaseSchema):
+class CompanyRequestTaxesSchema(BaseSchema):
     pass
 
 
@@ -88,7 +88,11 @@ class GetBrandResponseSchema(BaseSchema):
     pass
 
 
-class CreateUpdateBrandRequestSchema(BaseSchema):
+class CreateBrandRequestSchema(BaseSchema):
+    pass
+
+
+class UpdateBrandRequestSchema(BaseSchema):
     pass
 
 
@@ -377,19 +381,13 @@ class ErrorResponseSchema(BaseSchema):
     # CompanyProfile swagger.json
 
     
-    code = fields.Float(required=False)
-    
-    error = fields.Str(required=False)
-    
     message = fields.Str(required=False)
     
-    meta = fields.Dict(required=False)
-    
-    status = fields.Int(required=False)
+    error = fields.Dict(required=False)
     
 
 
-class CompanyTaxesSchema1(BaseSchema):
+class CompanyRequestTaxesSchema(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -443,7 +441,7 @@ class UpdateCompany(BaseSchema):
     
     _custom_json = fields.Dict(required=False)
     
-    taxes = fields.List(fields.Nested(CompanyTaxesSchema1, required=False), required=False)
+    taxes = fields.List(fields.Nested(CompanyRequestTaxesSchema, required=False), required=False)
     
     business_details = fields.Nested(BusinessDetails, required=False)
     
@@ -468,8 +466,6 @@ class ProfileSuccessResponseSchema(BaseSchema):
 
     
     uid = fields.Int(required=False)
-    
-    data = fields.List(fields.Dict(required=False), required=False)
     
     message = fields.Str(required=False)
     
@@ -561,7 +557,7 @@ class GetBrandResponseSchema(BaseSchema):
     
 
 
-class CreateUpdateBrandRequestSchema(BaseSchema):
+class CreateBrandRequestSchema(BaseSchema):
     # CompanyProfile swagger.json
 
     
@@ -586,6 +582,32 @@ class CreateUpdateBrandRequestSchema(BaseSchema):
     name = fields.Str(required=False)
     
     slug_key = fields.Str(required=False)
+    
+
+
+class UpdateBrandRequestSchema(BaseSchema):
+    # CompanyProfile swagger.json
+
+    
+    _custom_json = fields.Dict(required=False)
+    
+    _locale_language = fields.Dict(required=False)
+    
+    synonyms = fields.List(fields.Str(required=False), required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    description = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
+    
+    brand_tier = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    banner = fields.Nested(BrandBannerSchema, required=False)
+    
+    name = fields.Str(required=False)
     
 
 
@@ -699,7 +721,7 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
-    total = fields.Int(required=False)
+    page_size = fields.Int(required=False)
     
 
 
@@ -752,8 +774,6 @@ class GetCompanySchema(BaseSchema):
 
     
     stage = fields.Str(required=False)
-    
-    _custom_json = fields.Dict(required=False)
     
     verified_on = fields.Str(required=False)
     

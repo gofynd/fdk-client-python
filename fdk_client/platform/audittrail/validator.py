@@ -22,7 +22,7 @@ class AuditTrailValidator:
     class createAuditLog(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
          
         
     

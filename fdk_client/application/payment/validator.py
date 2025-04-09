@@ -12,16 +12,13 @@ from ..ApplicationModel import BaseSchema
     
     
         
-        
     
     
     
         
     
     
-    
         
-    
     
     
     
@@ -78,19 +75,10 @@ from ..ApplicationModel import BaseSchema
     
     
     
-        
-        
-    
-    
-    
-    
     
         
     
     
-    
-        
-        
     
     
     
@@ -114,21 +102,6 @@ from ..ApplicationModel import BaseSchema
     
     
     
-        
-    
-    
-    
-        
-    
-    
-    
-    
-        
-        
-    
-    
-        
-        
         
     
     
@@ -138,8 +111,6 @@ class PaymentValidator:
     
     class getAggregatorsConfig(BaseSchema):
         
-        
-        x__api__token = fields.Str(required=False)
         
         refresh = fields.Boolean(required=False)
          
@@ -157,21 +128,11 @@ class PaymentValidator:
          
         
     
-    class updateUserCard(BaseSchema):
-        
-        pass 
-        
-    
     class getActiveUserCards(BaseSchema):
         
         
         force_refresh = fields.Boolean(required=False)
          
-        
-    
-    class updateActiveCards(BaseSchema):
-        
-        pass 
         
     
     class deleteUserCard(BaseSchema):
@@ -325,17 +286,12 @@ class PaymentValidator:
          
         
     
-    class addBeneficiaryDetails(BaseSchema):
-        
-        pass 
-        
-    
-    class deleteBeneficiaryDetails(BaseSchema):
-        
-        pass 
-        
-    
     class verifyOtpAndAddBeneficiaryForBank(BaseSchema):
+        
+        pass 
+        
+    
+    class addBeneficiaryDetails(BaseSchema):
         
         pass 
         
@@ -345,26 +301,12 @@ class PaymentValidator:
         pass 
         
     
-    class getotpOrderBeneficiariesDetail(BaseSchema):
-        
-        
-        order_id = fields.Str(required=False)
-        
-        request_hash = fields.Str(required=False)
-         
-        
-    
     class verifyOtpAndAddBeneficiaryForWallet(BaseSchema):
         
         pass 
         
     
     class updateDefaultBeneficiary(BaseSchema):
-        
-        pass 
-        
-    
-    class getBenficiaryOrder(BaseSchema):
         
         pass 
         
@@ -381,16 +323,12 @@ class PaymentValidator:
         pass 
         
     
-    class getPaymentLinkId(BaseSchema):
+    class resendPaymentLink(BaseSchema):
         
-        
-        id = fields.Str(required=False)
-        
-        payment_link_id = fields.Str(required=False)
-         
+        pass 
         
     
-    class resendPaymentLink(BaseSchema):
+    class cancelPaymentLink(BaseSchema):
         
         pass 
         
@@ -452,18 +390,6 @@ class PaymentValidator:
         pass 
         
     
-    class outstandingOrderDetails(BaseSchema):
-        
-        
-        aggregator = fields.Str(required=False)
-         
-        
-    
-    class cancelPaymentLink(BaseSchema):
-        
-        pass 
-        
-    
     class paidOrderDetails(BaseSchema):
         
         
@@ -476,37 +402,7 @@ class PaymentValidator:
         pass 
         
     
-    class setRefundOptionforShipment(BaseSchema):
-        
-        pass 
-        
-    
-    class getSelectedRefundOption(BaseSchema):
-        
-        
-        shipment_id = fields.Str(required=False)
-        
-        order_id = fields.Str(required=False)
-         
-        
-    
-    class getUserBeneficiariesDetailV2(BaseSchema):
-        
-        
-        order_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
-        
-        mop = fields.Str(required=False)
-         
-        
-    
-    class validateBeneficiaryAddress(BaseSchema):
-        
-        pass 
-        
-    
-    class confirmPayment(BaseSchema):
+    class validateCustomerAndCreditSummary(BaseSchema):
         
         pass 
         
