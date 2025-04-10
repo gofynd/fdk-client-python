@@ -288,6 +288,14 @@ class Email(BaseSchema):
     pass
 
 
+class UserConsent(BaseSchema):
+    pass
+
+
+class PrivacyPolicyConsentSchema(BaseSchema):
+    pass
+
+
 
 
 
@@ -1269,6 +1277,8 @@ class UserSchema(BaseSchema):
     
     rr_id = fields.Str(required=False)
     
+    consent = fields.Nested(UserConsent, required=False)
+    
 
 
 class UserSearchSchema(BaseSchema):
@@ -1317,6 +1327,8 @@ class UserSearchSchema(BaseSchema):
     
     deleted_on = fields.Str(required=False)
     
+    consent = fields.Nested(UserConsent, required=False)
+    
 
 
 class PhoneNumber(BaseSchema):
@@ -1346,6 +1358,24 @@ class Email(BaseSchema):
     primary = fields.Boolean(required=False)
     
     verified = fields.Boolean(required=False)
+    
+
+
+class UserConsent(BaseSchema):
+    # User swagger.json
+
+    
+    privacy_policy = fields.Nested(PrivacyPolicyConsentSchema, required=False)
+    
+
+
+class PrivacyPolicyConsentSchema(BaseSchema):
+    # User swagger.json
+
+    
+    value = fields.Boolean(required=False)
+    
+    updated_at = fields.Str(required=False)
     
 
 

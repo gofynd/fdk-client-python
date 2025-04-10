@@ -91,9 +91,7 @@ class SaveProxy(BaseSchema):
     # FileStorage swagger.json
 
     
-    id = fields.Int(required=False)
-    
-    token = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
 
 
@@ -101,9 +99,7 @@ class ProxyFileData(BaseSchema):
     # FileStorage swagger.json
 
     
-    email = fields.Str(required=False)
-    
-    password = fields.Str(required=False)
+    name = fields.Str(required=False)
     
 
 
@@ -129,9 +125,7 @@ class FetchProxyDetails(BaseSchema):
     # FileStorage swagger.json
 
     
-    data = fields.Dict(required=False)
-    
-    support = fields.Dict(required=False)
+    success = fields.Boolean(required=False)
     
 
 
