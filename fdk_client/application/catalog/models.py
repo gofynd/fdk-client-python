@@ -2493,5 +2493,7 @@ class ProductSizePriceServiceabilityResponse(BaseSchema):
     
     is_serviceable = fields.Str(required=False)
     
+    tags = fields.List(fields.Str(required=False), required=False)
+    
 
 
