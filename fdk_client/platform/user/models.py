@@ -280,6 +280,38 @@ class Email(BaseSchema):
     pass
 
 
+class BulkUpdateUserAttributesBody(BaseSchema):
+    pass
+
+
+class BulkUpdateUserSameAttributes(BaseSchema):
+    pass
+
+
+class BulkUpdatePerUserAttributesBody(BaseSchema):
+    pass
+
+
+class UserDetailAttributes(BaseSchema):
+    pass
+
+
+class BulkUpdatePerUserAttributes(BaseSchema):
+    pass
+
+
+class BulkOperation(BaseSchema):
+    pass
+
+
+class BulkOperationError(BaseSchema):
+    pass
+
+
+class BulkOperationAsync(BaseSchema):
+    pass
+
+
 
 
 
@@ -1326,6 +1358,98 @@ class Email(BaseSchema):
     primary = fields.Boolean(required=False)
     
     verified = fields.Boolean(required=False)
+    
+
+
+class BulkUpdateUserAttributesBody(BaseSchema):
+    # User swagger.json
+
+    
+    users = fields.List(fields.Str(required=False), required=False)
+    
+    user_file_url = fields.Str(required=False)
+    
+    attribute = fields.List(fields.Nested(BulkUpdateUserSameAttributes, required=False), required=False)
+    
+
+
+class BulkUpdateUserSameAttributes(BaseSchema):
+    # User swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    value = fields.Raw(required=False)
+    
+
+
+class BulkUpdatePerUserAttributesBody(BaseSchema):
+    # User swagger.json
+
+    
+    user_detail_attributes = fields.List(fields.Nested(UserDetailAttributes, required=False), required=False)
+    
+
+
+class UserDetailAttributes(BaseSchema):
+    # User swagger.json
+
+    
+    user_id = fields.Str(required=False)
+    
+    attributes = fields.List(fields.Nested(BulkUpdatePerUserAttributes, required=False), required=False)
+    
+
+
+class BulkUpdatePerUserAttributes(BaseSchema):
+    # User swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    value = fields.Raw(required=False)
+    
+
+
+class BulkOperation(BaseSchema):
+    # User swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    total = fields.Int(required=False)
+    
+    processed = fields.Int(required=False)
+    
+    errors_count = fields.Int(required=False)
+    
+    errors = fields.List(fields.Nested(BulkOperationError, required=False), required=False)
+    
+    processing_type = fields.Str(required=False)
+    
+    error_summary = fields.Dict(required=False)
+    
+
+
+class BulkOperationError(BaseSchema):
+    # User swagger.json
+
+    
+    user_id = fields.Str(required=False)
+    
+    error = fields.Str(required=False)
+    
+
+
+class BulkOperationAsync(BaseSchema):
+    # User swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    request_id = fields.Str(required=False)
+    
+    processing_type = fields.Str(required=False)
     
 
 

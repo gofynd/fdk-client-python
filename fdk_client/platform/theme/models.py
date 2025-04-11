@@ -917,7 +917,7 @@ class AvailablePagePredicate(BaseSchema):
     
     route = fields.Nested(AvailablePageRoutePredicate, required=False)
     
-    schedule = fields.Nested(AvailablePageSchedulePredicate, required=False)
+    schedule = fields.List(fields.Nested(AvailablePageSchedulePredicate, required=False), required=False)
     
     platform = fields.Nested(AvailablePagePlatformPredicate, required=False)
     
@@ -944,6 +944,14 @@ class AvailablePageUserPredicate(BaseSchema):
     authenticated = fields.Boolean(required=False)
     
     anonymous = fields.Boolean(required=False)
+    
+    user_type = fields.Str(required=False)
+    
+    user_groups = fields.List(fields.Str(required=False), required=False)
+    
+    start = fields.Str(required=False)
+    
+    end = fields.Str(required=False)
     
 
 
