@@ -6431,6 +6431,8 @@ class ProductListingDetail(BaseSchema):
     
     uid = fields.Int(required=False)
     
+    seo = fields.Nested(ApplicationItemSEO, required=False)
+    
 
 
 class ProductListingPrice(BaseSchema):
