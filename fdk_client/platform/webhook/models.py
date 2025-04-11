@@ -22,10 +22,6 @@ class SubscriberEventMapping(BaseSchema):
     pass
 
 
-class FilterSchema(BaseSchema):
-    pass
-
-
 class EventConfig(BaseSchema):
     pass
 
@@ -159,7 +155,7 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
-    page_size = fields.Int(required=False)
+    total = fields.Int(required=False)
     
 
 
@@ -191,27 +187,9 @@ class SubscriberEventMapping(BaseSchema):
     
     subscriber_id = fields.Float(required=False)
     
-    filters = fields.Nested(FilterSchema, required=False)
-    
-    reducer = fields.Dict(required=False, allow_none=True)
-    
     broadcaster_config = fields.Nested(BroadcasterConfig, required=False)
     
     created_on = fields.Str(required=False)
-    
-
-
-class FilterSchema(BaseSchema):
-    # Webhook swagger.json
-
-    
-    query = fields.Str(required=False)
-    
-    condition = fields.Str(required=False)
-    
-    logic = fields.Str(required=False)
-    
-    conditions = fields.List(fields.Dict(required=False), required=False)
     
 
 

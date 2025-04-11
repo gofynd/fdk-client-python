@@ -22,10 +22,6 @@ class SeoComponent(BaseSchema):
     pass
 
 
-class ValidationError(BaseSchema):
-    pass
-
-
 class SeoSchema(BaseSchema):
     pass
 
@@ -62,7 +58,7 @@ class ScheduleStartSchema(BaseSchema):
     pass
 
 
-class BlogGetDetails(BaseSchema):
+class BlogGetResponseSchema(BaseSchema):
     pass
 
 
@@ -110,6 +106,22 @@ class SEObreadcrumb(BaseSchema):
     pass
 
 
+class DefaultSitemapIndividualConfig(BaseSchema):
+    pass
+
+
+class DefaultSitemapConfig(BaseSchema):
+    pass
+
+
+class SitemapConfig(BaseSchema):
+    pass
+
+
+class SitemapConfigurationList(BaseSchema):
+    pass
+
+
 class DateMeta(BaseSchema):
     pass
 
@@ -154,10 +166,6 @@ class ContentAPIError(BaseSchema):
     pass
 
 
-class CommonError(BaseSchema):
-    pass
-
-
 class CategorySchema(BaseSchema):
     pass
 
@@ -194,7 +202,7 @@ class LandingPageSchema(BaseSchema):
     pass
 
 
-class NavigationGetDetails(BaseSchema):
+class NavigationGetResponseSchema(BaseSchema):
     pass
 
 
@@ -206,11 +214,15 @@ class NavigationSchema(BaseSchema):
     pass
 
 
-class PageGetDetails(BaseSchema):
+class PageGetResponseSchema(BaseSchema):
     pass
 
 
 class PageSchema(BaseSchema):
+    pass
+
+
+class SanitizedContent(BaseSchema):
     pass
 
 
@@ -254,7 +266,7 @@ class TagSourceSchema(BaseSchema):
     pass
 
 
-class CustomObjectFieldValue(BaseSchema):
+class WellKnownResponseSchema(BaseSchema):
     pass
 
 
@@ -270,10 +282,6 @@ class CustomObjectByIdSchema(BaseSchema):
     pass
 
 
-class CustomFieldValue(BaseSchema):
-    pass
-
-
 class CustomFieldSchema(BaseSchema):
     pass
 
@@ -282,43 +290,7 @@ class CustomFieldsResponseByResourceIdSchema(BaseSchema):
     pass
 
 
-class CustomObjectListItemSchema(BaseSchema):
-    pass
-
-
-class CustomObjectsSchema(BaseSchema):
-    pass
-
-
 class ActionPage(BaseSchema):
-    pass
-
-
-class TranslateUiLabel(BaseSchema):
-    pass
-
-
-class TranslateUiLabelsPage(BaseSchema):
-    pass
-
-
-class Error(BaseSchema):
-    pass
-
-
-class ResourceTranslations(BaseSchema):
-    pass
-
-
-class StandardError(BaseSchema):
-    pass
-
-
-class ApplicationLanguage(BaseSchema):
-    pass
-
-
-class ResourcePayload(BaseSchema):
     pass
 
 
@@ -347,6 +319,8 @@ class ApplicationLegal(BaseSchema):
     
     created_at = fields.Str(required=False)
     
+    __v = fields.Float(required=False)
+    
 
 
 class ApplicationLegalFAQ(BaseSchema):
@@ -367,16 +341,6 @@ class SeoComponent(BaseSchema):
     
 
 
-class ValidationError(BaseSchema):
-    # Content swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    field = fields.Str(required=False)
-    
-
-
 class SeoSchema(BaseSchema):
     # Content swagger.json
 
@@ -389,7 +353,9 @@ class SeoSchema(BaseSchema):
     
     sitemap_enabled = fields.Boolean(required=False)
     
-    additonal_sitemap = fields.Str(required=False)
+    additional_sitemap = fields.Str(required=False)
+    
+    sitemap = fields.Nested(SEOSitemap, required=False)
     
     cannonical_enabled = fields.Boolean(required=False)
     
@@ -400,6 +366,8 @@ class SeoSchema(BaseSchema):
     created_at = fields.Str(required=False)
     
     updated_at = fields.Str(required=False)
+    
+    __v = fields.Float(required=False)
     
 
 
@@ -439,7 +407,7 @@ class SEOSchemaMarkupTemplate(BaseSchema):
     # Content swagger.json
 
     
-    id = fields.Str(required=False)
+    _id = fields.Str(required=False)
     
     title = fields.Str(required=False)
     
@@ -449,6 +417,8 @@ class SEOSchemaMarkupTemplate(BaseSchema):
     
     schema = fields.Str(required=False)
     
+    target_json = fields.Dict(required=False)
+    
     active = fields.Boolean(required=False)
     
     created_at = fields.Str(required=False)
@@ -456,6 +426,8 @@ class SEOSchemaMarkupTemplate(BaseSchema):
     updated_at = fields.Str(required=False)
     
     application = fields.Str(required=False)
+    
+    __v = fields.Float(required=False)
     
 
 
@@ -505,7 +477,7 @@ class ScheduleStartSchema(BaseSchema):
     
 
 
-class BlogGetDetails(BaseSchema):
+class BlogGetResponseSchema(BaseSchema):
     # Content swagger.json
 
     
@@ -595,6 +567,8 @@ class BlogSchema(BaseSchema):
     
     summary = fields.Str(required=False)
     
+    status = fields.Str(required=False)
+    
 
 
 class SEO(BaseSchema):
@@ -611,7 +585,7 @@ class SEO(BaseSchema):
     
     sitemap = fields.Nested(SEOSitemap, required=False)
     
-    breadcrumb = fields.List(fields.Nested(SEObreadcrumb, required=False), required=False)
+    breadcrumbs = fields.List(fields.Nested(SEObreadcrumb, required=False), required=False)
     
     canonical_url = fields.Str(required=False)
     
@@ -662,6 +636,68 @@ class SEObreadcrumb(BaseSchema):
     url = fields.Str(required=False)
     
     action = fields.Nested(Action, required=False)
+    
+
+
+class DefaultSitemapIndividualConfig(BaseSchema):
+    # Content swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
+    
+
+
+class DefaultSitemapConfig(BaseSchema):
+    # Content swagger.json
+
+    
+    root = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    brand = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    collections = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    category_l1 = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    category_l2 = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    category_l3 = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    pages = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    blog = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    section = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    faq = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    sitemap = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+
+
+class SitemapConfig(BaseSchema):
+    # Content swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    sitemap = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+
+
+class SitemapConfigurationList(BaseSchema):
+    # Content swagger.json
+
+    
+    items = fields.List(fields.Nested(SitemapConfig, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 
 
@@ -765,6 +801,16 @@ class DataLoaderSchema(BaseSchema):
     
     type = fields.Str(required=False)
     
+    is_selected = fields.Boolean(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    modified_at = fields.Str(required=False)
+    
+    company = fields.Str(required=False)
+    
+    application = fields.Str(required=False)
+    
     url = fields.Str(required=False)
     
     content = fields.Str(required=False)
@@ -815,14 +861,6 @@ class ContentAPIError(BaseSchema):
     
 
 
-class CommonError(BaseSchema):
-    # Content swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
 class CategorySchema(BaseSchema):
     # Content swagger.json
 
@@ -844,6 +882,8 @@ class CategorySchema(BaseSchema):
     icon_url = fields.Str(required=False)
     
     _custom_json = fields.Dict(required=False)
+    
+    __v = fields.Float(required=False)
     
 
 
@@ -885,6 +925,8 @@ class FAQCategorySchema(BaseSchema):
     
     _custom_json = fields.Dict(required=False)
     
+    __v = fields.Float(required=False)
+    
 
 
 class FaqSchema(BaseSchema):
@@ -902,6 +944,8 @@ class FaqSchema(BaseSchema):
     answer = fields.Str(required=False)
     
     tags = fields.List(fields.Str(required=False), required=False)
+    
+    __v = fields.Float(required=False)
     
 
 
@@ -947,7 +991,7 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
-    page_size = fields.Int(required=False)
+    total = fields.Int(required=False)
     
 
 
@@ -973,9 +1017,11 @@ class LandingPageSchema(BaseSchema):
     
     _custom_json = fields.Dict(required=False)
     
+    __v = fields.Float(required=False)
+    
 
 
-class NavigationGetDetails(BaseSchema):
+class NavigationGetResponseSchema(BaseSchema):
     # Content swagger.json
 
     
@@ -1021,9 +1067,11 @@ class NavigationSchema(BaseSchema):
     
     navigation = fields.List(fields.Nested(NavigationReference, required=False), required=False)
     
+    __v = fields.Float(required=False)
+    
 
 
-class PageGetDetails(BaseSchema):
+class PageGetResponseSchema(BaseSchema):
     # Content swagger.json
 
     
@@ -1080,6 +1128,20 @@ class PageSchema(BaseSchema):
     visibility = fields.Dict(required=False)
     
     archived = fields.Boolean(required=False)
+    
+    __v = fields.Float(required=False)
+    
+    sanitized_content = fields.List(fields.Nested(SanitizedContent, required=False), required=False)
+    
+
+
+class SanitizedContent(BaseSchema):
+    # Content swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
     
 
 
@@ -1171,7 +1233,11 @@ class TagsSchema(BaseSchema):
     
     _id = fields.Str(required=False)
     
+    company = fields.Str(required=False)
+    
     tags = fields.List(fields.Nested(TagSchema, required=False), required=False)
+    
+    __v = fields.Float(required=False)
     
 
 
@@ -1195,6 +1261,8 @@ class TagSchema(BaseSchema):
     
     content = fields.Str(required=False)
     
+    compatible_engines = fields.List(fields.Str(required=False), required=False)
+    
     pages = fields.List(fields.Dict(required=False), required=False)
     
     __source = fields.Nested(TagSourceSchema, required=False)
@@ -1211,11 +1279,23 @@ class TagSourceSchema(BaseSchema):
     
 
 
-class CustomObjectFieldValue(BaseSchema):
+class WellKnownResponseSchema(BaseSchema):
     # Content swagger.json
 
     
-    value = fields.Raw(required=False)
+    _id = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    application_id = fields.Str(required=False)
+    
+    content = fields.Str(required=False)
+    
+    content_type = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
     
 
 
@@ -1223,7 +1303,7 @@ class CustomObjectListItemDefinationSchema(BaseSchema):
     # Content swagger.json
 
     
-    _id = fields.Str(required=False)
+    id = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
@@ -1238,8 +1318,6 @@ class CustomObjectFieldSchema(BaseSchema):
     _id = fields.Str(required=False)
     
     slug = fields.Str(required=False)
-    
-    value = fields.List(fields.Nested(CustomObjectFieldValue, required=False), required=False)
     
     type = fields.Str(required=False)
     
@@ -1265,14 +1343,6 @@ class CustomObjectByIdSchema(BaseSchema):
     
 
 
-class CustomFieldValue(BaseSchema):
-    # Content swagger.json
-
-    
-    value = fields.Raw(required=False)
-    
-
-
 class CustomFieldSchema(BaseSchema):
     # Content swagger.json
 
@@ -1284,8 +1354,6 @@ class CustomFieldSchema(BaseSchema):
     slug = fields.Str(required=False)
     
     resource = fields.Str(required=False)
-    
-    value = fields.List(fields.Nested(CustomFieldValue, required=False), required=False)
     
     resource_id = fields.Str(required=False)
     
@@ -1319,36 +1387,6 @@ class CustomFieldsResponseByResourceIdSchema(BaseSchema):
     
 
 
-class CustomObjectListItemSchema(BaseSchema):
-    # Content swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    definition_id = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    definition = fields.Nested(CustomObjectListItemDefinationSchema, required=False)
-    
-    references = fields.Int(required=False)
-    
-
-
-class CustomObjectsSchema(BaseSchema):
-    # Content swagger.json
-
-    
-    items = fields.List(fields.Nested(CustomObjectListItemSchema, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
-    
-
-
 class ActionPage(BaseSchema):
     # Content swagger.json
 
@@ -1360,98 +1398,6 @@ class ActionPage(BaseSchema):
     url = fields.Str(required=False)
     
     type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
-    
-
-
-class TranslateUiLabel(BaseSchema):
-    # Content swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    company_id = fields.Str(required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    template_theme_id = fields.Str(required=False)
-    
-    theme_id = fields.Str(required=False)
-    
-    locale = fields.Str(required=False)
-    
-    resource = fields.Dict(required=False)
-    
-    type = fields.Str(required=False)
-    
-    template = fields.Boolean(required=False)
-    
-
-
-class TranslateUiLabelsPage(BaseSchema):
-    # Content swagger.json
-
-    
-    items = fields.List(fields.Nested(TranslateUiLabel, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
-    
-
-
-class Error(BaseSchema):
-    # Content swagger.json
-
-    
-    error = fields.Str(required=False)
-    
-
-
-class ResourceTranslations(BaseSchema):
-    # Content swagger.json
-
-    
-    resource_id = fields.Str(required=False)
-    
-    value = fields.Dict(required=False)
-    
-
-
-class StandardError(BaseSchema):
-    # Content swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
-class ApplicationLanguage(BaseSchema):
-    # Content swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    company_id = fields.Str(required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    locale = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    direction = fields.Str(required=False)
-    
-    is_default = fields.Boolean(required=False)
-    
-    published = fields.Boolean(required=False)
-    
-
-
-class ResourcePayload(BaseSchema):
-    # Content swagger.json
-
-    
-    payload = fields.List(fields.Dict(required=False), required=False)
     
 
 

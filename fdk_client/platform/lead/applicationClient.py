@@ -13,13 +13,13 @@ class Lead:
         self.applicationId = applicationId
 
     
-    async def getNewTickets(self, items=None, filters=None, q=None, status=None, priority=None, category=None, request_headers:Dict={}):
+    async def getTickets(self, items=None, filters=None, q=None, status=None, priority=None, category=None, request_headers:Dict={}):
         """Gets the list of Application level Tickets and/or ticket filters
         :param items : Decides that the reponse will contain the list of tickets : type boolean
         :param filters : Decides that the reponse will contain the ticket filters : type boolean
         :param q : Search through ticket titles and description : type string
         :param status : Filter tickets on status : type string
-        :param priority : Filter tickets on priority : type 
+        :param priority : Filter tickets on priority : type string
         :param category : Filter tickets on category : type string
         """
         payload = {}
@@ -38,11 +38,11 @@ class Lead:
             payload["category"] = category
 
         # Parameter validation
-        schema = LeadValidator.getNewTickets()
+        schema = LeadValidator.getTickets()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket", """{"required":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for which the data will be returned","required":true,"schema":{"type":"string"}}],"optional":[{"name":"items","in":"query","description":"Decides that the reponse will contain the list of tickets","schema":{"type":"boolean"}},{"name":"filters","in":"query","description":"Decides that the reponse will contain the ticket filters","schema":{"type":"boolean"}},{"name":"q","in":"query","description":"Search through ticket titles and description","schema":{"type":"string"}},{"name":"status","in":"query","description":"Filter tickets on status","schema":{"type":"string"}},{"name":"priority","in":"query","description":"Filter tickets on priority","schema":{"$ref":"#/components/schemas/PriorityEnum"}},{"name":"category","in":"query","description":"Filter tickets on category","schema":{"type":"string"}}],"query":[{"name":"items","in":"query","description":"Decides that the reponse will contain the list of tickets","schema":{"type":"boolean"}},{"name":"filters","in":"query","description":"Decides that the reponse will contain the ticket filters","schema":{"type":"boolean"}},{"name":"q","in":"query","description":"Search through ticket titles and description","schema":{"type":"string"}},{"name":"status","in":"query","description":"Filter tickets on status","schema":{"type":"string"}},{"name":"priority","in":"query","description":"Filter tickets on priority","schema":{"$ref":"#/components/schemas/PriorityEnum"}},{"name":"category","in":"query","description":"Filter tickets on category","schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for which the data will be returned","required":true,"schema":{"type":"string"}}]}""", serverType="platform", items=items, filters=filters, q=q, status=status, priority=priority, category=category)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/lead/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ticket", """{"required":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for which the data will be returned","required":true,"schema":{"type":"string"}}],"optional":[{"name":"items","in":"query","description":"Decides that the reponse will contain the list of tickets","schema":{"type":"boolean"}},{"name":"filters","in":"query","description":"Decides that the reponse will contain the ticket filters","schema":{"type":"boolean"}},{"name":"q","in":"query","description":"Search through ticket titles and description","schema":{"type":"string"}},{"name":"status","in":"query","description":"Filter tickets on status","schema":{"type":"string"}},{"name":"priority","in":"query","description":"Filter tickets on priority","schema":{"type":"string","enum":["low","high","medium","urgent"]}},{"name":"category","in":"query","description":"Filter tickets on category","schema":{"type":"string"}}],"query":[{"name":"items","in":"query","description":"Decides that the reponse will contain the list of tickets","schema":{"type":"boolean"}},{"name":"filters","in":"query","description":"Decides that the reponse will contain the ticket filters","schema":{"type":"boolean"}},{"name":"q","in":"query","description":"Search through ticket titles and description","schema":{"type":"string"}},{"name":"status","in":"query","description":"Filter tickets on status","schema":{"type":"string"}},{"name":"priority","in":"query","description":"Filter tickets on priority","schema":{"type":"string","enum":["low","high","medium","urgent"]}},{"name":"category","in":"query","description":"Filter tickets on category","schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID of the application","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID for which the data will be returned","required":true,"schema":{"type":"string"}}]}""", serverType="platform", items=items, filters=filters, q=q, status=status, priority=priority, category=category)
         query_string = await create_query_string(items=items, filters=filters, q=q, status=status, priority=priority, category=category)
         if query_string:
             url_with_params += "?" + query_string
@@ -67,12 +67,12 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getNewTickets")
+                print("Response Validation failed for getTickets")
                 print(e)
 
         return response
     
-    async def getNewTicket(self, id=None, request_headers:Dict={}):
+    async def getTicket(self, id=None, request_headers:Dict={}):
         """Get ticket details of a application level ticket with ticket ID
         :param id : Tiket ID of the ticket to be fetched : type string
         """
@@ -82,7 +82,7 @@ class Lead:
             payload["id"] = id
 
         # Parameter validation
-        schema = LeadValidator.getNewTicket()
+        schema = LeadValidator.getTicket()
         schema.dump(schema.load(payload))
         
 
@@ -111,12 +111,12 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getNewTicket")
+                print("Response Validation failed for getTicket")
                 print(e)
 
         return response
     
-    async def editNewTicket(self, id=None, body="", request_headers:Dict={}):
+    async def editTicket(self, id=None, body="", request_headers:Dict={}):
         """Edits ticket details of a application level ticket such as status, priority, category, tags, attachments, assigne & ticket content changes
         :param id : Ticket ID of ticket to be edited : type string
         """
@@ -126,7 +126,7 @@ class Lead:
             payload["id"] = id
 
         # Parameter validation
-        schema = LeadValidator.editNewTicket()
+        schema = LeadValidator.editTicket()
         schema.dump(schema.load(payload))
         
         # Body validation
@@ -159,7 +159,7 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for editNewTicket")
+                print("Response Validation failed for editTicket")
                 print(e)
 
         return response
@@ -212,7 +212,7 @@ class Lead:
 
         return response
     
-    async def getNewTicketHistory(self, id=None, request_headers:Dict={}):
+    async def getTicketHistory(self, id=None, request_headers:Dict={}):
         """Gets history list for specific application level ticket, this history is seen on ticket detail page, this can be comment, log or rating.
         :param id : Ticket ID for which history is to be fetched : type string
         """
@@ -222,7 +222,7 @@ class Lead:
             payload["id"] = id
 
         # Parameter validation
-        schema = LeadValidator.getNewTicketHistory()
+        schema = LeadValidator.getTicketHistory()
         schema.dump(schema.load(payload))
         
 
@@ -251,7 +251,7 @@ class Lead:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getNewTicketHistory")
+                print("Response Validation failed for getTicketHistory")
                 print(e)
 
         return response
@@ -349,7 +349,7 @@ class Lead:
         return response
     
     async def deleteCustomForm(self, slug=None, request_headers:Dict={}):
-        """Delete a custom form using it's slug
+        """Delete a custom form using it's slug.
         :param slug : Slug of form whose response is getting submitted : type string
         """
         payload = {}

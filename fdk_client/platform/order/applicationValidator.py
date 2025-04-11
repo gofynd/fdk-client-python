@@ -13,14 +13,56 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
         
         
         
         
     
     
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
         
         
         
@@ -52,7 +94,95 @@ from ..PlatformModel import BaseSchema
 class OrderValidator:
     
     
-    class getRules(BaseSchema):
+    class getQuestions(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
+        
+        is_active = fields.Boolean(required=False)
+         
+        
+    
+    class getRuleLaneConfig(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        search_value = fields.Str(required=False)
+         
+        
+    
+    class createRule(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getRuleById(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        rule_id = fields.Str(required=False)
+         
+        
+    
+    class updateRule(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        rule_id = fields.Str(required=False)
+         
+        
+    
+    class deleteRule(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        rule_id = fields.Str(required=False)
+         
+        
+    
+    class updateRulePosition(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getRuleParameters(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getRuleList(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -71,6 +201,8 @@ class OrderValidator:
         shipment_id = fields.Str(required=False)
         
         line_number = fields.Int(required=False)
+        
+        bag_id = fields.Str(required=False)
          
         
     
@@ -86,6 +218,8 @@ class OrderValidator:
         search_type = fields.Str(required=False)
         
         search_id = fields.Str(required=False)
+        
+        search_value = fields.Str(required=False)
         
         from_date = fields.Str(required=False)
         
@@ -116,7 +250,7 @@ class OrderValidator:
     class trackShipmentPlatform(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         

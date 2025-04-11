@@ -24,15 +24,11 @@ class PiiMasking(BaseSchema):
     pass
 
 
-class FstIdentification(BaseSchema):
+class OwnerAppInventoryConfig(BaseSchema):
     pass
 
 
-class QuerySuggestions(BaseSchema):
-    pass
-
-
-class SearchConfig(BaseSchema):
+class OwnerAppConfig(BaseSchema):
     pass
 
 
@@ -196,30 +192,6 @@ class ApplicationsResponseSchema(BaseSchema):
     pass
 
 
-class MobileAppConfiguration(BaseSchema):
-    pass
-
-
-class LandingImage(BaseSchema):
-    pass
-
-
-class SplashImage(BaseSchema):
-    pass
-
-
-class MobileAppConfigRequestSchema(BaseSchema):
-    pass
-
-
-class BuildVersionHistory(BaseSchema):
-    pass
-
-
-class BuildVersion(BaseSchema):
-    pass
-
-
 class AppSupportedCurrency(BaseSchema):
     pass
 
@@ -280,7 +252,75 @@ class SuccessMessageResponseSchema(BaseSchema):
     pass
 
 
+class GetIntegrationsOptInsResponseSchema(BaseSchema):
+    pass
+
+
+class IntegrationOptIn(BaseSchema):
+    pass
+
+
+class Validators(BaseSchema):
+    pass
+
+
+class CompanyValidator(BaseSchema):
+    pass
+
+
+class JsonSchema(BaseSchema):
+    pass
+
+
+class StoreValidator(BaseSchema):
+    pass
+
+
+class InventoryValidator(BaseSchema):
+    pass
+
+
+class OrderValidator(BaseSchema):
+    pass
+
+
+class IntegrationMeta(BaseSchema):
+    pass
+
+
+class IntegrationLevel(BaseSchema):
+    pass
+
+
+class UpdateIntegrationLevelRequestSchema(BaseSchema):
+    pass
+
+
+class OptedStoreIntegration(BaseSchema):
+    pass
+
+
+class OtherEntity(BaseSchema):
+    pass
+
+
+class LastPatch(BaseSchema):
+    pass
+
+
+class OtherEntityData(BaseSchema):
+    pass
+
+
 class App(BaseSchema):
+    pass
+
+
+class InventoryConfig(BaseSchema):
+    pass
+
+
+class AppInventory(BaseSchema):
     pass
 
 
@@ -300,11 +340,15 @@ class StoresResponseSchema(BaseSchema):
     pass
 
 
+class ListStoreResponseSchemaSchema(BaseSchema):
+    pass
+
+
 class AppInventoryStores(BaseSchema):
     pass
 
 
-class FilterOrderingStoreRequestSchema(BaseSchema):
+class FilterOrderingStoreRequestSchemaSchema(BaseSchema):
     pass
 
 
@@ -472,14 +516,6 @@ class RegistrationPageFeature(BaseSchema):
     pass
 
 
-class BuyboxFeature(BaseSchema):
-    pass
-
-
-class DeliveryStrategy(BaseSchema):
-    pass
-
-
 class AppFeature(BaseSchema):
     pass
 
@@ -540,6 +576,10 @@ class OrderFeature(BaseSchema):
     pass
 
 
+class BuyboxFeature(BaseSchema):
+    pass
+
+
 class AppFeatureRequestSchema(BaseSchema):
     pass
 
@@ -580,19 +620,43 @@ class Application(BaseSchema):
     pass
 
 
-class ApplicationById(BaseSchema):
-    pass
-
-
-class TokenSchemaID(BaseSchema):
-    pass
-
-
 class TokenSchema(BaseSchema):
     pass
 
 
 class InvalidPayloadRequestSchema(BaseSchema):
+    pass
+
+
+class InventoryBrandRule(BaseSchema):
+    pass
+
+
+class PricingStrategy(BaseSchema):
+    pass
+
+
+class StoreCriteriaRule(BaseSchema):
+    pass
+
+
+class InventoryStoreRule(BaseSchema):
+    pass
+
+
+class InventoryPaymentConfig(BaseSchema):
+    pass
+
+
+class StorePriorityRule(BaseSchema):
+    pass
+
+
+class ArticleAssignmentRule(BaseSchema):
+    pass
+
+
+class InventoryArticleAssignment(BaseSchema):
     pass
 
 
@@ -704,11 +768,71 @@ class OrderingStores(BaseSchema):
     pass
 
 
+class UpdateDiealog(BaseSchema):
+    pass
+
+
+class PlatformVersionRequestSchema(BaseSchema):
+    pass
+
+
+class PlatformVersion(BaseSchema):
+    pass
+
+
 class OrderingStoresResponseSchema(BaseSchema):
     pass
 
 
-class ValidationErrors(BaseSchema):
+class LocationDefaultLanguage(BaseSchema):
+    pass
+
+
+class LocationDefaultCurrency(BaseSchema):
+    pass
+
+
+class LocationCountry(BaseSchema):
+    pass
+
+
+class Locations(BaseSchema):
+    pass
+
+
+class UrlRedirectionResponseSchema(BaseSchema):
+    pass
+
+
+class UrlRedirectionRequestSchema(BaseSchema):
+    pass
+
+
+class UrlRedirection(BaseSchema):
+    pass
+
+
+class StoreForConfigurationRequestSchema(BaseSchema):
+    pass
+
+
+class DomainOptionsResponseSchema(BaseSchema):
+    pass
+
+
+class DomainType(BaseSchema):
+    pass
+
+
+class DomainValue(BaseSchema):
+    pass
+
+
+class StoreRequestSchema(BaseSchema):
+    pass
+
+
+class StoreResponseSchema(BaseSchema):
     pass
 
 
@@ -760,8 +884,6 @@ class CurrencyExchangeItem(BaseSchema):
 class ApplicationInventory(BaseSchema):
     # Configuration swagger.json
 
-    
-    search = fields.Nested(SearchConfig, required=False)
     
     inventory = fields.Nested(AppInventoryConfig, required=False)
     
@@ -815,39 +937,25 @@ class PiiMasking(BaseSchema):
     
 
 
-class FstIdentification(BaseSchema):
+class OwnerAppInventoryConfig(BaseSchema):
     # Configuration swagger.json
 
     
-    enabled = fields.Boolean(required=False)
+    pricing_strategy = fields.Nested(PricingStrategy, required=False)
     
 
 
-class QuerySuggestions(BaseSchema):
+class OwnerAppConfig(BaseSchema):
     # Configuration swagger.json
 
     
-    enabled = fields.Boolean(required=False)
-    
-    max_limit = fields.Int(required=False)
-    
-
-
-class SearchConfig(BaseSchema):
-    # Configuration swagger.json
-
-    
-    fst_identification = fields.Nested(FstIdentification, required=False)
-    
-    query_suggestions = fields.Nested(QuerySuggestions, required=False)
+    inventory = fields.Nested(OwnerAppInventoryConfig, required=False)
     
 
 
 class AppInventoryConfig(BaseSchema):
     # Configuration swagger.json
 
-    
-    delivery_strategy = fields.Nested(DeliveryStrategy, required=False)
     
     brand = fields.Nested(InventoryBrand, required=False)
     
@@ -859,17 +967,19 @@ class AppInventoryConfig(BaseSchema):
     
     discount = fields.Nested(InventoryDiscount, required=False)
     
+    pricing_strategy = fields.Nested(PricingStrategy, required=False)
+    
     out_of_stock = fields.Boolean(required=False)
     
     only_verified_products = fields.Boolean(required=False)
     
     franchise_enabled = fields.Boolean(required=False)
     
-    exclude_category = fields.List(fields.Dict(required=False), required=False)
+    exclude_category = fields.List(fields.Int(required=False), required=False)
     
     image = fields.List(fields.Str(required=False), required=False)
     
-    company_store = fields.List(fields.Raw(required=False), required=False)
+    company_store = fields.List(fields.Int(required=False), required=False)
     
     company_id = fields.Int(required=False)
     
@@ -891,7 +1001,7 @@ class InventoryStore(BaseSchema):
     
     criteria = fields.Str(required=False)
     
-    stores = fields.List(fields.Raw(required=False), required=False)
+    stores = fields.List(fields.Int(required=False), required=False)
     
     rules = fields.List(fields.Nested(AppStoreRules, required=False), required=False)
     
@@ -913,7 +1023,7 @@ class InventoryCategory(BaseSchema):
     
     criteria = fields.Str(required=False)
     
-    categories = fields.List(fields.Raw(required=False), required=False)
+    categories = fields.List(fields.Int(required=False), required=False)
     
 
 
@@ -973,7 +1083,7 @@ class StorePriority(BaseSchema):
     
     enabled = fields.Boolean(required=False)
     
-    storetype_order = fields.List(fields.Raw(required=False), required=False)
+    storetype_order = fields.List(fields.Int(required=False), required=False)
     
 
 
@@ -1169,8 +1279,6 @@ class AppInventoryPartialUpdate(BaseSchema):
     # Configuration swagger.json
 
     
-    search = fields.Nested(SearchConfig, required=False)
-    
     reward_points = fields.Nested(RewardPointsConfig, required=False)
     
     cart = fields.Nested(AppCartConfig, required=False)
@@ -1285,6 +1393,8 @@ class ValidationFailedResponseSchema(BaseSchema):
     
     message = fields.Str(required=False)
     
+    errors = fields.List(fields.Dict(required=False), required=False)
+    
 
 
 class NotFound(BaseSchema):
@@ -1292,6 +1402,10 @@ class NotFound(BaseSchema):
 
     
     message = fields.Str(required=False)
+    
+    error = fields.Str(required=False)
+    
+    code = fields.Str(required=False)
     
     success = fields.Boolean(required=False)
     
@@ -1358,104 +1472,6 @@ class ApplicationsResponseSchema(BaseSchema):
     items = fields.List(fields.Nested(Application, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
-    
-
-
-class MobileAppConfiguration(BaseSchema):
-    # Configuration swagger.json
-
-    
-    is_active = fields.Boolean(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    app_name = fields.Str(required=False)
-    
-    landing_image = fields.Nested(LandingImage, required=False)
-    
-    splash_image = fields.Nested(SplashImage, required=False)
-    
-    application = fields.Str(required=False)
-    
-    platform_type = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    modified_at = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
-    
-    package_name = fields.Str(required=False)
-    
-
-
-class LandingImage(BaseSchema):
-    # Configuration swagger.json
-
-    
-    aspect_ratio = fields.Str(required=False)
-    
-    secure_url = fields.Str(required=False)
-    
-
-
-class SplashImage(BaseSchema):
-    # Configuration swagger.json
-
-    
-    aspect_ratio = fields.Str(required=False)
-    
-    secure_url = fields.Str(required=False)
-    
-
-
-class MobileAppConfigRequestSchema(BaseSchema):
-    # Configuration swagger.json
-
-    
-    app_name = fields.Str(required=False)
-    
-    landing_image = fields.Nested(LandingImage, required=False)
-    
-    splash_image = fields.Nested(SplashImage, required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-
-
-class BuildVersionHistory(BaseSchema):
-    # Configuration swagger.json
-
-    
-    versions = fields.List(fields.Nested(BuildVersion, required=False), required=False)
-    
-    latest_available_version_name = fields.Str(required=False)
-    
-
-
-class BuildVersion(BaseSchema):
-    # Configuration swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    application = fields.Str(required=False)
-    
-    platform_type = fields.Str(required=False)
-    
-    build_status = fields.Str(required=False)
-    
-    version_name = fields.Str(required=False)
-    
-    version_code = fields.Int(required=False)
-    
-    download_url = fields.Nested(LandingImage, required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    modified_at = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
     
 
 
@@ -1603,7 +1619,7 @@ class DomainSuggestionsRequestSchema(BaseSchema):
     
     domain_url = fields.Str(required=False)
     
-    custom_domain = fields.Boolean(required=False)
+    is_custom_domain = fields.Boolean(required=False)
     
 
 
@@ -1641,6 +1657,250 @@ class SuccessMessageResponseSchema(BaseSchema):
     
 
 
+class GetIntegrationsOptInsResponseSchema(BaseSchema):
+    # Configuration swagger.json
+
+    
+    items = fields.List(fields.Nested(IntegrationOptIn, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class IntegrationOptIn(BaseSchema):
+    # Configuration swagger.json
+
+    
+    validators = fields.Nested(Validators, required=False)
+    
+    description = fields.Str(required=False)
+    
+    description_html = fields.Str(required=False)
+    
+    constants = fields.Str(required=False)
+    
+    companies = fields.List(fields.Str(required=False), required=False)
+    
+    support = fields.List(fields.Str(required=False), required=False)
+    
+    _id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    hidden = fields.Boolean(required=False)
+    
+    meta = fields.List(fields.Nested(IntegrationMeta, required=False), required=False)
+    
+    icon = fields.Str(required=False)
+    
+    owner = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    modified_at = fields.Str(required=False)
+    
+    token = fields.Str(required=False)
+    
+    secret = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+
+
+class Validators(BaseSchema):
+    # Configuration swagger.json
+
+    
+    company = fields.Nested(CompanyValidator, required=False)
+    
+    store = fields.Nested(StoreValidator, required=False)
+    
+    inventory = fields.Nested(InventoryValidator, required=False)
+    
+    order = fields.Nested(OrderValidator, required=False)
+    
+
+
+class CompanyValidator(BaseSchema):
+    # Configuration swagger.json
+
+    
+    json_schema = fields.List(fields.Nested(JsonSchema, required=False), required=False)
+    
+    browser_script = fields.Str(required=False)
+    
+
+
+class JsonSchema(BaseSchema):
+    # Configuration swagger.json
+
+    
+    display = fields.Str(required=False)
+    
+    key = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    tooltip = fields.Str(required=False)
+    
+
+
+class StoreValidator(BaseSchema):
+    # Configuration swagger.json
+
+    
+    json_schema = fields.List(fields.Nested(JsonSchema, required=False), required=False)
+    
+    browser_script = fields.Str(required=False)
+    
+
+
+class InventoryValidator(BaseSchema):
+    # Configuration swagger.json
+
+    
+    json_schema = fields.List(fields.Nested(JsonSchema, required=False), required=False)
+    
+    browser_script = fields.Str(required=False)
+    
+
+
+class OrderValidator(BaseSchema):
+    # Configuration swagger.json
+
+    
+    json_schema = fields.List(fields.Nested(JsonSchema, required=False), required=False)
+    
+    browser_script = fields.Str(required=False)
+    
+
+
+class IntegrationMeta(BaseSchema):
+    # Configuration swagger.json
+
+    
+    is_public = fields.Boolean(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+
+
+class IntegrationLevel(BaseSchema):
+    # Configuration swagger.json
+
+    
+    opted = fields.Boolean(required=False)
+    
+    permissions = fields.List(fields.Dict(required=False), required=False)
+    
+    last_patch = fields.List(fields.Nested(LastPatch, required=False), required=False)
+    
+    _id = fields.Str(required=False)
+    
+    integration = fields.Str(required=False)
+    
+    level = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    meta = fields.List(fields.Nested(IntegrationMeta, required=False), required=False)
+    
+    token = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    modified_at = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+    data = fields.Dict(required=False)
+    
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
+class UpdateIntegrationLevelRequestSchema(BaseSchema):
+    # Configuration swagger.json
+
+    
+    items = fields.List(fields.Nested(IntegrationLevel, required=False), required=False)
+    
+
+
+class OptedStoreIntegration(BaseSchema):
+    # Configuration swagger.json
+
+    
+    other_opted = fields.Boolean(required=False)
+    
+    other_integration = fields.Nested(IntegrationOptIn, required=False)
+    
+    other_entity = fields.Nested(OtherEntity, required=False)
+    
+
+
+class OtherEntity(BaseSchema):
+    # Configuration swagger.json
+
+    
+    opted = fields.Boolean(required=False)
+    
+    permissions = fields.List(fields.Str(required=False), required=False)
+    
+    last_patch = fields.List(fields.Nested(LastPatch, required=False), required=False)
+    
+    _id = fields.Str(required=False)
+    
+    integration = fields.Str(required=False)
+    
+    level = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    data = fields.Nested(OtherEntityData, required=False)
+    
+    meta = fields.List(fields.Dict(required=False), required=False)
+    
+    token = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    modified_at = fields.Str(required=False)
+    
+    __v = fields.Int(required=False)
+    
+
+
+class LastPatch(BaseSchema):
+    # Configuration swagger.json
+
+    
+    op = fields.Str(required=False)
+    
+    path = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+
+
+class OtherEntityData(BaseSchema):
+    # Configuration swagger.json
+
+    
+    article_identifier = fields.Str(required=False)
+    
+
+
 class App(BaseSchema):
     # Configuration swagger.json
 
@@ -1654,6 +1914,38 @@ class App(BaseSchema):
     name = fields.Str(required=False)
     
     desc = fields.Str(required=False)
+    
+
+
+class InventoryConfig(BaseSchema):
+    # Configuration swagger.json
+
+    
+    brand = fields.Nested(InventoryBrandRule, required=False)
+    
+    store = fields.Nested(InventoryStoreRule, required=False)
+    
+    image = fields.List(fields.Str(required=False), required=False)
+    
+    franchise_enabled = fields.Boolean(required=False)
+    
+    out_of_stock = fields.Boolean(required=False)
+    
+    only_verified_products = fields.Boolean(required=False)
+    
+    pricing_strategy = fields.Nested(PricingStrategy, required=False)
+    
+
+
+class AppInventory(BaseSchema):
+    # Configuration swagger.json
+
+    
+    inventory = fields.Nested(InventoryConfig, required=False)
+    
+    payment = fields.Nested(InventoryPaymentConfig, required=False)
+    
+    article_assignment = fields.Nested(InventoryArticleAssignment, required=False)
     
 
 
@@ -1697,6 +1989,14 @@ class StoresResponseSchema(BaseSchema):
     
 
 
+class ListStoreResponseSchemaSchema(BaseSchema):
+    # Configuration swagger.json
+
+    
+    stores = fields.List(fields.Nested(AppInventoryStores, required=False), required=False)
+    
+
+
 class AppInventoryStores(BaseSchema):
     # Configuration swagger.json
 
@@ -1723,7 +2023,7 @@ class AppInventoryStores(BaseSchema):
     
 
 
-class FilterOrderingStoreRequestSchema(BaseSchema):
+class FilterOrderingStoreRequestSchemaSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -2209,26 +2509,6 @@ class RegistrationPageFeature(BaseSchema):
     
 
 
-class BuyboxFeature(BaseSchema):
-    # Configuration swagger.json
-
-    
-    show_name = fields.Boolean(required=False)
-    
-    enable_selection = fields.Boolean(required=False)
-    
-    is_seller_buybox_enabled = fields.Boolean(required=False)
-    
-
-
-class DeliveryStrategy(BaseSchema):
-    # Configuration swagger.json
-
-    
-    value = fields.Str(required=False)
-    
-
-
 class AppFeature(BaseSchema):
     # Configuration swagger.json
 
@@ -2253,8 +2533,6 @@ class AppFeature(BaseSchema):
     
     buybox = fields.Nested(BuyboxFeature, required=False)
     
-    delivery_strategy = fields.Nested(DeliveryStrategy, required=False)
-    
     _id = fields.Str(required=False)
     
     app = fields.Str(required=False)
@@ -2264,6 +2542,8 @@ class AppFeature(BaseSchema):
     modified_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
+    
+    pricing_strategy = fields.Nested(PricingStrategy, required=False)
     
 
 
@@ -2417,6 +2697,18 @@ class OrderFeature(BaseSchema):
     
 
 
+class BuyboxFeature(BaseSchema):
+    # Configuration swagger.json
+
+    
+    show_name = fields.Boolean(required=False)
+    
+    enable_selection = fields.Boolean(required=False)
+    
+    is_seller_buybox_enabled = fields.Boolean(required=False)
+    
+
+
 class AppFeatureRequestSchema(BaseSchema):
     # Configuration swagger.json
 
@@ -2454,6 +2746,8 @@ class Currency(BaseSchema):
     symbol = fields.Str(required=False)
     
     country_name = fields.Str(required=False)
+    
+    subunit = fields.Str(required=False)
     
     country_code = fields.Str(required=False)
     
@@ -2581,84 +2875,6 @@ class Application(BaseSchema):
     
 
 
-class ApplicationById(BaseSchema):
-    # Configuration swagger.json
-
-    
-    website = fields.Nested(ApplicationWebsite, required=False)
-    
-    cors = fields.Nested(ApplicationCors, required=False)
-    
-    auth = fields.Nested(ApplicationAuth, required=False)
-    
-    description = fields.Str(required=False)
-    
-    channel_type = fields.Str(required=False)
-    
-    cache_ttl = fields.Int(required=False)
-    
-    is_internal = fields.Boolean(required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    owner = fields.Str(required=False)
-    
-    company_id = fields.Int(required=False)
-    
-    token = fields.Str(required=False)
-    
-    redirections = fields.List(fields.Nested(ApplicationRedirections, required=False), required=False)
-    
-    meta = fields.List(fields.Nested(ApplicationMeta, required=False), required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    modified_at = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
-    
-    banner = fields.Nested(SecureUrl, required=False)
-    
-    logo = fields.Nested(SecureUrl, required=False)
-    
-    favicon = fields.Nested(SecureUrl, required=False)
-    
-    domains = fields.List(fields.Nested(Domain, required=False), required=False)
-    
-    app_type = fields.Str(required=False)
-    
-    mobile_logo = fields.Nested(SecureUrl, required=False)
-    
-    domain = fields.Nested(Domain, required=False)
-    
-    slug = fields.Str(required=False)
-    
-    mode = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-    tokens = fields.List(fields.Nested(TokenSchemaID, required=False), required=False)
-    
-    secret = fields.Str(required=False)
-    
-
-
-class TokenSchemaID(BaseSchema):
-    # Configuration swagger.json
-
-    
-    token = fields.Str(required=False)
-    
-    created_by = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-
-
 class TokenSchema(BaseSchema):
     # Configuration swagger.json
 
@@ -2678,6 +2894,86 @@ class InvalidPayloadRequestSchema(BaseSchema):
     message = fields.Str(required=False)
     
     success = fields.Boolean(required=False)
+    
+    domain = fields.Dict(required=False)
+    
+
+
+class InventoryBrandRule(BaseSchema):
+    # Configuration swagger.json
+
+    
+    criteria = fields.Str(required=False)
+    
+    brands = fields.List(fields.Int(required=False), required=False)
+    
+
+
+class PricingStrategy(BaseSchema):
+    # Configuration swagger.json
+
+    
+    value = fields.Str(required=False)
+    
+
+
+class StoreCriteriaRule(BaseSchema):
+    # Configuration swagger.json
+
+    
+    companies = fields.List(fields.Int(required=False), required=False)
+    
+    brands = fields.List(fields.Int(required=False), required=False)
+    
+
+
+class InventoryStoreRule(BaseSchema):
+    # Configuration swagger.json
+
+    
+    criteria = fields.Str(required=False)
+    
+    rules = fields.List(fields.Nested(StoreCriteriaRule, required=False), required=False)
+    
+    stores = fields.List(fields.Int(required=False), required=False)
+    
+
+
+class InventoryPaymentConfig(BaseSchema):
+    # Configuration swagger.json
+
+    
+    mode_of_payment = fields.Str(required=False)
+    
+    source = fields.Str(required=False)
+    
+
+
+class StorePriorityRule(BaseSchema):
+    # Configuration swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
+    
+    storetype_order = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class ArticleAssignmentRule(BaseSchema):
+    # Configuration swagger.json
+
+    
+    store_priority = fields.Nested(StorePriorityRule, required=False)
+    
+
+
+class InventoryArticleAssignment(BaseSchema):
+    # Configuration swagger.json
+
+    
+    post_order_reassignment = fields.Boolean(required=False)
+    
+    rules = fields.Nested(ArticleAssignmentRule, required=False)
     
 
 
@@ -2699,7 +2995,7 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
-    page_size = fields.Int(required=False)
+    total = fields.Int(required=False)
     
 
 
@@ -3047,6 +3343,8 @@ class OptedStoreAddress(BaseSchema):
     
     state_code = fields.Str(required=False)
     
+    landmark = fields.Str(required=False)
+    
 
 
 class OrderingStore(BaseSchema):
@@ -3097,6 +3395,60 @@ class OrderingStores(BaseSchema):
     
 
 
+class UpdateDiealog(BaseSchema):
+    # Configuration swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    interval = fields.Int(required=False)
+    
+
+
+class PlatformVersionRequestSchema(BaseSchema):
+    # Configuration swagger.json
+
+    
+    app_code_name = fields.Str(required=False)
+    
+    app_name = fields.Str(required=False)
+    
+    force_version = fields.Str(required=False)
+    
+    latest_version = fields.Str(required=False)
+    
+    is_app_blocked = fields.Boolean(required=False)
+    
+    update_dialog = fields.Nested(UpdateDiealog, required=False)
+    
+
+
+class PlatformVersion(BaseSchema):
+    # Configuration swagger.json
+
+    
+    app_code_name = fields.Str(required=False)
+    
+    app_name = fields.Str(required=False)
+    
+    force_version = fields.Str(required=False)
+    
+    latest_version = fields.Str(required=False)
+    
+    is_app_blocked = fields.Boolean(required=False)
+    
+    update_dialog = fields.Nested(UpdateDiealog, required=False)
+    
+    _id = fields.Str(required=False)
+    
+    modified_at = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    __v = fields.Float(required=False)
+    
+
+
 class OrderingStoresResponseSchema(BaseSchema):
     # Configuration swagger.json
 
@@ -3107,11 +3459,161 @@ class OrderingStoresResponseSchema(BaseSchema):
     
 
 
-class ValidationErrors(BaseSchema):
+class LocationDefaultLanguage(BaseSchema):
     # Configuration swagger.json
 
     
-    errors = fields.List(fields.Nested(ValidationError, required=False), required=False)
+    name = fields.Str(required=False)
+    
+    code = fields.Str(required=False)
+    
+
+
+class LocationDefaultCurrency(BaseSchema):
+    # Configuration swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    symbol = fields.Str(required=False)
+    
+    code = fields.Str(required=False)
+    
+
+
+class LocationCountry(BaseSchema):
+    # Configuration swagger.json
+
+    
+    capital = fields.Str(required=False)
+    
+    currency = fields.Str(required=False)
+    
+    iso2 = fields.Str(required=False)
+    
+    iso3 = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    parent = fields.Str(required=False)
+    
+    phone_code = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    __v = fields.Int(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    default_currency = fields.Nested(LocationDefaultCurrency, required=False)
+    
+    default_language = fields.Nested(LocationDefaultLanguage, required=False)
+    
+    state_code = fields.Str(required=False)
+    
+    country_code = fields.Str(required=False)
+    
+    latitude = fields.Str(required=False)
+    
+    longitude = fields.Str(required=False)
+    
+
+
+class Locations(BaseSchema):
+    # Configuration swagger.json
+
+    
+    items = fields.List(fields.Nested(LocationCountry, required=False), required=False)
+    
+
+
+class UrlRedirectionResponseSchema(BaseSchema):
+    # Configuration swagger.json
+
+    
+    redirections = fields.List(fields.Nested(UrlRedirection, required=False), required=False)
+    
+
+
+class UrlRedirectionRequestSchema(BaseSchema):
+    # Configuration swagger.json
+
+    
+    redirection = fields.Nested(UrlRedirection, required=False)
+    
+
+
+class UrlRedirection(BaseSchema):
+    # Configuration swagger.json
+
+    
+    redirect_from = fields.Str(required=False)
+    
+    redirect_to = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    _id = fields.Str(required=False)
+    
+
+
+class StoreForConfigurationRequestSchema(BaseSchema):
+    # Configuration swagger.json
+
+    
+    conf = fields.List(fields.Nested(AppStoreRules, required=False), required=False)
+    
+
+
+class DomainOptionsResponseSchema(BaseSchema):
+    # Configuration swagger.json
+
+    
+    domain_types = fields.List(fields.Nested(DomainType, required=False), required=False)
+    
+    network_ips = fields.List(fields.Str(required=False), required=False)
+    
+    network_cnames = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class DomainType(BaseSchema):
+    # Configuration swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    display = fields.Str(required=False)
+    
+    values = fields.List(fields.Nested(DomainValue, required=False), required=False)
+    
+
+
+class DomainValue(BaseSchema):
+    # Configuration swagger.json
+
+    
+    value = fields.Str(required=False)
+    
+    text = fields.Str(required=False)
+    
+
+
+class StoreRequestSchema(BaseSchema):
+    # Configuration swagger.json
+
+    
+    companies = fields.List(fields.Int(required=False), required=False)
+    
+
+
+class StoreResponseSchema(BaseSchema):
+    # Configuration swagger.json
+
+    
+    data = fields.List(fields.Int(required=False), required=False)
     
 
 
