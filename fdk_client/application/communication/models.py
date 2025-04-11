@@ -36,15 +36,27 @@ class CommunicationConsent(BaseSchema):
     pass
 
 
-class BadRequestSchema(BaseSchema):
-    pass
-
-
 class PushtokenReq(BaseSchema):
     pass
 
 
 class PushtokenRes(BaseSchema):
+    pass
+
+
+class OtpConfigurationExpiryDuration(BaseSchema):
+    pass
+
+
+class OtpConfigurationExpiry(BaseSchema):
+    pass
+
+
+class OtpConfigurationRateLimit(BaseSchema):
+    pass
+
+
+class OtpConfiguration(BaseSchema):
     pass
 
 
@@ -133,16 +145,6 @@ class CommunicationConsent(BaseSchema):
     
 
 
-class BadRequestSchema(BaseSchema):
-    # Communication swagger.json
-
-    
-    status = fields.Str(required=False)
-    
-    message = fields.Str(required=False)
-    
-
-
 class PushtokenReq(BaseSchema):
     # Communication swagger.json
 
@@ -184,6 +186,50 @@ class PushtokenRes(BaseSchema):
     updated_at = fields.Str(required=False)
     
     expired_at = fields.Str(required=False)
+    
+
+
+class OtpConfigurationExpiryDuration(BaseSchema):
+    # Communication swagger.json
+
+    
+    time = fields.Float(required=False)
+    
+    denomination = fields.Str(required=False)
+    
+
+
+class OtpConfigurationExpiry(BaseSchema):
+    # Communication swagger.json
+
+    
+    duration = fields.Nested(OtpConfigurationExpiryDuration, required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class OtpConfigurationRateLimit(BaseSchema):
+    # Communication swagger.json
+
+    
+    duration = fields.Float(required=False)
+    
+    limit = fields.Int(required=False)
+    
+
+
+class OtpConfiguration(BaseSchema):
+    # Communication swagger.json
+
+    
+    otp_length = fields.Int(required=False)
+    
+    type = fields.Str(required=False)
+    
+    expiry = fields.Nested(OtpConfigurationExpiry, required=False)
+    
+    rate_limit = fields.Nested(OtpConfigurationRateLimit, required=False)
     
 
 

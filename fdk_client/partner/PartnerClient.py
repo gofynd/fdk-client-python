@@ -4,11 +4,17 @@ from ..common.exceptions import FDKClientValidationError
 from ..common.custom_request import custom_request
 
 
+from .authorization.client import Authorization
+
+from .catalog.client import Catalog
+
 from .filestorage.client import FileStorage
 
 from .lead.client import Lead
 
 from .logistics.client import Logistics
+
+from .payment.client import Payment
 
 from .theme.client import Theme
 
@@ -19,11 +25,17 @@ class PartnerClient:
     def __init__(self, config):
         self.config = config
         
+        self.authorization = Authorization(config)
+        
+        self.catalog = Catalog(config)
+        
         self.fileStorage = FileStorage(config)
         
         self.lead = Lead(config)
         
         self.logistics = Logistics(config)
+        
+        self.payment = Payment(config)
         
         self.theme = Theme(config)
         

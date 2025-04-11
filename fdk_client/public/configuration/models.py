@@ -8,7 +8,7 @@ from ..PublicModel import BaseSchema
 
 
 
-class ApplicationResponse(BaseSchema):
+class ApplicationResponseSchema(BaseSchema):
     pass
 
 
@@ -44,11 +44,7 @@ class Application(BaseSchema):
     pass
 
 
-class NotFound(BaseSchema):
-    pass
-
-
-class BadRequest(BaseSchema):
+class TokenSchema(BaseSchema):
     pass
 
 
@@ -68,10 +64,34 @@ class Locations(BaseSchema):
     pass
 
 
+class VersionApplication(BaseSchema):
+    pass
+
+
+class VersionDeviceOS(BaseSchema):
+    pass
+
+
+class VersionDevice(BaseSchema):
+    pass
+
+
+class VersionRequestSchema(BaseSchema):
+    pass
+
+
+class VersionUpdateDialogue(BaseSchema):
+    pass
+
+
+class VersionResponseSchema(BaseSchema):
+    pass
 
 
 
-class ApplicationResponse(BaseSchema):
+
+
+class ApplicationResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -189,7 +209,7 @@ class Application(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    updated_at = fields.Str(required=False)
+    modified_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
     
@@ -209,21 +229,23 @@ class Application(BaseSchema):
     
     slug = fields.Str(required=False)
     
+    mode = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    tokens = fields.List(fields.Nested(TokenSchema, required=False), required=False)
+    
 
 
-class NotFound(BaseSchema):
+class TokenSchema(BaseSchema):
     # Configuration swagger.json
 
     
-    message = fields.Str(required=False)
+    token = fields.Str(required=False)
     
-
-
-class BadRequest(BaseSchema):
-    # Configuration swagger.json
-
+    created_by = fields.Dict(required=False)
     
-    message = fields.Str(required=False)
+    created_at = fields.Str(required=False)
     
 
 
@@ -294,6 +316,68 @@ class Locations(BaseSchema):
 
     
     items = fields.List(fields.Nested(LocationCountry, required=False), required=False)
+    
+
+
+class VersionApplication(BaseSchema):
+    # Configuration swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    version = fields.Str(required=False)
+    
+
+
+class VersionDeviceOS(BaseSchema):
+    # Configuration swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+
+
+class VersionDevice(BaseSchema):
+    # Configuration swagger.json
+
+    
+    os = fields.Nested(VersionDeviceOS, required=False)
+    
+
+
+class VersionRequestSchema(BaseSchema):
+    # Configuration swagger.json
+
+    
+    application = fields.Nested(VersionApplication, required=False)
+    
+    device = fields.Nested(VersionDevice, required=False)
+    
+
+
+class VersionUpdateDialogue(BaseSchema):
+    # Configuration swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    interval = fields.Int(required=False)
+    
+
+
+class VersionResponseSchema(BaseSchema):
+    # Configuration swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    title = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    update_dialog = fields.Nested(VersionUpdateDialogue, required=False)
+    
+    is_app_blocked = fields.Boolean(required=False)
     
 
 

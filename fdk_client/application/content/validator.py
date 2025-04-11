@@ -45,6 +45,9 @@ from ..ApplicationModel import BaseSchema
         
     
     
+    
+        
+        
         
         
     
@@ -63,9 +66,13 @@ from ..ApplicationModel import BaseSchema
     
     
         
+        
     
     
         
+        
+    
+    
         
 
 class ContentValidator:
@@ -167,19 +174,28 @@ class ContentValidator:
          
         
     
-    class getSlideshows(BaseSchema):
+    class getDefaultSitemapConfig(BaseSchema):
+        
+        pass 
+        
+    
+    class getSitemaps(BaseSchema):
         
         
-        page_no = fields.Int(required=False)
+        page_no = fields.Str(required=False)
         
-        page_size = fields.Int(required=False)
+        page_size = fields.Str(required=False)
+        
+        is_active = fields.Boolean(required=False)
+        
+        name = fields.Str(required=False)
          
         
     
-    class getSlideshow(BaseSchema):
+    class getSitemap(BaseSchema):
         
         
-        slug = fields.Str(required=False)
+        name = fields.Str(required=False)
          
         
     
@@ -193,15 +209,6 @@ class ContentValidator:
         pass 
         
     
-    class getPage(BaseSchema):
-        
-        
-        slug = fields.Str(required=False)
-        
-        root_id = fields.Str(required=False)
-         
-        
-    
     class getPages(BaseSchema):
         
         
@@ -211,19 +218,37 @@ class ContentValidator:
          
         
     
-    class getCustomObject(BaseSchema):
+    class getPage(BaseSchema):
         
         
-        metaobject_id = fields.Str(required=False)
+        slug = fields.Str(required=False)
+        
+        root_id = fields.Str(required=False)
          
         
     
-    class getCustomFields(BaseSchema):
+    class getCustomObjectBySlug(BaseSchema):
+        
+        
+        definition_slug = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
+         
+        
+    
+    class getCustomFieldsByResourceId(BaseSchema):
         
         
         resource = fields.Str(required=False)
         
-        resource_id = fields.Str(required=False)
+        resource_slug = fields.Str(required=False)
+         
+        
+    
+    class getWellKnownUrl(BaseSchema):
+        
+        
+        slug = fields.Str(required=False)
          
         
     

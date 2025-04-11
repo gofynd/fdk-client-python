@@ -12,7 +12,7 @@ class E(BaseSchema):
     pass
 
 
-class GiveawayResponse(BaseSchema):
+class ListGiveaway(BaseSchema):
     pass
 
 
@@ -84,7 +84,7 @@ class SetConfigurationRes(BaseSchema):
     pass
 
 
-class ConfigurationRequest(BaseSchema):
+class SetConfiguration(BaseSchema):
     pass
 
 
@@ -105,7 +105,7 @@ class E(BaseSchema):
     
 
 
-class GiveawayResponse(BaseSchema):
+class ListGiveaway(BaseSchema):
     # Rewards swagger.json
 
     
@@ -206,6 +206,8 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+    total = fields.Int(required=False)
     
 
 
@@ -403,7 +405,7 @@ class SetConfigurationRes(BaseSchema):
     
 
 
-class ConfigurationRequest(BaseSchema):
+class SetConfiguration(BaseSchema):
     # Rewards swagger.json
 
     

@@ -12,6 +12,16 @@ from ..ApplicationModel import BaseSchema
     
     
         
+    
+    
+        
+        
+        
+        
+        
+        
+    
+    
         
         
         
@@ -23,6 +33,9 @@ from ..ApplicationModel import BaseSchema
     
     
         
+        
+    
+    
         
     
     
@@ -60,6 +73,30 @@ from ..ApplicationModel import BaseSchema
 class OrderValidator:
     
     
+    class getShipmentRefundSummary(BaseSchema):
+        
+        
+        shipment_id = fields.Str(required=False)
+         
+        
+    
+    class getRefundOptions(BaseSchema):
+        
+        
+        shipment_id = fields.Str(required=False)
+        
+        bag_ids = fields.Str(required=False)
+        
+        state = fields.Str(required=False)
+        
+        optin_app_id = fields.Str(required=False)
+        
+        optin_company_id = fields.Int(required=False)
+        
+        status = fields.Str(required=False)
+         
+        
+    
     class getOrders(BaseSchema):
         
         
@@ -78,8 +115,6 @@ class OrderValidator:
         end_date = fields.Str(required=False)
         
         custom_meta = fields.Str(required=False)
-        
-        allow_inactive = fields.Boolean(required=False)
          
         
     
@@ -89,6 +124,13 @@ class OrderValidator:
         order_id = fields.Str(required=False)
         
         allow_inactive = fields.Boolean(required=False)
+         
+        
+    
+    class getPosOrderById(BaseSchema):
+        
+        
+        order_id = fields.Str(required=False)
          
         
     
