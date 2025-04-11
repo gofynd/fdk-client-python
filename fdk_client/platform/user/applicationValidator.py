@@ -171,6 +171,14 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+    
+    
+        
+        
 
 class UserValidator:
     
@@ -525,6 +533,24 @@ class UserValidator:
         application_id = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
+         
+        
+    
+    class bulkUpdateUserAttributes(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class bulkUpdatePerUserAttributes(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     

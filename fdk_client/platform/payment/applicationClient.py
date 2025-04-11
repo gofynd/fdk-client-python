@@ -3223,3 +3223,62 @@ class Payment:
 
         return response
     
+    async def getTransactions(self, user_id=None, page_size=None, page_number=None, order_id=None, shipment_id=None, transaction_id=None, request_headers:Dict={}):
+        """Fetches a list of transactions associated with a specific user ID or order ID. Allows filtering and pagination to retrieve specific transaction records.
+        :param user_id : User ID of the user : type string
+        :param page_size : Size of the page, default and max value is 10 : type integer
+        :param page_number : Page number, default is 1 : type integer
+        :param order_id : Order ID for which transaction data is needed : type string
+        :param shipment_id : Shipment ID for which transaction data is needed : type string
+        :param transaction_id : Transaction ID for which transaction data is needed : type string
+        """
+        payload = {}
+        
+        if user_id is not None:
+            payload["user_id"] = user_id
+        if page_size is not None:
+            payload["page_size"] = page_size
+        if page_number is not None:
+            payload["page_number"] = page_number
+        if order_id is not None:
+            payload["order_id"] = order_id
+        if shipment_id is not None:
+            payload["shipment_id"] = shipment_id
+        if transaction_id is not None:
+            payload["transaction_id"] = transaction_id
+
+        # Parameter validation
+        schema = PaymentValidator.getTransactions()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/transactions", """{"required":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string"}}],"optional":[{"name":"user_id","in":"query","description":"User ID of the user","required":false,"schema":{"type":"string"}},{"name":"page_size","in":"query","description":"Size of the page, default and max value is 10","required":false,"schema":{"type":"integer","default":10}},{"name":"page_number","in":"query","description":"Page number, default is 1","required":false,"schema":{"type":"integer","default":1}},{"name":"order_id","in":"query","description":"Order ID for which transaction data is needed","required":false,"schema":{"type":"string"}},{"name":"shipment_id","in":"query","description":"Shipment ID for which transaction data is needed","required":false,"schema":{"type":"string"}},{"name":"transaction_id","in":"query","description":"Transaction ID for which transaction data is needed","required":false,"schema":{"type":"string"}}],"query":[{"name":"user_id","in":"query","description":"User ID of the user","required":false,"schema":{"type":"string"}},{"name":"page_size","in":"query","description":"Size of the page, default and max value is 10","required":false,"schema":{"type":"integer","default":10}},{"name":"page_number","in":"query","description":"Page number, default is 1","required":false,"schema":{"type":"integer","default":1}},{"name":"order_id","in":"query","description":"Order ID for which transaction data is needed","required":false,"schema":{"type":"string"}},{"name":"shipment_id","in":"query","description":"Shipment ID for which transaction data is needed","required":false,"schema":{"type":"string"}},{"name":"transaction_id","in":"query","description":"Transaction ID for which transaction data is needed","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string"}}]}""", serverType="platform", user_id=user_id, page_size=page_size, page_number=page_number, order_id=order_id, shipment_id=shipment_id, transaction_id=transaction_id)
+        query_string = await create_query_string(user_id=user_id, page_size=page_size, page_number=page_number, order_id=order_id, shipment_id=shipment_id, transaction_id=transaction_id)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/transactions", user_id=user_id, page_size=page_size, page_number=page_number, order_id=order_id, shipment_id=shipment_id, transaction_id=transaction_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TransactionsResponseSchema
+            schema = TransactionsResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getTransactions")
+                print(e)
+
+        return response
+    

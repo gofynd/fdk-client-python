@@ -6,6 +6,8 @@ from marshmallow.validate import OneOf
 from ..PlatformModel import BaseSchema
 
 
+from .enums import *
+
 
 
 class PaymentGatewayConfigDetails(BaseSchema):
@@ -1065,6 +1067,22 @@ class PaymentError(BaseSchema):
 
 
 class ShipmentBeneficiaryDetailsRes(BaseSchema):
+    pass
+
+
+class TransactionData(BaseSchema):
+    pass
+
+
+class OrderData(BaseSchema):
+    pass
+
+
+class PageData(BaseSchema):
+    pass
+
+
+class TransactionsResponseSchema(BaseSchema):
     pass
 
 
@@ -5506,6 +5524,74 @@ class ShipmentBeneficiaryDetailsRes(BaseSchema):
     message = fields.Str(required=False)
     
     beneficiary_details = fields.Str(required=False)
+    
+
+
+class TransactionData(BaseSchema):
+    # Payment swagger.json
+
+    
+    transaction_id = fields.Str(required=False)
+    
+    created_on = fields.Str(required=False)
+    
+    modified_on = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    aggregator_name = fields.Str(required=False)
+    
+    transaction_type = fields.Str(required=False, validate=OneOf([val.value for val in TransactionTypeSchema.__members__.values()]))
+    
+    payment_mode = fields.Str(required=False)
+    
+    amount = fields.Float(required=False)
+    
+    message = fields.Str(required=False)
+    
+    return_shipment_id = fields.Str(required=False)
+    
+
+
+class OrderData(BaseSchema):
+    # Payment swagger.json
+
+    
+    created_on = fields.Str(required=False)
+    
+    modified_on = fields.Str(required=False)
+    
+    status = fields.Str(required=False, validate=OneOf([val.value for val in StatusSchema.__members__.values()]))
+    
+    amount = fields.Float(required=False)
+    
+    paid_amount = fields.Float(required=False)
+    
+    device = fields.Str(required=False, validate=OneOf([val.value for val in DeviceTypeSchema.__members__.values()]))
+    
+    transactions = fields.List(fields.Nested(TransactionData, required=False), required=False)
+    
+
+
+class PageData(BaseSchema):
+    # Payment swagger.json
+
+    
+    page_size = fields.Int(required=False)
+    
+    current_page = fields.Int(required=False)
+    
+
+
+class TransactionsResponseSchema(BaseSchema):
+    # Payment swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    orders = fields.Dict(required=False)
+    
+    page = fields.Nested(PageData, required=False)
     
 
 
