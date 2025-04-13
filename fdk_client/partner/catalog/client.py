@@ -47,8 +47,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/catalog/v2.0/organization/{self._conf.organizationId}/company-details", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CompaniesSchema
-            schema = CompaniesSchema()
+            from .models import CompaniesSerializer
+            schema = CompaniesSerializer()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -94,8 +94,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/catalog/v2.0/organization/{self._conf.organizationId}/referred-companies", q=q, stage=stage), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CompanyListSchema
-            schema = CompanyListSchema()
+            from .models import CompanyListSerializer
+            schema = CompanyListSerializer()
             try:
                 schema.load(response["json"])
             except Exception as e:

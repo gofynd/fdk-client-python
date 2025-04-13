@@ -30,8 +30,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
     
     
         
@@ -164,7 +162,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
         
@@ -178,11 +175,18 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+        
+    
+    
         
         
     
     
         
+        
+    
+    
         
         
     
@@ -199,6 +203,9 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
+        
         
         
     
@@ -214,6 +221,9 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
         
         
     
@@ -224,14 +234,23 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
     
     
+        
         
+        
+    
+    
         
         
     
     
+        
+        
         
+    
+    
         
         
     
@@ -243,6 +262,7 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
     
     
         
@@ -255,6 +275,7 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
     
@@ -307,10 +328,6 @@ class ServiceabilityValidator:
         city = fields.Str(required=False)
         
         sector = fields.Str(required=False)
-        
-        store_uid = fields.Int(required=False)
-        
-        region_uid = fields.Str(required=False)
          
         
     
@@ -608,8 +625,6 @@ class ServiceabilityValidator:
         
         application_id = fields.Str(required=False)
         
-        q = fields.Str(required=False)
-        
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
@@ -630,17 +645,6 @@ class ServiceabilityValidator:
         
     
     class getCourierPartnerRule(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        rule_uid = fields.Str(required=False)
-         
-        
-    
-    class deleteCourierPartnerRule(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -760,17 +764,6 @@ class ServiceabilityValidator:
          
         
     
-    class deleteStoreRule(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        rule_uid = fields.Str(required=False)
-         
-        
-    
     class updateCourierPartnerRulePriority(BaseSchema):
         
         
@@ -819,6 +812,81 @@ class ServiceabilityValidator:
         application_id = fields.Str(required=False)
         
         product_type = fields.Str(required=False)
+         
+        
+    
+    class validateBulkZone(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getBulkZoneValidation(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        batch_id = fields.Str(required=False)
+         
+        
+    
+    class importBulkZone(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        batch_id = fields.Str(required=False)
+         
+        
+    
+    class overrideZoneById(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        zone_id = fields.Str(required=False)
+         
+        
+    
+    class getZoneOverrideStatus(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        zone_id = fields.Str(required=False)
+         
+        
+    
+    class overrideBulkZone(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        batch_id = fields.Str(required=False)
+         
+        
+    
+    class getBulkZoneOverrideStatus(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        batch_id = fields.Str(required=False)
          
         
     

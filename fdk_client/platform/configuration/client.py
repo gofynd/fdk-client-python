@@ -23,8 +23,8 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateApplicationRequestSchema
-        schema = CreateApplicationRequestSchema()
+        from .models import CreateApplicationRequest
+        schema = CreateApplicationRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}]}""", serverType="platform", )
@@ -48,8 +48,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreateAppResponseSchema
-            schema = CreateAppResponseSchema()
+            from .models import CreateAppResponse
+            schema = CreateAppResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -99,8 +99,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/application", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationsResponseSchema
-            schema = ApplicationsResponseSchema()
+            from .models import ApplicationsResponse
+            schema = ApplicationsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -141,8 +141,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/currencies", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CurrenciesResponseSchema
-            schema = CurrenciesResponseSchema()
+            from .models import CurrenciesResponse
+            schema = CurrenciesResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -302,8 +302,8 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DomainSuggestionsRequestSchema
-        schema = DomainSuggestionsRequestSchema()
+        from .models import DomainSuggestionsRequest
+        schema = DomainSuggestionsRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/domain/suggestions", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}]}""", serverType="platform", )
@@ -327,8 +327,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/domain/suggestions", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DomainSuggestionsResponseSchema
-            schema = DomainSuggestionsResponseSchema()
+            from .models import DomainSuggestionsResponse
+            schema = DomainSuggestionsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -372,8 +372,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/brands-by-companies", q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BrandsByCompanyResponseSchema
-            schema = BrandsByCompanyResponseSchema()
+            from .models import BrandsByCompanyResponse
+            schema = BrandsByCompanyResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -399,8 +399,8 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CompanyByBrandsRequestSchema
-        schema = CompanyByBrandsRequestSchema()
+        from .models import CompanyByBrandsRequest
+        schema = CompanyByBrandsRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/companies-by-brands", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}]}""", serverType="platform", page_no=page_no, page_size=page_size)
@@ -424,8 +424,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/companies-by-brands", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CompanyByBrandsResponseSchema
-            schema = CompanyByBrandsResponseSchema()
+            from .models import CompanyByBrandsResponse
+            schema = CompanyByBrandsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -451,8 +451,8 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import StoreByBrandsRequestSchema
-        schema = StoreByBrandsRequestSchema()
+        from .models import StoreByBrandsRequest
+        schema = StoreByBrandsRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v2.0/company/{self._conf.companyId}/inventory/stores-by-brands", """{"required":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer"},"description":"The page number to navigate through the given set of results. Default value is 1."},{"name":"page_size","in":"query","schema":{"type":"integer"},"description":"The number of items to retrieve in each page. Default value is 10."}],"headers":[],"path":[{"schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","in":"path","required":true,"name":"company_id"}]}""", serverType="platform", page_no=page_no, page_size=page_size)
@@ -476,8 +476,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/configuration/v2.0/company/{self._conf.companyId}/inventory/stores-by-brands", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import StoreByBrandsResponseSchema
-            schema = StoreByBrandsResponseSchema()
+            from .models import StoreByBrandsResponse
+            schema = StoreByBrandsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -569,8 +569,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications/{app_id}", app_id=app_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OptedApplicationResponseSchema
-            schema = OptedApplicationResponseSchema()
+            from .models import OptedApplicationResponse
+            schema = OptedApplicationResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -618,8 +618,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/other-seller-applications/{app_id}/opt_out", app_id=app_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessMessageResponseSchema
-            schema = SuccessMessageResponseSchema()
+            from .models import SuccessMessageResponse
+            schema = SuccessMessageResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -711,8 +711,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v1.0/company/{self._conf.companyId}/inventory/company/{company}", company=company), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ListStoreResponseSchemaSchema
-            schema = ListStoreResponseSchemaSchema()
+            from .models import ListStoreResponse
+            schema = ListStoreResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -753,63 +753,12 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v2.0/company/{self._conf.companyId}/domain/options", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DomainOptionsResponseSchema
-            schema = DomainOptionsResponseSchema()
+            from .models import DomainOptionsResponse
+            schema = DomainOptionsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getDomainOptions")
-                print(e)
-
-        return response
-    
-    async def getCurrencyExchangeRates(self, currency_code=None, exchange_currency_code=None, exchange_country_code=None, request_headers:Dict={}):
-        """Retrieve a list of currency exchange rates, relative to a provided currency.
-        :param currency_code : The 3-letter ISO 4217 code representing the base currency for the exchange rates.  Defaults to "INR" if not specified. : type string
-        :param exchange_currency_code : A 3-letter ISO 4217 currency code for which exchange rates against the base currency are requested. : type string
-        :param exchange_country_code : The country code for which exchange rates against the base currency are requested. : type string
-        """
-        payload = {}
-        
-        if currency_code is not None:
-            payload["currency_code"] = currency_code
-        if exchange_currency_code is not None:
-            payload["exchange_currency_code"] = exchange_currency_code
-        if exchange_country_code is not None:
-            payload["exchange_country_code"] = exchange_country_code
-
-        # Parameter validation
-        schema = ConfigurationValidator.getCurrencyExchangeRates()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/configuration/v2.0/company/{self._conf.companyId}/currency-exchange", """{"required":[{"in":"path","schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"name":"company_id"}],"optional":[{"in":"query","name":"currency_code","description":"The 3-letter ISO 4217 code representing the base currency for the exchange rates.  Defaults to \"INR\" if not specified.","required":false,"schema":{"type":"string","default":"INR","x-not-enum":true}},{"in":"query","name":"exchange_currency_code","description":"A 3-letter ISO 4217 currency code for which exchange rates against the base currency are requested.","required":false,"schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"exchange_country_code","description":"The country code for which exchange rates against the base currency are requested.","required":false,"schema":{"type":"string","x-not-enum":true}}],"query":[{"in":"query","name":"currency_code","description":"The 3-letter ISO 4217 code representing the base currency for the exchange rates.  Defaults to \"INR\" if not specified.","required":false,"schema":{"type":"string","default":"INR","x-not-enum":true}},{"in":"query","name":"exchange_currency_code","description":"A 3-letter ISO 4217 currency code for which exchange rates against the base currency are requested.","required":false,"schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"exchange_country_code","description":"The country code for which exchange rates against the base currency are requested.","required":false,"schema":{"type":"string","x-not-enum":true}}],"headers":[],"path":[{"in":"path","schema":{"type":"integer"},"description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"name":"company_id"}]}""", serverType="platform", currency_code=currency_code, exchange_currency_code=exchange_currency_code, exchange_country_code=exchange_country_code, )
-        query_string = await create_query_string(currency_code=currency_code, exchange_currency_code=exchange_currency_code, exchange_country_code=exchange_country_code, )
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/configuration/v2.0/company/{self._conf.companyId}/currency-exchange", currency_code=currency_code, exchange_currency_code=exchange_currency_code, exchange_country_code=exchange_country_code), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CurrencyExchangeResponseV2
-            schema = CurrencyExchangeResponseV2()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCurrencyExchangeRates")
                 print(e)
 
         return response

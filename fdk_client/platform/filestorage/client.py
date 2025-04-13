@@ -26,11 +26,11 @@ class FileStorage:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import FileUploadStart
-        schema = FileUploadStart()
+        from .models import StartRequest
+        schema = StartRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v2.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/start", """{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"description":"Unique numeric identifier for the company.","schema":{"type":"integer","description":"Unique numeric identifier for the company."}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"description":"Unique numeric identifier for the company.","schema":{"type":"integer","description":"Unique numeric identifier for the company."}}]}""", serverType="platform", namespace=namespace, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v2.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/start", """{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}]}""", serverType="platform", namespace=namespace, )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -51,8 +51,8 @@ class FileStorage:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v2.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/start", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FileUpload
-            schema = FileUpload()
+            from .models import StartResponse
+            schema = StartResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -75,11 +75,11 @@ class FileStorage:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import FileUpload
-        schema = FileUpload()
+        from .models import StartResponse
+        schema = StartResponse()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v2.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/complete", """{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"description":"Unique numeric identifier for the company.","schema":{"type":"integer","description":"Unique numeric identifier for the company."}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"description":"Unique numeric identifier for the company.","schema":{"type":"integer","description":"Unique numeric identifier for the company."}}]}""", serverType="platform", namespace=namespace, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v2.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/complete", """{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}]}""", serverType="platform", namespace=namespace, )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -100,8 +100,8 @@ class FileStorage:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v2.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/complete", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FileUploadComplete
-            schema = FileUploadComplete()
+            from .models import CompleteResponse
+            schema = CompleteResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -121,11 +121,11 @@ class FileStorage:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import SignUrl
-        schema = SignUrl()
+        from .models import SignUrlRequest
+        schema = SignUrlRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/sign-urls", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique numeric identifier for the company.","schema":{"type":"integer","description":"Unique numeric identifier for the company."}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique numeric identifier for the company.","schema":{"type":"integer","description":"Unique numeric identifier for the company."}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/sign-urls", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -146,8 +146,8 @@ class FileStorage:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/sign-urls", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SignUrlResult
-            schema = SignUrlResult()
+            from .models import SignUrlResponse
+            schema = SignUrlResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -158,7 +158,7 @@ class FileStorage:
     
     async def copyFiles(self, sync=None, body="", request_headers:Dict={}):
         """Duplicate files to another location.
-        :param sync : Determines whether the copy files operation should run in synchronous mode. : type boolean
+        :param sync :  : type boolean
         """
         payload = {}
         
@@ -174,7 +174,7 @@ class FileStorage:
         schema = CopyFiles()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/uploads/copy", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique numeric identifier for the company.","schema":{"type":"integer","description":"Unique numeric identifier for the company."}}],"optional":[{"name":"sync","in":"query","required":false,"description":"Determines whether the copy files operation should run in synchronous mode.","schema":{"type":"boolean"}}],"query":[{"name":"sync","in":"query","required":false,"description":"Determines whether the copy files operation should run in synchronous mode.","schema":{"type":"boolean"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique numeric identifier for the company.","schema":{"type":"integer","description":"Unique numeric identifier for the company."}}]}""", serverType="platform", sync=sync, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/uploads/copy", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}],"optional":[{"name":"sync","in":"query","required":false,"schema":{"type":"boolean","description":"Copy files operation should run in sync mode or not"}}],"query":[{"name":"sync","in":"query","required":false,"schema":{"type":"boolean","description":"Copy files operation should run in sync mode or not"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}]}""", serverType="platform", sync=sync, )
         query_string = await create_query_string(sync=sync, )
         if query_string:
             url_with_params += "?" + query_string
@@ -216,7 +216,7 @@ class FileStorage:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/namespaces/{namespace}/browse", """{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"description":"Unique numeric identifier for the company.","schema":{"type":"integer","description":"Unique numeric identifier for the company."}}],"optional":[{"name":"page","in":"query","description":"page no","required":false,"schema":{"type":"integer"}},{"name":"limit","in":"query","description":"Limit","required":false,"schema":{"type":"integer"}}],"query":[{"name":"page","in":"query","description":"page no","required":false,"schema":{"type":"integer"}},{"name":"limit","in":"query","description":"Limit","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"description":"Unique numeric identifier for the company.","schema":{"type":"integer","description":"Unique numeric identifier for the company."}}]}""", serverType="platform", namespace=namespace, page=page, limit=limit)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/namespaces/{namespace}/browse", """{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}],"optional":[{"name":"page","in":"query","description":"page no","required":false,"schema":{"type":"integer"}},{"name":"limit","in":"query","description":"Limit","required":false,"schema":{"type":"integer"}}],"query":[{"name":"page","in":"query","description":"page no","required":false,"schema":{"type":"integer"}},{"name":"limit","in":"query","description":"Limit","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}]}""", serverType="platform", namespace=namespace, page=page, limit=limit)
         query_string = await create_query_string(page=page, limit=limit)
         if query_string:
             url_with_params += "?" + query_string
@@ -252,7 +252,7 @@ class FileStorage:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/proxy", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique numeric identifier for the company.","schema":{"type":"integer","description":"Unique numeric identifier for the company."}},{"name":"url","in":"query","description":"url","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"url","in":"query","description":"url","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique numeric identifier for the company.","schema":{"type":"integer","description":"Unique numeric identifier for the company."}}]}""", serverType="platform", url=url)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/proxy", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"url","in":"query","description":"url","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"url","in":"query","description":"url","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}]}""", serverType="platform", url=url)
         query_string = await create_query_string(url=url)
         if query_string:
             url_with_params += "?" + query_string
@@ -273,8 +273,8 @@ class FileStorage:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/proxy", url=url), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProxyFileAccess
-            schema = ProxyFileAccess()
+            from .models import ProxyResponse
+            schema = ProxyResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

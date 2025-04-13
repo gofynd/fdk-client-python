@@ -112,6 +112,10 @@ class PricingBannerSchema(BaseSchema):
     pass
 
 
+class SdkReadmeSchema(BaseSchema):
+    pass
+
+
 class TagsSchema(BaseSchema):
     pass
 
@@ -580,6 +584,14 @@ class PricingBannerSchema(BaseSchema):
     modified_on = fields.Str(required=False)
     
     __v = fields.Int(required=False)
+    
+
+
+class SdkReadmeSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    data = fields.Str(required=False)
     
 
 

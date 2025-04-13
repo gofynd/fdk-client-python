@@ -364,16 +364,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
 
 class PaymentValidator:
     
@@ -409,13 +399,13 @@ class PaymentValidator:
         
         refresh = fields.Boolean(required=False)
         
-        amount = fields.Int(required=False)
-        
         request_type = fields.Str(required=False)
         
         order_id = fields.Str(required=False)
         
         shipment_id = fields.Str(required=False)
+        
+        amount = fields.Int(required=False)
          
         
     
@@ -1154,27 +1144,6 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
         
         shipment_id = fields.Str(required=False)
-         
-        
-    
-    class getTransactions(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        user_id = fields.Str(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        page_number = fields.Int(required=False)
-        
-        order_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
-        
-        transaction_id = fields.Str(required=False)
          
         
     

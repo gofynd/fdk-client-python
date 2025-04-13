@@ -189,13 +189,6 @@ from ..ApplicationModel import BaseSchema
     
     
         
-        
-    
-    
-        
-        
-        
-        
 
 class CartValidator:
     
@@ -595,21 +588,6 @@ class CartValidator:
         
         
         cart_meta_id = fields.Str(required=False)
-        
-        is_bank_offer = fields.Boolean(required=False)
-         
-        
-    
-    class addItemsv2(BaseSchema):
-        
-        
-        buy_now = fields.Boolean(required=False)
-        
-        id = fields.Str(required=False)
-        
-        cart_type = fields.Str(required=False)
-        
-        order_type = fields.Str(required=False)
          
         
     

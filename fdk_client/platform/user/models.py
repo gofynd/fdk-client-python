@@ -8,7 +8,7 @@ from ..PlatformModel import BaseSchema
 
 
 
-class SuccessMessage(BaseSchema):
+class SuccessMessageResponse(BaseSchema):
     pass
 
 
@@ -16,7 +16,7 @@ class UserAttributeDefinition(BaseSchema):
     pass
 
 
-class UserAttributeDefinitionResp(BaseSchema):
+class UserAttributeDefinitionResponse(BaseSchema):
     pass
 
 
@@ -24,11 +24,11 @@ class UserAttributeDefinitionValidation(BaseSchema):
     pass
 
 
-class UserAttribute(BaseSchema):
+class UserAttributeResponse(BaseSchema):
     pass
 
 
-class CreateUserAttributePayload(BaseSchema):
+class CreateUserAttributeRequest(BaseSchema):
     pass
 
 
@@ -268,10 +268,6 @@ class UserSearchSchema(BaseSchema):
     pass
 
 
-class DebugInfo(BaseSchema):
-    pass
-
-
 class PhoneNumber(BaseSchema):
     pass
 
@@ -280,42 +276,10 @@ class Email(BaseSchema):
     pass
 
 
-class BulkUpdateUserAttributesBody(BaseSchema):
-    pass
-
-
-class BulkUpdateUserSameAttributes(BaseSchema):
-    pass
-
-
-class BulkUpdatePerUserAttributesBody(BaseSchema):
-    pass
-
-
-class UserDetailAttributes(BaseSchema):
-    pass
-
-
-class BulkUpdatePerUserAttributes(BaseSchema):
-    pass
-
-
-class BulkOperation(BaseSchema):
-    pass
-
-
-class BulkOperationError(BaseSchema):
-    pass
-
-
-class BulkOperationAsync(BaseSchema):
-    pass
 
 
 
-
-
-class SuccessMessage(BaseSchema):
+class SuccessMessageResponse(BaseSchema):
     # User swagger.json
 
     
@@ -361,7 +325,7 @@ class UserAttributeDefinition(BaseSchema):
     
 
 
-class UserAttributeDefinitionResp(BaseSchema):
+class UserAttributeDefinitionResponse(BaseSchema):
     # User swagger.json
 
     
@@ -411,7 +375,7 @@ class UserAttributeDefinitionValidation(BaseSchema):
     
 
 
-class UserAttribute(BaseSchema):
+class UserAttributeResponse(BaseSchema):
     # User swagger.json
 
     
@@ -433,7 +397,7 @@ class UserAttribute(BaseSchema):
     
 
 
-class CreateUserAttributePayload(BaseSchema):
+class CreateUserAttributeRequest(BaseSchema):
     # User swagger.json
 
     
@@ -678,8 +642,6 @@ class UserGroupResponseSchema(BaseSchema):
     uid = fields.Int(required=False)
     
     application_id = fields.Str(required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
     
     created_at = fields.Str(required=False)
     
@@ -1273,12 +1235,6 @@ class UserSearchSchema(BaseSchema):
     # User swagger.json
 
     
-    __v = fields.Float(required=False)
-    
-    has_old_password_hash = fields.Boolean(required=False)
-    
-    debug = fields.Nested(DebugInfo, required=False)
-    
     application_id = fields.Str(required=False)
     
     user_id = fields.Str(required=False)
@@ -1321,16 +1277,6 @@ class UserSearchSchema(BaseSchema):
     
 
 
-class DebugInfo(BaseSchema):
-    # User swagger.json
-
-    
-    source = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
-    
-
-
 class PhoneNumber(BaseSchema):
     # User swagger.json
 
@@ -1358,98 +1304,6 @@ class Email(BaseSchema):
     primary = fields.Boolean(required=False)
     
     verified = fields.Boolean(required=False)
-    
-
-
-class BulkUpdateUserAttributesBody(BaseSchema):
-    # User swagger.json
-
-    
-    users = fields.List(fields.Str(required=False), required=False)
-    
-    user_file_url = fields.Str(required=False)
-    
-    attribute = fields.List(fields.Nested(BulkUpdateUserSameAttributes, required=False), required=False)
-    
-
-
-class BulkUpdateUserSameAttributes(BaseSchema):
-    # User swagger.json
-
-    
-    key = fields.Str(required=False)
-    
-    value = fields.Raw(required=False)
-    
-
-
-class BulkUpdatePerUserAttributesBody(BaseSchema):
-    # User swagger.json
-
-    
-    user_detail_attributes = fields.List(fields.Nested(UserDetailAttributes, required=False), required=False)
-    
-
-
-class UserDetailAttributes(BaseSchema):
-    # User swagger.json
-
-    
-    user_id = fields.Str(required=False)
-    
-    attributes = fields.List(fields.Nested(BulkUpdatePerUserAttributes, required=False), required=False)
-    
-
-
-class BulkUpdatePerUserAttributes(BaseSchema):
-    # User swagger.json
-
-    
-    key = fields.Str(required=False)
-    
-    value = fields.Raw(required=False)
-    
-
-
-class BulkOperation(BaseSchema):
-    # User swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    total = fields.Int(required=False)
-    
-    processed = fields.Int(required=False)
-    
-    errors_count = fields.Int(required=False)
-    
-    errors = fields.List(fields.Nested(BulkOperationError, required=False), required=False)
-    
-    processing_type = fields.Str(required=False)
-    
-    error_summary = fields.Dict(required=False)
-    
-
-
-class BulkOperationError(BaseSchema):
-    # User swagger.json
-
-    
-    user_id = fields.Str(required=False)
-    
-    error = fields.Str(required=False)
-    
-
-
-class BulkOperationAsync(BaseSchema):
-    # User swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    request_id = fields.Str(required=False)
-    
-    processing_type = fields.Str(required=False)
     
 
 

@@ -12,15 +12,15 @@ class Page(BaseSchema):
     pass
 
 
-class CompanyListSchema(BaseSchema):
+class CompanyListSerializer(BaseSchema):
     pass
 
 
-class CompaniesSchema(BaseSchema):
+class CompaniesSerializer(BaseSchema):
     pass
 
 
-class ErrorResponseSchema(BaseSchema):
+class ErrorResponse(BaseSchema):
     pass
 
 
@@ -28,11 +28,11 @@ class PartnerCompanyDetailsRequestSchema(BaseSchema):
     pass
 
 
-class CompanySchema(BaseSchema):
+class CompanySerializer(BaseSchema):
     pass
 
 
-class GetAddressSchema(BaseSchema):
+class GetAddressSerializer(BaseSchema):
     pass
 
 
@@ -44,7 +44,7 @@ class CountryCurrencyInfo(BaseSchema):
     pass
 
 
-class UserSchema(BaseSchema):
+class UserSerializer(BaseSchema):
     pass
 
 
@@ -81,25 +81,25 @@ class Page(BaseSchema):
     
 
 
-class CompanyListSchema(BaseSchema):
+class CompanyListSerializer(BaseSchema):
     # Catalog swagger.json
 
     
     page = fields.Nested(Page, required=False)
     
-    items = fields.List(fields.Nested(CompanySchema, required=False), required=False)
+    items = fields.List(fields.Nested(CompanySerializer, required=False), required=False)
     
 
 
-class CompaniesSchema(BaseSchema):
+class CompaniesSerializer(BaseSchema):
     # Catalog swagger.json
 
     
-    items = fields.List(fields.Nested(CompanySchema, required=False), required=False)
+    items = fields.List(fields.Nested(CompanySerializer, required=False), required=False)
     
 
 
-class ErrorResponseSchema(BaseSchema):
+class ErrorResponse(BaseSchema):
     # Catalog swagger.json
 
     
@@ -123,7 +123,7 @@ class PartnerCompanyDetailsRequestSchema(BaseSchema):
     
 
 
-class CompanySchema(BaseSchema):
+class CompanySerializer(BaseSchema):
     # Catalog swagger.json
 
     
@@ -135,11 +135,11 @@ class CompanySchema(BaseSchema):
     
     verified_on = fields.Str(required=False)
     
-    verified_by = fields.Nested(UserSchema, required=False)
+    verified_by = fields.Nested(UserSerializer, required=False)
     
-    modified_by = fields.Nested(UserSchema, required=False)
+    modified_by = fields.Nested(UserSerializer, required=False)
     
-    created_by = fields.Nested(UserSchema, required=False)
+    created_by = fields.Nested(UserSerializer, required=False)
     
     name = fields.Str(required=False)
     
@@ -149,7 +149,7 @@ class CompanySchema(BaseSchema):
     
     details = fields.Nested(CompanyDetails, required=False)
     
-    addresses = fields.List(fields.Nested(GetAddressSchema, required=False), required=False)
+    addresses = fields.List(fields.Nested(GetAddressSerializer, required=False), required=False)
     
     market_channels = fields.List(fields.Str(required=False), required=False)
     
@@ -165,7 +165,7 @@ class CompanySchema(BaseSchema):
     
 
 
-class GetAddressSchema(BaseSchema):
+class GetAddressSerializer(BaseSchema):
     # Catalog swagger.json
 
     
@@ -219,7 +219,7 @@ class CountryCurrencyInfo(BaseSchema):
     
 
 
-class UserSchema(BaseSchema):
+class UserSerializer(BaseSchema):
     # Catalog swagger.json
 
     

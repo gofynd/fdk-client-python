@@ -8,10 +8,6 @@ from ..PlatformModel import BaseSchema
 
 
 
-class ClickStatsResult(BaseSchema):
-    pass
-
-
 class ClickStatsItem(BaseSchema):
     pass
 
@@ -44,10 +40,6 @@ class ShortLinkReq(BaseSchema):
     pass
 
 
-class shortLinkReqMeta(BaseSchema):
-    pass
-
-
 class UrlInfo(BaseSchema):
     pass
 
@@ -69,14 +61,6 @@ class ErrorRes(BaseSchema):
 
 
 
-
-
-class ClickStatsResult(BaseSchema):
-    # Share swagger.json
-
-    
-    click_stats = fields.List(fields.Nested(ClickStatsItem, required=False), required=False)
-    
 
 
 class ClickStatsItem(BaseSchema):
@@ -181,18 +165,6 @@ class ShortLinkReq(BaseSchema):
     
     count = fields.Int(required=False)
     
-    meta = fields.Nested(shortLinkReqMeta, required=False)
-    
-
-
-class shortLinkReqMeta(BaseSchema):
-    # Share swagger.json
-
-    
-    for_sms = fields.Boolean(required=False)
-    
-    sms_header = fields.Str(required=False)
-    
 
 
 class UrlInfo(BaseSchema):
@@ -200,10 +172,6 @@ class UrlInfo(BaseSchema):
 
     
     hash = fields.Str(required=False)
-    
-    short_url = fields.Str(required=False)
-    
-    alias = fields.Str(required=False)
     
 
 

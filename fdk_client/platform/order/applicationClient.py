@@ -91,8 +91,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/rule-lane-config", search_value=search_value), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import LaneRuleConfigSchema
-            schema = LaneRuleConfigSchema()
+            from .models import RuleLaneConfigResponse
+            schema = RuleLaneConfigResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -112,8 +112,8 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import RuleRequestSchema
-        schema = RuleRequestSchema()
+        from .models import RuleRequest
+        schema = RuleRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/rule", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
@@ -136,8 +136,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/rule", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RuleSuccessResponseSchema
-            schema = RuleSuccessResponseSchema()
+            from .models import RuleSuccessResponse
+            schema = RuleSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -180,8 +180,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/rule/{rule_id}", rule_id=rule_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RuleResponseSchema
-            schema = RuleResponseSchema()
+            from .models import RuleResponse
+            schema = RuleResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -204,8 +204,8 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import RuleUpdateRequestSchema
-        schema = RuleUpdateRequestSchema()
+        from .models import RuleUpdateRequest
+        schema = RuleUpdateRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/rule/{rule_id}", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", rule_id=rule_id)
@@ -228,8 +228,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/rule/{rule_id}", rule_id=rule_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RuleSuccessResponseSchema
-            schema = RuleSuccessResponseSchema()
+            from .models import RuleSuccessResponse
+            schema = RuleSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -272,8 +272,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/rule/{rule_id}", rule_id=rule_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RuleSuccessResponseSchema
-            schema = RuleSuccessResponseSchema()
+            from .models import RuleSuccessResponse
+            schema = RuleSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -293,8 +293,8 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateRulePositionRequestSchema
-        schema = UpdateRulePositionRequestSchema()
+        from .models import UpdateRulePositionRequest
+        schema = UpdateRulePositionRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/rule-position", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
@@ -317,8 +317,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/rule-position", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RuleListResponseSchema
-            schema = RuleListResponseSchema()
+            from .models import RuleListResponse
+            schema = RuleListResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -358,8 +358,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/rule-parameters", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RuleParametersResponseSchema
-            schema = RuleParametersResponseSchema()
+            from .models import RuleParametersResponse
+            schema = RuleParametersResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -379,8 +379,8 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import RuleListRequestSchema
-        schema = RuleListRequestSchema()
+        from .models import RuleListRequest
+        schema = RuleListRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/rule_list", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
@@ -403,8 +403,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/rule_list", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RuleListResponseSchema
-            schema = RuleListResponseSchema()
+            from .models import RuleListResponse
+            schema = RuleListResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -414,9 +414,9 @@ class Order:
         return response
     
     async def getShipmentBagReasons(self, shipment_id=None, line_number=None, bag_id=None, request_headers:Dict={}):
-        """Allows users to retrieve a comprehensive list of reasons for cancellation  or returning a shipment. It provides both cancellation and return reasons, with an emphasis  on Quality Control (QC) evaluations.
-        :param shipment_id : The unique identifier for the shipment : type string
-        :param line_number : A unique identifier of the bag's line number. : type integer
+        """Use this API to retrieve the issues that led to the cancellation of bags within a shipment.
+        :param shipment_id : ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
+        :param line_number : line number of bag. : type integer
         :param bag_id : The ID of the bag. : type string
         """
         payload = {}
@@ -433,7 +433,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/orders/shipments/{shipment_id}/line_number/{line_number}/reasons", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer"}},{"in":"path","name":"application_id","description":"A unique identifier for the application on the platform","required":true,"schema":{"type":"string"}},{"in":"path","description":"The unique identifier for the shipment","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"line_number","description":"A unique identifier of the bag's line number.","required":true,"schema":{"type":"integer"}},{"name":"bag_id","in":"query","description":"The ID of the bag.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"bag_id","in":"query","description":"The ID of the bag.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer"}},{"in":"path","name":"application_id","description":"A unique identifier for the application on the platform","required":true,"schema":{"type":"string"}},{"in":"path","description":"The unique identifier for the shipment","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"line_number","description":"A unique identifier of the bag's line number.","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", shipment_id=shipment_id, line_number=line_number, bag_id=bag_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/orders/shipments/{shipment_id}/line_number/{line_number}/reasons", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}},{"in":"path","name":"application_id","description":"Application ID of company","required":true,"schema":{"type":"string"}},{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"path","description":"line number of bag.","name":"line_number","required":true,"schema":{"type":"integer"}},{"name":"bag_id","in":"query","description":"The ID of the bag.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"bag_id","in":"query","description":"The ID of the bag.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}},{"in":"path","name":"application_id","description":"Application ID of company","required":true,"schema":{"type":"string"}},{"in":"path","description":"ID of the bag. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"path","description":"line number of bag.","name":"line_number","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", shipment_id=shipment_id, line_number=line_number, bag_id=bag_id)
         query_string = await create_query_string(bag_id=bag_id)
         if query_string:
             url_with_params += "?" + query_string
@@ -465,22 +465,22 @@ class Order:
     
     async def getApplicationShipments(self, lane=None, search_type=None, search_id=None, search_value=None, from_date=None, to_date=None, dp_ids=None, ordering_company_id=None, stores=None, sales_channel=None, request_by_ext=None, page_no=None, page_size=None, customer_id=None, is_priority_sort=None, exclude_locked_shipments=None, request_headers:Dict={}):
         """Get cross selling platform shipments
-        :param lane : Optional parameter to specify the lane for filtering results. : type string
-        :param search_type : search_type refers to the field that will be used as the target for the search operation : type string
-        :param search_id : Identifier used for the search operation based on the selected search type. : type string
+        :param lane :  : type string
+        :param search_type :  : type string
+        :param search_id :  : type string
         :param search_value :  : type string
-        :param from_date : Date time in UTC timezone as per ISO format. : type string
-        :param to_date : Date time in UTC timezone as per ISO format. : type string
-        :param dp_ids : Comma-separated list of delivery partner IDs to filter results. : type string
-        :param ordering_company_id : ID of the company placing the order, used for filtering results. : type string
-        :param stores : Comma-separated list of store IDs to filter results. : type string
-        :param sales_channel : The sales channel to filter results. : type string
-        :param request_by_ext : Identifier for external requests. : type string
-        :param page_no : The page number for pagination of results. : type integer
-        :param page_size : The number of results to return per page for pagination. : type integer
-        :param customer_id : ID of the customer to filter results related to specific customer. : type string
-        :param is_priority_sort : Flag to determine if results should be sorted by priority. Defaults to true. : type boolean
-        :param exclude_locked_shipments : Flag to exclude shipments that are currently locked from the results. : type boolean
+        :param from_date :  : type string
+        :param to_date :  : type string
+        :param dp_ids :  : type string
+        :param ordering_company_id :  : type string
+        :param stores :  : type string
+        :param sales_channel :  : type string
+        :param request_by_ext :  : type string
+        :param page_no :  : type integer
+        :param page_size :  : type integer
+        :param customer_id :  : type string
+        :param is_priority_sort :  : type boolean
+        :param exclude_locked_shipments :  : type boolean
         """
         payload = {}
         
@@ -522,7 +522,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipments", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier of a company on the platform.","schema":{"type":"integer"}},{"name":"application_id","in":"path","required":true,"description":"A unique identifier for the application or system that is making the order request.","schema":{"type":"string"}}],"optional":[{"name":"lane","in":"query","required":false,"description":"Optional parameter to specify the lane for filtering results.","schema":{"type":"string"}},{"name":"search_type","in":"query","description":"search_type refers to the field that will be used as the target for the search operation","required":false,"schema":{"type":"string","enum":["shipment_id","order_id","channel_name","fynd_order_id"]}},{"name":"search_id","in":"query","required":false,"description":"Identifier used for the search operation based on the selected search type.","schema":{"type":"string"}},{"name":"search_value","in":"query","required":false,"schema":{"type":"string"}},{"name":"from_date","in":"query","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date"}},{"name":"to_date","in":"query","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date"}},{"name":"dp_ids","in":"query","required":false,"description":"Comma-separated list of delivery partner IDs to filter results.","schema":{"type":"string"}},{"name":"ordering_company_id","in":"query","required":false,"description":"ID of the company placing the order, used for filtering results.","schema":{"type":"string"}},{"name":"stores","in":"query","required":false,"description":"Comma-separated list of store IDs to filter results.","schema":{"type":"string"}},{"name":"sales_channel","in":"query","required":false,"description":"The sales channel to filter results.","schema":{"type":"string"}},{"name":"request_by_ext","in":"query","description":"Identifier for external requests.","required":false,"schema":{"type":"string"}},{"name":"page_no","in":"query","required":false,"description":"The page number for pagination of results.","schema":{"type":"integer"}},{"name":"page_size","in":"query","required":false,"description":"The number of results to return per page for pagination.","schema":{"type":"integer"}},{"name":"customer_id","in":"query","required":false,"description":"ID of the customer to filter results related to specific customer.","schema":{"type":"string"}},{"name":"is_priority_sort","in":"query","required":false,"description":"Flag to determine if results should be sorted by priority. Defaults to true.","schema":{"type":"boolean","default":true}},{"name":"exclude_locked_shipments","in":"query","required":false,"description":"Flag to exclude shipments that are currently locked from the results.","schema":{"type":"boolean","default":true}}],"query":[{"name":"lane","in":"query","required":false,"description":"Optional parameter to specify the lane for filtering results.","schema":{"type":"string"}},{"name":"search_type","in":"query","description":"search_type refers to the field that will be used as the target for the search operation","required":false,"schema":{"type":"string","enum":["shipment_id","order_id","channel_name","fynd_order_id"]}},{"name":"search_id","in":"query","required":false,"description":"Identifier used for the search operation based on the selected search type.","schema":{"type":"string"}},{"name":"search_value","in":"query","required":false,"schema":{"type":"string"}},{"name":"from_date","in":"query","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date"}},{"name":"to_date","in":"query","description":"Date time in UTC timezone as per ISO format.","required":false,"schema":{"type":"string","format":"date"}},{"name":"dp_ids","in":"query","required":false,"description":"Comma-separated list of delivery partner IDs to filter results.","schema":{"type":"string"}},{"name":"ordering_company_id","in":"query","required":false,"description":"ID of the company placing the order, used for filtering results.","schema":{"type":"string"}},{"name":"stores","in":"query","required":false,"description":"Comma-separated list of store IDs to filter results.","schema":{"type":"string"}},{"name":"sales_channel","in":"query","required":false,"description":"The sales channel to filter results.","schema":{"type":"string"}},{"name":"request_by_ext","in":"query","description":"Identifier for external requests.","required":false,"schema":{"type":"string"}},{"name":"page_no","in":"query","required":false,"description":"The page number for pagination of results.","schema":{"type":"integer"}},{"name":"page_size","in":"query","required":false,"description":"The number of results to return per page for pagination.","schema":{"type":"integer"}},{"name":"customer_id","in":"query","required":false,"description":"ID of the customer to filter results related to specific customer.","schema":{"type":"string"}},{"name":"is_priority_sort","in":"query","required":false,"description":"Flag to determine if results should be sorted by priority. Defaults to true.","schema":{"type":"boolean","default":true}},{"name":"exclude_locked_shipments","in":"query","required":false,"description":"Flag to exclude shipments that are currently locked from the results.","schema":{"type":"boolean","default":true}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier of a company on the platform.","schema":{"type":"integer"}},{"name":"application_id","in":"path","required":true,"description":"A unique identifier for the application or system that is making the order request.","schema":{"type":"string"}}]}""", serverType="platform", lane=lane, search_type=search_type, search_id=search_id, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort, exclude_locked_shipments=exclude_locked_shipments)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipments", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[{"name":"lane","in":"query","required":false,"schema":{"type":"string"}},{"name":"search_type","in":"query","required":false,"schema":{"type":"string"}},{"name":"search_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"search_value","in":"query","required":false,"schema":{"type":"string"}},{"name":"from_date","in":"query","required":false,"schema":{"type":"string"}},{"name":"to_date","in":"query","required":false,"schema":{"type":"string"}},{"name":"dp_ids","in":"query","required":false,"schema":{"type":"string"}},{"name":"ordering_company_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"stores","in":"query","required":false,"schema":{"type":"string"}},{"name":"sales_channel","in":"query","required":false,"schema":{"type":"string"}},{"name":"request_by_ext","in":"query","required":false,"schema":{"type":"string"}},{"name":"page_no","in":"query","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","required":false,"schema":{"type":"integer"}},{"name":"customer_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"is_priority_sort","in":"query","required":false,"schema":{"type":"boolean"}},{"name":"exclude_locked_shipments","in":"query","required":false,"schema":{"type":"boolean"}}],"query":[{"name":"lane","in":"query","required":false,"schema":{"type":"string"}},{"name":"search_type","in":"query","required":false,"schema":{"type":"string"}},{"name":"search_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"search_value","in":"query","required":false,"schema":{"type":"string"}},{"name":"from_date","in":"query","required":false,"schema":{"type":"string"}},{"name":"to_date","in":"query","required":false,"schema":{"type":"string"}},{"name":"dp_ids","in":"query","required":false,"schema":{"type":"string"}},{"name":"ordering_company_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"stores","in":"query","required":false,"schema":{"type":"string"}},{"name":"sales_channel","in":"query","required":false,"schema":{"type":"string"}},{"name":"request_by_ext","in":"query","required":false,"schema":{"type":"string"}},{"name":"page_no","in":"query","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","required":false,"schema":{"type":"integer"}},{"name":"customer_id","in":"query","required":false,"schema":{"type":"string"}},{"name":"is_priority_sort","in":"query","required":false,"schema":{"type":"boolean"}},{"name":"exclude_locked_shipments","in":"query","required":false,"schema":{"type":"boolean"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", lane=lane, search_type=search_type, search_id=search_id, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort, exclude_locked_shipments=exclude_locked_shipments)
         query_string = await create_query_string(lane=lane, search_type=search_type, search_id=search_id, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort, exclude_locked_shipments=exclude_locked_shipments)
         if query_string:
             url_with_params += "?" + query_string
@@ -542,8 +542,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipments", lane=lane, search_type=search_type, search_id=search_id, search_value=search_value, from_date=from_date, to_date=to_date, dp_ids=dp_ids, ordering_company_id=ordering_company_id, stores=stores, sales_channel=sales_channel, request_by_ext=request_by_ext, page_no=page_no, page_size=page_size, customer_id=customer_id, is_priority_sort=is_priority_sort, exclude_locked_shipments=exclude_locked_shipments), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentInternalPlatformViewResponseSchema
-            schema = ShipmentInternalPlatformViewResponseSchema()
+            from .models import ShipmentInternalPlatformViewResponse
+            schema = ShipmentInternalPlatformViewResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -554,7 +554,7 @@ class Order:
     
     async def trackShipmentPlatform(self, shipment_id=None, request_headers:Dict={}):
         """Track Shipment by shipment id, for application based on application Id
-        :param shipment_id : The unique identifier for the shipment : type string
+        :param shipment_id : Shipment Id : type string
         """
         payload = {}
         
@@ -566,7 +566,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/orders/shipments/{shipment_id}/track", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer"}},{"in":"path","name":"application_id","description":"A unique identifier for the application on the platform","required":true,"schema":{"type":"string"}},{"in":"path","name":"shipment_id","description":"The unique identifier for the shipment","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of a company on the platform.","required":true,"schema":{"type":"integer"}},{"in":"path","name":"application_id","description":"A unique identifier for the application on the platform","required":true,"schema":{"type":"string"}},{"in":"path","name":"shipment_id","description":"The unique identifier for the shipment","required":true,"schema":{"type":"string"}}]}""", serverType="platform", shipment_id=shipment_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/orders/shipments/{shipment_id}/track", """{"required":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}},{"in":"path","name":"application_id","description":"Id of application","required":true,"schema":{"type":"string"}},{"in":"path","name":"shipment_id","description":"Shipment Id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of company","required":true,"schema":{"type":"integer"}},{"in":"path","name":"application_id","description":"Id of application","required":true,"schema":{"type":"string"}},{"in":"path","name":"shipment_id","description":"Shipment Id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", shipment_id=shipment_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -630,8 +630,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/orders/shipments/reasons/{action}", action=action), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentReasonsResponseSchema
-            schema = ShipmentReasonsResponseSchema()
+            from .models import ShipmentReasonsResponse
+            schema = ShipmentReasonsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

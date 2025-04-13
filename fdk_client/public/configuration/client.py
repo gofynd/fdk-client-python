@@ -65,8 +65,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["searchApplication"]).netloc, "get", await create_url_without_domain("/service/public/configuration/v1.0/application/search-application", authorization=authorization, query=query), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationResponseSchema
-            schema = ApplicationResponseSchema()
+            from .models import ApplicationResponse
+            schema = ApplicationResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -136,8 +136,8 @@ class Configuration:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import VersionRequestSchema
-        schema = VersionRequestSchema()
+        from .models import VersionRequest
+        schema = VersionRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["checkVersionIsUpToDate"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
@@ -163,8 +163,8 @@ class Configuration:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkVersionIsUpToDate"]).netloc, "post", await create_url_without_domain("/service/public/configuration/v1.0/version", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import VersionResponseSchema
-            schema = VersionResponseSchema()
+            from .models import VersionResponse
+            schema = VersionResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

@@ -6,11 +6,9 @@ from marshmallow.validate import OneOf
 from ..PlatformModel import BaseSchema
 
 
-from .enums import *
 
 
-
-class PaymentGatewayConfigDetails(BaseSchema):
+class PaymentGatewayConfigResponse(BaseSchema):
     pass
 
 
@@ -26,7 +24,7 @@ class PaymentGatewayConfig(BaseSchema):
     pass
 
 
-class PaymentGatewayConfigCreation(BaseSchema):
+class PaymentGatewayConfigRequest(BaseSchema):
     pass
 
 
@@ -38,23 +36,23 @@ class ErrorCodeAndDescription(BaseSchema):
     pass
 
 
-class HttpErrorDetails(BaseSchema):
+class HttpErrorCodeAndResponse(BaseSchema):
     pass
 
 
-class RefundErrorCodeAndMessage(BaseSchema):
+class RefundErrorCodeAndResponse(BaseSchema):
     pass
 
 
-class PaymentOptionErrorCodeAndMessage(BaseSchema):
+class PaymentOptionErrorCodeAndResponse(BaseSchema):
     pass
 
 
-class RefundOptionErrorCodeAndMessage(BaseSchema):
+class RefundOptionErrorCodeAndResponse(BaseSchema):
     pass
 
 
-class UserCODAdvanceErrorCodeAndMessage(BaseSchema):
+class UserCODAdvanceErrorCodeAndResponse(BaseSchema):
     pass
 
 
@@ -98,7 +96,7 @@ class ProductCODData(BaseSchema):
     pass
 
 
-class CODChargesLimitsDetails(BaseSchema):
+class CODChargesLimitsResponse(BaseSchema):
     pass
 
 
@@ -182,7 +180,7 @@ class AdvancePaymentObject(BaseSchema):
     pass
 
 
-class PaymentModeRouteDetails(BaseSchema):
+class PaymentModeRouteResponse(BaseSchema):
     pass
 
 
@@ -194,7 +192,7 @@ class DeliverySlotDetail(BaseSchema):
     pass
 
 
-class PaymentOptionsDetails(BaseSchema):
+class PaymentOptionsResponse(BaseSchema):
     pass
 
 
@@ -214,7 +212,7 @@ class Payout(BaseSchema):
     pass
 
 
-class PayoutsDetails(BaseSchema):
+class PayoutsResponse(BaseSchema):
     pass
 
 
@@ -226,7 +224,11 @@ class PayoutUserDetails(BaseSchema):
     pass
 
 
-class PayoutCreation(BaseSchema):
+class PayoutRequest(BaseSchema):
+    pass
+
+
+class PayoutResponse(BaseSchema):
     pass
 
 
@@ -234,15 +236,11 @@ class PayoutDetails(BaseSchema):
     pass
 
 
-class PayoutData(BaseSchema):
-    pass
-
-
 class BankDetails(BaseSchema):
     pass
 
 
-class UpdatePayoutDetails(BaseSchema):
+class UpdatePayoutResponse(BaseSchema):
     pass
 
 
@@ -250,39 +248,19 @@ class Payouts(BaseSchema):
     pass
 
 
-class UpdatePayoutCreation(BaseSchema):
+class UpdatePayoutRequest(BaseSchema):
     pass
 
 
-class DeletePayoutDetails(BaseSchema):
+class DeletePayoutResponse(BaseSchema):
     pass
 
 
-class SubscriptionPaymentMethodDetails(BaseSchema):
+class RefundAccountResponse(BaseSchema):
     pass
 
 
-class DeleteSubscriptionPaymentMethodDetails(BaseSchema):
-    pass
-
-
-class SubscriptionConfigDetails(BaseSchema):
-    pass
-
-
-class SaveSubscriptionSetupIntentCreation(BaseSchema):
-    pass
-
-
-class SaveSubscriptionSetupIntentDetails(BaseSchema):
-    pass
-
-
-class RefundAccountDetails(BaseSchema):
-    pass
-
-
-class GetRefundAccountDetails(BaseSchema):
+class GetRefundAccountResponse(BaseSchema):
     pass
 
 
@@ -294,11 +272,11 @@ class BankDetailsForOTP(BaseSchema):
     pass
 
 
-class AddBeneficiaryDetailsOTPCreation(BaseSchema):
+class AddBeneficiaryDetailsOTPRequest(BaseSchema):
     pass
 
 
-class IfscCodeDetails(BaseSchema):
+class IfscCodeResponse(BaseSchema):
     pass
 
 
@@ -306,7 +284,7 @@ class OrderBeneficiaryDetails(BaseSchema):
     pass
 
 
-class OrderBeneficiaryFetchResults(BaseSchema):
+class OrderBeneficiaryResponse(BaseSchema):
     pass
 
 
@@ -318,11 +296,11 @@ class MultiTenderPaymentMethod(BaseSchema):
     pass
 
 
-class PaymentConfirmationCreation(BaseSchema):
+class PaymentConfirmationRequest(BaseSchema):
     pass
 
 
-class PaymentConfirmationDetails(BaseSchema):
+class PaymentConfirmationResponse(BaseSchema):
     pass
 
 
@@ -338,15 +316,11 @@ class CODPaymentLimitConfig(BaseSchema):
     pass
 
 
-class UserPaymentLimitConfig(BaseSchema):
+class GetUserBULimitResponse(BaseSchema):
     pass
 
 
-class GetUserBULimitDetails(BaseSchema):
-    pass
-
-
-class GetUserCODLimitDetails(BaseSchema):
+class GetUserCODLimitResponse(BaseSchema):
     pass
 
 
@@ -366,11 +340,7 @@ class SetBUPaymentLimit(BaseSchema):
     pass
 
 
-class SetCODForUserCreation(BaseSchema):
-    pass
-
-
-class SetCODOptionDetails(BaseSchema):
+class SetCODForUserRequest(BaseSchema):
     pass
 
 
@@ -378,7 +348,7 @@ class EdcModelData(BaseSchema):
     pass
 
 
-class EdcAggregatorAndModelListDetails(BaseSchema):
+class EdcAggregatorAndModelListResponse(BaseSchema):
     pass
 
 
@@ -386,11 +356,11 @@ class StatisticsData(BaseSchema):
     pass
 
 
-class EdcDeviceStatsDetails(BaseSchema):
+class EdcDeviceStatsResponse(BaseSchema):
     pass
 
 
-class EdcAddCreation(BaseSchema):
+class EdcAddRequest(BaseSchema):
     pass
 
 
@@ -398,19 +368,19 @@ class EdcDevice(BaseSchema):
     pass
 
 
-class EdcDeviceAddDetails(BaseSchema):
+class EdcDeviceAddResponse(BaseSchema):
     pass
 
 
-class EdcDeviceDetails(BaseSchema):
+class EdcDeviceDetailsResponse(BaseSchema):
     pass
 
 
-class EdcUpdate(BaseSchema):
+class EdcUpdateRequest(BaseSchema):
     pass
 
 
-class EdcDeviceUpdateDetails(BaseSchema):
+class EdcDeviceUpdateResponse(BaseSchema):
     pass
 
 
@@ -418,27 +388,27 @@ class Page(BaseSchema):
     pass
 
 
-class EdcDeviceListDetails(BaseSchema):
+class EdcDeviceListResponse(BaseSchema):
     pass
 
 
-class PaymentInitializationCreation(BaseSchema):
+class PaymentInitializationRequest(BaseSchema):
     pass
 
 
-class PaymentInitializationDetails(BaseSchema):
+class PaymentInitializationResponse(BaseSchema):
     pass
 
 
-class PaymentStatusUpdateCreation(BaseSchema):
+class PaymentStatusUpdateRequest(BaseSchema):
     pass
 
 
-class PaymentStatusUpdateDetails(BaseSchema):
+class PaymentStatusUpdateResponse(BaseSchema):
     pass
 
 
-class ResendOrCancelPaymentCreation(BaseSchema):
+class ResendOrCancelPaymentRequest(BaseSchema):
     pass
 
 
@@ -446,15 +416,15 @@ class LinkStatus(BaseSchema):
     pass
 
 
-class ResendOrCancelPaymentDetails(BaseSchema):
+class ResendOrCancelPaymentResponse(BaseSchema):
     pass
 
 
-class PaymentStatusBulkHandlerCreation(BaseSchema):
+class PaymentStatusBulkHandlerRequest(BaseSchema):
     pass
 
 
-class PaymentObjectList(BaseSchema):
+class PaymentObjectListSerializer(BaseSchema):
     pass
 
 
@@ -462,11 +432,11 @@ class PaymentStatusObject(BaseSchema):
     pass
 
 
-class PaymentStatusBulkHandlerDetails(BaseSchema):
+class PaymentStatusBulkHandlerResponse(BaseSchema):
     pass
 
 
-class GetOauthUrlDetails(BaseSchema):
+class GetOauthUrlResponse(BaseSchema):
     pass
 
 
@@ -482,15 +452,15 @@ class RepaymentDetailsSerialiserPayAll(BaseSchema):
     pass
 
 
-class RepaymentDetails(BaseSchema):
+class RepaymentResponse(BaseSchema):
     pass
 
 
-class MerchantOnBoardingCreation(BaseSchema):
+class MerchantOnBoardingRequest(BaseSchema):
     pass
 
 
-class MerchantOnBoardingDetails(BaseSchema):
+class MerchantOnBoardingResponse(BaseSchema):
     pass
 
 
@@ -498,7 +468,7 @@ class MerchantOnboardingData(BaseSchema):
     pass
 
 
-class ValidateCustomerCreation(BaseSchema):
+class ValidateCustomerRequest(BaseSchema):
     pass
 
 
@@ -510,7 +480,7 @@ class OrderItems(BaseSchema):
     pass
 
 
-class ValidateCustomerDetails(BaseSchema):
+class ValidateCustomerResponse(BaseSchema):
     pass
 
 
@@ -522,7 +492,7 @@ class ValidateCustomerData(BaseSchema):
     pass
 
 
-class GetPaymentLinkDetails(BaseSchema):
+class GetPaymentLinkResponse(BaseSchema):
     pass
 
 
@@ -530,7 +500,7 @@ class ErrorDescription(BaseSchema):
     pass
 
 
-class ErrorDetails(BaseSchema):
+class ErrorResponse(BaseSchema):
     pass
 
 
@@ -538,23 +508,23 @@ class CreatePaymentLinkMeta(BaseSchema):
     pass
 
 
-class CreatePaymentLinkCreation(BaseSchema):
+class CreatePaymentLinkRequest(BaseSchema):
     pass
 
 
-class CreatePaymentLinkDetails(BaseSchema):
+class CreatePaymentLinkResponse(BaseSchema):
     pass
 
 
-class PollingPaymentLinkDetails(BaseSchema):
+class PollingPaymentLinkResponse(BaseSchema):
     pass
 
 
-class CancelOrResendPaymentLinkCreation(BaseSchema):
+class CancelOrResendPaymentLinkRequest(BaseSchema):
     pass
 
 
-class ResendPaymentLinkDetails(BaseSchema):
+class ResendPaymentLinkResponse(BaseSchema):
     pass
 
 
@@ -562,7 +532,7 @@ class PaymentLinkError(BaseSchema):
     pass
 
 
-class CancelPaymentLinkDetails(BaseSchema):
+class CancelPaymentLinkResponse(BaseSchema):
     pass
 
 
@@ -578,15 +548,15 @@ class GetPaymentCode(BaseSchema):
     pass
 
 
-class GetPaymentCodeDetails(BaseSchema):
+class GetPaymentCodeResponse(BaseSchema):
     pass
 
 
-class PlatformOnlineOfflinePaymentDetails(BaseSchema):
+class PlatformOnlineOfflinePaymentResponse(BaseSchema):
     pass
 
 
-class PatchPlatformOnlineOfflinePaymentDetails(BaseSchema):
+class PatchPlatformOnlineOfflinePaymentResponse(BaseSchema):
     pass
 
 
@@ -614,23 +584,23 @@ class CODPaymentMode(BaseSchema):
     pass
 
 
-class PlatformPaymentMode(BaseSchema):
+class PlatformPaymentModeRequest(BaseSchema):
     pass
 
 
-class PlatformPaymentModeDetails(BaseSchema):
+class PlatformPaymentModeResponse(BaseSchema):
     pass
 
 
-class AggregatorPlatformPaymentModeDetails(BaseSchema):
+class AggregatorPlatformPaymentModeResponse(BaseSchema):
     pass
 
 
-class PlatformOfflineAdvance(BaseSchema):
+class PlatformOfflineAdvanceRequest(BaseSchema):
     pass
 
 
-class PlatformOfflineAdvanceDetails(BaseSchema):
+class PlatformOfflineAdvanceResponse(BaseSchema):
     pass
 
 
@@ -650,7 +620,7 @@ class PaymentModeItem(BaseSchema):
     pass
 
 
-class MerchantPaymentMode(BaseSchema):
+class MerchantPaymentModeRequest(BaseSchema):
     pass
 
 
@@ -658,15 +628,11 @@ class ModeIsactive(BaseSchema):
     pass
 
 
-class OfferSerializerData(BaseSchema):
+class OfferSerializer(BaseSchema):
     pass
 
 
-class AppliedOfferSerializerData(BaseSchema):
-    pass
-
-
-class MerchnatPaymentModeCreation(BaseSchema):
+class AppliedOfferSerializer(BaseSchema):
     pass
 
 
@@ -694,31 +660,23 @@ class PaymentSessionDetail(BaseSchema):
     pass
 
 
-class RefundDetailsSerializerData(BaseSchema):
+class AmountSerializer(BaseSchema):
     pass
 
 
-class AmountSerializerData(BaseSchema):
+class ChargeAmountSerializer(BaseSchema):
     pass
 
 
-class ChargeAmountSerializerData(BaseSchema):
+class CartChargesSerializer(BaseSchema):
     pass
 
 
-class CartChargesSerializerData(BaseSchema):
+class GetPaymentSessionResponse(BaseSchema):
     pass
 
 
-class CartDetailsSerializerData(BaseSchema):
-    pass
-
-
-class GetPaymentSessionDetails(BaseSchema):
-    pass
-
-
-class PaymentSessionCreation(BaseSchema):
+class PaymentSessionRequestSerializer(BaseSchema):
     pass
 
 
@@ -726,7 +684,7 @@ class TransactionDetail(BaseSchema):
     pass
 
 
-class PaymentSessionPutDetails(BaseSchema):
+class PaymentSessionResponseSerializer(BaseSchema):
     pass
 
 
@@ -734,27 +692,27 @@ class RefundSessionDetail(BaseSchema):
     pass
 
 
-class RefundSessionCreation(BaseSchema):
+class RefundSessionRequestSerializer(BaseSchema):
     pass
 
 
-class RefundSessionDetails(BaseSchema):
+class RefundSessionResponseSerializer(BaseSchema):
     pass
 
 
-class PaymentDetails(BaseSchema):
+class PaymentDetailsSerializer(BaseSchema):
     pass
 
 
-class CartDetails(BaseSchema):
+class CartDetailsSerializer(BaseSchema):
     pass
 
 
-class RefundDetails(BaseSchema):
+class RefundDetailsSerializer(BaseSchema):
     pass
 
 
-class PaymentSessionFetchDetails(BaseSchema):
+class PaymentSessionSerializer(BaseSchema):
     pass
 
 
@@ -762,15 +720,11 @@ class RefundSourcesPriority(BaseSchema):
     pass
 
 
-class RefundPriorityDetails(BaseSchema):
+class RefundPriorityResponseSerializer(BaseSchema):
     pass
 
 
-class RefundPriorityCreation(BaseSchema):
-    pass
-
-
-class MerchantPaymentModeCreation(BaseSchema):
+class RefundPriorityRequestSerializer(BaseSchema):
     pass
 
 
@@ -782,7 +736,7 @@ class ToConfig(BaseSchema):
     pass
 
 
-class PlatformPaymentModeCopyConfigCreation(BaseSchema):
+class PlatformPaymentModeCopyConfigRequest(BaseSchema):
     pass
 
 
@@ -794,7 +748,7 @@ class PaymentOrderMethods(BaseSchema):
     pass
 
 
-class PaymentOrderCreation(BaseSchema):
+class PaymentOrderRequest(BaseSchema):
     pass
 
 
@@ -806,7 +760,7 @@ class PaymentOrderData(BaseSchema):
     pass
 
 
-class PaymentOrderDetails(BaseSchema):
+class PaymentOrderResponse(BaseSchema):
     pass
 
 
@@ -814,7 +768,7 @@ class AggregatorVersionItemSchema(BaseSchema):
     pass
 
 
-class AggregatorVersionDetails(BaseSchema):
+class AggregatorVersionResponse(BaseSchema):
     pass
 
 
@@ -822,7 +776,7 @@ class AggregatorVersionRequestSchema(BaseSchema):
     pass
 
 
-class PatchAggregatorControl(BaseSchema):
+class AggregatorControlRequest(BaseSchema):
     pass
 
 
@@ -858,11 +812,11 @@ class PaymentCustomConfigResponseSchema(BaseSchema):
     pass
 
 
-class DeleteBeneficiary(BaseSchema):
+class DeleteBeneficiaryRequest(BaseSchema):
     pass
 
 
-class DeleteRefundAccountDetails(BaseSchema):
+class DeleteRefundAccountResponse(BaseSchema):
     pass
 
 
@@ -878,11 +832,11 @@ class OfflineRefundOptions(BaseSchema):
     pass
 
 
-class RefundOptionDetails(BaseSchema):
+class RefundOptionResponse(BaseSchema):
     pass
 
 
-class SelectedRefundOptionDetails(BaseSchema):
+class SelectedRefundOptionResponse(BaseSchema):
     pass
 
 
@@ -910,7 +864,7 @@ class RefundOptionsLimit(BaseSchema):
     pass
 
 
-class ValidateValidateAddress(BaseSchema):
+class ValidateValidateAddressRequest(BaseSchema):
     pass
 
 
@@ -918,23 +872,23 @@ class VPADetails(BaseSchema):
     pass
 
 
-class ValidateValidateAddressDetails(BaseSchema):
+class ValidateValidateAddressResponse(BaseSchema):
     pass
 
 
-class SetDefaultBeneficiary(BaseSchema):
+class SetDefaultBeneficiaryRequest(BaseSchema):
     pass
 
 
-class SetDefaultBeneficiaryDetails(BaseSchema):
+class SetDefaultBeneficiaryResponse(BaseSchema):
     pass
 
 
-class ShipmentRefundDetailsMeta(BaseSchema):
+class ShipmentRefundRequestMeta(BaseSchema):
     pass
 
 
-class ShipmentRefundDetails(BaseSchema):
+class ShipmentRefundRequest(BaseSchema):
     pass
 
 
@@ -942,7 +896,7 @@ class ShipmentRefundDetail(BaseSchema):
     pass
 
 
-class ShipmentRefundRes(BaseSchema):
+class ShipmentRefundResponse(BaseSchema):
     pass
 
 
@@ -954,19 +908,19 @@ class RefundItem(BaseSchema):
     pass
 
 
-class PennyDropValidationDetails(BaseSchema):
+class PennyDropValidationResponse(BaseSchema):
     pass
 
 
-class UpdatePennyDropValidation(BaseSchema):
+class UpdatePennyDropValidationRequest(BaseSchema):
     pass
 
 
-class AggregatorConfigDetails(BaseSchema):
+class AggregatorConfigResponse(BaseSchema):
     pass
 
 
-class PaymentModeDetails(BaseSchema):
+class PaymentModeResponse(BaseSchema):
     pass
 
 
@@ -982,15 +936,15 @@ class SubPaymentMode(BaseSchema):
     pass
 
 
-class AggregatorCredentialReq(BaseSchema):
+class AggregatorCredentialRequest(BaseSchema):
     pass
 
 
-class PatchAggregatorCredentialDetails(BaseSchema):
+class PatchAggregatorCredentialResponse(BaseSchema):
     pass
 
 
-class AggregatorCredentialRes(BaseSchema):
+class AggregatorCredentialResponse(BaseSchema):
     pass
 
 
@@ -1002,7 +956,7 @@ class AggregatorDisplayItem(BaseSchema):
     pass
 
 
-class GetDevice(BaseSchema):
+class GetDeviceResponse(BaseSchema):
     pass
 
 
@@ -1018,7 +972,7 @@ class Device(BaseSchema):
     pass
 
 
-class AggregatorHistoryDetails(BaseSchema):
+class AggregatorHistoryResponse(BaseSchema):
     pass
 
 
@@ -1046,7 +1000,7 @@ class RefundTo(BaseSchema):
     pass
 
 
-class PaymentMethodConfigDetails(BaseSchema):
+class PaymentMethodConfigResponse(BaseSchema):
     pass
 
 
@@ -1058,7 +1012,7 @@ class SessionItem(BaseSchema):
     pass
 
 
-class PaymentErrorCodeAndMessage(BaseSchema):
+class PaymentErrorCodeAndResponse(BaseSchema):
     pass
 
 
@@ -1066,38 +1020,14 @@ class PaymentError(BaseSchema):
     pass
 
 
-class ShipmentBeneficiaryDetailsRes(BaseSchema):
-    pass
-
-
-class TransactionData(BaseSchema):
-    pass
-
-
-class OrderData(BaseSchema):
-    pass
-
-
-class PageData(BaseSchema):
-    pass
-
-
-class TransactionsResponseSchema(BaseSchema):
-    pass
-
-
-class HttpErrorCodeAndMessage(BaseSchema):
-    pass
-
-
-class ErrorCodeDescription(BaseSchema):
+class ShipmentBeneficiaryDetailsResponse(BaseSchema):
     pass
 
 
 
 
 
-class PaymentGatewayConfigDetails(BaseSchema):
+class PaymentGatewayConfigResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -1165,7 +1095,7 @@ class PaymentGatewayConfig(BaseSchema):
     
 
 
-class PaymentGatewayConfigCreation(BaseSchema):
+class PaymentGatewayConfigRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -1201,7 +1131,7 @@ class ErrorCodeAndDescription(BaseSchema):
     
 
 
-class HttpErrorDetails(BaseSchema):
+class HttpErrorCodeAndResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -1215,7 +1145,7 @@ class HttpErrorDetails(BaseSchema):
     
 
 
-class RefundErrorCodeAndMessage(BaseSchema):
+class RefundErrorCodeAndResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -1229,7 +1159,7 @@ class RefundErrorCodeAndMessage(BaseSchema):
     
 
 
-class PaymentOptionErrorCodeAndMessage(BaseSchema):
+class PaymentOptionErrorCodeAndResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -1241,7 +1171,7 @@ class PaymentOptionErrorCodeAndMessage(BaseSchema):
     
 
 
-class RefundOptionErrorCodeAndMessage(BaseSchema):
+class RefundOptionErrorCodeAndResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -1253,7 +1183,7 @@ class RefundOptionErrorCodeAndMessage(BaseSchema):
     
 
 
-class UserCODAdvanceErrorCodeAndMessage(BaseSchema):
+class UserCODAdvanceErrorCodeAndResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -1375,11 +1305,11 @@ class ProductCODData(BaseSchema):
     
     items = fields.Dict(required=False, allow_none=True)
     
-    cod_charges = fields.Nested(CODChargesLimitsDetails, required=False)
+    cod_charges = fields.Nested(CODChargesLimitsResponse, required=False)
     
 
 
-class CODChargesLimitsDetails(BaseSchema):
+class CODChargesLimitsResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -1843,7 +1773,7 @@ class AdvancePaymentObject(BaseSchema):
     
 
 
-class PaymentModeRouteDetails(BaseSchema):
+class PaymentModeRouteResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -1913,7 +1843,7 @@ class DeliverySlotDetail(BaseSchema):
     
 
 
-class PaymentOptionsDetails(BaseSchema):
+class PaymentOptionsResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -1997,7 +1927,7 @@ class Payout(BaseSchema):
     
 
 
-class PayoutsDetails(BaseSchema):
+class PayoutsResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2047,7 +1977,7 @@ class PayoutUserDetails(BaseSchema):
     
 
 
-class PayoutCreation(BaseSchema):
+class PayoutRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -2065,7 +1995,7 @@ class PayoutCreation(BaseSchema):
     
 
 
-class PayoutDetails(BaseSchema):
+class PayoutResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2087,11 +2017,11 @@ class PayoutDetails(BaseSchema):
     
     created = fields.Boolean(required=False)
     
-    payouts = fields.Nested(PayoutData, required=False)
+    payouts = fields.Nested(PayoutDetails, required=False)
     
 
 
-class PayoutData(BaseSchema):
+class PayoutDetails(BaseSchema):
     # Payment swagger.json
 
     
@@ -2127,7 +2057,7 @@ class BankDetails(BaseSchema):
     
 
 
-class UpdatePayoutDetails(BaseSchema):
+class UpdatePayoutResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2163,7 +2093,7 @@ class Payouts(BaseSchema):
     
 
 
-class UpdatePayoutCreation(BaseSchema):
+class UpdatePayoutRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -2175,7 +2105,7 @@ class UpdatePayoutCreation(BaseSchema):
     
 
 
-class DeletePayoutDetails(BaseSchema):
+class DeletePayoutResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2187,55 +2117,7 @@ class DeletePayoutDetails(BaseSchema):
     
 
 
-class SubscriptionPaymentMethodDetails(BaseSchema):
-    # Payment swagger.json
-
-    
-    data = fields.List(fields.Dict(required=False), required=False)
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class DeleteSubscriptionPaymentMethodDetails(BaseSchema):
-    # Payment swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class SubscriptionConfigDetails(BaseSchema):
-    # Payment swagger.json
-
-    
-    aggregator = fields.Str(required=False)
-    
-    config = fields.Dict(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class SaveSubscriptionSetupIntentCreation(BaseSchema):
-    # Payment swagger.json
-
-    
-    unique_external_id = fields.Str(required=False)
-    
-
-
-class SaveSubscriptionSetupIntentDetails(BaseSchema):
-    # Payment swagger.json
-
-    
-    data = fields.Dict(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class RefundAccountDetails(BaseSchema):
+class RefundAccountResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2249,7 +2131,7 @@ class RefundAccountDetails(BaseSchema):
     
 
 
-class GetRefundAccountDetails(BaseSchema):
+class GetRefundAccountResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2301,7 +2183,7 @@ class BankDetailsForOTP(BaseSchema):
     
 
 
-class AddBeneficiaryDetailsOTPCreation(BaseSchema):
+class AddBeneficiaryDetailsOTPRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -2317,7 +2199,7 @@ class AddBeneficiaryDetailsOTPCreation(BaseSchema):
     
 
 
-class IfscCodeDetails(BaseSchema):
+class IfscCodeResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2375,9 +2257,9 @@ class OrderBeneficiaryDetails(BaseSchema):
     
     meta = fields.Dict(required=False, allow_none=True)
     
-    bank_name = fields.Str(required=False)
+    bank_name = fields.Str(required=False, allow_none=True)
     
-    account_no = fields.Str(required=False)
+    account_no = fields.Str(required=False, allow_none=True)
     
     mobile = fields.Str(required=False, allow_none=True)
     
@@ -2385,7 +2267,7 @@ class OrderBeneficiaryDetails(BaseSchema):
     
 
 
-class OrderBeneficiaryFetchResults(BaseSchema):
+class OrderBeneficiaryResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2431,7 +2313,7 @@ class MultiTenderPaymentMethod(BaseSchema):
     
 
 
-class PaymentConfirmationCreation(BaseSchema):
+class PaymentConfirmationRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -2441,7 +2323,7 @@ class PaymentConfirmationCreation(BaseSchema):
     
 
 
-class PaymentConfirmationDetails(BaseSchema):
+class PaymentConfirmationResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2503,17 +2385,7 @@ class CODPaymentLimitConfig(BaseSchema):
     
 
 
-class UserPaymentLimitConfig(BaseSchema):
-    # Payment swagger.json
-
-    
-    advance = fields.Nested(AdvancePaymentLimitConfig, required=False)
-    
-    cod = fields.Nested(CODPaymentLimitConfig, required=False)
-    
-
-
-class GetUserBULimitDetails(BaseSchema):
+class GetUserBULimitResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2521,19 +2393,19 @@ class GetUserBULimitDetails(BaseSchema):
     
     display_name = fields.Str(required=False)
     
-    config = fields.Nested(UserPaymentLimitConfig, required=False)
+    config = fields.Nested(CODPaymentLimitConfig, required=False)
     
 
 
-class GetUserCODLimitDetails(BaseSchema):
+class GetUserCODLimitResponse(BaseSchema):
     # Payment swagger.json
 
+    
+    items = fields.List(fields.Nested(GetUserBULimitResponse, required=False), required=False)
     
     success = fields.Boolean(required=False)
     
     message = fields.Str(required=False)
-    
-    items = fields.List(fields.Nested(GetUserBULimitDetails, required=False), required=False)
     
 
 
@@ -2591,7 +2463,7 @@ class SetBUPaymentLimit(BaseSchema):
     
 
 
-class SetCODForUserCreation(BaseSchema):
+class SetCODForUserRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -2599,19 +2471,7 @@ class SetCODForUserCreation(BaseSchema):
     
     merchant_user_id = fields.Str(required=False)
     
-    is_active = fields.Boolean(required=False)
-    
     items = fields.List(fields.Nested(SetBUPaymentLimit, required=False), required=False)
-    
-
-
-class SetCODOptionDetails(BaseSchema):
-    # Payment swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    success = fields.Boolean(required=False)
     
 
 
@@ -2627,7 +2487,7 @@ class EdcModelData(BaseSchema):
     
 
 
-class EdcAggregatorAndModelListDetails(BaseSchema):
+class EdcAggregatorAndModelListResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2647,7 +2507,7 @@ class StatisticsData(BaseSchema):
     
 
 
-class EdcDeviceStatsDetails(BaseSchema):
+class EdcDeviceStatsResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2657,7 +2517,7 @@ class EdcDeviceStatsDetails(BaseSchema):
     
 
 
-class EdcAddCreation(BaseSchema):
+class EdcAddRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -2703,7 +2563,7 @@ class EdcDevice(BaseSchema):
     
 
 
-class EdcDeviceAddDetails(BaseSchema):
+class EdcDeviceAddResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2713,7 +2573,7 @@ class EdcDeviceAddDetails(BaseSchema):
     
 
 
-class EdcDeviceDetails(BaseSchema):
+class EdcDeviceDetailsResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2723,7 +2583,7 @@ class EdcDeviceDetails(BaseSchema):
     
 
 
-class EdcUpdate(BaseSchema):
+class EdcUpdateRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -2743,7 +2603,7 @@ class EdcUpdate(BaseSchema):
     
 
 
-class EdcDeviceUpdateDetails(BaseSchema):
+class EdcDeviceUpdateResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2773,7 +2633,7 @@ class Page(BaseSchema):
     
 
 
-class EdcDeviceListDetails(BaseSchema):
+class EdcDeviceListResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2785,7 +2645,7 @@ class EdcDeviceListDetails(BaseSchema):
     
 
 
-class PaymentInitializationCreation(BaseSchema):
+class PaymentInitializationRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -2805,7 +2665,7 @@ class PaymentInitializationCreation(BaseSchema):
     
     currency = fields.Str(required=False)
     
-    amount = fields.Int(required=False)
+    amount = fields.Int(required=False, allow_none=True)
     
     contact = fields.Str(required=False)
     
@@ -2819,7 +2679,7 @@ class PaymentInitializationCreation(BaseSchema):
     
 
 
-class PaymentInitializationDetails(BaseSchema):
+class PaymentInitializationResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2861,7 +2721,7 @@ class PaymentInitializationDetails(BaseSchema):
     
 
 
-class PaymentStatusUpdateCreation(BaseSchema):
+class PaymentStatusUpdateRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -2879,7 +2739,7 @@ class PaymentStatusUpdateCreation(BaseSchema):
     
     currency = fields.Str(required=False)
     
-    amount = fields.Int(required=False)
+    amount = fields.Int(required=False, allow_none=True)
     
     contact = fields.Str(required=False)
     
@@ -2895,7 +2755,7 @@ class PaymentStatusUpdateCreation(BaseSchema):
     
 
 
-class PaymentStatusUpdateDetails(BaseSchema):
+class PaymentStatusUpdateResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2911,7 +2771,7 @@ class PaymentStatusUpdateDetails(BaseSchema):
     
 
 
-class ResendOrCancelPaymentCreation(BaseSchema):
+class ResendOrCancelPaymentRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -2933,7 +2793,7 @@ class LinkStatus(BaseSchema):
     
 
 
-class ResendOrCancelPaymentDetails(BaseSchema):
+class ResendOrCancelPaymentResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -2943,7 +2803,7 @@ class ResendOrCancelPaymentDetails(BaseSchema):
     
 
 
-class PaymentStatusBulkHandlerCreation(BaseSchema):
+class PaymentStatusBulkHandlerRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -2951,7 +2811,7 @@ class PaymentStatusBulkHandlerCreation(BaseSchema):
     
 
 
-class PaymentObjectList(BaseSchema):
+class PaymentObjectListSerializer(BaseSchema):
     # Payment swagger.json
 
     
@@ -2999,11 +2859,11 @@ class PaymentStatusObject(BaseSchema):
     
     merchant_order_id = fields.Str(required=False)
     
-    payment_object_list = fields.List(fields.Nested(PaymentObjectList, required=False), required=False)
+    payment_object_list = fields.List(fields.Nested(PaymentObjectListSerializer, required=False), required=False)
     
 
 
-class PaymentStatusBulkHandlerDetails(BaseSchema):
+class PaymentStatusBulkHandlerResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -3019,7 +2879,7 @@ class PaymentStatusBulkHandlerDetails(BaseSchema):
     
 
 
-class GetOauthUrlDetails(BaseSchema):
+class GetOauthUrlResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -3071,7 +2931,7 @@ class RepaymentDetailsSerialiserPayAll(BaseSchema):
     
     total_amount = fields.Float(required=False)
     
-    extension_order_id = fields.Str(required=False)
+    extension_order_id = fields.Str(required=False, allow_none=True)
     
     aggregator_transaction_id = fields.Str(required=False)
     
@@ -3081,7 +2941,7 @@ class RepaymentDetailsSerialiserPayAll(BaseSchema):
     
 
 
-class RepaymentDetails(BaseSchema):
+class RepaymentResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -3091,7 +2951,7 @@ class RepaymentDetails(BaseSchema):
     
 
 
-class MerchantOnBoardingCreation(BaseSchema):
+class MerchantOnBoardingRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -3107,7 +2967,7 @@ class MerchantOnBoardingCreation(BaseSchema):
     
 
 
-class MerchantOnBoardingDetails(BaseSchema):
+class MerchantOnBoardingResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -3129,7 +2989,7 @@ class MerchantOnboardingData(BaseSchema):
     
 
 
-class ValidateCustomerCreation(BaseSchema):
+class ValidateCustomerRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -3171,7 +3031,7 @@ class OrderItems(BaseSchema):
     
 
 
-class ValidateCustomerDetails(BaseSchema):
+class ValidateCustomerResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -3225,7 +3085,7 @@ class ValidateCustomerData(BaseSchema):
     
 
 
-class GetPaymentLinkDetails(BaseSchema):
+class GetPaymentLinkResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -3277,17 +3137,17 @@ class ErrorDescription(BaseSchema):
     
 
 
-class ErrorDetails(BaseSchema):
+class ErrorResponse(BaseSchema):
     # Payment swagger.json
 
     
     status_code = fields.Int(required=False)
     
-    error = fields.Nested(ErrorDescription, required=False)
-    
     message = fields.Str(required=False)
     
     success = fields.Boolean(required=False)
+    
+    error = fields.Nested(ErrorDescription, required=False)
     
 
 
@@ -3307,7 +3167,7 @@ class CreatePaymentLinkMeta(BaseSchema):
     
 
 
-class CreatePaymentLinkCreation(BaseSchema):
+class CreatePaymentLinkRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -3325,13 +3185,9 @@ class CreatePaymentLinkCreation(BaseSchema):
     
     external_order_id = fields.Str(required=False)
     
-    success_redirection_url = fields.Str(required=False)
-    
-    failure_redirection_url = fields.Str(required=False)
-    
 
 
-class CreatePaymentLinkDetails(BaseSchema):
+class CreatePaymentLinkResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -3349,7 +3205,7 @@ class CreatePaymentLinkDetails(BaseSchema):
     
 
 
-class PollingPaymentLinkDetails(BaseSchema):
+class PollingPaymentLinkResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -3377,7 +3233,7 @@ class PollingPaymentLinkDetails(BaseSchema):
     
 
 
-class CancelOrResendPaymentLinkCreation(BaseSchema):
+class CancelOrResendPaymentLinkRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -3385,7 +3241,7 @@ class CancelOrResendPaymentLinkCreation(BaseSchema):
     
 
 
-class ResendPaymentLinkDetails(BaseSchema):
+class ResendPaymentLinkResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -3396,8 +3252,6 @@ class ResendPaymentLinkDetails(BaseSchema):
     polling_timeout = fields.Int(required=False, allow_none=True)
     
     success = fields.Boolean(required=False)
-    
-    error = fields.Nested(PaymentLinkError, required=False)
     
 
 
@@ -3411,7 +3265,7 @@ class PaymentLinkError(BaseSchema):
     
 
 
-class CancelPaymentLinkDetails(BaseSchema):
+class CancelPaymentLinkResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -3420,8 +3274,6 @@ class CancelPaymentLinkDetails(BaseSchema):
     message = fields.Str(required=False)
     
     success = fields.Boolean(required=False)
-    
-    error = fields.Nested(PaymentLinkError, required=False)
     
 
 
@@ -3517,7 +3369,7 @@ class GetPaymentCode(BaseSchema):
     
 
 
-class GetPaymentCodeDetails(BaseSchema):
+class GetPaymentCodeResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -3527,7 +3379,7 @@ class GetPaymentCodeDetails(BaseSchema):
     
 
 
-class PlatformOnlineOfflinePaymentDetails(BaseSchema):
+class PlatformOnlineOfflinePaymentResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -3539,7 +3391,7 @@ class PlatformOnlineOfflinePaymentDetails(BaseSchema):
     
 
 
-class PatchPlatformOnlineOfflinePaymentDetails(BaseSchema):
+class PatchPlatformOnlineOfflinePaymentResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -3559,7 +3411,7 @@ class PlatformOnlineOfflineItem(BaseSchema):
     
     offline = fields.Nested(OfflinePaymentDetails, required=False)
     
-    advance = fields.Nested(PlatformOfflineAdvanceDetails, required=False)
+    advance = fields.Nested(PlatformOfflineAdvanceResponse, required=False)
     
 
 
@@ -3637,7 +3489,7 @@ class CODPaymentMode(BaseSchema):
     
 
 
-class PlatformPaymentMode(BaseSchema):
+class PlatformPaymentModeRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -3651,7 +3503,7 @@ class PlatformPaymentMode(BaseSchema):
     
 
 
-class PlatformPaymentModeDetails(BaseSchema):
+class PlatformPaymentModeResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -3669,7 +3521,7 @@ class PlatformPaymentModeDetails(BaseSchema):
     
 
 
-class AggregatorPlatformPaymentModeDetails(BaseSchema):
+class AggregatorPlatformPaymentModeResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -3691,7 +3543,7 @@ class AggregatorPlatformPaymentModeDetails(BaseSchema):
     
 
 
-class PlatformOfflineAdvance(BaseSchema):
+class PlatformOfflineAdvanceRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -3703,7 +3555,7 @@ class PlatformOfflineAdvance(BaseSchema):
     
 
 
-class PlatformOfflineAdvanceDetails(BaseSchema):
+class PlatformOfflineAdvanceResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -3813,7 +3665,7 @@ class PaymentModeItem(BaseSchema):
     
 
 
-class MerchantPaymentMode(BaseSchema):
+class MerchantPaymentModeRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -3831,7 +3683,7 @@ class ModeIsactive(BaseSchema):
     
 
 
-class OfferSerializerData(BaseSchema):
+class OfferSerializer(BaseSchema):
     # Payment swagger.json
 
     
@@ -3845,23 +3697,13 @@ class OfferSerializerData(BaseSchema):
     
 
 
-class AppliedOfferSerializerData(BaseSchema):
+class AppliedOfferSerializer(BaseSchema):
     # Payment swagger.json
 
     
     total_applied_offer_amount = fields.Float(required=False)
     
-    offer_list = fields.List(fields.Nested(OfferSerializerData, required=False), required=False)
-    
-
-
-class MerchnatPaymentModeCreation(BaseSchema):
-    # Payment swagger.json
-
-    
-    offline = fields.Dict(required=False, allow_none=True)
-    
-    online = fields.Dict(required=False, allow_none=True)
+    offer_list = fields.List(fields.Nested(OfferSerializer, required=False), required=False)
     
 
 
@@ -4021,25 +3863,7 @@ class PaymentSessionDetail(BaseSchema):
     
 
 
-class RefundDetailsSerializerData(BaseSchema):
-    # Payment swagger.json
-
-    
-    amount = fields.Int(required=False)
-    
-    currency = fields.Str(required=False)
-    
-    request_id = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-    created = fields.Str(required=False)
-    
-    refund_utr = fields.Str(required=False)
-    
-
-
-class AmountSerializerData(BaseSchema):
+class AmountSerializer(BaseSchema):
     # Payment swagger.json
 
     
@@ -4049,17 +3873,17 @@ class AmountSerializerData(BaseSchema):
     
 
 
-class ChargeAmountSerializerData(BaseSchema):
+class ChargeAmountSerializer(BaseSchema):
     # Payment swagger.json
 
     
-    ordering_currency = fields.Nested(AmountSerializerData, required=False)
+    ordering_currency = fields.Nested(AmountSerializer, required=False)
     
-    base_currency = fields.Nested(AmountSerializerData, required=False)
+    base_currency = fields.Nested(AmountSerializer, required=False)
     
 
 
-class CartChargesSerializerData(BaseSchema):
+class CartChargesSerializer(BaseSchema):
     # Payment swagger.json
 
     
@@ -4069,27 +3893,11 @@ class CartChargesSerializerData(BaseSchema):
     
     code = fields.Str(required=False)
     
-    amount = fields.Nested(ChargeAmountSerializerData, required=False)
+    amount = fields.Nested(ChargeAmountSerializer, required=False)
     
 
 
-class CartDetailsSerializerData(BaseSchema):
-    # Payment swagger.json
-
-    
-    items = fields.Dict(required=False)
-    
-    articles = fields.List(fields.Dict(required=False), required=False)
-    
-    cart_value = fields.Float(required=False)
-    
-    cart_charges = fields.List(fields.Nested(CartChargesSerializerData, required=False), required=False)
-    
-    total_quantity = fields.Int(required=False)
-    
-
-
-class GetPaymentSessionDetails(BaseSchema):
+class GetPaymentSessionResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -4097,7 +3905,7 @@ class GetPaymentSessionDetails(BaseSchema):
     
     gid = fields.Str(required=False)
     
-    applied_payment_offers = fields.Nested(AppliedOfferSerializerData, required=False)
+    applied_payment_offers = fields.Nested(AppliedOfferSerializer, required=False)
     
     checksum = fields.Str(required=False)
     
@@ -4107,15 +3915,15 @@ class GetPaymentSessionDetails(BaseSchema):
     
     payment_details = fields.Nested(PaymentSessionDetail, required=False)
     
-    cart_details = fields.Nested(CartDetailsSerializerData, required=False)
+    cart_details = fields.Nested(CartDetailsSerializer, required=False)
     
     total_amount = fields.Int(required=False)
     
-    refund_details = fields.List(fields.Nested(RefundDetailsSerializerData, required=False), required=False)
+    refund_details = fields.List(fields.Nested(RefundDetailsSerializer, required=False), required=False)
     
 
 
-class PaymentSessionCreation(BaseSchema):
+class PaymentSessionRequestSerializer(BaseSchema):
     # Payment swagger.json
 
     
@@ -4123,7 +3931,9 @@ class PaymentSessionCreation(BaseSchema):
     
     gid = fields.Str(required=False)
     
-    applied_payment_offers = fields.Nested(AppliedOfferSerializerData, required=False)
+    applied_payment_offers = fields.Nested(AppliedOfferSerializer, required=False)
+    
+    checksum = fields.Str(required=False)
     
     order_details = fields.Nested(OrderDetail, required=False)
     
@@ -4134,8 +3944,6 @@ class PaymentSessionCreation(BaseSchema):
     payment_details = fields.List(fields.Nested(PaymentSessionDetail, required=False), required=False)
     
     total_amount = fields.Int(required=False)
-    
-    checksum = fields.Str(required=False)
     
     source = fields.Str(required=False)
     
@@ -4155,7 +3963,7 @@ class TransactionDetail(BaseSchema):
     
 
 
-class PaymentSessionPutDetails(BaseSchema):
+class PaymentSessionResponseSerializer(BaseSchema):
     # Payment swagger.json
 
     
@@ -4207,7 +4015,7 @@ class RefundSessionDetail(BaseSchema):
     
 
 
-class RefundSessionCreation(BaseSchema):
+class RefundSessionRequestSerializer(BaseSchema):
     # Payment swagger.json
 
     
@@ -4233,7 +4041,7 @@ class RefundSessionCreation(BaseSchema):
     
 
 
-class RefundSessionDetails(BaseSchema):
+class RefundSessionResponseSerializer(BaseSchema):
     # Payment swagger.json
 
     
@@ -4253,7 +4061,7 @@ class RefundSessionDetails(BaseSchema):
     
 
 
-class PaymentDetails(BaseSchema):
+class PaymentDetailsSerializer(BaseSchema):
     # Payment swagger.json
 
     
@@ -4299,7 +4107,7 @@ class PaymentDetails(BaseSchema):
     
 
 
-class CartDetails(BaseSchema):
+class CartDetailsSerializer(BaseSchema):
     # Payment swagger.json
 
     
@@ -4313,9 +4121,11 @@ class CartDetails(BaseSchema):
     
     custom_cart_meta = fields.Dict(required=False)
     
+    cart_charges = fields.List(fields.Dict(required=False), required=False)
+    
 
 
-class RefundDetails(BaseSchema):
+class RefundDetailsSerializer(BaseSchema):
     # Payment swagger.json
 
     
@@ -4333,11 +4143,11 @@ class RefundDetails(BaseSchema):
     
 
 
-class PaymentSessionFetchDetails(BaseSchema):
+class PaymentSessionSerializer(BaseSchema):
     # Payment swagger.json
 
     
-    payment_details = fields.Raw(required=False)
+    payment_details = fields.Dict(required=False)
     
     currency = fields.Str(required=False, allow_none=True)
     
@@ -4345,11 +4155,11 @@ class PaymentSessionFetchDetails(BaseSchema):
     
     total_amount = fields.Int(required=False)
     
-    gid = fields.Str(required=False)
+    gid = fields.Str(required=False, allow_none=True)
     
-    cart_details = fields.Nested(CartDetails, required=False)
+    cart_details = fields.Nested(CartDetailsSerializer, required=False)
     
-    refund_details = fields.List(fields.Nested(RefundDetails, required=False), required=False)
+    refund_details = fields.List(fields.Nested(RefundDetailsSerializer, required=False), required=False)
     
 
 
@@ -4367,7 +4177,7 @@ class RefundSourcesPriority(BaseSchema):
     
 
 
-class RefundPriorityDetails(BaseSchema):
+class RefundPriorityResponseSerializer(BaseSchema):
     # Payment swagger.json
 
     
@@ -4387,7 +4197,7 @@ class RefundPriorityDetails(BaseSchema):
     
 
 
-class RefundPriorityCreation(BaseSchema):
+class RefundPriorityRequestSerializer(BaseSchema):
     # Payment swagger.json
 
     
@@ -4396,18 +4206,6 @@ class RefundPriorityCreation(BaseSchema):
     apportion = fields.Boolean(required=False)
     
     refund_sources_priority = fields.List(fields.Nested(RefundSourcesPriority, required=False), required=False)
-    
-
-
-class MerchantPaymentModeCreation(BaseSchema):
-    # Payment swagger.json
-
-    
-    business_unit = fields.Str(required=False)
-    
-    items = fields.List(fields.Dict(required=False), required=False)
-    
-    device = fields.Dict(required=False)
     
 
 
@@ -4431,7 +4229,7 @@ class ToConfig(BaseSchema):
     
 
 
-class PlatformPaymentModeCopyConfigCreation(BaseSchema):
+class PlatformPaymentModeCopyConfigRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -4473,7 +4271,7 @@ class PaymentOrderMethods(BaseSchema):
     
 
 
-class PaymentOrderCreation(BaseSchema):
+class PaymentOrderRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -4549,7 +4347,7 @@ class PaymentOrderData(BaseSchema):
     
 
 
-class PaymentOrderDetails(BaseSchema):
+class PaymentOrderResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -4581,7 +4379,7 @@ class AggregatorVersionItemSchema(BaseSchema):
     
 
 
-class AggregatorVersionDetails(BaseSchema):
+class AggregatorVersionResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -4605,7 +4403,7 @@ class AggregatorVersionRequestSchema(BaseSchema):
     
 
 
-class PatchAggregatorControl(BaseSchema):
+class AggregatorControlRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -4717,7 +4515,7 @@ class PaymentCustomConfigResponseSchema(BaseSchema):
     
 
 
-class DeleteBeneficiary(BaseSchema):
+class DeleteBeneficiaryRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -4725,7 +4523,7 @@ class DeleteBeneficiary(BaseSchema):
     
 
 
-class DeleteRefundAccountDetails(BaseSchema):
+class DeleteRefundAccountResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -4771,7 +4569,7 @@ class OfflineRefundOptions(BaseSchema):
     
 
 
-class RefundOptionDetails(BaseSchema):
+class RefundOptionResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -4783,7 +4581,7 @@ class RefundOptionDetails(BaseSchema):
     
 
 
-class SelectedRefundOptionDetails(BaseSchema):
+class SelectedRefundOptionResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -4921,7 +4719,7 @@ class RefundOptionsLimit(BaseSchema):
     
 
 
-class ValidateValidateAddress(BaseSchema):
+class ValidateValidateAddressRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -4947,7 +4745,7 @@ class VPADetails(BaseSchema):
     
 
 
-class ValidateValidateAddressDetails(BaseSchema):
+class ValidateValidateAddressResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -4961,7 +4759,7 @@ class ValidateValidateAddressDetails(BaseSchema):
     
 
 
-class SetDefaultBeneficiary(BaseSchema):
+class SetDefaultBeneficiaryRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -4975,7 +4773,7 @@ class SetDefaultBeneficiary(BaseSchema):
     
 
 
-class SetDefaultBeneficiaryDetails(BaseSchema):
+class SetDefaultBeneficiaryResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -4985,7 +4783,7 @@ class SetDefaultBeneficiaryDetails(BaseSchema):
     
 
 
-class ShipmentRefundDetailsMeta(BaseSchema):
+class ShipmentRefundRequestMeta(BaseSchema):
     # Payment swagger.json
 
     
@@ -5001,7 +4799,7 @@ class ShipmentRefundDetailsMeta(BaseSchema):
     
 
 
-class ShipmentRefundDetails(BaseSchema):
+class ShipmentRefundRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -5013,7 +4811,7 @@ class ShipmentRefundDetails(BaseSchema):
     
     shipment_ids = fields.List(fields.Str(required=False), required=False)
     
-    meta = fields.Nested(ShipmentRefundDetailsMeta, required=False)
+    meta = fields.Nested(ShipmentRefundRequestMeta, required=False)
     
 
 
@@ -5031,7 +4829,7 @@ class ShipmentRefundDetail(BaseSchema):
     
 
 
-class ShipmentRefundRes(BaseSchema):
+class ShipmentRefundResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -5077,7 +4875,7 @@ class RefundItem(BaseSchema):
     
 
 
-class PennyDropValidationDetails(BaseSchema):
+class PennyDropValidationResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -5089,7 +4887,7 @@ class PennyDropValidationDetails(BaseSchema):
     
 
 
-class UpdatePennyDropValidation(BaseSchema):
+class UpdatePennyDropValidationRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -5097,7 +4895,7 @@ class UpdatePennyDropValidation(BaseSchema):
     
 
 
-class AggregatorConfigDetails(BaseSchema):
+class AggregatorConfigResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -5109,7 +4907,7 @@ class AggregatorConfigDetails(BaseSchema):
     
 
 
-class PaymentModeDetails(BaseSchema):
+class PaymentModeResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -5211,7 +5009,7 @@ class SubPaymentMode(BaseSchema):
     
 
 
-class AggregatorCredentialReq(BaseSchema):
+class AggregatorCredentialRequest(BaseSchema):
     # Payment swagger.json
 
     
@@ -5233,7 +5031,7 @@ class AggregatorCredentialReq(BaseSchema):
     
 
 
-class PatchAggregatorCredentialDetails(BaseSchema):
+class PatchAggregatorCredentialResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -5243,7 +5041,7 @@ class PatchAggregatorCredentialDetails(BaseSchema):
     
 
 
-class AggregatorCredentialRes(BaseSchema):
+class AggregatorCredentialResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -5303,7 +5101,7 @@ class AggregatorDisplayItem(BaseSchema):
     
 
 
-class GetDevice(BaseSchema):
+class GetDeviceResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -5345,7 +5143,7 @@ class Device(BaseSchema):
     
 
 
-class AggregatorHistoryDetails(BaseSchema):
+class AggregatorHistoryResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -5435,7 +5233,7 @@ class RefundTo(BaseSchema):
     
 
 
-class PaymentMethodConfigDetails(BaseSchema):
+class PaymentMethodConfigResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -5483,7 +5281,7 @@ class SessionItem(BaseSchema):
     
 
 
-class PaymentErrorCodeAndMessage(BaseSchema):
+class PaymentErrorCodeAndResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -5511,7 +5309,7 @@ class PaymentError(BaseSchema):
     
 
 
-class ShipmentBeneficiaryDetailsRes(BaseSchema):
+class ShipmentBeneficiaryDetailsResponse(BaseSchema):
     # Payment swagger.json
 
     
@@ -5524,100 +5322,6 @@ class ShipmentBeneficiaryDetailsRes(BaseSchema):
     message = fields.Str(required=False)
     
     beneficiary_details = fields.Str(required=False)
-    
-
-
-class TransactionData(BaseSchema):
-    # Payment swagger.json
-
-    
-    transaction_id = fields.Str(required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    modified_on = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-    aggregator_name = fields.Str(required=False)
-    
-    transaction_type = fields.Str(required=False, validate=OneOf([val.value for val in TransactionTypeSchema.__members__.values()]))
-    
-    payment_mode = fields.Str(required=False)
-    
-    amount = fields.Float(required=False)
-    
-    message = fields.Str(required=False)
-    
-    return_shipment_id = fields.Str(required=False)
-    
-
-
-class OrderData(BaseSchema):
-    # Payment swagger.json
-
-    
-    created_on = fields.Str(required=False)
-    
-    modified_on = fields.Str(required=False)
-    
-    status = fields.Str(required=False, validate=OneOf([val.value for val in StatusSchema.__members__.values()]))
-    
-    amount = fields.Float(required=False)
-    
-    paid_amount = fields.Float(required=False)
-    
-    device = fields.Str(required=False, validate=OneOf([val.value for val in DeviceTypeSchema.__members__.values()]))
-    
-    transactions = fields.List(fields.Nested(TransactionData, required=False), required=False)
-    
-
-
-class PageData(BaseSchema):
-    # Payment swagger.json
-
-    
-    page_size = fields.Int(required=False)
-    
-    current_page = fields.Int(required=False)
-    
-
-
-class TransactionsResponseSchema(BaseSchema):
-    # Payment swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    orders = fields.Dict(required=False)
-    
-    page = fields.Nested(PageData, required=False)
-    
-
-
-class HttpErrorCodeAndMessage(BaseSchema):
-    # Payment swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    items = fields.List(fields.Str(required=False), required=False)
-    
-    error = fields.Nested(ErrorCodeAndDescription, required=False)
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class ErrorCodeDescription(BaseSchema):
-    # Payment swagger.json
-
-    
-    description = fields.Str(required=False)
-    
-    code = fields.Str(required=False)
-    
-    success = fields.Boolean(required=False)
     
 
 

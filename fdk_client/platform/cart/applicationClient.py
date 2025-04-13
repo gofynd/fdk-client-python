@@ -48,8 +48,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CouponDetailResult
-            schema = CouponDetailResult()
+            from .models import CouponDetailResponse
+            schema = CouponDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -58,23 +58,16 @@ class Cart:
 
         return response
     
-    async def getCoupons(self, page_no=None, page_size=None, is_archived=None, title=None, is_public=None, is_display=None, type_slug=None, code=None, created_by=None, reviewed_by=None, approved_start_time=None, approved_end_time=None, review_start_time=None, review_end_time=None, status=None, request_headers:Dict={}):
+    async def getCoupons(self, page_no=None, page_size=None, is_archived=None, title=None, is_public=None, is_display=None, type_slug=None, code=None, request_headers:Dict={}):
         """Retrieve a list of all created coupons for specific sales channel. It also supports searching based on text search, pagination and other flags to filter coupons.
-        :param page_no : current page no as per pagination : type integer
-        :param page_size : Coupon max records fetched in single request : type integer
-        :param is_archived : Filter by active or inactive coupon : type boolean
-        :param title : Filter coupon by coupon title : type string
-        :param is_public : Filter coupons which is public : type boolean
-        :param is_display : Filter coupons which is visible to sales channel : type boolean
-        :param type_slug : Filter by coupon type : type string
-        :param code : Filter by coupon code : type string
-        :param created_by : Filter by coupon creater user id : type string
-        :param reviewed_by : Filter by coupon reviewer user id : type string
-        :param approved_start_time : Filter coupon by start time date range when status is approved : type string
-        :param approved_end_time : Filter coupon by end time date range when status is approved : type string
-        :param review_start_time : Filter coupon by start time date range when status is in review state : type string
-        :param review_end_time : Filter coupon by end time date range when status is in review state : type string
-        :param status : Filter your coupons effortlessly by status, such as draft, review and more. : type string
+        :param page_no :  : type integer
+        :param page_size :  : type integer
+        :param is_archived :  : type boolean
+        :param title :  : type string
+        :param is_public :  : type boolean
+        :param is_display :  : type boolean
+        :param type_slug :  : type string
+        :param code :  : type string
         """
         payload = {}
         
@@ -94,28 +87,14 @@ class Cart:
             payload["type_slug"] = type_slug
         if code is not None:
             payload["code"] = code
-        if created_by is not None:
-            payload["created_by"] = created_by
-        if reviewed_by is not None:
-            payload["reviewed_by"] = reviewed_by
-        if approved_start_time is not None:
-            payload["approved_start_time"] = approved_start_time
-        if approved_end_time is not None:
-            payload["approved_end_time"] = approved_end_time
-        if review_start_time is not None:
-            payload["review_start_time"] = review_start_time
-        if review_end_time is not None:
-            payload["review_end_time"] = review_end_time
-        if status is not None:
-            payload["status"] = status
 
         # Parameter validation
         schema = CartValidator.getCoupons()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0},"description":"current page no as per pagination"},{"name":"page_size","in":"query","schema":{"type":"integer","default":10},"description":"Coupon max records fetched in single request"},{"name":"is_archived","in":"query","schema":{"type":"boolean","default":false},"description":"Filter by active or inactive coupon"},{"name":"title","in":"query","schema":{"type":"string"},"description":"Filter coupon by coupon title"},{"name":"is_public","in":"query","schema":{"type":"boolean"},"description":"Filter coupons which is public"},{"name":"is_display","in":"query","schema":{"type":"boolean"},"description":"Filter coupons which is visible to sales channel"},{"name":"type_slug","in":"query","schema":{"type":"string"},"description":"Filter by coupon type"},{"name":"code","in":"query","schema":{"type":"string"},"description":"Filter by coupon code"},{"name":"created_by","in":"query","schema":{"type":"string"},"description":"Filter by coupon creater user id"},{"name":"reviewed_by","in":"query","schema":{"type":"string"},"description":"Filter by coupon reviewer user id"},{"name":"approved_start_time","in":"query","schema":{"type":"string"},"description":"Filter coupon by start time date range when status is approved"},{"name":"approved_end_time","in":"query","schema":{"type":"string"},"description":"Filter coupon by end time date range when status is approved"},{"name":"review_start_time","in":"query","schema":{"type":"string"},"description":"Filter coupon by start time date range when status is in review state"},{"name":"review_end_time","in":"query","schema":{"type":"string"},"description":"Filter coupon by end time date range when status is in review state"},{"name":"status","in":"query","schema":{"type":"string","enum":["draft","review","rejected","live","published","archived"]},"description":"Filter your coupons effortlessly by status, such as draft, review and more."}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0},"description":"current page no as per pagination"},{"name":"page_size","in":"query","schema":{"type":"integer","default":10},"description":"Coupon max records fetched in single request"},{"name":"is_archived","in":"query","schema":{"type":"boolean","default":false},"description":"Filter by active or inactive coupon"},{"name":"title","in":"query","schema":{"type":"string"},"description":"Filter coupon by coupon title"},{"name":"is_public","in":"query","schema":{"type":"boolean"},"description":"Filter coupons which is public"},{"name":"is_display","in":"query","schema":{"type":"boolean"},"description":"Filter coupons which is visible to sales channel"},{"name":"type_slug","in":"query","schema":{"type":"string"},"description":"Filter by coupon type"},{"name":"code","in":"query","schema":{"type":"string"},"description":"Filter by coupon code"},{"name":"created_by","in":"query","schema":{"type":"string"},"description":"Filter by coupon creater user id"},{"name":"reviewed_by","in":"query","schema":{"type":"string"},"description":"Filter by coupon reviewer user id"},{"name":"approved_start_time","in":"query","schema":{"type":"string"},"description":"Filter coupon by start time date range when status is approved"},{"name":"approved_end_time","in":"query","schema":{"type":"string"},"description":"Filter coupon by end time date range when status is approved"},{"name":"review_start_time","in":"query","schema":{"type":"string"},"description":"Filter coupon by start time date range when status is in review state"},{"name":"review_end_time","in":"query","schema":{"type":"string"},"description":"Filter coupon by end time date range when status is in review state"},{"name":"status","in":"query","schema":{"type":"string","enum":["draft","review","rejected","live","published","archived"]},"description":"Filter your coupons effortlessly by status, such as draft, review and more."}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", page_no=page_no, page_size=page_size, is_archived=is_archived, title=title, is_public=is_public, is_display=is_display, type_slug=type_slug, code=code, created_by=created_by, reviewed_by=reviewed_by, approved_start_time=approved_start_time, approved_end_time=approved_end_time, review_start_time=review_start_time, review_end_time=review_end_time, status=status)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, is_archived=is_archived, title=title, is_public=is_public, is_display=is_display, type_slug=type_slug, code=code, created_by=created_by, reviewed_by=reviewed_by, approved_start_time=approved_start_time, approved_end_time=approved_end_time, review_start_time=review_start_time, review_end_time=review_end_time, status=status)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Coupon max records fetched in single request"}},{"name":"is_archived","in":"query","schema":{"type":"boolean","description":"Filter by active or inactive coupon","default":false}},{"name":"title","in":"query","schema":{"type":"string","description":"Filter by `title`"}},{"name":"is_public","in":"query","schema":{"type":"boolean","description":"Filter by `is_public`"}},{"name":"is_display","in":"query","schema":{"type":"boolean","description":"Filter by `is_display`"}},{"name":"type_slug","in":"query","schema":{"type":"string","description":"Filter by coupon type"}},{"name":"code","in":"query","schema":{"type":"string","description":"Filter by `code`"}}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Coupon max records fetched in single request"}},{"name":"is_archived","in":"query","schema":{"type":"boolean","description":"Filter by active or inactive coupon","default":false}},{"name":"title","in":"query","schema":{"type":"string","description":"Filter by `title`"}},{"name":"is_public","in":"query","schema":{"type":"boolean","description":"Filter by `is_public`"}},{"name":"is_display","in":"query","schema":{"type":"boolean","description":"Filter by `is_display`"}},{"name":"type_slug","in":"query","schema":{"type":"string","description":"Filter by coupon type"}},{"name":"code","in":"query","schema":{"type":"string","description":"Filter by `code`"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", page_no=page_no, page_size=page_size, is_archived=is_archived, title=title, is_public=is_public, is_display=is_display, type_slug=type_slug, code=code)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, is_archived=is_archived, title=title, is_public=is_public, is_display=is_display, type_slug=type_slug, code=code)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -131,11 +110,11 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon", page_no=page_no, page_size=page_size, is_archived=is_archived, title=title, is_public=is_public, is_display=is_display, type_slug=type_slug, code=code, created_by=created_by, reviewed_by=reviewed_by, approved_start_time=approved_start_time, approved_end_time=approved_end_time, review_start_time=review_start_time, review_end_time=review_end_time, status=status), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon", page_no=page_no, page_size=page_size, is_archived=is_archived, title=title, is_public=is_public, is_display=is_display, type_slug=type_slug, code=code), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CouponsResult
-            schema = CouponsResult()
+            from .models import CouponsResponse
+            schema = CouponsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -175,8 +154,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon-tags", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import TagsViewResult
-            schema = TagsViewResult()
+            from .models import TagsViewResponse
+            schema = TagsViewResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -196,7 +175,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promo-tags", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promo-tags", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"integer"},"description":"ID of the application for which tags are to be fetched.","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"integer"},"description":"ID of the application for which tags are to be fetched.","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -216,8 +195,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promo-tags", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import TagsViewResult
-            schema = TagsViewResult()
+            from .models import TagsViewResponse
+            schema = TagsViewResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -228,7 +207,7 @@ class Cart:
     
     async def getCouponById(self, id=None, request_headers:Dict={}):
         """Retrieve details of a specific coupon by providing its unique identifier to obtain information such as coupon type, rules, validity period and other related information.
-        :param id : Coupon mongo _id for fetching single coupon data for editing : type string
+        :param id :  : type string
         """
         payload = {}
         
@@ -240,7 +219,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","required":true,"schema":{"type":"string"},"description":"Coupon mongo _id for fetching single coupon data for editing"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","required":true,"schema":{"type":"string"},"description":"Coupon mongo _id for fetching single coupon data for editing"}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","required":true,"schema":{"type":"string","description":"Coupon mongo _id for fetching single coupon data for editing"}}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","required":true,"schema":{"type":"string","description":"Coupon mongo _id for fetching single coupon data for editing"}}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -272,7 +251,7 @@ class Cart:
     
     async def updateCoupon(self, id=None, body="", request_headers:Dict={}):
         """Update the details of an existing coupon by specifying its unique identifier. This includes modifying coupon attributes such as discount percentage, validity period, and associated conditions. Leveraging this functionality allows businesses to quickly adapt their promotional strategies to changing market dynamics.
-        :param id : Coupon id for fetching single coupon data for editing : type string
+        :param id :  : type string
         """
         payload = {}
         
@@ -288,7 +267,7 @@ class Cart:
         schema = CouponUpdate()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Coupon id for fetching single coupon data for editing","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Coupon id for fetching single coupon data for editing","required":true}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"Coupon mongo _id for fetching single coupon data for editing"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"Coupon mongo _id for fetching single coupon data for editing"},"required":true}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -308,8 +287,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CouponDetailResult
-            schema = CouponDetailResult()
+            from .models import CouponDetailResponse
+            schema = CouponDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -320,7 +299,7 @@ class Cart:
     
     async def updateCouponPartially(self, id=None, body="", request_headers:Dict={}):
         """Seller can make partial adjustments of an existing coupon by specifying its unique identifier. It enables businesses to modify specific attributes of the coupon while preserving other details intact.
-        :param id : Coupon id for fetching single coupon data for editing : type string
+        :param id :  : type string
         """
         payload = {}
         
@@ -336,7 +315,7 @@ class Cart:
         schema = CouponPartialUpdate()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Coupon id for fetching single coupon data for editing","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Coupon id for fetching single coupon data for editing","required":true}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"Coupon mongo _id for fetching single coupon data for editing"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"Coupon mongo _id for fetching single coupon data for editing"},"required":true}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -366,67 +345,16 @@ class Cart:
 
         return response
     
-    async def deleteCoupon(self, id=None, request_headers:Dict={}):
-        """Delete details of a draft coupon by providing its unique identifier to delete information such as coupon type, rules, validity period and other related information.
-        :param id :  : type string
-        """
-        payload = {}
-        
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = CartValidator.deleteCoupon()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","required":true,"schema":{"type":"string","description":"Coupon id for fetching single coupon data for deleting"}}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","required":true,"schema":{"type":"string","description":"Coupon id for fetching single coupon data for deleting"}}]}""", serverType="platform", id=id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessMessage
-            schema = SuccessMessage()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deleteCoupon")
-                print(e)
-
-        return response
-    
-    async def getPromotions(self, page_no=None, page_size=None, q=None, is_active=None, promo_group=None, promotion_type=None, fp_panel=None, promotion_id=None, created_by=None, reviewed_by=None, approved_start_time=None, approved_end_time=None, review_start_time=None, review_end_time=None, status=None, request_headers:Dict={}):
+    async def getPromotions(self, page_no=None, page_size=None, q=None, is_active=None, promo_group=None, promotion_type=None, fp_panel=None, promotion_id=None, request_headers:Dict={}):
         """Retrieve a list of all created promotions for specific sales channel. It also supports efficient text search and pagination functionalities, ensuring optimized promotion listing for streamlined navigation and management.
-        :param page_no : current page no as per pagination : type integer
-        :param page_size : Promotion max records fetched in single request : type integer
-        :param q : Filter by promotion name or title : type string
-        :param is_active : Filter by active or inactive promotion : type boolean
-        :param promo_group : Filter by promotion group : type string
-        :param promotion_type : Filter promotion type : type string
-        :param fp_panel : Filter non extension promotions : type string
-        :param promotion_id : Filter by promotion id : type string
-        :param created_by : Filter by promotion creater user id : type string
-        :param reviewed_by : Filter by promotion reviewer user id : type string
-        :param approved_start_time : Filter promotion by start time date range when status is in approved state : type string
-        :param approved_end_time : Filter promotion by end time date range when status is in approved state : type string
-        :param review_start_time : Filter promotion by start time date range when status is in review state : type string
-        :param review_end_time : Filter promotion by end time date range when status is in review state : type string
-        :param status : Filter your promotions effortlessly by status, such as draft, review and more : type string
+        :param page_no :  : type integer
+        :param page_size :  : type integer
+        :param q :  : type string
+        :param is_active :  : type boolean
+        :param promo_group :  : type string
+        :param promotion_type :  : type string
+        :param fp_panel :  : type string
+        :param promotion_id :  : type string
         """
         payload = {}
         
@@ -446,28 +374,14 @@ class Cart:
             payload["fp_panel"] = fp_panel
         if promotion_id is not None:
             payload["promotion_id"] = promotion_id
-        if created_by is not None:
-            payload["created_by"] = created_by
-        if reviewed_by is not None:
-            payload["reviewed_by"] = reviewed_by
-        if approved_start_time is not None:
-            payload["approved_start_time"] = approved_start_time
-        if approved_end_time is not None:
-            payload["approved_end_time"] = approved_end_time
-        if review_start_time is not None:
-            payload["review_start_time"] = review_start_time
-        if review_end_time is not None:
-            payload["review_end_time"] = review_end_time
-        if status is not None:
-            payload["status"] = status
 
         # Parameter validation
         schema = CartValidator.getPromotions()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0},"description":"current page no as per pagination"},{"name":"page_size","in":"query","schema":{"type":"integer","default":10},"description":"Promotion max records fetched in single request"},{"name":"q","in":"query","schema":{"type":"string"},"description":"Filter by promotion name or title"},{"name":"is_active","in":"query","schema":{"type":"boolean","default":true},"description":"Filter by active or inactive promotion"},{"name":"promo_group","in":"query","schema":{"type":"string","enum":["product","cart","contract","ladder_price","limited_timer"]},"description":"Filter by promotion group"},{"name":"promotion_type","in":"query","schema":{"type":"string","enum":["percentage","amount","fixed_price","bogo","contract_price","shipping_price","ladder_price","bundle_price_percentage","bundle_price_amount","bundle_amount_percentage","custom","free_gift_items","free_non_sellable_items","external_price_adjustment_discount"]},"description":"Filter promotion type"},{"name":"fp_panel","in":"query","schema":{"type":"string"},"description":"Filter non extension promotions"},{"name":"promotion_id","in":"query","schema":{"type":"string"},"description":"Filter by promotion id"},{"name":"created_by","in":"query","schema":{"type":"string"},"description":"Filter by promotion creater user id"},{"name":"reviewed_by","in":"query","schema":{"type":"string"},"description":"Filter by promotion reviewer user id"},{"name":"approved_start_time","in":"query","schema":{"type":"string"},"description":"Filter promotion by start time date range when status is in approved state"},{"name":"approved_end_time","in":"query","schema":{"type":"string"},"description":"Filter promotion by end time date range when status is in approved state"},{"name":"review_start_time","in":"query","schema":{"type":"string"},"description":"Filter promotion by start time date range when status is in review state"},{"name":"review_end_time","in":"query","schema":{"type":"string"},"description":"Filter promotion by end time date range when status is in review state"},{"name":"status","in":"query","schema":{"type":"string","enum":["draft","review","rejected","live","published","archived"]},"description":"Filter your promotions effortlessly by status, such as draft, review and more"}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0},"description":"current page no as per pagination"},{"name":"page_size","in":"query","schema":{"type":"integer","default":10},"description":"Promotion max records fetched in single request"},{"name":"q","in":"query","schema":{"type":"string"},"description":"Filter by promotion name or title"},{"name":"is_active","in":"query","schema":{"type":"boolean","default":true},"description":"Filter by active or inactive promotion"},{"name":"promo_group","in":"query","schema":{"type":"string","enum":["product","cart","contract","ladder_price","limited_timer"]},"description":"Filter by promotion group"},{"name":"promotion_type","in":"query","schema":{"type":"string","enum":["percentage","amount","fixed_price","bogo","contract_price","shipping_price","ladder_price","bundle_price_percentage","bundle_price_amount","bundle_amount_percentage","custom","free_gift_items","free_non_sellable_items","external_price_adjustment_discount"]},"description":"Filter promotion type"},{"name":"fp_panel","in":"query","schema":{"type":"string"},"description":"Filter non extension promotions"},{"name":"promotion_id","in":"query","schema":{"type":"string"},"description":"Filter by promotion id"},{"name":"created_by","in":"query","schema":{"type":"string"},"description":"Filter by promotion creater user id"},{"name":"reviewed_by","in":"query","schema":{"type":"string"},"description":"Filter by promotion reviewer user id"},{"name":"approved_start_time","in":"query","schema":{"type":"string"},"description":"Filter promotion by start time date range when status is in approved state"},{"name":"approved_end_time","in":"query","schema":{"type":"string"},"description":"Filter promotion by end time date range when status is in approved state"},{"name":"review_start_time","in":"query","schema":{"type":"string"},"description":"Filter promotion by start time date range when status is in review state"},{"name":"review_end_time","in":"query","schema":{"type":"string"},"description":"Filter promotion by end time date range when status is in review state"},{"name":"status","in":"query","schema":{"type":"string","enum":["draft","review","rejected","live","published","archived"]},"description":"Filter your promotions effortlessly by status, such as draft, review and more"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", page_no=page_no, page_size=page_size, q=q, is_active=is_active, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id, created_by=created_by, reviewed_by=reviewed_by, approved_start_time=approved_start_time, approved_end_time=approved_end_time, review_start_time=review_start_time, review_end_time=review_end_time, status=status)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q, is_active=is_active, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id, created_by=created_by, reviewed_by=reviewed_by, approved_start_time=approved_start_time, approved_end_time=approved_end_time, review_start_time=review_start_time, review_end_time=review_end_time, status=status)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Promotion max records fetched in single request"}},{"name":"q","in":"query","schema":{"type":"string","description":"Filter by name"}},{"name":"is_active","in":"query","schema":{"type":"boolean","description":"Filter by active or inactive promotion","default":true}},{"name":"promo_group","in":"query","schema":{"type":"string","description":"Filter promotion group","enum":["product","cart","contract","ladder_price","limited_timer"]}},{"name":"promotion_type","in":"query","schema":{"type":"string","description":"Filter promotion type"}},{"name":"fp_panel","in":"query","schema":{"type":"string","description":"Filter non extension promotions"}},{"name":"promotion_id","in":"query","schema":{"type":"string","description":"Filter by promotion _id"}}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Promotion max records fetched in single request"}},{"name":"q","in":"query","schema":{"type":"string","description":"Filter by name"}},{"name":"is_active","in":"query","schema":{"type":"boolean","description":"Filter by active or inactive promotion","default":true}},{"name":"promo_group","in":"query","schema":{"type":"string","description":"Filter promotion group","enum":["product","cart","contract","ladder_price","limited_timer"]}},{"name":"promotion_type","in":"query","schema":{"type":"string","description":"Filter promotion type"}},{"name":"fp_panel","in":"query","schema":{"type":"string","description":"Filter non extension promotions"}},{"name":"promotion_id","in":"query","schema":{"type":"string","description":"Filter by promotion _id"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", page_no=page_no, page_size=page_size, q=q, is_active=is_active, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q, is_active=is_active, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -483,11 +397,11 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion", page_no=page_no, page_size=page_size, q=q, is_active=is_active, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id, created_by=created_by, reviewed_by=reviewed_by, approved_start_time=approved_start_time, approved_end_time=approved_end_time, review_start_time=review_start_time, review_end_time=review_end_time, status=status), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion", page_no=page_no, page_size=page_size, q=q, is_active=is_active, promo_group=promo_group, promotion_type=promotion_type, fp_panel=fp_panel, promotion_id=promotion_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PromotionsResult
-            schema = PromotionsResult()
+            from .models import PromotionsResponse
+            schema = PromotionsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -511,7 +425,7 @@ class Cart:
         schema = PromotionAdd()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -543,7 +457,7 @@ class Cart:
     
     async def getPromotionById(self, id=None, request_headers:Dict={}):
         """Retrieve details of a specific promotion by providing its unique identifier to obtain information such as promotion type, rules, validity period and other related information.
-        :param id : Promotion id for fetching single promotion data for editing : type string
+        :param id :  : type string
         """
         payload = {}
         
@@ -555,7 +469,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","required":true,"schema":{"type":"string"},"description":"Promotion id for fetching single promotion data for editing"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","required":true,"schema":{"type":"string"},"description":"Promotion id for fetching single promotion data for editing"}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","required":true,"schema":{"type":"string","description":"Promotion mongo _id for fetching single promotion data for editing"}}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","required":true,"schema":{"type":"string","description":"Promotion mongo _id for fetching single promotion data for editing"}}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -587,7 +501,7 @@ class Cart:
     
     async def updatePromotion(self, id=None, body="", request_headers:Dict={}):
         """Update the details of an existing promotion by specifying its unique identifier. This includes modifying promotion attributes such as discount percentage, validity period, and associated conditions. Leveraging this functionality allows businesses to quickly adapt their promotional strategies to changing market dynamics.
-        :param id : Promotion mongo _id for fetching single promotion data for editing : type string
+        :param id :  : type string
         """
         payload = {}
         
@@ -603,7 +517,7 @@ class Cart:
         schema = PromotionUpdate()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Promotion mongo _id for fetching single promotion data for editing","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Promotion mongo _id for fetching single promotion data for editing","required":true}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"Promotion mongo _id for fetching single promotion data for editing"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"Promotion mongo _id for fetching single promotion data for editing"},"required":true}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -635,7 +549,7 @@ class Cart:
     
     async def updatePromotionPartially(self, id=None, body="", request_headers:Dict={}):
         """Seller can make partial adjustments of an existing promotion by specifying its unique identifier. It enables businesses to modify specific attributes of the promotion while preserving other details intact.
-        :param id : Promotion mongo _id for fetching single promotion data for editing : type string
+        :param id :  : type string
         """
         payload = {}
         
@@ -651,7 +565,7 @@ class Cart:
         schema = PromotionPartialUpdate()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Promotion mongo _id for fetching single promotion data for editing","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Promotion mongo _id for fetching single promotion data for editing","required":true}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"Promotion mongo _id for fetching single promotion data for editing"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"Promotion mongo _id for fetching single promotion data for editing"},"required":true}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -681,54 +595,10 @@ class Cart:
 
         return response
     
-    async def deletePromotion(self, id=None, request_headers:Dict={}):
-        """Delete details of a draft promotion by providing its unique identifier to delete information such as promotion type, rules, validity period and other related information.
-        :param id : Promotion id for fetching single promotion data for deleting : type string
-        """
-        payload = {}
-        
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = CartValidator.deletePromotion()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","required":true,"schema":{"type":"string"},"description":"Promotion id for fetching single promotion data for deleting"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","required":true,"schema":{"type":"string"},"description":"Promotion id for fetching single promotion data for deleting"}]}""", serverType="platform", id=id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessMessage
-            schema = SuccessMessage()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deletePromotion")
-                print(e)
-
-        return response
-    
     async def getPromosCouponConfig(self, entity_type=None, is_hidden=None, request_headers:Dict={}):
         """Retrieve the configuration settings related to promotions and coupons for a specific seller. It provides details of the supported types of coupons and promotions along with their descriptions, examples, and related attributes.
-        :param entity_type : Entity type as promotion or coupon : type string
-        :param is_hidden : Promotion coupon config shown or not : type boolean
+        :param entity_type : entity_type as promotion or coupon : type string
+        :param is_hidden : promo-coupon config shown or not : type boolean
         """
         payload = {}
         
@@ -742,7 +612,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promo-coupons", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"entity_type","description":"Entity type as promotion or coupon","in":"query","schema":{"type":"string","enum":["promotion","coupon"]}},{"name":"is_hidden","description":"Promotion coupon config shown or not","in":"query","schema":{"type":"boolean"}}],"query":[{"name":"entity_type","description":"Entity type as promotion or coupon","in":"query","schema":{"type":"string","enum":["promotion","coupon"]}},{"name":"is_hidden","description":"Promotion coupon config shown or not","in":"query","schema":{"type":"boolean"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", entity_type=entity_type, is_hidden=is_hidden)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promo-coupons", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"entity_type","description":"entity_type as promotion or coupon","in":"query","schema":{"type":"string","enum":["promotion","coupon"]}},{"name":"is_hidden","description":"promo-coupon config shown or not","in":"query","schema":{"type":"boolean"}}],"query":[{"name":"entity_type","description":"entity_type as promotion or coupon","in":"query","schema":{"type":"string","enum":["promotion","coupon"]}},{"name":"is_hidden","description":"promo-coupon config shown or not","in":"query","schema":{"type":"boolean"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", entity_type=entity_type, is_hidden=is_hidden)
         query_string = await create_query_string(entity_type=entity_type, is_hidden=is_hidden)
         if query_string:
             url_with_params += "?" + query_string
@@ -762,59 +632,12 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promo-coupons", entity_type=entity_type, is_hidden=is_hidden), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ActivePromosResult
-            schema = ActivePromosResult()
+            from .models import ActivePromosResponse
+            schema = ActivePromosResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getPromosCouponConfig")
-                print(e)
-
-        return response
-    
-    async def getPromotionPaymentOffers(self, id=None, uid=None, request_headers:Dict={}):
-        """Use this API to get top 5 payment offers available for current product
-        :param id : Cart id of the user cart : type string
-        :param uid : Cart uid of the user cart : type integer
-        """
-        payload = {}
-        
-        if id is not None:
-            payload["id"] = id
-        if uid is not None:
-            payload["uid"] = uid
-
-        # Parameter validation
-        schema = CartValidator.getPromotionPaymentOffers()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/available-payment-offers", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"id","schema":{"type":"string"},"in":"query","description":"Cart id of the user cart"},{"name":"uid","schema":{"type":"integer"},"in":"query","description":"Cart uid of the user cart"}],"query":[{"name":"id","schema":{"type":"string"},"in":"query","description":"Cart id of the user cart"},{"name":"uid","schema":{"type":"integer"},"in":"query","description":"Cart uid of the user cart"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, uid=uid)
-        query_string = await create_query_string(id=id, uid=uid)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/available-payment-offers", id=id, uid=uid), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PromotionPaymentOffersDetails
-            schema = PromotionPaymentOffersDetails()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getPromotionPaymentOffers")
                 print(e)
 
         return response
@@ -853,8 +676,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_configuration/{cart_meta_id}", cart_meta_id=cart_meta_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartMetaConfigDetailResult
-            schema = CartMetaConfigDetailResult()
+            from .models import CartMetaConfigDetailResponse
+            schema = CartMetaConfigDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -865,7 +688,7 @@ class Cart:
     
     async def updateCartMetaConfig(self, cart_meta_id=None, body="", request_headers:Dict={}):
         """Modify the configuration settings for cart metadata.
-        :param cart_meta_id : CartMeta id for fetching single cart meta data for editing : type string
+        :param cart_meta_id : CartMeta mongo _id for fetching single cart meta data for editing : type string
         """
         payload = {}
         
@@ -881,7 +704,7 @@ class Cart:
         schema = CartMetaConfigUpdate()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_configuration/{cart_meta_id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"cart_meta_id","in":"path","schema":{"type":"string"},"description":"CartMeta id for fetching single cart meta data for editing","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"cart_meta_id","in":"path","schema":{"type":"string"},"description":"CartMeta id for fetching single cart meta data for editing","required":true}]}""", serverType="platform", cart_meta_id=cart_meta_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_configuration/{cart_meta_id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"cart_meta_id","in":"path","schema":{"type":"string"},"description":"CartMeta mongo _id for fetching single cart meta data for editing","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"cart_meta_id","in":"path","schema":{"type":"string"},"description":"CartMeta mongo _id for fetching single cart meta data for editing","required":true}]}""", serverType="platform", cart_meta_id=cart_meta_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -986,8 +809,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_configuration", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartMetaConfigListResult
-            schema = CartMetaConfigListResult()
+            from .models import CartMetaConfigListResponse
+            schema = CartMetaConfigListResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1011,7 +834,7 @@ class Cart:
         schema = CartMetaConfigAdd()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_configuration", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_configuration", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1031,8 +854,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartMetaConfigAddResult
-            schema = CartMetaConfigAddResult()
+            from .models import CartMetaConfigAddResponse
+            schema = CartMetaConfigAddResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1076,8 +899,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price-adjustment", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AddPriceAdjustmentResult
-            schema = AddPriceAdjustmentResult()
+            from .models import AddPriceAdjustmentResponse
+            schema = AddPriceAdjustmentResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1120,8 +943,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price-adjustment", cart_id=cart_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PriceAdjustmentResult
-            schema = PriceAdjustmentResult()
+            from .models import PriceAdjustmentResponse
+            schema = PriceAdjustmentResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1132,7 +955,7 @@ class Cart:
     
     async def updatePriceAdjustment(self, id=None, body="", request_headers:Dict={}):
         """Modify price adjustments for items in the cart.
-        :param id : price adjustment id for fetching single price adjustment data for editing : type string
+        :param id :  : type string
         """
         payload = {}
         
@@ -1148,7 +971,7 @@ class Cart:
         schema = PriceAdjustmentUpdate()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price-adjustment/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"price adjustment id for fetching single price adjustment data for editing","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"price adjustment id for fetching single price adjustment data for editing","required":true}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price-adjustment/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"price adjustment id for fetching single price adjustment data for editing"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"price adjustment id for fetching single price adjustment data for editing"},"required":true}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1168,8 +991,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price-adjustment/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UpdatePriceAdjustmentResult
-            schema = UpdatePriceAdjustmentResult()
+            from .models import UpdatePriceAdjustmentResponse
+            schema = UpdatePriceAdjustmentResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1180,7 +1003,7 @@ class Cart:
     
     async def removePriceAdjustment(self, id=None, request_headers:Dict={}):
         """Remove price adjustments applied to items in the cart.
-        :param id : Price Adjustment  id for fetching single price adjustment data for editing : type string
+        :param id :  : type string
         """
         payload = {}
         
@@ -1192,7 +1015,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price-adjustment/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Price Adjustment  id for fetching single price adjustment data for editing","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"Price Adjustment  id for fetching single price adjustment data for editing","required":true}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price-adjustment/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"Price Adjustment  id for fetching single price adjustment data for editing"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"Price Adjustment  id for fetching single price adjustment data for editing"},"required":true}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1233,11 +1056,11 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import OpenapiCartDetailsPayload
-        schema = OpenapiCartDetailsPayload()
+        from .models import OpenapiCartDetailsRequest
+        schema = OpenapiCartDetailsRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/validate", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/validate", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1257,8 +1080,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/validate", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OpenapiCartDetailsResult
-            schema = OpenapiCartDetailsResult()
+            from .models import OpenapiCartDetailsResponse
+            schema = OpenapiCartDetailsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1278,8 +1101,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import OpenApiCartServiceabilityPayload
-        schema = OpenApiCartServiceabilityPayload()
+        from .models import OpenApiCartServiceabilityRequest
+        schema = OpenApiCartServiceabilityRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/serviceability", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
@@ -1302,8 +1125,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/serviceability", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OpenApiCartServiceabilityResult
-            schema = OpenApiCartServiceabilityResult()
+            from .models import OpenApiCartServiceabilityResponse
+            schema = OpenApiCartServiceabilityResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1327,7 +1150,7 @@ class Cart:
         schema = OpenApiPlatformCheckoutReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/checkout", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/checkout", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1347,8 +1170,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/checkout", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OpenApiCheckoutResult
-            schema = OpenApiCheckoutResult()
+            from .models import OpenApiCheckoutResponse
+            schema = OpenApiCheckoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1359,13 +1182,13 @@ class Cart:
     
     async def getAbandonedCart(self, page_no=None, page_size=None, from_date=None, to_date=None, anonymous_cart=None, last_id=None, sort_on=None, request_headers:Dict={}):
         """Retrieve the list of abandoned carts that have been active for the specified period of time and have not yet been archived for the specific sales channel.
-        :param page_no : current page no as per pagination : type integer
-        :param page_size : Cart max records fetched in single request : type integer
-        :param from_date : Cart which are created on or after from_date : type string
-        :param to_date : Cart which are created on or before to_date : type string
-        :param anonymous_cart : Filter by `anonymous_cart` : type boolean
-        :param last_id : pagination is done based on the last_object_id : type string
-        :param sort_on : on which column to sort on i.e created_on or last_modified : type string
+        :param page_no :  : type integer
+        :param page_size :  : type integer
+        :param from_date :  : type string
+        :param to_date :  : type string
+        :param anonymous_cart :  : type boolean
+        :param last_id :  : type string
+        :param sort_on :  : type string
         """
         payload = {}
         
@@ -1389,7 +1212,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0},"description":"current page no as per pagination"},{"name":"page_size","in":"query","schema":{"type":"integer","default":10},"description":"Cart max records fetched in single request"},{"name":"from_date","in":"query","schema":{"type":"string","format":"date-time"},"description":"Cart which are created on or after from_date"},{"name":"to_date","in":"query","schema":{"type":"string","format":"date-time"},"description":"Cart which are created on or before to_date"},{"name":"anonymous_cart","in":"query","schema":{"type":"boolean"},"description":"Filter by `anonymous_cart`"},{"name":"last_id","in":"query","schema":{"type":"string"},"description":"pagination is done based on the last_object_id"},{"name":"sort_on","in":"query","schema":{"type":"string","enum":["created_on","last_modified"]},"description":"on which column to sort on i.e created_on or last_modified"}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0},"description":"current page no as per pagination"},{"name":"page_size","in":"query","schema":{"type":"integer","default":10},"description":"Cart max records fetched in single request"},{"name":"from_date","in":"query","schema":{"type":"string","format":"date-time"},"description":"Cart which are created on or after from_date"},{"name":"to_date","in":"query","schema":{"type":"string","format":"date-time"},"description":"Cart which are created on or before to_date"},{"name":"anonymous_cart","in":"query","schema":{"type":"boolean"},"description":"Filter by `anonymous_cart`"},{"name":"last_id","in":"query","schema":{"type":"string"},"description":"pagination is done based on the last_object_id"},{"name":"sort_on","in":"query","schema":{"type":"string","enum":["created_on","last_modified"]},"description":"on which column to sort on i.e created_on or last_modified"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, anonymous_cart=anonymous_cart, last_id=last_id, sort_on=sort_on)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Coupon max records fetched in single request"}},{"name":"from_date","in":"query","schema":{"type":"string","description":"Cart which are created on or after from_date"}},{"name":"to_date","in":"query","schema":{"type":"string","description":"Cart which are created on or before to_date"}},{"name":"anonymous_cart","in":"query","schema":{"type":"boolean","description":"Filter by `anonymous_cart`"}},{"name":"last_id","in":"query","schema":{"type":"string","description":"pagination is done based on the last_object_id"}},{"name":"sort_on","in":"query","schema":{"type":"string","description":"on which column to sort on i.e created_on or last_modified","enum":["created_on","last_modified"]}}],"query":[{"name":"page_no","in":"query","schema":{"type":"integer","default":0,"description":"current page no as per pagination"}},{"name":"page_size","in":"query","schema":{"type":"integer","default":10,"description":"Coupon max records fetched in single request"}},{"name":"from_date","in":"query","schema":{"type":"string","description":"Cart which are created on or after from_date"}},{"name":"to_date","in":"query","schema":{"type":"string","description":"Cart which are created on or before to_date"}},{"name":"anonymous_cart","in":"query","schema":{"type":"boolean","description":"Filter by `anonymous_cart`"}},{"name":"last_id","in":"query","schema":{"type":"string","description":"pagination is done based on the last_object_id"}},{"name":"sort_on","in":"query","schema":{"type":"string","description":"on which column to sort on i.e created_on or last_modified","enum":["created_on","last_modified"]}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, anonymous_cart=anonymous_cart, last_id=last_id, sort_on=sort_on)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, anonymous_cart=anonymous_cart, last_id=last_id, sort_on=sort_on)
         if query_string:
             url_with_params += "?" + query_string
@@ -1409,8 +1232,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts", page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, anonymous_cart=anonymous_cart, last_id=last_id, sort_on=sort_on), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AbandonedCartResult
-            schema = AbandonedCartResult()
+            from .models import AbandonedCartResponse
+            schema = AbandonedCartResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1421,10 +1244,10 @@ class Cart:
     
     async def getAbandonedCartDetails(self, id=None, i=None, b=None, c=None, request_headers:Dict={}):
         """Retrieves abandoned cart details linked to a specific customer using a unique cart ID. It offers an overview of the items, quantities, prices, and other relevant information associated with the cart.
-        :param id : The unique identifier of the cart : type string
-        :param i : This is a boolean value. Select `true` to retrieve all the items added in the cart. : type boolean
-        :param b : This is a boolean value. Select `true` to retrieve the price breakup of cart items. : type boolean
-        :param c : This is a boolean value. Select `true` to retrieve the cod charges in breakup of cart items. : type boolean
+        :param id :  : type string
+        :param i :  : type boolean
+        :param b :  : type boolean
+        :param c :  : type boolean
         """
         payload = {}
         
@@ -1442,7 +1265,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/cart/detail", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"c","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the cod charges in breakup of cart items."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"c","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the cod charges in breakup of cart items."}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, i=i, b=b, c=c)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/cart/detail", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"c","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the cod charges in breakup of cart items."}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"c","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the cod charges in breakup of cart items."}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, i=i, b=b, c=c)
         query_string = await create_query_string(id=id, i=i, b=b, c=c)
         if query_string:
             url_with_params += "?" + query_string
@@ -1462,8 +1285,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/cart/detail", id=id, i=i, b=b, c=c), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartDetailResult
-            schema = CartDetailResult()
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1475,7 +1298,7 @@ class Cart:
     async def addItems(self, cart_id=None, b=None, body="", request_headers:Dict={}):
         """Add product items to the customer's existing shopping cart. If there is no existing cart associated with the customer, it creates a new one and adds the items to it.
         :param cart_id : Current Cart _id : type string
-        :param b : This is a boolean value. Select `true` to retrieve the price breakup of cart items. : type boolean
+        :param b :  : type boolean
         """
         payload = {}
         
@@ -1489,11 +1312,11 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import AddCartPayload
-        schema = AddCartPayload()
+        from .models import AddCartRequest
+        schema = AddCartRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts/{cart_id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string"},"description":"Current Cart _id","in":"path","required":true,"name":"cart_id"}],"optional":[{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}],"query":[{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string"},"description":"Current Cart _id","in":"path","required":true,"name":"cart_id"}]}""", serverType="platform", cart_id=cart_id, b=b)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts/{cart_id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string"},"description":"Current Cart _id","in":"path","required":true,"name":"cart_id"}],"optional":[{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"query":[{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string"},"description":"Current Cart _id","in":"path","required":true,"name":"cart_id"}]}""", serverType="platform", cart_id=cart_id, b=b)
         query_string = await create_query_string(b=b)
         if query_string:
             url_with_params += "?" + query_string
@@ -1513,8 +1336,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts/{cart_id}", cart_id=cart_id, b=b), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AddCartDetailResult
-            schema = AddCartDetailResult()
+            from .models import AddCartDetailResponse
+            schema = AddCartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1525,8 +1348,8 @@ class Cart:
     
     async def updateCart(self, cart_id=None, b=None, body="", request_headers:Dict={}):
         """Customers can modify added product attributes such as quantity and size, as well as remove items from the cart.
-        :param cart_id : Current Cart id of user cart : type string
-        :param b : This is a boolean value. Select `true` to retrieve the price breakup of cart items. : type boolean
+        :param cart_id : Current Cart _id : type string
+        :param b :  : type boolean
         """
         payload = {}
         
@@ -1540,11 +1363,11 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateCartPayload
-        schema = UpdateCartPayload()
+        from .models import UpdateCartRequest
+        schema = UpdateCartRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts/{cart_id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string"},"description":"Current Cart id of user cart","in":"path","required":true,"name":"cart_id"}],"optional":[{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}],"query":[{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string"},"description":"Current Cart id of user cart","in":"path","required":true,"name":"cart_id"}]}""", serverType="platform", cart_id=cart_id, b=b)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts/{cart_id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string"},"description":"Current Cart _id","in":"path","required":true,"name":"cart_id"}],"optional":[{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"query":[{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"schema":{"type":"string"},"description":"Current Cart _id","in":"path","required":true,"name":"cart_id"}]}""", serverType="platform", cart_id=cart_id, b=b)
         query_string = await create_query_string(b=b)
         if query_string:
             url_with_params += "?" + query_string
@@ -1564,8 +1387,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/abandoned/carts/{cart_id}", cart_id=cart_id, b=b), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UpdateCartDetailResult
-            schema = UpdateCartDetailResult()
+            from .models import UpdateCartDetailResponse
+            schema = UpdateCartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1585,7 +1408,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon_options", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon_options", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1617,7 +1440,7 @@ class Cart:
     
     async def getCouponCodeExists(self, code=None, request_headers:Dict={}):
         """Validates the presence of a coupon code for the specified sales channel to verify whether the provided code already exists or not.
-        :param code : Coupon code : type string
+        :param code :  : type string
         """
         payload = {}
         
@@ -1629,7 +1452,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon_code_exists", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"code","in":"query","schema":{"type":"string"},"description":"Coupon code"}],"query":[{"name":"code","in":"query","schema":{"type":"string"},"description":"Coupon code"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", code=code)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/coupon_code_exists", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"code","in":"query","schema":{"type":"string","description":"Coupon code"}}],"query":[{"name":"code","in":"query","schema":{"type":"string","description":"Coupon code"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", code=code)
         query_string = await create_query_string(code=code)
         if query_string:
             url_with_params += "?" + query_string
@@ -1652,7 +1475,7 @@ class Cart:
     
     async def getPromotionCodeExists(self, code=None, request_headers:Dict={}):
         """Validates the presence of a promotion code for the specified sales channel to verify whether the provided code already exists or not.
-        :param code : Promotion code : type string
+        :param code :  : type string
         """
         payload = {}
         
@@ -1664,7 +1487,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion_code_exists", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"code","in":"query","schema":{"type":"string"},"description":"Promotion code"}],"query":[{"name":"code","in":"query","schema":{"type":"string"},"description":"Promotion code"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", code=code)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/promotion_code_exists", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"code","in":"query","schema":{"type":"string","description":"Promotion code"}}],"query":[{"name":"code","in":"query","schema":{"type":"string","description":"Promotion code"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", code=code)
         query_string = await create_query_string(code=code)
         if query_string:
             url_with_params += "?" + query_string
@@ -1700,7 +1523,7 @@ class Cart:
         schema = OverrideCheckoutReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout/over-ride", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout/over-ride", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1720,8 +1543,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout/over-ride", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OverrideCheckoutResult
-            schema = OverrideCheckoutResult()
+            from .models import OverrideCheckoutResponse
+            schema = OverrideCheckoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1741,11 +1564,11 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GetShareCartLinkPayload
-        schema = GetShareCartLinkPayload()
+        from .models import GetShareCartLinkRequest
+        schema = GetShareCartLinkRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/share-cart", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/share-cart", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1765,8 +1588,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/share-cart", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetShareCartLinkResult
-            schema = GetShareCartLinkResult()
+            from .models import GetShareCartLinkResponse
+            schema = GetShareCartLinkResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1789,7 +1612,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/share-cart/{token}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"token","description":"Token of the shared short link","schema":{"type":"string"},"in":"path","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"},{"name":"token","description":"Token of the shared short link","schema":{"type":"string"},"in":"path","required":true}]}""", serverType="platform", token=token)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/share-cart/{token}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"token","description":"Token of the shared short link","schema":{"type":"string"},"in":"path","required":true}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"token","description":"Token of the shared short link","schema":{"type":"string"},"in":"path","required":true}]}""", serverType="platform", token=token)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1809,8 +1632,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/share-cart/{token}", token=token), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SharedCartResult
-            schema = SharedCartResult()
+            from .models import SharedCartResponse
+            schema = SharedCartResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1823,7 +1646,7 @@ class Cart:
         """Customer can either merge or replace shared cart items with existing cart.
         :param token : Token of the shared short link : type string
         :param action : Operation to perform on the existing cart merge or replace. : type string
-        :param cart_id : The unique identifier of the cart : type string
+        :param cart_id :  : type string
         """
         payload = {}
         
@@ -1839,7 +1662,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/share-cart/{token}/{action}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"token","description":"Token of the shared short link","schema":{"type":"string"},"in":"path","required":true},{"name":"action","description":"Operation to perform on the existing cart merge or replace.","schema":{"type":"string","enum":["merge","replace"]},"in":"path","required":true}],"optional":[{"name":"cart_id","in":"query","schema":{"type":"string"},"description":"The unique identifier of the cart"}],"query":[{"name":"cart_id","in":"query","schema":{"type":"string"},"description":"The unique identifier of the cart"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"token","description":"Token of the shared short link","schema":{"type":"string"},"in":"path","required":true},{"name":"action","description":"Operation to perform on the existing cart merge or replace.","schema":{"type":"string","enum":["merge","replace"]},"in":"path","required":true}]}""", serverType="platform", token=token, action=action, cart_id=cart_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/share-cart/{token}/{action}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"token","description":"Token of the shared short link","schema":{"type":"string"},"in":"path","required":true},{"name":"action","description":"Operation to perform on the existing cart merge or replace.","schema":{"type":"string","enum":["merge","replace"]},"in":"path","required":true}],"optional":[{"name":"cart_id","in":"query","schema":{"type":"string","description":"The unique identifier of the cart"}}],"query":[{"name":"cart_id","in":"query","schema":{"type":"string","description":"The unique identifier of the cart"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"token","description":"Token of the shared short link","schema":{"type":"string"},"in":"path","required":true},{"name":"action","description":"Operation to perform on the existing cart merge or replace.","schema":{"type":"string","enum":["merge","replace"]},"in":"path","required":true}]}""", serverType="platform", token=token, action=action, cart_id=cart_id)
         query_string = await create_query_string(cart_id=cart_id)
         if query_string:
             url_with_params += "?" + query_string
@@ -1859,8 +1682,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/share-cart/{token}/{action}", token=token, action=action, cart_id=cart_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SharedCartResult
-            schema = SharedCartResult()
+            from .models import SharedCartResponse
+            schema = SharedCartResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1871,9 +1694,9 @@ class Cart:
     
     async def getCartList(self, from_date=None, to_date=None, filter_on=None, request_headers:Dict={}):
         """Retrieve the list of active carts associated with a specific customer
-        :param from_date : Cart which are created on or after from_date. Supports ISO date format. : type string
-        :param to_date : Cart which are created on or before to_date. Supports ISO date format. : type string
-        :param filter_on : on which column to sort on i.e created_on or last_modified : type string
+        :param from_date :  : type string
+        :param to_date :  : type string
+        :param filter_on :  : type string
         """
         payload = {}
         
@@ -1889,7 +1712,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart-list", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"from_date","in":"query","schema":{"type":"string","format":"date-time"},"description":"Cart which are created on or after from_date. Supports ISO date format."},{"name":"to_date","in":"query","schema":{"type":"string","format":"date-time"},"description":"Cart which are created on or before to_date. Supports ISO date format."},{"name":"filter_on","in":"query","schema":{"type":"string","enum":["created_on","last_modified"]},"description":"on which column to sort on i.e created_on or last_modified"}],"query":[{"name":"from_date","in":"query","schema":{"type":"string","format":"date-time"},"description":"Cart which are created on or after from_date. Supports ISO date format."},{"name":"to_date","in":"query","schema":{"type":"string","format":"date-time"},"description":"Cart which are created on or before to_date. Supports ISO date format."},{"name":"filter_on","in":"query","schema":{"type":"string","enum":["created_on","last_modified"]},"description":"on which column to sort on i.e created_on or last_modified"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", from_date=from_date, to_date=to_date, filter_on=filter_on)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart-list", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"from_date","in":"query","schema":{"type":"string","description":"Cart which are created on or after from_date. Supports ISO date format."}},{"name":"to_date","in":"query","schema":{"type":"string","description":"Cart which are created on or before to_date. Supports ISO date format."}},{"name":"filter_on","in":"query","schema":{"type":"string","description":"on which column to sort on i.e created_on or last_modified","enum":["created_on","last_modified"]}}],"query":[{"name":"from_date","in":"query","schema":{"type":"string","description":"Cart which are created on or after from_date. Supports ISO date format."}},{"name":"to_date","in":"query","schema":{"type":"string","description":"Cart which are created on or before to_date. Supports ISO date format."}},{"name":"filter_on","in":"query","schema":{"type":"string","description":"on which column to sort on i.e created_on or last_modified","enum":["created_on","last_modified"]}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", from_date=from_date, to_date=to_date, filter_on=filter_on)
         query_string = await create_query_string(from_date=from_date, to_date=to_date, filter_on=filter_on)
         if query_string:
             url_with_params += "?" + query_string
@@ -1909,8 +1732,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart-list", from_date=from_date, to_date=to_date, filter_on=filter_on), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import MultiCartResult
-            schema = MultiCartResult()
+            from .models import MultiCartResponse
+            schema = MultiCartResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1921,7 +1744,7 @@ class Cart:
     
     async def updateCartUser(self, id=None, body="", request_headers:Dict={}):
         """Modify the cart user to a new valid customer for the provided customer ID.
-        :param id : cart id : type string
+        :param id :  : type string
         """
         payload = {}
         
@@ -1937,7 +1760,7 @@ class Cart:
         schema = UpdateUserCartMapping()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/update-user", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"id","in":"query","schema":{"type":"string"},"description":"cart id"}],"query":[{"name":"id","in":"query","schema":{"type":"string"},"description":"cart id"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/update-user", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"id","in":"query","schema":{"type":"string","description":"cart id"}}],"query":[{"name":"id","in":"query","schema":{"type":"string","description":"cart id"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id)
         query_string = await create_query_string(id=id)
         if query_string:
             url_with_params += "?" + query_string
@@ -1957,8 +1780,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/update-user", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UserCartMappingResult
-            schema = UserCartMappingResult()
+            from .models import UserCartMappingResponse
+            schema = UserCartMappingResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1987,7 +1810,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/basic", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Boolean value to get buy_now cart."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"query":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Boolean value to get buy_now cart."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, buy_now=buy_now, cart_type=cart_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/basic", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Boolean value to get buy_now cart."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"query":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Boolean value to get buy_now cart."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, buy_now=buy_now, cart_type=cart_type)
         query_string = await create_query_string(id=id, buy_now=buy_now, cart_type=cart_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -2007,8 +1830,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/basic", id=id, buy_now=buy_now, cart_type=cart_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartItemCountResult
-            schema = CartItemCountResult()
+            from .models import CartItemCountResponse
+            schema = CartItemCountResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2043,8 +1866,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PlatformAddCartPayload
-        schema = PlatformAddCartPayload()
+        from .models import PlatformAddCartRequest
+        schema = PlatformAddCartRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"query":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", i=i, b=b, buy_now=buy_now, id=id, cart_type=cart_type)
@@ -2067,8 +1890,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", i=i, b=b, buy_now=buy_now, id=id, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AddCartDetailResult
-            schema = AddCartDetailResult()
+            from .models import AddCartDetailResponse
+            schema = AddCartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2129,8 +1952,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", id=id, user_id=user_id, i=i, b=b, assign_card_id=assign_card_id, buy_now=buy_now, cart_type=cart_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartDetailResult
-            schema = CartDetailResult()
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2168,11 +1991,11 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PlatformUpdateCartPayload
-        schema = PlatformUpdateCartPayload()
+        from .models import PlatformUpdateCartRequest
+        schema = PlatformUpdateCartRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"order_type","schema":{"type":"string","x-not-enum":true},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"order_type","schema":{"type":"string","x-not-enum":true},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, i=i, order_type=order_type, b=b, buy_now=buy_now, cart_type=cart_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"order_type","schema":{"type":"string"},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"order_type","schema":{"type":"string"},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, i=i, order_type=order_type, b=b, buy_now=buy_now, cart_type=cart_type)
         query_string = await create_query_string(id=id, i=i, order_type=order_type, b=b, buy_now=buy_now, cart_type=cart_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -2192,8 +2015,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", id=id, i=i, order_type=order_type, b=b, buy_now=buy_now, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UpdateCartDetailResult
-            schema = UpdateCartDetailResult()
+            from .models import UpdateCartDetailResponse
+            schema = UpdateCartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2219,11 +2042,11 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DeleteCartPayload
-        schema = DeleteCartPayload()
+        from .models import DeleteCartRequest
+        schema = DeleteCartRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_archive", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"query":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, cart_type=cart_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_archive", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"query":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, cart_type=cart_type)
         query_string = await create_query_string(id=id, cart_type=cart_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -2243,8 +2066,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart_archive", id=id, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeleteCartDetailResult
-            schema = DeleteCartDetailResult()
+            from .models import DeleteCartDetailResponse
+            schema = DeleteCartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2255,10 +2078,10 @@ class Cart:
     
     async def getAppCoupons(self, id=None, buy_now=None, slug=None, store_id=None, request_headers:Dict={}):
         """Retrieve a list of all available coupons that customer can apply to their carts. It provides details about each coupon, including its code, discount amount, and applicable conditions.
-        :param id : The unique identifier of the cart. : type string
-        :param buy_now : This is boolean to get buy_now cart : type boolean
-        :param slug : Product slug to fetch the available coupons : type string
-        :param store_id : Store id : type string
+        :param id :  : type string
+        :param buy_now :  : type boolean
+        :param slug :  : type string
+        :param store_id :  : type string
         """
         payload = {}
         
@@ -2276,7 +2099,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"},{"in":"query","name":"slug","schema":{"type":"string"},"description":"Product slug to fetch the available coupons"},{"in":"query","name":"store_id","schema":{"type":"string"},"description":"Store id"}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"},{"in":"query","name":"slug","schema":{"type":"string"},"description":"Product slug to fetch the available coupons"},{"in":"query","name":"store_id","schema":{"type":"string"},"description":"Store id"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, buy_now=buy_now, slug=slug, store_id=store_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart."}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"slug","schema":{"type":"string","description":"Product slug to fetch the available coupons"}},{"in":"query","name":"store_id","schema":{"type":"string","description":"Store id"}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart."}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"slug","schema":{"type":"string","description":"Product slug to fetch the available coupons"}},{"in":"query","name":"store_id","schema":{"type":"string","description":"Store id"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, buy_now=buy_now, slug=slug, store_id=store_id)
         query_string = await create_query_string(id=id, buy_now=buy_now, slug=slug, store_id=store_id)
         if query_string:
             url_with_params += "?" + query_string
@@ -2296,8 +2119,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", id=id, buy_now=buy_now, slug=slug, store_id=store_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetCouponResult
-            schema = GetCouponResult()
+            from .models import GetCouponResponse
+            schema = GetCouponResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2308,11 +2131,11 @@ class Cart:
     
     async def applyCoupon(self, i=None, b=None, p=None, id=None, buy_now=None, body="", request_headers:Dict={}):
         """Apply a coupon code to the customer's cart to trigger discounts on eligible items
-        :param i : This is a boolean value. Select `true` to retrieve all the items added in the cart. : type boolean
-        :param b : This is a boolean value. Select `true` to retrieve the price breakup of cart items. : type boolean
-        :param p : This is a boolean value. Select `true` for getting a payment option in response. : type boolean
-        :param id : The unique identifier of the cart : type string
-        :param buy_now : This is boolean to get buy_now cart : type boolean
+        :param i :  : type boolean
+        :param b :  : type boolean
+        :param p :  : type boolean
+        :param id :  : type string
+        :param buy_now :  : type boolean
         """
         payload = {}
         
@@ -2332,11 +2155,11 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ApplyCouponPayload
-        schema = ApplyCouponPayload()
+        from .models import ApplyCouponRequest
+        schema = ApplyCouponRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"p","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` for getting a payment option in response."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"}],"query":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"p","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` for getting a payment option in response."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", i=i, b=b, p=p, id=id, buy_now=buy_now)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"p","schema":{"type":"boolean","description":"This is a boolean value. Select `true` for getting a payment option in response."}},{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}}],"query":[{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"p","schema":{"type":"boolean","description":"This is a boolean value. Select `true` for getting a payment option in response."}},{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", i=i, b=b, p=p, id=id, buy_now=buy_now)
         query_string = await create_query_string(i=i, b=b, p=p, id=id, buy_now=buy_now)
         if query_string:
             url_with_params += "?" + query_string
@@ -2356,8 +2179,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", i=i, b=b, p=p, id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartDetailResult
-            schema = CartDetailResult()
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2368,8 +2191,8 @@ class Cart:
     
     async def removeCoupon(self, uid=None, buy_now=None, cart_type=None, request_headers:Dict={}):
         """Remove an applied coupon from the customer's cart, thereby removing the associated discount from the cart total.
-        :param uid : The unique identifier of the cart : type string
-        :param buy_now : This is boolean to get buy_now cart : type boolean
+        :param uid :  : type string
+        :param buy_now :  : type boolean
         :param cart_type : The type of cart : type string
         """
         payload = {}
@@ -2386,7 +2209,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"uid","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"query":[{"in":"query","name":"uid","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", uid=uid, buy_now=buy_now, cart_type=cart_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"uid","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"query":[{"in":"query","name":"uid","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", uid=uid, buy_now=buy_now, cart_type=cart_type)
         query_string = await create_query_string(uid=uid, buy_now=buy_now, cart_type=cart_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -2406,8 +2229,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", uid=uid, buy_now=buy_now, cart_type=cart_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartDetailResult
-            schema = CartDetailResult()
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2451,8 +2274,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/address", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SaveAddressResult
-            schema = SaveAddressResult()
+            from .models import SaveAddressResponse
+            schema = SaveAddressResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2463,13 +2286,13 @@ class Cart:
     
     async def getAddresses(self, cart_id=None, buy_now=None, mobile_no=None, checkout_mode=None, tags=None, is_default=None, user_id=None, request_headers:Dict={}):
         """Retrieves a list of all addresses saved by the customer, simplifying the checkout process by offering pre-saved address options for delivery.
-        :param cart_id : The unique identifier of the cart : type string
-        :param buy_now : This is boolean to get buy_now cart : type boolean
-        :param mobile_no : 10-digit mobile number : type string
-        :param checkout_mode : Option to checkout for `self` or for `others`. By default, it is `self`. : type string
-        :param tags : Tag given to an address, e.g. work, home, office, shop. : type string
-        :param is_default : This is a boolean value. Select `true` to fetch the default address. : type boolean
-        :param user_id : Option to fetch address for the provided user_id. : type string
+        :param cart_id :  : type string
+        :param buy_now :  : type boolean
+        :param mobile_no :  : type string
+        :param checkout_mode :  : type string
+        :param tags :  : type string
+        :param is_default :  : type boolean
+        :param user_id :  : type string
         """
         payload = {}
         
@@ -2493,7 +2316,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/address", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"cart_id","in":"query","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"},{"in":"query","name":"mobile_no","schema":{"type":"string"},"description":"10-digit mobile number"},{"in":"query","name":"checkout_mode","schema":{"type":"string","enum":["self"]},"description":"Option to checkout for `self` or for `others`. By default, it is `self`."},{"in":"query","name":"tags","schema":{"type":"string","enum":["work","home"]},"description":"Tag given to an address, e.g. work, home, office, shop."},{"in":"query","name":"is_default","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to fetch the default address."},{"in":"query","name":"user_id","schema":{"type":"string"},"description":"Option to fetch address for the provided user_id."}],"query":[{"name":"cart_id","in":"query","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"},{"in":"query","name":"mobile_no","schema":{"type":"string"},"description":"10-digit mobile number"},{"in":"query","name":"checkout_mode","schema":{"type":"string","enum":["self"]},"description":"Option to checkout for `self` or for `others`. By default, it is `self`."},{"in":"query","name":"tags","schema":{"type":"string","enum":["work","home"]},"description":"Tag given to an address, e.g. work, home, office, shop."},{"in":"query","name":"is_default","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to fetch the default address."},{"in":"query","name":"user_id","schema":{"type":"string"},"description":"Option to fetch address for the provided user_id."}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default, user_id=user_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/address", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"cart_id","in":"query","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"mobile_no","schema":{"type":"string","description":"10-digit mobile number"}},{"in":"query","name":"checkout_mode","schema":{"type":"string","description":"Option to checkout for `self` or for `others`. By default, it is `self`.","enum":["self"]}},{"in":"query","name":"tags","schema":{"type":"string","description":"Tag given to an address, e.g. work, home, office, shop.","enum":["work","home"]}},{"in":"query","name":"is_default","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to fetch the default address."}},{"in":"query","name":"user_id","schema":{"type":"string","description":"Option to fetch address for the provided user_id."}}],"query":[{"name":"cart_id","in":"query","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"mobile_no","schema":{"type":"string","description":"10-digit mobile number"}},{"in":"query","name":"checkout_mode","schema":{"type":"string","description":"Option to checkout for `self` or for `others`. By default, it is `self`.","enum":["self"]}},{"in":"query","name":"tags","schema":{"type":"string","description":"Tag given to an address, e.g. work, home, office, shop.","enum":["work","home"]}},{"in":"query","name":"is_default","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to fetch the default address."}},{"in":"query","name":"user_id","schema":{"type":"string","description":"Option to fetch address for the provided user_id."}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default, user_id=user_id)
         query_string = await create_query_string(cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default, user_id=user_id)
         if query_string:
             url_with_params += "?" + query_string
@@ -2513,8 +2336,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/address", cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default, user_id=user_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PlatformGetAddressesResult
-            schema = PlatformGetAddressesResult()
+            from .models import PlatformGetAddressesResponse
+            schema = PlatformGetAddressesResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2525,14 +2348,14 @@ class Cart:
     
     async def getAddressById(self, id=None, cart_id=None, buy_now=None, mobile_no=None, checkout_mode=None, tags=None, is_default=None, user_id=None, request_headers:Dict={}):
         """Retrieve a specific customer address stored in the system by providing its unique identifier. This API provides detailed information about the address, including the recipient's name, address, city, postal code, and other relevant details.
-        :param id : ID allotted to the selected address : type string
-        :param cart_id : The unique identifier of the cart : type string
-        :param buy_now : This is boolean to get buy_now cart : type boolean
-        :param mobile_no : 10-digit mobile number : type string
-        :param checkout_mode : Option to checkout for self or for others : type string
-        :param tags : Tag given to an address, e.g. work, home, office, shop. : type string
-        :param is_default : This is a boolean value. Select `true` to fetch the default address. : type boolean
-        :param user_id : Option to fetch address for the provided user_id. : type string
+        :param id :  : type string
+        :param cart_id :  : type string
+        :param buy_now :  : type boolean
+        :param mobile_no :  : type string
+        :param checkout_mode :  : type string
+        :param tags :  : type string
+        :param is_default :  : type boolean
+        :param user_id :  : type string
         """
         payload = {}
         
@@ -2558,7 +2381,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/address/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"ID allotted to the selected address","required":true}],"optional":[{"name":"cart_id","in":"query","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"},{"in":"query","name":"mobile_no","schema":{"type":"string"},"description":"10-digit mobile number"},{"in":"query","name":"checkout_mode","schema":{"type":"string","enum":["self"]},"description":"Option to checkout for self or for others"},{"in":"query","name":"tags","schema":{"type":"string","enum":["home"]},"description":"Tag given to an address, e.g. work, home, office, shop."},{"in":"query","name":"is_default","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to fetch the default address."},{"in":"query","name":"user_id","schema":{"type":"string"},"description":"Option to fetch address for the provided user_id."}],"query":[{"name":"cart_id","in":"query","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"},{"in":"query","name":"mobile_no","schema":{"type":"string"},"description":"10-digit mobile number"},{"in":"query","name":"checkout_mode","schema":{"type":"string","enum":["self"]},"description":"Option to checkout for self or for others"},{"in":"query","name":"tags","schema":{"type":"string","enum":["home"]},"description":"Tag given to an address, e.g. work, home, office, shop."},{"in":"query","name":"is_default","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to fetch the default address."},{"in":"query","name":"user_id","schema":{"type":"string"},"description":"Option to fetch address for the provided user_id."}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string"},"description":"ID allotted to the selected address","required":true}]}""", serverType="platform", id=id, cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default, user_id=user_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/address/{id}", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"ID allotted to the selected address"},"required":true}],"optional":[{"name":"cart_id","in":"query","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"mobile_no","schema":{"type":"string","description":"10-digit mobile number"}},{"in":"query","name":"checkout_mode","schema":{"type":"string","description":"Option to checkout for self or for others","enum":["self"]}},{"in":"query","name":"tags","schema":{"type":"string","description":"Tag given to an address, e.g. work, home, office, shop.","enum":["home"]}},{"in":"query","name":"is_default","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to fetch the default address."}},{"in":"query","name":"user_id","schema":{"type":"string","description":"Option to fetch address for the provided user_id."}}],"query":[{"name":"cart_id","in":"query","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"mobile_no","schema":{"type":"string","description":"10-digit mobile number"}},{"in":"query","name":"checkout_mode","schema":{"type":"string","description":"Option to checkout for self or for others","enum":["self"]}},{"in":"query","name":"tags","schema":{"type":"string","description":"Tag given to an address, e.g. work, home, office, shop.","enum":["home"]}},{"in":"query","name":"is_default","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to fetch the default address."}},{"in":"query","name":"user_id","schema":{"type":"string","description":"Option to fetch address for the provided user_id."}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"name":"id","in":"path","schema":{"type":"string","description":"ID allotted to the selected address"},"required":true}]}""", serverType="platform", id=id, cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default, user_id=user_id)
         query_string = await create_query_string(cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default, user_id=user_id)
         if query_string:
             url_with_params += "?" + query_string
@@ -2626,8 +2449,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/address/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UpdateAddressResult
-            schema = UpdateAddressResult()
+            from .models import UpdateAddressResponse
+            schema = UpdateAddressResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2673,8 +2496,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/address/{id}", id=id, user_id=user_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeleteAddressResult
-            schema = DeleteAddressResult()
+            from .models import DeleteAddressResponse
+            schema = DeleteAddressResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2685,10 +2508,10 @@ class Cart:
     
     async def selectAddress(self, cart_id=None, buy_now=None, i=None, b=None, body="", request_headers:Dict={}):
         """Select an address from the saved customer addresses and validates the availability of items in the cart. Additionally, it verifies and updates the delivery promise based on the selected address.
-        :param cart_id : The unique identifier of the cart : type string
-        :param buy_now : This is boolean to get buy_now cart : type boolean
-        :param i : This is a boolean value. Select `true` to retrieve all the items added in the cart. : type boolean
-        :param b : This is a boolean value. Select `true` to retrieve the price breakup of cart items. : type boolean
+        :param cart_id :  : type string
+        :param buy_now :  : type boolean
+        :param i :  : type boolean
+        :param b :  : type boolean
         """
         payload = {}
         
@@ -2706,11 +2529,11 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PlatformSelectCartAddressPayload
-        schema = PlatformSelectCartAddressPayload()
+        from .models import PlatformSelectCartAddressRequest
+        schema = PlatformSelectCartAddressRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/select-address", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"cart_id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}],"query":[{"in":"query","name":"cart_id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", cart_id=cart_id, buy_now=buy_now, i=i, b=b)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/select-address", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"cart_id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"query":[{"in":"query","name":"cart_id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", cart_id=cart_id, buy_now=buy_now, i=i, b=b)
         query_string = await create_query_string(cart_id=cart_id, buy_now=buy_now, i=i, b=b)
         if query_string:
             url_with_params += "?" + query_string
@@ -2730,8 +2553,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/select-address", cart_id=cart_id, buy_now=buy_now, i=i, b=b), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartDetailResult
-            schema = CartDetailResult()
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2742,8 +2565,8 @@ class Cart:
     
     async def getShipments(self, pick_at_store_uid=None, ordering_store_id=None, i=None, p=None, id=None, address_id=None, area_code=None, order_type=None, request_headers:Dict={}):
         """Use this API to get shipment details, expected delivery date, items and price breakup of the shipment.
-        :param pick_at_store_uid : ID of the store from where the order will be picked up by the customer, assuming the order_type is `PickAtStore`. This may or may not be the same as the ID of the ordering store. : type integer
-        :param ordering_store_id : ID of the store where the customer is ordering from. : type integer
+        :param pick_at_store_uid :  : type integer
+        :param ordering_store_id :  : type integer
         :param i : This is a boolean value. Select `true` to retrieve all the items added in the cart. : type boolean
         :param p : This is a boolean value. Select `true` for getting a payment option in response. : type boolean
         :param id : The unique identifier of the cart : type string
@@ -2775,7 +2598,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipment", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"pick_at_store_uid","required":false,"schema":{"type":"integer"},"description":"ID of the store from where the order will be picked up by the customer, assuming the order_type is `PickAtStore`. This may or may not be the same as the ID of the ordering store."},{"in":"query","name":"ordering_store_id","required":false,"schema":{"type":"integer"},"description":"ID of the store where the customer is ordering from."},{"name":"i","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart.","in":"query","schema":{"type":"boolean"}},{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"name":"address_id","description":"ID allotted to the selected address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string","x-not-enum":true}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","in":"query","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]}}],"query":[{"in":"query","name":"pick_at_store_uid","required":false,"schema":{"type":"integer"},"description":"ID of the store from where the order will be picked up by the customer, assuming the order_type is `PickAtStore`. This may or may not be the same as the ID of the ordering store."},{"in":"query","name":"ordering_store_id","required":false,"schema":{"type":"integer"},"description":"ID of the store where the customer is ordering from."},{"name":"i","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart.","in":"query","schema":{"type":"boolean"}},{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"name":"address_id","description":"ID allotted to the selected address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string","x-not-enum":true}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","in":"query","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", pick_at_store_uid=pick_at_store_uid, ordering_store_id=ordering_store_id, i=i, p=p, id=id, address_id=address_id, area_code=area_code, order_type=order_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipment", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"pick_at_store_uid","required":false,"schema":{"type":"integer","description":"ID of the store from where the order will be picked up by the customer, assuming the order_type is `PickAtStore`. This may or may not be the same as the ID of the ordering store."}},{"in":"query","name":"ordering_store_id","required":false,"schema":{"type":"integer","description":"ID of the store where the customer is ordering from."}},{"name":"i","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart.","in":"query","schema":{"type":"boolean"}},{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"name":"address_id","description":"ID allotted to the selected address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string"}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","in":"query","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]}}],"query":[{"in":"query","name":"pick_at_store_uid","required":false,"schema":{"type":"integer","description":"ID of the store from where the order will be picked up by the customer, assuming the order_type is `PickAtStore`. This may or may not be the same as the ID of the ordering store."}},{"in":"query","name":"ordering_store_id","required":false,"schema":{"type":"integer","description":"ID of the store where the customer is ordering from."}},{"name":"i","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart.","in":"query","schema":{"type":"boolean"}},{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"name":"address_id","description":"ID allotted to the selected address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string"}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","in":"query","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", pick_at_store_uid=pick_at_store_uid, ordering_store_id=ordering_store_id, i=i, p=p, id=id, address_id=address_id, area_code=area_code, order_type=order_type)
         query_string = await create_query_string(pick_at_store_uid=pick_at_store_uid, ordering_store_id=ordering_store_id, i=i, p=p, id=id, address_id=address_id, area_code=area_code, order_type=order_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -2795,8 +2618,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipment", pick_at_store_uid=pick_at_store_uid, ordering_store_id=ordering_store_id, i=i, p=p, id=id, address_id=address_id, area_code=area_code, order_type=order_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PlatformCartShipmentsResult
-            schema = PlatformCartShipmentsResult()
+            from .models import PlatformCartShipmentsResponse
+            schema = PlatformCartShipmentsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2834,11 +2657,11 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateCartShipmentPayload
-        schema = UpdateCartShipmentPayload()
+        from .models import UpdateCartShipmentRequest
+        schema = UpdateCartShipmentRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipment", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"i","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart.","in":"query","schema":{"type":"boolean"}},{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"name":"address_id","description":"ID allotted to an address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string","x-not-enum":true}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","in":"query","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]}}],"query":[{"name":"i","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart.","in":"query","schema":{"type":"boolean"}},{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"name":"address_id","description":"ID allotted to an address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string","x-not-enum":true}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","in":"query","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", i=i, p=p, id=id, address_id=address_id, area_code=area_code, order_type=order_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipment", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"name":"i","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart.","in":"query","schema":{"type":"boolean"}},{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"name":"address_id","description":"ID allotted to an address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string"}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","in":"query","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]}}],"query":[{"name":"i","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart.","in":"query","schema":{"type":"boolean"}},{"name":"p","description":"This is a boolean value. Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart","in":"query","schema":{"type":"string"}},{"name":"address_id","description":"ID allotted to an address","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059","in":"query","schema":{"type":"string"}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","in":"query","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", i=i, p=p, id=id, address_id=address_id, area_code=area_code, order_type=order_type)
         query_string = await create_query_string(i=i, p=p, id=id, address_id=address_id, area_code=area_code, order_type=order_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -2858,8 +2681,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipment", i=i, p=p, id=id, address_id=address_id, area_code=area_code, order_type=order_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PlatformCartShipmentsResult
-            schema = PlatformCartShipmentsResult()
+            from .models import PlatformCartShipmentsResponse
+            schema = PlatformCartShipmentsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2870,9 +2693,9 @@ class Cart:
     
     async def updateCartMeta(self, id=None, buy_now=None, user_id=None, body="", request_headers:Dict={}):
         """Add or modify metadata associated with a cart, which includes customer preferences, delivery instructions, or any special requirements related to the cart items.
-        :param id : The unique identifier of the cart : type string
-        :param buy_now : this is boolean to get buy_now cart : type boolean
-        :param user_id : Option to update cart meta for the provided user_id : type string
+        :param id :  : type string
+        :param buy_now :  : type boolean
+        :param user_id :  : type string
         """
         payload = {}
         
@@ -2888,11 +2711,11 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PlatformCartMetaPayload
-        schema = PlatformCartMetaPayload()
+        from .models import PlatformCartMetaRequest
+        schema = PlatformCartMetaRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/meta", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"this is boolean to get buy_now cart"},{"in":"query","name":"user_id","schema":{"type":"string"},"description":"Option to update cart meta for the provided user_id"}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"this is boolean to get buy_now cart"},{"in":"query","name":"user_id","schema":{"type":"string"},"description":"Option to update cart meta for the provided user_id"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, buy_now=buy_now, user_id=user_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/meta", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"this is boolean to get buy_now cart"}},{"in":"query","name":"user_id","schema":{"type":"string","description":"Option to update cart meta for the provided user_id"}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"this is boolean to get buy_now cart"}},{"in":"query","name":"user_id","schema":{"type":"string","description":"Option to update cart meta for the provided user_id"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, buy_now=buy_now, user_id=user_id)
         query_string = await create_query_string(id=id, buy_now=buy_now, user_id=user_id)
         if query_string:
             url_with_params += "?" + query_string
@@ -2912,8 +2735,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/meta", id=id, buy_now=buy_now, user_id=user_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartMetaResult
-            schema = CartMetaResult()
+            from .models import CartMetaResponse
+            schema = CartMetaResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2939,8 +2762,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PlatformCartCheckoutDetailPayload
-        schema = PlatformCartCheckoutDetailPayload()
+        from .models import PlatformCartCheckoutDetailRequest
+        schema = PlatformCartCheckoutDetailRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","required":false,"schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"query":[{"in":"query","name":"id","required":false,"schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, cart_type=cart_type)
@@ -2963,8 +2786,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", id=id, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartCheckoutResult
-            schema = CartCheckoutResult()
+            from .models import CartCheckoutResponse
+            schema = CartCheckoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2990,7 +2813,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/available-delivery-mode", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"in":"query","name":"area_code","required":true,"schema":{"type":"string","x-not-enum":true,"description":"The PIN Code of the destination address, e.g. 400059"}}],"optional":[{"name":"id","in":"query","required":false,"schema":{"type":"string","description":"The unique identifier of the cart"}}],"query":[{"in":"query","name":"area_code","required":true,"schema":{"type":"string","x-not-enum":true,"description":"The PIN Code of the destination address, e.g. 400059"}},{"name":"id","in":"query","required":false,"schema":{"type":"string","description":"The unique identifier of the cart"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", area_code=area_code, id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/available-delivery-mode", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"},{"in":"query","name":"area_code","required":true,"schema":{"type":"string","description":"The PIN Code of the destination address, e.g. 400059"}}],"optional":[{"name":"id","in":"query","required":false,"schema":{"type":"string","description":"The unique identifier of the cart"}}],"query":[{"in":"query","name":"area_code","required":true,"schema":{"type":"string","description":"The PIN Code of the destination address, e.g. 400059"}},{"name":"id","in":"query","required":false,"schema":{"type":"string","description":"The unique identifier of the cart"}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", area_code=area_code, id=id)
         query_string = await create_query_string(area_code=area_code, id=id)
         if query_string:
             url_with_params += "?" + query_string
@@ -3010,8 +2833,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/available-delivery-mode", area_code=area_code, id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartDeliveryModesResult
-            schema = CartDeliveryModesResult()
+            from .models import CartDeliveryModesResponse
+            schema = CartDeliveryModesResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -3054,8 +2877,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store-address", store_uid=store_uid), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import StoreDetailsResult
-            schema = StoreDetailsResult()
+            from .models import StoreDetailsResponse
+            schema = StoreDetailsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -3084,11 +2907,11 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateCartPaymentPayload
-        schema = UpdateCartPaymentPayload()
+        from .models import UpdateCartPaymentRequest
+        schema = UpdateCartPaymentRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"type":"string","description":"This is boolean to get buy_now cart","enum":["HomeDelivery"]}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"type":"string","description":"This is boolean to get buy_now cart","enum":["HomeDelivery"]}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, buy_now=buy_now, order_type=order_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"type":"string","description":"This is boolean to get buy_now cart","enum":["HomeDelivery"]}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"type":"string","description":"This is boolean to get buy_now cart","enum":["HomeDelivery"]}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, buy_now=buy_now, order_type=order_type)
         query_string = await create_query_string(id=id, buy_now=buy_now, order_type=order_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -3108,8 +2931,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment", id=id, buy_now=buy_now, order_type=order_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartDetailResult
-            schema = CartDetailResult()
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -3165,7 +2988,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/validate/", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"address_id","schema":{"type":"string","description":"ID allotted to an address"}},{"in":"query","name":"payment_mode","schema":{"type":"string","description":"Payment mode selected by the customer"}},{"in":"query","name":"payment_identifier","schema":{"type":"string","description":"Identifier of payment like ICIC, PAYTM"}},{"in":"query","name":"aggregator_name","schema":{"type":"string","description":"Payment gateway identifier"}},{"in":"query","name":"merchant_code","schema":{"type":"string","x-not-enum":true,"description":"Identifier used by payment gateway for a given payment mode, e.g. NB_ICIC, PAYTM"}},{"in":"query","name":"iin","schema":{"type":"string"},"description":"Debit/Credit card prefix (first 6 digit)"},{"in":"query","name":"network","schema":{"type":"string"},"description":"Credit/Debit card issuer, e.g. VISA, MASTERCARD, RUPAY"},{"in":"query","name":"type","schema":{"type":"string"},"description":"card type, e.g. Credit, Debit"},{"in":"query","name":"card_id","schema":{"type":"string"},"description":"saved card token reference id"},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"type of the cart"}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"address_id","schema":{"type":"string","description":"ID allotted to an address"}},{"in":"query","name":"payment_mode","schema":{"type":"string","description":"Payment mode selected by the customer"}},{"in":"query","name":"payment_identifier","schema":{"type":"string","description":"Identifier of payment like ICIC, PAYTM"}},{"in":"query","name":"aggregator_name","schema":{"type":"string","description":"Payment gateway identifier"}},{"in":"query","name":"merchant_code","schema":{"type":"string","x-not-enum":true,"description":"Identifier used by payment gateway for a given payment mode, e.g. NB_ICIC, PAYTM"}},{"in":"query","name":"iin","schema":{"type":"string"},"description":"Debit/Credit card prefix (first 6 digit)"},{"in":"query","name":"network","schema":{"type":"string"},"description":"Credit/Debit card issuer, e.g. VISA, MASTERCARD, RUPAY"},{"in":"query","name":"type","schema":{"type":"string"},"description":"card type, e.g. Credit, Debit"},{"in":"query","name":"card_id","schema":{"type":"string"},"description":"saved card token reference id"},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"type of the cart"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, buy_now=buy_now, address_id=address_id, payment_mode=payment_mode, payment_identifier=payment_identifier, aggregator_name=aggregator_name, merchant_code=merchant_code, iin=iin, network=network, type=type, card_id=card_id, cart_type=cart_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/validate/", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"address_id","schema":{"type":"string","description":"ID allotted to an address"}},{"in":"query","name":"payment_mode","schema":{"type":"string","description":"Payment mode selected by the customer"}},{"in":"query","name":"payment_identifier","schema":{"type":"string","description":"Identifier of payment like ICIC, PAYTM"}},{"in":"query","name":"aggregator_name","schema":{"type":"string","description":"Payment gateway identifier"}},{"in":"query","name":"merchant_code","schema":{"type":"string","description":"Identifier used by payment gateway for a given payment mode, e.g. NB_ICIC, PAYTM"}},{"in":"query","name":"iin","schema":{"type":"string"},"description":"Debit/Credit card prefix (first 6 digit)"},{"in":"query","name":"network","schema":{"type":"string"},"description":"Credit/Debit card issuer, e.g. VISA, MASTERCARD, RUPAY"},{"in":"query","name":"type","schema":{"type":"string"},"description":"card type, e.g. Credit, Debit"},{"in":"query","name":"card_id","schema":{"type":"string"},"description":"saved card token reference id"},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"type of the cart"}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"address_id","schema":{"type":"string","description":"ID allotted to an address"}},{"in":"query","name":"payment_mode","schema":{"type":"string","description":"Payment mode selected by the customer"}},{"in":"query","name":"payment_identifier","schema":{"type":"string","description":"Identifier of payment like ICIC, PAYTM"}},{"in":"query","name":"aggregator_name","schema":{"type":"string","description":"Payment gateway identifier"}},{"in":"query","name":"merchant_code","schema":{"type":"string","description":"Identifier used by payment gateway for a given payment mode, e.g. NB_ICIC, PAYTM"}},{"in":"query","name":"iin","schema":{"type":"string"},"description":"Debit/Credit card prefix (first 6 digit)"},{"in":"query","name":"network","schema":{"type":"string"},"description":"Credit/Debit card issuer, e.g. VISA, MASTERCARD, RUPAY"},{"in":"query","name":"type","schema":{"type":"string"},"description":"card type, e.g. Credit, Debit"},{"in":"query","name":"card_id","schema":{"type":"string"},"description":"saved card token reference id"},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"type of the cart"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, buy_now=buy_now, address_id=address_id, payment_mode=payment_mode, payment_identifier=payment_identifier, aggregator_name=aggregator_name, merchant_code=merchant_code, iin=iin, network=network, type=type, card_id=card_id, cart_type=cart_type)
         query_string = await create_query_string(id=id, buy_now=buy_now, address_id=address_id, payment_mode=payment_mode, payment_identifier=payment_identifier, aggregator_name=aggregator_name, merchant_code=merchant_code, iin=iin, network=network, type=type, card_id=card_id, cart_type=cart_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -3196,7 +3019,7 @@ class Cart:
         return response
     
     async def platformCheckoutCartV2(self, id=None, cart_type=None, body="", request_headers:Dict={}):
-        """The checkout cart initiates the order creation process based on the items in the user’s cart, their selected address, and chosen payment methods. It also supports multiple payment method options and revalidates the cart details to ensure a secure and seamless order placement.
+        """The checkout cart initiates the order creation process based on the items in the user’s cart,  their selected address, and chosen payment methods. It also supports multiple payment method  options and revalidates the cart details to ensure a secure and seamless order placement.
         :param id : The unique identifier of the cart : type string
         :param cart_type : The type of cart : type string
         """
@@ -3212,8 +3035,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PlatformCartCheckoutDetailV2Payload
-        schema = PlatformCartCheckoutDetailV2Payload()
+        from .models import PlatformCartCheckoutDetailV2Request
+        schema = PlatformCartCheckoutDetailV2Request()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","required":false,"schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"query":[{"in":"query","name":"id","required":false,"schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, cart_type=cart_type)
@@ -3236,8 +3059,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", id=id, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartCheckoutResult
-            schema = CartCheckoutResult()
+            from .models import CartCheckoutResponse
+            schema = CartCheckoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -3266,8 +3089,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateCartPaymentPayloadV2
-        schema = UpdateCartPaymentPayloadV2()
+        from .models import UpdateCartPaymentRequestV2
+        schema = UpdateCartPaymentRequestV2()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/payment", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"type":"string","description":"This is boolean to get buy_now cart","enum":["HomeDelivery","PickAtStore"]}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"type":"string","description":"This is boolean to get buy_now cart","enum":["HomeDelivery","PickAtStore"]}}],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", id=id, buy_now=buy_now, order_type=order_type)
@@ -3290,8 +3113,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/payment", id=id, buy_now=buy_now, order_type=order_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartDetailResult
-            schema = CartDetailResult()
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

@@ -205,13 +205,13 @@ class FileUploadStart(BaseSchema):
     
     params = fields.Dict(required=False)
     
+    enc_key = fields.Str(required=False)
+    
 
 
 class CreatedBy(BaseSchema):
     # FileStorage swagger.json
 
-    
-    user_id = fields.Str(required=False)
     
     username = fields.Str(required=False)
     

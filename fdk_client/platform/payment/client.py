@@ -47,8 +47,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts", unique_external_id=unique_external_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PayoutsDetails
-            schema = PayoutsDetails()
+            from .models import PayoutsResponse
+            schema = PayoutsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -68,8 +68,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PayoutCreation
-        schema = PayoutCreation()
+        from .models import PayoutRequest
+        schema = PayoutRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
@@ -93,8 +93,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PayoutDetails
-            schema = PayoutDetails()
+            from .models import PayoutResponse
+            schema = PayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -114,8 +114,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PayoutCreation
-        schema = PayoutCreation()
+        from .models import PayoutRequest
+        schema = PayoutRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
@@ -139,8 +139,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UpdatePayoutDetails
-            schema = UpdatePayoutDetails()
+            from .models import UpdatePayoutResponse
+            schema = UpdatePayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -160,8 +160,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdatePayoutCreation
-        schema = UpdatePayoutCreation()
+        from .models import UpdatePayoutRequest
+        schema = UpdatePayoutRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
@@ -185,8 +185,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UpdatePayoutDetails
-            schema = UpdatePayoutDetails()
+            from .models import UpdatePayoutResponse
+            schema = UpdatePayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -230,8 +230,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts", unique_transfer_no=unique_transfer_no), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeletePayoutDetails
-            schema = DeletePayoutDetails()
+            from .models import DeletePayoutResponse
+            schema = DeletePayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -278,8 +278,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts/{unique_transfer_no}", unique_transfer_no=unique_transfer_no, unique_external_id=unique_external_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PayoutsDetails
-            schema = PayoutsDetails()
+            from .models import PayoutsResponse
+            schema = PayoutsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -302,8 +302,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PayoutCreation
-        schema = PayoutCreation()
+        from .models import PayoutRequest
+        schema = PayoutRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts/{unique_transfer_no}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"unique_transfer_no","in":"path","description":"Unique transfer id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"unique_transfer_no","in":"path","description":"Unique transfer id","schema":{"type":"string"},"required":true}]}""", serverType="platform", unique_transfer_no=unique_transfer_no)
@@ -327,8 +327,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts/{unique_transfer_no}", unique_transfer_no=unique_transfer_no), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PayoutDetails
-            schema = PayoutDetails()
+            from .models import PayoutResponse
+            schema = PayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -351,8 +351,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PayoutCreation
-        schema = PayoutCreation()
+        from .models import PayoutRequest
+        schema = PayoutRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts/{unique_transfer_no}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"unique_transfer_no","in":"path","description":"Unique transfer id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"unique_transfer_no","in":"path","description":"Unique transfer id","schema":{"type":"string"},"required":true}]}""", serverType="platform", unique_transfer_no=unique_transfer_no)
@@ -376,8 +376,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts/{unique_transfer_no}", unique_transfer_no=unique_transfer_no), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UpdatePayoutDetails
-            schema = UpdatePayoutDetails()
+            from .models import UpdatePayoutResponse
+            schema = UpdatePayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -400,8 +400,8 @@ class Payment:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdatePayoutCreation
-        schema = UpdatePayoutCreation()
+        from .models import UpdatePayoutRequest
+        schema = UpdatePayoutRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts/{unique_transfer_no}", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"unique_transfer_no","in":"path","description":"Unique transfer id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"unique_transfer_no","in":"path","description":"Unique transfer id","schema":{"type":"string"},"required":true}]}""", serverType="platform", unique_transfer_no=unique_transfer_no)
@@ -425,8 +425,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts/{unique_transfer_no}", unique_transfer_no=unique_transfer_no), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UpdatePayoutDetails
-            schema = UpdatePayoutDetails()
+            from .models import UpdatePayoutResponse
+            schema = UpdatePayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -470,8 +470,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payouts/{unique_transfer_no}", unique_transfer_no=unique_transfer_no), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeletePayoutDetails
-            schema = DeletePayoutDetails()
+            from .models import DeletePayoutResponse
+            schema = DeletePayoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -494,7 +494,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/ifsc-code/verify", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"ifsc_code","in":"query","schema":{"x-not-enum":true,"type":"string","description":"Fetch bank details for correct ifsc code"},"required":true}],"optional":[],"query":[{"name":"ifsc_code","in":"query","schema":{"x-not-enum":true,"type":"string","description":"Fetch bank details for correct ifsc code"},"required":true}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true}]}""", serverType="platform", ifsc_code=ifsc_code)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/ifsc-code/verify", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"ifsc_code","in":"query","schema":{"type":"string","description":"Fetch bank details for correct ifsc code"},"required":true}],"optional":[],"query":[{"name":"ifsc_code","in":"query","schema":{"type":"string","description":"Fetch bank details for correct ifsc code"},"required":true}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true}]}""", serverType="platform", ifsc_code=ifsc_code)
         query_string = await create_query_string(ifsc_code=ifsc_code)
         if query_string:
             url_with_params += "?" + query_string
@@ -515,8 +515,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/ifsc-code/verify", ifsc_code=ifsc_code), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import IfscCodeDetails
-            schema = IfscCodeDetails()
+            from .models import IfscCodeResponse
+            schema = IfscCodeResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -557,8 +557,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/payment/methods/configs", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PaymentMethodConfigDetails
-            schema = PaymentMethodConfigDetails()
+            from .models import PaymentMethodConfigResponse
+            schema = PaymentMethodConfigResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
