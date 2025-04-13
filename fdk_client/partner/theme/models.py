@@ -14,15 +14,15 @@ class AvailablePageSchema(BaseSchema):
     pass
 
 
-class DraftExtensionSection(BaseSchema):
+class DraftExtensionSectionRequest(BaseSchema):
     pass
 
 
-class ExtensionSectionDraft(BaseSchema):
+class DraftExtensionSectionResponse(BaseSchema):
     pass
 
 
-class Sections(BaseSchema):
+class SectionsResponse(BaseSchema):
     pass
 
 
@@ -38,19 +38,19 @@ class AssetsExtension(BaseSchema):
     pass
 
 
-class PublishExtensionSection(BaseSchema):
+class PublishExtensionSectionRequest(BaseSchema):
     pass
 
 
-class PreviewExtension(BaseSchema):
+class ExtensionPreviewRequest(BaseSchema):
     pass
 
 
-class ExtensionPreview(BaseSchema):
+class ExtensionPreviewResponse(BaseSchema):
     pass
 
 
-class ExtensionSectionPublish(BaseSchema):
+class PublishExtensionSectionResponse(BaseSchema):
     pass
 
 
@@ -83,10 +83,6 @@ class Action(BaseSchema):
 
 
 class AvailablePageSchemaSections(BaseSchema):
-    pass
-
-
-class SectionSource(BaseSchema):
     pass
 
 
@@ -171,14 +167,6 @@ class Comments(BaseSchema):
 
 
 class ThemeRejectionReasons(BaseSchema):
-    pass
-
-
-class RejectedMessages(BaseSchema):
-    pass
-
-
-class ThemeReviewRequestMessage(BaseSchema):
     pass
 
 
@@ -403,7 +391,7 @@ class AvailablePageSchema(BaseSchema):
     
 
 
-class DraftExtensionSection(BaseSchema):
+class DraftExtensionSectionRequest(BaseSchema):
     # Theme swagger.json
 
     
@@ -423,15 +411,15 @@ class DraftExtensionSection(BaseSchema):
     
 
 
-class ExtensionSectionDraft(BaseSchema):
+class DraftExtensionSectionResponse(BaseSchema):
     # Theme swagger.json
 
     
-    sections = fields.Nested(Sections, required=False)
+    sections = fields.Nested(SectionsResponse, required=False)
     
 
 
-class Sections(BaseSchema):
+class SectionsResponse(BaseSchema):
     # Theme swagger.json
 
     
@@ -485,7 +473,7 @@ class AssetsExtension(BaseSchema):
     
 
 
-class PublishExtensionSection(BaseSchema):
+class PublishExtensionSectionRequest(BaseSchema):
     # Theme swagger.json
 
     
@@ -505,7 +493,7 @@ class PublishExtensionSection(BaseSchema):
     
 
 
-class PreviewExtension(BaseSchema):
+class ExtensionPreviewRequest(BaseSchema):
     # Theme swagger.json
 
     
@@ -515,7 +503,7 @@ class PreviewExtension(BaseSchema):
     
 
 
-class ExtensionPreview(BaseSchema):
+class ExtensionPreviewResponse(BaseSchema):
     # Theme swagger.json
 
     
@@ -523,11 +511,11 @@ class ExtensionPreview(BaseSchema):
     
 
 
-class ExtensionSectionPublish(BaseSchema):
+class PublishExtensionSectionResponse(BaseSchema):
     # Theme swagger.json
 
     
-    sections = fields.Nested(Sections, required=False)
+    sections = fields.Nested(SectionsResponse, required=False)
     
 
 
@@ -625,19 +613,7 @@ class AvailablePageSchemaSections(BaseSchema):
     
     predicate = fields.Nested(AvailablePagePredicate, required=False)
     
-    __source = fields.Nested(SectionSource, required=False)
-    
-
-
-class SectionSource(BaseSchema):
-    # Theme swagger.json
-
-    
-    id = fields.Str(required=False)
-    
-    bundle_name = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
+    source = fields.Str(required=False)
     
 
 
@@ -933,39 +909,11 @@ class ThemeRejectionReasons(BaseSchema):
     
     status = fields.Str(required=False)
     
-    rejection_reasons = fields.Nested(RejectedMessages, required=False)
+    rejection_reasons = fields.Dict(required=False)
     
     created_at = fields.Str(required=False)
     
     updated_at = fields.Str(required=False)
-    
-
-
-class RejectedMessages(BaseSchema):
-    # Theme swagger.json
-
-    
-    theme_file = fields.Nested(ThemeReviewRequestMessage, required=False)
-    
-    theme_details = fields.Nested(ThemeReviewRequestMessage, required=False)
-    
-    theme_value_proposition = fields.Nested(ThemeReviewRequestMessage, required=False)
-    
-    theme_attributes = fields.Nested(ThemeReviewRequestMessage, required=False)
-    
-    theme_variations = fields.Nested(ThemeReviewRequestMessage, required=False)
-    
-    theme_docs = fields.Nested(ThemeReviewRequestMessage, required=False)
-    
-    theme_review = fields.Nested(ThemeReviewRequestMessage, required=False)
-    
-
-
-class ThemeReviewRequestMessage(BaseSchema):
-    # Theme swagger.json
-
-    
-    message = fields.Str(required=False)
     
 
 

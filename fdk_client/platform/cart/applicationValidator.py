@@ -21,22 +21,10 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
     
     
         
         
-        
     
     
         
@@ -54,13 +42,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -95,15 +76,9 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
         
-        
     
     
-        
         
         
         
@@ -400,24 +375,37 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
+        
         
         
         
         
         
         
+    
+    
         
         
         
     
     
+        
+        
+        
         
         
+    
+    
         
+        
     
     
         
         
+    
+    
         
         
         
@@ -447,20 +435,6 @@ class CartValidator:
         type_slug = fields.Str(required=False)
         
         code = fields.Str(required=False)
-        
-        created_by = fields.Str(required=False)
-        
-        reviewed_by = fields.Str(required=False)
-        
-        approved_start_time = fields.Str(required=False)
-        
-        approved_end_time = fields.Str(required=False)
-        
-        review_start_time = fields.Str(required=False)
-        
-        review_end_time = fields.Str(required=False)
-        
-        status = fields.Str(required=False)
          
         
     
@@ -506,17 +480,6 @@ class CartValidator:
          
         
     
-    class deleteCoupon(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
     class getPromotions(BaseSchema):
         
         
@@ -539,20 +502,6 @@ class CartValidator:
         fp_panel = fields.Str(required=False)
         
         promotion_id = fields.Str(required=False)
-        
-        created_by = fields.Str(required=False)
-        
-        reviewed_by = fields.Str(required=False)
-        
-        approved_start_time = fields.Str(required=False)
-        
-        approved_end_time = fields.Str(required=False)
-        
-        review_start_time = fields.Str(required=False)
-        
-        review_end_time = fields.Str(required=False)
-        
-        status = fields.Str(required=False)
          
         
     
@@ -598,17 +547,6 @@ class CartValidator:
          
         
     
-    class deletePromotion(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
     class getPromosCouponConfig(BaseSchema):
         
         
@@ -638,8 +576,6 @@ class CartValidator:
         store_id = fields.Int(required=False)
         
         cart_type = fields.Str(required=False)
-        
-        sort_by = fields.Str(required=False)
          
         
     
@@ -1308,6 +1244,35 @@ class CartValidator:
         buy_now = fields.Boolean(required=False)
         
         order_type = fields.Str(required=False)
+         
+        
+    
+    class addBulkPriceAdjustment(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateBulkPriceAdjustment(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class removeBulkPriceAdjustment(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        price_adjustment_ids = fields.Str(required=False)
          
         
     

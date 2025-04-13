@@ -11,87 +11,15 @@ from ..PublicModel import BaseSchema
 
     
     
-    
-    
-        
-    
-    
-    
-        
-    
-    
-    
-        
-    
-    
-    
-    
-    
         
 
 class ContentValidator:
     
     
-    class getBasicDetails(BaseSchema):
-        
-        pass 
-        
-    
-    class getMenuContent(BaseSchema):
-        
-        pass 
-        
-    
-    class getMenuContentByType(BaseSchema):
-        
-        
-        type = fields.Str(required=False)
-         
-        
-    
-    class getAnalyticsTags(BaseSchema):
-        
-        pass 
-        
-    
-    class getCustomPage(BaseSchema):
-        
-        
-        slug = fields.Str(required=False)
-         
-        
-    
-    class getFooterContent(BaseSchema):
-        
-        pass 
-        
-    
-    class getHomePageContent(BaseSchema):
-        
-        
-        page_type = fields.Str(required=False)
-         
-        
-    
-    class getNavbar(BaseSchema):
-        
-        pass 
-        
-    
-    class getPricingBanner(BaseSchema):
-        
-        pass 
-        
-    
-    class getAllTags(BaseSchema):
-        
-        pass 
-        
-    
     class getCredentialsByEntity(BaseSchema):
         
         
-        entity_type = fields.Str(required=False)
+        entity = fields.Str(required=False)
          
         
     
