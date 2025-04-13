@@ -1768,52 +1768,6 @@ class Order:
 
         return response
     
-    async def consolidateShipments(self, body="", request_headers:Dict={}):
-        """Consolidates multiple shipments into a single shipment, allowing for optimized logistics and delivery handling.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.consolidateShipments()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ConsolidateShipmentPayload
-        schema = ConsolidateShipmentPayload()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipments/consolidate", """{"required":[{"in":"path","name":"company_id","required":true,"description":"The unique identifier of the company for which the shipment consolidation is being performed.","schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"The unique identifier of the company for which the shipment consolidation is being performed.","schema":{"type":"integer"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipments/consolidate", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ConsolidateShipmentResponse
-            schema = ConsolidateShipmentResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for consolidateShipments")
-                print(e)
-
-        return response
-    
     async def getShipments(self, lane=None, bag_status=None, status_override_lane=None, time_to_dispatch=None, search_type=None, search_value=None, from_date=None, to_date=None, start_date=None, end_date=None, dp_ids=None, stores=None, sales_channels=None, page_no=None, page_size=None, fetch_active_shipment=None, allow_inactive=None, exclude_locked_shipments=None, payment_methods=None, channel_shipment_id=None, channel_order_id=None, custom_meta=None, ordering_channel=None, company_affiliate_tag=None, my_orders=None, platform_user_id=None, sort_type=None, show_cross_company_data=None, tags=None, customer_id=None, order_type=None, operational_status=None, financial_status=None, logistics_status=None, parent_view_slug=None, child_view_slug=None, lock_status=None, group_entity=None, enforce_date_filter=None, request_headers:Dict={}):
         """Get Shipments Listing for the company id
         :param lane : Name of lane for which data is to be fetched : type string

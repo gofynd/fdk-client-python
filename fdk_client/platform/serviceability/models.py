@@ -8,66 +8,6 @@ from ..PlatformModel import BaseSchema
 
 
 
-class ZoneBulkErrorResponse(BaseSchema):
-    pass
-
-
-class ZoneBulkValidationRequestSchema(BaseSchema):
-    pass
-
-
-class BulkZoneOverrideResponseSchema(BaseSchema):
-    pass
-
-
-class ZoneBulkImportResponse(BaseSchema):
-    pass
-
-
-class ZoneOverrideSchema(BaseSchema):
-    pass
-
-
-class BulkZoneOverrideSchema(BaseSchema):
-    pass
-
-
-class ZoneBulkValidationErrorResponse(BaseSchema):
-    pass
-
-
-class ZoneBulkValidationResponse(BaseSchema):
-    pass
-
-
-class ZoneBulkValidationStatusResponse(BaseSchema):
-    pass
-
-
-class ZoneOverrideResponseSchema(BaseSchema):
-    pass
-
-
-class StandardError(BaseSchema):
-    pass
-
-
-class ValidationError(BaseSchema):
-    pass
-
-
-class ZoneOverrideStatusResponseSchema(BaseSchema):
-    pass
-
-
-class OverrideStatusSchema(BaseSchema):
-    pass
-
-
-class BulkZoneOverrideStatusSchema(BaseSchema):
-    pass
-
-
 class GetExportPriceZoneHistory(BaseSchema):
     pass
 
@@ -1116,185 +1056,11 @@ class CompanyConfigurationShema(BaseSchema):
     pass
 
 
-
-
-
-class ZoneBulkErrorResponse(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    error = fields.Str(required=False)
-    
-
-
-class ZoneBulkValidationRequestSchema(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    file_url = fields.Str(required=False)
-    
-    product_type = fields.Str(required=False)
-    
-
-
-class BulkZoneOverrideResponseSchema(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    batch_id = fields.Str(required=False)
-    
-
-
-class ZoneBulkImportResponse(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    batch_id = fields.Str(required=False)
-    
-    file_path = fields.Str(required=False)
-    
-    product_type = fields.Str(required=False)
-    
-    total = fields.Int(required=False)
-    
-    failed = fields.Int(required=False)
-    
-    error_file_url = fields.Str(required=False, allow_none=True)
-    
-    action = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    updated_by = fields.Dict(required=False)
-    
-    type = fields.Str(required=False)
-    
-    company_id = fields.Str(required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    stage = fields.Str(required=False)
-    
-
-
-class ZoneOverrideSchema(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    allow_override = fields.Boolean(required=False)
-    
-
-
-class BulkZoneOverrideSchema(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    allow_override = fields.Boolean(required=False)
-    
-    overridding_correction_file_url = fields.Str(required=False)
-    
-
-
-class ZoneBulkValidationErrorResponse(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    error = fields.Raw(required=False)
-    
-
-
-class ZoneBulkValidationResponse(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    batch_id = fields.Str(required=False)
-    
-
-
-class ZoneBulkValidationStatusResponse(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    batch_id = fields.Str(required=False)
-    
-    file_path = fields.Str(required=False)
-    
-    product_type = fields.Str(required=False)
-    
-    total = fields.Int(required=False)
-    
-    failed = fields.Int(required=False)
-    
-    error_file_url = fields.Str(required=False, allow_none=True)
-    
-    action = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    updated_by = fields.Dict(required=False)
-    
-    type = fields.Str(required=False)
-    
-    company_id = fields.Str(required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    file_url = fields.Str(required=False)
-    
-    stage = fields.Str(required=False)
-    
-
-
-class ZoneOverrideResponseSchema(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    zone_id = fields.Str(required=False)
-    
-    allow_override = fields.Boolean(required=False)
-    
-
-
-class StandardError(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
 class ValidationError(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    field = fields.Str(required=False)
-    
+    pass
 
 
-class ZoneOverrideStatusResponseSchema(BaseSchema):
-    # Serviceability swagger.json
 
-    
-    overriding_process_status = fields.Str(required=False)
-    
-
-
-class OverrideStatusSchema(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    overriding_process_status = fields.Str(required=False)
-    
-
-
-class BulkZoneOverrideStatusSchema(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    items = fields.List(fields.Nested(OverrideStatusSchema, required=False), required=False)
-    
 
 
 class GetExportPriceZoneHistory(BaseSchema):
@@ -5508,6 +5274,16 @@ class CompanyConfigurationShema(BaseSchema):
 
     
     sort = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class ValidationError(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    field = fields.Str(required=False)
     
 
 

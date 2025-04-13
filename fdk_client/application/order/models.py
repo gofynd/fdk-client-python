@@ -76,14 +76,6 @@ class FulfillingStore(BaseSchema):
     pass
 
 
-class RuleConditionsSchema(BaseSchema):
-    pass
-
-
-class RuleSchema(BaseSchema):
-    pass
-
-
 class ChargeDistributionSchema(BaseSchema):
     pass
 
@@ -615,26 +607,6 @@ class FulfillingStore(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
-    custom_json = fields.Dict(required=False)
-    
-
-
-class RuleConditionsSchema(BaseSchema):
-    # Order swagger.json
-
-    
-    article_tag = fields.Str(required=False)
-    
-    department = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class RuleSchema(BaseSchema):
-    # Order swagger.json
-
-    
-    conditions = fields.Nested(RuleConditionsSchema, required=False)
-    
 
 
 class ChargeDistributionSchema(BaseSchema):
@@ -644,8 +616,6 @@ class ChargeDistributionSchema(BaseSchema):
     type = fields.Str(required=False)
     
     logic = fields.Str(required=False)
-    
-    rule = fields.Nested(RuleSchema, required=False)
     
 
 
@@ -692,12 +662,6 @@ class PriceAdjustmentCharge(BaseSchema):
     amount = fields.Nested(ChargeAmount, required=False)
     
     distribution_logic = fields.Nested(ChargeDistributionLogic, required=False)
-    
-    meta = fields.Dict(required=False, allow_none=True)
-    
-    is_refundable = fields.Boolean(required=False)
-    
-    is_refundable_on_state = fields.Boolean(required=False)
     
 
 
@@ -1287,8 +1251,6 @@ class ConversionRate(BaseSchema):
     
     rates = fields.Dict(required=False)
     
-    timestamp = fields.Float(required=False)
-    
 
 
 class CurrencyInfo(BaseSchema):
@@ -1350,8 +1312,6 @@ class OrderSchema(BaseSchema):
     external_order_id = fields.Str(required=False, allow_none=True)
     
     payment_info = fields.List(fields.Nested(PaymentInfo, required=False), required=False)
-    
-    custom_json = fields.Dict(required=False, allow_none=True)
     
 
 

@@ -249,40 +249,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
 
 class ServiceabilityValidator:
     
@@ -812,81 +778,6 @@ class ServiceabilityValidator:
         application_id = fields.Str(required=False)
         
         product_type = fields.Str(required=False)
-         
-        
-    
-    class validateBulkZone(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getBulkZoneValidation(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        batch_id = fields.Str(required=False)
-         
-        
-    
-    class importBulkZone(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        batch_id = fields.Str(required=False)
-         
-        
-    
-    class overrideZoneById(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        zone_id = fields.Str(required=False)
-         
-        
-    
-    class getZoneOverrideStatus(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        zone_id = fields.Str(required=False)
-         
-        
-    
-    class overrideBulkZone(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        batch_id = fields.Str(required=False)
-         
-        
-    
-    class getBulkZoneOverrideStatus(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        batch_id = fields.Str(required=False)
          
         
     

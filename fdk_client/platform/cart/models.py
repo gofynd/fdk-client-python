@@ -988,14 +988,6 @@ class AllAddressForSelectAddress(BaseSchema):
     pass
 
 
-class DeliveryPromiseObject(BaseSchema):
-    pass
-
-
-class JourneyPromiseObject(BaseSchema):
-    pass
-
-
 class ValidationError(BaseSchema):
     pass
 
@@ -3397,10 +3389,6 @@ class CartProductInfo(BaseSchema):
     
     discount_meta = fields.Nested(DiscountMeta, required=False)
     
-    journey_wise_promise = fields.List(fields.Nested(JourneyPromiseObject, required=False), required=False)
-    
-    distance = fields.Float(required=False, allow_none=True)
-    
 
 
 class DiscountMeta(BaseSchema):
@@ -4869,10 +4857,6 @@ class PlatformShipmentResponse(BaseSchema):
     
     error = fields.Nested(ShipmentError, required=False)
     
-    journey_wise_promise = fields.List(fields.Nested(JourneyPromiseObject, required=False), required=False)
-    
-    distance = fields.Float(required=False, allow_none=True)
-    
 
 
 class ShipmentMeta(BaseSchema):
@@ -5866,28 +5850,6 @@ class AllAddressForSelectAddress(BaseSchema):
     pii_masking = fields.Boolean(required=False)
     
     validation_config = fields.Nested(ValidationConfig, required=False)
-    
-
-
-class DeliveryPromiseObject(BaseSchema):
-    # Cart swagger.json
-
-    
-    min = fields.Str(required=False)
-    
-    max = fields.Str(required=False)
-    
-    message = fields.Str(required=False)
-    
-
-
-class JourneyPromiseObject(BaseSchema):
-    # Cart swagger.json
-
-    
-    journey = fields.Str(required=False)
-    
-    delivery_promise = fields.Nested(DeliveryPromiseObject, required=False)
     
 
 

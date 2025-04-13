@@ -163,9 +163,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
         
         
         
@@ -696,13 +693,6 @@ class OrderValidator:
         company_id = fields.Int(required=False)
         
         order_id = fields.Str(required=False)
-         
-        
-    
-    class consolidateShipments(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
          
         
     

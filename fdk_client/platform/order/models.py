@@ -1000,26 +1000,6 @@ class ExceptionErrorResponse(BaseSchema):
     pass
 
 
-class ProductDetails(BaseSchema):
-    pass
-
-
-class RePromise(BaseSchema):
-    pass
-
-
-class PackagingDimensions(BaseSchema):
-    pass
-
-
-class ConsolidateShipmentPayload(BaseSchema):
-    pass
-
-
-class ConsolidateShipmentResponse(BaseSchema):
-    pass
-
-
 class Page(BaseSchema):
     pass
 
@@ -5402,70 +5382,6 @@ class ExceptionErrorResponse(BaseSchema):
     exception = fields.Str(required=False)
     
     stack_trace = fields.Str(required=False)
-    
-
-
-class ProductDetails(BaseSchema):
-    # Order swagger.json
-
-    
-    identifier = fields.Str(required=False)
-    
-    quantity = fields.Int(required=False)
-    
-    line_number = fields.Int(required=False)
-    
-    shipment_id = fields.Str(required=False)
-    
-
-
-class RePromise(BaseSchema):
-    # Order swagger.json
-
-    
-    min = fields.Str(required=False)
-    
-    max = fields.Str(required=False)
-    
-
-
-class PackagingDimensions(BaseSchema):
-    # Order swagger.json
-
-    
-    width = fields.Float(required=False)
-    
-    height = fields.Float(required=False)
-    
-    length = fields.Float(required=False)
-    
-    weight = fields.Float(required=False)
-    
-    packaging_type = fields.Str(required=False)
-    
-
-
-class ConsolidateShipmentPayload(BaseSchema):
-    # Order swagger.json
-
-    
-    consolidated_shipment_id = fields.Str(required=False)
-    
-    products = fields.List(fields.Nested(ProductDetails, required=False), required=False)
-    
-    revise_promise = fields.Nested(RePromise, required=False)
-    
-    packaging_dimensions = fields.Nested(PackagingDimensions, required=False)
-    
-
-
-class ConsolidateShipmentResponse(BaseSchema):
-    # Order swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    data = fields.Dict(required=False)
     
 
 

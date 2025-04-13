@@ -917,8 +917,6 @@ class GetLocationSerializer(BaseSchema):
     
     auto_assign_courier_partner = fields.Boolean(required=False)
     
-    is_hyperlocal_active = fields.Boolean(required=False)
-    
 
 
 class LocationListSerializer(BaseSchema):
@@ -1018,8 +1016,6 @@ class LocationSerializer(BaseSchema):
     bulk_shipment = fields.Boolean(required=False)
     
     auto_assign_courier_partner = fields.Boolean(required=False)
-    
-    is_hyperlocal_active = fields.Boolean(required=False)
     
 
 
