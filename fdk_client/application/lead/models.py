@@ -18,11 +18,15 @@ class CustomFormSubmissionPayload(BaseSchema):
     pass
 
 
-class SubmitCustomFormResponseSchema(BaseSchema):
+class UserSchema(BaseSchema):
     pass
 
 
-class FormResponseSchema(BaseSchema):
+class SubmitCustomFormResponse(BaseSchema):
+    pass
+
+
+class FormResponse(BaseSchema):
     pass
 
 
@@ -90,6 +94,14 @@ class Error4XX(BaseSchema):
     pass
 
 
+class PhoneNumber(BaseSchema):
+    pass
+
+
+class Email(BaseSchema):
+    pass
+
+
 
 
 
@@ -113,7 +125,49 @@ class CustomFormSubmissionPayload(BaseSchema):
     
 
 
-class SubmitCustomFormResponseSchema(BaseSchema):
+class UserSchema(BaseSchema):
+    # Lead swagger.json
+
+    
+    application_id = fields.Str(required=False)
+    
+    user_id = fields.Str(required=False)
+    
+    first_name = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    last_name = fields.Str(required=False)
+    
+    phone_numbers = fields.List(fields.Nested(PhoneNumber, required=False), required=False)
+    
+    emails = fields.List(fields.Nested(Email, required=False), required=False)
+    
+    gender = fields.Str(required=False, allow_none=True)
+    
+    dob = fields.Str(required=False)
+    
+    active = fields.Boolean(required=False)
+    
+    profile_pic_url = fields.Str(required=False)
+    
+    username = fields.Str(required=False)
+    
+    account_type = fields.Str(required=False)
+    
+    _id = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    external_id = fields.Str(required=False)
+    
+    rr_id = fields.Str(required=False)
+    
+
+
+class SubmitCustomFormResponse(BaseSchema):
     # Lead swagger.json
 
     
@@ -123,11 +177,11 @@ class SubmitCustomFormResponseSchema(BaseSchema):
     
     notified_to = fields.List(fields.Str(required=False), required=False)
     
-    response = fields.Nested(FormResponseSchema, required=False)
+    response = fields.Nested(FormResponse, required=False)
     
 
 
-class FormResponseSchema(BaseSchema):
+class FormResponse(BaseSchema):
     # Lead swagger.json
 
     
@@ -428,6 +482,36 @@ class Error4XX(BaseSchema):
     stack = fields.Str(required=False)
     
     sentry = fields.Str(required=False)
+    
+
+
+class PhoneNumber(BaseSchema):
+    # Lead swagger.json
+
+    
+    phone = fields.Str(required=False)
+    
+    country_code = fields.Int(required=False)
+    
+    active = fields.Boolean(required=False)
+    
+    primary = fields.Boolean(required=False)
+    
+    verified = fields.Boolean(required=False)
+    
+
+
+class Email(BaseSchema):
+    # Lead swagger.json
+
+    
+    email = fields.Str(required=False)
+    
+    active = fields.Boolean(required=False)
+    
+    primary = fields.Boolean(required=False)
+    
+    verified = fields.Boolean(required=False)
     
 
 

@@ -44,8 +44,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetCompanyProfileSerializerResponseSchema
-            schema = GetCompanyProfileSerializerResponseSchema()
+            from .models import GetCompanyProfileSerializerResponse
+            schema = GetCompanyProfileSerializerResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -90,8 +90,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProfileSuccessResponseSchema
-            schema = ProfileSuccessResponseSchema()
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -132,8 +132,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/metrics", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import MetricsSchema
-            schema = MetricsSchema()
+            from .models import MetricsSerializer
+            schema = MetricsSerializer()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -177,8 +177,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/brand/{brand_id}", brand_id=brand_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetBrandResponseSchema
-            schema = GetBrandResponseSchema()
+            from .models import GetBrandResponseSerializer
+            schema = GetBrandResponseSerializer()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -201,8 +201,8 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateUpdateBrandRequestSchema
-        schema = CreateUpdateBrandRequestSchema()
+        from .models import CreateUpdateBrandRequestSerializer
+        schema = CreateUpdateBrandRequestSerializer()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/brand/{brand_id}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to brand that is to be viewed.","required":true,"schema":{"type":"integer"}},{"in":"path","name":"brand_id","description":"Id of the brand to be viewed.","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to brand that is to be viewed.","required":true,"schema":{"type":"integer"}},{"in":"path","name":"brand_id","description":"Id of the brand to be viewed.","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", brand_id=brand_id)
@@ -226,8 +226,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/brand/{brand_id}", brand_id=brand_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProfileSuccessResponseSchema
-            schema = ProfileSuccessResponseSchema()
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -247,8 +247,8 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateUpdateBrandRequestSchema
-        schema = CreateUpdateBrandRequestSchema()
+        from .models import CreateUpdateBrandRequestSerializer
+        schema = CreateUpdateBrandRequestSerializer()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/brand", """{"required":[{"in":"path","name":"company_id","description":"Id of the company.","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company.","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
@@ -272,8 +272,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/brand", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProfileSuccessResponseSchema
-            schema = ProfileSuccessResponseSchema()
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -323,8 +323,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/company-brand", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CompanyBrandListSchema
-            schema = CompanyBrandListSchema()
+            from .models import CompanyBrandListSerializer
+            schema = CompanyBrandListSerializer()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -344,8 +344,8 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CompanyBrandPostRequestSchema
-        schema = CompanyBrandPostRequestSchema()
+        from .models import CompanyBrandPostRequestSerializer
+        schema = CompanyBrandPostRequestSerializer()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/company-brand", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the brand is to be mapped.","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the brand is to be mapped.","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
@@ -369,8 +369,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/company-brand", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProfileSuccessResponseSchema
-            schema = ProfileSuccessResponseSchema()
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -417,7 +417,7 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/location", """{"required":[{"in":"path","name":"company_id","description":"Id of the company whose locations are to fetched","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"store_type","description":"Helps to sort the location list on the basis of location type.","required":false,"schema":{"type":"string","enum":["high_street","warehouse","mall"]}},{"in":"query","name":"store_codes","description":"List of up to 50 store codes to fetch. Specify multiple values by repeating the query parameter (e.g., `?store_codes=high_street&store_codes=main_avenue`). Comma-separated values are not supported.","required":false,"schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"q","description":"Query that is to be searched.","required":false,"schema":{"type":"string"}},{"in":"query","name":"stage","description":"to filter companies on basis of verified or unverified companies.","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","required":false,"schema":{"type":"integer","default":20}},{"in":"query","name":"location_ids","description":"Helps to filter stores on the basis of uids.","required":false,"schema":{"type":"array","items":{"type":"integer"}}},{"in":"query","name":"types","description":"Helps to get the location list on the basis of multiple location type.","required":false,"schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"tags","description":"Helps to get the location list on the basis of multiple location tag.","required":false,"schema":{"type":"array","items":{"type":"string"}}}],"query":[{"in":"query","name":"store_type","description":"Helps to sort the location list on the basis of location type.","required":false,"schema":{"type":"string","enum":["high_street","warehouse","mall"]}},{"in":"query","name":"store_codes","description":"List of up to 50 store codes to fetch. Specify multiple values by repeating the query parameter (e.g., `?store_codes=high_street&store_codes=main_avenue`). Comma-separated values are not supported.","required":false,"schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"q","description":"Query that is to be searched.","required":false,"schema":{"type":"string"}},{"in":"query","name":"stage","description":"to filter companies on basis of verified or unverified companies.","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","required":false,"schema":{"type":"integer","default":20}},{"in":"query","name":"location_ids","description":"Helps to filter stores on the basis of uids.","required":false,"schema":{"type":"array","items":{"type":"integer"}}},{"in":"query","name":"types","description":"Helps to get the location list on the basis of multiple location type.","required":false,"schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"tags","description":"Helps to get the location list on the basis of multiple location tag.","required":false,"schema":{"type":"array","items":{"type":"string"}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company whose locations are to fetched","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", store_type=store_type, store_codes=store_codes, q=q, stage=stage, page_no=page_no, page_size=page_size, location_ids=location_ids, types=types, tags=tags)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/location", """{"required":[{"in":"path","name":"company_id","description":"Id of the company whose locations are to fetched","required":true,"schema":{"type":"integer"}}],"optional":[{"in":"query","name":"store_type","description":"Helps to sort the location list on the basis of location type.","required":false,"schema":{"type":"string"}},{"in":"query","name":"store_codes","description":"List of up to 50 store codes to fetch. Specify multiple values by repeating the query parameter (e.g., `?store_codes=high_street&store_codes=main_avenue`). Comma-separated values are not supported.","required":false,"schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"q","description":"Query that is to be searched.","required":false,"schema":{"type":"string"}},{"in":"query","name":"stage","description":"to filter companies on basis of verified or unverified companies.","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","required":false,"schema":{"type":"integer","default":20}},{"in":"query","name":"location_ids","description":"Helps to filter stores on the basis of uids.","required":false,"schema":{"type":"array","items":{"type":"integer"}}},{"in":"query","name":"types","description":"Helps to get the location list on the basis of multiple location type.","required":false,"schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"tags","description":"Helps to get the location list on the basis of multiple location tag.","required":false,"schema":{"type":"array","items":{"type":"string"}}}],"query":[{"in":"query","name":"store_type","description":"Helps to sort the location list on the basis of location type.","required":false,"schema":{"type":"string"}},{"in":"query","name":"store_codes","description":"List of up to 50 store codes to fetch. Specify multiple values by repeating the query parameter (e.g., `?store_codes=high_street&store_codes=main_avenue`). Comma-separated values are not supported.","required":false,"schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"q","description":"Query that is to be searched.","required":false,"schema":{"type":"string"}},{"in":"query","name":"stage","description":"to filter companies on basis of verified or unverified companies.","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","required":false,"schema":{"type":"integer","default":20}},{"in":"query","name":"location_ids","description":"Helps to filter stores on the basis of uids.","required":false,"schema":{"type":"array","items":{"type":"integer"}}},{"in":"query","name":"types","description":"Helps to get the location list on the basis of multiple location type.","required":false,"schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"tags","description":"Helps to get the location list on the basis of multiple location tag.","required":false,"schema":{"type":"array","items":{"type":"string"}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company whose locations are to fetched","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", store_type=store_type, store_codes=store_codes, q=q, stage=stage, page_no=page_no, page_size=page_size, location_ids=location_ids, types=types, tags=tags)
         query_string = await create_query_string(store_type=store_type, store_codes=store_codes, q=q, stage=stage, page_no=page_no, page_size=page_size, location_ids=location_ids, types=types, tags=tags)
         if query_string:
             url_with_params += "?" + query_string
@@ -438,8 +438,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/location", store_type=store_type, store_codes=store_codes, q=q, stage=stage, page_no=page_no, page_size=page_size, location_ids=location_ids, types=types, tags=tags), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import LocationListSchema
-            schema = LocationListSchema()
+            from .models import LocationListSerializer
+            schema = LocationListSerializer()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -459,8 +459,8 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import LocationSchema
-        schema = LocationSchema()
+        from .models import LocationSerializer
+        schema = LocationSerializer()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/location", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
@@ -484,8 +484,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/location", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProfileSuccessResponseSchema
-            schema = ProfileSuccessResponseSchema()
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -529,8 +529,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/location/{location_id}", location_id=location_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetLocationSchema
-            schema = GetLocationSchema()
+            from .models import GetLocationSerializer
+            schema = GetLocationSerializer()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -553,8 +553,8 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import LocationSchema
-        schema = LocationSchema()
+        from .models import LocationSerializer
+        schema = LocationSerializer()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/location/{location_id}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","required":true,"schema":{"type":"integer"}},{"in":"path","name":"location_id","description":"Id of the location which you want to edit.","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","required":true,"schema":{"type":"integer"}},{"in":"path","name":"location_id","description":"Id of the location which you want to edit.","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", location_id=location_id)
@@ -578,8 +578,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/location/{location_id}", location_id=location_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProfileSuccessResponseSchema
-            schema = ProfileSuccessResponseSchema()
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -599,8 +599,8 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import BulkLocationSchema
-        schema = BulkLocationSchema()
+        from .models import BulkLocationSerializer
+        schema = BulkLocationSerializer()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/location/bulk", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
@@ -624,8 +624,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/location/bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProfileSuccessResponseSchema
-            schema = ProfileSuccessResponseSchema()
+            from .models import ProfileSuccessResponse
+            schema = ProfileSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

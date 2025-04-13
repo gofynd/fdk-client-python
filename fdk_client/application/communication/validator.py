@@ -14,6 +14,8 @@ from ..ApplicationModel import BaseSchema
     
     
     
+    
+    
 
 class CommunicationValidator:
     
@@ -38,7 +40,17 @@ class CommunicationValidator:
         pass 
         
     
+    class upsertAppPushtoken(BaseSchema):
+        
+        pass 
+        
+    
     class getOtpConfiguration(BaseSchema):
+        
+        pass 
+        
+    
+    class createAppPushtoken(BaseSchema):
         
         pass 
         

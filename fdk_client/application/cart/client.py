@@ -46,8 +46,7 @@ class Cart:
             "checkoutCartV2": "/service/application/cart/v2.0/checkout",
             "getPaymentPromotionOffers": "/service/application/cart/v1.0/available-payment-offers",
             "getCartMetaConfigs": "/service/application/cart/v1.0/cart/configuration",
-            "getCartMetaConfig": "/service/application/cart/v1.0/cart/configuration/{cart_meta_id}",
-            "addItemsv2": "/service/application/cart/v2.0/detail"
+            "getCartMetaConfig": "/service/application/cart/v1.0/cart/configuration/{cart_meta_id}"
             
         }
         self._urls = {
@@ -95,7 +94,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCart"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"c","schema":{"type":"boolean"},"description":"Select `true` to retrieve the cod charges in breakup of cart items."},{"in":"query","name":"assign_card_id","schema":{"type":"integer"},"description":"Token of user's debit or credit card."},{"in":"query","name":"area_code","schema":{"type":"string","x-not-enum":true},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"},{"in":"query","name":"order_type","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"c","schema":{"type":"boolean"},"description":"Select `true` to retrieve the cod charges in breakup of cart items."},{"in":"query","name":"assign_card_id","schema":{"type":"integer"},"description":"Token of user's debit or credit card."},{"in":"query","name":"area_code","schema":{"type":"string","x-not-enum":true},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"},{"in":"query","name":"order_type","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"headers":[],"path":[]}""", serverType="application", id=id, i=i, b=b, c=c, assign_card_id=assign_card_id, area_code=area_code, buy_now=buy_now, cart_type=cart_type, order_type=order_type)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCart"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"c","schema":{"type":"boolean"},"description":"Select `true` to retrieve the cod charges in breakup of cart items."},{"in":"query","name":"assign_card_id","schema":{"type":"integer"},"description":"Token of user's debit or credit card."},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"},{"in":"query","name":"order_type","schema":{"type":"string"},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"c","schema":{"type":"boolean"},"description":"Select `true` to retrieve the cod charges in breakup of cart items."},{"in":"query","name":"assign_card_id","schema":{"type":"integer"},"description":"Token of user's debit or credit card."},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"},{"in":"query","name":"order_type","schema":{"type":"string"},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"headers":[],"path":[]}""", serverType="application", id=id, i=i, b=b, c=c, assign_card_id=assign_card_id, area_code=area_code, buy_now=buy_now, cart_type=cart_type, order_type=order_type)
         query_string = await create_query_string(id=id, i=i, b=b, c=c, assign_card_id=assign_card_id, area_code=area_code, buy_now=buy_now, cart_type=cart_type, order_type=order_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -117,8 +116,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCart"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/detail", id=id, i=i, b=b, c=c, assign_card_id=assign_card_id, area_code=area_code, buy_now=buy_now, cart_type=cart_type, order_type=order_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartDetailResult
-            schema = CartDetailResult()
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -196,11 +195,11 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import AddCartPayload
-        schema = AddCartPayload()
+        from .models import AddCartRequest
+        schema = AddCartRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["addItems"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"area_code","schema":{"type":"string","x-not-enum":true},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"},{"in":"query","name":"order_type","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"query":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"area_code","schema":{"type":"string","x-not-enum":true},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"},{"in":"query","name":"order_type","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"headers":[],"path":[]}""", serverType="application", i=i, b=b, area_code=area_code, buy_now=buy_now, id=id, cart_type=cart_type, order_type=order_type)
+        url_with_params = await create_url_with_params(api_url=self._urls["addItems"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"},{"in":"query","name":"order_type","schema":{"type":"string"},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"query":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"},{"in":"query","name":"order_type","schema":{"type":"string"},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"headers":[],"path":[]}""", serverType="application", i=i, b=b, area_code=area_code, buy_now=buy_now, id=id, cart_type=cart_type, order_type=order_type)
         query_string = await create_query_string(i=i, b=b, area_code=area_code, buy_now=buy_now, id=id, cart_type=cart_type, order_type=order_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -222,8 +221,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addItems"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/detail", i=i, b=b, area_code=area_code, buy_now=buy_now, id=id, cart_type=cart_type, order_type=order_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AddCartDetailResult
-            schema = AddCartDetailResult()
+            from .models import AddCartDetailResponse
+            schema = AddCartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -264,11 +263,11 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateCartPayload
-        schema = UpdateCartPayload()
+        from .models import UpdateCartRequest
+        schema = UpdateCartRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["updateCart"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"area_code","schema":{"type":"string","x-not-enum":true},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart."},{"in":"query","name":"order_type","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"area_code","schema":{"type":"string","x-not-enum":true},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart."},{"in":"query","name":"order_type","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"headers":[],"path":[]}""", serverType="application", id=id, i=i, b=b, area_code=area_code, buy_now=buy_now, cart_type=cart_type, order_type=order_type)
+        url_with_params = await create_url_with_params(api_url=self._urls["updateCart"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart."},{"in":"query","name":"order_type","schema":{"type":"string"},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"area_code","schema":{"type":"string"},"description":"Customer servicable area_code."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart."},{"in":"query","name":"order_type","schema":{"type":"string"},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"headers":[],"path":[]}""", serverType="application", id=id, i=i, b=b, area_code=area_code, buy_now=buy_now, cart_type=cart_type, order_type=order_type)
         query_string = await create_query_string(id=id, i=i, b=b, area_code=area_code, buy_now=buy_now, cart_type=cart_type, order_type=order_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -290,8 +289,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateCart"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/detail", id=id, i=i, b=b, area_code=area_code, buy_now=buy_now, cart_type=cart_type, order_type=order_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UpdateCartDetailResult
-            schema = UpdateCartDetailResult()
+            from .models import UpdateCartDetailResponse
+            schema = UpdateCartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -317,8 +316,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DeleteCartPayload
-        schema = DeleteCartPayload()
+        from .models import DeleteCartRequest
+        schema = DeleteCartRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["deleteCart"], proccessed_params="""{"required":[],"optional":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"query":[{"name":"id","in":"query","description":"The unique identifier of the cart.","schema":{"type":"string"}},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart"}],"headers":[],"path":[]}""", serverType="application", id=id, cart_type=cart_type)
@@ -343,8 +342,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["deleteCart"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/cart_archive", id=id, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeleteCartDetailResult
-            schema = DeleteCartDetailResult()
+            from .models import DeleteCartDetailResponse
+            schema = DeleteCartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -392,8 +391,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getItemCount"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/basic", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartItemCountResult
-            schema = CartItemCountResult()
+            from .models import CartItemCountResponse
+            schema = CartItemCountResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -441,8 +440,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getItemCountV2"]).netloc, "get", await create_url_without_domain("/service/application/cart/v2.0/basic", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartItemCountResultV2
-            schema = CartItemCountResultV2()
+            from .models import CartItemCountResponseV2
+            schema = CartItemCountResponseV2()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -496,8 +495,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCoupons"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/coupon", id=id, buy_now=buy_now, slug=slug, store_id=store_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetCouponResult
-            schema = GetCouponResult()
+            from .models import GetCouponResponse
+            schema = GetCouponResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -535,8 +534,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ApplyCouponPayload
-        schema = ApplyCouponPayload()
+        from .models import ApplyCouponRequest
+        schema = ApplyCouponRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["applyCoupon"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"p","schema":{"type":"boolean"},"description":"Select `true` for getting a payment option in response."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart."}],"query":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"p","schema":{"type":"boolean"},"description":"Select `true` for getting a payment option in response."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"The type of cart."}],"headers":[],"path":[]}""", serverType="application", i=i, b=b, p=p, id=id, buy_now=buy_now, cart_type=cart_type)
@@ -561,8 +560,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["applyCoupon"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/coupon", i=i, b=b, p=p, id=id, buy_now=buy_now, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartDetailResult
-            schema = CartDetailResult()
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -613,8 +612,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["removeCoupon"]).netloc, "delete", await create_url_without_domain("/service/application/cart/v1.0/coupon", id=id, buy_now=buy_now, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartDetailResult
-            schema = CartDetailResult()
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -671,8 +670,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getBulkDiscountOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/bulk-price", item_id=item_id, article_id=article_id, uid=uid, slug=slug, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BulkPriceResult
-            schema = BulkPriceResult()
+            from .models import BulkPriceResponse
+            schema = BulkPriceResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -707,8 +706,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import RewardPointPayload
-        schema = RewardPointPayload()
+        from .models import RewardPointRequest
+        schema = RewardPointRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["applyRewardPoints"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."},{"name":"cart_type","description":"type of the cart","in":"query","schema":{"type":"string","enum":["universal"]}}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."},{"name":"cart_type","description":"type of the cart","in":"query","schema":{"type":"string","enum":["universal"]}}],"headers":[],"path":[]}""", serverType="application", id=id, i=i, b=b, buy_now=buy_now, cart_type=cart_type)
@@ -733,8 +732,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["applyRewardPoints"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/redeem/points/", id=id, i=i, b=b, buy_now=buy_now, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartDetailResult
-            schema = CartDetailResult()
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -797,8 +796,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAddresses"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/address", cart_id=cart_id, buy_now=buy_now, mobile_no=mobile_no, checkout_mode=checkout_mode, tags=tags, is_default=is_default, user_id=user_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetAddressesResult
-            schema = GetAddressesResult()
+            from .models import GetAddressesResponse
+            schema = GetAddressesResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -844,8 +843,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addAddress"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/address", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SaveAddressResult
-            schema = SaveAddressResult()
+            from .models import SaveAddressResponse
+            schema = SaveAddressResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -961,8 +960,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateAddress"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/address/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UpdateAddressResult
-            schema = UpdateAddressResult()
+            from .models import UpdateAddressResponse
+            schema = UpdateAddressResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1007,8 +1006,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["removeAddress"]).netloc, "delete", await create_url_without_domain("/service/application/cart/v1.0/address/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeleteAddressResult
-            schema = DeleteAddressResult()
+            from .models import DeleteAddressResponse
+            schema = DeleteAddressResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1040,8 +1039,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import SelectCartAddressPayload
-        schema = SelectCartAddressPayload()
+        from .models import SelectCartAddressRequest
+        schema = SelectCartAddressRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["selectAddress"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"cart_id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."}],"query":[{"in":"query","name":"cart_id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."}],"headers":[],"path":[]}""", serverType="application", cart_id=cart_id, buy_now=buy_now, i=i, b=b)
@@ -1066,8 +1065,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["selectAddress"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/select-address", cart_id=cart_id, buy_now=buy_now, i=i, b=b), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartDetailResult
-            schema = CartDetailResult()
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1096,8 +1095,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateCartPaymentPayload
-        schema = UpdateCartPaymentPayload()
+        from .models import UpdateCartPaymentRequest
+        schema = UpdateCartPaymentRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["selectPaymentMode"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"in":"query","name":"order_type","description":"This is boolean to get buy_now cart.","schema":{"type":"string","enum":["HomeDelivery"]}}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"in":"query","name":"order_type","description":"This is boolean to get buy_now cart.","schema":{"type":"string","enum":["HomeDelivery"]}}],"headers":[],"path":[]}""", serverType="application", id=id, buy_now=buy_now, order_type=order_type)
@@ -1122,8 +1121,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["selectPaymentMode"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/payment", id=id, buy_now=buy_now, order_type=order_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartDetailResult
-            schema = CartDetailResult()
+            from .models import CartDetailResponse
+            schema = CartDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1179,7 +1178,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["validateCouponForPayment"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"in":"query","name":"address_id","schema":{"type":"string"},"description":"ID allotted to an address."},{"in":"query","name":"payment_mode","schema":{"type":"string"},"description":"Payment mode selected by the customer."},{"in":"query","name":"payment_identifier","schema":{"type":"string"},"description":"Identifier of payment like ICIC, PAYTM."},{"in":"query","name":"aggregator_name","schema":{"type":"string"},"description":"Payment gateway identifier."},{"in":"query","name":"merchant_code","schema":{"type":"string","x-not-enum":true},"description":"Identifier used by payment gateway for a given payment mode, e.g. NB_ICIC, PAYTM."},{"in":"query","name":"iin","schema":{"type":"string"},"description":"Debit/Credit card prefix (first 6 digit)."},{"in":"query","name":"network","schema":{"type":"string"},"description":"Credit/Debit card issuer, e.g. VISA, MASTERCARD, RUPAY."},{"in":"query","name":"type","schema":{"type":"string"},"description":"Card type, e.g. Credit, Debit."},{"in":"query","name":"card_id","schema":{"type":"string"},"description":"Saved card token reference id."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"Type of the cart."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"in":"query","name":"address_id","schema":{"type":"string"},"description":"ID allotted to an address."},{"in":"query","name":"payment_mode","schema":{"type":"string"},"description":"Payment mode selected by the customer."},{"in":"query","name":"payment_identifier","schema":{"type":"string"},"description":"Identifier of payment like ICIC, PAYTM."},{"in":"query","name":"aggregator_name","schema":{"type":"string"},"description":"Payment gateway identifier."},{"in":"query","name":"merchant_code","schema":{"type":"string","x-not-enum":true},"description":"Identifier used by payment gateway for a given payment mode, e.g. NB_ICIC, PAYTM."},{"in":"query","name":"iin","schema":{"type":"string"},"description":"Debit/Credit card prefix (first 6 digit)."},{"in":"query","name":"network","schema":{"type":"string"},"description":"Credit/Debit card issuer, e.g. VISA, MASTERCARD, RUPAY."},{"in":"query","name":"type","schema":{"type":"string"},"description":"Card type, e.g. Credit, Debit."},{"in":"query","name":"card_id","schema":{"type":"string"},"description":"Saved card token reference id."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"Type of the cart."}],"headers":[],"path":[]}""", serverType="application", id=id, buy_now=buy_now, address_id=address_id, payment_mode=payment_mode, payment_identifier=payment_identifier, aggregator_name=aggregator_name, merchant_code=merchant_code, iin=iin, network=network, type=type, card_id=card_id, cart_type=cart_type)
+        url_with_params = await create_url_with_params(api_url=self._urls["validateCouponForPayment"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"in":"query","name":"address_id","schema":{"type":"string"},"description":"ID allotted to an address."},{"in":"query","name":"payment_mode","schema":{"type":"string"},"description":"Payment mode selected by the customer."},{"in":"query","name":"payment_identifier","schema":{"type":"string"},"description":"Identifier of payment like ICIC, PAYTM."},{"in":"query","name":"aggregator_name","schema":{"type":"string"},"description":"Payment gateway identifier."},{"in":"query","name":"merchant_code","schema":{"type":"string"},"description":"Identifier used by payment gateway for a given payment mode, e.g. NB_ICIC, PAYTM."},{"in":"query","name":"iin","schema":{"type":"string"},"description":"Debit/Credit card prefix (first 6 digit)."},{"in":"query","name":"network","schema":{"type":"string"},"description":"Credit/Debit card issuer, e.g. VISA, MASTERCARD, RUPAY."},{"in":"query","name":"type","schema":{"type":"string"},"description":"Card type, e.g. Credit, Debit."},{"in":"query","name":"card_id","schema":{"type":"string"},"description":"Saved card token reference id."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"Type of the cart."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"in":"query","name":"address_id","schema":{"type":"string"},"description":"ID allotted to an address."},{"in":"query","name":"payment_mode","schema":{"type":"string"},"description":"Payment mode selected by the customer."},{"in":"query","name":"payment_identifier","schema":{"type":"string"},"description":"Identifier of payment like ICIC, PAYTM."},{"in":"query","name":"aggregator_name","schema":{"type":"string"},"description":"Payment gateway identifier."},{"in":"query","name":"merchant_code","schema":{"type":"string"},"description":"Identifier used by payment gateway for a given payment mode, e.g. NB_ICIC, PAYTM."},{"in":"query","name":"iin","schema":{"type":"string"},"description":"Debit/Credit card prefix (first 6 digit)."},{"in":"query","name":"network","schema":{"type":"string"},"description":"Credit/Debit card issuer, e.g. VISA, MASTERCARD, RUPAY."},{"in":"query","name":"type","schema":{"type":"string"},"description":"Card type, e.g. Credit, Debit."},{"in":"query","name":"card_id","schema":{"type":"string"},"description":"Saved card token reference id."},{"in":"query","name":"cart_type","schema":{"type":"string","enum":["universal"]},"description":"Type of the cart."}],"headers":[],"path":[]}""", serverType="application", id=id, buy_now=buy_now, address_id=address_id, payment_mode=payment_mode, payment_identifier=payment_identifier, aggregator_name=aggregator_name, merchant_code=merchant_code, iin=iin, network=network, type=type, card_id=card_id, cart_type=cart_type)
         query_string = await create_query_string(id=id, buy_now=buy_now, address_id=address_id, payment_mode=payment_mode, payment_identifier=payment_identifier, aggregator_name=aggregator_name, merchant_code=merchant_code, iin=iin, network=network, type=type, card_id=card_id, cart_type=cart_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -1228,8 +1227,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CartMetaPayload
-        schema = CartMetaPayload()
+        from .models import CartMetaRequest
+        schema = CartMetaRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["updateCartMeta"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."}],"headers":[],"path":[]}""", serverType="application", id=id, buy_now=buy_now)
@@ -1254,8 +1253,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateCartMeta"]).netloc, "put", await create_url_without_domain("/service/application/cart/v1.0/meta", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartMetaResult
-            schema = CartMetaResult()
+            from .models import CartMetaResponse
+            schema = CartMetaResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1275,8 +1274,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import GetShareCartLinkPayload
-        schema = GetShareCartLinkPayload()
+        from .models import GetShareCartLinkRequest
+        schema = GetShareCartLinkRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["getCartShareLink"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -1301,8 +1300,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCartShareLink"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/share-cart", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetShareCartLinkResult
-            schema = GetShareCartLinkResult()
+            from .models import GetShareCartLinkResponse
+            schema = GetShareCartLinkResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1347,8 +1346,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCartSharedItems"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/share-cart/{token}", token=token), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SharedCartResult
-            schema = SharedCartResult()
+            from .models import SharedCartResponse
+            schema = SharedCartResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1399,8 +1398,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateCartWithSharedItems"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/share-cart/{token}/{action}", token=token, action=action, cart_id=cart_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SharedCartResult
-            schema = SharedCartResult()
+            from .models import SharedCartResponse
+            schema = SharedCartResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1454,8 +1453,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPromotionOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/available-promotions", slug=slug, page_size=page_size, promotion_group=promotion_group, store_id=store_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PromotionOffersResult
-            schema = PromotionOffersResult()
+            from .models import PromotionOffersResponse
+            schema = PromotionOffersResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1557,7 +1556,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getShipments"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"pick_at_store_uid","required":false,"schema":{"type":"integer"},"description":"ID of the store from where the order will be picked up by the customer, assuming the order_type is `PickAtStore`. This may or may not be the same as the ID of the ordering store."},{"in":"query","name":"ordering_store_id","required":false,"schema":{"type":"integer"},"description":"ID of the store where the customer is ordering from."},{"name":"i","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart.","in":"query","schema":{"type":"boolean"}},{"name":"p","description":"Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart.","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."},{"name":"address_id","description":"ID allotted to the selected address.","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059.","in":"query","x-not-enum":true,"schema":{"type":"string","x-not-enum":true}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. Digital - If the customer wants to buy digital voucher ( for jiogames ).","in":"query","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]}}],"query":[{"in":"query","name":"pick_at_store_uid","required":false,"schema":{"type":"integer"},"description":"ID of the store from where the order will be picked up by the customer, assuming the order_type is `PickAtStore`. This may or may not be the same as the ID of the ordering store."},{"in":"query","name":"ordering_store_id","required":false,"schema":{"type":"integer"},"description":"ID of the store where the customer is ordering from."},{"name":"i","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart.","in":"query","schema":{"type":"boolean"}},{"name":"p","description":"Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart.","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."},{"name":"address_id","description":"ID allotted to the selected address.","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059.","in":"query","x-not-enum":true,"schema":{"type":"string","x-not-enum":true}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. Digital - If the customer wants to buy digital voucher ( for jiogames ).","in":"query","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]}}],"headers":[],"path":[]}""", serverType="application", pick_at_store_uid=pick_at_store_uid, ordering_store_id=ordering_store_id, i=i, p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code, order_type=order_type)
+        url_with_params = await create_url_with_params(api_url=self._urls["getShipments"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"pick_at_store_uid","required":false,"schema":{"type":"integer"},"description":"ID of the store from where the order will be picked up by the customer, assuming the order_type is `PickAtStore`. This may or may not be the same as the ID of the ordering store."},{"in":"query","name":"ordering_store_id","required":false,"schema":{"type":"integer"},"description":"ID of the store where the customer is ordering from."},{"name":"i","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart.","in":"query","schema":{"type":"boolean"}},{"name":"p","description":"Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart.","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."},{"name":"address_id","description":"ID allotted to the selected address.","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059.","in":"query","schema":{"type":"string"}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. Digital - If the customer wants to buy digital voucher ( for jiogames ).","in":"query","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]}}],"query":[{"in":"query","name":"pick_at_store_uid","required":false,"schema":{"type":"integer"},"description":"ID of the store from where the order will be picked up by the customer, assuming the order_type is `PickAtStore`. This may or may not be the same as the ID of the ordering store."},{"in":"query","name":"ordering_store_id","required":false,"schema":{"type":"integer"},"description":"ID of the store where the customer is ordering from."},{"name":"i","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart.","in":"query","schema":{"type":"boolean"}},{"name":"p","description":"Select `true` for getting a payment option in response.","in":"query","schema":{"type":"boolean"}},{"name":"id","description":"The unique identifier of the cart.","in":"query","schema":{"type":"string"}},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."},{"name":"address_id","description":"ID allotted to the selected address.","in":"query","schema":{"type":"string"}},{"name":"area_code","description":"The PIN Code of the destination address, e.g. 400059.","in":"query","schema":{"type":"string"}},{"name":"order_type","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. Digital - If the customer wants to buy digital voucher ( for jiogames ).","in":"query","schema":{"type":"string","enum":["HomeDelivery","PickAtStore"]}}],"headers":[],"path":[]}""", serverType="application", pick_at_store_uid=pick_at_store_uid, ordering_store_id=ordering_store_id, i=i, p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code, order_type=order_type)
         query_string = await create_query_string(pick_at_store_uid=pick_at_store_uid, ordering_store_id=ordering_store_id, i=i, p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code, order_type=order_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -1579,8 +1578,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getShipments"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/shipment", pick_at_store_uid=pick_at_store_uid, ordering_store_id=ordering_store_id, i=i, p=p, id=id, buy_now=buy_now, address_id=address_id, area_code=area_code, order_type=order_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartShipmentsResult
-            schema = CartShipmentsResult()
+            from .models import CartShipmentsResponse
+            schema = CartShipmentsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1606,8 +1605,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CartCheckoutDetailPayload
-        schema = CartCheckoutDetailPayload()
+        from .models import CartCheckoutDetailRequest
+        schema = CartCheckoutDetailRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["checkoutCart"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"buy_now","description":"This indicates the type of cart to checkout.","schema":{"type":"boolean"}},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart."}],"query":[{"in":"query","name":"buy_now","description":"This indicates the type of cart to checkout.","schema":{"type":"boolean"}},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart."}],"headers":[],"path":[]}""", serverType="application", buy_now=buy_now, cart_type=cart_type)
@@ -1632,8 +1631,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkoutCart"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/checkout", buy_now=buy_now, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartCheckoutResult
-            schema = CartCheckoutResult()
+            from .models import CartCheckoutResponse
+            schema = CartCheckoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1659,8 +1658,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CartCheckoutDetailV2Payload
-        schema = CartCheckoutDetailV2Payload()
+        from .models import CartCheckoutDetailV2Request
+        schema = CartCheckoutDetailV2Request()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["checkoutCartV2"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"buy_now","description":"This indicates the type of cart to checkout.","schema":{"type":"boolean"}},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart."}],"query":[{"in":"query","name":"buy_now","description":"This indicates the type of cart to checkout.","schema":{"type":"boolean"}},{"name":"cart_type","in":"query","schema":{"type":"string","enum":["universal"]},"description":"The type of cart."}],"headers":[],"path":[]}""", serverType="application", buy_now=buy_now, cart_type=cart_type)
@@ -1685,8 +1684,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkoutCartV2"]).netloc, "post", await create_url_without_domain("/service/application/cart/v2.0/checkout", buy_now=buy_now, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartCheckoutResult
-            schema = CartCheckoutResult()
+            from .models import CartCheckoutResponse
+            schema = CartCheckoutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1734,8 +1733,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPaymentPromotionOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/available-payment-offers", id=id, uid=uid), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PromotionPaymentOffersResult
-            schema = PromotionPaymentOffersResult()
+            from .models import PromotionPaymentOffersResponse
+            schema = PromotionPaymentOffersResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1777,8 +1776,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCartMetaConfigs"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/cart/configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartMetaConfigListResult
-            schema = CartMetaConfigListResult()
+            from .models import CartMetaConfigListResponse
+            schema = CartMetaConfigListResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1787,25 +1786,22 @@ class Cart:
 
         return response
     
-    async def getCartMetaConfig(self, cart_meta_id=None, is_bank_offer=None, body="", request_headers:Dict={}):
+    async def getCartMetaConfig(self, cart_meta_id=None, body="", request_headers:Dict={}):
         """Get cart configuration by id.
         :param cart_meta_id : CartMeta mongo id for fetching single cart meta data : type string
-        :param is_bank_offer : Boolean flag stating if promotions with bank offer need to be fetched. : type boolean
         """
         payload = {}
         
         if cart_meta_id is not None:
             payload["cart_meta_id"] = cart_meta_id
-        if is_bank_offer is not None:
-            payload["is_bank_offer"] = is_bank_offer
 
         # Parameter validation
         schema = CartValidator.getCartMetaConfig()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCartMetaConfig"], proccessed_params="""{"required":[{"name":"cart_meta_id","in":"path","schema":{"type":"string"},"description":"CartMeta mongo id for fetching single cart meta data","required":true}],"optional":[{"name":"is_bank_offer","description":"Boolean flag stating if promotions with bank offer need to be fetched.","in":"query","schema":{"type":"boolean"}}],"query":[{"name":"is_bank_offer","description":"Boolean flag stating if promotions with bank offer need to be fetched.","in":"query","schema":{"type":"boolean"}}],"headers":[],"path":[{"name":"cart_meta_id","in":"path","schema":{"type":"string"},"description":"CartMeta mongo id for fetching single cart meta data","required":true}]}""", serverType="application", cart_meta_id=cart_meta_id, is_bank_offer=is_bank_offer)
-        query_string = await create_query_string(is_bank_offer=is_bank_offer)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCartMetaConfig"], proccessed_params="""{"required":[{"name":"cart_meta_id","in":"path","schema":{"type":"string"},"description":"CartMeta mongo id for fetching single cart meta data","required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"cart_meta_id","in":"path","schema":{"type":"string"},"description":"CartMeta mongo id for fetching single cart meta data","required":true}]}""", serverType="application", cart_meta_id=cart_meta_id)
+        query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
 
@@ -1823,74 +1819,15 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCartMetaConfig"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/cart/configuration/{cart_meta_id}", cart_meta_id=cart_meta_id, is_bank_offer=is_bank_offer), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCartMetaConfig"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/cart/configuration/{cart_meta_id}", cart_meta_id=cart_meta_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CartConfigDetailResult
-            schema = CartConfigDetailResult()
+            from .models import CartConfigDetailResponse
+            schema = CartConfigDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getCartMetaConfig")
-                print(e)
-
-        return response
-    
-    async def addItemsv2(self, buy_now=None, id=None, cart_type=None, order_type=None, body="", request_headers:Dict={}):
-        """Add product items to the customer's existing shopping cart. If there is no existing cart associated with the customer, it creates a new one and adds the items to it.
-        :param buy_now : Select `true` to set/initialize buy now cart. : type boolean
-        :param id : The unique identifier of the cart. : type string
-        :param cart_type : The type of cart : type string
-        :param order_type : The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. : type string
-        """
-        payload = {}
-        
-        if buy_now is not None:
-            payload["buy_now"] = buy_now
-        if id is not None:
-            payload["id"] = id
-        if cart_type is not None:
-            payload["cart_type"] = cart_type
-        if order_type is not None:
-            payload["order_type"] = order_type
-
-        # Parameter validation
-        schema = CartValidator.addItemsv2()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import AddCartPayload
-        schema = AddCartPayload()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(api_url=self._urls["addItemsv2"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"cart_type","x-not-enum":true,"schema":{"type":"string","enum":["universal"]},"description":"The type of cart"},{"in":"query","name":"order_type","schema":{"type":"string","x-not-enum":true},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"query":[{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Select `true` to set/initialize buy now cart."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"cart_type","x-not-enum":true,"schema":{"type":"string","enum":["universal"]},"description":"The type of cart"},{"in":"query","name":"order_type","schema":{"type":"string","x-not-enum":true},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."}],"headers":[],"path":[]}""", serverType="application", buy_now=buy_now, id=id, cart_type=cart_type, order_type=order_type)
-        query_string = await create_query_string(buy_now=buy_now, id=id, cart_type=cart_type, order_type=order_type)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["addItemsv2"]).netloc, "post", await create_url_without_domain("/service/application/cart/v2.0/detail", buy_now=buy_now, id=id, cart_type=cart_type, order_type=order_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import AddCartDetailResultV2
-            schema = AddCartDetailResultV2()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for addItemsv2")
                 print(e)
 
         return response

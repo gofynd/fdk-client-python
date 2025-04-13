@@ -120,11 +120,11 @@ class AuthSuccess(BaseSchema):
     pass
 
 
-class UserExists(BaseSchema):
+class UserExistsResponse(BaseSchema):
     pass
 
 
-class SendOtp(BaseSchema):
+class SendOtpResponse(BaseSchema):
     pass
 
 
@@ -329,10 +329,6 @@ class SessionExpiry(BaseSchema):
 
 
 class UserSchema(BaseSchema):
-    pass
-
-
-class DebugInfo(BaseSchema):
     pass
 
 
@@ -697,7 +693,7 @@ class AuthSuccess(BaseSchema):
     
 
 
-class UserExists(BaseSchema):
+class UserExistsResponse(BaseSchema):
     # User swagger.json
 
     
@@ -705,7 +701,7 @@ class UserExists(BaseSchema):
     
 
 
-class SendOtp(BaseSchema):
+class SendOtpResponse(BaseSchema):
     # User swagger.json
 
     
@@ -808,8 +804,6 @@ class ResetForgotPasswordSuccess(BaseSchema):
 class VerifyOtpSuccess(BaseSchema):
     # User swagger.json
 
-    
-    verify_mobile_link = fields.Boolean(required=False)
     
     user = fields.Nested(UserSchema, required=False)
     
@@ -970,8 +964,6 @@ class SendMobileVerifyLinkSuccess(BaseSchema):
 
     
     verify_mobile_link = fields.Boolean(required=False)
-    
-    user = fields.Nested(UserSchema, required=False)
     
 
 
@@ -1389,10 +1381,6 @@ class UserSchema(BaseSchema):
     # User swagger.json
 
     
-    debug = fields.Nested(DebugInfo, required=False)
-    
-    has_old_password_hash = fields.Boolean(required=False)
-    
     application_id = fields.Str(required=False)
     
     user_id = fields.Str(required=False)
@@ -1428,16 +1416,6 @@ class UserSchema(BaseSchema):
     external_id = fields.Str(required=False)
     
     rr_id = fields.Str(required=False)
-    
-
-
-class DebugInfo(BaseSchema):
-    # User swagger.json
-
-    
-    source = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
     
 
 

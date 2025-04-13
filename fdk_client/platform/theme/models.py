@@ -90,7 +90,7 @@ class CompanyThemeReqSchema(BaseSchema):
     pass
 
 
-class CompanyTheme(BaseSchema):
+class CompanyThemeResponse(BaseSchema):
     pass
 
 
@@ -206,7 +206,7 @@ class ThemesSchema(BaseSchema):
     pass
 
 
-class ThemeUpgradable(BaseSchema):
+class ThemeUpgradableResponse(BaseSchema):
     pass
 
 
@@ -374,7 +374,7 @@ class ThemeVersions(BaseSchema):
     pass
 
 
-class DummyTheme(BaseSchema):
+class DummyResponse(BaseSchema):
     pass
 
 
@@ -687,7 +687,7 @@ class CompanyThemeReqSchema(BaseSchema):
     
 
 
-class CompanyTheme(BaseSchema):
+class CompanyThemeResponse(BaseSchema):
     # Theme swagger.json
 
     
@@ -827,8 +827,6 @@ class SEOSitemap(BaseSchema):
     
     frequency = fields.Str(required=False)
     
-    modified_on = fields.Str(required=False)
-    
 
 
 class SEObreadcrumb(BaseSchema):
@@ -917,7 +915,7 @@ class AvailablePagePredicate(BaseSchema):
     
     route = fields.Nested(AvailablePageRoutePredicate, required=False)
     
-    schedule = fields.List(fields.Nested(AvailablePageSchedulePredicate, required=False), required=False)
+    schedule = fields.Nested(AvailablePageSchedulePredicate, required=False)
     
     platform = fields.Nested(AvailablePagePlatformPredicate, required=False)
     
@@ -944,14 +942,6 @@ class AvailablePageUserPredicate(BaseSchema):
     authenticated = fields.Boolean(required=False)
     
     anonymous = fields.Boolean(required=False)
-    
-    user_type = fields.Str(required=False)
-    
-    user_groups = fields.List(fields.Str(required=False), required=False)
-    
-    start = fields.Str(required=False)
-    
-    end = fields.Str(required=False)
     
 
 
@@ -1115,11 +1105,9 @@ class ThemesSchema(BaseSchema):
     
     src = fields.Str(required=False)
     
-    applied_themes = fields.List(fields.Dict(required=False), required=False)
-    
 
 
-class ThemeUpgradable(BaseSchema):
+class ThemeUpgradableResponse(BaseSchema):
     # Theme swagger.json
 
     
@@ -1637,7 +1625,7 @@ class ThemeVersions(BaseSchema):
     
 
 
-class DummyTheme(BaseSchema):
+class DummyResponse(BaseSchema):
     # Theme swagger.json
 
     

@@ -42,7 +42,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
@@ -178,7 +177,7 @@ class ThemeValidator:
          
         
     
-    class deletePage(BaseSchema):
+    class updatePage(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -191,7 +190,7 @@ class ThemeValidator:
          
         
     
-    class updatePage(BaseSchema):
+    class deletePage(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -201,8 +200,6 @@ class ThemeValidator:
         theme_id = fields.Str(required=False)
         
         page_value = fields.Str(required=False)
-        
-        socket_id = fields.Str(required=False)
          
         
     

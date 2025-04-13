@@ -51,6 +51,9 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
         
         
         
@@ -66,6 +69,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -215,13 +219,8 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
         
         
-    
-    
-        
         
         
     
@@ -240,9 +239,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
-        
         
         
     
@@ -499,6 +495,15 @@ class CatalogValidator:
         template_tag = fields.Str(required=False)
         
         item_type = fields.Str(required=False)
+         
+        
+    
+    class getHsnCode(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        id = fields.Str(required=False)
          
         
     
@@ -882,17 +887,6 @@ class CatalogValidator:
          
         
     
-    class validateProductGlobalTemplate(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        item_type = fields.Str(required=False)
-        
-        bulk = fields.Boolean(required=False)
-         
-        
-    
     class getProductValidation(BaseSchema):
         
         
@@ -926,15 +920,9 @@ class CatalogValidator:
     class getProductSize(BaseSchema):
         
         
-        item_code = fields.Str(required=False)
-        
         company_id = fields.Int(required=False)
         
         item_id = fields.Int(required=False)
-        
-        brand_uid = fields.Int(required=False)
-        
-        uid = fields.Int(required=False)
          
         
     

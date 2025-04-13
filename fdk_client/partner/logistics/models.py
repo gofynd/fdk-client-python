@@ -12,7 +12,7 @@ class ErrorResponseV1(BaseSchema):
     pass
 
 
-class BulkRegionServiceabilityTatRequestSchema(BaseSchema):
+class BulkRegionServiceabilityTatRequest(BaseSchema):
     pass
 
 
@@ -20,15 +20,15 @@ class BulkRegionServiceabilityTatResponseItemData(BaseSchema):
     pass
 
 
-class ErrorResponseSchema(BaseSchema):
+class ErrorResponse(BaseSchema):
     pass
 
 
-class FailureResponseSchema(BaseSchema):
+class FailureResponse(BaseSchema):
     pass
 
 
-class BulkRegionServiceabilityTatResponseSchema(BaseSchema):
+class BulkRegionServiceabilityTatResponse(BaseSchema):
     pass
 
 
@@ -36,7 +36,7 @@ class Page(BaseSchema):
     pass
 
 
-class BulkRegionJobSerializerSchema(BaseSchema):
+class BulkRegionJobSerializer(BaseSchema):
     pass
 
 
@@ -44,7 +44,7 @@ class BulkRegionResponseItemData(BaseSchema):
     pass
 
 
-class BulkRegionResponseSchema(BaseSchema):
+class BulkRegionResponse(BaseSchema):
     pass
 
 
@@ -52,19 +52,19 @@ class CourierAccount(BaseSchema):
     pass
 
 
-class CourierPartnerAccountFailureResponseSchema(BaseSchema):
+class CourierPartnerAccountFailureResponse(BaseSchema):
     pass
 
 
-class CompanyCourierPartnerAccountListResponseSchema(BaseSchema):
+class CompanyCourierPartnerAccountListResponse(BaseSchema):
     pass
 
 
-class CourierAccountSchemeResponseSchema(BaseSchema):
+class CourierAccountSchemeResponse(BaseSchema):
     pass
 
 
-class CourierAccountResponseSchema(BaseSchema):
+class CourierAccountResponse(BaseSchema):
     pass
 
 
@@ -80,11 +80,7 @@ class ArithmeticOperations(BaseSchema):
     pass
 
 
-class ArithmeticOperationsV2(BaseSchema):
-    pass
-
-
-class CourierPartnerSchemeUpdateRequestSchema(BaseSchema):
+class CourierPartnerSchemeUpdateRequest(BaseSchema):
     pass
 
 
@@ -115,7 +111,7 @@ class ErrorResponseV1(BaseSchema):
     
 
 
-class BulkRegionServiceabilityTatRequestSchema(BaseSchema):
+class BulkRegionServiceabilityTatRequest(BaseSchema):
     # Logistics swagger.json
 
     
@@ -147,7 +143,7 @@ class BulkRegionServiceabilityTatResponseItemData(BaseSchema):
     
 
 
-class ErrorResponseSchema(BaseSchema):
+class ErrorResponse(BaseSchema):
     # Logistics swagger.json
 
     
@@ -159,17 +155,17 @@ class ErrorResponseSchema(BaseSchema):
     
 
 
-class FailureResponseSchema(BaseSchema):
+class FailureResponse(BaseSchema):
     # Logistics swagger.json
 
     
     success = fields.Boolean(required=False)
     
-    error = fields.List(fields.Nested(ErrorResponseSchema, required=False), required=False)
+    error = fields.List(fields.Nested(ErrorResponse, required=False), required=False)
     
 
 
-class BulkRegionServiceabilityTatResponseSchema(BaseSchema):
+class BulkRegionServiceabilityTatResponse(BaseSchema):
     # Logistics swagger.json
 
     
@@ -201,7 +197,7 @@ class Page(BaseSchema):
     
 
 
-class BulkRegionJobSerializerSchema(BaseSchema):
+class BulkRegionJobSerializer(BaseSchema):
     # Logistics swagger.json
 
     
@@ -243,7 +239,7 @@ class BulkRegionResponseItemData(BaseSchema):
     
 
 
-class BulkRegionResponseSchema(BaseSchema):
+class BulkRegionResponse(BaseSchema):
     # Logistics swagger.json
 
     
@@ -271,27 +267,27 @@ class CourierAccount(BaseSchema):
     
 
 
-class CourierPartnerAccountFailureResponseSchema(BaseSchema):
+class CourierPartnerAccountFailureResponse(BaseSchema):
     # Logistics swagger.json
 
     
     success = fields.Boolean(required=False)
     
-    error = fields.List(fields.Nested(ErrorResponseSchema, required=False), required=False)
+    error = fields.List(fields.Nested(ErrorResponse, required=False), required=False)
     
 
 
-class CompanyCourierPartnerAccountListResponseSchema(BaseSchema):
+class CompanyCourierPartnerAccountListResponse(BaseSchema):
     # Logistics swagger.json
 
     
-    items = fields.List(fields.Nested(CourierAccountResponseSchema, required=False), required=False)
+    items = fields.List(fields.Nested(CourierAccountResponse, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
 
 
-class CourierAccountSchemeResponseSchema(BaseSchema):
+class CourierAccountSchemeResponse(BaseSchema):
     # Logistics swagger.json
 
     
@@ -301,7 +297,7 @@ class CourierAccountSchemeResponseSchema(BaseSchema):
     
     name = fields.Str(required=False)
     
-    weight = fields.Nested(ArithmeticOperationsV2, required=False)
+    weight = fields.Nested(ArithmeticOperations, required=False)
     
     transport_type = fields.Str(required=False)
     
@@ -317,7 +313,7 @@ class CourierAccountSchemeResponseSchema(BaseSchema):
     
 
 
-class CourierAccountResponseSchema(BaseSchema):
+class CourierAccountResponse(BaseSchema):
     # Logistics swagger.json
 
     
@@ -335,7 +331,7 @@ class CourierAccountResponseSchema(BaseSchema):
     
     is_own_account = fields.Boolean(required=False)
     
-    scheme_rules = fields.Nested(CourierAccountSchemeResponseSchema, required=False)
+    scheme_rules = fields.Nested(CourierAccountSchemeResponse, required=False)
     
 
 
@@ -349,7 +345,7 @@ class CourierPartnerSchemeModel(BaseSchema):
     
     name = fields.Str(required=False)
     
-    weight = fields.Nested(ArithmeticOperationsV2, required=False)
+    weight = fields.Nested(ArithmeticOperations, required=False)
     
     volumetric_weight = fields.Nested(ArithmeticOperations, required=False)
     
@@ -423,27 +419,13 @@ class ArithmeticOperations(BaseSchema):
     
 
 
-class ArithmeticOperationsV2(BaseSchema):
-    # Logistics swagger.json
-
-    
-    lt = fields.Int(required=False, allow_none=True)
-    
-    gt = fields.Int(required=False, allow_none=True)
-    
-    lte = fields.Int(required=False, allow_none=True)
-    
-    gte = fields.Int(required=False, allow_none=True)
-    
-
-
-class CourierPartnerSchemeUpdateRequestSchema(BaseSchema):
+class CourierPartnerSchemeUpdateRequest(BaseSchema):
     # Logistics swagger.json
 
     
     name = fields.Str(required=False)
     
-    weight = fields.Nested(ArithmeticOperationsV2, required=False)
+    weight = fields.Nested(ArithmeticOperations, required=False)
     
     volumetric_weight = fields.Nested(ArithmeticOperations, required=False)
     

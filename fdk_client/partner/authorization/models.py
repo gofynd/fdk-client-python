@@ -24,7 +24,7 @@ class ClientMeta(BaseSchema):
     pass
 
 
-class ClientResponseSchema(BaseSchema):
+class ClientResponse(BaseSchema):
     pass
 
 
@@ -83,7 +83,7 @@ class ClientMeta(BaseSchema):
     
 
 
-class ClientResponseSchema(BaseSchema):
+class ClientResponse(BaseSchema):
     # Authorization swagger.json
 
     
@@ -129,7 +129,7 @@ class ClientListSchema(BaseSchema):
     # Authorization swagger.json
 
     
-    items = fields.List(fields.Nested(ClientResponseSchema, required=False), required=False)
+    items = fields.List(fields.Nested(ClientResponse, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     

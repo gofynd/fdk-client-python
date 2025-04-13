@@ -319,7 +319,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getHomePageContent"], proccessed_params="""{"required":[{"name":"page_type","in":"query","description":"The type of the page (e.g., pricing).","required":true,"schema":{"type":"string","x-not-enum":true}}],"optional":[],"query":[{"name":"page_type","in":"query","description":"The type of the page (e.g., pricing).","required":true,"schema":{"type":"string","x-not-enum":true}}],"headers":[],"path":[]}""", serverType="public", page_type=page_type)
+        url_with_params = await create_url_with_params(api_url=self._urls["getHomePageContent"], proccessed_params="""{"required":[{"name":"page_type","in":"query","description":"The type of the page (e.g., pricing).","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"page_type","in":"query","description":"The type of the page (e.g., pricing).","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="public", page_type=page_type)
         query_string = await create_query_string(page_type=page_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -498,7 +498,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCredentialsByEntity"], proccessed_params="""{"required":[{"name":"entity_type","in":"path","description":"Server Type","required":true,"schema":{"type":"string","x-not-enum":true}}],"optional":[],"query":[],"headers":[],"path":[{"name":"entity_type","in":"path","description":"Server Type","required":true,"schema":{"type":"string","x-not-enum":true}}]}""", serverType="public", entity_type=entity_type)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCredentialsByEntity"], proccessed_params="""{"required":[{"name":"entity_type","in":"path","description":"Server Type","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"entity_type","in":"path","description":"Server Type","required":true,"schema":{"type":"string"}}]}""", serverType="public", entity_type=entity_type)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string

@@ -122,7 +122,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-        
     
     
         
@@ -404,8 +403,6 @@ class CatalogValidator:
         latitude = fields.Float(required=False)
         
         longitude = fields.Float(required=False)
-        
-        tags = fields.Str(required=False)
          
         
     

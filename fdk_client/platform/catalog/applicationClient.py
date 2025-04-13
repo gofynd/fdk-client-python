@@ -15,7 +15,7 @@ class Catalog:
     
     async def getCatalogInsights(self, brand=None, request_headers:Dict={}):
         """Retrieve the count of catalog related data like products, brands, departments and categories that have been made live as per configuration of the application.
-        :param brand : Brand slug : type string
+        :param brand : Brand slug that is to be searched. : type string
         """
         payload = {}
         
@@ -27,7 +27,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/analytics/insights", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"Brand slug","in":"query","name":"brand","required":false,"schema":{"type":"string"}}],"query":[{"description":"Brand slug","in":"query","name":"brand","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", brand=brand)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/analytics/insights", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"Brand slug that is to be searched.","in":"query","name":"brand","required":false,"schema":{"type":"string"}}],"query":[{"description":"Brand slug that is to be searched.","in":"query","name":"brand","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", brand=brand)
         query_string = await create_query_string(brand=brand)
         if query_string:
             url_with_params += "?" + query_string
@@ -47,8 +47,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/analytics/insights", brand=brand), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CatalogInsightResponseSchema
-            schema = CatalogInsightResponseSchema()
+            from .models import CatalogInsightResponse
+            schema = CatalogInsightResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -61,7 +61,7 @@ class Catalog:
         """Retrieve brand listings related to the application. A brand is the name under which a product is being sold
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
-        :param q : Search query with brand name.Use this parameter to search brands by brand name. : type string
+        :param q : Search query with brand name. Use this parameter to search brands by brand name. : type string
         """
         payload = {}
         
@@ -77,7 +77,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/brand", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search query with brand name.Use this parameter to search brands by brand name.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search query with brand name.Use this parameter to search brands by brand name.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, q=q)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/brand", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search query with brand name. Use this parameter to search brands by brand name.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search query with brand name. Use this parameter to search brands by brand name.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, q=q)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q)
         if query_string:
             url_with_params += "?" + query_string
@@ -108,7 +108,7 @@ class Catalog:
         return response
     
     async def updateAppBrand(self, brand_uid=None, body="", request_headers:Dict={}):
-        """Modify data associated to a item custom meta.
+        """Modify data associated to the brand for that particular sales channel.
         :param brand_uid : brand id for which the custom_json is associated. : type integer
         """
         payload = {}
@@ -125,7 +125,7 @@ class Catalog:
         schema = ApplicationBrandJson()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/brand/{brand_uid}", """{"required":[{"description":"Id of the company associated to brand custom json.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"application id for which the custom_json is associated.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"brand id for which the custom_json is associated.","in":"path","name":"brand_uid","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to brand custom json.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"application id for which the custom_json is associated.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"brand id for which the custom_json is associated.","in":"path","name":"brand_uid","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", brand_uid=brand_uid)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/brand/{brand_uid}", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"application id for which the custom_json is associated.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"brand id for which the custom_json is associated.","in":"path","name":"brand_uid","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"application id for which the custom_json is associated.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"brand id for which the custom_json is associated.","in":"path","name":"brand_uid","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", brand_uid=brand_uid)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -145,8 +145,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/brand/{brand_uid}", brand_uid=brand_uid), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponse1Schema
-            schema = SuccessResponse1Schema()
+            from .models import SuccessResponseSchema
+            schema = SuccessResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -157,7 +157,7 @@ class Catalog:
     
     async def getApplicationBrands(self, department=None, page_no=None, page_size=None, q=None, brand_id=None, request_headers:Dict={}):
         """List all the brands. A brand is the name under which a product is being sold.
-        :param department : The name of the department. Use this parameter to filter products by a particular department. See below the list of available departments. You can retrieve available departments from the **v1.0/departments/** API : type string
+        :param department : The name of the department. Use this parameter to filter products by a particular department. See below the list of available departments. You can retrieve available departments from the "v1.0/departments/" API : type string
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
         :param q : Search query with brand name.Use this parameter to search brands by brand name. : type string
@@ -181,7 +181,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/brands", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The name of the department. Use this parameter to filter products by a particular department. See below the list of available departments. You can retrieve available departments from the **v1.0/departments/** API","in":"query","name":"department","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search query with brand name.Use this parameter to search brands by brand name.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"Helps to sort the brands list on the basis of uid list.","in":"query","name":"brand_id","required":false,"schema":{"type":"array","items":{"type":"integer"}}}],"query":[{"description":"The name of the department. Use this parameter to filter products by a particular department. See below the list of available departments. You can retrieve available departments from the **v1.0/departments/** API","in":"query","name":"department","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search query with brand name.Use this parameter to search brands by brand name.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"Helps to sort the brands list on the basis of uid list.","in":"query","name":"brand_id","required":false,"schema":{"type":"array","items":{"type":"integer"}}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", department=department, page_no=page_no, page_size=page_size, q=q, brand_id=brand_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/brands", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The name of the department. Use this parameter to filter products by a particular department. See below the list of available departments. You can retrieve available departments from the \"v1.0/departments/\" API","in":"query","name":"department","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search query with brand name.Use this parameter to search brands by brand name.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"Helps to sort the brands list on the basis of uid list.","in":"query","name":"brand_id","required":false,"schema":{"type":"array","items":{"type":"integer"}}}],"query":[{"description":"The name of the department. Use this parameter to filter products by a particular department. See below the list of available departments. You can retrieve available departments from the \"v1.0/departments/\" API","in":"query","name":"department","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search query with brand name.Use this parameter to search brands by brand name.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"Helps to sort the brands list on the basis of uid list.","in":"query","name":"brand_id","required":false,"schema":{"type":"array","items":{"type":"integer"}}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", department=department, page_no=page_no, page_size=page_size, q=q, brand_id=brand_id)
         query_string = await create_query_string(department=department, page_no=page_no, page_size=page_size, q=q, brand_id=brand_id)
         if query_string:
             url_with_params += "?" + query_string
@@ -201,8 +201,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/brands", department=department, page_no=page_no, page_size=page_size, q=q, brand_id=brand_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BrandListingResponseSchema
-            schema = BrandListingResponseSchema()
+            from .models import BrandListingResponse
+            schema = BrandListingResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -213,7 +213,7 @@ class Catalog:
     
     async def getCategories(self, department=None, request_headers:Dict={}):
         """Retrieve a list of categories. Optionally pass filter the brands by the department.
-        :param department : The name of the department. Use this parameter to filter products by a particular department. See below the list of available departments. You can retrieve available departments from the **v1.0/departments/** API : type string
+        :param department : The name of the department. Use this parameter to filter products by a particular department. See below the list of available departments. You can retrieve available departments from the "v1.0/departments/" API : type string
         """
         payload = {}
         
@@ -225,7 +225,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/categories", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The name of the department. Use this parameter to filter products by a particular department. See below the list of available departments. You can retrieve available departments from the **v1.0/departments/** API","in":"query","name":"department","required":false,"schema":{"type":"string"}}],"query":[{"description":"The name of the department. Use this parameter to filter products by a particular department. See below the list of available departments. You can retrieve available departments from the **v1.0/departments/** API","in":"query","name":"department","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", department=department)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/categories", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The name of the department. Use this parameter to filter products by a particular department. See below the list of available departments. You can retrieve available departments from the \"v1.0/departments/\" API","in":"query","name":"department","required":false,"schema":{"type":"string"}}],"query":[{"description":"The name of the department. Use this parameter to filter products by a particular department. See below the list of available departments. You can retrieve available departments from the \"v1.0/departments/\" API","in":"query","name":"department","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", department=department)
         query_string = await create_query_string(department=department)
         if query_string:
             url_with_params += "?" + query_string
@@ -245,8 +245,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/categories", department=department), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CategoryListingResponseSchema
-            schema = CategoryListingResponseSchema()
+            from .models import CategoryListingResponse
+            schema = CategoryListingResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -260,7 +260,7 @@ class Catalog:
         :param department_id : A `department_id` is a unique identifier for a particular department. : type integer
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
-        :param q : Search query with brand name.Use this parameter to search brands by brand name. : type string
+        :param q : A search query string. Use this parameter to filter results based on a keyword or specific value. : type string
         """
         payload = {}
         
@@ -278,7 +278,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/category", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"A `department_id` is a unique identifier for a particular department.","in":"query","name":"department_id","required":false,"schema":{"type":"integer"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search query with brand name.Use this parameter to search brands by brand name.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"query":[{"description":"A `department_id` is a unique identifier for a particular department.","in":"query","name":"department_id","required":false,"schema":{"type":"integer"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search query with brand name.Use this parameter to search brands by brand name.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", department_id=department_id, page_no=page_no, page_size=page_size, q=q)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/category", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"A `department_id` is a unique identifier for a particular department.","in":"query","name":"department_id","required":false,"schema":{"type":"integer"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"A search query string. Use this parameter to filter results based on a keyword or specific value.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"query":[{"description":"A `department_id` is a unique identifier for a particular department.","in":"query","name":"department_id","required":false,"schema":{"type":"integer"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"A search query string. Use this parameter to filter results based on a keyword or specific value.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", department_id=department_id, page_no=page_no, page_size=page_size, q=q)
         query_string = await create_query_string(department_id=department_id, page_no=page_no, page_size=page_size, q=q)
         if query_string:
             url_with_params += "?" + query_string
@@ -310,7 +310,7 @@ class Catalog:
     
     async def updateAppCategory(self, category_uid=None, body="", request_headers:Dict={}):
         """Modify category data related to the application. Helps to update data associated to a item custom meta.
-        :param category_uid : category id for which the custom_json is associated. : type integer
+        :param category_uid : A `category id` is a unique identifier for a particular category. : type integer
         """
         payload = {}
         
@@ -326,7 +326,7 @@ class Catalog:
         schema = ApplicationCategoryJson()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/category/{category_uid}", """{"required":[{"description":"Id of the company associated to category custom json.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"application id for which the custom_json is associated.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"category id for which the custom_json is associated.","in":"path","name":"category_uid","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to category custom json.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"application id for which the custom_json is associated.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"category id for which the custom_json is associated.","in":"path","name":"category_uid","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", category_uid=category_uid)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/category/{category_uid}", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `category id` is a unique identifier for a particular category.","in":"path","name":"category_uid","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `category id` is a unique identifier for a particular category.","in":"path","name":"category_uid","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", category_uid=category_uid)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -346,8 +346,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/category/{category_uid}", category_uid=category_uid), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponse1Schema
-            schema = SuccessResponse1Schema()
+            from .models import SuccessResponseSchema
+            schema = SuccessResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -391,8 +391,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CollectionCreateResponseSchema
-            schema = CollectionCreateResponseSchema()
+            from .models import CollectionCreateResponse
+            schema = CollectionCreateResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -407,7 +407,7 @@ class Catalog:
         :param schedule_status : Get collection list filtered by scheduled status, : type string
         :param type : type of the collections : type string
         :param tag : Each response will contain next_id param, which should be sent back to make pagination work. : type array
-        :param is_active : get collections filtered by active status. : type boolean
+        :param is_active : Get collections filtered by active status. : type boolean
         :param page_no : The page number to navigate through the given set of results. : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
         """
@@ -433,7 +433,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"Get collection list filtered by q string,","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"Get collection list filtered by scheduled status,","in":"query","name":"schedule_status","required":false,"schema":{"enum":["live","upcoming","expired"],"type":"string"}},{"description":"type of the collections","in":"query","name":"type","required":false,"schema":{"type":"string"}},{"description":"Each response will contain next_id param, which should be sent back to make pagination work.","in":"query","name":"tag","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"get collections filtered by active status.","in":"query","name":"is_active","required":false,"schema":{"type":"boolean"}},{"description":"The page number to navigate through the given set of results.","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"query":[{"description":"Get collection list filtered by q string,","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"Get collection list filtered by scheduled status,","in":"query","name":"schedule_status","required":false,"schema":{"enum":["live","upcoming","expired"],"type":"string"}},{"description":"type of the collections","in":"query","name":"type","required":false,"schema":{"type":"string"}},{"description":"Each response will contain next_id param, which should be sent back to make pagination work.","in":"query","name":"tag","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"get collections filtered by active status.","in":"query","name":"is_active","required":false,"schema":{"type":"boolean"}},{"description":"The page number to navigate through the given set of results.","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", q=q, schedule_status=schedule_status, type=type, tag=tag, is_active=is_active, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"Get collection list filtered by q string,","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"Get collection list filtered by scheduled status,","in":"query","name":"schedule_status","required":false,"schema":{"enum":["live","upcoming","expired"],"type":"string"}},{"description":"type of the collections","in":"query","name":"type","required":false,"schema":{"type":"string"}},{"description":"Each response will contain next_id param, which should be sent back to make pagination work.","in":"query","name":"tag","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"Get collections filtered by active status.","in":"query","name":"is_active","required":false,"schema":{"type":"boolean"}},{"description":"The page number to navigate through the given set of results.","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"query":[{"description":"Get collection list filtered by q string,","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"Get collection list filtered by scheduled status,","in":"query","name":"schedule_status","required":false,"schema":{"enum":["live","upcoming","expired"],"type":"string"}},{"description":"type of the collections","in":"query","name":"type","required":false,"schema":{"type":"string"}},{"description":"Each response will contain next_id param, which should be sent back to make pagination work.","in":"query","name":"tag","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"Get collections filtered by active status.","in":"query","name":"is_active","required":false,"schema":{"type":"boolean"}},{"description":"The page number to navigate through the given set of results.","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", q=q, schedule_status=schedule_status, type=type, tag=tag, is_active=is_active, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(q=q, schedule_status=schedule_status, type=type, tag=tag, is_active=is_active, page_no=page_no, page_size=page_size)
         if query_string:
             url_with_params += "?" + query_string
@@ -453,8 +453,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections", q=q, schedule_status=schedule_status, type=type, tag=tag, is_active=is_active, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetCollectionListingResponseSchema
-            schema = GetCollectionListingResponseSchema()
+            from .models import GetCollectionListingResponse
+            schema = GetCollectionListingResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -466,11 +466,11 @@ class Catalog:
     async def getApplicationFilterValues(self, filter_key=None, c=None, collection_id=None, page_no=None, page_size=None, q=None, request_headers:Dict={}):
         """Get query filters keys to configure a collection
         :param filter_key : A `filter_key` is a filter key for a for which all the available filter values will returned. channel. : type string
-        :param c : The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in "c" parameter in this format. "?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts" : type string
+        :param c : The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts** : type string
         :param collection_id : A `collection_id` is a unique identifier for a particular collection. channel. : type string
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
-        :param q : The `q` parameter allows you to search and filter specific data within the filter options. It acts as a query keyword that can refine the results by matching relevant filter values, such as a category name or any other applicable filter criteria. : type string
+        :param q : Get Values filtered by q string : type string
         """
         payload = {}
         
@@ -492,7 +492,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/filter-options/{filter_key}/values", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `filter_key` is a filter key for a for which all the available filter values will returned. channel.","in":"path","name":"filter_key","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in \"c\" parameter in this format. \"?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts\"","in":"query","name":"c","required":false,"schema":{"type":"string"}},{"description":"A `collection_id` is a unique identifier for a particular collection. channel.","in":"query","name":"collection_id","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":10,"type":"integer"}},{"description":"The `q` parameter allows you to search and filter specific data within the filter options. It acts as a query keyword that can refine the results by matching relevant filter values, such as a category name or any other applicable filter criteria.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"query":[{"description":"The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in \"c\" parameter in this format. \"?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts\"","in":"query","name":"c","required":false,"schema":{"type":"string"}},{"description":"A `collection_id` is a unique identifier for a particular collection. channel.","in":"query","name":"collection_id","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":10,"type":"integer"}},{"description":"The `q` parameter allows you to search and filter specific data within the filter options. It acts as a query keyword that can refine the results by matching relevant filter values, such as a category name or any other applicable filter criteria.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `filter_key` is a filter key for a for which all the available filter values will returned. channel.","in":"path","name":"filter_key","required":true,"schema":{"type":"string"}}]}""", serverType="platform", filter_key=filter_key, c=c, collection_id=collection_id, page_no=page_no, page_size=page_size, q=q)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/filter-options/{filter_key}/values", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `filter_key` is a filter key for a for which all the available filter values will returned. channel.","in":"path","name":"filter_key","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts**","in":"query","name":"c","required":false,"schema":{"type":"string"}},{"description":"A `collection_id` is a unique identifier for a particular collection. channel.","in":"query","name":"collection_id","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":10,"type":"integer"}},{"description":"Get Values filtered by q string","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"query":[{"description":"The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts**","in":"query","name":"c","required":false,"schema":{"type":"string"}},{"description":"A `collection_id` is a unique identifier for a particular collection. channel.","in":"query","name":"collection_id","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"default":10,"type":"integer"}},{"description":"Get Values filtered by q string","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `filter_key` is a filter key for a for which all the available filter values will returned. channel.","in":"path","name":"filter_key","required":true,"schema":{"type":"string"}}]}""", serverType="platform", filter_key=filter_key, c=c, collection_id=collection_id, page_no=page_no, page_size=page_size, q=q)
         query_string = await create_query_string(c=c, collection_id=collection_id, page_no=page_no, page_size=page_size, q=q)
         if query_string:
             url_with_params += "?" + query_string
@@ -512,8 +512,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/filter-options/{filter_key}/values", filter_key=filter_key, c=c, collection_id=collection_id, page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetQueryFiltersValuesResponseSchema
-            schema = GetQueryFiltersValuesResponseSchema()
+            from .models import GetQueryFiltersValuesResponse
+            schema = GetQueryFiltersValuesResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -524,7 +524,7 @@ class Catalog:
     
     async def getApplicationFilterKeys(self, c=None, request_headers:Dict={}):
         """Get query filters keys to configure a collection
-        :param c : The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in "c" parameter in this format. "?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts" : type string
+        :param c : The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts** : type string
         """
         payload = {}
         
@@ -536,7 +536,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/filter-options/keys", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in \"c\" parameter in this format. \"?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts\"","in":"query","name":"c","required":false,"schema":{"type":"string"}}],"query":[{"description":"The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in \"c\" parameter in this format. \"?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts\"","in":"query","name":"c","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", c=c)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/filter-options/keys", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts**","in":"query","name":"c","required":false,"schema":{"type":"string"}}],"query":[{"description":"The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts**","in":"query","name":"c","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", c=c)
         query_string = await create_query_string(c=c)
         if query_string:
             url_with_params += "?" + query_string
@@ -556,8 +556,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/filter-options/keys", c=c), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetQueryFiltersKeysResponseSchema
-            schema = GetQueryFiltersKeysResponseSchema()
+            from .models import GetQueryFiltersKeysResponse
+            schema = GetQueryFiltersKeysResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -597,8 +597,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/query-options", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetQueryFiltersResponseSchema
-            schema = GetQueryFiltersResponseSchema()
+            from .models import GetQueryFiltersResponse
+            schema = GetQueryFiltersResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -795,8 +795,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{slug}", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetCollectionDetailResponseSchema
-            schema = GetCollectionDetailResponseSchema()
+            from .models import GetCollectionDetailResponse
+            schema = GetCollectionDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -901,7 +901,7 @@ class Catalog:
         """Retrieve department listings related to the application. Departments are a way to categorise similar products. A product can lie in multiple departments.
         :param page_no : The page number to navigate through the given set of results : type integer
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
-        :param q : Search query with brand name.Use this parameter to search department by name. : type string
+        :param q : A search query string. Use this parameter to filter results based on a keyword or specific value. : type string
         """
         payload = {}
         
@@ -917,7 +917,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/department", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search query with brand name.Use this parameter to search department by name.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search query with brand name.Use this parameter to search department by name.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, q=q)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/department", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"A search query string. Use this parameter to filter results based on a keyword or specific value.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"A search query string. Use this parameter to filter results based on a keyword or specific value.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, q=q)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q)
         if query_string:
             url_with_params += "?" + query_string
@@ -937,8 +937,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/department", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationDepartmentListingResponseSchema
-            schema = ApplicationDepartmentListingResponseSchema()
+            from .models import ApplicationDepartmentListingResponse
+            schema = ApplicationDepartmentListingResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -965,7 +965,7 @@ class Catalog:
         schema = ApplicationDepartmentJson()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/department/{department_uid}", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"application id for which the custom_json is associated.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"department id for which the custom_json is associated.","in":"path","name":"department_uid","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"application id for which the custom_json is associated.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"department id for which the custom_json is associated.","in":"path","name":"department_uid","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", department_uid=department_uid)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/department/{department_uid}", """{"required":[{"description":"Id of the company associated to department custom json.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"application id for which the custom_json is associated.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"department id for which the custom_json is associated.","in":"path","name":"department_uid","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to department custom json.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"application id for which the custom_json is associated.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"department id for which the custom_json is associated.","in":"path","name":"department_uid","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", department_uid=department_uid)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -985,8 +985,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/department/{department_uid}", department_uid=department_uid), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponse1Schema
-            schema = SuccessResponse1Schema()
+            from .models import SuccessResponseSchema
+            schema = SuccessResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1029,8 +1029,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/metadata/{filter}", filter=filter), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FilterResponseSchema
-            schema = FilterResponseSchema()
+            from .models import FilterResponse
+            schema = FilterResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1070,8 +1070,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/departments", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DepartmentResponseSchema
-            schema = DepartmentResponseSchema()
+            from .models import DepartmentResponse
+            schema = DepartmentResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1081,7 +1081,7 @@ class Catalog:
         return response
     
     async def getAppInventory(self, item_ids=None, store_ids=None, brand_ids=None, seller_identifiers=None, timestamp=None, page_size=None, page_id=None, qty_gt=None, qty_lt=None, qty_type=None, from_date=None, to_date=None, request_headers:Dict={}):
-        """Retrieve inventory data related to the sales channel. this can be used  to get the Inventory status of products.
+        """Retrieve inventory data related to the application. Retrieve the available Inventory of the products. Use this API to get the Inventory status of products with the filters of timestamp, store_ids, brand_ids, item_id, Items, Pagination
         :param item_ids : The Item Id of the product. : type array
         :param store_ids : The Store Id of products to fetch inventory. : type array
         :param brand_ids : The Brand Id of products to fetch inventory. : type array
@@ -1147,8 +1147,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/inventory", item_ids=item_ids, store_ids=store_ids, brand_ids=brand_ids, seller_identifiers=seller_identifiers, timestamp=timestamp, page_size=page_size, page_id=page_id, qty_gt=qty_gt, qty_lt=qty_lt, qty_type=qty_type, from_date=from_date, to_date=to_date), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import InventoryStockResponseSchema
-            schema = InventoryStockResponseSchema()
+            from .models import InventoryStockResponse
+            schema = InventoryStockResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1158,7 +1158,7 @@ class Catalog:
         return response
     
     async def getAppLocations(self, store_type=None, uid=None, q=None, stage=None, page_no=None, page_size=None, tags=None, store_types=None, company_uids=None, request_headers:Dict={}):
-        """Retrieve all stores associated with a sales channel, with support for searching by store name and filtering by store type and status.
+        """Retrieve locations specific to the application. View all the locations asscoiated to a application.
         :param store_type : Helps to sort the location list on the basis of location type. : type string
         :param uid : Helps to sort the location list on the basis of uid list. : type array
         :param q : Query that is to be searched. : type string
@@ -1195,7 +1195,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/locations", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"Helps to sort the location list on the basis of location type.","in":"query","name":"store_type","required":false,"schema":{"type":"string","enum":["high_street","warehouse","mall"]}},{"description":"Helps to sort the location list on the basis of uid list.","in":"query","name":"uid","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Query that is to be searched.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"to filter companies on basis of verified or unverified companies.","in":"query","name":"stage","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 20.","in":"query","name":"page_size","required":false,"schema":{"default":20,"type":"integer"}},{"description":"Get locations filtered by tags.","in":"query","name":"tags","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"Get locations filtered by store types.","in":"query","name":"store_types","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"Filter stores by company IDs available in the application.","in":"query","name":"company_uids","required":false,"schema":{"type":"array","items":{"type":"integer"}}}],"query":[{"description":"Helps to sort the location list on the basis of location type.","in":"query","name":"store_type","required":false,"schema":{"type":"string","enum":["high_street","warehouse","mall"]}},{"description":"Helps to sort the location list on the basis of uid list.","in":"query","name":"uid","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Query that is to be searched.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"to filter companies on basis of verified or unverified companies.","in":"query","name":"stage","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 20.","in":"query","name":"page_size","required":false,"schema":{"default":20,"type":"integer"}},{"description":"Get locations filtered by tags.","in":"query","name":"tags","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"Get locations filtered by store types.","in":"query","name":"store_types","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"Filter stores by company IDs available in the application.","in":"query","name":"company_uids","required":false,"schema":{"type":"array","items":{"type":"integer"}}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", store_type=store_type, uid=uid, q=q, stage=stage, page_no=page_no, page_size=page_size, tags=tags, store_types=store_types, company_uids=company_uids)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/locations", """{"required":[{"description":"Id of the company whose locations are to fetched","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Id of the application whose locations are to fetched","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"Helps to sort the location list on the basis of location type.","in":"query","name":"store_type","required":false,"schema":{"type":"string"}},{"description":"Helps to sort the location list on the basis of uid list.","in":"query","name":"uid","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Query that is to be searched.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"to filter companies on basis of verified or unverified companies.","in":"query","name":"stage","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 20.","in":"query","name":"page_size","required":false,"schema":{"default":20,"type":"integer"}},{"description":"Get locations filtered by tags.","in":"query","name":"tags","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"Get locations filtered by store types.","in":"query","name":"store_types","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"Filter stores by company IDs available in the application.","in":"query","name":"company_uids","required":false,"schema":{"type":"array","items":{"type":"integer"}}}],"query":[{"description":"Helps to sort the location list on the basis of location type.","in":"query","name":"store_type","required":false,"schema":{"type":"string"}},{"description":"Helps to sort the location list on the basis of uid list.","in":"query","name":"uid","required":false,"schema":{"items":{"type":"integer"},"type":"array"}},{"description":"Query that is to be searched.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"to filter companies on basis of verified or unverified companies.","in":"query","name":"stage","required":false,"schema":{"type":"string"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 20.","in":"query","name":"page_size","required":false,"schema":{"default":20,"type":"integer"}},{"description":"Get locations filtered by tags.","in":"query","name":"tags","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"Get locations filtered by store types.","in":"query","name":"store_types","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"Filter stores by company IDs available in the application.","in":"query","name":"company_uids","required":false,"schema":{"type":"array","items":{"type":"integer"}}}],"headers":[],"path":[{"description":"Id of the company whose locations are to fetched","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Id of the application whose locations are to fetched","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", store_type=store_type, uid=uid, q=q, stage=stage, page_no=page_no, page_size=page_size, tags=tags, store_types=store_types, company_uids=company_uids)
         query_string = await create_query_string(store_type=store_type, uid=uid, q=q, stage=stage, page_no=page_no, page_size=page_size, tags=tags, store_types=store_types, company_uids=company_uids)
         if query_string:
             url_with_params += "?" + query_string
@@ -1215,8 +1215,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/locations", store_type=store_type, uid=uid, q=q, stage=stage, page_no=page_no, page_size=page_size, tags=tags, store_types=store_types, company_uids=company_uids), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import LocationListSchema
-            schema = LocationListSchema()
+            from .models import LocationListSerializer
+            schema = LocationListSerializer()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1478,8 +1478,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product/{item_id}", item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OwnerAppItemResponseSchema
-            schema = OwnerAppItemResponseSchema()
+            from .models import OwnerAppItemResponse
+            schema = OwnerAppItemResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1489,7 +1489,7 @@ class Catalog:
         return response
     
     async def updateAppProduct(self, item_id=None, body="", request_headers:Dict={}):
-        """Allows to update data associated to a item by its item_id for a sales
+        """Allows to update data associated to a item custom meta.
         :param item_id : product id for which the custom_meta is associated. : type integer
         """
         payload = {}
@@ -1506,7 +1506,7 @@ class Catalog:
         schema = ApplicationItemMeta()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product/{item_id}", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"product id for which the custom_meta is associated.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"product id for which the custom_meta is associated.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", item_id=item_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product/{item_id}", """{"required":[{"description":"Id of the company associated to custom meta.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"application id for which the custom_meta is associated.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"product id for which the custom_meta is associated.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to custom meta.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"application id for which the custom_meta is associated.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"product id for which the custom_meta is associated.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", item_id=item_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1526,8 +1526,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/product/{item_id}", item_id=item_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponse1Schema
-            schema = SuccessResponse1Schema()
+            from .models import SuccessResponseSchema
+            schema = SuccessResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1540,7 +1540,7 @@ class Catalog:
         """Retrieve products associated with the application. List all the products associated with a brand, collection or category in a requested sort order.
         :param q : The search query. This can be a partial or complete name of a either a product, brand or category : type string
         :param f : The search filter parameters. All the parameter filtered from filter parameters will be passed in **f** parameter in this format. **?f=brand:voi-jeans||and:::category:t-shirts||shirts** : type string
-        :param c : The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in "c" parameter in this format. "?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts" : type string
+        :param c : The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts** : type string
         :param filters : Pass `filters` parameter to fetch the filter details. This flag is used to fetch all filters : type boolean
         :param is_dependent : This query parameter is used to get the dependent products in the listing. : type boolean
         :param sort_on : The order to sort the list of products on. The supported sort parameters are popularity, price, redemption and discount in either ascending or descending order. See the supported values below. : type string
@@ -1580,7 +1580,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/products", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The search query. This can be a partial or complete name of a either a product, brand or category","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The search filter parameters. All the parameter filtered from filter parameters will be passed in **f** parameter in this format. **?f=brand:voi-jeans||and:::category:t-shirts||shirts**","in":"query","name":"f","required":false,"schema":{"type":"string"}},{"description":"The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in \"c\" parameter in this format. \"?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts\"","in":"query","name":"c","required":false,"schema":{"type":"string"}},{"description":"Pass `filters` parameter to fetch the filter details. This flag is used to fetch all filters","in":"query","name":"filters","required":false,"schema":{"default":true,"type":"boolean"}},{"description":"This query parameter is used to get the dependent products in the listing.","in":"query","name":"is_dependent","required":false,"schema":{"default":true,"type":"boolean"}},{"description":"The order to sort the list of products on. The supported sort parameters are popularity, price, redemption and discount in either ascending or descending order. See the supported values below.","in":"query","name":"sort_on","required":false,"schema":{"enum":["latest","popular","price_asc","price_dsc","discount_asc","discount_dsc"],"type":"string"}},{"description":"Each response will contain **page_id** param, which should be sent back to make pagination work.","in":"query","name":"page_id","required":false,"schema":{"type":"string"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"If page_type is number then pass it to fetch page items. Default is 1.","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"For pagination type should be cursor or number. Default is cursor.","in":"query","name":"page_type","required":false,"schema":{"default":"cursor","type":"string","x-not-enum":true}},{"description":"Item Ids of product","in":"query","name":"item_ids","required":false,"schema":{"items":{"type":"string"},"type":"array"}}],"query":[{"description":"The search query. This can be a partial or complete name of a either a product, brand or category","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The search filter parameters. All the parameter filtered from filter parameters will be passed in **f** parameter in this format. **?f=brand:voi-jeans||and:::category:t-shirts||shirts**","in":"query","name":"f","required":false,"schema":{"type":"string"}},{"description":"The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in \"c\" parameter in this format. \"?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts\"","in":"query","name":"c","required":false,"schema":{"type":"string"}},{"description":"Pass `filters` parameter to fetch the filter details. This flag is used to fetch all filters","in":"query","name":"filters","required":false,"schema":{"default":true,"type":"boolean"}},{"description":"This query parameter is used to get the dependent products in the listing.","in":"query","name":"is_dependent","required":false,"schema":{"default":true,"type":"boolean"}},{"description":"The order to sort the list of products on. The supported sort parameters are popularity, price, redemption and discount in either ascending or descending order. See the supported values below.","in":"query","name":"sort_on","required":false,"schema":{"enum":["latest","popular","price_asc","price_dsc","discount_asc","discount_dsc"],"type":"string"}},{"description":"Each response will contain **page_id** param, which should be sent back to make pagination work.","in":"query","name":"page_id","required":false,"schema":{"type":"string"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"If page_type is number then pass it to fetch page items. Default is 1.","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"For pagination type should be cursor or number. Default is cursor.","in":"query","name":"page_type","required":false,"schema":{"default":"cursor","type":"string","x-not-enum":true}},{"description":"Item Ids of product","in":"query","name":"item_ids","required":false,"schema":{"items":{"type":"string"},"type":"array"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", q=q, f=f, c=c, filters=filters, is_dependent=is_dependent, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type, item_ids=item_ids)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/products", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The search query. This can be a partial or complete name of a either a product, brand or category","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The search filter parameters. All the parameter filtered from filter parameters will be passed in **f** parameter in this format. **?f=brand:voi-jeans||and:::category:t-shirts||shirts**","in":"query","name":"f","required":false,"schema":{"type":"string"}},{"description":"The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts**","in":"query","name":"c","required":false,"schema":{"type":"string"}},{"description":"Pass `filters` parameter to fetch the filter details. This flag is used to fetch all filters","in":"query","name":"filters","required":false,"schema":{"default":true,"type":"boolean"}},{"description":"This query parameter is used to get the dependent products in the listing.","in":"query","name":"is_dependent","required":false,"schema":{"default":true,"type":"boolean"}},{"description":"The order to sort the list of products on. The supported sort parameters are popularity, price, redemption and discount in either ascending or descending order. See the supported values below.","in":"query","name":"sort_on","required":false,"schema":{"enum":["latest","popular","price_asc","price_dsc","discount_asc","discount_dsc"],"type":"string"}},{"description":"Each response will contain **page_id** param, which should be sent back to make pagination work.","in":"query","name":"page_id","required":false,"schema":{"type":"string"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"If page_type is number then pass it to fetch page items. Default is 1.","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"For pagination type should be cursor or number. Default is cursor.","in":"query","name":"page_type","required":false,"schema":{"default":"cursor","type":"string"}},{"description":"Item Ids of product","in":"query","name":"item_ids","required":false,"schema":{"items":{"type":"string"},"type":"array"}}],"query":[{"description":"The search query. This can be a partial or complete name of a either a product, brand or category","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The search filter parameters. All the parameter filtered from filter parameters will be passed in **f** parameter in this format. **?f=brand:voi-jeans||and:::category:t-shirts||shirts**","in":"query","name":"f","required":false,"schema":{"type":"string"}},{"description":"The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts**","in":"query","name":"c","required":false,"schema":{"type":"string"}},{"description":"Pass `filters` parameter to fetch the filter details. This flag is used to fetch all filters","in":"query","name":"filters","required":false,"schema":{"default":true,"type":"boolean"}},{"description":"This query parameter is used to get the dependent products in the listing.","in":"query","name":"is_dependent","required":false,"schema":{"default":true,"type":"boolean"}},{"description":"The order to sort the list of products on. The supported sort parameters are popularity, price, redemption and discount in either ascending or descending order. See the supported values below.","in":"query","name":"sort_on","required":false,"schema":{"enum":["latest","popular","price_asc","price_dsc","discount_asc","discount_dsc"],"type":"string"}},{"description":"Each response will contain **page_id** param, which should be sent back to make pagination work.","in":"query","name":"page_id","required":false,"schema":{"type":"string"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"If page_type is number then pass it to fetch page items. Default is 1.","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"For pagination type should be cursor or number. Default is cursor.","in":"query","name":"page_type","required":false,"schema":{"default":"cursor","type":"string"}},{"description":"Item Ids of product","in":"query","name":"item_ids","required":false,"schema":{"items":{"type":"string"},"type":"array"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", q=q, f=f, c=c, filters=filters, is_dependent=is_dependent, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type, item_ids=item_ids)
         query_string = await create_query_string(q=q, f=f, c=c, filters=filters, is_dependent=is_dependent, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type, item_ids=item_ids)
         if query_string:
             url_with_params += "?" + query_string
@@ -1600,8 +1600,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/products", q=q, f=f, c=c, filters=filters, is_dependent=is_dependent, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type, item_ids=item_ids), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationProductListingResponseSchema
-            schema = ApplicationProductListingResponseSchema()
+            from .models import ApplicationProductListingResponse
+            schema = ApplicationProductListingResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1636,7 +1636,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/products/{item_id}/inventory/{size_identifier}", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Item code of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","in":"path","name":"size_identifier","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search by store ids.","in":"query","name":"location_ids","required":false,"schema":{"items":{"type":"integer"},"type":"array"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search by store ids.","in":"query","name":"location_ids","required":false,"schema":{"items":{"type":"integer"},"type":"array"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Item code of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","in":"path","name":"size_identifier","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", item_id=item_id, size_identifier=size_identifier, page_no=page_no, page_size=page_size, location_ids=location_ids)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/products/{item_id}/inventory/{size_identifier}", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Uniquer Application ID.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Item code of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","in":"path","name":"size_identifier","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search by store ids.","in":"query","name":"location_ids","required":false,"schema":{"items":{"type":"integer"},"type":"array"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search by store ids.","in":"query","name":"location_ids","required":false,"schema":{"items":{"type":"integer"},"type":"array"}}],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Uniquer Application ID.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Item code of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size Identifier (Seller Identifier or Primary Identifier) of which inventory is to get.","in":"path","name":"size_identifier","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", item_id=item_id, size_identifier=size_identifier, page_no=page_no, page_size=page_size, location_ids=location_ids)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, location_ids=location_ids)
         if query_string:
             url_with_params += "?" + query_string
@@ -1656,8 +1656,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/products/{item_id}/inventory/{size_identifier}", item_id=item_id, size_identifier=size_identifier, page_no=page_no, page_size=page_size, location_ids=location_ids), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationInventorySellerIdentifierResponsePaginated
-            schema = ApplicationInventorySellerIdentifierResponsePaginated()
+            from .models import InventorySellerIdentifierResponsePaginated
+            schema = InventorySellerIdentifierResponsePaginated()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1668,7 +1668,7 @@ class Catalog:
     
     async def getProductDetailBySlug(self, slug=None, request_headers:Dict={}):
         """Retrieve detailed product information using a product slug. Products are the core resource of an application. Products can be associated by categories, collections, brands and more.
-        :param slug : The unique identifier of a product. i.e; `slug` of a product. You can retrieve these from the APIs that list products like "v1.0/products/" : type string
+        :param slug : The unique identifier of a product. i.e; `slug` of a product. You can retrieve these from the APIs that list products like **v1.0/products/** : type string
         """
         payload = {}
         
@@ -1680,7 +1680,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/products/{slug}", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"The unique identifier of a product. i.e; `slug` of a product. You can retrieve these from the APIs that list products like \"v1.0/products/\"","in":"path","name":"slug","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"The unique identifier of a product. i.e; `slug` of a product. You can retrieve these from the APIs that list products like \"v1.0/products/\"","in":"path","name":"slug","required":true,"schema":{"type":"string"}}]}""", serverType="platform", slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/products/{slug}", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"The unique identifier of a product. i.e; `slug` of a product. You can retrieve these from the APIs that list products like **v1.0/products/**","in":"path","name":"slug","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"The unique identifier of a product. i.e; `slug` of a product. You can retrieve these from the APIs that list products like **v1.0/products/**","in":"path","name":"slug","required":true,"schema":{"type":"string"}}]}""", serverType="platform", slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1765,8 +1765,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/raw-products", brand_ids=brand_ids, category_ids=category_ids, department_ids=department_ids, tags=tags, item_ids=item_ids, page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RawProductListingResponseSchema
-            schema = RawProductListingResponseSchema()
+            from .models import RawProductListingResponse
+            schema = RawProductListingResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1806,8 +1806,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AppReturnConfigResponseSchema
-            schema = AppReturnConfigResponseSchema()
+            from .models import AppReturnConfigResponse
+            schema = AppReturnConfigResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1851,8 +1851,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponse1Schema
-            schema = SuccessResponse1Schema()
+            from .models import SuccessResponseSchema
+            schema = SuccessResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1896,8 +1896,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponse1Schema
-            schema = SuccessResponse1Schema()
+            from .models import SuccessResponseSchema
+            schema = SuccessResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1941,8 +1941,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config/categories", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponseSchema
-            schema = SuccessResponseSchema()
+            from .models import SuccessResponse
+            schema = SuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1991,8 +1991,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config/categories", q=q, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BaseAppCategoryReturnConfigResponseSchema
-            schema = BaseAppCategoryReturnConfigResponseSchema()
+            from .models import BaseAppCategoryReturnConfigResponse
+            schema = BaseAppCategoryReturnConfigResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2036,8 +2036,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config/categories", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponse1Schema
-            schema = SuccessResponse1Schema()
+            from .models import SuccessResponseSchema
+            schema = SuccessResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2081,8 +2081,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/return-config/categories", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponseSchema
-            schema = SuccessResponseSchema()
+            from .models import SuccessResponse
+            schema = SuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2126,8 +2126,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreateAutocompleteWordsResponseSchema
-            schema = CreateAutocompleteWordsResponseSchema()
+            from .models import CreateAutocompleteWordsResponse
+            schema = CreateAutocompleteWordsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2179,8 +2179,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete", page_no=page_no, page_size=page_size, q=q, is_active=is_active), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetAutocompleteWordsResponseSchema
-            schema = GetAutocompleteWordsResponseSchema()
+            from .models import GetAutocompleteWordsResponse
+            schema = GetAutocompleteWordsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2315,8 +2315,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/autocomplete/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeleteResponseSchema
-            schema = DeleteResponseSchema()
+            from .models import DeleteResponse
+            schema = DeleteResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2336,8 +2336,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateSearchRerankRequestSchema
-        schema = CreateSearchRerankRequestSchema()
+        from .models import CreateSearchRerankRequest
+        schema = CreateSearchRerankRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
@@ -2360,8 +2360,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreateSearchRerankResponseSchema
-            schema = CreateSearchRerankResponseSchema()
+            from .models import CreateSearchRerankResponse
+            schema = CreateSearchRerankResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2401,8 +2401,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetSearchRerankResponseSchema
-            schema = GetSearchRerankResponseSchema()
+            from .models import GetSearchRerankResponse
+            schema = GetSearchRerankResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2445,8 +2445,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetSearchRerankDetailResponseSchema
-            schema = GetSearchRerankDetailResponseSchema()
+            from .models import GetSearchRerankDetailResponse
+            schema = GetSearchRerankDetailResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2469,8 +2469,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateSearchRerankRequestSchema
-        schema = UpdateSearchRerankRequestSchema()
+        from .models import UpdateSearchRerankRequest
+        schema = UpdateSearchRerankRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank/{id}", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"An `id` is the identifier for a particular search rerank configuration. channel.","in":"path","name":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"An `id` is the identifier for a particular search rerank configuration. channel.","in":"path","name":"id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
@@ -2493,8 +2493,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UpdateSearchRerankResponseSchema
-            schema = UpdateSearchRerankResponseSchema()
+            from .models import UpdateSearchRerankResponse
+            schema = UpdateSearchRerankResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2537,8 +2537,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/rerank/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeleteSearchRerankConfigurationResponseSchema
-            schema = DeleteSearchRerankConfigurationResponseSchema()
+            from .models import DeleteSearchRerankConfigurationResponse
+            schema = DeleteSearchRerankConfigurationResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2558,8 +2558,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateSearchConfigurationRequestSchema
-        schema = CreateSearchConfigurationRequestSchema()
+        from .models import CreateSearchConfigurationRequest
+        schema = CreateSearchConfigurationRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/configuration", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
@@ -2582,8 +2582,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreateSearchConfigurationResponseSchema
-            schema = CreateSearchConfigurationResponseSchema()
+            from .models import CreateSearchConfigurationResponse
+            schema = CreateSearchConfigurationResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2623,8 +2623,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/configuration", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetSearchConfigurationResponseSchema
-            schema = GetSearchConfigurationResponseSchema()
+            from .models import GetSearchConfigurationResponse
+            schema = GetSearchConfigurationResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2644,8 +2644,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateSearchConfigurationRequestSchema
-        schema = UpdateSearchConfigurationRequestSchema()
+        from .models import UpdateSearchConfigurationRequest
+        schema = UpdateSearchConfigurationRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/configuration", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
@@ -2668,8 +2668,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UpdateSearchConfigurationResponseSchema
-            schema = UpdateSearchConfigurationResponseSchema()
+            from .models import UpdateSearchConfigurationResponse
+            schema = UpdateSearchConfigurationResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2709,8 +2709,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/configuration", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeleteSearchConfigurationResponseSchema
-            schema = DeleteSearchConfigurationResponseSchema()
+            from .models import DeleteSearchConfigurationResponse
+            schema = DeleteSearchConfigurationResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2807,8 +2807,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword", page_no=page_no, page_size=page_size, q=q, is_active=is_active), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetSearchWordsResponseSchema
-            schema = GetSearchWordsResponseSchema()
+            from .models import GetSearchWordsResponse
+            schema = GetSearchWordsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2943,8 +2943,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/keyword/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeleteResponseSchema
-            schema = DeleteResponseSchema()
+            from .models import DeleteResponse
+            schema = DeleteResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2991,8 +2991,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/{store_uid}", store_uid=store_uid), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponse1Schema
-            schema = SuccessResponse1Schema()
+            from .models import SuccessResponseSchema
+            schema = SuccessResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -3012,8 +3012,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import AllowSingleRequestSchema
-        schema = AllowSingleRequestSchema()
+        from .models import AllowSingleRequest
+        schema = AllowSingleRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/filter/allow_single", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
@@ -3036,8 +3036,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/filter/allow_single", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ConfigSuccessResponseSchema
-            schema = ConfigSuccessResponseSchema()
+            from .models import ConfigSuccessResponse
+            schema = ConfigSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -3057,8 +3057,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DefaultKeyRequestSchema
-        schema = DefaultKeyRequestSchema()
+        from .models import DefaultKeyRequest
+        schema = DefaultKeyRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/sort/default_key", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
@@ -3081,8 +3081,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/sort/default_key", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ConfigSuccessResponseSchema
-            schema = ConfigSuccessResponseSchema()
+            from .models import ConfigSuccessResponse
+            schema = ConfigSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -3129,8 +3129,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}", config_type=config_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AppConfigurationsFilterResponseSchema
-            schema = AppConfigurationsFilterResponseSchema()
+            from .models import AppConfigurationsFilterResponse
+            schema = AppConfigurationsFilterResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -3185,8 +3185,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}", config_type=config_type, page_no=page_no, page_size=page_size, search=search, uids=uids), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetListingConfigResponseSchema
-            schema = GetListingConfigResponseSchema()
+            from .models import GetListingConfigResponse
+            schema = GetListingConfigResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -3289,8 +3289,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/groups", config_type=config_type, page_no=page_no, page_size=page_size, search=search, template_slug=template_slug), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetConfigResponseSchema
-            schema = GetConfigResponseSchema()
+            from .models import GetConfigResponse
+            schema = GetConfigResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -3405,8 +3405,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import AppConfigurationsFilterResponseSchema
-        schema = AppConfigurationsFilterResponseSchema()
+        from .models import AppConfigurationsFilterResponse
+        schema = AppConfigurationsFilterResponse()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `config_type` is a unique identifier for a particular listing configuration type.","in":"path","name":"config_type","required":true,"schema":{"enum":["filter","sort","brands","categories","variant","similar"],"type":"string"}},{"description":"A `config_id` is a unique identifier of a particular configuration.","in":"path","name":"config_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `config_type` is a unique identifier for a particular listing configuration type.","in":"path","name":"config_type","required":true,"schema":{"enum":["filter","sort","brands","categories","variant","similar"],"type":"string"}},{"description":"A `config_id` is a unique identifier of a particular configuration.","in":"path","name":"config_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", config_type=config_type, config_id=config_id)
@@ -3429,8 +3429,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}", config_type=config_type, config_id=config_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AppConfigurationsFilterResponseSchema
-            schema = AppConfigurationsFilterResponseSchema()
+            from .models import AppConfigurationsFilterResponse
+            schema = AppConfigurationsFilterResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -3476,8 +3476,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/item/{config_id}", config_type=config_type, config_id=config_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ConfigSuccessResponseSchema
-            schema = ConfigSuccessResponseSchema()
+            from .models import ConfigSuccessResponse
+            schema = ConfigSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -3523,8 +3523,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/product-configuration/{config_type}/metadata", config_type=config_type, template_slug=template_slug), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetConfigMetadataResponseSchema
-            schema = GetConfigMetadataResponseSchema()
+            from .models import GetConfigMetadataResponse
+            schema = GetConfigMetadataResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -3740,8 +3740,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PinRequestSchema
-        schema = PinRequestSchema()
+        from .models import PinRequest
+        schema = PinRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/merchandise/rules/{merchandising_rule_id}/pin", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"merchandising_rule_id","description":"A `merchandising_rule_id` is a unique identifier for a particular merchandising rule.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"merchandising_rule_id","description":"A `merchandising_rule_id` is a unique identifier for a particular merchandising rule.","schema":{"type":"string"},"required":true}]}""", serverType="platform", merchandising_rule_id=merchandising_rule_id)
@@ -3788,8 +3788,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PinRequestSchema
-        schema = PinRequestSchema()
+        from .models import PinRequest
+        schema = PinRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/merchandise/rules/{merchandising_rule_id}/pin", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"merchandising_rule_id","description":"A `merchandising_rule_id` is a unique identifier for a particular merchandising rule.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"merchandising_rule_id","description":"A `merchandising_rule_id` is a unique identifier for a particular merchandising rule.","schema":{"type":"string"},"required":true}]}""", serverType="platform", merchandising_rule_id=merchandising_rule_id)
@@ -3856,8 +3856,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/merchandise/rules/{merchandising_rule_id}/pin", merchandising_rule_id=merchandising_rule_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PinResponseSchema
-            schema = PinResponseSchema()
+            from .models import PinResponse
+            schema = PinResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -3880,8 +3880,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import HideRequestSchema
-        schema = HideRequestSchema()
+        from .models import HideRequest
+        schema = HideRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/merchandise/rules/{merchandising_rule_id}/hide", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"merchandising_rule_id","description":"A `merchandising_rule_id` is a unique identifier for a particular merchandising rule.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"merchandising_rule_id","description":"A `merchandising_rule_id` is a unique identifier for a particular merchandising rule.","schema":{"type":"string"},"required":true}]}""", serverType="platform", merchandising_rule_id=merchandising_rule_id)
@@ -3928,8 +3928,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import HideRequestSchema
-        schema = HideRequestSchema()
+        from .models import HideRequest
+        schema = HideRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/merchandise/rules/{merchandising_rule_id}/hide", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"merchandising_rule_id","description":"A `merchandising_rule_id` is a unique identifier for a particular merchandising rule.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"merchandising_rule_id","description":"A `merchandising_rule_id` is a unique identifier for a particular merchandising rule.","schema":{"type":"string"},"required":true}]}""", serverType="platform", merchandising_rule_id=merchandising_rule_id)
@@ -3996,8 +3996,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/merchandise/rules/{merchandising_rule_id}/hide", merchandising_rule_id=merchandising_rule_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import HideResponseSchema
-            schema = HideResponseSchema()
+            from .models import HideResponse
+            schema = HideResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -4321,8 +4321,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/merchandise/rules/query", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import MerchandiseQueryResponseSchema
-            schema = MerchandiseQueryResponseSchema()
+            from .models import MerchandiseQueryResponse
+            schema = MerchandiseQueryResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -4643,8 +4643,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/merchandise/rules/{merchandising_rule_id}/preview", merchandising_rule_id=merchandising_rule_id, search_keyword=search_keyword), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProductListingResponseSchema
-            schema = ProductListingResponseSchema()
+            from .models import ProductListingResponse
+            schema = ProductListingResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -4688,8 +4688,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreateAppPriceFactoryResponseSchema
-            schema = CreateAppPriceFactoryResponseSchema()
+            from .models import CreateAppPriceFactoryResponse
+            schema = CreateAppPriceFactoryResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -4744,8 +4744,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory", is_active=is_active, factory_type_id=factory_type_id, code=code, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetAppPriceFactoryResponseSchema
-            schema = GetAppPriceFactoryResponseSchema()
+            from .models import GetAppPriceFactoryResponse
+            schema = GetAppPriceFactoryResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -4860,8 +4860,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreatePriceFactoryProductRequestSchema
-        schema = CreatePriceFactoryProductRequestSchema()
+        from .models import CreatePriceFactoryProductRequest
+        schema = CreatePriceFactoryProductRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/products", """{"required":[{"description":"A `company_id` is a unique identifier for a particular company.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","schema":{"type":"string"},"required":true},{"description":"An `id` is a unique identifier for a particular price factory.","in":"path","name":"id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular company.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","schema":{"type":"string"},"required":true},{"description":"An `id` is a unique identifier for a particular price factory.","in":"path","name":"id","schema":{"type":"string"},"required":true}]}""", serverType="platform", id=id)
@@ -4884,8 +4884,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/products", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreatePriceFactoryProductResponseSchema
-            schema = CreatePriceFactoryProductResponseSchema()
+            from .models import CreatePriceFactoryProductResponse
+            schema = CreatePriceFactoryProductResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -4943,8 +4943,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/products", id=id, zone_id=zone_id, item_id=item_id, q=q, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreateAppPriceFactoryProductsResponseSchema
-            schema = CreateAppPriceFactoryProductsResponseSchema()
+            from .models import CreateAppPriceFactoryProductsResponse
+            schema = CreateAppPriceFactoryProductsResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -4967,8 +4967,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateAppPriceFactoryProductBulkJobRequestSchema
-        schema = CreateAppPriceFactoryProductBulkJobRequestSchema()
+        from .models import CreateAppPriceFactoryProductBulkJobRequest
+        schema = CreateAppPriceFactoryProductBulkJobRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/bulk", """{"required":[{"description":"A `company_id` is a unique identifier for a particular company.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","schema":{"type":"string"},"required":true},{"description":"An `id` is a unique identifier for a particular price factory.","in":"path","name":"id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular company.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","schema":{"type":"string"},"required":true},{"description":"An `id` is a unique identifier for a particular price factory.","in":"path","name":"id","schema":{"type":"string"},"required":true}]}""", serverType="platform", id=id)
@@ -4991,8 +4991,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/bulk", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreateAppPriceFactoryProductBulkJobResponseSchema
-            schema = CreateAppPriceFactoryProductBulkJobResponseSchema()
+            from .models import CreateAppPriceFactoryProductBulkJobResponse
+            schema = CreateAppPriceFactoryProductBulkJobResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -5038,8 +5038,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/poll/{job_id}", id=id, job_id=job_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreateAppPriceFactoryProductBulkJobPollResponseSchema
-            schema = CreateAppPriceFactoryProductBulkJobPollResponseSchema()
+            from .models import CreateAppPriceFactoryProductBulkJobPollResponse
+            schema = CreateAppPriceFactoryProductBulkJobPollResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -5065,8 +5065,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateAppPriceFactoryProductBulkJobRequestSchema
-        schema = CreateAppPriceFactoryProductBulkJobRequestSchema()
+        from .models import CreateAppPriceFactoryProductBulkJobRequest
+        schema = CreateAppPriceFactoryProductBulkJobRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/bulk/{job_id}/validate", """{"required":[{"description":"A `company_id` is a unique identifier for a particular company.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","schema":{"type":"string"},"required":true},{"description":"An `id` is a unique identifier for a particular price factory.","in":"path","name":"id","schema":{"type":"string"},"required":true},{"description":"A `job_id` is a unique identifier for a particular bulk job.","in":"path","name":"job_id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular company.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","schema":{"type":"string"},"required":true},{"description":"An `id` is a unique identifier for a particular price factory.","in":"path","name":"id","schema":{"type":"string"},"required":true},{"description":"A `job_id` is a unique identifier for a particular bulk job.","in":"path","name":"job_id","schema":{"type":"string"},"required":true}]}""", serverType="platform", id=id, job_id=job_id)
@@ -5089,8 +5089,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/bulk/{job_id}/validate", id=id, job_id=job_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreateAppPriceFactoryProductBulkJobValidateResponseSchema
-            schema = CreateAppPriceFactoryProductBulkJobValidateResponseSchema()
+            from .models import CreateAppPriceFactoryProductBulkJobValidateResponse
+            schema = CreateAppPriceFactoryProductBulkJobValidateResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -5116,8 +5116,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateAppPriceFactoryProductBulkJobRequestSchema
-        schema = CreateAppPriceFactoryProductBulkJobRequestSchema()
+        from .models import CreateAppPriceFactoryProductBulkJobRequest
+        schema = CreateAppPriceFactoryProductBulkJobRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/bulk/{job_id}/process", """{"required":[{"description":"A `company_id` is a unique identifier for a particular company.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","schema":{"type":"string"},"required":true},{"description":"An `id` is a unique identifier for a particular price factory.","in":"path","name":"id","schema":{"type":"string"},"required":true},{"description":"A `job_id` is a unique identifier for a particular bulk job.","in":"path","name":"job_id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular company.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","schema":{"type":"string"},"required":true},{"description":"An `id` is a unique identifier for a particular price factory.","in":"path","name":"id","schema":{"type":"string"},"required":true},{"description":"A `job_id` is a unique identifier for a particular bulk job.","in":"path","name":"job_id","schema":{"type":"string"},"required":true}]}""", serverType="platform", id=id, job_id=job_id)
@@ -5140,8 +5140,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/bulk/{job_id}/process", id=id, job_id=job_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreateAppPriceFactoryProductBulkJobResponseSchema
-            schema = CreateAppPriceFactoryProductBulkJobResponseSchema()
+            from .models import CreateAppPriceFactoryProductBulkJobResponse
+            schema = CreateAppPriceFactoryProductBulkJobResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -5164,8 +5164,8 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateAppPriceFactoryProductExportJobRequestSchema
-        schema = CreateAppPriceFactoryProductExportJobRequestSchema()
+        from .models import CreateAppPriceFactoryProductExportJobRequest
+        schema = CreateAppPriceFactoryProductExportJobRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/export", """{"required":[{"description":"A `company_id` is a unique identifier for a particular company.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","schema":{"type":"string"},"required":true},{"description":"An `id` is a unique identifier for a particular price factory.","in":"path","name":"id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular company.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","schema":{"type":"string"},"required":true},{"description":"An `id` is a unique identifier for a particular price factory.","in":"path","name":"id","schema":{"type":"string"},"required":true}]}""", serverType="platform", id=id)
@@ -5188,8 +5188,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/export", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreateAppPriceFactoryProductExportJobResponseSchema
-            schema = CreateAppPriceFactoryProductExportJobResponseSchema()
+            from .models import CreateAppPriceFactoryProductExportJobResponse
+            schema = CreateAppPriceFactoryProductExportJobResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -5250,8 +5250,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/owner-application/{self.applicationId}/price-factory/{id}/poll", id=id, start_date=start_date, end_date=end_date, stage=stage, is_active=is_active, q=q, type=type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreateAppPriceFactoryProductExportJobPollResponseSchema
-            schema = CreateAppPriceFactoryProductExportJobPollResponseSchema()
+            from .models import CreateAppPriceFactoryProductExportJobPollResponse
+            schema = CreateAppPriceFactoryProductExportJobPollResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -5490,8 +5490,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/synonym", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SynonymDeleteResponseSchemaSchema
-            schema = SynonymDeleteResponseSchemaSchema()
+            from .models import SynonymDeleteResponseSchema
+            schema = SynonymDeleteResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -5591,7 +5591,7 @@ class Catalog:
         schema = SynonymUploadRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/bulk", """{"required":[{"description":"The application id where custom search configuration is set","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"The application id where custom search configuration is set","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/bulk", """{"required":[{"description":"The application id where custom search configuration is set","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"The application id where custom search configuration is set","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -5636,7 +5636,7 @@ class Catalog:
         schema = SynonymBulkValidateRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/bulk/validate", """{"required":[{"description":"The application id where custom search configuration is set","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"The application id where custom search configuration is set","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/bulk/validate", """{"required":[{"description":"The application id where custom search configuration is set","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"The application id where custom search configuration is set","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -5681,7 +5681,7 @@ class Catalog:
         schema = SynonymBulkProcessRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/bulk/process", """{"required":[{"description":"The application id where custom search configuration is set","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"The application id where custom search configuration is set","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/bulk/process", """{"required":[{"description":"The application id where custom search configuration is set","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"The application id where custom search configuration is set","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -5725,7 +5725,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/poll/{id}", """{"required":[{"description":"The application id where custom search configuration is set","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Id of the bulk job that needs to be polled.","in":"path","name":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"The application id where custom search configuration is set","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Id of the bulk job that needs to be polled.","in":"path","name":"id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/search/poll/{id}", """{"required":[{"description":"The application id where custom search configuration is set","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Id of the bulk job that needs to be polled.","in":"path","name":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"The application id where custom search configuration is set","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Id of the bulk job that needs to be polled.","in":"path","name":"id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -5778,7 +5778,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/item/{item_id}/price", """{"required":[{"description":"An `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"item_id","description":"Unique identifier of the product","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"store_ids","description":"An array of unique identifiers representing the store locations from which the product pricing should be fetched. If not provided, pricing for all applicable store locations will be returned.","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"factory_type_ids","description":"An array of unique factory type identifiers that specify that pricing from which factory type should be retrieved. This parameter allows filtering the price based on factory types.","schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"seller_id","description":"The company uid for which we want to fetch discounted pricing for a product","schema":{"type":"integer"},"required":false}],"query":[{"in":"query","name":"store_ids","description":"An array of unique identifiers representing the store locations from which the product pricing should be fetched. If not provided, pricing for all applicable store locations will be returned.","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"factory_type_ids","description":"An array of unique factory type identifiers that specify that pricing from which factory type should be retrieved. This parameter allows filtering the price based on factory types.","schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"seller_id","description":"The company uid for which we want to fetch discounted pricing for a product","schema":{"type":"integer"},"required":false}],"headers":[],"path":[{"description":"An `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"item_id","description":"Unique identifier of the product","schema":{"type":"integer"},"required":true}]}""", serverType="platform", item_id=item_id, store_ids=store_ids, factory_type_ids=factory_type_ids, seller_id=seller_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/item/{item_id}/price", """{"required":[{"description":"An `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"item_id","description":"Unique identifier of the product","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"store_ids","description":"An array of unique identifiers representing the store locations from which the product pricing should be fetched. If not provided, pricing for all applicable store locations will be returned.","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"factory_type_ids","description":"An array of unique factory type identifiers that specify that pricing from which factory type should be retrieved. This parameter allows filtering the price based on factory types.","schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"seller_id","description":"The company uid for which we want to fetch discounted pricing for a product","schema":{"type":"integer"},"required":false}],"query":[{"in":"query","name":"store_ids","description":"An array of unique identifiers representing the store locations from which the product pricing should be fetched. If not provided, pricing for all applicable store locations will be returned.","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"factory_type_ids","description":"An array of unique factory type identifiers that specify that pricing from which factory type should be retrieved. This parameter allows filtering the price based on factory types.","schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"seller_id","description":"The company uid for which we want to fetch discounted pricing for a product","schema":{"type":"integer"},"required":false}],"headers":[],"path":[{"description":"An `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"item_id","description":"Unique identifier of the product","schema":{"type":"integer"},"required":true}]}""", serverType="platform", item_id=item_id, store_ids=store_ids, factory_type_ids=factory_type_ids, seller_id=seller_id)
         query_string = await create_query_string(store_ids=store_ids, factory_type_ids=factory_type_ids, seller_id=seller_id)
         if query_string:
             url_with_params += "?" + query_string
@@ -5798,8 +5798,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/item/{item_id}/price", item_id=item_id, store_ids=store_ids, factory_type_ids=factory_type_ids, seller_id=seller_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import AppPriceByIdResponseSchema
-            schema = AppPriceByIdResponseSchema()
+            from .models import AppPriceByIdResponse
+            schema = AppPriceByIdResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

@@ -28,8 +28,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-        
-        
     
     
         
@@ -59,15 +57,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
-        
-        
-        
         
     
     
@@ -76,6 +65,16 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
     
     
         
@@ -88,6 +87,7 @@ from ..ApplicationModel import BaseSchema
     
         
         
+    
 
 class LogisticValidator:
     
@@ -132,10 +132,6 @@ class LogisticValidator:
         city = fields.Str(required=False)
         
         sector = fields.Str(required=False)
-        
-        store_uid = fields.Int(required=False)
-        
-        region_uid = fields.Str(required=False)
          
         
     
@@ -192,6 +188,8 @@ class LogisticValidator:
     
     class getLocalitiesByPrefix(BaseSchema):
         
+        
+        company_id = fields.Int(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -262,6 +260,11 @@ class LogisticValidator:
         
         page_size = fields.Int(required=False)
          
+        
+    
+    class getQCPromise(BaseSchema):
+        
+        pass 
         
     
     

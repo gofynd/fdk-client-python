@@ -44,6 +44,10 @@ class SignUrlResult(BaseSchema):
     pass
 
 
+class EncryptionMapping(BaseSchema):
+    pass
+
+
 class SignUrl(BaseSchema):
     pass
 
@@ -119,13 +123,13 @@ class FileUploadStart(BaseSchema):
     
     params = fields.Nested(Params, required=False)
     
+    enc_key = fields.Str(required=False)
+    
 
 
 class CreatedBy(BaseSchema):
     # FileStorage swagger.json
 
-    
-    user_id = fields.Str(required=False)
     
     username = fields.Str(required=False)
     
@@ -185,6 +189,16 @@ class SignUrlResult(BaseSchema):
     
 
 
+class EncryptionMapping(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    enc_url = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+
+
 class SignUrl(BaseSchema):
     # FileStorage swagger.json
 
@@ -192,6 +206,8 @@ class SignUrl(BaseSchema):
     expiry = fields.Int(required=False)
     
     urls = fields.List(fields.Str(required=False), required=False)
+    
+    enc_url_mapping = fields.List(fields.Nested(EncryptionMapping, required=False), required=False)
     
 
 

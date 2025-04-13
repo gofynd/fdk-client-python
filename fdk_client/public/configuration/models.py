@@ -8,7 +8,7 @@ from ..PublicModel import BaseSchema
 
 
 
-class ApplicationResponseSchema(BaseSchema):
+class ApplicationResponse(BaseSchema):
     pass
 
 
@@ -76,7 +76,7 @@ class VersionDevice(BaseSchema):
     pass
 
 
-class VersionRequestSchema(BaseSchema):
+class VersionRequest(BaseSchema):
     pass
 
 
@@ -84,14 +84,14 @@ class VersionUpdateDialogue(BaseSchema):
     pass
 
 
-class VersionResponseSchema(BaseSchema):
+class VersionResponse(BaseSchema):
     pass
 
 
 
 
 
-class ApplicationResponseSchema(BaseSchema):
+class ApplicationResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -345,7 +345,7 @@ class VersionDevice(BaseSchema):
     
 
 
-class VersionRequestSchema(BaseSchema):
+class VersionRequest(BaseSchema):
     # Configuration swagger.json
 
     
@@ -365,7 +365,7 @@ class VersionUpdateDialogue(BaseSchema):
     
 
 
-class VersionResponseSchema(BaseSchema):
+class VersionResponse(BaseSchema):
     # Configuration swagger.json
 
     
