@@ -147,7 +147,6 @@ from ..ApplicationModel import BaseSchema
         
     
     
-    
         
         
         
@@ -204,7 +203,7 @@ class CatalogValidator:
     class getProductStockByIds(BaseSchema):
         
         
-        item_id = fields.Str(required=False)
+        item_id = fields.Int(required=False)
         
         alu = fields.Str(required=False)
         
@@ -380,7 +379,7 @@ class CatalogValidator:
         
         collection_type = fields.Str(required=False)
         
-        collection_id = fields.Str(required=False)
+        collection_id = fields.Int(required=False)
          
         
     
@@ -443,7 +442,7 @@ class CatalogValidator:
         
         slug = fields.Str(required=False)
         
-        id = fields.Str(required=False)
+        id = fields.Int(required=False)
          
         
     
@@ -458,11 +457,6 @@ class CatalogValidator:
         
         moq = fields.Int(required=False)
          
-        
-    
-    class getProductsServiceability(BaseSchema):
-        
-        pass 
         
     
     class getProductSellersBySlug(BaseSchema):

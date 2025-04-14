@@ -8,6 +8,34 @@ from ..PartnerModel import BaseSchema
 
 
 
+class SizeConstraints(BaseSchema):
+    pass
+
+
+class SaveProxy(BaseSchema):
+    pass
+
+
+class ProxyFileData(BaseSchema):
+    pass
+
+
+class ProxyFile(BaseSchema):
+    pass
+
+
+class FetchProxyDetails(BaseSchema):
+    pass
+
+
+class NamespaceDetails(BaseSchema):
+    pass
+
+
+class AllNamespaceDetails(BaseSchema):
+    pass
+
+
 class CDN(BaseSchema):
     pass
 
@@ -16,11 +44,11 @@ class Upload(BaseSchema):
     pass
 
 
-class StartResponse(BaseSchema):
+class FileUpload(BaseSchema):
     pass
 
 
-class StartRequest(BaseSchema):
+class FileUploadStart(BaseSchema):
     pass
 
 
@@ -28,15 +56,99 @@ class CreatedBy(BaseSchema):
     pass
 
 
-class CompleteResponse(BaseSchema):
+class FileUploadComplete(BaseSchema):
     pass
 
 
-class FailedResponse(BaseSchema):
+class FailedBrowseFilesResult(BaseSchema):
+    pass
+
+
+class SignedUrl(BaseSchema):
+    pass
+
+
+class SignUrlResult(BaseSchema):
+    pass
+
+
+class SignUrl(BaseSchema):
     pass
 
 
 
+
+
+class SizeConstraints(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    max = fields.Int(required=False)
+    
+
+
+class SaveProxy(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+
+
+class ProxyFileData(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+
+
+class ProxyFile(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    id = fields.Int(required=False)
+    
+    customer = fields.Str(required=False)
+    
+    quantity = fields.Int(required=False)
+    
+    price = fields.Float(required=False)
+    
+    data = fields.Nested(ProxyFileData, required=False)
+    
+    url = fields.Str(required=False)
+    
+
+
+class FetchProxyDetails(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+
+
+class NamespaceDetails(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    namespace = fields.Str(required=False)
+    
+    valid_content_types = fields.List(fields.Str(required=False), required=False)
+    
+    size = fields.Nested(SizeConstraints, required=False)
+    
+    file_acl = fields.Str(required=False)
+    
+
+
+class AllNamespaceDetails(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    items = fields.List(fields.Nested(NamespaceDetails, required=False), required=False)
+    
 
 
 class CDN(BaseSchema):
@@ -61,7 +173,7 @@ class Upload(BaseSchema):
     
 
 
-class StartResponse(BaseSchema):
+class FileUpload(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -81,13 +193,11 @@ class StartResponse(BaseSchema):
     
     upload = fields.Nested(Upload, required=False)
     
-    cdn = fields.Nested(CDN, required=False)
-    
     tags = fields.List(fields.Str(required=False), required=False)
     
 
 
-class StartRequest(BaseSchema):
+class FileUploadStart(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -111,7 +221,7 @@ class CreatedBy(BaseSchema):
     
 
 
-class CompleteResponse(BaseSchema):
+class FileUploadComplete(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -145,11 +255,41 @@ class CompleteResponse(BaseSchema):
     
 
 
-class FailedResponse(BaseSchema):
+class FailedBrowseFilesResult(BaseSchema):
     # FileStorage swagger.json
 
     
     message = fields.Str(required=False)
+    
+
+
+class SignedUrl(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    url = fields.Str(required=False)
+    
+    signed_url = fields.Str(required=False)
+    
+    expiry = fields.Int(required=False)
+    
+
+
+class SignUrlResult(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    urls = fields.List(fields.Nested(SignedUrl, required=False), required=False)
+    
+
+
+class SignUrl(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    expiry = fields.Int(required=False)
+    
+    urls = fields.List(fields.Str(required=False), required=False)
     
 
 

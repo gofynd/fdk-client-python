@@ -8,7 +8,7 @@ from ..ApplicationModel import BaseSchema
 
 
 
-class UpdateUserAttributesRequest(BaseSchema):
+class UpdateUserAttributes(BaseSchema):
     pass
 
 
@@ -124,11 +124,11 @@ class AuthSuccess(BaseSchema):
     pass
 
 
-class UserExistsResponse(BaseSchema):
+class UserExistsDetails(BaseSchema):
     pass
 
 
-class SendOtpResponse(BaseSchema):
+class SendOtp(BaseSchema):
     pass
 
 
@@ -176,7 +176,7 @@ class DeleteUserSuccess(BaseSchema):
     pass
 
 
-class OtpSuccess(BaseSchema):
+class SendOtpSuccess(BaseSchema):
     pass
 
 
@@ -316,10 +316,18 @@ class Email(BaseSchema):
     pass
 
 
+class UserConsentSchema(BaseSchema):
+    pass
+
+
+class PrivacyPolicyConsentSchema(BaseSchema):
+    pass
 
 
 
-class UpdateUserAttributesRequest(BaseSchema):
+
+
+class UpdateUserAttributes(BaseSchema):
     # User swagger.json
 
     
@@ -412,6 +420,8 @@ class EditProfileRequestSchema(BaseSchema):
     sender = fields.Str(required=False)
     
     register_token = fields.Str(required=False)
+    
+    consent = fields.Boolean(required=False)
     
 
 
@@ -561,6 +571,8 @@ class FormRegisterRequestSchema(BaseSchema):
     
     register_token = fields.Str(required=False)
     
+    consent = fields.Boolean(required=False)
+    
 
 
 class TokenRequestBodySchema(BaseSchema):
@@ -675,7 +687,7 @@ class AuthSuccess(BaseSchema):
     
 
 
-class UserExistsResponse(BaseSchema):
+class UserExistsDetails(BaseSchema):
     # User swagger.json
 
     
@@ -683,7 +695,7 @@ class UserExistsResponse(BaseSchema):
     
 
 
-class SendOtpResponse(BaseSchema):
+class SendOtp(BaseSchema):
     # User swagger.json
 
     
@@ -865,7 +877,7 @@ class DeleteUserSuccess(BaseSchema):
     
 
 
-class OtpSuccess(BaseSchema):
+class SendOtpSuccess(BaseSchema):
     # User swagger.json
 
     
@@ -1301,6 +1313,8 @@ class UserSchema(BaseSchema):
     
     rr_id = fields.Str(required=False)
     
+    consent = fields.Nested(UserConsentSchema, required=False)
+    
 
 
 class PhoneNumber(BaseSchema):
@@ -1330,6 +1344,24 @@ class Email(BaseSchema):
     primary = fields.Boolean(required=False)
     
     verified = fields.Boolean(required=False)
+    
+
+
+class UserConsentSchema(BaseSchema):
+    # User swagger.json
+
+    
+    privacy_policy = fields.Nested(PrivacyPolicyConsentSchema, required=False)
+    
+
+
+class PrivacyPolicyConsentSchema(BaseSchema):
+    # User swagger.json
+
+    
+    value = fields.Boolean(required=False)
+    
+    updated_at = fields.Str(required=False)
     
 
 

@@ -18,11 +18,11 @@ class CustomFormSubmissionPayload(BaseSchema):
     pass
 
 
-class SubmitCustomFormResponse(BaseSchema):
+class SubmitCustomFormDetails(BaseSchema):
     pass
 
 
-class FormFieldResponse(BaseSchema):
+class FormFieldDetails(BaseSchema):
     pass
 
 
@@ -109,7 +109,7 @@ class CustomFormSubmissionPayload(BaseSchema):
     
 
 
-class SubmitCustomFormResponse(BaseSchema):
+class SubmitCustomFormDetails(BaseSchema):
     # Lead swagger.json
 
     
@@ -117,11 +117,11 @@ class SubmitCustomFormResponse(BaseSchema):
     
     ticket = fields.Nested(Ticket, required=False)
     
-    response = fields.Nested(FormFieldResponse, required=False)
+    response = fields.Nested(FormFieldDetails, required=False)
     
 
 
-class FormFieldResponse(BaseSchema):
+class FormFieldDetails(BaseSchema):
     # Lead swagger.json
 
     
@@ -313,7 +313,7 @@ class TicketCategory(BaseSchema):
     
     key = fields.Str(required=False)
     
-    sub_categories = fields.Nested(lambda: TicketCategory(exclude=('sub_categories')), required=False)
+    sub_categories = fields.List(fields.Nested(lambda: TicketCategory(exclude=('sub_categories')), required=False), required=False)
     
     group_id = fields.Float(required=False)
     

@@ -10,7 +10,7 @@ from .enums import *
 
 
 
-class GeneralConfigResponse(BaseSchema):
+class GeneralConfigDetails(BaseSchema):
     pass
 
 
@@ -149,7 +149,7 @@ class ErrorMessage(BaseSchema):
 
 
 
-class GeneralConfigResponse(BaseSchema):
+class GeneralConfigDetails(BaseSchema):
     # Lead swagger.json
 
     
@@ -244,6 +244,8 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+    page_size = fields.Int(required=False)
     
 
 
