@@ -30,7 +30,7 @@ class AgentChangePayload(BaseSchema):
     pass
 
 
-class GeneralConfigDetails(BaseSchema):
+class GeneralConfigResponse(BaseSchema):
     pass
 
 
@@ -131,8 +131,6 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
-    page_size = fields.Int(required=False)
-    
 
 
 class TicketHistoryList(BaseSchema):
@@ -175,7 +173,7 @@ class AgentChangePayload(BaseSchema):
     
 
 
-class GeneralConfigDetails(BaseSchema):
+class GeneralConfigResponse(BaseSchema):
     # Lead swagger.json
 
     

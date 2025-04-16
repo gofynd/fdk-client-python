@@ -27,17 +27,17 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
         
-    
-    
         
-    
-    
+        
         
         
         
+        
+        
+        
+        
+        
     
     
         
@@ -46,11 +46,12 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
         
     
     
         
-        
     
     
         
@@ -69,6 +70,8 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
         
         
         
@@ -195,10 +198,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-    
-    
         
     
     
@@ -235,11 +234,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-        
-        
-        
     
     
         
@@ -277,8 +271,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
         
         
         
@@ -407,9 +399,31 @@ class OrderValidator:
     class updateAddress(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
-        
         shipment_id = fields.Str(required=False)
+        
+        name = fields.Str(required=False)
+        
+        address = fields.Str(required=False)
+        
+        address_type = fields.Str(required=False)
+        
+        pincode = fields.Str(required=False)
+        
+        phone = fields.Str(required=False)
+        
+        email = fields.Str(required=False)
+        
+        landmark = fields.Str(required=False)
+        
+        address_category = fields.Str(required=False)
+        
+        city = fields.Str(required=False)
+        
+        state = fields.Str(required=False)
+        
+        country = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
          
         
     
@@ -462,22 +476,6 @@ class OrderValidator:
     class createOrder(BaseSchema):
         
         
-        x__ordering__source = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getChannelConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class createChannelConfig(BaseSchema):
-        
-        
         company_id = fields.Int(required=False)
          
         
@@ -509,8 +507,6 @@ class OrderValidator:
         company_id = fields.Int(required=False)
         
         ordering_channel = fields.Str(required=False)
-        
-        ordering_source = fields.Str(required=False)
         
         status = fields.Str(required=False)
          
@@ -784,16 +780,7 @@ class OrderValidator:
         
         ordering_channel = fields.Str(required=False)
         
-        ordering_source = fields.Str(required=False)
-        
         entity = fields.Str(required=False)
-         
-        
-    
-    class updatePaymentInfo(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
          
         
     
@@ -805,8 +792,6 @@ class OrderValidator:
         lane = fields.Str(required=False)
         
         bag_status = fields.Str(required=False)
-        
-        status_assigned = fields.Str(required=False)
         
         status_override_lane = fields.Boolean(required=False)
         
@@ -823,10 +808,6 @@ class OrderValidator:
         start_date = fields.Str(required=False)
         
         end_date = fields.Str(required=False)
-        
-        status_assigned_start_date = fields.Str(required=False)
-        
-        status_assigned_end_date = fields.Str(required=False)
         
         dp_ids = fields.Str(required=False)
         
@@ -870,11 +851,7 @@ class OrderValidator:
         
         order_type = fields.Str(required=False)
         
-        group_entity = fields.Str(required=False)
-        
         enforce_date_filter = fields.Boolean(required=False)
-        
-        fulfillment_type = fields.Str(required=False)
          
         
     
@@ -1002,11 +979,7 @@ class OrderValidator:
         
         allow_inactive = fields.Boolean(required=False)
         
-        group_entity = fields.Str(required=False)
-        
         enforce_date_filter = fields.Boolean(required=False)
-        
-        fulfillment_type = fields.Str(required=False)
          
         
     

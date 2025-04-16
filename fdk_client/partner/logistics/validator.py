@@ -56,96 +56,12 @@ from ..PartnerModel import BaseSchema
         
         
         
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     
     
         
         
     
     
-        
-        
-        
-        
         
         
         
@@ -166,27 +82,15 @@ from ..PartnerModel import BaseSchema
     
     
         
-        
-        
-        
-        
-        
-    
-    
-        
-    
-    
-        
-        
-        
-        
-        
     
     
         
         
     
     
+        
+        
+        
         
         
 
@@ -229,7 +133,7 @@ class LogisticsValidator:
         
         organization_id = fields.Str(required=False)
         
-        extension_id = fields.Str(required=False, allow_none=True)
+        extension_id = fields.Str(required=False)
         
         scheme_id = fields.Str(required=False)
         
@@ -241,7 +145,7 @@ class LogisticsValidator:
         
         action = fields.Str(required=False)
         
-        status = fields.Str(required=False, allow_none=True)
+        status = fields.Str(required=False)
         
         country = fields.Str(required=False)
         
@@ -250,176 +154,6 @@ class LogisticsValidator:
         start_date = fields.Str(required=False)
         
         end_date = fields.Str(required=False)
-         
-        
-    
-    class createDeliveryTime(BaseSchema):
-        
-        
-        partner_org_id = fields.Str(required=False)
-        
-        courier_partner_extension_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-         
-        
-    
-    class getDeliveryTimes(BaseSchema):
-        
-        
-        partner_org_id = fields.Str(required=False)
-        
-        courier_partner_extension_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        from_country_code = fields.Str(required=False)
-        
-        from_state_code = fields.Str(required=False)
-        
-        from_city_code = fields.Str(required=False)
-        
-        from_sector_code = fields.Str(required=False)
-        
-        from_pincode = fields.Str(required=False)
-        
-        to_country_code = fields.Str(required=False)
-        
-        to_state_code = fields.Str(required=False)
-        
-        to_city_code = fields.Str(required=False)
-        
-        to_sector_code = fields.Str(required=False)
-        
-        to_pincode = fields.Str(required=False)
-         
-        
-    
-    class getDeliveryTime(BaseSchema):
-        
-        
-        partner_org_id = fields.Str(required=False)
-        
-        courier_partner_extension_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class updateDeliveryTime(BaseSchema):
-        
-        
-        partner_org_id = fields.Str(required=False)
-        
-        courier_partner_extension_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class deleteDeliveryTime(BaseSchema):
-        
-        
-        partner_org_id = fields.Str(required=False)
-        
-        courier_partner_extension_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class createServiceability(BaseSchema):
-        
-        
-        partner_org_id = fields.Str(required=False)
-        
-        courier_partner_extension_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-         
-        
-    
-    class getServiceabilities(BaseSchema):
-        
-        
-        partner_org_id = fields.Str(required=False)
-        
-        courier_partner_extension_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        country_code = fields.Str(required=False)
-        
-        state_code = fields.Str(required=False)
-        
-        city_code = fields.Str(required=False)
-        
-        sector_code = fields.Str(required=False)
-        
-        pincode = fields.Str(required=False)
-        
-        first_mile = fields.Boolean(required=False)
-        
-        last_mile = fields.Boolean(required=False)
-        
-        doorstep_return = fields.Boolean(required=False)
-        
-        doorstep_qc = fields.Boolean(required=False)
-        
-        installation = fields.Boolean(required=False)
-         
-        
-    
-    class getServiceability(BaseSchema):
-        
-        
-        partner_org_id = fields.Str(required=False)
-        
-        courier_partner_extension_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class updateServiceability(BaseSchema):
-        
-        
-        partner_org_id = fields.Str(required=False)
-        
-        courier_partner_extension_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class deleteServiceability(BaseSchema):
-        
-        
-        partner_org_id = fields.Str(required=False)
-        
-        courier_partner_extension_id = fields.Str(required=False)
-        
-        scheme_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
          
         
     
@@ -451,7 +185,7 @@ class LogisticsValidator:
         
         action = fields.Str(required=False)
         
-        status = fields.Str(required=False, allow_none=True)
+        status = fields.Str(required=False)
         
         country = fields.Str(required=False)
         
@@ -488,14 +222,6 @@ class LogisticsValidator:
         payment_mode = fields.Str(required=False)
         
         transport_type = fields.Str(required=False)
-        
-        account_ids = fields.List(fields.Str(required=False), required=False)
-        
-        self_ship = fields.Boolean(required=False)
-        
-        own_account = fields.Boolean(required=False)
-        
-        q = fields.Str(required=False)
          
         
     
@@ -521,42 +247,10 @@ class LogisticsValidator:
          
         
     
-    class getCountries(BaseSchema):
-        
-        
-        organization_id = fields.Str(required=False)
-        
-        onboard = fields.Boolean(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        q = fields.Str(required=False)
-        
-        hierarchy = fields.Str(required=False)
-         
-        
-    
     class createCourierPartnerScheme(BaseSchema):
         
         
         organization_id = fields.Str(required=False)
-         
-        
-    
-    class getCourierPartnerSchemes(BaseSchema):
-        
-        
-        organization_id = fields.Str(required=False)
-        
-        scheme_type = fields.Str(required=False)
-        
-        payment_mode = fields.Str(required=False)
-        
-        capabilities = fields.List(fields.Str(required=False), required=False)
-        
-        scheme_ids = fields.List(fields.Str(required=False), required=False)
          
         
     
@@ -569,12 +263,18 @@ class LogisticsValidator:
          
         
     
-    class getCourierPartnerScheme(BaseSchema):
+    class getCountries(BaseSchema):
         
         
         organization_id = fields.Str(required=False)
         
-        scheme_id = fields.Str(required=False)
+        onboarding = fields.Boolean(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
          
         
     

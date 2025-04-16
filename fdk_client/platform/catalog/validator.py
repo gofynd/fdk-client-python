@@ -154,8 +154,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
     
     
         
@@ -218,15 +216,10 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
         
         
-    
-    
         
         
-        
     
     
         
@@ -346,42 +339,32 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
         
         
         
         
-    
-    
         
     
     
         
-        
     
     
-        
         
         
-        
     
     
         
         
-    
-    
         
         
     
     
         
         
-        
     
     
-        
         
         
     
@@ -414,7 +397,7 @@ class CatalogValidator:
     class listCategories(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         level = fields.Str(required=False)
         
@@ -719,29 +702,25 @@ class CatalogValidator:
     class getProductBundle(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         q = fields.Str(required=False)
         
         slug = fields.List(fields.Str(required=False), required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
          
         
     
     class createProductBundle(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
          
         
     
     class getProductBundleDetail(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
          
@@ -750,7 +729,7 @@ class CatalogValidator:
     class updateProductBundle(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
          
@@ -836,7 +815,7 @@ class CatalogValidator:
     class listProductTemplate(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         department = fields.Str(required=False)
          
@@ -845,7 +824,7 @@ class CatalogValidator:
     class listProductTemplateCategories(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         departments = fields.Str(required=False)
         
@@ -872,17 +851,6 @@ class CatalogValidator:
         company_id = fields.Str(required=False)
         
         slug = fields.Str(required=False)
-        
-        item_type = fields.Str(required=False)
-        
-        bulk = fields.Boolean(required=False)
-         
-        
-    
-    class validateProductGlobalTemplate(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
         
         item_type = fields.Str(required=False)
         
@@ -1226,28 +1194,6 @@ class CatalogValidator:
         company_id = fields.Int(required=False)
         
         item_id = fields.Int(required=False)
-        
-        seller_identifier = fields.Str(required=False)
-         
-        
-    
-    class updateLocationPrice(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        store_id = fields.Int(required=False)
-        
-        seller_identifier = fields.Str(required=False)
-         
-        
-    
-    class updateLocationQuantity(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        store_id = fields.Int(required=False)
         
         seller_identifier = fields.Str(required=False)
          
