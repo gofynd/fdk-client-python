@@ -86,6 +86,10 @@ class AvailablePageSchemaSections(BaseSchema):
     pass
 
 
+class SectionSource(BaseSchema):
+    pass
+
+
 class AvailablePagePredicate(BaseSchema):
     pass
 
@@ -142,7 +146,7 @@ class ThemesSchema(BaseSchema):
     pass
 
 
-class ThemeUpgradableResponse(BaseSchema):
+class ThemeUpgradable(BaseSchema):
     pass
 
 
@@ -219,6 +223,10 @@ class CustomProps(BaseSchema):
 
 
 class GlobalSchema(BaseSchema):
+    pass
+
+
+class Prop(BaseSchema):
     pass
 
 
@@ -310,7 +318,7 @@ class ThemeVersions(BaseSchema):
     pass
 
 
-class DummyResponse(BaseSchema):
+class DummyTheme(BaseSchema):
     pass
 
 
@@ -591,13 +599,27 @@ class AvailablePageSchemaSections(BaseSchema):
     
     props = fields.Dict(required=False)
     
+    custom_css = fields.Str(required=False)
+    
     blocks = fields.List(fields.Dict(required=False), required=False)
     
     preset = fields.Dict(required=False)
     
     predicate = fields.Nested(AvailablePagePredicate, required=False)
     
-    source = fields.Str(required=False)
+    __source = fields.Nested(SectionSource, required=False)
+    
+
+
+class SectionSource(BaseSchema):
+    # Theme swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    bundle_name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
     
 
 
@@ -799,7 +821,7 @@ class ThemesSchema(BaseSchema):
     
 
 
-class ThemeUpgradableResponse(BaseSchema):
+class ThemeUpgradable(BaseSchema):
     # Theme swagger.json
 
     
@@ -1075,7 +1097,25 @@ class GlobalSchema(BaseSchema):
     # Theme swagger.json
 
     
-    props = fields.List(fields.Dict(required=False), required=False)
+    props = fields.List(fields.Nested(Prop, required=False), required=False)
+    
+
+
+class Prop(BaseSchema):
+    # Theme swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    category = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
+    
+    label = fields.Str(required=False)
+    
+    info = fields.Str(required=False)
     
 
 
@@ -1315,7 +1355,7 @@ class ThemeVersions(BaseSchema):
     
 
 
-class DummyResponse(BaseSchema):
+class DummyTheme(BaseSchema):
     # Theme swagger.json
 
     

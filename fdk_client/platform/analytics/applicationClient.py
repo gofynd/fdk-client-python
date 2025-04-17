@@ -28,7 +28,7 @@ class Analytics:
         schema = JobExecute()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/insights/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/job/execute", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Value for the company ID"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"The application ID for the sales channel"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Value for the company ID"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"The application ID for the sales channel"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/insights/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/job/execute", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier of company.","schema":{"type":"integer","description":"Value for the company ID"}},{"name":"application_id","in":"path","required":true,"description":"Unique identifier of application associated with company.","schema":{"type":"string","description":"The application ID for the sales channel"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier of company.","schema":{"type":"integer","description":"Value for the company ID"}},{"name":"application_id","in":"path","required":true,"description":"Unique identifier of application associated with company.","schema":{"type":"string","description":"The application ID for the sales channel"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -47,11 +47,20 @@ class Analytics:
 
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/insights/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/job/execute", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
+        if 200 <= int(response['status_code']) < 300:
+            from .models import JobExecutionResult
+            schema = JobExecutionResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for executeJobForProvidedParametersV2")
+                print(e)
+
         return response
     
     async def startDownloadForQueryV2(self, export_type=None, body="", request_headers:Dict={}):
         """Initiates download job and returns job name
-        :param export_type :  : type string
+        :param export_type : Format in which to be exported(eg. CSV or excel). : type string
         """
         payload = {}
         
@@ -67,7 +76,7 @@ class Analytics:
         schema = FileDownloadRequestBody()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/insights/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/job/download", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Value for the company ID"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"The application ID for the sales channel"}},{"name":"export_type","in":"query","required":true,"schema":{"type":"string","description":"The file type for exporting your report.","enum":["csv","excel"]}}],"optional":[],"query":[{"name":"export_type","in":"query","required":true,"schema":{"type":"string","description":"The file type for exporting your report.","enum":["csv","excel"]}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Value for the company ID"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"The application ID for the sales channel"}}]}""", serverType="platform", export_type=export_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/insights/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/job/download", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier of company.","schema":{"type":"integer","description":"Value for the company ID"}},{"name":"application_id","in":"path","required":true,"description":"Unique identifier of application associated with company.","schema":{"type":"string","description":"The application ID for the sales channel"}},{"name":"export_type","in":"query","required":true,"description":"Format in which to be exported(eg. CSV or excel).","schema":{"type":"string","description":"The file type for exporting your report.","enum":["csv","excel"]}}],"optional":[],"query":[{"name":"export_type","in":"query","required":true,"description":"Format in which to be exported(eg. CSV or excel).","schema":{"type":"string","description":"The file type for exporting your report.","enum":["csv","excel"]}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier of company.","schema":{"type":"integer","description":"Value for the company ID"}},{"name":"application_id","in":"path","required":true,"description":"Unique identifier of application associated with company.","schema":{"type":"string","description":"The application ID for the sales channel"}}]}""", serverType="platform", export_type=export_type)
         query_string = await create_query_string(export_type=export_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -102,7 +111,7 @@ class Analytics:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/insights/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/job/{file_name}/status", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Value for the company ID"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"The application ID for the sales channel"}},{"name":"file_name","in":"path","description":"Download job name","required":true,"schema":{"type":"string","description":"File name for the job you want to know the status."}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Value for the company ID"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"The application ID for the sales channel"}},{"name":"file_name","in":"path","description":"Download job name","required":true,"schema":{"type":"string","description":"File name for the job you want to know the status."}}]}""", serverType="platform", file_name=file_name)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/insights/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/job/{file_name}/status", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier of company.","schema":{"type":"integer","description":"Value for the company ID"}},{"name":"application_id","in":"path","required":true,"description":"Unique identifier of application associated with company.","schema":{"type":"string","description":"The application ID for the sales channel"}},{"name":"file_name","in":"path","description":"Download job name","required":true,"schema":{"type":"string","description":"File name for the job you want to know the status."}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique identifier of company.","schema":{"type":"integer","description":"Value for the company ID"}},{"name":"application_id","in":"path","required":true,"description":"Unique identifier of application associated with company.","schema":{"type":"string","description":"The application ID for the sales channel"}},{"name":"file_name","in":"path","description":"Download job name","required":true,"schema":{"type":"string","description":"File name for the job you want to know the status."}}]}""", serverType="platform", file_name=file_name)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -120,6 +129,15 @@ class Analytics:
                 exclude_headers.append(key)
 
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/insights/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/job/{file_name}/status", file_name=file_name), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import JobStatus
+            schema = JobStatus()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for checkJobStatusByNameV2")
+                print(e)
 
         return response
     

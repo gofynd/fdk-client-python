@@ -40,11 +40,11 @@ class BulkDiscount(BaseSchema):
     pass
 
 
-class FileJobResponse(BaseSchema):
+class FileJobResponseSchema(BaseSchema):
     pass
 
 
-class FileJobRequest(BaseSchema):
+class FileJobRequestSchema(BaseSchema):
     pass
 
 
@@ -52,7 +52,7 @@ class DownloadFileJob(BaseSchema):
     pass
 
 
-class CancelJobResponse(BaseSchema):
+class CancelJobResponseSchema(BaseSchema):
     pass
 
 
@@ -267,7 +267,7 @@ class BulkDiscount(BaseSchema):
     
 
 
-class FileJobResponse(BaseSchema):
+class FileJobResponseSchema(BaseSchema):
     # Discount swagger.json
 
     
@@ -303,7 +303,7 @@ class FileJobResponse(BaseSchema):
     
 
 
-class FileJobRequest(BaseSchema):
+class FileJobRequestSchema(BaseSchema):
     # Discount swagger.json
 
     
@@ -343,7 +343,7 @@ class DownloadFileJob(BaseSchema):
     
 
 
-class CancelJobResponse(BaseSchema):
+class CancelJobResponseSchema(BaseSchema):
     # Discount swagger.json
 
     
@@ -368,6 +368,8 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+    page_size = fields.Int(required=False)
     
 
 
