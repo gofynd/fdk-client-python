@@ -19,8 +19,6 @@ from .content.client import Content
 
 from .filestorage.client import FileStorage
 
-from .finance.client import Finance
-
 from .lead.client import Lead
 
 from .logistic.client import Logistic
@@ -50,7 +48,6 @@ class ApplicationClient:
         self.configuration = Configuration(config)
         self.content = Content(config)
         self.fileStorage = FileStorage(config)
-        self.finance = Finance(config)
         self.lead = Lead(config)
         self.logistic = Logistic(config)
         self.order = Order(config)

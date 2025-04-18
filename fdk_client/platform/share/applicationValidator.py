@@ -34,11 +34,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
 
 class ShareValidator:
     
@@ -46,7 +41,7 @@ class ShareValidator:
     class createShortLink(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
          
@@ -55,7 +50,7 @@ class ShareValidator:
     class getShortLinks(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
@@ -78,7 +73,7 @@ class ShareValidator:
     class getShortLinkByHash(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
@@ -89,22 +84,11 @@ class ShareValidator:
     class updateShortLinkById(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
-         
-        
-    
-    class getShortLinkClickStats(BaseSchema):
-        
-        
-        surl_id = fields.Str(required=False)
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
          
         
     

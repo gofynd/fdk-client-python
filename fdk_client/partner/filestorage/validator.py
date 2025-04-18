@@ -12,6 +12,13 @@ from ..PartnerModel import BaseSchema
     
     
         
+    
+    
+        
+        
+    
+    
+        
         
     
     
@@ -23,12 +30,28 @@ from ..PartnerModel import BaseSchema
         
         
         
-    
-    
         
         
     
     
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
         
     
     
@@ -36,6 +59,22 @@ from ..PartnerModel import BaseSchema
 
 class FileStorageValidator:
     
+    
+    class getAllNamespaceDetails(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+         
+        
+    
+    class getNamespaceDetail(BaseSchema):
+        
+        
+        namespace = fields.Str(required=False)
+        
+        organization_id = fields.Str(required=False)
+         
+        
     
     class completeUpload(BaseSchema):
         
@@ -55,6 +94,23 @@ class FileStorageValidator:
          
         
     
+    class browse(BaseSchema):
+        
+        
+        namespace = fields.Str(required=False)
+        
+        organization_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+        
+        page = fields.Int(required=False)
+        
+        limit = fields.Int(required=False)
+         
+        
+    
     class browseFiles(BaseSchema):
         
         
@@ -68,6 +124,30 @@ class FileStorageValidator:
          
         
     
+    class organizationLevelFetchProxy(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+        
+        url = fields.Str(required=False)
+         
+        
+    
+    class saveOrganizationLevelProxy(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
     class fetchProxy(BaseSchema):
         
         
@@ -78,13 +158,6 @@ class FileStorageValidator:
         
     
     class saveProxyDetails(BaseSchema):
-        
-        
-        organization_id = fields.Str(required=False)
-         
-        
-    
-    class signUrls(BaseSchema):
         
         
         organization_id = fields.Str(required=False)

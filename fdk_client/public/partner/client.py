@@ -25,7 +25,7 @@ class Partner:
     
     async def getPanelExtensionDetails(self, slug=None, body="", request_headers:Dict={}):
         """Retrieve detailed information about panel extensions in the public server setup.
-        :param slug : Slug of the extension : type string
+        :param slug : pass the slug of the extension : type string
         """
         payload = {}
         
@@ -37,7 +37,7 @@ class Partner:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPanelExtensionDetails"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"Slug of the extension","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"Slug of the extension","required":true,"schema":{"type":"string"}}]}""", serverType="public", slug=slug)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPanelExtensionDetails"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"pass the slug of the extension","required":true,"schema":{"type":"string"},"example":"example-extension-1"}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"pass the slug of the extension","required":true,"schema":{"type":"string"},"example":"example-extension-1"}]}""", serverType="public", slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string

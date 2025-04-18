@@ -14,7 +14,6 @@ from ..ApplicationModel import BaseSchema
     
         
         
-        
     
     
         
@@ -57,29 +56,25 @@ from ..ApplicationModel import BaseSchema
     
     
         
-        
     
     
-        
-        
-    
-    
-        
-        
-        
-        
         
     
     
         
         
         
-    
-    
         
         
         
     
+    
+    
+        
+    
+    
+        
+        
 
 class ContentValidator:
     
@@ -95,8 +90,6 @@ class ContentValidator:
         slug = fields.Str(required=False)
         
         root_id = fields.Str(required=False)
-        
-        preview = fields.Boolean(required=False)
          
         
     
@@ -192,15 +185,6 @@ class ContentValidator:
         pass 
         
     
-    class getPage(BaseSchema):
-        
-        
-        slug = fields.Str(required=False)
-        
-        root_id = fields.Str(required=False)
-         
-        
-    
     class getPages(BaseSchema):
         
         
@@ -210,64 +194,65 @@ class ContentValidator:
          
         
     
-    class getCustomObjectBySlug(BaseSchema):
+    class getPage(BaseSchema):
         
         
-        definition_slug = fields.Str(required=False)
+        slug = fields.Str(required=False)
+        
+        root_id = fields.Str(required=False)
+         
+        
+    
+    class getWellKnownUrl(BaseSchema):
+        
         
         slug = fields.Str(required=False)
          
         
     
-    class getCustomFieldsByResourceId(BaseSchema):
+    class getCustomObject(BaseSchema):
+        
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class getCustomObjects(BaseSchema):
+        
+        
+        definition_id = fields.Str(required=False)
+        
+        page_no = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+        
+        ids = fields.Str(required=False)
+        
+        search = fields.Str(required=False)
+         
+        
+    
+    class getCustomFieldDefinitions(BaseSchema):
+        
+        pass 
+        
+    
+    class getCustomFieldDefinition(BaseSchema):
+        
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class getCustomFields(BaseSchema):
         
         
         resource = fields.Str(required=False)
         
-        resource_slug = fields.Str(required=False)
+        resource_ids = fields.Str(required=False)
          
-        
-    
-    class getTranslateUILabels(BaseSchema):
-        
-        
-        template = fields.Boolean(required=False)
-        
-        template_theme_id = fields.Str(required=False)
-        
-        theme_id = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-        
-        type = fields.Str(required=False)
-         
-        
-    
-    class fetchResourceTranslations(BaseSchema):
-        
-        
-        type = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-        
-        resource_id = fields.Str(required=False)
-         
-        
-    
-    class fetchResourceTranslationsWithPayload(BaseSchema):
-        
-        
-        type = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-        
-        resource_id = fields.Str(required=False)
-         
-        
-    
-    class getSupportedLanguages(BaseSchema):
-        
-        pass 
         
     
     

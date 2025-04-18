@@ -27,6 +27,24 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
     
     
         
@@ -35,6 +53,13 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+    
+    
+        
+        
+    
+    
         
         
     
@@ -50,7 +75,14 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+    
+    
         
+        
     
     
         
@@ -115,6 +147,8 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
         
         
     
@@ -122,26 +156,29 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
         
-        
     
     
+        
         
         
         
+        
     
     
         
         
+        
     
     
         
         
         
+    
+    
         
         
     
@@ -166,8 +203,11 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
         
         
+        
     
     
         
@@ -176,6 +216,8 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
         
         
         
@@ -183,9 +225,9 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
     
     
-        
         
         
     
@@ -197,12 +239,14 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
     
     
         
         
     
     
+        
         
         
 
@@ -226,6 +270,12 @@ class ServiceabilityValidator:
         application_id = fields.Str(required=False)
         
         stage = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+        
+        access_level = fields.Str(required=False)
+        
+        status = fields.Str(required=False)
         
         page_size = fields.Int(required=False)
         
@@ -280,6 +330,35 @@ class ServiceabilityValidator:
          
         
     
+    class getZoneDetails(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        zone_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class createBulkZone(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getBulkZone(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class createBulkExport(BaseSchema):
         
         
@@ -297,6 +376,42 @@ class ServiceabilityValidator:
         application_id = fields.Str(required=False)
         
         batch_id = fields.Str(required=False)
+         
+        
+    
+    class updatePincodeMopView(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updatePincodeBulkView(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updatePincodeCoDListing(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updatePincodeAuditHistory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     
@@ -413,7 +528,7 @@ class ServiceabilityValidator:
          
         
     
-    class updatePincodeMopView(BaseSchema):
+    class createBulkGeoAreaExport(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -422,60 +537,41 @@ class ServiceabilityValidator:
          
         
     
-    class updatePincodeBulkView(BaseSchema):
+    class createBulkGeoAreas(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
          
         
     
-    class updatePincodeCoDListing(BaseSchema):
+    class getBulkGeoAreasHistory(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-        
-        page_number = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
          
         
     
-    class updatePincodeAuditHistory(BaseSchema):
+    class getBulkGeoAreasSample(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-        
-        page_number = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
          
         
     
-    class updateCourierRule(BaseSchema):
+    class getGeoAreasExportStatus(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        rule_uid = fields.Str(required=False)
-         
-        
-    
-    class getCourierPartnerRule(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        rule_uid = fields.Str(required=False)
+        batch_id = fields.Str(required=False)
          
         
     
@@ -503,12 +599,25 @@ class ServiceabilityValidator:
          
         
     
-    class getCourierPartners(BaseSchema):
+    class updateCourierRule(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
+        
+        rule_uid = fields.Str(required=False)
+         
+        
+    
+    class getCourierPartnerRule(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        rule_uid = fields.Str(required=False)
          
         
     
@@ -590,6 +699,15 @@ class ServiceabilityValidator:
          
         
     
+    class updateStoreRulePriority(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class getStoreRule(BaseSchema):
         
         
@@ -621,12 +739,25 @@ class ServiceabilityValidator:
          
         
     
-    class updateStoreRulePriority(BaseSchema):
+    class getCourierPartnerRuleDetails(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
+        
+        rule_uid = fields.Str(required=False)
+         
+        
+    
+    class getStoreRuleDetails(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        rule_uid = fields.Str(required=False)
          
         
     
@@ -636,6 +767,17 @@ class ServiceabilityValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
+         
+        
+    
+    class downloadZoneSampleFile(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        product_type = fields.Str(required=False)
          
         
     
