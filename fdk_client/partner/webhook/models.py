@@ -116,14 +116,6 @@ class DeliveryEventLevelSchema(BaseSchema):
     pass
 
 
-class ResponseTimeTs(BaseSchema):
-    pass
-
-
-class AvgResponseTime(BaseSchema):
-    pass
-
-
 class DeliverySummaryResponse(BaseSchema):
     pass
 
@@ -505,8 +497,6 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
-    total = fields.Int(required=False)
-    
 
 
 class DeliveryEventLevelSchema(BaseSchema):
@@ -524,24 +514,6 @@ class DeliveryEventLevelSchema(BaseSchema):
     removed_webhooks = fields.Float(required=False)
     
     total = fields.Float(required=False)
-    
-    response_time = fields.Float(required=False)
-    
-
-
-class ResponseTimeTs(BaseSchema):
-    # Webhook swagger.json
-
-    
-    avg_response_time_ts = fields.List(fields.Nested(AvgResponseTime, required=False), required=False)
-    
-
-
-class AvgResponseTime(BaseSchema):
-    # Webhook swagger.json
-
-    
-    timestamp = fields.Str(required=False)
     
     response_time = fields.Float(required=False)
     

@@ -8,7 +8,7 @@ from ..ApplicationModel import BaseSchema
 
 
 
-class UpdateAttributesRequestPayload(BaseSchema):
+class UpdateUserAttributesRequest(BaseSchema):
     pass
 
 
@@ -96,6 +96,10 @@ class SendResetPasswordEmailRequestSchema(BaseSchema):
     pass
 
 
+class SendResetPasswordMobileRequestSchema(BaseSchema):
+    pass
+
+
 class PasswordLoginRequestSchema(BaseSchema):
     pass
 
@@ -125,10 +129,6 @@ class UserExistsResponse(BaseSchema):
 
 
 class SendOtpResponse(BaseSchema):
-    pass
-
-
-class EmailOtp(BaseSchema):
     pass
 
 
@@ -236,26 +236,6 @@ class LookAndFeel(BaseSchema):
     pass
 
 
-class PasswordConfigs(BaseSchema):
-    pass
-
-
-class PasswordHistory(BaseSchema):
-    pass
-
-
-class PasswordExpiry(BaseSchema):
-    pass
-
-
-class PasswordSettings(BaseSchema):
-    pass
-
-
-class AccountLockout(BaseSchema):
-    pass
-
-
 class Login(BaseSchema):
     pass
 
@@ -277,10 +257,6 @@ class PlatformEmail(BaseSchema):
 
 
 class PlatformMobile(BaseSchema):
-    pass
-
-
-class PlatformPassword(BaseSchema):
     pass
 
 
@@ -343,7 +319,7 @@ class Email(BaseSchema):
 
 
 
-class UpdateAttributesRequestPayload(BaseSchema):
+class UpdateUserAttributesRequest(BaseSchema):
     # User swagger.json
 
     
@@ -413,7 +389,7 @@ class EditProfileRequestSchema(BaseSchema):
     # User swagger.json
 
     
-    ci = fields.Boolean(required=False)
+    encrypt_otp = fields.Boolean(required=False)
     
     first_name = fields.Str(required=False)
     
@@ -481,8 +457,6 @@ class VerifyEmailOtpRequestSchema(BaseSchema):
     
     email = fields.Str(required=False)
     
-    request_id = fields.Str(required=False)
-    
     action = fields.Str(required=False)
     
     register_token = fields.Str(required=False)
@@ -498,8 +472,6 @@ class VerifyEmailForgotOtpRequestSchema(BaseSchema):
     email = fields.Str(required=False)
     
     otp = fields.Str(required=False)
-    
-    request_id = fields.Str(required=False)
     
 
 
@@ -529,7 +501,7 @@ class SendMobileOtpRequestSchema(BaseSchema):
     # User swagger.json
 
     
-    ci = fields.Boolean(required=False)
+    encrypt_otp = fields.Boolean(required=False)
     
     mobile = fields.Str(required=False)
     
@@ -625,6 +597,16 @@ class SendResetPasswordEmailRequestSchema(BaseSchema):
     
 
 
+class SendResetPasswordMobileRequestSchema(BaseSchema):
+    # User swagger.json
+
+    
+    country_code = fields.Str(required=False)
+    
+    mobile = fields.Str(required=False)
+    
+
+
 class PasswordLoginRequestSchema(BaseSchema):
     # User swagger.json
 
@@ -639,7 +621,7 @@ class SendOtpRequestSchema(BaseSchema):
     # User swagger.json
 
     
-    ci = fields.Boolean(required=False)
+    encrypt_otp = fields.Boolean(required=False)
     
     country_code = fields.Str(required=False)
     
@@ -733,16 +715,6 @@ class SendOtpResponse(BaseSchema):
     
 
 
-class EmailOtp(BaseSchema):
-    # User swagger.json
-
-    
-    request_id = fields.Str(required=False)
-    
-    resend_timer = fields.Int(required=False)
-    
-
-
 class ProfileEditSuccess(BaseSchema):
     # User swagger.json
 
@@ -762,8 +734,6 @@ class ProfileEditSuccess(BaseSchema):
     verify_mobile_otp = fields.Boolean(required=False)
     
     email = fields.Str(required=False)
-    
-    email_otp = fields.Nested(EmailOtp, required=False)
     
     request_id = fields.Str(required=False)
     
@@ -836,8 +806,6 @@ class RegisterFormSuccess(BaseSchema):
 
     
     email = fields.Str(required=False)
-    
-    email_otp = fields.Nested(EmailOtp, required=False)
     
     resend_timer = fields.Int(required=False)
     
@@ -926,8 +894,6 @@ class EmailOtpSuccess(BaseSchema):
     success = fields.Boolean(required=False)
     
     resend_email_token = fields.Str(required=False)
-    
-    email_otp = fields.Nested(EmailOtp, required=False)
     
 
 
@@ -1071,10 +1037,6 @@ class PlatformSchema(BaseSchema):
     
     login = fields.Nested(Login, required=False)
     
-    account_lockout = fields.Nested(AccountLockout, required=False)
-    
-    password_settings = fields.Nested(PasswordSettings, required=False)
-    
     skip_captcha = fields.Boolean(required=False)
     
     name = fields.Str(required=False)
@@ -1101,9 +1063,9 @@ class PlatformSchema(BaseSchema):
     
     register = fields.Boolean(required=False)
     
-    mobile_image = fields.Str(required=False, allow_none=True)
+    mobile_image = fields.Str(required=False)
     
-    desktop_image = fields.Str(required=False, allow_none=True)
+    desktop_image = fields.Str(required=False)
     
     delete_account_day = fields.Int(required=False)
     
@@ -1127,64 +1089,6 @@ class LookAndFeel(BaseSchema):
     
 
 
-class PasswordConfigs(BaseSchema):
-    # User swagger.json
-
-    
-    length = fields.Float(required=False)
-    
-    require_special_character = fields.Boolean(required=False)
-    
-    require_number = fields.Boolean(required=False)
-    
-    require_capital_character = fields.Boolean(required=False)
-    
-
-
-class PasswordHistory(BaseSchema):
-    # User swagger.json
-
-    
-    required = fields.Boolean(required=False)
-    
-    count = fields.Float(required=False)
-    
-
-
-class PasswordExpiry(BaseSchema):
-    # User swagger.json
-
-    
-    required = fields.Boolean(required=False)
-    
-    duration = fields.Float(required=False)
-    
-
-
-class PasswordSettings(BaseSchema):
-    # User swagger.json
-
-    
-    configs = fields.Nested(PasswordConfigs, required=False)
-    
-    history = fields.Nested(PasswordHistory, required=False)
-    
-    expiry = fields.Nested(PasswordExpiry, required=False)
-    
-
-
-class AccountLockout(BaseSchema):
-    # User swagger.json
-
-    
-    enable = fields.Boolean(required=False)
-    
-    attempts = fields.Float(required=False)
-    
-    duration = fields.Float(required=False)
-    
-
-
 class Login(BaseSchema):
     # User swagger.json
 
@@ -1192,8 +1096,6 @@ class Login(BaseSchema):
     password = fields.Boolean(required=False)
     
     otp = fields.Boolean(required=False)
-    
-    via = fields.Str(required=False)
     
 
 
@@ -1227,8 +1129,6 @@ class RequiredFields(BaseSchema):
     
     mobile = fields.Nested(PlatformMobile, required=False)
     
-    password = fields.Nested(PlatformPassword, required=False)
-    
 
 
 class PlatformEmail(BaseSchema):
@@ -1251,14 +1151,6 @@ class PlatformMobile(BaseSchema):
     
 
 
-class PlatformPassword(BaseSchema):
-    # User swagger.json
-
-    
-    is_required = fields.Boolean(required=False)
-    
-
-
 class RegisterRequiredFields(BaseSchema):
     # User swagger.json
 
@@ -1266,8 +1158,6 @@ class RegisterRequiredFields(BaseSchema):
     email = fields.Nested(RegisterRequiredFieldsEmail, required=False)
     
     mobile = fields.Nested(RegisterRequiredFieldsMobile, required=False)
-    
-    password = fields.Nested(PlatformPassword, required=False)
     
 
 
@@ -1341,8 +1231,6 @@ class Facebook(BaseSchema):
     
     app_id = fields.Str(required=False)
     
-    app_secret = fields.Str(required=False)
-    
 
 
 class Accountkit(BaseSchema):
@@ -1351,8 +1239,6 @@ class Accountkit(BaseSchema):
     
     app_id = fields.Str(required=False)
     
-    app_secret = fields.Str(required=False)
-    
 
 
 class Google(BaseSchema):
@@ -1360,8 +1246,6 @@ class Google(BaseSchema):
 
     
     app_id = fields.Str(required=False)
-    
-    app_secret = fields.Str(required=False)
     
 
 
@@ -1395,7 +1279,7 @@ class UserSchema(BaseSchema):
     
     emails = fields.List(fields.Nested(Email, required=False), required=False)
     
-    gender = fields.Str(required=False, allow_none=True)
+    gender = fields.Str(required=False)
     
     dob = fields.Str(required=False)
     

@@ -18,15 +18,15 @@ class CustomFormSubmissionPayload(BaseSchema):
     pass
 
 
-class UserSchema(BaseSchema):
-    pass
-
-
 class SubmitCustomFormResponse(BaseSchema):
     pass
 
 
-class FormResponse(BaseSchema):
+class FormFieldResponse(BaseSchema):
+    pass
+
+
+class FormFieldResponseValues(BaseSchema):
     pass
 
 
@@ -86,22 +86,6 @@ class Ticket(BaseSchema):
     pass
 
 
-class NotFoundError(BaseSchema):
-    pass
-
-
-class Error4XX(BaseSchema):
-    pass
-
-
-class PhoneNumber(BaseSchema):
-    pass
-
-
-class Email(BaseSchema):
-    pass
-
-
 
 
 
@@ -111,7 +95,7 @@ class TicketHistoryPayload(BaseSchema):
     
     value = fields.Dict(required=False)
     
-    type = fields.Str(required=False)
+    type = fields.Str(required=False, validate=OneOf([val.value for val in HistoryTypeEnum.__members__.values()]))
     
 
 
@@ -125,48 +109,6 @@ class CustomFormSubmissionPayload(BaseSchema):
     
 
 
-class UserSchema(BaseSchema):
-    # Lead swagger.json
-
-    
-    application_id = fields.Str(required=False)
-    
-    user_id = fields.Str(required=False)
-    
-    first_name = fields.Str(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    last_name = fields.Str(required=False)
-    
-    phone_numbers = fields.List(fields.Nested(PhoneNumber, required=False), required=False)
-    
-    emails = fields.List(fields.Nested(Email, required=False), required=False)
-    
-    gender = fields.Str(required=False, allow_none=True)
-    
-    dob = fields.Str(required=False)
-    
-    active = fields.Boolean(required=False)
-    
-    profile_pic_url = fields.Str(required=False)
-    
-    username = fields.Str(required=False)
-    
-    account_type = fields.Str(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    external_id = fields.Str(required=False)
-    
-    rr_id = fields.Str(required=False)
-    
-
-
 class SubmitCustomFormResponse(BaseSchema):
     # Lead swagger.json
 
@@ -175,33 +117,33 @@ class SubmitCustomFormResponse(BaseSchema):
     
     ticket = fields.Nested(Ticket, required=False)
     
-    notified_to = fields.List(fields.Str(required=False), required=False)
-    
-    response = fields.Nested(FormResponse, required=False)
+    response = fields.Nested(FormFieldResponse, required=False)
     
 
 
-class FormResponse(BaseSchema):
+class FormFieldResponse(BaseSchema):
     # Lead swagger.json
 
+    
+    _id = fields.Str(required=False)
+    
+    __v = fields.Float(required=False)
     
     application_id = fields.Str(required=False)
     
     form_slug = fields.Str(required=False)
     
-    response = fields.List(fields.Dict(required=False), required=False)
-    
-    created_by = fields.Str(required=False)
-    
     created_on = fields.Nested(CreatedOn, required=False)
     
-    _id = fields.Str(required=False)
+    response = fields.List(fields.Nested(FormFieldResponseValues, required=False), required=False)
     
-    created_at = fields.Str(required=False)
+
+
+class FormFieldResponseValues(BaseSchema):
+    # Lead swagger.json
+
     
-    updated_at = fields.Str(required=False)
-    
-    __v = fields.Float(required=False)
+    key = fields.Str(required=False)
     
 
 
@@ -220,8 +162,6 @@ class CreatedOn(BaseSchema):
 
     
     user_agent = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
     
 
 
@@ -257,7 +197,7 @@ class AddTicketPayload(BaseSchema):
     
     status = fields.Str(required=False)
     
-    priority = fields.Str(required=False)
+    priority = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
     
     category = fields.Str(required=False)
     
@@ -273,7 +213,7 @@ class Priority(BaseSchema):
     # Lead swagger.json
 
     
-    key = fields.Str(required=False)
+    key = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
     
     display = fields.Str(required=False)
     
@@ -333,6 +273,8 @@ class CustomForm(BaseSchema):
     
     description = fields.Str(required=False)
     
+    priority = fields.Nested(Priority, required=False)
+    
     login_required = fields.Boolean(required=False)
     
     should_notify = fields.Boolean(required=False)
@@ -347,17 +289,7 @@ class CustomForm(BaseSchema):
     
     poll_for_assignment = fields.Nested(PollForAssignment, required=False)
     
-    available_assignees = fields.List(fields.Str(required=False), required=False)
-    
     _id = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-    __v = fields.Float(required=False)
-    
-    created_by = fields.Str(required=False)
     
 
 
@@ -401,15 +333,13 @@ class TicketHistory(BaseSchema):
     
     created_on = fields.Nested(CreatedOn, required=False)
     
-    created_by = fields.Str(required=False)
+    created_by = fields.Dict(required=False)
     
     _id = fields.Str(required=False)
     
     updated_at = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
-    
-    __v = fields.Float(required=False)
     
 
 
@@ -452,66 +382,6 @@ class Ticket(BaseSchema):
     updated_at = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
-    
-    video_room_id = fields.Str(required=False)
-    
-    subscribers = fields.List(fields.Str(required=False), required=False)
-    
-    additional_info = fields.List(fields.Dict(required=False), required=False)
-    
-    __v = fields.Float(required=False)
-    
-    attachments = fields.List(fields.Nested(TicketAsset, required=False), required=False)
-    
-
-
-class NotFoundError(BaseSchema):
-    # Lead swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
-class Error4XX(BaseSchema):
-    # Lead swagger.json
-
-    
-    message = fields.Dict(required=False)
-    
-    stack = fields.Str(required=False)
-    
-    sentry = fields.Str(required=False)
-    
-
-
-class PhoneNumber(BaseSchema):
-    # Lead swagger.json
-
-    
-    phone = fields.Str(required=False)
-    
-    country_code = fields.Int(required=False)
-    
-    active = fields.Boolean(required=False)
-    
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
-    
-
-
-class Email(BaseSchema):
-    # Lead swagger.json
-
-    
-    email = fields.Str(required=False)
-    
-    active = fields.Boolean(required=False)
-    
-    primary = fields.Boolean(required=False)
-    
-    verified = fields.Boolean(required=False)
     
 
 

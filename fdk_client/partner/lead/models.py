@@ -34,10 +34,6 @@ class GeneralConfigResponse(BaseSchema):
     pass
 
 
-class SupportSchema(BaseSchema):
-    pass
-
-
 class SupportCommunicationSchema(BaseSchema):
     pass
 
@@ -102,14 +98,6 @@ class Ticket(BaseSchema):
     pass
 
 
-class Error4XX(BaseSchema):
-    pass
-
-
-class NotFoundError(BaseSchema):
-    pass
-
-
 
 
 
@@ -143,8 +131,6 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
-    total = fields.Int(required=False)
-    
 
 
 class TicketHistoryList(BaseSchema):
@@ -171,7 +157,7 @@ class EditTicketPayload(BaseSchema):
     
     status = fields.Str(required=False)
     
-    priority = fields.Str(required=False)
+    priority = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
     
     assigned_to = fields.Nested(AgentChangePayload, required=False)
     
@@ -191,43 +177,13 @@ class GeneralConfigResponse(BaseSchema):
     # Lead swagger.json
 
     
-    _id = fields.Str(required=False)
-    
     support_communication = fields.List(fields.Nested(SupportCommunicationSchema, required=False), required=False)
-    
-    show_communication_info = fields.Boolean(required=False)
-    
-    show_support_dris = fields.Boolean(required=False)
     
     type = fields.Str(required=False)
     
     integration = fields.Nested(GeneralConfigIntegrationSchema, required=False)
     
-    allow_ticket_creation = fields.Boolean(required=False)
-    
-    show_listing = fields.Boolean(required=False)
-    
     available_integration = fields.List(fields.Str(required=False), required=False)
-    
-    enable_dris = fields.Boolean(required=False)
-    
-    support_email = fields.Nested(SupportSchema, required=False)
-    
-    support_phone = fields.Nested(SupportSchema, required=False)
-    
-    support_faq = fields.Nested(SupportSchema, required=False)
-    
-
-
-class SupportSchema(BaseSchema):
-    # Lead swagger.json
-
-    
-    value = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    enabled = fields.Boolean(required=False)
     
 
 
@@ -238,6 +194,8 @@ class SupportCommunicationSchema(BaseSchema):
     type = fields.Str(required=False)
     
     title = fields.Str(required=False)
+    
+    value = fields.Dict(required=False)
     
     description = fields.Str(required=False)
     
@@ -265,8 +223,6 @@ class Filter(BaseSchema):
     
     assignees = fields.List(fields.Dict(required=False), required=False)
     
-    all_categories = fields.Dict(required=False)
-    
 
 
 class TicketHistoryPayload(BaseSchema):
@@ -275,7 +231,7 @@ class TicketHistoryPayload(BaseSchema):
     
     value = fields.Dict(required=False)
     
-    type = fields.Str(required=False)
+    type = fields.Str(required=False, validate=OneOf([val.value for val in HistoryTypeEnum.__members__.values()]))
     
 
 
@@ -285,7 +241,7 @@ class TicketContext(BaseSchema):
     
     application_id = fields.Str(required=False)
     
-    organization_id = fields.Str(required=False)
+    partner_id = fields.Str(required=False)
     
 
 
@@ -294,8 +250,6 @@ class CreatedOn(BaseSchema):
 
     
     user_agent = fields.Str(required=False)
-    
-    platform = fields.Str(required=False)
     
 
 
@@ -331,7 +285,7 @@ class AddTicketPayload(BaseSchema):
     
     status = fields.Str(required=False)
     
-    priority = fields.Str(required=False)
+    priority = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
     
     category = fields.Str(required=False)
     
@@ -345,7 +299,7 @@ class Priority(BaseSchema):
     # Lead swagger.json
 
     
-    key = fields.Str(required=False)
+    key = fields.Str(required=False, validate=OneOf([val.value for val in PriorityEnum.__members__.values()]))
     
     display = fields.Str(required=False)
     
@@ -393,7 +347,7 @@ class TicketCategory(BaseSchema):
     
     key = fields.Str(required=False)
     
-    sub_categories = fields.List(fields.Nested(lambda: TicketCategory(exclude=('sub_categories')), required=False), required=False)
+    sub_categories = fields.Nested(lambda: TicketCategory(exclude=('sub_categories')), required=False)
     
     group_id = fields.Float(required=False)
     
@@ -421,8 +375,6 @@ class TicketHistory(BaseSchema):
     
     created_at = fields.Str(required=False)
     
-    __v = fields.Float(required=False)
-    
 
 
 class Ticket(BaseSchema):
@@ -441,7 +393,7 @@ class Ticket(BaseSchema):
     
     sub_category = fields.Str(required=False)
     
-    source = fields.Str(required=False)
+    source = fields.Str(required=False, validate=OneOf([val.value for val in TicketSourceEnum.__members__.values()]))
     
     status = fields.Nested(Status, required=False)
     
@@ -455,8 +407,6 @@ class Ticket(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
-    subscribers = fields.List(fields.Str(required=False), required=False)
-    
     _custom_json = fields.Dict(required=False)
     
     is_feedback_pending = fields.Boolean(required=False)
@@ -468,32 +418,6 @@ class Ticket(BaseSchema):
     updated_at = fields.Str(required=False)
     
     created_at = fields.Str(required=False)
-    
-    additional_info = fields.List(fields.Dict(required=False), required=False)
-    
-    ticket_link = fields.Str(required=False)
-    
-    __v = fields.Float(required=False)
-    
-
-
-class Error4XX(BaseSchema):
-    # Lead swagger.json
-
-    
-    message = fields.Dict(required=False)
-    
-    stack = fields.Str(required=False)
-    
-    sentry = fields.Str(required=False)
-    
-
-
-class NotFoundError(BaseSchema):
-    # Lead swagger.json
-
-    
-    message = fields.Str(required=False)
     
 
 

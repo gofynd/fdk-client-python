@@ -13,14 +13,7 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
         
-    
-    
-        
-    
-    
         
         
         
@@ -30,6 +23,8 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
         
     
     
@@ -49,6 +44,77 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
     
     
         
@@ -66,13 +132,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-    
-    
-        
-        
-        
-        
     
     
         
@@ -87,54 +146,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-    
-    
-        
         
         
     
@@ -146,14 +157,59 @@ from ..PlatformModel import BaseSchema
 class ServiceabilityValidator:
     
     
-    class updateCompanySelfShip(BaseSchema):
+    class getZones(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        is_active = fields.Boolean(required=False)
+        
+        application_ids = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
+        
+        country_iso_code = fields.Str(required=False)
+        
+        state = fields.Str(required=False)
+        
+        city = fields.Str(required=False)
+        
+        pincode = fields.Str(required=False)
+        
+        sector = fields.Str(required=False)
+         
+        
+    
+    class createZone(BaseSchema):
         
         
         company_id = fields.Int(required=False)
          
         
     
-    class getCompanySelfShip(BaseSchema):
+    class updateZoneById(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        zone_id = fields.Str(required=False)
+         
+        
+    
+    class getZoneById(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        zone_id = fields.Str(required=False)
+         
+        
+    
+    class getAllStores(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -181,14 +237,6 @@ class ServiceabilityValidator:
         payment_mode = fields.Str(required=False)
         
         transport_type = fields.Str(required=False)
-        
-        account_ids = fields.List(fields.Str(required=False), required=False)
-        
-        self_ship = fields.Boolean(required=False)
-        
-        own_account = fields.Boolean(required=False)
-        
-        q = fields.Str(required=False)
          
         
     
@@ -224,12 +272,116 @@ class ServiceabilityValidator:
          
         
     
-    class createPackageMaterial(BaseSchema):
+    class bulkTat(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
+        extension_id = fields.Str(required=False)
+        
+        scheme_id = fields.Str(required=False)
+         
+        
+    
+    class getBulkTat(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        extension_id = fields.Str(required=False)
+        
+        scheme_id = fields.Str(required=False)
+        
         page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        batch_id = fields.Str(required=False)
+        
+        action = fields.Str(required=False)
+        
+        status = fields.Str(required=False)
+        
+        country = fields.Str(required=False)
+        
+        region = fields.Str(required=False)
+        
+        start_date = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
+         
+        
+    
+    class bulkServiceability(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        extension_id = fields.Str(required=False)
+        
+        scheme_id = fields.Str(required=False)
+         
+        
+    
+    class getBulkServiceability(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        extension_id = fields.Str(required=False)
+        
+        scheme_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        batch_id = fields.Str(required=False)
+        
+        action = fields.Str(required=False)
+        
+        status = fields.Str(required=False)
+        
+        country = fields.Str(required=False)
+        
+        region = fields.Str(required=False)
+        
+        start_date = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
+         
+        
+    
+    class getServiceability(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        extension_id = fields.Str(required=False)
+        
+        scheme_id = fields.Str(required=False)
+        
+        region_id = fields.Str(required=False)
+         
+        
+    
+    class updateServiceability(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        extension_id = fields.Str(required=False)
+        
+        scheme_id = fields.Str(required=False)
+        
+        region_id = fields.Str(required=False)
+         
+        
+    
+    class createPackageMaterial(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     
@@ -257,22 +409,7 @@ class ServiceabilityValidator:
          
         
     
-    class getPackageMaterialRuleDetails(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        rule_id = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        is_active = fields.Str(required=False)
-         
-        
-    
-    class getListPackageMaterialRuleDetails(BaseSchema):
+    class getPackageMaterialRules(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -282,19 +419,19 @@ class ServiceabilityValidator:
         page_size = fields.Int(required=False)
         
         is_active = fields.Str(required=False)
-         
-        
-    
-    class getPackageMaterialRule(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        rule_id = fields.Str(required=False)
          
         
     
     class updatePackageMaterialRule(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        rule_id = fields.Str(required=False)
+         
+        
+    
+    class getPackageMaterialRule(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -318,109 +455,6 @@ class ServiceabilityValidator:
         company_id = fields.Int(required=False)
         
         package_material_id = fields.Str(required=False)
-         
-        
-    
-    class getInstalledCourierPartnerExtensions(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        is_installed = fields.Str(required=False)
-         
-        
-    
-    class getLocalitiesByPrefix(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        q = fields.Str(required=False)
-         
-        
-    
-    class getLocality(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        locality_type = fields.Str(required=False)
-        
-        locality_value = fields.Str(required=False)
-        
-        country = fields.Str(required=False)
-        
-        state = fields.Str(required=False)
-        
-        city = fields.Str(required=False)
-         
-        
-    
-    class getLocalities(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        locality_type = fields.Str(required=False)
-        
-        country = fields.Str(required=False)
-        
-        state = fields.Str(required=False)
-        
-        city = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        q = fields.Str(required=False)
-        
-        name = fields.Str(required=False)
-         
-        
-    
-    class getCountry(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        country_iso_code = fields.Str(required=False)
-         
-        
-    
-    class getCountries(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        onboard = fields.Boolean(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        q = fields.Str(required=False)
-        
-        hierarchy = fields.Str(required=False)
-         
-        
-    
-    class validateAddress(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        country_iso_code = fields.Str(required=False)
-        
-        template_name = fields.Str(required=False)
          
         
     

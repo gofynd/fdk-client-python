@@ -16,7 +16,7 @@ class Upload(BaseSchema):
     pass
 
 
-class FileUpload(BaseSchema):
+class StartResponse(BaseSchema):
     pass
 
 
@@ -24,7 +24,7 @@ class Params(BaseSchema):
     pass
 
 
-class FileUploadStart(BaseSchema):
+class StartRequest(BaseSchema):
     pass
 
 
@@ -32,7 +32,7 @@ class CreatedBy(BaseSchema):
     pass
 
 
-class FileUploadComplete(BaseSchema):
+class CompleteResponse(BaseSchema):
     pass
 
 
@@ -40,7 +40,7 @@ class Urls(BaseSchema):
     pass
 
 
-class SignUrlResult(BaseSchema):
+class SignUrlResponse(BaseSchema):
     pass
 
 
@@ -48,7 +48,7 @@ class EncryptionMapping(BaseSchema):
     pass
 
 
-class SignUrl(BaseSchema):
+class SignUrlRequest(BaseSchema):
     pass
 
 
@@ -77,7 +77,7 @@ class Upload(BaseSchema):
     
 
 
-class FileUpload(BaseSchema):
+class StartResponse(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -97,6 +97,8 @@ class FileUpload(BaseSchema):
     
     upload = fields.Nested(Upload, required=False)
     
+    cdn = fields.Nested(CDN, required=False)
+    
     tags = fields.List(fields.Str(required=False), required=False)
     
 
@@ -109,7 +111,7 @@ class Params(BaseSchema):
     
 
 
-class FileUploadStart(BaseSchema):
+class StartRequest(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -135,7 +137,7 @@ class CreatedBy(BaseSchema):
     
 
 
-class FileUploadComplete(BaseSchema):
+class CompleteResponse(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -181,7 +183,7 @@ class Urls(BaseSchema):
     
 
 
-class SignUrlResult(BaseSchema):
+class SignUrlResponse(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -199,7 +201,7 @@ class EncryptionMapping(BaseSchema):
     
 
 
-class SignUrl(BaseSchema):
+class SignUrlRequest(BaseSchema):
     # FileStorage swagger.json
 
     

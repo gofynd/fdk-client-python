@@ -8,43 +8,7 @@ from ..PlatformModel import BaseSchema
 
 
 
-class UpdatePdfTypeRequest(BaseSchema):
-    pass
-
-
-class PdfTypeIdResponse(BaseSchema):
-    pass
-
-
-class PdfConfigurationData(BaseSchema):
-    pass
-
-
-class PdfConfigurationResponse(BaseSchema):
-    pass
-
-
-class UpdateTemplate(BaseSchema):
-    pass
-
-
-class PdfDefaultTemplateResponse(BaseSchema):
-    pass
-
-
-class PdfTemplateCreateSuccess(BaseSchema):
-    pass
-
-
-class PdfTemplateCreateSuccessData(BaseSchema):
-    pass
-
-
-class CreateTemplate(BaseSchema):
-    pass
-
-
-class PdfDefaultTemplateSuccess(BaseSchema):
+class ProxyResponse(BaseSchema):
     pass
 
 
@@ -64,6 +28,10 @@ class StartResponse(BaseSchema):
     pass
 
 
+class Params(BaseSchema):
+    pass
+
+
 class StartRequest(BaseSchema):
     pass
 
@@ -73,10 +41,6 @@ class CreatedBy(BaseSchema):
 
 
 class CompleteResponse(BaseSchema):
-    pass
-
-
-class ProxyResponse(BaseSchema):
     pass
 
 
@@ -244,14 +208,6 @@ class DummyTemplateData(BaseSchema):
     pass
 
 
-class savePdfPayload(BaseSchema):
-    pass
-
-
-class DummyPayloadById(BaseSchema):
-    pass
-
-
 class DummyTemplateDataItems(BaseSchema):
     pass
 
@@ -273,6 +229,10 @@ class PdfConfigSaveSuccessData(BaseSchema):
 
 
 class PdfConfigSaveSuccess(BaseSchema):
+    pass
+
+
+class PdfDefaultTemplateSuccess(BaseSchema):
     pass
 
 
@@ -323,159 +283,13 @@ class ExtensionSlug(BaseSchema):
 
 
 
-class UpdatePdfTypeRequest(BaseSchema):
+class ProxyResponse(BaseSchema):
     # FileStorage swagger.json
 
     
-    pdf_type_id = fields.Int(required=False)
+    data = fields.Dict(required=False)
     
-    name = fields.Str(required=False)
-    
-    format = fields.List(fields.Str(required=False), required=False)
-    
-    visibility = fields.Boolean(required=False)
-    
-    schema = fields.Dict(required=False)
-    
-    store_os = fields.Boolean(required=False)
-    
-    country_code = fields.Str(required=False)
-    
-
-
-class PdfTypeIdResponse(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    store_os = fields.Boolean(required=False)
-    
-    country_code = fields.Str(required=False)
-    
-    pdf_type_id = fields.Int(required=False)
-    
-    __v = fields.Int(required=False)
-    
-    format = fields.List(fields.Str(required=False), required=False)
-    
-    name = fields.Str(required=False)
-    
-    visibility = fields.Boolean(required=False)
-    
-
-
-class PdfConfigurationData(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    pdf_type_id = fields.Int(required=False)
-    
-    format = fields.Str(required=False)
-    
-    template = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
-    
-
-
-class PdfConfigurationResponse(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    data = fields.Nested(PdfConfigurationData, required=False)
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class UpdateTemplate(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    pdf_type_id = fields.Int(required=False)
-    
-    format = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
-    
-    template = fields.Str(required=False)
-    
-    store_os = fields.Boolean(required=False)
-    
-
-
-class PdfDefaultTemplateResponse(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
-    
-    format = fields.Str(required=False)
-    
-    pdf_type_id = fields.Int(required=False)
-    
-    __v = fields.Int(required=False)
-    
-    template = fields.Str(required=False)
-    
-
-
-class PdfTemplateCreateSuccess(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    code = fields.Int(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-    data = fields.Nested(PdfTemplateCreateSuccessData, required=False)
-    
-
-
-class PdfTemplateCreateSuccessData(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    pdf_type_id = fields.Int(required=False)
-    
-    format = fields.Str(required=False)
-    
-    template = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
-    
-
-
-class CreateTemplate(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    pdf_type_id = fields.Int(required=False)
-    
-    format = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
-    
-    template = fields.Str(required=False)
-    
-
-
-class PdfDefaultTemplateSuccess(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    data = fields.List(fields.Nested(Document, required=False), required=False)
-    
-    success = fields.Boolean(required=False)
+    support = fields.Dict(required=False)
     
 
 
@@ -529,7 +343,17 @@ class StartResponse(BaseSchema):
     
     upload = fields.Nested(Upload, required=False)
     
+    cdn = fields.Nested(CDN, required=False)
+    
     tags = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class Params(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    subpath = fields.Str(required=False)
     
 
 
@@ -592,16 +416,6 @@ class CompleteResponse(BaseSchema):
     modified_on = fields.Str(required=False)
     
     created_by = fields.Nested(CreatedBy, required=False)
-    
-
-
-class ProxyResponse(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    data = fields.Dict(required=False)
-    
-    support = fields.Dict(required=False)
     
 
 
@@ -682,8 +496,6 @@ class InvoiceTypesDataResponse(BaseSchema):
     __v = fields.Int(required=False)
     
     visibility = fields.Boolean(required=False)
-    
-    store_os = fields.Boolean(required=False)
     
     country_code = fields.Str(required=False)
     
@@ -1313,6 +1125,10 @@ class DummyTemplateDataPayload(BaseSchema):
     
     is_self_pickup = fields.Boolean(required=False)
     
+    shipment_meta = fields.Dict(required=False)
+    
+    order_meta = fields.Dict(required=False)
+    
     platform_name = fields.Str(required=False)
     
     amount_to_be_collected = fields.Float(required=False)
@@ -1355,34 +1171,6 @@ class DummyTemplateData(BaseSchema):
     
 
 
-class savePdfPayload(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    pdf_type_id = fields.Float(required=False)
-    
-    payload = fields.Nested(DummyTemplateDataPayload, required=False)
-    
-    country_code = fields.Str(required=False)
-    
-
-
-class DummyPayloadById(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    pdf_type_id = fields.Float(required=False)
-    
-    payload = fields.Nested(DummyTemplateDataPayload, required=False)
-    
-    country_code = fields.Str(required=False)
-    
-    __v = fields.Int(required=False)
-    
-
-
 class DummyTemplateDataItems(BaseSchema):
     # FileStorage swagger.json
 
@@ -1402,10 +1190,6 @@ class PdfConfig(BaseSchema):
     template = fields.Str(required=False)
     
     pdf_type_id = fields.Int(required=False)
-    
-    country_code = fields.Str(required=False)
-    
-    default_template = fields.Boolean(required=False)
     
 
 
@@ -1428,8 +1212,6 @@ class PdfConfigSuccessData(BaseSchema):
     __v = fields.Int(required=False)
     
     country_code = fields.Str(required=False)
-    
-    default_template = fields.Boolean(required=False)
     
 
 
@@ -1468,6 +1250,16 @@ class PdfConfigSaveSuccess(BaseSchema):
 
     
     data = fields.Nested(PdfConfigSaveSuccessData, required=False)
+    
+    success = fields.Boolean(required=False)
+    
+
+
+class PdfDefaultTemplateSuccess(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    data = fields.List(fields.Nested(Document, required=False), required=False)
     
     success = fields.Boolean(required=False)
     

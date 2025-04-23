@@ -13,7 +13,7 @@ class Common:
 
     
     async def searchApplication(self, authorization=None, query=None, request_headers:Dict={}):
-        """Provide application name or domain url
+        """This API retrieves details for a specific sales channel based on the provided search criteria. The search can be performed using the name of the sales channel
         :param authorization :  : type string
         :param query : Provide application name : type string
         """
