@@ -13,10 +13,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
         
         
     
@@ -51,15 +47,6 @@ from ..PlatformModel import BaseSchema
 
 class OrderValidator:
     
-    
-    class getRules(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
     
     class getShipmentBagReasons(BaseSchema):
         

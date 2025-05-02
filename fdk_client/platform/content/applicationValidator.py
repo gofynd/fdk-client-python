@@ -226,6 +226,10 @@ from .models import GenerationEntityType
     
         
         
+    
+    
+        
+        
         
     
     
@@ -301,25 +305,17 @@ from .models import GenerationEntityType
     
         
         
-    
-    
         
-        
-    
-    
         
         
     
     
-        
         
         
     
     
         
         
-    
-    
         
         
     
@@ -340,13 +336,10 @@ from .models import GenerationEntityType
     
         
         
-        
-        
     
     
         
         
-        
     
     
         
@@ -362,29 +355,16 @@ from .models import GenerationEntityType
         
     
     
-        
         
         
         
-        
-        
-        
-        
-        
     
     
-        
-        
-        
         
         
         
-        
-        
-        
     
     
-        
         
         
     
@@ -393,39 +373,28 @@ from .models import GenerationEntityType
         
         
         
-        
     
     
-        
         
         
         
-        
     
     
-        
         
         
         
-        
     
     
-        
         
         
-        
     
     
-        
         
         
-        
     
     
         
         
-    
-    
         
         
         
@@ -433,7 +402,6 @@ from .models import GenerationEntityType
         
     
     
-        
         
         
     
@@ -451,8 +419,6 @@ from .models import GenerationEntityType
         
         
         
-        
-        
     
     
         
@@ -472,19 +438,12 @@ from .models import GenerationEntityType
         
     
     
-        
-        
         
         
     
     
         
         
-        
-        
-        
-    
-    
         
         
         
@@ -500,14 +459,7 @@ from .models import GenerationEntityType
         
     
     
-        
-        
-        
         
-        
-        
-    
-    
         
         
     
@@ -515,21 +467,15 @@ from .models import GenerationEntityType
         
         
         
-    
-    
         
         
-        
     
     
         
         
     
     
-        
         
-    
-    
         
         
     
@@ -552,9 +498,6 @@ from .models import GenerationEntityType
     
     
         
-        
-    
-    
         
         
     
@@ -1035,6 +978,15 @@ class ContentValidator:
          
         
     
+    class createPagePreview(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class updatePagePreview(BaseSchema):
         
         
@@ -1200,6 +1152,65 @@ class ContentValidator:
          
         
     
+    class getSlideshows(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        device_platform = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class createSlideshow(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getSlideshowBySlug(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
+        
+        device_platform = fields.Str(required=False)
+         
+        
+    
+    class updateSlideshow(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class deleteSlideshow(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
     class getSupportInformation(BaseSchema):
         
         
@@ -1351,38 +1362,11 @@ class ContentValidator:
         
         page_size = fields.Str(required=False)
         
-        resources = fields.Str(required=False)
-        
-        types = fields.Str(required=False)
-        
-        search = fields.Str(required=False)
-        
-        slugs = fields.Str(required=False)
-        
-        namespaces = fields.Str(required=False)
-         
-        
-    
-    class getAppCustomFieldDefinitionByResource(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        page_no = fields.Str(required=False)
-        
-        page_size = fields.Str(required=False)
-        
         resource = fields.Str(required=False)
         
-        types = fields.Str(required=False)
+        type = fields.Str(required=False)
         
         search = fields.Str(required=False)
-        
-        slugs = fields.Str(required=False)
-        
-        namespaces = fields.Str(required=False)
          
         
     
@@ -1392,57 +1376,43 @@ class ContentValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-        
-        resource = fields.Str(required=False)
          
         
     
-    class getAppCustomFieldDefinitionBySlug(BaseSchema):
+    class getAppCustomFieldDefinition(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        slug = fields.Str(required=False)
-        
-        resource = fields.Str(required=False)
-        
-        namespace = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
-    class updateAppCustomFieldDefinitionBySlug(BaseSchema):
+    class updateAppCustomFieldDefinition(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        slug = fields.Str(required=False)
-        
-        resource = fields.Str(required=False)
-        
-        namespace = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
-    class deleteAppCustomFieldDefinitionBySlug(BaseSchema):
+    class deleteAppCustomFieldDefinition(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        slug = fields.Str(required=False)
-        
-        resource = fields.Str(required=False)
-        
-        namespace = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
-    class getAppCustomFieldsByResourceSlug(BaseSchema):
+    class getAppCustomFields(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -1450,12 +1420,10 @@ class ContentValidator:
         application_id = fields.Str(required=False)
         
         resource = fields.Str(required=False)
-        
-        resource_slug = fields.Str(required=False)
          
         
     
-    class updateAppCustomFieldByResourceSlug(BaseSchema):
+    class getAppCustomFieldsByResourceId(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -1464,7 +1432,20 @@ class ContentValidator:
         
         resource = fields.Str(required=False)
         
-        resource_slug = fields.Str(required=False)
+        resource_id = fields.Str(required=False)
+         
+        
+    
+    class createAppCustomFieldByResourceId(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        resource = fields.Str(required=False)
+        
+        resource_id = fields.Str(required=False)
          
         
     
@@ -1492,101 +1473,93 @@ class ContentValidator:
          
         
     
-    class getAppCustomObjectDefinitionBySlug(BaseSchema):
+    class getAppCustomObjectDefinition(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        slug = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
-    class updateAppCustomObjectDefinitionBySlug(BaseSchema):
+    class updateAppCustomObjectDefinition(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        slug = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
-    class deleteAppCustomObjectDefinitionBySlug(BaseSchema):
+    class deleteAppCustomObjectDefinition(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        slug = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
-    class getAppCustomObjectsBySlug(BaseSchema):
+    class getAppCustomObjects(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
+        
+        definition_id = fields.Str(required=False)
         
         page_no = fields.Str(required=False)
         
         page_size = fields.Str(required=False)
-        
-        definition_slug = fields.Str(required=False)
          
         
     
-    class createAppCustomObjectBySlug(BaseSchema):
+    class createAppCustomObject(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getAppCustomObject(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        definition_slug = fields.Str(required=False)
+        metaobject_id = fields.Str(required=False)
          
         
     
-    class getAppCustomObjectBySlug(BaseSchema):
+    class deleteAppCustomObject(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        definition_slug = fields.Str(required=False)
-        
-        slug = fields.Str(required=False)
+        metaobject_id = fields.Str(required=False)
          
         
     
-    class deleteAppCustomObjectBySlug(BaseSchema):
+    class updateAppCustomObject(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        definition_slug = fields.Str(required=False)
-        
-        slug = fields.Str(required=False)
-         
-        
-    
-    class updateAppCustomObjectBySlug(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        definition_slug = fields.Str(required=False)
-        
-        slug = fields.Str(required=False)
+        metaobject_id = fields.Str(required=False)
          
         
     
@@ -1605,188 +1578,36 @@ class ContentValidator:
          
         
     
-    class importAppCustomObjectEntriesBySlug(BaseSchema):
+    class importAppCustomObjectEntries(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        slug = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
-    class exportAppCustomObjectEntriesBySlug(BaseSchema):
+    class exportAppCustomObjectEntries(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        slug = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     
-    class sampleAppCustomObjectBulkEntryBySlug(BaseSchema):
+    class sampleAppCustomObjectBulkEntry(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         
-        slug = fields.Str(required=False)
-         
-        
-    
-    class getTranslateUILabels(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        template_theme_id = fields.Str(required=False)
-        
-        theme_id = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-        
-        type = fields.Str(required=False)
-         
-        
-    
-    class createTranslateUILabels(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getTranslateUILabelsById(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class updateTranslateUILabels(BaseSchema):
-        
-        
-        id = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getApplicationLanguages(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class addApplicationLanguage(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class bulkUnPublishApplicationLanguage(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateApplicationLanguageStatus(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-         
-        
-    
-    class deleteApplicationLanguage(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-         
-        
-    
-    class getApplicationResourceTranslations(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-        
-        type = fields.Str(required=False)
-        
-        resource_id = fields.Str(required=False)
-         
-        
-    
-    class createApplicationResourceTranslation(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class upsertApplicationResourceTranslationInBulk(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateApplicationResourceTranslation(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class deleteApplicationResourceTranslation(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
+        definition_id = fields.Str(required=False)
          
         
     

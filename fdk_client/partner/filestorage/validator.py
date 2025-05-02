@@ -23,28 +23,11 @@ from ..PartnerModel import BaseSchema
         
         
         
-    
-    
         
-        
-    
-    
-        
-    
-    
         
 
 class FileStorageValidator:
     
-    
-    class completeUpload(BaseSchema):
-        
-        
-        namespace = fields.Str(required=False)
-        
-        organization_id = fields.Str(required=False)
-         
-        
     
     class startUpload(BaseSchema):
         
@@ -55,39 +38,29 @@ class FileStorageValidator:
          
         
     
-    class browseFiles(BaseSchema):
+    class completeUpload(BaseSchema):
+        
+        
+        namespace = fields.Str(required=False)
+        
+        organization_id = fields.Str(required=False)
+         
+        
+    
+    class browse(BaseSchema):
         
         
         namespace = fields.Str(required=False)
         
         organization_id = fields.Str(required=False)
         
+        application_id = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+        
         page = fields.Int(required=False)
         
         limit = fields.Int(required=False)
-         
-        
-    
-    class fetchProxy(BaseSchema):
-        
-        
-        organization_id = fields.Str(required=False)
-        
-        url = fields.Str(required=False)
-         
-        
-    
-    class saveProxyDetails(BaseSchema):
-        
-        
-        organization_id = fields.Str(required=False)
-         
-        
-    
-    class signUrls(BaseSchema):
-        
-        
-        organization_id = fields.Str(required=False)
          
         
     

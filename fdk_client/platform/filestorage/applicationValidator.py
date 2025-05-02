@@ -24,6 +24,11 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
         
         
         
@@ -33,6 +38,44 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
         
         
 
@@ -54,6 +97,17 @@ class FileStorageValidator:
         
         
         namespace = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class appCopyFiles(BaseSchema):
+        
+        
+        sync = fields.Boolean(required=False)
         
         company_id = fields.Int(required=False)
         
@@ -92,6 +146,89 @@ class FileStorageValidator:
         limit = fields.Int(required=False)
         
         search = fields.Str(required=False)
+         
+        
+    
+    class getPdfTypes(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        country_code = fields.Str(required=False)
+         
+        
+    
+    class getDefaultPdfData(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        pdf_type_id = fields.Int(required=False)
+        
+        country_code = fields.Str(required=False)
+         
+        
+    
+    class updateHtmlTemplate(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class getDefaultHtmlTemplate(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        pdf_type_id = fields.Int(required=False)
+        
+        format = fields.Str(required=False)
+        
+        country_code = fields.Str(required=False)
+         
+        
+    
+    class saveHtmlTemplate(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getDefaultPdfTemplate(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        pdf_type_id = fields.Int(required=False)
+        
+        format = fields.Str(required=False)
+        
+        country_code = fields.Str(required=False)
+         
+        
+    
+    class generatePaymentReceipt(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     
