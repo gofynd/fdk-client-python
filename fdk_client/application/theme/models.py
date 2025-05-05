@@ -22,6 +22,10 @@ class AvailablePageSectionMetaAttributes(BaseSchema):
     pass
 
 
+class CanvasItem(BaseSchema):
+    pass
+
+
 class SEOMetaItem(BaseSchema):
     pass
 
@@ -47,6 +51,14 @@ class AvailablePageSeo(BaseSchema):
 
 
 class AvailablePageSchemaSections(BaseSchema):
+    pass
+
+
+class SectionAssets(BaseSchema):
+    pass
+
+
+class SectionSource(BaseSchema):
     pass
 
 
@@ -99,10 +111,6 @@ class CustomConfig(BaseSchema):
 
 
 class CustomProps(BaseSchema):
-    pass
-
-
-class GlobalConfig(BaseSchema):
     pass
 
 
@@ -207,6 +215,10 @@ class SectionItem(BaseSchema):
 
 
 class GlobalSchema(BaseSchema):
+    pass
+
+
+class Prop(BaseSchema):
     pass
 
 
@@ -333,6 +345,18 @@ class AvailablePageSectionMetaAttributes(BaseSchema):
     
     attributes = fields.Dict(required=False)
     
+    canvas = fields.Nested(CanvasItem, required=False)
+    
+
+
+class CanvasItem(BaseSchema):
+    # Theme swagger.json
+
+    
+    value = fields.Str(required=False)
+    
+    label = fields.Str(required=False)
+    
 
 
 class SEOMetaItem(BaseSchema):
@@ -415,15 +439,43 @@ class AvailablePageSchemaSections(BaseSchema):
     
     label = fields.Str(required=False)
     
-    source = fields.Str(required=False)
+    canvas = fields.Str(required=False)
     
     props = fields.Dict(required=False)
+    
+    custom_css = fields.Str(required=False)
     
     blocks = fields.List(fields.Dict(required=False), required=False)
     
     preset = fields.Dict(required=False)
     
     predicate = fields.Nested(AvailablePagePredicate, required=False)
+    
+    __source = fields.Nested(SectionSource, required=False)
+    
+    assets = fields.Nested(SectionAssets, required=False)
+    
+
+
+class SectionAssets(BaseSchema):
+    # Theme swagger.json
+
+    
+    js = fields.Str(required=False)
+    
+    css = fields.Str(required=False)
+    
+
+
+class SectionSource(BaseSchema):
+    # Theme swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    bundle_name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
     
 
 
@@ -668,16 +720,6 @@ class CustomProps(BaseSchema):
     is_menu_below_logo = fields.Boolean(required=False)
     
     menu_position = fields.Str(required=False)
-    
-
-
-class GlobalConfig(BaseSchema):
-    # Theme swagger.json
-
-    
-    statics = fields.Nested(StaticConfig, required=False)
-    
-    custom = fields.Nested(CustomConfig, required=False)
     
 
 
@@ -989,7 +1031,23 @@ class GlobalSchema(BaseSchema):
     # Theme swagger.json
 
     
-    props = fields.List(fields.Dict(required=False), required=False)
+    props = fields.List(fields.Nested(Prop, required=False), required=False)
+    
+
+
+class Prop(BaseSchema):
+    # Theme swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    category = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
+    
+    label = fields.Str(required=False)
+    
+    info = fields.Str(required=False)
     
 
 

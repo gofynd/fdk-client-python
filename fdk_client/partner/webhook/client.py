@@ -12,6 +12,56 @@ class Webhook:
         self._conf = config
 
     
+    async def responseTimeSummary(self, extension_id=None, start_date=None, end_date=None, request_headers:Dict={}):
+        """Response time summary
+        :param extension_id : extension_id : type string
+        :param start_date : start_date : type string
+        :param end_date : end_date : type string
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+        if start_date is not None:
+            payload["start_date"] = start_date
+        if end_date is not None:
+            payload["end_date"] = end_date
+
+        # Parameter validation
+        schema = WebhookValidator.responseTimeSummary()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/response_time_ts", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}},{"name":"start_date","in":"query","description":"start_date","required":true,"schema":{"type":"string","format":"date-time"}},{"name":"end_date","in":"query","description":"end_date","required":true,"schema":{"type":"string","format":"date-time"}}],"optional":[],"query":[{"name":"start_date","in":"query","description":"start_date","required":true,"schema":{"type":"string","format":"date-time"}},{"name":"end_date","in":"query","description":"end_date","required":true,"schema":{"type":"string","format":"date-time"}}],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}]}""", serverType="partner", extension_id=extension_id, start_date=start_date, end_date=end_date)
+        query_string = await create_query_string(start_date=start_date, end_date=end_date)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/response_time_ts", extension_id=extension_id, start_date=start_date, end_date=end_date), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ResponseTimeTs
+            schema = ResponseTimeTs()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for responseTimeSummary")
+                print(e)
+
+        return response
+    
     async def fetchDeliverySummary(self, extension_id=None, start_date=None, end_date=None, request_headers:Dict={}):
         """Webhook delivery summary
         :param extension_id : extension_id : type string
@@ -32,7 +82,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/delivery_summary", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}},{"name":"start_date","in":"query","description":"start_date","required":true,"schema":{"type":"string"}},{"name":"end_date","in":"query","description":"end_date","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"start_date","in":"query","description":"start_date","required":true,"schema":{"type":"string"}},{"name":"end_date","in":"query","description":"end_date","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}]}""", serverType="partner", extension_id=extension_id, start_date=start_date, end_date=end_date)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/delivery_summary", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}},{"name":"start_date","in":"query","description":"start_date","required":true,"schema":{"type":"string","format":"date-time"}},{"name":"end_date","in":"query","description":"end_date","required":true,"schema":{"type":"string","format":"date-time"}}],"optional":[],"query":[{"name":"start_date","in":"query","description":"start_date","required":true,"schema":{"type":"string","format":"date-time"}},{"name":"end_date","in":"query","description":"end_date","required":true,"schema":{"type":"string","format":"date-time"}}],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}]}""", serverType="partner", extension_id=extension_id, start_date=start_date, end_date=end_date)
         query_string = await create_query_string(start_date=start_date, end_date=end_date)
         if query_string:
             url_with_params += "?" + query_string
@@ -52,8 +102,8 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/delivery_summary", extension_id=extension_id, start_date=start_date, end_date=end_date), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeliverySummaryResponse
-            schema = DeliverySummaryResponse()
+            from .models import DeliverySummaryResult
+            schema = DeliverySummaryResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -76,8 +126,8 @@ class Webhook:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import DeliveryDetailsRequest
-        schema = DeliveryDetailsRequest()
+        from .models import DeliveryDetailsPayload
+        schema = DeliveryDetailsPayload()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/delivery_details", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}]}""", serverType="partner", extension_id=extension_id)
@@ -100,8 +150,8 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/delivery_details", extension_id=extension_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeliveryDetailsResponse
-            schema = DeliveryDetailsResponse()
+            from .models import DeliveryDetailsResult
+            schema = DeliveryDetailsResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -130,7 +180,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/delivery_ts", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}},{"name":"start_date","in":"query","description":"start_date","required":true,"schema":{"type":"string"}},{"name":"end_date","in":"query","description":"end_date","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"start_date","in":"query","description":"start_date","required":true,"schema":{"type":"string"}},{"name":"end_date","in":"query","description":"end_date","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}]}""", serverType="partner", extension_id=extension_id, start_date=start_date, end_date=end_date)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/delivery_ts", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}},{"name":"start_date","in":"query","description":"start_date","required":true,"schema":{"type":"string","format":"date-time"}},{"name":"end_date","in":"query","description":"end_date","required":true,"schema":{"type":"string","format":"date-time"}}],"optional":[],"query":[{"name":"start_date","in":"query","description":"start_date","required":true,"schema":{"type":"string","format":"date-time"}},{"name":"end_date","in":"query","description":"end_date","required":true,"schema":{"type":"string","format":"date-time"}}],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}]}""", serverType="partner", extension_id=extension_id, start_date=start_date, end_date=end_date)
         query_string = await create_query_string(start_date=start_date, end_date=end_date)
         if query_string:
             url_with_params += "?" + query_string
@@ -150,8 +200,8 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/delivery_ts", extension_id=extension_id, start_date=start_date, end_date=end_date), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DeliveryTsResponse
-            schema = DeliveryTsResponse()
+            from .models import DeliveryTsResult
+            schema = DeliveryTsResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -186,7 +236,7 @@ class Webhook:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/filters", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}},{"name":"start_date","in":"query","description":"start_date","required":true,"schema":{"type":"string"}},{"name":"end_date","in":"query","description":"end_date","required":true,"schema":{"type":"string"}},{"name":"page_no","in":"query","description":"page_no","required":true,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"page_size","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[{"name":"start_date","in":"query","description":"start_date","required":true,"schema":{"type":"string"}},{"name":"end_date","in":"query","description":"end_date","required":true,"schema":{"type":"string"}},{"name":"page_no","in":"query","description":"page_no","required":true,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"page_size","required":true,"schema":{"type":"integer"}}],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}]}""", serverType="partner", extension_id=extension_id, start_date=start_date, end_date=end_date, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/filters", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}},{"name":"start_date","in":"query","description":"start_date","required":true,"schema":{"type":"string","format":"date-time"}},{"name":"end_date","in":"query","description":"end_date","required":true,"schema":{"type":"string","format":"date-time"}},{"name":"page_no","in":"query","description":"page_no","required":true,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"page_size","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[{"name":"start_date","in":"query","description":"start_date","required":true,"schema":{"type":"string","format":"date-time"}},{"name":"end_date","in":"query","description":"end_date","required":true,"schema":{"type":"string","format":"date-time"}},{"name":"page_no","in":"query","description":"page_no","required":true,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"page_size","required":true,"schema":{"type":"integer"}}],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}]}""", serverType="partner", extension_id=extension_id, start_date=start_date, end_date=end_date, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(start_date=start_date, end_date=end_date, page_no=page_no, page_size=page_size)
         if query_string:
             url_with_params += "?" + query_string
@@ -244,8 +294,8 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/reports/cancel/file/{filename}", extension_id=extension_id, filename=filename), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CancelDownloadResponse
-            schema = CancelDownloadResponse()
+            from .models import CancelDownloadResult
+            schema = CancelDownloadResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -293,8 +343,8 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/history", extension_id=extension_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import HistoryResponse
-            schema = HistoryResponse()
+            from .models import HistoryResult
+            schema = HistoryResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -318,8 +368,8 @@ class Webhook:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import InvalidEventsRequest
-        schema = InvalidEventsRequest()
+        from .models import InvalidEventsPayload
+        schema = InvalidEventsPayload()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/invalid_events", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}]}""", serverType="partner", extension_id=extension_id)
@@ -377,8 +427,8 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/subscriber/", extension_id=extension_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SubscriberConfigResponse
-            schema = SubscriberConfigResponse()
+            from .models import SubscriberConfigDetails
+            schema = SubscriberConfigDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -405,8 +455,8 @@ class Webhook:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateSubscriberRequest
-        schema = UpdateSubscriberRequest()
+        from .models import SubscriberUpdate
+        schema = SubscriberUpdate()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/subscriber/{subscriber_id}", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}},{"name":"subscriber_id","in":"path","description":"subscriber_id","required":true,"schema":{"type":"number"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}},{"name":"subscriber_id","in":"path","description":"subscriber_id","required":true,"schema":{"type":"number"}}]}""", serverType="partner", extension_id=extension_id, subscriber_id=subscriber_id)
@@ -429,8 +479,8 @@ class Webhook:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/subscriber/{subscriber_id}", extension_id=extension_id, subscriber_id=subscriber_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UpdateSubscriberResponse
-            schema = UpdateSubscriberResponse()
+            from .models import SubscriberUpdateResult
+            schema = SubscriberUpdateResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
