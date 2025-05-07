@@ -300,11 +300,11 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import BlogPayload
-        schema = BlogPayload()
+        from .models import BlogRequestSchema
+        schema = BlogRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/blogs/", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/blogs", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -321,7 +321,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/blogs/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/blogs", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import BlogSchema
@@ -366,7 +366,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/blogs/", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"tags","in":"query","description":"Blogs retrieve based on the list of tags passed.","required":false,"schema":{"type":"string","description":"Comma separated list of tags."},"style":"form","explode":false},{"name":"q","in":"query","description":"Blogs retrieve based on the title or slug passed.","required":false,"schema":{"type":"string"}},{"name":"slug","in":"query","description":"Blogs retrieve based on the slug passed.","required":false,"schema":{"type":"string"}},{"name":"title","in":"query","description":"Blogs retrieve based on the title passed.","required":false,"schema":{"type":"string"}},{"name":"status","in":"query","description":"Blogs retrieve based on the status passed.","required":false,"schema":{"type":"string"}}],"query":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"tags","in":"query","description":"Blogs retrieve based on the list of tags passed.","required":false,"schema":{"type":"string","description":"Comma separated list of tags."},"style":"form","explode":false},{"name":"q","in":"query","description":"Blogs retrieve based on the title or slug passed.","required":false,"schema":{"type":"string"}},{"name":"slug","in":"query","description":"Blogs retrieve based on the slug passed.","required":false,"schema":{"type":"string"}},{"name":"title","in":"query","description":"Blogs retrieve based on the title passed.","required":false,"schema":{"type":"string"}},{"name":"status","in":"query","description":"Blogs retrieve based on the status passed.","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, tags=tags, q=q, slug=slug, title=title, status=status)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/blogs", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"tags","in":"query","description":"Blogs retrieve based on the list of tags passed.","required":false,"schema":{"type":"string","description":"Comma separated list of tags."},"style":"form","explode":false},{"name":"q","in":"query","description":"Blogs retrieve based on the title or slug passed.","required":false,"schema":{"type":"string"}},{"name":"slug","in":"query","description":"Blogs retrieve based on the slug passed.","required":false,"schema":{"type":"string"}},{"name":"title","in":"query","description":"Blogs retrieve based on the title passed.","required":false,"schema":{"type":"string"}},{"name":"status","in":"query","description":"Blogs retrieve based on the status passed.","required":false,"schema":{"type":"string"}}],"query":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"tags","in":"query","description":"Blogs retrieve based on the list of tags passed.","required":false,"schema":{"type":"string","description":"Comma separated list of tags."},"style":"form","explode":false},{"name":"q","in":"query","description":"Blogs retrieve based on the title or slug passed.","required":false,"schema":{"type":"string"}},{"name":"slug","in":"query","description":"Blogs retrieve based on the slug passed.","required":false,"schema":{"type":"string"}},{"name":"title","in":"query","description":"Blogs retrieve based on the title passed.","required":false,"schema":{"type":"string"}},{"name":"status","in":"query","description":"Blogs retrieve based on the status passed.","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, tags=tags, q=q, slug=slug, title=title, status=status)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, tags=tags, q=q, slug=slug, title=title, status=status)
         if query_string:
             url_with_params += "?" + query_string
@@ -383,11 +383,11 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/blogs/", page_no=page_no, page_size=page_size, tags=tags, q=q, slug=slug, title=title, status=status), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/blogs", page_no=page_no, page_size=page_size, tags=tags, q=q, slug=slug, title=title, status=status), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BlogGetDetails
-            schema = BlogGetDetails()
+            from .models import BlogGetResponseSchema
+            schema = BlogGetResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -410,8 +410,8 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import BlogPayload
-        schema = BlogPayload()
+        from .models import BlogRequestSchema
+        schema = BlogRequestSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/blogs/{id}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"ID allotted to the blog.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"ID allotted to the blog.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
@@ -484,6 +484,50 @@ class Content:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for deleteBlog")
+                print(e)
+
+        return response
+    
+    async def getComponentById(self, slug=None, request_headers:Dict={}):
+        """Retrieve detailed information about a specific component.
+        :param slug : A short, human-readable, URL-friendly identifier of a blog page. You can get slug value of a blog from `getBlogs` API. : type string
+        """
+        payload = {}
+        
+        if slug is not None:
+            payload["slug"] = slug
+
+        # Parameter validation
+        schema = ContentValidator.getComponentById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/blogs/{slug}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a blog page. You can get slug value of a blog from `getBlogs` API.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a blog page. You can get slug value of a blog from `getBlogs` API.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", slug=slug)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/blogs/{slug}", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BlogSchema
+            schema = BlogSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getComponentById")
                 print(e)
 
         return response
@@ -570,6 +614,50 @@ class Content:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getDataLoaders")
+                print(e)
+
+        return response
+    
+    async def getDataLoaderApiSpecs(self, data_loader=None, request_headers:Dict={}):
+        """Retrieve a list of data loaders api specs.
+        :param data_loader : Alphanumeric ID allotted to an application created within a business account. : type string
+        """
+        payload = {}
+        
+        if data_loader is not None:
+            payload["data_loader"] = data_loader
+
+        # Parameter validation
+        schema = ContentValidator.getDataLoaderApiSpecs()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/data-loader/api-spec", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"data_loader","in":"query","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"data_loader","in":"query","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", data_loader=data_loader)
+        query_string = await create_query_string(data_loader=data_loader)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/data-loader/api-spec", data_loader=data_loader), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DataLoadersApiSpecSchema
+            schema = DataLoadersApiSpecSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDataLoaderApiSpecs")
                 print(e)
 
         return response
@@ -680,7 +768,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/data-loader/service/{service_name}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string","example":"13741"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}},{"name":"service_name","in":"path","description":"Service name of the data loader..","required":true,"schema":{"type":"string","example":"catalog"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string","example":"13741"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}},{"name":"service_name","in":"path","description":"Service name of the data loader..","required":true,"schema":{"type":"string","example":"catalog"}}]}""", serverType="platform", service_name=service_name)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/data-loader/service/{service_name}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"service_name","in":"path","description":"Service name of the data loader..","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"service_name","in":"path","description":"Service name of the data loader..","required":true,"schema":{"type":"string"}}]}""", serverType="platform", service_name=service_name)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -700,8 +788,8 @@ class Content:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/data-loader/service/{service_name}", service_name=service_name), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DataLoaderResponseSchema
-            schema = DataLoaderResponseSchema()
+            from .models import DataLoaderItemsResponseSchema
+            schema = DataLoaderItemsResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1013,8 +1101,8 @@ class Content:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/faq/category/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FaqSchema
-            schema = FaqSchema()
+            from .models import CreateFaqCategorySchema
+            schema = CreateFaqCategorySchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1259,7 +1347,7 @@ class Content:
     
     async def generateSEOTitle(self, type=None, body="", request_headers:Dict={}):
         """Create an SEO-friendly title for content.
-        :param type : String representing the type of SEO content to be generated. Possible values are: title, description : type 
+        :param type : String representing the type of SEO content to be generated. Possible values are: title, description : type string
         """
         payload = {}
         
@@ -1275,7 +1363,7 @@ class Content:
         schema = GenerateSEOContent()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/generate-seo/{type}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"type","in":"path","description":"String representing the type of SEO content to be generated. Possible values are: title, description","required":true,"schema":{"$ref":"#/components/schemas/GenerationEntityType"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"type","in":"path","description":"String representing the type of SEO content to be generated. Possible values are: title, description","required":true,"schema":{"$ref":"#/components/schemas/GenerationEntityType"}}]}""", serverType="platform", type=type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/generate-seo/{type}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"type","in":"path","description":"String representing the type of SEO content to be generated. Possible values are: title, description","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"type","in":"path","description":"String representing the type of SEO content to be generated. Possible values are: title, description","required":true,"schema":{"type":"string"}}]}""", serverType="platform", type=type)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1322,7 +1410,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/landing-page/", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}}],"query":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/landing-page", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}}],"query":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", page_no=page_no, page_size=page_size)
         query_string = await create_query_string(page_no=page_no, page_size=page_size)
         if query_string:
             url_with_params += "?" + query_string
@@ -1339,11 +1427,11 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/landing-page/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/landing-page", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import LandingPageGetDetails
-            schema = LandingPageGetDetails()
+            from .models import LandingPageGetResponseSchema
+            schema = LandingPageGetResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1367,7 +1455,7 @@ class Content:
         schema = LandingPageSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/landing-page/", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/landing-page", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1384,7 +1472,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/landing-page/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/landing-page", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import LandingPageSchema
@@ -1595,7 +1683,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations/", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"device_platform","in":"query","description":"Filter navigations by platform. Acceptable values are: web, android, ios, all","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}}],"query":[{"name":"device_platform","in":"query","description":"Filter navigations by platform. Acceptable values are: web, android, ios, all","required":true,"schema":{"type":"string"}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", device_platform=device_platform, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"device_platform","in":"query","description":"Filter navigations by platform. Acceptable values are: web, android, ios, all","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}}],"query":[{"name":"device_platform","in":"query","description":"Filter navigations by platform. Acceptable values are: web, android, ios, all","required":true,"schema":{"type":"string"}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", device_platform=device_platform, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(device_platform=device_platform, page_no=page_no, page_size=page_size)
         if query_string:
             url_with_params += "?" + query_string
@@ -1612,11 +1700,11 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations/", device_platform=device_platform, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations", device_platform=device_platform, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import NavigationGetDetails
-            schema = NavigationGetDetails()
+            from .models import NavigationGetResponseSchema
+            schema = NavigationGetResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1636,11 +1724,11 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import NavigationPayload
-        schema = NavigationPayload()
+        from .models import NavigationRequestSchema
+        schema = NavigationRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations/", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1657,7 +1745,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import NavigationSchema
@@ -1701,8 +1789,8 @@ class Content:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations/default", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import DefaultNavigationDetails
-            schema = DefaultNavigationDetails()
+            from .models import DefaultNavigationResponseSchema
+            schema = DefaultNavigationResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1772,8 +1860,8 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import NavigationPayload
-        schema = NavigationPayload()
+        from .models import NavigationRequestSchema
+        schema = NavigationRequestSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/navigations/{id}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"ID allotted to the navigation.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"ID allotted to the navigation.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
@@ -1932,6 +2020,51 @@ class Content:
 
         return response
     
+    async def createPagePreview(self, body="", request_headers:Dict={}):
+        """Generate and add a new page preview.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.createPagePreview()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PageRequestSchema
+        schema = PageRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/preview", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/preview", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PageSchema
+            schema = PageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createPagePreview")
+                print(e)
+
+        return response
+    
     async def updatePagePreview(self, slug=None, body="", request_headers:Dict={}):
         """Modify the content and settings of a specific page preview.
         :param slug : A short, human-readable, URL-friendly identifier of a page. You can get slug value of a page from `getPages` API. : type string
@@ -1946,8 +2079,8 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PagePublishPayload
-        schema = PagePublishPayload()
+        from .models import PagePublishRequestSchema
+        schema = PagePublishRequestSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/publish/{slug}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a page. You can get slug value of a page from `getPages` API.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a page. You can get slug value of a page from `getPages` API.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", slug=slug)
@@ -2059,8 +2192,8 @@ class Content:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/path-mappings", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PathMappingSchema
-            schema = PathMappingSchema()
+            from .models import CreatePathMappingSchema
+            schema = CreatePathMappingSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2106,8 +2239,8 @@ class Content:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/path-mappings", page_size=page_size, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PathMappingSchema
-            schema = PathMappingSchema()
+            from .models import GetAllPathMappingSchema
+            schema = GetAllPathMappingSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2150,8 +2283,8 @@ class Content:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/path-mappings/{path_id}", path_id=path_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PathMappingSchema
-            schema = PathMappingSchema()
+            from .models import DeletPathMappingSchema
+            schema = DeletPathMappingSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2198,8 +2331,8 @@ class Content:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/path-mappings/{path_id}", path_id=path_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PathMappingSchema
-            schema = PathMappingSchema()
+            from .models import CreatePathMappingSchema
+            schema = CreatePathMappingSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2240,6 +2373,15 @@ class Content:
                 exclude_headers.append(key)
 
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/path-mappings/{path_id}", path_id=path_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeletPathMappingSchema
+            schema = DeletPathMappingSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deletePathRedirectionRules")
+                print(e)
 
         return response
     
@@ -2471,21 +2613,21 @@ class Content:
 
         return response
     
-    async def getSEOMarkupSchema(self, id=None, request_headers:Dict={}):
+    async def getSEOMarkupSchema(self, schema_id=None, request_headers:Dict={}):
         """Use this API to Get SEO Markup Schema
-        :param id : Alphanumeric ID allotted to a SEO Markup Schema Template created within a business. : type string
+        :param schema_id : Alphanumeric ID allotted to a SEO Markup Schema Template created within a business. : type string
         """
         payload = {}
         
-        if id is not None:
-            payload["id"] = id
+        if schema_id is not None:
+            payload["schema_id"] = schema_id
 
         # Parameter validation
         schema = ContentValidator.getSEOMarkupSchema()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/schema/{id}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Alphanumeric ID allotted to a SEO Markup Schema Template created within a business.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Alphanumeric ID allotted to a SEO Markup Schema Template created within a business.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/schema/{schema_id}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"schema_id","in":"path","description":"Alphanumeric ID allotted to a SEO Markup Schema Template created within a business.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"schema_id","in":"path","description":"Alphanumeric ID allotted to a SEO Markup Schema Template created within a business.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", schema_id=schema_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -2502,7 +2644,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/schema/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/schema/{schema_id}", schema_id=schema_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SEOSchemaMarkupTemplate
@@ -2515,14 +2657,14 @@ class Content:
 
         return response
     
-    async def editSEOMarkupSchema(self, id=None, body="", request_headers:Dict={}):
-        """Use this API to Get SEO Markup Schema
-        :param id : Alphanumeric ID allotted to a SEO Markup Schema Template created within a business. : type string
+    async def editSEOMarkupSchema(self, schema_id=None, body="", request_headers:Dict={}):
+        """Use this API to edit SEO Markup Schema
+        :param schema_id : Alphanumeric ID allotted to a SEO Markup Schema Template created within a business. : type string
         """
         payload = {}
         
-        if id is not None:
-            payload["id"] = id
+        if schema_id is not None:
+            payload["schema_id"] = schema_id
 
         # Parameter validation
         schema = ContentValidator.editSEOMarkupSchema()
@@ -2533,7 +2675,7 @@ class Content:
         schema = SEOSchemaMarkupTemplateRequestBody()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/schema/{id}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Alphanumeric ID allotted to a SEO Markup Schema Template created within a business.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Alphanumeric ID allotted to a SEO Markup Schema Template created within a business.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/schema/{schema_id}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"schema_id","in":"path","description":"Alphanumeric ID allotted to a SEO Markup Schema Template created within a business.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"schema_id","in":"path","description":"Alphanumeric ID allotted to a SEO Markup Schema Template created within a business.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", schema_id=schema_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -2550,7 +2692,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/schema/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/schema/{schema_id}", schema_id=schema_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SEOSchemaMarkupTemplate
@@ -2563,21 +2705,21 @@ class Content:
 
         return response
     
-    async def deleteSEOMarkupSchema(self, id=None, request_headers:Dict={}):
+    async def deleteSEOMarkupSchema(self, schema_id=None, request_headers:Dict={}):
         """Use this API to Delete SEO Markup Schema
-        :param id : Alphanumeric ID allotted to a SEO Markup Schema Template created within a business. : type string
+        :param schema_id : Alphanumeric ID allotted to a SEO Markup Schema Template created within a business. : type string
         """
         payload = {}
         
-        if id is not None:
-            payload["id"] = id
+        if schema_id is not None:
+            payload["schema_id"] = schema_id
 
         # Parameter validation
         schema = ContentValidator.deleteSEOMarkupSchema()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/schema/{id}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Alphanumeric ID allotted to a SEO Markup Schema Template created within a business.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Alphanumeric ID allotted to a SEO Markup Schema Template created within a business.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/schema/{schema_id}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"schema_id","in":"path","description":"Alphanumeric ID allotted to a SEO Markup Schema Template created within a business.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"schema_id","in":"path","description":"Alphanumeric ID allotted to a SEO Markup Schema Template created within a business.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", schema_id=schema_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -2594,7 +2736,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/schema/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/schema/{schema_id}", schema_id=schema_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SEOSchemaMarkupTemplate
@@ -2603,6 +2745,376 @@ class Content:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for deleteSEOMarkupSchema")
+                print(e)
+
+        return response
+    
+    async def getDefaultSitemapConfig(self, request_headers:Dict={}):
+        """Retrieves the current default sitemap configuration settings
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.getDefaultSitemapConfig()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/sitemap/default", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/sitemap/default", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DefaultSitemapConfig
+            schema = DefaultSitemapConfig()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDefaultSitemapConfig")
+                print(e)
+
+        return response
+    
+    async def updateDefaultSitemapConfig(self, body="", request_headers:Dict={}):
+        """Updates the default sitemap configuration settings
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.updateDefaultSitemapConfig()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import DefaultSitemapConfig
+        schema = DefaultSitemapConfig()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/sitemap/default", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/sitemap/default", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DefaultSitemapConfig
+            schema = DefaultSitemapConfig()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateDefaultSitemapConfig")
+                print(e)
+
+        return response
+    
+    async def getSitemaps(self, page_no=None, page_size=None, is_active=None, name=None, request_headers:Dict={}):
+        """Retrieve a list of sitemap configurations for a specific company and application. Each configuration contains the sitemap XML data and its activation status. 
+
+        :param page_no :  : type string
+        :param page_size :  : type string
+        :param is_active : Boolean flag for checking if sitemap is active or not in storefront : type boolean
+        :param name : Query parameter to search sitemaps with name : type string
+        """
+        payload = {}
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+        if is_active is not None:
+            payload["is_active"] = is_active
+        if name is not None:
+            payload["name"] = name
+
+        # Parameter validation
+        schema = ContentValidator.getSitemaps()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/sitemaps", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"optional":[{"name":"is_active","in":"query","description":"Boolean flag for checking if sitemap is active or not in storefront","required":false,"schema":{"type":"boolean"}},{"name":"name","in":"query","description":"Query parameter to search sitemaps with name","required":false,"schema":{"type":"string"}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"is_active","in":"query","description":"Boolean flag for checking if sitemap is active or not in storefront","required":false,"schema":{"type":"boolean"}},{"name":"name","in":"query","description":"Query parameter to search sitemaps with name","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, is_active=is_active, name=name)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, is_active=is_active, name=name)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/sitemaps", page_no=page_no, page_size=page_size, is_active=is_active, name=name), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SitemapConfigurationList
+            schema = SitemapConfigurationList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSitemaps")
+                print(e)
+
+        return response
+    
+    async def createSitemap(self, body="", request_headers:Dict={}):
+        """Create a new sitemap configuration for a specific company and application. The name must be unique within the scope of the application. The sitemap XML data must be valid XML following the sitemap protocol specification. Once created, the configuration can be activated or deactivated using the is_active flag.
+
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.createSitemap()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SitemapConfigCreate
+        schema = SitemapConfigCreate()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/sitemaps", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/sitemaps", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SitemapConfig
+            schema = SitemapConfig()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createSitemap")
+                print(e)
+
+        return response
+    
+    async def getSitemap(self, name=None, request_headers:Dict={}):
+        """Retrieve a specific sitemap configuration by its name. Returns the complete configuration including the sitemap XML data, activation status, and timestamps.
+
+        :param name :  : type string
+        """
+        payload = {}
+        
+        if name is not None:
+            payload["name"] = name
+
+        # Parameter validation
+        schema = ContentValidator.getSitemap()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/sitemaps/{name}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"name","schema":{"type":"string","description":"Unique identifier for the sitemap configuration"},"in":"path","required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"name","schema":{"type":"string","description":"Unique identifier for the sitemap configuration"},"in":"path","required":true}]}""", serverType="platform", name=name)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/sitemaps/{name}", name=name), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SitemapConfig
+            schema = SitemapConfig()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSitemap")
+                print(e)
+
+        return response
+    
+    async def updateSitemap(self, name=None, body="", request_headers:Dict={}):
+        """Update an existing sitemap configuration identified by its name. You can update the activation status and/or the sitemap XML data. The name cannot be modified once the configuration is created. The updated sitemap XML data must be valid XML following the sitemap protocol specification.
+
+        :param name :  : type string
+        """
+        payload = {}
+        
+        if name is not None:
+            payload["name"] = name
+
+        # Parameter validation
+        schema = ContentValidator.updateSitemap()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SitemapConfigUpdate
+        schema = SitemapConfigUpdate()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/sitemaps/{name}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"name","schema":{"type":"string","description":"Unique identifier for the sitemap configuration"},"in":"path","required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"name","schema":{"type":"string","description":"Unique identifier for the sitemap configuration"},"in":"path","required":true}]}""", serverType="platform", name=name)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/sitemaps/{name}", name=name), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SitemapConfig
+            schema = SitemapConfig()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateSitemap")
+                print(e)
+
+        return response
+    
+    async def deleteSitemap(self, name=None, request_headers:Dict={}):
+        """Permanently delete a sitemap configuration identified by its name. This action cannot be undone. All associated data including the sitemap XML data will be removed.
+
+        :param name :  : type string
+        """
+        payload = {}
+        
+        if name is not None:
+            payload["name"] = name
+
+        # Parameter validation
+        schema = ContentValidator.deleteSitemap()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/sitemaps/{name}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"name","schema":{"type":"string","description":"Unique identifier for the sitemap configuration"},"in":"path","required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"name","schema":{"type":"string","description":"Unique identifier for the sitemap configuration"},"in":"path","required":true}]}""", serverType="platform", name=name)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/seo/sitemaps/{name}", name=name), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SitemapConfig
+            schema = SitemapConfig()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteSitemap")
+                print(e)
+
+        return response
+    
+    async def addInjectableTag(self, body="", request_headers:Dict={}):
+        """Create and add a new injectable tag
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.addInjectableTag()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CreateTagRequestSchema
+        schema = CreateTagRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags/add", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags/add", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TagsSchema
+            schema = TagsSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addInjectableTag")
                 print(e)
 
         return response
@@ -2693,8 +3205,146 @@ class Content:
 
         return response
     
+    async def removeInjectableTag(self, body="", request_headers:Dict={}):
+        """Delete a specific injectable tag.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.removeInjectableTag()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import RemoveHandpickedSchema
+        schema = RemoveHandpickedSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags/remove/handpicked", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags/remove/handpicked", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TagDeleteSuccessResponseSchema
+            schema = TagDeleteSuccessResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for removeInjectableTag")
+                print(e)
+
+        return response
+    
+    async def editInjectableTag(self, tag_id=None, body="", request_headers:Dict={}):
+        """Modify an injectable tag
+        :param tag_id : ID allotted to the tag. : type string
+        """
+        payload = {}
+        
+        if tag_id is not None:
+            payload["tag_id"] = tag_id
+
+        # Parameter validation
+        schema = ContentValidator.editInjectableTag()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import UpdateHandpickedSchema
+        schema = UpdateHandpickedSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags/edit/handpicked/{tag_id}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"tag_id","in":"path","description":"ID allotted to the tag.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"tag_id","in":"path","description":"ID allotted to the tag.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", tag_id=tag_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags/edit/handpicked/{tag_id}", tag_id=tag_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TagsSchema
+            schema = TagsSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for editInjectableTag")
+                print(e)
+
+        return response
+    
+    async def createInjectableTag(self, body="", request_headers:Dict={}):
+        """Use this API to create HTML tags. This includes a list of tags with name, tag type (css/js), url and position of the tag
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.createInjectableTag()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CreateTagRequestSchema
+        schema = CreateTagRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TagsSchema
+            schema = TagsSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createInjectableTag")
+                print(e)
+
+        return response
+    
     async def updateInjectableTag(self, body="", request_headers:Dict={}):
-        """Modify settings for an injectable tag.
+        """Use this API to edit all HTML Tags present
         """
         payload = {}
         
@@ -2738,22 +3388,19 @@ class Content:
 
         return response
     
-    async def getInjectableTags(self, all=None, request_headers:Dict={}):
-        """Retrieve a list of injectable tags.
-        :param all : Get all tags irrespective of the creator of tags : type boolean
+    async def deleteAllInjectableTags(self, request_headers:Dict={}):
+        """Use this API to delete all the existing tags at once
         """
         payload = {}
         
-        if all is not None:
-            payload["all"] = all
 
         # Parameter validation
-        schema = ContentValidator.getInjectableTags()
+        schema = ContentValidator.deleteAllInjectableTags()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"all","in":"query","description":"Get all tags irrespective of the creator of tags","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"name":"all","in":"query","description":"Get all tags irrespective of the creator of tags","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", all=all)
-        query_string = await create_query_string(all=all)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
 
@@ -2769,7 +3416,48 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags", all=all), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TagsSchema
+            schema = TagsSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteAllInjectableTags")
+                print(e)
+
+        return response
+    
+    async def getInjectableTags(self, request_headers:Dict={}):
+        """Use this API to retrieve all HTML Tags
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.getInjectableTags()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import TagsSchema
@@ -2778,144 +3466,6 @@ class Content:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getInjectableTags")
-                print(e)
-
-        return response
-    
-    async def addInjectableTag(self, body="", request_headers:Dict={}):
-        """Create and add a new injectable tag.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ContentValidator.addInjectableTag()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CreateTagRequestSchema
-        schema = CreateTagRequestSchema()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags/add", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags/add", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TagsSchema
-            schema = TagsSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for addInjectableTag")
-                print(e)
-
-        return response
-    
-    async def removeInjectableTag(self, body="", request_headers:Dict={}):
-        """Delete a specific injectable tag.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ContentValidator.removeInjectableTag()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import RemoveHandpickedSchema
-        schema = RemoveHandpickedSchema()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags/remove/handpicked", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags/remove/handpicked", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TagDeleteSuccessDetails
-            schema = TagDeleteSuccessDetails()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for removeInjectableTag")
-                print(e)
-
-        return response
-    
-    async def editInjectableTag(self, tag_id=None, body="", request_headers:Dict={}):
-        """Modify settings for an injectable tag.
-        :param tag_id : ID allotted to the tag. : type string
-        """
-        payload = {}
-        
-        if tag_id is not None:
-            payload["tag_id"] = tag_id
-
-        # Parameter validation
-        schema = ContentValidator.editInjectableTag()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import UpdateHandpickedSchema
-        schema = UpdateHandpickedSchema()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags/edit/handpicked/{tag_id}", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"tag_id","in":"path","description":"ID allotted to the tag.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}},{"name":"tag_id","in":"path","description":"ID allotted to the tag.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", tag_id=tag_id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/tags/edit/handpicked/{tag_id}", tag_id=tag_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TagsSchema
-            schema = TagsSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for editInjectableTag")
                 print(e)
 
         return response
@@ -2975,11 +3525,11 @@ class Content:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PagePayload
-        schema = PagePayload()
+        from .models import PageRequestSchema
+        schema = PageRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/pages", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -2996,7 +3546,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/pages", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import PageSchema
@@ -3026,7 +3576,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}}],"query":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/pages", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}}],"query":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Numeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", page_no=page_no, page_size=page_size)
         query_string = await create_query_string(page_no=page_no, page_size=page_size)
         if query_string:
             url_with_params += "?" + query_string
@@ -3043,11 +3593,11 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/pages/", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/pages", page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PageGetDetails
-            schema = PageGetDetails()
+            from .models import PageGetResponseSchema
+            schema = PageGetResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -3105,7 +3655,7 @@ class Content:
         return response
     
     async def getPageBySlug(self, slug=None, request_headers:Dict={}):
-        """Get detailed information about a specific page using its slug.
+        """Get detailed information about a specific page using its slug
         :param slug : A short, human-readable, URL-friendly identifier of a page. You can get slug value of a page from `getPages` API. : type string
         """
         payload = {}
@@ -3159,7 +3709,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metafields/types", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metafields/types", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3200,7 +3750,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metafields/resources", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metafields/resources", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3262,7 +3812,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"optional":[{"name":"resources","in":"query","required":false,"schema":{"type":"string","description":"This is the resource for which we are fetching definitions"}},{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}},{"name":"slugs","in":"query","required":false,"schema":{"type":"string","description":"This is the slug list to filter custom fields definitions, it will come comma separated"}},{"name":"namespaces","in":"query","required":false,"schema":{"type":"string","description":"This is the namespace list to filter custom fields definitions, it needs to be comma separated"}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"resources","in":"query","required":false,"schema":{"type":"string","description":"This is the resource for which we are fetching definitions"}},{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}},{"name":"slugs","in":"query","required":false,"schema":{"type":"string","description":"This is the slug list to filter custom fields definitions, it will come comma separated"}},{"name":"namespaces","in":"query","required":false,"schema":{"type":"string","description":"This is the namespace list to filter custom fields definitions, it needs to be comma separated"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", page_no=page_no, page_size=page_size, resources=resources, types=types, search=search, slugs=slugs, namespaces=namespaces)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"optional":[{"name":"resources","in":"query","required":false,"schema":{"type":"string","description":"This is the resource for which we are fetching definitions"}},{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}},{"name":"slugs","in":"query","required":false,"schema":{"type":"string","description":"This is the slug list to filter custom fields definitions, it will come comma separated"}},{"name":"namespaces","in":"query","required":false,"schema":{"type":"string","description":"This is the namespace list to filter custom fields definitions, it needs to be comma separated"}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"resources","in":"query","required":false,"schema":{"type":"string","description":"This is the resource for which we are fetching definitions"}},{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}},{"name":"slugs","in":"query","required":false,"schema":{"type":"string","description":"This is the slug list to filter custom fields definitions, it will come comma separated"}},{"name":"namespaces","in":"query","required":false,"schema":{"type":"string","description":"This is the namespace list to filter custom fields definitions, it needs to be comma separated"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, resources=resources, types=types, search=search, slugs=slugs, namespaces=namespaces)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, resources=resources, types=types, search=search, slugs=slugs, namespaces=namespaces)
         if query_string:
             url_with_params += "?" + query_string
@@ -3324,7 +3874,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}}],"optional":[{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}},{"name":"slugs","in":"query","required":false,"schema":{"type":"string","description":"This is the slug list to filter custom fields definitions, it will come comma separated"}},{"name":"namespaces","in":"query","required":false,"schema":{"type":"string","description":"This is the namespace list to filter custom fields definitions, it needs to be comma separated"}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}},{"name":"slugs","in":"query","required":false,"schema":{"type":"string","description":"This is the slug list to filter custom fields definitions, it will come comma separated"}},{"name":"namespaces","in":"query","required":false,"schema":{"type":"string","description":"This is the namespace list to filter custom fields definitions, it needs to be comma separated"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}}]}""", serverType="platform", page_no=page_no, page_size=page_size, resource=resource, types=types, search=search, slugs=slugs, namespaces=namespaces)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}}],"optional":[{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}},{"name":"slugs","in":"query","required":false,"schema":{"type":"string","description":"This is the slug list to filter custom fields definitions, it will come comma separated"}},{"name":"namespaces","in":"query","required":false,"schema":{"type":"string","description":"This is the namespace list to filter custom fields definitions, it needs to be comma separated"}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"types","in":"query","required":false,"schema":{"type":"string","description":"This is the type of the custom fields definitions"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}},{"name":"slugs","in":"query","required":false,"schema":{"type":"string","description":"This is the slug list to filter custom fields definitions, it will come comma separated"}},{"name":"namespaces","in":"query","required":false,"schema":{"type":"string","description":"This is the namespace list to filter custom fields definitions, it needs to be comma separated"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}}]}""", serverType="platform", page_no=page_no, page_size=page_size, resource=resource, types=types, search=search, slugs=slugs, namespaces=namespaces)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, types=types, search=search, slugs=slugs, namespaces=namespaces)
         if query_string:
             url_with_params += "?" + query_string
@@ -3372,7 +3922,7 @@ class Content:
         schema = CustomFieldDefinitionRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}}]}""", serverType="platform", resource=resource)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}}]}""", serverType="platform", resource=resource)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3422,7 +3972,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/namespace/{namespace}/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}]}""", serverType="platform", slug=slug, resource=resource, namespace=namespace)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/namespace/{namespace}/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}]}""", serverType="platform", slug=slug, resource=resource, namespace=namespace)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3476,7 +4026,7 @@ class Content:
         schema = CustomFieldDefinitionRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/namespace/{namespace}/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}]}""", serverType="platform", slug=slug, resource=resource, namespace=namespace)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/namespace/{namespace}/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}]}""", serverType="platform", slug=slug, resource=resource, namespace=namespace)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3526,7 +4076,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/namespace/{namespace}/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}]}""", serverType="platform", slug=slug, resource=resource, namespace=namespace)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/namespace/{namespace}/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom field definition slug"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"namespace","in":"path","required":true,"schema":{"type":"string","description":"This is namespace for a custom field"}}]}""", serverType="platform", slug=slug, resource=resource, namespace=namespace)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3573,7 +4123,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/{resource_slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}]}""", serverType="platform", resource=resource, resource_slug=resource_slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/{resource_slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}]}""", serverType="platform", resource=resource, resource_slug=resource_slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3624,7 +4174,7 @@ class Content:
         schema = CustomFieldRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/{resource_slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}]}""", serverType="platform", resource=resource, resource_slug=resource_slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customfields/resource/{resource}/{resource_slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"resource","in":"path","required":true,"schema":{"type":"string","description":"This is the type of resource for which you want to fetch custom fields eg. product, collection, customer etc."}},{"name":"resource_slug","in":"path","required":true,"schema":{"type":"string","description":"This is the resource slug for which custom fields created"}}]}""", serverType="platform", resource=resource, resource_slug=resource_slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3669,7 +4219,7 @@ class Content:
         schema = CustomObjectDefinitionRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3719,7 +4269,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"optional":[{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", page_no=page_no, page_size=page_size, search=search)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"optional":[{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}}],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"search","in":"query","required":false,"schema":{"type":"string","description":"This is the search text to filter custom fields definitions"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, search=search)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, search=search)
         if query_string:
             url_with_params += "?" + query_string
@@ -3763,7 +4313,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3811,7 +4361,7 @@ class Content:
         schema = CustomObjectDefinitionUpdateRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3855,7 +4405,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3905,7 +4455,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, definition_slug=definition_slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, definition_slug=definition_slug)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, )
         if query_string:
             url_with_params += "?" + query_string
@@ -3953,7 +4503,7 @@ class Content:
         schema = CustomObjectRequestSchemaWithoutId()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", definition_slug=definition_slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", definition_slug=definition_slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -4000,7 +4550,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}]}""", serverType="platform", definition_slug=definition_slug, slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}]}""", serverType="platform", definition_slug=definition_slug, slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -4047,7 +4597,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}]}""", serverType="platform", definition_slug=definition_slug, slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}]}""", serverType="platform", definition_slug=definition_slug, slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -4098,7 +4648,7 @@ class Content:
         schema = CustomObjectRequestSchemaWithoutId()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}]}""", serverType="platform", definition_slug=definition_slug, slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{definition_slug}/entries/{slug}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}]}""", serverType="platform", definition_slug=definition_slug, slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -4128,16 +4678,16 @@ class Content:
 
         return response
     
-    async def getAppJobs(self, page=None, page_size=None, action_type=None, request_headers:Dict={}):
+    async def getAppJobs(self, page_no=None, page_size=None, action_type=None, request_headers:Dict={}):
         """Custom object bulk import and export jobs status and details can be obtained using this endpoint.
-        :param page :  : type string
+        :param page_no :  : type string
         :param page_size :  : type string
         :param action_type :  : type string
         """
         payload = {}
         
-        if page is not None:
-            payload["page"] = page
+        if page_no is not None:
+            payload["page_no"] = page_no
         if page_size is not None:
             payload["page_size"] = page_size
         if action_type is not None:
@@ -4148,8 +4698,8 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metaobjects/jobs", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"page","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"action_type","in":"query","required":true,"schema":{"type":"string","enum":["download","upload"],"description":"This is the action type"}}],"optional":[],"query":[{"name":"page","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"action_type","in":"query","required":true,"schema":{"type":"string","enum":["download","upload"],"description":"This is the action type"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", page=page, page_size=page_size, action_type=action_type)
-        query_string = await create_query_string(page=page, page_size=page_size, action_type=action_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metaobjects/jobs", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"action_type","in":"query","required":true,"schema":{"type":"string","enum":["download","upload"],"description":"This is the action type"}}],"optional":[],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}},{"name":"action_type","in":"query","required":true,"schema":{"type":"string","enum":["download","upload"],"description":"This is the action type"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, action_type=action_type)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, action_type=action_type)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -4165,7 +4715,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metaobjects/jobs", page=page, page_size=page_size, action_type=action_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/metaobjects/jobs", page_no=page_no, page_size=page_size, action_type=action_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CustomObjectBulkEntry
@@ -4196,7 +4746,7 @@ class Content:
         schema = CustomObjectBulkSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}/bulk/upload", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}/bulk/upload", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -4240,7 +4790,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}/bulk/download", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}/bulk/download", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -4284,7 +4834,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}/bulk/sample", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}/bulk/sample", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"This is application id"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}}]}""", serverType="platform", slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -4302,615 +4852,6 @@ class Content:
                 exclude_headers.append(key)
 
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/customobjects/definition/{slug}/bulk/sample", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        return response
-    
-    async def getTranslateUILabels(self, template_theme_id=None, theme_id=None, locale=None, type=None, request_headers:Dict={}):
-        """Retrieves Translate Ui Labels with optional filtering by type, application, and company identifiers.
-        :param template_theme_id : unique id of template theme : type string
-        :param theme_id : unique id of theme : type string
-        :param locale : Multilingual locale : type string
-        :param type : Filter Translate Ui Labels by type : type string
-        """
-        payload = {}
-        
-        if template_theme_id is not None:
-            payload["template_theme_id"] = template_theme_id
-        if theme_id is not None:
-            payload["theme_id"] = theme_id
-        if locale is not None:
-            payload["locale"] = locale
-        if type is not None:
-            payload["type"] = type
-
-        # Parameter validation
-        schema = ContentValidator.getTranslateUILabels()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/translate-ui-labels", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}],"optional":[{"name":"template_theme_id","in":"query","description":"unique id of template theme","required":false,"schema":{"type":"string","description":"template theme id"}},{"name":"theme_id","in":"query","description":"unique id of theme","required":false,"schema":{"type":"string","description":"theme id"}},{"name":"locale","in":"query","description":"Multilingual locale","required":false,"schema":{"type":"string","description":"Multilingual locale"}},{"name":"type","in":"query","description":"Filter Translate Ui Labels by type","required":false,"schema":{"type":"string","enum":["locale_schema","locale"],"example":"locale"}}],"query":[{"name":"template_theme_id","in":"query","description":"unique id of template theme","required":false,"schema":{"type":"string","description":"template theme id"}},{"name":"theme_id","in":"query","description":"unique id of theme","required":false,"schema":{"type":"string","description":"theme id"}},{"name":"locale","in":"query","description":"Multilingual locale","required":false,"schema":{"type":"string","description":"Multilingual locale"}},{"name":"type","in":"query","description":"Filter Translate Ui Labels by type","required":false,"schema":{"type":"string","enum":["locale_schema","locale"],"example":"locale"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", template_theme_id=template_theme_id, theme_id=theme_id, locale=locale, type=type)
-        query_string = await create_query_string(template_theme_id=template_theme_id, theme_id=theme_id, locale=locale, type=type)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/translate-ui-labels", template_theme_id=template_theme_id, theme_id=theme_id, locale=locale, type=type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TranslateUiLabelsPage
-            schema = TranslateUiLabelsPage()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getTranslateUILabels")
-                print(e)
-
-        return response
-    
-    async def createTranslateUILabels(self, body="", request_headers:Dict={}):
-        """Creates a new Translate Ui Labels entry with specified configuration and locale settings.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ContentValidator.createTranslateUILabels()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import TranslateUiLabelsCreate
-        schema = TranslateUiLabelsCreate()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/translate-ui-labels", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/translate-ui-labels", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TranslateUiLabels
-            schema = TranslateUiLabels()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createTranslateUILabels")
-                print(e)
-
-        return response
-    
-    async def getTranslateUILabelsById(self, id=None, request_headers:Dict={}):
-        """Fetches detailed information for a specific Translate Ui Labels using its unique identifier.
-        :param id : ID of the Translate Ui Labels : type string
-        """
-        payload = {}
-        
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = ContentValidator.getTranslateUILabelsById()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/translate-ui-labels/{id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"id","in":"path","required":true,"description":"ID of the Translate Ui Labels","schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"},{"name":"id","in":"path","required":true,"description":"ID of the Translate Ui Labels","schema":{"type":"string"}}]}""", serverType="platform", id=id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/translate-ui-labels/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TranslateUiLabels
-            schema = TranslateUiLabels()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getTranslateUILabelsById")
-                print(e)
-
-        return response
-    
-    async def updateTranslateUILabels(self, id=None, body="", request_headers:Dict={}):
-        """Modifies existing Translate Ui Labels properties including locale, type, and associated configurations.
-        :param id : The unique identifier of the Translate Ui Labels to update : type string
-        """
-        payload = {}
-        
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = ContentValidator.updateTranslateUILabels()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import StaticResourceUpdate
-        schema = StaticResourceUpdate()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/translate-ui-labels/{id}", """{"required":[{"name":"id","in":"path","required":true,"description":"The unique identifier of the Translate Ui Labels to update","schema":{"type":"string","example":"60c72b2f9b1d8e35d8dca123"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}],"optional":[],"query":[],"headers":[],"path":[{"name":"id","in":"path","required":true,"description":"The unique identifier of the Translate Ui Labels to update","schema":{"type":"string","example":"60c72b2f9b1d8e35d8dca123"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"Numeric ID allotted to a business account on Fynd Platform."},"description":"This is company id"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","description":"Alphanumeric ID allotted to an application created within a business account."},"description":"This is application id"}]}""", serverType="platform", id=id, )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/translate-ui-labels/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TranslateUiLabels
-            schema = TranslateUiLabels()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateTranslateUILabels")
-                print(e)
-
-        return response
-    
-    async def getApplicationLanguages(self, request_headers:Dict={}):
-        """Fetch all languages configured for the specified application.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ContentValidator.getApplicationLanguages()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        return response
-    
-    async def addApplicationLanguage(self, body="", request_headers:Dict={}):
-        """Add new languages to application's supported language list.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ContentValidator.addApplicationLanguage()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ApplicationLanguageCreate
-        schema = ApplicationLanguageCreate()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        return response
-    
-    async def bulkUnPublishApplicationLanguage(self, body="", request_headers:Dict={}):
-        """Unpublish all application's published languages of specific sales channel.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ContentValidator.bulkUnPublishApplicationLanguage()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import unPublishApplicationLanguage
-        schema = unPublishApplicationLanguage()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        return response
-    
-    async def updateApplicationLanguageStatus(self, locale=None, body="", request_headers:Dict={}):
-        """Update language status and settings for the application.
-        :param locale :  : type string
-        """
-        payload = {}
-        
-        if locale is not None:
-            payload["locale"] = locale
-
-        # Parameter validation
-        schema = ContentValidator.updateApplicationLanguageStatus()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ApplicationLanguageUpdate
-        schema = ApplicationLanguageUpdate()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages/{locale}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", locale=locale)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages/{locale}", locale=locale), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationLanguage
-            schema = ApplicationLanguage()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateApplicationLanguageStatus")
-                print(e)
-
-        return response
-    
-    async def deleteApplicationLanguage(self, locale=None, request_headers:Dict={}):
-        """Remove a language from application's supported languages.
-        :param locale :  : type string
-        """
-        payload = {}
-        
-        if locale is not None:
-            payload["locale"] = locale
-
-        # Parameter validation
-        schema = ContentValidator.deleteApplicationLanguage()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages/{locale}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", locale=locale)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/languages/{locale}", locale=locale), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import OperationResponseSchema
-            schema = OperationResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deleteApplicationLanguage")
-                print(e)
-
-        return response
-    
-    async def getApplicationResourceTranslations(self, locale=None, type=None, resource_id=None, request_headers:Dict={}):
-        """Fetch translations for application-level resources.
-        :param locale :  : type string
-        :param type :  : type string
-        :param resource_id :  : type string
-        """
-        payload = {}
-        
-        if locale is not None:
-            payload["locale"] = locale
-        if type is not None:
-            payload["type"] = type
-        if resource_id is not None:
-            payload["resource_id"] = resource_id
-
-        # Parameter validation
-        schema = ContentValidator.getApplicationResourceTranslations()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string","example":"1"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","example":"66ed4e88aefcf6dd7dfb0f16"}},{"name":"locale","in":"query","required":true,"schema":{"type":"string","example":"hi"}},{"name":"type","in":"query","required":true,"schema":{"type":"string","example":"company.product"}},{"name":"resource_id","in":"query","required":true,"schema":{"type":"string","example":"235466,66ed4e88aefcf6dd7dfb0f16"}}],"optional":[],"query":[{"name":"locale","in":"query","required":true,"schema":{"type":"string","example":"hi"}},{"name":"type","in":"query","required":true,"schema":{"type":"string","example":"company.product"}},{"name":"resource_id","in":"query","required":true,"schema":{"type":"string","example":"235466,66ed4e88aefcf6dd7dfb0f16"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string","example":"1"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string","example":"66ed4e88aefcf6dd7dfb0f16"}}]}""", serverType="platform", locale=locale, type=type, resource_id=resource_id)
-        query_string = await create_query_string(locale=locale, type=type, resource_id=resource_id)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations", locale=locale, type=type, resource_id=resource_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        return response
-    
-    async def createApplicationResourceTranslation(self, body="", request_headers:Dict={}):
-        """Create new translations for application resources.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ContentValidator.createApplicationResourceTranslation()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ResourceTranslationCreate
-        schema = ResourceTranslationCreate()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResourceTranslation
-            schema = ResourceTranslation()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createApplicationResourceTranslation")
-                print(e)
-
-        return response
-    
-    async def upsertApplicationResourceTranslationInBulk(self, body="", request_headers:Dict={}):
-        """Create or update multiple translations in a single request.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ContentValidator.upsertApplicationResourceTranslationInBulk()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ResourceTranslationList
-        schema = ResourceTranslationList()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations/bulk", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations/bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResourceTranslationBulkUpsert
-            schema = ResourceTranslationBulkUpsert()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for upsertApplicationResourceTranslationInBulk")
-                print(e)
-
-        return response
-    
-    async def updateApplicationResourceTranslation(self, id=None, body="", request_headers:Dict={}):
-        """Update existing translations for application resources.
-        :param id :  : type string
-        """
-        payload = {}
-        
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = ContentValidator.updateApplicationResourceTranslation()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ResourceTranslationUpdate
-        schema = ResourceTranslationUpdate()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations/{id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResourceTranslation
-            schema = ResourceTranslation()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateApplicationResourceTranslation")
-                print(e)
-
-        return response
-    
-    async def deleteApplicationResourceTranslation(self, id=None, request_headers:Dict={}):
-        """Remove translations for application resources.
-        :param id :  : type string
-        """
-        payload = {}
-        
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = ContentValidator.deleteApplicationResourceTranslation()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations/{id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/resource/translations/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import OperationResponseSchema
-            schema = OperationResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deleteApplicationResourceTranslation")
-                print(e)
 
         return response
     

@@ -171,6 +171,8 @@ class Application(BaseSchema):
     
     is_internal = fields.Boolean(required=False)
     
+    is_sis_enabled = fields.Boolean(required=False)
+    
     is_active = fields.Boolean(required=False)
     
     _id = fields.Str(required=False)

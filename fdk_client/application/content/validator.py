@@ -14,7 +14,6 @@ from ..ApplicationModel import BaseSchema
     
         
         
-        
     
     
         
@@ -47,17 +46,15 @@ from ..ApplicationModel import BaseSchema
     
     
     
-    
+        
+        
         
         
     
     
         
-        
     
     
-        
-        
     
     
         
@@ -66,20 +63,17 @@ from ..ApplicationModel import BaseSchema
     
         
         
-        
+    
+    
         
         
     
     
         
         
-        
     
     
         
-        
-        
-    
 
 class ContentValidator:
     
@@ -95,8 +89,6 @@ class ContentValidator:
         slug = fields.Str(required=False)
         
         root_id = fields.Str(required=False)
-        
-        preview = fields.Boolean(required=False)
          
         
     
@@ -182,6 +174,31 @@ class ContentValidator:
          
         
     
+    class getDefaultSitemapConfig(BaseSchema):
+        
+        pass 
+        
+    
+    class getSitemaps(BaseSchema):
+        
+        
+        page_no = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
+        
+        is_active = fields.Boolean(required=False)
+        
+        name = fields.Str(required=False)
+         
+        
+    
+    class getSitemap(BaseSchema):
+        
+        
+        name = fields.Str(required=False)
+         
+        
+    
     class getSupportInformation(BaseSchema):
         
         pass 
@@ -192,21 +209,21 @@ class ContentValidator:
         pass 
         
     
-    class getPage(BaseSchema):
-        
-        
-        slug = fields.Str(required=False)
-        
-        root_id = fields.Str(required=False)
-         
-        
-    
     class getPages(BaseSchema):
         
         
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+         
+        
+    
+    class getPage(BaseSchema):
+        
+        
+        slug = fields.Str(required=False)
+        
+        root_id = fields.Str(required=False)
          
         
     
@@ -228,46 +245,11 @@ class ContentValidator:
          
         
     
-    class getTranslateUILabels(BaseSchema):
+    class getWellKnownUrl(BaseSchema):
         
         
-        template = fields.Boolean(required=False)
-        
-        template_theme_id = fields.Str(required=False)
-        
-        theme_id = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-        
-        type = fields.Str(required=False)
+        slug = fields.Str(required=False)
          
-        
-    
-    class fetchResourceTranslations(BaseSchema):
-        
-        
-        type = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-        
-        resource_id = fields.Str(required=False)
-         
-        
-    
-    class fetchResourceTranslationsWithPayload(BaseSchema):
-        
-        
-        type = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-        
-        resource_id = fields.Str(required=False)
-         
-        
-    
-    class getSupportedLanguages(BaseSchema):
-        
-        pass 
         
     
     
