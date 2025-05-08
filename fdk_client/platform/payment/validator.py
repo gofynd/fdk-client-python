@@ -20,17 +20,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
-    
-    
-        
-        
-    
-    
-        
-        
         
     
     
@@ -48,12 +37,16 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
         
     
     
+        
+    
+    
+        
+    
+    
+        
         
 
 
@@ -74,49 +67,6 @@ class PaymentValidator:
         
         
         company_id = fields.Int(required=False)
-         
-        
-    
-    class updatePayouts(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class activateAndDectivatePayouts(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class deletePayouts(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        unique_transfer_no = fields.Str(required=False)
-         
-        
-    
-    class getAllPayout(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        unique_transfer_no = fields.Str(required=False)
-        
-        unique_external_id = fields.Str(required=False)
-         
-        
-    
-    class savePayouts(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        unique_transfer_no = fields.Str(required=False)
          
         
     
@@ -147,19 +97,46 @@ class PaymentValidator:
          
         
     
+    class getSubscriptionPaymentMethod(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        unique_external_id = fields.Str(required=False)
+         
+        
+    
+    class deleteSubscriptionPaymentMethod(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        unique_external_id = fields.Str(required=False)
+        
+        payment_method_id = fields.Str(required=False)
+         
+        
+    
+    class getSubscriptionConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class saveSubscriptionSetupIntent(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
     class verifyIfscCode(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         ifsc_code = fields.Str(required=False)
-         
-        
-    
-    class getPaymentMethodConfig(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
          
         
     

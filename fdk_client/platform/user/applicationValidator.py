@@ -91,15 +91,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
-        
-    
-    
-        
-        
         
     
     
@@ -173,14 +164,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-        
-        
-    
-    
-        
-        
-    
-    
         
         
 
@@ -358,15 +341,6 @@ class UserValidator:
          
         
     
-    class getUserGroupCategories(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
     class updateUserGroup(BaseSchema):
         
         
@@ -390,17 +364,6 @@ class UserValidator:
         
     
     class updateUserGroupPartially(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        group_id = fields.Str(required=False)
-         
-        
-    
-    class getUsersByByGroupId(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -546,24 +509,6 @@ class UserValidator:
         application_id = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
-         
-        
-    
-    class bulkUpdateUserAttributes(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class bulkUpdatePerUserAttributes(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
          
         
     

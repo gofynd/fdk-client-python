@@ -18,9 +18,7 @@ class Theme:
             "getAllPages": "/service/application/theme/v1.0/{theme_id}/page",
             "getPage": "/service/application/theme/v1.0/{theme_id}/{page_value}",
             "getAppliedTheme": "/service/application/theme/v2.0/applied-theme",
-            "getThemeForPreview": "/service/application/theme/v2.0/{theme_id}/preview",
-            "getAppliedThemeV1": "/service/application/theme/v1.0/applied-theme",
-            "getThemeForPreviewV1": "/service/application/theme/v1.0/{theme_id}/preview"
+            "getThemeForPreview": "/service/application/theme/v2.0/{theme_id}/preview"
             
         }
         self._urls = {
@@ -76,14 +74,13 @@ class Theme:
 
         return response
     
-    async def getPage(self, theme_id=None, page_value=None, filters=None, section_preview_hash=None, company=None, preview_id=None, body="", request_headers:Dict={}):
+    async def getPage(self, theme_id=None, page_value=None, filters=None, section_preview_hash=None, company=None, body="", request_headers:Dict={}):
         """Get page level configurations, applied sections and seo data of a page by `page_value` received from list pages api.
         :param theme_id : Id of the theme to be retrieved. : type string
         :param page_value : Value of the page to be retrieved. : type string
         :param filters : Filters on sections to be applied or not. : type string
         :param section_preview_hash : Unique hash id on sections preview. : type string
         :param company : Company id of the application. : type integer
-        :param preview_id : Id to get the preview of the page. : type string
         """
         payload = {}
         
@@ -97,16 +94,14 @@ class Theme:
             payload["section_preview_hash"] = section_preview_hash
         if company is not None:
             payload["company"] = company
-        if preview_id is not None:
-            payload["preview_id"] = preview_id
 
         # Parameter validation
         schema = ThemeValidator.getPage()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPage"], proccessed_params="""{"required":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"string"}},{"name":"section_preview_hash","in":"query","description":"Unique hash id on sections preview.","required":false,"schema":{"type":"string"}},{"name":"company","in":"query","description":"Company id of the application.","required":false,"schema":{"type":"integer"}},{"name":"preview_id","in":"query","description":"Id to get the preview of the page.","required":false,"schema":{"type":"string"}}],"query":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"string"}},{"name":"section_preview_hash","in":"query","description":"Unique hash id on sections preview.","required":false,"schema":{"type":"string"}},{"name":"company","in":"query","description":"Company id of the application.","required":false,"schema":{"type":"integer"}},{"name":"preview_id","in":"query","description":"Id to get the preview of the page.","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved.","required":true,"schema":{"type":"string"}}]}""", serverType="application", theme_id=theme_id, page_value=page_value, filters=filters, section_preview_hash=section_preview_hash, company=company, preview_id=preview_id)
-        query_string = await create_query_string(filters=filters, section_preview_hash=section_preview_hash, company=company, preview_id=preview_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPage"], proccessed_params="""{"required":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"string"}},{"name":"section_preview_hash","in":"query","description":"Unique hash id on sections preview.","required":false,"schema":{"type":"string"}},{"name":"company","in":"query","description":"Company id of the application.","required":false,"schema":{"type":"integer"}}],"query":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"string"}},{"name":"section_preview_hash","in":"query","description":"Unique hash id on sections preview.","required":false,"schema":{"type":"string"}},{"name":"company","in":"query","description":"Company id of the application.","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved.","required":true,"schema":{"type":"string"}}]}""", serverType="application", theme_id=theme_id, page_value=page_value, filters=filters, section_preview_hash=section_preview_hash, company=company)
+        query_string = await create_query_string(filters=filters, section_preview_hash=section_preview_hash, company=company)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -124,7 +119,7 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPage"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/{theme_id}/{page_value}", theme_id=theme_id, page_value=page_value, filters=filters, section_preview_hash=section_preview_hash, company=company, preview_id=preview_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPage"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/{theme_id}/{page_value}", theme_id=theme_id, page_value=page_value, filters=filters, section_preview_hash=section_preview_hash, company=company), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import AvailablePageSchema
@@ -200,7 +195,7 @@ class Theme:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getThemeForPreview"], proccessed_params="""{"required":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"boolean"}}],"query":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"boolean"}}],"headers":[],"path":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}}]}""", serverType="application", theme_id=theme_id, filters=filters)
+        url_with_params = await create_url_with_params(api_url=self._urls["getThemeForPreview"], proccessed_params="""{"required":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"boolean","example":true}}],"query":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"boolean","example":true}}],"headers":[],"path":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}}]}""", serverType="application", theme_id=theme_id, filters=filters)
         query_string = await create_query_string(filters=filters)
         if query_string:
             url_with_params += "?" + query_string
@@ -228,95 +223,6 @@ class Theme:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getThemeForPreview")
-                print(e)
-
-        return response
-    
-    async def getAppliedThemeV1(self, body="", request_headers:Dict={}):
-        """Gets the theme currently applied to the application.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ThemeValidator.getAppliedThemeV1()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getAppliedThemeV1"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAppliedThemeV1"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/applied-theme", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ThemesSchema
-            schema = ThemesSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getAppliedThemeV1")
-                print(e)
-
-        return response
-    
-    async def getThemeForPreviewV1(self, theme_id=None, body="", request_headers:Dict={}):
-        """Retrieves a theme for previewing before applying it to the application.
-        :param theme_id : ID of the theme to be retrieved : type string
-        """
-        payload = {}
-        
-        if theme_id is not None:
-            payload["theme_id"] = theme_id
-
-        # Parameter validation
-        schema = ThemeValidator.getThemeForPreviewV1()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getThemeForPreviewV1"], proccessed_params="""{"required":[{"name":"theme_id","in":"path","description":"ID of the theme to be retrieved","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"theme_id","in":"path","description":"ID of the theme to be retrieved","required":true,"schema":{"type":"string"}}]}""", serverType="application", theme_id=theme_id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getThemeForPreviewV1"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/{theme_id}/preview", theme_id=theme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ThemesSchema
-            schema = ThemesSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getThemeForPreviewV1")
                 print(e)
 
         return response

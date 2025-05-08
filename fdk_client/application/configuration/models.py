@@ -224,10 +224,6 @@ class OrderFeature(BaseSchema):
     pass
 
 
-class BuyboxFeature(BaseSchema):
-    pass
-
-
 class AppFeatureResponseSchema(BaseSchema):
     pass
 
@@ -405,10 +401,6 @@ class OrderingStore(BaseSchema):
 
 
 class OrderingStores(BaseSchema):
-    pass
-
-
-class PricingStrategy(BaseSchema):
     pass
 
 
@@ -905,8 +897,6 @@ class AppFeature(BaseSchema):
     
     order = fields.Nested(OrderFeature, required=False)
     
-    buybox = fields.Nested(BuyboxFeature, required=False)
-    
     _id = fields.Str(required=False)
     
     app = fields.Str(required=False)
@@ -916,8 +906,6 @@ class AppFeature(BaseSchema):
     modified_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
-    
-    pricing_strategy = fields.Nested(PricingStrategy, required=False)
     
 
 
@@ -1079,18 +1067,6 @@ class OrderFeature(BaseSchema):
     
 
 
-class BuyboxFeature(BaseSchema):
-    # Configuration swagger.json
-
-    
-    show_name = fields.Boolean(required=False)
-    
-    enable_selection = fields.Boolean(required=False)
-    
-    is_seller_buybox_enabled = fields.Boolean(required=False)
-    
-
-
 class AppFeatureResponseSchema(BaseSchema):
     # Configuration swagger.json
 
@@ -1119,8 +1095,6 @@ class Currency(BaseSchema):
     
     symbol = fields.Str(required=False)
     
-    subunit = fields.Str(required=False)
-    
     country_name = fields.Str(required=False)
     
     country_code = fields.Str(required=False)
@@ -1140,8 +1114,6 @@ class Domain(BaseSchema):
     _id = fields.Str(required=False)
     
     name = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
     
     is_predefined = fields.Boolean(required=False)
     
@@ -1183,8 +1155,6 @@ class ApplicationRedirections(BaseSchema):
     
     type = fields.Str(required=False)
     
-    _id = fields.Str(required=False)
-    
 
 
 class ApplicationMeta(BaseSchema):
@@ -1222,8 +1192,6 @@ class Application(BaseSchema):
     cache_ttl = fields.Int(required=False)
     
     is_internal = fields.Boolean(required=False)
-    
-    is_sis_enabled = fields.Boolean(required=False)
     
     is_active = fields.Boolean(required=False)
     
@@ -1269,8 +1237,6 @@ class Application(BaseSchema):
     
     tokens = fields.List(fields.Nested(TokenSchema, required=False), required=False)
     
-    company_created_on = fields.Str(required=False)
-    
 
 
 class TokenSchema(BaseSchema):
@@ -1279,7 +1245,7 @@ class TokenSchema(BaseSchema):
     
     token = fields.Str(required=False)
     
-    created_by = fields.Str(required=False)
+    created_by = fields.Dict(required=False)
     
     created_at = fields.Str(required=False)
     
@@ -1313,7 +1279,7 @@ class CompanyAboutAddress(BaseSchema):
     # Configuration swagger.json
 
     
-    pincode = fields.Str(required=False)
+    pincode = fields.Int(required=False)
     
     address1 = fields.Str(required=False)
     
@@ -1376,8 +1342,6 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
-    
-    total = fields.Int(required=False)
     
 
 
@@ -1723,7 +1687,7 @@ class OptedStoreAddress(BaseSchema):
     
     address2 = fields.Str(required=False)
     
-    pincode = fields.Str(required=False)
+    pincode = fields.Int(required=False)
     
     country = fields.Str(required=False)
     
@@ -1749,7 +1713,7 @@ class OrderingStore(BaseSchema):
     
     store_code = fields.Str(required=False)
     
-    pincode = fields.Str(required=False)
+    pincode = fields.Int(required=False)
     
     code = fields.Str(required=False)
     
@@ -1776,14 +1740,6 @@ class OrderingStores(BaseSchema):
     app = fields.Str(required=False)
     
     __v = fields.Int(required=False)
-    
-
-
-class PricingStrategy(BaseSchema):
-    # Configuration swagger.json
-
-    
-    value = fields.Str(required=False)
     
 
 

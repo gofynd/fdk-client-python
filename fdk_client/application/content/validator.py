@@ -14,41 +14,21 @@ from ..ApplicationModel import BaseSchema
     
         
         
-    
-    
         
-        
-        
-        
-    
-    
-    
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-    
-    
-        
-        
-    
-    
-    
-        
-        
-    
     
     
         
         
         
+        
+    
+    
+    
+    
+    
+        
+    
+    
         
     
     
@@ -61,8 +41,26 @@ from ..ApplicationModel import BaseSchema
         
     
     
+    
         
         
+    
+    
+    
+        
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+    
+    
     
     
         
@@ -73,6 +71,11 @@ from ..ApplicationModel import BaseSchema
         
     
     
+        
+        
+    
+    
+        
         
 
 class ContentValidator:
@@ -89,6 +92,8 @@ class ContentValidator:
         slug = fields.Str(required=False)
         
         root_id = fields.Str(required=False)
+        
+        preview = fields.Boolean(required=False)
          
         
     
@@ -185,10 +190,6 @@ class ContentValidator:
         page_no = fields.Str(required=False)
         
         page_size = fields.Str(required=False)
-        
-        is_active = fields.Boolean(required=False)
-        
-        name = fields.Str(required=False)
          
         
     
@@ -196,6 +197,22 @@ class ContentValidator:
         
         
         name = fields.Str(required=False)
+         
+        
+    
+    class getSlideshows(BaseSchema):
+        
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class getSlideshow(BaseSchema):
+        
+        
+        slug = fields.Str(required=False)
          
         
     
@@ -209,21 +226,21 @@ class ContentValidator:
         pass 
         
     
-    class getPages(BaseSchema):
-        
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-         
-        
-    
     class getPage(BaseSchema):
         
         
         slug = fields.Str(required=False)
         
         root_id = fields.Str(required=False)
+         
+        
+    
+    class getPages(BaseSchema):
+        
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     
@@ -242,13 +259,6 @@ class ContentValidator:
         resource = fields.Str(required=False)
         
         resource_slug = fields.Str(required=False)
-         
-        
-    
-    class getWellKnownUrl(BaseSchema):
-        
-        
-        slug = fields.Str(required=False)
          
         
     

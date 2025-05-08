@@ -12,23 +12,49 @@ class Serviceability:
         self._conf = config
 
     
-    async def updateCompanySelfShip(self, body="", request_headers:Dict={}):
-        """Updates Self Ship at company level
+    async def getZones(self, page_no=None, page_size=None, is_active=None, application_ids=None, q=None, country_iso_code=None, state=None, city=None, pincode=None, sector=None, request_headers:Dict={}):
+        """Retrieves a list of delivery zones.
+        :param page_no : Index of the item to start returning with : type integer
+        :param page_size : Determines the items to be displayed in a page : type integer
+        :param is_active : Status of Zone (either active or inactive) : type boolean
+        :param application_ids : Zones filtered by applications : type string
+        :param q : Search with name as a free text : type string
+        :param country_iso_code : ISO2 code of the country : type string
+        :param state : State name : type string
+        :param city : City name : type string
+        :param pincode : Pincode value to search zones : type string
+        :param sector : Sector value to search zones : type string
         """
         payload = {}
         
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+        if is_active is not None:
+            payload["is_active"] = is_active
+        if application_ids is not None:
+            payload["application_ids"] = application_ids
+        if q is not None:
+            payload["q"] = q
+        if country_iso_code is not None:
+            payload["country_iso_code"] = country_iso_code
+        if state is not None:
+            payload["state"] = state
+        if city is not None:
+            payload["city"] = city
+        if pincode is not None:
+            payload["pincode"] = pincode
+        if sector is not None:
+            payload["sector"] = sector
 
         # Parameter validation
-        schema = ServiceabilityValidator.updateCompanySelfShip()
+        schema = ServiceabilityValidator.getZones()
         schema.dump(schema.load(payload))
         
-        # Body validation
-        from .models import CompanySelfShip
-        schema = CompanySelfShip()
-        schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/selfship", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/zones", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"Index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_active","description":"Status of Zone (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"application_ids","description":"Zones filtered by applications","schema":{"type":"string"}},{"in":"query","name":"q","description":"Search with name as a free text","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"state","description":"State name","schema":{"type":"string"}},{"in":"query","name":"city","description":"City name","schema":{"type":"string"}},{"in":"query","name":"pincode","description":"Pincode value to search zones","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector value to search zones","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_no","description":"Index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_active","description":"Status of Zone (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"application_ids","description":"Zones filtered by applications","schema":{"type":"string"}},{"in":"query","name":"q","description":"Search with name as a free text","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"state","description":"State name","schema":{"type":"string"}},{"in":"query","name":"city","description":"City name","schema":{"type":"string"}},{"in":"query","name":"pincode","description":"Pincode value to search zones","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector value to search zones","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, is_active=is_active, application_ids=application_ids, q=q, country_iso_code=country_iso_code, state=state, city=city, pincode=pincode, sector=sector)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, is_active=is_active, application_ids=application_ids, q=q, country_iso_code=country_iso_code, state=state, city=city, pincode=pincode, sector=sector)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -45,31 +71,35 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/selfship", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/zones", page_no=page_no, page_size=page_size, is_active=is_active, application_ids=application_ids, q=q, country_iso_code=country_iso_code, state=state, city=city, pincode=pincode, sector=sector), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CompanySelfShip
-            schema = CompanySelfShip()
+            from .models import ListViewResult
+            schema = ListViewResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for updateCompanySelfShip")
+                print("Response Validation failed for getZones")
                 print(e)
 
         return response
     
-    async def getCompanySelfShip(self, request_headers:Dict={}):
-        """Updates Self Ship at company level
+    async def createZone(self, body="", request_headers:Dict={}):
+        """Creates a delivery zone.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.getCompanySelfShip()
+        schema = ServiceabilityValidator.createZone()
         schema.dump(schema.load(payload))
         
+        # Body validation
+        from .models import CreateZoneData
+        schema = CreateZoneData()
+        schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/selfship", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/zones", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -87,21 +117,157 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/selfship", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/zones", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CompanySelfShip
-            schema = CompanySelfShip()
+            from .models import ZoneResult
+            schema = ZoneResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getCompanySelfShip")
+                print("Response Validation failed for createZone")
+                print(e)
+
+        return response
+    
+    async def updateZoneById(self, zone_id=None, body="", request_headers:Dict={}):
+        """Update an existing delivery zone .
+        :param zone_id : A `zone_id` is a unique identifier for a particular zone. : type string
+        """
+        payload = {}
+        
+        if zone_id is not None:
+            payload["zone_id"] = zone_id
+
+        # Parameter validation
+        schema = ServiceabilityValidator.updateZoneById()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import UpdateZoneData
+        schema = UpdateZoneData()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/zones/{zone_id}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"required":true}]}""", serverType="platform", zone_id=zone_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/zones/{zone_id}", zone_id=zone_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ZoneSuccessResult
+            schema = ZoneSuccessResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateZoneById")
+                print(e)
+
+        return response
+    
+    async def getZoneById(self, zone_id=None, request_headers:Dict={}):
+        """Retrieves a single delivery zone.
+        :param zone_id : A `zone_id` is a unique identifier for a particular zone. : type string
+        """
+        payload = {}
+        
+        if zone_id is not None:
+            payload["zone_id"] = zone_id
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getZoneById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/zones/{zone_id}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"zone_id","description":"A `zone_id` is a unique identifier for a particular zone.","schema":{"type":"string"},"required":true}]}""", serverType="platform", zone_id=zone_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/zones/{zone_id}", zone_id=zone_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetZoneByIdSchema
+            schema = GetZoneByIdSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getZoneById")
+                print(e)
+
+        return response
+    
+    async def getAllStores(self, request_headers:Dict={}):
+        """Retrieves a list of locations.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getAllStores()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/logistics/stores", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/logistics/stores", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetStoresViewResult
+            schema = GetStoresViewResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAllStores")
                 print(e)
 
         return response
     
     async def createCourierPartnerAccount(self, body="", request_headers:Dict={}):
-        """Retrieves a list of courier partner accounts.
+        """Creates a courier partner account.
         """
         payload = {}
         
@@ -111,11 +277,11 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CourierAccount
-        schema = CourierAccount()
+        from .models import CourierAccountDetailsBody
+        schema = CourierAccountDetailsBody()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/account", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/account", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true,"example":123}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true,"example":123}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -146,17 +312,13 @@ class Serviceability:
 
         return response
     
-    async def getCourierPartnerAccounts(self, page_no=None, page_size=None, stage=None, payment_mode=None, transport_type=None, account_ids=None, self_ship=None, own_account=None, q=None, request_headers:Dict={}):
+    async def getCourierPartnerAccounts(self, page_no=None, page_size=None, stage=None, payment_mode=None, transport_type=None, request_headers:Dict={}):
         """Retrieves a list of courier partner accounts.
-        :param page_no : index of the item to start returning with : type integer
-        :param page_size : determines the items to be displayed in a page : type integer
-        :param stage : stage of the account. enabled/disabled : type string
+        :param page_no : Index of the item to start returning with : type integer
+        :param page_size : Determines the items to be displayed in a page : type integer
+        :param stage : Stage of the account. enabled/disabled : type string
         :param payment_mode : Filters dp accounts based on payment mode : type string
         :param transport_type : Filters dp accounts based on transport_type : type string
-        :param account_ids : Filters dp accounts based on their ids : type array
-        :param self_ship : To filter self ship/non self ship dp accounts : type boolean
-        :param own_account : Filters seller owned or admin owned dp accounts : type boolean
-        :param q : Filters dp accounts based on case sensitive partial account name : type string
         """
         payload = {}
         
@@ -170,22 +332,14 @@ class Serviceability:
             payload["payment_mode"] = payment_mode
         if transport_type is not None:
             payload["transport_type"] = transport_type
-        if account_ids is not None:
-            payload["account_ids"] = account_ids
-        if self_ship is not None:
-            payload["self_ship"] = self_ship
-        if own_account is not None:
-            payload["own_account"] = own_account
-        if q is not None:
-            payload["q"] = q
 
         # Parameter validation
         schema = ServiceabilityValidator.getCourierPartnerAccounts()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/account", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"stage","description":"stage of the account. enabled/disabled","schema":{"type":"string"}},{"in":"query","name":"payment_mode","description":"Filters dp accounts based on payment mode","schema":{"type":"string"}},{"in":"query","name":"transport_type","description":"Filters dp accounts based on transport_type","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"account_ids","description":"Filters dp accounts based on their ids","schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"self_ship","description":"To filter self ship/non self ship dp accounts","schema":{"type":"boolean"}},{"in":"query","name":"own_account","description":"Filters seller owned or admin owned dp accounts","schema":{"type":"boolean"}},{"in":"query","name":"q","description":"Filters dp accounts based on case sensitive partial account name","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"stage","description":"stage of the account. enabled/disabled","schema":{"type":"string"}},{"in":"query","name":"payment_mode","description":"Filters dp accounts based on payment mode","schema":{"type":"string"}},{"in":"query","name":"transport_type","description":"Filters dp accounts based on transport_type","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"account_ids","description":"Filters dp accounts based on their ids","schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"self_ship","description":"To filter self ship/non self ship dp accounts","schema":{"type":"boolean"}},{"in":"query","name":"own_account","description":"Filters seller owned or admin owned dp accounts","schema":{"type":"boolean"}},{"in":"query","name":"q","description":"Filters dp accounts based on case sensitive partial account name","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, stage=stage, payment_mode=payment_mode, transport_type=transport_type, account_ids=account_ids, self_ship=self_ship, own_account=own_account, q=q)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, stage=stage, payment_mode=payment_mode, transport_type=transport_type, account_ids=account_ids, self_ship=self_ship, own_account=own_account, q=q)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/account", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"Index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"stage","description":"Stage of the account. enabled/disabled","schema":{"type":"string","enum":["enabled","disabled"]}},{"in":"query","name":"payment_mode","description":"Filters dp accounts based on payment mode","schema":{"type":"string"}},{"in":"query","name":"transport_type","description":"Filters dp accounts based on transport_type","schema":{"type":"string","x-not-enum":true}}],"query":[{"in":"query","name":"page_no","description":"Index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"stage","description":"Stage of the account. enabled/disabled","schema":{"type":"string","enum":["enabled","disabled"]}},{"in":"query","name":"payment_mode","description":"Filters dp accounts based on payment mode","schema":{"type":"string"}},{"in":"query","name":"transport_type","description":"Filters dp accounts based on transport_type","schema":{"type":"string","x-not-enum":true}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, stage=stage, payment_mode=payment_mode, transport_type=transport_type)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, stage=stage, payment_mode=payment_mode, transport_type=transport_type)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -202,11 +356,11 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/account", page_no=page_no, page_size=page_size, stage=stage, payment_mode=payment_mode, transport_type=transport_type, account_ids=account_ids, self_ship=self_ship, own_account=own_account, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/account", page_no=page_no, page_size=page_size, stage=stage, payment_mode=payment_mode, transport_type=transport_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CompanyCourierPartnerAccountListResponseSchema
-            schema = CompanyCourierPartnerAccountListResponseSchema()
+            from .models import CompanyCourierPartnerAccountListResult
+            schema = CompanyCourierPartnerAccountListResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -217,7 +371,7 @@ class Serviceability:
     
     async def updateCourierPartnerAccount(self, account_id=None, body="", request_headers:Dict={}):
         """Updates an existing courier partner account.
-        :param account_id : Unique ID of courier account : type string
+        :param account_id : Unique ID of courier partner account : type string
         """
         payload = {}
         
@@ -229,11 +383,11 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CourierAccount
-        schema = CourierAccount()
+        from .models import CourierAccountUpdateDetails
+        schema = CourierAccountUpdateDetails()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/account/{account_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"account_id","description":"Unique ID of courier account","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"account_id","description":"Unique ID of courier account","schema":{"type":"string"},"required":true}]}""", serverType="platform", account_id=account_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/account/{account_id}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"account_id","description":"Unique ID of courier partner account","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"account_id","description":"Unique ID of courier partner account","schema":{"type":"string"},"required":true}]}""", serverType="platform", account_id=account_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -254,8 +408,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/account/{account_id}", account_id=account_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierAccount
-            schema = CourierAccount()
+            from .models import CourierAccountResult
+            schema = CourierAccountResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -266,7 +420,7 @@ class Serviceability:
     
     async def getCourierPartnerAccount(self, account_id=None, request_headers:Dict={}):
         """Retrieves a single courier partner account.
-        :param account_id : Unique ID of courier account : type string
+        :param account_id : Unique ID of courier partner account : type string
         """
         payload = {}
         
@@ -278,7 +432,7 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/account/{account_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"account_id","description":"Unique ID of courier account","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"account_id","description":"Unique ID of courier account","schema":{"type":"string"},"required":true}]}""", serverType="platform", account_id=account_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/account/{account_id}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"account_id","description":"Unique ID of courier partner account","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"account_id","description":"Unique ID of courier partner account","schema":{"type":"string"},"required":true}]}""", serverType="platform", account_id=account_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -299,8 +453,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/account/{account_id}", account_id=account_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierAccountResponseSchema
-            schema = CourierAccountResponseSchema()
+            from .models import CourierAccountResult
+            schema = CourierAccountResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -320,11 +474,11 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CompanyConfigurationShema
-        schema = CompanyConfigurationShema()
+        from .models import CompanyConfig
+        schema = CompanyConfig()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/configuration", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/configuration", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -366,7 +520,7 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/configuration", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/configuration", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -397,26 +551,30 @@ class Serviceability:
 
         return response
     
-    async def createPackageMaterial(self, page_no=None, body="", request_headers:Dict={}):
-        """Creates a packaging material
-        :param page_no : index of the item to start returning with : type integer
+    async def bulkTat(self, extension_id=None, scheme_id=None, body="", request_headers:Dict={}):
+        """Updates locality wise TAT(Turn Around Time) for particular courier scheme using CSV file.
+Export locality wise CSV files.
+        :param extension_id : Unique Identifier of courier partner extension. : type string
+        :param scheme_id : Unique identifier of courier partner scheme. : type string
         """
         payload = {}
         
-        if page_no is not None:
-            payload["page_no"] = page_no
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+        if scheme_id is not None:
+            payload["scheme_id"] = scheme_id
 
         # Parameter validation
-        schema = ServiceabilityValidator.createPackageMaterial()
+        schema = ServiceabilityValidator.bulkTat()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PackageMaterial
-        schema = PackageMaterial()
+        from .models import BulkRegionJobDetails
+        schema = BulkRegionJobDetails()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-materials", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer"},"required":false}],"query":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", page_no=page_no)
-        query_string = await create_query_string(page_no=page_no)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/{extension_id}/scheme/{scheme_id}/tat", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of courier partner scheme.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of courier partner scheme.","schema":{"type":"string"},"required":true}]}""", serverType="platform", extension_id=extension_id, scheme_id=scheme_id)
+        query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
 
@@ -433,11 +591,365 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-materials", page_no=page_no), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/{extension_id}/scheme/{scheme_id}/tat", extension_id=extension_id, scheme_id=scheme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PackageMaterialResponseSchema
-            schema = PackageMaterialResponseSchema()
+            from .models import BulkRegionResultItemData
+            schema = BulkRegionResultItemData()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for bulkTat")
+                print(e)
+
+        return response
+    
+    async def getBulkTat(self, extension_id=None, scheme_id=None, page_no=None, page_size=None, batch_id=None, action=None, status=None, country=None, region=None, start_date=None, end_date=None, request_headers:Dict={}):
+        """Retrieves the history of changes made to TAT(Turn Around Time) for scheme.
+        :param extension_id : Unique Identifier of courier partner extension. : type string
+        :param scheme_id : Unique identifier of courier partner scheme. : type string
+        :param page_no : Index of the item to start returning with : type integer
+        :param page_size : Determines the items to be displayed in a page : type integer
+        :param batch_id : Unique identifier of bulk job : type string
+        :param action : Import or export bulk type : type string
+        :param status : Status of the bulk actions : type string
+        :param country : Country for which bulk job is initiated : type string
+        :param region : Region for which bulk job is initiated : type string
+        :param start_date : Fetch job history after a particule date : type string
+        :param end_date : Fetch job history before a particule date : type string
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+        if scheme_id is not None:
+            payload["scheme_id"] = scheme_id
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
+        if action is not None:
+            payload["action"] = action
+        if status is not None:
+            payload["status"] = status
+        if country is not None:
+            payload["country"] = country
+        if region is not None:
+            payload["region"] = region
+        if start_date is not None:
+            payload["start_date"] = start_date
+        if end_date is not None:
+            payload["end_date"] = end_date
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getBulkTat()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/{extension_id}/scheme/{scheme_id}/tat", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of courier partner scheme.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"Index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Unique identifier of bulk job","schema":{"type":"string"}},{"in":"query","name":"action","description":"Import or export bulk type","schema":{"type":"string","enum":["import","export"]}},{"in":"query","name":"status","description":"Status of the bulk actions","schema":{"type":"string","enum":["processing","failed","partial","completed"]}},{"in":"query","name":"country","description":"Country for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"region","description":"Region for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"start_date","description":"Fetch job history after a particule date","example":"2023-08-03T00:00:00.000Z","schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"Fetch job history before a particule date","example":"2023-08-03T00:00:00.000Z","schema":{"type":"string","format":"date-time"}}],"query":[{"in":"query","name":"page_no","description":"Index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Unique identifier of bulk job","schema":{"type":"string"}},{"in":"query","name":"action","description":"Import or export bulk type","schema":{"type":"string","enum":["import","export"]}},{"in":"query","name":"status","description":"Status of the bulk actions","schema":{"type":"string","enum":["processing","failed","partial","completed"]}},{"in":"query","name":"country","description":"Country for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"region","description":"Region for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"start_date","description":"Fetch job history after a particule date","example":"2023-08-03T00:00:00.000Z","schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"Fetch job history before a particule date","example":"2023-08-03T00:00:00.000Z","schema":{"type":"string","format":"date-time"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of courier partner scheme.","schema":{"type":"string"},"required":true}]}""", serverType="platform", extension_id=extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, country=country, region=region, start_date=start_date, end_date=end_date)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, country=country, region=region, start_date=start_date, end_date=end_date)
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/{extension_id}/scheme/{scheme_id}/tat", extension_id=extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, country=country, region=region, start_date=start_date, end_date=end_date), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkRegionResult
+            schema = BulkRegionResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBulkTat")
+                print(e)
+
+        return response
+    
+    async def bulkServiceability(self, extension_id=None, scheme_id=None, body="", request_headers:Dict={}):
+        """Bulk operations involve either new serviceability settings or updating existing ones in large quantities.
+        :param extension_id : Unique Identifier of courier partner extension. : type string
+        :param scheme_id : Unique identifier of courier partner scheme. : type string
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+        if scheme_id is not None:
+            payload["scheme_id"] = scheme_id
+
+        # Parameter validation
+        schema = ServiceabilityValidator.bulkServiceability()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import BulkRegionJobDetails
+        schema = BulkRegionJobDetails()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/{extension_id}/scheme/{scheme_id}/serviceability/bulk", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of courier partner scheme.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of courier partner scheme.","schema":{"type":"string"},"required":true}]}""", serverType="platform", extension_id=extension_id, scheme_id=scheme_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/{extension_id}/scheme/{scheme_id}/serviceability/bulk", extension_id=extension_id, scheme_id=scheme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkRegionResultItemData
+            schema = BulkRegionResultItemData()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for bulkServiceability")
+                print(e)
+
+        return response
+    
+    async def getBulkServiceability(self, extension_id=None, scheme_id=None, page_no=None, page_size=None, batch_id=None, action=None, status=None, country=None, region=None, start_date=None, end_date=None, request_headers:Dict={}):
+        """Retrieves the history of changes made to serviceability settings for a scheme.
+        :param extension_id : Unique Identifier of courier partner extension. : type string
+        :param scheme_id : Unique identifier of courier partner scheme. : type string
+        :param page_no : Index of the item to start returning with : type integer
+        :param page_size : Determines the items to be displayed in a page : type integer
+        :param batch_id : Unique identifier of bulk job : type string
+        :param action : Import or export bulk type : type string
+        :param status : Status of the bulk actions : type string
+        :param country : Country for which bulk job is initiated : type string
+        :param region : Region for which bulk job is initiated : type string
+        :param start_date : Fetch job history after a particule date : type string
+        :param end_date : Fetch job history before a particule date : type string
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+        if scheme_id is not None:
+            payload["scheme_id"] = scheme_id
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
+        if action is not None:
+            payload["action"] = action
+        if status is not None:
+            payload["status"] = status
+        if country is not None:
+            payload["country"] = country
+        if region is not None:
+            payload["region"] = region
+        if start_date is not None:
+            payload["start_date"] = start_date
+        if end_date is not None:
+            payload["end_date"] = end_date
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getBulkServiceability()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/{extension_id}/scheme/{scheme_id}/serviceability/bulk", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of courier partner scheme.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"Index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Unique identifier of bulk job","schema":{"type":"string"}},{"in":"query","name":"action","description":"Import or export bulk type","schema":{"type":"string","enum":["import","export"]}},{"in":"query","name":"status","description":"Status of the bulk actions","schema":{"type":"string","enum":["completed","failed","partial","processing"]}},{"in":"query","name":"country","description":"Country for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"region","description":"Region for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"start_date","description":"Fetch job history after a particule date","example":"2023-08-03T00:00:00.000Z","schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"Fetch job history before a particule date","example":"2023-08-03T00:00:00.000Z","schema":{"type":"string","format":"date-time"}}],"query":[{"in":"query","name":"page_no","description":"Index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Unique identifier of bulk job","schema":{"type":"string"}},{"in":"query","name":"action","description":"Import or export bulk type","schema":{"type":"string","enum":["import","export"]}},{"in":"query","name":"status","description":"Status of the bulk actions","schema":{"type":"string","enum":["completed","failed","partial","processing"]}},{"in":"query","name":"country","description":"Country for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"region","description":"Region for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"start_date","description":"Fetch job history after a particule date","example":"2023-08-03T00:00:00.000Z","schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"Fetch job history before a particule date","example":"2023-08-03T00:00:00.000Z","schema":{"type":"string","format":"date-time"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of courier partner scheme.","schema":{"type":"string"},"required":true}]}""", serverType="platform", extension_id=extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, country=country, region=region, start_date=start_date, end_date=end_date)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, country=country, region=region, start_date=start_date, end_date=end_date)
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/{extension_id}/scheme/{scheme_id}/serviceability/bulk", extension_id=extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, country=country, region=region, start_date=start_date, end_date=end_date), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkRegionResult
+            schema = BulkRegionResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBulkServiceability")
+                print(e)
+
+        return response
+    
+    async def getServiceability(self, extension_id=None, scheme_id=None, region_id=None, request_headers:Dict={}):
+        """Rerieves serviceability settings of a single courier scheme for a given locality
+        :param extension_id : Unique Identifier of courier partner extension. : type string
+        :param scheme_id : Unique identifier of courier partner scheme. : type string
+        :param region_id : Unique identifier of a region : type string
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+        if scheme_id is not None:
+            payload["scheme_id"] = scheme_id
+        if region_id is not None:
+            payload["region_id"] = region_id
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getServiceability()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/{extension_id}/scheme/{scheme_id}/serviceability/region/{region_id}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of courier partner scheme.","schema":{"type":"string"},"required":true},{"in":"path","name":"region_id","description":"Unique identifier of a region","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of courier partner scheme.","schema":{"type":"string"},"required":true},{"in":"path","name":"region_id","description":"Unique identifier of a region","schema":{"type":"string"},"required":true}]}""", serverType="platform", extension_id=extension_id, scheme_id=scheme_id, region_id=region_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/{extension_id}/scheme/{scheme_id}/serviceability/region/{region_id}", extension_id=extension_id, scheme_id=scheme_id, region_id=region_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ServiceabilityModel
+            schema = ServiceabilityModel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getServiceability")
+                print(e)
+
+        return response
+    
+    async def updateServiceability(self, extension_id=None, scheme_id=None, region_id=None, body="", request_headers:Dict={}):
+        """Updates serviceability settings of a single courier scheme for a given locality
+        :param extension_id : Unique Identifier of courier partner extension. : type string
+        :param scheme_id : Unique identifier of courier partner scheme. : type string
+        :param region_id : Unique identifier of a region : type string
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+        if scheme_id is not None:
+            payload["scheme_id"] = scheme_id
+        if region_id is not None:
+            payload["region_id"] = region_id
+
+        # Parameter validation
+        schema = ServiceabilityValidator.updateServiceability()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ServiceabilityModel
+        schema = ServiceabilityModel()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/{extension_id}/scheme/{scheme_id}/serviceability/region/{region_id}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of courier partner scheme.","schema":{"type":"string"},"required":true},{"in":"path","name":"region_id","description":"Unique identifier of a region","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of courier partner scheme.","schema":{"type":"string"},"required":true},{"in":"path","name":"region_id","description":"Unique identifier of a region","schema":{"type":"string"},"required":true}]}""", serverType="platform", extension_id=extension_id, scheme_id=scheme_id, region_id=region_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/{extension_id}/scheme/{scheme_id}/serviceability/region/{region_id}", extension_id=extension_id, scheme_id=scheme_id, region_id=region_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ServiceabilityModel
+            schema = ServiceabilityModel()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateServiceability")
+                print(e)
+
+        return response
+    
+    async def createPackageMaterial(self, body="", request_headers:Dict={}):
+        """Creates a packaging material
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.createPackageMaterial()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PackageMaterial
+        schema = PackageMaterial()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-materials", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-materials", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PackageMaterialResult
+            schema = PackageMaterialResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -448,11 +960,11 @@ class Serviceability:
     
     async def getPackageMaterialList(self, page_no=None, page_size=None, q=None, size=None, package_type=None, request_headers:Dict={}):
         """Retrieves a list of packaging materials
-        :param page_no : index of the item to start returning with : type integer
-        :param page_size : determines the items to be displayed in a page : type integer
-        :param q : perform regex search on items matching name for given value : type string
-        :param size : filters items based on given size : type string
-        :param package_type : filters items based on given package_type : type string
+        :param page_no : Index of the item to start returning with : type integer
+        :param page_size : Determines the items to be displayed in a page : type integer
+        :param q : Perform regex search on items matching name for given value : type string
+        :param size : Filters items based on given size : type string
+        :param package_type : Filters items based on given package_type : type string
         """
         payload = {}
         
@@ -472,7 +984,7 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-materials", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"q","description":"perform regex search on items matching name for given value","schema":{"type":"string"}},{"in":"query","name":"size","description":"filters items based on given size","schema":{"type":"string"}},{"in":"query","name":"package_type","description":"filters items based on given package_type","schema":{"type":"string","x-not-enum":true}}],"query":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"q","description":"perform regex search on items matching name for given value","schema":{"type":"string"}},{"in":"query","name":"size","description":"filters items based on given size","schema":{"type":"string"}},{"in":"query","name":"package_type","description":"filters items based on given package_type","schema":{"type":"string","x-not-enum":true}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, q=q, size=size, package_type=package_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-materials", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"Index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"q","description":"Perform regex search on items matching name for given value","schema":{"type":"string"}},{"in":"query","name":"size","description":"Filters items based on given size","schema":{"type":"string"}},{"in":"query","name":"package_type","description":"Filters items based on given package_type","schema":{"type":"string","x-not-enum":true}}],"query":[{"in":"query","name":"page_no","description":"Index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"q","description":"Perform regex search on items matching name for given value","schema":{"type":"string"}},{"in":"query","name":"size","description":"Filters items based on given size","schema":{"type":"string"}},{"in":"query","name":"package_type","description":"Filters items based on given package_type","schema":{"type":"string","x-not-enum":true}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, q=q, size=size, package_type=package_type)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q, size=size, package_type=package_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -514,11 +1026,11 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PackageRuleRequestSchema
-        schema = PackageRuleRequestSchema()
+        from .models import PackageRule
+        schema = PackageRule()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/rules", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/rules", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -549,17 +1061,14 @@ class Serviceability:
 
         return response
     
-    async def getPackageMaterialRuleDetails(self, rule_id=None, page_no=None, page_size=None, is_active=None, request_headers:Dict={}):
-        """This API returns details of package materials rule.
-        :param rule_id : A `package_material_rule_id` is a unique identifier for a Package Material Rule : type string
-        :param page_no : index of the item to start returning with : type integer
-        :param page_size : determines the items to be displayed in a page : type integer
-        :param is_active : filters items based on given is_active : type string
+    async def getPackageMaterialRules(self, page_no=None, page_size=None, is_active=None, request_headers:Dict={}):
+        """Retrieve packaging rules
+        :param page_no : Index of the item to start returning with : type integer
+        :param page_size : Determines the items to be displayed in a page : type integer
+        :param is_active : Filters items based on given is_active : type string
         """
         payload = {}
         
-        if rule_id is not None:
-            payload["rule_id"] = rule_id
         if page_no is not None:
             payload["page_no"] = page_no
         if page_size is not None:
@@ -568,11 +1077,11 @@ class Serviceability:
             payload["is_active"] = is_active
 
         # Parameter validation
-        schema = ServiceabilityValidator.getPackageMaterialRuleDetails()
+        schema = ServiceabilityValidator.getPackageMaterialRules()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/rules/{rule_id}/details", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"rule_id","description":"A `package_material_rule_id` is a unique identifier for a Package Material Rule","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_active","description":"filters items based on given is_active","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_active","description":"filters items based on given is_active","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"rule_id","description":"A `package_material_rule_id` is a unique identifier for a Package Material Rule","schema":{"type":"string"},"required":true}]}""", serverType="platform", rule_id=rule_id, page_no=page_no, page_size=page_size, is_active=is_active)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/rules", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"Index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_active","description":"Filters items based on given is_active","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_no","description":"Index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_active","description":"Filters items based on given is_active","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, is_active=is_active)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, is_active=is_active)
         if query_string:
             url_with_params += "?" + query_string
@@ -590,58 +1099,7 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/rules/{rule_id}/details", rule_id=rule_id, page_no=page_no, page_size=page_size, is_active=is_active), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PackageRuleResult
-            schema = PackageRuleResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getPackageMaterialRuleDetails")
-                print(e)
-
-        return response
-    
-    async def getListPackageMaterialRuleDetails(self, page_no=None, page_size=None, is_active=None, request_headers:Dict={}):
-        """This API returns response of Package Materials Rules from mongo database.
-        :param page_no : index of the item to start returning with : type integer
-        :param page_size : determines the items to be displayed in a page : type integer
-        :param is_active : filters items based on given is_active : type string
-        """
-        payload = {}
-        
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if is_active is not None:
-            payload["is_active"] = is_active
-
-        # Parameter validation
-        schema = ServiceabilityValidator.getListPackageMaterialRuleDetails()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/rules/details", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_active","description":"filters items based on given is_active","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_active","description":"filters items based on given is_active","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, is_active=is_active)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, is_active=is_active)
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/rules/details", page_no=page_no, page_size=page_size, is_active=is_active), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/rules", page_no=page_no, page_size=page_size, is_active=is_active), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import PackageMaterialRuleList
@@ -649,52 +1107,7 @@ class Serviceability:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getListPackageMaterialRuleDetails")
-                print(e)
-
-        return response
-    
-    async def getPackageMaterialRule(self, rule_id=None, request_headers:Dict={}):
-        """Retrieve packaging rule details.
-        :param rule_id : A `package_material_rule_id` is a unique identifier for a Package Material Rule : type string
-        """
-        payload = {}
-        
-        if rule_id is not None:
-            payload["rule_id"] = rule_id
-
-        # Parameter validation
-        schema = ServiceabilityValidator.getPackageMaterialRule()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/rules/{rule_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller.","schema":{"type":"integer"},"required":true},{"in":"path","name":"rule_id","description":"A `package_material_rule_id` is a unique identifier for a Package Material Rule","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller.","schema":{"type":"integer"},"required":true},{"in":"path","name":"rule_id","description":"A `package_material_rule_id` is a unique identifier for a Package Material Rule","schema":{"type":"string"},"required":true}]}""", serverType="platform", rule_id=rule_id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/rules/{rule_id}", rule_id=rule_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PackageRuleResult
-            schema = PackageRuleResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getPackageMaterialRule")
+                print("Response Validation failed for getPackageMaterialRules")
                 print(e)
 
         return response
@@ -713,11 +1126,11 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PackageRuleRequestSchema
-        schema = PackageRuleRequestSchema()
+        from .models import PackageRule
+        schema = PackageRule()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/rules/{rule_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller.","schema":{"type":"integer"},"required":true},{"in":"path","name":"rule_id","description":"A `package_material_rule_id` is a unique identifier for a Package Material Rule","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller.","schema":{"type":"integer"},"required":true},{"in":"path","name":"rule_id","description":"A `package_material_rule_id` is a unique identifier for a Package Material Rule","schema":{"type":"string"},"required":true}]}""", serverType="platform", rule_id=rule_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/rules/{rule_id}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"rule_id","description":"A `package_material_rule_id` is a unique identifier for a Package Material Rule","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"rule_id","description":"A `package_material_rule_id` is a unique identifier for a Package Material Rule","schema":{"type":"string"},"required":true}]}""", serverType="platform", rule_id=rule_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -748,8 +1161,8 @@ class Serviceability:
 
         return response
     
-    async def deletePackageMaterialRule(self, rule_id=None, request_headers:Dict={}):
-        """Delete a single packaging material rule
+    async def getPackageMaterialRule(self, rule_id=None, request_headers:Dict={}):
+        """Retrieve packaging rule details.
         :param rule_id : A `package_material_rule_id` is a unique identifier for a Package Material Rule : type string
         """
         payload = {}
@@ -758,11 +1171,11 @@ class Serviceability:
             payload["rule_id"] = rule_id
 
         # Parameter validation
-        schema = ServiceabilityValidator.deletePackageMaterialRule()
+        schema = ServiceabilityValidator.getPackageMaterialRule()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/rules/{rule_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller.","schema":{"type":"integer"},"required":true},{"in":"path","name":"rule_id","description":"A `package_material_rule_id` is a unique identifier for a Package Material Rule","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller.","schema":{"type":"integer"},"required":true},{"in":"path","name":"rule_id","description":"A `package_material_rule_id` is a unique identifier for a Package Material Rule","schema":{"type":"string"},"required":true}]}""", serverType="platform", rule_id=rule_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/rules/{rule_id}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"rule_id","description":"A `package_material_rule_id` is a unique identifier for a Package Material Rule","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"rule_id","description":"A `package_material_rule_id` is a unique identifier for a Package Material Rule","schema":{"type":"string"},"required":true}]}""", serverType="platform", rule_id=rule_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -780,22 +1193,22 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/rules/{rule_id}", rule_id=rule_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/rules/{rule_id}", rule_id=rule_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PackageMaterialDeleteResponseSchema
-            schema = PackageMaterialDeleteResponseSchema()
+            from .models import PackageRuleResult
+            schema = PackageRuleResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for deletePackageMaterialRule")
+                print("Response Validation failed for getPackageMaterialRule")
                 print(e)
 
         return response
     
     async def updatePackageMaterials(self, package_material_id=None, body="", request_headers:Dict={}):
         """Update an existing packaging material
-        :param package_material_id : A `package_material_id` is a unique identifier for a Package Material : type string
+        :param package_material_id : Unique identifier for a Package. Material : type string
         """
         payload = {}
         
@@ -811,7 +1224,7 @@ class Serviceability:
         schema = PackageMaterial()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/{package_material_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller.","schema":{"type":"integer"},"required":true},{"in":"path","name":"package_material_id","description":"A `package_material_id` is a unique identifier for a Package Material","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller.","schema":{"type":"integer"},"required":true},{"in":"path","name":"package_material_id","description":"A `package_material_id` is a unique identifier for a Package Material","schema":{"type":"string"},"required":true}]}""", serverType="platform", package_material_id=package_material_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/{package_material_id}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"package_material_id","description":"Unique identifier for a Package. Material","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"package_material_id","description":"Unique identifier for a Package. Material","schema":{"type":"string"},"required":true}]}""", serverType="platform", package_material_id=package_material_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -832,8 +1245,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/{package_material_id}", package_material_id=package_material_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PackageMaterialResponseSchema
-            schema = PackageMaterialResponseSchema()
+            from .models import PackageMaterialResult
+            schema = PackageMaterialResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -844,7 +1257,7 @@ class Serviceability:
     
     async def getPackageMaterials(self, package_material_id=None, request_headers:Dict={}):
         """Retrieve a single packaging material
-        :param package_material_id : A `package_material_id` is a unique identifier for a Package Material : type string
+        :param package_material_id : Unique identifier for a Package. Material : type string
         """
         payload = {}
         
@@ -856,7 +1269,7 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/{package_material_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"package_material_id","description":"A `package_material_id` is a unique identifier for a Package Material","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"package_material_id","description":"A `package_material_id` is a unique identifier for a Package Material","schema":{"type":"string"},"required":true}]}""", serverType="platform", package_material_id=package_material_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/{package_material_id}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"package_material_id","description":"Unique identifier for a Package. Material","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"package_material_id","description":"Unique identifier for a Package. Material","schema":{"type":"string"},"required":true}]}""", serverType="platform", package_material_id=package_material_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -877,436 +1290,12 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/{package_material_id}", package_material_id=package_material_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PackageMaterialResponseSchema
-            schema = PackageMaterialResponseSchema()
+            from .models import PackageMaterialResult
+            schema = PackageMaterialResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getPackageMaterials")
-                print(e)
-
-        return response
-    
-    async def deletePackageMaterials(self, package_material_id=None, request_headers:Dict={}):
-        """Delete a single packaging material
-        :param package_material_id : A `package_material_id` is a unique identifier for a Package Material : type string
-        """
-        payload = {}
-        
-        if package_material_id is not None:
-            payload["package_material_id"] = package_material_id
-
-        # Parameter validation
-        schema = ServiceabilityValidator.deletePackageMaterials()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/{package_material_id}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"package_material_id","description":"A `package_material_id` is a unique identifier for a Package Material","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"package_material_id","description":"A `package_material_id` is a unique identifier for a Package Material","schema":{"type":"string"},"required":true}]}""", serverType="platform", package_material_id=package_material_id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/packaging-material/{package_material_id}", package_material_id=package_material_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PackageMaterialDeleteResponseSchema
-            schema = PackageMaterialDeleteResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deletePackageMaterials")
-                print(e)
-
-        return response
-    
-    async def getInstalledCourierPartnerExtensions(self, page_no=None, page_size=None, is_installed=None, request_headers:Dict={}):
-        """This API returns response of Package Materials Rules from mongo database.
-        :param page_no : index of the item to start returning with : type integer
-        :param page_size : determines the items to be displayed in a page : type integer
-        :param is_installed : filter to get installed extensions only : type string
-        """
-        payload = {}
-        
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if is_installed is not None:
-            payload["is_installed"] = is_installed
-
-        # Parameter validation
-        schema = ServiceabilityValidator.getInstalledCourierPartnerExtensions()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/list", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_installed","description":"filter to get installed extensions only","schema":{"type":"string","enum":[true,false]}}],"query":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_installed","description":"filter to get installed extensions only","schema":{"type":"string","enum":[true,false]}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, is_installed=is_installed)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, is_installed=is_installed)
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/courier-partner/list", page_no=page_no, page_size=page_size, is_installed=is_installed), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import InstallCourierPartnerResponseSchema
-            schema = InstallCourierPartnerResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getInstalledCourierPartnerExtensions")
-                print(e)
-
-        return response
-    
-    async def getLocalitiesByPrefix(self, page_no=None, page_size=None, q=None, request_headers:Dict={}):
-        """Get localities that start with a specified prefix.
-        :param page_no : Starting index of the items. : type integer
-        :param page_size : Number of items per page. : type integer
-        :param q : Localities starting with the specified prefix. : type string
-        """
-        payload = {}
-        
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if q is not None:
-            payload["q"] = q
-
-        # Parameter validation
-        schema = ServiceabilityValidator.getLocalitiesByPrefix()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/localities", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"Starting index of the items.","schema":{"type":"integer","default":1,"minimum":1},"required":false},{"in":"query","name":"page_size","description":"Number of items per page.","required":false,"schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"q","description":"Localities starting with the specified prefix.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"page_no","description":"Starting index of the items.","schema":{"type":"integer","default":1,"minimum":1},"required":false},{"in":"query","name":"page_size","description":"Number of items per page.","required":false,"schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"q","description":"Localities starting with the specified prefix.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, q=q)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q)
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/localities", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetLocalities
-            schema = GetLocalities()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getLocalitiesByPrefix")
-                print(e)
-
-        return response
-    
-    async def getLocality(self, locality_type=None, locality_value=None, country=None, state=None, city=None, request_headers:Dict={}):
-        """Get Locality data
-        :param locality_type : A `locality_type` contains value geographical division. : type string
-        :param locality_value : A `locality_value` contains a specific name of the locality. : type string
-        :param country : A `country` contains a specific value of the country iso2 code. : type string
-        :param state : A `state` contains a specific value of the state, province. : type string
-        :param city : A `city` contains a specific value of the city. : type string
-        """
-        payload = {}
-        
-        if locality_type is not None:
-            payload["locality_type"] = locality_type
-        if locality_value is not None:
-            payload["locality_value"] = locality_value
-        if country is not None:
-            payload["country"] = country
-        if state is not None:
-            payload["state"] = state
-        if city is not None:
-            payload["city"] = city
-
-        # Parameter validation
-        schema = ServiceabilityValidator.getLocality()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/localities/{locality_type}/{locality_value}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"locality_type","description":"A `locality_type` contains value geographical division.","schema":{"type":"string","enum":["pincode","sector"]},"required":true},{"in":"path","name":"locality_value","description":"A `locality_value` contains a specific name of the locality.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"country","description":"A `country` contains a specific value of the country iso2 code.","schema":{"type":"string"},"required":false},{"in":"query","name":"state","description":"A `state` contains a specific value of the state, province.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"A `city` contains a specific value of the city.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"country","description":"A `country` contains a specific value of the country iso2 code.","schema":{"type":"string"},"required":false},{"in":"query","name":"state","description":"A `state` contains a specific value of the state, province.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"A `city` contains a specific value of the city.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"locality_type","description":"A `locality_type` contains value geographical division.","schema":{"type":"string","enum":["pincode","sector"]},"required":true},{"in":"path","name":"locality_value","description":"A `locality_value` contains a specific name of the locality.","schema":{"type":"string"},"required":true}]}""", serverType="platform", locality_type=locality_type, locality_value=locality_value, country=country, state=state, city=city)
-        query_string = await create_query_string(country=country, state=state, city=city)
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/localities/{locality_type}/{locality_value}", locality_type=locality_type, locality_value=locality_value, country=country, state=state, city=city), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetLocality
-            schema = GetLocality()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getLocality")
-                print(e)
-
-        return response
-    
-    async def getLocalities(self, locality_type=None, country=None, state=None, city=None, page_no=None, page_size=None, q=None, name=None, request_headers:Dict={}):
-        """Get Localities data.
-        :param locality_type : A `locality_type` contains unique geographical division. : type string
-        :param country : A `country` contains a specific value of the country iso2 code. : type string
-        :param state : A `state` contains a specific value of the state, province. : type string
-        :param city : A `city` contains a specific value of the city. : type string
-        :param page_no : page number. : type integer
-        :param page_size : page size. : type integer
-        :param q : search. : type string
-        :param name : Search for localities. Either provide a full name or a search term. : type string
-        """
-        payload = {}
-        
-        if locality_type is not None:
-            payload["locality_type"] = locality_type
-        if country is not None:
-            payload["country"] = country
-        if state is not None:
-            payload["state"] = state
-        if city is not None:
-            payload["city"] = city
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if q is not None:
-            payload["q"] = q
-        if name is not None:
-            payload["name"] = name
-
-        # Parameter validation
-        schema = ServiceabilityValidator.getLocalities()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/localities/{locality_type}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"locality_type","description":"A `locality_type` contains unique geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true}],"optional":[{"in":"query","name":"country","description":"A `country` contains a specific value of the country iso2 code.","schema":{"type":"string"},"required":false},{"in":"query","name":"state","description":"A `state` contains a specific value of the state, province.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"A `city` contains a specific value of the city.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"page number.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"page size.","schema":{"type":"integer","default":12,"maximum":1000},"required":false},{"in":"query","name":"q","description":"search.","schema":{"type":"string"},"required":false},{"in":"query","name":"name","description":"Search for localities. Either provide a full name or a search term.","schema":{"type":"string"}}],"query":[{"in":"query","name":"country","description":"A `country` contains a specific value of the country iso2 code.","schema":{"type":"string"},"required":false},{"in":"query","name":"state","description":"A `state` contains a specific value of the state, province.","schema":{"type":"string"},"required":false},{"in":"query","name":"city","description":"A `city` contains a specific value of the city.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"page number.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"page size.","schema":{"type":"integer","default":12,"maximum":1000},"required":false},{"in":"query","name":"q","description":"search.","schema":{"type":"string"},"required":false},{"in":"query","name":"name","description":"Search for localities. Either provide a full name or a search term.","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"locality_type","description":"A `locality_type` contains unique geographical division.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":true}]}""", serverType="platform", locality_type=locality_type, country=country, state=state, city=city, page_no=page_no, page_size=page_size, q=q, name=name)
-        query_string = await create_query_string(country=country, state=state, city=city, page_no=page_no, page_size=page_size, q=q, name=name)
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/localities/{locality_type}", locality_type=locality_type, country=country, state=state, city=city, page_no=page_no, page_size=page_size, q=q, name=name), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetLocalities
-            schema = GetLocalities()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getLocalities")
-                print(e)
-
-        return response
-    
-    async def getCountry(self, country_iso_code=None, request_headers:Dict={}):
-        """Retrieve data for a single country and address format.
-        :param country_iso_code : The `country_iso_code` is ISO-2 (alpha-2) code for the country. : type string
-        """
-        payload = {}
-        
-        if country_iso_code is not None:
-            payload["country_iso_code"] = country_iso_code
-
-        # Parameter validation
-        schema = ServiceabilityValidator.getCountry()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/countries/{country_iso_code}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"country_iso_code","description":"The `country_iso_code` is ISO-2 (alpha-2) code for the country.","schema":{"type":"string","x-not-enum":true},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"country_iso_code","description":"The `country_iso_code` is ISO-2 (alpha-2) code for the country.","schema":{"type":"string","x-not-enum":true},"required":true}]}""", serverType="platform", country_iso_code=country_iso_code)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/countries/{country_iso_code}", country_iso_code=country_iso_code), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetCountry
-            schema = GetCountry()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCountry")
-                print(e)
-
-        return response
-    
-    async def getCountries(self, onboard=None, page_no=None, page_size=None, q=None, hierarchy=None, request_headers:Dict={}):
-        """Retrieve a list of countries for logistical purposes.
-        :param onboard : Only fetch countries which allowed for onboard on Platform. : type boolean
-        :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
-        :param page_size : The number of items to retrieve in each page. Default value is 12 : type integer
-        :param q : The search string to search in the list of countries by name. : type string
-        :param hierarchy : The search filter to filter countries based on their available hierarchy. : type string
-        """
-        payload = {}
-        
-        if onboard is not None:
-            payload["onboard"] = onboard
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if q is not None:
-            payload["q"] = q
-        if hierarchy is not None:
-            payload["hierarchy"] = hierarchy
-
-        # Parameter validation
-        schema = ServiceabilityValidator.getCountries()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/countries", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"onboard","description":"Only fetch countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12","schema":{"type":"integer","default":12,"maximum":300},"required":false},{"in":"query","name":"q","description":"The search string to search in the list of countries by name.","schema":{"type":"string"},"required":false},{"in":"query","name":"hierarchy","description":"The search filter to filter countries based on their available hierarchy.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"onboard","description":"Only fetch countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12","schema":{"type":"integer","default":12,"maximum":300},"required":false},{"in":"query","name":"q","description":"The search string to search in the list of countries by name.","schema":{"type":"string"},"required":false},{"in":"query","name":"hierarchy","description":"The search filter to filter countries based on their available hierarchy.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", onboard=onboard, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy)
-        query_string = await create_query_string(onboard=onboard, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy)
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/countries", onboard=onboard, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetCountries
-            schema = GetCountries()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCountries")
-                print(e)
-
-        return response
-    
-    async def validateAddress(self, country_iso_code=None, template_name=None, body="", request_headers:Dict={}):
-        """Validate given address wrt template
-        :param country_iso_code : The ISO code of the country. : type string
-        :param template_name : The type of address form. : type string
-        """
-        payload = {}
-        
-        if country_iso_code is not None:
-            payload["country_iso_code"] = country_iso_code
-        if template_name is not None:
-            payload["template_name"] = template_name
-
-        # Parameter validation
-        schema = ServiceabilityValidator.validateAddress()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ValidateAddressRequestSchema
-        schema = ValidateAddressRequestSchema()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/country/{country_iso_code}/address/templates/{template_name}/validate", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"country_iso_code","description":"The ISO code of the country.","schema":{"type":"string","x-not-enum":true},"required":true},{"in":"path","name":"template_name","description":"The type of address form.","schema":{"type":"string","enum":["checkout_form","store_os_form","default_display"]},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"country_iso_code","description":"The ISO code of the country.","schema":{"type":"string","x-not-enum":true},"required":true},{"in":"path","name":"template_name","description":"The type of address form.","schema":{"type":"string","enum":["checkout_form","store_os_form","default_display"]},"required":true}]}""", serverType="platform", country_iso_code=country_iso_code, template_name=template_name)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/country/{country_iso_code}/address/templates/{template_name}/validate", country_iso_code=country_iso_code, template_name=template_name), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ValidateAddressRequestSchema
-            schema = ValidateAddressRequestSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for validateAddress")
                 print(e)
 
         return response
@@ -1322,11 +1311,11 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import OptimlLocationsRequestSchema
-        schema = OptimlLocationsRequestSchema()
+        from .models import OptimlLocationsDetailsSchema
+        schema = OptimlLocationsDetailsSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/optimal-locations", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/optimal-locations", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1347,8 +1336,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/optimal-locations", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OptimalLocationsResponseSchema
-            schema = OptimalLocationsResponseSchema()
+            from .models import OptimalLocationsResult
+            schema = OptimalLocationsResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
