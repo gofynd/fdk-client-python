@@ -100,7 +100,6 @@ from ..ApplicationModel import BaseSchema
     
     
         
-        
     
     
     
@@ -388,8 +387,6 @@ class PaymentValidator:
         
         
         aggregator = fields.Str(required=False)
-        
-        wallet = fields.Str(required=False)
          
         
     

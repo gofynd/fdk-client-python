@@ -2088,8 +2088,8 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import EnginePayload
-        schema = EnginePayload()
+        from .models import EngineRequest
+        schema = EngineRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/engine/send-instant", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", serverType="platform", )
@@ -2112,8 +2112,8 @@ class Communication:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/engine/send-instant", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import EngineResult
-            schema = EngineResult()
+            from .models import EngineResponse
+            schema = EngineResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2133,8 +2133,8 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import EnginePayload
-        schema = EnginePayload()
+        from .models import EngineRequest
+        schema = EngineRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/engine/send-async", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", serverType="platform", )
@@ -2157,8 +2157,8 @@ class Communication:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/engine/send-async", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import EngineResult
-            schema = EngineResult()
+            from .models import EngineResponse
+            schema = EngineResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2252,8 +2252,8 @@ class Communication:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import EventSubscriptionsBulkUpdateResult
-            schema = EventSubscriptionsBulkUpdateResult()
+            from .models import EventSubscriptionsBulkUpdateResponse
+            schema = EventSubscriptionsBulkUpdateResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2347,8 +2347,8 @@ class Communication:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import EventSubscriptionsBulkUpdateResult
-            schema = EventSubscriptionsBulkUpdateResult()
+            from .models import EventSubscriptionsBulkUpdateResponse
+            schema = EventSubscriptionsBulkUpdateResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2412,8 +2412,8 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import EventSubscriptionsBulkUpdatePayload
-        schema = EventSubscriptionsBulkUpdatePayload()
+        from .models import EventSubscriptionsBulkUpdateRequest
+        schema = EventSubscriptionsBulkUpdateRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/event/event-subscriptions/bulkUpdate", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", serverType="platform", )
@@ -2468,8 +2468,8 @@ class Communication:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/global-variables", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetGlobalVariablesResult
-            schema = GetGlobalVariablesResult()
+            from .models import GlobalVariablesGetResponse
+            schema = GlobalVariablesGetResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2513,8 +2513,8 @@ class Communication:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/global-variables", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CreateGlobalVariablesResult
-            schema = CreateGlobalVariablesResult()
+            from .models import GlobalVariablesPostResponse
+            schema = GlobalVariablesPostResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2632,8 +2632,8 @@ class Communication:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import TriggerJobPayload
-        schema = TriggerJobPayload()
+        from .models import TriggerJobRequest
+        schema = TriggerJobRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/trigger-job", """{"required":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id","required":true,"schema":{"type":"string","example":"13741"}},{"in":"path","name":"application_id","description":"Application id","required":true,"schema":{"type":"string","example":"637b6355dc65337da9b5c951"}}]}""", serverType="platform", )
@@ -2656,8 +2656,8 @@ class Communication:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/communication/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/jobs/trigger-job", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import TriggerJobResult
-            schema = TriggerJobResult()
+            from .models import TriggerJobResponse
+            schema = TriggerJobResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

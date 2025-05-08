@@ -20,19 +20,8 @@ from ..ApplicationModel import BaseSchema
     
         
         
-    
-    
         
         
-        
-        
-        
-        
-        
-        
-        
-    
-    
         
         
         
@@ -41,9 +30,11 @@ from ..ApplicationModel import BaseSchema
     
     
         
-    
-    
         
+        
+        
+    
+    
         
     
     
@@ -96,15 +87,6 @@ class LogisticValidator:
         pass 
         
     
-    class getCourierPartners(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
     class getLocations(BaseSchema):
         
         
@@ -138,8 +120,6 @@ class LogisticValidator:
         page_size = fields.Int(required=False)
         
         q = fields.Str(required=False)
-        
-        hierarchy = fields.Str(required=False)
          
         
     
@@ -147,15 +127,6 @@ class LogisticValidator:
         
         
         country_iso_code = fields.Str(required=False)
-         
-        
-    
-    class getDeliveryPromise(BaseSchema):
-        
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
          
         
     
