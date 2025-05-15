@@ -36,34 +36,6 @@ class CreateUserAttributeDefinition(BaseSchema):
     pass
 
 
-class CreateStoreFrontUsersPayload(BaseSchema):
-    pass
-
-
-class BulkUserExportSchema(BaseSchema):
-    pass
-
-
-class BulkActionModel(BaseSchema):
-    pass
-
-
-class CreatedBySchema(BaseSchema):
-    pass
-
-
-class BulkActionLinkSchema(BaseSchema):
-    pass
-
-
-class FileLinks(BaseSchema):
-    pass
-
-
-class BulkActionCountSchema(BaseSchema):
-    pass
-
-
 class BlockUserRequestSchema(BaseSchema):
     pass
 
@@ -93,10 +65,6 @@ class UserSearchResponseSchema(BaseSchema):
 
 
 class CustomerListResponseSchema(BaseSchema):
-    pass
-
-
-class BulkActionPaginationSchema(BaseSchema):
     pass
 
 
@@ -224,14 +192,6 @@ class DeleteAccountConsent(BaseSchema):
     pass
 
 
-class GetUserTimeline(BaseSchema):
-    pass
-
-
-class UserTimeline(BaseSchema):
-    pass
-
-
 class Facebook(BaseSchema):
     pass
 
@@ -285,14 +245,6 @@ class PhoneNumber(BaseSchema):
 
 
 class Email(BaseSchema):
-    pass
-
-
-class UserConsent(BaseSchema):
-    pass
-
-
-class PrivacyPolicyConsentSchema(BaseSchema):
     pass
 
 
@@ -455,98 +407,6 @@ class CreateUserAttributeDefinition(BaseSchema):
     
 
 
-class CreateStoreFrontUsersPayload(BaseSchema):
-    # User swagger.json
-
-    
-    absolute_url = fields.Str(required=False)
-    
-    file_format = fields.Str(required=False)
-    
-    relative_url = fields.Str(required=False)
-    
-
-
-class BulkUserExportSchema(BaseSchema):
-    # User swagger.json
-
-    
-    file_format = fields.Str(required=False)
-    
-
-
-class BulkActionModel(BaseSchema):
-    # User swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    file_name = fields.Str(required=False)
-    
-    file_format = fields.Str(required=False)
-    
-    action_type = fields.Str(required=False)
-    
-    created_by = fields.Nested(CreatedBySchema, required=False)
-    
-    count = fields.Nested(BulkActionCountSchema, required=False)
-    
-    status = fields.Str(required=False)
-    
-    links = fields.Nested(BulkActionLinkSchema, required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    company_id = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-
-
-class CreatedBySchema(BaseSchema):
-    # User swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    user_id = fields.Str(required=False)
-    
-
-
-class BulkActionLinkSchema(BaseSchema):
-    # User swagger.json
-
-    
-    file = fields.Nested(FileLinks, required=False)
-    
-    error = fields.Nested(FileLinks, required=False)
-    
-
-
-class FileLinks(BaseSchema):
-    # User swagger.json
-
-    
-    absolute_url = fields.Str(required=False)
-    
-    relative_url = fields.Str(required=False)
-    
-
-
-class BulkActionCountSchema(BaseSchema):
-    # User swagger.json
-
-    
-    total = fields.Int(required=False)
-    
-    success = fields.Int(required=False)
-    
-    error = fields.Int(required=False)
-    
-
-
 class BlockUserRequestSchema(BaseSchema):
     # User swagger.json
 
@@ -616,16 +476,6 @@ class CustomerListResponseSchema(BaseSchema):
 
     
     items = fields.List(fields.Nested(UserSearchSchema, required=False), required=False)
-    
-    page = fields.Nested(PaginationSchema, required=False)
-    
-
-
-class BulkActionPaginationSchema(BaseSchema):
-    # User swagger.json
-
-    
-    items = fields.List(fields.Nested(BulkActionModel, required=False), required=False)
     
     page = fields.Nested(PaginationSchema, required=False)
     
@@ -1071,32 +921,6 @@ class DeleteAccountConsent(BaseSchema):
     
 
 
-class GetUserTimeline(BaseSchema):
-    # User swagger.json
-
-    
-    delete_on = fields.Str(required=False)
-    
-    timeline = fields.List(fields.Nested(UserTimeline, required=False), required=False)
-    
-
-
-class UserTimeline(BaseSchema):
-    # User swagger.json
-
-    
-    date = fields.Str(required=False)
-    
-    title = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    visible = fields.Boolean(required=False)
-    
-    sub_title = fields.Str(required=False, allow_none=True)
-    
-
-
 class Facebook(BaseSchema):
     # User swagger.json
 
@@ -1277,8 +1101,6 @@ class UserSchema(BaseSchema):
     
     rr_id = fields.Str(required=False)
     
-    consent = fields.Nested(UserConsent, required=False)
-    
 
 
 class UserSearchSchema(BaseSchema):
@@ -1325,10 +1147,6 @@ class UserSearchSchema(BaseSchema):
     
     status = fields.Str(required=False)
     
-    deleted_on = fields.Str(required=False)
-    
-    consent = fields.Nested(UserConsent, required=False)
-    
 
 
 class PhoneNumber(BaseSchema):
@@ -1358,24 +1176,6 @@ class Email(BaseSchema):
     primary = fields.Boolean(required=False)
     
     verified = fields.Boolean(required=False)
-    
-
-
-class UserConsent(BaseSchema):
-    # User swagger.json
-
-    
-    privacy_policy = fields.Nested(PrivacyPolicyConsentSchema, required=False)
-    
-
-
-class PrivacyPolicyConsentSchema(BaseSchema):
-    # User swagger.json
-
-    
-    value = fields.Boolean(required=False)
-    
-    updated_at = fields.Str(required=False)
     
 
 

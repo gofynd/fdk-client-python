@@ -47,7 +47,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
     
     
         
@@ -204,8 +203,6 @@ class ThemeValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
-        
-        capability = fields.Str(required=False)
          
         
     

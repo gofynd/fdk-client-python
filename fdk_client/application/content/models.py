@@ -110,6 +110,22 @@ class SEObreadcrumb(BaseSchema):
     pass
 
 
+class SitemapConfig(BaseSchema):
+    pass
+
+
+class SitemapConfigurationList(BaseSchema):
+    pass
+
+
+class DefaultSitemapIndividualConfig(BaseSchema):
+    pass
+
+
+class DefaultSitemapConfig(BaseSchema):
+    pass
+
+
 class DateMeta(BaseSchema):
     pass
 
@@ -127,6 +143,14 @@ class Action(BaseSchema):
 
 
 class NavigationReference(BaseSchema):
+    pass
+
+
+class ConfigurationSchema(BaseSchema):
+    pass
+
+
+class SlideshowMedia(BaseSchema):
     pass
 
 
@@ -218,6 +242,14 @@ class CreatedBySchema(BaseSchema):
     pass
 
 
+class SlideshowGetDetails(BaseSchema):
+    pass
+
+
+class SlideshowSchema(BaseSchema):
+    pass
+
+
 class Support(BaseSchema):
     pass
 
@@ -294,34 +326,6 @@ class ActionPage(BaseSchema):
     pass
 
 
-class TranslateUiLabel(BaseSchema):
-    pass
-
-
-class TranslateUiLabelsPage(BaseSchema):
-    pass
-
-
-class Error(BaseSchema):
-    pass
-
-
-class ResourceTranslations(BaseSchema):
-    pass
-
-
-class StandardError(BaseSchema):
-    pass
-
-
-class ApplicationLanguage(BaseSchema):
-    pass
-
-
-class ResourcePayload(BaseSchema):
-    pass
-
-
 
 
 
@@ -386,10 +390,6 @@ class SeoSchema(BaseSchema):
     _id = fields.Str(required=False)
     
     robots_txt = fields.Str(required=False)
-    
-    sitemap_enabled = fields.Boolean(required=False)
-    
-    additonal_sitemap = fields.Str(required=False)
     
     cannonical_enabled = fields.Boolean(required=False)
     
@@ -665,6 +665,66 @@ class SEObreadcrumb(BaseSchema):
     
 
 
+class SitemapConfig(BaseSchema):
+    # Content swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    sitemap = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+
+
+class SitemapConfigurationList(BaseSchema):
+    # Content swagger.json
+
+    
+    items = fields.List(fields.Nested(SitemapConfig, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class DefaultSitemapIndividualConfig(BaseSchema):
+    # Content swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
+    
+
+
+class DefaultSitemapConfig(BaseSchema):
+    # Content swagger.json
+
+    
+    root = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    brand = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    collections = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    category_l1 = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    category_l2 = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    category_l3 = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    pages = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    blog = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    section = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    faq = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+    sitemap = fields.Nested(DefaultSitemapIndividualConfig, required=False)
+    
+
+
 class DateMeta(BaseSchema):
     # Content swagger.json
 
@@ -730,6 +790,38 @@ class NavigationReference(BaseSchema):
     sort_order = fields.Int(required=False)
     
     sub_navigation = fields.List(fields.Nested(lambda: NavigationReference(exclude=('sub_navigation')), required=False), required=False)
+    
+
+
+class ConfigurationSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    sleep_time = fields.Int(required=False)
+    
+    start_on_launch = fields.Boolean(required=False)
+    
+    duration = fields.Int(required=False)
+    
+    slide_direction = fields.Str(required=False)
+    
+
+
+class SlideshowMedia(BaseSchema):
+    # Content swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    url = fields.Str(required=False)
+    
+    bg_color = fields.Str(required=False)
+    
+    duration = fields.Int(required=False)
+    
+    auto_decide_duration = fields.Boolean(required=False)
+    
+    action = fields.Nested(Action, required=False)
     
 
 
@@ -947,8 +1039,6 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
-    page_size = fields.Int(required=False)
-    
 
 
 class LandingPageSchema(BaseSchema):
@@ -1088,6 +1178,42 @@ class CreatedBySchema(BaseSchema):
 
     
     id = fields.Str(required=False)
+    
+
+
+class SlideshowGetDetails(BaseSchema):
+    # Content swagger.json
+
+    
+    items = fields.List(fields.Nested(SlideshowSchema, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class SlideshowSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    _id = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    date_meta = fields.Nested(DateMeta, required=False)
+    
+    application = fields.Str(required=False)
+    
+    platform = fields.Str(required=False)
+    
+    configuration = fields.Nested(ConfigurationSchema, required=False)
+    
+    media = fields.List(fields.Nested(SlideshowMedia, required=False), required=False)
+    
+    active = fields.Boolean(required=False)
+    
+    archived = fields.Boolean(required=False)
+    
+    _custom_json = fields.Dict(required=False)
     
 
 
@@ -1360,98 +1486,6 @@ class ActionPage(BaseSchema):
     url = fields.Str(required=False)
     
     type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
-    
-
-
-class TranslateUiLabel(BaseSchema):
-    # Content swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    company_id = fields.Str(required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    template_theme_id = fields.Str(required=False)
-    
-    theme_id = fields.Str(required=False)
-    
-    locale = fields.Str(required=False)
-    
-    resource = fields.Dict(required=False)
-    
-    type = fields.Str(required=False)
-    
-    template = fields.Boolean(required=False)
-    
-
-
-class TranslateUiLabelsPage(BaseSchema):
-    # Content swagger.json
-
-    
-    items = fields.List(fields.Nested(TranslateUiLabel, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
-    
-
-
-class Error(BaseSchema):
-    # Content swagger.json
-
-    
-    error = fields.Str(required=False)
-    
-
-
-class ResourceTranslations(BaseSchema):
-    # Content swagger.json
-
-    
-    resource_id = fields.Str(required=False)
-    
-    value = fields.Dict(required=False)
-    
-
-
-class StandardError(BaseSchema):
-    # Content swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
-class ApplicationLanguage(BaseSchema):
-    # Content swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    company_id = fields.Str(required=False)
-    
-    application_id = fields.Str(required=False)
-    
-    locale = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-    direction = fields.Str(required=False)
-    
-    is_default = fields.Boolean(required=False)
-    
-    published = fields.Boolean(required=False)
-    
-
-
-class ResourcePayload(BaseSchema):
-    # Content swagger.json
-
-    
-    payload = fields.List(fields.Dict(required=False), required=False)
     
 
 

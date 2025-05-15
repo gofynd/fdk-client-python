@@ -23,10 +23,7 @@ class Content:
             "getNavbar": "/service/public/content/navbar",
             "getPricingBanner": "/service/public/content/pricing-banner",
             "getAllTags": "/service/public/content/tags",
-            "getCredentialsByEntity": "/service/public/content/credentials/{entity_type}",
-            "getAllLanguages": "/service/public/content/languages",
-            "getLanguageByLocale": "/service/public/content/languages/{locale}",
-            "getAllTranslatableResources": "/service/public/content/translatable/resources"
+            "getCredentialsByEntity": "/service/public/content/credentials/{entity_type}"
             
         }
         self._urls = {
@@ -529,123 +526,6 @@ class Content:
             except Exception as e:
                 print("Response Validation failed for getCredentialsByEntity")
                 print(e)
-
-        return response
-    
-    async def getAllLanguages(self, body="", request_headers:Dict={}):
-        """Fetches complete list of languages supported by the platform with their locale codes and text directions.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ContentValidator.getAllLanguages()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getAllLanguages"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {
-            "User-Agent": self._conf.userAgent,
-            "Accept-Language": self._conf.language,
-            "x-currency-code":   self._conf.currency
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllLanguages"]).netloc, "get", await create_url_without_domain("/service/public/content/languages", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        return response
-    
-    async def getLanguageByLocale(self, locale=None, body="", request_headers:Dict={}):
-        """Retrieves detailed information about a specific language using its locale identifier.
-        :param locale :  : type string
-        """
-        payload = {}
-        
-        if locale is not None:
-            payload["locale"] = locale
-
-        # Parameter validation
-        schema = ContentValidator.getLanguageByLocale()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getLanguageByLocale"], proccessed_params="""{"required":[{"name":"locale","in":"path","required":true,"schema":{"type":"string","example":"hi-IN"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"locale","in":"path","required":true,"schema":{"type":"string","example":"hi-IN"}}]}""", serverType="public", locale=locale)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {
-            "User-Agent": self._conf.userAgent,
-            "Accept-Language": self._conf.language,
-            "x-currency-code":   self._conf.currency
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLanguageByLocale"]).netloc, "get", await create_url_without_domain("/service/public/content/languages/{locale}", locale=locale), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import Language
-            schema = Language()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getLanguageByLocale")
-                print(e)
-
-        return response
-    
-    async def getAllTranslatableResources(self, body="", request_headers:Dict={}):
-        """Retrieves all resources that can be translated across different languages in the system.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ContentValidator.getAllTranslatableResources()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getAllTranslatableResources"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {
-            "User-Agent": self._conf.userAgent,
-            "Accept-Language": self._conf.language,
-            "x-currency-code":   self._conf.currency
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllTranslatableResources"]).netloc, "get", await create_url_without_domain("/service/public/content/translatable/resources", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         return response
     

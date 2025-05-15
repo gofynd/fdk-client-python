@@ -6,8 +6,6 @@ from marshmallow.validate import OneOf
 from ..PlatformModel import BaseSchema
 
 
-from .enums import *
-
 
 
 class CouponDateMeta(BaseSchema):
@@ -422,10 +420,6 @@ class ProductPriceInfo(BaseSchema):
     pass
 
 
-class ProductMaxQuantityInfo(BaseSchema):
-    pass
-
-
 class CartProductIdentifer(BaseSchema):
     pass
 
@@ -539,10 +533,6 @@ class AddCartCreation(BaseSchema):
 
 
 class AddCartDetailResult(BaseSchema):
-    pass
-
-
-class CartItemInfo(BaseSchema):
     pass
 
 
@@ -731,10 +721,6 @@ class Files(BaseSchema):
 
 
 class CartCheckoutCustomMeta(BaseSchema):
-    pass
-
-
-class OrderTag(BaseSchema):
     pass
 
 
@@ -1171,6 +1157,8 @@ class CouponAdd(BaseSchema):
     
     _id = fields.Str(required=False)
     
+    is_archived = fields.Boolean(required=False)
+    
 
 
 class Page(BaseSchema):
@@ -1190,8 +1178,6 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
-    
-    page_size = fields.Int(required=False)
     
 
 
@@ -1401,6 +1387,8 @@ class ItemCriteria(BaseSchema):
     
     item_sku = fields.List(fields.Str(required=False), required=False)
     
+    item_exclude_product_tags = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class DiscountOffer(BaseSchema):
@@ -1557,7 +1545,7 @@ class PromotionAction(BaseSchema):
     
     action_date = fields.Str(required=False, allow_none=True)
     
-    action_type = fields.Str(required=False)
+    action_type = fields.Str(required=False, allow_none=True)
     
 
 
@@ -1657,7 +1645,7 @@ class PromotionListItem(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
-    auto_apply = fields.Boolean(required=False)
+    is_archived = fields.Boolean(required=False)
     
 
 
@@ -1721,7 +1709,7 @@ class PromotionAdd(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
-    auto_apply = fields.Boolean(required=False)
+    _id = fields.Str(required=False)
     
 
 
@@ -1777,7 +1765,7 @@ class PromotionAddResult(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
-    auto_apply = fields.Boolean(required=False)
+    is_archived = fields.Boolean(required=False)
     
 
 
@@ -1832,8 +1820,6 @@ class PromotionUpdate(BaseSchema):
     date_meta = fields.Nested(PromotionDateMeta, required=False)
     
     tags = fields.List(fields.Str(required=False), required=False)
-    
-    auto_apply = fields.Boolean(required=False)
     
 
 
@@ -1891,7 +1877,7 @@ class PromotionUpdateResult(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
-    auto_apply = fields.Boolean(required=False)
+    is_archived = fields.Boolean(required=False)
     
 
 
@@ -2014,8 +2000,6 @@ class Article(BaseSchema):
     quantity = fields.Int(required=False)
     
     meta = fields.Dict(required=False)
-    
-    allowed_refund = fields.Boolean(required=False)
     
 
 
@@ -2491,8 +2475,6 @@ class ProductArticle(BaseSchema):
     
     product_group_tags = fields.List(fields.Str(required=False), required=False)
     
-    force_new_line_item = fields.Boolean(required=False)
-    
     identifier = fields.Dict(required=False)
     
     mto_quantity = fields.Int(required=False)
@@ -2582,8 +2564,6 @@ class AppliedPromotion(BaseSchema):
     buy_rules = fields.List(fields.Nested(BuyRules, required=False), required=False)
     
     offer_text = fields.Str(required=False)
-    
-    offer_label = fields.Str(required=False)
     
     amount = fields.Float(required=False)
     
@@ -2685,18 +2665,6 @@ class ProductPriceInfo(BaseSchema):
     
 
 
-class ProductMaxQuantityInfo(BaseSchema):
-    # Cart swagger.json
-
-    
-    item = fields.Float(required=False, allow_none=True)
-    
-    item_seller = fields.Float(required=False, allow_none=True)
-    
-    item_store = fields.Float(required=False, allow_none=True)
-    
-
-
 class CartProductIdentifer(BaseSchema):
     # Cart swagger.json
 
@@ -2782,8 +2750,6 @@ class CartProductInfo(BaseSchema):
     availability = fields.Nested(ProductAvailability, required=False)
     
     moq = fields.Dict(required=False)
-    
-    max_quantity = fields.Nested(ProductMaxQuantityInfo, required=False)
     
     price_per_unit = fields.Nested(ProductPriceInfo, required=False)
     
@@ -3269,8 +3235,6 @@ class CartDetailResult(BaseSchema):
     
     custom_cart_meta = fields.Dict(required=False)
     
-    free_gift_selection_available = fields.Boolean(required=False)
-    
 
 
 class AddProductCart(BaseSchema):
@@ -3301,13 +3265,13 @@ class AddProductCart(BaseSchema):
     
     _custom_json = fields.Dict(required=False)
     
-    force_new_line_item = fields.Boolean(required=False)
-    
     meta = fields.Dict(required=False)
     
     pos = fields.Boolean(required=False)
     
     seller_identifier = fields.Str(required=False)
+    
+    order_type = fields.Str(required=False)
     
 
 
@@ -3333,26 +3297,6 @@ class AddCartDetailResult(BaseSchema):
     
     message = fields.Str(required=False)
     
-    result = fields.Dict(required=False)
-    
-    items = fields.List(fields.Nested(CartItemInfo, required=False), required=False)
-    
-
-
-class CartItemInfo(BaseSchema):
-    # Cart swagger.json
-
-    
-    item_id = fields.Int(required=False)
-    
-    size = fields.Str(required=False)
-    
-    store_id = fields.Int(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
-    
 
 
 class UpdateProductCart(BaseSchema):
@@ -3370,8 +3314,6 @@ class UpdateProductCart(BaseSchema):
     extra_meta = fields.Dict(required=False)
     
     _custom_json = fields.Dict(required=False)
-    
-    force_new_line_item = fields.Boolean(required=False)
     
     item_id = fields.Int(required=False)
     
@@ -3414,10 +3356,6 @@ class UpdateCartDetailResult(BaseSchema):
     success = fields.Boolean(required=False)
     
     cart = fields.Nested(CartDetailResult, required=False)
-    
-    result = fields.Dict(required=False)
-    
-    items = fields.List(fields.Nested(CartItemInfo, required=False), required=False)
     
     message = fields.Str(required=False)
     
@@ -3739,8 +3677,6 @@ class PlatformUpdateCartDetails(BaseSchema):
     
     operation = fields.Str(required=False)
     
-    free_gift_items_operation = fields.Str(required=False)
-    
 
 
 class DeleteCartDetails(BaseSchema):
@@ -3927,8 +3863,6 @@ class PlatformGetAddressesDetails(BaseSchema):
     # Cart swagger.json
 
     
-    pii_masking = fields.Boolean(required=False)
-    
     address = fields.List(fields.Nested(PlatformAddress, required=False), required=False)
     
     validation_config = fields.Nested(ValidationConfig, required=False)
@@ -4077,8 +4011,6 @@ class PlatformCartShipmentsResult(BaseSchema):
     
     custom_cart_meta = fields.Dict(required=False)
     
-    customer_id = fields.Str(required=False)
-    
 
 
 class UpdateCartShipmentItem(BaseSchema):
@@ -4187,16 +4119,6 @@ class CartCheckoutCustomMeta(BaseSchema):
     
 
 
-class OrderTag(BaseSchema):
-    # Cart swagger.json
-
-    
-    display_text = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-
-
 class PlatformCartCheckoutDetailCreation(BaseSchema):
     # Cart swagger.json
 
@@ -4262,12 +4184,6 @@ class PlatformCartCheckoutDetailCreation(BaseSchema):
     type = fields.Str(required=False)
     
     card_id = fields.Str(required=False)
-    
-    success_callback_url = fields.Str(required=False, allow_none=True)
-    
-    failure_callback_url = fields.Str(required=False, allow_none=True)
-    
-    order_tags = fields.List(fields.Nested(OrderTag, required=False), required=False)
     
 
 
@@ -4587,12 +4503,6 @@ class PlatformCartCheckoutDetailV2Creation(BaseSchema):
     
     card_id = fields.Str(required=False)
     
-    success_callback_url = fields.Str(required=False, allow_none=True)
-    
-    failure_callback_url = fields.Str(required=False, allow_none=True)
-    
-    order_tags = fields.List(fields.Nested(OrderTag, required=False), required=False)
-    
 
 
 class UpdateCartPaymentRequestV2(BaseSchema):
@@ -4694,6 +4604,8 @@ class PromotionOffer(BaseSchema):
     free_gift_items = fields.List(fields.Nested(FreeGiftItems, required=False), required=False)
     
     description = fields.Str(required=False)
+    
+    is_bank_offer = fields.Boolean(required=False)
     
 
 

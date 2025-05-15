@@ -28,11 +28,6 @@ from ..PublicModel import BaseSchema
     
     
         
-    
-    
-    
-        
-    
 
 class ContentValidator:
     
@@ -98,23 +93,6 @@ class ContentValidator:
         
         entity_type = fields.Str(required=False)
          
-        
-    
-    class getAllLanguages(BaseSchema):
-        
-        pass 
-        
-    
-    class getLanguageByLocale(BaseSchema):
-        
-        
-        locale = fields.Str(required=False)
-         
-        
-    
-    class getAllTranslatableResources(BaseSchema):
-        
-        pass 
         
     
     

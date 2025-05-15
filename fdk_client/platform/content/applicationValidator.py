@@ -226,7 +226,11 @@ from .models import GenerationEntityType
     
         
         
+    
+    
+        
         
+        
     
     
         
@@ -307,19 +311,24 @@ from .models import GenerationEntityType
         
     
     
+        
+        
+        
         
         
+        
     
     
-        
         
         
     
     
         
         
+        
     
     
+        
         
         
     
@@ -332,6 +341,8 @@ from .models import GenerationEntityType
         
         
         
+        
+        
     
     
         
@@ -362,35 +373,23 @@ from .models import GenerationEntityType
         
     
     
-        
-        
         
         
-        
-        
-        
-        
-        
     
     
-        
-        
-        
         
         
         
-        
-        
-        
     
     
-        
         
         
     
     
         
         
+    
+    
         
         
         
@@ -399,6 +398,8 @@ from .models import GenerationEntityType
         
         
         
+    
+    
         
         
     
@@ -407,10 +408,8 @@ from .models import GenerationEntityType
         
         
         
-        
     
     
-        
         
         
         
@@ -419,30 +418,22 @@ from .models import GenerationEntityType
         
         
         
-        
     
     
         
         
     
     
-        
         
         
-        
-        
     
     
         
         
         
-    
-    
         
         
         
-    
-    
         
         
         
@@ -453,14 +444,12 @@ from .models import GenerationEntityType
         
         
         
-    
-    
         
         
         
+        
     
     
-        
         
         
         
@@ -470,8 +459,10 @@ from .models import GenerationEntityType
         
         
         
+        
     
     
+        
         
         
         
@@ -488,8 +479,10 @@ from .models import GenerationEntityType
         
         
         
+        
     
     
+        
         
         
         
@@ -497,10 +490,8 @@ from .models import GenerationEntityType
     
         
         
-        
     
     
-        
         
         
         
@@ -510,6 +501,7 @@ from .models import GenerationEntityType
     
         
         
+        
     
     
         
@@ -524,16 +516,17 @@ from .models import GenerationEntityType
     
         
         
-    
-    
+        
         
         
     
     
         
         
+        
     
     
+        
         
         
         
@@ -542,9 +535,9 @@ from .models import GenerationEntityType
         
         
         
+        
     
     
-        
         
         
         
@@ -553,8 +546,12 @@ from .models import GenerationEntityType
     
         
         
+        
+        
+        
     
     
+        
         
         
     
@@ -1035,6 +1032,15 @@ class ContentValidator:
          
         
     
+    class createPagePreview(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class updatePagePreview(BaseSchema):
         
         
@@ -1190,6 +1196,142 @@ class ContentValidator:
         
     
     class deleteSEOMarkupSchema(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class getDefaultSitemapConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class updateDefaultSitemapConfig(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getSitemaps(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_no = fields.Str(required=False)
+        
+        page_size = fields.Str(required=False)
+        
+        is_active = fields.Boolean(required=False)
+        
+        name = fields.Str(required=False)
+         
+        
+    
+    class createSitemap(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getSitemap(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        name = fields.Str(required=False)
+         
+        
+    
+    class updateSitemap(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        name = fields.Str(required=False)
+         
+        
+    
+    class deleteSitemap(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        name = fields.Str(required=False)
+         
+        
+    
+    class getSlideshows(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        device_platform = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class createSlideshow(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getSlideshowBySlug(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
+        
+        device_platform = fields.Str(required=False)
+         
+        
+    
+    class updateSlideshow(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class deleteSlideshow(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -1635,158 +1777,6 @@ class ContentValidator:
         application_id = fields.Str(required=False)
         
         slug = fields.Str(required=False)
-         
-        
-    
-    class getTranslateUILabels(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        template_theme_id = fields.Str(required=False)
-        
-        theme_id = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-        
-        type = fields.Str(required=False)
-         
-        
-    
-    class createTranslateUILabels(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getTranslateUILabelsById(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class updateTranslateUILabels(BaseSchema):
-        
-        
-        id = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getApplicationLanguages(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class addApplicationLanguage(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class bulkUnPublishApplicationLanguage(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateApplicationLanguageStatus(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-         
-        
-    
-    class deleteApplicationLanguage(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-         
-        
-    
-    class getApplicationResourceTranslations(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        locale = fields.Str(required=False)
-        
-        type = fields.Str(required=False)
-        
-        resource_id = fields.Str(required=False)
-         
-        
-    
-    class createApplicationResourceTranslation(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class upsertApplicationResourceTranslationInBulk(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateApplicationResourceTranslation(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class deleteApplicationResourceTranslation(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
          
         
     

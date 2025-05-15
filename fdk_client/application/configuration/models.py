@@ -224,10 +224,6 @@ class OrderFeature(BaseSchema):
     pass
 
 
-class DeliveryStrategy(BaseSchema):
-    pass
-
-
 class AppFeatureResponseSchema(BaseSchema):
     pass
 
@@ -901,8 +897,6 @@ class AppFeature(BaseSchema):
     
     order = fields.Nested(OrderFeature, required=False)
     
-    delivery_strategy = fields.Nested(DeliveryStrategy, required=False)
-    
     _id = fields.Str(required=False)
     
     app = fields.Str(required=False)
@@ -1070,14 +1064,6 @@ class OrderFeature(BaseSchema):
 
     
     buy_again = fields.Boolean(required=False)
-    
-
-
-class DeliveryStrategy(BaseSchema):
-    # Configuration swagger.json
-
-    
-    value = fields.Str(required=False)
     
 
 
@@ -1293,7 +1279,7 @@ class CompanyAboutAddress(BaseSchema):
     # Configuration swagger.json
 
     
-    pincode = fields.Str(required=False)
+    pincode = fields.Int(required=False)
     
     address1 = fields.Str(required=False)
     
@@ -1356,8 +1342,6 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
-    
-    page_size = fields.Int(required=False)
     
 
 
@@ -1703,7 +1687,7 @@ class OptedStoreAddress(BaseSchema):
     
     address2 = fields.Str(required=False)
     
-    pincode = fields.Str(required=False)
+    pincode = fields.Int(required=False)
     
     country = fields.Str(required=False)
     
@@ -1729,7 +1713,7 @@ class OrderingStore(BaseSchema):
     
     store_code = fields.Str(required=False)
     
-    pincode = fields.Str(required=False)
+    pincode = fields.Int(required=False)
     
     code = fields.Str(required=False)
     

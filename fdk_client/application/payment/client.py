@@ -58,9 +58,9 @@ class Payment:
             "redirectToAggregator": "/service/application/payment/v1.0/payment/redirect-to-aggregator/",
             "checkCredit": "/service/application/payment/v1.0/check-credits/",
             "customerOnboard": "/service/application/payment/v1.0/credit-onboard/",
+            "outstandingOrderDetails": "/service/application/payment/v1.0/payment/outstanding-orders/",
             "paidOrderDetails": "/service/application/payment/v1.0/payment/paid-orders/",
-            "createPaymentOrder": "/service/application/payment/v1.0/payment-orders/",
-            "validateCustomerAndCreditSummary": "/service/application/payment/v1.0/payment/validate/customer-credits-v2"
+            "createPaymentOrder": "/service/application/payment/v1.0/payment-orders/"
             
         }
         self._urls = {
@@ -70,12 +70,15 @@ class Payment:
     async def updateUrls(self, urls):
         self._urls.update(urls)
     
-    async def getAggregatorsConfig(self, refresh=None, body="", request_headers:Dict={}):
+    async def getAggregatorsConfig(self, x_api_token=None, refresh=None, body="", request_headers:Dict={}):
         """Get aggregator secret key of all payment gateways utilized for payments when using the SDK for the payment gateway.
+        :param x-api-token : Basic auth token. : type string
         :param refresh : Select `true` to remove temporary cache files on payment gateway and replace with the latest one. : type boolean
         """
         payload = {}
         
+        if x_api_token is not None:
+            payload["x_api_token"] = x_api_token
         if refresh is not None:
             payload["refresh"] = refresh
 
@@ -84,7 +87,7 @@ class Payment:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getAggregatorsConfig"], proccessed_params="""{"required":[],"optional":[{"name":"refresh","in":"query","description":"Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}}],"query":[{"name":"refresh","in":"query","description":"Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}}],"headers":[],"path":[]}""", serverType="application", refresh=refresh)
+        url_with_params = await create_url_with_params(api_url=self._urls["getAggregatorsConfig"], proccessed_params="""{"required":[],"optional":[{"name":"x-api-token","in":"header","description":"Basic auth token.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}}],"query":[{"name":"refresh","in":"query","description":"Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"}}],"headers":[{"name":"x-api-token","in":"header","description":"Basic auth token.","required":false,"schema":{"type":"string"}}],"path":[]}""", serverType="application", x_api_token=x_api_token, refresh=refresh)
         query_string = await create_query_string(refresh=refresh)
         if query_string:
             url_with_params += "?" + query_string
@@ -103,7 +106,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAggregatorsConfig"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/config/aggregators/key", refresh=refresh), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAggregatorsConfig"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/config/aggregators/key", x_api_token=x_api_token, refresh=refresh), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import AggregatorsConfigDetail
@@ -2025,22 +2028,25 @@ class Payment:
 
         return response
     
-    async def checkCredit(self, aggregator=None, body="", request_headers:Dict={}):
+    async def checkCredit(self, aggregator=None, wallet=None, body="", request_headers:Dict={}):
         """Check the availability and status of customer credit, providing the status of payment along with registration information and signup URL if the customer is not registered.
         :param aggregator : Aggregator name. : type string
+        :param wallet : Wallet name. : type string
         """
         payload = {}
         
         if aggregator is not None:
             payload["aggregator"] = aggregator
+        if wallet is not None:
+            payload["wallet"] = wallet
 
         # Parameter validation
         schema = PaymentValidator.checkCredit()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["checkCredit"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"aggregator","schema":{"type":"string"},"description":"Aggregator name."}],"query":[{"in":"query","name":"aggregator","schema":{"type":"string"},"description":"Aggregator name."}],"headers":[],"path":[]}""", serverType="application", aggregator=aggregator)
-        query_string = await create_query_string(aggregator=aggregator)
+        url_with_params = await create_url_with_params(api_url=self._urls["checkCredit"], proccessed_params="""{"required":[{"in":"query","name":"aggregator","schema":{"type":"string"},"description":"Aggregator name.","required":true}],"optional":[{"in":"query","name":"wallet","schema":{"type":"string"},"description":"Wallet name.","required":false}],"query":[{"in":"query","name":"aggregator","schema":{"type":"string"},"description":"Aggregator name.","required":true},{"in":"query","name":"wallet","schema":{"type":"string"},"description":"Wallet name.","required":false}],"headers":[],"path":[]}""", serverType="application", aggregator=aggregator, wallet=wallet)
+        query_string = await create_query_string(aggregator=aggregator, wallet=wallet)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -2058,7 +2064,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkCredit"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/check-credits/", aggregator=aggregator), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkCredit"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/check-credits/", aggregator=aggregator, wallet=wallet), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CheckCreditDetails
@@ -2114,6 +2120,52 @@ class Payment:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for customerOnboard")
+                print(e)
+
+        return response
+    
+    async def outstandingOrderDetails(self, aggregator=None, body="", request_headers:Dict={}):
+        """Get details of orders with outstanding payments.
+        :param aggregator : Merchant user ID as value. : type string
+        """
+        payload = {}
+        
+        if aggregator is not None:
+            payload["aggregator"] = aggregator
+
+        # Parameter validation
+        schema = PaymentValidator.outstandingOrderDetails()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["outstandingOrderDetails"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"aggregator","schema":{"type":"string"},"description":"Merchant user ID as value."}],"query":[{"in":"query","name":"aggregator","schema":{"type":"string"},"description":"Merchant user ID as value."}],"headers":[],"path":[]}""", serverType="application", aggregator=aggregator)
+        query_string = await create_query_string(aggregator=aggregator)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["outstandingOrderDetails"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/outstanding-orders/", aggregator=aggregator), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OutstandingOrderDetails
+            schema = OutstandingOrderDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for outstandingOrderDetails")
                 print(e)
 
         return response
@@ -2207,53 +2259,6 @@ class Payment:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for createPaymentOrder")
-                print(e)
-
-        return response
-    
-    async def validateCustomerAndCreditSummary(self, body="", request_headers:Dict={}):
-        """Verify if the user is eligible for payment and also show credit summary if activated.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = PaymentValidator.validateCustomerAndCreditSummary()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CustomerValidationSchema
-        schema = CustomerValidationSchema()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(api_url=self._urls["validateCustomerAndCreditSummary"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["validateCustomerAndCreditSummary"]).netloc, "post", await create_url_without_domain("/service/application/payment/v1.0/payment/validate/customer-credits-v2", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ValidateCustomerCreditSchema
-            schema = ValidateCustomerCreditSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for validateCustomerAndCreditSummary")
                 print(e)
 
         return response

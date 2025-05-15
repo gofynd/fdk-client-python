@@ -26,19 +26,20 @@ class Content:
             "getFaqsByCategorySlug": "/service/application/content/v1.0/faq/category/{slug}/faqs",
             "getLandingPage": "/service/application/content/v1.0/landing-page",
             "getLegalInformation": "/service/application/content/v1.0/legal",
-            "getNavigations": "/service/application/content/v1.0/navigations",
+            "getNavigations": "/service/application/content/v2.0/navigations",
             "getSEOConfiguration": "/service/application/content/v1.0/seo",
             "getSEOMarkupSchemas": "/service/application/content/v1.0/seo/schema",
+            "getDefaultSitemapConfig": "/service/application/content/v1.0/seo/sitemap/default",
+            "getSitemaps": "/service/application/content/v1.0/seo/sitemaps",
+            "getSitemap": "/service/application/content/v1.0/seo/sitemaps/{name}",
+            "getSlideshows": "/service/application/content/v1.0/slideshow",
+            "getSlideshow": "/service/application/content/v1.0/slideshow/{slug}",
             "getSupportInformation": "/service/application/content/v1.0/support",
             "getTags": "/service/application/content/v1.0/tags",
             "getPage": "/service/application/content/v2.0/pages/{slug}",
             "getPages": "/service/application/content/v2.0/pages",
             "getCustomObjectBySlug": "/service/application/content/v2.0/customobjects/definition/{definition_slug}/entries/{slug}",
-            "getCustomFieldsByResourceId": "/service/application/content/v2.0/customfields/resource/{resource}/{resource_slug}",
-            "getTranslateUILabels": "/service/application/content/v1.0/translate-ui-labels",
-            "fetchResourceTranslations": "/service/application/content/v1.0/resource/translations/{type}/{locale}",
-            "fetchResourceTranslationsWithPayload": "/service/application/content/v1.0/resource/translations/{type}/{locale}",
-            "getSupportedLanguages": "/service/application/content/v1.0/languages"
+            "getCustomFieldsByResourceId": "/service/application/content/v2.0/customfields/resource/{resource}/{resource_slug}"
             
         }
         self._urls = {
@@ -587,7 +588,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getNavigations"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/navigations", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getNavigations"]).netloc, "get", await create_url_without_domain("/service/application/content/v2.0/navigations", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import NavigationGetDetails
@@ -688,6 +689,241 @@ class Content:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getSEOMarkupSchemas")
+                print(e)
+
+        return response
+    
+    async def getDefaultSitemapConfig(self, body="", request_headers:Dict={}):
+        """Retrieves the current default sitemap configuration settings
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.getDefaultSitemapConfig()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getDefaultSitemapConfig"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getDefaultSitemapConfig"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/seo/sitemap/default", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DefaultSitemapConfig
+            schema = DefaultSitemapConfig()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getDefaultSitemapConfig")
+                print(e)
+
+        return response
+    
+    async def getSitemaps(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
+        """Retrieve a list of sitemap configurations for a specific application. Each configuration contains the sitemap XML data. 
+
+        :param page_no :  : type string
+        :param page_size :  : type string
+        """
+        payload = {}
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+
+        # Parameter validation
+        schema = ContentValidator.getSitemaps()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getSitemaps"], proccessed_params="""{"required":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"optional":[],"query":[{"name":"page_no","in":"query","required":true,"schema":{"type":"string","description":"This is the page number"}},{"name":"page_size","in":"query","required":true,"schema":{"type":"string","description":"This is the page size"}}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSitemaps"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/seo/sitemaps", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SitemapConfigurationList
+            schema = SitemapConfigurationList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSitemaps")
+                print(e)
+
+        return response
+    
+    async def getSitemap(self, name=None, body="", request_headers:Dict={}):
+        """Retrieve a specific sitemap configuration by its name. Returns the complete configuration including the sitemap XML data, activation status, and timestamps.
+
+        :param name :  : type string
+        """
+        payload = {}
+        
+        if name is not None:
+            payload["name"] = name
+
+        # Parameter validation
+        schema = ContentValidator.getSitemap()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getSitemap"], proccessed_params="""{"required":[{"name":"name","schema":{"type":"string","description":"Unique identifier for the sitemap configuration"},"in":"path","required":true,"example":{"success":{"value":"main-sitemap"}}}],"optional":[],"query":[],"headers":[],"path":[{"name":"name","schema":{"type":"string","description":"Unique identifier for the sitemap configuration"},"in":"path","required":true,"example":{"success":{"value":"main-sitemap"}}}]}""", serverType="application", name=name)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSitemap"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/seo/sitemaps/{name}", name=name), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SitemapConfig
+            schema = SitemapConfig()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSitemap")
+                print(e)
+
+        return response
+    
+    async def getSlideshows(self, page_no=None, page_size=None, body="", request_headers:Dict={}):
+        """List slideshows along with their details.
+        :param page_no : The page number to navigate through the given set of results. Default value is 1. . : type integer
+        :param page_size : The number of items to retrieve in each page. : type integer
+        """
+        payload = {}
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+
+        # Parameter validation
+        schema = ContentValidator.getSlideshows()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getSlideshows"], proccessed_params="""{"required":[],"optional":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. .","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","required":false,"schema":{"type":"integer","default":10}}],"query":[{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. .","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page.","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[]}""", serverType="application", page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSlideshows"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/slideshow", page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SlideshowGetDetails
+            schema = SlideshowGetDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSlideshows")
+                print(e)
+
+        return response
+    
+    async def getSlideshow(self, slug=None, body="", request_headers:Dict={}):
+        """Get a slideshow using its `slug`.
+        :param slug : A short, human-readable, URL-friendly identifier of a slideshow. You can get slug value from the endpoint /service/application/content/v1.0/slideshow/. : type string
+        """
+        payload = {}
+        
+        if slug is not None:
+            payload["slug"] = slug
+
+        # Parameter validation
+        schema = ContentValidator.getSlideshow()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getSlideshow"], proccessed_params="""{"required":[{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a slideshow. You can get slug value from the endpoint /service/application/content/v1.0/slideshow/.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"slug","in":"path","description":"A short, human-readable, URL-friendly identifier of a slideshow. You can get slug value from the endpoint /service/application/content/v1.0/slideshow/.","required":true,"schema":{"type":"string"}}]}""", serverType="application", slug=slug)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSlideshow"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/slideshow/{slug}", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SlideshowSchema
+            schema = SlideshowSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSlideshow")
                 print(e)
 
         return response
@@ -878,8 +1114,8 @@ class Content:
     
     async def getCustomObjectBySlug(self, definition_slug=None, slug=None, body="", request_headers:Dict={}):
         """Details of a custom object entry can be obtained using this endpoint.
-        :param definition_slug : Slug of Meta object definition : type string
-        :param slug : Slug of Meta object : type string
+        :param definition_slug :  : type string
+        :param slug :  : type string
         """
         payload = {}
         
@@ -893,7 +1129,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCustomObjectBySlug"], proccessed_params="""{"required":[{"name":"definition_slug","description":"Slug of Meta object definition","in":"path","required":true,"schema":{"type":"string"}},{"name":"slug","description":"Slug of Meta object","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"definition_slug","description":"Slug of Meta object definition","in":"path","required":true,"schema":{"type":"string"}},{"name":"slug","description":"Slug of Meta object","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="application", definition_slug=definition_slug, slug=slug)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCustomObjectBySlug"], proccessed_params="""{"required":[{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"definition_slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object definition slug"}},{"name":"slug","in":"path","required":true,"schema":{"type":"string","description":"This is custom object entry slug"}}]}""", serverType="application", definition_slug=definition_slug, slug=slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -971,206 +1207,6 @@ class Content:
             except Exception as e:
                 print("Response Validation failed for getCustomFieldsByResourceId")
                 print(e)
-
-        return response
-    
-    async def getTranslateUILabels(self, template=None, template_theme_id=None, theme_id=None, locale=None, type=None, body="", request_headers:Dict={}):
-        """Retrieve Translate Ui Labels with filtering options for type, template, and locale settings.
-        :param template : template : type boolean
-        :param template_theme_id : unique id of template theme : type string
-        :param theme_id : unique id of theme : type string
-        :param locale : Multilingual locale : type string
-        :param type : Filter Translate Ui Labels by type : type string
-        """
-        payload = {}
-        
-        if template is not None:
-            payload["template"] = template
-        if template_theme_id is not None:
-            payload["template_theme_id"] = template_theme_id
-        if theme_id is not None:
-            payload["theme_id"] = theme_id
-        if locale is not None:
-            payload["locale"] = locale
-        if type is not None:
-            payload["type"] = type
-
-        # Parameter validation
-        schema = ContentValidator.getTranslateUILabels()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getTranslateUILabels"], proccessed_params="""{"required":[],"optional":[{"name":"template","in":"query","description":"template","required":false,"schema":{"type":"boolean","enum":[true,false],"description":"template"}},{"name":"template_theme_id","in":"query","description":"unique id of template theme","required":false,"schema":{"type":"string","description":"template theme"}},{"name":"theme_id","in":"query","description":"unique id of theme","required":false,"schema":{"type":"string","description":"theme"}},{"name":"locale","in":"query","description":"Multilingual locale","required":false,"schema":{"type":"string","description":"Multilingual locale"}},{"name":"type","in":"query","description":"Filter Translate Ui Labels by type","required":false,"schema":{"type":"string","example":"locale"}}],"query":[{"name":"template","in":"query","description":"template","required":false,"schema":{"type":"boolean","enum":[true,false],"description":"template"}},{"name":"template_theme_id","in":"query","description":"unique id of template theme","required":false,"schema":{"type":"string","description":"template theme"}},{"name":"theme_id","in":"query","description":"unique id of theme","required":false,"schema":{"type":"string","description":"theme"}},{"name":"locale","in":"query","description":"Multilingual locale","required":false,"schema":{"type":"string","description":"Multilingual locale"}},{"name":"type","in":"query","description":"Filter Translate Ui Labels by type","required":false,"schema":{"type":"string","example":"locale"}}],"headers":[],"path":[]}""", serverType="application", template=template, template_theme_id=template_theme_id, theme_id=theme_id, locale=locale, type=type)
-        query_string = await create_query_string(template=template, template_theme_id=template_theme_id, theme_id=theme_id, locale=locale, type=type)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getTranslateUILabels"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/translate-ui-labels", template=template, template_theme_id=template_theme_id, theme_id=theme_id, locale=locale, type=type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TranslateUiLabelsPage
-            schema = TranslateUiLabelsPage()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getTranslateUILabels")
-                print(e)
-
-        return response
-    
-    async def fetchResourceTranslations(self, type=None, locale=None, resource_id=None, body="", request_headers:Dict={}):
-        """Fetch translations for specific resource IDs based on type and locale settings.
-        :param type : Type of resource for which translations are required (e.g., `application.product`). : type string
-        :param locale : Locale code for the translations (e.g., `hi-IN` for Hindi). : type string
-        :param resource_id : Comma-separated list of resource IDs to fetch translations for. : type string
-        """
-        payload = {}
-        
-        if type is not None:
-            payload["type"] = type
-        if locale is not None:
-            payload["locale"] = locale
-        if resource_id is not None:
-            payload["resource_id"] = resource_id
-
-        # Parameter validation
-        schema = ContentValidator.fetchResourceTranslations()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["fetchResourceTranslations"], proccessed_params="""{"required":[{"name":"type","in":"path","required":true,"description":"Type of resource for which translations are required (e.g., `application.product`).","schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"description":"Locale code for the translations (e.g., `hi-IN` for Hindi).","schema":{"type":"string"}},{"name":"resource_id","in":"query","required":true,"description":"Comma-separated list of resource IDs to fetch translations for.","schema":{"type":"string"}}],"optional":[],"query":[{"name":"resource_id","in":"query","required":true,"description":"Comma-separated list of resource IDs to fetch translations for.","schema":{"type":"string"}}],"headers":[],"path":[{"name":"type","in":"path","required":true,"description":"Type of resource for which translations are required (e.g., `application.product`).","schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"description":"Locale code for the translations (e.g., `hi-IN` for Hindi).","schema":{"type":"string"}}]}""", serverType="application", type=type, locale=locale, resource_id=resource_id)
-        query_string = await create_query_string(resource_id=resource_id)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["fetchResourceTranslations"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/resource/translations/{type}/{locale}", type=type, locale=locale, resource_id=resource_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResourceTranslations
-            schema = ResourceTranslations()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for fetchResourceTranslations")
-                print(e)
-
-        return response
-    
-    async def fetchResourceTranslationsWithPayload(self, type=None, locale=None, resource_id=None, body="", request_headers:Dict={}):
-        """Submit and retrieve translations for resources using payload data and locale settings.
-        :param type : Type of resource for which translations are required (e.g., `application.product`). : type string
-        :param locale : Locale code for the translations (e.g., `hi-IN` for Hindi). : type string
-        :param resource_id : Comma-separated list of resource IDs to fetch translations for. : type string
-        """
-        payload = {}
-        
-        if type is not None:
-            payload["type"] = type
-        if locale is not None:
-            payload["locale"] = locale
-        if resource_id is not None:
-            payload["resource_id"] = resource_id
-
-        # Parameter validation
-        schema = ContentValidator.fetchResourceTranslationsWithPayload()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ResourcePayload
-        schema = ResourcePayload()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(api_url=self._urls["fetchResourceTranslationsWithPayload"], proccessed_params="""{"required":[{"name":"type","in":"path","required":true,"description":"Type of resource for which translations are required (e.g., `application.product`).","schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"description":"Locale code for the translations (e.g., `hi-IN` for Hindi).","schema":{"type":"string"}},{"name":"resource_id","in":"query","required":true,"description":"Comma-separated list of resource IDs to fetch translations for.","schema":{"type":"string"}}],"optional":[],"query":[{"name":"resource_id","in":"query","required":true,"description":"Comma-separated list of resource IDs to fetch translations for.","schema":{"type":"string"}}],"headers":[],"path":[{"name":"type","in":"path","required":true,"description":"Type of resource for which translations are required (e.g., `application.product`).","schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"description":"Locale code for the translations (e.g., `hi-IN` for Hindi).","schema":{"type":"string"}}]}""", serverType="application", type=type, locale=locale, resource_id=resource_id)
-        query_string = await create_query_string(resource_id=resource_id)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["fetchResourceTranslationsWithPayload"]).netloc, "post", await create_url_without_domain("/service/application/content/v1.0/resource/translations/{type}/{locale}", type=type, locale=locale, resource_id=resource_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ResourceTranslations
-            schema = ResourceTranslations()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for fetchResourceTranslationsWithPayload")
-                print(e)
-
-        return response
-    
-    async def getSupportedLanguages(self, body="", request_headers:Dict={}):
-        """Retrieve available languages and their configurations for the specified application.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ContentValidator.getSupportedLanguages()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getSupportedLanguages"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSupportedLanguages"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/languages", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         return response
     

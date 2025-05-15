@@ -48,6 +48,26 @@ class CustomMetaFields(BaseSchema):
     pass
 
 
+class Sitemap(BaseSchema):
+    pass
+
+
+class ApplicationItemSeoAction(BaseSchema):
+    pass
+
+
+class ApplicationItemSeoBreadcrumbs(BaseSchema):
+    pass
+
+
+class ApplicationItemSeoMetaTagItem(BaseSchema):
+    pass
+
+
+class Metatags(BaseSchema):
+    pass
+
+
 class ApplicationItemSEO(BaseSchema):
     pass
 
@@ -540,7 +560,7 @@ class PromiseSchema(BaseSchema):
     pass
 
 
-class ProductSizePriceResponseV4(BaseSchema):
+class ProductSizePriceResponseV3(BaseSchema):
     pass
 
 
@@ -556,7 +576,7 @@ class ProductSizeSellerFilterSchemaV3(BaseSchema):
     pass
 
 
-class ProductSizeSellersResponseV4(BaseSchema):
+class ProductSizeSellersResponseV3(BaseSchema):
     pass
 
 
@@ -687,13 +707,71 @@ class CustomMetaFields(BaseSchema):
     
 
 
+class Sitemap(BaseSchema):
+    # Catalog swagger.json
+
+    
+    priority = fields.Float(required=False)
+    
+    frequency = fields.Str(required=False)
+    
+
+
+class ApplicationItemSeoAction(BaseSchema):
+    # Catalog swagger.json
+
+    
+    page = fields.Dict(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class ApplicationItemSeoBreadcrumbs(BaseSchema):
+    # Catalog swagger.json
+
+    
+    url = fields.Str(required=False)
+    
+    action = fields.Nested(ApplicationItemSeoAction, required=False)
+    
+
+
+class ApplicationItemSeoMetaTagItem(BaseSchema):
+    # Catalog swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+
+
+class Metatags(BaseSchema):
+    # Catalog swagger.json
+
+    
+    title = fields.Str(required=False)
+    
+    items = fields.List(fields.Nested(ApplicationItemSeoMetaTagItem, required=False), required=False)
+    
+
+
 class ApplicationItemSEO(BaseSchema):
     # Catalog swagger.json
 
     
-    title = fields.Raw(required=False)
+    description = fields.Str(required=False)
     
-    description = fields.Raw(required=False)
+    title = fields.Str(required=False)
+    
+    sitemap = fields.Nested(Sitemap, required=False)
+    
+    breadcrumbs = fields.List(fields.Nested(ApplicationItemSeoBreadcrumbs, required=False), required=False)
+    
+    meta_tags = fields.List(fields.Nested(Metatags, required=False), required=False)
+    
+    canonical_url = fields.Str(required=False)
     
 
 
@@ -931,6 +1009,8 @@ class ProductDetail(BaseSchema):
     
     country_of_origin = fields.Str(required=False)
     
+    modified_on = fields.Str(required=False)
+    
 
 
 class ErrorResponseSchema(BaseSchema):
@@ -1011,14 +1091,6 @@ class SizeChartValues(BaseSchema):
     
     col_6 = fields.Str(required=False)
     
-    col_7 = fields.Str(required=False)
-    
-    col_8 = fields.Str(required=False)
-    
-    col_9 = fields.Str(required=False)
-    
-    col_10 = fields.Str(required=False)
-    
     col_2 = fields.Str(required=False)
     
     col_4 = fields.Str(required=False)
@@ -1055,14 +1127,6 @@ class ColumnHeaders(BaseSchema):
     
     col_5 = fields.Nested(ColumnHeader, required=False)
     
-    col_7 = fields.Nested(ColumnHeader, required=False)
-    
-    col_8 = fields.Nested(ColumnHeader, required=False)
-    
-    col_9 = fields.Nested(ColumnHeader, required=False)
-    
-    col_10 = fields.Nested(ColumnHeader, required=False)
-    
 
 
 class SizeChart(BaseSchema):
@@ -1082,8 +1146,6 @@ class SizeChart(BaseSchema):
     title = fields.Str(required=False)
     
     headers = fields.Nested(ColumnHeaders, required=False)
-    
-    id = fields.Str(required=False)
     
 
 
@@ -1387,8 +1449,6 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
-    page_size = fields.Int(required=False)
-    
 
 
 class ProductStockPolling(BaseSchema):
@@ -1442,8 +1502,6 @@ class ProductListingDetail(BaseSchema):
     seo = fields.Nested(ApplicationItemSEO, required=False)
     
     image_nature = fields.Str(required=False)
-    
-    pinned = fields.Boolean(required=False)
     
     has_variant = fields.Boolean(required=False)
     
@@ -1508,6 +1566,8 @@ class ProductListingDetail(BaseSchema):
     is_tryout = fields.Boolean(required=False)
     
     channel = fields.Str(required=False)
+    
+    modified_on = fields.Str(required=False)
     
 
 
@@ -1615,6 +1675,8 @@ class BrandItem(BaseSchema):
     
     logo = fields.Nested(Media, required=False)
     
+    seo = fields.Nested(ApplicationItemSEO, required=False)
+    
     description = fields.Str(required=False)
     
     banners = fields.Nested(ImageUrls, required=False)
@@ -1660,6 +1722,8 @@ class BrandDetailResponseSchema(BaseSchema):
     slug = fields.Str(required=False)
     
     _app = fields.Dict(required=False)
+    
+    seo = fields.Nested(ApplicationItemSEO, required=False)
     
 
 
@@ -1969,6 +2033,8 @@ class GetCollectionDetailNest(BaseSchema):
     
     is_visible = fields.Boolean(required=False)
     
+    modified_on = fields.Str(required=False)
+    
 
 
 class CollectionListingFilterTag(BaseSchema):
@@ -2032,6 +2098,8 @@ class CollectionDetailResponseSchema(BaseSchema):
     cron = fields.Dict(required=False)
     
     _schedule = fields.Dict(required=False)
+    
+    modified_on = fields.Str(required=False)
     
     query = fields.List(fields.Nested(CollectionQuery, required=False), required=False)
     
@@ -2169,7 +2237,7 @@ class Store(BaseSchema):
     
     country = fields.Str(required=False)
     
-    pincode = fields.Str(required=False)
+    pincode = fields.Int(required=False)
     
     city = fields.Str(required=False)
     
@@ -2293,7 +2361,7 @@ class StoreAddressSchema(BaseSchema):
     
     address1 = fields.Str(required=False)
     
-    pincode = fields.Str(required=False)
+    pincode = fields.Int(required=False)
     
     city = fields.Str(required=False)
     
@@ -2725,7 +2793,7 @@ class StrategyWiseListingSchemaV3(BaseSchema):
     
     distance = fields.Int(required=False)
     
-    pincode = fields.Str(required=False)
+    pincode = fields.Int(required=False)
     
     tat = fields.Int(required=False)
     
@@ -2857,7 +2925,7 @@ class PromiseSchema(BaseSchema):
     
 
 
-class ProductSizePriceResponseV4(BaseSchema):
+class ProductSizePriceResponseV3(BaseSchema):
     # Catalog swagger.json
 
     
@@ -2899,7 +2967,7 @@ class ProductSizePriceResponseV4(BaseSchema):
     
     price_per_unit = fields.Nested(ProductStockUnitPriceV3, required=False)
     
-    pincode = fields.Str(required=False)
+    pincode = fields.Int(required=False)
     
     marketplace_attributes = fields.List(fields.Nested(MarketPlaceSttributesSchemaV3, required=False), required=False)
     
@@ -2916,8 +2984,6 @@ class ProductSizePriceResponseV4(BaseSchema):
     inventory_updated_on = fields.Str(required=False)
     
     is_serviceable = fields.Boolean(required=False)
-    
-    total_available_quantity = fields.Int(required=False)
     
 
 
@@ -2963,7 +3029,7 @@ class ProductSellersPriceResponseV3(BaseSchema):
     
     price_per_unit = fields.Nested(ProductStockUnitPriceV3, required=False)
     
-    pincode = fields.Str(required=False)
+    pincode = fields.Int(required=False)
     
     marketplace_attributes = fields.List(fields.Nested(MarketPlaceSttributesSchemaV3, required=False), required=False)
     
@@ -2995,7 +3061,7 @@ class ProductSizeSellerFilterSchemaV3(BaseSchema):
     
 
 
-class ProductSizeSellersResponseV4(BaseSchema):
+class ProductSizeSellersResponseV3(BaseSchema):
     # Catalog swagger.json
 
     

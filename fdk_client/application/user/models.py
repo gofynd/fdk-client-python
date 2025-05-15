@@ -8,26 +8,6 @@ from ..ApplicationModel import BaseSchema
 
 
 
-class VerifyOTPForUpdateRequestSchema(BaseSchema):
-    pass
-
-
-class SendOTPForUpdateRequestSchema(BaseSchema):
-    pass
-
-
-class VerifyPrimaryOTPSuccess(BaseSchema):
-    pass
-
-
-class VerifyPrimaryOTPRequestSchema(BaseSchema):
-    pass
-
-
-class SendPrimaryOTPRequestSchema(BaseSchema):
-    pass
-
-
 class UpdateUserAttributes(BaseSchema):
     pass
 
@@ -336,73 +316,7 @@ class Email(BaseSchema):
     pass
 
 
-class UserConsentSchema(BaseSchema):
-    pass
 
-
-class PrivacyPolicyConsentSchema(BaseSchema):
-    pass
-
-
-
-
-
-class VerifyOTPForUpdateRequestSchema(BaseSchema):
-    # User swagger.json
-
-    
-    email = fields.Str(required=False)
-    
-    otp = fields.Str(required=False)
-    
-    request_id = fields.Str(required=False)
-    
-
-
-class SendOTPForUpdateRequestSchema(BaseSchema):
-    # User swagger.json
-
-    
-    request_id = fields.Str(required=False)
-    
-    mobile = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
-    
-    email = fields.Str(required=False)
-    
-    encrypt_otp = fields.Boolean(required=False)
-    
-
-
-class VerifyPrimaryOTPSuccess(BaseSchema):
-    # User swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    request_id = fields.Str(required=False)
-    
-    entity = fields.Str(required=False)
-    
-
-
-class VerifyPrimaryOTPRequestSchema(BaseSchema):
-    # User swagger.json
-
-    
-    otp = fields.Str(required=False)
-    
-    request_id = fields.Str(required=False)
-    
-
-
-class SendPrimaryOTPRequestSchema(BaseSchema):
-    # User swagger.json
-
-    
-    encrypt_otp = fields.Boolean(required=False)
-    
 
 
 class UpdateUserAttributes(BaseSchema):
@@ -498,8 +412,6 @@ class EditProfileRequestSchema(BaseSchema):
     sender = fields.Str(required=False)
     
     register_token = fields.Str(required=False)
-    
-    consent = fields.Boolean(required=False)
     
 
 
@@ -648,8 +560,6 @@ class FormRegisterRequestSchema(BaseSchema):
     phone = fields.Nested(FormRegisterRequestSchemaPhone, required=False)
     
     register_token = fields.Str(required=False)
-    
-    consent = fields.Boolean(required=False)
     
 
 
@@ -1391,8 +1301,6 @@ class UserSchema(BaseSchema):
     
     rr_id = fields.Str(required=False)
     
-    consent = fields.Nested(UserConsentSchema, required=False)
-    
 
 
 class PhoneNumber(BaseSchema):
@@ -1422,24 +1330,6 @@ class Email(BaseSchema):
     primary = fields.Boolean(required=False)
     
     verified = fields.Boolean(required=False)
-    
-
-
-class UserConsentSchema(BaseSchema):
-    # User swagger.json
-
-    
-    privacy_policy = fields.Nested(PrivacyPolicyConsentSchema, required=False)
-    
-
-
-class PrivacyPolicyConsentSchema(BaseSchema):
-    # User swagger.json
-
-    
-    value = fields.Boolean(required=False)
-    
-    updated_at = fields.Str(required=False)
     
 
 

@@ -58,10 +58,6 @@ class AvailablePageSectionMetaAttributes(BaseSchema):
     pass
 
 
-class CanvasItem(BaseSchema):
-    pass
-
-
 class SEOMetaItem(BaseSchema):
     pass
 
@@ -227,10 +223,6 @@ class CustomProps(BaseSchema):
 
 
 class GlobalSchema(BaseSchema):
-    pass
-
-
-class Prop(BaseSchema):
     pass
 
 
@@ -521,18 +513,6 @@ class AvailablePageSectionMetaAttributes(BaseSchema):
     
     attributes = fields.Dict(required=False)
     
-    canvas = fields.Nested(CanvasItem, required=False)
-    
-
-
-class CanvasItem(BaseSchema):
-    # Theme swagger.json
-
-    
-    value = fields.Str(required=False)
-    
-    label = fields.Str(required=False)
-    
 
 
 class SEOMetaItem(BaseSchema):
@@ -613,11 +593,7 @@ class AvailablePageSchemaSections(BaseSchema):
     
     label = fields.Str(required=False)
     
-    canvas = fields.Str(required=False)
-    
     props = fields.Dict(required=False)
-    
-    custom_css = fields.Str(required=False)
     
     blocks = fields.List(fields.Dict(required=False), required=False)
     
@@ -1115,25 +1091,7 @@ class GlobalSchema(BaseSchema):
     # Theme swagger.json
 
     
-    props = fields.List(fields.Nested(Prop, required=False), required=False)
-    
-
-
-class Prop(BaseSchema):
-    # Theme swagger.json
-
-    
-    type = fields.Str(required=False)
-    
-    category = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-    id = fields.Str(required=False)
-    
-    label = fields.Str(required=False)
-    
-    info = fields.Str(required=False)
+    props = fields.List(fields.Dict(required=False), required=False)
     
 
 

@@ -20,10 +20,6 @@ class ErrorCodeAndDescription(BaseSchema):
     pass
 
 
-class HttpErrorCodeAndResponseSchema(BaseSchema):
-    pass
-
-
 class HttpErrorCodeDetails(BaseSchema):
     pass
 
@@ -112,10 +108,6 @@ class RootPaymentMode(BaseSchema):
     pass
 
 
-class SupportedMethodDetails(BaseSchema):
-    pass
-
-
 class AggregatorRoute(BaseSchema):
     pass
 
@@ -145,10 +137,6 @@ class AdvancePaymentObject(BaseSchema):
 
 
 class PaymentModeRouteDetails(BaseSchema):
-    pass
-
-
-class StoredPaymentDetails(BaseSchema):
     pass
 
 
@@ -432,6 +420,10 @@ class CustomerOnboardingDetails(BaseSchema):
     pass
 
 
+class OutstandingOrderDetails(BaseSchema):
+    pass
+
+
 class PaidOrderDetails(BaseSchema):
     pass
 
@@ -520,22 +512,6 @@ class ShipmentRefundDetails(BaseSchema):
     pass
 
 
-class CustomerValidationSchema(BaseSchema):
-    pass
-
-
-class UserCreditSchema(BaseSchema):
-    pass
-
-
-class CreditAccountSummary(BaseSchema):
-    pass
-
-
-class ValidateCustomerCreditSchema(BaseSchema):
-    pass
-
-
 
 
 
@@ -596,16 +572,6 @@ class ErrorCodeAndDescription(BaseSchema):
 
     
     code = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-
-
-class HttpErrorCodeAndResponseSchema(BaseSchema):
-    # Payment swagger.json
-
-    
-    success = fields.Boolean(required=False)
     
     description = fields.Str(required=False)
     
@@ -905,8 +871,6 @@ class PaymentStatusUpdate(BaseSchema):
     
     merchant_order_id = fields.Str(required=False)
     
-    virtual_id = fields.Str(required=False)
-    
     vpa = fields.Str(required=False)
     
     order_id = fields.Str(required=False)
@@ -1045,8 +1009,6 @@ class PaymentModeList(BaseSchema):
     
     meta = fields.Dict(required=False, allow_none=True)
     
-    partial_payment_allowed = fields.Boolean(required=False)
-    
 
 
 class RootPaymentMode(BaseSchema):
@@ -1070,24 +1032,6 @@ class RootPaymentMode(BaseSchema):
     name = fields.Str(required=False)
     
     anonymous_enable = fields.Boolean(required=False, allow_none=True)
-    
-    supported_methods = fields.List(fields.Nested(SupportedMethodDetails, required=False), required=False)
-    
-    stored_payment_details = fields.List(fields.Nested(StoredPaymentDetails, required=False), required=False)
-    
-    suggested_list = fields.List(fields.Str(required=False), required=False)
-    
-    flow = fields.Str(required=False)
-    
-
-
-class SupportedMethodDetails(BaseSchema):
-    # Payment swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    logo = fields.Str(required=False)
     
 
 
@@ -1237,60 +1181,6 @@ class PaymentModeRouteDetails(BaseSchema):
     
 
 
-class StoredPaymentDetails(BaseSchema):
-    # Payment swagger.json
-
-    
-    aggregator_name = fields.Str(required=False)
-    
-    card_number = fields.Str(required=False, allow_none=True)
-    
-    card_reference = fields.Str(required=False, allow_none=True)
-    
-    card_issuer = fields.Str(required=False, allow_none=True)
-    
-    compliant_with_tokenisation_guidelines = fields.Boolean(required=False, allow_none=True)
-    
-    card_fingerprint = fields.Str(required=False, allow_none=True)
-    
-    expired = fields.Boolean(required=False, allow_none=True)
-    
-    exp_year = fields.Int(required=False, allow_none=True)
-    
-    exp_month = fields.Int(required=False, allow_none=True)
-    
-    card_id = fields.Str(required=False, allow_none=True)
-    
-    card_brand = fields.Str(required=False)
-    
-    logo_url = fields.Nested(PaymentModeLogo, required=False)
-    
-    nickname = fields.Str(required=False, allow_none=True)
-    
-    card_name = fields.Str(required=False, allow_none=True)
-    
-    card_type = fields.Str(required=False, allow_none=True)
-    
-    card_brand_image = fields.Str(required=False, allow_none=True)
-    
-    display_name = fields.Str(required=False, allow_none=True)
-    
-    card_isin = fields.Str(required=False, allow_none=True)
-    
-    cvv_length = fields.Int(required=False, allow_none=True)
-    
-    cvv_less = fields.Boolean(required=False, allow_none=True)
-    
-    card_token = fields.Str(required=False, allow_none=True)
-    
-    name = fields.Str(required=False, allow_none=True)
-    
-    meta = fields.Dict(required=False, allow_none=True)
-    
-    vpa = fields.Str(required=False, allow_none=True)
-    
-
-
 class WalletLinkRequestSchema(BaseSchema):
     # Payment swagger.json
 
@@ -1322,6 +1212,8 @@ class WalletDelinkRequestSchema(BaseSchema):
     aggregator = fields.Str(required=False)
     
     wallet_code = fields.Str(required=False)
+    
+    wallet_id = fields.Str(required=False)
     
 
 
@@ -1498,14 +1390,6 @@ class CardDetails(BaseSchema):
     user = fields.Str(required=False)
     
     bank = fields.Str(required=False)
-    
-    cvv_length = fields.Int(required=False)
-    
-    logo = fields.Str(required=False)
-    
-    is_enabled = fields.Boolean(required=False)
-    
-    is_card_valid = fields.Boolean(required=False)
     
 
 
@@ -1920,8 +1804,6 @@ class CreatePaymentLink(BaseSchema):
     success_redirection_url = fields.Str(required=False)
     
     failure_redirection_url = fields.Str(required=False)
-    
-    send_communication = fields.Boolean(required=False)
     
 
 
@@ -2359,6 +2241,20 @@ class CustomerOnboardingDetails(BaseSchema):
     
 
 
+class OutstandingOrderDetails(BaseSchema):
+    # Payment swagger.json
+
+    
+    status_code = fields.Int(required=False)
+    
+    data = fields.List(fields.Dict(required=False), required=False)
+    
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False, allow_none=True)
+    
+
+
 class PaidOrderDetails(BaseSchema):
     # Payment swagger.json
 
@@ -2702,64 +2598,6 @@ class ShipmentRefundDetails(BaseSchema):
     success = fields.Boolean(required=False)
     
     message = fields.Str(required=False)
-    
-
-
-class CustomerValidationSchema(BaseSchema):
-    # Payment swagger.json
-
-    
-    aggregator = fields.Str(required=False)
-    
-    transaction_amount = fields.Float(required=False)
-    
-    cart_id = fields.Str(required=False)
-    
-
-
-class UserCreditSchema(BaseSchema):
-    # Payment swagger.json
-
-    
-    amount = fields.Float(required=False)
-    
-    currency = fields.Str(required=False)
-    
-    unique_id = fields.Str(required=False)
-    
-
-
-class CreditAccountSummary(BaseSchema):
-    # Payment swagger.json
-
-    
-    account_id = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-    redeemable_balance = fields.Nested(UserCreditSchema, required=False)
-    
-    available_balance = fields.Nested(UserCreditSchema, required=False)
-    
-    amount_on_hold = fields.List(fields.Nested(UserCreditSchema, required=False), required=False)
-    
-
-
-class ValidateCustomerCreditSchema(BaseSchema):
-    # Payment swagger.json
-
-    
-    success = fields.Boolean(required=False)
-    
-    is_eligible = fields.Boolean(required=False)
-    
-    is_applied = fields.Boolean(required=False)
-    
-    message = fields.Str(required=False)
-    
-    cart_id = fields.Str(required=False)
-    
-    account = fields.Nested(CreditAccountSummary, required=False)
     
 
 

@@ -301,22 +301,19 @@ class Theme:
 
         return response
     
-    async def getFonts(self, capability=None, request_headers:Dict={}):
+    async def getFonts(self, request_headers:Dict={}):
         """Retrieve a list of available fonts that can be used by themes in the platform.
-        :param capability : Filter fonts based on supported capabilities (e.g., "WOFF2"). : type string
         """
         payload = {}
         
-        if capability is not None:
-            payload["capability"] = capability
 
         # Parameter validation
         schema = ThemeValidator.getFonts()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fonts", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}}],"optional":[{"name":"capability","in":"query","description":"Filter fonts based on supported capabilities (e.g., \"WOFF2\").","required":false,"schema":{"type":"string","example":"WOFF2"}}],"query":[{"name":"capability","in":"query","description":"Filter fonts based on supported capabilities (e.g., \"WOFF2\").","required":false,"schema":{"type":"string","example":"WOFF2"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}}]}""", serverType="platform", capability=capability)
-        query_string = await create_query_string(capability=capability)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fonts", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
 
@@ -332,7 +329,7 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fonts", capability=capability), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fonts", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import FontsSchema
@@ -847,7 +844,7 @@ class Theme:
         return response
     
     async def isUpgradable(self, theme_id=None, request_headers:Dict={}):
-        """Determine if a public theme is eligible for an upgrade to a new version after any new version released in marketplace.
+        """Determine if a public theme is eligible for an upgrade to a new version after any new version released in marketplace. 
         :param theme_id : The ID of the theme : type string
         """
         payload = {}

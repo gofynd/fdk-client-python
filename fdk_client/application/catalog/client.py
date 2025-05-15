@@ -39,12 +39,12 @@ class Catalog:
             "followById": "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/",
             "getFollowerCountById": "/service/application/catalog/v1.0/follow/{collection_type}/{collection_id}/count/",
             "getFollowIds": "/service/application/catalog/v1.0/follow/ids/",
-            "getStores": "/service/application/catalog/v2.0/locations/",
-            "getInStockLocations": "/service/application/catalog/v2.0/in-stock/locations/",
-            "getLocationDetailsById": "/service/application/catalog/v2.0/locations/{location_id}/",
+            "getStores": "/service/application/catalog/v1.0/locations/",
+            "getInStockLocations": "/service/application/catalog/v1.0/in-stock/locations/",
+            "getLocationDetailsById": "/service/application/catalog/v1.0/locations/{location_id}/",
             "getProductBundlesBySlug": "/service/application/catalog/v1.0/product-grouping/",
-            "getProductPriceBySlug": "/service/application/catalog/v4.0/products/{slug}/sizes/{size}/price/",
-            "getProductSellersBySlug": "/service/application/catalog/v4.0/products/{slug}/sizes/{size}/sellers/"
+            "getProductPriceBySlug": "/service/application/catalog/v3.0/products/{slug}/sizes/{size}/price/",
+            "getProductSellersBySlug": "/service/application/catalog/v3.0/products/{slug}/sizes/{size}/sellers/"
             
         }
         self._urls = {
@@ -1311,7 +1311,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getStores"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v2.0/locations/", page_no=page_no, page_size=page_size, q=q, city=city, range=range, latitude=latitude, longitude=longitude, tags=tags), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getStores"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/locations/", page_no=page_no, page_size=page_size, q=q, city=city, range=range, latitude=latitude, longitude=longitude, tags=tags), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import StoreListingResponseSchema
@@ -1375,7 +1375,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getInStockLocations"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v2.0/in-stock/locations/", page_no=page_no, page_size=page_size, q=q, city=city, range=range, latitude=latitude, longitude=longitude), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getInStockLocations"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/in-stock/locations/", page_no=page_no, page_size=page_size, q=q, city=city, range=range, latitude=latitude, longitude=longitude), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ApplicationStoreListing
@@ -1421,7 +1421,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocationDetailsById"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v2.0/locations/{location_id}/", location_id=location_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLocationDetailsById"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/locations/{location_id}/", location_id=location_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import StoreDetails
@@ -1525,11 +1525,11 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductPriceBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v4.0/products/{slug}/sizes/{size}/price/", slug=slug, size=size, store_id=store_id, moq=moq), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductPriceBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v3.0/products/{slug}/sizes/{size}/price/", slug=slug, size=size, store_id=store_id, moq=moq), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProductSizePriceResponseV4
-            schema = ProductSizePriceResponseV4()
+            from .models import ProductSizePriceResponseV3
+            schema = ProductSizePriceResponseV3()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1583,11 +1583,11 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductSellersBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v4.0/products/{slug}/sizes/{size}/sellers/", slug=slug, size=size, strategy=strategy, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductSellersBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v3.0/products/{slug}/sizes/{size}/sellers/", slug=slug, size=size, strategy=strategy, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProductSizeSellersResponseV4
-            schema = ProductSizeSellersResponseV4()
+            from .models import ProductSizeSellersResponseV3
+            schema = ProductSizeSellersResponseV3()
             try:
                 schema.load(response["json"])
             except Exception as e:

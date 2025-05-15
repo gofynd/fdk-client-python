@@ -85,9 +85,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-        
     
     
         
@@ -111,14 +108,12 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
     
     
         
         
-        
     
     
         
@@ -208,10 +203,8 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
-        
     
     
         
@@ -353,42 +346,32 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
         
         
         
         
-    
-    
         
     
     
         
-        
     
     
-        
         
         
-        
     
     
         
         
-    
-    
         
         
     
     
         
         
-        
     
     
-        
         
         
     
@@ -576,12 +559,6 @@ class CatalogValidator:
         page_size = fields.Int(required=False)
         
         search = fields.Str(required=False)
-        
-        start_date = fields.Str(required=False)
-        
-        end_date = fields.Str(required=False)
-        
-        stage = fields.Str(required=False)
          
         
     
@@ -638,9 +615,7 @@ class CatalogValidator:
         
         company_id = fields.Str(required=False)
         
-        schema_type = fields.Str(required=False)
-        
-        type = fields.Str(required=False)
+        item_type = fields.Str(required=False)
          
         
     
@@ -650,8 +625,6 @@ class CatalogValidator:
         company_id = fields.Str(required=False)
         
         item_type = fields.Str(required=False)
-        
-        schema_type = fields.Str(required=False)
          
         
     
@@ -856,10 +829,6 @@ class CatalogValidator:
         company_id = fields.Int(required=False)
         
         department = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
          
         
     
@@ -1247,28 +1216,6 @@ class CatalogValidator:
         company_id = fields.Int(required=False)
         
         item_id = fields.Int(required=False)
-        
-        seller_identifier = fields.Str(required=False)
-         
-        
-    
-    class updateLocationPrice(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        store_id = fields.Int(required=False)
-        
-        seller_identifier = fields.Str(required=False)
-         
-        
-    
-    class updateLocationQuantity(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        store_id = fields.Int(required=False)
         
         seller_identifier = fields.Str(required=False)
          
