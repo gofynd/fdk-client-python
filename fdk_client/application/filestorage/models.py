@@ -16,7 +16,7 @@ class Upload(BaseSchema):
     pass
 
 
-class StartResponse(BaseSchema):
+class FileUpload(BaseSchema):
     pass
 
 
@@ -24,7 +24,7 @@ class Params(BaseSchema):
     pass
 
 
-class StartRequest(BaseSchema):
+class FileUploadStart(BaseSchema):
     pass
 
 
@@ -32,7 +32,7 @@ class CreatedBy(BaseSchema):
     pass
 
 
-class CompleteResponse(BaseSchema):
+class FileUploadComplete(BaseSchema):
     pass
 
 
@@ -40,15 +40,11 @@ class Urls(BaseSchema):
     pass
 
 
-class SignUrlResponse(BaseSchema):
+class SignUrlResult(BaseSchema):
     pass
 
 
-class EncryptionMapping(BaseSchema):
-    pass
-
-
-class SignUrlRequest(BaseSchema):
+class SignUrl(BaseSchema):
     pass
 
 
@@ -77,7 +73,7 @@ class Upload(BaseSchema):
     
 
 
-class StartResponse(BaseSchema):
+class FileUpload(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -97,8 +93,6 @@ class StartResponse(BaseSchema):
     
     upload = fields.Nested(Upload, required=False)
     
-    cdn = fields.Nested(CDN, required=False)
-    
     tags = fields.List(fields.Str(required=False), required=False)
     
 
@@ -111,7 +105,7 @@ class Params(BaseSchema):
     
 
 
-class StartRequest(BaseSchema):
+class FileUploadStart(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -125,8 +119,6 @@ class StartRequest(BaseSchema):
     
     params = fields.Nested(Params, required=False)
     
-    enc_key = fields.Str(required=False)
-    
 
 
 class CreatedBy(BaseSchema):
@@ -137,7 +129,7 @@ class CreatedBy(BaseSchema):
     
 
 
-class CompleteResponse(BaseSchema):
+class FileUploadComplete(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -183,7 +175,7 @@ class Urls(BaseSchema):
     
 
 
-class SignUrlResponse(BaseSchema):
+class SignUrlResult(BaseSchema):
     # FileStorage swagger.json
 
     
@@ -191,25 +183,13 @@ class SignUrlResponse(BaseSchema):
     
 
 
-class EncryptionMapping(BaseSchema):
-    # FileStorage swagger.json
-
-    
-    enc_url = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-
-
-class SignUrlRequest(BaseSchema):
+class SignUrl(BaseSchema):
     # FileStorage swagger.json
 
     
     expiry = fields.Int(required=False)
     
     urls = fields.List(fields.Str(required=False), required=False)
-    
-    enc_url_mapping = fields.List(fields.Nested(EncryptionMapping, required=False), required=False)
     
 
 
