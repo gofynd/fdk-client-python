@@ -200,6 +200,57 @@ class Theme:
 
         return response
     
+    async def updatePage(self, theme_id=None, page_value=None, body="", request_headers:Dict={}):
+        """Modify and update the content of a page.
+        :param theme_id : ID of the theme : type string
+        :param page_value : Value of the page to be updated : type string
+        """
+        payload = {}
+        
+        if theme_id is not None:
+            payload["theme_id"] = theme_id
+        if page_value is not None:
+            payload["page_value"] = page_value
+
+        # Parameter validation
+        schema = ThemeValidator.updatePage()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import AvailablePageSchema
+        schema = AvailablePageSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/{page_value}", """{"required":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID of the theme","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be updated","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID of the theme","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be updated","required":true,"schema":{"type":"string"}}]}""", serverType="platform", theme_id=theme_id, page_value=page_value)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/{page_value}", theme_id=theme_id, page_value=page_value), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AvailablePageSchema
+            schema = AvailablePageSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePage")
+                print(e)
+
+        return response
+    
     async def deletePage(self, theme_id=None, page_value=None, request_headers:Dict={}):
         """Remove a page from a theme of the platform.
         :param theme_id : ID of the theme : type string
@@ -243,60 +294,6 @@ class Theme:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for deletePage")
-                print(e)
-
-        return response
-    
-    async def updatePage(self, theme_id=None, page_value=None, socket_id=None, body="", request_headers:Dict={}):
-        """Modify and update the content of a page.
-        :param theme_id : ID of the theme : type string
-        :param page_value : Value of the page to be updated : type string
-        :param socket_id : Unique socket id for websocket : type string
-        """
-        payload = {}
-        
-        if theme_id is not None:
-            payload["theme_id"] = theme_id
-        if page_value is not None:
-            payload["page_value"] = page_value
-        if socket_id is not None:
-            payload["socket_id"] = socket_id
-
-        # Parameter validation
-        schema = ThemeValidator.updatePage()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import AvailablePageSchema
-        schema = AvailablePageSchema()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/{page_value}/{socket_id}", """{"required":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID of the theme","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be updated","required":true,"schema":{"type":"string"}},{"name":"socket_id","in":"path","description":"Unique socket id for websocket","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"integer","example":19243}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string","example":"6487ea376e1442284917c44e"}},{"name":"theme_id","in":"path","description":"ID of the theme","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be updated","required":true,"schema":{"type":"string"}},{"name":"socket_id","in":"path","description":"Unique socket id for websocket","required":true,"schema":{"type":"string"}}]}""", serverType="platform", theme_id=theme_id, page_value=page_value, socket_id=socket_id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/theme/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/{page_value}/{socket_id}", theme_id=theme_id, page_value=page_value, socket_id=socket_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import AvailablePageSchema
-            schema = AvailablePageSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updatePage")
                 print(e)
 
         return response
@@ -877,8 +874,8 @@ class Theme:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/theme/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/{theme_id}/upgradable", theme_id=theme_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ThemeUpgradable
-            schema = ThemeUpgradable()
+            from .models import ThemeUpgradableResponse
+            schema = ThemeUpgradableResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

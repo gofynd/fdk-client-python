@@ -8,7 +8,7 @@ from ..PublicModel import BaseSchema
 
 
 
-class ApplicationResponseSchema(BaseSchema):
+class ApplicationResponse(BaseSchema):
     pass
 
 
@@ -48,7 +48,7 @@ class NotFound(BaseSchema):
     pass
 
 
-class BadRequestSchema(BaseSchema):
+class BadRequest(BaseSchema):
     pass
 
 
@@ -71,7 +71,7 @@ class Locations(BaseSchema):
 
 
 
-class ApplicationResponseSchema(BaseSchema):
+class ApplicationResponse(BaseSchema):
     # Configuration swagger.json
 
     
@@ -219,7 +219,7 @@ class NotFound(BaseSchema):
     
 
 
-class BadRequestSchema(BaseSchema):
+class BadRequest(BaseSchema):
     # Configuration swagger.json
 
     

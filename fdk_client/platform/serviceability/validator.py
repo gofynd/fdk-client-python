@@ -20,6 +20,16 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -156,6 +166,27 @@ from ..PlatformModel import BaseSchema
 
 class ServiceabilityValidator:
     
+    
+    class getLocalities(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        locality_type = fields.Str(required=False)
+        
+        country = fields.List(fields.Str(required=False), required=False)
+        
+        state = fields.List(fields.Str(required=False), required=False)
+        
+        city = fields.List(fields.Str(required=False), required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
+         
+        
     
     class getZones(BaseSchema):
         

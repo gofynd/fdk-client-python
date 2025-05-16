@@ -8,11 +8,19 @@ from ..PlatformModel import BaseSchema
 
 
 
-class UpdateZoneConfigDetails(BaseSchema):
+class Localities(BaseSchema):
     pass
 
 
-class ServiceabilityErrorResult(BaseSchema):
+class GetLocalities(BaseSchema):
+    pass
+
+
+class UpdateZoneConfigRequest(BaseSchema):
+    pass
+
+
+class ServiceabilityErrorResponse(BaseSchema):
     pass
 
 
@@ -20,11 +28,11 @@ class ApplicationServiceabilityConfig(BaseSchema):
     pass
 
 
-class ApplicationServiceabilityConfigResult(BaseSchema):
+class ApplicationServiceabilityConfigResponse(BaseSchema):
     pass
 
 
-class EntityRegionView_Details(BaseSchema):
+class EntityRegionView_Request(BaseSchema):
     pass
 
 
@@ -36,7 +44,7 @@ class EntityRegionView_page(BaseSchema):
     pass
 
 
-class getAppRegionZonesResult(BaseSchema):
+class getAppRegionZonesResponse(BaseSchema):
     pass
 
 
@@ -48,7 +56,7 @@ class EntityRegionView_Items(BaseSchema):
     pass
 
 
-class EntityRegionView_Result(BaseSchema):
+class EntityRegionView_Response(BaseSchema):
     pass
 
 
@@ -72,7 +80,7 @@ class ListViewItems(BaseSchema):
     pass
 
 
-class ListViewResult(BaseSchema):
+class ListViewResponse(BaseSchema):
     pass
 
 
@@ -80,7 +88,7 @@ class CompanyStoreView_PageItems(BaseSchema):
     pass
 
 
-class CompanyStoreView_Result(BaseSchema):
+class CompanyStoreView_Response(BaseSchema):
     pass
 
 
@@ -108,11 +116,11 @@ class UpdateZoneData(BaseSchema):
     pass
 
 
-class ZoneUpdateDetails(BaseSchema):
+class ZoneUpdateRequest(BaseSchema):
     pass
 
 
-class ZoneSuccessResult(BaseSchema):
+class ZoneSuccessResponse(BaseSchema):
     pass
 
 
@@ -120,7 +128,7 @@ class GetZoneDataViewItems(BaseSchema):
     pass
 
 
-class GetSingleZoneDataViewResult(BaseSchema):
+class GetSingleZoneDataViewResponse(BaseSchema):
     pass
 
 
@@ -132,11 +140,11 @@ class CreateZoneData(BaseSchema):
     pass
 
 
-class ZoneResult(BaseSchema):
+class ZoneResponse(BaseSchema):
     pass
 
 
-class GetZoneFromPincodeViewDetails(BaseSchema):
+class GetZoneFromPincodeViewRequest(BaseSchema):
     pass
 
 
@@ -144,15 +152,15 @@ class Zone(BaseSchema):
     pass
 
 
-class GetZoneFromPincodeViewResult(BaseSchema):
+class GetZoneFromPincodeViewResponse(BaseSchema):
     pass
 
 
-class GetZoneFromApplicationIdViewResult(BaseSchema):
+class GetZoneFromApplicationIdViewResponse(BaseSchema):
     pass
 
 
-class ServiceabilityPageResult(BaseSchema):
+class ServiceabilityPageResponse(BaseSchema):
     pass
 
 
@@ -160,47 +168,47 @@ class MobileNo(BaseSchema):
     pass
 
 
-class ManagerResult(BaseSchema):
+class ManagerResponse(BaseSchema):
     pass
 
 
-class ModifiedByResult(BaseSchema):
+class ModifiedByResponse(BaseSchema):
     pass
 
 
-class IntegrationTypeResult(BaseSchema):
+class IntegrationTypeResponse(BaseSchema):
     pass
 
 
-class ProductReturnConfigResult(BaseSchema):
+class ProductReturnConfigResponse(BaseSchema):
     pass
 
 
-class ContactNumberResult(BaseSchema):
+class ContactNumberResponse(BaseSchema):
     pass
 
 
-class AddressResult(BaseSchema):
+class AddressResponse(BaseSchema):
     pass
 
 
-class CreatedByResult(BaseSchema):
+class CreatedByResponse(BaseSchema):
     pass
 
 
-class EwayBillResult(BaseSchema):
+class EwayBillResponse(BaseSchema):
     pass
 
 
-class EinvoiceResult(BaseSchema):
+class EinvoiceResponse(BaseSchema):
     pass
 
 
-class GstCredentialsResult(BaseSchema):
+class GstCredentialsResponse(BaseSchema):
     pass
 
 
-class WarningsResult(BaseSchema):
+class WarningsResponse(BaseSchema):
     pass
 
 
@@ -208,11 +216,11 @@ class OpeningClosing(BaseSchema):
     pass
 
 
-class TimmingResult(BaseSchema):
+class TimmingResponse(BaseSchema):
     pass
 
 
-class DocumentsResult(BaseSchema):
+class DocumentsResponse(BaseSchema):
     pass
 
 
@@ -220,15 +228,15 @@ class Dp(BaseSchema):
     pass
 
 
-class LogisticsResult(BaseSchema):
+class LogisticsResponse(BaseSchema):
     pass
 
 
-class ItemResult(BaseSchema):
+class ItemResponse(BaseSchema):
     pass
 
 
-class GetStoresViewResult(BaseSchema):
+class GetStoresViewResponse(BaseSchema):
     pass
 
 
@@ -236,11 +244,11 @@ class PincodeMopData(BaseSchema):
     pass
 
 
-class PincodeMopUpdateResult(BaseSchema):
+class PincodeMopUpdateResponse(BaseSchema):
     pass
 
 
-class PincodeMOPResult(BaseSchema):
+class PincodeMOPresponse(BaseSchema):
     pass
 
 
@@ -252,19 +260,15 @@ class PincodeMopBulkData(BaseSchema):
     pass
 
 
-class PincodeBulkViewResult(BaseSchema):
+class PincodeBulkViewResponse(BaseSchema):
     pass
 
 
-class PincodeCodStatusListingDetails(BaseSchema):
+class PincodeCodStatusListingRequest(BaseSchema):
     pass
 
 
-class PincodeCodStatusItem(BaseSchema):
-    pass
-
-
-class PincodeCodStatusListingResult(BaseSchema):
+class PincodeCodStatusListingResponse(BaseSchema):
     pass
 
 
@@ -280,7 +284,7 @@ class PincodeCodStatusListingSummary(BaseSchema):
     pass
 
 
-class PincodeMopUpdateAuditHistoryDetails(BaseSchema):
+class PincodeMopUpdateAuditHistoryRequest(BaseSchema):
     pass
 
 
@@ -288,11 +292,11 @@ class PincodeMopUpdateAuditHistoryPaging(BaseSchema):
     pass
 
 
-class PincodeMopUpdateAuditHistoryResult(BaseSchema):
+class PincodeMopUpdateAuditHistoryResponse(BaseSchema):
     pass
 
 
-class PincodeMopUpdateAuditHistoryResultData(BaseSchema):
+class PincodeMopUpdateAuditHistoryResponseData(BaseSchema):
     pass
 
 
@@ -308,23 +312,19 @@ class SchemeRules(BaseSchema):
     pass
 
 
-class CourierAccountUpdateDetails(BaseSchema):
-    pass
-
-
 class CourierAccount(BaseSchema):
     pass
 
 
-class CourierAccountDetailsBody(BaseSchema):
+class CourierAccountRequestBody(BaseSchema):
     pass
 
 
-class ErrorResult(BaseSchema):
+class ErrorResponse(BaseSchema):
     pass
 
 
-class CourierPartnerAccountFailureResult(BaseSchema):
+class CourierPartnerAccountFailureResponse(BaseSchema):
     pass
 
 
@@ -332,11 +332,11 @@ class Page(BaseSchema):
     pass
 
 
-class CourierPartnerRuleCPListResult(BaseSchema):
+class CourierPartnerRuleCPListResponse(BaseSchema):
     pass
 
 
-class CourierPartnerRuleResult(BaseSchema):
+class CourierPartnerRuleResponse(BaseSchema):
     pass
 
 
@@ -368,47 +368,11 @@ class CourierPartnerRule(BaseSchema):
     pass
 
 
-class FailureResult(BaseSchema):
+class FailureResponse(BaseSchema):
     pass
 
 
-class CourierPartnerRulesListResult(BaseSchema):
-    pass
-
-
-class ShipmentsArticles(BaseSchema):
-    pass
-
-
-class ShipmentDimension(BaseSchema):
-    pass
-
-
-class Shipments(BaseSchema):
-    pass
-
-
-class ShipmentCourierPartnerDetails(BaseSchema):
-    pass
-
-
-class CourierPartnerPromise(BaseSchema):
-    pass
-
-
-class CourierPartners(BaseSchema):
-    pass
-
-
-class ShipmentCourierPartners(BaseSchema):
-    pass
-
-
-class ShipmentCourierPartnerResult(BaseSchema):
-    pass
-
-
-class ShipmentsCourierPartnersServiceability(BaseSchema):
+class CourierPartnerRulesListResponse(BaseSchema):
     pass
 
 
@@ -424,19 +388,19 @@ class ApplicationConfig(BaseSchema):
     pass
 
 
-class BulkRegionJobDetails(BaseSchema):
+class BulkRegionJobSerializer(BaseSchema):
     pass
 
 
-class BulkRegionResultItemData(BaseSchema):
+class BulkRegionResponseItemData(BaseSchema):
     pass
 
 
-class BulkRegionResult(BaseSchema):
+class BulkRegionResponse(BaseSchema):
     pass
 
 
-class SelfShipResult(BaseSchema):
+class SelfShipResponse(BaseSchema):
     pass
 
 
@@ -444,7 +408,7 @@ class ApplicationSelfShipConfig(BaseSchema):
     pass
 
 
-class ApplicationSelfShipConfigResult(BaseSchema):
+class ApplicationSelfShipConfigResponse(BaseSchema):
     pass
 
 
@@ -468,19 +432,19 @@ class StorePrioritySchema(BaseSchema):
     pass
 
 
-class GetStoreRulesApiResult(BaseSchema):
+class GetStoreRulesApiResponse(BaseSchema):
     pass
 
 
-class CreateStoreRuleDetailsSchema(BaseSchema):
+class CreateStoreRuleRequestSchema(BaseSchema):
     pass
 
 
-class StoreRuleResultSchema(BaseSchema):
+class StoreRuleResponseSchema(BaseSchema):
     pass
 
 
-class StoreRuleUpdateResultSchema(BaseSchema):
+class StoreRuleUpdateResponseSchema(BaseSchema):
     pass
 
 
@@ -496,11 +460,11 @@ class CourierPartnerSchemeModel(BaseSchema):
     pass
 
 
-class CourierAccountResult(BaseSchema):
+class CourierAccountResponse(BaseSchema):
     pass
 
 
-class CompanyCourierPartnerAccountListResult(BaseSchema):
+class CompanyCourierPartnerAccountListResponse(BaseSchema):
     pass
 
 
@@ -508,7 +472,7 @@ class PackageMaterial(BaseSchema):
     pass
 
 
-class PackageMaterialResult(BaseSchema):
+class PackageMaterialResponse(BaseSchema):
     pass
 
 
@@ -520,7 +484,7 @@ class PackageRule(BaseSchema):
     pass
 
 
-class PackageRuleResult(BaseSchema):
+class PackageRuleResponse(BaseSchema):
     pass
 
 
@@ -552,11 +516,11 @@ class PackageMaterialRuleQuantity(BaseSchema):
     pass
 
 
-class RulePriorityDetails(BaseSchema):
+class RulePriorityRequest(BaseSchema):
     pass
 
 
-class RulePriorityResult(BaseSchema):
+class RulePriorityResponse(BaseSchema):
     pass
 
 
@@ -576,34 +540,52 @@ class OptimalLocationsArticles(BaseSchema):
     pass
 
 
-class OptimlLocationsDetailsSchema(BaseSchema):
+class OptimlLocationsRequestSchema(BaseSchema):
     pass
 
 
-class OptimalLocationArticlesResult(BaseSchema):
+class OptimalLocationArticlesResponse(BaseSchema):
     pass
 
 
-class OptimalLocationAssignedStoresResult(BaseSchema):
+class OptimalLocationAssignedStoresResponse(BaseSchema):
     pass
 
 
-class OptimalLocationsResult(BaseSchema):
-    pass
-
-
-class ValidationError(BaseSchema):
-    pass
-
-
-class StandardError(BaseSchema):
+class OptimalLocationsResponse(BaseSchema):
     pass
 
 
 
 
 
-class UpdateZoneConfigDetails(BaseSchema):
+class Localities(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    parent_ids = fields.List(fields.Str(required=False), required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class GetLocalities(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    items = fields.List(fields.Nested(Localities, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class UpdateZoneConfigRequest(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -611,7 +593,7 @@ class UpdateZoneConfigDetails(BaseSchema):
     
 
 
-class ServiceabilityErrorResult(BaseSchema):
+class ServiceabilityErrorResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -635,11 +617,11 @@ class ApplicationServiceabilityConfig(BaseSchema):
     
 
 
-class ApplicationServiceabilityConfigResult(BaseSchema):
+class ApplicationServiceabilityConfigResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    error = fields.Nested(ServiceabilityErrorResult, required=False)
+    error = fields.Nested(ServiceabilityErrorResponse, required=False)
     
     data = fields.Nested(ApplicationServiceabilityConfig, required=False)
     
@@ -647,7 +629,7 @@ class ApplicationServiceabilityConfigResult(BaseSchema):
     
 
 
-class EntityRegionView_Details(BaseSchema):
+class EntityRegionView_Request(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -685,7 +667,7 @@ class EntityRegionView_page(BaseSchema):
     
 
 
-class getAppRegionZonesResult(BaseSchema):
+class getAppRegionZonesResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -723,7 +705,7 @@ class EntityRegionView_Items(BaseSchema):
     
 
 
-class EntityRegionView_Result(BaseSchema):
+class EntityRegionView_Response(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -809,7 +791,7 @@ class ListViewItems(BaseSchema):
     
 
 
-class ListViewResult(BaseSchema):
+class ListViewResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -835,7 +817,7 @@ class CompanyStoreView_PageItems(BaseSchema):
     
 
 
-class CompanyStoreView_Result(BaseSchema):
+class CompanyStoreView_Response(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -927,7 +909,7 @@ class UpdateZoneData(BaseSchema):
     
 
 
-class ZoneUpdateDetails(BaseSchema):
+class ZoneUpdateRequest(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -937,7 +919,7 @@ class ZoneUpdateDetails(BaseSchema):
     
 
 
-class ZoneSuccessResult(BaseSchema):
+class ZoneSuccessResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -971,13 +953,11 @@ class GetZoneDataViewItems(BaseSchema):
     
     mapping = fields.List(fields.Nested(ZoneMappingType, required=False), required=False)
     
-    assignment_preference = fields.Str(required=False)
-    
     stores_count = fields.Int(required=False)
     
 
 
-class GetSingleZoneDataViewResult(BaseSchema):
+class GetSingleZoneDataViewResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1009,8 +989,6 @@ class GetZoneByIdSchema(BaseSchema):
     
     mapping = fields.List(fields.Nested(ZoneMappingDetailType, required=False), required=False)
     
-    stores_count = fields.Int(required=False)
-    
 
 
 class CreateZoneData(BaseSchema):
@@ -1029,15 +1007,15 @@ class CreateZoneData(BaseSchema):
     
     store_ids = fields.List(fields.Int(required=False), required=False)
     
+    product = fields.Nested(ZoneProductTypes, required=False)
+    
     region_type = fields.Str(required=False)
     
     mapping = fields.List(fields.Nested(ZoneMappingType, required=False), required=False)
     
-    product = fields.Nested(ZoneProductTypes, required=False)
-    
 
 
-class ZoneResult(BaseSchema):
+class ZoneResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1049,7 +1027,7 @@ class ZoneResult(BaseSchema):
     
 
 
-class GetZoneFromPincodeViewDetails(BaseSchema):
+class GetZoneFromPincodeViewRequest(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1079,7 +1057,7 @@ class Zone(BaseSchema):
     
 
 
-class GetZoneFromPincodeViewResult(BaseSchema):
+class GetZoneFromPincodeViewResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1089,7 +1067,7 @@ class GetZoneFromPincodeViewResult(BaseSchema):
     
 
 
-class GetZoneFromApplicationIdViewResult(BaseSchema):
+class GetZoneFromApplicationIdViewResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1099,7 +1077,7 @@ class GetZoneFromApplicationIdViewResult(BaseSchema):
     
 
 
-class ServiceabilityPageResult(BaseSchema):
+class ServiceabilityPageResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1125,7 +1103,7 @@ class MobileNo(BaseSchema):
     
 
 
-class ManagerResult(BaseSchema):
+class ManagerResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1137,7 +1115,7 @@ class ManagerResult(BaseSchema):
     
 
 
-class ModifiedByResult(BaseSchema):
+class ModifiedByResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1147,7 +1125,7 @@ class ModifiedByResult(BaseSchema):
     
 
 
-class IntegrationTypeResult(BaseSchema):
+class IntegrationTypeResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1157,7 +1135,7 @@ class IntegrationTypeResult(BaseSchema):
     
 
 
-class ProductReturnConfigResult(BaseSchema):
+class ProductReturnConfigResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1165,7 +1143,7 @@ class ProductReturnConfigResult(BaseSchema):
     
 
 
-class ContactNumberResult(BaseSchema):
+class ContactNumberResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1175,7 +1153,7 @@ class ContactNumberResult(BaseSchema):
     
 
 
-class AddressResult(BaseSchema):
+class AddressResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1199,7 +1177,7 @@ class AddressResult(BaseSchema):
     
 
 
-class CreatedByResult(BaseSchema):
+class CreatedByResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1209,7 +1187,7 @@ class CreatedByResult(BaseSchema):
     
 
 
-class EwayBillResult(BaseSchema):
+class EwayBillResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1217,7 +1195,7 @@ class EwayBillResult(BaseSchema):
     
 
 
-class EinvoiceResult(BaseSchema):
+class EinvoiceResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1225,17 +1203,17 @@ class EinvoiceResult(BaseSchema):
     
 
 
-class GstCredentialsResult(BaseSchema):
+class GstCredentialsResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    e_waybill = fields.Nested(EwayBillResult, required=False)
+    e_waybill = fields.Nested(EwayBillResponse, required=False)
     
-    e_invoice = fields.Nested(EinvoiceResult, required=False)
+    e_invoice = fields.Nested(EinvoiceResponse, required=False)
     
 
 
-class WarningsResult(BaseSchema):
+class WarningsResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1253,7 +1231,7 @@ class OpeningClosing(BaseSchema):
     
 
 
-class TimmingResult(BaseSchema):
+class TimmingResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1267,7 +1245,7 @@ class TimmingResult(BaseSchema):
     
 
 
-class DocumentsResult(BaseSchema):
+class DocumentsResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1307,7 +1285,7 @@ class Dp(BaseSchema):
     
 
 
-class LogisticsResult(BaseSchema):
+class LogisticsResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1317,35 +1295,35 @@ class LogisticsResult(BaseSchema):
     
 
 
-class ItemResult(BaseSchema):
+class ItemResponse(BaseSchema):
     # Serviceability swagger.json
 
     
     created_on = fields.Str(required=False)
     
-    manager = fields.Nested(ManagerResult, required=False)
+    manager = fields.Nested(ManagerResponse, required=False)
     
-    modified_by = fields.Nested(ModifiedByResult, required=False)
+    modified_by = fields.Nested(ModifiedByResponse, required=False)
     
-    integration_type = fields.Nested(IntegrationTypeResult, required=False)
+    integration_type = fields.Nested(IntegrationTypeResponse, required=False)
     
     verified_on = fields.Str(required=False)
     
-    product_return_config = fields.Nested(ProductReturnConfigResult, required=False)
+    product_return_config = fields.Nested(ProductReturnConfigResponse, required=False)
     
-    contact_numbers = fields.List(fields.Nested(ContactNumberResult, required=False), required=False)
+    contact_numbers = fields.List(fields.Nested(ContactNumberResponse, required=False), required=False)
     
-    verified_by = fields.Nested(ModifiedByResult, required=False)
+    verified_by = fields.Nested(ModifiedByResponse, required=False)
     
     stage = fields.Str(required=False)
     
-    address = fields.Nested(AddressResult, required=False)
+    address = fields.Nested(AddressResponse, required=False)
     
     modified_on = fields.Str(required=False)
     
-    created_by = fields.Nested(CreatedByResult, required=False)
+    created_by = fields.Nested(CreatedByResponse, required=False)
     
-    gst_credentials = fields.Nested(GstCredentialsResult, required=False)
+    gst_credentials = fields.Nested(GstCredentialsResponse, required=False)
     
     display_name = fields.Str(required=False)
     
@@ -1357,13 +1335,13 @@ class ItemResult(BaseSchema):
     
     code = fields.Str(required=False)
     
-    warnings = fields.Nested(WarningsResult, required=False)
+    warnings = fields.Nested(WarningsResponse, required=False)
     
     name = fields.Str(required=False)
     
-    timing = fields.List(fields.Nested(TimmingResult, required=False), required=False)
+    timing = fields.List(fields.Nested(TimmingResponse, required=False), required=False)
     
-    documents = fields.List(fields.Nested(DocumentsResult, required=False), required=False)
+    documents = fields.List(fields.Nested(DocumentsResponse, required=False), required=False)
     
     store_type = fields.Str(required=False)
     
@@ -1373,19 +1351,19 @@ class ItemResult(BaseSchema):
     
     _cls = fields.Str(required=False)
     
-    logistics = fields.Nested(LogisticsResult, required=False)
+    logistics = fields.Nested(LogisticsResponse, required=False)
     
     notification_emails = fields.List(fields.Str(required=False), required=False)
     
 
 
-class GetStoresViewResult(BaseSchema):
+class GetStoresViewResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    page = fields.Nested(ServiceabilityPageResult, required=False)
+    page = fields.Nested(ServiceabilityPageResponse, required=False)
     
-    items = fields.List(fields.Nested(ItemResult, required=False), required=False)
+    items = fields.List(fields.Nested(ItemResponse, required=False), required=False)
     
 
 
@@ -1401,7 +1379,7 @@ class PincodeMopData(BaseSchema):
     
 
 
-class PincodeMopUpdateResult(BaseSchema):
+class PincodeMopUpdateResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1415,7 +1393,7 @@ class PincodeMopUpdateResult(BaseSchema):
     
 
 
-class PincodeMOPResult(BaseSchema):
+class PincodeMOPresponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1431,7 +1409,7 @@ class PincodeMOPResult(BaseSchema):
     
     pincodes = fields.List(fields.Int(required=False), required=False)
     
-    updated_pincodes = fields.List(fields.Nested(PincodeMopUpdateResult, required=False), required=False)
+    updated_pincodes = fields.List(fields.Nested(PincodeMopUpdateResponse, required=False), required=False)
     
 
 
@@ -1457,7 +1435,7 @@ class PincodeMopBulkData(BaseSchema):
     
 
 
-class PincodeBulkViewResult(BaseSchema):
+class PincodeBulkViewResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1467,7 +1445,7 @@ class PincodeBulkViewResult(BaseSchema):
     
 
 
-class PincodeCodStatusListingDetails(BaseSchema):
+class PincodeCodStatusListingRequest(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1483,23 +1461,13 @@ class PincodeCodStatusListingDetails(BaseSchema):
     
 
 
-class PincodeCodStatusItem(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    active = fields.Boolean(required=False)
-    
-    pincode = fields.Str(required=False)
-    
-
-
-class PincodeCodStatusListingResult(BaseSchema):
+class PincodeCodStatusListingResponse(BaseSchema):
     # Serviceability swagger.json
 
     
     country = fields.Str(required=False)
     
-    data = fields.List(fields.Nested(lambda: PincodeCodStatusListingResult(exclude=('data')), required=False), required=False)
+    data = fields.List(fields.Nested(lambda: PincodeCodStatusListingResponse(exclude=('data')), required=False), required=False)
     
     success = fields.Boolean(required=False)
     
@@ -1549,7 +1517,7 @@ class PincodeCodStatusListingSummary(BaseSchema):
     
 
 
-class PincodeMopUpdateAuditHistoryDetails(BaseSchema):
+class PincodeMopUpdateAuditHistoryRequest(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1575,7 +1543,7 @@ class PincodeMopUpdateAuditHistoryPaging(BaseSchema):
     
 
 
-class PincodeMopUpdateAuditHistoryResult(BaseSchema):
+class PincodeMopUpdateAuditHistoryResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1597,7 +1565,7 @@ class PincodeMopUpdateAuditHistoryResult(BaseSchema):
     
 
 
-class PincodeMopUpdateAuditHistoryResultData(BaseSchema):
+class PincodeMopUpdateAuditHistoryResponseData(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1605,7 +1573,7 @@ class PincodeMopUpdateAuditHistoryResultData(BaseSchema):
     
     page = fields.Nested(PincodeMopUpdateAuditHistoryPaging, required=False)
     
-    data = fields.List(fields.Nested(PincodeMopUpdateAuditHistoryResult, required=False), required=False)
+    data = fields.List(fields.Nested(PincodeMopUpdateAuditHistoryResponse, required=False), required=False)
     
 
 
@@ -1659,28 +1627,10 @@ class SchemeRules(BaseSchema):
     
 
 
-class CourierAccountUpdateDetails(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    extension_id = fields.Str(required=False)
-    
-    scheme_id = fields.Str(required=False)
-    
-    is_self_ship = fields.Boolean(required=False)
-    
-    stage = fields.Str(required=False)
-    
-    is_own_account = fields.Boolean(required=False)
-    
-
-
 class CourierAccount(BaseSchema):
     # Serviceability swagger.json
 
     
-    company_id = fields.Int(required=False)
-    
     extension_id = fields.Str(required=False)
     
     account_id = fields.Str(required=False)
@@ -1693,11 +1643,9 @@ class CourierAccount(BaseSchema):
     
     is_own_account = fields.Boolean(required=False)
     
-    scheme_rules = fields.Nested(CourierPartnerSchemeModel, required=False)
-    
 
 
-class CourierAccountDetailsBody(BaseSchema):
+class CourierAccountRequestBody(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1715,7 +1663,7 @@ class CourierAccountDetailsBody(BaseSchema):
     
 
 
-class ErrorResult(BaseSchema):
+class ErrorResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1727,13 +1675,13 @@ class ErrorResult(BaseSchema):
     
 
 
-class CourierPartnerAccountFailureResult(BaseSchema):
+class CourierPartnerAccountFailureResponse(BaseSchema):
     # Serviceability swagger.json
 
     
     success = fields.Boolean(required=False)
     
-    error = fields.List(fields.Nested(ErrorResult, required=False), required=False)
+    error = fields.List(fields.Nested(ErrorResponse, required=False), required=False)
     
 
 
@@ -1757,7 +1705,7 @@ class Page(BaseSchema):
     
 
 
-class CourierPartnerRuleCPListResult(BaseSchema):
+class CourierPartnerRuleCPListResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1771,7 +1719,7 @@ class CourierPartnerRuleCPListResult(BaseSchema):
     
 
 
-class CourierPartnerRuleResult(BaseSchema):
+class CourierPartnerRuleResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -1797,7 +1745,7 @@ class CourierPartnerRuleResult(BaseSchema):
     
     type = fields.Str(required=False)
     
-    cp_list = fields.List(fields.Nested(CourierPartnerRuleCPListResult, required=False), required=False)
+    cp_list = fields.List(fields.Nested(CourierPartnerRuleCPListResponse, required=False), required=False)
     
 
 
@@ -1823,7 +1771,7 @@ class LocationRuleValues(BaseSchema):
     
     display_name = fields.Str(required=False)
     
-    parent_id = fields.List(fields.Str(required=False), required=False)
+    parent_id = fields.Str(required=False)
     
     parent_ids = fields.List(fields.Str(required=False), required=False)
     
@@ -1907,155 +1855,25 @@ class CourierPartnerRule(BaseSchema):
     
     sort = fields.List(fields.Str(required=False), required=False)
     
-    type = fields.Str(required=False)
-    
 
 
-class FailureResult(BaseSchema):
+class FailureResponse(BaseSchema):
     # Serviceability swagger.json
 
     
     success = fields.Boolean(required=False)
     
-    error = fields.List(fields.Nested(ErrorResult, required=False), required=False)
+    error = fields.List(fields.Nested(ErrorResponse, required=False), required=False)
     
 
 
-class CourierPartnerRulesListResult(BaseSchema):
+class CourierPartnerRulesListResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    items = fields.List(fields.Nested(CourierPartnerRuleResult, required=False), required=False)
+    items = fields.List(fields.Nested(CourierPartnerRuleResponse, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
-    
-
-
-class ShipmentsArticles(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    item_id = fields.Int(required=False)
-    
-    category_id = fields.Int(required=False)
-    
-    brand_id = fields.Int(required=False)
-    
-    department_id = fields.Int(required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-
-
-class ShipmentDimension(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    height = fields.Float(required=False)
-    
-    length = fields.Float(required=False)
-    
-    width = fields.Float(required=False)
-    
-
-
-class Shipments(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    id = fields.Str(required=False)
-    
-    location_id = fields.Float(required=False)
-    
-    location_tags = fields.List(fields.Str(required=False), required=False)
-    
-    shipment_weight = fields.Float(required=False)
-    
-    shipment_volumetric_weight = fields.Float(required=False)
-    
-    shipment_cost = fields.Float(required=False)
-    
-    shipment_dimension = fields.Nested(ShipmentDimension, required=False)
-    
-    courier_partner_schemes = fields.List(fields.Str(required=False), required=False)
-    
-    articles = fields.List(fields.Nested(ShipmentsArticles, required=False), required=False)
-    
-
-
-class ShipmentCourierPartnerDetails(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    from_location = fields.Nested(ShipmentsCourierPartnersServiceability, required=False)
-    
-    to_location = fields.Nested(ShipmentsCourierPartnersServiceability, required=False)
-    
-    shipments = fields.List(fields.Nested(Shipments, required=False), required=False)
-    
-    journey = fields.Str(required=False)
-    
-    payment_mode = fields.Str(required=False)
-    
-
-
-class CourierPartnerPromise(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    min = fields.Str(required=False)
-    
-    max = fields.Str(required=False)
-    
-
-
-class CourierPartners(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    extension_id = fields.Str(required=False)
-    
-    scheme_id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    delivery_promise = fields.Nested(CourierPartnerPromise, required=False)
-    
-
-
-class ShipmentCourierPartners(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    id = fields.Str(required=False)
-    
-    courier_partners = fields.List(fields.Nested(CourierPartners, required=False), required=False)
-    
-
-
-class ShipmentCourierPartnerResult(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    courier_partners = fields.List(fields.Nested(CourierPartners, required=False), required=False)
-    
-    shipments = fields.List(fields.Nested(ShipmentCourierPartners, required=False), required=False)
-    
-
-
-class ShipmentsCourierPartnersServiceability(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    pincode = fields.Str(required=False)
-    
-    sector_code = fields.Str(required=False)
-    
-    state_code = fields.Str(required=False)
-    
-    city_code = fields.Str(required=False)
-    
-    country_code = fields.Str(required=False)
     
 
 
@@ -2067,11 +1885,7 @@ class CompanyConfig(BaseSchema):
     
     sort = fields.List(fields.Str(required=False), required=False)
     
-    logistics_as_actual = fields.Str(required=False)
-    
-    company_id = fields.Int(required=False)
-    
-    application_id = fields.Str(required=False)
+    logistics_as_actual = fields.Boolean(required=False)
     
 
 
@@ -2080,10 +1894,6 @@ class ZoneConfig(BaseSchema):
 
     
     serviceability_type = fields.Str(required=False)
-    
-    active_count = fields.Int(required=False)
-    
-    total_count = fields.Int(required=False)
     
 
 
@@ -2099,11 +1909,11 @@ class ApplicationConfig(BaseSchema):
     
 
 
-class BulkRegionJobDetails(BaseSchema):
+class BulkRegionJobSerializer(BaseSchema):
     # Serviceability swagger.json
 
     
-    file_path = fields.Str(required=False, allow_none=True)
+    file_path = fields.Str(required=False)
     
     country = fields.Str(required=False)
     
@@ -2113,7 +1923,7 @@ class BulkRegionJobDetails(BaseSchema):
     
 
 
-class BulkRegionResultItemData(BaseSchema):
+class BulkRegionResponseItemData(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -2141,17 +1951,17 @@ class BulkRegionResultItemData(BaseSchema):
     
 
 
-class BulkRegionResult(BaseSchema):
+class BulkRegionResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    items = fields.List(fields.Nested(BulkRegionResultItemData, required=False), required=False)
+    items = fields.List(fields.Nested(BulkRegionResponseItemData, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
 
 
-class SelfShipResult(BaseSchema):
+class SelfShipResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -2165,15 +1975,15 @@ class ApplicationSelfShipConfig(BaseSchema):
     # Serviceability swagger.json
 
     
-    self_ship = fields.Nested(SelfShipResult, required=False)
+    self_ship = fields.Dict(required=False, allow_none=True)
     
 
 
-class ApplicationSelfShipConfigResult(BaseSchema):
+class ApplicationSelfShipConfigResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    error = fields.Nested(ServiceabilityErrorResult, required=False)
+    error = fields.Nested(ServiceabilityErrorResponse, required=False)
     
     data = fields.Nested(ApplicationSelfShipConfig, required=False)
     
@@ -2271,13 +2081,13 @@ class StorePrioritySchema(BaseSchema):
     # Serviceability swagger.json
 
     
-    id = fields.Int(required=False)
+    id = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
 
 
-class GetStoreRulesApiResult(BaseSchema):
+class GetStoreRulesApiResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -2287,7 +2097,7 @@ class GetStoreRulesApiResult(BaseSchema):
     
 
 
-class CreateStoreRuleDetailsSchema(BaseSchema):
+class CreateStoreRuleRequestSchema(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -2307,7 +2117,7 @@ class CreateStoreRuleDetailsSchema(BaseSchema):
     
 
 
-class StoreRuleResultSchema(BaseSchema):
+class StoreRuleResponseSchema(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -2331,7 +2141,7 @@ class StoreRuleResultSchema(BaseSchema):
     
 
 
-class StoreRuleUpdateResultSchema(BaseSchema):
+class StoreRuleUpdateResponseSchema(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -2427,13 +2237,9 @@ class CourierPartnerSchemeModel(BaseSchema):
     # Serviceability swagger.json
 
     
-    name = fields.Str(required=False)
-    
     extension_id = fields.Str(required=False)
     
     scheme_id = fields.Str(required=False)
-    
-    volumetric_weight = fields.Nested(ArithmeticOperations, required=False)
     
     weight = fields.Nested(ArithmeticOperations, required=False)
     
@@ -2451,13 +2257,9 @@ class CourierPartnerSchemeModel(BaseSchema):
     
 
 
-class CourierAccountResult(BaseSchema):
+class CourierAccountResponse(BaseSchema):
     # Serviceability swagger.json
 
-    
-    company_id = fields.Int(required=False)
-    
-    extension_id = fields.Str(required=False)
     
     account_id = fields.Str(required=False)
     
@@ -2473,11 +2275,11 @@ class CourierAccountResult(BaseSchema):
     
 
 
-class CompanyCourierPartnerAccountListResult(BaseSchema):
+class CompanyCourierPartnerAccountListResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    items = fields.List(fields.Nested(CourierAccountResult, required=False), required=False)
+    items = fields.List(fields.Nested(CourierAccountResponse, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
@@ -2523,7 +2325,7 @@ class PackageMaterial(BaseSchema):
     
 
 
-class PackageMaterialResult(BaseSchema):
+class PackageMaterialResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -2532,8 +2334,6 @@ class PackageMaterialResult(BaseSchema):
     id = fields.Str(required=False)
     
     item_id = fields.Int(required=False)
-    
-    company_id = fields.Int(required=False)
     
     width = fields.Float(required=False)
     
@@ -2601,7 +2401,7 @@ class PackageRule(BaseSchema):
     
 
 
-class PackageRuleResult(BaseSchema):
+class PackageRuleResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -2637,7 +2437,7 @@ class PackageMaterialRuleList(BaseSchema):
     # Serviceability swagger.json
 
     
-    items = fields.Nested(PackageRuleResult, required=False)
+    items = fields.Nested(PackageRuleResponse, required=False)
     
     page = fields.Nested(Page, required=False)
     
@@ -2647,7 +2447,7 @@ class PackageMaterialList(BaseSchema):
     # Serviceability swagger.json
 
     
-    items = fields.Nested(PackageMaterialResult, required=False)
+    items = fields.Nested(PackageMaterialResponse, required=False)
     
     page = fields.Nested(Page, required=False)
     
@@ -2687,7 +2487,7 @@ class PackageMaterialRuleQuantity(BaseSchema):
     
 
 
-class RulePriorityDetails(BaseSchema):
+class RulePriorityRequest(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -2697,7 +2497,7 @@ class RulePriorityDetails(BaseSchema):
     
 
 
-class RulePriorityResult(BaseSchema):
+class RulePriorityResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -2753,7 +2553,7 @@ class OptimalLocationsArticles(BaseSchema):
     
     size = fields.Str(required=False)
     
-    quantity = fields.Int(required=False)
+    quantity = fields.Str(required=False)
     
     group_id = fields.Str(required=False)
     
@@ -2771,7 +2571,7 @@ class OptimalLocationsArticles(BaseSchema):
     
 
 
-class OptimlLocationsDetailsSchema(BaseSchema):
+class OptimlLocationsRequestSchema(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -2783,11 +2583,11 @@ class OptimlLocationsDetailsSchema(BaseSchema):
     
     to_serviceability = fields.Nested(LocationDetailsServiceability, required=False)
     
-    articles = fields.List(fields.Nested(OptimalLocationsArticles, required=False), required=False)
+    article = fields.Nested(OptimalLocationsArticles, required=False)
     
 
 
-class OptimalLocationArticlesResult(BaseSchema):
+class OptimalLocationArticlesResponse(BaseSchema):
     # Serviceability swagger.json
 
     
@@ -2821,41 +2621,23 @@ class OptimalLocationArticlesResult(BaseSchema):
     
 
 
-class OptimalLocationAssignedStoresResult(BaseSchema):
+class OptimalLocationAssignedStoresResponse(BaseSchema):
     # Serviceability swagger.json
 
     
     store_id = fields.Int(required=False)
     
-    articles = fields.List(fields.Nested(OptimalLocationArticlesResult, required=False), required=False)
+    articles = fields.List(fields.Nested(OptimalLocationArticlesResponse, required=False), required=False)
     
 
 
-class OptimalLocationsResult(BaseSchema):
+class OptimalLocationsResponse(BaseSchema):
     # Serviceability swagger.json
 
     
-    assigned_stores = fields.List(fields.Nested(OptimalLocationAssignedStoresResult, required=False), required=False)
+    assigned_stores = fields.List(fields.Nested(OptimalLocationAssignedStoresResponse, required=False), required=False)
     
-    faulty_articles = fields.List(fields.Nested(ErrorResult, required=False), required=False)
-    
-
-
-class ValidationError(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    field = fields.Str(required=False)
-    
-
-
-class StandardError(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    message = fields.Str(required=False)
+    faulty_articles = fields.List(fields.Nested(ErrorResponse, required=False), required=False)
     
 
 

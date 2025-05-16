@@ -47,15 +47,6 @@ class Analytics:
 
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/insights/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/job/execute", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
-        if 200 <= int(response['status_code']) < 300:
-            from .models import JobExecutionResult
-            schema = JobExecutionResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for executeJobForProvidedParametersV2")
-                print(e)
-
         return response
     
     async def startDownloadForQueryV2(self, export_type=None, body="", request_headers:Dict={}):
@@ -129,15 +120,6 @@ class Analytics:
                 exclude_headers.append(key)
 
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/insights/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/job/{file_name}/status", file_name=file_name), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import JobStatus
-            schema = JobStatus()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for checkJobStatusByNameV2")
-                print(e)
 
         return response
     
