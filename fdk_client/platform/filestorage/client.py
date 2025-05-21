@@ -13,7 +13,7 @@ class FileStorage:
 
     
     async def startUpload(self, namespace=None, body="", request_headers:Dict={}):
-        """Inititates the process of uploading a file to storage location, and returns a storage link in response at platform level. Please refer group description for more details.
+        """Inititates the process of uploading a file to storage location, and returns a storage link in response.
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
@@ -26,11 +26,11 @@ class FileStorage:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import StartRequest
-        schema = StartRequest()
+        from .models import FileUploadStart
+        schema = FileUploadStart()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/start", """{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}]}""", serverType="platform", namespace=namespace, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v2.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/start", """{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}]}""", serverType="platform", namespace=namespace, )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -48,11 +48,11 @@ class FileStorage:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/start", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v2.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/start", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import StartResponse
-            schema = StartResponse()
+            from .models import FileUpload
+            schema = FileUpload()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -62,7 +62,7 @@ class FileStorage:
         return response
     
     async def completeUpload(self, namespace=None, body="", request_headers:Dict={}):
-        """Complete the file upload and store the file details such as name, size, content type, and namespace to maintain integrity within the system's database at platform level
+        """Starts the process of uploading a file to storage location, and returns a storage link in response.
         :param namespace : Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket. : type string
         """
         payload = {}
@@ -75,11 +75,11 @@ class FileStorage:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import StartResponse
-        schema = StartResponse()
+        from .models import FileUpload
+        schema = FileUpload()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/complete", """{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}]}""", serverType="platform", namespace=namespace, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v2.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/complete", """{"required":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"namespace","in":"path","description":"Segregation of different types of files(products, orders, logistics etc), Required for validating the data of the file being uploaded, decides where exactly the file will be stored inside the storage bucket.","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}]}""", serverType="platform", namespace=namespace, )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -97,11 +97,11 @@ class FileStorage:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/complete", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v2.0/company/{self._conf.companyId}/namespaces/{namespace}/upload/complete", namespace=namespace), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CompleteResponse
-            schema = CompleteResponse()
+            from .models import FileUploadComplete
+            schema = FileUploadComplete()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -111,7 +111,7 @@ class FileStorage:
         return response
     
     async def getSignUrls(self, body="", request_headers:Dict={}):
-        """Generates secure, signed URLs that is valid for certain expiry time for accessing stored resources inside private bucket.
+        """Retrieve signed URLs for file access.
         """
         payload = {}
         
@@ -121,8 +121,8 @@ class FileStorage:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import SignUrlRequest
-        schema = SignUrlRequest()
+        from .models import SignUrl
+        schema = SignUrl()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/assets/v1.0/company/{self._conf.companyId}/sign-urls", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer","description":"This is company id"}}]}""", serverType="platform", )
@@ -146,8 +146,8 @@ class FileStorage:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/sign-urls", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SignUrlResponse
-            schema = SignUrlResponse()
+            from .models import SignUrlResult
+            schema = SignUrlResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -157,7 +157,7 @@ class FileStorage:
         return response
     
     async def copyFiles(self, sync=None, body="", request_headers:Dict={}):
-        """Handle multiple file uploads, updating progress and providing detailed status reports.
+        """Duplicate files to another location.
         :param sync :  : type boolean
         """
         payload = {}
@@ -239,7 +239,7 @@ class FileStorage:
         return response
     
     async def proxy(self, url=None, request_headers:Dict={}):
-        """It enables the communication between two entities by directing client requests to the correct server and sending responses back to the client. Please refer group description for more details.
+        """Access files through a proxy.
         :param url : url : type string
         """
         payload = {}
@@ -273,8 +273,8 @@ class FileStorage:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/assets/v1.0/company/{self._conf.companyId}/proxy", url=url), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProxyResponse
-            schema = ProxyResponse()
+            from .models import ProxyFileAccess
+            schema = ProxyFileAccess()
             try:
                 schema.load(response["json"])
             except Exception as e:

@@ -3,6 +3,8 @@
 from ..common.exceptions import FDKClientValidationError
 
 
+from .catalog.client import Catalog
+
 from .configuration.client import Configuration
 
 from .content.client import Content
@@ -15,6 +17,8 @@ from .webhook.client import Webhook
 class PublicClient:
     def __init__(self, config):
         self.config = config
+        
+        self.catalog = Catalog(config)
         
         self.configuration = Configuration(config)
         

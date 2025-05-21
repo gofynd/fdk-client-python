@@ -12,7 +12,6 @@ from ..ApplicationModel import BaseSchema
     
     
         
-        
     
     
     
@@ -105,8 +104,6 @@ from ..ApplicationModel import BaseSchema
     
         
     
-    
-        
     
 
 class PaymentValidator:
@@ -114,8 +111,6 @@ class PaymentValidator:
     
     class getAggregatorsConfig(BaseSchema):
         
-        
-        x__api__token = fields.Str(required=False)
         
         refresh = fields.Boolean(required=False)
          
@@ -395,13 +390,6 @@ class PaymentValidator:
         pass 
         
     
-    class outstandingOrderDetails(BaseSchema):
-        
-        
-        aggregator = fields.Str(required=False)
-         
-        
-    
     class paidOrderDetails(BaseSchema):
         
         
@@ -410,6 +398,11 @@ class PaymentValidator:
         
     
     class createPaymentOrder(BaseSchema):
+        
+        pass 
+        
+    
+    class validateCustomerAndCreditSummary(BaseSchema):
         
         pass 
         

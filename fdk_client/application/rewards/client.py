@@ -78,7 +78,7 @@ class Rewards:
         return response
     
     async def catalogueOrder(self, body="", request_headers:Dict={}):
-        """Place an reward on order items available in the catalogue.
+        """Place a reward on order items available in the catalogue.
         """
         payload = {}
         
@@ -88,8 +88,8 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CatalogueOrderRequest
-        schema = CatalogueOrderRequest()
+        from .models import CatalogueOrderCreation
+        schema = CatalogueOrderCreation()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["catalogueOrder"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -114,8 +114,8 @@ class Rewards:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["catalogueOrder"]).netloc, "post", await create_url_without_domain("/service/application/rewards/v1.0/catalogue/offer/order/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CatalogueOrderResponse
-            schema = CatalogueOrderResponse()
+            from .models import CatalogueOrderDetails
+            schema = CatalogueOrderDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -163,8 +163,8 @@ class Rewards:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserPointsHistory"]).netloc, "get", await create_url_without_domain("/service/application/rewards/v1.0/user/points/history/", page_id=page_id, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PointsHistoryResponse
-            schema = PointsHistoryResponse()
+            from .models import PointsHistoryDetails
+            schema = PointsHistoryDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -206,8 +206,8 @@ class Rewards:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserPoints"]).netloc, "get", await create_url_without_domain("/service/application/rewards/v1.0/user/points/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PointsResponse
-            schema = PointsResponse()
+            from .models import PointsDetails
+            schema = PointsDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -249,8 +249,8 @@ class Rewards:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserReferralDetails"]).netloc, "get", await create_url_without_domain("/service/application/rewards/v1.0/user/referral/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ReferralDetailsResponse
-            schema = ReferralDetailsResponse()
+            from .models import ReferralDetails
+            schema = ReferralDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -270,8 +270,8 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import OrderDiscountRequest
-        schema = OrderDiscountRequest()
+        from .models import RetrieveOrderDiscount
+        schema = RetrieveOrderDiscount()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["getOrderDiscount"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -296,8 +296,8 @@ class Rewards:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrderDiscount"]).netloc, "post", await create_url_without_domain("/service/application/rewards/v1.0/user/offer/order-discount/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OrderDiscountResponse
-            schema = OrderDiscountResponse()
+            from .models import OrderDiscountDetails
+            schema = OrderDiscountDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -317,8 +317,8 @@ class Rewards:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import RedeemReferralCodeRequest
-        schema = RedeemReferralCodeRequest()
+        from .models import RedeemReferralCode
+        schema = RedeemReferralCode()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(api_url=self._urls["redeemReferralCode"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
@@ -343,8 +343,8 @@ class Rewards:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["redeemReferralCode"]).netloc, "post", await create_url_without_domain("/service/application/rewards/v1.0/user/referral/redeem/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RedeemReferralCodeResponse
-            schema = RedeemReferralCodeResponse()
+            from .models import RedeemReferralCodeDetails
+            schema = RedeemReferralCodeDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:

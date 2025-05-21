@@ -8,11 +8,11 @@ from ..PlatformModel import BaseSchema
 
 
 
-class EventSubscriptionsBulkUpdateRequest(BaseSchema):
+class EventSubscriptionsBulkUpdatePayload(BaseSchema):
     pass
 
 
-class EventSubscriptionsBulkUpdateResponse(BaseSchema):
+class EventSubscriptionsBulkUpdateResult(BaseSchema):
     pass
 
 
@@ -232,11 +232,11 @@ class MetaStructure(BaseSchema):
     pass
 
 
-class EngineRequest(BaseSchema):
+class EnginePayload(BaseSchema):
     pass
 
 
-class EngineResponse(BaseSchema):
+class EngineResult(BaseSchema):
     pass
 
 
@@ -256,23 +256,35 @@ class EventSubscription(BaseSchema):
     pass
 
 
+class EventSubscriptionEvents(BaseSchema):
+    pass
+
+
+class EventTemplate(BaseSchema):
+    pass
+
+
+class EventProviderTemplates(BaseSchema):
+    pass
+
+
 class EventSubscriptions(BaseSchema):
     pass
 
 
-class TriggerJobResponse(BaseSchema):
+class TriggerJobResult(BaseSchema):
     pass
 
 
-class TriggerJobRequest(BaseSchema):
+class TriggerJobPayload(BaseSchema):
     pass
 
 
-class GlobalVariablesGetResponse(BaseSchema):
+class GetGlobalVariablesResult(BaseSchema):
     pass
 
 
-class GlobalVariablesPostResponse(BaseSchema):
+class CreateGlobalVariablesResult(BaseSchema):
     pass
 
 
@@ -412,6 +424,10 @@ class SystemSmsTemplates(BaseSchema):
     pass
 
 
+class SystemSmsTemplate(BaseSchema):
+    pass
+
+
 class metaObj(BaseSchema):
     pass
 
@@ -471,7 +487,7 @@ class OtpConfiguration(BaseSchema):
 
 
 
-class EventSubscriptionsBulkUpdateRequest(BaseSchema):
+class EventSubscriptionsBulkUpdatePayload(BaseSchema):
     # Communication swagger.json
 
     
@@ -479,7 +495,7 @@ class EventSubscriptionsBulkUpdateRequest(BaseSchema):
     
 
 
-class EventSubscriptionsBulkUpdateResponse(BaseSchema):
+class EventSubscriptionsBulkUpdateResult(BaseSchema):
     # Communication swagger.json
 
     
@@ -1299,7 +1315,7 @@ class MetaStructure(BaseSchema):
     
 
 
-class EngineRequest(BaseSchema):
+class EnginePayload(BaseSchema):
     # Communication swagger.json
 
     
@@ -1309,7 +1325,7 @@ class EngineRequest(BaseSchema):
     
 
 
-class EngineResponse(BaseSchema):
+class EngineResult(BaseSchema):
     # Communication swagger.json
 
     
@@ -1323,7 +1339,7 @@ class EventSubscriptionTemplateSms(BaseSchema):
     
     subscribed = fields.Boolean(required=False)
     
-    template = fields.Str(required=False)
+    template = fields.Nested(SmsTemplate, required=False)
     
 
 
@@ -1333,7 +1349,7 @@ class EventSubscriptionTemplateEmail(BaseSchema):
     
     subscribed = fields.Boolean(required=False)
     
-    template = fields.Str(required=False)
+    template = fields.Nested(EmailTemplate, required=False)
     
 
 
@@ -1359,7 +1375,7 @@ class EventSubscription(BaseSchema):
     
     application = fields.Str(required=False)
     
-    event = fields.Str(required=False)
+    event = fields.Nested(EventSubscriptionEvents, required=False)
     
     slug = fields.Str(required=False)
     
@@ -1368,6 +1384,44 @@ class EventSubscription(BaseSchema):
     updated_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
+    
+
+
+class EventSubscriptionEvents(BaseSchema):
+    # Communication swagger.json
+
+    
+    category = fields.Str(required=False)
+    
+    event_name = fields.Str(required=False)
+    
+    group = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    template = fields.Nested(EventTemplate, required=False)
+    
+
+
+class EventTemplate(BaseSchema):
+    # Communication swagger.json
+
+    
+    email = fields.Nested(EventProviderTemplates, required=False)
+    
+    pushnotification = fields.Nested(EventProviderTemplates, required=False)
+    
+    sms = fields.Nested(EventProviderTemplates, required=False)
+    
+
+
+class EventProviderTemplates(BaseSchema):
+    # Communication swagger.json
+
+    
+    provider_type = fields.Str(required=False, allow_none=True)
+    
+    template = fields.Str(required=False, allow_none=True)
     
 
 
@@ -1381,7 +1435,7 @@ class EventSubscriptions(BaseSchema):
     
 
 
-class TriggerJobResponse(BaseSchema):
+class TriggerJobResult(BaseSchema):
     # Communication swagger.json
 
     
@@ -1389,7 +1443,7 @@ class TriggerJobResponse(BaseSchema):
     
 
 
-class TriggerJobRequest(BaseSchema):
+class TriggerJobPayload(BaseSchema):
     # Communication swagger.json
 
     
@@ -1397,7 +1451,7 @@ class TriggerJobRequest(BaseSchema):
     
 
 
-class GlobalVariablesGetResponse(BaseSchema):
+class GetGlobalVariablesResult(BaseSchema):
     # Communication swagger.json
 
     
@@ -1407,7 +1461,7 @@ class GlobalVariablesGetResponse(BaseSchema):
     
 
 
-class GlobalVariablesPostResponse(BaseSchema):
+class CreateGlobalVariablesResult(BaseSchema):
     # Communication swagger.json
 
     
@@ -1815,6 +1869,10 @@ class SmsProviderReq(BaseSchema):
     
     api_key = fields.Str(required=False)
     
+    tenant_name_1 = fields.Str(required=False)
+    
+    tenant_name_2 = fields.Str(required=False)
+    
 
 
 class SmsProvider(BaseSchema):
@@ -1946,6 +2004,14 @@ class SmsTemplate(BaseSchema):
 
 
 class SystemSmsTemplates(BaseSchema):
+    # Communication swagger.json
+
+    
+    items = fields.List(fields.Nested(SystemSmsTemplate, required=False), required=False)
+    
+
+
+class SystemSmsTemplate(BaseSchema):
     # Communication swagger.json
 
     
@@ -2094,6 +2160,8 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+    page_size = fields.Int(required=False)
     
 
 

@@ -8,7 +8,7 @@ from ..ApplicationModel import BaseSchema
 
 
 
-class ApplicationAboutResponse(BaseSchema):
+class ApplicationAboutResponseSchema(BaseSchema):
     pass
 
 
@@ -28,19 +28,19 @@ class SupportedLanguage(BaseSchema):
     pass
 
 
-class LanguageResponse(BaseSchema):
+class LanguageResponseSchema(BaseSchema):
     pass
 
 
-class AppStaffResponse(BaseSchema):
+class AppStaffResponseSchema(BaseSchema):
     pass
 
 
-class AppStaffListResponse(BaseSchema):
+class AppStaffListResponseSchema(BaseSchema):
     pass
 
 
-class OrderingStoreSelectRequest(BaseSchema):
+class OrderingStoreSelectRequestSchema(BaseSchema):
     pass
 
 
@@ -52,7 +52,7 @@ class AppStaff(BaseSchema):
     pass
 
 
-class AppTokenResponse(BaseSchema):
+class AppTokenResponseSchema(BaseSchema):
     pass
 
 
@@ -224,7 +224,11 @@ class OrderFeature(BaseSchema):
     pass
 
 
-class AppFeatureResponse(BaseSchema):
+class DeliveryStrategy(BaseSchema):
+    pass
+
+
+class AppFeatureResponseSchema(BaseSchema):
     pass
 
 
@@ -272,15 +276,11 @@ class NotFound(BaseSchema):
     pass
 
 
-class InvalidPayloadRequest(BaseSchema):
+class InvalidPayloadRequestSchema(BaseSchema):
     pass
 
 
-class UnhandledError(BaseSchema):
-    pass
-
-
-class SuccessMessageResponse(BaseSchema):
+class SuccessMessageResponseSchema(BaseSchema):
     pass
 
 
@@ -380,7 +380,7 @@ class ApplicationDetail(BaseSchema):
     pass
 
 
-class CurrenciesResponse(BaseSchema):
+class CurrenciesResponseSchema(BaseSchema):
     pass
 
 
@@ -388,7 +388,7 @@ class DefaultCurrency(BaseSchema):
     pass
 
 
-class AppCurrencyResponse(BaseSchema):
+class AppCurrencyResponseSchema(BaseSchema):
     pass
 
 
@@ -411,7 +411,7 @@ class OrderingStores(BaseSchema):
 
 
 
-class ApplicationAboutResponse(BaseSchema):
+class ApplicationAboutResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -515,7 +515,7 @@ class SupportedLanguage(BaseSchema):
     
 
 
-class LanguageResponse(BaseSchema):
+class LanguageResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -523,7 +523,7 @@ class LanguageResponse(BaseSchema):
     
 
 
-class AppStaffResponse(BaseSchema):
+class AppStaffResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -531,7 +531,7 @@ class AppStaffResponse(BaseSchema):
     
 
 
-class AppStaffListResponse(BaseSchema):
+class AppStaffListResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -541,7 +541,7 @@ class AppStaffListResponse(BaseSchema):
     
 
 
-class OrderingStoreSelectRequest(BaseSchema):
+class OrderingStoreSelectRequestSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -583,7 +583,7 @@ class AppStaff(BaseSchema):
     
 
 
-class AppTokenResponse(BaseSchema):
+class AppTokenResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -901,6 +901,8 @@ class AppFeature(BaseSchema):
     
     order = fields.Nested(OrderFeature, required=False)
     
+    delivery_strategy = fields.Nested(DeliveryStrategy, required=False)
+    
     _id = fields.Str(required=False)
     
     app = fields.Str(required=False)
@@ -1071,7 +1073,15 @@ class OrderFeature(BaseSchema):
     
 
 
-class AppFeatureResponse(BaseSchema):
+class DeliveryStrategy(BaseSchema):
+    # Configuration swagger.json
+
+    
+    value = fields.Str(required=False)
+    
+
+
+class AppFeatureResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1263,7 +1273,7 @@ class NotFound(BaseSchema):
     
 
 
-class InvalidPayloadRequest(BaseSchema):
+class InvalidPayloadRequestSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1271,15 +1281,7 @@ class InvalidPayloadRequest(BaseSchema):
     
 
 
-class UnhandledError(BaseSchema):
-    # Configuration swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-
-
-class SuccessMessageResponse(BaseSchema):
+class SuccessMessageResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1291,7 +1293,7 @@ class CompanyAboutAddress(BaseSchema):
     # Configuration swagger.json
 
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     address1 = fields.Str(required=False)
     
@@ -1354,6 +1356,8 @@ class Page(BaseSchema):
     type = fields.Str(required=False)
     
     size = fields.Int(required=False)
+    
+    page_size = fields.Int(required=False)
     
 
 
@@ -1641,7 +1645,7 @@ class ApplicationDetail(BaseSchema):
     
 
 
-class CurrenciesResponse(BaseSchema):
+class CurrenciesResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1659,7 +1663,7 @@ class DefaultCurrency(BaseSchema):
     
 
 
-class AppCurrencyResponse(BaseSchema):
+class AppCurrencyResponseSchema(BaseSchema):
     # Configuration swagger.json
 
     
@@ -1699,7 +1703,7 @@ class OptedStoreAddress(BaseSchema):
     
     address2 = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     country = fields.Str(required=False)
     
@@ -1725,7 +1729,7 @@ class OrderingStore(BaseSchema):
     
     store_code = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     code = fields.Str(required=False)
     
