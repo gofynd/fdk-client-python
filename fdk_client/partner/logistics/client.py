@@ -23,11 +23,11 @@ class Logistics:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import BulkRegionServiceabilityTatDetails
-        schema = BulkRegionServiceabilityTatDetails()
+        from .models import BulkRegionServiceabilityTatRequest
+        schema = BulkRegionServiceabilityTatRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/localities/bulk-sample", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}]}""", serverType="partner", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/localities/bulk-sample", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}]}""", serverType="partner", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -44,11 +44,11 @@ class Logistics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/localities/bulk-sample", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/localities/bulk-sample", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BulkRegionServiceabilityTatResultItemData
-            schema = BulkRegionServiceabilityTatResultItemData()
+            from .models import BulkRegionServiceabilityTatResponseItemData
+            schema = BulkRegionServiceabilityTatResponseItemData()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -59,8 +59,8 @@ class Logistics:
     
     async def getSampleFileServiceabilityStatus(self, page_no=None, page_size=None, batch_id=None, request_headers:Dict={}):
         """Get Serviceability TAT sample file generator status
-        :param page_no : The current page number for paginated results. : type integer
-        :param page_size : Determines the items to be displayed in a page : type integer
+        :param page_no : index of the item to start returning with : type integer
+        :param page_size : determines the items to be displayed in a page : type integer
         :param batch_id : Batch id of the execution : type string
         """
         payload = {}
@@ -77,7 +77,7 @@ class Logistics:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/localities/bulk-sample", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Batch id of the execution","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Batch id of the execution","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}]}""", serverType="partner", page_no=page_no, page_size=page_size, batch_id=batch_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/localities/bulk-sample", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Batch id of the execution","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Batch id of the execution","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}]}""", serverType="partner", page_no=page_no, page_size=page_size, batch_id=batch_id)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, batch_id=batch_id)
         if query_string:
             url_with_params += "?" + query_string
@@ -94,11 +94,11 @@ class Logistics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/localities/bulk-sample", page_no=page_no, page_size=page_size, batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/localities/bulk-sample", page_no=page_no, page_size=page_size, batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BulkRegionServiceabilityTatResult
-            schema = BulkRegionServiceabilityTatResult()
+            from .models import BulkRegionServiceabilityTatResponse
+            schema = BulkRegionServiceabilityTatResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -109,8 +109,8 @@ class Logistics:
     
     async def bulkTat(self, extension_id=None, scheme_id=None, body="", request_headers:Dict={}):
         """Region TAT Import or Export
-        :param extension_id : Unique Identifier of courier partner extension. : type string
-        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
+        :param extension_id : Unique Identifier of CP Extension : type string
+        :param scheme_id : Unique identifier of a scheme : type string
         """
         payload = {}
         
@@ -124,11 +124,11 @@ class Logistics:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import BulkRegionJobDetails
-        schema = BulkRegionJobDetails()
+        from .models import BulkRegionJobSerializer
+        schema = BulkRegionJobSerializer()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/tat", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}]}""", serverType="partner", extension_id=extension_id, scheme_id=scheme_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/tat", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of CP Extension","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of a scheme","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of CP Extension","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of a scheme","schema":{"type":"string"},"required":true}]}""", serverType="partner", extension_id=extension_id, scheme_id=scheme_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -145,11 +145,11 @@ class Logistics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/tat", extension_id=extension_id, scheme_id=scheme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/tat", extension_id=extension_id, scheme_id=scheme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BulkRegionResultItemData
-            schema = BulkRegionResultItemData()
+            from .models import BulkRegionResponseItemData
+            schema = BulkRegionResponseItemData()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -160,12 +160,12 @@ class Logistics:
     
     async def getBulkTat(self, extension_id=None, scheme_id=None, page_no=None, page_size=None, batch_id=None, action=None, status=None, country=None, region=None, start_date=None, end_date=None, request_headers:Dict={}):
         """Get region tat bulk history
-        :param extension_id : Unique Identifier of courier partner extension. : type string
-        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
-        :param page_no : The current page number for paginated results. : type integer
-        :param page_size : Determines the items to be displayed in a page : type integer
+        :param extension_id : Unique Identifier of CP Extension : type string
+        :param scheme_id : Unique identifier of a scheme : type string
+        :param page_no : index of the item to start returning with : type integer
+        :param page_size : determines the items to be displayed in a page : type integer
         :param batch_id : Unique identifier of bulk job : type string
-        :param action : Import or export bulk type : type string
+        :param action : import or export bulk type : type string
         :param status : Status of the bulk actions : type string
         :param country : Country for which bulk job is initiated : type string
         :param region : Region for which bulk job is initiated : type string
@@ -202,7 +202,7 @@ class Logistics:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/tat", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string","nullable":true},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Unique identifier of bulk job","schema":{"type":"string"}},{"in":"query","name":"action","description":"Import or export bulk type","schema":{"type":"string"}},{"in":"query","name":"status","description":"Status of the bulk actions","schema":{"type":"string","nullable":true,"enum":["processing","failed","partial","completed"]}},{"in":"query","name":"country","description":"Country for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"region","description":"Region for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"start_date","description":"Fetch job history after a particule date","schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"Fetch job history before a particule date","schema":{"type":"string","format":"date-time"}}],"query":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Unique identifier of bulk job","schema":{"type":"string"}},{"in":"query","name":"action","description":"Import or export bulk type","schema":{"type":"string"}},{"in":"query","name":"status","description":"Status of the bulk actions","schema":{"type":"string","nullable":true,"enum":["processing","failed","partial","completed"]}},{"in":"query","name":"country","description":"Country for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"region","description":"Region for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"start_date","description":"Fetch job history after a particule date","schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"Fetch job history before a particule date","schema":{"type":"string","format":"date-time"}}],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string","nullable":true},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}]}""", serverType="partner", extension_id=extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, country=country, region=region, start_date=start_date, end_date=end_date)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/tat", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of CP Extension","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of a scheme","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Unique identifier of bulk job","schema":{"type":"string"}},{"in":"query","name":"action","description":"import or export bulk type","schema":{"type":"string"}},{"in":"query","name":"status","description":"Status of the bulk actions","schema":{"type":"string"}},{"in":"query","name":"country","description":"Country for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"region","description":"Region for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"start_date","description":"Fetch job history after a particule date","example":"2023-08-03T00:00:00.000Z","schema":{"type":"string"}},{"in":"query","name":"end_date","description":"Fetch job history before a particule date","example":"2023-08-03T00:00:00.000Z","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Unique identifier of bulk job","schema":{"type":"string"}},{"in":"query","name":"action","description":"import or export bulk type","schema":{"type":"string"}},{"in":"query","name":"status","description":"Status of the bulk actions","schema":{"type":"string"}},{"in":"query","name":"country","description":"Country for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"region","description":"Region for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"start_date","description":"Fetch job history after a particule date","example":"2023-08-03T00:00:00.000Z","schema":{"type":"string"}},{"in":"query","name":"end_date","description":"Fetch job history before a particule date","example":"2023-08-03T00:00:00.000Z","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of CP Extension","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of a scheme","schema":{"type":"string"},"required":true}]}""", serverType="partner", extension_id=extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, country=country, region=region, start_date=start_date, end_date=end_date)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, country=country, region=region, start_date=start_date, end_date=end_date)
         if query_string:
             url_with_params += "?" + query_string
@@ -219,11 +219,11 @@ class Logistics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/tat", extension_id=extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, country=country, region=region, start_date=start_date, end_date=end_date), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/tat", extension_id=extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, country=country, region=region, start_date=start_date, end_date=end_date), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BulkRegionResult
-            schema = BulkRegionResult()
+            from .models import BulkRegionResponse
+            schema = BulkRegionResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -232,616 +232,10 @@ class Logistics:
 
         return response
     
-    async def createDeliveryTime(self, partner_org_id=None, courier_partner_extension_id=None, scheme_id=None, body="", request_headers:Dict={}):
-        """Insert the region based delivery time for a specific region within a courier partner scheme.
-        :param partner_org_id : Unique identifier of partner's organization : type string
-        :param courier_partner_extension_id : Unique identifier of courier partner extension. : type string
-        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
-        """
-        payload = {}
-        
-        if partner_org_id is not None:
-            payload["partner_org_id"] = partner_org_id
-        if courier_partner_extension_id is not None:
-            payload["courier_partner_extension_id"] = courier_partner_extension_id
-        if scheme_id is not None:
-            payload["scheme_id"] = scheme_id
-
-        # Parameter validation
-        schema = LogisticsValidator.createDeliveryTime()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import RegionTatDetails
-        schema = RegionTatDetails()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/delivery-time", """{"required":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}]}""", serverType="partner", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/delivery-time", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import RegionTatResult
-            schema = RegionTatResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createDeliveryTime")
-                print(e)
-
-        return response
-    
-    async def getDeliveryTimes(self, partner_org_id=None, courier_partner_extension_id=None, scheme_id=None, page_no=None, page_size=None, from_country_code=None, from_state_code=None, from_city_code=None, from_sector_code=None, from_pincode=None, to_country_code=None, to_state_code=None, to_city_code=None, to_sector_code=None, to_pincode=None, request_headers:Dict={}):
-        """Retrieve a list of delivery time for specific regions within a courier partner scheme.
-        :param partner_org_id : Unique identifier of partner's organization : type string
-        :param courier_partner_extension_id : Unique identifier of courier partner extension. : type string
-        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
-        :param page_no : The current page number for paginated results. : type integer
-        :param page_size : Determines the items to be displayed in a page : type integer
-        :param from_country_code : From country ISO2 code for which request is initiated : type string
-        :param from_state_code : From state code for which request is initiated : type string
-        :param from_city_code : From city code for which request is initiated : type string
-        :param from_sector_code : From sector code for which request is initiated : type string
-        :param from_pincode : From pincode for which request is initiated : type string
-        :param to_country_code : To country ISO2 code for which request is initiated : type string
-        :param to_state_code : To state code for which request is initiated : type string
-        :param to_city_code : To city code for which request is initiated : type string
-        :param to_sector_code : To sector code for which request is initiated : type string
-        :param to_pincode : To pincode for which request is initiated : type string
-        """
-        payload = {}
-        
-        if partner_org_id is not None:
-            payload["partner_org_id"] = partner_org_id
-        if courier_partner_extension_id is not None:
-            payload["courier_partner_extension_id"] = courier_partner_extension_id
-        if scheme_id is not None:
-            payload["scheme_id"] = scheme_id
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if from_country_code is not None:
-            payload["from_country_code"] = from_country_code
-        if from_state_code is not None:
-            payload["from_state_code"] = from_state_code
-        if from_city_code is not None:
-            payload["from_city_code"] = from_city_code
-        if from_sector_code is not None:
-            payload["from_sector_code"] = from_sector_code
-        if from_pincode is not None:
-            payload["from_pincode"] = from_pincode
-        if to_country_code is not None:
-            payload["to_country_code"] = to_country_code
-        if to_state_code is not None:
-            payload["to_state_code"] = to_state_code
-        if to_city_code is not None:
-            payload["to_city_code"] = to_city_code
-        if to_sector_code is not None:
-            payload["to_sector_code"] = to_sector_code
-        if to_pincode is not None:
-            payload["to_pincode"] = to_pincode
-
-        # Parameter validation
-        schema = LogisticsValidator.getDeliveryTimes()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/delivery-time", """{"required":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"from_country_code","description":"From country ISO2 code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"from_state_code","description":"From state code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"from_city_code","description":"From city code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"from_sector_code","description":"From sector code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"from_pincode","description":"From pincode for which request is initiated","schema":{"type":"string"}},{"in":"query","name":"to_country_code","description":"To country ISO2 code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"to_state_code","description":"To state code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"to_city_code","description":"To city code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"to_sector_code","description":"To sector code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"to_pincode","description":"To pincode for which request is initiated","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"from_country_code","description":"From country ISO2 code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"from_state_code","description":"From state code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"from_city_code","description":"From city code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"from_sector_code","description":"From sector code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"from_pincode","description":"From pincode for which request is initiated","schema":{"type":"string"}},{"in":"query","name":"to_country_code","description":"To country ISO2 code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"to_state_code","description":"To state code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"to_city_code","description":"To city code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"to_sector_code","description":"To sector code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"to_pincode","description":"To pincode for which request is initiated","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}]}""", serverType="partner", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, from_country_code=from_country_code, from_state_code=from_state_code, from_city_code=from_city_code, from_sector_code=from_sector_code, from_pincode=from_pincode, to_country_code=to_country_code, to_state_code=to_state_code, to_city_code=to_city_code, to_sector_code=to_sector_code, to_pincode=to_pincode)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, from_country_code=from_country_code, from_state_code=from_state_code, from_city_code=from_city_code, from_sector_code=from_sector_code, from_pincode=from_pincode, to_country_code=to_country_code, to_state_code=to_state_code, to_city_code=to_city_code, to_sector_code=to_sector_code, to_pincode=to_pincode)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/delivery-time", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, from_country_code=from_country_code, from_state_code=from_state_code, from_city_code=from_city_code, from_sector_code=from_sector_code, from_pincode=from_pincode, to_country_code=to_country_code, to_state_code=to_state_code, to_city_code=to_city_code, to_sector_code=to_sector_code, to_pincode=to_pincode), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import RegionTatItemResult
-            schema = RegionTatItemResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getDeliveryTimes")
-                print(e)
-
-        return response
-    
-    async def getDeliveryTime(self, partner_org_id=None, courier_partner_extension_id=None, scheme_id=None, id=None, request_headers:Dict={}):
-        """Retrieve the delivery time details for a specific region within a courier partner scheme using the unique delivery time record identifier.
-        :param partner_org_id : Unique identifier of partner's organization : type string
-        :param courier_partner_extension_id : Unique identifier of courier partner extension. : type string
-        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
-        :param id : Unique identifier of a delivery time record : type string
-        """
-        payload = {}
-        
-        if partner_org_id is not None:
-            payload["partner_org_id"] = partner_org_id
-        if courier_partner_extension_id is not None:
-            payload["courier_partner_extension_id"] = courier_partner_extension_id
-        if scheme_id is not None:
-            payload["scheme_id"] = scheme_id
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = LogisticsValidator.getDeliveryTime()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/delivery-time/{id}", """{"required":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Unique identifier of a delivery time record","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Unique identifier of a delivery time record","schema":{"type":"string"},"required":true}]}""", serverType="partner", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id, id=id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/delivery-time/{id}", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id, id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import RegionTatResult
-            schema = RegionTatResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getDeliveryTime")
-                print(e)
-
-        return response
-    
-    async def updateDeliveryTime(self, partner_org_id=None, courier_partner_extension_id=None, scheme_id=None, id=None, body="", request_headers:Dict={}):
-        """Update the delivery time details for a specific region within a courier partner scheme using the unique delivery time record identifier.
-        :param partner_org_id : Unique identifier of partner's organization : type string
-        :param courier_partner_extension_id : Unique identifier of courier partner extension. : type string
-        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
-        :param id : Unique identifier of a delivery time record : type string
-        """
-        payload = {}
-        
-        if partner_org_id is not None:
-            payload["partner_org_id"] = partner_org_id
-        if courier_partner_extension_id is not None:
-            payload["courier_partner_extension_id"] = courier_partner_extension_id
-        if scheme_id is not None:
-            payload["scheme_id"] = scheme_id
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = LogisticsValidator.updateDeliveryTime()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import TATUpdateDetails
-        schema = TATUpdateDetails()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/delivery-time/{id}", """{"required":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Unique identifier of a delivery time record","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Unique identifier of a delivery time record","schema":{"type":"string"},"required":true}]}""", serverType="partner", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id, id=id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/delivery-time/{id}", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import RegionTatResult
-            schema = RegionTatResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateDeliveryTime")
-                print(e)
-
-        return response
-    
-    async def deleteDeliveryTime(self, partner_org_id=None, courier_partner_extension_id=None, scheme_id=None, id=None, request_headers:Dict={}):
-        """Delete the delivery time record for a specific region within a courier partner scheme using the unique delivery time record identifier.
-        :param partner_org_id : Unique identifier of partner's organization : type string
-        :param courier_partner_extension_id : Unique identifier of courier partner extension. : type string
-        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
-        :param id : Unique identifier of a delivery time record : type string
-        """
-        payload = {}
-        
-        if partner_org_id is not None:
-            payload["partner_org_id"] = partner_org_id
-        if courier_partner_extension_id is not None:
-            payload["courier_partner_extension_id"] = courier_partner_extension_id
-        if scheme_id is not None:
-            payload["scheme_id"] = scheme_id
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = LogisticsValidator.deleteDeliveryTime()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/delivery-time/{id}", """{"required":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Unique identifier of a delivery time record","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Unique identifier of a delivery time record","schema":{"type":"string"},"required":true}]}""", serverType="partner", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id, id=id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/delivery-time/{id}", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id, id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import RegionTatResult
-            schema = RegionTatResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deleteDeliveryTime")
-                print(e)
-
-        return response
-    
-    async def createServiceability(self, partner_org_id=None, courier_partner_extension_id=None, scheme_id=None, body="", request_headers:Dict={}):
-        """Insert the serviceability for a specific region within a courier partner scheme.
-        :param partner_org_id : Unique identifier of partner's organization : type string
-        :param courier_partner_extension_id : Unique identifier of courier partner extension. : type string
-        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
-        """
-        payload = {}
-        
-        if partner_org_id is not None:
-            payload["partner_org_id"] = partner_org_id
-        if courier_partner_extension_id is not None:
-            payload["courier_partner_extension_id"] = courier_partner_extension_id
-        if scheme_id is not None:
-            payload["scheme_id"] = scheme_id
-
-        # Parameter validation
-        schema = LogisticsValidator.createServiceability()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import RegionServiceabilityDetails
-        schema = RegionServiceabilityDetails()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/serviceability", """{"required":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}]}""", serverType="partner", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/serviceability", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import RegionServiceabilityResult
-            schema = RegionServiceabilityResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createServiceability")
-                print(e)
-
-        return response
-    
-    async def getServiceabilities(self, partner_org_id=None, courier_partner_extension_id=None, scheme_id=None, page_no=None, page_size=None, country_code=None, state_code=None, city_code=None, sector_code=None, pincode=None, first_mile=None, last_mile=None, doorstep_return=None, doorstep_qc=None, installation=None, request_headers:Dict={}):
-        """Retrieve a list of serviceability for specific regions within a courier partner scheme.
-        :param partner_org_id : Unique identifier of partner's organization : type string
-        :param courier_partner_extension_id : Unique identifier of courier partner extension. : type string
-        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
-        :param page_no : The current page number for paginated results. : type integer
-        :param page_size : Determines the items to be displayed in a page : type integer
-        :param country_code : Country ISO2 code for which request is initiated : type string
-        :param state_code : State code for which request is initiated : type string
-        :param city_code : City code for which request is initiated : type string
-        :param sector_code : Sector code for which request is initiated : type string
-        :param pincode : Pincode for which request is initiated : type string
-        :param first_mile : First mile value for which request is initiated : type boolean
-        :param last_mile : Last mile value for which request is initiated : type boolean
-        :param doorstep_return : Doorstep return value for which request is initiated : type boolean
-        :param doorstep_qc : Doorstep qc value for which request is initiated : type boolean
-        :param installation : Installation value for which request is initiated : type boolean
-        """
-        payload = {}
-        
-        if partner_org_id is not None:
-            payload["partner_org_id"] = partner_org_id
-        if courier_partner_extension_id is not None:
-            payload["courier_partner_extension_id"] = courier_partner_extension_id
-        if scheme_id is not None:
-            payload["scheme_id"] = scheme_id
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if country_code is not None:
-            payload["country_code"] = country_code
-        if state_code is not None:
-            payload["state_code"] = state_code
-        if city_code is not None:
-            payload["city_code"] = city_code
-        if sector_code is not None:
-            payload["sector_code"] = sector_code
-        if pincode is not None:
-            payload["pincode"] = pincode
-        if first_mile is not None:
-            payload["first_mile"] = first_mile
-        if last_mile is not None:
-            payload["last_mile"] = last_mile
-        if doorstep_return is not None:
-            payload["doorstep_return"] = doorstep_return
-        if doorstep_qc is not None:
-            payload["doorstep_qc"] = doorstep_qc
-        if installation is not None:
-            payload["installation"] = installation
-
-        # Parameter validation
-        schema = LogisticsValidator.getServiceabilities()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/serviceability", """{"required":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"country_code","description":"Country ISO2 code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"state_code","description":"State code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"city_code","description":"City code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"sector_code","description":"Sector code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"pincode","description":"Pincode for which request is initiated","schema":{"type":"string"}},{"in":"query","name":"first_mile","description":"First mile value for which request is initiated","schema":{"type":"boolean"}},{"in":"query","name":"last_mile","description":"Last mile value for which request is initiated","schema":{"type":"boolean"}},{"in":"query","name":"doorstep_return","description":"Doorstep return value for which request is initiated","schema":{"type":"boolean"}},{"in":"query","name":"doorstep_qc","description":"Doorstep qc value for which request is initiated","schema":{"type":"boolean"}},{"in":"query","name":"installation","description":"Installation value for which request is initiated","schema":{"type":"boolean"}}],"query":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"country_code","description":"Country ISO2 code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"state_code","description":"State code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"city_code","description":"City code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"sector_code","description":"Sector code for which request is initiated","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"pincode","description":"Pincode for which request is initiated","schema":{"type":"string"}},{"in":"query","name":"first_mile","description":"First mile value for which request is initiated","schema":{"type":"boolean"}},{"in":"query","name":"last_mile","description":"Last mile value for which request is initiated","schema":{"type":"boolean"}},{"in":"query","name":"doorstep_return","description":"Doorstep return value for which request is initiated","schema":{"type":"boolean"}},{"in":"query","name":"doorstep_qc","description":"Doorstep qc value for which request is initiated","schema":{"type":"boolean"}},{"in":"query","name":"installation","description":"Installation value for which request is initiated","schema":{"type":"boolean"}}],"headers":[],"path":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}]}""", serverType="partner", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, country_code=country_code, state_code=state_code, city_code=city_code, sector_code=sector_code, pincode=pincode, first_mile=first_mile, last_mile=last_mile, doorstep_return=doorstep_return, doorstep_qc=doorstep_qc, installation=installation)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, country_code=country_code, state_code=state_code, city_code=city_code, sector_code=sector_code, pincode=pincode, first_mile=first_mile, last_mile=last_mile, doorstep_return=doorstep_return, doorstep_qc=doorstep_qc, installation=installation)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/serviceability", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, country_code=country_code, state_code=state_code, city_code=city_code, sector_code=sector_code, pincode=pincode, first_mile=first_mile, last_mile=last_mile, doorstep_return=doorstep_return, doorstep_qc=doorstep_qc, installation=installation), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import RegionServiceabilityItemResult
-            schema = RegionServiceabilityItemResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getServiceabilities")
-                print(e)
-
-        return response
-    
-    async def getServiceability(self, partner_org_id=None, courier_partner_extension_id=None, scheme_id=None, id=None, request_headers:Dict={}):
-        """Retrieve serviceability for specific region within a courier partner scheme for a given identifier.
-        :param partner_org_id : Unique identifier of partner's organization : type string
-        :param courier_partner_extension_id : Unique identifier of courier partner extension. : type string
-        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
-        :param id : Unique identifier of a serviceability record : type string
-        """
-        payload = {}
-        
-        if partner_org_id is not None:
-            payload["partner_org_id"] = partner_org_id
-        if courier_partner_extension_id is not None:
-            payload["courier_partner_extension_id"] = courier_partner_extension_id
-        if scheme_id is not None:
-            payload["scheme_id"] = scheme_id
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = LogisticsValidator.getServiceability()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/serviceability/{id}", """{"required":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Unique identifier of a serviceability record","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Unique identifier of a serviceability record","schema":{"type":"string"},"required":true}]}""", serverType="partner", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id, id=id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/serviceability/{id}", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id, id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import RegionServiceabilityResult
-            schema = RegionServiceabilityResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getServiceability")
-                print(e)
-
-        return response
-    
-    async def updateServiceability(self, partner_org_id=None, courier_partner_extension_id=None, scheme_id=None, id=None, body="", request_headers:Dict={}):
-        """Update the serviceability for a specific region within a courier partner scheme based on unique identifier.
-        :param partner_org_id : Unique identifier of partner's organization : type string
-        :param courier_partner_extension_id : Unique identifier of courier partner extension. : type string
-        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
-        :param id : Unique identifier of a serviceability record : type string
-        """
-        payload = {}
-        
-        if partner_org_id is not None:
-            payload["partner_org_id"] = partner_org_id
-        if courier_partner_extension_id is not None:
-            payload["courier_partner_extension_id"] = courier_partner_extension_id
-        if scheme_id is not None:
-            payload["scheme_id"] = scheme_id
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = LogisticsValidator.updateServiceability()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ServiceabilityDetails
-        schema = ServiceabilityDetails()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/serviceability/{id}", """{"required":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Unique identifier of a serviceability record","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Unique identifier of a serviceability record","schema":{"type":"string"},"required":true}]}""", serverType="partner", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id, id=id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/serviceability/{id}", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ServiceabilityDetailsResult
-            schema = ServiceabilityDetailsResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateServiceability")
-                print(e)
-
-        return response
-    
-    async def deleteServiceability(self, partner_org_id=None, courier_partner_extension_id=None, scheme_id=None, id=None, request_headers:Dict={}):
-        """Delete the serviceability for a specific region within a courier partner scheme based on a unique identifier.
-        :param partner_org_id : Unique identifier of partner's organization : type string
-        :param courier_partner_extension_id : Unique identifier of courier partner extension. : type string
-        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
-        :param id : Unique identifier of a serviceability record : type string
-        """
-        payload = {}
-        
-        if partner_org_id is not None:
-            payload["partner_org_id"] = partner_org_id
-        if courier_partner_extension_id is not None:
-            payload["courier_partner_extension_id"] = courier_partner_extension_id
-        if scheme_id is not None:
-            payload["scheme_id"] = scheme_id
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = LogisticsValidator.deleteServiceability()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/serviceability/{id}", """{"required":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Unique identifier of a serviceability record","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"partner_org_id","description":"Unique identifier of partner's organization","schema":{"type":"string"},"required":true},{"in":"path","name":"courier_partner_extension_id","description":"Unique identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true},{"in":"path","name":"id","description":"Unique identifier of a serviceability record","schema":{"type":"string"},"required":true}]}""", serverType="partner", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id, id=id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{partner_org_id}/courier-partner/{courier_partner_extension_id}/scheme/{scheme_id}/serviceability/{id}", partner_org_id=partner_org_id, courier_partner_extension_id=courier_partner_extension_id, scheme_id=scheme_id, id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import RegionServiceabilityResult
-            schema = RegionServiceabilityResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for deleteServiceability")
-                print(e)
-
-        return response
-    
     async def bulkServiceability(self, extension_id=None, scheme_id=None, body="", request_headers:Dict={}):
         """Serviceability Import or Export
-        :param extension_id : Unique Identifier of courier partner extension. : type string
-        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
+        :param extension_id : Unique Identifier of CP Extension : type string
+        :param scheme_id : Unique identifier of a scheme : type string
         """
         payload = {}
         
@@ -855,11 +249,11 @@ class Logistics:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import BulkRegionJobDetails
-        schema = BulkRegionJobDetails()
+        from .models import BulkRegionJobSerializer
+        schema = BulkRegionJobSerializer()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/serviceability/bulk", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}]}""", serverType="partner", extension_id=extension_id, scheme_id=scheme_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/serviceability/bulk", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of CP Extension","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of a scheme","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of CP Extension","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of a scheme","schema":{"type":"string"},"required":true}]}""", serverType="partner", extension_id=extension_id, scheme_id=scheme_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -876,11 +270,11 @@ class Logistics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/serviceability/bulk", extension_id=extension_id, scheme_id=scheme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/serviceability/bulk", extension_id=extension_id, scheme_id=scheme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BulkRegionResultItemData
-            schema = BulkRegionResultItemData()
+            from .models import BulkRegionResponseItemData
+            schema = BulkRegionResponseItemData()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -891,12 +285,12 @@ class Logistics:
     
     async def getBulkServiceability(self, extension_id=None, scheme_id=None, page_no=None, page_size=None, batch_id=None, action=None, status=None, country=None, region=None, start_date=None, end_date=None, request_headers:Dict={}):
         """Get Region Serviceability Bulk History
-        :param extension_id : Unique Identifier of courier partner extension. : type string
-        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
-        :param page_no : The current page number for paginated results. : type integer
-        :param page_size : Determines the items to be displayed in a page : type integer
+        :param extension_id : Unique Identifier of CP Extension : type string
+        :param scheme_id : Unique identifier of a scheme : type string
+        :param page_no : index of the item to start returning with : type integer
+        :param page_size : determines the items to be displayed in a page : type integer
         :param batch_id : Unique identifier of bulk job : type string
-        :param action : Import or export bulk type : type string
+        :param action : import or export bulk type : type string
         :param status : Status of the bulk actions : type string
         :param country : Country for which bulk job is initiated : type string
         :param region : Region for which bulk job is initiated : type string
@@ -933,7 +327,7 @@ class Logistics:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/serviceability/bulk", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Unique identifier of bulk job","schema":{"type":"string"}},{"in":"query","name":"action","description":"Import or export bulk type","schema":{"type":"string","enum":["import","export"]}},{"in":"query","name":"status","description":"Status of the bulk actions","schema":{"type":"string","nullable":true,"enum":["processing","failed","partial","completed"]}},{"in":"query","name":"country","description":"Country for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"region","description":"Region for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"start_date","description":"Fetch job history after a particule date","schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"Fetch job history before a particule date","schema":{"type":"string","format":"date-time"}}],"query":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Unique identifier of bulk job","schema":{"type":"string"}},{"in":"query","name":"action","description":"Import or export bulk type","schema":{"type":"string","enum":["import","export"]}},{"in":"query","name":"status","description":"Status of the bulk actions","schema":{"type":"string","nullable":true,"enum":["processing","failed","partial","completed"]}},{"in":"query","name":"country","description":"Country for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"region","description":"Region for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"start_date","description":"Fetch job history after a particule date","schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"Fetch job history before a particule date","schema":{"type":"string","format":"date-time"}}],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}]}""", serverType="partner", extension_id=extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, country=country, region=region, start_date=start_date, end_date=end_date)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/serviceability/bulk", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of CP Extension","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of a scheme","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Unique identifier of bulk job","schema":{"type":"string"}},{"in":"query","name":"action","description":"import or export bulk type","schema":{"type":"string"}},{"in":"query","name":"status","description":"Status of the bulk actions","schema":{"type":"string"}},{"in":"query","name":"country","description":"Country for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"region","description":"Region for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"start_date","description":"Fetch job history after a particule date","example":"2023-08-01T00:00:00.000Z","schema":{"type":"string"}},{"in":"query","name":"end_date","description":"Fetch job history before a particule date","example":"2023-08-03T00:00:00.000Z","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Unique identifier of bulk job","schema":{"type":"string"}},{"in":"query","name":"action","description":"import or export bulk type","schema":{"type":"string"}},{"in":"query","name":"status","description":"Status of the bulk actions","schema":{"type":"string"}},{"in":"query","name":"country","description":"Country for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"region","description":"Region for which bulk job is initiated","schema":{"type":"string"}},{"in":"query","name":"start_date","description":"Fetch job history after a particule date","example":"2023-08-01T00:00:00.000Z","schema":{"type":"string"}},{"in":"query","name":"end_date","description":"Fetch job history before a particule date","example":"2023-08-03T00:00:00.000Z","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of CP Extension","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier of a scheme","schema":{"type":"string"},"required":true}]}""", serverType="partner", extension_id=extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, country=country, region=region, start_date=start_date, end_date=end_date)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, country=country, region=region, start_date=start_date, end_date=end_date)
         if query_string:
             url_with_params += "?" + query_string
@@ -950,11 +344,11 @@ class Logistics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/serviceability/bulk", extension_id=extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, country=country, region=region, start_date=start_date, end_date=end_date), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/serviceability/bulk", extension_id=extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, country=country, region=region, start_date=start_date, end_date=end_date), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BulkRegionResult
-            schema = BulkRegionResult()
+            from .models import BulkRegionResponse
+            schema = BulkRegionResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -964,7 +358,7 @@ class Logistics:
         return response
     
     async def createCourierPartnerAccount(self, company_id=None, body="", request_headers:Dict={}):
-        """Retrieves a list of courier partner accounts.
+        """This API Creates a new Courier Account
         :param company_id : A `company_id` is a unique identifier for a particular sale channel. : type integer
         """
         payload = {}
@@ -977,8 +371,8 @@ class Logistics:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CourierAccountDetailsBody
-        schema = CourierAccountDetailsBody()
+        from .models import CourierAccountRequestBody
+        schema = CourierAccountRequestBody()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/company/{company_id}/courier-partner/account", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="partner", company_id=company_id)
@@ -1001,8 +395,8 @@ class Logistics:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/company/{company_id}/courier-partner/account", company_id=company_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierAccountDetailsBody
-            schema = CourierAccountDetailsBody()
+            from .models import CourierAccount
+            schema = CourierAccount()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1011,18 +405,14 @@ class Logistics:
 
         return response
     
-    async def getCourierPartnerAccounts(self, company_id=None, page_no=None, page_size=None, stage=None, payment_mode=None, transport_type=None, account_ids=None, self_ship=None, own_account=None, q=None, request_headers:Dict={}):
-        """Retrieves a list of courier partner accounts.
+    async def getCourierPartnerAccounts(self, company_id=None, page_no=None, page_size=None, stage=None, payment_mode=None, transport_type=None, request_headers:Dict={}):
+        """This API returns Courier Account of a company.
         :param company_id : A `company_id` is a unique identifier for a particular sale channel. : type integer
-        :param page_no : The current page number for paginated results. : type integer
-        :param page_size : Determines the items to be displayed in a page : type integer
-        :param stage : Stage of the account. : type string
+        :param page_no : index of the item to start returning with : type integer
+        :param page_size : determines the items to be displayed in a page : type integer
+        :param stage : stage of the account. enabled/disabled : type string
         :param payment_mode : Filters dp accounts based on payment mode : type string
         :param transport_type : Filters dp accounts based on transport_type : type string
-        :param account_ids : Filters dp accounts based on their ids : type array
-        :param self_ship : To filter self ship/non self ship dp accounts : type boolean
-        :param own_account : Filters seller owned or Fynd Managed dp accounts. : type boolean
-        :param q : Filters dp accounts based on account name. : type string
         """
         payload = {}
         
@@ -1038,22 +428,14 @@ class Logistics:
             payload["payment_mode"] = payment_mode
         if transport_type is not None:
             payload["transport_type"] = transport_type
-        if account_ids is not None:
-            payload["account_ids"] = account_ids
-        if self_ship is not None:
-            payload["self_ship"] = self_ship
-        if own_account is not None:
-            payload["own_account"] = own_account
-        if q is not None:
-            payload["q"] = q
 
         # Parameter validation
         schema = LogisticsValidator.getCourierPartnerAccounts()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/company/{company_id}/courier-partner/account", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"stage","description":"Stage of the account.","schema":{"type":"string","enum":["enabled","disabled"]}},{"in":"query","name":"payment_mode","description":"Filters dp accounts based on payment mode","schema":{"type":"string"}},{"in":"query","name":"transport_type","description":"Filters dp accounts based on transport_type","schema":{"type":"string","enum":["surface","air","waterways"]}},{"in":"query","name":"account_ids","description":"Filters dp accounts based on their ids","schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"self_ship","description":"To filter self ship/non self ship dp accounts","schema":{"type":"boolean"}},{"in":"query","name":"own_account","description":"Filters seller owned or Fynd Managed dp accounts.","schema":{"type":"boolean"}},{"in":"query","name":"q","description":"Filters dp accounts based on account name.","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"stage","description":"Stage of the account.","schema":{"type":"string","enum":["enabled","disabled"]}},{"in":"query","name":"payment_mode","description":"Filters dp accounts based on payment mode","schema":{"type":"string"}},{"in":"query","name":"transport_type","description":"Filters dp accounts based on transport_type","schema":{"type":"string","enum":["surface","air","waterways"]}},{"in":"query","name":"account_ids","description":"Filters dp accounts based on their ids","schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"self_ship","description":"To filter self ship/non self ship dp accounts","schema":{"type":"boolean"}},{"in":"query","name":"own_account","description":"Filters seller owned or Fynd Managed dp accounts.","schema":{"type":"boolean"}},{"in":"query","name":"q","description":"Filters dp accounts based on account name.","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="partner", company_id=company_id, page_no=page_no, page_size=page_size, stage=stage, payment_mode=payment_mode, transport_type=transport_type, account_ids=account_ids, self_ship=self_ship, own_account=own_account, q=q)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, stage=stage, payment_mode=payment_mode, transport_type=transport_type, account_ids=account_ids, self_ship=self_ship, own_account=own_account, q=q)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/company/{company_id}/courier-partner/account", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"stage","description":"stage of the account. enabled/disabled","schema":{"type":"string"}},{"in":"query","name":"payment_mode","description":"Filters dp accounts based on payment mode","schema":{"type":"string"}},{"in":"query","name":"transport_type","description":"Filters dp accounts based on transport_type","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"stage","description":"stage of the account. enabled/disabled","schema":{"type":"string"}},{"in":"query","name":"payment_mode","description":"Filters dp accounts based on payment mode","schema":{"type":"string"}},{"in":"query","name":"transport_type","description":"Filters dp accounts based on transport_type","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="partner", company_id=company_id, page_no=page_no, page_size=page_size, stage=stage, payment_mode=payment_mode, transport_type=transport_type)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, stage=stage, payment_mode=payment_mode, transport_type=transport_type)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -1069,11 +451,11 @@ class Logistics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/company/{company_id}/courier-partner/account", company_id=company_id, page_no=page_no, page_size=page_size, stage=stage, payment_mode=payment_mode, transport_type=transport_type, account_ids=account_ids, self_ship=self_ship, own_account=own_account, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/company/{company_id}/courier-partner/account", company_id=company_id, page_no=page_no, page_size=page_size, stage=stage, payment_mode=payment_mode, transport_type=transport_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CompanyCourierPartnerAccountListResult
-            schema = CompanyCourierPartnerAccountListResult()
+            from .models import CompanyCourierPartnerAccountListResponse
+            schema = CompanyCourierPartnerAccountListResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1083,7 +465,7 @@ class Logistics:
         return response
     
     async def updateCourierPartnerAccount(self, company_id=None, account_id=None, body="", request_headers:Dict={}):
-        """Updates an existing courier partner account.
+        """Updates Courier Account
         :param company_id : A `company_id` is a unique identifier for a particular sale channel. : type integer
         :param account_id : Unique ID of courier account : type string
         """
@@ -1099,8 +481,8 @@ class Logistics:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CourierAccountDetailsBody
-        schema = CourierAccountDetailsBody()
+        from .models import CourierAccount
+        schema = CourierAccount()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/company/{company_id}/courier-partner/account/{account_id}", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"account_id","description":"Unique ID of courier account","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"account_id","description":"Unique ID of courier account","schema":{"type":"string"},"required":true}]}""", serverType="partner", company_id=company_id, account_id=account_id)
@@ -1123,8 +505,8 @@ class Logistics:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/company/{company_id}/courier-partner/account/{account_id}", company_id=company_id, account_id=account_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierAccountDetailsBody
-            schema = CourierAccountDetailsBody()
+            from .models import CourierAccountResponse
+            schema = CourierAccountResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1134,7 +516,7 @@ class Logistics:
         return response
     
     async def getCourierPartnerAccount(self, company_id=None, account_id=None, request_headers:Dict={}):
-        """Retrieves a single courier partner account.
+        """This API returns response DpAccount of a company from mongo database.
         :param company_id : A `company_id` is a unique identifier for a particular sale channel. : type integer
         :param account_id : Unique ID of courier account : type string
         """
@@ -1170,68 +552,12 @@ class Logistics:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/company/{company_id}/courier-partner/account/{account_id}", company_id=company_id, account_id=account_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierAccountResult
-            schema = CourierAccountResult()
+            from .models import CourierAccountResponse
+            schema = CourierAccountResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getCourierPartnerAccount")
-                print(e)
-
-        return response
-    
-    async def getCountries(self, onboard=None, page_no=None, page_size=None, q=None, hierarchy=None, request_headers:Dict={}):
-        """Retrieve a list of countries for logistical purposes.
-        :param onboard : Only fetch countries which allowed for onboard on Platform. : type boolean
-        :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
-        :param page_size : The number of items to retrieve in each page. Default value is 12 : type integer
-        :param q : The search string to search in the list of countries by name. : type string
-        :param hierarchy : The search filter to filter countries based on their available hierarchy. : type string
-        """
-        payload = {}
-        
-        if onboard is not None:
-            payload["onboard"] = onboard
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if q is not None:
-            payload["q"] = q
-        if hierarchy is not None:
-            payload["hierarchy"] = hierarchy
-
-        # Parameter validation
-        schema = LogisticsValidator.getCountries()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/countries", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"onboard","description":"Only fetch countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12","schema":{"type":"integer","default":12,"maximum":300},"required":false},{"in":"query","name":"q","description":"The search string to search in the list of countries by name.","schema":{"type":"string"},"required":false},{"in":"query","name":"hierarchy","description":"The search filter to filter countries based on their available hierarchy.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":false}],"query":[{"in":"query","name":"onboard","description":"Only fetch countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12","schema":{"type":"integer","default":12,"maximum":300},"required":false},{"in":"query","name":"q","description":"The search string to search in the list of countries by name.","schema":{"type":"string"},"required":false},{"in":"query","name":"hierarchy","description":"The search filter to filter countries based on their available hierarchy.","schema":{"type":"string","enum":["state","city","pincode","sector"]},"required":false}],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}]}""", serverType="partner", onboard=onboard, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy)
-        query_string = await create_query_string(onboard=onboard, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/countries", onboard=onboard, page_no=page_no, page_size=page_size, q=q, hierarchy=hierarchy), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetCountries
-            schema = GetCountries()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCountries")
                 print(e)
 
         return response
@@ -1247,11 +573,11 @@ class Logistics:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CourierPartnerSchemeDetailsModel
-        schema = CourierPartnerSchemeDetailsModel()
+        from .models import CourierPartnerSchemeRequestModel
+        schema = CourierPartnerSchemeRequestModel()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/scheme", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}]}""", serverType="partner", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/scheme/", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}]}""", serverType="partner", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1268,11 +594,11 @@ class Logistics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/scheme", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/scheme/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierPartnerSchemeModelSchema
-            schema = CourierPartnerSchemeModelSchema()
+            from .models import CourierPartnerSchemeModel
+            schema = CourierPartnerSchemeModel()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1281,62 +607,9 @@ class Logistics:
 
         return response
     
-    async def getCourierPartnerSchemes(self, scheme_type=None, payment_mode=None, capabilities=None, scheme_ids=None, request_headers:Dict={}):
-        """Get created Schemes for courier partner
-        :param scheme_type : Indicates whether a scheme is created by an admin for global purposes or customized for a specific company. : type string
-        :param payment_mode : Indicates payment mode for a scheme. : type string
-        :param capabilities : Indicates whether the scheme possesses certain capabilities. : type array
-        :param scheme_ids : List of scheme ids which need to be returned in the response. : type array
-        """
-        payload = {}
-        
-        if scheme_type is not None:
-            payload["scheme_type"] = scheme_type
-        if payment_mode is not None:
-            payload["payment_mode"] = payment_mode
-        if capabilities is not None:
-            payload["capabilities"] = capabilities
-        if scheme_ids is not None:
-            payload["scheme_ids"] = scheme_ids
-
-        # Parameter validation
-        schema = LogisticsValidator.getCourierPartnerSchemes()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/scheme", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"scheme_type","description":"Indicates whether a scheme is created by an admin for global purposes or customized for a specific company.","schema":{"type":"string","enum":["global","custom"]},"required":false},{"in":"query","name":"payment_mode","description":"Indicates payment mode for a scheme.","schema":{"type":"string","enum":["COD","PREPAID"]},"required":false},{"in":"query","name":"capabilities","description":"Indicates whether the scheme possesses certain capabilities.","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"scheme_ids","description":"List of scheme ids which need to be returned in the response.","schema":{"type":"array","items":{"type":"string"}},"required":false}],"query":[{"in":"query","name":"scheme_type","description":"Indicates whether a scheme is created by an admin for global purposes or customized for a specific company.","schema":{"type":"string","enum":["global","custom"]},"required":false},{"in":"query","name":"payment_mode","description":"Indicates payment mode for a scheme.","schema":{"type":"string","enum":["COD","PREPAID"]},"required":false},{"in":"query","name":"capabilities","description":"Indicates whether the scheme possesses certain capabilities.","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"scheme_ids","description":"List of scheme ids which need to be returned in the response.","schema":{"type":"array","items":{"type":"string"}},"required":false}],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}]}""", serverType="partner", scheme_type=scheme_type, payment_mode=payment_mode, capabilities=capabilities, scheme_ids=scheme_ids)
-        query_string = await create_query_string(scheme_type=scheme_type, payment_mode=payment_mode, capabilities=capabilities, scheme_ids=scheme_ids)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/scheme", scheme_type=scheme_type, payment_mode=payment_mode, capabilities=capabilities, scheme_ids=scheme_ids), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CourierPartnerSchemeList
-            schema = CourierPartnerSchemeList()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCourierPartnerSchemes")
-                print(e)
-
-        return response
-    
     async def updateCourierPartnerScheme(self, scheme_id=None, body="", request_headers:Dict={}):
         """Update Scheme for courier partner extension
-        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
+        :param scheme_id : Unique Identifier of Scheme : type string
         """
         payload = {}
         
@@ -1348,11 +621,11 @@ class Logistics:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CourierPartnerSchemeUpdateDetails
-        schema = CourierPartnerSchemeUpdateDetails()
+        from .models import CourierPartnerSchemeUpdateRequest
+        schema = CourierPartnerSchemeUpdateRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/scheme/{scheme_id}", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}]}""", serverType="partner", scheme_id=scheme_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/scheme/{scheme_id}", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique Identifier of Scheme","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique Identifier of Scheme","schema":{"type":"string"},"required":true}]}""", serverType="partner", scheme_id=scheme_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1369,11 +642,11 @@ class Logistics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/scheme/{scheme_id}", scheme_id=scheme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/scheme/{scheme_id}", scheme_id=scheme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierPartnerPutSchema
-            schema = CourierPartnerPutSchema()
+            from .models import CourierPartnerSchemeUpdateRequest
+            schema = CourierPartnerSchemeUpdateRequest()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1382,22 +655,31 @@ class Logistics:
 
         return response
     
-    async def getCourierPartnerScheme(self, scheme_id=None, request_headers:Dict={}):
-        """Update Scheme for courier partner extension by Id
-        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
+    async def getCountries(self, onboarding=None, page_no=None, page_size=None, q=None, request_headers:Dict={}):
+        """Retrieve of all countries.
+        :param onboarding : Only fetch countries which allowed for onboard on Platform. : type boolean
+        :param page_no : page number. : type integer
+        :param page_size : page size. : type integer
+        :param q : search. : type string
         """
         payload = {}
         
-        if scheme_id is not None:
-            payload["scheme_id"] = scheme_id
+        if onboarding is not None:
+            payload["onboarding"] = onboarding
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+        if q is not None:
+            payload["q"] = q
 
         # Parameter validation
-        schema = LogisticsValidator.getCourierPartnerScheme()
+        schema = LogisticsValidator.getCountries()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/scheme/{scheme_id}", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}]}""", serverType="partner", scheme_id=scheme_id)
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/countries", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"onboarding","description":"Only fetch countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"page number.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"page size.","schema":{"type":"integer","default":12,"maximum":48},"required":false},{"in":"query","name":"q","description":"search.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"onboarding","description":"Only fetch countries which allowed for onboard on Platform.","schema":{"type":"boolean"},"required":false},{"in":"query","name":"page_no","description":"page number.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"page size.","schema":{"type":"integer","default":12,"maximum":48},"required":false},{"in":"query","name":"q","description":"search.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}]}""", serverType="partner", onboarding=onboarding, page_no=page_no, page_size=page_size, q=q)
+        query_string = await create_query_string(onboarding=onboarding, page_no=page_no, page_size=page_size, q=q)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -1413,15 +695,15 @@ class Logistics:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/courier-partner/scheme/{scheme_id}", scheme_id=scheme_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v2.0/organization/{self._conf.organizationId}/countries", onboarding=onboarding, page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierPartnerSchemeModelSchema
-            schema = CourierPartnerSchemeModelSchema()
+            from .models import GetCountries
+            schema = GetCountries()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getCourierPartnerScheme")
+                print("Response Validation failed for getCountries")
                 print(e)
 
         return response

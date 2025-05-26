@@ -14,15 +14,15 @@ class Discount:
     
     async def getDiscounts(self, view=None, q=None, page_no=None, page_size=None, archived=None, month=None, year=None, type=None, app_ids=None, request_headers:Dict={}):
         """Retrieve a list of discounts. You can also retrieve discounts using filter query parameters. There are additional optional parameters that can be specified in the parameters of the request when retrieving discount
-        :param view : Specifies the format in which the discounts are displayed. Options are 'listing' for a list view or 'calendar' for a calendar view. Defaults to 'listing'. : type string
+        :param view : listing or calender.  Default is listing. : type string
         :param q : The search query. This can be a partial or complete name of a discount. : type string
-        :param page_no : The page number to navigate through the given set of results. Default is 1. : type integer
-        :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
-        :param archived : Indicates whether to include expired discounts in the results. Defaults to false. : type boolean
-        :param month : The month for which discounts is requested. Defaults to the current month if not specified. : type integer
-        :param year : The year for which discounts is requested. Defaults to the current year if not specified. : type integer
-        :param type : Specifies the type of disocunt to list, either 'basic' or 'custom'. : type string
-        :param app_ids : A `application_id` is a unique identifier for a particular sales channel. : type array
+        :param page_no : page number. Default is 1. : type integer
+        :param page_size : page size. Default is 12. : type integer
+        :param archived : archived. Default is false. : type boolean
+        :param month : month. Default is current month. : type integer
+        :param year : year. Default is current year. : type integer
+        :param type : basic or custom. : type string
+        :param app_ids : application ids. : type array
         """
         payload = {}
         
@@ -50,7 +50,7 @@ class Discount:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/job/", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}}],"optional":[{"name":"view","in":"query","description":"Specifies the format in which the discounts are displayed. Options are 'listing' for a list view or 'calendar' for a calendar view. Defaults to 'listing'.","required":false,"schema":{"type":"string","enum":["listing","calender"]}},{"name":"q","in":"query","description":"The search query. This can be a partial or complete name of a discount.","required":false,"schema":{"type":"string"}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default is 1.","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"Number of items to retrieve in each page. Default is 12.","required":false,"schema":{"type":"integer"}},{"name":"archived","in":"query","description":"Indicates whether to include expired discounts in the results. Defaults to false.","required":false,"schema":{"type":"boolean","enum":[true,false]}},{"name":"month","in":"query","description":"The month for which discounts is requested. Defaults to the current month if not specified.","required":false,"schema":{"type":"integer"}},{"name":"year","in":"query","description":"The year for which discounts is requested. Defaults to the current year if not specified.","required":false,"schema":{"type":"integer"}},{"name":"type","in":"query","description":"Specifies the type of disocunt to list, either 'basic' or 'custom'.","required":false,"schema":{"type":"string"}},{"name":"app_ids","in":"query","description":"A `application_id` is a unique identifier for a particular sales channel.","required":false,"schema":{"type":"array","items":{"type":"string"}}}],"query":[{"name":"view","in":"query","description":"Specifies the format in which the discounts are displayed. Options are 'listing' for a list view or 'calendar' for a calendar view. Defaults to 'listing'.","required":false,"schema":{"type":"string","enum":["listing","calender"]}},{"name":"q","in":"query","description":"The search query. This can be a partial or complete name of a discount.","required":false,"schema":{"type":"string"}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default is 1.","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"Number of items to retrieve in each page. Default is 12.","required":false,"schema":{"type":"integer"}},{"name":"archived","in":"query","description":"Indicates whether to include expired discounts in the results. Defaults to false.","required":false,"schema":{"type":"boolean","enum":[true,false]}},{"name":"month","in":"query","description":"The month for which discounts is requested. Defaults to the current month if not specified.","required":false,"schema":{"type":"integer"}},{"name":"year","in":"query","description":"The year for which discounts is requested. Defaults to the current year if not specified.","required":false,"schema":{"type":"integer"}},{"name":"type","in":"query","description":"Specifies the type of disocunt to list, either 'basic' or 'custom'.","required":false,"schema":{"type":"string"}},{"name":"app_ids","in":"query","description":"A `application_id` is a unique identifier for a particular sales channel.","required":false,"schema":{"type":"array","items":{"type":"string"}}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}}]}""", serverType="platform", view=view, q=q, page_no=page_no, page_size=page_size, archived=archived, month=month, year=year, type=type, app_ids=app_ids)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/job/", """{"required":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"name":"view","in":"query","description":"listing or calender.  Default is listing.","required":false,"schema":{"type":"string","enum":["listing","calender"]}},{"name":"q","in":"query","description":"The search query. This can be a partial or complete name of a discount.","required":false,"schema":{"type":"string"}},{"name":"page_no","in":"query","description":"page number. Default is 1.","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"page size. Default is 12.","required":false,"schema":{"type":"integer"}},{"name":"archived","in":"query","description":"archived. Default is false.","required":false,"schema":{"type":"boolean","enum":[true,false]}},{"name":"month","in":"query","description":"month. Default is current month.","required":false,"schema":{"type":"integer"}},{"name":"year","in":"query","description":"year. Default is current year.","required":false,"schema":{"type":"integer"}},{"name":"type","in":"query","description":"basic or custom.","required":false,"schema":{"type":"string"}},{"name":"app_ids","in":"query","description":"application ids.","required":false,"schema":{"type":"array","items":{"type":"string"}}}],"query":[{"name":"view","in":"query","description":"listing or calender.  Default is listing.","required":false,"schema":{"type":"string","enum":["listing","calender"]}},{"name":"q","in":"query","description":"The search query. This can be a partial or complete name of a discount.","required":false,"schema":{"type":"string"}},{"name":"page_no","in":"query","description":"page number. Default is 1.","required":false,"schema":{"type":"integer"}},{"name":"page_size","in":"query","description":"page size. Default is 12.","required":false,"schema":{"type":"integer"}},{"name":"archived","in":"query","description":"archived. Default is false.","required":false,"schema":{"type":"boolean","enum":[true,false]}},{"name":"month","in":"query","description":"month. Default is current month.","required":false,"schema":{"type":"integer"}},{"name":"year","in":"query","description":"year. Default is current year.","required":false,"schema":{"type":"integer"}},{"name":"type","in":"query","description":"basic or custom.","required":false,"schema":{"type":"string"}},{"name":"app_ids","in":"query","description":"application ids.","required":false,"schema":{"type":"array","items":{"type":"string"}}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", view=view, q=q, page_no=page_no, page_size=page_size, archived=archived, month=month, year=year, type=type, app_ids=app_ids)
         query_string = await create_query_string(view=view, q=q, page_no=page_no, page_size=page_size, archived=archived, month=month, year=year, type=type, app_ids=app_ids)
         if query_string:
             url_with_params += "?" + query_string
@@ -96,7 +96,7 @@ class Discount:
         schema = CreateUpdateDiscount()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/job/", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/job/", """{"required":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -129,7 +129,7 @@ class Discount:
     
     async def getDiscount(self, id=None, request_headers:Dict={}):
         """Retrieve a single discount by its id.
-        :param id : Unique identifier for the discount. : type string
+        :param id : unique id. : type string
         """
         payload = {}
         
@@ -141,7 +141,7 @@ class Discount:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/job/{id}/", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Unique identifier for the discount.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Unique identifier for the discount.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/job/{id}/", """{"required":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"id","in":"path","description":"unique id.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"id","in":"path","description":"unique id.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -174,7 +174,7 @@ class Discount:
     
     async def updateDiscount(self, id=None, body="", request_headers:Dict={}):
         """Update an existing discount by its id. Discount can only be updated after 5 min from last updated time stamp (modified_on).
-        :param id : Unique identifier for the discount. : type string
+        :param id : id : type string
         """
         payload = {}
         
@@ -190,7 +190,7 @@ class Discount:
         schema = CreateUpdateDiscount()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/job/{id}/", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Unique identifier for the discount.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Unique identifier for the discount.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/job/{id}/", """{"required":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"id","in":"path","description":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"id","in":"path","description":"id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -223,7 +223,7 @@ class Discount:
     
     async def upsertDiscountItems(self, id=None, body="", request_headers:Dict={}):
         """Enables users to create custom discounts in bulk by providing the multiple products in requestBody. It allows for the efficient creation of multiple discounts simultaneously, streamlining the discount management process.
-        :param id : Unique identifier for the discount. : type string
+        :param id : Job ID of the discount. : type string
         """
         payload = {}
         
@@ -239,7 +239,7 @@ class Discount:
         schema = BulkDiscount()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/job/{id}/items/", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Unique identifier for the discount.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Unique identifier for the discount.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/job/{id}/items/", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is the unique identifier of the company.","required":true,"schema":{"type":"integer"}},{"name":"id","in":"path","description":"Job ID of the discount.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is the unique identifier of the company.","required":true,"schema":{"type":"integer"}},{"name":"id","in":"path","description":"Job ID of the discount.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -263,7 +263,7 @@ class Discount:
     
     async def validateDiscountFile(self, discount=None, body="", request_headers:Dict={}):
         """Validates the discount file for any discrepancies. like item should be valid etc..
-        :param discount : Unique identifier for the discount. : type string
+        :param discount : discount : type string
         """
         payload = {}
         
@@ -275,11 +275,11 @@ class Discount:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import FileJobRequestSchema
-        schema = FileJobRequestSchema()
+        from .models import FileJobRequest
+        schema = FileJobRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/validation/", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}}],"optional":[{"name":"discount","in":"query","description":"Unique identifier for the discount.","required":false,"schema":{"type":"string"}}],"query":[{"name":"discount","in":"query","description":"Unique identifier for the discount.","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}}]}""", serverType="platform", discount=discount)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/validation/", """{"required":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"name":"discount","in":"query","description":"discount","required":false,"schema":{"type":"string"}}],"query":[{"name":"discount","in":"query","description":"discount","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", discount=discount)
         query_string = await create_query_string(discount=discount)
         if query_string:
             url_with_params += "?" + query_string
@@ -300,8 +300,8 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/validation/", discount=discount), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FileJobResponseSchema
-            schema = FileJobResponseSchema()
+            from .models import FileJobResponse
+            schema = FileJobResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -312,7 +312,7 @@ class Discount:
     
     async def downloadDiscountFile(self, type=None, body="", request_headers:Dict={}):
         """Retrieve a discount file by its type, it could be product or inventory.
-        :param type : The type of discount file to download, either 'product' or 'inventory'. : type string
+        :param type : type : type string
         """
         payload = {}
         
@@ -328,7 +328,7 @@ class Discount:
         schema = DownloadFileJob()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/{type}/download/", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}},{"name":"type","in":"path","description":"The type of discount file to download, either 'product' or 'inventory'.","required":true,"schema":{"type":"string","enum":["product","inventory"]}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}},{"name":"type","in":"path","description":"The type of discount file to download, either 'product' or 'inventory'.","required":true,"schema":{"type":"string","enum":["product","inventory"]}}]}""", serverType="platform", type=type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/{type}/download/", """{"required":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"type","in":"path","description":"type","required":true,"schema":{"type":"string","enum":["product","inventory"]}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"type","in":"path","description":"type","required":true,"schema":{"type":"string","enum":["product","inventory"]}}]}""", serverType="platform", type=type)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -349,8 +349,8 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/{type}/download/", type=type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FileJobResponseSchema
-            schema = FileJobResponseSchema()
+            from .models import FileJobResponse
+            schema = FileJobResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -361,7 +361,7 @@ class Discount:
     
     async def getValidationJob(self, id=None, request_headers:Dict={}):
         """Retrieve a validation job of a discount by its id.
-        :param id : Unique identifier for the discount. : type string
+        :param id : id : type string
         """
         payload = {}
         
@@ -373,7 +373,7 @@ class Discount:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/validation/{id}/", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Unique identifier for the discount.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Unique identifier for the discount.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/validation/{id}/", """{"required":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"id","in":"path","description":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"id","in":"path","description":"id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -394,8 +394,8 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/validation/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FileJobResponseSchema
-            schema = FileJobResponseSchema()
+            from .models import FileJobResponse
+            schema = FileJobResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -406,7 +406,7 @@ class Discount:
     
     async def cancelValidationJob(self, id=None, request_headers:Dict={}):
         """Cancel validation job of a discount by its id.
-        :param id : Unique identifier for the discount. : type string
+        :param id : id : type string
         """
         payload = {}
         
@@ -418,7 +418,7 @@ class Discount:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/validation/{id}/", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Unique identifier for the discount.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Unique identifier for the discount.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/validation/{id}/", """{"required":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"id","in":"path","description":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"id","in":"path","description":"id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -439,8 +439,8 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/validation/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CancelJobResponseSchema
-            schema = CancelJobResponseSchema()
+            from .models import CancelJobResponse
+            schema = CancelJobResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -451,7 +451,7 @@ class Discount:
     
     async def getDownloadJob(self, id=None, request_headers:Dict={}):
         """Retrieve a discount download job by its id.
-        :param id : Unique identifier for the discount. : type string
+        :param id : id : type string
         """
         payload = {}
         
@@ -463,7 +463,7 @@ class Discount:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/download/{id}/", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Unique identifier for the discount.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Unique identifier for the discount.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/download/{id}/", """{"required":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"id","in":"path","description":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"id","in":"path","description":"id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -484,8 +484,8 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/download/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FileJobResponseSchema
-            schema = FileJobResponseSchema()
+            from .models import FileJobResponse
+            schema = FileJobResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -496,7 +496,7 @@ class Discount:
     
     async def cancelDownloadJob(self, id=None, request_headers:Dict={}):
         """Cancel a discount download job by its id.
-        :param id : Unique identifier for the discount : type string
+        :param id : id : type string
         """
         payload = {}
         
@@ -508,7 +508,7 @@ class Discount:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/download/{id}/", """{"required":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Unique identifier for the discount","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"A `company_id` is a unique identifier for a particular seller","required":true,"schema":{"type":"string"}},{"name":"id","in":"path","description":"Unique identifier for the discount","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/download/{id}/", """{"required":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"id","in":"path","description":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"id","in":"path","description":"id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -529,8 +529,8 @@ class Discount:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/discount/v1.0/company/{self._conf.companyId}/file/download/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CancelJobResponseSchema
-            schema = CancelJobResponseSchema()
+            from .models import CancelJobResponse
+            schema = CancelJobResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:

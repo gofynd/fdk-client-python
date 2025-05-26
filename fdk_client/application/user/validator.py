@@ -115,18 +115,6 @@ from ..ApplicationModel import BaseSchema
     
         
     
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
 
 class UserValidator:
     
@@ -416,34 +404,6 @@ class UserValidator:
     class updateUserAttributes(BaseSchema):
         
         pass 
-        
-    
-    class sendOTPOnPrimary(BaseSchema):
-        
-        
-        entity = fields.Str(required=False)
-         
-        
-    
-    class verifyOTPonPrimary(BaseSchema):
-        
-        
-        entity = fields.Str(required=False)
-         
-        
-    
-    class sendOTPForUpdate(BaseSchema):
-        
-        
-        entity = fields.Str(required=False)
-         
-        
-    
-    class verifyOTPForUpdate(BaseSchema):
-        
-        
-        entity = fields.Str(required=False)
-         
         
     
     

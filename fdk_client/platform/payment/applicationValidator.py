@@ -109,8 +109,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
     
     
         
@@ -268,11 +266,7 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
-        
-    
-    
         
         
 
@@ -466,8 +460,6 @@ class PaymentValidator:
     class getPosPaymentModeRoutes(BaseSchema):
         
         
-        x__ordering__source = fields.Str(required=False)
-        
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
@@ -495,8 +487,6 @@ class PaymentValidator:
         advance_payment = fields.Boolean(required=False)
         
         shipment_id = fields.Str(required=False)
-        
-        customer_id = fields.Str(required=False)
          
         
     
@@ -850,15 +840,6 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
         
         aggregator_id = fields.Int(required=False)
-         
-        
-    
-    class validateCustomerAndCreditSummary(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
          
         
     

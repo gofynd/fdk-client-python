@@ -17,7 +17,7 @@ class User:
         """Retrieve details of users registered in the sales channel
         :param q : The search query. Mobile number or email ID of a customer. : type string
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
-        :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
+        :param page_no : The page number to navigate through the given set of results. Default value is 1.  : type integer
         """
         payload = {}
         
@@ -33,7 +33,7 @@ class User:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/list", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"q","in":"query","description":"The search query. Mobile number or email ID of a customer.","required":false,"schema":{"type":"string"}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}}],"query":[{"name":"q","in":"query","description":"The search query. Mobile number or email ID of a customer.","required":false,"schema":{"type":"string"}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", q=q, page_size=page_size, page_no=page_no)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/list", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"q","in":"query","description":"The search query. Mobile number or email ID of a customer.","required":false,"schema":{"type":"string"}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. ","required":false,"schema":{"type":"integer","default":1}}],"query":[{"name":"q","in":"query","description":"The search query. Mobile number or email ID of a customer.","required":false,"schema":{"type":"string"}},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. ","required":false,"schema":{"type":"integer","default":1}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", q=q, page_size=page_size, page_no=page_no)
         query_string = await create_query_string(q=q, page_size=page_size, page_no=page_no)
         if query_string:
             url_with_params += "?" + query_string
@@ -241,50 +241,6 @@ class User:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for unDeleteUser")
-                print(e)
-
-        return response
-    
-    async def getUserTimeline(self, user_id=None, request_headers:Dict={}):
-        """Fetches the timeline for the user who has made a data erase request. The timeline will show when the request was raised and when the request will be completed. It will also show if request has been cancelled before completion.
-        :param user_id : User ID : type string
-        """
-        payload = {}
-        
-        if user_id is not None:
-            payload["user_id"] = user_id
-
-        # Parameter validation
-        schema = UserValidator.getUserTimeline()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/{user_id}/timeline", """{"required":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string"}},{"name":"user_id","in":"path","description":"User ID","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string"}},{"name":"user_id","in":"path","description":"User ID","required":true,"schema":{"type":"string"}}]}""", serverType="platform", user_id=user_id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers/{user_id}/timeline", user_id=user_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetUserTimeline
-            schema = GetUserTimeline()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getUserTimeline")
                 print(e)
 
         return response
@@ -933,8 +889,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/definition", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UserAttributeDefinitionDetails
-            schema = UserAttributeDefinitionDetails()
+            from .models import UserAttributeDefinitionResponse
+            schema = UserAttributeDefinitionResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -955,7 +911,7 @@ class User:
         :param is_locked : Filter by locked status. : type boolean
         :param name : Filter by attribute name using a case-insensitive regex. : type string
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
-        :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
+        :param page_no : The page number to navigate through the given set of results. Default value is 1.  : type integer
         """
         payload = {}
         
@@ -987,7 +943,7 @@ class User:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/definition", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"excluding_ids","schema":{"type":"string"},"description":"Exclude attribute definitions by Ids"},{"in":"query","name":"slug","schema":{"type":"string"},"description":"Filter by attribute slug."},{"in":"query","name":"type","schema":{"type":"string"},"description":"Filter by attribute type."},{"in":"query","name":"customer_editable","schema":{"type":"boolean"},"description":"Filter by customer_editable status."},{"in":"query","name":"encrypted","schema":{"type":"boolean"},"description":"Filter by encrypted status."},{"in":"query","name":"pinned","schema":{"type":"boolean"},"description":"Filter by pinned status."},{"in":"query","name":"pin_order","schema":{"type":"integer"},"description":"Filter by pin order."},{"in":"query","name":"is_locked","schema":{"type":"boolean"},"description":"Filter by locked status."},{"in":"query","name":"name","schema":{"type":"string"},"description":"Filter by attribute name using a case-insensitive regex."},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}}],"query":[{"in":"query","name":"excluding_ids","schema":{"type":"string"},"description":"Exclude attribute definitions by Ids"},{"in":"query","name":"slug","schema":{"type":"string"},"description":"Filter by attribute slug."},{"in":"query","name":"type","schema":{"type":"string"},"description":"Filter by attribute type."},{"in":"query","name":"customer_editable","schema":{"type":"boolean"},"description":"Filter by customer_editable status."},{"in":"query","name":"encrypted","schema":{"type":"boolean"},"description":"Filter by encrypted status."},{"in":"query","name":"pinned","schema":{"type":"boolean"},"description":"Filter by pinned status."},{"in":"query","name":"pin_order","schema":{"type":"integer"},"description":"Filter by pin order."},{"in":"query","name":"is_locked","schema":{"type":"boolean"},"description":"Filter by locked status."},{"in":"query","name":"name","schema":{"type":"string"},"description":"Filter by attribute name using a case-insensitive regex."},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", excluding_ids=excluding_ids, slug=slug, type=type, customer_editable=customer_editable, encrypted=encrypted, pinned=pinned, pin_order=pin_order, is_locked=is_locked, name=name, page_size=page_size, page_no=page_no)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/definition", """{"required":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"excluding_ids","schema":{"type":"string"},"description":"Exclude attribute definitions by Ids"},{"in":"query","name":"slug","schema":{"type":"string"},"description":"Filter by attribute slug."},{"in":"query","name":"type","schema":{"type":"string"},"description":"Filter by attribute type."},{"in":"query","name":"customer_editable","schema":{"type":"boolean"},"description":"Filter by customer_editable status."},{"in":"query","name":"encrypted","schema":{"type":"boolean"},"description":"Filter by encrypted status."},{"in":"query","name":"pinned","schema":{"type":"boolean"},"description":"Filter by pinned status."},{"in":"query","name":"pin_order","schema":{"type":"integer"},"description":"Filter by pin order."},{"in":"query","name":"is_locked","schema":{"type":"boolean"},"description":"Filter by locked status."},{"in":"query","name":"name","schema":{"type":"string"},"description":"Filter by attribute name using a case-insensitive regex."},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. ","required":false,"schema":{"type":"integer","default":1}}],"query":[{"in":"query","name":"excluding_ids","schema":{"type":"string"},"description":"Exclude attribute definitions by Ids"},{"in":"query","name":"slug","schema":{"type":"string"},"description":"Filter by attribute slug."},{"in":"query","name":"type","schema":{"type":"string"},"description":"Filter by attribute type."},{"in":"query","name":"customer_editable","schema":{"type":"boolean"},"description":"Filter by customer_editable status."},{"in":"query","name":"encrypted","schema":{"type":"boolean"},"description":"Filter by encrypted status."},{"in":"query","name":"pinned","schema":{"type":"boolean"},"description":"Filter by pinned status."},{"in":"query","name":"pin_order","schema":{"type":"integer"},"description":"Filter by pin order."},{"in":"query","name":"is_locked","schema":{"type":"boolean"},"description":"Filter by locked status."},{"in":"query","name":"name","schema":{"type":"string"},"description":"Filter by attribute name using a case-insensitive regex."},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. ","required":false,"schema":{"type":"integer","default":1}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Numeric ID allotted to a business account on Fynd Platform.","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Alphanumeric ID allotted to an application created within a business account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", excluding_ids=excluding_ids, slug=slug, type=type, customer_editable=customer_editable, encrypted=encrypted, pinned=pinned, pin_order=pin_order, is_locked=is_locked, name=name, page_size=page_size, page_no=page_no)
         query_string = await create_query_string(excluding_ids=excluding_ids, slug=slug, type=type, customer_editable=customer_editable, encrypted=encrypted, pinned=pinned, pin_order=pin_order, is_locked=is_locked, name=name, page_size=page_size, page_no=page_no)
         if query_string:
             url_with_params += "?" + query_string
@@ -1090,8 +1046,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/definition/{attribute_def_id}", attribute_def_id=attribute_def_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessMessage
-            schema = SuccessMessage()
+            from .models import SuccessMessageResponse
+            schema = SuccessMessageResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1161,8 +1117,8 @@ class User:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateUserAttribute
-        schema = CreateUserAttribute()
+        from .models import CreateUserAttributeRequest
+        schema = CreateUserAttributeRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/definition/{attribute_def_id}/user/{user_id}", """{"required":[{"in":"path","name":"attribute_def_id","required":true,"schema":{"type":"string"},"description":"The unique identifier of the attribute definition to update."},{"in":"path","name":"user_id","required":true,"schema":{"type":"string"},"description":"The unique identifier of the user to update."},{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"Application ID."},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"Company ID."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"attribute_def_id","required":true,"schema":{"type":"string"},"description":"The unique identifier of the attribute definition to update."},{"in":"path","name":"user_id","required":true,"schema":{"type":"string"},"description":"The unique identifier of the user to update."},{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"Application ID."},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"Company ID."}]}""", serverType="platform", attribute_def_id=attribute_def_id, user_id=user_id, )
@@ -1185,8 +1141,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/definition/{attribute_def_id}/user/{user_id}", attribute_def_id=attribute_def_id, user_id=user_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UserAttribute
-            schema = UserAttribute()
+            from .models import UserAttributeResponse
+            schema = UserAttributeResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1232,8 +1188,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/definition/{attribute_def_id}/user/{user_id}", attribute_def_id=attribute_def_id, user_id=user_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UserAttribute
-            schema = UserAttribute()
+            from .models import UserAttributeResponse
+            schema = UserAttributeResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1279,8 +1235,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/definition/{attribute_def_id}/user/{user_id}", attribute_def_id=attribute_def_id, user_id=user_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessMessage
-            schema = SuccessMessage()
+            from .models import SuccessMessageResponse
+            schema = SuccessMessageResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1293,7 +1249,7 @@ class User:
         """Retrieve all user attributes for a specific user
         :param user_id : The unique identifier of the user to update. : type string
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
-        :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
+        :param page_no : The page number to navigate through the given set of results. Default value is 1.  : type integer
         """
         payload = {}
         
@@ -1309,7 +1265,7 @@ class User:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/user/{user_id}", """{"required":[{"in":"path","name":"user_id","required":true,"schema":{"type":"string"},"description":"The unique identifier of the user to update."},{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"Application ID."},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"Company ID."}],"optional":[{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}}],"query":[{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}}],"headers":[],"path":[{"in":"path","name":"user_id","required":true,"schema":{"type":"string"},"description":"The unique identifier of the user to update."},{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"Application ID."},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"Company ID."}]}""", serverType="platform", user_id=user_id, page_size=page_size, page_no=page_no)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/user/{user_id}", """{"required":[{"in":"path","name":"user_id","required":true,"schema":{"type":"string"},"description":"The unique identifier of the user to update."},{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"Application ID."},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"Company ID."}],"optional":[{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. ","required":false,"schema":{"type":"integer","default":1}}],"query":[{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1. ","required":false,"schema":{"type":"integer","default":1}}],"headers":[],"path":[{"in":"path","name":"user_id","required":true,"schema":{"type":"string"},"description":"The unique identifier of the user to update."},{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"Application ID."},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"Company ID."}]}""", serverType="platform", user_id=user_id, page_size=page_size, page_no=page_no)
         query_string = await create_query_string(page_size=page_size, page_no=page_no)
         if query_string:
             url_with_params += "?" + query_string
@@ -1364,276 +1320,12 @@ class User:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/attribute/{attribute_id}", attribute_id=attribute_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UserAttribute
-            schema = UserAttribute()
+            from .models import UserAttributeResponse
+            schema = UserAttributeResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getUserAttributeById")
-                print(e)
-
-        return response
-    
-    async def bulkImportStoreFrontUsers(self, body="", request_headers:Dict={}):
-        """The API allows bulk import of storefront customers using CSV or XLSX files.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = UserValidator.bulkImportStoreFrontUsers()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CreateStoreFrontUsersPayload
-        schema = CreateStoreFrontUsersPayload()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/jobs/import", """{"required":[{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"Application ID."},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"Company ID."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"Application ID."},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"Company ID."}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/jobs/import", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import BulkActionModel
-            schema = BulkActionModel()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for bulkImportStoreFrontUsers")
-                print(e)
-
-        return response
-    
-    async def getBulkImportUsersList(self, page_no=None, page_size=None, search=None, start_date=None, end_date=None, status=None, file_format=None, request_headers:Dict={}):
-        """This API allows fetching the list of bulk user imports for a specific application and company.
-It supports pagination and filtering based on various parameters.
-
-        :param page_no : page number for pagination result : type string
-        :param page_size : page size for pagination result : type string
-        :param search : The search queries based on job name. : type string
-        :param start_date : Start date : type string
-        :param end_date : End date : type string
-        :param status : Status of the Import Documents : type string
-        :param file_format : Filter data based on file format eg csv or xlsx : type string
-        """
-        payload = {}
-        
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if search is not None:
-            payload["search"] = search
-        if start_date is not None:
-            payload["start_date"] = start_date
-        if end_date is not None:
-            payload["end_date"] = end_date
-        if status is not None:
-            payload["status"] = status
-        if file_format is not None:
-            payload["file_format"] = file_format
-
-        # Parameter validation
-        schema = UserValidator.getBulkImportUsersList()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/jobs/import", """{"required":[{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"Application ID."},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"Company ID."}],"optional":[{"name":"page_no","in":"query","description":"page number for pagination result","required":false,"schema":{"type":"string"}},{"name":"page_size","in":"query","description":"page size for pagination result","required":false,"schema":{"type":"string"}},{"name":"search","in":"query","description":"The search queries based on job name.","required":false,"schema":{"type":"string"}},{"name":"start_date","in":"query","required":false,"schema":{"type":"string","format":"date-time"},"description":"Start date"},{"name":"end_date","in":"query","required":false,"schema":{"type":"string","format":"date-time"},"description":"End date"},{"name":"status","in":"query","required":false,"schema":{"type":"string","enum":["inprogress","failed","complete","partial"]},"description":"Status of the Import Documents"},{"name":"file_format","in":"query","description":"Filter data based on file format eg csv or xlsx","required":false,"schema":{"type":"string","enum":["csv","xlsx"]}}],"query":[{"name":"page_no","in":"query","description":"page number for pagination result","required":false,"schema":{"type":"string"}},{"name":"page_size","in":"query","description":"page size for pagination result","required":false,"schema":{"type":"string"}},{"name":"search","in":"query","description":"The search queries based on job name.","required":false,"schema":{"type":"string"}},{"name":"start_date","in":"query","required":false,"schema":{"type":"string","format":"date-time"},"description":"Start date"},{"name":"end_date","in":"query","required":false,"schema":{"type":"string","format":"date-time"},"description":"End date"},{"name":"status","in":"query","required":false,"schema":{"type":"string","enum":["inprogress","failed","complete","partial"]},"description":"Status of the Import Documents"},{"name":"file_format","in":"query","description":"Filter data based on file format eg csv or xlsx","required":false,"schema":{"type":"string","enum":["csv","xlsx"]}}],"headers":[],"path":[{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"Application ID."},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"Company ID."}]}""", serverType="platform", page_no=page_no, page_size=page_size, search=search, start_date=start_date, end_date=end_date, status=status, file_format=file_format)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, search=search, start_date=start_date, end_date=end_date, status=status, file_format=file_format)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/jobs/import", page_no=page_no, page_size=page_size, search=search, start_date=start_date, end_date=end_date, status=status, file_format=file_format), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import BulkActionPaginationSchema
-            schema = BulkActionPaginationSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getBulkImportUsersList")
-                print(e)
-
-        return response
-    
-    async def createBulkExportUsers(self, body="", request_headers:Dict={}):
-        """This API allows bulk export of storefront users by requesting files in CSV or XLSX format.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = UserValidator.createBulkExportUsers()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import BulkUserExportSchema
-        schema = BulkUserExportSchema()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/jobs/export", """{"required":[{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"Application ID."},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"Company ID."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"Application ID."},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"Company ID."}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/jobs/export", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import BulkActionModel
-            schema = BulkActionModel()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createBulkExportUsers")
-                print(e)
-
-        return response
-    
-    async def getBulkExportUsersList(self, page_no=None, page_size=None, file_format=None, search=None, start_date=None, end_date=None, status=None, request_headers:Dict={}):
-        """This API allows fetching the list of bulk user exports for a specific application and company.
-It supports pagination and filtering based on various parameters.
-
-        :param page_no : page number for pagination result : type string
-        :param page_size : page size for pagination result : type string
-        :param file_format : Filter data based on file format eg csv or xlsx : type string
-        :param search : The search queries based on job name. : type string
-        :param start_date : Start date : type string
-        :param end_date : End date : type string
-        :param status : Status of the Import Documents : type string
-        """
-        payload = {}
-        
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if file_format is not None:
-            payload["file_format"] = file_format
-        if search is not None:
-            payload["search"] = search
-        if start_date is not None:
-            payload["start_date"] = start_date
-        if end_date is not None:
-            payload["end_date"] = end_date
-        if status is not None:
-            payload["status"] = status
-
-        # Parameter validation
-        schema = UserValidator.getBulkExportUsersList()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/jobs/export", """{"required":[{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"Application ID."},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"Company ID."}],"optional":[{"name":"page_no","in":"query","description":"page number for pagination result","required":false,"schema":{"type":"string"}},{"name":"page_size","in":"query","description":"page size for pagination result","required":false,"schema":{"type":"string"}},{"name":"file_format","in":"query","description":"Filter data based on file format eg csv or xlsx","required":false,"schema":{"type":"string","enum":["csv","xlsx"]}},{"name":"search","in":"query","description":"The search queries based on job name.","required":false,"schema":{"type":"string"}},{"name":"start_date","in":"query","required":false,"schema":{"type":"string","format":"date-time"},"description":"Start date"},{"name":"end_date","in":"query","required":false,"schema":{"type":"string","format":"date-time"},"description":"End date"},{"name":"status","in":"query","required":false,"schema":{"type":"string","enum":["inprogress","failed","complete","partial"]},"description":"Status of the Import Documents"}],"query":[{"name":"page_no","in":"query","description":"page number for pagination result","required":false,"schema":{"type":"string"}},{"name":"page_size","in":"query","description":"page size for pagination result","required":false,"schema":{"type":"string"}},{"name":"file_format","in":"query","description":"Filter data based on file format eg csv or xlsx","required":false,"schema":{"type":"string","enum":["csv","xlsx"]}},{"name":"search","in":"query","description":"The search queries based on job name.","required":false,"schema":{"type":"string"}},{"name":"start_date","in":"query","required":false,"schema":{"type":"string","format":"date-time"},"description":"Start date"},{"name":"end_date","in":"query","required":false,"schema":{"type":"string","format":"date-time"},"description":"End date"},{"name":"status","in":"query","required":false,"schema":{"type":"string","enum":["inprogress","failed","complete","partial"]},"description":"Status of the Import Documents"}],"headers":[],"path":[{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"Application ID."},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"Company ID."}]}""", serverType="platform", page_no=page_no, page_size=page_size, file_format=file_format, search=search, start_date=start_date, end_date=end_date, status=status)
-        query_string = await create_query_string(page_no=page_no, page_size=page_size, file_format=file_format, search=search, start_date=start_date, end_date=end_date, status=status)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/jobs/export", page_no=page_no, page_size=page_size, file_format=file_format, search=search, start_date=start_date, end_date=end_date, status=status), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import BulkActionPaginationSchema
-            schema = BulkActionPaginationSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getBulkExportUsersList")
-                print(e)
-
-        return response
-    
-    async def getUsersJobByJobId(self, job_id=None, request_headers:Dict={}):
-        """This endpoint retrieves the details of a specific user's import and export related jobs associated with a given `job_id`, `application_id`, and `company_id`.
-
-        :param job_id : The unique identifier of the job. This is used to fetch the details of the specific job.
- : type string
-        """
-        payload = {}
-        
-        if job_id is not None:
-            payload["job_id"] = job_id
-
-        # Parameter validation
-        schema = UserValidator.getUsersJobByJobId()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/jobs/{job_id}", """{"required":[{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"The unique identifier of the application. This is required to identify the application context for the job.\n"},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"The unique identifier of the company. This helps in scoping the request to the specific company.\n"},{"in":"path","name":"job_id","schema":{"type":"string"},"required":true,"description":"The unique identifier of the job. This is used to fetch the details of the specific job.\n"}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"application_id","schema":{"type":"string"},"required":true,"description":"The unique identifier of the application. This is required to identify the application context for the job.\n"},{"in":"path","name":"company_id","schema":{"type":"string"},"required":true,"description":"The unique identifier of the company. This helps in scoping the request to the specific company.\n"},{"in":"path","name":"job_id","schema":{"type":"string"},"required":true,"description":"The unique identifier of the job. This is used to fetch the details of the specific job.\n"}]}""", serverType="platform", job_id=job_id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/users/jobs/{job_id}", job_id=job_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import BulkActionModel
-            schema = BulkActionModel()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getUsersJobByJobId")
                 print(e)
 
         return response
