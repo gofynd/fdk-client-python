@@ -23,7 +23,7 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v2.0/company/{self._conf.companyId}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -41,11 +41,11 @@ class CompanyProfile:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v2.0/company/{self._conf.companyId}", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetCompanyProfileSerializerResponse
-            schema = GetCompanyProfileSerializerResponse()
+            from .models import GetCompanyProfileSerializerResponseSchema
+            schema = GetCompanyProfileSerializerResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -69,7 +69,7 @@ class CompanyProfile:
         schema = UpdateCompany()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v2.0/company/{self._conf.companyId}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -87,11 +87,11 @@ class CompanyProfile:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/company-profile/v2.0/company/{self._conf.companyId}", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProfileSuccessResponse
-            schema = ProfileSuccessResponse()
+            from .models import ProfileSuccessResponseSchema
+            schema = ProfileSuccessResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -132,8 +132,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/metrics", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import MetricsSerializer
-            schema = MetricsSerializer()
+            from .models import MetricsSchema
+            schema = MetricsSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -177,8 +177,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/{brand_id}", brand_id=brand_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetBrandResponseSerializer
-            schema = GetBrandResponseSerializer()
+            from .models import GetBrandResponseSchema
+            schema = GetBrandResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -201,8 +201,8 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateBrandRequestSerializer
-        schema = UpdateBrandRequestSerializer()
+        from .models import UpdateBrandRequestSchema
+        schema = UpdateBrandRequestSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/{brand_id}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company associated to brand that is to be viewed.","schema":{"type":"string"},"required":true},{"in":"path","name":"brand_id","description":"Id of the brand to be viewed.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company associated to brand that is to be viewed.","schema":{"type":"string"},"required":true},{"in":"path","name":"brand_id","description":"Id of the brand to be viewed.","schema":{"type":"string"},"required":true}]}""", serverType="platform", brand_id=brand_id)
@@ -226,8 +226,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/{brand_id}", brand_id=brand_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProfileSuccessResponse
-            schema = ProfileSuccessResponse()
+            from .models import ProfileSuccessResponseSchema
+            schema = ProfileSuccessResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -247,11 +247,11 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateBrandRequestSerializer
-        schema = CreateBrandRequestSerializer()
+        from .models import CreateBrandRequestSchema
+        schema = CreateBrandRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/", """{"required":[{"in":"path","name":"company_id","description":"Id of the company.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -272,8 +272,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/brand/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProfileSuccessResponse
-            schema = ProfileSuccessResponse()
+            from .models import ProfileSuccessResponseSchema
+            schema = ProfileSuccessResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -302,7 +302,7 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/company-brand", """{"required":[{"in":"path","name":"company_id","description":"Id of the company.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":20},"required":false},{"in":"query","name":"q","description":"Search term for name.","schema":{"type":"string"},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":20},"required":false},{"in":"query","name":"q","description":"Search term for name.","schema":{"type":"string"},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company.","schema":{"type":"string"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, q=q)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v2.0/company/{self._conf.companyId}/company-brand", """{"required":[{"in":"path","name":"company_id","description":"Id of the company.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","required":false,"schema":{"type":"integer","default":20}},{"in":"query","name":"q","description":"Search term for name.","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","required":false,"schema":{"type":"integer","default":20}},{"in":"query","name":"q","description":"Search term for name.","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company.","schema":{"type":"string"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, q=q)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q)
         if query_string:
             url_with_params += "?" + query_string
@@ -320,11 +320,11 @@ class CompanyProfile:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/company-brand", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v2.0/company/{self._conf.companyId}/company-brand", page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CompanyBrandListSerializer
-            schema = CompanyBrandListSerializer()
+            from .models import CompanyBrandListSchema
+            schema = CompanyBrandListSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -344,11 +344,11 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CompanyBrandPostRequestSerializer
-        schema = CompanyBrandPostRequestSerializer()
+        from .models import CompanyBrandPostRequestSchema
+        schema = CompanyBrandPostRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/company-brand", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the brand is to be mapped.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the brand is to be mapped.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v2.0/company/{self._conf.companyId}/company-brand", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the brand is to be mapped.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the brand is to be mapped.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -366,11 +366,11 @@ class CompanyProfile:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/company-brand", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/company-profile/v2.0/company/{self._conf.companyId}/company-brand", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProfileSuccessResponse
-            schema = ProfileSuccessResponse()
+            from .models import ProfileSuccessResponseSchema
+            schema = ProfileSuccessResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -414,7 +414,7 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location", """{"required":[{"in":"path","name":"company_id","description":"Id of the company whose locations are to fetched","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"store_type","description":"Helps to sort the location list on the basis of location type.","schema":{"type":"string"},"required":false},{"in":"query","name":"q","description":"Query that is to be searched.","schema":{"type":"string"},"required":false},{"in":"query","name":"stage","description":"to filter companies on basis of verified or unverified companies.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":20},"required":false},{"in":"query","name":"location_ids","description":"Helps to filter stores on the basis of uids.","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"types","description":"Helps to get the location list on the basis of multiple location type.","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"tags","description":"Helps to get the location list on the basis of multiple location tag.","schema":{"type":"array","items":{"type":"string"}},"required":false}],"query":[{"in":"query","name":"store_type","description":"Helps to sort the location list on the basis of location type.","schema":{"type":"string"},"required":false},{"in":"query","name":"q","description":"Query that is to be searched.","schema":{"type":"string"},"required":false},{"in":"query","name":"stage","description":"to filter companies on basis of verified or unverified companies.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","schema":{"type":"integer","default":20},"required":false},{"in":"query","name":"location_ids","description":"Helps to filter stores on the basis of uids.","schema":{"type":"array","items":{"type":"integer"}},"required":false},{"in":"query","name":"types","description":"Helps to get the location list on the basis of multiple location type.","schema":{"type":"array","items":{"type":"string"}},"required":false},{"in":"query","name":"tags","description":"Helps to get the location list on the basis of multiple location tag.","schema":{"type":"array","items":{"type":"string"}},"required":false}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company whose locations are to fetched","schema":{"type":"string"},"required":true}]}""", serverType="platform", store_type=store_type, q=q, stage=stage, page_no=page_no, page_size=page_size, location_ids=location_ids, types=types, tags=tags)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v2.0/company/{self._conf.companyId}/location", """{"required":[{"in":"path","name":"company_id","description":"Id of the company whose locations are to fetched","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"store_type","description":"Helps to sort the location list on the basis of location type.","required":false,"schema":{"type":"string","enum":["high_street","warehouse","mall"]}},{"in":"query","name":"q","description":"Query that is to be searched.","required":false,"schema":{"type":"string"}},{"in":"query","name":"stage","description":"to filter companies on basis of verified or unverified companies.","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","required":false,"schema":{"type":"integer","default":20}},{"in":"query","name":"location_ids","description":"Helps to filter stores on the basis of uids.","required":false,"schema":{"type":"array","items":{"type":"integer"}}},{"in":"query","name":"types","description":"Helps to get the location list on the basis of multiple location type.","required":false,"schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"tags","description":"Helps to get the location list on the basis of multiple location tag.","required":false,"schema":{"type":"array","items":{"type":"string"}}}],"query":[{"in":"query","name":"store_type","description":"Helps to sort the location list on the basis of location type.","required":false,"schema":{"type":"string","enum":["high_street","warehouse","mall"]}},{"in":"query","name":"q","description":"Query that is to be searched.","required":false,"schema":{"type":"string"}},{"in":"query","name":"stage","description":"to filter companies on basis of verified or unverified companies.","required":false,"schema":{"type":"string"}},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results","required":false,"schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Number of items to retrieve in each page. Default is 10.","required":false,"schema":{"type":"integer","default":20}},{"in":"query","name":"location_ids","description":"Helps to filter stores on the basis of uids.","required":false,"schema":{"type":"array","items":{"type":"integer"}}},{"in":"query","name":"types","description":"Helps to get the location list on the basis of multiple location type.","required":false,"schema":{"type":"array","items":{"type":"string"}}},{"in":"query","name":"tags","description":"Helps to get the location list on the basis of multiple location tag.","required":false,"schema":{"type":"array","items":{"type":"string"}}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company whose locations are to fetched","schema":{"type":"string"},"required":true}]}""", serverType="platform", store_type=store_type, q=q, stage=stage, page_no=page_no, page_size=page_size, location_ids=location_ids, types=types, tags=tags)
         query_string = await create_query_string(store_type=store_type, q=q, stage=stage, page_no=page_no, page_size=page_size, location_ids=location_ids, types=types, tags=tags)
         if query_string:
             url_with_params += "?" + query_string
@@ -432,11 +432,11 @@ class CompanyProfile:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location", store_type=store_type, q=q, stage=stage, page_no=page_no, page_size=page_size, location_ids=location_ids, types=types, tags=tags), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v2.0/company/{self._conf.companyId}/location", store_type=store_type, q=q, stage=stage, page_no=page_no, page_size=page_size, location_ids=location_ids, types=types, tags=tags), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import LocationListSerializer
-            schema = LocationListSerializer()
+            from .models import LocationListSchema
+            schema = LocationListSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -456,11 +456,11 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import LocationSerializer
-        schema = LocationSerializer()
+        from .models import LocationSchema
+        schema = LocationSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v2.0/company/{self._conf.companyId}/location", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -478,11 +478,11 @@ class CompanyProfile:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/company-profile/v2.0/company/{self._conf.companyId}/location", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProfileSuccessResponse
-            schema = ProfileSuccessResponse()
+            from .models import ProfileSuccessResponseSchema
+            schema = ProfileSuccessResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -505,7 +505,7 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/{location_id}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location lies.","schema":{"type":"string"},"required":true},{"in":"path","name":"location_id","description":"Id of the location which you want to view.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location lies.","schema":{"type":"string"},"required":true},{"in":"path","name":"location_id","description":"Id of the location which you want to view.","schema":{"type":"string"},"required":true}]}""", serverType="platform", location_id=location_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v2.0/company/{self._conf.companyId}/location/{location_id}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location lies.","schema":{"type":"string"},"required":true},{"in":"path","name":"location_id","description":"Id of the location which you want to view.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location lies.","schema":{"type":"string"},"required":true},{"in":"path","name":"location_id","description":"Id of the location which you want to view.","schema":{"type":"string"},"required":true}]}""", serverType="platform", location_id=location_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -523,11 +523,11 @@ class CompanyProfile:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/{location_id}", location_id=location_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/company-profile/v2.0/company/{self._conf.companyId}/location/{location_id}", location_id=location_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetLocationSerializer
-            schema = GetLocationSerializer()
+            from .models import GetLocationSchema
+            schema = GetLocationSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -550,11 +550,11 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import LocationSerializer
-        schema = LocationSerializer()
+        from .models import LocationSchema
+        schema = LocationSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/{location_id}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true},{"in":"path","name":"location_id","description":"Id of the location which you want to edit.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true},{"in":"path","name":"location_id","description":"Id of the location which you want to edit.","schema":{"type":"string"},"required":true}]}""", serverType="platform", location_id=location_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v2.0/company/{self._conf.companyId}/location/{location_id}", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true},{"in":"path","name":"location_id","description":"Id of the location which you want to edit.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true},{"in":"path","name":"location_id","description":"Id of the location which you want to edit.","schema":{"type":"string"},"required":true}]}""", serverType="platform", location_id=location_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -572,11 +572,11 @@ class CompanyProfile:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/{location_id}", location_id=location_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/company-profile/v2.0/company/{self._conf.companyId}/location/{location_id}", location_id=location_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProfileSuccessResponse
-            schema = ProfileSuccessResponse()
+            from .models import ProfileSuccessResponseSchema
+            schema = ProfileSuccessResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -596,8 +596,8 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import BulkLocationSerializer
-        schema = BulkLocationSerializer()
+        from .models import BulkLocationSchema
+        schema = BulkLocationSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/bulk", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -621,8 +621,8 @@ class CompanyProfile:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ProfileSuccessResponse
-            schema = ProfileSuccessResponse()
+            from .models import ProfileSuccessResponseSchema
+            schema = ProfileSuccessResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -642,7 +642,7 @@ class CompanyProfile:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/tags", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"integer"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/company-profile/v1.0/company/{self._conf.companyId}/location/tags", """{"required":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Id of the company inside which the location is to be created.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string

@@ -42,8 +42,10 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
+        
         
         
     
@@ -168,19 +170,6 @@ class ThemeValidator:
          
         
     
-    class updatePage(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        theme_id = fields.Str(required=False)
-        
-        page_value = fields.Str(required=False)
-         
-        
-    
     class deletePage(BaseSchema):
         
         
@@ -194,12 +183,29 @@ class ThemeValidator:
          
         
     
+    class updatePage(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        theme_id = fields.Str(required=False)
+        
+        page_value = fields.Str(required=False)
+        
+        socket_id = fields.Str(required=False)
+         
+        
+    
     class getFonts(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
+        
+        capability = fields.Str(required=False)
          
         
     

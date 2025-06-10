@@ -25,8 +25,6 @@ from .discount.client import Discount
 
 from .filestorage.client import FileStorage
 
-from .finance.client import Finance
-
 from .lead.client import Lead
 
 from .serviceability.client import Serviceability
@@ -63,8 +61,6 @@ class PlatformClient:
         self.discount = Discount(config)
         
         self.fileStorage = FileStorage(config)
-        
-        self.finance = Finance(config)
         
         self.lead = Lead(config)
         

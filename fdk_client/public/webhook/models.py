@@ -12,7 +12,7 @@ class EventConfig(BaseSchema):
     pass
 
 
-class EventConfigResponse(BaseSchema):
+class EventDetails(BaseSchema):
     pass
 
 
@@ -44,19 +44,19 @@ class TransformEventAssociation(BaseSchema):
     pass
 
 
-class TransformEventRequest(BaseSchema):
+class TransformEventPayload(BaseSchema):
     pass
 
 
-class ValidateSchemaRequest(BaseSchema):
+class ValidateSchemaPayload(BaseSchema):
     pass
 
 
-class ValidateSchemaResponse(BaseSchema):
+class ValidateSchemaResult(BaseSchema):
     pass
 
 
-class TransformEventResponse(BaseSchema):
+class TransformEventResult(BaseSchema):
     pass
 
 
@@ -91,7 +91,7 @@ class EventConfig(BaseSchema):
     
 
 
-class EventConfigResponse(BaseSchema):
+class EventDetails(BaseSchema):
     # Webhook swagger.json
 
     
@@ -179,7 +179,7 @@ class TransformEventAssociation(BaseSchema):
     
 
 
-class TransformEventRequest(BaseSchema):
+class TransformEventPayload(BaseSchema):
     # Webhook swagger.json
 
     
@@ -195,7 +195,7 @@ class TransformEventRequest(BaseSchema):
     
 
 
-class ValidateSchemaRequest(BaseSchema):
+class ValidateSchemaPayload(BaseSchema):
     # Webhook swagger.json
 
     
@@ -213,7 +213,7 @@ class ValidateSchemaRequest(BaseSchema):
     
 
 
-class ValidateSchemaResponse(BaseSchema):
+class ValidateSchemaResult(BaseSchema):
     # Webhook swagger.json
 
     
@@ -223,7 +223,7 @@ class ValidateSchemaResponse(BaseSchema):
     
 
 
-class TransformEventResponse(BaseSchema):
+class TransformEventResult(BaseSchema):
     # Webhook swagger.json
 
     
