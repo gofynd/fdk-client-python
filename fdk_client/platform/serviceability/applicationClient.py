@@ -24,8 +24,8 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateZoneDataSchema
-        schema = CreateZoneDataSchema()
+        from .models import CreateZoneV2Data
+        schema = CreateZoneV2Data()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -48,8 +48,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ZoneSchema
-            schema = ZoneSchema()
+            from .models import ZoneResponseV2
+            schema = ZoneResponseV2()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -58,14 +58,16 @@ class Serviceability:
 
         return response
     
-    async def getZones(self, stage=None, page_size=None, page_no=None, fulfillment_option_slug=None, is_active=None, q=None, country_iso_code=None, pincode=None, state=None, city=None, sector=None, request_headers:Dict={}):
+    async def getZones(self, stage=None, type=None, access_level=None, status=None, page_size=None, page_no=None, is_active=None, q=None, country_iso_code=None, pincode=None, state=None, city=None, sector=None, request_headers:Dict={}):
         """Retrieves a list of delivery zones.
         :param stage : Identifies the specific stage of zone bing requested. : type string
+        :param type : Using type, you can filter custom or default zones : type string
+        :param access_level : Using access level, you can filter public and private zones as marketplace owner : type string
+        :param status : Using status zones listing can be filttered for marketplace owner and 3p sellers : type string
         :param page_size : Defines the number of items displayed per page. : type integer
-        :param page_no : Current page number. : type integer
-        :param fulfillment_option_slug : Slug identifier for filtering by fulfillment option. : type string
+        :param page_no : current page number. : type integer
         :param is_active : Status of Zone (either active or inactive) : type boolean
-        :param q : Used to search for matching results based on the provided input. : type string
+        :param q : Search with name as a free text. : type string
         :param country_iso_code : ISO2 code of the country. : type string
         :param pincode : PIN Code of the country. : type string
         :param state : State of the country. : type string
@@ -76,12 +78,16 @@ class Serviceability:
         
         if stage is not None:
             payload["stage"] = stage
+        if type is not None:
+            payload["type"] = type
+        if access_level is not None:
+            payload["access_level"] = access_level
+        if status is not None:
+            payload["status"] = status
         if page_size is not None:
             payload["page_size"] = page_size
         if page_no is not None:
             payload["page_no"] = page_no
-        if fulfillment_option_slug is not None:
-            payload["fulfillment_option_slug"] = fulfillment_option_slug
         if is_active is not None:
             payload["is_active"] = is_active
         if q is not None:
@@ -102,8 +108,8 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"stage","description":"Identifies the specific stage of zone bing requested.","schema":{"type":"string","enum":["in_progress","failed","completed"]}},{"in":"query","name":"page_size","description":"Defines the number of items displayed per page.","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"page_no","description":"Current page number.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"fulfillment_option_slug","description":"Slug identifier for filtering by fulfillment option.","schema":{"type":"string"}},{"in":"query","name":"is_active","description":"Status of Zone (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"q","description":"Used to search for matching results based on the provided input.","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country.","schema":{"x-not-enum":true,"type":"string"}},{"in":"query","name":"pincode","description":"PIN Code of the country.","schema":{"type":"string"}},{"in":"query","name":"state","description":"State of the country.","schema":{"type":"string"}},{"in":"query","name":"city","description":"City of the country.","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector name of mentioned address.","schema":{"type":"string"}}],"query":[{"in":"query","name":"stage","description":"Identifies the specific stage of zone bing requested.","schema":{"type":"string","enum":["in_progress","failed","completed"]}},{"in":"query","name":"page_size","description":"Defines the number of items displayed per page.","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"page_no","description":"Current page number.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"fulfillment_option_slug","description":"Slug identifier for filtering by fulfillment option.","schema":{"type":"string"}},{"in":"query","name":"is_active","description":"Status of Zone (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"q","description":"Used to search for matching results based on the provided input.","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country.","schema":{"x-not-enum":true,"type":"string"}},{"in":"query","name":"pincode","description":"PIN Code of the country.","schema":{"type":"string"}},{"in":"query","name":"state","description":"State of the country.","schema":{"type":"string"}},{"in":"query","name":"city","description":"City of the country.","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector name of mentioned address.","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", stage=stage, page_size=page_size, page_no=page_no, fulfillment_option_slug=fulfillment_option_slug, is_active=is_active, q=q, country_iso_code=country_iso_code, pincode=pincode, state=state, city=city, sector=sector)
-        query_string = await create_query_string(stage=stage, page_size=page_size, page_no=page_no, fulfillment_option_slug=fulfillment_option_slug, is_active=is_active, q=q, country_iso_code=country_iso_code, pincode=pincode, state=state, city=city, sector=sector)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"stage","description":"Identifies the specific stage of zone bing requested.","schema":{"type":"string","enum":["in_progress","failed","completed"]}},{"in":"query","name":"type","description":"Using type, you can filter custom or default zones","schema":{"type":"string","enum":["default","custom"]}},{"in":"query","name":"access_level","description":"Using access level, you can filter public and private zones as marketplace owner","schema":{"type":"string","enum":["public","private"]}},{"in":"query","name":"status","description":"Using status zones listing can be filttered for marketplace owner and 3p sellers","schema":{"type":"string"}},{"in":"query","name":"page_size","description":"Defines the number of items displayed per page.","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"page_no","description":"current page number.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"is_active","description":"Status of Zone (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"q","description":"Search with name as a free text.","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country.","schema":{"type":"string"}},{"in":"query","name":"pincode","description":"PIN Code of the country.","schema":{"type":"string"}},{"in":"query","name":"state","description":"State of the country.","schema":{"type":"string"}},{"in":"query","name":"city","description":"City of the country.","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector name of mentioned address.","schema":{"type":"string"}}],"query":[{"in":"query","name":"stage","description":"Identifies the specific stage of zone bing requested.","schema":{"type":"string","enum":["in_progress","failed","completed"]}},{"in":"query","name":"type","description":"Using type, you can filter custom or default zones","schema":{"type":"string","enum":["default","custom"]}},{"in":"query","name":"access_level","description":"Using access level, you can filter public and private zones as marketplace owner","schema":{"type":"string","enum":["public","private"]}},{"in":"query","name":"status","description":"Using status zones listing can be filttered for marketplace owner and 3p sellers","schema":{"type":"string"}},{"in":"query","name":"page_size","description":"Defines the number of items displayed per page.","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"page_no","description":"current page number.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"is_active","description":"Status of Zone (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"q","description":"Search with name as a free text.","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country.","schema":{"type":"string"}},{"in":"query","name":"pincode","description":"PIN Code of the country.","schema":{"type":"string"}},{"in":"query","name":"state","description":"State of the country.","schema":{"type":"string"}},{"in":"query","name":"city","description":"City of the country.","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector name of mentioned address.","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", stage=stage, type=type, access_level=access_level, status=status, page_size=page_size, page_no=page_no, is_active=is_active, q=q, country_iso_code=country_iso_code, pincode=pincode, state=state, city=city, sector=sector)
+        query_string = await create_query_string(stage=stage, type=type, access_level=access_level, status=status, page_size=page_size, page_no=page_no, is_active=is_active, q=q, country_iso_code=country_iso_code, pincode=pincode, state=state, city=city, sector=sector)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -119,11 +125,11 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones", stage=stage, page_size=page_size, page_no=page_no, fulfillment_option_slug=fulfillment_option_slug, is_active=is_active, q=q, country_iso_code=country_iso_code, pincode=pincode, state=state, city=city, sector=sector), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones", stage=stage, type=type, access_level=access_level, status=status, page_size=page_size, page_no=page_no, is_active=is_active, q=q, country_iso_code=country_iso_code, pincode=pincode, state=state, city=city, sector=sector), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ListViewSchema
-            schema = ListViewSchema()
+            from .models import ListViewResponseV2
+            schema = ListViewResponseV2()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -190,8 +196,8 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateZoneData
-        schema = UpdateZoneData()
+        from .models import UpdateZoneDataV2
+        schema = UpdateZoneDataV2()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/{zone_id}", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"zone_id","description":"Unique identifier for a particular zone","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"zone_id","description":"Unique identifier for a particular zone","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", zone_id=zone_id, )
@@ -214,8 +220,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/{zone_id}", zone_id=zone_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ZoneUpdateSuccessResult
-            schema = ZoneUpdateSuccessResult()
+            from .models import ZoneUpdateSuccessResponse
+            schema = ZoneUpdateSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -258,12 +264,142 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/{zone_id}", zone_id=zone_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ZoneDeleteSuccessResult
-            schema = ZoneDeleteSuccessResult()
+            from .models import ZoneDeleteSuccessResponse
+            schema = ZoneDeleteSuccessResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for deleteZone")
+                print(e)
+
+        return response
+    
+    async def getZoneDetails(self, zone_id=None, request_headers:Dict={}):
+        """Get details of a single delivery zone along with product, store and region details.
+        :param zone_id : Unique identifier of a particular zone : type string
+        """
+        payload = {}
+        
+        if zone_id is not None:
+            payload["zone_id"] = zone_id
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getZoneDetails()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/{zone_id}/details", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"zone_id","description":"Unique identifier of a particular zone","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel (application).","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"zone_id","description":"Unique identifier of a particular zone","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel (application).","schema":{"type":"string"},"required":true}]}""", serverType="platform", zone_id=zone_id, )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/{zone_id}/details", zone_id=zone_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetZoneByIdDetailsSchema
+            schema = GetZoneByIdDetailsSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getZoneDetails")
+                print(e)
+
+        return response
+    
+    async def createBulkZone(self, body="", request_headers:Dict={}):
+        """Creates  bulk zones defined at the application level.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.createBulkZone()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CreateBulkZoneData
+        schema = CreateBulkZoneData()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/bulk", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CreateBulkZoneResponse
+            schema = CreateBulkZoneResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createBulkZone")
+                print(e)
+
+        return response
+    
+    async def getBulkZone(self, request_headers:Dict={}):
+        """Fetch bulk zones created at the application level.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getBulkZone()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/bulk/history", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/bulk/history", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetBulkZoneHistory
+            schema = GetBulkZoneHistory()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBulkZone")
                 print(e)
 
         return response
@@ -357,6 +493,186 @@ class Serviceability:
 
         return response
     
+    async def updatePincodeMopView(self, body="", request_headers:Dict={}):
+        """Modify and update views related to pincode MOP (Mode of Payment).
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.updatePincodeMopView()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PincodeMopData
+        schema = PincodeMopData()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pincode-mop-update", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pincode-mop-update", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PincodeMOPresponse
+            schema = PincodeMOPresponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePincodeMopView")
+                print(e)
+
+        return response
+    
+    async def updatePincodeBulkView(self, body="", request_headers:Dict={}):
+        """Updates the cash on delivery settings for multiple specified pin codes simultaneously.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.updatePincodeBulkView()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PincodeMopBulkData
+        schema = PincodeMopBulkData()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pincode-mop-bulk-update", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pincode-mop-bulk-update", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PincodeBulkViewResponse
+            schema = PincodeBulkViewResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePincodeBulkView")
+                print(e)
+
+        return response
+    
+    async def updatePincodeCoDListing(self, body="", request_headers:Dict={}):
+        """Retrieves a list of pincodes along with the count based on whether cash on delivery settings.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.updatePincodeCoDListing()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PincodeCodStatusListingRequest
+        schema = PincodeCodStatusListingRequest()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pincode-mop-data", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pincode-mop-data", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PincodeCodStatusListingResponse
+            schema = PincodeCodStatusListingResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePincodeCoDListing")
+                print(e)
+
+        return response
+    
+    async def updatePincodeAuditHistory(self, body="", request_headers:Dict={}):
+        """Retrieves the history of changes made to cash on delivery settings for pincodes.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.updatePincodeAuditHistory()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PincodeMopUpdateAuditHistoryRequest
+        schema = PincodeMopUpdateAuditHistoryRequest()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/history", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/history", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PincodeMopUpdateAuditHistoryResponseData
+            schema = PincodeMopUpdateAuditHistoryResponseData()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePincodeAuditHistory")
+                print(e)
+
+        return response
+    
     async def createGeoArea(self, body="", request_headers:Dict={}):
         """Allows to create and manage GeoAreas, representing groups of geographic regions.
         """
@@ -408,7 +724,7 @@ class Serviceability:
         :param is_active : Status of GeoAreas (either active or inactive) : type boolean
         :param page_no : Current page number : type integer
         :param type : To fetch the type of a specific geoarea. : type string
-        :param q : Used to search for matching results based on the provided input. : type string
+        :param q : search with name as a free text : type string
         :param country_iso_code : ISO2 code of the country : type string
         :param state : State name : type string
         :param city : City name : type string
@@ -443,7 +759,7 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas", """{"required":[{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for an application.","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_active","description":"Status of GeoAreas (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"page_no","description":"Current page number","schema":{"type":"integer"}},{"in":"query","name":"type","description":"To fetch the type of a specific geoarea.","schema":{"type":"string"}},{"in":"query","name":"q","description":"Used to search for matching results based on the provided input.","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"state","description":"State name","schema":{"type":"string"}},{"in":"query","name":"city","description":"City name","schema":{"type":"string"}},{"in":"query","name":"pincode","description":"Pincode value to search geoareas","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector value to search geoareas","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_active","description":"Status of GeoAreas (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"page_no","description":"Current page number","schema":{"type":"integer"}},{"in":"query","name":"type","description":"To fetch the type of a specific geoarea.","schema":{"type":"string"}},{"in":"query","name":"q","description":"Used to search for matching results based on the provided input.","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country","schema":{"type":"string","x-not-enum":true}},{"in":"query","name":"state","description":"State name","schema":{"type":"string"}},{"in":"query","name":"city","description":"City name","schema":{"type":"string"}},{"in":"query","name":"pincode","description":"Pincode value to search geoareas","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector value to search geoareas","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for an application.","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", page_size=page_size, is_active=is_active, page_no=page_no, type=type, q=q, country_iso_code=country_iso_code, state=state, city=city, pincode=pincode, sector=sector)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas", """{"required":[{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for an application.","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}],"optional":[{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_active","description":"Status of GeoAreas (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"page_no","description":"Current page number","schema":{"type":"integer"}},{"in":"query","name":"type","description":"To fetch the type of a specific geoarea.","schema":{"type":"string"}},{"in":"query","name":"q","description":"search with name as a free text","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country","schema":{"type":"string"}},{"in":"query","name":"state","description":"State name","schema":{"type":"string"}},{"in":"query","name":"city","description":"City name","schema":{"type":"string"}},{"in":"query","name":"pincode","description":"Pincode value to search geoareas","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector value to search geoareas","schema":{"type":"string"}}],"query":[{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"is_active","description":"Status of GeoAreas (either active or inactive)","schema":{"type":"boolean"}},{"in":"query","name":"page_no","description":"Current page number","schema":{"type":"integer"}},{"in":"query","name":"type","description":"To fetch the type of a specific geoarea.","schema":{"type":"string"}},{"in":"query","name":"q","description":"search with name as a free text","schema":{"type":"string"}},{"in":"query","name":"country_iso_code","description":"ISO2 code of the country","schema":{"type":"string"}},{"in":"query","name":"state","description":"State name","schema":{"type":"string"}},{"in":"query","name":"city","description":"City name","schema":{"type":"string"}},{"in":"query","name":"pincode","description":"Pincode value to search geoareas","schema":{"type":"string"}},{"in":"query","name":"sector","description":"Sector value to search geoareas","schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for an application.","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true}]}""", serverType="platform", page_size=page_size, is_active=is_active, page_no=page_no, type=type, q=q, country_iso_code=country_iso_code, state=state, city=city, pincode=pincode, sector=sector)
         query_string = await create_query_string(page_size=page_size, is_active=is_active, page_no=page_no, type=type, q=q, country_iso_code=country_iso_code, state=state, city=city, pincode=pincode, sector=sector)
         if query_string:
             url_with_params += "?" + query_string
@@ -507,8 +823,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/{geoarea_id}", geoarea_id=geoarea_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GeoAreaDetails
-            schema = GeoAreaDetails()
+            from .models import GeoAreaResponse
+            schema = GeoAreaResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -644,8 +960,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/regions/bulk/{geoarea_id}", geoarea_id=geoarea_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import BulkGeoAreaGetResult
-            schema = BulkGeoAreaGetResult()
+            from .models import BulkGeoAreaGetResponse
+            schema = BulkGeoAreaGetResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -790,22 +1106,22 @@ class Serviceability:
 
         return response
     
-    async def updatePincodeMopView(self, body="", request_headers:Dict={}):
-        """Modify and update views related to pincode MOP (Mode of Payment).
+    async def createBulkGeoAreaExport(self, body="", request_headers:Dict={}):
+        """Allows to create and manage GeoAreas, representing groups of geographic regions in bulk.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.updatePincodeMopView()
+        schema = ServiceabilityValidator.createBulkGeoAreaExport()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PincodeMopData
-        schema = PincodeMopData()
+        from .models import PriceBulkGeoAreaExportRequestPayload
+        schema = PriceBulkGeoAreaExportRequestPayload()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pincode-mop-update", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/export", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier for the sales channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier for the sales channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -822,35 +1138,35 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pincode-mop-update", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/export", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PincodeMOPResult
-            schema = PincodeMOPResult()
+            from .models import PriceGeoAreaExportResult
+            schema = PriceGeoAreaExportResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for updatePincodeMopView")
+                print("Response Validation failed for createBulkGeoAreaExport")
                 print(e)
 
         return response
     
-    async def updatePincodeBulkView(self, body="", request_headers:Dict={}):
-        """Updates the cash on delivery settings for multiple specified pin codes simultaneously.
+    async def createBulkGeoAreas(self, body="", request_headers:Dict={}):
+        """Allows to create and manage GeoAreas, representing groups of geographic regions in bulk.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.updatePincodeBulkView()
+        schema = ServiceabilityValidator.createBulkGeoAreas()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PincodeMopBulkData
-        schema = PincodeMopBulkData()
+        from .models import PriceBulkGeoAreaPayload
+        schema = PriceBulkGeoAreaPayload()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pincode-mop-bulk-update", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier for the sales channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier for the sales channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -867,140 +1183,35 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pincode-mop-bulk-update", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import PincodeBulkViewResult
-            schema = PincodeBulkViewResult()
+            from .models import BulkGeoAreaResult
+            schema = BulkGeoAreaResult()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for updatePincodeBulkView")
+                print("Response Validation failed for createBulkGeoAreas")
                 print(e)
 
         return response
     
-    async def updatePincodeCoDListing(self, page_number=None, page_size=None, body="", request_headers:Dict={}):
-        """Retrieves a list of pincodes along with the count based on whether cash on delivery settings.
-        :param page_number : Page number to be fetched. : type integer
-        :param page_size : Determines the items to be displayed in a page : type integer
+    async def validateBulkGeoarea(self, body="", request_headers:Dict={}):
+        """Validates the bulk geoareas data before import.
         """
         payload = {}
         
-        if page_number is not None:
-            payload["page_number"] = page_number
-        if page_size is not None:
-            payload["page_size"] = page_size
 
         # Parameter validation
-        schema = ServiceabilityValidator.updatePincodeCoDListing()
+        schema = ServiceabilityValidator.validateBulkGeoarea()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import PincodeCodStatusListingDetails
-        schema = PincodeCodStatusListingDetails()
+        from .models import ZoneBulkValidationRequestSchema
+        schema = ZoneBulkValidationRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pincode-mop-data", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_number","description":"Page number to be fetched.","schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":100}}],"query":[{"in":"query","name":"page_number","description":"Page number to be fetched.","schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":100}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true}]}""", serverType="platform", page_number=page_number, page_size=page_size)
-        query_string = await create_query_string(page_number=page_number, page_size=page_size)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/pincode-mop-data", page_number=page_number, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PincodeCodStatusListingResult
-            schema = PincodeCodStatusListingResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updatePincodeCoDListing")
-                print(e)
-
-        return response
-    
-    async def updatePincodeAuditHistory(self, page_number=None, page_size=None, body="", request_headers:Dict={}):
-        """Retrieves the history of changes made to cash on delivery settings for pincodes.
-        :param page_number : Page number to be fetched. : type integer
-        :param page_size : Determines the items to be displayed in a page : type integer
-        """
-        payload = {}
-        
-        if page_number is not None:
-            payload["page_number"] = page_number
-        if page_size is not None:
-            payload["page_size"] = page_size
-
-        # Parameter validation
-        schema = ServiceabilityValidator.updatePincodeAuditHistory()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import PincodeMopUpdateAuditHistoryDetails
-        schema = PincodeMopUpdateAuditHistoryDetails()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/history", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_number","description":"Page number to be fetched.","schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":100}}],"query":[{"in":"query","name":"page_number","description":"Page number to be fetched.","schema":{"type":"integer","default":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":100}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"string"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true}]}""", serverType="platform", page_number=page_number, page_size=page_size)
-        query_string = await create_query_string(page_number=page_number, page_size=page_size)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/history", page_number=page_number, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PincodeMopUpdateAuditHistoryResultData
-            schema = PincodeMopUpdateAuditHistoryResultData()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updatePincodeAuditHistory")
-                print(e)
-
-        return response
-    
-    async def updateCourierRule(self, rule_uid=None, body="", request_headers:Dict={}):
-        """Updates an existing rule within the delivery configuration.
-        :param rule_uid : Unique identifier of the courier partner rule. : type string
-        """
-        payload = {}
-        
-        if rule_uid is not None:
-            payload["rule_uid"] = rule_uid
-
-        # Parameter validation
-        schema = ServiceabilityValidator.updateCourierRule()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CourierPartnerRule
-        schema = CourierPartnerRule()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/{rule_uid}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true},{"in":"path","name":"rule_uid","description":"Unique identifier of the courier partner rule.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true},{"in":"path","name":"rule_uid","description":"Unique identifier of the courier partner rule.","schema":{"type":"string"},"required":true}]}""", serverType="platform", rule_uid=rule_uid)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/validation", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1017,34 +1228,34 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/{rule_uid}", rule_uid=rule_uid), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/validation", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierPartnerRuleResult
-            schema = CourierPartnerRuleResult()
+            from .models import ZoneBulkValidationResponse
+            schema = ZoneBulkValidationResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for updateCourierRule")
+                print("Response Validation failed for validateBulkGeoarea")
                 print(e)
 
         return response
     
-    async def getCourierPartnerRule(self, rule_uid=None, request_headers:Dict={}):
-        """Retrieves a single rule within the delivery configuration.
-        :param rule_uid : Unique identifier of the courier partner rule : type string
+    async def getBulkGeoareaValidation(self, batch_id=None, request_headers:Dict={}):
+        """Fetch the validation status and results for a specific bulk geoarea validation batch.
+        :param batch_id : The batch identifier returned from validation request. : type string
         """
         payload = {}
         
-        if rule_uid is not None:
-            payload["rule_uid"] = rule_uid
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
 
         # Parameter validation
-        schema = ServiceabilityValidator.getCourierPartnerRule()
+        schema = ServiceabilityValidator.getBulkGeoareaValidation()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/{rule_uid}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true},{"in":"path","name":"rule_uid","description":"Unique identifier of the courier partner rule","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true},{"in":"path","name":"rule_uid","description":"Unique identifier of the courier partner rule","schema":{"type":"string"},"required":true}]}""", serverType="platform", rule_uid=rule_uid)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/validation/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The batch identifier returned from validation request.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The batch identifier returned from validation request.","schema":{"type":"string"},"required":true}]}""", serverType="platform", batch_id=batch_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1061,15 +1272,312 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/{rule_uid}", rule_uid=rule_uid), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/validation/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierPartnerRuleResult
-            schema = CourierPartnerRuleResult()
+            from .models import ZoneBulkValidationStatusResponse
+            schema = ZoneBulkValidationStatusResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getCourierPartnerRule")
+                print("Response Validation failed for getBulkGeoareaValidation")
+                print(e)
+
+        return response
+    
+    async def importBulkGeoarea(self, batch_id=None, request_headers:Dict={}):
+        """Imports previously validated bulk geoareas into the system.
+        :param batch_id : The batch identifier returned from validation request. : type string
+        """
+        payload = {}
+        
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
+
+        # Parameter validation
+        schema = ServiceabilityValidator.importBulkGeoarea()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/import/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The batch identifier returned from validation request.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The batch identifier returned from validation request.","schema":{"type":"string"},"required":true}]}""", serverType="platform", batch_id=batch_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/import/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ZoneBulkValidationStatusResponse
+            schema = ZoneBulkValidationStatusResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for importBulkGeoarea")
+                print(e)
+
+        return response
+    
+    async def importBulkGeoareaStatus(self, batch_id=None, request_headers:Dict={}):
+        """Get status of the import job for a validated geoarea.
+        :param batch_id : The batch identifier returned from validation request. : type string
+        """
+        payload = {}
+        
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
+
+        # Parameter validation
+        schema = ServiceabilityValidator.importBulkGeoareaStatus()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/import/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The batch identifier returned from validation request.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The batch identifier returned from validation request.","schema":{"type":"string"},"required":true}]}""", serverType="platform", batch_id=batch_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/import/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ZoneBulkImportResponse
+            schema = ZoneBulkImportResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for importBulkGeoareaStatus")
+                print(e)
+
+        return response
+    
+    async def overrideBulkGeoarea(self, batch_id=None, body="", request_headers:Dict={}):
+        """Resolve multiple geoarea conflicts.
+        :param batch_id : The unique identifier for current batch of geoareas to be updated. : type string
+        """
+        payload = {}
+        
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
+
+        # Parameter validation
+        schema = ServiceabilityValidator.overrideBulkGeoarea()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import BulkZoneOverrideSchema
+        schema = BulkZoneOverrideSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/conflicts/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The unique identifier for current batch of geoareas to be updated.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The unique identifier for current batch of geoareas to be updated.","schema":{"type":"string"},"required":true}]}""", serverType="platform", batch_id=batch_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/conflicts/{batch_id}", batch_id=batch_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkZoneOverrideResponseSchema
+            schema = BulkZoneOverrideResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for overrideBulkGeoarea")
+                print(e)
+
+        return response
+    
+    async def getGeoareaOverrideStatus(self, batch_id=None, request_headers:Dict={}):
+        """Get current status of zone conflict override process.
+        :param batch_id : The unique identifier of the bulk job. : type string
+        """
+        payload = {}
+        
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getGeoareaOverrideStatus()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/conflicts/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The unique identifier of the bulk job.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The unique identifier of the bulk job.","schema":{"type":"string"},"required":true}]}""", serverType="platform", batch_id=batch_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/conflicts/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ZoneOverrideStatusResponseSchema
+            schema = ZoneOverrideStatusResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getGeoareaOverrideStatus")
+                print(e)
+
+        return response
+    
+    async def getBulkGeoAreasHistory(self, request_headers:Dict={}):
+        """Allows to get the history of geoareas that are uploaded in bulk.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getBulkGeoAreasHistory()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/history", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier for the sales channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier for the sales channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/history", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetBulkPriceZoneHistory
+            schema = GetBulkPriceZoneHistory()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBulkGeoAreasHistory")
+                print(e)
+
+        return response
+    
+    async def getBulkGeoAreasSample(self, request_headers:Dict={}):
+        """Generates a sample XLSX file containing template data for Price GeoAreas. This sample file provides the required columns and example values needed for bulk uploading Price GeoArea data.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getBulkGeoAreasSample()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/sample", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier for the sales channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier for the sales channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/bulk/sample", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        return response
+    
+    async def getGeoAreasExportStatus(self, batch_id=None, request_headers:Dict={}):
+        """Allows to get the history of geoareas that are uploaded in bulk.
+        :param batch_id : The unique identifier for the sales channel. : type string
+        """
+        payload = {}
+        
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getGeoAreasExportStatus()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/export/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier for the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The unique identifier for the sales channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier for the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The unique identifier for the sales channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", batch_id=batch_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/geoareas/export/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetExportPriceZoneHistory
+            schema = GetExportPriceZoneHistory()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getGeoAreasExportStatus")
                 print(e)
 
         return response
@@ -1089,7 +1597,7 @@ class Serviceability:
         schema = CourierPartnerRule()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1109,8 +1617,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierPartnerRuleResult
-            schema = CourierPartnerRuleResult()
+            from .models import CourierPartnerRuleResponseSchema
+            schema = CourierPartnerRuleResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1121,8 +1629,8 @@ class Serviceability:
     
     async def getCourierPartnerRules(self, page_no=None, page_size=None, status=None, request_headers:Dict={}):
         """Retrieve a list of rules within the delivery configuration.
-        :param page_no : The current page number for paginated results. : type integer
-        :param page_size : Determines the items to be displayed in a page : type integer
+        :param page_no : index of the item to start returning with : type integer
+        :param page_size : determines the items to be displayed in a page : type integer
         :param status : Filter rules based on rule status : type string
         """
         payload = {}
@@ -1139,7 +1647,7 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"status","description":"Filter rules based on rule status","schema":{"type":"string","enum":["true","false"]}}],"query":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"status","description":"Filter rules based on rule status","schema":{"type":"string","enum":["true","false"]}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, status=status)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"status","description":"Filter rules based on rule status","schema":{"type":"string","enum":[true,false]}}],"query":[{"in":"query","name":"page_no","description":"index of the item to start returning with","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"determines the items to be displayed in a page","schema":{"type":"integer","default":10,"minimum":1}},{"in":"query","name":"status","description":"Filter rules based on rule status","schema":{"type":"string","enum":[true,false]}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, status=status)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, status=status)
         if query_string:
             url_with_params += "?" + query_string
@@ -1159,8 +1667,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules", page_no=page_no, page_size=page_size, status=status), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CourierPartnerRulesListResult
-            schema = CourierPartnerRulesListResult()
+            from .models import CourierPartnerRulesListResponse
+            schema = CourierPartnerRulesListResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1169,22 +1677,25 @@ class Serviceability:
 
         return response
     
-    async def getCourierPartners(self, body="", request_headers:Dict={}):
-        """Get all the serviceable courier partners of a destination and the shipments.
+    async def updateCourierRule(self, rule_uid=None, body="", request_headers:Dict={}):
+        """Updates an existing rule within the delivery configuration
+        :param rule_uid : A `rule_uid` is a unique identifier for a particular Dp. : type string
         """
         payload = {}
         
+        if rule_uid is not None:
+            payload["rule_uid"] = rule_uid
 
         # Parameter validation
-        schema = ServiceabilityValidator.getCourierPartners()
+        schema = ServiceabilityValidator.updateCourierRule()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ShipmentCourierPartnerDetails
-        schema = ShipmentCourierPartnerDetails()
+        from .models import CourierPartnerRule
+        schema = CourierPartnerRule()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipment/courier-partners", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/{rule_uid}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true},{"in":"path","name":"rule_uid","description":"A `rule_uid` is a unique identifier for a particular Dp.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true},{"in":"path","name":"rule_uid","description":"A `rule_uid` is a unique identifier for a particular Dp.","schema":{"type":"string"},"required":true}]}""", serverType="platform", rule_uid=rule_uid)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1201,15 +1712,59 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipment/courier-partners", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/{rule_uid}", rule_uid=rule_uid), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentCourierPartnerResult
-            schema = ShipmentCourierPartnerResult()
+            from .models import CourierPartnerRuleResponseSchema
+            schema = CourierPartnerRuleResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getCourierPartners")
+                print("Response Validation failed for updateCourierRule")
+                print(e)
+
+        return response
+    
+    async def getCourierPartnerRule(self, rule_uid=None, request_headers:Dict={}):
+        """Retrieves a single rule within the delivery configuration.
+        :param rule_uid : A `rule_uid` is a unique identifier for a particular Dp. : type string
+        """
+        payload = {}
+        
+        if rule_uid is not None:
+            payload["rule_uid"] = rule_uid
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getCourierPartnerRule()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/{rule_uid}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true},{"in":"path","name":"rule_uid","description":"A `rule_uid` is a unique identifier for a particular Dp.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true},{"in":"path","name":"rule_uid","description":"A `rule_uid` is a unique identifier for a particular Dp.","schema":{"type":"string"},"required":true}]}""", serverType="platform", rule_uid=rule_uid)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/{rule_uid}", rule_uid=rule_uid), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import CourierPartnerRuleResponseSchema
+            schema = CourierPartnerRuleResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCourierPartnerRule")
                 print(e)
 
         return response
@@ -1225,8 +1780,8 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ApplicationConfigPutDetail
-        schema = ApplicationConfigPutDetail()
+        from .models import ApplicationConfigPutRequest
+        schema = ApplicationConfigPutRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier of company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier of sales channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier of company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier of sales channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -1249,8 +1804,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationConfigPut
-            schema = ApplicationConfigPut()
+            from .models import ApplicationConfigPutResponse
+            schema = ApplicationConfigPutResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1290,8 +1845,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationConfigGetResult
-            schema = ApplicationConfigGetResult()
+            from .models import ApplicationConfigGetResponse
+            schema = ApplicationConfigGetResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1311,8 +1866,8 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ApplicationConfigPatch
-        schema = ApplicationConfigPatch()
+        from .models import ApplicationConfigPatchRequest
+        schema = ApplicationConfigPatchRequest()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier of company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier of sales channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier of company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier of sales channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -1335,8 +1890,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationConfigPatchResult
-            schema = ApplicationConfigPatchResult()
+            from .models import ApplicationConfigPatchResponse
+            schema = ApplicationConfigPatchResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1401,7 +1956,7 @@ class Serviceability:
         schema = StoreRuleConfigData()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/configuration", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/configuration", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true,"example":{"success":{"value":123},"failure":{"value":123}}},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true,"example":{"success":{"value":123},"failure":{"value":123}}},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1478,9 +2033,9 @@ class Serviceability:
     
     async def getStoreRules(self, page_no=None, page_size=None, status=None, request_headers:Dict={}):
         """Retrieves an existing order routing setup for a single application
-        :param page_no : The current page number for paginated results. : type integer
-        :param page_size : Determines the items to be displayed in a page : type integer
-        :param status : Filter rules based on rule status : type string
+        :param page_no :  : type integer
+        :param page_size :  : type integer
+        :param status :  : type string
         """
         payload = {}
         
@@ -1496,7 +2051,7 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","required":false,"description":"The current page number for paginated results.","schema":{"type":"integer"}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","required":false,"schema":{"type":"integer"}},{"in":"query","name":"status","required":false,"description":"Filter rules based on rule status","schema":{"type":"string","enum":["true","false","all"]}}],"query":[{"in":"query","name":"page_no","required":false,"description":"The current page number for paginated results.","schema":{"type":"integer"}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","required":false,"schema":{"type":"integer"}},{"in":"query","name":"status","required":false,"description":"Filter rules based on rule status","schema":{"type":"string","enum":["true","false","all"]}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, status=status)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"status","required":false,"schema":{"type":"string","enum":["true","false","all"]}}],"query":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","name":"status","required":false,"schema":{"type":"string","enum":["true","false","all"]}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", page_no=page_no, page_size=page_size, status=status)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, status=status)
         if query_string:
             url_with_params += "?" + query_string
@@ -1516,8 +2071,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules", page_no=page_no, page_size=page_size, status=status), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import GetStoreRulesApiResult
-            schema = GetStoreRulesApiResult()
+            from .models import GetStoreRulesApiResponse
+            schema = GetStoreRulesApiResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1537,8 +2092,8 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateStoreRuleDetailsSchema
-        schema = CreateStoreRuleDetailsSchema()
+        from .models import CreateStoreRuleRequestSchema
+        schema = CreateStoreRuleRequestSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
@@ -1561,12 +2116,57 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import StoreRuleResultSchema
-            schema = StoreRuleResultSchema()
+            from .models import StoreRuleResponseSchema
+            schema = StoreRuleResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for createStoreRules")
+                print(e)
+
+        return response
+    
+    async def updateStoreRulePriority(self, body="", request_headers:Dict={}):
+        """Update Store Rule priority
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ServiceabilityValidator.updateStoreRulePriority()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import RulePriorityRequest
+        schema = RulePriorityRequest()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules/priority", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules/priority", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RulePriorityResponse
+            schema = RulePriorityResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateStoreRulePriority")
                 print(e)
 
         return response
@@ -1629,8 +2229,8 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import CreateStoreRuleDetailsSchema
-        schema = CreateStoreRuleDetailsSchema()
+        from .models import CreateStoreRuleRequestSchema
+        schema = CreateStoreRuleRequestSchema()
         schema.dump(schema.load(body))
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules/{rule_uid}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"rule_uid","description":"A `rule_uid` is a unique identifier for a particular rule object.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"rule_uid","description":"A `rule_uid` is a unique identifier for a particular rule object.","schema":{"type":"string"},"required":true}]}""", serverType="platform", rule_uid=rule_uid)
@@ -1653,8 +2253,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules/{rule_uid}", rule_uid=rule_uid), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import StoreRuleUpdateResultSchema
-            schema = StoreRuleUpdateResultSchema()
+            from .models import StoreRuleUpdateResponseSchema
+            schema = StoreRuleUpdateResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1674,11 +2274,11 @@ class Serviceability:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import RulePriorityDetails
-        schema = RulePriorityDetails()
+        from .models import RulePriorityRequest
+        schema = RulePriorityRequest()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/priority", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/priority", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1698,8 +2298,8 @@ class Serviceability:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/priority", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RulePriorityResult
-            schema = RulePriorityResult()
+            from .models import RulePriorityResponse
+            schema = RulePriorityResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1708,22 +2308,21 @@ class Serviceability:
 
         return response
     
-    async def updateStoreRulePriority(self, body="", request_headers:Dict={}):
-        """Update Store Rule priority
+    async def getCourierPartnerRuleDetails(self, rule_uid=None, request_headers:Dict={}):
+        """Retrieves details for a courier partner rule.
+        :param rule_uid : A `rule_uid` is a unique identifier for a courier partner rule. : type string
         """
         payload = {}
         
+        if rule_uid is not None:
+            payload["rule_uid"] = rule_uid
 
         # Parameter validation
-        schema = ServiceabilityValidator.updateStoreRulePriority()
+        schema = ServiceabilityValidator.getCourierPartnerRuleDetails()
         schema.dump(schema.load(payload))
         
-        # Body validation
-        from .models import RulePriorityDetails
-        schema = RulePriorityDetails()
-        schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules/priority", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular sale channel.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/{rule_uid}/details", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true},{"in":"path","name":"rule_uid","description":"A `rule_uid` is a unique identifier for a courier partner rule.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a particular company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique Identifier of sales channel","schema":{"type":"string"},"required":true},{"in":"path","name":"rule_uid","description":"A `rule_uid` is a unique identifier for a courier partner rule.","schema":{"type":"string"},"required":true}]}""", serverType="platform", rule_uid=rule_uid)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1740,15 +2339,59 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules/priority", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/courier-partner/rules/{rule_uid}/details", rule_uid=rule_uid), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RulePriorityResult
-            schema = RulePriorityResult()
+            from .models import CourierPartnerRuleResponseDetailSchema
+            schema = CourierPartnerRuleResponseDetailSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for updateStoreRulePriority")
+                print("Response Validation failed for getCourierPartnerRuleDetails")
+                print(e)
+
+        return response
+    
+    async def getStoreRuleDetails(self, rule_uid=None, request_headers:Dict={}):
+        """Retrieves details of a order routing rule.
+        :param rule_uid : A `rule_uid` is a unique identifier for a order routing rule. : type string
+        """
+        payload = {}
+        
+        if rule_uid is not None:
+            payload["rule_uid"] = rule_uid
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getStoreRuleDetails()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules/{rule_uid}/details", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"rule_uid","description":"A `rule_uid` is a unique identifier for a order routing rule.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier for a particular application channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"rule_uid","description":"A `rule_uid` is a unique identifier for a order routing rule.","schema":{"type":"string"},"required":true}]}""", serverType="platform", rule_uid=rule_uid)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/store/rules/{rule_uid}/details", rule_uid=rule_uid), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import StoreRuleDataDetailsSchema
+            schema = StoreRuleDataDetailsSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getStoreRuleDetails")
                 print(e)
 
         return response
@@ -1785,22 +2428,57 @@ class Serviceability:
 
         return response
     
-    async def createFulfillmentOption(self, body="", request_headers:Dict={}):
-        """Creates a new fulfillment option for the specified company and application.
+    async def downloadZoneSampleFile(self, product_type=None, request_headers:Dict={}):
+        """Download a sample file for Delivery Zone with specified product type column (i.e. category, department, Item IDs or tags).
+        :param product_type : It denotes the attribute of the product : type string
+        """
+        payload = {}
+        
+        if product_type is not None:
+            payload["product_type"] = product_type
+
+        # Parameter validation
+        schema = ServiceabilityValidator.downloadZoneSampleFile()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/bulk/sample/{product_type}", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"product_type","description":"It denotes the attribute of the product","schema":{"type":"string","enum":["category","department","item_id","all","tag"]},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier for a company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"product_type","description":"It denotes the attribute of the product","schema":{"type":"string","enum":["category","department","item_id","all","tag"]},"required":true}]}""", serverType="platform", product_type=product_type)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/bulk/sample/{product_type}", product_type=product_type), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        return response
+    
+    async def validateBulkZone(self, body="", request_headers:Dict={}):
+        """Validates the bulk zones data before import.
         """
         payload = {}
         
 
         # Parameter validation
-        schema = ServiceabilityValidator.createFulfillmentOption()
+        schema = ServiceabilityValidator.validateBulkZone()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import FulfillmentOption
-        schema = FulfillmentOption()
+        from .models import ZoneBulkValidationRequestSchema
+        schema = ZoneBulkValidationRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/bulk/validation", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1817,84 +2495,34 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/bulk/validation", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FulfillmentOption
-            schema = FulfillmentOption()
+            from .models import ZoneBulkValidationResponse
+            schema = ZoneBulkValidationResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for createFulfillmentOption")
+                print("Response Validation failed for validateBulkZone")
                 print(e)
 
         return response
     
-    async def getFulfillmentOptions(self, slug=None, product_id=None, store_id=None, request_headers:Dict={}):
-        """Fetches available fulfillment options for a given product and store.
-        :param slug : Slug of the fulfillment option for retrieving details. : type string
-        :param product_id : The unique identifier of the product. : type integer
-        :param store_id : The unique identifier of the store. : type integer
+    async def getBulkZoneValidation(self, batch_id=None, request_headers:Dict={}):
+        """Fetch the validation status and results for a specific bulk zone validation batch.
+        :param batch_id : The batch identifier returned from validation request. : type string
         """
         payload = {}
         
-        if slug is not None:
-            payload["slug"] = slug
-        if product_id is not None:
-            payload["product_id"] = product_id
-        if store_id is not None:
-            payload["store_id"] = store_id
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
 
         # Parameter validation
-        schema = ServiceabilityValidator.getFulfillmentOptions()
+        schema = ServiceabilityValidator.getBulkZoneValidation()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options/{slug}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"Slug of the fulfillment option for retrieving details.","schema":{"type":"string"},"required":true}],"optional":[{"name":"product_id","in":"query","schema":{"type":"integer"},"description":"The unique identifier of the product."},{"name":"store_id","in":"query","schema":{"type":"integer"},"description":"The unique identifier of the store."}],"query":[{"name":"product_id","in":"query","schema":{"type":"integer"},"description":"The unique identifier of the product."},{"name":"store_id","in":"query","schema":{"type":"integer"},"description":"The unique identifier of the store."}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"Slug of the fulfillment option for retrieving details.","schema":{"type":"string"},"required":true}]}""", serverType="platform", slug=slug, product_id=product_id, store_id=store_id)
-        query_string = await create_query_string(product_id=product_id, store_id=store_id)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options/{slug}", slug=slug, product_id=product_id, store_id=store_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import FulfillmentOption
-            schema = FulfillmentOption()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getFulfillmentOptions")
-                print(e)
-
-        return response
-    
-    async def deleteFulfillmentOptions(self, slug=None, request_headers:Dict={}):
-        """Deletes fulfillment options for provided slug.
-        :param slug : Slug of the fulfillment option for retrieving details. : type string
-        """
-        payload = {}
-        
-        if slug is not None:
-            payload["slug"] = slug
-
-        # Parameter validation
-        schema = ServiceabilityValidator.deleteFulfillmentOptions()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options/{slug}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"Slug of the fulfillment option for retrieving details.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"Slug of the fulfillment option for retrieving details.","schema":{"type":"string"},"required":true}]}""", serverType="platform", slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/bulk/validation/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The batch identifier returned from validation request.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The batch identifier returned from validation request.","schema":{"type":"string"},"required":true}]}""", serverType="platform", batch_id=batch_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1911,38 +2539,82 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options/{slug}", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/bulk/validation/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OperationResponseSchema
-            schema = OperationResponseSchema()
+            from .models import ZoneBulkValidationStatusResponse
+            schema = ZoneBulkValidationStatusResponse()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for deleteFulfillmentOptions")
+                print("Response Validation failed for getBulkZoneValidation")
                 print(e)
 
         return response
     
-    async def putFulfillmentOption(self, slug=None, body="", request_headers:Dict={}):
-        """Updates the details of an existing fulfillment option for the specified company and application
-        :param slug : Slug of the fulfillment option for retrieving details. : type string
+    async def importBulkZone(self, batch_id=None, request_headers:Dict={}):
+        """Imports previously validated bulk zones into the system.
+        :param batch_id : The batch identifier returned from validation request. : type string
         """
         payload = {}
         
-        if slug is not None:
-            payload["slug"] = slug
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
 
         # Parameter validation
-        schema = ServiceabilityValidator.putFulfillmentOption()
+        schema = ServiceabilityValidator.importBulkZone()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/bulk/import/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The batch identifier returned from validation request.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A unique identifier for a particular sale channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The batch identifier returned from validation request.","schema":{"type":"string"},"required":true}]}""", serverType="platform", batch_id=batch_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/bulk/import/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ZoneBulkImportResponse
+            schema = ZoneBulkImportResponse()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for importBulkZone")
+                print(e)
+
+        return response
+    
+    async def overrideZoneById(self, zone_id=None, body="", request_headers:Dict={}):
+        """Resolves the conflicts in the current zone with or without existing zone.
+        :param zone_id : The unique identifier of the delivery zone. : type string
+        """
+        payload = {}
+        
+        if zone_id is not None:
+            payload["zone_id"] = zone_id
+
+        # Parameter validation
+        schema = ServiceabilityValidator.overrideZoneById()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import FulfillmentOption
-        schema = FulfillmentOption()
+        from .models import ZoneOverrideSchema
+        schema = ZoneOverrideSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options/{slug}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"Slug of the fulfillment option for retrieving details.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"Slug of the fulfillment option for retrieving details.","schema":{"type":"string"},"required":true}]}""", serverType="platform", slug=slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/{zone_id}/conflicts", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"zone_id","description":"The unique identifier of the delivery zone.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"zone_id","description":"The unique identifier of the delivery zone.","schema":{"type":"string"},"required":true}]}""", serverType="platform", zone_id=zone_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1959,41 +2631,35 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options/{slug}", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/{zone_id}/conflicts", zone_id=zone_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FulfillmentOption
-            schema = FulfillmentOption()
+            from .models import ZoneOverrideResponseSchema
+            schema = ZoneOverrideResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for putFulfillmentOption")
+                print("Response Validation failed for overrideZoneById")
                 print(e)
 
         return response
     
-    async def getFulfillmentOptionProducts(self, slug=None, q=None, store_id=None, request_headers:Dict={}):
-        """Retrieves products available for a specific fulfillment option in an application.
-        :param slug : Slug of the fulfillment option for retrieving details. : type string
-        :param q : Query to search product by name. : type string
-        :param store_id : The unique identifier of the store. : type integer
+    async def getZoneOverrideStatus(self, zone_id=None, request_headers:Dict={}):
+        """Get current status of zone conflict override process.
+        :param zone_id : The unique identifier of the delivery zone. : type string
         """
         payload = {}
         
-        if slug is not None:
-            payload["slug"] = slug
-        if q is not None:
-            payload["q"] = q
-        if store_id is not None:
-            payload["store_id"] = store_id
+        if zone_id is not None:
+            payload["zone_id"] = zone_id
 
         # Parameter validation
-        schema = ServiceabilityValidator.getFulfillmentOptionProducts()
+        schema = ServiceabilityValidator.getZoneOverrideStatus()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options/{slug}/products", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"Slug of the fulfillment option for retrieving details.","schema":{"type":"string"},"required":true},{"name":"store_id","in":"query","required":true,"schema":{"type":"integer"},"description":"The unique identifier of the store."}],"optional":[{"name":"q","in":"query","required":false,"schema":{"type":"string"},"description":"Query to search product by name."}],"query":[{"name":"q","in":"query","required":false,"schema":{"type":"string"},"description":"Query to search product by name."},{"name":"store_id","in":"query","required":true,"schema":{"type":"integer"},"description":"The unique identifier of the store."}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"Slug of the fulfillment option for retrieving details.","schema":{"type":"string"},"required":true}]}""", serverType="platform", slug=slug, q=q, store_id=store_id)
-        query_string = await create_query_string(q=q, store_id=store_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/{zone_id}/conflicts", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"zone_id","description":"The unique identifier of the delivery zone.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"zone_id","description":"The unique identifier of the delivery zone.","schema":{"type":"string"},"required":true}]}""", serverType="platform", zone_id=zone_id)
+        query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
 
@@ -2009,82 +2675,38 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options/{slug}/products", slug=slug, q=q, store_id=store_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/{zone_id}/conflicts", zone_id=zone_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FulfillmentOptionProducts
-            schema = FulfillmentOptionProducts()
+            from .models import ZoneOverrideStatusResponseSchema
+            schema = ZoneOverrideStatusResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getFulfillmentOptionProducts")
+                print("Response Validation failed for getZoneOverrideStatus")
                 print(e)
 
         return response
     
-    async def getFulfillmentOptionStores(self, slug=None, q=None, request_headers:Dict={}):
-        """Retrieves stores available for a specific fulfillment option in an application.
-        :param slug : Slug of the fulfillment option for retrieving details. : type string
-        :param q : Query to search product by name. : type string
+    async def overrideBulkZone(self, batch_id=None, body="", request_headers:Dict={}):
+        """Resolve multiple zone conflicts.
+        :param batch_id : The unique identifier for current batch of zones to be updated. : type string
         """
         payload = {}
         
-        if slug is not None:
-            payload["slug"] = slug
-        if q is not None:
-            payload["q"] = q
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
 
         # Parameter validation
-        schema = ServiceabilityValidator.getFulfillmentOptionStores()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options/{slug}/stores", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"Slug of the fulfillment option for retrieving details.","schema":{"type":"string"},"required":true}],"optional":[{"name":"q","in":"query","required":false,"schema":{"type":"string"},"description":"Query to search product by name."}],"query":[{"name":"q","in":"query","required":false,"schema":{"type":"string"},"description":"Query to search product by name."}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"slug","description":"Slug of the fulfillment option for retrieving details.","schema":{"type":"string"},"required":true}]}""", serverType="platform", slug=slug, q=q)
-        query_string = await create_query_string(q=q)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options/{slug}/stores", slug=slug, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import FulfillmentOptionStores
-            schema = FulfillmentOptionStores()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getFulfillmentOptionStores")
-                print(e)
-
-        return response
-    
-    async def uploadBulkFulfillmentOptions(self, body="", request_headers:Dict={}):
-        """Uploads a bulk list of fulfillment options for an application, allowing multiple fulfillment configurations to be processed at once.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ServiceabilityValidator.uploadBulkFulfillmentOptions()
+        schema = ServiceabilityValidator.overrideBulkZone()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import FulfillmentOptionBulk
-        schema = FulfillmentOptionBulk()
+        from .models import BulkZoneOverrideSchema
+        schema = BulkZoneOverrideSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options/bulk", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/bulk/conflicts/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The unique identifier for current batch of zones to be updated.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The unique identifier for current batch of zones to be updated.","schema":{"type":"string"},"required":true}]}""", serverType="platform", batch_id=batch_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -2101,38 +2723,34 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options/bulk", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/bulk/conflicts/{batch_id}", batch_id=batch_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FulfillmentOptionBulkData
-            schema = FulfillmentOptionBulkData()
+            from .models import BulkZoneOverrideResponseSchema
+            schema = BulkZoneOverrideResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for uploadBulkFulfillmentOptions")
+                print("Response Validation failed for overrideBulkZone")
                 print(e)
 
         return response
     
-    async def validateBulkFulfillmentOptions(self, type=None, body="", request_headers:Dict={}):
-        """Validates a bulk list of fulfillment options for an application before processing, ensuring correctness for stores or products.
-        :param type : Type of entity being validated (stores or products). : type string
+    async def getBulkZoneOverrideStatus(self, batch_id=None, request_headers:Dict={}):
+        """Get status multiple zone conflicts.
+        :param batch_id : The unique identifier for current batch of zones to be updated. : type string
         """
         payload = {}
         
-        if type is not None:
-            payload["type"] = type
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
 
         # Parameter validation
-        schema = ServiceabilityValidator.validateBulkFulfillmentOptions()
+        schema = ServiceabilityValidator.getBulkZoneOverrideStatus()
         schema.dump(schema.load(payload))
         
-        # Body validation
-        from .models import FulfillmentOptionBulkValidate
-        schema = FulfillmentOptionBulkValidate()
-        schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options/bulk/validate/{type}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"type","description":"Type of entity being validated (stores or products).","schema":{"type":"string","enum":["stores","products"]},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"type","description":"Type of entity being validated (stores or products).","schema":{"type":"string","enum":["stores","products"]},"required":true}]}""", serverType="platform", type=type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/bulk/history/{batch_id}", """{"required":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The unique identifier for current batch of zones to be updated.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The unique identifier for the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"The unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"batch_id","description":"The unique identifier for current batch of zones to be updated.","schema":{"type":"string"},"required":true}]}""", serverType="platform", batch_id=batch_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -2149,59 +2767,15 @@ class Serviceability:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options/bulk/validate/{type}", type=type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/zones/bulk/history/{batch_id}", batch_id=batch_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import FulfillmentOptionBulkValidateData
-            schema = FulfillmentOptionBulkValidateData()
+            from .models import BulkZoneOverrideStatusSchema
+            schema = BulkZoneOverrideStatusSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for validateBulkFulfillmentOptions")
-                print(e)
-
-        return response
-    
-    async def getBulkFulfillmentValidationStatus(self, bulk_id=None, request_headers:Dict={}):
-        """Validates a bulk list of fulfillment options for an application before processing, ensuring correctness for stores or products.
-        :param bulk_id : Unique id created by validate api. : type string
-        """
-        payload = {}
-        
-        if bulk_id is not None:
-            payload["bulk_id"] = bulk_id
-
-        # Parameter validation
-        schema = ServiceabilityValidator.getBulkFulfillmentValidationStatus()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options/poll/validate/{bulk_id}", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"bulk_id","description":"Unique id created by validate api.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"bulk_id","description":"Unique id created by validate api.","schema":{"type":"string"},"required":true}]}""", serverType="platform", bulk_id=bulk_id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options/poll/validate/{bulk_id}", bulk_id=bulk_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import FulfillmentOptionBulkValidate
-            schema = FulfillmentOptionBulkValidate()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getBulkFulfillmentValidationStatus")
+                print("Response Validation failed for getBulkZoneOverrideStatus")
                 print(e)
 
         return response

@@ -16,7 +16,6 @@ class Content:
             "getBasicDetails": "/service/public/content/basic-details",
             "getMenuContent": "/service/public/content/menu",
             "getMenuContentByType": "/service/public/content/menu/{type}",
-            "getAnalyticsTags": "/service/public/content/analytics-tags",
             "getCustomPage": "/service/public/content/custom-pages/{slug}",
             "getFooterContent": "/service/public/content/footer",
             "getHomePageContent": "/service/public/content/home-page",
@@ -24,9 +23,8 @@ class Content:
             "getPricingBanner": "/service/public/content/pricing-banner",
             "getAllTags": "/service/public/content/tags",
             "getCredentialsByEntity": "/service/public/content/credentials/{entity_type}",
-            "getAllLanguages": "/service/public/content/languages",
-            "getLanguageByLocale": "/service/public/content/languages/{locale}",
-            "getAllTranslatableResources": "/service/public/content/translatable/resources"
+            "getSDKDocumentation": "/service/public/content/sdk-readme",
+            "getSDKDocumentationByType": "/service/public/content/sdk-readme/{type}"
             
         }
         self._urls = {
@@ -171,50 +169,6 @@ class Content:
 
         return response
     
-    async def getAnalyticsTags(self, body="", request_headers:Dict={}):
-        """Retrieve analytics tags.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ContentValidator.getAnalyticsTags()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getAnalyticsTags"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {
-            "User-Agent": self._conf.userAgent,
-            "Accept-Language": self._conf.language,
-            "x-currency-code":   self._conf.currency
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAnalyticsTags"]).netloc, "get", await create_url_without_domain("/service/public/content/analytics-tags", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import AnalyticsTagsSchema
-            schema = AnalyticsTagsSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getAnalyticsTags")
-                print(e)
-
-        return response
-    
     async def getCustomPage(self, slug=None, body="", request_headers:Dict={}):
         """Retrieve info of custom pagee to develop and manage custom webpages.
         :param slug : unique identifier created for each feature object in the schema. : type string
@@ -320,7 +274,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getHomePageContent"], proccessed_params="""{"required":[{"name":"page_type","in":"query","description":"The type of the page (e.g., pricing).","required":true,"schema":{"type":"string","enum":["home","features","pricing","theme"]}}],"optional":[],"query":[{"name":"page_type","in":"query","description":"The type of the page (e.g., pricing).","required":true,"schema":{"type":"string","enum":["home","features","pricing","theme"]}}],"headers":[],"path":[]}""", serverType="public", page_type=page_type)
+        url_with_params = await create_url_with_params(api_url=self._urls["getHomePageContent"], proccessed_params="""{"required":[{"name":"page_type","in":"query","description":"The type of the page (e.g., pricing).","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"page_type","in":"query","description":"The type of the page (e.g., pricing).","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="public", page_type=page_type)
         query_string = await create_query_string(page_type=page_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -499,7 +453,7 @@ class Content:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCredentialsByEntity"], proccessed_params="""{"required":[{"name":"entity_type","in":"path","description":"Server Type","required":true,"schema":{"type":"string","enum":["partner","platform"]}}],"optional":[],"query":[],"headers":[],"path":[{"name":"entity_type","in":"path","description":"Server Type","required":true,"schema":{"type":"string","enum":["partner","platform"]}}]}""", serverType="public", entity_type=entity_type)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCredentialsByEntity"], proccessed_params="""{"required":[{"name":"entity_type","in":"path","description":"Server Type","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"entity_type","in":"path","description":"Server Type","required":true,"schema":{"type":"string"}}]}""", serverType="public", entity_type=entity_type)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -532,18 +486,18 @@ class Content:
 
         return response
     
-    async def getAllLanguages(self, body="", request_headers:Dict={}):
-        """Fetches complete list of languages supported by the platform with their locale codes and text directions.
+    async def getSDKDocumentation(self, body="", request_headers:Dict={}):
+        """Get documentation of SDK
         """
         payload = {}
         
 
         # Parameter validation
-        schema = ContentValidator.getAllLanguages()
+        schema = ContentValidator.getSDKDocumentation()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getAllLanguages"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
+        url_with_params = await create_url_with_params(api_url=self._urls["getSDKDocumentation"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -563,69 +517,34 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllLanguages"]).netloc, "get", await create_url_without_domain("/service/public/content/languages", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        return response
-    
-    async def getLanguageByLocale(self, locale=None, body="", request_headers:Dict={}):
-        """Retrieves detailed information about a specific language using its locale identifier.
-        :param locale :  : type string
-        """
-        payload = {}
-        
-        if locale is not None:
-            payload["locale"] = locale
-
-        # Parameter validation
-        schema = ContentValidator.getLanguageByLocale()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getLanguageByLocale"], proccessed_params="""{"required":[{"name":"locale","in":"path","required":true,"schema":{"type":"string","example":"hi-IN"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"locale","in":"path","required":true,"schema":{"type":"string","example":"hi-IN"}}]}""", serverType="public", locale=locale)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {
-            "User-Agent": self._conf.userAgent,
-            "Accept-Language": self._conf.language,
-            "x-currency-code":   self._conf.currency
-        }
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getLanguageByLocale"]).netloc, "get", await create_url_without_domain("/service/public/content/languages/{locale}", locale=locale), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSDKDocumentation"]).netloc, "get", await create_url_without_domain("/service/public/content/sdk-readme", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import Language
-            schema = Language()
+            from .models import SDKLinksResponseSchema
+            schema = SDKLinksResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getLanguageByLocale")
+                print("Response Validation failed for getSDKDocumentation")
                 print(e)
 
         return response
     
-    async def getAllTranslatableResources(self, body="", request_headers:Dict={}):
-        """Retrieves all resources that can be translated across different languages in the system.
+    async def getSDKDocumentationByType(self, type=None, body="", request_headers:Dict={}):
+        """Get documentation of SDK by its type
+        :param type : Type of SDK : type string
         """
         payload = {}
         
+        if type is not None:
+            payload["type"] = type
 
         # Parameter validation
-        schema = ContentValidator.getAllTranslatableResources()
+        schema = ContentValidator.getSDKDocumentationByType()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getAllTranslatableResources"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
+        url_with_params = await create_url_with_params(api_url=self._urls["getSDKDocumentationByType"], proccessed_params="""{"required":[{"name":"type","in":"path","description":"Type of SDK","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"type","in":"path","description":"Type of SDK","schema":{"type":"string"},"required":true}]}""", serverType="public", type=type)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -645,7 +564,16 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllTranslatableResources"]).netloc, "get", await create_url_without_domain("/service/public/content/translatable/resources", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSDKDocumentationByType"]).netloc, "get", await create_url_without_domain("/service/public/content/sdk-readme/{type}", type=type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SDKbyTypeResponseSchema
+            schema = SDKbyTypeResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSDKDocumentationByType")
+                print(e)
 
         return response
     

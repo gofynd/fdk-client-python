@@ -122,7 +122,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-        
     
     
         
@@ -139,13 +138,9 @@ from ..ApplicationModel import BaseSchema
     
         
         
+        
+        
     
-    
-        
-        
-        
-        
-        
     
     
         
@@ -408,8 +403,6 @@ class CatalogValidator:
         latitude = fields.Float(required=False)
         
         longitude = fields.Float(required=False)
-        
-        tags = fields.Str(required=False)
          
         
     
@@ -445,22 +438,16 @@ class CatalogValidator:
         slug = fields.Str(required=False)
         
         id = fields.Int(required=False)
+        
+        size = fields.Str(required=False)
+        
+        seller_id = fields.Int(required=False)
          
         
     
     class getProductPriceBySlug(BaseSchema):
         
-        
-        slug = fields.Str(required=False)
-        
-        size = fields.Str(required=False)
-        
-        store_id = fields.Int(required=False)
-        
-        moq = fields.Int(required=False)
-        
-        fulfillment_option_slug = fields.Str(required=False)
-         
+        pass 
         
     
     class getProductSellersBySlug(BaseSchema):
@@ -470,9 +457,9 @@ class CatalogValidator:
         
         size = fields.Str(required=False)
         
-        strategy = fields.Str(required=False)
+        pincode = fields.Str(required=False)
         
-        fulfillment_option_slug = fields.Str(required=False)
+        strategy = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         

@@ -64,10 +64,6 @@ class FooterContentSchema(BaseSchema):
     pass
 
 
-class AnalyticsTagsSchema(BaseSchema):
-    pass
-
-
 class CustomPageBySlugSchema(BaseSchema):
     pass
 
@@ -144,27 +140,19 @@ class CredentialsSchema(BaseSchema):
     pass
 
 
+class SDKLinksResponseSchema(BaseSchema):
+    pass
+
+
+class SDKLinkObjectSchema(BaseSchema):
+    pass
+
+
+class SDKbyTypeResponseSchema(BaseSchema):
+    pass
+
+
 class ContentAPIError(BaseSchema):
-    pass
-
-
-class Language(BaseSchema):
-    pass
-
-
-class Error(BaseSchema):
-    pass
-
-
-class TranslatableResource(BaseSchema):
-    pass
-
-
-class Meta(BaseSchema):
-    pass
-
-
-class ResourceTranslation(BaseSchema):
     pass
 
 
@@ -386,24 +374,6 @@ class FooterContentSchema(BaseSchema):
     line_one = fields.Str(required=False)
     
     line_two = fields.Str(required=False)
-    
-
-
-class AnalyticsTagsSchema(BaseSchema):
-    # Content swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    __v = fields.Float(required=False)
-    
-    body_code = fields.Str(required=False)
-    
-    enabled = fields.Boolean(required=False)
-    
-    header_code = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
     
 
 
@@ -707,6 +677,40 @@ class CredentialsSchema(BaseSchema):
     
 
 
+class SDKLinksResponseSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    readmes = fields.List(fields.Nested(SDKLinkObjectSchema, required=False), required=False)
+    
+
+
+class SDKLinkObjectSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    owner = fields.Str(required=False)
+    
+    repo = fields.Str(required=False)
+    
+    path = fields.Str(required=False)
+    
+    image = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class SDKbyTypeResponseSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    readme_content = fields.Str(required=False)
+    
+
+
 class ContentAPIError(BaseSchema):
     # Content swagger.json
 
@@ -726,72 +730,6 @@ class ContentAPIError(BaseSchema):
     stack_trace = fields.Str(required=False)
     
     meta = fields.Dict(required=False)
-    
-
-
-class Language(BaseSchema):
-    # Content swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    locale = fields.Str(required=False)
-    
-    direction = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    display_name = fields.Str(required=False)
-    
-
-
-class Error(BaseSchema):
-    # Content swagger.json
-
-    
-    error = fields.Str(required=False)
-    
-
-
-class TranslatableResource(BaseSchema):
-    # Content swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    type = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    meta = fields.Nested(Meta, required=False)
-    
-
-
-class Meta(BaseSchema):
-    # Content swagger.json
-
-    
-    created_by = fields.Str(required=False)
-    
-    updated_by = fields.Str(required=False)
-    
-    created_at = fields.Str(required=False)
-    
-    updated_at = fields.Str(required=False)
-    
-
-
-class ResourceTranslation(BaseSchema):
-    # Content swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    locale = fields.Str(required=False)
-    
-    value = fields.Dict(required=False)
     
 
 

@@ -16,9 +16,7 @@ from ..PartnerModel import BaseSchema
         
         
         
-                
-from .models import PriorityEnum
-
+        
         
         
         
@@ -61,7 +59,7 @@ class LeadValidator:
         
         status = fields.Str(required=False)
         
-        priority = fields.Nested(PriorityEnum, required=False)
+        priority = fields.Str(required=False)
         
         category = fields.Str(required=False)
         

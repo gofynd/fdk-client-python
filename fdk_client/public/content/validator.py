@@ -16,7 +16,6 @@ from ..PublicModel import BaseSchema
         
     
     
-    
         
     
     
@@ -32,7 +31,6 @@ from ..PublicModel import BaseSchema
     
     
         
-    
 
 class ContentValidator:
     
@@ -52,11 +50,6 @@ class ContentValidator:
         
         type = fields.Str(required=False)
          
-        
-    
-    class getAnalyticsTags(BaseSchema):
-        
-        pass 
         
     
     class getCustomPage(BaseSchema):
@@ -100,21 +93,16 @@ class ContentValidator:
          
         
     
-    class getAllLanguages(BaseSchema):
+    class getSDKDocumentation(BaseSchema):
         
         pass 
         
     
-    class getLanguageByLocale(BaseSchema):
+    class getSDKDocumentationByType(BaseSchema):
         
         
-        locale = fields.Str(required=False)
+        type = fields.Str(required=False)
          
-        
-    
-    class getAllTranslatableResources(BaseSchema):
-        
-        pass 
         
     
     

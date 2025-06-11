@@ -40,11 +40,11 @@ class BulkDiscount(BaseSchema):
     pass
 
 
-class FileJobResponseSchema(BaseSchema):
+class FileJobResponse(BaseSchema):
     pass
 
 
-class FileJobRequestSchema(BaseSchema):
+class FileJobRequest(BaseSchema):
     pass
 
 
@@ -52,7 +52,7 @@ class DownloadFileJob(BaseSchema):
     pass
 
 
-class CancelJobResponseSchema(BaseSchema):
+class CancelJobResponse(BaseSchema):
     pass
 
 
@@ -99,9 +99,7 @@ class CreateUpdateDiscount(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    app_ids = fields.List(fields.Str(required=False), required=False)
-    
-    extension_ids = fields.List(fields.Str(required=False), required=False)
+    app_id = fields.Str(required=False)
     
     job_type = fields.Str(required=False)
     
@@ -117,7 +115,7 @@ class CreateUpdateDiscount(BaseSchema):
     
     store_ids = fields.List(fields.Int(required=False), required=False)
     
-    zone_ids = fields.List(fields.Str(required=False), required=False)
+    factory_type_ids = fields.List(fields.Str(required=False), required=False)
     
     validity = fields.Nested(ValidityObject, required=False)
     
@@ -149,7 +147,7 @@ class DiscountJob(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    app_ids = fields.List(fields.Str(required=False), required=False)
+    app_id = fields.Str(required=False)
     
     job_type = fields.Str(required=False)
     
@@ -165,7 +163,7 @@ class DiscountJob(BaseSchema):
     
     store_ids = fields.List(fields.Int(required=False), required=False)
     
-    zone_ids = fields.List(fields.Str(required=False), required=False)
+    factory_type_ids = fields.List(fields.Str(required=False), required=False)
     
     discount_meta = fields.Nested(DiscountMeta, required=False)
     
@@ -193,7 +191,7 @@ class FileJobBody(BaseSchema):
     
     is_active = fields.Boolean(required=False)
     
-    app_ids = fields.List(fields.Str(required=False), required=False)
+    app_id = fields.Str(required=False)
     
     job_type = fields.Str(required=False)
     
@@ -209,9 +207,7 @@ class FileJobBody(BaseSchema):
     
     store_ids = fields.List(fields.Int(required=False), required=False)
     
-    extension_ids = fields.List(fields.Str(required=False), required=False)
-    
-    zone_ids = fields.List(fields.Str(required=False), required=False)
+    factory_type_ids = fields.List(fields.Str(required=False), required=False)
     
     discount_meta = fields.Nested(DiscountMeta, required=False)
     
@@ -249,6 +245,10 @@ class DiscountItems(BaseSchema):
     
     seller_identifier = fields.Str(required=False)
     
+    store_code = fields.Str(required=False)
+    
+    price_zone = fields.Str(required=False)
+    
     discount_type = fields.Str(required=False)
     
     value = fields.Float(required=False)
@@ -267,7 +267,7 @@ class BulkDiscount(BaseSchema):
     
 
 
-class FileJobResponseSchema(BaseSchema):
+class FileJobResponse(BaseSchema):
     # Discount swagger.json
 
     
@@ -291,10 +291,6 @@ class FileJobResponseSchema(BaseSchema):
     
     progress = fields.Int(required=False)
     
-    extension_ids = fields.List(fields.Str(required=False), required=False)
-    
-    zone_ids = fields.List(fields.Str(required=False), required=False)
-    
     created_on = fields.Str(required=False)
     
     modified_on = fields.Str(required=False)
@@ -303,7 +299,7 @@ class FileJobResponseSchema(BaseSchema):
     
 
 
-class FileJobRequestSchema(BaseSchema):
+class FileJobRequest(BaseSchema):
     # Discount swagger.json
 
     
@@ -313,7 +309,7 @@ class FileJobRequestSchema(BaseSchema):
     
     company_id = fields.Int(required=False)
     
-    app_ids = fields.List(fields.Str(required=False), required=False)
+    app_id = fields.Str(required=False)
     
     job_type = fields.Str(required=False)
     
@@ -337,13 +333,11 @@ class DownloadFileJob(BaseSchema):
     # Discount swagger.json
 
     
-    brand_ids = fields.List(fields.Int(required=False), required=False)
-    
-    store_ids = fields.List(fields.Int(required=False), required=False)
+    app_id = fields.Str(required=False)
     
 
 
-class CancelJobResponseSchema(BaseSchema):
+class CancelJobResponse(BaseSchema):
     # Discount swagger.json
 
     
@@ -369,7 +363,7 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
-    page_size = fields.Int(required=False)
+    total = fields.Int(required=False)
     
 
 

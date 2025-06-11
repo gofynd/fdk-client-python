@@ -8,11 +8,11 @@ from ..PartnerModel import BaseSchema
 
 
 
-class SubscriberUpdate(BaseSchema):
+class UpdateSubscriberRequest(BaseSchema):
     pass
 
 
-class SubscriberUpdateResult(BaseSchema):
+class UpdateSubscriberResponse(BaseSchema):
     pass
 
 
@@ -24,31 +24,23 @@ class AuthMeta(BaseSchema):
     pass
 
 
-class BroadcasterConfig(BaseSchema):
-    pass
-
-
 class SubscriberEventMapping(BaseSchema):
     pass
 
 
-class FilterSchema(BaseSchema):
+class EventConfigResponse(BaseSchema):
     pass
 
 
-class EventConfigDetails(BaseSchema):
+class SubscriberConfigResponse(BaseSchema):
     pass
 
 
-class SubscriberConfigDetails(BaseSchema):
+class InvalidEventsRequest(BaseSchema):
     pass
 
 
-class InvalidEventsPayload(BaseSchema):
-    pass
-
-
-class InvalidEventsResult(BaseSchema):
+class InvalidEventsResponse(BaseSchema):
     pass
 
 
@@ -76,7 +68,7 @@ class HistoryItems(BaseSchema):
     pass
 
 
-class HistoryResult(BaseSchema):
+class HistoryResponse(BaseSchema):
     pass
 
 
@@ -84,15 +76,15 @@ class HistoryPayload(BaseSchema):
     pass
 
 
-class CancelDownloadResult(BaseSchema):
+class CancelDownloadResponse(BaseSchema):
     pass
 
 
-class FilterReportResult(BaseSchema):
+class FilterReportResponse(BaseSchema):
     pass
 
 
-class DeliveryTsResult(BaseSchema):
+class DeliveryTsResponse(BaseSchema):
     pass
 
 
@@ -100,7 +92,7 @@ class DeliveryTsSchema(BaseSchema):
     pass
 
 
-class DeliveryDetailsPayload(BaseSchema):
+class DeliveryDetailsRequest(BaseSchema):
     pass
 
 
@@ -108,7 +100,7 @@ class EventDeliveryDetailSchema(BaseSchema):
     pass
 
 
-class DeliveryDetailsResult(BaseSchema):
+class DeliveryDetailsResponse(BaseSchema):
     pass
 
 
@@ -132,7 +124,7 @@ class AvgResponseTime(BaseSchema):
     pass
 
 
-class DeliverySummaryResult(BaseSchema):
+class DeliverySummaryResponse(BaseSchema):
     pass
 
 
@@ -147,7 +139,7 @@ class ItemSchema(BaseSchema):
 
 
 
-class SubscriberUpdate(BaseSchema):
+class UpdateSubscriberRequest(BaseSchema):
     # Webhook swagger.json
 
     
@@ -155,7 +147,7 @@ class SubscriberUpdate(BaseSchema):
     
 
 
-class SubscriberUpdateResult(BaseSchema):
+class UpdateSubscriberResponse(BaseSchema):
     # Webhook swagger.json
 
     
@@ -187,24 +179,6 @@ class AuthMeta(BaseSchema):
     
 
 
-class BroadcasterConfig(BaseSchema):
-    # Webhook swagger.json
-
-    
-    topic = fields.Str(required=False)
-    
-    queue = fields.Str(required=False)
-    
-    event_bridge_name = fields.Str(required=False)
-    
-    workflow_name = fields.Str(required=False)
-    
-    account_id = fields.Str(required=False)
-    
-    detail_type = fields.Str(required=False)
-    
-
-
 class SubscriberEventMapping(BaseSchema):
     # Webhook swagger.json
 
@@ -215,31 +189,13 @@ class SubscriberEventMapping(BaseSchema):
     
     subscriber_id = fields.Int(required=False)
     
-    filters = fields.Nested(FilterSchema, required=False)
-    
-    reducer = fields.Dict(required=False, allow_none=True)
-    
-    broadcaster_config = fields.Nested(BroadcasterConfig, required=False)
+    topic = fields.Str(required=False, allow_none=True)
     
     created_on = fields.Str(required=False)
     
 
 
-class FilterSchema(BaseSchema):
-    # Webhook swagger.json
-
-    
-    query = fields.Str(required=False)
-    
-    condition = fields.Str(required=False)
-    
-    logic = fields.Str(required=False)
-    
-    conditions = fields.List(fields.Dict(required=False), required=False)
-    
-
-
-class EventConfigDetails(BaseSchema):
+class EventConfigResponse(BaseSchema):
     # Webhook swagger.json
 
     
@@ -269,7 +225,7 @@ class EventConfigDetails(BaseSchema):
     
 
 
-class SubscriberConfigDetails(BaseSchema):
+class SubscriberConfigResponse(BaseSchema):
     # Webhook swagger.json
 
     
@@ -279,7 +235,7 @@ class SubscriberConfigDetails(BaseSchema):
     
 
 
-class InvalidEventsPayload(BaseSchema):
+class InvalidEventsRequest(BaseSchema):
     # Webhook swagger.json
 
     
@@ -295,7 +251,7 @@ class InvalidEventsPayload(BaseSchema):
     
 
 
-class InvalidEventsResult(BaseSchema):
+class InvalidEventsResponse(BaseSchema):
     # Webhook swagger.json
 
     
@@ -391,7 +347,7 @@ class HistoryItems(BaseSchema):
     
 
 
-class HistoryResult(BaseSchema):
+class HistoryResponse(BaseSchema):
     # Webhook swagger.json
 
     
@@ -415,7 +371,7 @@ class HistoryPayload(BaseSchema):
     
 
 
-class CancelDownloadResult(BaseSchema):
+class CancelDownloadResponse(BaseSchema):
     # Webhook swagger.json
 
     
@@ -425,7 +381,7 @@ class CancelDownloadResult(BaseSchema):
     
 
 
-class FilterReportResult(BaseSchema):
+class FilterReportResponse(BaseSchema):
     # Webhook swagger.json
 
     
@@ -435,7 +391,7 @@ class FilterReportResult(BaseSchema):
     
 
 
-class DeliveryTsResult(BaseSchema):
+class DeliveryTsResponse(BaseSchema):
     # Webhook swagger.json
 
     
@@ -457,7 +413,7 @@ class DeliveryTsSchema(BaseSchema):
     
 
 
-class DeliveryDetailsPayload(BaseSchema):
+class DeliveryDetailsRequest(BaseSchema):
     # Webhook swagger.json
 
     
@@ -491,7 +447,7 @@ class EventDeliveryDetailSchema(BaseSchema):
     
 
 
-class DeliveryDetailsResult(BaseSchema):
+class DeliveryDetailsResponse(BaseSchema):
     # Webhook swagger.json
 
     
@@ -549,7 +505,7 @@ class Page(BaseSchema):
     
     size = fields.Int(required=False)
     
-    page_size = fields.Int(required=False)
+    total = fields.Int(required=False)
     
 
 
@@ -585,19 +541,13 @@ class AvgResponseTime(BaseSchema):
     # Webhook swagger.json
 
     
-    last_attempted_on = fields.Str(required=False)
+    timestamp = fields.Str(required=False)
     
-    response_code = fields.Float(required=False)
-    
-    response_time = fields.Str(required=False)
-    
-    attempt = fields.Float(required=False)
-    
-    total = fields.Float(required=False)
+    response_time = fields.Float(required=False)
     
 
 
-class DeliverySummaryResult(BaseSchema):
+class DeliverySummaryResponse(BaseSchema):
     # Webhook swagger.json
 
     
@@ -635,11 +585,9 @@ class ItemSchema(BaseSchema):
     
     provider = fields.Str(required=False)
     
-    source = fields.Str(required=False, allow_none=True)
-    
     association = fields.Nested(Association, required=False)
     
-    custom_headers = fields.Dict(required=False, allow_none=True)
+    custom_headers = fields.Dict(required=False)
     
     status = fields.Str(required=False)
     
@@ -653,7 +601,7 @@ class ItemSchema(BaseSchema):
     
     auth_meta = fields.Nested(AuthMeta, required=False)
     
-    event_configs = fields.List(fields.Nested(EventConfigDetails, required=False), required=False)
+    event_configs = fields.List(fields.Nested(EventConfigResponse, required=False), required=False)
     
     event_id = fields.List(fields.Int(required=False), required=False)
     
