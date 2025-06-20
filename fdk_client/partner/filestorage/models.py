@@ -64,6 +64,18 @@ class FailedBrowseFilesResult(BaseSchema):
     pass
 
 
+class SignedUrl(BaseSchema):
+    pass
+
+
+class SignUrlResult(BaseSchema):
+    pass
+
+
+class SignUrl(BaseSchema):
+    pass
+
+
 
 
 
@@ -79,9 +91,7 @@ class SaveProxy(BaseSchema):
     # FileStorage swagger.json
 
     
-    id = fields.Int(required=False)
-    
-    token = fields.Str(required=False)
+    success = fields.Boolean(required=False)
     
 
 
@@ -89,9 +99,7 @@ class ProxyFileData(BaseSchema):
     # FileStorage swagger.json
 
     
-    email = fields.Str(required=False)
-    
-    password = fields.Str(required=False)
+    name = fields.Str(required=False)
     
 
 
@@ -111,17 +119,13 @@ class ProxyFile(BaseSchema):
     
     url = fields.Str(required=False)
     
-    headers = fields.Dict(required=False)
-    
 
 
 class FetchProxyDetails(BaseSchema):
     # FileStorage swagger.json
 
     
-    data = fields.Dict(required=False)
-    
-    support = fields.Dict(required=False)
+    success = fields.Boolean(required=False)
     
 
 
@@ -207,8 +211,6 @@ class FileUploadStart(BaseSchema):
     
     params = fields.Dict(required=False)
     
-    enc_key = fields.Str(required=False)
-    
 
 
 class CreatedBy(BaseSchema):
@@ -258,6 +260,36 @@ class FailedBrowseFilesResult(BaseSchema):
 
     
     message = fields.Str(required=False)
+    
+
+
+class SignedUrl(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    url = fields.Str(required=False)
+    
+    signed_url = fields.Str(required=False)
+    
+    expiry = fields.Int(required=False)
+    
+
+
+class SignUrlResult(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    urls = fields.List(fields.Nested(SignedUrl, required=False), required=False)
+    
+
+
+class SignUrl(BaseSchema):
+    # FileStorage swagger.json
+
+    
+    expiry = fields.Int(required=False)
+    
+    urls = fields.List(fields.Str(required=False), required=False)
     
 
 

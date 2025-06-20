@@ -13,7 +13,7 @@ class Common:
 
     
     async def searchApplication(self, authorization=None, query=None, request_headers:Dict={}):
-        """Provide application name or domain url
+        """This API retrieves details for a specific sales channel based on the provided search criteria. The search can be performed using the name of the sales channel
         :param authorization :  : type string
         :param query : Provide application name : type string
         """
@@ -50,8 +50,8 @@ class Common:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/common/configuration/v1.0/application/search-application", authorization=authorization, query=query), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationResponse
-            schema = ApplicationResponse()
+            from .models import ApplicationResponseSchema
+            schema = ApplicationResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:

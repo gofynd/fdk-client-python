@@ -14,6 +14,38 @@ from ..ApplicationModel import BaseSchema
         
     
     
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+    
+        
+    
+    
+        
+    
+    
+    
+    
+    
+    
+        
+    
+    
+    
+    
+    
     
         
     
@@ -33,39 +65,6 @@ from ..ApplicationModel import BaseSchema
         
     
     
-    
-        
-    
-    
-    
-    
-    
-    
-        
-    
-    
-    
-    
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
-        
-    
-    
         
     
     
@@ -112,21 +111,25 @@ from ..ApplicationModel import BaseSchema
         
     
     
+    
+    
+        
+    
+    
+    
+        
+    
+    
+        
+    
+    
+        
+    
+    
+        
 
 class UserValidator:
     
-    
-    class getUserAttributes(BaseSchema):
-        
-        
-        slug = fields.Str(required=False)
-         
-        
-    
-    class updateUserAttributes(BaseSchema):
-        
-        pass 
-        
     
     class loginWithFacebook(BaseSchema):
         
@@ -176,6 +179,13 @@ class UserValidator:
         
     
     class sendResetPasswordEmail(BaseSchema):
+        
+        
+        platform = fields.Str(required=False)
+         
+        
+    
+    class sendResetPasswordMobile(BaseSchema):
         
         
         platform = fields.Str(required=False)
@@ -394,6 +404,46 @@ class UserValidator:
     class logout(BaseSchema):
         
         pass 
+        
+    
+    class getUserAttributes(BaseSchema):
+        
+        
+        slug = fields.Str(required=False)
+         
+        
+    
+    class updateUserAttributes(BaseSchema):
+        
+        pass 
+        
+    
+    class sendOTPOnPrimary(BaseSchema):
+        
+        
+        entity = fields.Str(required=False)
+         
+        
+    
+    class verifyOTPonPrimary(BaseSchema):
+        
+        
+        entity = fields.Str(required=False)
+         
+        
+    
+    class sendOTPForUpdate(BaseSchema):
+        
+        
+        entity = fields.Str(required=False)
+         
+        
+    
+    class verifyOTPForUpdate(BaseSchema):
+        
+        
+        entity = fields.Str(required=False)
+         
         
     
     

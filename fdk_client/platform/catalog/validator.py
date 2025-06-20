@@ -19,6 +19,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -46,6 +47,9 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+    
+    
         
     
     
@@ -55,6 +59,8 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
         
         
         
@@ -70,25 +76,19 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
         
         
         
     
     
         
-    
-    
         
         
-    
-    
         
         
-    
-    
+        
         
+        
     
     
         
@@ -103,6 +103,8 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
         
     
     
@@ -112,14 +114,17 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
     
     
+        
         
         
     
     
         
-        
+    
+    
         
     
     
@@ -153,12 +158,12 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
         
         
         
         
+    
+    
         
     
     
@@ -201,7 +206,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
     
     
@@ -209,6 +213,8 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
         
         
         
@@ -232,6 +238,9 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
         
         
         
@@ -242,22 +251,18 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
         
         
         
     
     
-        
-        
         
         
         
-        
-        
     
     
+        
+        
         
         
         
@@ -268,17 +273,12 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
         
-    
-    
         
         
-    
-    
         
     
     
@@ -288,6 +288,9 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+    
+    
         
     
     
@@ -325,7 +328,6 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
         
         
@@ -364,14 +366,14 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
-        
         
         
     
     
         
         
+        
+        
     
     
         
@@ -394,24 +396,22 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
         
     
     
         
         
+        
     
     
-        
         
     
     
         
         
-        
     
     
+        
         
 
 
@@ -435,13 +435,15 @@ class CatalogValidator:
         page_size = fields.Int(required=False)
         
         uids = fields.List(fields.Int(required=False), required=False)
+        
+        slug = fields.Str(required=False)
          
         
     
     class getCategoryData(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         uid = fields.Str(required=False)
          
@@ -450,7 +452,7 @@ class CatalogValidator:
     class getSellerInsights(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         seller_app_id = fields.Str(required=False)
          
@@ -459,7 +461,7 @@ class CatalogValidator:
     class listDepartmentsData(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -473,14 +475,14 @@ class CatalogValidator:
         
         is_active = fields.Boolean(required=False)
         
-        uids = fields.List(fields.Int(required=False), required=False)
+        slug = fields.Str(required=False)
          
         
     
     class getDepartmentData(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         uid = fields.Str(required=False)
          
@@ -489,7 +491,7 @@ class CatalogValidator:
     class listTemplateBrandTypeValues(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         filter = fields.Str(required=False)
         
@@ -499,10 +501,26 @@ class CatalogValidator:
          
         
     
+    class bulkHsnCode(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
     class getHsnCode(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class updateHsnCode(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
          
@@ -511,9 +529,9 @@ class CatalogValidator:
     class getInventories(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
-        item_id = fields.Int(required=False)
+        item_id = fields.Str(required=False)
         
         size = fields.Str(required=False)
         
@@ -535,9 +553,11 @@ class CatalogValidator:
         
         seller_identifiers = fields.List(fields.Str(required=False), required=False)
         
-        min_sellable = fields.Int(required=False)
+        qty_gt = fields.Int(required=False)
         
-        max_sellable = fields.Int(required=False)
+        qty_lt = fields.Int(required=False)
+        
+        qty_type = fields.Str(required=False)
         
         from_date = fields.Str(required=False)
         
@@ -555,6 +575,16 @@ class CatalogValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+        
+        search = fields.Str(required=False)
+        
+        start_date = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
+        
+        stage = fields.Str(required=False)
+        
+        tags = fields.Str(required=False)
          
         
     
@@ -568,7 +598,7 @@ class CatalogValidator:
     class deleteBulkInventoryJob(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         batch_id = fields.Str(required=False)
          
@@ -583,13 +613,6 @@ class CatalogValidator:
          
         
     
-    class createInventoryExportJob(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class getInventoryExport(BaseSchema):
         
         
@@ -597,55 +620,28 @@ class CatalogValidator:
          
         
     
-    class patchProductExportDetail(BaseSchema):
+    class createInventoryExportJob(BaseSchema):
         
         
         company_id = fields.Int(required=False)
-        
-        job_id = fields.Str(required=False)
-         
-        
-    
-    class getProductExportDetail(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        job_id = fields.Str(required=False)
-         
-        
-    
-    class patchInventoryExportDetail(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        job_id = fields.Str(required=False)
-         
-        
-    
-    class getInventoryExportDetail(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        job_id = fields.Str(required=False)
          
         
     
     class exportInventoryConfig(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
-        filter = fields.Str(required=False)
+        filter_type = fields.Str(required=False)
          
         
     
     class downloadInventoryTemplateView(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
+        
+        schema_type = fields.Str(required=False)
         
         type = fields.Str(required=False)
          
@@ -654,11 +650,25 @@ class CatalogValidator:
     class validateProductTemplateSchema(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         item_type = fields.Str(required=False)
         
-        bulk = fields.Boolean(required=False)
+        schema_type = fields.Str(required=False)
+         
+        
+    
+    class getOptimalLocations(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
+    class getMarketplaceOptinDetail(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     
@@ -726,13 +736,6 @@ class CatalogValidator:
          
         
     
-    class createProductBundle(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class getProductBundle(BaseSchema):
         
         
@@ -745,6 +748,13 @@ class CatalogValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+         
+        
+    
+    class createProductBundle(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     
@@ -807,9 +817,9 @@ class CatalogValidator:
     class deleteProductBulkJob(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
-        batch_id = fields.Str(required=False)
+        batch_id = fields.Int(required=False)
          
         
     
@@ -822,10 +832,17 @@ class CatalogValidator:
          
         
     
+    class listProductTemplateExportDetails(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+         
+        
+    
     class listHSNCodes(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
          
         
     
@@ -842,6 +859,10 @@ class CatalogValidator:
         company_id = fields.Int(required=False)
         
         department = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     
@@ -853,21 +874,13 @@ class CatalogValidator:
         departments = fields.Str(required=False)
         
         item_type = fields.Str(required=False)
-        
-        page_size = fields.Float(required=False)
-        
-        page_no = fields.Float(required=False)
-        
-        q = fields.Str(required=False)
-        
-        slug = fields.Str(required=False)
          
         
     
     class downloadProductTemplateViews(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         slug = fields.Str(required=False)
         
@@ -880,9 +893,20 @@ class CatalogValidator:
     class validateProductTemplate(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         slug = fields.Str(required=False)
+        
+        item_type = fields.Str(required=False)
+        
+        bulk = fields.Boolean(required=False)
+         
+        
+    
+    class validateProductGlobalTemplate(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
         
         item_type = fields.Str(required=False)
         
@@ -894,10 +918,6 @@ class CatalogValidator:
         
         
         company_id = fields.Int(required=False)
-        
-        type = fields.Str(required=False)
-        
-        slug = fields.Str(required=False)
          
         
     
@@ -923,9 +943,15 @@ class CatalogValidator:
     class getProductSize(BaseSchema):
         
         
+        item_code = fields.Str(required=False)
+        
         company_id = fields.Int(required=False)
         
         item_id = fields.Int(required=False)
+        
+        brand_uid = fields.Int(required=False)
+        
+        uid = fields.Int(required=False)
          
         
     
@@ -959,6 +985,17 @@ class CatalogValidator:
          
         
     
+    class addInventory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        item_id = fields.Int(required=False)
+        
+        size = fields.Str(required=False)
+         
+        
+    
     class getVariantsOfProducts(BaseSchema):
         
         
@@ -974,44 +1011,6 @@ class CatalogValidator:
          
         
     
-    class getCompanyVerification(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        q = fields.Str(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-         
-        
-    
-    class getProductVerificationDetails(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        item_id = fields.Int(required=False)
-         
-        
-    
-    class getVariantTypes(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        template_tag = fields.Str(required=False)
-         
-        
-    
-    class createSizeGuide(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class getSizeGuides(BaseSchema):
         
         
@@ -1021,29 +1020,36 @@ class CatalogValidator:
         
         q = fields.Str(required=False)
         
-        brand_id = fields.Int(required=False)
-        
         tag = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+        
+        brand_id = fields.Int(required=False)
+         
+        
+    
+    class createSizeGuide(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
          
         
     
     class getSizeGuide(BaseSchema):
         
         
-        id = fields.Str(required=False)
+        company_id = fields.Str(required=False)
         
-        company_id = fields.Int(required=False)
+        id = fields.Str(required=False)
          
         
     
     class updateSizeGuide(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
          
@@ -1113,8 +1119,6 @@ class CatalogValidator:
         
         brand_ids = fields.List(fields.Int(required=False), required=False)
         
-        multi_size = fields.Boolean(required=False)
-        
         category_ids = fields.List(fields.Int(required=False), required=False)
         
         item_ids = fields.List(fields.Int(required=False), required=False)
@@ -1148,7 +1152,7 @@ class CatalogValidator:
     class createProduct(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
          
         
     
@@ -1166,7 +1170,7 @@ class CatalogValidator:
     class getProductExportJobs(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         status = fields.Str(required=False)
         
@@ -1189,6 +1193,15 @@ class CatalogValidator:
          
         
     
+    class deleteProduct(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        item_id = fields.Int(required=False)
+         
+        
+    
     class getProduct(BaseSchema):
         
         
@@ -1205,16 +1218,7 @@ class CatalogValidator:
     class editProduct(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
-        
-        item_id = fields.Int(required=False)
-         
-        
-    
-    class deleteProduct(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         item_id = fields.Int(required=False)
          
@@ -1223,7 +1227,7 @@ class CatalogValidator:
     class allSizes(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         item_id = fields.Int(required=False)
          
@@ -1251,12 +1255,25 @@ class CatalogValidator:
          
         
     
-    class getProductTemplateBySlug(BaseSchema):
+    class updateLocationPrice(BaseSchema):
         
         
         company_id = fields.Int(required=False)
         
-        slug = fields.Str(required=False)
+        store_id = fields.Int(required=False)
+        
+        seller_identifier = fields.Str(required=False)
+         
+        
+    
+    class updateLocationQuantity(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        store_id = fields.Int(required=False)
+        
+        seller_identifier = fields.Str(required=False)
          
         
     
@@ -1272,7 +1289,7 @@ class CatalogValidator:
         
         company_id = fields.Int(required=False)
         
-        marketplace = fields.Str(required=False)
+        marketplace_slug = fields.Str(required=False)
          
         
     
@@ -1281,25 +1298,7 @@ class CatalogValidator:
         
         company_id = fields.Int(required=False)
         
-        marketplace = fields.Str(required=False)
-         
-        
-    
-    class getCompanyBrandsDRI(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-         
-        
-    
-    class getLocationTags(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
+        marketplace_slug = fields.Str(required=False)
          
         
     

@@ -15,8 +15,6 @@ class User:
     def __init__(self, config: ApplicationConfig):
         self._conf = config
         self._relativeUrls = {
-            "getUserAttributes": "/service/application/user/profile/v1.0/user-attributes",
-            "updateUserAttributes": "/service/application/user/profile/v1.0/user-attributes",
             "loginWithFacebook": "/service/application/user/authentication/v1.0/login/facebook-token",
             "loginWithGoogle": "/service/application/user/authentication/v1.0/login/google-token",
             "loginWithGoogleAndroid": "/service/application/user/authentication/v1.0/login/google-android",
@@ -25,6 +23,7 @@ class User:
             "loginWithOTP": "/service/application/user/authentication/v1.0/login/otp",
             "loginWithEmailAndPassword": "/service/application/user/authentication/v1.0/login/password",
             "sendResetPasswordEmail": "/service/application/user/authentication/v1.0/login/password/reset",
+            "sendResetPasswordMobile": "/service/application/user/authentication/v1.0/login/password/mobile/reset",
             "sendResetToken": "/service/application/user/authentication/v1.0/login/password/reset/token",
             "forgotPassword": "/service/application/user/authentication/v1.0/login/password/reset/forgot",
             "resetForgotPassword": "/service/application/user/authentication/v1.0/login/password/forgot",
@@ -56,7 +55,13 @@ class User:
             "sendVerificationLinkToEmail": "/service/application/user/profile/v1.0/email/link/send",
             "userExists": "/service/application/user/authentication/v1.0/user-exists",
             "deleteUser": "/service/application/user/authentication/v1.0/delete",
-            "logout": "/service/application/user/authentication/v1.0/logout"
+            "logout": "/service/application/user/authentication/v1.0/logout",
+            "getUserAttributes": "/service/application/user/profile/v1.0/user-attributes",
+            "updateUserAttributes": "/service/application/user/profile/v1.0/user-attributes",
+            "sendOTPOnPrimary": "/service/application/user/profile/v2.0/{entity}/primary/otp/send",
+            "verifyOTPonPrimary": "/service/application/user/profile/v2.0/{entity}/primary/otp/verify",
+            "sendOTPForUpdate": "/service/application/user/profile/v2.0/{entity}/otp/send",
+            "verifyOTPForUpdate": "/service/application/user/profile/v2.0/{entity}/otp/verify"
             
         }
         self._urls = {
@@ -65,99 +70,6 @@ class User:
 
     async def updateUrls(self, urls):
         self._urls.update(urls)
-    
-    async def getUserAttributes(self, slug=None, body="", request_headers:Dict={}):
-        """Get the list of user attributes.
-        :param slug : Filter by attribute slug. : type string
-        """
-        payload = {}
-        
-        if slug is not None:
-            payload["slug"] = slug
-
-        # Parameter validation
-        schema = UserValidator.getUserAttributes()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getUserAttributes"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"slug","schema":{"type":"string"},"description":"Filter by attribute slug."}],"query":[{"in":"query","name":"slug","schema":{"type":"string"},"description":"Filter by attribute slug."}],"headers":[],"path":[]}""", serverType="application", slug=slug)
-        query_string = await create_query_string(slug=slug)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserAttributes"]).netloc, "get", await create_url_without_domain("/service/application/user/profile/v1.0/user-attributes", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import UserAttributes
-            schema = UserAttributes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getUserAttributes")
-                print(e)
-
-        return response
-    
-    async def updateUserAttributes(self, body="", request_headers:Dict={}):
-        """Update user attributes.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = UserValidator.updateUserAttributes()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import UpdateAttributesRequestPayload
-        schema = UpdateAttributesRequestPayload()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(api_url=self._urls["updateUserAttributes"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateUserAttributes"]).netloc, "patch", await create_url_without_domain("/service/application/user/profile/v1.0/user-attributes", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import UserAttributes
-            schema = UserAttributes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateUserAttributes")
-                print(e)
-
-        return response
     
     async def loginWithFacebook(self, platform=None, body="", request_headers:Dict={}):
         """Enable users to log in to the system using their facebook accounts.
@@ -449,8 +361,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["loginWithOTP"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/otp", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SendOtpResponse
-            schema = SendOtpResponse()
+            from .models import SendOtp
+            schema = SendOtp()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -553,6 +465,47 @@ class User:
             except Exception as e:
                 print("Response Validation failed for sendResetPasswordEmail")
                 print(e)
+
+        return response
+    
+    async def sendResetPasswordMobile(self, platform=None, body="", request_headers:Dict={}):
+        """Send a password reset link to the user's mobile.
+        :param platform : ID of the application. : type string
+        """
+        payload = {}
+        
+        if platform is not None:
+            payload["platform"] = platform
+
+        # Parameter validation
+        schema = UserValidator.sendResetPasswordMobile()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SendResetPasswordMobileRequestSchema
+        schema = SendResetPasswordMobileRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["sendResetPasswordMobile"], proccessed_params="""{"required":[],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"headers":[],"path":[]}""", serverType="application", platform=platform)
+        query_string = await create_query_string(platform=platform)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendResetPasswordMobile"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/login/password/mobile/reset", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         return response
     
@@ -1018,8 +971,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendOTPOnMobile"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/otp/mobile/send", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OtpSuccess
-            schema = OtpSuccess()
+            from .models import SendOtpSuccess
+            schema = SendOtpSuccess()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1068,8 +1021,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendForgotOTPOnMobile"]).netloc, "post", await create_url_without_domain("/service/application/user/authentication/v1.0/otp/forgot/mobile/send", platform=platform), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import OtpSuccess
-            schema = OtpSuccess()
+            from .models import SendOtpSuccess
+            schema = SendOtpSuccess()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -1639,7 +1592,7 @@ class User:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["deleteMobileNumber"], proccessed_params="""{"required":[{"name":"active","in":"query","required":true,"description":"This is a boolean value to check if mobile number is active 1.True - number is active 2. False - number is inactive.","schema":{"type":"boolean"}},{"name":"primary","in":"query","description":"This is a boolean value to check if mobile number is primary number (main number) 1. True - number is primary 2. False - number is not primary.","required":true,"schema":{"type":"boolean"}},{"name":"verified","in":"query","description":"This is a boolean value to check if mobile number is verified 1. True - number is verified 2.False - number is not verified yet.","required":true,"schema":{"type":"boolean"}},{"name":"country_code","in":"query","description":"Country code of the phone number, e.g. 91.","required":true,"schema":{"type":"string"}},{"name":"phone","in":"query","description":"Phone number.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}},{"name":"active","in":"query","required":true,"description":"This is a boolean value to check if mobile number is active 1.True - number is active 2. False - number is inactive.","schema":{"type":"boolean"}},{"name":"primary","in":"query","description":"This is a boolean value to check if mobile number is primary number (main number) 1. True - number is primary 2. False - number is not primary.","required":true,"schema":{"type":"boolean"}},{"name":"verified","in":"query","description":"This is a boolean value to check if mobile number is verified 1. True - number is verified 2.False - number is not verified yet.","required":true,"schema":{"type":"boolean"}},{"name":"country_code","in":"query","description":"Country code of the phone number, e.g. 91.","required":true,"schema":{"type":"string"}},{"name":"phone","in":"query","description":"Phone number.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", platform=platform, active=active, primary=primary, verified=verified, country_code=country_code, phone=phone)
+        url_with_params = await create_url_with_params(api_url=self._urls["deleteMobileNumber"], proccessed_params="""{"required":[{"name":"active","in":"query","required":true,"description":"This is a boolean value to check if mobile number is active 1.True - number is active 2. False - number is inactive.","schema":{"type":"boolean"}},{"name":"primary","in":"query","description":"This is a boolean value to check if mobile number is primary number (main number) 1. True - number is primary 2. False - number is not primary.","required":true,"schema":{"type":"boolean"}},{"name":"verified","in":"query","description":"This is a boolean value to check if mobile number is verified 1. True - number is verified 2.False - number is not verified yet.","required":true,"schema":{"type":"boolean"}},{"name":"country_code","in":"query","description":"Country code of the phone number, e.g. 91.","required":true,"schema":{"type":"string","x-not-enum":true}},{"name":"phone","in":"query","description":"Phone number.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}}],"query":[{"name":"platform","in":"query","description":"ID of the application.","schema":{"type":"string","default":"Fynd"}},{"name":"active","in":"query","required":true,"description":"This is a boolean value to check if mobile number is active 1.True - number is active 2. False - number is inactive.","schema":{"type":"boolean"}},{"name":"primary","in":"query","description":"This is a boolean value to check if mobile number is primary number (main number) 1. True - number is primary 2. False - number is not primary.","required":true,"schema":{"type":"boolean"}},{"name":"verified","in":"query","description":"This is a boolean value to check if mobile number is verified 1. True - number is verified 2.False - number is not verified yet.","required":true,"schema":{"type":"boolean"}},{"name":"country_code","in":"query","description":"Country code of the phone number, e.g. 91.","required":true,"schema":{"type":"string","x-not-enum":true}},{"name":"phone","in":"query","description":"Phone number.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", platform=platform, active=active, primary=primary, verified=verified, country_code=country_code, phone=phone)
         query_string = await create_query_string(platform=platform, active=active, primary=primary, verified=verified, country_code=country_code, phone=phone)
         if query_string:
             url_with_params += "?" + query_string
@@ -2009,8 +1962,8 @@ class User:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["userExists"]).netloc, "get", await create_url_without_domain("/service/application/user/authentication/v1.0/user-exists", q=q), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UserExistsResponse
-            schema = UserExistsResponse()
+            from .models import UserExistsDetails
+            schema = UserExistsDetails()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2105,6 +2058,299 @@ class User:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for logout")
+                print(e)
+
+        return response
+    
+    async def getUserAttributes(self, slug=None, body="", request_headers:Dict={}):
+        """Get the list of user attributes.
+        :param slug : Filter by attribute slug. : type string
+        """
+        payload = {}
+        
+        if slug is not None:
+            payload["slug"] = slug
+
+        # Parameter validation
+        schema = UserValidator.getUserAttributes()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getUserAttributes"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"slug","schema":{"type":"string"},"description":"Filter by attribute slug."}],"query":[{"in":"query","name":"slug","schema":{"type":"string"},"description":"Filter by attribute slug."}],"headers":[],"path":[]}""", serverType="application", slug=slug)
+        query_string = await create_query_string(slug=slug)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getUserAttributes"]).netloc, "get", await create_url_without_domain("/service/application/user/profile/v1.0/user-attributes", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UserAttributes
+            schema = UserAttributes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserAttributes")
+                print(e)
+
+        return response
+    
+    async def updateUserAttributes(self, body="", request_headers:Dict={}):
+        """Update user attributes.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = UserValidator.updateUserAttributes()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import UpdateUserAttributes
+        schema = UpdateUserAttributes()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["updateUserAttributes"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateUserAttributes"]).netloc, "patch", await create_url_without_domain("/service/application/user/profile/v1.0/user-attributes", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UserAttributes
+            schema = UserAttributes()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateUserAttributes")
+                print(e)
+
+        return response
+    
+    async def sendOTPOnPrimary(self, entity=None, body="", request_headers:Dict={}):
+        """Send OTP to primary mobile number or email to verify primary details. Use this to update Email or Mobile, other APIs will be deprecated.
+        :param entity : This is a string parameter and the value can be either `mobile` or `email`. : type string
+        """
+        payload = {}
+        
+        if entity is not None:
+            payload["entity"] = entity
+
+        # Parameter validation
+        schema = UserValidator.sendOTPOnPrimary()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SendPrimaryOTPRequestSchema
+        schema = SendPrimaryOTPRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["sendOTPOnPrimary"], proccessed_params="""{"required":[{"name":"entity","in":"path","required":true,"description":"This is a string parameter and the value can be either `mobile` or `email`.","schema":{"type":"string","enum":["mobile","email"]}}],"optional":[],"query":[],"headers":[],"path":[{"name":"entity","in":"path","required":true,"description":"This is a string parameter and the value can be either `mobile` or `email`.","schema":{"type":"string","enum":["mobile","email"]}}]}""", serverType="application", entity=entity)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendOTPOnPrimary"]).netloc, "post", await create_url_without_domain("/service/application/user/profile/v2.0/{entity}/primary/otp/send", entity=entity), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SendOtpSuccess
+            schema = SendOtpSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendOTPOnPrimary")
+                print(e)
+
+        return response
+    
+    async def verifyOTPonPrimary(self, entity=None, body="", request_headers:Dict={}):
+        """Verify OTP sent to primary mobile number or email to verify primary details. User needs to use sendOTPOnPrimary before verifying OTP.
+        :param entity : This is a string parameter and the value can be either `mobile` or `email`. : type string
+        """
+        payload = {}
+        
+        if entity is not None:
+            payload["entity"] = entity
+
+        # Parameter validation
+        schema = UserValidator.verifyOTPonPrimary()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import VerifyPrimaryOTPRequestSchema
+        schema = VerifyPrimaryOTPRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["verifyOTPonPrimary"], proccessed_params="""{"required":[{"name":"entity","in":"path","required":true,"description":"This is a string parameter and the value can be either `mobile` or `email`.","schema":{"type":"string","enum":["mobile","email"]}}],"optional":[],"query":[],"headers":[],"path":[{"name":"entity","in":"path","required":true,"description":"This is a string parameter and the value can be either `mobile` or `email`.","schema":{"type":"string","enum":["mobile","email"]}}]}""", serverType="application", entity=entity)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyOTPonPrimary"]).netloc, "post", await create_url_without_domain("/service/application/user/profile/v2.0/{entity}/primary/otp/verify", entity=entity), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import VerifyPrimaryOTPSuccess
+            schema = VerifyPrimaryOTPSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for verifyOTPonPrimary")
+                print(e)
+
+        return response
+    
+    async def sendOTPForUpdate(self, entity=None, body="", request_headers:Dict={}):
+        """Send OTP to mobile number or email. User needs to use sendOTPOnPrimary and verifyOTPonPrimary before using this method to update details.
+        :param entity : This is a string parameter and the value can be either `mobile` or `email`. : type string
+        """
+        payload = {}
+        
+        if entity is not None:
+            payload["entity"] = entity
+
+        # Parameter validation
+        schema = UserValidator.sendOTPForUpdate()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SendOTPForUpdateRequestSchema
+        schema = SendOTPForUpdateRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["sendOTPForUpdate"], proccessed_params="""{"required":[{"name":"entity","in":"path","required":true,"description":"This is a string parameter and the value can be either `mobile` or `email`.","schema":{"type":"string","enum":["mobile","email"]}}],"optional":[],"query":[],"headers":[],"path":[{"name":"entity","in":"path","required":true,"description":"This is a string parameter and the value can be either `mobile` or `email`.","schema":{"type":"string","enum":["mobile","email"]}}]}""", serverType="application", entity=entity)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendOTPForUpdate"]).netloc, "post", await create_url_without_domain("/service/application/user/profile/v2.0/{entity}/otp/send", entity=entity), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SendOtpSuccess
+            schema = SendOtpSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for sendOTPForUpdate")
+                print(e)
+
+        return response
+    
+    async def verifyOTPForUpdate(self, entity=None, body="", request_headers:Dict={}):
+        """Verify OTP sent to Mobile number or Email to update primary details. User needs to use sendOTPOnPrimary, verifyOTPonPrimary and sendOTPForUpdate before using this method to verify update details.
+        :param entity : This is a string parameter and the value can be either `mobile` or `email`. : type string
+        """
+        payload = {}
+        
+        if entity is not None:
+            payload["entity"] = entity
+
+        # Parameter validation
+        schema = UserValidator.verifyOTPForUpdate()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import VerifyOTPForUpdateRequestSchema
+        schema = VerifyOTPForUpdateRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["verifyOTPForUpdate"], proccessed_params="""{"required":[{"name":"entity","in":"path","required":true,"description":"This is a string parameter and the value can be either `mobile` or `email`.","schema":{"type":"string","enum":["mobile","email"]}}],"optional":[],"query":[],"headers":[],"path":[{"name":"entity","in":"path","required":true,"description":"This is a string parameter and the value can be either `mobile` or `email`.","schema":{"type":"string","enum":["mobile","email"]}}]}""", serverType="application", entity=entity)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyOTPForUpdate"]).netloc, "post", await create_url_without_domain("/service/application/user/profile/v2.0/{entity}/otp/verify", entity=entity), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import VerifyOtpSuccess
+            schema = VerifyOtpSuccess()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for verifyOTPForUpdate")
                 print(e)
 
         return response
