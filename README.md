@@ -14,14 +14,13 @@ Get started with the python Development SDK for Fynd Platform
 ### Usage
 
 ```bash
-pip install "git+https://github.com/gofynd/fdk-client-python.git@3.4.1#egg=fdk_client"
+pip install "git+https://github.com/gofynd/fdk-client-python.git@3.4.2#egg=fdk_client"
 ```
 
 Using this method, you can `import` fdk-client-python like so:
 
 ```python
 from fdk_client.application.ApplicationClient import ApplicationClient
-from fdk_client.application.ApplicationConfig import ApplicationConfig
 ```
 
 ---
@@ -31,13 +30,12 @@ from fdk_client.application.ApplicationConfig import ApplicationConfig
 To print the curl command in the console for all network calls made using `applicationClient` or `platformClient`, set the logger level to `"DEBUG"`.
 
 ```python
-config = ApplicationConfig({
+
+applicationClient = ApplicationClient({
     "applicationID": "YOUR_APPLICATION_ID",
     "applicationToken": "YOUR_APPLICATION_TOKEN",
     "logLevel": "DEBUG"
 })
-
-applicationClient = ApplicationClient(config)
 
 async def apiCall():
     try:
@@ -63,14 +61,13 @@ curl --request POST 'https://api.fynd.com/service/application/user/authenticatio
 ### Sample Usage - ApplicationClient
 
 ```python
-config = ApplicationConfig({
+
+applicationClient = ApplicationClient({
     "applicationID": "YOUR_APPLICATION_ID",
     "applicationToken": "YOUR_APPLICATION_TOKEN",
     "domain": "YOUR_DOMAIN",
     "locationDetails": "LOCATION_DETAILS_OBJECT"
 })
-
-applicationClient = ApplicationClient(config)
 applicationClient.setLocationDetails(
     { 
         "pincode":"385001",
@@ -170,7 +167,15 @@ try:
     tokenResponse = await setAccessToken(platformConfig, loginResponse["cookies"])
     # print(tokenResponse)
     await platformConfig.oauthClient.setToken(tokenResponse)
-    platformClient = PlatformClient(platformConfig)
+    platformClient = PlatformClient({
+        "companyId": "YOUR_COMPANY_ID",
+        "domain": "YOUR_DOMAIN",
+        "apiKey": "YOUR_APIKEY",
+        "apiSecret": "YOUR_APISECRET"
+    })
+    token = await platformClient.getAccesstokenObj(grant_type='client_credentials')
+    platformClient.setToken(token)
+    
     res = await platformClient.lead.getTicket(id="YOUR_TICKET_ID")
     # use res
 except Exception as e:

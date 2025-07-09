@@ -3230,3 +3230,150 @@ class Catalog:
 
         return response
     
+    async def getFollowedProducts(self, user_id=None, page_id=None, page_size=None, request_headers:Dict={}):
+        """List all product ids a user has wishlisted or is following for sales channel.
+
+        :param user_id : User ID to fetch the followed list : type string
+        :param page_id : The identifier used to retrieve the next set of results. This parameter follows cursor-based pagination. : type string
+        :param page_size : Number of items per page : type integer
+        """
+        payload = {}
+        
+        if user_id is not None:
+            payload["user_id"] = user_id
+        if page_id is not None:
+            payload["page_id"] = page_id
+        if page_size is not None:
+            payload["page_size"] = page_size
+
+        # Parameter validation
+        schema = CatalogValidator.getFollowedProducts()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user/{user_id}/products/follow", """{"required":[{"in":"path","name":"company_id","description":"The Company ID","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"The Application ID of the store front","required":true,"schema":{"type":"string"}},{"in":"path","name":"user_id","description":"User ID to fetch the followed list","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"page_id","description":"The identifier used to retrieve the next set of results. This parameter follows cursor-based pagination.","required":false,"schema":{"type":"string","default":"1"}},{"in":"query","name":"page_size","description":"Number of items per page","required":false,"schema":{"type":"integer","default":12}}],"query":[{"in":"query","name":"page_id","description":"The identifier used to retrieve the next set of results. This parameter follows cursor-based pagination.","required":false,"schema":{"type":"string","default":"1"}},{"in":"query","name":"page_size","description":"Number of items per page","required":false,"schema":{"type":"integer","default":12}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"The Company ID","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"The Application ID of the store front","required":true,"schema":{"type":"string"}},{"in":"path","name":"user_id","description":"User ID to fetch the followed list","required":true,"schema":{"type":"string"}}]}""", serverType="platform", user_id=user_id, page_id=page_id, page_size=page_size)
+        query_string = await create_query_string(page_id=page_id, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user/{user_id}/products/follow", user_id=user_id, page_id=page_id, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FollowedProducts
+            schema = FollowedProducts()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getFollowedProducts")
+                print(e)
+
+        return response
+    
+    async def followProductById(self, user_id=None, item_id=None, request_headers:Dict={}):
+        """This endpoint enables a user to follow a specific product identified by its unique item ID for a sales channel.         
+
+        :param user_id : User ID of User : type string
+        :param item_id : Item ID of Product : type string
+        """
+        payload = {}
+        
+        if user_id is not None:
+            payload["user_id"] = user_id
+        if item_id is not None:
+            payload["item_id"] = item_id
+
+        # Parameter validation
+        schema = CatalogValidator.followProductById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user/{user_id}/products/{item_id}/follow", """{"required":[{"in":"path","name":"company_id","description":"The Company ID","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application ID of the Store Front","required":true,"schema":{"type":"string"}},{"in":"path","name":"user_id","description":"User ID of User","required":true,"schema":{"type":"string"}},{"in":"path","name":"item_id","description":"Item ID of Product","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The Company ID","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application ID of the Store Front","required":true,"schema":{"type":"string"}},{"in":"path","name":"user_id","description":"User ID of User","required":true,"schema":{"type":"string"}},{"in":"path","name":"item_id","description":"Item ID of Product","required":true,"schema":{"type":"string"}}]}""", serverType="platform", user_id=user_id, item_id=item_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user/{user_id}/products/{item_id}/follow", user_id=user_id, item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FollowProduct
+            schema = FollowProduct()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for followProductById")
+                print(e)
+
+        return response
+    
+    async def unfollowProductById(self, user_id=None, item_id=None, request_headers:Dict={}):
+        """This endpoint allows a user to unfollow a previously followed product using its unique item ID for a sales channel.         
+
+        :param user_id : User ID of User : type string
+        :param item_id : Item ID of Product : type string
+        """
+        payload = {}
+        
+        if user_id is not None:
+            payload["user_id"] = user_id
+        if item_id is not None:
+            payload["item_id"] = item_id
+
+        # Parameter validation
+        schema = CatalogValidator.unfollowProductById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user/{user_id}/products/{item_id}/follow", """{"required":[{"in":"path","name":"company_id","description":"The Company ID","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application ID of the Store Front","required":true,"schema":{"type":"string"}},{"in":"path","name":"user_id","description":"User ID of User","required":true,"schema":{"type":"string"}},{"in":"path","name":"item_id","description":"Item ID of Product","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"The Company ID","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"Application ID of the Store Front","required":true,"schema":{"type":"string"}},{"in":"path","name":"user_id","description":"User ID of User","required":true,"schema":{"type":"string"}},{"in":"path","name":"item_id","description":"Item ID of Product","required":true,"schema":{"type":"string"}}]}""", serverType="platform", user_id=user_id, item_id=item_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user/{user_id}/products/{item_id}/follow", user_id=user_id, item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FollowProduct
+            schema = FollowProduct()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for unfollowProductById")
+                print(e)
+
+        return response
+    

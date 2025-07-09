@@ -1,5 +1,6 @@
 """Public Client."""
 
+from .PublicConfig import PublicConfig
 from ..common.exceptions import FDKClientValidationError
 
 
@@ -16,17 +17,20 @@ from .webhook.client import Webhook
 
 class PublicClient:
     def __init__(self, config):
-        self.config = config
+        if isinstance(config, PublicConfig):
+            self.config = config
+        else:
+            self.config = PublicConfig(config)
         
-        self.catalog = Catalog(config)
+        self.catalog = Catalog(self.config)
         
-        self.configuration = Configuration(config)
+        self.configuration = Configuration(self.config)
         
-        self.content = Content(config)
+        self.content = Content(self.config)
         
-        self.partner = Partner(config)
+        self.partner = Partner(self.config)
         
-        self.webhook = Webhook(config)
+        self.webhook = Webhook(self.config)
         
     
     def setExtraHeaders(self, header):

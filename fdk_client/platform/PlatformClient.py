@@ -1,5 +1,6 @@
 """Platform Client."""
 
+from .PlatformConfig import PlatformConfig
 from .PlatformApplicationClient import PlatformApplicationClient
 from ..common.exceptions import FDKClientValidationError
 from ..common.custom_request import custom_request
@@ -40,39 +41,42 @@ from .webhook.client import Webhook
 
 class PlatformClient:
     def __init__(self, config):
-        self.config = config
+        if isinstance(config, PlatformConfig):
+            self.config = config
+        else:
+            self.config = PlatformConfig(config)
         
-        self.auditTrail = AuditTrail(config)
+        self.auditTrail = AuditTrail(self.config)
         
-        self.billing = Billing(config)
+        self.billing = Billing(self.config)
         
-        self.catalog = Catalog(config)
+        self.catalog = Catalog(self.config)
         
-        self.common = Common(config)
+        self.common = Common(self.config)
         
-        self.communication = Communication(config)
+        self.communication = Communication(self.config)
         
-        self.companyProfile = CompanyProfile(config)
+        self.companyProfile = CompanyProfile(self.config)
         
-        self.configuration = Configuration(config)
+        self.configuration = Configuration(self.config)
         
-        self.content = Content(config)
+        self.content = Content(self.config)
         
-        self.discount = Discount(config)
+        self.discount = Discount(self.config)
         
-        self.fileStorage = FileStorage(config)
+        self.fileStorage = FileStorage(self.config)
         
-        self.lead = Lead(config)
+        self.lead = Lead(self.config)
         
-        self.serviceability = Serviceability(config)
+        self.serviceability = Serviceability(self.config)
         
-        self.order = Order(config)
+        self.order = Order(self.config)
         
-        self.payment = Payment(config)
+        self.payment = Payment(self.config)
         
-        self.theme = Theme(config)
+        self.theme = Theme(self.config)
         
-        self.webhook = Webhook(config)
+        self.webhook = Webhook(self.config)
         
 
     def application(self, applicationId):
@@ -83,6 +87,12 @@ class PlatformClient:
             self.config.extraHeaders.append(header)
         else:
             raise FDKClientValidationError("Context value should be an dict")
+    
+    def getAccesstokenObj(self, grant_type="", refresh_token="", code=""):
+        return self.config.oauthClient.getAccesstokenObj(grant_type, refresh_token, code)
+    
+    def setToken(self, token):
+        self.config.oauthClient.setToken(token)
 
     async def request(self, method, url, query={}, body={}, headers={}):
         return await custom_request(self, method, url, query, body, headers)

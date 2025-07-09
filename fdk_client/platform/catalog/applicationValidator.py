@@ -407,6 +407,25 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
 
 class CatalogValidator:
     
@@ -1270,6 +1289,47 @@ class CatalogValidator:
         page_size = fields.Int(required=False)
         
         q = fields.Str(required=False)
+         
+        
+    
+    class getFollowedProducts(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        user_id = fields.Str(required=False)
+        
+        page_id = fields.Str(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class followProductById(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        user_id = fields.Str(required=False)
+        
+        item_id = fields.Str(required=False)
+         
+        
+    
+    class unfollowProductById(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        user_id = fields.Str(required=False)
+        
+        item_id = fields.Str(required=False)
          
         
     

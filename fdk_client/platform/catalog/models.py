@@ -1654,6 +1654,14 @@ class Filters(BaseSchema):
     pass
 
 
+class FollowedProducts(BaseSchema):
+    pass
+
+
+class FollowProduct(BaseSchema):
+    pass
+
+
 class ActionPage(BaseSchema):
     pass
 
@@ -9060,6 +9068,24 @@ class Filters(BaseSchema):
     stores = fields.List(fields.Str(required=False), required=False)
     
     to_date = fields.Str(required=False)
+    
+
+
+class FollowedProducts(BaseSchema):
+    # Catalog swagger.json
+
+    
+    item_ids = fields.List(fields.Int(required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class FollowProduct(BaseSchema):
+    # Catalog swagger.json
+
+    
+    message = fields.Str(required=False)
     
 
 

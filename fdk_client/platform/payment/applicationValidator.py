@@ -95,9 +95,7 @@ from ..PlatformModel import BaseSchema
         
     
     
-                
-from .models import OrderingSource
-
+        
         
         
         
@@ -468,7 +466,7 @@ class PaymentValidator:
     class getPosPaymentModeRoutes(BaseSchema):
         
         
-        x__ordering__source = fields.Nested(OrderingSource, required=False)
+        x__ordering__source = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
         
