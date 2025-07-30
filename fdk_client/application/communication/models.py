@@ -113,8 +113,6 @@ class CommunicationConsentChannelsWhatsapp(BaseSchema):
     
     phone_number = fields.Str(required=False)
     
-    value = fields.Str(required=False)
-    
 
 
 class CommunicationConsentChannels(BaseSchema):

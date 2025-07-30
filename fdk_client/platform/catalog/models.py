@@ -2759,8 +2759,6 @@ class BulkJob(BaseSchema):
     
     tracking_url = fields.Str(required=False)
     
-    tags = fields.List(fields.Str(required=False), required=False)
-    
 
 
 class BulkProductRequestSchema(BaseSchema):
@@ -8968,6 +8966,8 @@ class BulkInventoryJob(BaseSchema):
     file_type = fields.Str(required=False)
     
     file_path = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
     
     meta = fields.Nested(BulkMeta, required=False)
     

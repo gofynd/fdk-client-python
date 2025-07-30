@@ -5925,6 +5925,8 @@ class PlatformItem(BaseSchema):
     
     images = fields.List(fields.Str(required=False), required=False)
     
+    tags = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class Dates(BaseSchema):

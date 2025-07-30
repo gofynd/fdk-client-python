@@ -66,37 +66,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-    
-    
-        
-        
         
         
         
@@ -388,74 +357,6 @@ class PaymentValidator:
     
     class setUserCODlimitRoutes(BaseSchema):
         
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class edcAggregatorsAndModelList(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class edcDeviceStats(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateEdcDevice(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class getEdcDevice(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        terminal_unique_identifier = fields.Str(required=False)
-         
-        
-    
-    class addEdcDevice(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        terminal_unique_identifier = fields.Str(required=False)
-         
-        
-    
-    class edcDeviceList(BaseSchema):
-        
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        is_active = fields.Boolean(required=False)
-        
-        store_id = fields.Int(required=False)
-        
-        device_tag = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
         
