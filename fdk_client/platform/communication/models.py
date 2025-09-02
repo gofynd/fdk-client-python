@@ -717,6 +717,8 @@ class CampaignReq(BaseSchema):
     
     type = fields.Str(required=False)
     
+    datasource_type = fields.Str(required=False)
+    
     records_count = fields.Int(required=False)
     
     application = fields.Str(required=False)
@@ -782,6 +784,8 @@ class Campaign(BaseSchema):
     datasource = fields.Str(required=False)
     
     type = fields.Str(required=False)
+    
+    datasource_type = fields.Str(required=False)
     
     name = fields.Str(required=False)
     

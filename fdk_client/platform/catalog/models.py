@@ -6249,6 +6249,8 @@ class LocationQuantityRequestSchema(BaseSchema):
     
     not_available_quantity = fields.Int(required=False)
     
+    mode = fields.Str(required=False)
+    
 
 
 class LocationPriceQuantitySuccessResponseSchema(BaseSchema):
