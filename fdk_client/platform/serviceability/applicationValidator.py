@@ -222,6 +222,13 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+    
+    
+        
+        
+        
     
     
         
@@ -696,6 +703,21 @@ class ServiceabilityValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
+         
+        
+    
+    class getFulfillmentOptionsList(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        product_slug = fields.Str(required=False)
+        
+        store_id = fields.Int(required=False)
+        
+        status = fields.Str(required=False)
          
         
     

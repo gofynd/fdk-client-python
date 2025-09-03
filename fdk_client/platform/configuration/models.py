@@ -28,6 +28,10 @@ class FstIdentification(BaseSchema):
     pass
 
 
+class SkgIdentification(BaseSchema):
+    pass
+
+
 class QuerySuggestions(BaseSchema):
     pass
 
@@ -835,6 +839,14 @@ class FstIdentification(BaseSchema):
     
 
 
+class SkgIdentification(BaseSchema):
+    # Configuration swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
+    
+
+
 class QuerySuggestions(BaseSchema):
     # Configuration swagger.json
 
@@ -852,6 +864,8 @@ class SearchConfig(BaseSchema):
     fst_identification = fields.Nested(FstIdentification, required=False)
     
     query_suggestions = fields.Nested(QuerySuggestions, required=False)
+    
+    skg_identification = fields.Nested(SkgIdentification, required=False)
     
 
 

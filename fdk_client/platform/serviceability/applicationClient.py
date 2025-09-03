@@ -1830,6 +1830,56 @@ class Serviceability:
 
         return response
     
+    async def getFulfillmentOptionsList(self, product_slug=None, store_id=None, status=None, request_headers:Dict={}):
+        """Fetches fulfillment options for an application. Queryable by product_slug, store_id, and status.
+        :param product_slug : The unique identifier (slug) of the product. : type string
+        :param store_id : The unique identifier of the store. : type integer
+        :param status : Status of the fulfillment option. Must be either `ACTIVE` or `INACTIVE`. : type string
+        """
+        payload = {}
+        
+        if product_slug is not None:
+            payload["product_slug"] = product_slug
+        if store_id is not None:
+            payload["store_id"] = store_id
+        if status is not None:
+            payload["status"] = status
+
+        # Parameter validation
+        schema = ServiceabilityValidator.getFulfillmentOptionsList()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","required":true,"schema":{"type":"integer"},"example":1},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","required":true,"schema":{"type":"string"},"example":"65f467177f066cb22e159e8f"}],"optional":[{"in":"query","name":"product_slug","description":"The unique identifier (slug) of the product.","required":false,"schema":{"type":"string"},"example":"sample-product"},{"in":"query","name":"store_id","description":"The unique identifier of the store.","required":false,"schema":{"type":"integer","minimum":0},"example":1},{"in":"query","name":"status","description":"Status of the fulfillment option. Must be either `ACTIVE` or `INACTIVE`.","required":false,"schema":{"type":"string","enum":["ACTIVE","INACTIVE"]},"example":"ACTIVE"}],"query":[{"in":"query","name":"product_slug","description":"The unique identifier (slug) of the product.","required":false,"schema":{"type":"string"},"example":"sample-product"},{"in":"query","name":"store_id","description":"The unique identifier of the store.","required":false,"schema":{"type":"integer","minimum":0},"example":1},{"in":"query","name":"status","description":"Status of the fulfillment option. Must be either `ACTIVE` or `INACTIVE`.","required":false,"schema":{"type":"string","enum":["ACTIVE","INACTIVE"]},"example":"ACTIVE"}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","required":true,"schema":{"type":"integer"},"example":1},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","required":true,"schema":{"type":"string"},"example":"65f467177f066cb22e159e8f"}]}""", serverType="platform", product_slug=product_slug, store_id=store_id, status=status)
+        query_string = await create_query_string(product_slug=product_slug, store_id=store_id, status=status)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/fulfillment-options", product_slug=product_slug, store_id=store_id, status=status), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FulfillmentOptionsList
+            schema = FulfillmentOptionsList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getFulfillmentOptionsList")
+                print(e)
+
+        return response
+    
     async def getFulfillmentOptions(self, slug=None, product_id=None, store_id=None, request_headers:Dict={}):
         """Fetches available fulfillment options for a given product and store.
         :param slug : Slug of the fulfillment option for retrieving details. : type string

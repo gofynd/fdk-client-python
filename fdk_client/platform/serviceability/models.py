@@ -12,6 +12,10 @@ class FulfillmentOption(BaseSchema):
     pass
 
 
+class FulfillmentOptionsList(BaseSchema):
+    pass
+
+
 class FulfillmentOptionProducts(BaseSchema):
     pass
 
@@ -457,6 +461,10 @@ class CourierPartnerSchemes(BaseSchema):
 
 
 class CourierPartnerScheme(BaseSchema):
+    pass
+
+
+class FulfillmentOptionItem(BaseSchema):
     pass
 
 
@@ -976,6 +984,14 @@ class FulfillmentOption(BaseSchema):
     cp_schemes = fields.Nested(CourierPartnerSchemes, required=False)
     
     id = fields.Str(required=False)
+    
+
+
+class FulfillmentOptionsList(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    items = fields.List(fields.Nested(FulfillmentOptionItem, required=False), required=False)
     
 
 
@@ -2906,6 +2922,24 @@ class CourierPartnerScheme(BaseSchema):
     scheme_id = fields.Str(required=False)
     
     cp_ext_id = fields.Str(required=False)
+    
+
+
+class FulfillmentOptionItem(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    slug = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    is_default = fields.Boolean(required=False)
+    
+    id = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
 
 
