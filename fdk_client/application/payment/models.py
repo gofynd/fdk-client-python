@@ -536,6 +536,38 @@ class ValidateCustomerCreditSchema(BaseSchema):
     pass
 
 
+class RefundBeneficiaries(BaseSchema):
+    pass
+
+
+class UPIBeneficiary(BaseSchema):
+    pass
+
+
+class BankBeneficiary(BaseSchema):
+    pass
+
+
+class BeneficiaryDetails(BaseSchema):
+    pass
+
+
+class AddBeneficiaryRequestDetails(BaseSchema):
+    pass
+
+
+class AddBeneficiaryResponseDetails(BaseSchema):
+    pass
+
+
+class DeleteBeneficiary(BaseSchema):
+    pass
+
+
+class DeleteBeneficiaryDetails(BaseSchema):
+    pass
+
+
 
 
 
@@ -2760,6 +2792,126 @@ class ValidateCustomerCreditSchema(BaseSchema):
     cart_id = fields.Str(required=False)
     
     account = fields.Nested(CreditAccountSummary, required=False)
+    
+
+
+class RefundBeneficiaries(BaseSchema):
+    # Payment swagger.json
+
+    
+    upi = fields.List(fields.Nested(UPIBeneficiary, required=False), required=False)
+    
+    bank = fields.List(fields.Nested(BankBeneficiary, required=False), required=False)
+    
+
+
+class UPIBeneficiary(BaseSchema):
+    # Payment swagger.json
+
+    
+    is_active = fields.Boolean(required=False)
+    
+    is_verified = fields.Boolean(required=False)
+    
+    transfer_mode = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    vpa_address = fields.Str(required=False)
+    
+    customer_name = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
+    
+
+
+class BankBeneficiary(BaseSchema):
+    # Payment swagger.json
+
+    
+    ifsc_code = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    is_verified = fields.Boolean(required=False)
+    
+    transfer_mode = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    account_holder = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
+    
+    account_no = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
+    
+
+
+class BeneficiaryDetails(BaseSchema):
+    # Payment swagger.json
+
+    
+    account_holder = fields.Str(required=False)
+    
+    account_no = fields.Str(required=False)
+    
+    ifsc_code = fields.Str(required=False)
+    
+    upi = fields.Str(required=False)
+    
+
+
+class AddBeneficiaryRequestDetails(BaseSchema):
+    # Payment swagger.json
+
+    
+    details = fields.Nested(BeneficiaryDetails, required=False)
+    
+    order_id = fields.Str(required=False)
+    
+    shipment_id = fields.Str(required=False)
+    
+
+
+class AddBeneficiaryResponseDetails(BaseSchema):
+    # Payment swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    is_verified = fields.Boolean(required=False)
+    
+    id = fields.Str(required=False)
+    
+    account_no = fields.Str(required=False)
+    
+    account_holder = fields.Str(required=False)
+    
+    bank_name = fields.Str(required=False)
+    
+    upi = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
+    
+
+
+class DeleteBeneficiary(BaseSchema):
+    # Payment swagger.json
+
+    
+    beneficiary_id = fields.Str(required=False)
+    
+
+
+class DeleteBeneficiaryDetails(BaseSchema):
+    # Payment swagger.json
+
+    
+    message = fields.Str(required=False)
     
 
 

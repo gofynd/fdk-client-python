@@ -3,6 +3,34 @@
 from enum import Enum
 
 
+class TaxStatusEnum(Enum):
+    
+    ACTIVE = "ACTIVE"
+    
+    INACTIVE = "INACTIVE"
+    
+    DELETED = "DELETED"
+    
+    @classmethod
+    async def is_valid(cls, value):
+        if value in cls._value2member_map_:
+            return None
+        raise Exception("Invalid TaxStatusEnum type")
+
+
+class HsTypeEnum(Enum):
+    
+    HS = "HS"
+    
+    SAC = "SAC"
+    
+    @classmethod
+    async def is_valid(cls, value):
+        if value in cls._value2member_map_:
+            return None
+        raise Exception("Invalid HsTypeEnum type")
+
+
 class PageType(Enum):
     
     ABOUT_US = "about-us"

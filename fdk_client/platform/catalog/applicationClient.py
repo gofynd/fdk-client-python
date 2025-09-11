@@ -3230,12 +3230,11 @@ class Catalog:
 
         return response
     
-    async def getFollowedProducts(self, user_id=None, page_id=None, page_size=None, request_headers:Dict={}):
+    async def getFollowedProducts(self, user_id=None, page_id=None, request_headers:Dict={}):
         """List all product ids a user has wishlisted or is following for sales channel.
 
         :param user_id : User ID to fetch the followed list : type string
         :param page_id : The identifier used to retrieve the next set of results. This parameter follows cursor-based pagination. : type string
-        :param page_size : Number of items per page : type integer
         """
         payload = {}
         
@@ -3243,16 +3242,14 @@ class Catalog:
             payload["user_id"] = user_id
         if page_id is not None:
             payload["page_id"] = page_id
-        if page_size is not None:
-            payload["page_size"] = page_size
 
         # Parameter validation
         schema = CatalogValidator.getFollowedProducts()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user/{user_id}/products/follow", """{"required":[{"in":"path","name":"company_id","description":"The Company ID","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"The Application ID of the store front","required":true,"schema":{"type":"string"}},{"in":"path","name":"user_id","description":"User ID to fetch the followed list","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"page_id","description":"The identifier used to retrieve the next set of results. This parameter follows cursor-based pagination.","required":false,"schema":{"type":"string","default":"1"}},{"in":"query","name":"page_size","description":"Number of items per page","required":false,"schema":{"type":"integer","default":12}}],"query":[{"in":"query","name":"page_id","description":"The identifier used to retrieve the next set of results. This parameter follows cursor-based pagination.","required":false,"schema":{"type":"string","default":"1"}},{"in":"query","name":"page_size","description":"Number of items per page","required":false,"schema":{"type":"integer","default":12}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"The Company ID","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"The Application ID of the store front","required":true,"schema":{"type":"string"}},{"in":"path","name":"user_id","description":"User ID to fetch the followed list","required":true,"schema":{"type":"string"}}]}""", serverType="platform", user_id=user_id, page_id=page_id, page_size=page_size)
-        query_string = await create_query_string(page_id=page_id, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user/{user_id}/products/follow", """{"required":[{"in":"path","name":"company_id","description":"The Company ID","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"The Application ID of the store front","required":true,"schema":{"type":"string"}},{"in":"path","name":"user_id","description":"User ID to fetch the followed list","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"page_id","description":"The identifier used to retrieve the next set of results. This parameter follows cursor-based pagination.","required":false,"schema":{"type":"string","default":"1"}}],"query":[{"in":"query","name":"page_id","description":"The identifier used to retrieve the next set of results. This parameter follows cursor-based pagination.","required":false,"schema":{"type":"string","default":"1"}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"The Company ID","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"The Application ID of the store front","required":true,"schema":{"type":"string"}},{"in":"path","name":"user_id","description":"User ID to fetch the followed list","required":true,"schema":{"type":"string"}}]}""", serverType="platform", user_id=user_id, page_id=page_id)
+        query_string = await create_query_string(page_id=page_id)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -3268,7 +3265,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user/{user_id}/products/follow", user_id=user_id, page_id=page_id, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user/{user_id}/products/follow", user_id=user_id, page_id=page_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import FollowedProducts

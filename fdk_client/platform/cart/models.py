@@ -2107,6 +2107,8 @@ class Article(BaseSchema):
     
     allowed_refund = fields.Boolean(required=False)
     
+    min_price_threshold = fields.Float(required=False)
+    
 
 
 class PriceAdjustmentRestrictions(BaseSchema):
