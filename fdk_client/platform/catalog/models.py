@@ -74,6 +74,10 @@ class ApplicationItemMOQ(BaseSchema):
     pass
 
 
+class Scores(BaseSchema):
+    pass
+
+
 class ApplicationItemMeta(BaseSchema):
     pass
 
@@ -1170,14 +1174,6 @@ class ProductCreateSchemaV2(BaseSchema):
     pass
 
 
-class ProductCreateSchemaV3(BaseSchema):
-    pass
-
-
-class ProductUpdateSchemaV3(BaseSchema):
-    pass
-
-
 class ProductDetail(BaseSchema):
     pass
 
@@ -1526,10 +1522,6 @@ class TaxIdentifier(BaseSchema):
     pass
 
 
-class TaxIdentifierV3(BaseSchema):
-    pass
-
-
 class TaxSlab(BaseSchema):
     pass
 
@@ -1671,94 +1663,6 @@ class FollowedProducts(BaseSchema):
 
 
 class FollowProduct(BaseSchema):
-    pass
-
-
-class TaxReqBodyRule(BaseSchema):
-    pass
-
-
-class TaxThreshold(BaseSchema):
-    pass
-
-
-class TaxComponent(BaseSchema):
-    pass
-
-
-class TaxComponentRes(BaseSchema):
-    pass
-
-
-class TaxReqBodyVersion(BaseSchema):
-    pass
-
-
-class CreateTaxRequestBody(BaseSchema):
-    pass
-
-
-class TaxVersion(BaseSchema):
-    pass
-
-
-class UpdateTaxVersionRequestBody(BaseSchema):
-    pass
-
-
-class CreateTaxVersionRequestBody(BaseSchema):
-    pass
-
-
-class TaxRule(BaseSchema):
-    pass
-
-
-class TaxVersionDetail(BaseSchema):
-    pass
-
-
-class CreateTax(BaseSchema):
-    pass
-
-
-class UpdateTaxVersion(BaseSchema):
-    pass
-
-
-class UpdateTaxRequestBody(BaseSchema):
-    pass
-
-
-class TaxRuleItem(BaseSchema):
-    pass
-
-
-class TaxRules(BaseSchema):
-    pass
-
-
-class TaxVersionPastData(BaseSchema):
-    pass
-
-
-class TaxRuleVersion(BaseSchema):
-    pass
-
-
-class HSCodeItem(BaseSchema):
-    pass
-
-
-class HSCodes(BaseSchema):
-    pass
-
-
-class CreateTaxComponentName(BaseSchema):
-    pass
-
-
-class GetTaxComponents(BaseSchema):
     pass
 
 
@@ -2029,6 +1933,34 @@ class ApplicationItemMOQ(BaseSchema):
     
 
 
+class Scores(BaseSchema):
+    # Catalog swagger.json
+
+    
+    popularity = fields.Float(required=False, allow_none=True)
+    
+    availability = fields.Float(required=False, allow_none=True)
+    
+    conversion = fields.Float(required=False, allow_none=True)
+    
+    sold_quantity = fields.Float(required=False, allow_none=True)
+    
+    depth = fields.Float(required=False, allow_none=True)
+    
+    discount = fields.Float(required=False, allow_none=True)
+    
+    revenue = fields.Float(required=False, allow_none=True)
+    
+    cancelled = fields.Float(required=False, allow_none=True)
+    
+    returns = fields.Float(required=False, allow_none=True)
+    
+    catalogue = fields.Float(required=False, allow_none=True)
+    
+    listing = fields.Float(required=False, allow_none=True)
+    
+
+
 class ApplicationItemMeta(BaseSchema):
     # Catalog swagger.json
 
@@ -2038,6 +1970,8 @@ class ApplicationItemMeta(BaseSchema):
     _custom_meta = fields.List(fields.Nested(MetaFields, required=False), required=False)
     
     alt_text = fields.Dict(required=False)
+    
+    scores = fields.Nested(Scores, required=False)
     
     is_cod = fields.Boolean(required=False)
     
@@ -3961,8 +3895,6 @@ class RawProduct(BaseSchema):
     
     highlights = fields.List(fields.Str(required=False), required=False)
     
-    hs_code = fields.Str(required=False)
-    
     hsn_code = fields.Str(required=False)
     
     id = fields.Str(required=False)
@@ -5136,8 +5068,6 @@ class HSNDataInsertV2(BaseSchema):
     description = fields.Str(required=False)
     
     hsn_code = fields.Str(required=False)
-    
-    tax_rule_id = fields.Str(required=False)
     
     hsn_code_id = fields.Str(required=False)
     
@@ -6635,8 +6565,6 @@ class Product(BaseSchema):
     
     highlights = fields.List(fields.Str(required=False), required=False)
     
-    hs_code = fields.Str(required=False)
-    
     hsn_code = fields.Str(required=False)
     
     id = fields.Str(required=False)
@@ -6967,8 +6895,6 @@ class ProductUpdateSchemaV2(BaseSchema):
     
     tax_identifier = fields.Nested(TaxIdentifier, required=False)
     
-    hs_code = fields.Str(required=False)
-    
     teaser_tag = fields.Nested(TeaserTag, required=False)
     
     template_tag = fields.Str(required=False)
@@ -7064,188 +6990,6 @@ class ProductCreateSchemaV2(BaseSchema):
     template_tag = fields.Str(required=False)
     
     trader = fields.List(fields.Nested(Trader, required=False), required=False)
-    
-    variant_group = fields.Dict(required=False)
-    
-    variant_media = fields.Dict(required=False)
-    
-    variants = fields.Dict(required=False)
-    
-
-
-class ProductCreateSchemaV3(BaseSchema):
-    # Catalog swagger.json
-
-    
-    _custom_json = fields.Dict(required=False)
-    
-    action = fields.Str(required=False)
-    
-    attributes = fields.Dict(required=False)
-    
-    brand_uid = fields.Int(required=False)
-    
-    bulk_job_id = fields.Str(required=False)
-    
-    category_slug = fields.Str(required=False)
-    
-    change_request_id = fields.Str(required=False, allow_none=True)
-    
-    company_id = fields.Int(required=False)
-    
-    country_of_origin = fields.Str(required=False)
-    
-    currency = fields.Str(required=False)
-    
-    custom_order = fields.Nested(CustomOrder, required=False)
-    
-    departments = fields.List(fields.Int(required=False), required=False)
-    
-    description = fields.Str(required=False)
-    
-    highlights = fields.List(fields.Str(required=False), required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    is_dependent = fields.Boolean(required=False)
-    
-    is_image_less_product = fields.Boolean(required=False)
-    
-    is_set = fields.Boolean(required=False)
-    
-    item_code = fields.Str(required=False)
-    
-    item_type = fields.Str(required=False)
-    
-    media = fields.List(fields.Nested(Media, required=False), required=False)
-    
-    multi_size = fields.Boolean(required=False)
-    
-    name = fields.Str(required=False)
-    
-    net_quantity = fields.Nested(NetQuantity, required=False)
-    
-    no_of_boxes = fields.Int(required=False)
-    
-    product_group_tag = fields.List(fields.Str(required=False), required=False)
-    
-    product_publish = fields.Nested(ProductPublish, required=False)
-    
-    requester = fields.Str(required=False)
-    
-    return_config = fields.Nested(ReturnConfig, required=False)
-    
-    short_description = fields.Str(required=False)
-    
-    size_guide = fields.Str(required=False)
-    
-    sizes = fields.List(fields.Dict(required=False), required=False)
-    
-    slug = fields.Str(required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-    tax_identifier = fields.Nested(TaxIdentifierV3, required=False)
-    
-    teaser_tag = fields.Nested(TeaserTag, required=False)
-    
-    template_tag = fields.Str(required=False)
-    
-    trader = fields.List(fields.Nested(Trader, required=False), required=False)
-    
-    variant_group = fields.Dict(required=False)
-    
-    variant_media = fields.Dict(required=False)
-    
-    variants = fields.Dict(required=False)
-    
-    hs_code = fields.Str(required=False)
-    
-
-
-class ProductUpdateSchemaV3(BaseSchema):
-    # Catalog swagger.json
-
-    
-    _custom_json = fields.Dict(required=False)
-    
-    action = fields.Str(required=False)
-    
-    attributes = fields.Dict(required=False)
-    
-    brand_uid = fields.Int(required=False)
-    
-    bulk_job_id = fields.Str(required=False)
-    
-    category_slug = fields.Str(required=False)
-    
-    change_request_id = fields.Str(required=False, allow_none=True)
-    
-    company_id = fields.Int(required=False)
-    
-    country_of_origin = fields.Str(required=False)
-    
-    currency = fields.Str(required=False)
-    
-    custom_order = fields.Nested(CustomOrder, required=False)
-    
-    departments = fields.List(fields.Int(required=False), required=False)
-    
-    description = fields.Str(required=False)
-    
-    highlights = fields.List(fields.Str(required=False), required=False)
-    
-    is_active = fields.Boolean(required=False)
-    
-    is_dependent = fields.Boolean(required=False)
-    
-    is_image_less_product = fields.Boolean(required=False)
-    
-    is_set = fields.Boolean(required=False)
-    
-    item_code = fields.Str(required=False)
-    
-    item_type = fields.Str(required=False)
-    
-    media = fields.List(fields.Nested(Media, required=False), required=False)
-    
-    multi_size = fields.Boolean(required=False)
-    
-    name = fields.Str(required=False)
-    
-    net_quantity = fields.Nested(NetQuantity, required=False)
-    
-    no_of_boxes = fields.Int(required=False)
-    
-    product_group_tag = fields.List(fields.Str(required=False), required=False)
-    
-    product_publish = fields.Nested(ProductPublish, required=False)
-    
-    requester = fields.Str(required=False)
-    
-    return_config = fields.Nested(ReturnConfig, required=False)
-    
-    short_description = fields.Str(required=False)
-    
-    size_guide = fields.Str(required=False)
-    
-    sizes = fields.List(fields.Dict(required=False), required=False)
-    
-    slug = fields.Str(required=False)
-    
-    tags = fields.List(fields.Str(required=False), required=False)
-    
-    tax_identifier = fields.Nested(TaxIdentifierV3, required=False)
-    
-    hs_code = fields.Str(required=False)
-    
-    teaser_tag = fields.Nested(TeaserTag, required=False)
-    
-    template_tag = fields.Str(required=False)
-    
-    trader = fields.List(fields.Nested(Trader, required=False), required=False)
-    
-    uid = fields.Int(required=False, allow_none=True)
     
     variant_group = fields.Dict(required=False)
     
@@ -7953,8 +7697,6 @@ class ProductSchemaV2(BaseSchema):
     
     highlights = fields.List(fields.Str(required=False), required=False)
     
-    hs_code = fields.Str(required=False)
-    
     hsn_code = fields.Str(required=False)
     
     id = fields.Str(required=False)
@@ -8183,8 +7925,6 @@ class ProductTemplateExportFilterRequestSchema(BaseSchema):
     
     brands = fields.List(fields.Str(required=False), required=False)
     
-    tax_rule_ids = fields.List(fields.Str(required=False), required=False)
-    
     catalogue_types = fields.List(fields.Str(required=False), required=False)
     
     from_date = fields.Str(required=False)
@@ -8268,8 +8008,6 @@ class Properties(BaseSchema):
     description = fields.Dict(required=False)
     
     highlights = fields.Dict(required=False)
-    
-    hs_code = fields.Dict(required=False)
     
     hsn_code = fields.Dict(required=False)
     
@@ -8813,21 +8551,11 @@ class TaxIdentifier(BaseSchema):
     # Catalog swagger.json
 
     
-    tax_rule_id = fields.Str(required=False)
-    
     hsn_code = fields.Str(required=False)
     
     hsn_code_id = fields.Str(required=False)
     
     reporting_hsn = fields.Str(required=False)
-    
-
-
-class TaxIdentifierV3(BaseSchema):
-    # Catalog swagger.json
-
-    
-    tax_rule_id = fields.Str(required=False)
     
 
 
@@ -9394,280 +9122,6 @@ class FollowProduct(BaseSchema):
 
     
     message = fields.Str(required=False)
-    
-
-
-class TaxReqBodyRule(BaseSchema):
-    # Catalog swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-
-
-class TaxThreshold(BaseSchema):
-    # Catalog swagger.json
-
-    
-    value = fields.Float(required=False)
-    
-    rate = fields.Float(required=False)
-    
-
-
-class TaxComponent(BaseSchema):
-    # Catalog swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    slabs = fields.List(fields.Nested(TaxThreshold, required=False), required=False)
-    
-
-
-class TaxComponentRes(BaseSchema):
-    # Catalog swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    slabs = fields.List(fields.Nested(TaxThreshold, required=False), required=False)
-    
-    _id = fields.Str(required=False)
-    
-
-
-class TaxReqBodyVersion(BaseSchema):
-    # Catalog swagger.json
-
-    
-    components = fields.List(fields.Nested(TaxComponent, required=False), required=False)
-    
-
-
-class CreateTaxRequestBody(BaseSchema):
-    # Catalog swagger.json
-
-    
-    rule = fields.Nested(TaxReqBodyRule, required=False)
-    
-    versions = fields.List(fields.Nested(TaxReqBodyVersion, required=False), required=False)
-    
-
-
-class TaxVersion(BaseSchema):
-    # Catalog swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    rule_id = fields.Str(required=False)
-    
-    applicable_date = fields.Str(required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    modified_on = fields.Str(required=False)
-    
-    company_id = fields.Int(required=False)
-    
-    status = fields.Str(required=False, validate=OneOf([val.value for val in TaxStatusEnum.__members__.values()]))
-    
-    components = fields.List(fields.Nested(TaxComponentRes, required=False), required=False)
-    
-
-
-class UpdateTaxVersionRequestBody(BaseSchema):
-    # Catalog swagger.json
-
-    
-    components = fields.List(fields.Nested(TaxComponentRes, required=False), required=False)
-    
-    applicable_date = fields.Str(required=False)
-    
-
-
-class CreateTaxVersionRequestBody(BaseSchema):
-    # Catalog swagger.json
-
-    
-    components = fields.List(fields.Nested(TaxComponent, required=False), required=False)
-    
-    applicable_date = fields.Str(required=False)
-    
-
-
-class TaxRule(BaseSchema):
-    # Catalog swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    description = fields.Str(required=False)
-    
-    is_default = fields.Boolean(required=False)
-    
-    company_id = fields.Int(required=False)
-    
-    status = fields.Str(required=False, validate=OneOf([val.value for val in TaxStatusEnum.__members__.values()]))
-    
-    created_on = fields.Str(required=False)
-    
-    modified_on = fields.Str(required=False)
-    
-
-
-class TaxVersionDetail(BaseSchema):
-    # Catalog swagger.json
-
-    
-    _id = fields.Str(required=False)
-    
-    rule_id = fields.Str(required=False)
-    
-    applicable_date = fields.Str(required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    modified_on = fields.Str(required=False)
-    
-    company_id = fields.Int(required=False)
-    
-    status = fields.Str(required=False, validate=OneOf([val.value for val in TaxStatusEnum.__members__.values()]))
-    
-    components = fields.List(fields.Nested(TaxComponent, required=False), required=False)
-    
-    version_status = fields.Str(required=False)
-    
-
-
-class CreateTax(BaseSchema):
-    # Catalog swagger.json
-
-    
-    rule = fields.Nested(TaxRule, required=False)
-    
-    versions = fields.Nested(TaxVersion, required=False)
-    
-
-
-class UpdateTaxVersion(BaseSchema):
-    # Catalog swagger.json
-
-    
-    components = fields.List(fields.Nested(TaxComponent, required=False), required=False)
-    
-    applicable_date = fields.Str(required=False)
-    
-
-
-class UpdateTaxRequestBody(BaseSchema):
-    # Catalog swagger.json
-
-    
-    status = fields.Str(required=False, validate=OneOf([val.value for val in TaxStatusEnum.__members__.values()]))
-    
-    is_default = fields.Boolean(required=False)
-    
-    name = fields.Str(required=False)
-    
-
-
-class TaxRuleItem(BaseSchema):
-    # Catalog swagger.json
-
-    
-    versions = fields.List(fields.Nested(TaxVersionDetail, required=False), required=False)
-    
-    rule = fields.Nested(TaxRule, required=False)
-    
-
-
-class TaxRules(BaseSchema):
-    # Catalog swagger.json
-
-    
-    items = fields.List(fields.Nested(TaxRuleItem, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
-    
-
-
-class TaxVersionPastData(BaseSchema):
-    # Catalog swagger.json
-
-    
-    data = fields.List(fields.Nested(TaxVersion, required=False), required=False)
-    
-    pagination = fields.Nested(Page, required=False)
-    
-
-
-class TaxRuleVersion(BaseSchema):
-    # Catalog swagger.json
-
-    
-    items = fields.List(fields.Nested(TaxVersionDetail, required=False), required=False)
-    
-    rule = fields.Nested(TaxRule, required=False)
-    
-    page = fields.Nested(Page, required=False)
-    
-
-
-class HSCodeItem(BaseSchema):
-    # Catalog swagger.json
-
-    
-    created_on = fields.Str(required=False)
-    
-    modified_on = fields.Str(required=False)
-    
-    type = fields.Str(required=False, validate=OneOf([val.value for val in HsTypeEnum.__members__.values()]))
-    
-    company_id = fields.Int(required=False)
-    
-    description = fields.Str(required=False)
-    
-    hs_code = fields.Str(required=False)
-    
-    _id = fields.Str(required=False)
-    
-    country_iso = fields.Str(required=False)
-    
-
-
-class HSCodes(BaseSchema):
-    # Catalog swagger.json
-
-    
-    items = fields.List(fields.Nested(HSCodeItem, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
-    
-
-
-class CreateTaxComponentName(BaseSchema):
-    # Catalog swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-
-
-class GetTaxComponents(BaseSchema):
-    # Catalog swagger.json
-
-    
-    items = fields.List(fields.Nested(TaxComponentRes, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
     
 
 

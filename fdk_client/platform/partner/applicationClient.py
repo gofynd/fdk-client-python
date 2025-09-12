@@ -14,8 +14,8 @@ class Partner:
 
     
     async def addProxyPath(self, extension_id=None, body="", request_headers:Dict={}):
-        """Extension proxy can be used to call extension API from storefront and make extension API integration seamless.
-        :param extension_id : Extension id for which a proxy URL will be generated : type string
+        """Use this endpoint to register a proxy for calling an extension's API from your storefront. This enables your storefront to interact with extension APIs seamlessly, helps enhance and extend your storefront's existing functionality using extensions, and simplifies integration by avoiding CORS issues when accessing extension APIs.
+        :param extension_id : Extension's unique identifier for which a proxy URL will be generated : type string
         """
         payload = {}
         
@@ -31,7 +31,7 @@ class Partner:
         schema = AddProxyReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/partners/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/proxy/{extension_id}", """{"required":[{"name":"company_id","description":"Current company id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","description":"Current application id","in":"path","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"Extension id for which a proxy URL will be generated","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","description":"Current company id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","description":"Current application id","in":"path","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"Extension id for which a proxy URL will be generated","required":true,"schema":{"type":"string"}}]}""", serverType="platform", extension_id=extension_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/partners/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/proxy/{extension_id}", """{"required":[{"name":"company_id","description":"Company ID for which proxy URL will be generated","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","description":"Application (Storefront) unique identifier for which proxy URL will be generated","in":"path","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"Extension's unique identifier for which a proxy URL will be generated","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","description":"Company ID for which proxy URL will be generated","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","description":"Application (Storefront) unique identifier for which proxy URL will be generated","in":"path","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"Extension's unique identifier for which a proxy URL will be generated","required":true,"schema":{"type":"string"}}]}""", serverType="platform", extension_id=extension_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -62,8 +62,8 @@ class Partner:
         return response
     
     async def removeProxyPath(self, extension_id=None, attached_path=None, request_headers:Dict={}):
-        """Remove the proxy which are created earlier for the extension.
-        :param extension_id : Extension id for which proxy URL needs to be removed : type string
+        """Remove the proxy that was created earlier for the extension.
+        :param extension_id : Extension ID for which proxy URL needs to be removed : type string
         :param attached_path : Attached path slug : type string
         """
         payload = {}
@@ -78,7 +78,7 @@ class Partner:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/partners/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/proxy/{extension_id}/{attached_path}", """{"required":[{"name":"company_id","description":"Current company id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","description":"Current application id","in":"path","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"Extension id for which proxy URL needs to be removed","required":true,"schema":{"type":"string"}},{"name":"attached_path","in":"path","description":"Attached path slug","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","description":"Current company id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","description":"Current application id","in":"path","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"Extension id for which proxy URL needs to be removed","required":true,"schema":{"type":"string"}},{"name":"attached_path","in":"path","description":"Attached path slug","required":true,"schema":{"type":"string"}}]}""", serverType="platform", extension_id=extension_id, attached_path=attached_path)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/partners/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/proxy/{extension_id}/{attached_path}", """{"required":[{"name":"company_id","description":"Company ID for which proxy URL will be generated","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","description":"Application (Storefront) unique identifier for which proxy URL will be generated","in":"path","required":true,"schema":{"type":"string"}},{"name":"extension_id","description":"Extension ID for which proxy URL needs to be removed","in":"path","required":true,"schema":{"type":"string"}},{"name":"attached_path","description":"Attached path slug","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","description":"Company ID for which proxy URL will be generated","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","description":"Application (Storefront) unique identifier for which proxy URL will be generated","in":"path","required":true,"schema":{"type":"string"}},{"name":"extension_id","description":"Extension ID for which proxy URL needs to be removed","in":"path","required":true,"schema":{"type":"string"}},{"name":"attached_path","description":"Attached path slug","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", extension_id=extension_id, attached_path=attached_path)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string

@@ -1183,8 +1183,6 @@ class RawBreakup(BaseSchema):
     
     cod_charge = fields.Float(required=False)
     
-    taxes = fields.Float(required=False)
-    
 
 
 class CouponBreakup(BaseSchema):

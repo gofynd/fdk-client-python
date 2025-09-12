@@ -241,7 +241,9 @@ class ProxyFileAccess(BaseSchema):
     # FileStorage swagger.json
 
     
-    success = fields.Boolean(required=False)
+    data = fields.Dict(required=False)
+    
+    support = fields.Dict(required=False)
     
 
 

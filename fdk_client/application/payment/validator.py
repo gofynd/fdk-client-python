@@ -105,21 +105,6 @@ from ..ApplicationModel import BaseSchema
         
     
     
-    
-    
-        
-        
-        
-    
-    
-    
-        
-    
-    
-        
-        
-        
-    
 
 class PaymentValidator:
     
@@ -418,45 +403,6 @@ class PaymentValidator:
         
     
     class validateCustomerAndCreditSummary(BaseSchema):
-        
-        pass 
-        
-    
-    class getRefundBeneficiaries(BaseSchema):
-        
-        
-        order_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
-        
-        filter_by = fields.Str(required=False)
-         
-        
-    
-    class addBeneficiary(BaseSchema):
-        
-        pass 
-        
-    
-    class deleteBeneficiary(BaseSchema):
-        
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class getRefundBeneficiariesUsingOTPSession(BaseSchema):
-        
-        
-        order_id = fields.Str(required=False)
-        
-        shipment_id = fields.Str(required=False)
-        
-        filter_by = fields.Str(required=False)
-         
-        
-    
-    class addRefundBeneficiaryUsingOTPSession(BaseSchema):
         
         pass 
         

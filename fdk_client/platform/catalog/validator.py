@@ -355,50 +355,9 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
         
         
         
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
         
         
         
@@ -413,30 +372,10 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-    
-    
-        
-        
-        
-        
         
         
     
     
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
         
         
     
@@ -458,9 +397,10 @@ from ..PlatformModel import BaseSchema
         
         
         
-                
-from .models import HsTypeEnum
-
+    
+    
+        
+        
         
     
     
@@ -468,8 +408,10 @@ from .models import HsTypeEnum
     
     
         
+        
     
     
+        
         
 
 
@@ -1225,13 +1167,6 @@ class CatalogValidator:
          
         
     
-    class createProductExportJob(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class getProductExportJobs(BaseSchema):
         
         
@@ -1251,12 +1186,10 @@ class CatalogValidator:
          
         
     
-    class editProduct(BaseSchema):
+    class createProductExportJob(BaseSchema):
         
         
-        company_id = fields.Str(required=False)
-        
-        item_id = fields.Int(required=False)
+        company_id = fields.Int(required=False)
          
         
     
@@ -1279,6 +1212,15 @@ class CatalogValidator:
         brand_uid = fields.Int(required=False)
         
         item_code = fields.Str(required=False)
+         
+        
+    
+    class editProduct(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        item_id = fields.Int(required=False)
          
         
     
@@ -1357,130 +1299,6 @@ class CatalogValidator:
         company_id = fields.Int(required=False)
         
         marketplace_slug = fields.Str(required=False)
-         
-        
-    
-    class createTax(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-         
-        
-    
-    class getAllTaxRules(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        q = fields.Str(required=False)
-        
-        statuses = fields.Str(required=False)
-        
-        page = fields.Int(required=False)
-        
-        limit = fields.Int(required=False)
-        
-        version_status = fields.Str(required=False)
-         
-        
-    
-    class updateTaxRule(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        rule_id = fields.Str(required=False)
-         
-        
-    
-    class deleteTaxRule(BaseSchema):
-        
-        
-        rule_id = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getTaxVersionDetails(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        rule_id = fields.Str(required=False)
-        
-        version_status = fields.Str(required=False)
-        
-        limit = fields.Str(required=False)
-        
-        page = fields.Str(required=False)
-         
-        
-    
-    class createTaxVersion(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        rule_id = fields.Str(required=False)
-         
-        
-    
-    class deleteTaxVersion(BaseSchema):
-        
-        
-        rule_id = fields.Str(required=False)
-        
-        version_id = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class updateTaxVersion(BaseSchema):
-        
-        
-        rule_id = fields.Str(required=False)
-        
-        version_id = fields.Str(required=False)
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getHsCodes(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        page = fields.Int(required=False)
-        
-        limit = fields.Int(required=False)
-        
-        type = fields.Nested(HsTypeEnum, required=False)
-        
-        q = fields.Str(required=False)
-         
-        
-    
-    class createHsCode(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class createTaxComponentName(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getTaxComponentNames(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
          
         
     

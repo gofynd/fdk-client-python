@@ -3117,11 +3117,11 @@ class Catalog:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ProductCreateSchemaV3
-        schema = ProductCreateSchemaV3()
+        from .models import ProductCreateSchemaV2
+        schema = ProductCreateSchemaV2()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v3.0/company/{self._conf.companyId}/products/", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3139,7 +3139,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v3.0/company/{self._conf.companyId}/products/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SuccessResponseObject
@@ -3153,7 +3153,7 @@ class Catalog:
         return response
     
     async def uploadBulkProducts(self, department=None, product_type=None, body="", request_headers:Dict={}):
-        """Users can create multiple products by providing the required information needed for product creation in a CSV  or Excel file format.
+        """Users can create multiple products by providing the required information needed for product creation in a CSV or Excel file format.
         :param department : Department of the product to be uploaded. : type string
         :param product_type : Product type of the product to be uploaded i.e. set, standard, digital. : type string
         """
@@ -3173,7 +3173,7 @@ class Catalog:
         schema = BulkProductJob()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v3.0/company/{self._conf.companyId}/products/bulk", """{"required":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Department of the product to be uploaded.","in":"query","name":"department","required":true,"schema":{"type":"string"}},{"description":"Product type of the product to be uploaded i.e. set, standard, digital.","in":"query","name":"product_type","required":true,"schema":{"type":"string","enum":["set","digital","standard","composite"]}}],"optional":[],"query":[{"description":"Department of the product to be uploaded.","in":"query","name":"department","required":true,"schema":{"type":"string"}},{"description":"Product type of the product to be uploaded i.e. set, standard, digital.","in":"query","name":"product_type","required":true,"schema":{"type":"string","enum":["set","digital","standard","composite"]}}],"headers":[],"path":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", department=department, product_type=product_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/bulk", """{"required":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Department of the product to be uploaded.","in":"query","name":"department","required":true,"schema":{"type":"string"}},{"description":"Product type of the product to be uploaded i.e. set, standard, digital.","in":"query","name":"product_type","required":true,"schema":{"type":"string","enum":["set","digital","standard","composite"]}}],"optional":[],"query":[{"description":"Department of the product to be uploaded.","in":"query","name":"department","required":true,"schema":{"type":"string"}},{"description":"Product type of the product to be uploaded i.e. set, standard, digital.","in":"query","name":"product_type","required":true,"schema":{"type":"string","enum":["set","digital","standard","composite"]}}],"headers":[],"path":[{"description":"Company Id in which assets to be uploaded.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", department=department, product_type=product_type)
         query_string = await create_query_string(department=department, product_type=product_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -3191,7 +3191,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v3.0/company/{self._conf.companyId}/products/bulk", department=department, product_type=product_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/bulk", department=department, product_type=product_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import BulkResponseSchema
@@ -3200,52 +3200,6 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for uploadBulkProducts")
-                print(e)
-
-        return response
-    
-    async def createProductExportJob(self, body="", request_headers:Dict={}):
-        """Allows to create a product export job for a company.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = CatalogValidator.createProductExportJob()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ProductTemplateDownloadsExport
-        schema = ProductTemplateDownloadsExport()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v3.0/company/{self._conf.companyId}/products/downloads/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v3.0/company/{self._conf.companyId}/products/downloads/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ProductDownloadsResponseSchema
-            schema = ProductDownloadsResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createProductExportJob")
                 print(e)
 
         return response
@@ -3310,25 +3264,22 @@ class Catalog:
 
         return response
     
-    async def editProduct(self, item_id=None, body="", request_headers:Dict={}):
-        """Modify the details and settings of an existing product in the catalog.
-        :param item_id : Id of the product to be updated. : type integer
+    async def createProductExportJob(self, body="", request_headers:Dict={}):
+        """Allows to create a product export job for a company.
         """
         payload = {}
         
-        if item_id is not None:
-            payload["item_id"] = item_id
 
         # Parameter validation
-        schema = CatalogValidator.editProduct()
+        schema = CatalogValidator.createProductExportJob()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import ProductUpdateSchemaV3
-        schema = ProductUpdateSchemaV3()
+        from .models import ProductTemplateDownloadsExport
+        schema = ProductTemplateDownloadsExport()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v3.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the product to be updated.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the product to be updated.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", item_id=item_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3346,15 +3297,15 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v3.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/downloads/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponseSchema
-            schema = SuccessResponseSchema()
+            from .models import ProductDownloadsResponseSchema
+            schema = ProductDownloadsResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for editProduct")
+                print("Response Validation failed for createProductExportJob")
                 print(e)
 
         return response
@@ -3451,6 +3402,55 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getProduct")
+                print(e)
+
+        return response
+    
+    async def editProduct(self, item_id=None, body="", request_headers:Dict={}):
+        """Modify the details and settings of an existing product in the catalog.
+        :param item_id : Id of the product to be updated. : type integer
+        """
+        payload = {}
+        
+        if item_id is not None:
+            payload["item_id"] = item_id
+
+        # Parameter validation
+        schema = CatalogValidator.editProduct()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ProductUpdateSchemaV2
+        schema = ProductUpdateSchemaV2()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the product to be updated.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Id of the product to be updated.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", item_id=item_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponseSchema
+            schema = SuccessResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for editProduct")
                 print(e)
 
         return response
@@ -3844,580 +3844,6 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for createMarketplaceOptin")
-                print(e)
-
-        return response
-    
-    async def createTax(self, body="", request_headers:Dict={}):
-        """Create a tax rule and its version for under a specific company. This also creates a live version of the rule
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = CatalogValidator.createTax()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CreateTaxRequestBody
-        schema = CreateTaxRequestBody()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/versions", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"},"description":"The ID of the company for which the tax rule is being created."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"},"description":"The ID of the company for which the tax rule is being created."}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/versions", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CreateTax
-            schema = CreateTax()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createTax")
-                print(e)
-
-        return response
-    
-    async def getAllTaxRules(self, q=None, statuses=None, page=None, limit=None, version_status=None, request_headers:Dict={}):
-        """Returns array of all tax rules of a company
-        :param q : The search query to filter tax rules. : type string
-        :param statuses : The status of the tax rules to filter. : type string
-        :param page : The page number to retrieve. : type integer
-        :param limit : The number of items per page. : type integer
-        :param version_status : The status of the tax rule versions to filter. : type string
-        """
-        payload = {}
-        
-        if q is not None:
-            payload["q"] = q
-        if statuses is not None:
-            payload["statuses"] = statuses
-        if page is not None:
-            payload["page"] = page
-        if limit is not None:
-            payload["limit"] = limit
-        if version_status is not None:
-            payload["version_status"] = version_status
-
-        # Parameter validation
-        schema = CatalogValidator.getAllTaxRules()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"},"description":"The ID of the company for which tax rules are being retrieved."}],"optional":[{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"The search query to filter tax rules."},{"in":"query","name":"statuses","required":false,"schema":{"type":"string","enum":["ACTIVE","INACTIVE","DELETED"]},"description":"The status of the tax rules to filter."},{"in":"query","name":"page","required":false,"schema":{"type":"integer"},"description":"The page number to retrieve."},{"in":"query","name":"limit","required":false,"schema":{"type":"integer"},"description":"The number of items per page."},{"in":"query","name":"version_status","required":false,"schema":{"type":"string","enum":["LIVE","PAST","FUTURE"]},"description":"The status of the tax rule versions to filter."}],"query":[{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"The search query to filter tax rules."},{"in":"query","name":"statuses","required":false,"schema":{"type":"string","enum":["ACTIVE","INACTIVE","DELETED"]},"description":"The status of the tax rules to filter."},{"in":"query","name":"page","required":false,"schema":{"type":"integer"},"description":"The page number to retrieve."},{"in":"query","name":"limit","required":false,"schema":{"type":"integer"},"description":"The number of items per page."},{"in":"query","name":"version_status","required":false,"schema":{"type":"string","enum":["LIVE","PAST","FUTURE"]},"description":"The status of the tax rule versions to filter."}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"},"description":"The ID of the company for which tax rules are being retrieved."}]}""", serverType="platform", q=q, statuses=statuses, page=page, limit=limit, version_status=version_status)
-        query_string = await create_query_string(q=q, statuses=statuses, page=page, limit=limit, version_status=version_status)
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules", q=q, statuses=statuses, page=page, limit=limit, version_status=version_status), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TaxRules
-            schema = TaxRules()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getAllTaxRules")
-                print(e)
-
-        return response
-    
-    async def updateTaxRule(self, rule_id=None, body="", request_headers:Dict={}):
-        """Update an existing tax rule under a specific company.
-        :param rule_id : tax rule id that you want to update. : type string
-        """
-        payload = {}
-        
-        if rule_id is not None:
-            payload["rule_id"] = rule_id
-
-        # Parameter validation
-        schema = CatalogValidator.updateTaxRule()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import UpdateTaxRequestBody
-        schema = UpdateTaxRequestBody()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being updated."},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"tax rule id that you want to update."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being updated."},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"tax rule id that you want to update."}]}""", serverType="platform", rule_id=rule_id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}", rule_id=rule_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TaxRule
-            schema = TaxRule()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateTaxRule")
-                print(e)
-
-        return response
-    
-    async def deleteTaxRule(self, rule_id=None, request_headers:Dict={}):
-        """Deletes a tax rule along with all its versions using the provided rule_id. You can not delete a rule if 1. it is the default tax rule 2. it is applied to any product. You will need to set any other tax rule as default or will need to attach a different tax rule to the products, then only you can delete the rule.
-
-        :param rule_id : The ID of the tax rule to be deleted. : type string
-        """
-        payload = {}
-        
-        if rule_id is not None:
-            payload["rule_id"] = rule_id
-
-        # Parameter validation
-        schema = CatalogValidator.deleteTaxRule()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}", """{"required":[{"name":"rule_id","in":"path","required":true,"description":"The ID of the tax rule to be deleted.","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being updated."}],"optional":[],"query":[],"headers":[],"path":[{"name":"rule_id","in":"path","required":true,"description":"The ID of the tax rule to be deleted.","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being updated."}]}""", serverType="platform", rule_id=rule_id, )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}", rule_id=rule_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        return response
-    
-    async def getTaxVersionDetails(self, rule_id=None, version_status=None, limit=None, page=None, request_headers:Dict={}):
-        """Retrieve versions of a tax rule with support for filtering by query parameters (e.g., live, past, all).
-        :param rule_id : The ID of the tax rule. : type string
-        :param version_status : Filter by tax version status. : type string
-        :param limit : The number of items to return per page for paginated past versions. : type string
-        :param page : The page number for paginated past versions. : type string
-        """
-        payload = {}
-        
-        if rule_id is not None:
-            payload["rule_id"] = rule_id
-        if version_status is not None:
-            payload["version_status"] = version_status
-        if limit is not None:
-            payload["limit"] = limit
-        if page is not None:
-            payload["page"] = page
-
-        # Parameter validation
-        schema = CatalogValidator.getTaxVersionDetails()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being created."},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"The ID of the tax rule."}],"optional":[{"in":"query","name":"version_status","required":false,"schema":{"type":"string","enum":["ALL","LIVE","PAST","FUTURE"],"default":"ALL"},"description":"Filter by tax version status."},{"in":"query","name":"limit","required":false,"schema":{"type":"string","default":10},"description":"The number of items to return per page for paginated past versions."},{"in":"query","name":"page","required":false,"schema":{"type":"string","default":"1"},"description":"The page number for paginated past versions."}],"query":[{"in":"query","name":"version_status","required":false,"schema":{"type":"string","enum":["ALL","LIVE","PAST","FUTURE"],"default":"ALL"},"description":"Filter by tax version status."},{"in":"query","name":"limit","required":false,"schema":{"type":"string","default":10},"description":"The number of items to return per page for paginated past versions."},{"in":"query","name":"page","required":false,"schema":{"type":"string","default":"1"},"description":"The page number for paginated past versions."}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being created."},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"The ID of the tax rule."}]}""", serverType="platform", rule_id=rule_id, version_status=version_status, limit=limit, page=page)
-        query_string = await create_query_string(version_status=version_status, limit=limit, page=page)
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions", rule_id=rule_id, version_status=version_status, limit=limit, page=page), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TaxRuleVersion
-            schema = TaxRuleVersion()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getTaxVersionDetails")
-                print(e)
-
-        return response
-    
-    async def createTaxVersion(self, rule_id=None, body="", request_headers:Dict={}):
-        """Creates a tax rule using the provided rule_id.
-        :param rule_id : The ID of the tax rule. : type string
-        """
-        payload = {}
-        
-        if rule_id is not None:
-            payload["rule_id"] = rule_id
-
-        # Parameter validation
-        schema = CatalogValidator.createTaxVersion()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CreateTaxVersionRequestBody
-        schema = CreateTaxVersionRequestBody()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being created."},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"The ID of the tax rule."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being created."},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"The ID of the tax rule."}]}""", serverType="platform", rule_id=rule_id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions", rule_id=rule_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TaxVersion
-            schema = TaxVersion()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createTaxVersion")
-                print(e)
-
-        return response
-    
-    async def deleteTaxVersion(self, rule_id=None, version_id=None, request_headers:Dict={}):
-        """Deletes a tax rule using the provided rule_id. On future/scheduled version can be deleted.
-        :param rule_id : The ID of the tax rule to be deleted. : type string
-        :param version_id : The ID of the tax version to be deleted. : type string
-        """
-        payload = {}
-        
-        if rule_id is not None:
-            payload["rule_id"] = rule_id
-        if version_id is not None:
-            payload["version_id"] = version_id
-
-        # Parameter validation
-        schema = CatalogValidator.deleteTaxVersion()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions/{version_id}", """{"required":[{"name":"rule_id","in":"path","required":true,"description":"The ID of the tax rule to be deleted.","schema":{"type":"string"}},{"name":"version_id","in":"path","required":true,"description":"The ID of the tax version to be deleted.","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being updated."}],"optional":[],"query":[],"headers":[],"path":[{"name":"rule_id","in":"path","required":true,"description":"The ID of the tax rule to be deleted.","schema":{"type":"string"}},{"name":"version_id","in":"path","required":true,"description":"The ID of the tax version to be deleted.","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being updated."}]}""", serverType="platform", rule_id=rule_id, version_id=version_id, )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions/{version_id}", rule_id=rule_id, version_id=version_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        return response
-    
-    async def updateTaxVersion(self, rule_id=None, version_id=None, body="", request_headers:Dict={}):
-        """Updates a tax rule using the provided rule_id. You can update any part of a scheduled version but only tax name of live version can be updated.
-        :param rule_id : The ID of the tax rule to be updated. : type string
-        :param version_id : The ID of the tax version to be updated. : type string
-        """
-        payload = {}
-        
-        if rule_id is not None:
-            payload["rule_id"] = rule_id
-        if version_id is not None:
-            payload["version_id"] = version_id
-
-        # Parameter validation
-        schema = CatalogValidator.updateTaxVersion()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import UpdateTaxVersionRequestBody
-        schema = UpdateTaxVersionRequestBody()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions/{version_id}", """{"required":[{"name":"rule_id","in":"path","required":true,"description":"The ID of the tax rule to be updated.","schema":{"type":"string"}},{"name":"version_id","in":"path","required":true,"description":"The ID of the tax version to be updated.","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being updated."}],"optional":[],"query":[],"headers":[],"path":[{"name":"rule_id","in":"path","required":true,"description":"The ID of the tax rule to be updated.","schema":{"type":"string"}},{"name":"version_id","in":"path","required":true,"description":"The ID of the tax version to be updated.","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being updated."}]}""", serverType="platform", rule_id=rule_id, version_id=version_id, )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions/{version_id}", rule_id=rule_id, version_id=version_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TaxVersion
-            schema = TaxVersion()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateTaxVersion")
-                print(e)
-
-        return response
-    
-    async def getHsCodes(self, page=None, limit=None, type=None, q=None, request_headers:Dict={}):
-        """Retrieve a list of HS (Harmonized System) or SAC (Service Accounting Code) codes for a company.
-HS codes are used for classifying goods in international trade, while SAC codes are used for classifying services for taxation purposes.
-Supports optional filtering and pagination.
-
-        :param page : The page number for pagination. : type integer
-        :param limit : The number of items to return per page. : type integer
-        :param type : Filter by HS/SAC code type. : type 
-        :param q : Search query to filter HS/SAC codes by code or description. : type string
-        """
-        payload = {}
-        
-        if page is not None:
-            payload["page"] = page
-        if limit is not None:
-            payload["limit"] = limit
-        if type is not None:
-            payload["type"] = type
-        if q is not None:
-            payload["q"] = q
-
-        # Parameter validation
-        schema = CatalogValidator.getHsCodes()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/hscodes", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which to retrieve HS/SAC codes."}],"optional":[{"in":"query","name":"page","required":false,"schema":{"type":"integer","default":1},"description":"The page number for pagination."},{"in":"query","name":"limit","required":false,"schema":{"type":"integer","default":50},"description":"The number of items to return per page."},{"in":"query","name":"type","required":false,"schema":{"$ref":"#/components/schemas/HsTypeEnum"},"description":"Filter by HS/SAC code type."},{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"Search query to filter HS/SAC codes by code or description."}],"query":[{"in":"query","name":"page","required":false,"schema":{"type":"integer","default":1},"description":"The page number for pagination."},{"in":"query","name":"limit","required":false,"schema":{"type":"integer","default":50},"description":"The number of items to return per page."},{"in":"query","name":"type","required":false,"schema":{"$ref":"#/components/schemas/HsTypeEnum"},"description":"Filter by HS/SAC code type."},{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"Search query to filter HS/SAC codes by code or description."}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which to retrieve HS/SAC codes."}]}""", serverType="platform", page=page, limit=limit, type=type, q=q)
-        query_string = await create_query_string(page=page, limit=limit, type=type, q=q)
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/hscodes", page=page, limit=limit, type=type, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import HSCodes
-            schema = HSCodes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getHsCodes")
-                print(e)
-
-        return response
-    
-    async def createHsCode(self, body="", request_headers:Dict={}):
-        """Create HS/SAC code.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = CatalogValidator.createHsCode()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import HSCodeItem
-        schema = HSCodeItem()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/hscodes", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the HS/SAC code is being created."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the HS/SAC code is being created."}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/hscodes", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import HSCodeItem
-            schema = HSCodeItem()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createHsCode")
-                print(e)
-
-        return response
-    
-    async def createTaxComponentName(self, body="", request_headers:Dict={}):
-        """Create component names for a product.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = CatalogValidator.createTaxComponentName()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CreateTaxComponentName
-        schema = CreateTaxComponentName()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/component-names", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the component names are being created."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the component names are being created."}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/component-names", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import TaxComponentRes
-            schema = TaxComponentRes()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createTaxComponentName")
-                print(e)
-
-        return response
-    
-    async def getTaxComponentNames(self, request_headers:Dict={}):
-        """Get component names for a company.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = CatalogValidator.getTaxComponentNames()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/component-names", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the component names are being retrieved."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the component names are being retrieved."}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/component-names", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetTaxComponents
-            schema = GetTaxComponents()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getTaxComponentNames")
                 print(e)
 
         return response

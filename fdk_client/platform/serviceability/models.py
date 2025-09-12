@@ -2207,6 +2207,8 @@ class PackageMaterialResult(BaseSchema):
     
     id = fields.Str(required=False)
     
+    item_id = fields.Int(required=False)
+    
     width = fields.Float(required=False)
     
     height = fields.Float(required=False)
@@ -2332,6 +2334,8 @@ class PackageItem(BaseSchema):
     size = fields.Str(required=False)
     
     company_id = fields.Int(required=False)
+    
+    item_id = fields.Int(required=False)
     
     max_weight = fields.Float(required=False)
     

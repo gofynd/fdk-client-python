@@ -413,6 +413,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -1301,6 +1302,8 @@ class CatalogValidator:
         user_id = fields.Str(required=False)
         
         page_id = fields.Str(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     
