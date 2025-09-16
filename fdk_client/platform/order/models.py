@@ -1022,6 +1022,10 @@ class Identifier(BaseSchema):
     pass
 
 
+class TaxComponent(BaseSchema):
+    pass
+
+
 class FinancialBreakup(BaseSchema):
     pass
 
@@ -5545,6 +5549,20 @@ class Identifier(BaseSchema):
     
 
 
+class TaxComponent(BaseSchema):
+    # Order swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    rate = fields.Float(required=False)
+    
+    tax_amount = fields.Float(required=False)
+    
+    taxable_amount = fields.Float(required=False)
+    
+
+
 class FinancialBreakup(BaseSchema):
     # Order swagger.json
 
@@ -5604,6 +5622,8 @@ class FinancialBreakup(BaseSchema):
     total_units = fields.Int(required=False)
     
     added_to_fynd_cash = fields.Boolean(required=False)
+    
+    taxes = fields.List(fields.Nested(TaxComponent, required=False), required=False)
     
 
 
