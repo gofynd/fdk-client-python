@@ -19,6 +19,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
         
@@ -49,6 +50,8 @@ class ThemeValidator:
         section_preview_hash = fields.Str(required=False)
         
         company = fields.Int(required=False)
+        
+        url_params = fields.Str(required=False)
          
         
     

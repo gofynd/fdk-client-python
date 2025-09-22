@@ -532,19 +532,22 @@ class Content:
 
         return response
     
-    async def getAllLanguages(self, body="", request_headers:Dict={}):
+    async def getAllLanguages(self, is_enabled=None, body="", request_headers:Dict={}):
         """Fetches complete list of languages supported by the platform with their locale codes and text directions.
+        :param is_enabled : Filter languages by enabled status. : type boolean
         """
         payload = {}
         
+        if is_enabled is not None:
+            payload["is_enabled"] = is_enabled
 
         # Parameter validation
         schema = ContentValidator.getAllLanguages()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getAllLanguages"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="public" )
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(api_url=self._urls["getAllLanguages"], proccessed_params="""{"required":[],"optional":[{"name":"is_enabled","in":"query","required":false,"schema":{"type":"boolean"},"description":"Filter languages by enabled status."}],"query":[{"name":"is_enabled","in":"query","required":false,"schema":{"type":"boolean"},"description":"Filter languages by enabled status."}],"headers":[],"path":[]}""", serverType="public", is_enabled=is_enabled)
+        query_string = await create_query_string(is_enabled=is_enabled)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -563,7 +566,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllLanguages"]).netloc, "get", await create_url_without_domain("/service/public/content/languages", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAllLanguages"]).netloc, "get", await create_url_without_domain("/service/public/content/languages", is_enabled=is_enabled), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         return response
     

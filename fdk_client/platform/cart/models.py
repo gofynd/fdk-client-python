@@ -10,6 +10,10 @@ from .enums import *
 
 
 
+class RedeemLoyaltyPoints(BaseSchema):
+    pass
+
+
 class CouponDateMeta(BaseSchema):
     pass
 
@@ -598,6 +602,10 @@ class OverrideCheckoutReq(BaseSchema):
     pass
 
 
+class OverrideCheckoutData(BaseSchema):
+    pass
+
+
 class OverrideCheckoutResult(BaseSchema):
     pass
 
@@ -859,6 +867,14 @@ class ValidationError(BaseSchema):
 
 
 
+
+
+class RedeemLoyaltyPoints(BaseSchema):
+    # Cart swagger.json
+
+    
+    redeem_points = fields.Boolean(required=False)
+    
 
 
 class CouponDateMeta(BaseSchema):
@@ -2107,6 +2123,8 @@ class Article(BaseSchema):
     
     allowed_refund = fields.Boolean(required=False)
     
+    article_index = fields.Int(required=False)
+    
     min_price_threshold = fields.Float(required=False)
     
 
@@ -2365,6 +2383,22 @@ class LoyaltyPoints(BaseSchema):
     
     description = fields.Str(required=False)
     
+    total_points = fields.Float(required=False)
+    
+    points = fields.Float(required=False)
+    
+    amount = fields.Float(required=False)
+    
+    mop_amount = fields.Float(required=False)
+    
+    earn_points = fields.Float(required=False)
+    
+    earn_points_amount = fields.Float(required=False)
+    
+    earn_title = fields.Str(required=False)
+    
+    title = fields.Str(required=False)
+    
 
 
 class RawBreakup(BaseSchema):
@@ -2376,6 +2410,10 @@ class RawBreakup(BaseSchema):
     gst_charges = fields.Float(required=False)
     
     mrp_total = fields.Float(required=False)
+    
+    engage_amount = fields.Float(required=False)
+    
+    engage_mop_amount = fields.Float(required=False)
     
     fynd_cash = fields.Float(required=False)
     
@@ -3659,7 +3697,7 @@ class OverrideCheckoutReq(BaseSchema):
     
     payment_mode = fields.Str(required=False)
     
-    billing_address = fields.Dict(required=False)
+    billing_address = fields.Nested(ShippingAddress, required=False)
     
     merchant_code = fields.Str(required=False)
     
@@ -3677,7 +3715,35 @@ class OverrideCheckoutReq(BaseSchema):
     
     ordering_store = fields.Int(required=False, allow_none=True)
     
-    shipping_address = fields.Dict(required=False)
+    device_id = fields.Str(required=False, allow_none=True)
+    
+    shipping_address = fields.Nested(ShippingAddress, required=False)
+    
+
+
+class OverrideCheckoutData(BaseSchema):
+    # Cart swagger.json
+
+    
+    amount = fields.Int(required=False)
+    
+    order_id = fields.Str(required=False)
+    
+    email = fields.Str(required=False)
+    
+    contact = fields.Str(required=False)
+    
+    currency = fields.Str(required=False)
+    
+    customer_id = fields.Str(required=False)
+    
+    callback_url = fields.Str(required=False)
+    
+    bank = fields.Str(required=False)
+    
+    method = fields.Str(required=False)
+    
+    vpa = fields.Str(required=False)
     
 
 
@@ -3685,9 +3751,9 @@ class OverrideCheckoutResult(BaseSchema):
     # Cart swagger.json
 
     
-    data = fields.Dict(required=False)
+    data = fields.Nested(OverrideCheckoutData, required=False)
     
-    cart = fields.Dict(required=False)
+    cart = fields.Nested(CheckCart, required=False)
     
     success = fields.Str(required=False)
     

@@ -743,6 +743,8 @@ class Language(BaseSchema):
     
     display_name = fields.Str(required=False)
     
+    is_enabled = fields.Boolean(required=False)
+    
 
 
 class Error(BaseSchema):

@@ -74,13 +74,14 @@ class Theme:
 
         return response
     
-    async def getPage(self, theme_id=None, page_value=None, filters=None, section_preview_hash=None, company=None, body="", request_headers:Dict={}):
-        """Get page level configurations, applied sections and seo data of a page by `page_value` received from list pages api.
+    async def getPage(self, theme_id=None, page_value=None, filters=None, section_preview_hash=None, company=None, url_params=None, body="", request_headers:Dict={}):
+        """Get page level configurations, applied sections and seo data of a page by `page_value` received from list pages api. Supports dynamic URL parameter for custom sections.
         :param theme_id : Id of the theme to be retrieved. : type string
         :param page_value : Value of the page to be retrieved. : type string
         :param filters : Filters on sections to be applied or not. : type string
         :param section_preview_hash : Unique hash id on sections preview. : type string
         :param company : Company id of the application. : type integer
+        :param url_params : URL parameters extracted from the browser path and query string, used for dynamic variable mapping in custom sections. The value should be a stringified  JSON object containing the browser's URL parameters, with the JSON escaped. : type string
         """
         payload = {}
         
@@ -94,14 +95,16 @@ class Theme:
             payload["section_preview_hash"] = section_preview_hash
         if company is not None:
             payload["company"] = company
+        if url_params is not None:
+            payload["url_params"] = url_params
 
         # Parameter validation
         schema = ThemeValidator.getPage()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPage"], proccessed_params="""{"required":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"string"}},{"name":"section_preview_hash","in":"query","description":"Unique hash id on sections preview.","required":false,"schema":{"type":"string"}},{"name":"company","in":"query","description":"Company id of the application.","required":false,"schema":{"type":"integer"}}],"query":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"string"}},{"name":"section_preview_hash","in":"query","description":"Unique hash id on sections preview.","required":false,"schema":{"type":"string"}},{"name":"company","in":"query","description":"Company id of the application.","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved.","required":true,"schema":{"type":"string"}}]}""", serverType="application", theme_id=theme_id, page_value=page_value, filters=filters, section_preview_hash=section_preview_hash, company=company)
-        query_string = await create_query_string(filters=filters, section_preview_hash=section_preview_hash, company=company)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPage"], proccessed_params="""{"required":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved.","required":true,"schema":{"type":"string"}}],"optional":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"string"}},{"name":"section_preview_hash","in":"query","description":"Unique hash id on sections preview.","required":false,"schema":{"type":"string"}},{"name":"company","in":"query","description":"Company id of the application.","required":false,"schema":{"type":"integer"}},{"name":"url_params","in":"query","description":"URL parameters extracted from the browser path and query string, used for dynamic variable mapping in custom sections. The value should be a stringified  JSON object containing the browser's URL parameters, with the JSON escaped.","required":false,"schema":{"type":"string","format":"json"},"example":"{\"slug\": \"awesome-product\", \"page_type\": \"product\", \"path_segment_0\": \"product\", \"path_segment_1\": \"awesome-product\", \"full_path\": \"/product/awesome-product\"}"}],"query":[{"name":"filters","in":"query","description":"Filters on sections to be applied or not.","required":false,"schema":{"type":"string"}},{"name":"section_preview_hash","in":"query","description":"Unique hash id on sections preview.","required":false,"schema":{"type":"string"}},{"name":"company","in":"query","description":"Company id of the application.","required":false,"schema":{"type":"integer"}},{"name":"url_params","in":"query","description":"URL parameters extracted from the browser path and query string, used for dynamic variable mapping in custom sections. The value should be a stringified  JSON object containing the browser's URL parameters, with the JSON escaped.","required":false,"schema":{"type":"string","format":"json"},"example":"{\"slug\": \"awesome-product\", \"page_type\": \"product\", \"path_segment_0\": \"product\", \"path_segment_1\": \"awesome-product\", \"full_path\": \"/product/awesome-product\"}"}],"headers":[],"path":[{"name":"theme_id","in":"path","description":"Id of the theme to be retrieved.","required":true,"schema":{"type":"string"}},{"name":"page_value","in":"path","description":"Value of the page to be retrieved.","required":true,"schema":{"type":"string"}}]}""", serverType="application", theme_id=theme_id, page_value=page_value, filters=filters, section_preview_hash=section_preview_hash, company=company, url_params=url_params)
+        query_string = await create_query_string(filters=filters, section_preview_hash=section_preview_hash, company=company, url_params=url_params)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -119,7 +122,7 @@ class Theme:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPage"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/{theme_id}/{page_value}", theme_id=theme_id, page_value=page_value, filters=filters, section_preview_hash=section_preview_hash, company=company), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPage"]).netloc, "get", await create_url_without_domain("/service/application/theme/v1.0/{theme_id}/{page_value}", theme_id=theme_id, page_value=page_value, filters=filters, section_preview_hash=section_preview_hash, company=company, url_params=url_params), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import AvailablePageSchema

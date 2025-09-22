@@ -727,6 +727,8 @@ class ProductDetailGroupedAttribute(BaseSchema):
     
     title = fields.Str(required=False)
     
+    id = fields.Str(required=False)
+    
     details = fields.List(fields.Nested(ProductDetailAttribute, required=False), required=False)
     
 

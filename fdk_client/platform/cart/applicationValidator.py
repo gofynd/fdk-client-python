@@ -468,6 +468,17 @@ from .models import OrderingSource
         
         
         
+    
+    
+                
+from .models import OrderingSource
+
+        
+        
+        
+        
+        
+        
 
 class CartValidator:
     
@@ -1389,6 +1400,25 @@ class CartValidator:
         buy_now = fields.Boolean(required=False)
         
         order_type = fields.Str(required=False)
+         
+        
+    
+    class applyLoyaltyPoints(BaseSchema):
+        
+        
+        x__ordering__source = fields.Nested(OrderingSource, required=False)
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+        
+        i = fields.Boolean(required=False)
+        
+        b = fields.Boolean(required=False)
+        
+        buy_now = fields.Boolean(required=False)
          
         
     

@@ -378,7 +378,7 @@ class CartValidator:
          
         
     
-    class applyRewardPoints(BaseSchema):
+    class applyLoyaltyPoints(BaseSchema):
         
         
         x__ordering__source = fields.Nested(OrderingSource, required=False)

@@ -30,6 +30,8 @@ from ..PublicModel import BaseSchema
         
     
     
+        
+    
     
         
     
@@ -102,7 +104,9 @@ class ContentValidator:
     
     class getAllLanguages(BaseSchema):
         
-        pass 
+        
+        is_enabled = fields.Boolean(required=False)
+         
         
     
     class getLanguageByLocale(BaseSchema):

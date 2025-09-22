@@ -306,7 +306,7 @@ class BulkPriceResult(BaseSchema):
     pass
 
 
-class RewardPointCreation(BaseSchema):
+class RedeemLoyaltyPoints(BaseSchema):
     pass
 
 
@@ -1157,6 +1157,10 @@ class RawBreakup(BaseSchema):
     
     subtotal = fields.Float(required=False)
     
+    engage_amount = fields.Float(required=False)
+    
+    engage_mop_amount = fields.Float(required=False)
+    
     fynd_cash = fields.Float(required=False)
     
     discount = fields.Float(required=False)
@@ -1228,6 +1232,22 @@ class LoyaltyPoints(BaseSchema):
     applicable = fields.Float(required=False)
     
     is_applied = fields.Boolean(required=False)
+    
+    total_points = fields.Float(required=False)
+    
+    points = fields.Float(required=False)
+    
+    amount = fields.Float(required=False)
+    
+    mop_amount = fields.Float(required=False)
+    
+    earn_points = fields.Float(required=False)
+    
+    earn_points_amount = fields.Float(required=False)
+    
+    earn_title = fields.Str(required=False)
+    
+    title = fields.Str(required=False)
     
 
 
@@ -1739,11 +1759,11 @@ class BulkPriceResult(BaseSchema):
     
 
 
-class RewardPointCreation(BaseSchema):
+class RedeemLoyaltyPoints(BaseSchema):
     # Cart swagger.json
 
     
-    points = fields.Boolean(required=False)
+    redeem_points = fields.Boolean(required=False)
     
 
 

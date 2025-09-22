@@ -26,7 +26,7 @@ class Cart:
             "applyCoupon": "/service/application/cart/v1.0/coupon",
             "removeCoupon": "/service/application/cart/v1.0/coupon",
             "getBulkDiscountOffers": "/service/application/cart/v1.0/bulk-price",
-            "applyRewardPoints": "/service/application/cart/v1.0/redeem/points/",
+            "applyLoyaltyPoints": "/service/application/cart/v1.0/redeem",
             "getAddresses": "/service/application/cart/v1.0/address",
             "addAddress": "/service/application/cart/v1.0/address",
             "getAddressById": "/service/application/cart/v1.0/address/{id}",
@@ -301,7 +301,7 @@ class Cart:
         return response
     
     async def updateCartBreakup(self, x_ordering_source=None, id=None, i=None, b=None, buy_now=None, cart_type=None, body="", request_headers:Dict={}):
-        """Update cart. Customers can adjust the cart breakup by  applying or removing store credits as needed.
+        """Update cart. Customers can adjust the cart breakup by applying or removing store credits as needed.
         :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type 
         :param id : The unique identifier of the cart. : type string
         :param i : Select `true` to retrieve all the items added in the cart. : type boolean
@@ -690,8 +690,8 @@ class Cart:
 
         return response
     
-    async def applyRewardPoints(self, x_ordering_source=None, id=None, i=None, b=None, buy_now=None, body="", request_headers:Dict={}):
-        """Users can redeem their accumulated reward points and apply them to the items in their cart, thereby availing discounts on their current purchases.
+    async def applyLoyaltyPoints(self, x_ordering_source=None, id=None, i=None, b=None, buy_now=None, body="", request_headers:Dict={}):
+        """Users can redeem their accumulated loyalty points and apply them to the items in their cart, thereby availing discounts on their current purchases.
         :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type 
         :param id : The unique identifier of the cart. : type string
         :param i : Select `true` to retrieve all the items added in the cart. : type boolean
@@ -712,15 +712,15 @@ class Cart:
             payload["buy_now"] = buy_now
 
         # Parameter validation
-        schema = CartValidator.applyRewardPoints()
+        schema = CartValidator.applyLoyaltyPoints()
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import RewardPointCreation
-        schema = RewardPointCreation()
+        from .models import RedeemLoyaltyPoints
+        schema = RedeemLoyaltyPoints()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["applyRewardPoints"], proccessed_params="""{"required":[],"optional":[{"in":"header","name":"x-ordering-source","schema":{"$ref":"#/components/schemas/OrderingSource"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"$ref":"#/components/schemas/OrderingSource"},"description":"Ordering source header, to be used to identify source of order creation."}],"path":[]}""", serverType="application", x_ordering_source=x_ordering_source, id=id, i=i, b=b, buy_now=buy_now)
+        url_with_params = await create_url_with_params(api_url=self._urls["applyLoyaltyPoints"], proccessed_params="""{"required":[],"optional":[{"in":"header","name":"x-ordering-source","schema":{"$ref":"#/components/schemas/OrderingSource"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is boolean to get buy_now cart."}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"$ref":"#/components/schemas/OrderingSource"},"description":"Ordering source header, to be used to identify source of order creation."}],"path":[]}""", serverType="application", x_ordering_source=x_ordering_source, id=id, i=i, b=b, buy_now=buy_now)
         query_string = await create_query_string(id=id, i=i, b=b, buy_now=buy_now)
         if query_string:
             url_with_params += "?" + query_string
@@ -739,7 +739,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["applyRewardPoints"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/redeem/points/", x_ordering_source=x_ordering_source, id=id, i=i, b=b, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["applyLoyaltyPoints"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/redeem", x_ordering_source=x_ordering_source, id=id, i=i, b=b, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CartDetailResult
@@ -747,7 +747,7 @@ class Cart:
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for applyRewardPoints")
+                print("Response Validation failed for applyLoyaltyPoints")
                 print(e)
 
         return response
@@ -1704,7 +1704,7 @@ class Cart:
         return response
     
     async def checkoutCartV2(self, x_ordering_source=None, buy_now=None, cart_type=None, body="", request_headers:Dict={}):
-        """The checkout cart initiates the order creation process based on the items in the user's cart,  their selected address, and chosen payment methods. It also supports multiple payment method  options and revalidates the cart details to ensure a secure and seamless order placement.
+        """The checkout cart initiates the order creation process based on the items in the user's cart, their selected address, and chosen payment methods. It also supports multiple payment method options and revalidates the cart details to ensure a secure and seamless order placement.
         :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type 
         :param buy_now : This indicates the type of cart to checkout. : type boolean
         :param cart_type : The type of cart. : type string
