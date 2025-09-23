@@ -2,8 +2,7 @@
 from typing import Dict
 
 from ...common.aiohttp_helper import AiohttpHelper
-from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, \
-    create_url_without_domain
+from ...common.utils import create_url_with_params, create_query_string, get_headers_with_signature, create_url_without_domain
 from ..PlatformConfig import PlatformConfig
 
 from .validator import CatalogValidator
