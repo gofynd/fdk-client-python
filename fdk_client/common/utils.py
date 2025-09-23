@@ -44,27 +44,6 @@ async def create_url_with_params(domain: Text = "", api_url: Text = "", proccess
     return final_url
 
 
-async def custom_create_url_with_params(domain: Text = "", api_url: Text = "", proccessed_params: Text = "",
-                                        serverType: Text = "", **kwargs):
-    """Creates url with params - supports arrays for query parameters"""
-    params = {}
-    final_url = domain + api_url
-    for key, value in kwargs.items():
-        if value is not None:
-            new_key = key.replace("__", "-")
-            params[new_key] = value
-            if new_key in final_url:
-                final_url.replace(new_key, key)
-    await validate_required_query_params(json.loads(proccessed_params), params, serverType)
-    final_url = final_url.format(**params)
-
-    # Use our custom query string creation that handles arrays properly
-    query_string = await create_query_string(**params)
-    if query_string:
-        final_url += "?" + query_string
-    return final_url
-
-
 async def create_url_without_domain(url: Text, **kwargs):
     """Returns url without domain replacing variables."""
     params = {}
@@ -92,31 +71,6 @@ async def create_query_string(**kwargs):
         final_params[key] = params[key]
     query_string = parse.urlencode(final_params)
     return query_string
-
-
-async def custom_create_query_string(**kwargs):
-    """Return query string."""
-    params = {}
-    for key, value in kwargs.items():
-        if value is not None:
-            new_key = key.replace("__", "-")
-            params[new_key] = value
-
-    # Handle arrays properly - create multiple query parameters instead of encoding the array
-    query_parts = []
-    query_keys = list(params.keys())
-    query_keys.sort()
-
-    for key in query_keys:
-        value = params[key]
-        if isinstance(value, list):
-            # For arrays, create multiple query parameters with the same key
-            for item in value:
-                query_parts.append(f"{parse.quote_plus(str(key))}={parse.quote_plus(str(item))}")
-        else:
-            query_parts.append(f"{parse.quote_plus(str(key))}={parse.quote_plus(str(value))}")
-
-    return "&".join(query_parts)
 
 
 def get_headers_with_signature(domain: Text, method: Text, url: Text, query_string: Text, headers: Dict, body="",
