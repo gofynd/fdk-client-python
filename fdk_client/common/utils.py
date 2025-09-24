@@ -30,7 +30,7 @@ async def create_url_with_params(domain: Text = "", api_url: Text = "", proccess
     """Creates url with params"""
     params = {}
     final_url = domain + api_url
-    doseq = kwargs.get("doseq", False)
+    doseq = kwargs.pop("doseq", False)
     for key, value in kwargs.items():
         if value:
             new_key = key.replace("__", "-")
@@ -61,7 +61,7 @@ async def create_url_without_domain(url: Text, **kwargs):
 async def create_query_string(**kwargs):
     """Return query string."""
     params = {}
-    doseq = kwargs.get("doseq", False)
+    doseq = kwargs.pop("doseq", False)
     for key, value in kwargs.items():
         if value:
             new_key = key.replace("__", "-")
