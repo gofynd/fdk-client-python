@@ -1130,6 +1130,10 @@ class InvoiceInfo(BaseSchema):
     pass
 
 
+class LoyaltyDiscountDetails(BaseSchema):
+    pass
+
+
 class OrderDetailsData(BaseSchema):
     pass
 
@@ -2828,6 +2832,8 @@ class OrderDetails(BaseSchema):
     prices = fields.Nested(Prices, required=False)
     
     charges = fields.List(fields.Nested(PriceAdjustmentCharge, required=False), required=False)
+    
+    loyalty_discount_details = fields.Nested(LoyaltyDiscountDetails, required=False)
     
 
 
@@ -5425,6 +5431,8 @@ class Prices(BaseSchema):
     
     amount_to_be_collected = fields.Float(required=False, allow_none=True)
     
+    loyalty_discount = fields.Float(required=False)
+    
 
 
 class ChargeDistributionSchema(BaseSchema):
@@ -5531,6 +5539,8 @@ class OrderingCurrencyPrices(BaseSchema):
     
     amount_to_be_collected = fields.Float(required=False, allow_none=True)
     
+    loyalty_discount = fields.Float(required=False)
+    
 
 
 class Identifier(BaseSchema):
@@ -5624,6 +5634,8 @@ class FinancialBreakup(BaseSchema):
     added_to_fynd_cash = fields.Boolean(required=False)
     
     taxes = fields.List(fields.Nested(TaxComponent, required=False), required=False)
+    
+    loyalty_discount = fields.Float(required=False)
     
 
 
@@ -5853,7 +5865,7 @@ class AffiliateMeta(BaseSchema):
     
     size_level_total_qty = fields.Int(required=False, allow_none=True)
     
-    loyalty_discount = fields.Float(required=False, allow_none=True)
+    loyalty_discount = fields.Float(required=False)
     
     replacement_details = fields.Nested(ReplacementDetails, required=False)
     
@@ -5887,7 +5899,7 @@ class AffiliateBagDetails(BaseSchema):
     
     affiliate_bag_id = fields.Str(required=False)
     
-    loyalty_discount = fields.Float(required=False, allow_none=True)
+    loyalty_discount = fields.Float(required=False)
     
 
 
@@ -6255,6 +6267,18 @@ class InvoiceInfo(BaseSchema):
     
 
 
+class LoyaltyDiscountDetails(BaseSchema):
+    # Order swagger.json
+
+    
+    discount = fields.Float(required=False)
+    
+    ownership = fields.Str(required=False)
+    
+    is_applied = fields.Boolean(required=False)
+    
+
+
 class OrderDetailsData(BaseSchema):
     # Order swagger.json
 
@@ -6282,6 +6306,8 @@ class OrderDetailsData(BaseSchema):
     ordering_channel = fields.Str(required=False, allow_none=True)
     
     ordering_source = fields.Str(required=False)
+    
+    loyalty_discount_details = fields.Nested(LoyaltyDiscountDetails, required=False)
     
     meta = fields.Dict(required=False)
     
@@ -7277,6 +7303,8 @@ class OrderData(BaseSchema):
     
     currency = fields.Nested(CurrencySchema, required=False)
     
+    loyalty_discount_details = fields.Nested(LoyaltyDiscountDetails, required=False)
+    
 
 
 class OrderDetailsResponseSchema(BaseSchema):
@@ -7384,6 +7412,8 @@ class PlatformOrderItems(BaseSchema):
     prices = fields.Nested(Prices, required=False)
     
     ordering_currency_prices = fields.Nested(OrderingCurrencyPrices, required=False)
+    
+    loyalty_discount_details = fields.Nested(LoyaltyDiscountDetails, required=False)
     
 
 

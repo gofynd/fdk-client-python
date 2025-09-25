@@ -651,6 +651,8 @@ class Prices(BaseSchema):
     
     amount_to_be_collected = fields.Float(required=False)
     
+    loyalty_discount = fields.Float(required=False)
+    
 
 
 class ItemBrand(BaseSchema):
@@ -816,6 +818,8 @@ class FinancialBreakup(BaseSchema):
     amount_to_be_collected = fields.Float(required=False)
     
     taxes = fields.List(fields.Nested(TaxComponent, required=False), required=False)
+    
+    loyalty_discount = fields.Float(required=False)
     
 
 

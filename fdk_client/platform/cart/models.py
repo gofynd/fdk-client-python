@@ -2123,8 +2123,6 @@ class Article(BaseSchema):
     
     allowed_refund = fields.Boolean(required=False)
     
-    article_index = fields.Int(required=False)
-    
     min_price_threshold = fields.Float(required=False)
     
 
