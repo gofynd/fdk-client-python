@@ -446,6 +446,30 @@ class FreeGiftItems(BaseSchema):
     pass
 
 
+class DiscountOffer(BaseSchema):
+    pass
+
+
+class DiscountItemCriteria(BaseSchema):
+    pass
+
+
+class CompareObject(BaseSchema):
+    pass
+
+
+class ItemSizeMapping(BaseSchema):
+    pass
+
+
+class BuyRuleItemCriteria(BaseSchema):
+    pass
+
+
+class DiscountOfferRule(BaseSchema):
+    pass
+
+
 class PromotionOffer(BaseSchema):
     pass
 
@@ -2437,13 +2461,181 @@ class FreeGiftItems(BaseSchema):
     
 
 
+class DiscountOffer(BaseSchema):
+    # Cart swagger.json
+
+    
+    max_discount_amount = fields.Float(required=False)
+    
+    discount_price = fields.Float(required=False)
+    
+    max_usage_per_transaction = fields.Int(required=False)
+    
+    discount_amount = fields.Float(required=False)
+    
+    discount_percentage = fields.Float(required=False)
+    
+    min_offer_quantity = fields.Int(required=False)
+    
+    max_offer_quantity = fields.Int(required=False)
+    
+
+
+class DiscountItemCriteria(BaseSchema):
+    # Cart swagger.json
+
+    
+    item_store = fields.List(fields.Int(required=False), required=False)
+    
+    item_company = fields.List(fields.Int(required=False), required=False)
+    
+    item_brand = fields.List(fields.Int(required=False), required=False)
+    
+    item_exclude_brand = fields.List(fields.Int(required=False), required=False)
+    
+    item_category = fields.List(fields.Int(required=False), required=False)
+    
+    item_exclude_category = fields.List(fields.Int(required=False), required=False)
+    
+    item_l1_category = fields.List(fields.Int(required=False), required=False)
+    
+    item_exclude_l1_category = fields.List(fields.Int(required=False), required=False)
+    
+    item_l2_category = fields.List(fields.Int(required=False), required=False)
+    
+    item_exclude_l2_category = fields.List(fields.Int(required=False), required=False)
+    
+    item_department = fields.List(fields.Int(required=False), required=False)
+    
+    item_exclude_department = fields.List(fields.Int(required=False), required=False)
+    
+    item_id = fields.List(fields.Int(required=False), required=False)
+    
+    item_exclude_id = fields.List(fields.Int(required=False), required=False)
+    
+    buy_rules = fields.List(fields.Str(required=False), required=False)
+    
+    available_zones = fields.List(fields.Str(required=False), required=False)
+    
+    product_tags = fields.List(fields.Str(required=False), required=False)
+    
+    all_items = fields.Boolean(required=False)
+    
+
+
+class CompareObject(BaseSchema):
+    # Cart swagger.json
+
+    
+    equals = fields.Float(required=False, allow_none=True)
+    
+    greater_than = fields.Float(required=False, allow_none=True)
+    
+    less_than_equals = fields.Float(required=False, allow_none=True)
+    
+    less_than = fields.Float(required=False, allow_none=True)
+    
+    greater_than_equals = fields.Float(required=False, allow_none=True)
+    
+
+
+class ItemSizeMapping(BaseSchema):
+    # Cart swagger.json
+
+    
+    item_size_mapping = fields.Dict(required=False)
+    
+
+
+class BuyRuleItemCriteria(BaseSchema):
+    # Cart swagger.json
+
+    
+    cart_quantity = fields.Nested(CompareObject, required=False)
+    
+    available_zones = fields.List(fields.Str(required=False), required=False)
+    
+    item_exclude_company = fields.List(fields.Int(required=False), required=False)
+    
+    item_id = fields.List(fields.Int(required=False), required=False)
+    
+    item_l1_category = fields.List(fields.Int(required=False), required=False)
+    
+    cart_total = fields.Nested(CompareObject, required=False)
+    
+    cart_unique_item_quantity = fields.Nested(CompareObject, required=False)
+    
+    cart_unique_item_amount = fields.Nested(CompareObject, required=False)
+    
+    item_exclude_id = fields.List(fields.Int(required=False), required=False)
+    
+    all_items = fields.Boolean(required=False)
+    
+    item_exclude_l1_category = fields.List(fields.Int(required=False), required=False)
+    
+    item_size = fields.List(fields.Str(required=False), required=False)
+    
+    item_store = fields.List(fields.Int(required=False), required=False)
+    
+    item_exclude_sku = fields.List(fields.Str(required=False), required=False)
+    
+    item_department = fields.List(fields.Int(required=False), required=False)
+    
+    item_exclude_store = fields.List(fields.Int(required=False), required=False)
+    
+    item_brand = fields.List(fields.Int(required=False), required=False)
+    
+    item_exclude_department = fields.List(fields.Int(required=False), required=False)
+    
+    item_exclude_category = fields.List(fields.Int(required=False), required=False)
+    
+    item_category = fields.List(fields.Int(required=False), required=False)
+    
+    buy_rules = fields.List(fields.Str(required=False), required=False)
+    
+    item_exclude_brand = fields.List(fields.Int(required=False), required=False)
+    
+    item_l2_category = fields.List(fields.Int(required=False), required=False)
+    
+    item_company = fields.List(fields.Int(required=False), required=False)
+    
+    item_tags = fields.List(fields.Str(required=False), required=False)
+    
+    item_exclude_l2_category = fields.List(fields.Int(required=False), required=False)
+    
+    item_sku = fields.List(fields.Str(required=False), required=False)
+    
+    meta = fields.Nested(ItemSizeMapping, required=False)
+    
+
+
+class DiscountOfferRule(BaseSchema):
+    # Cart swagger.json
+
+    
+    discount_type = fields.Str(required=False)
+    
+    offer = fields.Nested(DiscountOffer, required=False)
+    
+    item_criteria = fields.Nested(DiscountItemCriteria, required=False)
+    
+    buy_condition = fields.Str(required=False)
+    
+    discounted_price = fields.Float(required=False)
+    
+    matched_buy_rules = fields.List(fields.Str(required=False), required=False)
+    
+    meta = fields.Nested(ItemSizeMapping, required=False)
+    
+
+
 class PromotionOffer(BaseSchema):
     # Cart swagger.json
 
     
     id = fields.Str(required=False)
     
-    buy_rules = fields.Dict(required=False)
+    buy_rules = fields.Nested(BuyRuleItemCriteria, required=False)
     
     offer_text = fields.Str(required=False)
     
@@ -2455,7 +2647,7 @@ class PromotionOffer(BaseSchema):
     
     valid_till = fields.Str(required=False)
     
-    discount_rules = fields.List(fields.Dict(required=False), required=False)
+    discount_rules = fields.List(fields.Nested(DiscountOfferRule, required=False), required=False)
     
     free_gift_items = fields.List(fields.Nested(FreeGiftItems, required=False), required=False)
     

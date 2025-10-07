@@ -1173,6 +1173,8 @@ class AttributeMetadata(BaseSchema):
     # Catalog swagger.json
 
     
+    id = fields.Str(required=False)
+    
     title = fields.Str(required=False)
     
     details = fields.List(fields.Nested(AttributeDetail, required=False), required=False)

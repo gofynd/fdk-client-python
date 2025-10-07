@@ -154,6 +154,10 @@ class BuyRuleItemCriteria(BaseSchema):
     pass
 
 
+class DiscountItemCriteria(BaseSchema):
+    pass
+
+
 class DiscountOffer(BaseSchema):
     pass
 
@@ -846,6 +850,10 @@ class FreeGiftItems(BaseSchema):
     pass
 
 
+class DiscountOfferRule(BaseSchema):
+    pass
+
+
 class PromotionOffer(BaseSchema):
     pass
 
@@ -1509,6 +1517,48 @@ class BuyRuleItemCriteria(BaseSchema):
     
 
 
+class DiscountItemCriteria(BaseSchema):
+    # Cart swagger.json
+
+    
+    item_store = fields.List(fields.Int(required=False), required=False)
+    
+    item_company = fields.List(fields.Int(required=False), required=False)
+    
+    item_brand = fields.List(fields.Int(required=False), required=False)
+    
+    item_exclude_brand = fields.List(fields.Int(required=False), required=False)
+    
+    item_category = fields.List(fields.Int(required=False), required=False)
+    
+    item_exclude_category = fields.List(fields.Int(required=False), required=False)
+    
+    item_l1_category = fields.List(fields.Int(required=False), required=False)
+    
+    item_exclude_l1_category = fields.List(fields.Int(required=False), required=False)
+    
+    item_l2_category = fields.List(fields.Int(required=False), required=False)
+    
+    item_exclude_l2_category = fields.List(fields.Int(required=False), required=False)
+    
+    item_department = fields.List(fields.Int(required=False), required=False)
+    
+    item_exclude_department = fields.List(fields.Int(required=False), required=False)
+    
+    item_id = fields.List(fields.Int(required=False), required=False)
+    
+    item_exclude_id = fields.List(fields.Int(required=False), required=False)
+    
+    buy_rules = fields.List(fields.Str(required=False), required=False)
+    
+    available_zones = fields.List(fields.Str(required=False), required=False)
+    
+    product_tags = fields.List(fields.Str(required=False), required=False)
+    
+    all_items = fields.Boolean(required=False)
+    
+
+
 class DiscountOffer(BaseSchema):
     # Cart swagger.json
 
@@ -1521,7 +1571,7 @@ class DiscountOffer(BaseSchema):
     
     partial_can_ret = fields.Boolean(required=False)
     
-    max_usage_per_transaction = fields.Int(required=False, allow_none=True)
+    max_usage_per_transaction = fields.Int(required=False)
     
     min_offer_quantity = fields.Int(required=False)
     
@@ -1532,6 +1582,8 @@ class DiscountOffer(BaseSchema):
     discount_percentage = fields.Float(required=False)
     
     max_offer_quantity = fields.Int(required=False)
+    
+    item_sequence_number = fields.Int(required=False)
     
 
 
@@ -4937,13 +4989,33 @@ class FreeGiftItems(BaseSchema):
     
 
 
+class DiscountOfferRule(BaseSchema):
+    # Cart swagger.json
+
+    
+    discount_type = fields.Str(required=False)
+    
+    offer = fields.Nested(DiscountOffer, required=False)
+    
+    item_criteria = fields.Nested(DiscountItemCriteria, required=False)
+    
+    buy_condition = fields.Str(required=False)
+    
+    discounted_price = fields.Float(required=False)
+    
+    matched_buy_rules = fields.List(fields.Str(required=False), required=False)
+    
+    meta = fields.Nested(ItemSizeMapping, required=False)
+    
+
+
 class PromotionOffer(BaseSchema):
     # Cart swagger.json
 
     
     id = fields.Str(required=False)
     
-    buy_rules = fields.Dict(required=False)
+    buy_rules = fields.Nested(BuyRuleItemCriteria, required=False)
     
     offer_text = fields.Str(required=False)
     
@@ -4955,7 +5027,7 @@ class PromotionOffer(BaseSchema):
     
     valid_till = fields.Str(required=False)
     
-    discount_rules = fields.List(fields.Dict(required=False), required=False)
+    discount_rules = fields.List(fields.Nested(DiscountOfferRule, required=False), required=False)
     
     free_gift_items = fields.List(fields.Nested(FreeGiftItems, required=False), required=False)
     

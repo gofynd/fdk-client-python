@@ -129,6 +129,8 @@ class PageType(Enum):
     
     LOCATE_US = "locate-us"
     
+    SINGLE_PAGE_CHECKOUT = "single-page-checkout"
+    
     @classmethod
     async def is_valid(cls, value):
         if value in cls._value2member_map_:
