@@ -144,6 +144,14 @@ class Shipments(BaseSchema):
     pass
 
 
+class BundleReturnConfig(BaseSchema):
+    pass
+
+
+class BundleDetails(BaseSchema):
+    pass
+
+
 class BagsForReorderArticleAssignment(BaseSchema):
     pass
 
@@ -879,6 +887,10 @@ class Bags(BaseSchema):
     
     charges = fields.List(fields.Nested(PriceAdjustmentCharge, required=False), required=False)
     
+    is_bundle_item = fields.Boolean(required=False)
+    
+    bundle_details = fields.Nested(BundleDetails, required=False)
+    
 
 
 class FulfillingCompany(BaseSchema):
@@ -1040,6 +1052,58 @@ class Shipments(BaseSchema):
     charges = fields.List(fields.Nested(PriceAdjustmentCharge, required=False), required=False)
     
     fulfillment_option = fields.Nested(FulfillmentOption, required=False)
+    
+
+
+class BundleReturnConfig(BaseSchema):
+    # Order swagger.json
+
+    
+    allow_partial_return = fields.Boolean(required=False, allow_none=True)
+    
+    returnable = fields.Boolean(required=False, allow_none=True)
+    
+    unit = fields.Boolean(required=False, allow_none=True)
+    
+    time = fields.Boolean(required=False, allow_none=True)
+    
+
+
+class BundleDetails(BaseSchema):
+    # Order swagger.json
+
+    
+    bundle_group_id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    bundle_count = fields.Int(required=False)
+    
+    article_bundle_id = fields.Str(required=False)
+    
+    bundle_article_quantity = fields.Int(required=False)
+    
+    is_base = fields.Boolean(required=False)
+    
+    price_marked = fields.Float(required=False)
+    
+    price_effective = fields.Float(required=False)
+    
+    item_id = fields.Int(required=False)
+    
+    item_type = fields.Str(required=False)
+    
+    return_config = fields.Nested(BundleReturnConfig, required=False)
+    
+    seller_identifier = fields.Str(required=False)
+    
+    images = fields.List(fields.Str(required=False), required=False)
+    
+    brand_name = fields.Str(required=False)
+    
+    size = fields.Str(required=False)
     
 
 

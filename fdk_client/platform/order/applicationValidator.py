@@ -18,6 +18,23 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
         
     
     
@@ -58,6 +75,43 @@ class OrderValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+         
+        
+    
+    class getOrderingSourceConfigBySlug(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
+         
+        
+    
+    class updateOrderingSourceConfigBySlug(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
+         
+        
+    
+    class listOrderingSources(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     

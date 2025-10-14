@@ -16,6 +16,8 @@ class Catalog:
         self._conf = config
         self._relativeUrls = {
             "getProductDetailBySlug": "/service/application/catalog/v1.0/products/{slug}/",
+            "getProductBundleItems": "/service/application/catalog/v1.0/products/{slug}/bundle/items",
+            "getProductBundlesByChildSku": "/service/application/catalog/v1.0/products/{slug}/size/{size}/bundle",
             "getProductSizesBySlug": "/service/application/catalog/v1.0/products/{slug}/sizes/",
             "getProductComparisonBySlugs": "/service/application/catalog/v1.0/products/compare/",
             "getSimilarComparisonProductBySlug": "/service/application/catalog/v1.0/products/{slug}/similar/compare/",
@@ -42,7 +44,6 @@ class Catalog:
             "getStores": "/service/application/catalog/v2.0/locations/",
             "getInStockLocations": "/service/application/catalog/v2.0/in-stock/locations/",
             "getLocationDetailsById": "/service/application/catalog/v2.0/locations/{location_id}/",
-            "getProductBundlesBySlug": "/service/application/catalog/v1.0/product-grouping/",
             "getProductPriceBySlug": "/service/application/catalog/v4.0/products/{slug}/sizes/{size}/price/",
             "getProductSellersBySlug": "/service/application/catalog/v4.0/products/{slug}/sizes/{size}/sellers/"
             
@@ -96,6 +97,113 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getProductDetailBySlug")
+                print(e)
+
+        return response
+    
+    async def getProductBundleItems(self, slug=None, page_no=None, page_size=None, body="", request_headers:Dict={}):
+        """Retrieve bundle children for a given bundled product slug with pricing, brand, media, and seller information.
+        :param slug : Unique product identifier slug. : type string
+        :param page_no : Page number to retrieve. : type integer
+        :param page_size : Number of items per page. : type integer
+        """
+        payload = {}
+        
+        if slug is not None:
+            payload["slug"] = slug
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+
+        # Parameter validation
+        schema = CatalogValidator.getProductBundleItems()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getProductBundleItems"], proccessed_params="""{"required":[{"in":"path","name":"slug","required":true,"description":"Unique product identifier slug.","schema":{"type":"string"}}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"},"description":"Page number to retrieve."},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"},"description":"Number of items per page."}],"query":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"},"description":"Page number to retrieve."},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"},"description":"Number of items per page."}],"headers":[],"path":[{"in":"path","name":"slug","required":true,"description":"Unique product identifier slug.","schema":{"type":"string"}}]}""", serverType="application", slug=slug, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductBundleItems"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/{slug}/bundle/items", slug=slug, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductBundleItems
+            schema = ProductBundleItems()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductBundleItems")
+                print(e)
+
+        return response
+    
+    async def getProductBundlesByChildSku(self, slug=None, size=None, page_no=None, page_size=None, body="", request_headers:Dict={}):
+        """Retrieve bundled items for a given product slug and size with pricing, brand, media, and seller information.
+        :param slug : Unique product identifier slug. : type string
+        :param size : Size of the product (e.g., S, M, L, XL, OS). : type string
+        :param page_no : Page number to retrieve. : type integer
+        :param page_size : Number of items per page. : type integer
+        """
+        payload = {}
+        
+        if slug is not None:
+            payload["slug"] = slug
+        if size is not None:
+            payload["size"] = size
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+
+        # Parameter validation
+        schema = CatalogValidator.getProductBundlesByChildSku()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getProductBundlesByChildSku"], proccessed_params="""{"required":[{"in":"path","name":"slug","required":true,"description":"Unique product identifier slug.","schema":{"type":"string"}},{"in":"path","name":"size","required":true,"description":"Size of the product (e.g., S, M, L, XL, OS).","schema":{"type":"string"}}],"optional":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"},"description":"Page number to retrieve."},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"},"description":"Number of items per page."}],"query":[{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"},"description":"Page number to retrieve."},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"},"description":"Number of items per page."}],"headers":[],"path":[{"in":"path","name":"slug","required":true,"description":"Unique product identifier slug.","schema":{"type":"string"}},{"in":"path","name":"size","required":true,"description":"Size of the product (e.g., S, M, L, XL, OS).","schema":{"type":"string"}}]}""", serverType="application", slug=slug, size=size, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductBundlesByChildSku"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/{slug}/size/{size}/bundle", slug=slug, size=size, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductBundleItemsWithSlug
+            schema = ProductBundleItemsWithSlug()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductBundlesByChildSku")
                 print(e)
 
         return response
@@ -1430,55 +1538,6 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getLocationDetailsById")
-                print(e)
-
-        return response
-    
-    async def getProductBundlesBySlug(self, slug=None, id=None, body="", request_headers:Dict={}):
-        """Get products bundles to the one specified by its slug.
-        :param slug : Product slug for which bundles need to be fetched. : type string
-        :param id : Product uid. : type integer
-        """
-        payload = {}
-        
-        if slug is not None:
-            payload["slug"] = slug
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = CatalogValidator.getProductBundlesBySlug()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getProductBundlesBySlug"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"slug","description":"Product slug for which bundles need to be fetched.","schema":{"type":"string"},"required":false},{"in":"query","name":"id","description":"Product uid.","schema":{"type":"integer"},"required":false}],"query":[{"in":"query","name":"slug","description":"Product slug for which bundles need to be fetched.","schema":{"type":"string"},"required":false},{"in":"query","name":"id","description":"Product uid.","schema":{"type":"integer"},"required":false}],"headers":[],"path":[]}""", serverType="application", slug=slug, id=id)
-        query_string = await create_query_string(slug=slug, id=id)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductBundlesBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/product-grouping/", slug=slug, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ProductBundle
-            schema = ProductBundle()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getProductBundlesBySlug")
                 print(e)
 
         return response

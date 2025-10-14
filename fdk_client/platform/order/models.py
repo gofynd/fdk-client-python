@@ -6,8 +6,6 @@ from marshmallow.validate import OneOf
 from ..PlatformModel import BaseSchema
 
 
-from .enums import *
-
 
 
 class InvalidateShipmentCachePayload(BaseSchema):
@@ -950,11 +948,171 @@ class PaymentMetaLogoURLSchema(BaseSchema):
     pass
 
 
-class ValidationError(BaseSchema):
+class FulfillmentOptionSchema(BaseSchema):
+    pass
+
+
+class PaymentMethodGatewaySchema(BaseSchema):
+    pass
+
+
+class SubModeOfPaymentSchema(BaseSchema):
+    pass
+
+
+class PaymentMethodModeOfPaymentSchema(BaseSchema):
+    pass
+
+
+class PaymentMethodTransactionPartySchema(BaseSchema):
+    pass
+
+
+class LineItemPaymentMethodSchema(BaseSchema):
+    pass
+
+
+class BundleDetailsSchema(BaseSchema):
+    pass
+
+
+class LineItemMonetaryValuesSchema(BaseSchema):
+    pass
+
+
+class DimensionSchema(BaseSchema):
+    pass
+
+
+class GiftDetailsSchema(BaseSchema):
+    pass
+
+
+class CPRiderDetailsSchema(BaseSchema):
+    pass
+
+
+class CPAreaCodeSchema(BaseSchema):
+    pass
+
+
+class CPTatToDeliverTheShipmentSchema(BaseSchema):
+    pass
+
+
+class CPOptionsSchema(BaseSchema):
+    pass
+
+
+class CourierPartnerDetailsSchema(BaseSchema):
+    pass
+
+
+class TaxDetailsSchema(BaseSchema):
+    pass
+
+
+class PromiseDetailsSchema(BaseSchema):
+    pass
+
+
+class CustomerPickupSlotSchema(BaseSchema):
+    pass
+
+
+class DpPickupSlotSchema(BaseSchema):
+    pass
+
+
+class OrderFulfillmentTimelineSchema(BaseSchema):
+    pass
+
+
+class LineItemSchema(BaseSchema):
+    pass
+
+
+class CreateOrderShipmentSchema(BaseSchema):
+    pass
+
+
+class OrderingCurrencySchema(BaseSchema):
+    pass
+
+
+class ConversionRateSchema(BaseSchema):
+    pass
+
+
+class CurrencySchema(BaseSchema):
+    pass
+
+
+class CouponOwnershipSchema(BaseSchema):
+    pass
+
+
+class CouponSchema(BaseSchema):
+    pass
+
+
+class BillingDetailsSchema(BaseSchema):
+    pass
+
+
+class CPConfigurationSchema(BaseSchema):
+    pass
+
+
+class ShippingDetailsSchema(BaseSchema):
+    pass
+
+
+class UserDetailsSchema(BaseSchema):
+    pass
+
+
+class LifecycleMessageSchema(BaseSchema):
+    pass
+
+
+class CreateOrderRequestSchema(BaseSchema):
     pass
 
 
 class Page(BaseSchema):
+    pass
+
+
+class OrderingSourceConfig(BaseSchema):
+    pass
+
+
+class OrderingSourceFeature(BaseSchema):
+    pass
+
+
+class ListOrderingSources(BaseSchema):
+    pass
+
+
+class OrderingSourceSummary(BaseSchema):
+    pass
+
+
+class CreateAccount(BaseSchema):
+    pass
+
+
+class Account(BaseSchema):
+    pass
+
+
+class AccountsList(BaseSchema):
+    pass
+
+
+class ValidationError(BaseSchema):
     pass
 
 
@@ -979,6 +1137,14 @@ class ShipmentStatus(BaseSchema):
 
 
 class UserDataInfo(BaseSchema):
+    pass
+
+
+class BundleReturnConfig(BaseSchema):
+    pass
+
+
+class BundleDetails(BaseSchema):
     pass
 
 
@@ -1295,10 +1461,6 @@ class TaxDetails(BaseSchema):
 
 
 class PaymentInfoData(BaseSchema):
-    pass
-
-
-class CurrencySchema(BaseSchema):
     pass
 
 
@@ -2969,15 +3131,15 @@ class Charge(BaseSchema):
     # Order swagger.json
 
     
-    name = fields.Str(required=False)
-    
     amount = fields.Nested(AmountSchema, required=False)
     
-    tax = fields.Nested(Tax, required=False)
+    type = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
     code = fields.Str(required=False)
     
-    type = fields.Str(required=False)
+    tax = fields.Nested(Tax, required=False)
     
 
 
@@ -5157,13 +5319,615 @@ class PaymentMetaLogoURLSchema(BaseSchema):
     
 
 
-class ValidationError(BaseSchema):
+class FulfillmentOptionSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    is_default = fields.Boolean(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class PaymentMethodGatewaySchema(BaseSchema):
+    # Order swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
+    
+
+
+class SubModeOfPaymentSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+
+
+class PaymentMethodModeOfPaymentSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    sub_mode_of_payment = fields.Nested(SubModeOfPaymentSchema, required=False)
+    
+
+
+class PaymentMethodTransactionPartySchema(BaseSchema):
+    # Order swagger.json
+
+    
+    refund_bearer = fields.Str(required=False)
+    
+    collection_bearer = fields.Str(required=False)
+    
+
+
+class LineItemPaymentMethodSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    gateway = fields.Nested(PaymentMethodGatewaySchema, required=False)
+    
+    mode_of_payment = fields.Nested(PaymentMethodModeOfPaymentSchema, required=False)
+    
+    amount_paid = fields.Int(required=False)
+    
+    payment_identifier = fields.Str(required=False)
+    
+    transaction_party = fields.Nested(PaymentMethodTransactionPartySchema, required=False)
+    
+
+
+class BundleDetailsSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    is_base = fields.Boolean(required=False)
+    
+    images = fields.List(fields.Str(required=False), required=False)
+    
+    group_id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    item_type = fields.Str(required=False)
+    
+    item_id = fields.Int(required=False)
+    
+    item_code = fields.Str(required=False)
+    
+    item_name = fields.Str(required=False)
+    
+    seller_identifier = fields.Str(required=False)
+    
+    bundle_article_quantity = fields.Int(required=False)
+    
+    brand_name = fields.Str(required=False)
+    
+    size = fields.Str(required=False)
+    
+
+
+class LineItemMonetaryValuesSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    amount_paid = fields.Float(required=False)
+    
+    price_effective = fields.Float(required=False)
+    
+    discount = fields.Float(required=False)
+    
+    price_marked = fields.Float(required=False)
+    
+    coupon_discount = fields.Float(required=False)
+    
+    cod_charges = fields.Float(required=False)
+    
+    promo_discount = fields.Float(required=False)
+    
+    gift_price = fields.Float(required=False)
+    
+    delivery_charges = fields.Float(required=False)
+    
+
+
+class DimensionSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    height = fields.Int(required=False)
+    
+    length = fields.Int(required=False)
+    
+    is_default = fields.Boolean(required=False)
+    
+    unit = fields.Str(required=False)
+    
+    width = fields.Int(required=False)
+    
+
+
+class GiftDetailsSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    amount = fields.Float(required=False)
+    
+    display_text = fields.Str(required=False)
+    
+
+
+class CPRiderDetailsSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    phone = fields.Str(required=False)
+    
+
+
+class CPAreaCodeSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    source = fields.Str(required=False)
+    
+    destination = fields.Str(required=False)
+    
+
+
+class CPTatToDeliverTheShipmentSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    min = fields.Int(required=False)
+    
+    max = fields.Int(required=False)
+    
+
+
+class CPOptionsSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    extension_id = fields.Str(required=False)
+    
+    scheme_id = fields.Str(required=False)
+    
+    area_code = fields.Nested(CPAreaCodeSchema, required=False)
+    
+    is_self_ship = fields.Boolean(required=False)
+    
+    max_reattempts_for_delivery_allowed = fields.Int(required=False)
+    
+    cp_sort_key = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    rider_details = fields.Nested(CPRiderDetailsSchema, required=False)
+    
+    using_own_creds = fields.Boolean(required=False)
+    
+    qc_supported = fields.Boolean(required=False)
+    
+
+
+class CourierPartnerDetailsSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    cp_sort_key = fields.Str(required=False)
+    
+    cp_options = fields.List(fields.Nested(CPOptionsSchema, required=False), required=False)
+    
+    scheme_id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    extension_id = fields.Str(required=False)
+    
+    rider_details = fields.Nested(CPRiderDetailsSchema, required=False)
+    
+    qc_supported = fields.Boolean(required=False)
+    
+    using_own_creds = fields.Boolean(required=False)
+    
+    max_reattempts_for_delivery_allowed = fields.Int(required=False)
+    
+    tat_to_deliver_the_shipment = fields.Nested(CPTatToDeliverTheShipmentSchema, required=False)
+    
+    is_self_ship = fields.Boolean(required=False)
+    
+
+
+class TaxDetailsSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    hs_code = fields.Str(required=False)
+    
+    tax_rule_id = fields.Str(required=False)
+    
+
+
+class PromiseDetailsSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    min_sla = fields.Int(required=False)
+    
+    max_sla = fields.Int(required=False)
+    
+
+
+class CustomerPickupSlotSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    start_time = fields.Str(required=False)
+    
+    end_time = fields.Str(required=False)
+    
+
+
+class DpPickupSlotSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    start_time = fields.Str(required=False)
+    
+    end_time = fields.Str(required=False)
+    
+
+
+class OrderFulfillmentTimelineSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    dp_pickup_slot = fields.Nested(DpPickupSlotSchema, required=False)
+    
+    dispatch_after_date = fields.Str(required=False)
+    
+    dispatch_by_date = fields.Str(required=False)
+    
+    confirm_by_date = fields.Str(required=False)
+    
+    customer_pickup_slot = fields.Nested(CustomerPickupSlotSchema, required=False)
+    
+    pack_by_date = fields.Str(required=False)
+    
+
+
+class LineItemSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    seller_identifier = fields.Str(required=False)
+    
+    payment_methods = fields.List(fields.Nested(LineItemPaymentMethodSchema, required=False), required=False)
+    
+    monetary_values = fields.Nested(LineItemMonetaryValuesSchema, required=False)
+    
+    gift_details = fields.Nested(GiftDetailsSchema, required=False)
+    
+    special_instructions = fields.Str(required=False)
+    
+    dimension = fields.Nested(DimensionSchema, required=False)
+    
+    quantity = fields.Float(required=False)
+    
+    external_line_id = fields.Str(required=False)
+    
+    bundle_details = fields.Nested(BundleDetailsSchema, required=False)
+    
+    meta = fields.Dict(required=False)
+    
+
+
+class CreateOrderShipmentSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    is_mto = fields.Boolean(required=False)
+    
+    shipment_lifecycle_messages = fields.List(fields.Nested(LifecycleMessageSchema, required=False), required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    type = fields.Str(required=False)
+    
+    fulfillment_option = fields.Nested(FulfillmentOptionSchema, required=False)
+    
+    external_shipment_id = fields.Str(required=False)
+    
+    line_items = fields.List(fields.Nested(LineItemSchema, required=False), required=False)
+    
+    order_fulfillment_timeline = fields.Nested(OrderFulfillmentTimelineSchema, required=False)
+    
+    location_id = fields.Int(required=False)
+    
+    external_location_id = fields.Str(required=False)
+    
+    return_location_id = fields.Int(required=False)
+    
+    courier_partner_details = fields.Nested(CourierPartnerDetailsSchema, required=False)
+    
+    tax_details = fields.Nested(TaxDetailsSchema, required=False)
+    
+    promise_details = fields.Nested(PromiseDetailsSchema, required=False)
+    
+    allow_processing_after = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+
+
+class OrderingCurrencySchema(BaseSchema):
+    # Order swagger.json
+
+    
+    currency_code = fields.Str(required=False)
+    
+    currency_symbol = fields.Str(required=False)
+    
+
+
+class ConversionRateSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    rate = fields.Float(required=False)
+    
+    timestamp_ms = fields.Int(required=False)
+    
+
+
+class CurrencySchema(BaseSchema):
+    # Order swagger.json
+
+    
+    ordering_currency = fields.Nested(OrderingCurrencySchema, required=False)
+    
+    conversion_rate = fields.Nested(ConversionRateSchema, required=False)
+    
+    currency_code = fields.Str(required=False)
+    
+    currency_symbol = fields.Str(required=False)
+    
+
+
+class CouponOwnershipSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    payable_category = fields.Str(required=False)
+    
+
+
+class CouponSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    code = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
+    
+    ownership = fields.Nested(CouponOwnershipSchema, required=False)
+    
+    is_return_allowed = fields.Boolean(required=False)
+    
+    is_cancellation_allowed = fields.Boolean(required=False)
+    
+
+
+class BillingDetailsSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    first_name = fields.Str(required=False)
+    
+    phone_code = fields.Str(required=False)
+    
+    country = fields.Str(required=False)
+    
+    city = fields.Str(required=False)
+    
+    pincode = fields.Str(required=False)
+    
+    last_name = fields.Str(required=False)
+    
+    mobile_number = fields.Str(required=False)
+    
+    email = fields.Str(required=False)
+    
+    state = fields.Str(required=False)
+    
+    alternate_mobile_number = fields.Str(required=False)
+    
+    address = fields.Str(required=False)
+    
+    middle_name = fields.Str(required=False)
+    
+    title = fields.Str(required=False)
+    
+    house_no = fields.Str(required=False)
+    
+    geo_location = fields.Nested(GeoLocationSchema, required=False)
+    
+    gender = fields.Str(required=False)
+    
+    landmark = fields.Str(required=False)
+    
+    address_type = fields.Str(required=False)
+    
+    state_code = fields.Str(required=False)
+    
+    floor_no = fields.Str(required=False)
+    
+    alternate_email = fields.Str(required=False)
+    
+    address1 = fields.Str(required=False)
+    
+    address2 = fields.Str(required=False)
+    
+    country_iso_code = fields.Str(required=False)
+    
+    user_id = fields.Str(required=False)
+    
+    area_code = fields.Str(required=False)
+    
+    area_code_slug = fields.Str(required=False)
+    
+    country_phone_code = fields.Str(required=False)
+    
+
+
+class CPConfigurationSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    shipping_by = fields.Str(required=False)
+    
+
+
+class ShippingDetailsSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    first_name = fields.Str(required=False)
+    
+    phone_code = fields.Str(required=False)
+    
+    country = fields.Str(required=False)
+    
+    city = fields.Str(required=False)
+    
+    pincode = fields.Str(required=False)
+    
+    last_name = fields.Str(required=False)
+    
+    mobile_number = fields.Str(required=False)
+    
+    email = fields.Str(required=False)
+    
+    state = fields.Str(required=False)
+    
+    alternate_mobile_number = fields.Str(required=False)
+    
+    address = fields.Str(required=False)
+    
+    middle_name = fields.Str(required=False)
+    
+    title = fields.Str(required=False)
+    
+    house_no = fields.Str(required=False)
+    
+    geo_location = fields.Nested(GeoLocationSchema, required=False)
+    
+    gender = fields.Str(required=False)
+    
+    landmark = fields.Str(required=False)
+    
+    address_type = fields.Str(required=False)
+    
+    state_code = fields.Str(required=False)
+    
+    floor_no = fields.Str(required=False)
+    
+    alternate_email = fields.Str(required=False)
+    
+    address1 = fields.Str(required=False)
+    
+    address2 = fields.Str(required=False)
+    
+    country_iso_code = fields.Str(required=False)
+    
+    user_id = fields.Str(required=False)
+    
+    area_code = fields.Str(required=False)
+    
+    area_code_slug = fields.Str(required=False)
+    
+    country_phone_code = fields.Str(required=False)
+    
+
+
+class UserDetailsSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    gstin = fields.Str(required=False)
+    
+    pan_no = fields.Str(required=False)
+    
+
+
+class LifecycleMessageSchema(BaseSchema):
     # Order swagger.json
 
     
     message = fields.Str(required=False)
     
-    field = fields.Str(required=False)
+    type = fields.Str(required=False)
+    
+    states = fields.List(fields.Str(required=False), required=False)
+    
+    priority = fields.Int(required=False)
+    
+
+
+class CreateOrderRequestSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    shipments = fields.List(fields.Nested(CreateOrderShipmentSchema, required=False), required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    currency_details = fields.Nested(CurrencySchema, required=False)
+    
+    external_creation_date = fields.Str(required=False)
+    
+    coupon_details = fields.Nested(CouponSchema, required=False)
+    
+    billing_details = fields.Nested(BillingDetailsSchema, required=False)
+    
+    primary_payment_mode = fields.Str(required=False)
+    
+    cp_configuration = fields.Nested(CPConfigurationSchema, required=False)
+    
+    ordering_location_id = fields.Int(required=False)
+    
+    allow_location_reassignment = fields.Boolean(required=False)
+    
+    shipping_details = fields.Nested(ShippingDetailsSchema, required=False)
+    
+    external_order_id = fields.Str(required=False)
+    
+    user_details = fields.Nested(UserDetailsSchema, required=False)
+    
+    order_lifecycle_messages = fields.List(fields.Nested(LifecycleMessageSchema, required=False), required=False)
+    
+    channel_application_id = fields.Str(required=False)
+    
+    b2b_gstin_number = fields.Str(required=False)
+    
+    channel_company_id = fields.Str(required=False)
+    
+    is_draft = fields.Boolean(required=False)
     
 
 
@@ -5186,6 +5950,92 @@ class Page(BaseSchema):
     size = fields.Int(required=False)
     
     page_size = fields.Int(required=False)
+    
+
+
+class OrderingSourceConfig(BaseSchema):
+    # Order swagger.json
+
+    
+    slug = fields.Str(required=False)
+    
+    configs = fields.List(fields.Nested(OrderingSourceFeature, required=False), required=False)
+    
+    logo = fields.Str(required=False)
+    
+
+
+class OrderingSourceFeature(BaseSchema):
+    # Order swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    enabled = fields.Boolean(required=False)
+    
+
+
+class ListOrderingSources(BaseSchema):
+    # Order swagger.json
+
+    
+    items = fields.List(fields.Nested(OrderingSourceSummary, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class OrderingSourceSummary(BaseSchema):
+    # Order swagger.json
+
+    
+    text = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+
+
+class CreateAccount(BaseSchema):
+    # Order swagger.json
+
+    
+    channel_account_name = fields.Str(required=False)
+    
+
+
+class Account(BaseSchema):
+    # Order swagger.json
+
+    
+    channel_account_id = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    channel_account_name = fields.Str(required=False)
+    
+
+
+class AccountsList(BaseSchema):
+    # Order swagger.json
+
+    
+    data = fields.List(fields.Nested(Account, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class ValidationError(BaseSchema):
+    # Order swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    field = fields.Str(required=False)
     
 
 
@@ -5296,6 +6146,58 @@ class UserDataInfo(BaseSchema):
     gender = fields.Str(required=False, allow_none=True)
     
     country_phone_code = fields.Str(required=False)
+    
+
+
+class BundleReturnConfig(BaseSchema):
+    # Order swagger.json
+
+    
+    allow_partial_return = fields.Boolean(required=False, allow_none=True)
+    
+    returnable = fields.Boolean(required=False, allow_none=True)
+    
+    unit = fields.Boolean(required=False, allow_none=True)
+    
+    time = fields.Boolean(required=False, allow_none=True)
+    
+
+
+class BundleDetails(BaseSchema):
+    # Order swagger.json
+
+    
+    bundle_group_id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    bundle_count = fields.Int(required=False)
+    
+    article_bundle_id = fields.Str(required=False)
+    
+    bundle_article_quantity = fields.Int(required=False)
+    
+    is_base = fields.Boolean(required=False)
+    
+    price_marked = fields.Float(required=False)
+    
+    price_effective = fields.Float(required=False)
+    
+    item_id = fields.Int(required=False)
+    
+    item_type = fields.Str(required=False)
+    
+    return_config = fields.Nested(BundleReturnConfig, required=False)
+    
+    seller_identifier = fields.Str(required=False)
+    
+    images = fields.List(fields.Str(required=False), required=False)
+    
+    brand_name = fields.Str(required=False)
+    
+    size = fields.Str(required=False)
     
 
 
@@ -6703,6 +7605,10 @@ class BagConfigs(BaseSchema):
     
     is_customer_return_allowed = fields.Boolean(required=False)
     
+    is_bundle_item = fields.Boolean(required=False)
+    
+    bundle_details = fields.Nested(BundleDetails, required=False)
+    
 
 
 class OrderBagArticle(BaseSchema):
@@ -7254,16 +8160,6 @@ class PaymentInfoData(BaseSchema):
     display_name = fields.Str(required=False)
     
     merchant_transaction_id = fields.Str(required=False)
-    
-
-
-class CurrencySchema(BaseSchema):
-    # Order swagger.json
-
-    
-    currency_code = fields.Str(required=False)
-    
-    currency_symbol = fields.Str(required=False)
     
 
 

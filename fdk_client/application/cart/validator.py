@@ -11,9 +11,7 @@ from ..ApplicationModel import BaseSchema
 
     
     
-                
-from .models import OrderingSource
-
+        
         
         
         
@@ -27,20 +25,6 @@ from .models import OrderingSource
         
     
     
-                
-from .models import OrderingSource
-
-        
-        
-        
-        
-        
-        
-    
-    
-                
-from .models import OrderingSource
-
         
         
         
@@ -50,9 +34,17 @@ from .models import OrderingSource
         
     
     
-                
-from .models import OrderingSource
-
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
         
         
         
@@ -73,9 +65,7 @@ from .models import OrderingSource
         
     
     
-                
-from .models import OrderingSource
-
+        
         
         
         
@@ -84,9 +74,7 @@ from .models import OrderingSource
         
     
     
-                
-from .models import OrderingSource
-
+        
         
         
     
@@ -97,9 +85,7 @@ from .models import OrderingSource
         
     
     
-                
-from .models import OrderingSource
-
+        
         
         
         
@@ -130,25 +116,19 @@ from .models import OrderingSource
         
     
     
-                
-from .models import OrderingSource
-
+        
         
         
         
         
     
     
-                
-from .models import OrderingSource
-
+        
         
         
     
     
-                
-from .models import OrderingSource
-
+        
         
         
         
@@ -171,9 +151,7 @@ from .models import OrderingSource
         
     
     
-                
-from .models import OrderingSource
-
+        
         
         
     
@@ -210,9 +188,7 @@ from .models import OrderingSource
         
     
     
-                
-from .models import OrderingSource
-
+        
         
         
 
@@ -222,7 +198,7 @@ class CartValidator:
     class getCart(BaseSchema):
         
         
-        x__ordering__source = fields.Nested(OrderingSource, required=False)
+        x__ordering__source = fields.Str(required=False)
         
         id = fields.Str(required=False)
         
@@ -252,7 +228,7 @@ class CartValidator:
     class addItems(BaseSchema):
         
         
-        x__ordering__source = fields.Nested(OrderingSource, required=False)
+        x__ordering__source = fields.Str(required=False)
         
         i = fields.Boolean(required=False)
         
@@ -271,7 +247,7 @@ class CartValidator:
     class updateCart(BaseSchema):
         
         
-        x__ordering__source = fields.Nested(OrderingSource, required=False)
+        x__ordering__source = fields.Str(required=False)
         
         id = fields.Str(required=False)
         
@@ -292,7 +268,7 @@ class CartValidator:
     class updateCartBreakup(BaseSchema):
         
         
-        x__ordering__source = fields.Nested(OrderingSource, required=False)
+        x__ordering__source = fields.Str(required=False)
         
         id = fields.Str(required=False)
         
@@ -338,7 +314,7 @@ class CartValidator:
     class applyCoupon(BaseSchema):
         
         
-        x__ordering__source = fields.Nested(OrderingSource, required=False)
+        x__ordering__source = fields.Str(required=False)
         
         i = fields.Boolean(required=False)
         
@@ -357,7 +333,7 @@ class CartValidator:
     class removeCoupon(BaseSchema):
         
         
-        x__ordering__source = fields.Nested(OrderingSource, required=False)
+        x__ordering__source = fields.Str(required=False)
         
         id = fields.Str(required=False)
         
@@ -381,7 +357,7 @@ class CartValidator:
     class applyLoyaltyPoints(BaseSchema):
         
         
-        x__ordering__source = fields.Nested(OrderingSource, required=False)
+        x__ordering__source = fields.Str(required=False)
         
         id = fields.Str(required=False)
         
@@ -451,7 +427,7 @@ class CartValidator:
     class selectAddress(BaseSchema):
         
         
-        x__ordering__source = fields.Nested(OrderingSource, required=False)
+        x__ordering__source = fields.Str(required=False)
         
         cart_id = fields.Str(required=False)
         
@@ -466,7 +442,7 @@ class CartValidator:
     class selectPaymentMode(BaseSchema):
         
         
-        x__ordering__source = fields.Nested(OrderingSource, required=False)
+        x__ordering__source = fields.Str(required=False)
         
         id = fields.Str(required=False)
         
@@ -477,7 +453,7 @@ class CartValidator:
     class validateCouponForPayment(BaseSchema):
         
         
-        x__ordering__source = fields.Nested(OrderingSource, required=False)
+        x__ordering__source = fields.Str(required=False)
         
         id = fields.Str(required=False)
         
@@ -525,7 +501,7 @@ class CartValidator:
     class checkoutCart(BaseSchema):
         
         
-        x__ordering__source = fields.Nested(OrderingSource, required=False)
+        x__ordering__source = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
         
@@ -609,7 +585,7 @@ class CartValidator:
     class checkoutCartV2(BaseSchema):
         
         
-        x__ordering__source = fields.Nested(OrderingSource, required=False)
+        x__ordering__source = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
         

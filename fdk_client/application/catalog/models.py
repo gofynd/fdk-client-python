@@ -464,23 +464,7 @@ class Size(BaseSchema):
     pass
 
 
-class ProductGroupPrice(BaseSchema):
-    pass
-
-
 class ProductDetails(BaseSchema):
-    pass
-
-
-class ProductInGroup(BaseSchema):
-    pass
-
-
-class ProductGroupingModel(BaseSchema):
-    pass
-
-
-class ProductBundle(BaseSchema):
     pass
 
 
@@ -573,6 +557,18 @@ class ProductSizeSellersResponseV4(BaseSchema):
 
 
 class Identifier(BaseSchema):
+    pass
+
+
+class ProductBundleItems(BaseSchema):
+    pass
+
+
+class BundleItem(BaseSchema):
+    pass
+
+
+class ProductBundleItemsWithSlug(BaseSchema):
     pass
 
 
@@ -1014,6 +1010,8 @@ class ProductSize(BaseSchema):
     value = fields.Str(required=False)
     
     display = fields.Str(required=False)
+    
+    is_bundle_item = fields.Boolean(required=False)
     
 
 
@@ -2577,22 +2575,6 @@ class Size(BaseSchema):
     
 
 
-class ProductGroupPrice(BaseSchema):
-    # Catalog swagger.json
-
-    
-    max_effective = fields.Float(required=False)
-    
-    min_effective = fields.Float(required=False)
-    
-    min_marked = fields.Float(required=False)
-    
-    currency = fields.Raw(required=False)
-    
-    max_marked = fields.Float(required=False)
-    
-
-
 class ProductDetails(BaseSchema):
     # Catalog swagger.json
 
@@ -2638,78 +2620,6 @@ class ProductDetails(BaseSchema):
     highlights = fields.List(fields.Raw(required=False), required=False)
     
     brand_uid = fields.Int(required=False)
-    
-
-
-class ProductInGroup(BaseSchema):
-    # Catalog swagger.json
-
-    
-    auto_add_to_cart = fields.Boolean(required=False)
-    
-    max_quantity = fields.Int(required=False)
-    
-    sizes = fields.List(fields.Nested(Size, required=False), required=False)
-    
-    price = fields.Nested(ProductGroupPrice, required=False)
-    
-    auto_select = fields.Boolean(required=False)
-    
-    product_details = fields.Nested(ProductDetails, required=False)
-    
-    min_quantity = fields.Int(required=False)
-    
-    allow_remove = fields.Boolean(required=False)
-    
-    product_uid = fields.Int(required=False)
-    
-
-
-class ProductGroupingModel(BaseSchema):
-    # Catalog swagger.json
-
-    
-    logo = fields.Str(required=False, allow_none=True)
-    
-    is_active = fields.Boolean(required=False)
-    
-    meta = fields.Dict(required=False)
-    
-    verified_by = fields.Nested(UserDetail, required=False)
-    
-    created_on = fields.Str(required=False)
-    
-    company_id = fields.Int(required=False)
-    
-    page_visibility = fields.List(fields.Raw(required=False), required=False)
-    
-    modified_on = fields.Str(required=False)
-    
-    created_by = fields.Nested(UserDetail, required=False)
-    
-    modified_by = fields.Nested(UserDetail, required=False)
-    
-    products = fields.List(fields.Nested(ProductInGroup, required=False), required=False)
-    
-    same_store_assignment = fields.Boolean(required=False)
-    
-    _id = fields.Raw(required=False)
-    
-    name = fields.Raw(required=False)
-    
-    choice = fields.Raw(required=False)
-    
-    slug = fields.Raw(required=False)
-    
-    verified_on = fields.Str(required=False)
-    
-
-
-class ProductBundle(BaseSchema):
-    # Catalog swagger.json
-
-    
-    items = fields.List(fields.Nested(ProductGroupingModel, required=False), required=False)
     
 
 
@@ -3098,6 +3008,48 @@ class Identifier(BaseSchema):
     upc = fields.Str(required=False)
     
     isbn = fields.Str(required=False)
+    
+
+
+class ProductBundleItems(BaseSchema):
+    # Catalog swagger.json
+
+    
+    items = fields.List(fields.Nested(BundleItem, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class BundleItem(BaseSchema):
+    # Catalog swagger.json
+
+    
+    brand = fields.Nested(ProductBrand, required=False)
+    
+    media = fields.List(fields.Nested(Media, required=False), required=False)
+    
+    net_quantity = fields.Int(required=False)
+    
+    size = fields.Str(required=False)
+    
+    seller_identifiers = fields.List(fields.Str(required=False), required=False)
+    
+    price = fields.Float(required=False)
+    
+    price_effective = fields.Float(required=False)
+    
+    currency = fields.Str(required=False)
+    
+
+
+class ProductBundleItemsWithSlug(BaseSchema):
+    # Catalog swagger.json
+
+    
+    items = fields.List(fields.Nested(BundleItem, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 
 

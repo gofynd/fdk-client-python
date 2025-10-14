@@ -58,6 +58,148 @@ class Order:
 
         return response
     
+    async def getOrderingSourceConfigBySlug(self, slug=None, request_headers:Dict={}):
+        """Retrieves the ordering source config for a given company and application.
+        :param slug :  : type string
+        """
+        payload = {}
+        
+        if slug is not None:
+            payload["slug"] = slug
+
+        # Parameter validation
+        schema = OrderValidator.getOrderingSourceConfigBySlug()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-sources/{slug}", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"slug","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"slug","required":true,"schema":{"type":"string"}}]}""", serverType="platform", slug=slug)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-sources/{slug}", slug=slug), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderingSourceConfig
+            schema = OrderingSourceConfig()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOrderingSourceConfigBySlug")
+                print(e)
+
+        return response
+    
+    async def updateOrderingSourceConfigBySlug(self, slug=None, body="", request_headers:Dict={}):
+        """Updates the ordering source config for a given company and application.
+        :param slug :  : type string
+        """
+        payload = {}
+        
+        if slug is not None:
+            payload["slug"] = slug
+
+        # Parameter validation
+        schema = OrderValidator.updateOrderingSourceConfigBySlug()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import OrderingSourceConfig
+        schema = OrderingSourceConfig()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-sources/{slug}", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"slug","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"slug","required":true,"schema":{"type":"string"}}]}""", serverType="platform", slug=slug)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-sources/{slug}", slug=slug), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderingSourceConfig
+            schema = OrderingSourceConfig()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateOrderingSourceConfigBySlug")
+                print(e)
+
+        return response
+    
+    async def listOrderingSources(self, type=None, page_no=None, page_size=None, request_headers:Dict={}):
+        """Retrieves the list of ordering sources for a given company and application.
+        :param type :  : type string
+        :param page_no :  : type integer
+        :param page_size :  : type integer
+        """
+        payload = {}
+        
+        if type is not None:
+            payload["type"] = type
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+
+        # Parameter validation
+        schema = OrderValidator.listOrderingSources()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-sources", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"type","required":false,"schema":{"type":"string","enum":["SALES_CHANNEL","ORDERING_SOURCE"]}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"query":[{"in":"query","name":"type","required":false,"schema":{"type":"string","enum":["SALES_CHANNEL","ORDERING_SOURCE"]}},{"in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","name":"page_size","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", type=type, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(type=type, page_no=page_no, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/ordering-sources", type=type, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ListOrderingSources
+            schema = ListOrderingSources()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for listOrderingSources")
+                print(e)
+
+        return response
+    
     async def getShipmentBagReasons(self, shipment_id=None, line_number=None, request_headers:Dict={}):
         """Allows users to retrieve a comprehensive list of reasons for cancellation  or returning a shipment. It provides both cancellation and return reasons, with an emphasis  on Quality Control (QC) evaluations.
         :param shipment_id : The unique identifier for the shipment : type string

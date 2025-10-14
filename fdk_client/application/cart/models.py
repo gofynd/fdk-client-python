@@ -6,8 +6,6 @@ from marshmallow.validate import OneOf
 from ..ApplicationModel import BaseSchema
 
 
-from .enums import *
-
 
 
 class BuyRules(BaseSchema):
@@ -1150,6 +1148,8 @@ class CartProductInfo(BaseSchema):
     price_per_unit = fields.Nested(ProductPricePerUnitInfo, required=False)
     
     promotions_applied = fields.List(fields.Nested(AppliedPromotion, required=False), required=False)
+    
+    item_type = fields.Str(required=False)
     
 
 

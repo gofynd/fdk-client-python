@@ -6,8 +6,6 @@ from marshmallow.validate import OneOf
 from ..PlatformModel import BaseSchema
 
 
-from .enums import *
-
 
 
 class RedeemLoyaltyPoints(BaseSchema):
@@ -3036,6 +3034,8 @@ class CartProductInfo(BaseSchema):
     promo_meta = fields.Nested(PromoMeta, required=False)
     
     custom_order = fields.Dict(required=False)
+    
+    item_type = fields.Str(required=False)
     
 
 

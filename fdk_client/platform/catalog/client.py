@@ -1353,200 +1353,6 @@ class Catalog:
 
         return response
     
-    async def getProductBundle(self, q=None, slug=None, page_no=None, page_size=None, request_headers:Dict={}):
-        """Retrieve a list of product bundles available in the catalog associated to a specific company.
-        :param q : A search string that is searched with product bundle name. : type string
-        :param slug : slugs of bundles to be retrieved. : type array
-        :param page_no : The page number to navigate through the given set of results : type integer
-        :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
-        """
-        payload = {}
-        
-        if q is not None:
-            payload["q"] = q
-        if slug is not None:
-            payload["slug"] = slug
-        if page_no is not None:
-            payload["page_no"] = page_no
-        if page_size is not None:
-            payload["page_size"] = page_size
-
-        # Parameter validation
-        schema = CatalogValidator.getProductBundle()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"A search string that is searched with product bundle name.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"slugs of bundles to be retrieved.","in":"query","name":"slug","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}}],"query":[{"description":"A search string that is searched with product bundle name.","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"slugs of bundles to be retrieved.","in":"query","name":"slug","required":false,"schema":{"items":{"type":"string"},"type":"array"}},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", q=q, slug=slug, page_no=page_no, page_size=page_size)
-        query_string = await create_query_string(q=q, slug=slug, page_no=page_no, page_size=page_size)
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", q=q, slug=slug, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetProductBundleListingResponseSchema
-            schema = GetProductBundleListingResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getProductBundle")
-                print(e)
-
-        return response
-    
-    async def createProductBundle(self, body="", request_headers:Dict={}):
-        """Create product bundle in the catalog associated to a specific company
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = CatalogValidator.createProductBundle()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ProductBundleRequestSchema
-        schema = ProductBundleRequestSchema()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetProductBundleCreateResponseSchema
-            schema = GetProductBundleCreateResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createProductBundle")
-                print(e)
-
-        return response
-    
-    async def getProductBundleDetail(self, id=None, request_headers:Dict={}):
-        """Retrieve detailed information about a specific product bundle associated to a specific company.
-        :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve. : type string
-        """
-        payload = {}
-        
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = CatalogValidator.getProductBundleDetail()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","in":"path","name":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to retrieve.","in":"path","name":"id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetProductBundleResponseSchema
-            schema = GetProductBundleResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getProductBundleDetail")
-                print(e)
-
-        return response
-    
-    async def updateProductBundle(self, id=None, body="", request_headers:Dict={}):
-        """Modify the details of an existing product bundle in the catalog associated to a specific company.
-        :param id : A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete. : type string
-        """
-        payload = {}
-        
-        if id is not None:
-            payload["id"] = id
-
-        # Parameter validation
-        schema = CatalogValidator.updateProductBundle()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ProductBundleUpdateRequestSchema
-        schema = ProductBundleUpdateRequestSchema()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete.","in":"path","name":"id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `id` is a unique identifier for a particular detail. Pass the `id` of the keywords which you want to delete.","in":"path","name":"id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/product-bundle/{id}/", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetProductBundleCreateResponseSchema
-            schema = GetProductBundleCreateResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateProductBundle")
-                print(e)
-
-        return response
-    
     async def getProductAssetsInBulk(self, page_no=None, page_size=None, request_headers:Dict={}):
         """Helps to retrieve bulk asset jobs data associated to a particular company.
         :param page_no : The page number to navigate through the given set of results : type integer
@@ -3303,6 +3109,59 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for editProduct")
+                print(e)
+
+        return response
+    
+    async def partialUpdateProduct(self, item_id=None, body="", request_headers:Dict={}):
+        """Partially update an existing product in the catalog using PATCH method. This operation allows you to modify specific fields of a product without affecting other attributes. Only the fields provided in the request body will be updated, while all other existing product data remains unchanged.
+For objects (e.g. attributes), merge keys shallowly: any key in the patch overrides the existing value.
+For arrays of primitives (e.g. tags): replaced wholesale when present.
+For arrays of objects (e.g. sizes): match on a unique identifier (seller_identifier) and apply the merge-patch per element; unmentioned elements remain unchanged.
+
+        :param item_id : Item ID of the product to be patched. : type integer
+        """
+        payload = {}
+        
+        if item_id is not None:
+            payload["item_id"] = item_id
+
+        # Parameter validation
+        schema = CatalogValidator.partialUpdateProduct()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ProductPatchSchemaV3
+        schema = ProductPatchSchemaV3()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v3.0/company/{self._conf.companyId}/products/{item_id}/", """{"required":[{"description":"Id of the company associated.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Item ID of the product to be patched.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated.","in":"path","name":"company_id","required":true,"schema":{"type":"string"}},{"description":"Item ID of the product to be patched.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", item_id=item_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/catalog/v3.0/company/{self._conf.companyId}/products/{item_id}/", item_id=item_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponseSchema
+            schema = SuccessResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for partialUpdateProduct")
                 print(e)
 
         return response

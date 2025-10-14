@@ -160,24 +160,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-    
-    
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
     
     
         
@@ -352,11 +334,15 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
         
         
+        
+    
+    
         
         
     
@@ -789,46 +775,6 @@ class CatalogValidator:
          
         
     
-    class getProductBundle(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        q = fields.Str(required=False)
-        
-        slug = fields.List(fields.Str(required=False), required=False)
-        
-        page_no = fields.Int(required=False)
-        
-        page_size = fields.Int(required=False)
-         
-        
-    
-    class createProductBundle(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class getProductBundleDetail(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
-    class updateProductBundle(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        id = fields.Str(required=False)
-         
-        
-    
     class getProductAssetsInBulk(BaseSchema):
         
         
@@ -1236,6 +1182,15 @@ class CatalogValidator:
         
     
     class editProduct(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        item_id = fields.Int(required=False)
+         
+        
+    
+    class partialUpdateProduct(BaseSchema):
         
         
         company_id = fields.Str(required=False)

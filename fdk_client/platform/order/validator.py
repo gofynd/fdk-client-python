@@ -49,10 +49,10 @@ from ..PlatformModel import BaseSchema
         
     
     
-                
-from .models import OrderingSource
-
         
+        
+        
+        
     
     
         
@@ -72,10 +72,8 @@ from .models import OrderingSource
     
         
         
-                
-from .models import OrderingSource
-
         
+        
     
     
         
@@ -177,18 +175,37 @@ from .models import OrderingSource
         
     
     
+        
+        
+        
         
         
         
+    
+    
+        
+        
+    
+    
         
         
+    
+    
         
     
     
         
         
+        
+        
+        
+    
     
+        
+    
     
+        
+        
         
         
     
@@ -199,12 +216,13 @@ from .models import OrderingSource
         
         
         
-                
-from .models import OrderingSource
-
+    
+    
         
+        
     
     
+        
         
     
     
@@ -246,6 +264,8 @@ from .models import OrderingSource
         
         
         
+        
+        
     
     
         
@@ -283,6 +303,8 @@ from .models import OrderingSource
         
     
     
+        
+        
         
         
         
@@ -465,10 +487,14 @@ class OrderValidator:
          
         
     
-    class createOrder(BaseSchema):
+    class createOrderDeprecated(BaseSchema):
         
         
-        x__ordering__source = fields.Nested(OrderingSource, required=False)
+        x__ordering__source = fields.Str(required=False)
+        
+        x__application__id = fields.Str(required=False)
+        
+        x__extension__id = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
          
@@ -516,7 +542,7 @@ class OrderValidator:
         
         ordering_channel = fields.Str(required=False)
         
-        ordering_source = fields.Nested(OrderingSource, required=False)
+        ordering_source = fields.Str(required=False)
         
         status = fields.Str(required=False)
          
@@ -790,7 +816,7 @@ class OrderValidator:
         
         ordering_channel = fields.Str(required=False)
         
-        ordering_source = fields.Nested(OrderingSource, required=False)
+        ordering_source = fields.Str(required=False)
         
         entity = fields.Str(required=False)
          
@@ -800,6 +826,55 @@ class OrderValidator:
         
         
         company_id = fields.Str(required=False)
+         
+        
+    
+    class createOrder(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        x__ordering__source = fields.Str(required=False)
+        
+        x__application__id = fields.Str(required=False)
+        
+        x__extension__id = fields.Str(required=False)
+         
+        
+    
+    class createAccount(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class listAccounts(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        page = fields.Int(required=False)
+        
+        size = fields.Int(required=False)
+         
+        
+    
+    class getAccountById(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        channel_account_id = fields.Str(required=False)
+         
+        
+    
+    class updateAccount(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        channel_account_id = fields.Str(required=False)
          
         
     
@@ -881,6 +956,10 @@ class OrderValidator:
         enforce_date_filter = fields.Boolean(required=False)
         
         fulfillment_type = fields.Str(required=False)
+        
+        ordering_source = fields.Str(required=False)
+        
+        channel_account_id = fields.Str(required=False)
          
         
     
@@ -1013,6 +1092,10 @@ class OrderValidator:
         enforce_date_filter = fields.Boolean(required=False)
         
         fulfillment_type = fields.Str(required=False)
+        
+        ordering_source = fields.Str(required=False)
+        
+        channel_account_id = fields.Str(required=False)
          
         
     

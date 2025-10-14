@@ -16,6 +16,17 @@ from ..ApplicationModel import BaseSchema
     
         
         
+        
+    
+    
+        
+        
+        
+        
+    
+    
+        
+        
     
     
         
@@ -134,10 +145,6 @@ from ..ApplicationModel import BaseSchema
         
     
     
-        
-    
-    
-        
         
     
     
@@ -162,6 +169,30 @@ class CatalogValidator:
         
         
         slug = fields.Str(required=False)
+         
+        
+    
+    class getProductBundleItems(BaseSchema):
+        
+        
+        slug = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class getProductBundlesByChildSku(BaseSchema):
+        
+        
+        slug = fields.Str(required=False)
+        
+        size = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     
@@ -436,15 +467,6 @@ class CatalogValidator:
         
         
         location_id = fields.Int(required=False)
-         
-        
-    
-    class getProductBundlesBySlug(BaseSchema):
-        
-        
-        slug = fields.Str(required=False)
-        
-        id = fields.Int(required=False)
          
         
     
