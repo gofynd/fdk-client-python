@@ -2256,3 +2256,51 @@ class Serviceability:
 
         return response
     
+    async def createShipments(self, x_ordering_source=None, body="", request_headers:Dict={}):
+        """Create and return shipments.
+        :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type string
+        """
+        payload = {}
+        
+        if x_ordering_source is not None:
+            payload["x_ordering_source"] = x_ordering_source
+
+        # Parameter validation
+        schema = ServiceabilityValidator.createShipments()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PlatformShipmentsRequestSchema
+        schema = PlatformShipmentsRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipments", """{"required":[{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"The ID of the company.","schema":{"type":"string"},"required":true}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"query":[],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"path":[{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true},{"in":"path","name":"company_id","description":"The ID of the company.","schema":{"type":"string"},"required":true}]}""", serverType="platform", x_ordering_source=x_ordering_source, )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/shipments", x_ordering_source=x_ordering_source), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PlatformShipmentsResponseSchema
+            schema = PlatformShipmentsResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createShipments")
+                print(e)
+
+        return response
+    

@@ -261,6 +261,11 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
 
 class ServiceabilityValidator:
     
@@ -814,6 +819,17 @@ class ServiceabilityValidator:
         application_id = fields.Str(required=False)
         
         bulk_id = fields.Str(required=False)
+         
+        
+    
+    class createShipments(BaseSchema):
+        
+        
+        x__ordering__source = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        company_id = fields.Str(required=False)
          
         
     

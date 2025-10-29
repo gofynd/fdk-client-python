@@ -153,6 +153,8 @@ class TransformEventData(BaseSchema):
     # Webhook swagger.json
 
     
+    region = fields.Str(required=False)
+    
     event = fields.Nested(InternalTransformEvent, required=False)
     
     company_id = fields.Float(required=False)
