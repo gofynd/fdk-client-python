@@ -3979,7 +3979,7 @@ class RawProduct(BaseSchema):
     
     highlights = fields.List(fields.Str(required=False), required=False)
     
-    hs_code = fields.Str(required=False)
+    hs_code = fields.Str(required=False, allow_none=True)
     
     hsn_code = fields.Str(required=False)
     
@@ -6593,7 +6593,7 @@ class Product(BaseSchema):
     
     highlights = fields.List(fields.Str(required=False), required=False)
     
-    hs_code = fields.Str(required=False)
+    hs_code = fields.Str(required=False, allow_none=True)
     
     hsn_code = fields.Str(required=False)
     
@@ -6859,7 +6859,7 @@ class ProductCreateSchemaV3(BaseSchema):
     
     variants = fields.Dict(required=False)
     
-    hs_code = fields.Str(required=False)
+    hs_code = fields.Str(required=False, allow_none=True)
     
     bundle_details = fields.List(fields.Nested(BundleDetails, required=False), required=False)
     
@@ -6939,7 +6939,7 @@ class ProductUpdateSchemaV3(BaseSchema):
     
     tax_identifier = fields.Nested(TaxIdentifierV3, required=False)
     
-    hs_code = fields.Str(required=False)
+    hs_code = fields.Str(required=False, allow_none=True)
     
     teaser_tag = fields.Nested(TeaserTag, required=False)
     
@@ -7005,7 +7005,7 @@ class ProductPatchSchemaV3(BaseSchema):
     
     tax_identifier = fields.Nested(TaxIdentifierV3, required=False)
     
-    hs_code = fields.Str(required=False)
+    hs_code = fields.Str(required=False, allow_none=True)
     
     teaser_tag = fields.Nested(TeaserTag, required=False)
     
@@ -7745,7 +7745,7 @@ class ProductSchemaV2(BaseSchema):
     
     highlights = fields.List(fields.Str(required=False), required=False)
     
-    hs_code = fields.Str(required=False)
+    hs_code = fields.Str(required=False, allow_none=True)
     
     hsn_code = fields.Str(required=False)
     
@@ -8061,7 +8061,7 @@ class Properties(BaseSchema):
     
     highlights = fields.Dict(required=False)
     
-    hs_code = fields.Dict(required=False)
+    hs_code = fields.Dict(required=False, allow_none=True)
     
     hsn_code = fields.Dict(required=False)
     

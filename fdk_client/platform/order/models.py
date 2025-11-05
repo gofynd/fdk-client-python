@@ -5929,6 +5929,8 @@ class CreateOrderRequestSchema(BaseSchema):
     
     is_draft = fields.Boolean(required=False)
     
+    meta = fields.Dict(required=False)
+    
 
 
 class Page(BaseSchema):

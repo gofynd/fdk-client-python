@@ -4023,6 +4023,8 @@ class PlatformAddCartDetails(BaseSchema):
     
     new_cart = fields.Boolean(required=False)
     
+    default_cart = fields.Boolean(required=False)
+    
     items = fields.List(fields.Nested(AddProductCart, required=False), required=False)
     
 
