@@ -12,6 +12,10 @@ class SuccessMessage(BaseSchema):
     pass
 
 
+class UserAttributeDefinitionList(BaseSchema):
+    pass
+
+
 class UserAttributeDefinition(BaseSchema):
     pass
 
@@ -348,6 +352,16 @@ class SuccessMessage(BaseSchema):
 
     
     success = fields.Str(required=False)
+    
+
+
+class UserAttributeDefinitionList(BaseSchema):
+    # User swagger.json
+
+    
+    items = fields.List(fields.Nested(UserAttributeDefinition, required=False), required=False)
+    
+    page = fields.Nested(PaginationSchema, required=False)
     
 
 

@@ -89,9 +89,9 @@ class PageType(Enum):
     
     PROFILE_COMPANY = "profile-company"
     
-    PROFILE_EMAILS = "profile-emails"
+    PROFILE_EMAIL = "profile-email"
     
-    PROFILE_PHONES = "profile-phones"
+    PROFILE_PHONE = "profile-phone"
     
     RATE_US = "rate-us"
     
@@ -130,6 +130,8 @@ class PageType(Enum):
     LOCATE_US = "locate-us"
     
     SINGLE_PAGE_CHECKOUT = "single-page-checkout"
+    
+    REQUEST_REATTEMPT = "request-reattempt"
     
     @classmethod
     async def is_valid(cls, value):

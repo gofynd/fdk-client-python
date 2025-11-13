@@ -451,6 +451,10 @@ class UserValidator:
     class getUserAttributeDefinitions(BaseSchema):
         
         
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
         excluding_ids = fields.Str(required=False)
         
         slug = fields.Str(required=False)
@@ -468,10 +472,6 @@ class UserValidator:
         is_locked = fields.Boolean(required=False)
         
         name = fields.Str(required=False)
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
         
         page_size = fields.Int(required=False)
         
