@@ -109,12 +109,11 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-        
-        
     
     
+        
+        
+        
         
         
         
@@ -634,25 +633,6 @@ class CatalogValidator:
          
         
     
-    class getCollectionItems(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-        
-        id = fields.Str(required=False)
-        
-        sort_on = fields.Str(required=False)
-        
-        page_id = fields.Str(required=False)
-        
-        page_size = fields.Int(required=False)
-        
-        page_no = fields.Int(required=False)
-         
-        
-    
     class addCollectionItems(BaseSchema):
         
         
@@ -661,6 +641,23 @@ class CatalogValidator:
         application_id = fields.Str(required=False)
         
         id = fields.Str(required=False)
+         
+        
+    
+    class getCollectionItems(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        collection_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
          
         
     

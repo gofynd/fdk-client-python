@@ -281,6 +281,15 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+        
+    
+    
+        
+        
+        
     
     
         
@@ -1019,6 +1028,25 @@ class CartValidator:
         i = fields.Boolean(required=False)
         
         order_type = fields.Str(required=False)
+        
+        b = fields.Boolean(required=False)
+        
+        buy_now = fields.Boolean(required=False)
+         
+        
+    
+    class updateCartBreakup(BaseSchema):
+        
+        
+        x__ordering__source = fields.Str(required=False)
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+        
+        i = fields.Boolean(required=False)
         
         b = fields.Boolean(required=False)
         

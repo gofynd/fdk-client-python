@@ -45,13 +45,17 @@ from ..ApplicationModel import BaseSchema
     
         
         
+        
+    
+    
+        
+        
     
     
         
         
     
     
-        
         
     
     
@@ -140,6 +144,8 @@ class OrderValidator:
         order_id = fields.Str(required=False)
         
         shipment_id = fields.Str(required=False)
+        
+        event_type = fields.Str(required=False)
          
         
     
@@ -169,6 +175,13 @@ class OrderValidator:
         
     
     class updateShipmentStatus(BaseSchema):
+        
+        
+        shipment_id = fields.Str(required=False)
+         
+        
+    
+    class submitDeliveryReattemptRequest(BaseSchema):
         
         
         shipment_id = fields.Str(required=False)

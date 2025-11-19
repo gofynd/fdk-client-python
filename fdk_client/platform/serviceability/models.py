@@ -732,6 +732,10 @@ class IntComparisonOperations(BaseSchema):
     pass
 
 
+class DateOperations(BaseSchema):
+    pass
+
+
 class ArithmeticOperations(BaseSchema):
     pass
 
@@ -841,10 +845,6 @@ class StoreRuleConditionSchema(BaseSchema):
 
 
 class CustomerRadiusSchema(BaseSchema):
-    pass
-
-
-class DateOperations(BaseSchema):
     pass
 
 
@@ -1513,7 +1513,7 @@ class PincodeMopBulkError(BaseSchema):
     
     status_code = fields.Int(required=False)
     
-    error = fields.Raw(required=False)
+    error = fields.List(fields.Nested(Error, required=False), required=False)
     
     success = fields.Boolean(required=False)
     
@@ -1525,7 +1525,7 @@ class CommonError(BaseSchema):
     
     status_code = fields.Int(required=False)
     
-    error = fields.Raw(required=False)
+    error = fields.List(fields.Nested(Error, required=False), required=False)
     
     success = fields.Boolean(required=False)
     
@@ -1867,7 +1867,7 @@ class CourierPartnerRuleResult(BaseSchema):
     
     manual_priority = fields.List(fields.Str(required=False), required=False)
     
-    filters = fields.Str(required=False)
+    filters = fields.Str(required=False, allow_none=True)
     
     conditions = fields.Nested(CourierPartnerRuleConditions, required=False)
     
@@ -1901,7 +1901,7 @@ class CourierPartnerRule(BaseSchema):
     
     manual_priority = fields.List(fields.Str(required=False), required=False)
     
-    filters = fields.Str(required=False)
+    filters = fields.Str(required=False, allow_none=True)
     
     conditions = fields.Nested(CourierPartnerRuleConditions, required=False)
     
@@ -2091,7 +2091,7 @@ class StoreRuleDataSchema(BaseSchema):
     
     meta_conditions = fields.Dict(required=False)
     
-    filters = fields.Str(required=False)
+    filters = fields.Str(required=False, allow_none=True)
     
     company_id = fields.Int(required=False)
     
@@ -2133,7 +2133,7 @@ class CreateStoreRuleDetailsSchema(BaseSchema):
     
     meta_conditions = fields.Dict(required=False)
     
-    filters = fields.Str(required=False)
+    filters = fields.Str(required=False, allow_none=True)
     
     is_active = fields.Boolean(required=False)
     
@@ -2163,7 +2163,7 @@ class StoreRuleResultSchema(BaseSchema):
     
     meta_conditions = fields.Dict(required=False)
     
-    filters = fields.Str(required=False)
+    filters = fields.Str(required=False, allow_none=True)
     
     type = fields.Str(required=False)
     
@@ -2195,7 +2195,7 @@ class StoreRuleUpdateResultSchema(BaseSchema):
     
     meta_conditions = fields.Dict(required=False)
     
-    filters = fields.Str(required=False)
+    filters = fields.Str(required=False, allow_none=True)
     
     type = fields.Str(required=False)
     
@@ -3082,6 +3082,10 @@ class PlatformShipmentsSchema(BaseSchema):
     fulfillment_location_id = fields.Int(required=False)
     
     courier_partners = fields.List(fields.Nested(ShipmentsCourierPartner, required=False), required=False)
+    
+    count = fields.Int(required=False)
+    
+    is_cod_available = fields.Boolean(required=False)
     
 
 
@@ -4033,7 +4037,7 @@ class CourierPartnerRuleConditions(BaseSchema):
     
     brand_ids = fields.Nested(IntComparisonOperations, required=False)
     
-    order_place_date = fields.Nested(ArithmeticOperations, required=False)
+    order_place_date = fields.Nested(DateOperations, required=False)
     
     store_ids = fields.Nested(IntComparisonOperations, required=False)
     
@@ -4094,6 +4098,16 @@ class IntComparisonOperations(BaseSchema):
 
     
     includes = fields.List(fields.Int(required=False), required=False)
+    
+
+
+class DateOperations(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    lte = fields.Str(required=False)
+    
+    gte = fields.Str(required=False)
     
 
 
@@ -4540,20 +4554,6 @@ class CustomerRadiusSchema(BaseSchema):
     gt = fields.Int(required=False)
     
     gte = fields.Int(required=False)
-    
-
-
-class DateOperations(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    lt = fields.Str(required=False, allow_none=True)
-    
-    gt = fields.Str(required=False, allow_none=True)
-    
-    lte = fields.Str(required=False, allow_none=True)
-    
-    gte = fields.Str(required=False, allow_none=True)
     
 
 

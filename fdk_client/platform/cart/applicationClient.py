@@ -2056,6 +2056,66 @@ class Cart:
 
         return response
     
+    async def updateCartBreakup(self, x_ordering_source=None, id=None, i=None, b=None, buy_now=None, body="", request_headers:Dict={}):
+        """Updates the cart breakup based on the enabled features and user preferences.   This endpoint allows customers to modify how their cart totals are calculated —  including options such as applying store credits, loyalty points, discounts,  and other promotional benefits.   The API recalculates and returns the updated breakup reflecting the selected  configurations in real-time.
+        :param x-ordering-source : Identifier for the ordering source (e.g., web, mobile app, POS). Used to determine the origin of the order request and apply source-specific rules. : type string
+        :param id : Unique identifier of the cart for which the breakup needs to be updated. : type string
+        :param i : Set to `true` to include all items currently added to the cart in the response. : type boolean
+        :param b : Set to `true` to include the detailed price breakup of each cart item in the response. : type boolean
+        :param buy_now : Set to `true` to initialize a "Buy Now" cart flow, enabling direct checkout for a single item. : type boolean
+        """
+        payload = {}
+        
+        if x_ordering_source is not None:
+            payload["x_ordering_source"] = x_ordering_source
+        if id is not None:
+            payload["id"] = id
+        if i is not None:
+            payload["i"] = i
+        if b is not None:
+            payload["b"] = b
+        if buy_now is not None:
+            payload["buy_now"] = buy_now
+
+        # Parameter validation
+        schema = CartValidator.updateCartBreakup()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import UpdateCartBreakup
+        schema = UpdateCartBreakup()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", """{"required":[{"schema":{"type":"string"},"description":"Unique identifier of the company associated with the current cart.","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Unique identifier of the sales channel (e.g., website, app) for which the cart belongs.","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Identifier for the ordering source (e.g., web, mobile app, POS). Used to determine the origin of the order request and apply source-specific rules."},{"in":"query","name":"id","schema":{"type":"string"},"description":"Unique identifier of the cart for which the breakup needs to be updated."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Set to `true` to include all items currently added to the cart in the response."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Set to `true` to include the detailed price breakup of each cart item in the response."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Set to `true` to initialize a \"Buy Now\" cart flow, enabling direct checkout for a single item."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"Unique identifier of the cart for which the breakup needs to be updated."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Set to `true` to include all items currently added to the cart in the response."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Set to `true` to include the detailed price breakup of each cart item in the response."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Set to `true` to initialize a \"Buy Now\" cart flow, enabling direct checkout for a single item."}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Identifier for the ordering source (e.g., web, mobile app, POS). Used to determine the origin of the order request and apply source-specific rules."}],"path":[{"schema":{"type":"string"},"description":"Unique identifier of the company associated with the current cart.","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Unique identifier of the sales channel (e.g., website, app) for which the cart belongs.","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, id=id, i=i, b=b, buy_now=buy_now)
+        query_string = await create_query_string(id=id, i=i, b=b, buy_now=buy_now)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", x_ordering_source=x_ordering_source, id=id, i=i, b=b, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UpdateCartDetailResult
+            schema = UpdateCartDetailResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateCartBreakup")
+                print(e)
+
+        return response
+    
     async def deleteCart(self, id=None, body="", request_headers:Dict={}):
         """Delete all items from the user's cart and resets it to its initial state, providing a clean slate for new selections.
         :param id : The unique identifier of the cart. : type string

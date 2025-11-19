@@ -26,7 +26,8 @@ class Order:
             "verifyOtpShipmentCustomer": "/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/verify/",
             "getShipmentBagReasons": "/service/application/order/v1.0/orders/shipments/{shipment_id}/bags/{bag_id}/reasons",
             "getShipmentReasons": "/service/application/order/v1.0/orders/shipments/{shipment_id}/reasons",
-            "updateShipmentStatus": "/service/application/order/v1.0/orders/shipments/{shipment_id}/status"
+            "updateShipmentStatus": "/service/application/order/v1.0/orders/shipments/{shipment_id}/status",
+            "submitDeliveryReattemptRequest": "/service/application/order/v1.0/shipments/{shipment_id}/delivery-reattempt"
             
         }
         self._urls = {
@@ -391,10 +392,14 @@ class Order:
 
         return response
     
-    async def sendOtpToShipmentCustomer(self, order_id=None, shipment_id=None, body="", request_headers:Dict={}):
+    async def sendOtpToShipmentCustomer(self, order_id=None, shipment_id=None, event_type=None, body="", request_headers:Dict={}):
         """Send OTP to the customer for shipment verification.
         :param order_id : A unique number used for identifying and tracking your orders. : type string
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
+        :param event_type : Type of the event for which the OTP needs to be sent. This determines the context or purpose of OTP verification. Supported values are:
+  - `refund_bank_details`: Used when the customer needs to verify refund bank information.
+  - `customer_ndr`: Used when the customer needs to confirm delivery preferences after a failed delivery attempt (Non-Delivery Report).
+ : type string
         """
         payload = {}
         
@@ -402,14 +407,16 @@ class Order:
             payload["order_id"] = order_id
         if shipment_id is not None:
             payload["shipment_id"] = shipment_id
+        if event_type is not None:
+            payload["event_type"] = event_type
 
         # Parameter validation
         schema = OrderValidator.sendOtpToShipmentCustomer()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["sendOtpToShipmentCustomer"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16544950215681060915J"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16544950215681060915J"}}]}""", serverType="application", order_id=order_id, shipment_id=shipment_id)
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(api_url=self._urls["sendOtpToShipmentCustomer"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16544950215681060915J"}}],"optional":[{"in":"query","name":"event_type","description":"Type of the event for which the OTP needs to be sent. This determines the context or purpose of OTP verification. Supported values are:\n  - `refund_bank_details`: Used when the customer needs to verify refund bank information.\n  - `customer_ndr`: Used when the customer needs to confirm delivery preferences after a failed delivery attempt (Non-Delivery Report).\n","required":false,"schema":{"type":"string","enum":["refund_bank_details","customer_ndr"],"default":"refund_bank_details"}}],"query":[{"in":"query","name":"event_type","description":"Type of the event for which the OTP needs to be sent. This determines the context or purpose of OTP verification. Supported values are:\n  - `refund_bank_details`: Used when the customer needs to verify refund bank information.\n  - `customer_ndr`: Used when the customer needs to confirm delivery preferences after a failed delivery attempt (Non-Delivery Report).\n","required":false,"schema":{"type":"string","enum":["refund_bank_details","customer_ndr"],"default":"refund_bank_details"}}],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16544950215681060915J"}}]}""", serverType="application", order_id=order_id, shipment_id=shipment_id, event_type=event_type)
+        query_string = await create_query_string(event_type=event_type)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -427,7 +434,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendOtpToShipmentCustomer"]).netloc, "post", await create_url_without_domain("/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/send/", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendOtpToShipmentCustomer"]).netloc, "post", await create_url_without_domain("/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/send/", order_id=order_id, shipment_id=shipment_id, event_type=event_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import SendOtpToCustomerResponseSchema
@@ -634,6 +641,56 @@ class Order:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for updateShipmentStatus")
+                print(e)
+
+        return response
+    
+    async def submitDeliveryReattemptRequest(self, shipment_id=None, body="", request_headers:Dict={}):
+        """This operation allows customers to submit a request for reattempting the delivery of a specific shipment  with optional address updates and a new delivery date.
+        :param shipment_id : The unique identifier for the shipment. : type string
+        """
+        payload = {}
+        
+        if shipment_id is not None:
+            payload["shipment_id"] = shipment_id
+
+        # Parameter validation
+        schema = OrderValidator.submitDeliveryReattemptRequest()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import DeliveryReattemptRequestSchema
+        schema = DeliveryReattemptRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["submitDeliveryReattemptRequest"], proccessed_params="""{"required":[{"in":"path","description":"The unique identifier for the shipment.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"The unique identifier for the shipment.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["submitDeliveryReattemptRequest"]).netloc, "put", await create_url_without_domain("/service/application/order/v1.0/shipments/{shipment_id}/delivery-reattempt", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeliveryReattemptSuccessResponseSchema
+            schema = DeliveryReattemptSuccessResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for submitDeliveryReattemptRequest")
                 print(e)
 
         return response

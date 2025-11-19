@@ -1085,6 +1085,10 @@ class OrderFeature(BaseSchema):
     
     buy_again = fields.Boolean(required=False)
     
+    enabled = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
 
 
 class DeliveryStrategy(BaseSchema):

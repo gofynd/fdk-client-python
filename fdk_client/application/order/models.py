@@ -8,6 +8,14 @@ from ..ApplicationModel import BaseSchema
 
 
 
+class ValidationErrors(BaseSchema):
+    pass
+
+
+class StandardError(BaseSchema):
+    pass
+
+
 class FulfillmentOption(BaseSchema):
     pass
 
@@ -124,6 +132,14 @@ class CurrentStatus(BaseSchema):
     pass
 
 
+class BundleReturnConfig(BaseSchema):
+    pass
+
+
+class BundleDetails(BaseSchema):
+    pass
+
+
 class Bags(BaseSchema):
     pass
 
@@ -144,14 +160,6 @@ class Shipments(BaseSchema):
     pass
 
 
-class BundleReturnConfig(BaseSchema):
-    pass
-
-
-class BundleDetails(BaseSchema):
-    pass
-
-
 class BagsForReorderArticleAssignment(BaseSchema):
     pass
 
@@ -168,15 +176,27 @@ class OrderSchema(BaseSchema):
     pass
 
 
+class UserDetails(BaseSchema):
+    pass
+
+
+class NdrDeliveryWindowSchema(BaseSchema):
+    pass
+
+
+class NdrDetailsSchema(BaseSchema):
+    pass
+
+
+class ShipmentInfo(BaseSchema):
+    pass
+
+
+class OrderInfo(BaseSchema):
+    pass
+
+
 class OrderStatuses(BaseSchema):
-    pass
-
-
-class OrderGlobalFilterOption(BaseSchema):
-    pass
-
-
-class OrderGlobalFilter(BaseSchema):
     pass
 
 
@@ -185,10 +205,6 @@ class OrderFilters(BaseSchema):
 
 
 class OrderList(BaseSchema):
-    pass
-
-
-class ApefaceApiError(BaseSchema):
     pass
 
 
@@ -296,6 +312,10 @@ class DataUpdates(BaseSchema):
     pass
 
 
+class TransitionComments(BaseSchema):
+    pass
+
+
 class ShipmentsRequestSchema(BaseSchema):
     pass
 
@@ -320,11 +340,35 @@ class ShipmentApplicationStatusResponseSchema(BaseSchema):
     pass
 
 
-class ErrorResponseSchema(BaseSchema):
+class DeliveryReattemptRequestSchema(BaseSchema):
+    pass
+
+
+class DeliveryReattemptSuccessResponseSchema(BaseSchema):
+    pass
+
+
+class ValidationError(BaseSchema):
     pass
 
 
 
+
+
+class ValidationErrors(BaseSchema):
+    # Order swagger.json
+
+    
+    errors = fields.List(fields.Nested(ValidationError, required=False), required=False)
+    
+
+
+class StandardError(BaseSchema):
+    # Order swagger.json
+
+    
+    message = fields.Str(required=False)
+    
 
 
 class FulfillmentOption(BaseSchema):
@@ -845,6 +889,58 @@ class CurrentStatus(BaseSchema):
     
 
 
+class BundleReturnConfig(BaseSchema):
+    # Order swagger.json
+
+    
+    allow_partial_return = fields.Boolean(required=False, allow_none=True)
+    
+    returnable = fields.Boolean(required=False, allow_none=True)
+    
+    unit = fields.Boolean(required=False, allow_none=True)
+    
+    time = fields.Boolean(required=False, allow_none=True)
+    
+
+
+class BundleDetails(BaseSchema):
+    # Order swagger.json
+
+    
+    bundle_group_id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    bundle_count = fields.Int(required=False)
+    
+    article_bundle_id = fields.Str(required=False)
+    
+    bundle_article_quantity = fields.Int(required=False)
+    
+    is_base = fields.Boolean(required=False)
+    
+    price_marked = fields.Float(required=False)
+    
+    price_effective = fields.Float(required=False)
+    
+    item_id = fields.Int(required=False)
+    
+    item_type = fields.Str(required=False)
+    
+    return_config = fields.Nested(BundleReturnConfig, required=False)
+    
+    seller_identifier = fields.Str(required=False)
+    
+    images = fields.List(fields.Str(required=False), required=False)
+    
+    brand_name = fields.Str(required=False)
+    
+    size = fields.Str(required=False)
+    
+
+
 class Bags(BaseSchema):
     # Order swagger.json
 
@@ -1053,57 +1149,7 @@ class Shipments(BaseSchema):
     
     fulfillment_option = fields.Nested(FulfillmentOption, required=False)
     
-
-
-class BundleReturnConfig(BaseSchema):
-    # Order swagger.json
-
-    
-    allow_partial_return = fields.Boolean(required=False, allow_none=True)
-    
-    returnable = fields.Boolean(required=False, allow_none=True)
-    
-    unit = fields.Boolean(required=False, allow_none=True)
-    
-    time = fields.Boolean(required=False, allow_none=True)
-    
-
-
-class BundleDetails(BaseSchema):
-    # Order swagger.json
-
-    
-    bundle_group_id = fields.Str(required=False)
-    
-    name = fields.Str(required=False)
-    
-    slug = fields.Str(required=False)
-    
-    bundle_count = fields.Int(required=False)
-    
-    article_bundle_id = fields.Str(required=False)
-    
-    bundle_article_quantity = fields.Int(required=False)
-    
-    is_base = fields.Boolean(required=False)
-    
-    price_marked = fields.Float(required=False)
-    
-    price_effective = fields.Float(required=False)
-    
-    item_id = fields.Int(required=False)
-    
-    item_type = fields.Str(required=False)
-    
-    return_config = fields.Nested(BundleReturnConfig, required=False)
-    
-    seller_identifier = fields.Str(required=False)
-    
-    images = fields.List(fields.Str(required=False), required=False)
-    
-    brand_name = fields.Str(required=False)
-    
-    size = fields.Str(required=False)
+    ndr_details = fields.Nested(NdrDetailsSchema, required=False)
     
 
 
@@ -1175,6 +1221,164 @@ class OrderSchema(BaseSchema):
     
 
 
+class UserDetails(BaseSchema):
+    # Order swagger.json
+
+    
+    first_name = fields.Str(required=False)
+    
+    gender = fields.Str(required=False)
+    
+    last_name = fields.Str(required=False)
+    
+    mobile = fields.Str(required=False)
+    
+
+
+class NdrDeliveryWindowSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    start_date = fields.Str(required=False)
+    
+    end_date = fields.Str(required=False)
+    
+    excluded_dates = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class NdrDetailsSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    show_ndr_form = fields.Boolean(required=False)
+    
+    non_editable_address_fields = fields.List(fields.Str(required=False), required=False)
+    
+    delivery_scheduled_date = fields.Str(required=False)
+    
+    allowed_delivery_window = fields.Nested(NdrDeliveryWindowSchema, required=False)
+    
+    failure_reason = fields.Str(required=False)
+    
+    delivery_partner_remarks = fields.Str(required=False)
+    
+    customer_remarks = fields.Str(required=False)
+    
+
+
+class ShipmentInfo(BaseSchema):
+    # Order swagger.json
+
+    
+    order_id = fields.Str(required=False)
+    
+    breakup_values = fields.List(fields.Nested(BreakupValues, required=False), required=False)
+    
+    beneficiary_details = fields.Boolean(required=False)
+    
+    shipment_created_at = fields.Str(required=False)
+    
+    shipment_created_ts = fields.Str(required=False)
+    
+    shipment_id = fields.Str(required=False)
+    
+    shipment_status = fields.Nested(ShipmentStatus, required=False)
+    
+    track_url = fields.Str(required=False)
+    
+    traking_no = fields.Str(required=False)
+    
+    awb_no = fields.Str(required=False)
+    
+    dp_name = fields.Str(required=False)
+    
+    tracking_details = fields.List(fields.Nested(TrackingDetails, required=False), required=False)
+    
+    total_bags = fields.Int(required=False)
+    
+    bags = fields.List(fields.Nested(Bags, required=False), required=False)
+    
+    size_info = fields.Dict(required=False)
+    
+    order_type = fields.Str(required=False, allow_none=True)
+    
+    fulfilling_store = fields.Nested(FulfillingStore, required=False)
+    
+    fulfilling_company = fields.Nested(FulfillingCompany, required=False)
+    
+    charges = fields.List(fields.Nested(PriceAdjustmentCharge, required=False), required=False)
+    
+    total_details = fields.Nested(ShipmentTotalDetails, required=False)
+    
+    promise = fields.Nested(Promise, required=False)
+    
+    delivery_date = fields.Str(required=False, allow_none=True)
+    
+    billing_address = fields.Nested(Address, required=False)
+    
+    delivery_address = fields.Nested(Address, required=False)
+    
+    can_cancel = fields.Boolean(required=False)
+    
+    can_return = fields.Boolean(required=False)
+    
+    returnable_date = fields.Str(required=False, allow_none=True)
+    
+    show_track_link = fields.Boolean(required=False)
+    
+    prices = fields.Nested(Prices, required=False)
+    
+    can_break = fields.Dict(required=False)
+    
+    need_help_url = fields.Str(required=False)
+    
+    show_download_invoice = fields.Boolean(required=False)
+    
+    payment = fields.Nested(ShipmentPayment, required=False)
+    
+    user_info = fields.Nested(ShipmentUserInfo, required=False)
+    
+    comment = fields.Str(required=False)
+    
+    invoice = fields.Nested(Invoice, required=False)
+    
+    refund_details = fields.Dict(required=False)
+    
+    payment_info = fields.List(fields.Nested(ShipmentPaymentInfo, required=False), required=False)
+    
+    fulfillment_option = fields.Nested(FulfillmentOption, required=False)
+    
+    ndr_details = fields.Nested(NdrDetailsSchema, required=False)
+    
+
+
+class OrderInfo(BaseSchema):
+    # Order swagger.json
+
+    
+    order_created_time = fields.Str(required=False)
+    
+    order_created_ts = fields.Str(required=False)
+    
+    total_shipments_in_order = fields.Int(required=False)
+    
+    order_id = fields.Str(required=False)
+    
+    breakup_values = fields.List(fields.Nested(BreakupValues, required=False), required=False)
+    
+    shipments = fields.List(fields.Nested(ShipmentInfo, required=False), required=False)
+    
+    charges = fields.List(fields.Nested(PriceAdjustmentCharge, required=False), required=False)
+    
+    bags_for_reorder = fields.List(fields.Nested(BagsForReorder, required=False), required=False)
+    
+    gstin_code = fields.Str(required=False)
+    
+    user_info = fields.Nested(UserDetails, required=False)
+    
+
+
 class OrderStatuses(BaseSchema):
     # Order swagger.json
 
@@ -1184,30 +1388,6 @@ class OrderStatuses(BaseSchema):
     is_selected = fields.Boolean(required=False)
     
     display = fields.Str(required=False)
-    
-
-
-class OrderGlobalFilterOption(BaseSchema):
-    # Order swagger.json
-
-    
-    display_text = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-    is_selected = fields.Boolean(required=False)
-    
-
-
-class OrderGlobalFilter(BaseSchema):
-    # Order swagger.json
-
-    
-    display_test = fields.Str(required=False)
-    
-    value = fields.Str(required=False)
-    
-    options = fields.List(fields.Nested(OrderGlobalFilterOption, required=False), required=False)
     
 
 
@@ -1225,19 +1405,9 @@ class OrderList(BaseSchema):
     
     page = fields.Nested(OrderPage, required=False)
     
-    items = fields.List(fields.Nested(OrderSchema, required=False), required=False)
+    items = fields.List(fields.Nested(OrderInfo, required=False), required=False)
     
     filters = fields.Nested(OrderFilters, required=False)
-    
-
-
-class ApefaceApiError(BaseSchema):
-    # Order swagger.json
-
-    
-    message = fields.Str(required=False)
-    
-    success = fields.Boolean(required=False)
     
 
 
@@ -1545,6 +1715,16 @@ class DataUpdates(BaseSchema):
     
 
 
+class TransitionComments(BaseSchema):
+    # Order swagger.json
+
+    
+    title = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
 class ShipmentsRequestSchema(BaseSchema):
     # Order swagger.json
 
@@ -1554,6 +1734,8 @@ class ShipmentsRequestSchema(BaseSchema):
     products = fields.List(fields.Nested(Products, required=False), required=False)
     
     data_updates = fields.Nested(DataUpdates, required=False)
+    
+    transition_comments = fields.List(fields.Nested(TransitionComments, required=False), required=False)
     
     identifier = fields.Str(required=False)
     
@@ -1611,19 +1793,33 @@ class ShipmentApplicationStatusResponseSchema(BaseSchema):
     
 
 
-class ErrorResponseSchema(BaseSchema):
+class DeliveryReattemptRequestSchema(BaseSchema):
     # Order swagger.json
 
     
-    code = fields.Str(required=False, allow_none=True)
+    delivery_address = fields.Dict(required=False)
     
-    message = fields.Str(required=False, allow_none=True)
+    delivery_reschedule_date = fields.Str(required=False)
     
-    status = fields.Int(required=False)
+    remark = fields.Str(required=False)
     
-    exception = fields.Str(required=False, allow_none=True)
+
+
+class DeliveryReattemptSuccessResponseSchema(BaseSchema):
+    # Order swagger.json
+
     
-    stack_trace = fields.Str(required=False, allow_none=True)
+    message = fields.Str(required=False)
+    
+
+
+class ValidationError(BaseSchema):
+    # Order swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    field = fields.Str(required=False)
     
 
 

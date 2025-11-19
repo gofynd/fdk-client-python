@@ -168,22 +168,6 @@ class WalletResponseSchema(BaseSchema):
     pass
 
 
-class RupifiBannerData(BaseSchema):
-    pass
-
-
-class RupifiBannerDetails(BaseSchema):
-    pass
-
-
-class EpaylaterBannerData(BaseSchema):
-    pass
-
-
-class EpaylaterBannerDetails(BaseSchema):
-    pass
-
-
 class ResendOrCancelPayment(BaseSchema):
     pass
 
@@ -610,12 +594,6 @@ class AggregatorsConfigDetail(BaseSchema):
     simpl = fields.Nested(AggregatorConfigDetail, required=False)
     
     payumoney = fields.Nested(AggregatorConfigDetail, required=False)
-    
-    rupifi = fields.Nested(AggregatorConfigDetail, required=False)
-    
-    mswipe = fields.Nested(AggregatorConfigDetail, required=False)
-    
-    stripe = fields.Nested(AggregatorConfigDetail, required=False)
     
     ccavenue = fields.Nested(AggregatorConfigDetail, required=False)
     
@@ -1157,27 +1135,15 @@ class PaymentFlow(BaseSchema):
     
     fynd = fields.Nested(AggregatorRoute, required=False)
     
-    epaylater = fields.Nested(AggregatorRoute, required=False)
-    
     razorpay = fields.Nested(AggregatorRoute, required=False)
     
     juspay = fields.Nested(AggregatorRoute, required=False)
     
-    ajiodhan = fields.Nested(AggregatorRoute, required=False)
-    
     simpl = fields.Nested(AggregatorRoute, required=False)
-    
-    rupifi = fields.Nested(AggregatorRoute, required=False)
-    
-    mswipe = fields.Nested(AggregatorRoute, required=False)
-    
-    stripe = fields.Nested(AggregatorRoute, required=False)
     
     ccavenue = fields.Nested(AggregatorRoute, required=False)
     
     payubiz = fields.Nested(AggregatorRoute, required=False)
-    
-    jiopay = fields.Nested(AggregatorRoute, required=False)
     
     upi_razorpay = fields.Nested(AggregatorRoute, required=False)
     
@@ -1362,48 +1328,6 @@ class WalletResponseSchema(BaseSchema):
 
     
     data = fields.Dict(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class RupifiBannerData(BaseSchema):
-    # Payment swagger.json
-
-    
-    status = fields.Str(required=False)
-    
-    kyc_url = fields.Str(required=False)
-    
-
-
-class RupifiBannerDetails(BaseSchema):
-    # Payment swagger.json
-
-    
-    data = fields.Nested(RupifiBannerData, required=False)
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class EpaylaterBannerData(BaseSchema):
-    # Payment swagger.json
-
-    
-    status = fields.Str(required=False)
-    
-    message = fields.Str(required=False)
-    
-    display = fields.Boolean(required=False)
-    
-
-
-class EpaylaterBannerDetails(BaseSchema):
-    # Payment swagger.json
-
-    
-    data = fields.Nested(EpaylaterBannerData, required=False)
     
     success = fields.Boolean(required=False)
     

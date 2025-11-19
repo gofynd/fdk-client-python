@@ -54,8 +54,6 @@ from ..ApplicationModel import BaseSchema
     
     
     
-    
-    
         
         
     
@@ -232,16 +230,6 @@ class PaymentValidator:
         
     
     class delinkWallet(BaseSchema):
-        
-        pass 
-        
-    
-    class getRupifiBannerDetails(BaseSchema):
-        
-        pass 
-        
-    
-    class getEpaylaterBannerDetails(BaseSchema):
         
         pass 
         

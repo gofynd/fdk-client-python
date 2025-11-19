@@ -660,6 +660,10 @@ class PlatformUpdateCartDetails(BaseSchema):
     pass
 
 
+class UpdateCartBreakup(BaseSchema):
+    pass
+
+
 class DeleteCartDetails(BaseSchema):
     pass
 
@@ -4042,6 +4046,14 @@ class PlatformUpdateCartDetails(BaseSchema):
     operation = fields.Str(required=False)
     
     free_gift_items_operation = fields.Str(required=False)
+    
+
+
+class UpdateCartBreakup(BaseSchema):
+    # Cart swagger.json
+
+    
+    store_credit = fields.Boolean(required=False)
     
 
 

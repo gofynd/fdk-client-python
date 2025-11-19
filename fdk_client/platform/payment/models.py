@@ -296,26 +296,6 @@ class RevokeOAuthToken(BaseSchema):
     pass
 
 
-class RepaymentRequestDetails(BaseSchema):
-    pass
-
-
-class RepaymentDetailsSerialiserPayAll(BaseSchema):
-    pass
-
-
-class RepaymentDetails(BaseSchema):
-    pass
-
-
-class MerchantOnBoardingCreation(BaseSchema):
-    pass
-
-
-class MerchantOnBoardingDetails(BaseSchema):
-    pass
-
-
 class ValidateCustomerCreation(BaseSchema):
     pass
 
@@ -863,27 +843,15 @@ class PaymentFlow(BaseSchema):
     
     fynd = fields.Nested(AggregatorRoute, required=False)
     
-    epaylater = fields.Nested(AggregatorRoute, required=False)
-    
     razorpay = fields.Nested(AggregatorRoute, required=False)
     
     juspay = fields.Nested(AggregatorRoute, required=False)
     
-    ajiodhan = fields.Nested(AggregatorRoute, required=False)
-    
     simpl = fields.Nested(AggregatorRoute, required=False)
-    
-    rupifi = fields.Nested(AggregatorRoute, required=False)
-    
-    mswipe = fields.Nested(AggregatorRoute, required=False)
-    
-    stripe = fields.Nested(AggregatorRoute, required=False)
     
     ccavenue = fields.Nested(AggregatorRoute, required=False)
     
     payubiz = fields.Nested(AggregatorRoute, required=False)
-    
-    jiopay = fields.Nested(AggregatorRoute, required=False)
     
 
 
@@ -1726,84 +1694,6 @@ class RevokeOAuthToken(BaseSchema):
 
     
     message = fields.Str(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class RepaymentRequestDetails(BaseSchema):
-    # Payment swagger.json
-
-    
-    fwd_shipment_id = fields.Str(required=False)
-    
-    aggregator = fields.Str(required=False)
-    
-    current_status = fields.Str(required=False)
-    
-    merchant_order_id = fields.Str(required=False)
-    
-    amount = fields.Float(required=False)
-    
-    payment_mode = fields.Str(required=False)
-    
-    outstanding_details_id = fields.Int(required=False)
-    
-    aggregator_transaction_id = fields.Str(required=False)
-    
-    aggregator_order_id = fields.Str(required=False)
-    
-    payment_mode_identifier = fields.Str(required=False)
-    
-
-
-class RepaymentDetailsSerialiserPayAll(BaseSchema):
-    # Payment swagger.json
-
-    
-    total_amount = fields.Float(required=False)
-    
-    extension_order_id = fields.Str(required=False)
-    
-    aggregator_transaction_id = fields.Str(required=False)
-    
-    aggregator_order_id = fields.Str(required=False)
-    
-    shipment_details = fields.List(fields.Nested(RepaymentRequestDetails, required=False), required=False)
-    
-
-
-class RepaymentDetails(BaseSchema):
-    # Payment swagger.json
-
-    
-    data = fields.Dict(required=False)
-    
-    success = fields.Boolean(required=False)
-    
-
-
-class MerchantOnBoardingCreation(BaseSchema):
-    # Payment swagger.json
-
-    
-    credit_line_id = fields.Str(required=False)
-    
-    aggregator = fields.Str(required=False)
-    
-    app_id = fields.Str(required=False)
-    
-    user_id = fields.Str(required=False)
-    
-    status = fields.Str(required=False)
-    
-
-
-class MerchantOnBoardingDetails(BaseSchema):
-    # Payment swagger.json
-
-    
-    data = fields.Dict(required=False)
     
     success = fields.Boolean(required=False)
     

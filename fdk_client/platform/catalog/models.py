@@ -606,10 +606,6 @@ class GetCollectionDetailNest(BaseSchema):
     pass
 
 
-class GetCollectionItemsResponseSchema(BaseSchema):
-    pass
-
-
 class GetCollectionListingResponseSchema(BaseSchema):
     pass
 
@@ -703,6 +699,10 @@ class GetQueryFiltersResponseSchema(BaseSchema):
 
 
 class GetCollectionItemsResponseSchemaV2(BaseSchema):
+    pass
+
+
+class CollectionItemV2(BaseSchema):
     pass
 
 
@@ -4333,20 +4333,6 @@ class GetCollectionDetailNest(BaseSchema):
     
 
 
-class GetCollectionItemsResponseSchema(BaseSchema):
-    # Catalog swagger.json
-
-    
-    filters = fields.List(fields.Nested(ProductFilters, required=False), required=False)
-    
-    items = fields.List(fields.Nested(ApplicationProductsSchema, required=False), required=False)
-    
-    page = fields.Nested(Page, required=False)
-    
-    sort_on = fields.List(fields.Nested(ProductSortOn, required=False), required=False)
-    
-
-
 class GetCollectionListingResponseSchema(BaseSchema):
     # Catalog swagger.json
 
@@ -4801,6 +4787,8 @@ class GetCollectionDetailResponseSchema(BaseSchema):
     
     visible_facets_keys = fields.List(fields.Str(required=False), required=False)
     
+    handpicked_collection_item_ids = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class CommonResponseSchemaCollection(BaseSchema):
@@ -4839,9 +4827,29 @@ class GetCollectionItemsResponseSchemaV2(BaseSchema):
     # Catalog swagger.json
 
     
-    items = fields.List(fields.Nested(ProductDetailV2, required=False), required=False)
+    items = fields.List(fields.Nested(CollectionItemV2, required=False), required=False)
     
-    page = fields.Nested(Page1, required=False)
+    page = fields.Nested(Page, required=False)
+    
+
+
+class CollectionItemV2(BaseSchema):
+    # Catalog swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    short_description = fields.Str(required=False)
+    
+    medias = fields.List(fields.Nested(Media, required=False), required=False)
+    
+    slug = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+    item_code = fields.Str(required=False)
+    
+    item_type = fields.Str(required=False)
     
 
 

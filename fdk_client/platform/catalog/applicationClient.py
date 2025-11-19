@@ -721,62 +721,6 @@ class Catalog:
 
         return response
     
-    async def getCollectionItems(self, id=None, sort_on=None, page_id=None, page_size=None, page_no=None, request_headers:Dict={}):
-        """Get items from a collection specified by its id.
-        :param id : A `id` is a unique identifier of a collection. : type string
-        :param sort_on : Each response will contain sort_on param, which should be sent back to make pagination work. : type string
-        :param page_id : Each response will contain next_id param, which should be sent back to make pagination work. : type string
-        :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
-        :param page_no : Identifies the specific page of results being requested. : type integer
-        """
-        payload = {}
-        
-        if id is not None:
-            payload["id"] = id
-        if sort_on is not None:
-            payload["sort_on"] = sort_on
-        if page_id is not None:
-            payload["page_id"] = page_id
-        if page_size is not None:
-            payload["page_size"] = page_size
-        if page_no is not None:
-            payload["page_no"] = page_no
-
-        # Parameter validation
-        schema = CatalogValidator.getCollectionItems()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/items/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `id` is a unique identifier of a collection.","in":"path","name":"id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"Each response will contain sort_on param, which should be sent back to make pagination work.","in":"query","name":"sort_on","required":false,"schema":{"type":"string"}},{"description":"Each response will contain next_id param, which should be sent back to make pagination work.","in":"query","name":"page_id","required":false,"schema":{"type":"string"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"description":"Identifies the specific page of results being requested.","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}}],"query":[{"description":"Each response will contain sort_on param, which should be sent back to make pagination work.","in":"query","name":"sort_on","required":false,"schema":{"type":"string"}},{"description":"Each response will contain next_id param, which should be sent back to make pagination work.","in":"query","name":"page_id","required":false,"schema":{"type":"string"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"type":"integer"}},{"description":"Identifies the specific page of results being requested.","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `id` is a unique identifier of a collection.","in":"path","name":"id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", id=id, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no)
-        query_string = await create_query_string(sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{id}/items/", id=id, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import GetCollectionItemsResponseSchema
-            schema = GetCollectionItemsResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCollectionItems")
-                print(e)
-
-        return response
-    
     async def addCollectionItems(self, id=None, body="", request_headers:Dict={}):
         """Adds items to a collection specified by its id
         :param id : A `id` is a unique identifier of a collection. : type string
@@ -821,6 +765,59 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for addCollectionItems")
+                print(e)
+
+        return response
+    
+    async def getCollectionItems(self, collection_id=None, page_no=None, page_size=None, q=None, request_headers:Dict={}):
+        """Get items from a collection specified by its collection_id with enhanced search capabilities.
+        :param collection_id : A `collection_id` is a unique identifier of a collection. : type string
+        :param page_no : The page number to navigate through the given set of results : type integer
+        :param page_size : Number of items to retrieve in each page. Default is 10. : type integer
+        :param q : Query string to search collection items by substring match on item's name (case-insensitive) or exact item_code. : type string
+        """
+        payload = {}
+        
+        if collection_id is not None:
+            payload["collection_id"] = collection_id
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+        if q is not None:
+            payload["q"] = q
+
+        # Parameter validation
+        schema = CatalogValidator.getCollectionItems()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{collection_id}/items/", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `collection_id` is a unique identifier of a collection.","in":"path","name":"collection_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":10}},{"description":"Query string to search collection items by substring match on item's name (case-insensitive) or exact item_code.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer","default":1}},{"description":"Number of items to retrieve in each page. Default is 10.","in":"query","name":"page_size","required":false,"schema":{"type":"integer","default":10}},{"description":"Query string to search collection items by substring match on item's name (case-insensitive) or exact item_code.","in":"query","name":"q","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `collection_id` is a unique identifier of a collection.","in":"path","name":"collection_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", collection_id=collection_id, page_no=page_no, page_size=page_size, q=q)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, q=q)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/collections/{collection_id}/items/", collection_id=collection_id, page_no=page_no, page_size=page_size, q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetCollectionItemsResponseSchemaV2
+            schema = GetCollectionItemsResponseSchemaV2()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getCollectionItems")
                 print(e)
 
         return response

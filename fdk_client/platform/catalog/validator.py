@@ -463,7 +463,7 @@ class CatalogValidator:
         
         company_id = fields.Int(required=False)
         
-        level = fields.Str(required=False)
+        level = fields.List(fields.Int(required=False), required=False)
         
         department = fields.Int(required=False)
         

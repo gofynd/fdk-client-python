@@ -29,8 +29,6 @@ class Payment:
             "walletLinkInitiate": "/service/application/payment/v1.0/payment/options/wallet/link",
             "linkWallet": "/service/application/payment/v1.0/payment/options/wallet/verify",
             "delinkWallet": "/service/application/payment/v1.0/payment/options/wallet/delink",
-            "getRupifiBannerDetails": "/service/application/payment/v1.0/rupifi/banner",
-            "getEpaylaterBannerDetails": "/service/application/payment/v1.0/epaylater/banner",
             "resendOrCancelPayment": "/service/application/payment/v1.0/payment/resend_or_cancel",
             "renderHTML": "/service/application/payment/v1.0/payment/html/render/",
             "validateVPA": "/service/application/payment/v1.0/validate-vpa",
@@ -772,92 +770,6 @@ class Payment:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for delinkWallet")
-                print(e)
-
-        return response
-    
-    async def getRupifiBannerDetails(self, body="", request_headers:Dict={}):
-        """Get Rupifi payment banner details. It provides information such as the KYC URL and the current status of the Rupifi payment banner.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = PaymentValidator.getRupifiBannerDetails()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getRupifiBannerDetails"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getRupifiBannerDetails"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/rupifi/banner", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import RupifiBannerDetails
-            schema = RupifiBannerDetails()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getRupifiBannerDetails")
-                print(e)
-
-        return response
-    
-    async def getEpaylaterBannerDetails(self, body="", request_headers:Dict={}):
-        """Get Epaylater payment banner details. It provides information about the banner's display status, along with relevant messages and the user's registration status.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = PaymentValidator.getEpaylaterBannerDetails()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getEpaylaterBannerDetails"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getEpaylaterBannerDetails"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/epaylater/banner", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import EpaylaterBannerDetails
-            schema = EpaylaterBannerDetails()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getEpaylaterBannerDetails")
                 print(e)
 
         return response
