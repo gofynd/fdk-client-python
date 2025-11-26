@@ -314,6 +314,13 @@ from .models import GenerationEntityType
         
         
         
+        
+        
+        
+    
+    
+        
+        
     
     
         
@@ -322,9 +329,9 @@ from .models import GenerationEntityType
     
         
         
-    
-    
         
+    
+    
         
         
     
@@ -1235,6 +1242,12 @@ class ContentValidator:
         application_id = fields.Str(required=False)
         
         all = fields.Boolean(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        search = fields.Str(required=False)
          
         
     
@@ -1264,6 +1277,15 @@ class ContentValidator:
         application_id = fields.Str(required=False)
         
         tag_id = fields.Str(required=False)
+         
+        
+    
+    class getTagsTemplate(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     

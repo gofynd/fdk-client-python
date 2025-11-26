@@ -2921,6 +2921,10 @@ class ProductPrice(BaseSchema):
     
     selling = fields.Float(required=False)
     
+    final_price = fields.Float(required=False)
+    
+    discount = fields.Float(required=False)
+    
 
 
 class ProductPriceInfo(BaseSchema):

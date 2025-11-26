@@ -206,11 +206,39 @@ class CreateTagSchema(BaseSchema):
     pass
 
 
+class TemplateSchema(BaseSchema):
+    pass
+
+
+class TemplateField(BaseSchema):
+    pass
+
+
 class CreateTagRequestSchema(BaseSchema):
     pass
 
 
 class DataLoaderSchema(BaseSchema):
+    pass
+
+
+class TagsTemplateSchema(BaseSchema):
+    pass
+
+
+class TagTemplateItem(BaseSchema):
+    pass
+
+
+class TemplateLayout(BaseSchema):
+    pass
+
+
+class FieldDefinition(BaseSchema):
+    pass
+
+
+class FieldValidation(BaseSchema):
     pass
 
 
@@ -1463,6 +1491,8 @@ class HandpickedTagSchema(BaseSchema):
     
     content = fields.Str(required=False)
     
+    template = fields.Nested(TemplateSchema, required=False)
+    
 
 
 class RemoveHandpickedSchema(BaseSchema):
@@ -1497,6 +1527,30 @@ class CreateTagSchema(BaseSchema):
     
     content = fields.Str(required=False)
     
+    template = fields.Nested(TemplateSchema, required=False)
+    
+
+
+class TemplateSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    template_id = fields.Str(required=False)
+    
+    template_version = fields.Str(required=False)
+    
+    template_fields = fields.List(fields.Nested(TemplateField, required=False), required=False)
+    
+
+
+class TemplateField(BaseSchema):
+    # Content swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
 
 
 class CreateTagRequestSchema(BaseSchema):
@@ -1526,6 +1580,104 @@ class DataLoaderSchema(BaseSchema):
     __source = fields.Nested(DataLoaderSourceSchema, required=False)
     
     _id = fields.Str(required=False)
+    
+
+
+class TagsTemplateSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    items = fields.List(fields.Nested(TagTemplateItem, required=False), required=False)
+    
+
+
+class TagTemplateItem(BaseSchema):
+    # Content swagger.json
+
+    
+    template_name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    sub_type = fields.Str(required=False)
+    
+    position = fields.Str(required=False)
+    
+    pages = fields.List(fields.Str(required=False), required=False)
+    
+    attributes = fields.Dict(required=False)
+    
+    compatible_engines = fields.List(fields.Str(required=False), required=False)
+    
+    field_mappings = fields.Dict(required=False)
+    
+    layout = fields.Nested(TemplateLayout, required=False)
+    
+    name = fields.Str(required=False)
+    
+    path = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    image = fields.Str(required=False)
+    
+    note = fields.Str(required=False)
+    
+    template_id = fields.Str(required=False)
+    
+    template_version = fields.Str(required=False)
+    
+    category = fields.Str(required=False)
+    
+    fields = fields.List(fields.Nested(FieldDefinition, required=False), required=False)
+    
+    script = fields.Str(required=False)
+    
+
+
+class TemplateLayout(BaseSchema):
+    # Content swagger.json
+
+    
+    columns = fields.Int(required=False)
+    
+    gap = fields.Str(required=False)
+    
+    responsive = fields.Boolean(required=False)
+    
+
+
+class FieldDefinition(BaseSchema):
+    # Content swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    label = fields.Str(required=False)
+    
+    placeholder = fields.Str(required=False)
+    
+    required = fields.Boolean(required=False)
+    
+    size = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    validation = fields.Nested(FieldValidation, required=False)
+    
+    events = fields.Dict(required=False)
+    
+
+
+class FieldValidation(BaseSchema):
+    # Content swagger.json
+
+    
+    pattern = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
     
 
 
@@ -2127,7 +2279,11 @@ class TagsSchema(BaseSchema):
     
     _id = fields.Str(required=False)
     
+    company = fields.Str(required=False)
+    
     tags = fields.List(fields.Nested(TagSchema, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
     
 
 
@@ -2156,6 +2312,8 @@ class TagSchema(BaseSchema):
     pages = fields.List(fields.Dict(required=False), required=False)
     
     __source = fields.Nested(TagSourceSchema, required=False)
+    
+    template = fields.Nested(TemplateSchema, required=False)
     
 
 

@@ -959,6 +959,10 @@ class UserAttributeFilterQuery(BaseSchema):
     
     email = fields.Str(required=False)
     
+    has_email = fields.Boolean(required=False)
+    
+    has_phone = fields.Boolean(required=False)
+    
     phone = fields.Str(required=False)
     
     definition_ids = fields.List(fields.Str(required=False), required=False)
