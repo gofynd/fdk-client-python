@@ -26,6 +26,7 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
     
     
         
@@ -258,6 +259,8 @@ class UserValidator:
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
+        
+        verified = fields.Boolean(required=False)
          
         
     

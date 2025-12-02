@@ -2179,6 +2179,8 @@ class Article(BaseSchema):
     
     min_price_threshold = fields.Float(required=False)
     
+    article_index = fields.Int(required=False)
+    
 
 
 class PriceAdjustmentRestrictions(BaseSchema):

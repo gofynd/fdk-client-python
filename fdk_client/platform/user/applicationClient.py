@@ -110,11 +110,14 @@ class User:
 
         return response
     
-    async def createUser(self, body="", request_headers:Dict={}):
+    async def createUser(self, verified=None, body="", request_headers:Dict={}):
         """Register and add a new user to the sales channel.
+        :param verified : Controls whether newly created emails and phone numbers are marked as verified. Pass verified=false to keep them unverified. When omitted, they are auto-marked verified. : type boolean
         """
         payload = {}
         
+        if verified is not None:
+            payload["verified"] = verified
 
         # Parameter validation
         schema = UserValidator.createUser()
@@ -125,8 +128,8 @@ class User:
         schema = CreateUserRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers", """{"required":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers", """{"required":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string"}}],"optional":[{"name":"verified","in":"query","description":"Controls whether newly created emails and phone numbers are marked as verified. Pass verified=false to keep them unverified. When omitted, they are auto-marked verified.","required":false,"schema":{"type":"boolean"}}],"query":[{"name":"verified","in":"query","description":"Controls whether newly created emails and phone numbers are marked as verified. Pass verified=false to keep them unverified. When omitted, they are auto-marked verified.","required":false,"schema":{"type":"boolean"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","description":"Application ID","required":true,"schema":{"type":"string"}}]}""", serverType="platform", verified=verified)
+        query_string = await create_query_string(verified=verified)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -142,7 +145,7 @@ class User:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/customers", verified=verified), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CreateUserResponseSchema
