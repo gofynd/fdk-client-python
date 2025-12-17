@@ -8,6 +8,18 @@ from ..PlatformModel import BaseSchema
 
 
 
+class GroupMapping(BaseSchema):
+    pass
+
+
+class EventGroup(BaseSchema):
+    pass
+
+
+class EventSubgroup(BaseSchema):
+    pass
+
+
 class EventSubscriptionsBulkUpdatePayload(BaseSchema):
     pass
 
@@ -485,6 +497,36 @@ class OtpConfiguration(BaseSchema):
 
 
 
+
+
+class GroupMapping(BaseSchema):
+    # Communication swagger.json
+
+    
+    items = fields.List(fields.Nested(EventGroup, required=False), required=False)
+    
+
+
+class EventGroup(BaseSchema):
+    # Communication swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    display = fields.Str(required=False)
+    
+    subgroups = fields.List(fields.Nested(EventSubgroup, required=False), required=False)
+    
+
+
+class EventSubgroup(BaseSchema):
+    # Communication swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    display = fields.Str(required=False)
+    
 
 
 class EventSubscriptionsBulkUpdatePayload(BaseSchema):

@@ -340,6 +340,10 @@ class UserConsent(BaseSchema):
     pass
 
 
+class DeleteUserGroupSuccess(BaseSchema):
+    pass
+
+
 class PrivacyPolicyConsentSchema(BaseSchema):
     pass
 
@@ -928,6 +932,8 @@ class ConditionsSchema(BaseSchema):
     type = fields.Str(required=False)
     
     value = fields.Str(required=False)
+    
+    ignore_year = fields.Boolean(required=False)
     
 
 
@@ -1610,6 +1616,16 @@ class UserConsent(BaseSchema):
 
     
     privacy_policy = fields.Nested(PrivacyPolicyConsentSchema, required=False)
+    
+
+
+class DeleteUserGroupSuccess(BaseSchema):
+    # User swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
     
 
 

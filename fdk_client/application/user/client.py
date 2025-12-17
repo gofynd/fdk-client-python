@@ -58,6 +58,7 @@ class User:
             "logout": "/service/application/user/authentication/v1.0/logout",
             "getUserAttributes": "/service/application/user/profile/v1.0/user-attributes",
             "updateUserAttributes": "/service/application/user/profile/v1.0/user-attributes",
+            "getAttributesDefinition": "/service/application/user/profile/v1.0/attributes/definition",
             "sendOTPOnPrimary": "/service/application/user/profile/v2.0/{entity}/primary/otp/send",
             "verifyOTPonPrimary": "/service/application/user/profile/v2.0/{entity}/primary/otp/verify",
             "sendOTPForUpdate": "/service/application/user/profile/v2.0/{entity}/otp/send",
@@ -2152,6 +2153,79 @@ class User:
             except Exception as e:
                 print("Response Validation failed for updateUserAttributes")
                 print(e)
+
+        return response
+    
+    async def getAttributesDefinition(self, excluding_ids=None, slug=None, type=None, customer_editable=None, encrypted=None, pinned=None, pin_order=None, is_locked=None, name=None, registration_enabled=None, registration_type=None, page_size=None, page_no=None, body="", request_headers:Dict={}):
+        """Retrieve user attribute definitions.
+        :param excluding_ids : Exclude attribute definitions by Ids : type string
+        :param slug : Filter by attribute slug. : type string
+        :param type : Filter by attribute type. : type string
+        :param customer_editable : Filter by whether the attribute is editable by the customer. : type boolean
+        :param encrypted : Filter by whether the attribute is encrypted. : type boolean
+        :param pinned : Filter by whether the attribute is pinned. : type boolean
+        :param pin_order : Filter by pin order, it is the order in which the attribute is pinned. : type integer
+        :param is_locked : Filter by locked status. : type boolean
+        :param name : Filter by attribute name using a case-insensitive regex. : type string
+        :param registration_enabled : Filter by whether the attribute is enabled for registration. : type boolean
+        :param registration_type : Filter by registration type (e.g., mandatory, optional). : type 
+        :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
+        :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
+        """
+        payload = {}
+        
+        if excluding_ids is not None:
+            payload["excluding_ids"] = excluding_ids
+        if slug is not None:
+            payload["slug"] = slug
+        if type is not None:
+            payload["type"] = type
+        if customer_editable is not None:
+            payload["customer_editable"] = customer_editable
+        if encrypted is not None:
+            payload["encrypted"] = encrypted
+        if pinned is not None:
+            payload["pinned"] = pinned
+        if pin_order is not None:
+            payload["pin_order"] = pin_order
+        if is_locked is not None:
+            payload["is_locked"] = is_locked
+        if name is not None:
+            payload["name"] = name
+        if registration_enabled is not None:
+            payload["registration_enabled"] = registration_enabled
+        if registration_type is not None:
+            payload["registration_type"] = registration_type
+        if page_size is not None:
+            payload["page_size"] = page_size
+        if page_no is not None:
+            payload["page_no"] = page_no
+
+        # Parameter validation
+        schema = UserValidator.getAttributesDefinition()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getAttributesDefinition"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"excluding_ids","schema":{"type":"string"},"description":"Exclude attribute definitions by Ids"},{"in":"query","name":"slug","schema":{"type":"string"},"description":"Filter by attribute slug."},{"in":"query","name":"type","schema":{"type":"string"},"description":"Filter by attribute type."},{"in":"query","name":"customer_editable","schema":{"type":"boolean"},"description":"Filter by whether the attribute is editable by the customer."},{"in":"query","name":"encrypted","schema":{"type":"boolean"},"description":"Filter by whether the attribute is encrypted."},{"in":"query","name":"pinned","schema":{"type":"boolean"},"description":"Filter by whether the attribute is pinned."},{"in":"query","name":"pin_order","schema":{"type":"integer"},"description":"Filter by pin order, it is the order in which the attribute is pinned."},{"in":"query","name":"is_locked","schema":{"type":"boolean"},"description":"Filter by locked status."},{"in":"query","name":"name","schema":{"type":"string"},"description":"Filter by attribute name using a case-insensitive regex."},{"in":"query","name":"registration_enabled","schema":{"type":"boolean"},"description":"Filter by whether the attribute is enabled for registration."},{"in":"query","name":"registration_type","schema":{"enum":["mandatory","optional"],"oneOf":[{"type":"string"},{"type":"array","items":{"type":"string"}}]},"description":"Filter by registration type (e.g., mandatory, optional)."},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}}],"query":[{"in":"query","name":"excluding_ids","schema":{"type":"string"},"description":"Exclude attribute definitions by Ids"},{"in":"query","name":"slug","schema":{"type":"string"},"description":"Filter by attribute slug."},{"in":"query","name":"type","schema":{"type":"string"},"description":"Filter by attribute type."},{"in":"query","name":"customer_editable","schema":{"type":"boolean"},"description":"Filter by whether the attribute is editable by the customer."},{"in":"query","name":"encrypted","schema":{"type":"boolean"},"description":"Filter by whether the attribute is encrypted."},{"in":"query","name":"pinned","schema":{"type":"boolean"},"description":"Filter by whether the attribute is pinned."},{"in":"query","name":"pin_order","schema":{"type":"integer"},"description":"Filter by pin order, it is the order in which the attribute is pinned."},{"in":"query","name":"is_locked","schema":{"type":"boolean"},"description":"Filter by locked status."},{"in":"query","name":"name","schema":{"type":"string"},"description":"Filter by attribute name using a case-insensitive regex."},{"in":"query","name":"registration_enabled","schema":{"type":"boolean"},"description":"Filter by whether the attribute is enabled for registration."},{"in":"query","name":"registration_type","schema":{"enum":["mandatory","optional"],"oneOf":[{"type":"string"},{"type":"array","items":{"type":"string"}}]},"description":"Filter by registration type (e.g., mandatory, optional)."},{"name":"page_size","in":"query","description":"The number of items to retrieve in each page. Default value is 10.","required":false,"schema":{"type":"integer","default":10}},{"name":"page_no","in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","required":false,"schema":{"type":"integer","default":1}}],"headers":[],"path":[]}""", serverType="application", excluding_ids=excluding_ids, slug=slug, type=type, customer_editable=customer_editable, encrypted=encrypted, pinned=pinned, pin_order=pin_order, is_locked=is_locked, name=name, registration_enabled=registration_enabled, registration_type=registration_type, page_size=page_size, page_no=page_no)
+        query_string = await create_query_string(excluding_ids=excluding_ids, slug=slug, type=type, customer_editable=customer_editable, encrypted=encrypted, pinned=pinned, pin_order=pin_order, is_locked=is_locked, name=name, registration_enabled=registration_enabled, registration_type=registration_type, page_size=page_size, page_no=page_no)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getAttributesDefinition"]).netloc, "get", await create_url_without_domain("/service/application/user/profile/v1.0/attributes/definition", excluding_ids=excluding_ids, slug=slug, type=type, customer_editable=customer_editable, encrypted=encrypted, pinned=pinned, pin_order=pin_order, is_locked=is_locked, name=name, registration_enabled=registration_enabled, registration_type=registration_type, page_size=page_size, page_no=page_no), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         return response
     

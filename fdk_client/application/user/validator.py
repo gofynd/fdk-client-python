@@ -118,6 +118,21 @@ from ..ApplicationModel import BaseSchema
     
     
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
     
     
         
@@ -416,6 +431,37 @@ class UserValidator:
     class updateUserAttributes(BaseSchema):
         
         pass 
+        
+    
+    class getAttributesDefinition(BaseSchema):
+        
+        
+        excluding_ids = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+        
+        customer_editable = fields.Boolean(required=False)
+        
+        encrypted = fields.Boolean(required=False)
+        
+        pinned = fields.Boolean(required=False)
+        
+        pin_order = fields.Int(required=False)
+        
+        is_locked = fields.Boolean(required=False)
+        
+        name = fields.Str(required=False)
+        
+        registration_enabled = fields.Boolean(required=False)
+        
+        registration_type = fields.Raw(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        page_no = fields.Int(required=False)
+         
         
     
     class sendOTPOnPrimary(BaseSchema):

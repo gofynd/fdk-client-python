@@ -267,6 +267,9 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
     
     
         
@@ -915,6 +918,12 @@ class CommunicationValidator:
         page_size = fields.Int(required=False)
         
         populate = fields.Str(required=False)
+        
+        group = fields.Str(required=False)
+        
+        sub_group = fields.Str(required=False)
+        
+        fulfillment_option_types = fields.Str(required=False)
          
         
     

@@ -2283,8 +2283,6 @@ class TagsSchema(BaseSchema):
     
     tags = fields.List(fields.Nested(TagSchema, required=False), required=False)
     
-    page = fields.Nested(Page, required=False)
-    
 
 
 class TagSchema(BaseSchema):

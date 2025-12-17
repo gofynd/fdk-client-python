@@ -112,6 +112,11 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+    
+    
+        
+        
     
     
         
@@ -435,6 +440,17 @@ class UserValidator:
         
         
         company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        group_id = fields.Str(required=False)
+         
+        
+    
+    class deleteUserGroup(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
         

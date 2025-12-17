@@ -8,6 +8,22 @@ from ..ApplicationModel import BaseSchema
 
 
 
+class UserAttributesDefinition(BaseSchema):
+    pass
+
+
+class AttributeMaskingProperties(BaseSchema):
+    pass
+
+
+class AttributeRegistrationProperties(BaseSchema):
+    pass
+
+
+class UserAttributeDefinitionValidation(BaseSchema):
+    pass
+
+
 class VerifyOTPForUpdateRequestSchema(BaseSchema):
     pass
 
@@ -345,6 +361,80 @@ class PrivacyPolicyConsentSchema(BaseSchema):
 
 
 
+
+
+class UserAttributesDefinition(BaseSchema):
+    # User swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    application_id = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    icon = fields.Str(required=False)
+    
+    ordering_channels = fields.List(fields.Str(required=False), required=False)
+    
+    masking = fields.Nested(AttributeMaskingProperties, required=False)
+    
+    registration = fields.Nested(AttributeRegistrationProperties, required=False)
+    
+    is_multi_value = fields.Boolean(required=False)
+    
+    customer_editable = fields.Boolean(required=False)
+    
+    encrypted = fields.Boolean(required=False)
+    
+    pinned = fields.Boolean(required=False)
+    
+    pin_order = fields.Int(required=False)
+    
+    validations = fields.List(fields.Dict(required=False), required=False)
+    
+    is_locked = fields.Boolean(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    modified_at = fields.Str(required=False)
+    
+
+
+class AttributeMaskingProperties(BaseSchema):
+    # User swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class AttributeRegistrationProperties(BaseSchema):
+    # User swagger.json
+
+    
+    enabled = fields.Boolean(required=False)
+    
+    type = fields.Str(required=False)
+    
+
+
+class UserAttributeDefinitionValidation(BaseSchema):
+    # User swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    value = fields.Raw(required=False)
+    
 
 
 class VerifyOTPForUpdateRequestSchema(BaseSchema):
