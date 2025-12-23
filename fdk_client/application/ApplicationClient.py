@@ -30,8 +30,6 @@ from .order.client import Order
 
 from .payment.client import Payment
 
-from .rewards.client import Rewards
-
 from .share.client import Share
 
 from .theme.client import Theme
@@ -59,7 +57,6 @@ class ApplicationClient:
         self.logistic = Logistic(self.config)
         self.order = Order(self.config)
         self.payment = Payment(self.config)
-        self.rewards = Rewards(self.config)
         self.share = Share(self.config)
         self.theme = Theme(self.config)
         self.user = User(self.config)

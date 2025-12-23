@@ -126,9 +126,6 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
-        
         
         
         
@@ -694,13 +691,6 @@ class CatalogValidator:
         item_type = fields.Str(required=False)
         
         schema_type = fields.Str(required=False)
-         
-        
-    
-    class getOptimalLocations(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
          
         
     

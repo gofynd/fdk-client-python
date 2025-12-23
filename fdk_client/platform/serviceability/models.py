@@ -612,6 +612,26 @@ class Address(BaseSchema):
     pass
 
 
+class LatLong(BaseSchema):
+    pass
+
+
+class StoreDistance(BaseSchema):
+    pass
+
+
+class StoreTimingDetails(BaseSchema):
+    pass
+
+
+class StoreTiming(BaseSchema):
+    pass
+
+
+class Time(BaseSchema):
+    pass
+
+
 class FulfillmentOptionValidate(BaseSchema):
     pass
 
@@ -1975,6 +1995,8 @@ class CompanyConfig(BaseSchema):
     
     company_id = fields.Int(required=False)
     
+    is_rate_card_enabled = fields.Boolean(required=False)
+    
     sort = fields.List(fields.Str(required=False), required=False)
     
     logistics_as_actual = fields.Str(required=False)
@@ -2983,6 +3005,8 @@ class CompanyConfigurationSchema(BaseSchema):
     # Serviceability swagger.json
 
     
+    is_rate_card_enabled = fields.Boolean(required=False)
+    
     sort = fields.List(fields.Str(required=False), required=False)
     
 
@@ -3631,17 +3655,33 @@ class FulfillmentOptionStore(BaseSchema):
     
     uid = fields.Int(required=False)
     
+    store_code = fields.Str(required=False)
+    
     address = fields.Nested(Address, required=False)
     
     company_id = fields.Int(required=False)
-    
-    display_name = fields.Str(required=False)
     
     name = fields.Str(required=False)
     
     store_type = fields.Str(required=False)
     
     tags = fields.List(fields.Str(required=False), required=False)
+    
+    avg_order_processing_time = fields.Int(required=False)
+    
+    timezone = fields.Str(required=False)
+    
+    holiday_list = fields.List(fields.List(fields.Str(required=False), required=False), required=False)
+    
+    customfields = fields.Dict(required=False)
+    
+    is_open = fields.Boolean(required=False)
+    
+    promise_customfields = fields.Dict(required=False)
+    
+    distance = fields.Nested(StoreDistance, required=False)
+    
+    timing = fields.Nested(StoreTimingDetails, required=False)
     
 
 
@@ -3651,9 +3691,13 @@ class Address(BaseSchema):
     
     address1 = fields.Str(required=False)
     
+    address2 = fields.Str(required=False)
+    
     country = fields.Str(required=False)
     
     pincode = fields.Str(required=False)
+    
+    postal_code = fields.Str(required=False)
     
     city = fields.Str(required=False)
     
@@ -3664,6 +3708,64 @@ class Address(BaseSchema):
     longitude = fields.Float(required=False)
     
     country_code = fields.Str(required=False)
+    
+    lat_long = fields.Nested(LatLong, required=False)
+    
+
+
+class LatLong(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    coordinates = fields.List(fields.Float(required=False), required=False)
+    
+
+
+class StoreDistance(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    value = fields.Float(required=False, allow_none=True)
+    
+    unit = fields.Str(required=False)
+    
+    reason = fields.Str(required=False, allow_none=True)
+    
+
+
+class StoreTimingDetails(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    operational_timing = fields.List(fields.Nested(StoreTiming, required=False), required=False)
+    
+    order_acceptance_timing = fields.List(fields.Nested(StoreTiming, required=False), required=False)
+    
+
+
+class StoreTiming(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    weekday = fields.Str(required=False)
+    
+    open = fields.Boolean(required=False)
+    
+    opening = fields.Nested(Time, required=False)
+    
+    closing = fields.Nested(Time, required=False)
+    
+
+
+class Time(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    hour = fields.Int(required=False)
+    
+    minute = fields.Int(required=False)
     
 
 
@@ -4172,6 +4274,8 @@ class CourierPartnerSchemeFeatures(BaseSchema):
     qr = fields.Boolean(required=False)
     
     mps = fields.Boolean(required=False)
+    
+    b2b = fields.Boolean(required=False)
     
     ndr = fields.Boolean(required=False)
     

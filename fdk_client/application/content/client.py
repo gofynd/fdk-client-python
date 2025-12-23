@@ -35,6 +35,7 @@ class Content:
             "getPages": "/service/application/content/v2.0/pages",
             "getCustomObjectBySlug": "/service/application/content/v2.0/customobjects/definition/{definition_slug}/entries/{slug}",
             "getCustomFieldsByResourceId": "/service/application/content/v2.0/customfields/resource/{resource}/{resource_slug}",
+            "getBulkCustomFieldsByResource": "/service/application/content/v2.0/customfields/resource/{resource}",
             "getTranslateUILabels": "/service/application/content/v1.0/translate-ui-labels",
             "fetchResourceTranslations": "/service/application/content/v1.0/resource/translations/{type}/{locale}",
             "fetchResourceTranslationsWithPayload": "/service/application/content/v1.0/resource/translations/{type}/{locale}",
@@ -970,6 +971,61 @@ class Content:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getCustomFieldsByResourceId")
+                print(e)
+
+        return response
+    
+    async def getBulkCustomFieldsByResource(self, resource=None, resource_ids=None, keys=None, namespaces=None, body="", request_headers:Dict={}):
+        """Retrieves a bulk list of custom fields attached to a particular resource by using the resource and resource IDs. The resource_ids query parameter is required and can accept multiple comma-separated values. Optional filters for keys and namespaces can also be applied.
+        :param resource : This is the name of resource for which you want to fetch custom fields eg. product, collection, customer etc. : type string
+        :param resource_ids : This is the resource ids for which custom fields created with comma separated. : type string
+        :param keys : Filter custom fields by specific keys (slugs). Multiple values can be provided as comma-separated. : type string
+        :param namespaces : Filter custom fields by specific namespaces. Multiple values can be provided as comma-separated. : type string
+        """
+        payload = {}
+        
+        if resource is not None:
+            payload["resource"] = resource
+        if resource_ids is not None:
+            payload["resource_ids"] = resource_ids
+        if keys is not None:
+            payload["keys"] = keys
+        if namespaces is not None:
+            payload["namespaces"] = namespaces
+
+        # Parameter validation
+        schema = ContentValidator.getBulkCustomFieldsByResource()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getBulkCustomFieldsByResource"], proccessed_params="""{"required":[{"name":"resource","in":"path","required":true,"schema":{"type":"string"},"description":"This is the name of resource for which you want to fetch custom fields eg. product, collection, customer etc."},{"name":"resource_ids","description":"This is the resource ids for which custom fields created with comma separated.","in":"query","required":true,"schema":{"type":"string"}}],"optional":[{"name":"keys","in":"query","required":false,"description":"Filter custom fields by specific keys (slugs). Multiple values can be provided as comma-separated.","schema":{"type":"string"},"example":"brand_story,designer_name"},{"name":"namespaces","in":"query","required":false,"description":"Filter custom fields by specific namespaces. Multiple values can be provided as comma-separated.","schema":{"type":"string"},"example":"custom"}],"query":[{"name":"resource_ids","description":"This is the resource ids for which custom fields created with comma separated.","in":"query","required":true,"schema":{"type":"string"}},{"name":"keys","in":"query","required":false,"description":"Filter custom fields by specific keys (slugs). Multiple values can be provided as comma-separated.","schema":{"type":"string"},"example":"brand_story,designer_name"},{"name":"namespaces","in":"query","required":false,"description":"Filter custom fields by specific namespaces. Multiple values can be provided as comma-separated.","schema":{"type":"string"},"example":"custom"}],"headers":[],"path":[{"name":"resource","in":"path","required":true,"schema":{"type":"string"},"description":"This is the name of resource for which you want to fetch custom fields eg. product, collection, customer etc."}]}""", serverType="application", resource=resource, resource_ids=resource_ids, keys=keys, namespaces=namespaces)
+        query_string = await create_query_string(resource_ids=resource_ids, keys=keys, namespaces=namespaces)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getBulkCustomFieldsByResource"]).netloc, "get", await create_url_without_domain("/service/application/content/v2.0/customfields/resource/{resource}", resource=resource, resource_ids=resource_ids, keys=keys, namespaces=namespaces), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkCustomFieldsResponseByResourceSchema
+            schema = BulkCustomFieldsResponseByResourceSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBulkCustomFieldsByResource")
                 print(e)
 
         return response

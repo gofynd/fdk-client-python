@@ -937,6 +937,8 @@ class GetLocationSchema(BaseSchema):
     
     bulk_shipment = fields.Boolean(required=False)
     
+    multi_piece_shipment = fields.Boolean(required=False)
+    
     auto_assign_courier_partner = fields.Boolean(required=False)
     
     qc_based_return_inventory_sync = fields.Boolean(required=False)
@@ -1038,6 +1040,8 @@ class LocationSchema(BaseSchema):
     avg_order_processing_time = fields.Nested(AverageOrderProcessingTime, required=False)
     
     bulk_shipment = fields.Boolean(required=False)
+    
+    multi_piece_shipment = fields.Boolean(required=False)
     
     auto_assign_courier_partner = fields.Boolean(required=False)
     

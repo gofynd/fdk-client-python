@@ -8,6 +8,14 @@ from ..PartnerModel import BaseSchema
 
 
 
+class RateZoneConfigurationDetails(BaseSchema):
+    pass
+
+
+class RateCardSampleFile(BaseSchema):
+    pass
+
+
 class CourierPartnerSchemeModelSchema(BaseSchema):
     pass
 
@@ -33,6 +41,26 @@ class FailureResult(BaseSchema):
 
 
 class BulkRegionServiceabilityTatResult(BaseSchema):
+    pass
+
+
+class BulkRateCardJob(BaseSchema):
+    pass
+
+
+class BulkRateCardJobDetails(BaseSchema):
+    pass
+
+
+class SampleFileRateZoneRequestSchema(BaseSchema):
+    pass
+
+
+class RateZoneBulkJobDetails(BaseSchema):
+    pass
+
+
+class RateZoneBulkJobList(BaseSchema):
     pass
 
 
@@ -124,6 +152,10 @@ class ValidationErrors(BaseSchema):
     pass
 
 
+class StandardRateZone(BaseSchema):
+    pass
+
+
 class CreatedBy(BaseSchema):
     pass
 
@@ -181,6 +213,28 @@ class ValidationError(BaseSchema):
 
 
 
+
+
+class RateZoneConfigurationDetails(BaseSchema):
+    # Logistics swagger.json
+
+    
+    standard_zone_mapping = fields.List(fields.Nested(StandardRateZone, required=False), required=False)
+    
+    custom_zones = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class RateCardSampleFile(BaseSchema):
+    # Logistics swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    file_path = fields.Str(required=False, allow_none=True)
+    
+    status = fields.Str(required=False)
+    
 
 
 class CourierPartnerSchemeModelSchema(BaseSchema):
@@ -302,6 +356,86 @@ class BulkRegionServiceabilityTatResult(BaseSchema):
 
     
     items = fields.List(fields.Nested(BulkRegionServiceabilityTatResultItemData, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class BulkRateCardJob(BaseSchema):
+    # Logistics swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    total = fields.Int(required=False)
+    
+    failed = fields.Int(required=False)
+    
+    success = fields.Int(required=False)
+    
+    action = fields.Str(required=False)
+    
+    batch_id = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    failed_records = fields.List(fields.Dict(required=False), required=False)
+    
+    file_path = fields.Str(required=False, allow_none=True)
+    
+    created_on = fields.Str(required=False)
+    
+    modified_on = fields.Str(required=False)
+    
+
+
+class BulkRateCardJobDetails(BaseSchema):
+    # Logistics swagger.json
+
+    
+    file_path = fields.Str(required=False)
+    
+    rate_card_type = fields.Str(required=False)
+    
+    action = fields.Str(required=False)
+    
+    company_ids = fields.List(fields.Int(required=False), required=False)
+    
+
+
+class SampleFileRateZoneRequestSchema(BaseSchema):
+    # Logistics swagger.json
+
+    
+    zone_type = fields.Str(required=False)
+    
+    country = fields.Str(required=False)
+    
+    region = fields.Str(required=False)
+    
+
+
+class RateZoneBulkJobDetails(BaseSchema):
+    # Logistics swagger.json
+
+    
+    action = fields.Str(required=False)
+    
+    file_path = fields.Str(required=False, allow_none=True)
+    
+    zone_type = fields.Str(required=False)
+    
+    country = fields.Str(required=False)
+    
+    region = fields.Str(required=False)
+    
+
+
+class RateZoneBulkJobList(BaseSchema):
+    # Logistics swagger.json
+
+    
+    items = fields.List(fields.Nested(BulkRateCardJob, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
@@ -847,6 +981,16 @@ class ValidationErrors(BaseSchema):
     
 
 
+class StandardRateZone(BaseSchema):
+    # Logistics swagger.json
+
+    
+    zone_name = fields.Str(required=False)
+    
+    zone_slug = fields.Str(required=False)
+    
+
+
 class CreatedBy(BaseSchema):
     # Logistics swagger.json
 
@@ -886,6 +1030,8 @@ class CourierPartnerSchemeFeatures(BaseSchema):
     qr = fields.Boolean(required=False)
     
     mps = fields.Boolean(required=False)
+    
+    b2b = fields.Boolean(required=False)
     
     ndr = fields.Boolean(required=False)
     

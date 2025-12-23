@@ -13,6 +13,10 @@ from ..ApplicationModel import BaseSchema
     
         
         
+    
+    
+        
+        
         
         
         
@@ -66,6 +70,15 @@ from ..ApplicationModel import BaseSchema
 
 class OrderValidator:
     
+    
+    class getRefundModes(BaseSchema):
+        
+        
+        shipment_id = fields.Str(required=False)
+        
+        line_numbers = fields.List(fields.Int(required=False), required=False)
+         
+        
     
     class getOrders(BaseSchema):
         

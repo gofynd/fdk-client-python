@@ -8,6 +8,22 @@ from ..ApplicationModel import BaseSchema
 
 
 
+class PriceBreakupValues(BaseSchema):
+    pass
+
+
+class RefundMode(BaseSchema):
+    pass
+
+
+class RefundOption(BaseSchema):
+    pass
+
+
+class RefundOptions(BaseSchema):
+    pass
+
+
 class ValidationErrors(BaseSchema):
     pass
 
@@ -153,6 +169,18 @@ class Article(BaseSchema):
 
 
 class Address(BaseSchema):
+    pass
+
+
+class RefundStatus(BaseSchema):
+    pass
+
+
+class BeneficiaryDetails(BaseSchema):
+    pass
+
+
+class RefundModeData(BaseSchema):
     pass
 
 
@@ -312,6 +340,14 @@ class DataUpdates(BaseSchema):
     pass
 
 
+class RefundModeTransitionBeneficiaryData(BaseSchema):
+    pass
+
+
+class RefundModeTransitionData(BaseSchema):
+    pass
+
+
 class TransitionComments(BaseSchema):
     pass
 
@@ -353,6 +389,72 @@ class ValidationError(BaseSchema):
 
 
 
+
+
+class PriceBreakupValues(BaseSchema):
+    # Order swagger.json
+
+    
+    value = fields.Float(required=False)
+    
+    currency_symbol = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    display = fields.Str(required=False)
+    
+    currency_code = fields.Str(required=False)
+    
+    sub_values = fields.List(fields.Nested(lambda: PriceBreakupValues(exclude=('sub_values')), required=False), required=False)
+    
+
+
+class RefundMode(BaseSchema):
+    # Order swagger.json
+
+    
+    refund_mode = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    payment_identifiers = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class RefundOption(BaseSchema):
+    # Order swagger.json
+
+    
+    slug = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    amount = fields.Float(required=False)
+    
+    currency_symbol = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
+    
+    beneficiary_type = fields.Str(required=False)
+    
+    suggested_list = fields.List(fields.Str(required=False), required=False)
+    
+    refund_modes = fields.List(fields.Nested(RefundMode, required=False), required=False)
+    
+
+
+class RefundOptions(BaseSchema):
+    # Order swagger.json
+
+    
+    refund_options = fields.List(fields.Nested(RefundOption, required=False), required=False)
+    
+    refund_price_breakup = fields.List(fields.Nested(PriceBreakupValues, required=False), required=False)
+    
+    is_refund_config_enabled = fields.Boolean(required=False)
+    
 
 
 class ValidationErrors(BaseSchema):
@@ -432,6 +534,8 @@ class BreakupValues(BaseSchema):
     display = fields.Str(required=False)
     
     currency_code = fields.Str(required=False)
+    
+    sub_values = fields.List(fields.Nested(lambda: BreakupValues(exclude=('sub_values')), required=False), required=False)
     
 
 
@@ -1059,6 +1163,76 @@ class Address(BaseSchema):
     
 
 
+class RefundStatus(BaseSchema):
+    # Order swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    created_ts = fields.Str(required=False)
+    
+    updated_ts = fields.Str(required=False)
+    
+    updated_by = fields.Str(required=False)
+    
+
+
+class BeneficiaryDetails(BaseSchema):
+    # Order swagger.json
+
+    
+    account_holder = fields.Str(required=False)
+    
+    account_no = fields.Str(required=False)
+    
+    bank_name = fields.Str(required=False)
+    
+    beneficiary_id = fields.Str(required=False)
+    
+    branch_name = fields.Str(required=False)
+    
+    is_verified = fields.Boolean(required=False)
+    
+    vpa_address = fields.Str(required=False)
+    
+
+
+class RefundModeData(BaseSchema):
+    # Order swagger.json
+
+    
+    identifier = fields.Str(required=False)
+    
+    amount_paid = fields.Float(required=False)
+    
+    refund_amount = fields.Float(required=False)
+    
+    refund_status = fields.Nested(RefundStatus, required=False)
+    
+    remarks = fields.Str(required=False)
+    
+    beneficiary_details = fields.Nested(BeneficiaryDetails, required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    refund_mode = fields.Str(required=False)
+    
+    logo = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    payment_identifiers = fields.List(fields.Str(required=False), required=False)
+    
+    operational_status = fields.Str(required=False)
+    
+    transaction_data = fields.Dict(required=False)
+    
+    default_refund_mode = fields.Boolean(required=False)
+    
+
+
 class Shipments(BaseSchema):
     # Order swagger.json
 
@@ -1150,6 +1324,12 @@ class Shipments(BaseSchema):
     fulfillment_option = fields.Nested(FulfillmentOption, required=False)
     
     ndr_details = fields.Nested(NdrDetailsSchema, required=False)
+    
+    refund_modes = fields.List(fields.Nested(RefundModeData, required=False), required=False)
+    
+    refund_breakup_values = fields.List(fields.Nested(BreakupValues, required=False), required=False)
+    
+    is_refund_config_enabled = fields.Boolean(required=False)
     
 
 
@@ -1715,6 +1895,28 @@ class DataUpdates(BaseSchema):
     
 
 
+class RefundModeTransitionBeneficiaryData(BaseSchema):
+    # Order swagger.json
+
+    
+    beneficiary_id = fields.Str(required=False)
+    
+
+
+class RefundModeTransitionData(BaseSchema):
+    # Order swagger.json
+
+    
+    refund_mode = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    beneficiary_details = fields.Nested(RefundModeTransitionBeneficiaryData, required=False)
+    
+    payment_identifiers = fields.List(fields.Str(required=False), required=False)
+    
+
+
 class TransitionComments(BaseSchema):
     # Order swagger.json
 
@@ -1738,6 +1940,8 @@ class ShipmentsRequestSchema(BaseSchema):
     transition_comments = fields.List(fields.Nested(TransitionComments, required=False), required=False)
     
     identifier = fields.Str(required=False)
+    
+    refund_modes = fields.List(fields.Nested(RefundModeTransitionData, required=False), required=False)
     
 
 

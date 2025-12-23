@@ -2057,7 +2057,7 @@ class Cart:
         return response
     
     async def updateCartBreakup(self, x_ordering_source=None, id=None, i=None, b=None, buy_now=None, body="", request_headers:Dict={}):
-        """Updates the cart breakup based on the enabled features and user preferences.   This endpoint allows customers to modify how their cart totals are calculated —  including options such as applying store credits, loyalty points, discounts,  and other promotional benefits.   The API recalculates and returns the updated breakup reflecting the selected  configurations in real-time.
+        """Updates the cart breakup based on the enabled features and user preferences. This endpoint allows customers to modify how their cart totals are calculated — including options such as applying store credits, loyalty points, discounts, and other promotional benefits. The API recalculates and returns the updated breakup reflecting the selected configurations in real-time.
         :param x-ordering-source : Identifier for the ordering source (e.g., web, mobile app, POS). Used to determine the origin of the order request and apply source-specific rules. : type string
         :param id : Unique identifier of the cart for which the breakup needs to be updated. : type string
         :param i : Set to `true` to include all items currently added to the cart in the response. : type boolean
@@ -2106,8 +2106,8 @@ class Cart:
         response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", x_ordering_source=x_ordering_source, id=id, i=i, b=b, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import UpdateCartDetailResult
-            schema = UpdateCartDetailResult()
+            from .models import CartDetailResult
+            schema = CartDetailResult()
             try:
                 schema.load(response["json"])
             except Exception as e:

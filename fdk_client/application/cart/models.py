@@ -1687,6 +1687,8 @@ class Coupon(BaseSchema):
     
     coupon_code = fields.Str(required=False)
     
+    coupon_id = fields.Str(required=False)
+    
     is_applicable = fields.Boolean(required=False)
     
     description = fields.Str(required=False, allow_none=True)

@@ -32,6 +32,10 @@ class ApplicationRedirections(BaseSchema):
     pass
 
 
+class RegionDetails(BaseSchema):
+    pass
+
+
 class ApplicationMeta(BaseSchema):
     pass
 
@@ -135,6 +139,16 @@ class ApplicationRedirections(BaseSchema):
     
 
 
+class RegionDetails(BaseSchema):
+    # Configuration swagger.json
+
+    
+    slug = fields.Str(required=False)
+    
+    zone = fields.Str(required=False)
+    
+
+
 class ApplicationMeta(BaseSchema):
     # Configuration swagger.json
 
@@ -208,6 +222,10 @@ class Application(BaseSchema):
     domain = fields.Nested(Domain, required=False)
     
     slug = fields.Str(required=False)
+    
+    region = fields.Str(required=False)
+    
+    region_details = fields.Nested(RegionDetails, required=False)
     
 
 

@@ -12,52 +12,6 @@ class Order:
         self._conf = config
 
     
-    async def invalidateShipmentCache(self, body="", request_headers:Dict={}):
-        """Clear the existing shipment cache data stored in Redis  and serialize the updated data for subsequent use.
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = OrderValidator.invalidateShipmentCache()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import InvalidateShipmentCachePayload
-        schema = InvalidateShipmentCachePayload()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/update-cache", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Unique identifier of a company on the platform","schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Unique identifier of a company on the platform","schema":{"type":"integer"}}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/update-cache", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import InvalidateShipmentCacheResponseSchema
-            schema = InvalidateShipmentCacheResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for invalidateShipmentCache")
-                print(e)
-
-        return response
-    
     async def reassignLocation(self, body="", request_headers:Dict={}):
         """Reassign the shipment to a another location and update its status to 'Store Reassigned.'
         """
@@ -514,61 +468,6 @@ class Order:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for updatePackagingDimensions")
-                print(e)
-
-        return response
-    
-    async def createOrderDeprecated(self, x_ordering_source=None, x_application_id=None, x_extension_id=None, body="", request_headers:Dict={}):
-        """Creates an order
-        :param x-ordering-source : To uniquely identify the source through which order has been placed. : type string
-        :param x-application-id : The Application ID is a unique identifier assigned to a storefront that typically follows a 24-character hexadecimal string. Either `x-application-id` or `x-extension-id` header is mandatory. At least one of them must be provided. : type string
-        :param x-extension-id : The Extension ID is a unique identifier assigned to an extension that typically follows a 24-character hexadecimal string. Either `x-application-id` or `x-extension-id` header is mandatory. At least one of them must be provided. : type string
-        """
-        payload = {}
-        
-        if x_ordering_source is not None:
-            payload["x_ordering_source"] = x_ordering_source
-        if x_application_id is not None:
-            payload["x_application_id"] = x_application_id
-        if x_extension_id is not None:
-            payload["x_extension_id"] = x_extension_id
-
-        # Parameter validation
-        schema = OrderValidator.createOrderDeprecated()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import CreateOrderAPI
-        schema = CreateOrderAPI()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/create-order", """{"required":[{"in":"header","name":"x-ordering-source","description":"To uniquely identify the source through which order has been placed.","required":true,"schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of a company on the Fynd Commerce platform."}],"optional":[{"in":"header","name":"x-application-id","description":"The Application ID is a unique identifier assigned to a storefront that typically follows a 24-character hexadecimal string. Either `x-application-id` or `x-extension-id` header is mandatory. At least one of them must be provided.","required":false,"schema":{"type":"string"}},{"in":"header","name":"x-extension-id","description":"The Extension ID is a unique identifier assigned to an extension that typically follows a 24-character hexadecimal string. Either `x-application-id` or `x-extension-id` header is mandatory. At least one of them must be provided.","required":false,"schema":{"type":"string"}}],"query":[],"headers":[{"in":"header","name":"x-ordering-source","description":"To uniquely identify the source through which order has been placed.","required":true,"schema":{"type":"string"}},{"in":"header","name":"x-application-id","description":"The Application ID is a unique identifier assigned to a storefront that typically follows a 24-character hexadecimal string. Either `x-application-id` or `x-extension-id` header is mandatory. At least one of them must be provided.","required":false,"schema":{"type":"string"}},{"in":"header","name":"x-extension-id","description":"The Extension ID is a unique identifier assigned to an extension that typically follows a 24-character hexadecimal string. Either `x-application-id` or `x-extension-id` header is mandatory. At least one of them must be provided.","required":false,"schema":{"type":"string"}}],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of a company on the Fynd Commerce platform."}]}""", serverType="platform", x_ordering_source=x_ordering_source, x_application_id=x_application_id, x_extension_id=x_extension_id, )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/create-order", x_ordering_source=x_ordering_source, x_application_id=x_application_id, x_extension_id=x_extension_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import CreateOrderResponseSchema
-            schema = CreateOrderResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for createOrderDeprecated")
                 print(e)
 
         return response
@@ -2325,6 +2224,149 @@ The ESM config stores order processing configuration. Each document in the ESM c
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for updateAccount")
+                print(e)
+
+        return response
+    
+    async def getShipmentPackages(self, shipment_id=None, request_headers:Dict={}):
+        """Retrieve all packages associated with a specific shipment. This endpoint supports  both single-piece and multi-piece shipments.
+        :param shipment_id : Unique identifier for the shipment whose packages are being retrieved. : type string
+        """
+        payload = {}
+        
+        if shipment_id is not None:
+            payload["shipment_id"] = shipment_id
+
+        # Parameter validation
+        schema = OrderValidator.getShipmentPackages()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/{shipment_id}/packages", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Unique identifier of a company on the platform.","schema":{"type":"integer"}},{"in":"path","name":"shipment_id","required":true,"description":"Unique identifier for the shipment whose packages are being retrieved.","schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Unique identifier of a company on the platform.","schema":{"type":"integer"}},{"in":"path","name":"shipment_id","required":true,"description":"Unique identifier for the shipment whose packages are being retrieved.","schema":{"type":"string"}}]}""", serverType="platform", shipment_id=shipment_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/{shipment_id}/packages", shipment_id=shipment_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PackagesResponseSchema
+            schema = PackagesResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getShipmentPackages")
+                print(e)
+
+        return response
+    
+    async def createShipmentPackages(self, shipment_id=None, body="", request_headers:Dict={}):
+        """Create new packages for a shipment, enabling Multi-Piece Shipment (MPS) functionality. This operation validates courier partner availability and performs bag breaking  as per number of packages. The system automatically validates MPS eligibility and store  configuration before creating packages. If the store is not eligible for MPS, it will not let the user create packages.
+        :param shipment_id : Unique identifier of the shipment. : type string
+        """
+        payload = {}
+        
+        if shipment_id is not None:
+            payload["shipment_id"] = shipment_id
+
+        # Parameter validation
+        schema = OrderValidator.createShipmentPackages()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PackagesSchema
+        schema = PackagesSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/{shipment_id}/packages", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Unique identifier of a company on the platform.","schema":{"type":"integer"}},{"in":"path","name":"shipment_id","required":true,"description":"Unique identifier of the shipment.","schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Unique identifier of a company on the platform.","schema":{"type":"integer"}},{"in":"path","name":"shipment_id","required":true,"description":"Unique identifier of the shipment.","schema":{"type":"string"}}]}""", serverType="platform", shipment_id=shipment_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/{shipment_id}/packages", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BaseResponseSchema
+            schema = BaseResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createShipmentPackages")
+                print(e)
+
+        return response
+    
+    async def updateShipmentPackages(self, shipment_id=None, body="", request_headers:Dict={}):
+        """Update existing packages for a shipment. This operation replaces all existing  packages with the provided package list. The system validates courier partner  availability and performs bag breaking as per number of packages. Any packages  without IDs will have new unique IDs generated.
+        :param shipment_id : Unique identifier for the shipment whose packages will be updated. : type string
+        """
+        payload = {}
+        
+        if shipment_id is not None:
+            payload["shipment_id"] = shipment_id
+
+        # Parameter validation
+        schema = OrderValidator.updateShipmentPackages()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import PackagesSchema
+        schema = PackagesSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/{shipment_id}/packages", """{"required":[{"in":"path","name":"company_id","required":true,"description":"Unique identifier of a company on the platform.","schema":{"type":"integer"}},{"in":"path","name":"shipment_id","required":true,"description":"Unique identifier for the shipment whose packages will be updated.","schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"description":"Unique identifier of a company on the platform.","schema":{"type":"integer"}},{"in":"path","name":"shipment_id","required":true,"description":"Unique identifier for the shipment whose packages will be updated.","schema":{"type":"string"}}]}""", serverType="platform", shipment_id=shipment_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/{shipment_id}/packages", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BaseResponseSchema
+            schema = BaseResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateShipmentPackages")
                 print(e)
 
         return response

@@ -264,6 +264,10 @@ class ApplicationMeta(BaseSchema):
     pass
 
 
+class RegionDetails(BaseSchema):
+    pass
+
+
 class SecureUrl(BaseSchema):
     pass
 
@@ -1196,6 +1200,16 @@ class ApplicationMeta(BaseSchema):
     name = fields.Str(required=False)
     
     value = fields.Str(required=False)
+    
+
+
+class RegionDetails(BaseSchema):
+    # Configuration swagger.json
+
+    
+    slug = fields.Str(required=False)
+    
+    zone = fields.Str(required=False)
     
 
 

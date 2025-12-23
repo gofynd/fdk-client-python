@@ -15,16 +15,15 @@ class Logistic:
     def __init__(self, config: ApplicationConfig):
         self._conf = config
         self._relativeUrls = {
-            "getPincodeCity": "/service/application/logistics/v1.0/pincode/{pincode}",
             "getAllCountries": "/service/application/logistics/v1.0/country-list",
-            "getCourierPartners": "/service/application/logistics/v1.0/company/{company_id}/application/{application_id}/shipment/courier-partners",
             "getCountries": "/service/application/logistics/v2.0/countries",
             "getCountry": "/service/application/logistics/v1.0/countries/{country_iso_code}",
             "getDeliveryPromise": "/service/application/logistics/v1.0/delivery-promise",
             "getLocalities": "/service/application/logistics/v1.0/localities/{locality_type}",
             "getLocality": "/service/application/logistics/v1.0/localities/{locality_type}/{locality_value}",
             "validateAddress": "/service/application/logistics/v1.0/country/{country_iso_code}/address/templates/{template_name}/validate",
-            "getFulfillmentOptions": "/service/application/logistics/v1.0/fulfillment-options"
+            "getFulfillmentOptions": "/service/application/logistics/v1.0/fulfillment-options",
+            "getFulfillmentOptionStores": "/service/application/logistics/v1.0/fulfillment-options/{slug}/stores"
             
         }
         self._urls = {
@@ -33,52 +32,6 @@ class Logistic:
 
     async def updateUrls(self, urls):
         self._urls.update(urls)
-    
-    async def getPincodeCity(self, pincode=None, body="", request_headers:Dict={}):
-        """Get details of a specific pincode, such as obtaining its city and state information.
-        :param pincode : Postal code or PIN code of the address area. : type string
-        """
-        payload = {}
-        
-        if pincode is not None:
-            payload["pincode"] = pincode
-
-        # Parameter validation
-        schema = LogisticValidator.getPincodeCity()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getPincodeCity"], proccessed_params="""{"required":[{"in":"path","name":"pincode","description":"Postal code or PIN code of the address area.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"pincode","description":"Postal code or PIN code of the address area.","schema":{"type":"string"},"required":true}]}""", serverType="application", pincode=pincode)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPincodeCity"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/pincode/{pincode}", pincode=pincode), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import PincodeDetailsResult
-            schema = PincodeDetailsResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getPincodeCity")
-                print(e)
-
-        return response
     
     async def getAllCountries(self, body="", request_headers:Dict={}):
         """Get a list of countries within the specified delivery zones for that application.
@@ -119,59 +72,6 @@ class Logistic:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getAllCountries")
-                print(e)
-
-        return response
-    
-    async def getCourierPartners(self, company_id=None, application_id=None, body="", request_headers:Dict={}):
-        """Get all the serviceable courier partners of a destination and the shipments.
-        :param company_id : Unique identifier of the company. : type integer
-        :param application_id : Unique identifier of the sales channel. : type string
-        """
-        payload = {}
-        
-        if company_id is not None:
-            payload["company_id"] = company_id
-        if application_id is not None:
-            payload["application_id"] = application_id
-
-        # Parameter validation
-        schema = LogisticValidator.getCourierPartners()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ShipmentCourierPartnerDetails
-        schema = ShipmentCourierPartnerDetails()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getCourierPartners"], proccessed_params="""{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"Unique identifier of the sales channel.","schema":{"type":"string"},"required":true}]}""", serverType="application", company_id=company_id, application_id=application_id)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCourierPartners"]).netloc, "post", await create_url_without_domain("/service/application/logistics/v1.0/company/{company_id}/application/{application_id}/shipment/courier-partners", company_id=company_id, application_id=application_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentCourierPartnerResult
-            schema = ShipmentCourierPartnerResult()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getCourierPartners")
                 print(e)
 
         return response
@@ -283,10 +183,9 @@ class Logistic:
 
         return response
     
-    async def getDeliveryPromise(self, x_location_detail=None, x_application_data=None, page_no=None, page_size=None, body="", request_headers:Dict={}):
-        """Get delivery promises for both global and store levels based on a specific locality type.
-        :param x-location-detail : Custom header for this operation : type string
-        :param x-application-data : Custom header for this operation : type string
+    async def getDeliveryPromise(self, x_location_detail=None, page_no=None, page_size=None, body="", request_headers:Dict={}):
+        """Delivery Promise Configurations involve estimating and communicating the anticipated delivery date or time to customers, taking into account parameters like store processing time, delivery partner time to delivery, and buffer time. This helps establish precise delivery expectations based on both the delivery partner's capabilities and the store's operations.
+        :param x-location-detail : Header carrying structured location information. Example for India: {"country":"INDIA","country_iso_code":"IN","pincode":"400093","city":"Mumbai","state":"Maharashtra"}; example for UAE: {"country":"UNITED ARAB EMIRATES","country_iso_code":"AE","city":"Abu Dhabi","sector":"Abu Dhabi"}. : type string
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 12. : type integer
         """
@@ -294,8 +193,6 @@ class Logistic:
         
         if x_location_detail is not None:
             payload["x_location_detail"] = x_location_detail
-        if x_application_data is not None:
-            payload["x_application_data"] = x_application_data
         if page_no is not None:
             payload["page_no"] = page_no
         if page_size is not None:
@@ -306,7 +203,7 @@ class Logistic:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getDeliveryPromise"], proccessed_params="""{"required":[{"name":"x-location-detail","in":"header","description":"Custom header for this operation","required":true,"schema":{"type":"string"}},{"name":"x-application-data","in":"header","description":"Custom header for this operation","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12},"required":false}],"headers":[{"name":"x-location-detail","in":"header","description":"Custom header for this operation","required":true,"schema":{"type":"string"}},{"name":"x-application-data","in":"header","description":"Custom header for this operation","required":true,"schema":{"type":"string"}}],"path":[]}""", serverType="application", x_location_detail=x_location_detail, x_application_data=x_application_data, page_no=page_no, page_size=page_size)
+        url_with_params = await create_url_with_params(api_url=self._urls["getDeliveryPromise"], proccessed_params="""{"required":[{"name":"x-location-detail","in":"header","description":"Header carrying structured location information. Example for India: {\"country\":\"INDIA\",\"country_iso_code\":\"IN\",\"pincode\":\"400093\",\"city\":\"Mumbai\",\"state\":\"Maharashtra\"}; example for UAE: {\"country\":\"UNITED ARAB EMIRATES\",\"country_iso_code\":\"AE\",\"city\":\"Abu Dhabi\",\"sector\":\"Abu Dhabi\"}.","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12},"required":false}],"query":[{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results. Default value is 1.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page. Default value is 12.","schema":{"type":"integer","default":12},"required":false}],"headers":[{"name":"x-location-detail","in":"header","description":"Header carrying structured location information. Example for India: {\"country\":\"INDIA\",\"country_iso_code\":\"IN\",\"pincode\":\"400093\",\"city\":\"Mumbai\",\"state\":\"Maharashtra\"}; example for UAE: {\"country\":\"UNITED ARAB EMIRATES\",\"country_iso_code\":\"AE\",\"city\":\"Abu Dhabi\",\"sector\":\"Abu Dhabi\"}.","required":true,"schema":{"type":"string"}}],"path":[]}""", serverType="application", x_location_detail=x_location_detail, page_no=page_no, page_size=page_size)
         query_string = await create_query_string(page_no=page_no, page_size=page_size)
         if query_string:
             url_with_params += "?" + query_string
@@ -325,7 +222,7 @@ class Logistic:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getDeliveryPromise"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/delivery-promise", x_location_detail=x_location_detail, x_application_data=x_application_data, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getDeliveryPromise"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/delivery-promise", x_location_detail=x_location_detail, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import GetPromiseDetails
@@ -567,6 +464,58 @@ class Logistic:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getFulfillmentOptions")
+                print(e)
+
+        return response
+    
+    async def getFulfillmentOptionStores(self, slug=None, page_no=None, page_size=None, body="", request_headers:Dict={}):
+        """Fetches a paginated list of stores associated with a given fulfillment option slug.
+        :param slug : The unique slug identifier of the fulfillment option. : type string
+        :param page_no : The current page number for pagination. : type integer
+        :param page_size : The number of items per page. : type integer
+        """
+        payload = {}
+        
+        if slug is not None:
+            payload["slug"] = slug
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+
+        # Parameter validation
+        schema = LogisticValidator.getFulfillmentOptionStores()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getFulfillmentOptionStores"], proccessed_params="""{"required":[{"name":"slug","in":"path","required":true,"description":"The unique slug identifier of the fulfillment option.","schema":{"type":"string"}}],"optional":[{"name":"page_no","in":"query","description":"The current page number for pagination.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items per page.","required":false,"schema":{"type":"integer","default":10}}],"query":[{"name":"page_no","in":"query","description":"The current page number for pagination.","required":false,"schema":{"type":"integer","default":1}},{"name":"page_size","in":"query","description":"The number of items per page.","required":false,"schema":{"type":"integer","default":10}}],"headers":[],"path":[{"name":"slug","in":"path","required":true,"description":"The unique slug identifier of the fulfillment option.","schema":{"type":"string"}}]}""", serverType="application", slug=slug, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getFulfillmentOptionStores"]).netloc, "get", await create_url_without_domain("/service/application/logistics/v1.0/fulfillment-options/{slug}/stores", slug=slug, page_no=page_no, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FulfillmentOptionStores
+            schema = FulfillmentOptionStores()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getFulfillmentOptionStores")
                 print(e)
 
         return response

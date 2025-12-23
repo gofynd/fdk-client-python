@@ -107,7 +107,6 @@ from ..ApplicationModel import BaseSchema
     
         
         
-        
     
     
     
@@ -416,8 +415,6 @@ class PaymentValidator:
         order_id = fields.Str(required=False)
         
         shipment_id = fields.Str(required=False)
-        
-        filter_by = fields.Str(required=False)
          
         
     

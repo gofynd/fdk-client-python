@@ -11,13 +11,6 @@ from ..ApplicationModel import BaseSchema
 
     
     
-        
-    
-    
-    
-        
-        
-    
     
         
         
@@ -30,7 +23,6 @@ from ..ApplicationModel import BaseSchema
         
     
     
-        
         
         
         
@@ -54,6 +46,11 @@ from ..ApplicationModel import BaseSchema
         
     
     
+        
+        
+    
+    
+        
         
         
     
@@ -65,25 +62,9 @@ from ..ApplicationModel import BaseSchema
 class LogisticValidator:
     
     
-    class getPincodeCity(BaseSchema):
-        
-        
-        pincode = fields.Str(required=False)
-         
-        
-    
     class getAllCountries(BaseSchema):
         
         pass 
-        
-    
-    class getCourierPartners(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
         
     
     class getCountries(BaseSchema):
@@ -114,8 +95,6 @@ class LogisticValidator:
         
         
         x__location__detail = fields.Str(required=False)
-        
-        x__application__data = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -178,6 +157,17 @@ class LogisticValidator:
         product_slug = fields.Str(required=False)
         
         store_id = fields.Int(required=False)
+         
+        
+    
+    class getFulfillmentOptionStores(BaseSchema):
+        
+        
+        slug = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     

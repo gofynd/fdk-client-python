@@ -19,10 +19,7 @@ from ..PlatformModel import BaseSchema
     
     
         
-    
-    
         
-        
     
     
         
@@ -37,9 +34,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
-    
-    
         
     
     
@@ -49,10 +43,7 @@ from ..PlatformModel import BaseSchema
         
     
     
-        
         
-        
-        
     
     
         
@@ -194,26 +185,38 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
         
+    
+    
         
     
     
+        
+        
+        
         
     
     
         
+    
+    
         
         
         
     
     
+        
         
     
     
         
+        
+    
+    
         
         
     
@@ -402,13 +405,6 @@ from ..PlatformModel import BaseSchema
 class OrderValidator:
     
     
-    class invalidateShipmentCache(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
     class reassignLocation(BaseSchema):
         
         
@@ -482,19 +478,6 @@ class OrderValidator:
     
     class updatePackagingDimensions(BaseSchema):
         
-        
-        company_id = fields.Int(required=False)
-         
-        
-    
-    class createOrderDeprecated(BaseSchema):
-        
-        
-        x__ordering__source = fields.Str(required=False)
-        
-        x__application__id = fields.Str(required=False)
-        
-        x__extension__id = fields.Str(required=False)
         
         company_id = fields.Int(required=False)
          
@@ -875,6 +858,33 @@ class OrderValidator:
         company_id = fields.Int(required=False)
         
         channel_account_id = fields.Str(required=False)
+         
+        
+    
+    class getShipmentPackages(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        shipment_id = fields.Str(required=False)
+         
+        
+    
+    class createShipmentPackages(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        shipment_id = fields.Str(required=False)
+         
+        
+    
+    class updateShipmentPackages(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        shipment_id = fields.Str(required=False)
          
         
     

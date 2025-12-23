@@ -280,6 +280,38 @@ class Promise(BaseSchema):
     pass
 
 
+class FulfillmentOptionStores(BaseSchema):
+    pass
+
+
+class FulfillmentOptionStore(BaseSchema):
+    pass
+
+
+class Address(BaseSchema):
+    pass
+
+
+class LatLong(BaseSchema):
+    pass
+
+
+class StoreDistance(BaseSchema):
+    pass
+
+
+class StoreTimingDetails(BaseSchema):
+    pass
+
+
+class StoreTiming(BaseSchema):
+    pass
+
+
+class Time(BaseSchema):
+    pass
+
+
 
 
 
@@ -1354,6 +1386,136 @@ class Promise(BaseSchema):
     min = fields.Str(required=False)
     
     max = fields.Str(required=False)
+    
+
+
+class FulfillmentOptionStores(BaseSchema):
+    # Logistic swagger.json
+
+    
+    items = fields.List(fields.Nested(FulfillmentOptionStore, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class FulfillmentOptionStore(BaseSchema):
+    # Logistic swagger.json
+
+    
+    uid = fields.Int(required=False)
+    
+    store_code = fields.Str(required=False)
+    
+    address = fields.Nested(Address, required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
+    
+    store_type = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    avg_order_processing_time = fields.Int(required=False)
+    
+    timezone = fields.Str(required=False)
+    
+    holiday_list = fields.List(fields.List(fields.Str(required=False), required=False), required=False)
+    
+    customfields = fields.Dict(required=False)
+    
+    is_open = fields.Boolean(required=False)
+    
+    promise_customfields = fields.Dict(required=False)
+    
+    distance = fields.Nested(StoreDistance, required=False)
+    
+    timing = fields.Nested(StoreTimingDetails, required=False)
+    
+
+
+class Address(BaseSchema):
+    # Logistic swagger.json
+
+    
+    address1 = fields.Str(required=False)
+    
+    address2 = fields.Str(required=False)
+    
+    country = fields.Str(required=False)
+    
+    pincode = fields.Str(required=False)
+    
+    postal_code = fields.Str(required=False)
+    
+    city = fields.Str(required=False)
+    
+    state = fields.Str(required=False)
+    
+    latitude = fields.Float(required=False)
+    
+    longitude = fields.Float(required=False)
+    
+    country_code = fields.Str(required=False)
+    
+    lat_long = fields.Nested(LatLong, required=False)
+    
+
+
+class LatLong(BaseSchema):
+    # Logistic swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    coordinates = fields.List(fields.Float(required=False), required=False)
+    
+
+
+class StoreDistance(BaseSchema):
+    # Logistic swagger.json
+
+    
+    value = fields.Float(required=False, allow_none=True)
+    
+    unit = fields.Str(required=False)
+    
+    reason = fields.Str(required=False, allow_none=True)
+    
+
+
+class StoreTimingDetails(BaseSchema):
+    # Logistic swagger.json
+
+    
+    operational_timing = fields.List(fields.Nested(StoreTiming, required=False), required=False)
+    
+    order_acceptance_timing = fields.List(fields.Nested(StoreTiming, required=False), required=False)
+    
+
+
+class StoreTiming(BaseSchema):
+    # Logistic swagger.json
+
+    
+    weekday = fields.Str(required=False)
+    
+    open = fields.Boolean(required=False)
+    
+    opening = fields.Nested(Time, required=False)
+    
+    closing = fields.Nested(Time, required=False)
+    
+
+
+class Time(BaseSchema):
+    # Logistic swagger.json
+
+    
+    hour = fields.Int(required=False)
+    
+    minute = fields.Int(required=False)
     
 
 

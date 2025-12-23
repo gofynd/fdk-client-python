@@ -1426,3 +1426,428 @@ class Logistics:
 
         return response
     
+    async def getSampleFileRateCard(self, request_headers:Dict={}):
+        """Retrieves a downloadable sample file template for bulk rate card uploads.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = LogisticsValidator.getSampleFileRateCard()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/rate-card/sample-file", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}]}""", serverType="partner", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/rate-card/sample-file", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RateCardSampleFile
+            schema = RateCardSampleFile()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSampleFileRateCard")
+                print(e)
+
+        return response
+    
+    async def bulkRateCard(self, extension_id=None, scheme_id=None, body="", request_headers:Dict={}):
+        """Rate Card Import or Export
+        :param extension_id : Unique Identifier of courier partner extension. : type string
+        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+        if scheme_id is not None:
+            payload["scheme_id"] = scheme_id
+
+        # Parameter validation
+        schema = LogisticsValidator.bulkRateCard()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import BulkRateCardJobDetails
+        schema = BulkRateCardJobDetails()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/rate-card/bulk", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}]}""", serverType="partner", extension_id=extension_id, scheme_id=scheme_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/rate-card/bulk", extension_id=extension_id, scheme_id=scheme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkRateCardJob
+            schema = BulkRateCardJob()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for bulkRateCard")
+                print(e)
+
+        return response
+    
+    async def getBulkRateCard(self, extension_id=None, scheme_id=None, page_no=None, page_size=None, batch_id=None, action=None, status=None, start_date=None, end_date=None, request_headers:Dict={}):
+        """Returns the history of all bulk rate card upload operations, including their statuses and details.
+        :param extension_id : Unique Identifier of courier partner extension. : type string
+        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
+        :param page_no : The current page number for paginated results. : type integer
+        :param page_size : Determines the items to be displayed in a page : type integer
+        :param batch_id : Unique identifier of bulk job : type string
+        :param action : Import or export bulk type : type string
+        :param status : Status of the bulk actions : type string
+        :param start_date : Fetch job history after a particule date : type string
+        :param end_date : Fetch job history before a particule date : type string
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+        if scheme_id is not None:
+            payload["scheme_id"] = scheme_id
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
+        if action is not None:
+            payload["action"] = action
+        if status is not None:
+            payload["status"] = status
+        if start_date is not None:
+            payload["start_date"] = start_date
+        if end_date is not None:
+            payload["end_date"] = end_date
+
+        # Parameter validation
+        schema = LogisticsValidator.getBulkRateCard()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/rate-card/bulk", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Unique identifier of bulk job","schema":{"type":"string"}},{"in":"query","name":"action","description":"Import or export bulk type","schema":{"type":"string","enum":["import","export"]}},{"in":"query","name":"status","description":"Status of the bulk actions","schema":{"type":"string","nullable":true,"enum":["processing","failed","partial","completed"]}},{"in":"query","name":"start_date","description":"Fetch job history after a particule date","schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"Fetch job history before a particule date","schema":{"type":"string","format":"date-time"}}],"query":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Unique identifier of bulk job","schema":{"type":"string"}},{"in":"query","name":"action","description":"Import or export bulk type","schema":{"type":"string","enum":["import","export"]}},{"in":"query","name":"status","description":"Status of the bulk actions","schema":{"type":"string","nullable":true,"enum":["processing","failed","partial","completed"]}},{"in":"query","name":"start_date","description":"Fetch job history after a particule date","schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"Fetch job history before a particule date","schema":{"type":"string","format":"date-time"}}],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}]}""", serverType="partner", extension_id=extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, start_date=start_date, end_date=end_date)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, start_date=start_date, end_date=end_date)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/rate-card/bulk", extension_id=extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, start_date=start_date, end_date=end_date), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkRateCardJob
+            schema = BulkRateCardJob()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBulkRateCard")
+                print(e)
+
+        return response
+    
+    async def getSampleFileRateZone(self, body="", request_headers:Dict={}):
+        """Retrieves a downloadable sample file template for bulk rate zone uploads.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = LogisticsValidator.getSampleFileRateZone()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import SampleFileRateZoneRequestSchema
+        schema = SampleFileRateZoneRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/rate-card/zone/sample-file", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true}]}""", serverType="partner", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/rate-card/zone/sample-file", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkRateCardJob
+            schema = BulkRateCardJob()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getSampleFileRateZone")
+                print(e)
+
+        return response
+    
+    async def createRateZoneBulkJob(self, extension_id=None, scheme_id=None, body="", request_headers:Dict={}):
+        """Performs bulk import or export of rate zone details.
+        :param extension_id : Unique Identifier of courier partner extension. : type string
+        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+        if scheme_id is not None:
+            payload["scheme_id"] = scheme_id
+
+        # Parameter validation
+        schema = LogisticsValidator.createRateZoneBulkJob()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import RateZoneBulkJobDetails
+        schema = RateZoneBulkJobDetails()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/rate-card/zone/bulk", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}]}""", serverType="partner", extension_id=extension_id, scheme_id=scheme_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/rate-card/zone/bulk", extension_id=extension_id, scheme_id=scheme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import BulkRateCardJob
+            schema = BulkRateCardJob()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createRateZoneBulkJob")
+                print(e)
+
+        return response
+    
+    async def getBulkRateZoneJobHistory(self, extension_id=None, scheme_id=None, page_no=None, page_size=None, batch_id=None, action=None, status=None, zone_type=None, start_date=None, end_date=None, request_headers:Dict={}):
+        """Retrieves the bulk job history for rate zone import and export operations.
+        :param extension_id : Unique Identifier of courier partner extension. : type string
+        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
+        :param page_no : The current page number for paginated results. : type integer
+        :param page_size : Determines the items to be displayed in a page : type integer
+        :param batch_id : Unique identifier of bulk job : type string
+        :param action : Import or export bulk type : type string
+        :param status : Status of the bulk actions : type string
+        :param zone_type : Unique identifier of zone type. : type string
+        :param start_date : Fetch job history after a particule date : type string
+        :param end_date : Fetch job history before a particule date : type string
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+        if scheme_id is not None:
+            payload["scheme_id"] = scheme_id
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+        if batch_id is not None:
+            payload["batch_id"] = batch_id
+        if action is not None:
+            payload["action"] = action
+        if status is not None:
+            payload["status"] = status
+        if zone_type is not None:
+            payload["zone_type"] = zone_type
+        if start_date is not None:
+            payload["start_date"] = start_date
+        if end_date is not None:
+            payload["end_date"] = end_date
+
+        # Parameter validation
+        schema = LogisticsValidator.getBulkRateZoneJobHistory()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/rate-card/zone/bulk", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Unique identifier of bulk job","schema":{"type":"string"}},{"in":"query","name":"action","description":"Import or export bulk type","schema":{"type":"string","enum":["import","export"]}},{"in":"query","name":"status","description":"Status of the bulk actions","schema":{"type":"string","enum":["processing","failed","partial","completed"]}},{"in":"query","name":"zone_type","description":"Unique identifier of zone type.","schema":{"type":"string","enum":["standard","custom"]}},{"in":"query","name":"start_date","description":"Fetch job history after a particule date","schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"Fetch job history before a particule date","schema":{"type":"string","format":"date-time"}}],"query":[{"in":"query","name":"page_no","description":"The current page number for paginated results.","schema":{"type":"integer","default":1,"minimum":1}},{"in":"query","name":"page_size","description":"Determines the items to be displayed in a page","schema":{"type":"integer","default":12,"minimum":1}},{"in":"query","name":"batch_id","description":"Unique identifier of bulk job","schema":{"type":"string"}},{"in":"query","name":"action","description":"Import or export bulk type","schema":{"type":"string","enum":["import","export"]}},{"in":"query","name":"status","description":"Status of the bulk actions","schema":{"type":"string","enum":["processing","failed","partial","completed"]}},{"in":"query","name":"zone_type","description":"Unique identifier of zone type.","schema":{"type":"string","enum":["standard","custom"]}},{"in":"query","name":"start_date","description":"Fetch job history after a particule date","schema":{"type":"string","format":"date-time"}},{"in":"query","name":"end_date","description":"Fetch job history before a particule date","schema":{"type":"string","format":"date-time"}}],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}]}""", serverType="partner", extension_id=extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, zone_type=zone_type, start_date=start_date, end_date=end_date)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, zone_type=zone_type, start_date=start_date, end_date=end_date)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/rate-card/zone/bulk", extension_id=extension_id, scheme_id=scheme_id, page_no=page_no, page_size=page_size, batch_id=batch_id, action=action, status=status, zone_type=zone_type, start_date=start_date, end_date=end_date), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RateZoneBulkJobList
+            schema = RateZoneBulkJobList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getBulkRateZoneJobHistory")
+                print(e)
+
+        return response
+    
+    async def getRateZoneConfig(self, extension_id=None, scheme_id=None, request_headers:Dict={}):
+        """Fetch Rate Zone Configuration
+        :param extension_id : Unique Identifier of courier partner extension. : type string
+        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+        if scheme_id is not None:
+            payload["scheme_id"] = scheme_id
+
+        # Parameter validation
+        schema = LogisticsValidator.getRateZoneConfig()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/rate-card/zone/configuration", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}]}""", serverType="partner", extension_id=extension_id, scheme_id=scheme_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/rate-card/zone/configuration", extension_id=extension_id, scheme_id=scheme_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RateZoneConfigurationDetails
+            schema = RateZoneConfigurationDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getRateZoneConfig")
+                print(e)
+
+        return response
+    
+    async def updateRateZoneConfiguration(self, extension_id=None, scheme_id=None, body="", request_headers:Dict={}):
+        """Updates the rate zone configuration for the specified courier partner scheme.
+        :param extension_id : Unique Identifier of courier partner extension. : type string
+        :param scheme_id : Unique identifier for the scheme, used to fetch or modify scheme details. : type string
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+        if scheme_id is not None:
+            payload["scheme_id"] = scheme_id
+
+        # Parameter validation
+        schema = LogisticsValidator.updateRateZoneConfiguration()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import RateZoneConfigurationDetails
+        schema = RateZoneConfigurationDetails()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/rate-card/zone/configuration", """{"required":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"organization_id","description":"Unique Identifier of Organization","schema":{"type":"string"},"required":true},{"in":"path","name":"extension_id","description":"Unique Identifier of courier partner extension.","schema":{"type":"string"},"required":true},{"in":"path","name":"scheme_id","description":"Unique identifier for the scheme, used to fetch or modify scheme details.","schema":{"type":"string"},"required":true}]}""", serverType="partner", extension_id=extension_id, scheme_id=scheme_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/partner/logistics/v1.0/organization/{self._conf.organizationId}/courier-partner/{extension_id}/scheme/{scheme_id}/rate-card/zone/configuration", extension_id=extension_id, scheme_id=scheme_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RateZoneConfigurationDetails
+            schema = RateZoneConfigurationDetails()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateRateZoneConfiguration")
+                print(e)
+
+        return response
+    

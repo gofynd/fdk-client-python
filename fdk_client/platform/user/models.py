@@ -545,7 +545,7 @@ class BulkUserAttributeRequestBody(BaseSchema):
     
     definition_id = fields.Str(required=False)
     
-    value = fields.Raw(required=False)
+    value = fields.Dict(required=False)
     
 
 
@@ -931,7 +931,7 @@ class ConditionsSchema(BaseSchema):
     
     type = fields.Str(required=False)
     
-    value = fields.Str(required=False)
+    value = fields.Dict(required=False)
     
     ignore_year = fields.Boolean(required=False)
     
@@ -985,7 +985,7 @@ class UserAttributeFilterRequestConditions(BaseSchema):
     
     type = fields.Str(required=False)
     
-    value = fields.Raw(required=False)
+    value = fields.Dict(required=False)
     
 
 

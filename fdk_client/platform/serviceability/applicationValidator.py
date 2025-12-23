@@ -173,10 +173,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
-        
         
         
         
@@ -567,15 +563,6 @@ class ServiceabilityValidator:
         
     
     class getCourierPartners(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateApplicationConfiguration(BaseSchema):
         
         
         company_id = fields.Int(required=False)

@@ -15,6 +15,7 @@ class Order:
     def __init__(self, config: ApplicationConfig):
         self._conf = config
         self._relativeUrls = {
+            "getRefundModes": "/service/application/order-manage/v1.0/shipment/{shipment_id}/refund/modes",
             "getOrders": "/service/application/order/v1.0/orders",
             "getOrderById": "/service/application/order/v1.0/orders/{order_id}",
             "getPosOrderById": "/service/application/order/v1.0/orders/pos-order/{order_id}",
@@ -36,6 +37,56 @@ class Order:
 
     async def updateUrls(self, urls):
         self._urls.update(urls)
+    
+    async def getRefundModes(self, shipment_id=None, line_numbers=None, body="", request_headers:Dict={}):
+        """Returns a list of available refund options for the given company and shipment.
+
+        :param shipment_id : Numeric identifier of the shipment. : type string
+        :param line_numbers : A comma-separated list of line numbers. : type array
+        """
+        payload = {}
+        
+        if shipment_id is not None:
+            payload["shipment_id"] = shipment_id
+        if line_numbers is not None:
+            payload["line_numbers"] = line_numbers
+
+        # Parameter validation
+        schema = OrderValidator.getRefundModes()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getRefundModes"], proccessed_params="""{"required":[{"name":"shipment_id","in":"path","description":"Numeric identifier of the shipment.","required":true,"schema":{"type":"string"},"example":"17452383364661844036"}],"optional":[{"name":"line_numbers","in":"query","description":"A comma-separated list of line numbers.","required":false,"schema":{"type":"array","items":{"type":"integer"}}}],"query":[{"name":"line_numbers","in":"query","description":"A comma-separated list of line numbers.","required":false,"schema":{"type":"array","items":{"type":"integer"}}}],"headers":[],"path":[{"name":"shipment_id","in":"path","description":"Numeric identifier of the shipment.","required":true,"schema":{"type":"string"},"example":"17452383364661844036"}]}""", serverType="application", shipment_id=shipment_id, line_numbers=line_numbers)
+        query_string = await create_query_string(line_numbers=line_numbers)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getRefundModes"]).netloc, "get", await create_url_without_domain("/service/application/order-manage/v1.0/shipment/{shipment_id}/refund/modes", shipment_id=shipment_id, line_numbers=line_numbers), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RefundOptions
+            schema = RefundOptions()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getRefundModes")
+                print(e)
+
+        return response
     
     async def getOrders(self, status=None, page_no=None, page_size=None, from_date=None, to_date=None, start_date=None, end_date=None, custom_meta=None, allow_inactive=None, body="", request_headers:Dict={}):
         """Get all orders associated with a customer account.

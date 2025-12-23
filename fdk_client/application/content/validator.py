@@ -68,6 +68,12 @@ from ..ApplicationModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+        
         
     
     
@@ -225,6 +231,19 @@ class ContentValidator:
         resource = fields.Str(required=False)
         
         resource_slug = fields.Str(required=False)
+         
+        
+    
+    class getBulkCustomFieldsByResource(BaseSchema):
+        
+        
+        resource = fields.Str(required=False)
+        
+        resource_ids = fields.Str(required=False)
+        
+        keys = fields.Str(required=False)
+        
+        namespaces = fields.Str(required=False)
          
         
     

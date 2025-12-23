@@ -1225,6 +1225,8 @@ class BankDetailsForOTP(BaseSchema):
     
     account_holder = fields.Str(required=False)
     
+    upi = fields.Str(required=False, allow_none=True)
+    
 
 
 class AddBeneficiaryDetailsOTPCreation(BaseSchema):
@@ -1232,6 +1234,8 @@ class AddBeneficiaryDetailsOTPCreation(BaseSchema):
 
     
     order_id = fields.Str(required=False)
+    
+    shipment_id = fields.Str(required=False)
     
     details = fields.Nested(BankDetailsForOTP, required=False)
     

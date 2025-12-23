@@ -189,6 +189,57 @@ from ..PartnerModel import BaseSchema
     
         
         
+    
+    
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
 
 class LogisticsValidator:
     
@@ -573,6 +624,116 @@ class LogisticsValidator:
         
         
         organization_id = fields.Str(required=False)
+        
+        scheme_id = fields.Str(required=False)
+         
+        
+    
+    class getSampleFileRateCard(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+         
+        
+    
+    class bulkRateCard(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
+        
+        scheme_id = fields.Str(required=False)
+         
+        
+    
+    class getBulkRateCard(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
+        
+        scheme_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        batch_id = fields.Str(required=False)
+        
+        action = fields.Str(required=False)
+        
+        status = fields.Str(required=False, allow_none=True)
+        
+        start_date = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
+         
+        
+    
+    class getSampleFileRateZone(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+         
+        
+    
+    class createRateZoneBulkJob(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
+        
+        scheme_id = fields.Str(required=False)
+         
+        
+    
+    class getBulkRateZoneJobHistory(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
+        
+        scheme_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        batch_id = fields.Str(required=False)
+        
+        action = fields.Str(required=False)
+        
+        status = fields.Str(required=False)
+        
+        zone_type = fields.Str(required=False)
+        
+        start_date = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
+         
+        
+    
+    class getRateZoneConfig(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
+        
+        scheme_id = fields.Str(required=False)
+         
+        
+    
+    class updateRateZoneConfiguration(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
         
         scheme_id = fields.Str(required=False)
          

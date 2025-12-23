@@ -32,6 +32,10 @@ class ApplicationRedirections(BaseSchema):
     pass
 
 
+class RegionDetails(BaseSchema):
+    pass
+
+
 class ApplicationMeta(BaseSchema):
     pass
 
@@ -148,6 +152,16 @@ class ApplicationRedirections(BaseSchema):
     redirect_to = fields.Str(required=False)
     
     type = fields.Str(required=False)
+    
+
+
+class RegionDetails(BaseSchema):
+    # Common swagger.json
+
+    
+    slug = fields.Str(required=False)
+    
+    zone = fields.Str(required=False)
     
 
 

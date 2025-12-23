@@ -520,7 +520,11 @@ class ValidateCustomerCreditSchema(BaseSchema):
     pass
 
 
-class RefundBeneficiaries(BaseSchema):
+class GetRefundBeneficiary(BaseSchema):
+    pass
+
+
+class BeneficiaryData(BaseSchema):
     pass
 
 
@@ -1703,8 +1707,6 @@ class RefundAccountDetails(BaseSchema):
     # Payment swagger.json
 
     
-    is_verified_flag = fields.Boolean(required=False)
-    
     data = fields.Dict(required=False)
     
     success = fields.Boolean(required=False)
@@ -1727,6 +1729,8 @@ class BankDetailsForOTP(BaseSchema):
     
     account_holder = fields.Str(required=False)
     
+    upi = fields.Str(required=False, allow_none=True)
+    
 
 
 class AddBeneficiaryDetailsOTP(BaseSchema):
@@ -1734,6 +1738,8 @@ class AddBeneficiaryDetailsOTP(BaseSchema):
 
     
     order_id = fields.Str(required=False)
+    
+    shipment_id = fields.Str(required=False)
     
     details = fields.Nested(BankDetailsForOTP, required=False)
     
@@ -2719,7 +2725,15 @@ class ValidateCustomerCreditSchema(BaseSchema):
     
 
 
-class RefundBeneficiaries(BaseSchema):
+class GetRefundBeneficiary(BaseSchema):
+    # Payment swagger.json
+
+    
+    data = fields.Nested(BeneficiaryData, required=False)
+    
+
+
+class BeneficiaryData(BaseSchema):
     # Payment swagger.json
 
     

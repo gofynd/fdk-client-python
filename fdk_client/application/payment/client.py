@@ -2175,11 +2175,10 @@ class Payment:
 
         return response
     
-    async def getRefundBeneficiaries(self, order_id=None, shipment_id=None, filter_by=None, body="", request_headers:Dict={}):
+    async def getRefundBeneficiaries(self, order_id=None, shipment_id=None, body="", request_headers:Dict={}):
         """Returns a list of UPI and Bank refund beneficiaries associated with a user.   Both `order_id` and `shipment_id` are optional query parameters.   Use the optional filter_by enum parameter to refine the response. When the value of filter_by is order, the API returns only beneficiaries associated with the order. When the value of filter_by is shipment, it returns only beneficiaries associated with the shipment.
         :param order_id : Unique ID of the order : type string
         :param shipment_id : Unique ID of the shipment : type string
-        :param filter_by : Optional filter to restrict beneficiaries. When provided, only beneficiaries directly linked to the specified `order_id` or `shipment_id` will be returned. : type string
         """
         payload = {}
         
@@ -2187,16 +2186,14 @@ class Payment:
             payload["order_id"] = order_id
         if shipment_id is not None:
             payload["shipment_id"] = shipment_id
-        if filter_by is not None:
-            payload["filter_by"] = filter_by
 
         # Parameter validation
         schema = PaymentValidator.getRefundBeneficiaries()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getRefundBeneficiaries"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"order_id","schema":{"type":"string"},"description":"Unique ID of the order"},{"in":"query","name":"shipment_id","schema":{"type":"string"},"description":"Unique ID of the shipment"},{"in":"query","name":"filter_by","schema":{"type":"string","enum":["order","shipment"]},"description":"Optional filter to restrict beneficiaries. When provided, only beneficiaries directly linked to the specified `order_id` or `shipment_id` will be returned."}],"query":[{"in":"query","name":"order_id","schema":{"type":"string"},"description":"Unique ID of the order"},{"in":"query","name":"shipment_id","schema":{"type":"string"},"description":"Unique ID of the shipment"},{"in":"query","name":"filter_by","schema":{"type":"string","enum":["order","shipment"]},"description":"Optional filter to restrict beneficiaries. When provided, only beneficiaries directly linked to the specified `order_id` or `shipment_id` will be returned."}],"headers":[],"path":[]}""", serverType="application", order_id=order_id, shipment_id=shipment_id, filter_by=filter_by)
-        query_string = await create_query_string(order_id=order_id, shipment_id=shipment_id, filter_by=filter_by)
+        url_with_params = await create_url_with_params(api_url=self._urls["getRefundBeneficiaries"], proccessed_params="""{"required":[],"optional":[{"name":"order_id","in":"query","required":false,"schema":{"type":"string"},"description":"Unique ID of the order"},{"name":"shipment_id","in":"query","required":false,"schema":{"type":"string"},"description":"Unique ID of the shipment"}],"query":[{"name":"order_id","in":"query","required":false,"schema":{"type":"string"},"description":"Unique ID of the order"},{"name":"shipment_id","in":"query","required":false,"schema":{"type":"string"},"description":"Unique ID of the shipment"}],"headers":[],"path":[]}""", serverType="application", order_id=order_id, shipment_id=shipment_id)
+        query_string = await create_query_string(order_id=order_id, shipment_id=shipment_id)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -2214,11 +2211,11 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getRefundBeneficiaries"]).netloc, "get", await create_url_without_domain("/service/application/payment/v2.0/refund/user/beneficiary", order_id=order_id, shipment_id=shipment_id, filter_by=filter_by), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getRefundBeneficiaries"]).netloc, "get", await create_url_without_domain("/service/application/payment/v2.0/refund/user/beneficiary", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RefundBeneficiaries
-            schema = RefundBeneficiaries()
+            from .models import GetRefundBeneficiary
+            schema = GetRefundBeneficiary()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -2362,8 +2359,8 @@ class Payment:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getRefundBeneficiariesUsingOTPSession"]).netloc, "get", await create_url_without_domain("/service/application/payment/v2.0/refund/user/beneficiary-otp", order_id=order_id, shipment_id=shipment_id, filter_by=filter_by), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import RefundBeneficiaries
-            schema = RefundBeneficiaries()
+            from .models import GetRefundBeneficiary
+            schema = GetRefundBeneficiary()
             try:
                 schema.load(response["json"])
             except Exception as e:

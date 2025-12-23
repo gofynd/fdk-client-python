@@ -282,6 +282,18 @@ class CustomFieldsResponseByResourceIdSchema(BaseSchema):
     pass
 
 
+class BulkCustomFieldsResponseByResourceSchema(BaseSchema):
+    pass
+
+
+class ResourceCustomFieldsSchema(BaseSchema):
+    pass
+
+
+class CustomFieldItemSchema(BaseSchema):
+    pass
+
+
 class CustomObjectListItemSchema(BaseSchema):
     pass
 
@@ -1316,6 +1328,62 @@ class CustomFieldsResponseByResourceIdSchema(BaseSchema):
 
     
     items = fields.List(fields.Nested(CustomFieldSchema, required=False), required=False)
+    
+
+
+class BulkCustomFieldsResponseByResourceSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    items = fields.List(fields.Nested(ResourceCustomFieldsSchema, required=False), required=False)
+    
+
+
+class ResourceCustomFieldsSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    resource_id = fields.Str(required=False)
+    
+    resource_slug = fields.Str(required=False)
+    
+    items = fields.List(fields.Nested(CustomFieldItemSchema, required=False), required=False)
+    
+
+
+class CustomFieldItemSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    namespace = fields.Str(required=False)
+    
+    resource = fields.Str(required=False)
+    
+    value = fields.List(fields.Str(required=False), required=False)
+    
+    type = fields.Str(required=False)
+    
+    multi_value = fields.Boolean(required=False)
+    
+    company_id = fields.Str(required=False)
+    
+    application_id = fields.Str(required=False)
+    
+    has_invalid_values = fields.Boolean(required=False)
+    
+    invalid_value_errors = fields.List(fields.Raw(required=False), required=False)
+    
+    is_deleted = fields.Boolean(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    resource_slug = fields.Str(required=False)
     
 
 

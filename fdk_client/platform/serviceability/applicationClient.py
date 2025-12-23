@@ -1214,51 +1214,6 @@ class Serviceability:
 
         return response
     
-    async def updateApplicationConfiguration(self, body="", request_headers:Dict={}):
-        """Apply configuration to application to set DP rules and Zone configuration
-        """
-        payload = {}
-        
-
-        # Parameter validation
-        schema = ServiceabilityValidator.updateApplicationConfiguration()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import ApplicationConfigPutDetail
-        schema = ApplicationConfigPutDetail()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", """{"required":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier of company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier of sales channel.","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"A `company_id` is a unique identifier of company.","schema":{"type":"integer"},"required":true},{"in":"path","name":"application_id","description":"A `application_id` is a unique identifier of sales channel.","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/logistics/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/configuration", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import ApplicationConfigPut
-            schema = ApplicationConfigPut()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for updateApplicationConfiguration")
-                print(e)
-
-        return response
-    
     async def getApplicationConfiguration(self, request_headers:Dict={}):
         """This API returns all the Application config that has been applied to the given company and application.
         """
