@@ -8,6 +8,10 @@ from ..PlatformModel import BaseSchema
 
 
 
+class AggregatorToken(BaseSchema):
+    pass
+
+
 class PaymentGatewayConfigDetails(BaseSchema):
     pass
 
@@ -364,6 +368,38 @@ class PlatformPaymentModeDetails(BaseSchema):
     pass
 
 
+class PaymentModeConfig(BaseSchema):
+    pass
+
+
+class PaymentModeItems(BaseSchema):
+    pass
+
+
+class SubPaymentMode(BaseSchema):
+    pass
+
+
+class LogoSet(BaseSchema):
+    pass
+
+
+class PlatformLogoSet(BaseSchema):
+    pass
+
+
+class PlatformConfigPaymentModeDetails(BaseSchema):
+    pass
+
+
+class PlatformPaymentModeItem(BaseSchema):
+    pass
+
+
+class PlatformSubPaymentMode(BaseSchema):
+    pass
+
+
 class MerchnatPaymentModeCreation(BaseSchema):
     pass
 
@@ -540,7 +576,29 @@ class ValidateCustomerCreditSchema(BaseSchema):
     pass
 
 
+class OperationResponseSchema(BaseSchema):
+    pass
 
+
+
+
+
+class AggregatorToken(BaseSchema):
+    # Payment swagger.json
+
+    
+    payment_mode_id = fields.Int(required=False)
+    
+    sub_payment_mode_code = fields.Str(required=False)
+    
+    token = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    domain = fields.Str(required=False)
+    
 
 
 class PaymentGatewayConfigDetails(BaseSchema):
@@ -1971,6 +2029,134 @@ class PlatformPaymentModeDetails(BaseSchema):
     
 
 
+class PaymentModeConfig(BaseSchema):
+    # Payment swagger.json
+
+    
+    business_unit = fields.Str(required=False)
+    
+    device = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    items = fields.List(fields.Nested(PaymentModeItems, required=False), required=False)
+    
+
+
+class PaymentModeItems(BaseSchema):
+    # Payment swagger.json
+
+    
+    id = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
+    
+    short_code = fields.Str(required=False)
+    
+    logos = fields.Nested(LogoSet, required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    sub_payment_mode = fields.List(fields.Nested(SubPaymentMode, required=False), required=False)
+    
+    is_active_at_pg = fields.Boolean(required=False)
+    
+    fulfillment_options = fields.Dict(required=False)
+    
+
+
+class SubPaymentMode(BaseSchema):
+    # Payment swagger.json
+
+    
+    code = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    priority = fields.Int(required=False)
+    
+    logos = fields.Nested(LogoSet, required=False)
+    
+    name = fields.Str(required=False)
+    
+    is_active_at_pg = fields.Boolean(required=False)
+    
+
+
+class LogoSet(BaseSchema):
+    # Payment swagger.json
+
+    
+    large = fields.Str(required=False)
+    
+    small = fields.Str(required=False)
+    
+
+
+class PlatformLogoSet(BaseSchema):
+    # Payment swagger.json
+
+    
+    large = fields.Str(required=False)
+    
+    small = fields.Str(required=False)
+    
+
+
+class PlatformConfigPaymentModeDetails(BaseSchema):
+    # Payment swagger.json
+
+    
+    business_unit = fields.Str(required=False)
+    
+    device = fields.Str(required=False)
+    
+    fulfillment_options = fields.Dict(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    items = fields.List(fields.Nested(PlatformPaymentModeItem, required=False), required=False)
+    
+
+
+class PlatformPaymentModeItem(BaseSchema):
+    # Payment swagger.json
+
+    
+    id = fields.Int(required=False)
+    
+    name = fields.Str(required=False)
+    
+    short_code = fields.Str(required=False)
+    
+    logos = fields.Nested(PlatformLogoSet, required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    is_active_at_pg = fields.Boolean(required=False)
+    
+    sub_payment_mode = fields.List(fields.Nested(PlatformSubPaymentMode, required=False), required=False)
+    
+
+
+class PlatformSubPaymentMode(BaseSchema):
+    # Payment swagger.json
+
+    
+    code = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    is_active_at_pg = fields.Boolean(required=False)
+    
+    priority = fields.Int(required=False)
+    
+    logos = fields.Nested(PlatformLogoSet, required=False)
+    
+
+
 class MerchnatPaymentModeCreation(BaseSchema):
     # Payment swagger.json
 
@@ -2718,6 +2904,16 @@ class ValidateCustomerCreditSchema(BaseSchema):
     cart_id = fields.Str(required=False)
     
     account = fields.Nested(CreditAccountSummary, required=False)
+    
+
+
+class OperationResponseSchema(BaseSchema):
+    # Payment swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
     
 
 

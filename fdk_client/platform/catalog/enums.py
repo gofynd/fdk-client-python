@@ -18,6 +18,21 @@ class TaxStatusEnum(Enum):
         raise Exception("Invalid TaxStatusEnum type")
 
 
+class TaxVersionScopeEnum(Enum):
+    
+    COUNTRY = "COUNTRY"
+    
+    REGION = "REGION"
+    
+    STORE = "STORE"
+    
+    @classmethod
+    async def is_valid(cls, value):
+        if value in cls._value2member_map_:
+            return None
+        raise Exception("Invalid TaxVersionScopeEnum type")
+
+
 class HsTypeEnum(Enum):
     
     HS = "HS"

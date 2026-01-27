@@ -161,6 +161,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+    
 
 class CatalogValidator:
     
@@ -500,6 +501,11 @@ class CatalogValidator:
         
         page_size = fields.Int(required=False)
          
+        
+    
+    class listCountryCurrencyMappings(BaseSchema):
+        
+        pass 
         
     
     

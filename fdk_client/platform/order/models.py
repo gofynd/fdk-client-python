@@ -5721,6 +5721,8 @@ class CreateOrderShipmentSchema(BaseSchema):
     
     external_shipment_id = fields.Str(required=False)
     
+    invoice_id = fields.Str(required=False)
+    
     line_items = fields.List(fields.Nested(LineItemSchema, required=False), required=False)
     
     order_fulfillment_timeline = fields.Nested(OrderFulfillmentTimelineSchema, required=False)
@@ -5996,6 +5998,8 @@ class CreateOrderRequestSchema(BaseSchema):
     channel_company_id = fields.Str(required=False)
     
     is_draft = fields.Boolean(required=False)
+    
+    is_offline_order = fields.Boolean(required=False)
     
     meta = fields.Dict(required=False)
     

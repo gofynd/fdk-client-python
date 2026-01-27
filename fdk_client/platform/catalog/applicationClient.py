@@ -1468,7 +1468,7 @@ class Catalog:
         :param c : The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts** : type string
         :param filters : Pass `filters` parameter to fetch the filter details. This flag is used to fetch all filters : type boolean
         :param is_dependent : This query parameter is used to get the dependent products in the listing. : type boolean
-        :param sort_on : The order to sort the list of products on. The supported sort parameters are popularity, price, redemption and discount in either ascending or descending order. See the supported values below. : type string
+        :param sort_on : The order to sort the list of products on. Supported values include latest, popular, price_asc, price_dsc, discount_asc, discount_dsc. Custom sort keys configured via listing configuration (e.g., best_selling) are also supported for cohort-based sorting. : type string
         :param page_id : Each response will contain **page_id** param, which should be sent back to make pagination work. : type string
         :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
         :param page_no : If page_type is number then pass it to fetch page items. Default is 1. : type integer
@@ -1505,7 +1505,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/products", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The search query. This can be a partial or complete name of a either a product, brand or category","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The search filter parameters. All the parameter filtered from filter parameters will be passed in **f** parameter in this format. **?f=brand:voi-jeans||and:::category:t-shirts||shirts**","in":"query","name":"f","required":false,"schema":{"type":"string"}},{"description":"The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts**","in":"query","name":"c","required":false,"schema":{"type":"string"}},{"description":"Pass `filters` parameter to fetch the filter details. This flag is used to fetch all filters","in":"query","name":"filters","required":false,"schema":{"default":true,"type":"boolean"}},{"description":"This query parameter is used to get the dependent products in the listing.","in":"query","name":"is_dependent","required":false,"schema":{"default":true,"type":"boolean"}},{"description":"The order to sort the list of products on. The supported sort parameters are popularity, price, redemption and discount in either ascending or descending order. See the supported values below.","in":"query","name":"sort_on","required":false,"schema":{"enum":["latest","popular","price_asc","price_dsc","discount_asc","discount_dsc"],"type":"string"}},{"description":"Each response will contain **page_id** param, which should be sent back to make pagination work.","in":"query","name":"page_id","required":false,"schema":{"type":"string"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"If page_type is number then pass it to fetch page items. Default is 1.","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"For pagination type should be cursor or number. Default is cursor.","in":"query","name":"page_type","required":false,"schema":{"default":"cursor","type":"string","enum":["cursor","number"]}},{"description":"Item Ids of product","in":"query","name":"item_ids","required":false,"schema":{"items":{"type":"string"},"type":"array"}}],"query":[{"description":"The search query. This can be a partial or complete name of a either a product, brand or category","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The search filter parameters. All the parameter filtered from filter parameters will be passed in **f** parameter in this format. **?f=brand:voi-jeans||and:::category:t-shirts||shirts**","in":"query","name":"f","required":false,"schema":{"type":"string"}},{"description":"The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts**","in":"query","name":"c","required":false,"schema":{"type":"string"}},{"description":"Pass `filters` parameter to fetch the filter details. This flag is used to fetch all filters","in":"query","name":"filters","required":false,"schema":{"default":true,"type":"boolean"}},{"description":"This query parameter is used to get the dependent products in the listing.","in":"query","name":"is_dependent","required":false,"schema":{"default":true,"type":"boolean"}},{"description":"The order to sort the list of products on. The supported sort parameters are popularity, price, redemption and discount in either ascending or descending order. See the supported values below.","in":"query","name":"sort_on","required":false,"schema":{"enum":["latest","popular","price_asc","price_dsc","discount_asc","discount_dsc"],"type":"string"}},{"description":"Each response will contain **page_id** param, which should be sent back to make pagination work.","in":"query","name":"page_id","required":false,"schema":{"type":"string"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"If page_type is number then pass it to fetch page items. Default is 1.","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"For pagination type should be cursor or number. Default is cursor.","in":"query","name":"page_type","required":false,"schema":{"default":"cursor","type":"string","enum":["cursor","number"]}},{"description":"Item Ids of product","in":"query","name":"item_ids","required":false,"schema":{"items":{"type":"string"},"type":"array"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", q=q, f=f, c=c, filters=filters, is_dependent=is_dependent, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type, item_ids=item_ids)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/products", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}],"optional":[{"description":"The search query. This can be a partial or complete name of a either a product, brand or category","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The search filter parameters. All the parameter filtered from filter parameters will be passed in **f** parameter in this format. **?f=brand:voi-jeans||and:::category:t-shirts||shirts**","in":"query","name":"f","required":false,"schema":{"type":"string"}},{"description":"The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts**","in":"query","name":"c","required":false,"schema":{"type":"string"}},{"description":"Pass `filters` parameter to fetch the filter details. This flag is used to fetch all filters","in":"query","name":"filters","required":false,"schema":{"default":true,"type":"boolean"}},{"description":"This query parameter is used to get the dependent products in the listing.","in":"query","name":"is_dependent","required":false,"schema":{"default":true,"type":"boolean"}},{"description":"The order to sort the list of products on. Supported values include latest, popular, price_asc, price_dsc, discount_asc, discount_dsc. Custom sort keys configured via listing configuration (e.g., best_selling) are also supported for cohort-based sorting.","in":"query","name":"sort_on","required":false,"schema":{"type":"string","x-not-enum":true}},{"description":"Each response will contain **page_id** param, which should be sent back to make pagination work.","in":"query","name":"page_id","required":false,"schema":{"type":"string"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"If page_type is number then pass it to fetch page items. Default is 1.","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"For pagination type should be cursor or number. Default is cursor.","in":"query","name":"page_type","required":false,"schema":{"default":"cursor","type":"string","enum":["cursor","number"]}},{"description":"Item Ids of product","in":"query","name":"item_ids","required":false,"schema":{"items":{"type":"string"},"type":"array"}}],"query":[{"description":"The search query. This can be a partial or complete name of a either a product, brand or category","in":"query","name":"q","required":false,"schema":{"type":"string"}},{"description":"The search filter parameters. All the parameter filtered from filter parameters will be passed in **f** parameter in this format. **?f=brand:voi-jeans||and:::category:t-shirts||shirts**","in":"query","name":"f","required":false,"schema":{"type":"string"}},{"description":"The search filter parameters for collection items. All the parameter filtered from filter parameters will be passed in **c** parameter in this format. **?c=brand:in:voi-jeans|and:::category:nin:t-shirts|shirts**","in":"query","name":"c","required":false,"schema":{"type":"string"}},{"description":"Pass `filters` parameter to fetch the filter details. This flag is used to fetch all filters","in":"query","name":"filters","required":false,"schema":{"default":true,"type":"boolean"}},{"description":"This query parameter is used to get the dependent products in the listing.","in":"query","name":"is_dependent","required":false,"schema":{"default":true,"type":"boolean"}},{"description":"The order to sort the list of products on. Supported values include latest, popular, price_asc, price_dsc, discount_asc, discount_dsc. Custom sort keys configured via listing configuration (e.g., best_selling) are also supported for cohort-based sorting.","in":"query","name":"sort_on","required":false,"schema":{"type":"string","x-not-enum":true}},{"description":"Each response will contain **page_id** param, which should be sent back to make pagination work.","in":"query","name":"page_id","required":false,"schema":{"type":"string"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"If page_type is number then pass it to fetch page items. Default is 1.","in":"query","name":"page_no","required":false,"schema":{"default":1,"type":"integer"}},{"description":"For pagination type should be cursor or number. Default is cursor.","in":"query","name":"page_type","required":false,"schema":{"default":"cursor","type":"string","enum":["cursor","number"]}},{"description":"Item Ids of product","in":"query","name":"item_ids","required":false,"schema":{"items":{"type":"string"},"type":"array"}}],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", q=q, f=f, c=c, filters=filters, is_dependent=is_dependent, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type, item_ids=item_ids)
         query_string = await create_query_string(q=q, f=f, c=c, filters=filters, is_dependent=is_dependent, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type, item_ids=item_ids)
         if query_string:
             url_with_params += "?" + query_string
@@ -1696,6 +1696,50 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getAppProducts")
+                print(e)
+
+        return response
+    
+    async def getAppProductPrices(self, item_ids=None, request_headers:Dict={}):
+        """Fetch pricing details for multiple raw products by their item IDs, scoped to a particular company and sales channel.
+        :param item_ids : List of item IDs for which to retrieve pricing. : type array
+        """
+        payload = {}
+        
+        if item_ids is not None:
+            payload["item_ids"] = item_ids
+
+        # Parameter validation
+        schema = CatalogValidator.getAppProductPrices()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/raw-products/price", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"description":"Unique identifier for the seller (company)."},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"},"description":"Unique identifier for the application (sales channel)."},{"name":"item_ids","in":"query","required":true,"schema":{"type":"array","items":{"type":"integer"}},"style":"form","explode":true,"description":"List of item IDs for which to retrieve pricing."}],"optional":[],"query":[{"name":"item_ids","in":"query","required":true,"schema":{"type":"array","items":{"type":"integer"}},"style":"form","explode":true,"description":"List of item IDs for which to retrieve pricing."}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"description":"Unique identifier for the seller (company)."},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"},"description":"Unique identifier for the application (sales channel)."}]}""", serverType="platform", item_ids=item_ids)
+        query_string = await create_query_string(item_ids=item_ids)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/raw-products/price", item_ids=item_ids), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppProductPricesSchema
+            schema = AppProductPricesSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppProductPrices")
                 print(e)
 
         return response
@@ -3370,6 +3414,419 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for unfollowProductById")
+                print(e)
+
+        return response
+    
+    async def getPriceFactories(self, q=None, request_headers:Dict={}):
+        """Fetches a paginated list of price factories configured for the specified application within a company. Supports optional filters such as brand IDs, category IDs, seller identifier, item code, slug, and name to narrow down the results.
+
+        :param q : Optional q to filter price factories by name.
+ : type string
+        """
+        payload = {}
+        
+        if q is not None:
+            payload["q"] = q
+
+        # Parameter validation
+        schema = CatalogValidator.getPriceFactories()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price/list", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"description":"Unique identifier representing the seller's company account.\n"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"},"description":"Unique identifier representing the application or sales channel.\n"}],"optional":[{"name":"q","in":"query","required":false,"schema":{"type":"string","x-not-enum":true},"description":"Optional q to filter price factories by name.\n"}],"query":[{"name":"q","in":"query","required":false,"schema":{"type":"string","x-not-enum":true},"description":"Optional q to filter price factories by name.\n"}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"description":"Unique identifier representing the seller's company account.\n"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"},"description":"Unique identifier representing the application or sales channel.\n"}]}""", serverType="platform", q=q)
+        query_string = await create_query_string(q=q)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price/list", q=q), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PriceFactoryListResponseSchema
+            schema = PriceFactoryListResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPriceFactories")
+                print(e)
+
+        return response
+    
+    async def createPriceFactory(self, body="", request_headers:Dict={}):
+        """Creates a new price factory configuration for the specified application under a given company. A price factory allows defining region-based or international pricing strategies using fixed or percentage-based adjustments per currency.
+
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CatalogValidator.createPriceFactory()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import CreatePriceFactoryConfigSchema
+        schema = CreatePriceFactoryConfigSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"description":"Unique identifier representing the seller's company account.\n"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"},"description":"Unique identifier for the application or sales channel where the price factory will be applied.\n"}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"description":"Unique identifier representing the seller's company account.\n"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"},"description":"Unique identifier for the application or sales channel where the price factory will be applied.\n"}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponseSchema
+            schema = SuccessResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createPriceFactory")
+                print(e)
+
+        return response
+    
+    async def getPriceFactory(self, price_factory_id=None, request_headers:Dict={}):
+        """Retrieves detailed information about a specific price factory configuration  for the given application and company, using the unique price factory ID.  This includes currency strategies, adjustment values, zone mapping, and audit metadata.
+
+        :param price_factory_id : Unique identifier of the specific price factory to be retrieved.
+ : type string
+        """
+        payload = {}
+        
+        if price_factory_id is not None:
+            payload["price_factory_id"] = price_factory_id
+
+        # Parameter validation
+        schema = CatalogValidator.getPriceFactory()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price/{price_factory_id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"description":"Unique identifier representing the seller's company account.\n"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"},"description":"Unique identifier representing the application or sales channel.\n"},{"name":"price_factory_id","in":"path","required":true,"schema":{"type":"string"},"description":"Unique identifier of the specific price factory to be retrieved.\n"}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"description":"Unique identifier representing the seller's company account.\n"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"},"description":"Unique identifier representing the application or sales channel.\n"},{"name":"price_factory_id","in":"path","required":true,"schema":{"type":"string"},"description":"Unique identifier of the specific price factory to be retrieved.\n"}]}""", serverType="platform", price_factory_id=price_factory_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price/{price_factory_id}", price_factory_id=price_factory_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PriceFactoryConfigSchema
+            schema = PriceFactoryConfigSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPriceFactory")
+                print(e)
+
+        return response
+    
+    async def updatePriceFactory(self, price_factory_id=None, body="", request_headers:Dict={}):
+        """Allows partial update of an existing price factory configuration  for a specific application and company using the provided price factory ID.  Fields such as name, currencies, pricing strategies, or zone mapping can be modified.
+
+        :param price_factory_id : Unique identifier of the specific price factory to be updated.
+ : type string
+        """
+        payload = {}
+        
+        if price_factory_id is not None:
+            payload["price_factory_id"] = price_factory_id
+
+        # Parameter validation
+        schema = CatalogValidator.updatePriceFactory()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import UpdatePriceFactoryConfigSchema
+        schema = UpdatePriceFactoryConfigSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price/{price_factory_id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"description":"Unique identifier representing the seller's company account.\n"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"},"description":"Unique identifier representing the application or sales channel.\n"},{"name":"price_factory_id","in":"path","required":true,"schema":{"type":"string"},"description":"Unique identifier of the specific price factory to be updated.\n"}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"description":"Unique identifier representing the seller's company account.\n"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"},"description":"Unique identifier representing the application or sales channel.\n"},{"name":"price_factory_id","in":"path","required":true,"schema":{"type":"string"},"description":"Unique identifier of the specific price factory to be updated.\n"}]}""", serverType="platform", price_factory_id=price_factory_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price/{price_factory_id}", price_factory_id=price_factory_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponseSchema
+            schema = SuccessResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePriceFactory")
+                print(e)
+
+        return response
+    
+    async def deletePriceFactory(self, price_factory_id=None, request_headers:Dict={}):
+        """Deletes a specific price factory configuration associated with a given company and application.  This action is typically irreversible and will remove the pricing logic tied to the specified price factory ID.
+
+        :param price_factory_id : A `price_factory_id` is a unique identifier for a particular price factory configuration.
+ : type string
+        """
+        payload = {}
+        
+        if price_factory_id is not None:
+            payload["price_factory_id"] = price_factory_id
+
+        # Parameter validation
+        schema = CatalogValidator.deletePriceFactory()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price/{price_factory_id}", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"description":"A `company_id` is a unique identifier for a particular seller account.\n"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"},"description":"A `application_id` is a unique identifier for a particular sale channel.\n"},{"name":"price_factory_id","in":"path","required":true,"schema":{"type":"string"},"description":"A `price_factory_id` is a unique identifier for a particular price factory configuration.\n"}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"description":"A `company_id` is a unique identifier for a particular seller account.\n"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"},"description":"A `application_id` is a unique identifier for a particular sale channel.\n"},{"name":"price_factory_id","in":"path","required":true,"schema":{"type":"string"},"description":"A `price_factory_id` is a unique identifier for a particular price factory configuration.\n"}]}""", serverType="platform", price_factory_id=price_factory_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price/{price_factory_id}", price_factory_id=price_factory_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponseSchema
+            schema = SuccessResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deletePriceFactory")
+                print(e)
+
+        return response
+    
+    async def getPriceFactoryProducts(self, price_factory_id=None, brand_ids=None, category_ids=None, seller_identifier=None, item_code=None, slug=None, name=None, active=None, page_no=None, page_size=None, request_headers:Dict={}):
+        """Retrieves a paginated list of products linked to a specific price factory configuration for the given application and company. This endpoint returns item-level details such as pricing by currency, delivery zones, seller identifiers, media, and size-level configurations. Useful for viewing how pricing strategies are applied across different items.
+
+        :param price_factory_id : A `price_factory_id` uniquely identifies a price factory configuration for a specific application.
+ : type string
+        :param brand_ids : Optional list of brand IDs to filter price factories associated with specific brands.
+ : type array
+        :param category_ids : Optional list of category IDs to filter price factories related to specific product categories.
+ : type array
+        :param seller_identifier : Optional seller identifier to filter price factories associated with a particular seller.
+ : type string
+        :param item_code : Optional item code to filter price factories configured for a specific product code.
+ : type string
+        :param slug : Optional slug to filter price factories by product slug.
+ : type string
+        :param name : Optional name to filter price factories by product or configuration name.
+ : type string
+        :param active : Optional name to filter price factories by product status.
+ : type boolean
+        :param page_no : The page number to navigate through the given set of results : type integer
+        :param page_size : Number of items to retrieve in each page. Default is 12. : type integer
+        """
+        payload = {}
+        
+        if price_factory_id is not None:
+            payload["price_factory_id"] = price_factory_id
+        if brand_ids is not None:
+            payload["brand_ids"] = brand_ids
+        if category_ids is not None:
+            payload["category_ids"] = category_ids
+        if seller_identifier is not None:
+            payload["seller_identifier"] = seller_identifier
+        if item_code is not None:
+            payload["item_code"] = item_code
+        if slug is not None:
+            payload["slug"] = slug
+        if name is not None:
+            payload["name"] = name
+        if active is not None:
+            payload["active"] = active
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+
+        # Parameter validation
+        schema = CatalogValidator.getPriceFactoryProducts()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price/{price_factory_id}/products", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"description":"A `company_id` is a unique identifier for a particular seller account.\n"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"},"description":"A `application_id` is a unique identifier for a particular sales channel.\n"},{"name":"price_factory_id","in":"path","required":true,"schema":{"type":"string"},"description":"A `price_factory_id` uniquely identifies a price factory configuration for a specific application.\n"}],"optional":[{"name":"brand_ids","in":"query","required":false,"schema":{"type":"array","items":{"type":"integer"}},"description":"Optional list of brand IDs to filter price factories associated with specific brands.\n"},{"name":"category_ids","in":"query","required":false,"schema":{"type":"array","items":{"type":"integer"}},"description":"Optional list of category IDs to filter price factories related to specific product categories.\n"},{"name":"seller_identifier","in":"query","required":false,"schema":{"type":"string"},"description":"Optional seller identifier to filter price factories associated with a particular seller.\n"},{"name":"item_code","in":"query","required":false,"schema":{"type":"string","x-not-enum":true},"description":"Optional item code to filter price factories configured for a specific product code.\n"},{"name":"slug","in":"query","required":false,"schema":{"type":"string","x-not-enum":true},"description":"Optional slug to filter price factories by product slug.\n"},{"name":"name","in":"query","required":false,"schema":{"type":"string","x-not-enum":true},"description":"Optional name to filter price factories by product or configuration name.\n"},{"name":"active","in":"query","required":false,"schema":{"type":"boolean","x-not-enum":true},"description":"Optional name to filter price factories by product status.\n"},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}}],"query":[{"name":"brand_ids","in":"query","required":false,"schema":{"type":"array","items":{"type":"integer"}},"description":"Optional list of brand IDs to filter price factories associated with specific brands.\n"},{"name":"category_ids","in":"query","required":false,"schema":{"type":"array","items":{"type":"integer"}},"description":"Optional list of category IDs to filter price factories related to specific product categories.\n"},{"name":"seller_identifier","in":"query","required":false,"schema":{"type":"string"},"description":"Optional seller identifier to filter price factories associated with a particular seller.\n"},{"name":"item_code","in":"query","required":false,"schema":{"type":"string","x-not-enum":true},"description":"Optional item code to filter price factories configured for a specific product code.\n"},{"name":"slug","in":"query","required":false,"schema":{"type":"string","x-not-enum":true},"description":"Optional slug to filter price factories by product slug.\n"},{"name":"name","in":"query","required":false,"schema":{"type":"string","x-not-enum":true},"description":"Optional name to filter price factories by product or configuration name.\n"},{"name":"active","in":"query","required":false,"schema":{"type":"boolean","x-not-enum":true},"description":"Optional name to filter price factories by product status.\n"},{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}}],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"integer"},"description":"A `company_id` is a unique identifier for a particular seller account.\n"},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"},"description":"A `application_id` is a unique identifier for a particular sales channel.\n"},{"name":"price_factory_id","in":"path","required":true,"schema":{"type":"string"},"description":"A `price_factory_id` uniquely identifies a price factory configuration for a specific application.\n"}]}""", serverType="platform", price_factory_id=price_factory_id, brand_ids=brand_ids, category_ids=category_ids, seller_identifier=seller_identifier, item_code=item_code, slug=slug, name=name, active=active, page_no=page_no, page_size=page_size)
+        query_string = await create_query_string(brand_ids=brand_ids, category_ids=category_ids, seller_identifier=seller_identifier, item_code=item_code, slug=slug, name=name, active=active, page_no=page_no, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price/{price_factory_id}/products", price_factory_id=price_factory_id, brand_ids=brand_ids, category_ids=category_ids, seller_identifier=seller_identifier, item_code=item_code, slug=slug, name=name, active=active, page_no=page_no, page_size=page_size), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PriceFactoryProductListResponseSchema
+            schema = PriceFactoryProductListResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPriceFactoryProducts")
+                print(e)
+
+        return response
+    
+    async def getPriceFactoryProduct(self, price_factory_id=None, item_id=None, request_headers:Dict={}):
+        """get price related information of item for given price factory
+        :param price_factory_id : A `price_factory_id` is a unique identifier for a particular sale channel. : type string
+        :param item_id : A `item_id` is a unique identifier for a particular product. : type integer
+        """
+        payload = {}
+        
+        if price_factory_id is not None:
+            payload["price_factory_id"] = price_factory_id
+        if item_id is not None:
+            payload["item_id"] = item_id
+
+        # Parameter validation
+        schema = CatalogValidator.getPriceFactoryProduct()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price/{price_factory_id}/products/{item_id}", """{"required":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `price_factory_id` is a unique identifier for a particular sale channel.","in":"path","name":"price_factory_id","required":true,"schema":{"type":"string"}},{"description":"A `item_id` is a unique identifier for a particular product.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"A `company_id` is a unique identifier for a particular seller account.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"A `application_id` is a unique identifier for a particular sale channel.","in":"path","name":"application_id","required":true,"schema":{"type":"string"}},{"description":"A `price_factory_id` is a unique identifier for a particular sale channel.","in":"path","name":"price_factory_id","required":true,"schema":{"type":"string"}},{"description":"A `item_id` is a unique identifier for a particular product.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", price_factory_id=price_factory_id, item_id=item_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price/{price_factory_id}/products/{item_id}", price_factory_id=price_factory_id, item_id=item_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import PriceFactoryProductResponseSchema
+            schema = PriceFactoryProductResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getPriceFactoryProduct")
+                print(e)
+
+        return response
+    
+    async def updatePriceFactoryProduct(self, price_factory_id=None, item_id=None, body="", request_headers:Dict={}):
+        """Updates specific fields in the price factory product configuration. Use this to partially update pricing or status for a given product and size without overwriting the entire configuration.
+
+        :param price_factory_id : A `price_factory_id` is a unique identifier for a specific price factory configuration. : type string
+        :param item_id : A `item_id` is a unique identifier for a particular product. : type integer
+        """
+        payload = {}
+        
+        if price_factory_id is not None:
+            payload["price_factory_id"] = price_factory_id
+        if item_id is not None:
+            payload["item_id"] = item_id
+
+        # Parameter validation
+        schema = CatalogValidator.updatePriceFactoryProduct()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import UpsertPriceFactoryProductSchema
+        schema = UpsertPriceFactoryProductSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price/{price_factory_id}/products/{item_id}", """{"required":[{"name":"company_id","in":"path","required":true,"description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"}},{"name":"application_id","in":"path","required":true,"description":"A `application_id` is a unique identifier for a particular sales channel.","schema":{"type":"string"}},{"name":"price_factory_id","in":"path","required":true,"description":"A `price_factory_id` is a unique identifier for a specific price factory configuration.","schema":{"type":"string"}},{"name":"item_id","in":"path","required":true,"description":"A `item_id` is a unique identifier for a particular product.","schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"A `company_id` is a unique identifier for a particular seller account.","schema":{"type":"integer"}},{"name":"application_id","in":"path","required":true,"description":"A `application_id` is a unique identifier for a particular sales channel.","schema":{"type":"string"}},{"name":"price_factory_id","in":"path","required":true,"description":"A `price_factory_id` is a unique identifier for a specific price factory configuration.","schema":{"type":"string"}},{"name":"item_id","in":"path","required":true,"description":"A `item_id` is a unique identifier for a particular product.","schema":{"type":"integer"}}]}""", serverType="platform", price_factory_id=price_factory_id, item_id=item_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/price/{price_factory_id}/products/{item_id}", price_factory_id=price_factory_id, item_id=item_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponseSchema
+            schema = SuccessResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updatePriceFactoryProduct")
                 print(e)
 
         return response

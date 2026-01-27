@@ -84,7 +84,7 @@ from ..ApplicationModel import BaseSchema
     
         
         
-        
+    
     
 
 class ContentValidator:
@@ -279,12 +279,15 @@ class ContentValidator:
         type = fields.Str(required=False)
         
         locale = fields.Str(required=False)
-        
-        resource_id = fields.Str(required=False)
          
         
     
     class getSupportedLanguages(BaseSchema):
+        
+        pass 
+        
+    
+    class getOrderTranslation(BaseSchema):
         
         pass 
         

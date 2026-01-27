@@ -18,6 +18,10 @@ class ValidationErrors(BaseSchema):
     pass
 
 
+class StandardError(BaseSchema):
+    pass
+
+
 class AllSizes(BaseSchema):
     pass
 
@@ -47,6 +51,82 @@ class AppConfigurationDetail(BaseSchema):
 
 
 class AppConfigurationsSort(BaseSchema):
+    pass
+
+
+class SortWeights(BaseSchema):
+    pass
+
+
+class CohortWeights(BaseSchema):
+    pass
+
+
+class HighSpenderRepeatCustomerWeights(BaseSchema):
+    pass
+
+
+class HyperactiveRepeatCustomerWeights(BaseSchema):
+    pass
+
+
+class HighSpenderOccasionalCustomerWeights(BaseSchema):
+    pass
+
+
+class StandardOccasionalCustomerWeights(BaseSchema):
+    pass
+
+
+class DormantPremiumCustomerWeights(BaseSchema):
+    pass
+
+
+class BudgetRegularCustomerWeights(BaseSchema):
+    pass
+
+
+class HighSpenderRegularCustomerWeights(BaseSchema):
+    pass
+
+
+class StandardCustomerAboutToChurnWeights(BaseSchema):
+    pass
+
+
+class PremiumCustomerAboutToChurnWeights(BaseSchema):
+    pass
+
+
+class HighSpenderCustomerAboutToChurnWeights(BaseSchema):
+    pass
+
+
+class StandardDormantCustomerWeights(BaseSchema):
+    pass
+
+
+class HighSpenderDormantCustomerWeights(BaseSchema):
+    pass
+
+
+class PotentialCustomerWeights(BaseSchema):
+    pass
+
+
+class NewCustomerWeights(BaseSchema):
+    pass
+
+
+class BudgetRepeatCustomerWeights(BaseSchema):
+    pass
+
+
+class AverageSpenderRepeatCustomerWeights(BaseSchema):
+    pass
+
+
+class CohortSortingConfiguration(BaseSchema):
     pass
 
 
@@ -1098,6 +1178,14 @@ class ProdcutTemplateCategoriesResponseSchema(BaseSchema):
     pass
 
 
+class PriceStrategySchema(BaseSchema):
+    pass
+
+
+class PriceFactoryResponseSchema(BaseSchema):
+    pass
+
+
 class Product(BaseSchema):
     pass
 
@@ -1662,6 +1750,26 @@ class TaxReqBodyVersion(BaseSchema):
     pass
 
 
+class TaxGeoArea(BaseSchema):
+    pass
+
+
+class AreaDetails(BaseSchema):
+    pass
+
+
+class Country(BaseSchema):
+    pass
+
+
+class Area(BaseSchema):
+    pass
+
+
+class RegionReference(BaseSchema):
+    pass
+
+
 class CreateTaxRequestBody(BaseSchema):
     pass
 
@@ -1687,10 +1795,6 @@ class TaxVersionDetail(BaseSchema):
 
 
 class CreateTax(BaseSchema):
-    pass
-
-
-class UpdateTaxVersion(BaseSchema):
     pass
 
 
@@ -1723,6 +1827,70 @@ class HSCodes(BaseSchema):
 
 
 class GetTaxComponents(BaseSchema):
+    pass
+
+
+class PriceFactoryListItemsSchema(BaseSchema):
+    pass
+
+
+class PriceFactoryListResponseSchema(BaseSchema):
+    pass
+
+
+class CreatePriceFactoryConfigSchema(BaseSchema):
+    pass
+
+
+class UpdatePriceFactoryConfigSchema(BaseSchema):
+    pass
+
+
+class PriceFactoryConfigSchema(BaseSchema):
+    pass
+
+
+class CurrencyPriceSchema(BaseSchema):
+    pass
+
+
+class UpsertPriceFactorySizesSchema(BaseSchema):
+    pass
+
+
+class UpsertPriceFactoryProductSchema(BaseSchema):
+    pass
+
+
+class PriceFactoryCurrencyPriceSchema(BaseSchema):
+    pass
+
+
+class PriceFactorySizesSchema(BaseSchema):
+    pass
+
+
+class PriceFactoryProductResponseSchema(BaseSchema):
+    pass
+
+
+class PriceFactoryProductListResponseSchema(BaseSchema):
+    pass
+
+
+class PriceRange(BaseSchema):
+    pass
+
+
+class CurrencyPrice(BaseSchema):
+    pass
+
+
+class ProductPrice(BaseSchema):
+    pass
+
+
+class AppProductPricesSchema(BaseSchema):
     pass
 
 
@@ -1770,6 +1938,14 @@ class ValidationErrors(BaseSchema):
 
     
     errors = fields.List(fields.Nested(ValidationError, required=False), required=False)
+    
+
+
+class StandardError(BaseSchema):
+    # Catalog swagger.json
+
+    
+    message = fields.Str(required=False)
     
 
 
@@ -1926,6 +2102,212 @@ class AppConfigurationsSort(BaseSchema):
     name = fields.Str(required=False)
     
     priority = fields.Int(required=False)
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+    cohorts = fields.Nested(CohortSortingConfiguration, required=False)
+    
+
+
+class SortWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    popularity = fields.Float(required=False)
+    
+    availability = fields.Float(required=False)
+    
+    conversion = fields.Float(required=False)
+    
+    sold_quantity = fields.Float(required=False)
+    
+    depth = fields.Float(required=False)
+    
+    listing = fields.Float(required=False)
+    
+    discount = fields.Float(required=False)
+    
+    cancelled = fields.Float(required=False)
+    
+    returns = fields.Float(required=False)
+    
+    catalogue = fields.Float(required=False)
+    
+    revenue = fields.Float(required=False)
+    
+
+
+class CohortWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class HighSpenderRepeatCustomerWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class HyperactiveRepeatCustomerWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class HighSpenderOccasionalCustomerWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class StandardOccasionalCustomerWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class DormantPremiumCustomerWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class BudgetRegularCustomerWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class HighSpenderRegularCustomerWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class StandardCustomerAboutToChurnWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class PremiumCustomerAboutToChurnWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class HighSpenderCustomerAboutToChurnWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class StandardDormantCustomerWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class HighSpenderDormantCustomerWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class PotentialCustomerWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class NewCustomerWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class BudgetRepeatCustomerWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class AverageSpenderRepeatCustomerWeights(BaseSchema):
+    # Catalog swagger.json
+
+    
+    weights = fields.Nested(SortWeights, required=False)
+    
+
+
+class CohortSortingConfiguration(BaseSchema):
+    # Catalog swagger.json
+
+    
+    high_spender_repeat_customer = fields.Nested(HighSpenderRepeatCustomerWeights, required=False)
+    
+    hyperactive_premium_repeat_customer = fields.Nested(HyperactiveRepeatCustomerWeights, required=False)
+    
+    high_spender_occasional_customer = fields.Nested(HighSpenderOccasionalCustomerWeights, required=False)
+    
+    standard_occasional_customer = fields.Nested(StandardOccasionalCustomerWeights, required=False)
+    
+    dormant_premium_customer = fields.Nested(DormantPremiumCustomerWeights, required=False)
+    
+    budget_regular_customer = fields.Nested(BudgetRegularCustomerWeights, required=False)
+    
+    high_spender_regular_customer = fields.Nested(HighSpenderRegularCustomerWeights, required=False)
+    
+    standard_customer_about_to_churn = fields.Nested(StandardCustomerAboutToChurnWeights, required=False)
+    
+    premium_customer_about_to_churn = fields.Nested(PremiumCustomerAboutToChurnWeights, required=False)
+    
+    high_spender_customer_about_to_churn = fields.Nested(HighSpenderCustomerAboutToChurnWeights, required=False)
+    
+    standard_dormant_customer = fields.Nested(StandardDormantCustomerWeights, required=False)
+    
+    high_spender_dormant_customer = fields.Nested(HighSpenderDormantCustomerWeights, required=False)
+    
+    potential_customer = fields.Nested(PotentialCustomerWeights, required=False)
+    
+    new_customer = fields.Nested(NewCustomerWeights, required=False)
+    
+    budget_repeat_customer = fields.Nested(BudgetRepeatCustomerWeights, required=False)
+    
+    average_spender_repeat_customer = fields.Nested(AverageSpenderRepeatCustomerWeights, required=False)
     
 
 
@@ -6465,6 +6847,40 @@ class ProdcutTemplateCategoriesResponseSchema(BaseSchema):
     
 
 
+class PriceStrategySchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    currency = fields.Str(required=False)
+    
+    adjustment_value = fields.Float(required=False)
+    
+    adjustment_type = fields.Str(required=False)
+    
+
+
+class PriceFactoryResponseSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    price_zone_id = fields.Str(required=False)
+    
+    price_factory_id = fields.Str(required=False)
+    
+    modified_by = fields.Str(required=False)
+    
+    currencies = fields.List(fields.Str(required=False), required=False)
+    
+    name = fields.Str(required=False)
+    
+    price_strategy = fields.List(fields.Nested(PriceStrategySchema, required=False), required=False)
+    
+    active = fields.Boolean(required=False)
+    
+    created_by = fields.Str(required=False)
+    
+
+
 class Product(BaseSchema):
     # Catalog swagger.json
 
@@ -9143,6 +9559,70 @@ class TaxReqBodyVersion(BaseSchema):
     
     components = fields.List(fields.Nested(TaxComponent, required=False), required=False)
     
+    applicable_date = fields.Str(required=False)
+    
+    region_type = fields.Str(required=False)
+    
+    areas = fields.Nested(TaxGeoArea, required=False)
+    
+    store_ids = fields.List(fields.Int(required=False), required=False)
+    
+
+
+class TaxGeoArea(BaseSchema):
+    # Catalog swagger.json
+
+    
+    regions = fields.List(fields.Str(required=False), required=False)
+    
+    country = fields.Str(required=False)
+    
+
+
+class AreaDetails(BaseSchema):
+    # Catalog swagger.json
+
+    
+    uid = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    sub_type = fields.Str(required=False)
+    
+    parent_id = fields.List(fields.Str(required=False), required=False)
+    
+
+
+class Country(BaseSchema):
+    # Catalog swagger.json
+
+    
+    uid = fields.Str(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+
+
+class Area(BaseSchema):
+    # Catalog swagger.json
+
+    
+    regions = fields.List(fields.Nested(AreaDetails, required=False), required=False)
+    
+    country = fields.Nested(Country, required=False)
+    
+
+
+class RegionReference(BaseSchema):
+    # Catalog swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    slug = fields.Str(required=False)
+    
+    areas = fields.List(fields.Nested(Area, required=False), required=False)
+    
 
 
 class CreateTaxRequestBody(BaseSchema):
@@ -9173,6 +9653,14 @@ class TaxVersion(BaseSchema):
     
     status = fields.Str(required=False, validate=OneOf([val.value for val in TaxStatusEnum.__members__.values()]))
     
+    region_type = fields.Str(required=False)
+    
+    areas = fields.Nested(TaxGeoArea, required=False)
+    
+    store_ids = fields.List(fields.Int(required=False), required=False)
+    
+    scope = fields.Str(required=False, validate=OneOf([val.value for val in TaxVersionScopeEnum.__members__.values()]))
+    
     components = fields.List(fields.Nested(TaxComponentResponseSchema, required=False), required=False)
     
 
@@ -9185,6 +9673,12 @@ class UpdateTaxVersionRequestBody(BaseSchema):
     
     applicable_date = fields.Str(required=False)
     
+    region_type = fields.Str(required=False)
+    
+    areas = fields.Nested(TaxGeoArea, required=False)
+    
+    store_ids = fields.List(fields.Int(required=False), required=False)
+    
 
 
 class CreateTaxVersionRequestBody(BaseSchema):
@@ -9194,6 +9688,12 @@ class CreateTaxVersionRequestBody(BaseSchema):
     components = fields.List(fields.Nested(TaxComponent, required=False), required=False)
     
     applicable_date = fields.Str(required=False)
+    
+    region_type = fields.Str(required=False)
+    
+    areas = fields.Nested(TaxGeoArea, required=False)
+    
+    store_ids = fields.List(fields.Int(required=False), required=False)
     
 
 
@@ -9237,7 +9737,15 @@ class TaxVersionDetail(BaseSchema):
     
     status = fields.Str(required=False, validate=OneOf([val.value for val in TaxStatusEnum.__members__.values()]))
     
+    region_code = fields.Str(required=False)
+    
+    store_ids = fields.List(fields.Int(required=False), required=False)
+    
+    region = fields.Nested(RegionReference, required=False)
+    
     components = fields.List(fields.Nested(TaxComponent, required=False), required=False)
+    
+    scope = fields.Str(required=False, validate=OneOf([val.value for val in TaxVersionScopeEnum.__members__.values()]))
     
     version_status = fields.Str(required=False)
     
@@ -9250,16 +9758,6 @@ class CreateTax(BaseSchema):
     rule = fields.Nested(TaxRule, required=False)
     
     versions = fields.Nested(TaxVersion, required=False)
-    
-
-
-class UpdateTaxVersion(BaseSchema):
-    # Catalog swagger.json
-
-    
-    components = fields.List(fields.Nested(TaxComponent, required=False), required=False)
-    
-    applicable_date = fields.Str(required=False)
     
 
 
@@ -9356,6 +9854,238 @@ class GetTaxComponents(BaseSchema):
     items = fields.List(fields.Nested(TaxComponentResponseSchema, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class PriceFactoryListItemsSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    price_factory_id = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    currencies = fields.List(fields.Str(required=False), required=False)
+    
+    price_strategy = fields.List(fields.Nested(PriceStrategySchema, required=False), required=False)
+    
+    price_zone_id = fields.Str(required=False)
+    
+    active = fields.Boolean(required=False)
+    
+    modified_by = fields.Nested(CreatedBy, required=False)
+    
+    created_by = fields.Nested(CreatedBy, required=False)
+    
+    modified_on = fields.Str(required=False)
+    
+
+
+class PriceFactoryListResponseSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    page = fields.Nested(Page, required=False)
+    
+    data = fields.List(fields.Nested(PriceFactoryListItemsSchema, required=False), required=False)
+    
+
+
+class CreatePriceFactoryConfigSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    currencies = fields.List(fields.Str(required=False), required=False)
+    
+    price_strategy = fields.List(fields.Nested(PriceStrategySchema, required=False), required=False)
+    
+    price_zone_id = fields.Str(required=False)
+    
+
+
+class UpdatePriceFactoryConfigSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    currencies = fields.List(fields.Str(required=False), required=False)
+    
+    price_strategy = fields.List(fields.Nested(PriceStrategySchema, required=False), required=False)
+    
+    price_zone_id = fields.Str(required=False)
+    
+
+
+class PriceFactoryConfigSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    currencies = fields.List(fields.Str(required=False), required=False)
+    
+    price_strategy = fields.List(fields.Nested(PriceStrategySchema, required=False), required=False)
+    
+    price_zone_id = fields.Str(required=False)
+    
+    created_by = fields.Nested(CreatedBy, required=False)
+    
+    modified_by = fields.Nested(CreatedBy, required=False)
+    
+
+
+class CurrencyPriceSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    marked_price = fields.Float(required=False)
+    
+    selling_price = fields.Float(required=False)
+    
+    currency = fields.Str(required=False)
+    
+
+
+class UpsertPriceFactorySizesSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    size = fields.Str(required=False)
+    
+    currency_prices = fields.List(fields.Nested(CurrencyPriceSchema, required=False), required=False)
+    
+
+
+class UpsertPriceFactoryProductSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    sizes = fields.List(fields.Nested(UpsertPriceFactorySizesSchema, required=False), required=False)
+    
+    active = fields.Boolean(required=False)
+    
+
+
+class PriceFactoryCurrencyPriceSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    base_price = fields.Boolean(required=False)
+    
+    currency = fields.Str(required=False)
+    
+    selling_price = fields.Float(required=False)
+    
+    marked_price = fields.Float(required=False)
+    
+
+
+class PriceFactorySizesSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    price_factory_id = fields.Str(required=False)
+    
+    seller_identifier = fields.Str(required=False)
+    
+    size = fields.Str(required=False)
+    
+    price_zone_id = fields.Str(required=False)
+    
+    currency_prices = fields.List(fields.Nested(PriceFactoryCurrencyPriceSchema, required=False), required=False)
+    
+
+
+class PriceFactoryProductResponseSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    item_id = fields.Int(required=False)
+    
+    item_code = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    active = fields.Boolean(required=False)
+    
+    media = fields.List(fields.Str(required=False), required=False)
+    
+    sizes = fields.List(fields.Nested(PriceFactorySizesSchema, required=False), required=False)
+    
+
+
+class PriceFactoryProductListResponseSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    items = fields.List(fields.Nested(PriceFactoryProductResponseSchema, required=False), required=False)
+    
+    page = fields.Nested(Page, required=False)
+    
+
+
+class PriceRange(BaseSchema):
+    # Catalog swagger.json
+
+    
+    min = fields.Float(required=False)
+    
+    max = fields.Float(required=False)
+    
+
+
+class CurrencyPrice(BaseSchema):
+    # Catalog swagger.json
+
+    
+    discount = fields.Float(required=False)
+    
+    currency_code = fields.Str(required=False)
+    
+    currency_symbol = fields.Str(required=False)
+    
+    marked = fields.Nested(PriceRange, required=False)
+    
+    effective = fields.Nested(PriceRange, required=False)
+    
+    selling = fields.Nested(PriceRange, required=False)
+    
+
+
+class ProductPrice(BaseSchema):
+    # Catalog swagger.json
+
+    
+    zone_type = fields.Str(required=False)
+    
+    zone_identifier = fields.Str(required=False)
+    
+    currency_prices = fields.List(fields.Nested(CurrencyPrice, required=False), required=False)
+    
+
+
+class AppProductPricesSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    item_code = fields.Str(required=False)
+    
+    brand_uid = fields.Int(required=False)
+    
+    item_id = fields.Int(required=False)
+    
+    discount_meta = fields.Dict(required=False)
+    
+    product_price = fields.List(fields.Nested(ProductPrice, required=False), required=False)
     
 
 

@@ -36,6 +36,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
         
@@ -194,6 +195,8 @@ class PaymentValidator:
         advance_payment = fields.Boolean(required=False)
         
         shipment_id = fields.Str(required=False)
+        
+        fulfillment_option = fields.List(fields.Str(required=False), required=False)
          
         
     

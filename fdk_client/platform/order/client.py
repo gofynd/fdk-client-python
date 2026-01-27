@@ -199,7 +199,7 @@ class Order:
         return response
     
     async def updateShipmentStatus(self, body="", request_headers:Dict={}):
-        """It is used for updating the shipment in the following scenarios: Full Confirmation, Partial Confirmation, Change the status of a shipment, Full Cancellation, Partial Cancellation, Assign the shipment to DP. Click <a href='/commerce/miscellaneous/updateShipmentStatus'>here</a> to get the example payload. Also, refer to the <a href='/commerce/getting-started/oms-states/'>OMS States</a> for the complete status list.
+        """It is used for updating the shipment in the following scenarios: Full Confirmation, Partial Confirmation, Change the status of a shipment, Full Cancellation, Partial Cancellation, Assign the shipment to DP. Click <a href='/commerce/miscellaneous/updateShipmentStatus'>here</a> to get the use case details.
         """
         payload = {}
         
@@ -213,7 +213,7 @@ class Order:
         schema = UpdateShipmentStatusRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/status-internal", """{"required":[{"in":"path","name":"company_id","description":"company id from where are transitioning the shipment state or data","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"company id from where are transitioning the shipment state or data","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/order-manage/v1.0/company/{self._conf.companyId}/shipment/status-internal", """{"required":[{"in":"path","name":"company_id","description":"Company id from where are transitioning the shipment state or data","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","description":"Company id from where are transitioning the shipment state or data","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string

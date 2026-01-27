@@ -235,6 +235,12 @@ class EventConfig(BaseSchema):
     
     event_schema = fields.Dict(required=False, allow_none=True)
     
+    sunset_date = fields.Str(required=False, allow_none=True)
+    
+    announcement_date = fields.Str(required=False, allow_none=True)
+    
+    support_end_date = fields.Str(required=False, allow_none=True)
+    
     group = fields.Str(required=False, allow_none=True)
     
     version = fields.Str(required=False)

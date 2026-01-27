@@ -39,7 +39,8 @@ class Content:
             "getTranslateUILabels": "/service/application/content/v1.0/translate-ui-labels",
             "fetchResourceTranslations": "/service/application/content/v1.0/resource/translations/{type}/{locale}",
             "fetchResourceTranslationsWithPayload": "/service/application/content/v1.0/resource/translations/{type}/{locale}",
-            "getSupportedLanguages": "/service/application/content/v1.0/languages"
+            "getSupportedLanguages": "/service/application/content/v1.0/languages",
+            "getOrderTranslation": "/service/application/content/v1.0/resource/translations/orders"
             
         }
         self._urls = {
@@ -1140,11 +1141,10 @@ class Content:
 
         return response
     
-    async def fetchResourceTranslationsWithPayload(self, type=None, locale=None, resource_id=None, body="", request_headers:Dict={}):
+    async def fetchResourceTranslationsWithPayload(self, type=None, locale=None, body="", request_headers:Dict={}):
         """Submit and retrieve translations for resources using payload data and locale settings.
         :param type : Type of resource for which translations are required (e.g., `application.product`). : type string
         :param locale : Locale code for the translations (e.g., `hi-IN` for Hindi). : type string
-        :param resource_id : Comma-separated list of resource IDs to fetch translations for. : type string
         """
         payload = {}
         
@@ -1152,8 +1152,6 @@ class Content:
             payload["type"] = type
         if locale is not None:
             payload["locale"] = locale
-        if resource_id is not None:
-            payload["resource_id"] = resource_id
 
         # Parameter validation
         schema = ContentValidator.fetchResourceTranslationsWithPayload()
@@ -1164,8 +1162,8 @@ class Content:
         schema = ResourcePayload()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["fetchResourceTranslationsWithPayload"], proccessed_params="""{"required":[{"name":"type","in":"path","required":true,"description":"Type of resource for which translations are required (e.g., `application.product`).","schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"description":"Locale code for the translations (e.g., `hi-IN` for Hindi).","schema":{"type":"string"}},{"name":"resource_id","in":"query","required":true,"description":"Comma-separated list of resource IDs to fetch translations for.","schema":{"type":"string"}}],"optional":[],"query":[{"name":"resource_id","in":"query","required":true,"description":"Comma-separated list of resource IDs to fetch translations for.","schema":{"type":"string"}}],"headers":[],"path":[{"name":"type","in":"path","required":true,"description":"Type of resource for which translations are required (e.g., `application.product`).","schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"description":"Locale code for the translations (e.g., `hi-IN` for Hindi).","schema":{"type":"string"}}]}""", serverType="application", type=type, locale=locale, resource_id=resource_id)
-        query_string = await create_query_string(resource_id=resource_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["fetchResourceTranslationsWithPayload"], proccessed_params="""{"required":[{"name":"type","in":"path","required":true,"description":"Type of resource for which translations are required (e.g., `application.product`).","schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"description":"Locale code for the translations (e.g., `hi-IN` for Hindi).","schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"type","in":"path","required":true,"description":"Type of resource for which translations are required (e.g., `application.product`).","schema":{"type":"string"}},{"name":"locale","in":"path","required":true,"description":"Locale code for the translations (e.g., `hi-IN` for Hindi).","schema":{"type":"string"}}]}""", serverType="application", type=type, locale=locale)
+        query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
 
@@ -1183,7 +1181,7 @@ class Content:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["fetchResourceTranslationsWithPayload"]).netloc, "post", await create_url_without_domain("/service/application/content/v1.0/resource/translations/{type}/{locale}", type=type, locale=locale, resource_id=resource_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["fetchResourceTranslationsWithPayload"]).netloc, "post", await create_url_without_domain("/service/application/content/v1.0/resource/translations/{type}/{locale}", type=type, locale=locale), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ResourceTranslations
@@ -1227,6 +1225,53 @@ class Content:
                 exclude_headers.append(key)
 
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getSupportedLanguages"]).netloc, "get", await create_url_without_domain("/service/application/content/v1.0/languages", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        return response
+    
+    async def getOrderTranslation(self, body="", request_headers:Dict={}):
+        """Retrieves translated  information for orders or shipments. This endpoint processes the order/shipment payload and returns the same structure with translated  details including names, brands, categories, and other localized content.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.getOrderTranslation()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import OrderTranslationRequestSchema
+        schema = OrderTranslationRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getOrderTranslation"], proccessed_params="""{"required":[],"optional":[],"query":[],"headers":[],"path":[]}""", serverType="application" )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrderTranslation"]).netloc, "post", await create_url_without_domain("/service/application/content/v1.0/resource/translations/orders", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import TranslationResult
+            schema = TranslationResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOrderTranslation")
+                print(e)
 
         return response
     

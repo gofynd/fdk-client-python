@@ -96,6 +96,10 @@ class PromoMeta(BaseSchema):
     pass
 
 
+class CurrencyValue(BaseSchema):
+    pass
+
+
 class ChargesAmount(BaseSchema):
     pass
 
@@ -265,6 +269,18 @@ class CartItemCountResult(BaseSchema):
 
 
 class PageCoupon(BaseSchema):
+    pass
+
+
+class EligibleProductItem(BaseSchema):
+    pass
+
+
+class PageInfo(BaseSchema):
+    pass
+
+
+class EligibleProductsResult(BaseSchema):
     pass
 
 
@@ -521,6 +537,18 @@ class CartCheckoutDetailV2Creation(BaseSchema):
 
 
 class ValidationError(BaseSchema):
+    pass
+
+
+class ApplyOfferSchema(BaseSchema):
+    pass
+
+
+class OfferListItem(BaseSchema):
+    pass
+
+
+class GetOfferResult(BaseSchema):
     pass
 
 
@@ -859,6 +887,16 @@ class PromoMeta(BaseSchema):
     
 
 
+class CurrencyValue(BaseSchema):
+    # Cart swagger.json
+
+    
+    currency = fields.Str(required=False)
+    
+    value = fields.Float(required=False)
+    
+
+
 class ChargesAmount(BaseSchema):
     # Cart swagger.json
 
@@ -866,6 +904,10 @@ class ChargesAmount(BaseSchema):
     value = fields.Float(required=False)
     
     currency = fields.Str(required=False)
+    
+    base_currency = fields.Nested(CurrencyValue, required=False)
+    
+    ordering_currency = fields.Nested(CurrencyValue, required=False)
     
 
 
@@ -1650,6 +1692,44 @@ class PageCoupon(BaseSchema):
     current = fields.Int(required=False)
     
     has_previous = fields.Boolean(required=False)
+    
+
+
+class EligibleProductItem(BaseSchema):
+    # Cart swagger.json
+
+    
+    product_slug = fields.Str(required=False)
+    
+    uid = fields.Int(required=False)
+    
+
+
+class PageInfo(BaseSchema):
+    # Cart swagger.json
+
+    
+    current = fields.Int(required=False)
+    
+    has_previous = fields.Boolean(required=False)
+    
+    has_next = fields.Boolean(required=False)
+    
+    size = fields.Int(required=False)
+    
+
+
+class EligibleProductsResult(BaseSchema):
+    # Cart swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
+    items = fields.List(fields.Nested(EligibleProductItem, required=False), required=False)
+    
+    page = fields.Nested(PageInfo, required=False)
     
 
 
@@ -2894,6 +2974,60 @@ class ValidationError(BaseSchema):
     message = fields.Str(required=False)
     
     field = fields.Str(required=False)
+    
+
+
+class ApplyOfferSchema(BaseSchema):
+    # Cart swagger.json
+
+    
+    offer_code = fields.Str(required=False)
+    
+
+
+class OfferListItem(BaseSchema):
+    # Cart swagger.json
+
+    
+    mode = fields.Str(required=False)
+    
+    offer_text = fields.Str(required=False)
+    
+    description = fields.Str(required=False)
+    
+    id = fields.Str(required=False)
+    
+    code = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    offer_label = fields.Str(required=False)
+    
+    max_discount_value = fields.Float(required=False)
+    
+    applied_discount_amount = fields.Float(required=False)
+    
+    is_applicable = fields.Boolean(required=False)
+    
+    is_applied = fields.Boolean(required=False)
+    
+    is_bank_offer = fields.Boolean(required=False)
+    
+    start_date = fields.Str(required=False)
+    
+    end_date = fields.Str(required=False)
+    
+
+
+class GetOfferResult(BaseSchema):
+    # Cart swagger.json
+
+    
+    available_offers = fields.List(fields.Nested(OfferListItem, required=False), required=False)
+    
+    page = fields.Nested(PageCoupon, required=False)
     
 
 

@@ -228,6 +228,14 @@ class OrderFeature(BaseSchema):
     pass
 
 
+class SecurityFeature(BaseSchema):
+    pass
+
+
+class AllowedDomain(BaseSchema):
+    pass
+
+
 class DeliveryStrategy(BaseSchema):
     pass
 
@@ -917,9 +925,15 @@ class AppFeature(BaseSchema):
     
     order = fields.Nested(OrderFeature, required=False)
     
+    security = fields.Nested(SecurityFeature, required=False)
+    
     fulfillment_option = fields.Nested(FulfillmentOption, required=False)
     
     delivery_strategy = fields.Nested(DeliveryStrategy, required=False)
+    
+    price_strategy = fields.Str(required=False)
+    
+    international = fields.Boolean(required=False)
     
     _id = fields.Str(required=False)
     
@@ -1092,6 +1106,24 @@ class OrderFeature(BaseSchema):
     enabled = fields.Boolean(required=False)
     
     message = fields.Str(required=False)
+    
+
+
+class SecurityFeature(BaseSchema):
+    # Configuration swagger.json
+
+    
+    domains = fields.List(fields.Nested(AllowedDomain, required=False), required=False)
+    
+
+
+class AllowedDomain(BaseSchema):
+    # Configuration swagger.json
+
+    
+    host = fields.Str(required=False)
+    
+    url_scheme = fields.Str(required=False)
     
 
 

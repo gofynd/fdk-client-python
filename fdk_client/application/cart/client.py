@@ -44,7 +44,11 @@ class Cart:
             "getPromotionOffers": "/service/application/cart/v1.0/available-promotions",
             "getLadderOffers": "/service/application/cart/v1.0/available-ladder-prices",
             "getPromotionPaymentOffers": "/service/application/cart/v1.0/available-payment-offers",
-            "checkoutCartV2": "/service/application/cart/v2.0/checkout"
+            "checkoutCartV2": "/service/application/cart/v2.0/checkout",
+            "getOffers": "/service/application/cart/v1.0/offer",
+            "applyOffer": "/service/application/cart/v1.0/offer",
+            "removeOffer": "/service/application/cart/v1.0/offer",
+            "getProductsByOfferId": "/service/application/cart/v1.0/eligible-offer-products"
             
         }
         self._urls = {
@@ -1755,6 +1759,224 @@ class Cart:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for checkoutCartV2")
+                print(e)
+
+        return response
+    
+    async def getOffers(self, mode=None, id=None, buy_now=None, product_slug=None, store_id=None, type=None, product_size=None, body="", request_headers:Dict={}):
+        """List all offers available for the items in the cart, including details such as offer text, unique offer ID, validity period, etc.
+        :param mode : Type of offer to be fetched. : type string
+        :param id : The unique identifier of the cart. : type string
+        :param buy_now : Whether to get buy_now cart. : type boolean
+        :param product_slug : Product slug to fetch the available offers. : type string
+        :param store_id : Unique identifier of a store. : type string
+        :param type : Filter by offer type. : type boolean
+        :param product_size : Size of the product in case of multi-size productfor which applicable offers will be fetched when product_slug is provided. Defaults to first size of the product if not provided. : type string
+        """
+        payload = {}
+        
+        if mode is not None:
+            payload["mode"] = mode
+        if id is not None:
+            payload["id"] = id
+        if buy_now is not None:
+            payload["buy_now"] = buy_now
+        if product_slug is not None:
+            payload["product_slug"] = product_slug
+        if store_id is not None:
+            payload["store_id"] = store_id
+        if type is not None:
+            payload["type"] = type
+        if product_size is not None:
+            payload["product_size"] = product_size
+
+        # Parameter validation
+        schema = CartValidator.getOffers()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getOffers"], proccessed_params="""{"required":[],"optional":[{"name":"mode","in":"query","schema":{"type":"string","enum":["promotion","coupon"]},"description":"Type of offer to be fetched."},{"name":"id","in":"query","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"name":"buy_now","in":"query","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"name":"product_slug","in":"query","schema":{"type":"string"},"description":"Product slug to fetch the available offers."},{"name":"store_id","in":"query","schema":{"type":"string"},"description":"Unique identifier of a store."},{"name":"type","in":"query","schema":{"type":"boolean"},"description":"Filter by offer type."},{"name":"product_size","in":"query","schema":{"type":"string"},"description":"Size of the product in case of multi-size productfor which applicable offers will be fetched when product_slug is provided. Defaults to first size of the product if not provided."}],"query":[{"name":"mode","in":"query","schema":{"type":"string","enum":["promotion","coupon"]},"description":"Type of offer to be fetched."},{"name":"id","in":"query","schema":{"type":"string"},"description":"The unique identifier of the cart."},{"name":"buy_now","in":"query","schema":{"type":"boolean"},"description":"Whether to get buy_now cart."},{"name":"product_slug","in":"query","schema":{"type":"string"},"description":"Product slug to fetch the available offers."},{"name":"store_id","in":"query","schema":{"type":"string"},"description":"Unique identifier of a store."},{"name":"type","in":"query","schema":{"type":"boolean"},"description":"Filter by offer type."},{"name":"product_size","in":"query","schema":{"type":"string"},"description":"Size of the product in case of multi-size productfor which applicable offers will be fetched when product_slug is provided. Defaults to first size of the product if not provided."}],"headers":[],"path":[]}""", serverType="application", mode=mode, id=id, buy_now=buy_now, product_slug=product_slug, store_id=store_id, type=type, product_size=product_size)
+        query_string = await create_query_string(mode=mode, id=id, buy_now=buy_now, product_slug=product_slug, store_id=store_id, type=type, product_size=product_size)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOffers"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/offer", mode=mode, id=id, buy_now=buy_now, product_slug=product_slug, store_id=store_id, type=type, product_size=product_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetOfferResult
+            schema = GetOfferResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOffers")
+                print(e)
+
+        return response
+    
+    async def applyOffer(self, id=None, buy_now=None, body="", request_headers:Dict={}):
+        """Apply offer to the cart to trigger discounts on eligible items.
+        :param id : The unique identifier of the cart. : type string
+        :param buy_now : Whether to apply offer to buy_now cart or not. : type boolean
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+        if buy_now is not None:
+            payload["buy_now"] = buy_now
+
+        # Parameter validation
+        schema = CartValidator.applyOffer()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ApplyOfferSchema
+        schema = ApplyOfferSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["applyOffer"], proccessed_params="""{"required":[{"in":"query","name":"id","required":true,"schema":{"type":"string"},"description":"The unique identifier of the cart."}],"optional":[{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to apply offer to buy_now cart or not."}],"query":[{"in":"query","name":"id","required":true,"schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to apply offer to buy_now cart or not."}],"headers":[],"path":[]}""", serverType="application", id=id, buy_now=buy_now)
+        query_string = await create_query_string(id=id, buy_now=buy_now)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["applyOffer"]).netloc, "post", await create_url_without_domain("/service/application/cart/v1.0/offer", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OfferListItem
+            schema = OfferListItem()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for applyOffer")
+                print(e)
+
+        return response
+    
+    async def removeOffer(self, id=None, buy_now=None, body="", request_headers:Dict={}):
+        """Remove an applied offer from the customer's cart, thereby removing the associated discount from the cart total.
+        :param id : The unique identifier of the cart. : type string
+        :param buy_now : Whether to remove offer from buy_now cart or not. : type boolean
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+        if buy_now is not None:
+            payload["buy_now"] = buy_now
+
+        # Parameter validation
+        schema = CartValidator.removeOffer()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["removeOffer"], proccessed_params="""{"required":[{"in":"query","name":"id","required":true,"schema":{"type":"string"},"description":"The unique identifier of the cart."}],"optional":[{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to remove offer from buy_now cart or not."}],"query":[{"in":"query","name":"id","required":true,"schema":{"type":"string"},"description":"The unique identifier of the cart."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Whether to remove offer from buy_now cart or not."}],"headers":[],"path":[]}""", serverType="application", id=id, buy_now=buy_now)
+        query_string = await create_query_string(id=id, buy_now=buy_now)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["removeOffer"]).netloc, "delete", await create_url_without_domain("/service/application/cart/v1.0/offer", id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OfferListItem
+            schema = OfferListItem()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for removeOffer")
+                print(e)
+
+        return response
+    
+    async def getProductsByOfferId(self, offer_id=None, page=None, page_size=None, body="", request_headers:Dict={}):
+        """List all products eligible for the given offer id.
+        :param offer_id : The unique identifier of the offer : type string
+        :param page : Page number for pagination : type integer
+        :param page_size : Number of items per page : type integer
+        """
+        payload = {}
+        
+        if offer_id is not None:
+            payload["offer_id"] = offer_id
+        if page is not None:
+            payload["page"] = page
+        if page_size is not None:
+            payload["page_size"] = page_size
+
+        # Parameter validation
+        schema = CartValidator.getProductsByOfferId()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getProductsByOfferId"], proccessed_params="""{"required":[{"name":"offer_id","in":"query","required":true,"schema":{"type":"string"},"description":"The unique identifier of the offer"}],"optional":[{"name":"page","in":"query","schema":{"type":"integer","default":1},"description":"Page number for pagination"},{"name":"page_size","in":"query","schema":{"type":"integer","default":20},"description":"Number of items per page"}],"query":[{"name":"offer_id","in":"query","required":true,"schema":{"type":"string"},"description":"The unique identifier of the offer"},{"name":"page","in":"query","schema":{"type":"integer","default":1},"description":"Page number for pagination"},{"name":"page_size","in":"query","schema":{"type":"integer","default":20},"description":"Number of items per page"}],"headers":[],"path":[]}""", serverType="application", offer_id=offer_id, page=page, page_size=page_size)
+        query_string = await create_query_string(offer_id=offer_id, page=page, page_size=page_size)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductsByOfferId"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/eligible-offer-products", offer_id=offer_id, page=page, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import EligibleProductsResult
+            schema = EligibleProductsResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductsByOfferId")
                 print(e)
 
         return response

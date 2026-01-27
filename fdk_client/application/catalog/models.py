@@ -572,6 +572,18 @@ class ProductBundleItemsWithSlug(BaseSchema):
     pass
 
 
+class CurrenciesSchema(BaseSchema):
+    pass
+
+
+class CountryCurrencyMapping(BaseSchema):
+    pass
+
+
+class AvailableCountrySchema(BaseSchema):
+    pass
+
+
 
 
 
@@ -3050,6 +3062,46 @@ class ProductBundleItemsWithSlug(BaseSchema):
     items = fields.List(fields.Nested(BundleItem, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class CurrenciesSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    code = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    symbol = fields.Str(required=False)
+    
+    is_default = fields.Boolean(required=False)
+    
+
+
+class CountryCurrencyMapping(BaseSchema):
+    # Catalog swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    iso2 = fields.Str(required=False)
+    
+    iso3 = fields.Str(required=False)
+    
+    uid = fields.Str(required=False)
+    
+    is_default = fields.Boolean(required=False)
+    
+    currencies = fields.List(fields.Nested(CurrenciesSchema, required=False), required=False)
+    
+
+
+class AvailableCountrySchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    items = fields.List(fields.Nested(CountryCurrencyMapping, required=False), required=False)
     
 
 

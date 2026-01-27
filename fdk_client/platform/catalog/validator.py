@@ -417,6 +417,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -1339,6 +1340,8 @@ class CatalogValidator:
         rule_id = fields.Str(required=False)
         
         version_status = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
         
         limit = fields.Str(required=False)
         

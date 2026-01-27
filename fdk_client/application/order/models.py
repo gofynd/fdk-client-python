@@ -180,6 +180,10 @@ class BeneficiaryDetails(BaseSchema):
     pass
 
 
+class RefundTransactionInfo(BaseSchema):
+    pass
+
+
 class RefundModeData(BaseSchema):
     pass
 
@@ -1171,6 +1175,10 @@ class RefundStatus(BaseSchema):
     
     status = fields.Str(required=False)
     
+    operational_status = fields.Str(required=False)
+    
+    transaction_info = fields.List(fields.Nested(RefundTransactionInfo, required=False), required=False)
+    
     created_ts = fields.Str(required=False)
     
     updated_ts = fields.Str(required=False)
@@ -1196,6 +1204,18 @@ class BeneficiaryDetails(BaseSchema):
     is_verified = fields.Boolean(required=False)
     
     vpa_address = fields.Str(required=False)
+    
+
+
+class RefundTransactionInfo(BaseSchema):
+    # Order swagger.json
+
+    
+    rrn = fields.Str(required=False)
+    
+    utr = fields.Str(required=False)
+    
+    mode = fields.Str(required=False)
     
 
 

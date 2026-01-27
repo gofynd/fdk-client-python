@@ -244,6 +244,11 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+    
+    
+        
+        
     
     
         
@@ -258,10 +263,14 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
         
+    
+    
+        
         
     
     
@@ -279,6 +288,7 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
     
     
         
@@ -291,7 +301,10 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
+    
+    
         
         
     
@@ -314,10 +327,12 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
     
     
         
         
+        
     
     
         
@@ -330,20 +345,32 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
+    
+    
         
         
     
     
+        
+        
         
         
         
+        
     
     
         
         
+        
     
     
+        
+        
+        
+        
+        
         
         
     
@@ -351,6 +378,9 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
         
         
         
@@ -359,11 +389,15 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
+        
         
         
         
+    
+    
         
         
         
@@ -373,8 +407,13 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+        
     
     
+        
         
         
         
@@ -395,19 +434,35 @@ from ..PlatformModel import BaseSchema
     
         
         
+        
+    
+    
         
         
     
     
+        
+        
         
+    
+    
         
         
         
+    
+    
         
         
         
     
     
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -924,6 +979,17 @@ class CatalogValidator:
          
         
     
+    class getAppProductPrices(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        item_ids = fields.List(fields.Int(required=False), required=False)
+         
+        
+    
     class getAppReturnConfiguration(BaseSchema):
         
         
@@ -1327,6 +1393,114 @@ class CatalogValidator:
         user_id = fields.Str(required=False)
         
         item_id = fields.Str(required=False)
+         
+        
+    
+    class getPriceFactories(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        q = fields.Str(required=False)
+         
+        
+    
+    class createPriceFactory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getPriceFactory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        price_factory_id = fields.Str(required=False)
+         
+        
+    
+    class updatePriceFactory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        price_factory_id = fields.Str(required=False)
+         
+        
+    
+    class deletePriceFactory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        price_factory_id = fields.Str(required=False)
+         
+        
+    
+    class getPriceFactoryProducts(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        price_factory_id = fields.Str(required=False)
+        
+        brand_ids = fields.List(fields.Int(required=False), required=False)
+        
+        category_ids = fields.List(fields.Int(required=False), required=False)
+        
+        seller_identifier = fields.Str(required=False)
+        
+        item_code = fields.Str(required=False)
+        
+        slug = fields.Str(required=False)
+        
+        name = fields.Str(required=False)
+        
+        active = fields.Boolean(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class getPriceFactoryProduct(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        price_factory_id = fields.Str(required=False)
+        
+        item_id = fields.Int(required=False)
+         
+        
+    
+    class updatePriceFactoryProduct(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        price_factory_id = fields.Str(required=False)
+        
+        item_id = fields.Int(required=False)
          
         
     

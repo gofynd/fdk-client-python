@@ -191,6 +191,28 @@ from ..ApplicationModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
 
 class CartValidator:
     
@@ -590,6 +612,54 @@ class CartValidator:
         buy_now = fields.Boolean(required=False)
         
         cart_type = fields.Str(required=False)
+         
+        
+    
+    class getOffers(BaseSchema):
+        
+        
+        mode = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
+        
+        product_slug = fields.Str(required=False)
+        
+        store_id = fields.Str(required=False)
+        
+        type = fields.Boolean(required=False)
+        
+        product_size = fields.Str(required=False)
+         
+        
+    
+    class applyOffer(BaseSchema):
+        
+        
+        id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
+         
+        
+    
+    class removeOffer(BaseSchema):
+        
+        
+        id = fields.Str(required=False)
+        
+        buy_now = fields.Boolean(required=False)
+         
+        
+    
+    class getProductsByOfferId(BaseSchema):
+        
+        
+        offer_id = fields.Str(required=False)
+        
+        page = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
          
         
     

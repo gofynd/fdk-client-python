@@ -166,6 +166,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -256,8 +257,10 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
+        
         
         
         
@@ -276,6 +279,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -285,6 +289,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -306,6 +311,7 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
@@ -321,6 +327,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -368,6 +375,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -398,6 +406,7 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
@@ -405,28 +414,43 @@ from ..PlatformModel import BaseSchema
     
     
         
+        
+        
+        
+    
+    
         
         
         
     
     
+        
+        
         
         
         
+        
+        
     
     
+        
         
         
         
         
         
         
+        
+        
+        
     
     
         
         
         
         
+    
+    
         
         
         
@@ -435,24 +459,53 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
         
         
         
         
+        
     
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
         
         
+    
+    
+        
+        
+    
+    
+        
         
+        
     
     
+        
+        
         
+    
+    
         
         
         
+    
+    
         
         
         
@@ -793,6 +846,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__anonymous__cart = fields.Str(required=False)
+        
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
@@ -973,6 +1028,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__anonymous__cart = fields.Str(required=False)
+        
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
@@ -998,6 +1055,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__anonymous__cart = fields.Str(required=False)
+        
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
@@ -1019,6 +1078,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__anonymous__cart = fields.Str(required=False)
+        
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
@@ -1039,6 +1100,8 @@ class CartValidator:
         
         
         x__ordering__source = fields.Str(required=False)
+        
+        x__anonymous__cart = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
         
@@ -1100,6 +1163,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__anonymous__cart = fields.Str(required=False)
+        
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
@@ -1120,6 +1185,8 @@ class CartValidator:
         
         
         x__ordering__source = fields.Str(required=False)
+        
+        x__anonymous__cart = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
         
@@ -1217,6 +1284,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__anonymous__cart = fields.Str(required=False)
+        
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
@@ -1295,6 +1364,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__anonymous__cart = fields.Str(required=False)
+        
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
@@ -1331,6 +1402,8 @@ class CartValidator:
         
         
         x__ordering__source = fields.Str(required=False)
+        
+        x__anonymous__cart = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
         
@@ -1415,6 +1488,98 @@ class CartValidator:
         b = fields.Boolean(required=False)
         
         buy_now = fields.Boolean(required=False)
+         
+        
+    
+    class getOffers(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_no = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+        
+        search = fields.Str(required=False)
+        
+        mode = fields.Str(required=False)
+        
+        type = fields.Str(required=False)
+        
+        promo_group = fields.Str(required=False)
+        
+        exclude_contract_offers = fields.Boolean(required=False)
+        
+        offer_id = fields.Str(required=False)
+        
+        created_by = fields.Str(required=False)
+        
+        reviewed_by = fields.Str(required=False)
+        
+        approved_start_time = fields.Str(required=False)
+        
+        approved_end_time = fields.Str(required=False)
+        
+        status = fields.Str(required=False)
+        
+        code = fields.Str(required=False)
+        
+        is_public = fields.Boolean(required=False)
+         
+        
+    
+    class createOffer(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getOfferById(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class updateOffer(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class updateOfferPartially(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
+         
+        
+    
+    class deleteOffer(BaseSchema):
+        
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        id = fields.Str(required=False)
          
         
     

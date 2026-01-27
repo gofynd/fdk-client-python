@@ -119,6 +119,8 @@ class CreateUpdateDiscount(BaseSchema):
     
     zone_ids = fields.List(fields.Str(required=False), required=False)
     
+    price_factory_ids = fields.List(fields.Str(required=False), required=False)
+    
     validity = fields.Nested(ValidityObject, required=False)
     
     discount_meta = fields.Nested(DiscountMeta, required=False)
@@ -166,6 +168,8 @@ class DiscountJob(BaseSchema):
     store_ids = fields.List(fields.Int(required=False), required=False)
     
     zone_ids = fields.List(fields.Str(required=False), required=False)
+    
+    price_factory_ids = fields.List(fields.Str(required=False), required=False)
     
     discount_meta = fields.Nested(DiscountMeta, required=False)
     
@@ -326,6 +330,8 @@ class FileJobRequestSchema(BaseSchema):
     brand_ids = fields.List(fields.Int(required=False), required=False)
     
     store_ids = fields.List(fields.Int(required=False), required=False)
+    
+    price_factory_ids = fields.List(fields.Str(required=False), required=False)
     
     validity = fields.Nested(ValidityObject, required=False)
     

@@ -1213,14 +1213,17 @@ class Cart:
 
         return response
     
-    async def checkoutCart(self, x_ordering_source=None, body="", request_headers:Dict={}):
+    async def checkoutCart(self, x_ordering_source=None, x_anonymous_cart=None, body="", request_headers:Dict={}):
         """The checkout cart initiates the order creation process based on the selected address and payment method. It revalidates the cart details to ensure safe and seamless order placement.
         :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type string
+        :param x-anonymous-cart : Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id. : type string
         """
         payload = {}
         
         if x_ordering_source is not None:
             payload["x_ordering_source"] = x_ordering_source
+        if x_anonymous_cart is not None:
+            payload["x_anonymous_cart"] = x_anonymous_cart
 
         # Parameter validation
         schema = CartValidator.checkoutCart()
@@ -1231,7 +1234,7 @@ class Cart:
         schema = OpenApiPlatformCheckoutReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/checkout", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"query":[],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/checkout", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."}],"query":[],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1248,7 +1251,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/checkout", x_ordering_source=x_ordering_source), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/checkout", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OpenApiCheckoutResult
@@ -1865,9 +1868,10 @@ class Cart:
 
         return response
     
-    async def getCart(self, x_ordering_source=None, id=None, user_id=None, order_type=None, i=None, b=None, assign_card_id=None, buy_now=None, request_headers:Dict={}):
+    async def getCart(self, x_ordering_source=None, x_anonymous_cart=None, id=None, user_id=None, order_type=None, i=None, b=None, assign_card_id=None, buy_now=None, request_headers:Dict={}):
         """Retrieve details of a cart linked to a specific customer using either the customer's ID or a unique cart ID. It offers an overview of the items, quantities, prices, and other relevant information associated with the cart.
         :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type string
+        :param x-anonymous-cart : Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id. : type string
         :param id : The unique identifier of the cart : type string
         :param user_id : Option to fetch cart for the provided user_id. : type string
         :param order_type : The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. : type string
@@ -1880,6 +1884,8 @@ class Cart:
         
         if x_ordering_source is not None:
             payload["x_ordering_source"] = x_ordering_source
+        if x_anonymous_cart is not None:
+            payload["x_anonymous_cart"] = x_anonymous_cart
         if id is not None:
             payload["id"] = id
         if user_id is not None:
@@ -1900,7 +1906,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"user_id","schema":{"type":"string"},"description":"Option to fetch cart for the provided user_id."},{"in":"query","name":"order_type","schema":{"type":"string","x-not-enum":true},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"assign_card_id","schema":{"type":"integer"},"description":"Token of user's debit or credit card"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"user_id","schema":{"type":"string"},"description":"Option to fetch cart for the provided user_id."},{"in":"query","name":"order_type","schema":{"type":"string","x-not-enum":true},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"assign_card_id","schema":{"type":"integer"},"description":"Token of user's debit or credit card"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, id=id, user_id=user_id, order_type=order_type, i=i, b=b, assign_card_id=assign_card_id, buy_now=buy_now)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"user_id","schema":{"type":"string"},"description":"Option to fetch cart for the provided user_id."},{"in":"query","name":"order_type","schema":{"type":"string","x-not-enum":true},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"assign_card_id","schema":{"type":"integer"},"description":"Token of user's debit or credit card"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"user_id","schema":{"type":"string"},"description":"Option to fetch cart for the provided user_id."},{"in":"query","name":"order_type","schema":{"type":"string","x-not-enum":true},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"assign_card_id","schema":{"type":"integer"},"description":"Token of user's debit or credit card"},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, id=id, user_id=user_id, order_type=order_type, i=i, b=b, assign_card_id=assign_card_id, buy_now=buy_now)
         query_string = await create_query_string(id=id, user_id=user_id, order_type=order_type, i=i, b=b, assign_card_id=assign_card_id, buy_now=buy_now)
         if query_string:
             url_with_params += "?" + query_string
@@ -1917,7 +1923,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", x_ordering_source=x_ordering_source, id=id, user_id=user_id, order_type=order_type, i=i, b=b, assign_card_id=assign_card_id, buy_now=buy_now), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, id=id, user_id=user_id, order_type=order_type, i=i, b=b, assign_card_id=assign_card_id, buy_now=buy_now), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CartDetailResult
@@ -1930,9 +1936,10 @@ class Cart:
 
         return response
     
-    async def platformAddItems(self, x_ordering_source=None, i=None, b=None, buy_now=None, order_type=None, id=None, body="", request_headers:Dict={}):
+    async def platformAddItems(self, x_ordering_source=None, x_anonymous_cart=None, i=None, b=None, buy_now=None, order_type=None, id=None, body="", request_headers:Dict={}):
         """Adds product items to a customer's shopping cart. If the customer does not have an existing cart, a new one is created automatically. - The `new_cart` flag forces creation of a new cart even if one already exists. - The `default_cart` flag determines whether the item is added to the user's default storefront-visible cart. If `true`, the item is added to the user's default cart that is accessible via the storefront. If `false`, an existing active cart is fetched if available; otherwise, a new hidden cart is created.
         :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type string
+        :param x-anonymous-cart : Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id. : type string
         :param i : This is a boolean value. Select `true` to retrieve all the items added in the cart. : type boolean
         :param b : This is a boolean value. Select `true` to retrieve the price breakup of cart items. : type boolean
         :param buy_now : This is a boolen value. Select `true` to set/initialize buy now cart : type boolean
@@ -1943,6 +1950,8 @@ class Cart:
         
         if x_ordering_source is not None:
             payload["x_ordering_source"] = x_ordering_source
+        if x_anonymous_cart is not None:
+            payload["x_anonymous_cart"] = x_anonymous_cart
         if i is not None:
             payload["i"] = i
         if b is not None:
@@ -1963,7 +1972,7 @@ class Cart:
         schema = PlatformAddCartDetails()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"},{"in":"query","name":"order_type","schema":{"type":"string","x-not-enum":true},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"}],"query":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"},{"in":"query","name":"order_type","schema":{"type":"string","x-not-enum":true},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, i=i, b=b, buy_now=buy_now, order_type=order_type, id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"},{"in":"query","name":"order_type","schema":{"type":"string","x-not-enum":true},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"}],"query":[{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"},{"in":"query","name":"order_type","schema":{"type":"string","x-not-enum":true},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, i=i, b=b, buy_now=buy_now, order_type=order_type, id=id)
         query_string = await create_query_string(i=i, b=b, buy_now=buy_now, order_type=order_type, id=id)
         if query_string:
             url_with_params += "?" + query_string
@@ -1980,7 +1989,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", x_ordering_source=x_ordering_source, i=i, b=b, buy_now=buy_now, order_type=order_type, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, i=i, b=b, buy_now=buy_now, order_type=order_type, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import AddCartDetailResult
@@ -1993,9 +2002,10 @@ class Cart:
 
         return response
     
-    async def platformUpdateCart(self, x_ordering_source=None, id=None, i=None, order_type=None, b=None, buy_now=None, body="", request_headers:Dict={}):
+    async def platformUpdateCart(self, x_ordering_source=None, x_anonymous_cart=None, id=None, i=None, order_type=None, b=None, buy_now=None, body="", request_headers:Dict={}):
         """Customers can modify added product attributes such as quantity and size, as well as remove items from the cart.
         :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type string
+        :param x-anonymous-cart : Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id. : type string
         :param id : The unique identifier of the cart : type string
         :param i : This is a boolean value. Select `true` to retrieve all the items added in the cart. : type boolean
         :param order_type : The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself. : type string
@@ -2006,6 +2016,8 @@ class Cart:
         
         if x_ordering_source is not None:
             payload["x_ordering_source"] = x_ordering_source
+        if x_anonymous_cart is not None:
+            payload["x_anonymous_cart"] = x_anonymous_cart
         if id is not None:
             payload["id"] = id
         if i is not None:
@@ -2026,7 +2038,7 @@ class Cart:
         schema = PlatformUpdateCartDetails()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"order_type","schema":{"type":"string","x-not-enum":true},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"order_type","schema":{"type":"string","x-not-enum":true},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, id=id, i=i, order_type=order_type, b=b, buy_now=buy_now)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."},{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"order_type","schema":{"type":"string","x-not-enum":true},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"The unique identifier of the cart"},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."},{"in":"query","name":"order_type","schema":{"type":"string","x-not-enum":true},"description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"This is a boolen value. Select `true` to set/initialize buy now cart"}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, id=id, i=i, order_type=order_type, b=b, buy_now=buy_now)
         query_string = await create_query_string(id=id, i=i, order_type=order_type, b=b, buy_now=buy_now)
         if query_string:
             url_with_params += "?" + query_string
@@ -2043,7 +2055,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", x_ordering_source=x_ordering_source, id=id, i=i, order_type=order_type, b=b, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, id=id, i=i, order_type=order_type, b=b, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import UpdateCartDetailResult
@@ -2056,9 +2068,10 @@ class Cart:
 
         return response
     
-    async def updateCartBreakup(self, x_ordering_source=None, id=None, i=None, b=None, buy_now=None, body="", request_headers:Dict={}):
+    async def updateCartBreakup(self, x_ordering_source=None, x_anonymous_cart=None, id=None, i=None, b=None, buy_now=None, body="", request_headers:Dict={}):
         """Updates the cart breakup based on the enabled features and user preferences. This endpoint allows customers to modify how their cart totals are calculated — including options such as applying store credits, loyalty points, discounts, and other promotional benefits. The API recalculates and returns the updated breakup reflecting the selected configurations in real-time.
         :param x-ordering-source : Identifier for the ordering source (e.g., web, mobile app, POS). Used to determine the origin of the order request and apply source-specific rules. : type string
+        :param x-anonymous-cart : Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id. : type string
         :param id : Unique identifier of the cart for which the breakup needs to be updated. : type string
         :param i : Set to `true` to include all items currently added to the cart in the response. : type boolean
         :param b : Set to `true` to include the detailed price breakup of each cart item in the response. : type boolean
@@ -2068,6 +2081,8 @@ class Cart:
         
         if x_ordering_source is not None:
             payload["x_ordering_source"] = x_ordering_source
+        if x_anonymous_cart is not None:
+            payload["x_anonymous_cart"] = x_anonymous_cart
         if id is not None:
             payload["id"] = id
         if i is not None:
@@ -2086,7 +2101,7 @@ class Cart:
         schema = UpdateCartBreakup()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", """{"required":[{"schema":{"type":"string"},"description":"Unique identifier of the company associated with the current cart.","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Unique identifier of the sales channel (e.g., website, app) for which the cart belongs.","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Identifier for the ordering source (e.g., web, mobile app, POS). Used to determine the origin of the order request and apply source-specific rules."},{"in":"query","name":"id","schema":{"type":"string"},"description":"Unique identifier of the cart for which the breakup needs to be updated."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Set to `true` to include all items currently added to the cart in the response."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Set to `true` to include the detailed price breakup of each cart item in the response."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Set to `true` to initialize a \"Buy Now\" cart flow, enabling direct checkout for a single item."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"Unique identifier of the cart for which the breakup needs to be updated."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Set to `true` to include all items currently added to the cart in the response."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Set to `true` to include the detailed price breakup of each cart item in the response."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Set to `true` to initialize a \"Buy Now\" cart flow, enabling direct checkout for a single item."}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Identifier for the ordering source (e.g., web, mobile app, POS). Used to determine the origin of the order request and apply source-specific rules."}],"path":[{"schema":{"type":"string"},"description":"Unique identifier of the company associated with the current cart.","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Unique identifier of the sales channel (e.g., website, app) for which the cart belongs.","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, id=id, i=i, b=b, buy_now=buy_now)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", """{"required":[{"schema":{"type":"string"},"description":"Unique identifier of the company associated with the current cart.","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Unique identifier of the sales channel (e.g., website, app) for which the cart belongs.","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Identifier for the ordering source (e.g., web, mobile app, POS). Used to determine the origin of the order request and apply source-specific rules."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."},{"in":"query","name":"id","schema":{"type":"string"},"description":"Unique identifier of the cart for which the breakup needs to be updated."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Set to `true` to include all items currently added to the cart in the response."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Set to `true` to include the detailed price breakup of each cart item in the response."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Set to `true` to initialize a \"Buy Now\" cart flow, enabling direct checkout for a single item."}],"query":[{"in":"query","name":"id","schema":{"type":"string"},"description":"Unique identifier of the cart for which the breakup needs to be updated."},{"in":"query","name":"i","schema":{"type":"boolean"},"description":"Set to `true` to include all items currently added to the cart in the response."},{"in":"query","name":"b","schema":{"type":"boolean"},"description":"Set to `true` to include the detailed price breakup of each cart item in the response."},{"in":"query","name":"buy_now","schema":{"type":"boolean"},"description":"Set to `true` to initialize a \"Buy Now\" cart flow, enabling direct checkout for a single item."}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Identifier for the ordering source (e.g., web, mobile app, POS). Used to determine the origin of the order request and apply source-specific rules."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."}],"path":[{"schema":{"type":"string"},"description":"Unique identifier of the company associated with the current cart.","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Unique identifier of the sales channel (e.g., website, app) for which the cart belongs.","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, id=id, i=i, b=b, buy_now=buy_now)
         query_string = await create_query_string(id=id, i=i, b=b, buy_now=buy_now)
         if query_string:
             url_with_params += "?" + query_string
@@ -2103,7 +2118,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", x_ordering_source=x_ordering_source, id=id, i=i, b=b, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/detail", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, id=id, i=i, b=b, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CartDetailResult
@@ -2264,9 +2279,10 @@ class Cart:
 
         return response
     
-    async def applyCoupon(self, x_ordering_source=None, i=None, b=None, p=None, id=None, buy_now=None, body="", request_headers:Dict={}):
+    async def applyCoupon(self, x_ordering_source=None, x_anonymous_cart=None, i=None, b=None, p=None, id=None, buy_now=None, body="", request_headers:Dict={}):
         """Apply a coupon code to the customer's cart to trigger discounts on eligible items
         :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type string
+        :param x-anonymous-cart : Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id. : type string
         :param i :  : type boolean
         :param b :  : type boolean
         :param p :  : type boolean
@@ -2277,6 +2293,8 @@ class Cart:
         
         if x_ordering_source is not None:
             payload["x_ordering_source"] = x_ordering_source
+        if x_anonymous_cart is not None:
+            payload["x_anonymous_cart"] = x_anonymous_cart
         if i is not None:
             payload["i"] = i
         if b is not None:
@@ -2297,7 +2315,7 @@ class Cart:
         schema = ApplyCouponDetails()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"p","schema":{"type":"boolean","description":"This is a boolean value. Select `true` for getting a payment option in response."}},{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}}],"query":[{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"p","schema":{"type":"boolean","description":"This is a boolean value. Select `true` for getting a payment option in response."}},{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, i=i, b=b, p=p, id=id, buy_now=buy_now)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."},{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"p","schema":{"type":"boolean","description":"This is a boolean value. Select `true` for getting a payment option in response."}},{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}}],"query":[{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}},{"in":"query","name":"p","schema":{"type":"boolean","description":"This is a boolean value. Select `true` for getting a payment option in response."}},{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, i=i, b=b, p=p, id=id, buy_now=buy_now)
         query_string = await create_query_string(i=i, b=b, p=p, id=id, buy_now=buy_now)
         if query_string:
             url_with_params += "?" + query_string
@@ -2314,7 +2332,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", x_ordering_source=x_ordering_source, i=i, b=b, p=p, id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, i=i, b=b, p=p, id=id, buy_now=buy_now), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CartDetailResult
@@ -2327,9 +2345,10 @@ class Cart:
 
         return response
     
-    async def removeCoupon(self, x_ordering_source=None, uid=None, buy_now=None, request_headers:Dict={}):
+    async def removeCoupon(self, x_ordering_source=None, x_anonymous_cart=None, uid=None, buy_now=None, request_headers:Dict={}):
         """Remove an applied coupon from the customer's cart, thereby removing the associated discount from the cart total.
         :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type string
+        :param x-anonymous-cart : Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id. : type string
         :param uid :  : type string
         :param buy_now :  : type boolean
         """
@@ -2337,6 +2356,8 @@ class Cart:
         
         if x_ordering_source is not None:
             payload["x_ordering_source"] = x_ordering_source
+        if x_anonymous_cart is not None:
+            payload["x_anonymous_cart"] = x_anonymous_cart
         if uid is not None:
             payload["uid"] = uid
         if buy_now is not None:
@@ -2347,7 +2368,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"query","name":"uid","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}}],"query":[{"in":"query","name":"uid","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, uid=uid, buy_now=buy_now)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."},{"in":"query","name":"uid","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}}],"query":[{"in":"query","name":"uid","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, uid=uid, buy_now=buy_now)
         query_string = await create_query_string(uid=uid, buy_now=buy_now)
         if query_string:
             url_with_params += "?" + query_string
@@ -2364,7 +2385,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", x_ordering_source=x_ordering_source, uid=uid, buy_now=buy_now), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/platform-pos-coupon", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, uid=uid, buy_now=buy_now), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CartDetailResult
@@ -2644,9 +2665,10 @@ class Cart:
 
         return response
     
-    async def selectAddress(self, x_ordering_source=None, cart_id=None, buy_now=None, i=None, b=None, body="", request_headers:Dict={}):
+    async def selectAddress(self, x_ordering_source=None, x_anonymous_cart=None, cart_id=None, buy_now=None, i=None, b=None, body="", request_headers:Dict={}):
         """Select an address from the saved customer addresses and validates the availability of items in the cart. Additionally, it verifies and updates the delivery promise based on the selected address.
         :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type string
+        :param x-anonymous-cart : Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id. : type string
         :param cart_id :  : type string
         :param buy_now :  : type boolean
         :param i :  : type boolean
@@ -2656,6 +2678,8 @@ class Cart:
         
         if x_ordering_source is not None:
             payload["x_ordering_source"] = x_ordering_source
+        if x_anonymous_cart is not None:
+            payload["x_anonymous_cart"] = x_anonymous_cart
         if cart_id is not None:
             payload["cart_id"] = cart_id
         if buy_now is not None:
@@ -2674,7 +2698,7 @@ class Cart:
         schema = PlatformSelectCartAddress()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/select-address", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"query","name":"cart_id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"query":[{"in":"query","name":"cart_id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, cart_id=cart_id, buy_now=buy_now, i=i, b=b)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/select-address", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."},{"in":"query","name":"cart_id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"query":[{"in":"query","name":"cart_id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"i","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve all the items added in the cart."}},{"in":"query","name":"b","schema":{"type":"boolean","description":"This is a boolean value. Select `true` to retrieve the price breakup of cart items."}}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, cart_id=cart_id, buy_now=buy_now, i=i, b=b)
         query_string = await create_query_string(cart_id=cart_id, buy_now=buy_now, i=i, b=b)
         if query_string:
             url_with_params += "?" + query_string
@@ -2691,7 +2715,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/select-address", x_ordering_source=x_ordering_source, cart_id=cart_id, buy_now=buy_now, i=i, b=b), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/select-address", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, cart_id=cart_id, buy_now=buy_now, i=i, b=b), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CartDetailResult
@@ -2883,15 +2907,18 @@ class Cart:
 
         return response
     
-    async def platformCheckoutCart(self, x_ordering_source=None, id=None, body="", request_headers:Dict={}):
+    async def platformCheckoutCart(self, x_ordering_source=None, x_anonymous_cart=None, id=None, body="", request_headers:Dict={}):
         """The checkout cart initiates the order creation process based on the selected address and payment method. It revalidates the cart details to ensure safe and seamless order placement.
         :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type string
+        :param x-anonymous-cart : Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id. : type string
         :param id : The unique identifier of the cart : type string
         """
         payload = {}
         
         if x_ordering_source is not None:
             payload["x_ordering_source"] = x_ordering_source
+        if x_anonymous_cart is not None:
+            payload["x_anonymous_cart"] = x_anonymous_cart
         if id is not None:
             payload["id"] = id
 
@@ -2904,7 +2931,7 @@ class Cart:
         schema = PlatformCartCheckoutDetailCreation()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"query","name":"id","required":false,"schema":{"type":"string"},"description":"The unique identifier of the cart"}],"query":[{"in":"query","name":"id","required":false,"schema":{"type":"string"},"description":"The unique identifier of the cart"}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."},{"in":"query","name":"id","required":false,"schema":{"type":"string"},"description":"The unique identifier of the cart"}],"query":[{"in":"query","name":"id","required":false,"schema":{"type":"string"},"description":"The unique identifier of the cart"}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application _id","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, id=id)
         query_string = await create_query_string(id=id)
         if query_string:
             url_with_params += "?" + query_string
@@ -2921,7 +2948,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", x_ordering_source=x_ordering_source, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CartCheckoutResult
@@ -3025,9 +3052,10 @@ class Cart:
 
         return response
     
-    async def selectPaymentMode(self, x_ordering_source=None, id=None, buy_now=None, order_type=None, body="", request_headers:Dict={}):
+    async def selectPaymentMode(self, x_ordering_source=None, x_anonymous_cart=None, id=None, buy_now=None, order_type=None, body="", request_headers:Dict={}):
         """Customers can select a preferred payment mode from available options during the cart checkout process to securely and efficiently complete their transaction.
         :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type string
+        :param x-anonymous-cart : Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id. : type string
         :param id :  : type string
         :param buy_now :  : type boolean
         :param order_type :  : type string
@@ -3036,6 +3064,8 @@ class Cart:
         
         if x_ordering_source is not None:
             payload["x_ordering_source"] = x_ordering_source
+        if x_anonymous_cart is not None:
+            payload["x_anonymous_cart"] = x_anonymous_cart
         if id is not None:
             payload["id"] = id
         if buy_now is not None:
@@ -3052,7 +3082,7 @@ class Cart:
         schema = CartPaymentUpdate()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"order_type","schema":{"type":"string","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","x-not-enum":true}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"order_type","schema":{"type":"string","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","x-not-enum":true}}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, id=id, buy_now=buy_now, order_type=order_type)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."},{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"order_type","schema":{"type":"string","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","x-not-enum":true}}],"query":[{"in":"query","name":"id","schema":{"type":"string","description":"The unique identifier of the cart"}},{"in":"query","name":"buy_now","schema":{"type":"boolean","description":"This is boolean to get buy_now cart"}},{"in":"query","name":"order_type","schema":{"type":"string","description":"The order type of shipment HomeDelivery - If the customer wants the order home-delivered PickAtStore - If the customer wants the handover of an order at the store itself.","x-not-enum":true}}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, id=id, buy_now=buy_now, order_type=order_type)
         query_string = await create_query_string(id=id, buy_now=buy_now, order_type=order_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -3069,7 +3099,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment", x_ordering_source=x_ordering_source, id=id, buy_now=buy_now, order_type=order_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, id=id, buy_now=buy_now, order_type=order_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CartDetailResult
@@ -3311,6 +3341,321 @@ class Cart:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for applyLoyaltyPoints")
+                print(e)
+
+        return response
+    
+    async def getOffers(self, page_no=None, page_size=None, search=None, mode=None, type=None, promo_group=None, exclude_contract_offers=None, offer_id=None, created_by=None, reviewed_by=None, approved_start_time=None, approved_end_time=None, status=None, code=None, is_public=None, request_headers:Dict={}):
+        """Retrieve a list of all created offers for specific sales channel. It also supports efficient text search and pagination functionalities, ensuring optimized offers listing for streamlined navigation and management.
+        :param page_no : Current page no as per pagination : type integer
+        :param page_size : Offers max records fetched in single request : type integer
+        :param search : Filter by offer name : type string
+        :param mode : Filter by offer mode : type string
+        :param type : Filter by offer type : type string
+        :param promo_group :  : type string
+        :param exclude_contract_offers : Filter non contract offers : type boolean
+        :param offer_id : Filter by offer id : type string
+        :param created_by : Filter by offer created by user id : type string
+        :param reviewed_by : Filter by offer reviewer user id : type string
+        :param approved_start_time : Filter offer by start time date range when status is in approved state : type string
+        :param approved_end_time : Filter offer by end time date range when status is in approved state : type string
+        :param status : Filter your offers effortlessly by status, such as draft, review and more : type string
+        :param code : Filter by offer code in case of coupons : type string
+        :param is_public : Filter offers which are public : type boolean
+        """
+        payload = {}
+        
+        if page_no is not None:
+            payload["page_no"] = page_no
+        if page_size is not None:
+            payload["page_size"] = page_size
+        if search is not None:
+            payload["search"] = search
+        if mode is not None:
+            payload["mode"] = mode
+        if type is not None:
+            payload["type"] = type
+        if promo_group is not None:
+            payload["promo_group"] = promo_group
+        if exclude_contract_offers is not None:
+            payload["exclude_contract_offers"] = exclude_contract_offers
+        if offer_id is not None:
+            payload["offer_id"] = offer_id
+        if created_by is not None:
+            payload["created_by"] = created_by
+        if reviewed_by is not None:
+            payload["reviewed_by"] = reviewed_by
+        if approved_start_time is not None:
+            payload["approved_start_time"] = approved_start_time
+        if approved_end_time is not None:
+            payload["approved_end_time"] = approved_end_time
+        if status is not None:
+            payload["status"] = status
+        if code is not None:
+            payload["code"] = code
+        if is_public is not None:
+            payload["is_public"] = is_public
+
+        # Parameter validation
+        schema = CartValidator.getOffers()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers", """{"required":[{"name":"company_id","description":"Current company id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","description":"Current Application id of sales channel","in":"path","required":true,"schema":{"type":"string"}}],"optional":[{"name":"page_no","description":"Current page no as per pagination","in":"query","schema":{"type":"integer","default":1}},{"name":"page_size","description":"Offers max records fetched in single request","in":"query","schema":{"type":"integer","default":10}},{"name":"search","in":"query","description":"Filter by offer name","schema":{"type":"string"}},{"name":"mode","in":"query","description":"Filter by offer mode","schema":{"type":"string","enum":["promotion","coupon"]}},{"name":"type","in":"query","description":"Filter by offer type","schema":{"type":"string"}},{"name":"promo_group","in":"query","schema":{"type":"string","description":"Filter by promotion offer group","enum":["product","cart","contract","ladder_price","limited_timer"]}},{"name":"exclude_contract_offers","in":"query","description":"Filter non contract offers","schema":{"type":"boolean"}},{"name":"offer_id","in":"query","description":"Filter by offer id","schema":{"type":"string"}},{"name":"created_by","description":"Filter by offer created by user id","in":"query","schema":{"type":"string"}},{"name":"reviewed_by","description":"Filter by offer reviewer user id","in":"query","schema":{"type":"string"}},{"name":"approved_start_time","description":"Filter offer by start time date range when status is in approved state","in":"query","schema":{"type":"string","format":"date-time"}},{"name":"approved_end_time","description":"Filter offer by end time date range when status is in approved state","in":"query","schema":{"type":"string","format":"date-time"}},{"name":"status","description":"Filter your offers effortlessly by status, such as draft, review and more","in":"query","schema":{"type":"string","enum":["draft","review","rejected","live","published"]}},{"name":"code","description":"Filter by offer code in case of coupons","in":"query","schema":{"type":"string"}},{"name":"is_public","description":"Filter offers which are public","in":"query","schema":{"type":"boolean"}}],"query":[{"name":"page_no","description":"Current page no as per pagination","in":"query","schema":{"type":"integer","default":1}},{"name":"page_size","description":"Offers max records fetched in single request","in":"query","schema":{"type":"integer","default":10}},{"name":"search","in":"query","description":"Filter by offer name","schema":{"type":"string"}},{"name":"mode","in":"query","description":"Filter by offer mode","schema":{"type":"string","enum":["promotion","coupon"]}},{"name":"type","in":"query","description":"Filter by offer type","schema":{"type":"string"}},{"name":"promo_group","in":"query","schema":{"type":"string","description":"Filter by promotion offer group","enum":["product","cart","contract","ladder_price","limited_timer"]}},{"name":"exclude_contract_offers","in":"query","description":"Filter non contract offers","schema":{"type":"boolean"}},{"name":"offer_id","in":"query","description":"Filter by offer id","schema":{"type":"string"}},{"name":"created_by","description":"Filter by offer created by user id","in":"query","schema":{"type":"string"}},{"name":"reviewed_by","description":"Filter by offer reviewer user id","in":"query","schema":{"type":"string"}},{"name":"approved_start_time","description":"Filter offer by start time date range when status is in approved state","in":"query","schema":{"type":"string","format":"date-time"}},{"name":"approved_end_time","description":"Filter offer by end time date range when status is in approved state","in":"query","schema":{"type":"string","format":"date-time"}},{"name":"status","description":"Filter your offers effortlessly by status, such as draft, review and more","in":"query","schema":{"type":"string","enum":["draft","review","rejected","live","published"]}},{"name":"code","description":"Filter by offer code in case of coupons","in":"query","schema":{"type":"string"}},{"name":"is_public","description":"Filter offers which are public","in":"query","schema":{"type":"boolean"}}],"headers":[],"path":[{"name":"company_id","description":"Current company id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","description":"Current Application id of sales channel","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, search=search, mode=mode, type=type, promo_group=promo_group, exclude_contract_offers=exclude_contract_offers, offer_id=offer_id, created_by=created_by, reviewed_by=reviewed_by, approved_start_time=approved_start_time, approved_end_time=approved_end_time, status=status, code=code, is_public=is_public)
+        query_string = await create_query_string(page_no=page_no, page_size=page_size, search=search, mode=mode, type=type, promo_group=promo_group, exclude_contract_offers=exclude_contract_offers, offer_id=offer_id, created_by=created_by, reviewed_by=reviewed_by, approved_start_time=approved_start_time, approved_end_time=approved_end_time, status=status, code=code, is_public=is_public)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers", page_no=page_no, page_size=page_size, search=search, mode=mode, type=type, promo_group=promo_group, exclude_contract_offers=exclude_contract_offers, offer_id=offer_id, created_by=created_by, reviewed_by=reviewed_by, approved_start_time=approved_start_time, approved_end_time=approved_end_time, status=status, code=code, is_public=is_public), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OfferListResult
+            schema = OfferListResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOffers")
+                print(e)
+
+        return response
+    
+    async def createOffer(self, body="", request_headers:Dict={}):
+        """Creates a new offer based on the selected offer type. Sellers can choose from multiple supported offer types, including percentage value, fixed amount value, bundled discount, buy X get Y items, and more, along with customizable offer criteria to meet specific business requirements.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CartValidator.createOffer()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import OfferSchema
+        schema = OfferSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[],"query":[],"headers":[],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OfferSchema
+            schema = OfferSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createOffer")
+                print(e)
+
+        return response
+    
+    async def getOfferById(self, id=None, request_headers:Dict={}):
+        """Retrieve details of a specific offer by providing its unique identifier to obtain information such as offer type, rules, validity period and other related information.
+        :param id :  : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = CartValidator.getOfferById()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{id}", """{"required":[{"name":"company_id","schema":{"type":"string"},"description":"Current company id","in":"path","required":true},{"name":"application_id","schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true},{"name":"id","in":"path","required":true,"schema":{"type":"string","description":"Offer id for fetching corresponding offer data"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","schema":{"type":"string"},"description":"Current company id","in":"path","required":true},{"name":"application_id","schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true},{"name":"id","in":"path","required":true,"schema":{"type":"string","description":"Offer id for fetching corresponding offer data"}}]}""", serverType="platform", id=id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OfferSchema
+            schema = OfferSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOfferById")
+                print(e)
+
+        return response
+    
+    async def updateOffer(self, id=None, body="", request_headers:Dict={}):
+        """Update the details of an existing offer by specifying its unique identifier. This includes modifying offer attributes such as discount percentage, validity period, and associated conditions.
+        :param id :  : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = CartValidator.updateOffer()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import OfferSchema
+        schema = OfferSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{id}", """{"required":[{"name":"company_id","schema":{"type":"string"},"description":"Current company id","in":"path","required":true},{"name":"application_id","schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true},{"name":"id","in":"path","schema":{"type":"string","description":"Offer identifier for updating corresponding offer data"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","schema":{"type":"string"},"description":"Current company id","in":"path","required":true},{"name":"application_id","schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true},{"name":"id","in":"path","schema":{"type":"string","description":"Offer identifier for updating corresponding offer data"},"required":true}]}""", serverType="platform", id=id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OfferSchema
+            schema = OfferSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateOffer")
+                print(e)
+
+        return response
+    
+    async def updateOfferPartially(self, id=None, body="", request_headers:Dict={}):
+        """Seller can make partial adjustments of an existing offer by specifying its unique identifier. It enables businesses to modify specific attributes of the offer while preserving other details intact.
+        :param id :  : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = CartValidator.updateOfferPartially()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import OfferPartialUpdate
+        schema = OfferPartialUpdate()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{id}", """{"required":[{"name":"company_id","schema":{"type":"string"},"description":"Current company id","in":"path","required":true},{"name":"application_id","schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true},{"name":"id","in":"path","schema":{"type":"string","description":"Offer identifier for fetching single promotion data for editing"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","schema":{"type":"string"},"description":"Current company id","in":"path","required":true},{"name":"application_id","schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true},{"name":"id","in":"path","schema":{"type":"string","description":"Offer identifier for fetching single promotion data for editing"},"required":true}]}""", serverType="platform", id=id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{id}", id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessMessage
+            schema = SuccessMessage()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateOfferPartially")
+                print(e)
+
+        return response
+    
+    async def deleteOffer(self, id=None, request_headers:Dict={}):
+        """Delete details of a draft offer by providing its unique identifier to delete information such as offer type, rules, validity period and other related information.
+        :param id :  : type string
+        """
+        payload = {}
+        
+        if id is not None:
+            payload["id"] = id
+
+        # Parameter validation
+        schema = CartValidator.deleteOffer()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{id}", """{"required":[{"name":"company_id","schema":{"type":"string"},"description":"Current company id","in":"path","required":true},{"name":"application_id","schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true},{"name":"id","in":"path","schema":{"type":"string","description":"Offer identifier for fetching single offer data for editing"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","schema":{"type":"string"},"description":"Current company id","in":"path","required":true},{"name":"application_id","schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true},{"name":"id","in":"path","schema":{"type":"string","description":"Offer identifier for fetching single offer data for editing"},"required":true}]}""", serverType="platform", id=id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/offers/{id}", id=id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessMessage
+            schema = SuccessMessage()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteOffer")
                 print(e)
 
         return response

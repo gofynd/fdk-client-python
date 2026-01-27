@@ -3610,7 +3610,7 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         return response
     
     async def createTax(self, body="", request_headers:Dict={}):
-        """Create a tax rule and its version for under a specific company. This also creates a live version of the rule
+        """Create a tax rule and its version for under a specific company. This also creates a live version of the rule. The API now supports region-specific versions using optional region_type and areas along with the default country-level rule definition.
         """
         payload = {}
         
@@ -3798,10 +3798,11 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
 
         return response
     
-    async def getTaxVersionDetails(self, rule_id=None, version_status=None, limit=None, page=None, request_headers:Dict={}):
-        """Retrieve versions of a tax rule with support for filtering by query parameters (e.g., live, past, all).
+    async def getTaxVersionDetails(self, rule_id=None, version_status=None, q=None, limit=None, page=None, request_headers:Dict={}):
+        """Retrieve versions of a tax rule with support for filtering by status and text search on region names via the `q` parameter.
         :param rule_id : The ID of the tax rule. : type string
         :param version_status : Filter by tax version status. : type string
+        :param q : Case-insensitive search by region name (e.g., "raj", "New York") to find matching tax versions. : type string
         :param limit : The number of items to return per page for paginated past versions. : type string
         :param page : The page number for paginated past versions. : type string
         """
@@ -3811,6 +3812,8 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
             payload["rule_id"] = rule_id
         if version_status is not None:
             payload["version_status"] = version_status
+        if q is not None:
+            payload["q"] = q
         if limit is not None:
             payload["limit"] = limit
         if page is not None:
@@ -3821,8 +3824,8 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being created."},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"The ID of the tax rule."}],"optional":[{"in":"query","name":"version_status","required":false,"schema":{"type":"string","enum":["ALL","LIVE","PAST","FUTURE"],"default":"ALL"},"description":"Filter by tax version status."},{"in":"query","name":"limit","required":false,"schema":{"type":"string","default":10},"description":"The number of items to return per page for paginated past versions."},{"in":"query","name":"page","required":false,"schema":{"type":"string","default":"1"},"description":"The page number for paginated past versions."}],"query":[{"in":"query","name":"version_status","required":false,"schema":{"type":"string","enum":["ALL","LIVE","PAST","FUTURE"],"default":"ALL"},"description":"Filter by tax version status."},{"in":"query","name":"limit","required":false,"schema":{"type":"string","default":10},"description":"The number of items to return per page for paginated past versions."},{"in":"query","name":"page","required":false,"schema":{"type":"string","default":"1"},"description":"The page number for paginated past versions."}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being created."},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"The ID of the tax rule."}]}""", serverType="platform", rule_id=rule_id, version_status=version_status, limit=limit, page=page)
-        query_string = await create_query_string(version_status=version_status, limit=limit, page=page)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being created."},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"The ID of the tax rule."}],"optional":[{"in":"query","name":"version_status","required":false,"schema":{"type":"string","enum":["ALL","LIVE","PAST","FUTURE"],"default":"ALL"},"description":"Filter by tax version status."},{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"Case-insensitive search by region name (e.g., \"raj\", \"New York\") to find matching tax versions."},{"in":"query","name":"limit","required":false,"schema":{"type":"string","default":10},"description":"The number of items to return per page for paginated past versions."},{"in":"query","name":"page","required":false,"schema":{"type":"string","default":"1"},"description":"The page number for paginated past versions."}],"query":[{"in":"query","name":"version_status","required":false,"schema":{"type":"string","enum":["ALL","LIVE","PAST","FUTURE"],"default":"ALL"},"description":"Filter by tax version status."},{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"Case-insensitive search by region name (e.g., \"raj\", \"New York\") to find matching tax versions."},{"in":"query","name":"limit","required":false,"schema":{"type":"string","default":10},"description":"The number of items to return per page for paginated past versions."},{"in":"query","name":"page","required":false,"schema":{"type":"string","default":"1"},"description":"The page number for paginated past versions."}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being created."},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"The ID of the tax rule."}]}""", serverType="platform", rule_id=rule_id, version_status=version_status, q=q, limit=limit, page=page)
+        query_string = await create_query_string(version_status=version_status, q=q, limit=limit, page=page)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -3839,7 +3842,7 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions", rule_id=rule_id, version_status=version_status, limit=limit, page=page), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions", rule_id=rule_id, version_status=version_status, q=q, limit=limit, page=page), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import TaxRuleVersion
@@ -3853,7 +3856,7 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         return response
     
     async def createTaxVersion(self, rule_id=None, body="", request_headers:Dict={}):
-        """Creates a tax rule using the provided rule_id.
+        """Creates a tax version using the provided rule_id with support for scheduled applicability and optional region-level overrides.
         :param rule_id : The ID of the tax rule. : type string
         """
         payload = {}
@@ -3941,7 +3944,7 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         return response
     
     async def updateTaxVersion(self, rule_id=None, version_id=None, body="", request_headers:Dict={}):
-        """Updates a tax rule using the provided rule_id. You can update any part of a scheduled version but only tax name of live version can be updated.
+        """Updates a tax version using the provided rule_id. Scheduled versions support editing of components, applicable dates, and regional overrides while live versions allow limited updates.
         :param rule_id : The ID of the tax rule to be updated. : type string
         :param version_id : The ID of the tax version to be updated. : type string
         """

@@ -236,6 +236,11 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+        
 
 class PaymentValidator:
     
@@ -734,6 +739,17 @@ class PaymentValidator:
         company_id = fields.Int(required=False)
         
         application_id = fields.Str(required=False)
+         
+        
+    
+    class saveTokenForAggregator(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        aggregator_id = fields.Str(required=False)
          
         
     

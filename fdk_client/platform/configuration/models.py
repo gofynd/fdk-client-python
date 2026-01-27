@@ -556,6 +556,14 @@ class OrderFeature(BaseSchema):
     pass
 
 
+class SecurityFeature(BaseSchema):
+    pass
+
+
+class AllowedDomain(BaseSchema):
+    pass
+
+
 class AppFeatureRequestSchema(BaseSchema):
     pass
 
@@ -884,6 +892,14 @@ class AppInventoryConfig(BaseSchema):
     price = fields.Nested(InventoryPrice, required=False)
     
     discount = fields.Nested(InventoryDiscount, required=False)
+    
+    price_strategy = fields.Str(required=False)
+    
+    international = fields.Boolean(required=False)
+    
+    strategy_change_pending = fields.Boolean(required=False)
+    
+    strategy_modified_at = fields.Str(required=False)
     
     out_of_stock = fields.Boolean(required=False)
     
@@ -2309,9 +2325,19 @@ class AppFeature(BaseSchema):
     
     order = fields.Nested(OrderFeature, required=False)
     
+    security = fields.Nested(SecurityFeature, required=False)
+    
     buybox = fields.Nested(BuyboxFeature, required=False)
     
     delivery_strategy = fields.Nested(DeliveryStrategy, required=False)
+    
+    price_strategy = fields.Str(required=False)
+    
+    international = fields.Boolean(required=False)
+    
+    strategy_change_pending = fields.Boolean(required=False)
+    
+    strategy_modified_at = fields.Str(required=False)
     
     fulfillment_option = fields.Nested(FulfillmentOption, required=False)
     
@@ -2474,6 +2500,24 @@ class OrderFeature(BaseSchema):
 
     
     buy_again = fields.Boolean(required=False)
+    
+
+
+class SecurityFeature(BaseSchema):
+    # Configuration swagger.json
+
+    
+    domains = fields.List(fields.Nested(AllowedDomain, required=False), required=False)
+    
+
+
+class AllowedDomain(BaseSchema):
+    # Configuration swagger.json
+
+    
+    host = fields.Str(required=False)
+    
+    url_scheme = fields.Str(required=False)
     
 
 

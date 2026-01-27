@@ -334,6 +334,14 @@ class ResourcePayload(BaseSchema):
     pass
 
 
+class OrderTranslationRequestSchema(BaseSchema):
+    pass
+
+
+class TranslationResult(BaseSchema):
+    pass
+
+
 
 
 
@@ -1519,7 +1527,27 @@ class ResourcePayload(BaseSchema):
     # Content swagger.json
 
     
+    resource_id = fields.List(fields.Str(required=False), required=False)
+    
     payload = fields.List(fields.Dict(required=False), required=False)
+    
+
+
+class OrderTranslationRequestSchema(BaseSchema):
+    # Content swagger.json
+
+    
+    payload_type = fields.Str(required=False)
+    
+    payload = fields.List(fields.Dict(required=False), required=False)
+    
+
+
+class TranslationResult(BaseSchema):
+    # Content swagger.json
+
+    
+    items = fields.List(fields.Dict(required=False), required=False)
     
 
 
