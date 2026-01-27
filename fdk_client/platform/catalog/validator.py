@@ -546,6 +546,8 @@ class CatalogValidator:
         
         store_ids = fields.List(fields.Int(required=False), required=False)
         
+        seller_identifiers = fields.List(fields.Str(required=False), required=False)
+        
         size_identifier = fields.Str(required=False)
          
         
