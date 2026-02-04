@@ -42,7 +42,9 @@ from ..ApplicationModel import BaseSchema
     
     
     
-        
+                
+from .models import PageType
+
         
     
     
@@ -182,7 +184,7 @@ class ContentValidator:
     class getSEOMarkupSchemas(BaseSchema):
         
         
-        page_type = fields.Str(required=False)
+        page_type = fields.Nested(PageType, required=False)
         
         active = fields.Boolean(required=False)
          

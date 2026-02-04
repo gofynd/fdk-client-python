@@ -1823,6 +1823,8 @@ class SendOtpCommsReq(BaseSchema):
     
     email = fields.Nested(SendOtpCommsReqEmail, required=False)
     
+    additional_variables = fields.Dict(required=False)
+    
 
 
 class SendOtpCommsRes(BaseSchema):

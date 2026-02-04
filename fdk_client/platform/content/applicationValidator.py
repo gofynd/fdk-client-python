@@ -269,7 +269,9 @@ from .models import GenerationEntityType
     
         
         
-        
+                
+from .models import PageType
+
     
     
         
@@ -1142,7 +1144,7 @@ class ContentValidator:
         
         application_id = fields.Str(required=False)
         
-        page_type = fields.Str(required=False)
+        page_type = fields.Nested(PageType, required=False)
          
         
     

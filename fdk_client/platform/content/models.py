@@ -987,7 +987,7 @@ class SEOSchemaMarkupTemplate(BaseSchema):
     
     title = fields.Str(required=False)
     
-    page_type = fields.Str(required=False)
+    page_type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
     
     schema = fields.Str(required=False)
     
@@ -1011,7 +1011,7 @@ class SEOSchemaMarkupTemplateRequestBody(BaseSchema):
     
     title = fields.Str(required=False)
     
-    page_type = fields.Str(required=False)
+    page_type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
     
     schema = fields.Str(required=False)
     
@@ -1101,7 +1101,7 @@ class DefaultSEOSchemaMarkupTemplate(BaseSchema):
     # Content swagger.json
 
     
-    page_type = fields.Str(required=False)
+    page_type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
     
     schema = fields.Str(required=False)
     

@@ -1995,7 +1995,7 @@ The ESM config stores order processing configuration. Each document in the ESM c
         return response
     
     async def createOrder(self, x_ordering_source=None, x_application_id=None, x_extension_id=None, body="", request_headers:Dict={}):
-        """Creates an order in the OMS. Note: Use the Serviceability API (<a href='/commerce/sdk/latest/platform/company/serviceability#createShipments'>createShipments</a>) to determine shipments before creating an order.
+        """Creates an order in the OMS. Use the (<a href='https://docs.fynd.com/partners/commerce/sdk/latest/platform/application/serviceability#createShipments'>createShipments API</a>) to determine shipments before creating an order.  Click <a href='https://docs.fynd.com/partners/commerce/miscellaneous/createOrder-useCases'>here</a> to get the use case details.
         :param x-ordering-source : To uniquely identify the source through which order has been placed. : type string
         :param x-application-id : The Application ID is a unique identifier assigned to a storefront that typically follows a 24-character hexadecimal string. Either `x-application-id` or `x-extension-id` header is mandatory. At least one of them must be provided. : type string
         :param x-extension-id : The Extension ID is a unique identifier assigned to an extension that typically follows a 24-character hexadecimal string. Either `x-application-id` or `x-extension-id` header is mandatory. At least one of them must be provided. : type string

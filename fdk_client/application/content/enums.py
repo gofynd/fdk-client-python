@@ -105,6 +105,8 @@ class PageType(Enum):
     
     REQUEST_REATTEMPT = "request-reattempt"
     
+    FILES = "files"
+    
     @classmethod
     async def is_valid(cls, value):
         if value in cls._value2member_map_:

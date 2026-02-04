@@ -463,7 +463,7 @@ class SEOSchemaMarkupTemplate(BaseSchema):
     
     title = fields.Str(required=False)
     
-    page_type = fields.Str(required=False)
+    page_type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
     
     description = fields.Str(required=False)
     
