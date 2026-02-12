@@ -1351,6 +1351,8 @@ class Shipments(BaseSchema):
     
     is_refund_config_enabled = fields.Boolean(required=False)
     
+    meta = fields.Dict(required=False)
+    
 
 
 class BagsForReorderArticleAssignment(BaseSchema):
@@ -1572,6 +1574,8 @@ class OrderInfo(BaseSchema):
     charges = fields.List(fields.Nested(PriceAdjustmentCharge, required=False), required=False)
     
     bags_for_reorder = fields.List(fields.Nested(BagsForReorder, required=False), required=False)
+    
+    meta = fields.Dict(required=False)
     
     gstin_code = fields.Str(required=False)
     
