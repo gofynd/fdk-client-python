@@ -1081,6 +1081,8 @@ class CreateUserRequestSchema(BaseSchema):
     
     rr_id = fields.Str(required=False)
     
+    dob = fields.Str(required=False)
+    
 
 
 class CreateUserResponseSchema(BaseSchema):
@@ -1442,6 +1444,8 @@ class UpdateUserRequestSchema(BaseSchema):
     first_name = fields.Str(required=False)
     
     last_name = fields.Str(required=False)
+    
+    dob = fields.Str(required=False)
     
     gender = fields.Str(required=False)
     

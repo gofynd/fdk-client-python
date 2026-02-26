@@ -16,6 +16,7 @@ class Order:
         self._conf = config
         self._relativeUrls = {
             "getRefundModes": "/service/application/order-manage/v1.0/shipment/{shipment_id}/refund/modes",
+            "getRefundModesWithPriceBreakup": "/service/application/order-manage/v1.0/shipment/{shipment_id}/refund/modes",
             "getOrders": "/service/application/order/v1.0/orders",
             "getOrderById": "/service/application/order/v1.0/orders/{order_id}",
             "getPosOrderById": "/service/application/order/v1.0/orders/pos-order/{order_id}",
@@ -84,6 +85,57 @@ class Order:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getRefundModes")
+                print(e)
+
+        return response
+    
+    async def getRefundModesWithPriceBreakup(self, shipment_id=None, body="", request_headers:Dict={}):
+        """Returns a list of available refund options for the given company and shipment.
+
+        :param shipment_id : Numeric identifier of the shipment. : type string
+        """
+        payload = {}
+        
+        if shipment_id is not None:
+            payload["shipment_id"] = shipment_id
+
+        # Parameter validation
+        schema = OrderValidator.getRefundModesWithPriceBreakup()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import RefundModeRequestData
+        schema = RefundModeRequestData()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getRefundModesWithPriceBreakup"], proccessed_params="""{"required":[{"name":"shipment_id","in":"path","description":"Numeric identifier of the shipment.","required":true,"schema":{"type":"string"},"example":"17452383364661844036"}],"optional":[],"query":[],"headers":[],"path":[{"name":"shipment_id","in":"path","description":"Numeric identifier of the shipment.","required":true,"schema":{"type":"string"},"example":"17452383364661844036"}]}""", serverType="application", shipment_id=shipment_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getRefundModesWithPriceBreakup"]).netloc, "post", await create_url_without_domain("/service/application/order-manage/v1.0/shipment/{shipment_id}/refund/modes", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RefundOptions
+            schema = RefundOptions()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getRefundModesWithPriceBreakup")
                 print(e)
 
         return response

@@ -257,6 +257,54 @@ class Webhook:
 
         return response
     
+    async def downloadDeliveryReport(self, extension_id=None, body="", request_headers:Dict={}):
+        """Download webhook delivery report
+        :param extension_id : extension_id : type string
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+
+        # Parameter validation
+        schema = WebhookValidator.downloadDeliveryReport()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ReportDownloadPayload
+        schema = ReportDownloadPayload()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/download", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}]}""", serverType="partner", extension_id=extension_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/report/download", extension_id=extension_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DownloadReportResult
+            schema = DownloadReportResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for downloadDeliveryReport")
+                print(e)
+
+        return response
+    
     async def cancelReportDownload(self, extension_id=None, filename=None, request_headers:Dict={}):
         """Cancel report download job
         :param extension_id : extension_id : type string
@@ -485,6 +533,159 @@ class Webhook:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for updateSubscriber")
+                print(e)
+
+        return response
+    
+    async def validateFilterConfiguration(self, extension_id=None, body="", request_headers:Dict={}):
+        """Validate a filter configuration against sample payload data.
+
+        :param extension_id : extension_id : type string
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+
+        # Parameter validation
+        schema = WebhookValidator.validateFilterConfiguration()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import FilterValidationPayload
+        schema = FilterValidationPayload()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/validate/filter", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}]}""", serverType="partner", extension_id=extension_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/validate/filter", extension_id=extension_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FilterValidationResult
+            schema = FilterValidationResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for validateFilterConfiguration")
+                print(e)
+
+        return response
+    
+    async def validateReducerConfiguration(self, extension_id=None, body="", request_headers:Dict={}):
+        """Validate a reducer configuration against sample payload data.
+
+        :param extension_id : extension_id : type string
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+
+        # Parameter validation
+        schema = WebhookValidator.validateReducerConfiguration()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import ReducerValidationPayload
+        schema = ReducerValidationPayload()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/validate/reducer", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}}]}""", serverType="partner", extension_id=extension_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/validate/reducer", extension_id=extension_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ReducerValidationResult
+            schema = ReducerValidationResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for validateReducerConfiguration")
+                print(e)
+
+        return response
+    
+    async def saveFilterReducerConfiguration(self, extension_id=None, company_id=None, subscriber_id=None, body="", request_headers:Dict={}):
+        """Save filter and/or reducer configuration for a subscriber event mapping.
+
+        :param extension_id : extension_id : type string
+        :param company_id : company_id : type integer
+        :param subscriber_id : subscriber_id : type number
+        """
+        payload = {}
+        
+        if extension_id is not None:
+            payload["extension_id"] = extension_id
+        if company_id is not None:
+            payload["company_id"] = company_id
+        if subscriber_id is not None:
+            payload["subscriber_id"] = subscriber_id
+
+        # Parameter validation
+        schema = WebhookValidator.saveFilterReducerConfiguration()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import FilterReducerSave
+        schema = FilterReducerSave()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/company/{company_id}/subscriber/{subscriber_id}/filter_reducer", """{"required":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"subscriber_id","in":"path","description":"subscriber_id","required":true,"schema":{"type":"number"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"organization_id","in":"path","description":"organization_id","required":true,"schema":{"type":"string"}},{"name":"extension_id","in":"path","description":"extension_id","required":true,"schema":{"type":"string"}},{"name":"company_id","in":"path","description":"company_id","required":true,"schema":{"type":"integer"}},{"name":"subscriber_id","in":"path","description":"subscriber_id","required":true,"schema":{"type":"number"}}]}""", serverType="partner", extension_id=extension_id, company_id=company_id, subscriber_id=subscriber_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/partner/webhook/v1.0/organization/{self._conf.organizationId}/extension/{extension_id}/company/{company_id}/subscriber/{subscriber_id}/filter_reducer", extension_id=extension_id, company_id=company_id, subscriber_id=subscriber_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import FilterReducerSaveResult
+            schema = FilterReducerSaveResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for saveFilterReducerConfiguration")
                 print(e)
 
         return response

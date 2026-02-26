@@ -8,6 +8,14 @@ from ..ApplicationModel import BaseSchema
 
 
 
+class RefundModeLineNumber(BaseSchema):
+    pass
+
+
+class RefundModeRequestData(BaseSchema):
+    pass
+
+
 class PriceBreakupValues(BaseSchema):
     pass
 
@@ -393,6 +401,24 @@ class ValidationError(BaseSchema):
 
 
 
+
+
+class RefundModeLineNumber(BaseSchema):
+    # Order swagger.json
+
+    
+    line_number = fields.Float(required=False)
+    
+    quantity = fields.Float(required=False)
+    
+
+
+class RefundModeRequestData(BaseSchema):
+    # Order swagger.json
+
+    
+    line_numbers = fields.List(fields.Nested(RefundModeLineNumber, required=False), required=False)
+    
 
 
 class PriceBreakupValues(BaseSchema):

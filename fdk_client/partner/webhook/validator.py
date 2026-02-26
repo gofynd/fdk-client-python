@@ -43,6 +43,10 @@ from ..PartnerModel import BaseSchema
     
         
         
+    
+    
+        
+        
         
     
     
@@ -58,6 +62,20 @@ from ..PartnerModel import BaseSchema
         
     
     
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
         
         
         
@@ -130,6 +148,15 @@ class WebhookValidator:
          
         
     
+    class downloadDeliveryReport(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
+         
+        
+    
     class cancelReportDownload(BaseSchema):
         
         
@@ -174,6 +201,37 @@ class WebhookValidator:
         organization_id = fields.Str(required=False)
         
         extension_id = fields.Str(required=False)
+        
+        subscriber_id = fields.Float(required=False)
+         
+        
+    
+    class validateFilterConfiguration(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
+         
+        
+    
+    class validateReducerConfiguration(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
+         
+        
+    
+    class saveFilterReducerConfiguration(BaseSchema):
+        
+        
+        organization_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
+        
+        company_id = fields.Int(required=False)
         
         subscriber_id = fields.Float(required=False)
          

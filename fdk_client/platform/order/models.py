@@ -5041,7 +5041,7 @@ class PostHook(BaseSchema):
     
     kwargs = fields.Dict(required=False)
     
-    filters = fields.Nested(Filter, required=False)
+    filter = fields.Nested(Filter, required=False)
     
 
 
@@ -5053,7 +5053,7 @@ class PreHook(BaseSchema):
     
     kwargs = fields.Dict(required=False)
     
-    filters = fields.Nested(Filter, required=False)
+    filter = fields.Nested(Filter, required=False)
     
 
 

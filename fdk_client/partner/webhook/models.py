@@ -8,6 +8,46 @@ from ..PartnerModel import BaseSchema
 
 
 
+class ReportDownloadPayload(BaseSchema):
+    pass
+
+
+class DownloadReportResult(BaseSchema):
+    pass
+
+
+class FilterValidationPayload(BaseSchema):
+    pass
+
+
+class ReducerValidationPayload(BaseSchema):
+    pass
+
+
+class FilterReducerSave(BaseSchema):
+    pass
+
+
+class FilterValidationSchema(BaseSchema):
+    pass
+
+
+class FilterSaveSchema(BaseSchema):
+    pass
+
+
+class FilterValidationResult(BaseSchema):
+    pass
+
+
+class ReducerValidationResult(BaseSchema):
+    pass
+
+
+class FilterReducerSaveResult(BaseSchema):
+    pass
+
+
 class SubscriberUpdate(BaseSchema):
     pass
 
@@ -145,6 +185,120 @@ class ItemSchema(BaseSchema):
 
 
 
+
+
+class ReportDownloadPayload(BaseSchema):
+    # Webhook swagger.json
+
+    
+    end_date = fields.Str(required=False)
+    
+    start_date = fields.Str(required=False)
+    
+
+
+class DownloadReportResult(BaseSchema):
+    # Webhook swagger.json
+
+    
+    file_name = fields.Str(required=False)
+    
+
+
+class FilterValidationPayload(BaseSchema):
+    # Webhook swagger.json
+
+    
+    sample_data = fields.Dict(required=False)
+    
+    filters = fields.Nested(FilterValidationSchema, required=False)
+    
+
+
+class ReducerValidationPayload(BaseSchema):
+    # Webhook swagger.json
+
+    
+    sample_data = fields.Dict(required=False)
+    
+    reducer = fields.Dict(required=False)
+    
+
+
+class FilterReducerSave(BaseSchema):
+    # Webhook swagger.json
+
+    
+    filter_configuration = fields.Nested(FilterSaveSchema, required=False)
+    
+    reducer_configuration = fields.Dict(required=False)
+    
+    event_slug = fields.Str(required=False)
+    
+
+
+class FilterValidationSchema(BaseSchema):
+    # Webhook swagger.json
+
+    
+    query = fields.Str(required=False)
+    
+    condition = fields.Str(required=False)
+    
+    logic = fields.Str(required=False)
+    
+    conditions = fields.List(fields.Dict(required=False), required=False)
+    
+
+
+class FilterSaveSchema(BaseSchema):
+    # Webhook swagger.json
+
+    
+    query = fields.Str(required=False)
+    
+    condition = fields.Str(required=False)
+    
+    logic = fields.Str(required=False)
+    
+    conditions = fields.List(fields.Dict(required=False), required=False)
+    
+
+
+class FilterValidationResult(BaseSchema):
+    # Webhook swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
+    filter_result = fields.Boolean(required=False)
+    
+
+
+class ReducerValidationResult(BaseSchema):
+    # Webhook swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
+    reducer_result = fields.Dict(required=False)
+    
+
+
+class FilterReducerSaveResult(BaseSchema):
+    # Webhook swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
+    data = fields.Dict(required=False)
+    
 
 
 class SubscriberUpdate(BaseSchema):
