@@ -754,7 +754,7 @@ class FeatureImage(BaseSchema):
     pass
 
 
-class Seo(BaseSchema):
+class SeoTranslate(BaseSchema):
     pass
 
 
@@ -3533,7 +3533,7 @@ class ResourceUISchema(BaseSchema):
     
     feature_image = fields.Nested(FeatureImage, required=False)
     
-    seo = fields.Nested(Seo, required=False)
+    seo = fields.Nested(SeoTranslate, required=False)
     
 
 
@@ -3563,7 +3563,7 @@ class FeatureImage(BaseSchema):
     
 
 
-class Seo(BaseSchema):
+class SeoTranslate(BaseSchema):
     # Content swagger.json
 
     

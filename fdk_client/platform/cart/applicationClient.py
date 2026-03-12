@@ -1117,14 +1117,20 @@ class Cart:
 
         return response
     
-    async def fetchAndvalidateCartItems(self, x_ordering_source=None, body="", request_headers:Dict={}):
+    async def fetchAndvalidateCartItems(self, x_ordering_source=None, x_location_detail=None, x_currency_code=None, body="", request_headers:Dict={}):
         """Retrieve cart details for a provided list of cart items and validate its contents. This ensures accuracy and completeness in cart information, including item quantities, prices, discounts, and applicable taxes.
         :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type string
+        :param x-location-detail : Location details for the cart checkout : type string
+        :param x-currency-code : Currency code for transactions. : type string
         """
         payload = {}
         
         if x_ordering_source is not None:
             payload["x_ordering_source"] = x_ordering_source
+        if x_location_detail is not None:
+            payload["x_location_detail"] = x_location_detail
+        if x_currency_code is not None:
+            payload["x_currency_code"] = x_currency_code
 
         # Parameter validation
         schema = CartValidator.fetchAndvalidateCartItems()
@@ -1135,7 +1141,7 @@ class Cart:
         schema = OpenapiCartDetailsCreation()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/validate", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"query":[],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/validate", """{"required":[{"schema":{"type":"string"},"description":"Unique identifier of the company","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Unique identifier of the sales channel application","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-location-detail","schema":{"type":"string"},"description":"Location details for the cart checkout","example":{"country":"INDIA","country_iso_code":"IN","pincode":"400093","city":"Mumbai","state":"Maharashtra"}},{"in":"header","name":"x-currency-code","schema":{"type":"string","default":"INR"},"description":"Currency code for transactions."}],"query":[],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-location-detail","schema":{"type":"string"},"description":"Location details for the cart checkout","example":{"country":"INDIA","country_iso_code":"IN","pincode":"400093","city":"Mumbai","state":"Maharashtra"}},{"in":"header","name":"x-currency-code","schema":{"type":"string","default":"INR"},"description":"Currency code for transactions."}],"path":[{"schema":{"type":"string"},"description":"Unique identifier of the company","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Unique identifier of the sales channel application","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, x_location_detail=x_location_detail, x_currency_code=x_currency_code, )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1152,7 +1158,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/validate", x_ordering_source=x_ordering_source), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/validate", x_ordering_source=x_ordering_source, x_location_detail=x_location_detail, x_currency_code=x_currency_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OpenapiCartDetailsResult
@@ -1213,10 +1219,12 @@ class Cart:
 
         return response
     
-    async def checkoutCart(self, x_ordering_source=None, x_anonymous_cart=None, body="", request_headers:Dict={}):
+    async def checkoutCart(self, x_ordering_source=None, x_anonymous_cart=None, x_location_detail=None, x_currency_code=None, body="", request_headers:Dict={}):
         """The checkout cart initiates the order creation process based on the selected address and payment method. It revalidates the cart details to ensure safe and seamless order placement.
         :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type string
-        :param x-anonymous-cart : Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id. : type string
+        :param x-anonymous-cart : It allows operations on cross-platform anonymous carts. When provided, the system retrieves the cart using only the cart_id, ignoring the user_id. Use this when interacting with an anonymous or guest cart across platforms. : type string
+        :param x-location-detail : Location details for the cart checkout : type string
+        :param x-currency-code : Currency code for transactions. Defaults to INR if the location is India. : type string
         """
         payload = {}
         
@@ -1224,6 +1232,10 @@ class Cart:
             payload["x_ordering_source"] = x_ordering_source
         if x_anonymous_cart is not None:
             payload["x_anonymous_cart"] = x_anonymous_cart
+        if x_location_detail is not None:
+            payload["x_location_detail"] = x_location_detail
+        if x_currency_code is not None:
+            payload["x_currency_code"] = x_currency_code
 
         # Parameter validation
         schema = CartValidator.checkoutCart()
@@ -1234,7 +1246,7 @@ class Cart:
         schema = OpenApiPlatformCheckoutReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/checkout", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."}],"query":[],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"Anonymous cart header used to perform operations on cross-platform anonymous cart. When enabled, the system fetches the cart only based on cart_id instead of user_id."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/checkout", """{"required":[{"schema":{"type":"string"},"description":"Unique identifier of the company for which the cart checkout is being performed.","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Unique identifier for the sales channel application","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"It allows operations on cross-platform anonymous carts. When provided, the system retrieves the cart using only the cart_id, ignoring the user_id. Use this when interacting with an anonymous or guest cart across platforms."},{"in":"header","name":"x-location-detail","schema":{"type":"string"},"description":"Location details for the cart checkout","example":{"country":"INDIA","country_iso_code":"IN","pincode":"400093","city":"Mumbai","state":"Maharashtra"}},{"in":"header","name":"x-currency-code","schema":{"type":"string","default":"INR"},"description":"Currency code for transactions. Defaults to INR if the location is India."}],"query":[],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"It allows operations on cross-platform anonymous carts. When provided, the system retrieves the cart using only the cart_id, ignoring the user_id. Use this when interacting with an anonymous or guest cart across platforms."},{"in":"header","name":"x-location-detail","schema":{"type":"string"},"description":"Location details for the cart checkout","example":{"country":"INDIA","country_iso_code":"IN","pincode":"400093","city":"Mumbai","state":"Maharashtra"}},{"in":"header","name":"x-currency-code","schema":{"type":"string","default":"INR"},"description":"Currency code for transactions. Defaults to INR if the location is India."}],"path":[{"schema":{"type":"string"},"description":"Unique identifier of the company for which the cart checkout is being performed.","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Unique identifier for the sales channel application","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, x_location_detail=x_location_detail, x_currency_code=x_currency_code, )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1251,7 +1263,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/checkout", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/cart/checkout", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, x_location_detail=x_location_detail, x_currency_code=x_currency_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OpenApiCheckoutResult
@@ -1583,14 +1595,20 @@ class Cart:
 
         return response
     
-    async def overrideCart(self, x_ordering_source=None, body="", request_headers:Dict={}):
+    async def overrideCart(self, x_ordering_source=None, x_location_detail=None, x_currency_code=None, body="", request_headers:Dict={}):
         """Overrides the cart's checkout process with a new provided cart items. It provides flexibility in customizing checkout flows to meet specific business requirements, enhancing the user experience and optimizing order processing workflows.
         :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type string
+        :param x-location-detail : Location details for the cart checkout : type string
+        :param x-currency-code : Currency code for transactions. Defaults to INR if the location is India. : type string
         """
         payload = {}
         
         if x_ordering_source is not None:
             payload["x_ordering_source"] = x_ordering_source
+        if x_location_detail is not None:
+            payload["x_location_detail"] = x_location_detail
+        if x_currency_code is not None:
+            payload["x_currency_code"] = x_currency_code
 
         # Parameter validation
         schema = CartValidator.overrideCart()
@@ -1601,7 +1619,7 @@ class Cart:
         schema = OverrideCheckoutReq()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout/over-ride", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"query":[],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout/over-ride", """{"required":[{"schema":{"type":"string"},"description":"Unique identifier of the company","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Unique identifier of the sales channel application","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-location-detail","schema":{"type":"string"},"description":"Location details for the cart checkout","example":{"country":"INDIA","country_iso_code":"IN","pincode":"400093","city":"Mumbai","state":"Maharashtra"}},{"in":"header","name":"x-currency-code","schema":{"type":"string","default":"INR"},"description":"Currency code for transactions. Defaults to INR if the location is India."}],"query":[],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-location-detail","schema":{"type":"string"},"description":"Location details for the cart checkout","example":{"country":"INDIA","country_iso_code":"IN","pincode":"400093","city":"Mumbai","state":"Maharashtra"}},{"in":"header","name":"x-currency-code","schema":{"type":"string","default":"INR"},"description":"Currency code for transactions. Defaults to INR if the location is India."}],"path":[{"schema":{"type":"string"},"description":"Unique identifier of the company","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Unique identifier of the sales channel application","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, x_location_detail=x_location_detail, x_currency_code=x_currency_code, )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -1618,7 +1636,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout/over-ride", x_ordering_source=x_ordering_source), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout/over-ride", x_ordering_source=x_ordering_source, x_location_detail=x_location_detail, x_currency_code=x_currency_code), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OverrideCheckoutResult
@@ -3177,15 +3195,24 @@ class Cart:
 
         return response
     
-    async def platformCheckoutCartV2(self, x_ordering_source=None, id=None, body="", request_headers:Dict={}):
+    async def platformCheckoutCartV2(self, x_ordering_source=None, x_anonymous_cart=None, x_location_detail=None, x_currency_code=None, id=None, body="", request_headers:Dict={}):
         """The checkout cart initiates the order creation process based on the items in the user’s cart, their selected address, and chosen payment methods. It also supports multiple payment method options and revalidates the cart details to ensure a secure and seamless order placement.
-        :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type string
-        :param id : The unique identifier of the cart : type string
+        :param x-ordering-source : Ordering source header, to be used to identify source of order creation : type string
+        :param x-anonymous-cart : It allows operations on cross-platform anonymous carts. When provided, the system retrieves the cart using only the cart_id, ignoring the user_id. Use this when interacting with an anonymous or guest cart across platforms. : type string
+        :param x-location-detail : Location information for the cart : type string
+        :param x-currency-code : Currency code for the transaction. Defaults to INR if the order location is India. : type string
+        :param id : Unique identifier of the cart : type string
         """
         payload = {}
         
         if x_ordering_source is not None:
             payload["x_ordering_source"] = x_ordering_source
+        if x_anonymous_cart is not None:
+            payload["x_anonymous_cart"] = x_anonymous_cart
+        if x_location_detail is not None:
+            payload["x_location_detail"] = x_location_detail
+        if x_currency_code is not None:
+            payload["x_currency_code"] = x_currency_code
         if id is not None:
             payload["id"] = id
 
@@ -3198,7 +3225,7 @@ class Cart:
         schema = PlatformCartCheckoutDetailV2Creation()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", """{"required":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"query","name":"id","required":false,"schema":{"type":"string"},"description":"The unique identifier of the cart"}],"query":[{"in":"query","name":"id","required":false,"schema":{"type":"string"},"description":"The unique identifier of the cart"}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"path":[{"schema":{"type":"string"},"description":"Current company id","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Current Application id of sales channel","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, id=id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/cart/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", """{"required":[{"schema":{"type":"string"},"description":"Unique identifier of the company","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Unique identifier for the sales channel application","in":"path","required":true,"name":"application_id"}],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation"},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"It allows operations on cross-platform anonymous carts. When provided, the system retrieves the cart using only the cart_id, ignoring the user_id. Use this when interacting with an anonymous or guest cart across platforms."},{"in":"header","name":"x-location-detail","schema":{"type":"string","format":"json"},"description":"Location information for the cart","example":{"country":"INDIA","country_iso_code":"IN","pincode":"400001","city":"Mumbai","state":"Maharashtra"}},{"in":"header","name":"x-currency-code","schema":{"type":"string","default":"INR"},"description":"Currency code for the transaction. Defaults to INR if the order location is India."},{"in":"query","name":"id","required":false,"schema":{"type":"string"},"description":"Unique identifier of the cart"}],"query":[{"in":"query","name":"id","required":false,"schema":{"type":"string"},"description":"Unique identifier of the cart"}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation"},{"in":"header","name":"x-anonymous-cart","schema":{"type":"string"},"description":"It allows operations on cross-platform anonymous carts. When provided, the system retrieves the cart using only the cart_id, ignoring the user_id. Use this when interacting with an anonymous or guest cart across platforms."},{"in":"header","name":"x-location-detail","schema":{"type":"string","format":"json"},"description":"Location information for the cart","example":{"country":"INDIA","country_iso_code":"IN","pincode":"400001","city":"Mumbai","state":"Maharashtra"}},{"in":"header","name":"x-currency-code","schema":{"type":"string","default":"INR"},"description":"Currency code for the transaction. Defaults to INR if the order location is India."}],"path":[{"schema":{"type":"string"},"description":"Unique identifier of the company","in":"path","required":true,"name":"company_id"},{"schema":{"type":"string"},"description":"Unique identifier for the sales channel application","in":"path","required":true,"name":"application_id"}]}""", serverType="platform", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, x_location_detail=x_location_detail, x_currency_code=x_currency_code, id=id)
         query_string = await create_query_string(id=id)
         if query_string:
             url_with_params += "?" + query_string
@@ -3215,7 +3242,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", x_ordering_source=x_ordering_source, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/cart/v2.0/company/{self._conf.companyId}/application/{self.applicationId}/checkout", x_ordering_source=x_ordering_source, x_anonymous_cart=x_anonymous_cart, x_location_detail=x_location_detail, x_currency_code=x_currency_code, id=id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CartCheckoutDetails

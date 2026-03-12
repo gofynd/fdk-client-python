@@ -16,6 +16,10 @@ class UserAttributeDefinitionList(BaseSchema):
     pass
 
 
+class UserAttributeDefinitionsResponseSchema(BaseSchema):
+    pass
+
+
 class UserAttributeDefinition(BaseSchema):
     pass
 
@@ -369,6 +373,16 @@ class UserAttributeDefinitionList(BaseSchema):
     
 
 
+class UserAttributeDefinitionsResponseSchema(BaseSchema):
+    # User swagger.json
+
+    
+    items = fields.List(fields.Nested(UserAttribute, required=False), required=False)
+    
+    page = fields.Nested(PaginationSchema, required=False)
+    
+
+
 class UserAttributeDefinition(BaseSchema):
     # User swagger.json
 
@@ -412,6 +426,8 @@ class UserAttributeDefinition(BaseSchema):
     modified_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
+    
+    options = fields.List(fields.Str(required=False), required=False)
     
 
 
@@ -545,7 +561,7 @@ class BulkUserAttributeRequestBody(BaseSchema):
     
     definition_id = fields.Str(required=False)
     
-    value = fields.Dict(required=False)
+    value = fields.Raw(required=False)
     
 
 

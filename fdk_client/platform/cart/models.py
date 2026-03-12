@@ -800,6 +800,10 @@ class CheckCart(BaseSchema):
     pass
 
 
+class CartCheckoutDetailsData(BaseSchema):
+    pass
+
+
 class CartCheckoutDetails(BaseSchema):
     pass
 
@@ -2541,6 +2545,8 @@ class LoyaltyPoints(BaseSchema):
     
     title = fields.Str(required=False)
     
+    discount_amount = fields.Float(required=False)
+    
 
 
 class RawBreakup(BaseSchema):
@@ -2576,6 +2582,8 @@ class RawBreakup(BaseSchema):
     subtotal = fields.Float(required=False)
     
     convenience_fee = fields.Float(required=False)
+    
+    store_credit = fields.Float(required=False)
     
 
 
@@ -4801,13 +4809,21 @@ class CheckCart(BaseSchema):
     
 
 
+class CartCheckoutDetailsData(BaseSchema):
+    # Cart swagger.json
+
+    
+    order_id = fields.Str(required=False)
+    
+
+
 class CartCheckoutDetails(BaseSchema):
     # Cart swagger.json
 
     
     app_intercept_url = fields.Str(required=False)
     
-    data = fields.Dict(required=False)
+    data = fields.Nested(CartCheckoutDetailsData, required=False)
     
     cart = fields.Nested(CheckCart, required=False)
     

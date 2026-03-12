@@ -929,7 +929,7 @@ class Cart:
         return response
     
     async def updateAddress(self, id=None, body="", request_headers:Dict={}):
-        """Customer can modify the details of a previously saved addresses.
+        """Customer can modify the details of a previously saved address.
         :param id : ID allotted to the selected address. : type string
         """
         payload = {}
@@ -1660,8 +1660,8 @@ class Cart:
     
     async def getPromotionPaymentOffers(self, id=None, uid=None, body="", request_headers:Dict={}):
         """Use this API to get top 5 payment offers available for current product.
-        :param id : Cart id of the user cart . : type string
-        :param uid : Cart uid of the user cart . : type integer
+        :param id : Cart id of the user cart. : type string
+        :param uid : Cart uid of the user cart. : type integer
         """
         payload = {}
         
@@ -1675,7 +1675,7 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPromotionPaymentOffers"], proccessed_params="""{"required":[],"optional":[{"name":"id","schema":{"type":"string"},"in":"query","description":"Cart id of the user cart ."},{"name":"uid","schema":{"type":"integer"},"in":"query","description":"Cart uid of the user cart ."}],"query":[{"name":"id","schema":{"type":"string"},"in":"query","description":"Cart id of the user cart ."},{"name":"uid","schema":{"type":"integer"},"in":"query","description":"Cart uid of the user cart ."}],"headers":[],"path":[]}""", serverType="application", id=id, uid=uid)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPromotionPaymentOffers"], proccessed_params="""{"required":[],"optional":[{"name":"id","schema":{"type":"string"},"in":"query","description":"Cart id of the user cart."},{"name":"uid","schema":{"type":"integer"},"in":"query","description":"Cart uid of the user cart."}],"query":[{"name":"id","schema":{"type":"string"},"in":"query","description":"Cart id of the user cart."},{"name":"uid","schema":{"type":"integer"},"in":"query","description":"Cart uid of the user cart."}],"headers":[],"path":[]}""", serverType="application", id=id, uid=uid)
         query_string = await create_query_string(id=id, uid=uid)
         if query_string:
             url_with_params += "?" + query_string
@@ -1707,9 +1707,11 @@ class Cart:
 
         return response
     
-    async def checkoutCartV2(self, x_ordering_source=None, buy_now=None, cart_type=None, body="", request_headers:Dict={}):
+    async def checkoutCartV2(self, x_ordering_source=None, x_location_detail=None, x_currency_code=None, buy_now=None, cart_type=None, body="", request_headers:Dict={}):
         """The checkout cart initiates the order creation process based on the items in the user's cart, their selected address, and chosen payment methods. It also supports multiple payment method options and revalidates the cart details to ensure a secure and seamless order placement.
         :param x-ordering-source : Ordering source header, to be used to identify source of order creation. : type string
+        :param x-location-detail : Location details for the cart checkout : type string
+        :param x-currency-code : Currency code for transactions. : type string
         :param buy_now : This indicates the type of cart to checkout. : type boolean
         :param cart_type : The type of cart. : type string
         """
@@ -1717,6 +1719,10 @@ class Cart:
         
         if x_ordering_source is not None:
             payload["x_ordering_source"] = x_ordering_source
+        if x_location_detail is not None:
+            payload["x_location_detail"] = x_location_detail
+        if x_currency_code is not None:
+            payload["x_currency_code"] = x_currency_code
         if buy_now is not None:
             payload["buy_now"] = buy_now
         if cart_type is not None:
@@ -1731,7 +1737,7 @@ class Cart:
         schema = CartCheckoutDetailV2Creation()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["checkoutCartV2"], proccessed_params="""{"required":[],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"query","name":"buy_now","description":"This indicates the type of cart to checkout.","schema":{"type":"boolean"}},{"name":"cart_type","in":"query","schema":{"type":"string","x-not-enum":true},"description":"The type of cart."}],"query":[{"in":"query","name":"buy_now","description":"This indicates the type of cart to checkout.","schema":{"type":"boolean"}},{"name":"cart_type","in":"query","schema":{"type":"string","x-not-enum":true},"description":"The type of cart."}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."}],"path":[]}""", serverType="application", x_ordering_source=x_ordering_source, buy_now=buy_now, cart_type=cart_type)
+        url_with_params = await create_url_with_params(api_url=self._urls["checkoutCartV2"], proccessed_params="""{"required":[],"optional":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-location-detail","schema":{"type":"string"},"description":"Location details for the cart checkout","example":{"country":"INDIA","country_iso_code":"IN","pincode":"400093","city":"Mumbai","state":"Maharashtra"}},{"in":"header","name":"x-currency-code","schema":{"type":"string","default":"INR"},"description":"Currency code for transactions."},{"in":"query","name":"buy_now","description":"This indicates the type of cart to checkout.","schema":{"type":"boolean"}},{"name":"cart_type","in":"query","schema":{"type":"string","x-not-enum":true},"description":"The type of cart."}],"query":[{"in":"query","name":"buy_now","description":"This indicates the type of cart to checkout.","schema":{"type":"boolean"}},{"name":"cart_type","in":"query","schema":{"type":"string","x-not-enum":true},"description":"The type of cart."}],"headers":[{"in":"header","name":"x-ordering-source","schema":{"type":"string"},"description":"Ordering source header, to be used to identify source of order creation."},{"in":"header","name":"x-location-detail","schema":{"type":"string"},"description":"Location details for the cart checkout","example":{"country":"INDIA","country_iso_code":"IN","pincode":"400093","city":"Mumbai","state":"Maharashtra"}},{"in":"header","name":"x-currency-code","schema":{"type":"string","default":"INR"},"description":"Currency code for transactions."}],"path":[]}""", serverType="application", x_ordering_source=x_ordering_source, x_location_detail=x_location_detail, x_currency_code=x_currency_code, buy_now=buy_now, cart_type=cart_type)
         query_string = await create_query_string(buy_now=buy_now, cart_type=cart_type)
         if query_string:
             url_with_params += "?" + query_string
@@ -1750,7 +1756,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkoutCartV2"]).netloc, "post", await create_url_without_domain("/service/application/cart/v2.0/checkout", x_ordering_source=x_ordering_source, buy_now=buy_now, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["checkoutCartV2"]).netloc, "post", await create_url_without_domain("/service/application/cart/v2.0/checkout", x_ordering_source=x_ordering_source, x_location_detail=x_location_detail, x_currency_code=x_currency_code, buy_now=buy_now, cart_type=cart_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import CartCheckoutResult

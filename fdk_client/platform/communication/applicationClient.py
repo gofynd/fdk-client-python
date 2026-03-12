@@ -55,7 +55,7 @@ class Communication:
         return response
     
     async def updateAppProviders(self, body="", request_headers:Dict={}):
-        """Modify provider configuration using provider object id .
+        """Modify provider configuration using provider object id.
         """
         payload = {}
         

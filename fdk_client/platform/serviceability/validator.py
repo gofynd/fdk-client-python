@@ -123,6 +123,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -399,6 +400,8 @@ class ServiceabilityValidator:
         
         
         company_id = fields.Int(required=False)
+        
+        extension_id = fields.Str(required=False)
         
         scheme_type = fields.Str(required=False)
         

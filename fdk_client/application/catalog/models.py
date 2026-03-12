@@ -2645,6 +2645,8 @@ class StoreV3(BaseSchema):
     
     count = fields.Int(required=False)
     
+    code = fields.Str(required=False)
+    
 
 
 class StoreV4(BaseSchema):
@@ -2853,7 +2855,7 @@ class ProductSizePriceResponseV4(BaseSchema):
     # Catalog swagger.json
 
     
-    store = fields.Nested(StoreV3, required=False)
+    store = fields.Nested(StoreV4, required=False)
     
     article_assignment = fields.Nested(ArticleAssignmentV3, required=False)
     

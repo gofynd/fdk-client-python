@@ -181,6 +181,7 @@ from ..PartnerModel import BaseSchema
         
         
         
+        
     
     
         
@@ -600,6 +601,8 @@ class LogisticsValidator:
         
         
         organization_id = fields.Str(required=False)
+        
+        extension_id = fields.Str(required=False)
         
         scheme_type = fields.Str(required=False)
         

@@ -191,6 +191,8 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
+        
     
     
         
@@ -608,6 +610,10 @@ class CartValidator:
         
         
         x__ordering__source = fields.Str(required=False)
+        
+        x__location__detail = fields.Str(required=False)
+        
+        x__currency__code = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
         

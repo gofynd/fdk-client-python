@@ -309,7 +309,7 @@ class Catalog:
         return response
     
     async def updateAppCategory(self, category_uid=None, body="", request_headers:Dict={}):
-        """Modify category data related to the sales channel .
+        """Modify category data related to the sales channel.
         :param category_uid : A `category id` is a unique identifier for a particular category. : type string
         """
         payload = {}
@@ -3292,7 +3292,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user/{user_id}/products/follow", """{"required":[{"in":"path","name":"company_id","description":"The Company ID","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"The Application ID of the store front","required":true,"schema":{"type":"string"}},{"in":"path","name":"user_id","description":"User ID to fetch the followed list","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"page_id","description":"The identifier used to retrieve the next set of results. This parameter follows cursor-based pagination.","required":false,"schema":{"type":"string","default":"1"}},{"in":"query","name":"page_size","description":"Number of items per page","required":false,"schema":{"type":"integer","default":12}}],"query":[{"in":"query","name":"page_id","description":"The identifier used to retrieve the next set of results. This parameter follows cursor-based pagination.","required":false,"schema":{"type":"string","default":"1"}},{"in":"query","name":"page_size","description":"Number of items per page","required":false,"schema":{"type":"integer","default":12}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"The Company ID","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"The Application ID of the store front","required":true,"schema":{"type":"string"}},{"in":"path","name":"user_id","description":"User ID to fetch the followed list","required":true,"schema":{"type":"string"}}]}""", serverType="platform", user_id=user_id, page_id=page_id, page_size=page_size)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user/{user_id}/products/follow", """{"required":[{"in":"path","name":"company_id","description":"Unique identifier of the Company","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"The Application ID of the store front","required":true,"schema":{"type":"string"}},{"in":"path","name":"user_id","description":"User ID to fetch the followed list","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"page_id","description":"The identifier used to retrieve the next set of results. This parameter follows cursor-based pagination.","required":false,"schema":{"type":"string","default":"1"}},{"in":"query","name":"page_size","description":"Number of items per page","required":false,"schema":{"type":"integer","default":12}}],"query":[{"in":"query","name":"page_id","description":"The identifier used to retrieve the next set of results. This parameter follows cursor-based pagination.","required":false,"schema":{"type":"string","default":"1"}},{"in":"query","name":"page_size","description":"Number of items per page","required":false,"schema":{"type":"integer","default":12}}],"headers":[],"path":[{"in":"path","name":"company_id","description":"Unique identifier of the Company","required":true,"schema":{"type":"string"}},{"in":"path","name":"application_id","description":"The Application ID of the store front","required":true,"schema":{"type":"string"}},{"in":"path","name":"user_id","description":"User ID to fetch the followed list","required":true,"schema":{"type":"string"}}]}""", serverType="platform", user_id=user_id, page_id=page_id, page_size=page_size)
         query_string = await create_query_string(page_id=page_id, page_size=page_size)
         if query_string:
             url_with_params += "?" + query_string
@@ -3323,7 +3323,7 @@ class Catalog:
         return response
     
     async def followProductById(self, user_id=None, item_id=None, request_headers:Dict={}):
-        """This endpoint enables a user to follow a specific product identified by its unique item ID for a sales channel.         
+        """This endpoint enables a user to follow a specific product identified by its unique item ID for a sales channel.
 
         :param user_id : User ID of User : type string
         :param item_id : Item ID of Product : type string

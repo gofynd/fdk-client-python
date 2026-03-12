@@ -243,12 +243,12 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
         
         
         
         
-    
-    
         
         
         
@@ -434,12 +434,10 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
-                
-from .models import HsTypeEnum
-
         
     
     
@@ -621,7 +619,7 @@ class CatalogValidator:
         
         stage = fields.Str(required=False)
         
-        tags = fields.Str(required=False)
+        tags = fields.Str(required=False, allow_none=True)
          
         
     
@@ -956,6 +954,17 @@ class CatalogValidator:
          
         
     
+    class addInventory(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        item_id = fields.Int(required=False)
+        
+        size = fields.Str(required=False)
+         
+        
+    
     class getInventoryBySize(BaseSchema):
         
         
@@ -972,17 +981,6 @@ class CatalogValidator:
         q = fields.Str(required=False)
         
         sellable = fields.Boolean(required=False)
-         
-        
-    
-    class addInventory(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        item_id = fields.Int(required=False)
-        
-        size = fields.Str(required=False)
          
         
     
@@ -1389,7 +1387,7 @@ class CatalogValidator:
         
         limit = fields.Int(required=False)
         
-        type = fields.Nested(HsTypeEnum, required=False)
+        type = fields.Str(required=False)
         
         q = fields.Str(required=False)
          

@@ -302,6 +302,10 @@ class BulkInventoryGet(BaseSchema):
     pass
 
 
+class InventoryRecord(BaseSchema):
+    pass
+
+
 class FailedRecord(BaseSchema):
     pass
 
@@ -3051,6 +3055,30 @@ class BulkInventoryGet(BaseSchema):
     
 
 
+class InventoryRecord(BaseSchema):
+    # Catalog swagger.json
+
+    
+    command = fields.Str(required=False)
+    
+    currency = fields.Str(required=False)
+    
+    inventory_bucket = fields.Str(required=False)
+    
+    price_effective = fields.Float(required=False)
+    
+    price_marked = fields.Float(required=False)
+    
+    seller_identifier = fields.Str(required=False)
+    
+    store_code = fields.Str(required=False)
+    
+    total_quantity = fields.Int(required=False)
+    
+    trace_id = fields.Str(required=False)
+    
+
+
 class FailedRecord(BaseSchema):
     # Catalog swagger.json
 
@@ -3058,6 +3086,8 @@ class FailedRecord(BaseSchema):
     identifiers = fields.Str(required=False)
     
     message = fields.Str(required=False)
+    
+    data = fields.List(fields.Nested(InventoryRecord, required=False), required=False)
     
 
 
@@ -3097,6 +3127,8 @@ class BulkInventoryGetItems(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
+    error_file_url = fields.Str(required=False)
+    
     meta = fields.Nested(BulkMeta, required=False)
     
 
@@ -3108,6 +3140,10 @@ class BulkMeta(BaseSchema):
     comment = fields.Str(required=False)
     
     image_urls = fields.List(fields.Str(required=False), required=False)
+    
+    total = fields.Int(required=False, allow_none=True)
+    
+    meta = fields.Dict(required=False, allow_none=True)
     
 
 
@@ -3166,6 +3202,10 @@ class BulkJob(BaseSchema):
     total = fields.Int(required=False)
     
     tracking_url = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    meta = fields.Dict(required=False, allow_none=True)
     
 
 
@@ -5643,7 +5683,7 @@ class InventoryExportJobListResponseSchema(BaseSchema):
     # Catalog swagger.json
 
     
-    items = fields.Nested(InventoryJobDetailResponseSchema, required=False)
+    items = fields.List(fields.Nested(InventoryJobDetailResponseSchema, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
     
@@ -5840,6 +5880,8 @@ class InventoryPayload(BaseSchema):
     not_available_quantity = fields.Int(required=False, allow_none=True)
     
     trace_id = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
     
 
 
@@ -8013,6 +8055,16 @@ class SizeDetails(BaseSchema):
     
     size = fields.Str(required=False)
     
+    item_width = fields.Float(required=False, allow_none=True)
+    
+    item_length = fields.Float(required=False, allow_none=True)
+    
+    item_height = fields.Float(required=False, allow_none=True)
+    
+    price_effective = fields.Float(required=False, allow_none=True)
+    
+    item_weight = fields.Float(required=False, allow_none=True)
+    
     store_count = fields.Int(required=False)
     
     sellable_quantity = fields.Int(required=False)
@@ -9361,6 +9413,8 @@ class BulkInventoryJob(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
+    created_on = fields.Str(required=False)
+    
     meta = fields.Nested(BulkMeta, required=False)
     
 
@@ -9549,13 +9603,13 @@ class CreateTaxComponentNameRequestSchema(BaseSchema):
     
     name = fields.Str(required=False)
     
-    description = fields.Str(required=False)
-    
 
 
 class TaxReqBodyVersion(BaseSchema):
     # Catalog swagger.json
 
+    
+    scope = fields.Str(required=False)
     
     components = fields.List(fields.Nested(TaxComponent, required=False), required=False)
     
@@ -9631,7 +9685,7 @@ class CreateTaxRequestBody(BaseSchema):
     
     rule = fields.Nested(TaxReqBodyRule, required=False)
     
-    versions = fields.List(fields.Nested(TaxReqBodyVersion, required=False), required=False)
+    versions = fields.Nested(TaxReqBodyVersion, required=False)
     
 
 
@@ -9684,6 +9738,8 @@ class UpdateTaxVersionRequestBody(BaseSchema):
 class CreateTaxVersionRequestBody(BaseSchema):
     # Catalog swagger.json
 
+    
+    scope = fields.Str(required=False)
     
     components = fields.List(fields.Nested(TaxComponent, required=False), required=False)
     
@@ -9823,7 +9879,7 @@ class HSCodeItem(BaseSchema):
     
     modified_on = fields.Str(required=False)
     
-    type = fields.Str(required=False, validate=OneOf([val.value for val in HsTypeEnum.__members__.values()]))
+    type = fields.Str(required=False)
     
     company_id = fields.Int(required=False)
     

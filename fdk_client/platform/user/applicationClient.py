@@ -1384,6 +1384,15 @@ class User:
 
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/user/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/user_attribute/user/{user_id}", user_id=user_id, page_size=page_size, page_no=page_no), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
 
+        if 200 <= int(response['status_code']) < 300:
+            from .models import UserAttributeDefinitionsResponseSchema
+            schema = UserAttributeDefinitionsResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getUserAttributesForUser")
+                print(e)
+
         return response
     
     async def updateUserAttributes(self, user_id=None, body="", request_headers:Dict={}):

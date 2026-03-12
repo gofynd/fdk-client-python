@@ -589,7 +589,7 @@ class Catalog:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", """{"required":[{"description":"Company Id of of which Inventory Bulk Upload History to be obtained.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search string to filter the results by batch id","in":"query","name":"search","required":false,"schema":{"type":"string"}},{"description":"Filter results by the job's start date.","in":"query","name":"start_date","required":false,"schema":{"type":"string","format":"date"}},{"description":"Filter results by the job's end date.","in":"query","name":"end_date","required":false,"schema":{"type":"string","format":"date"}},{"description":"Filter results by the current stage of the import job.","in":"query","name":"stage","required":false,"schema":{"type":"string"}},{"description":"Filter results by the tags of the import job.","in":"query","name":"tags","required":false,"schema":{"type":"string"}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search string to filter the results by batch id","in":"query","name":"search","required":false,"schema":{"type":"string"}},{"description":"Filter results by the job's start date.","in":"query","name":"start_date","required":false,"schema":{"type":"string","format":"date"}},{"description":"Filter results by the job's end date.","in":"query","name":"end_date","required":false,"schema":{"type":"string","format":"date"}},{"description":"Filter results by the current stage of the import job.","in":"query","name":"stage","required":false,"schema":{"type":"string"}},{"description":"Filter results by the tags of the import job.","in":"query","name":"tags","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"description":"Company Id of of which Inventory Bulk Upload History to be obtained.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, search=search, start_date=start_date, end_date=end_date, stage=stage, tags=tags)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/inventory/bulk/", """{"required":[{"description":"Company Id of of which Inventory Bulk Upload History to be obtained.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search string to filter the results by batch id","in":"query","name":"search","required":false,"schema":{"type":"string"}},{"description":"Filter results by the job's start date.","in":"query","name":"start_date","required":false,"schema":{"type":"string","format":"date"}},{"description":"Filter results by the job's end date.","in":"query","name":"end_date","required":false,"schema":{"type":"string","format":"date"}},{"description":"Filter results by the current stage of the import job.","in":"query","name":"stage","required":false,"schema":{"type":"string"}},{"description":"Filter results by the tags of the import job.","in":"query","name":"tags","required":false,"allowReserved":true,"schema":{"type":"string","nullable":true}}],"query":[{"description":"The page number to navigate through the given set of results","in":"query","name":"page_no","required":false,"schema":{"type":"integer"}},{"description":"Number of items to retrieve in each page. Default is 12.","in":"query","name":"page_size","required":false,"schema":{"default":12,"type":"integer"}},{"description":"Search string to filter the results by batch id","in":"query","name":"search","required":false,"schema":{"type":"string"}},{"description":"Filter results by the job's start date.","in":"query","name":"start_date","required":false,"schema":{"type":"string","format":"date"}},{"description":"Filter results by the job's end date.","in":"query","name":"end_date","required":false,"schema":{"type":"string","format":"date"}},{"description":"Filter results by the current stage of the import job.","in":"query","name":"stage","required":false,"schema":{"type":"string"}},{"description":"Filter results by the tags of the import job.","in":"query","name":"tags","required":false,"allowReserved":true,"schema":{"type":"string","nullable":true}}],"headers":[],"path":[{"description":"Company Id of of which Inventory Bulk Upload History to be obtained.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", page_no=page_no, page_size=page_size, search=search, start_date=start_date, end_date=end_date, stage=stage, tags=tags)
         query_string = await create_query_string(page_no=page_no, page_size=page_size, search=search, start_date=start_date, end_date=end_date, stage=stage, tags=tags)
         if query_string:
             url_with_params += "?" + query_string
@@ -2162,6 +2162,58 @@ class Catalog:
 
         return response
     
+    async def addInventory(self, item_id=None, size=None, body="", request_headers:Dict={}):
+        """Allows add Inventory for particular size and selling location.
+        :param item_id : Item id of the product of which size is to be get. : type integer
+        :param size : Size in which inventory is to be added. : type string
+        """
+        payload = {}
+        
+        if item_id is not None:
+            payload["item_id"] = item_id
+        if size is not None:
+            payload["size"] = size
+
+        # Parameter validation
+        schema = CatalogValidator.addInventory()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import InventoryRequestSchema
+        schema = InventoryRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item id of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size in which inventory is to be added.","in":"path","name":"size","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item id of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size in which inventory is to be added.","in":"path","name":"size","required":true,"schema":{"type":"string"}}]}""", serverType="platform", item_id=item_id, size=size)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import SuccessResponseSchema
+            schema = SuccessResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for addInventory")
+                print(e)
+
+        return response
+    
     async def getInventoryBySize(self, item_id=None, size=None, page_no=None, page_size=None, q=None, sellable=None, request_headers:Dict={}):
         """Retrieve inventory data for a specific company, item ID, and size. The API supports search capabilities based on selling location (store) code and product availability (in stock or not)."
         :param item_id : Item code of the product of which size is to be get. : type integer
@@ -2218,58 +2270,6 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getInventoryBySize")
-                print(e)
-
-        return response
-    
-    async def addInventory(self, item_id=None, size=None, body="", request_headers:Dict={}):
-        """Allows add Inventory for particular size and selling location.
-        :param item_id : Item id of the product of which size is to be get. : type integer
-        :param size : Size in which inventory is to be added. : type string
-        """
-        payload = {}
-        
-        if item_id is not None:
-            payload["item_id"] = item_id
-        if size is not None:
-            payload["size"] = size
-
-        # Parameter validation
-        schema = CatalogValidator.addInventory()
-        schema.dump(schema.load(payload))
-        
-        # Body validation
-        from .models import InventoryRequestSchema
-        schema = InventoryRequestSchema()
-        schema.dump(schema.load(body))
-
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", """{"required":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item id of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size in which inventory is to be added.","in":"path","name":"size","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to product that is to be viewed.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"description":"Item id of the product of which size is to be get.","in":"path","name":"item_id","required":true,"schema":{"type":"integer"}},{"description":"Size in which inventory is to be added.","in":"path","name":"size","required":true,"schema":{"type":"string"}}]}""", serverType="platform", item_id=item_id, size=size)
-        query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
-
-
-        headers = {}
-        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/sizes/{size}", item_id=item_id, size=size), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import SuccessResponseSchema
-            schema = SuccessResponseSchema()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for addInventory")
                 print(e)
 
         return response
@@ -3513,7 +3513,7 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
     
     async def updateMarketplaceOptin(self, marketplace_slug=None, body="", request_headers:Dict={}):
         """Allows to update marketplace optin for a company by marketplace_slug.
-        :param marketplace_slug : Slug of the marketplace . : type string
+        :param marketplace_slug : Slug of the marketplace. : type string
         """
         payload = {}
         
@@ -3529,7 +3529,7 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         schema = UpdateMarketplaceOptinRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/channel/{marketplace_slug}/opt-in", """{"required":[{"description":"Id of the company associated to the marketplace.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"Slug of the marketplace .","in":"path","name":"marketplace_slug","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to the marketplace.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"Slug of the marketplace .","in":"path","name":"marketplace_slug","schema":{"type":"string"},"required":true}]}""", serverType="platform", marketplace_slug=marketplace_slug)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/channel/{marketplace_slug}/opt-in", """{"required":[{"description":"Id of the company associated to the marketplace.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"Slug of the marketplace.","in":"path","name":"marketplace_slug","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"description":"Id of the company associated to the marketplace.","in":"path","name":"company_id","schema":{"type":"integer"},"required":true},{"description":"Slug of the marketplace.","in":"path","name":"marketplace_slug","schema":{"type":"string"},"required":true}]}""", serverType="platform", marketplace_slug=marketplace_slug)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3610,7 +3610,7 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         return response
     
     async def createTax(self, body="", request_headers:Dict={}):
-        """Create a tax rule and its version for under a specific company. This also creates a live version of the rule. The API now supports region-specific versions using optional region_type and areas along with the default country-level rule definition.
+        """Create a tax rule in a company, including its initial (live) version.  The API supports both default (country-level) and region-specific versions by using optional  parameters such as 'region_type' and 'areas'. This enables granular taxation rules scoped to  different geographic regions.
         """
         payload = {}
         
@@ -3624,7 +3624,7 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         schema = CreateTaxRequestBody()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/versions", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"},"description":"The ID of the company for which the tax rule is being created."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"},"description":"The ID of the company for which the tax rule is being created."}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/versions", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"},"description":"Unique identifier of the company for which the tax rule will be created."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"},"description":"Unique identifier of the company for which the tax rule will be created."}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3656,12 +3656,12 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         return response
     
     async def getAllTaxRules(self, q=None, statuses=None, page=None, limit=None, version_status=None, request_headers:Dict={}):
-        """Returns array of all tax rules of a company
-        :param q : The search query to filter tax rules. : type string
-        :param statuses : The status of the tax rules to filter. : type string
-        :param page : The page number to retrieve. : type integer
-        :param limit : The number of items per page. : type integer
-        :param version_status : The status of the tax rule versions to filter. : type string
+        """Retrieves a list of all tax rules defined for a company, along with their details.
+        :param q : Search query to filter tax rules : type string
+        :param statuses : Filter tax rules based on their lifecycle status. : type string
+        :param page : The page number to retrieve : type integer
+        :param limit : Maximum number of tax rule items per page : type integer
+        :param version_status : Filter tax rules to include only those with versions in the specified status. : type string
         """
         payload = {}
         
@@ -3681,7 +3681,7 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"},"description":"The ID of the company for which tax rules are being retrieved."}],"optional":[{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"The search query to filter tax rules."},{"in":"query","name":"statuses","required":false,"schema":{"type":"string","enum":["ACTIVE","INACTIVE","DELETED"]},"description":"The status of the tax rules to filter."},{"in":"query","name":"page","required":false,"schema":{"type":"integer"},"description":"The page number to retrieve."},{"in":"query","name":"limit","required":false,"schema":{"type":"integer"},"description":"The number of items per page."},{"in":"query","name":"version_status","required":false,"schema":{"type":"string","enum":["LIVE","PAST","FUTURE"]},"description":"The status of the tax rule versions to filter."}],"query":[{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"The search query to filter tax rules."},{"in":"query","name":"statuses","required":false,"schema":{"type":"string","enum":["ACTIVE","INACTIVE","DELETED"]},"description":"The status of the tax rules to filter."},{"in":"query","name":"page","required":false,"schema":{"type":"integer"},"description":"The page number to retrieve."},{"in":"query","name":"limit","required":false,"schema":{"type":"integer"},"description":"The number of items per page."},{"in":"query","name":"version_status","required":false,"schema":{"type":"string","enum":["LIVE","PAST","FUTURE"]},"description":"The status of the tax rule versions to filter."}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"},"description":"The ID of the company for which tax rules are being retrieved."}]}""", serverType="platform", q=q, statuses=statuses, page=page, limit=limit, version_status=version_status)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"},"description":"Unique identifier of the company whose tax rules are being retrieved"}],"optional":[{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"Search query to filter tax rules"},{"in":"query","name":"statuses","required":false,"schema":{"type":"string","enum":["ACTIVE","INACTIVE","DELETED"]},"description":"Filter tax rules based on their lifecycle status."},{"in":"query","name":"page","required":false,"schema":{"type":"integer"},"description":"The page number to retrieve"},{"in":"query","name":"limit","required":false,"schema":{"type":"integer"},"description":"Maximum number of tax rule items per page"},{"in":"query","name":"version_status","required":false,"schema":{"type":"string","enum":["LIVE","PAST","FUTURE"]},"description":"Filter tax rules to include only those with versions in the specified status."}],"query":[{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"Search query to filter tax rules"},{"in":"query","name":"statuses","required":false,"schema":{"type":"string","enum":["ACTIVE","INACTIVE","DELETED"]},"description":"Filter tax rules based on their lifecycle status."},{"in":"query","name":"page","required":false,"schema":{"type":"integer"},"description":"The page number to retrieve"},{"in":"query","name":"limit","required":false,"schema":{"type":"integer"},"description":"Maximum number of tax rule items per page"},{"in":"query","name":"version_status","required":false,"schema":{"type":"string","enum":["LIVE","PAST","FUTURE"]},"description":"Filter tax rules to include only those with versions in the specified status."}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"},"description":"Unique identifier of the company whose tax rules are being retrieved"}]}""", serverType="platform", q=q, statuses=statuses, page=page, limit=limit, version_status=version_status)
         query_string = await create_query_string(q=q, statuses=statuses, page=page, limit=limit, version_status=version_status)
         if query_string:
             url_with_params += "?" + query_string
@@ -3713,8 +3713,8 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         return response
     
     async def updateTaxRule(self, rule_id=None, body="", request_headers:Dict={}):
-        """Update an existing tax rule under a specific company.
-        :param rule_id : tax rule id that you want to update. : type string
+        """Update the details of an existing tax rule for a company.
+        :param rule_id : Unique identifier of the tax rule to update : type string
         """
         payload = {}
         
@@ -3730,7 +3730,7 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         schema = UpdateTaxRequestBody()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being updated."},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"tax rule id that you want to update."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being updated."},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"tax rule id that you want to update."}]}""", serverType="platform", rule_id=rule_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company for which the tax rule is being updated"},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"Unique identifier of the tax rule to update"}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company for which the tax rule is being updated"},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"Unique identifier of the tax rule to update"}]}""", serverType="platform", rule_id=rule_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3762,9 +3762,10 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         return response
     
     async def deleteTaxRule(self, rule_id=None, request_headers:Dict={}):
-        """Deletes a tax rule along with all its versions using the provided rule_id. You can not delete a rule if 1. it is the default tax rule 2. it is applied to any product. You will need to set any other tax rule as default or will need to attach a different tax rule to the products, then only you can delete the rule.
+        """Deletes a tax rule and all its associated versions. Note: A rule cannot be deleted if it is set as the default or is currently assigned to any product. 
+To proceed with deletion, ensure you first assign another rule as the default and unlink this rule from all products.
 
-        :param rule_id : The ID of the tax rule to be deleted. : type string
+        :param rule_id : Unique identifier of the tax rule to be deleted : type string
         """
         payload = {}
         
@@ -3776,7 +3777,7 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}", """{"required":[{"name":"rule_id","in":"path","required":true,"description":"The ID of the tax rule to be deleted.","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being updated."}],"optional":[],"query":[],"headers":[],"path":[{"name":"rule_id","in":"path","required":true,"description":"The ID of the tax rule to be deleted.","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being updated."}]}""", serverType="platform", rule_id=rule_id, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}", """{"required":[{"name":"rule_id","in":"path","required":true,"description":"Unique identifier of the tax rule to be deleted","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company associated with the tax rule to be deleted"}],"optional":[],"query":[],"headers":[],"path":[{"name":"rule_id","in":"path","required":true,"description":"Unique identifier of the tax rule to be deleted","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company associated with the tax rule to be deleted"}]}""", serverType="platform", rule_id=rule_id, )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3799,11 +3800,11 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         return response
     
     async def getTaxVersionDetails(self, rule_id=None, version_status=None, q=None, limit=None, page=None, request_headers:Dict={}):
-        """Retrieve versions of a tax rule with support for filtering by status and text search on region names via the `q` parameter.
-        :param rule_id : The ID of the tax rule. : type string
-        :param version_status : Filter by tax version status. : type string
-        :param q : Case-insensitive search by region name (e.g., "raj", "New York") to find matching tax versions. : type string
-        :param limit : The number of items to return per page for paginated past versions. : type string
+        """Retrieve the versions of a tax rule. You can filter results by version status.
+        :param rule_id : Unique identifier of the tax rule : type string
+        :param version_status : Filter by tax version status : type string
+        :param q : Case-insensitive search by region name (e.g., "john", "New York") to find matching tax versions : type string
+        :param limit : The number of items to return per page for paginated past versions : type string
         :param page : The page number for paginated past versions. : type string
         """
         payload = {}
@@ -3824,7 +3825,7 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being created."},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"The ID of the tax rule."}],"optional":[{"in":"query","name":"version_status","required":false,"schema":{"type":"string","enum":["ALL","LIVE","PAST","FUTURE"],"default":"ALL"},"description":"Filter by tax version status."},{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"Case-insensitive search by region name (e.g., \"raj\", \"New York\") to find matching tax versions."},{"in":"query","name":"limit","required":false,"schema":{"type":"string","default":10},"description":"The number of items to return per page for paginated past versions."},{"in":"query","name":"page","required":false,"schema":{"type":"string","default":"1"},"description":"The page number for paginated past versions."}],"query":[{"in":"query","name":"version_status","required":false,"schema":{"type":"string","enum":["ALL","LIVE","PAST","FUTURE"],"default":"ALL"},"description":"Filter by tax version status."},{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"Case-insensitive search by region name (e.g., \"raj\", \"New York\") to find matching tax versions."},{"in":"query","name":"limit","required":false,"schema":{"type":"string","default":10},"description":"The number of items to return per page for paginated past versions."},{"in":"query","name":"page","required":false,"schema":{"type":"string","default":"1"},"description":"The page number for paginated past versions."}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being created."},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"The ID of the tax rule."}]}""", serverType="platform", rule_id=rule_id, version_status=version_status, q=q, limit=limit, page=page)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company for which the tax rule versoin is being retrieved"},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"Unique identifier of the tax rule"}],"optional":[{"in":"query","name":"version_status","required":false,"schema":{"type":"string","enum":["ALL","LIVE","PAST","FUTURE"],"default":"ALL"},"description":"Filter by tax version status"},{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"Case-insensitive search by region name (e.g., \"john\", \"New York\") to find matching tax versions"},{"in":"query","name":"limit","required":false,"schema":{"type":"string","default":10},"description":"The number of items to return per page for paginated past versions"},{"in":"query","name":"page","required":false,"schema":{"type":"string","default":"1"},"description":"The page number for paginated past versions."}],"query":[{"in":"query","name":"version_status","required":false,"schema":{"type":"string","enum":["ALL","LIVE","PAST","FUTURE"],"default":"ALL"},"description":"Filter by tax version status"},{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"Case-insensitive search by region name (e.g., \"john\", \"New York\") to find matching tax versions"},{"in":"query","name":"limit","required":false,"schema":{"type":"string","default":10},"description":"The number of items to return per page for paginated past versions"},{"in":"query","name":"page","required":false,"schema":{"type":"string","default":"1"},"description":"The page number for paginated past versions."}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company for which the tax rule versoin is being retrieved"},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"Unique identifier of the tax rule"}]}""", serverType="platform", rule_id=rule_id, version_status=version_status, q=q, limit=limit, page=page)
         query_string = await create_query_string(version_status=version_status, q=q, limit=limit, page=page)
         if query_string:
             url_with_params += "?" + query_string
@@ -3857,7 +3858,7 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
     
     async def createTaxVersion(self, rule_id=None, body="", request_headers:Dict={}):
         """Creates a tax version using the provided rule_id with support for scheduled applicability and optional region-level overrides.
-        :param rule_id : The ID of the tax rule. : type string
+        :param rule_id : Unique identifier of the tax rule : type string
         """
         payload = {}
         
@@ -3873,7 +3874,7 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         schema = CreateTaxVersionRequestBody()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being created."},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"The ID of the tax rule."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being created."},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"The ID of the tax rule."}]}""", serverType="platform", rule_id=rule_id)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company for which the tax rule is being created"},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"Unique identifier of the tax rule"}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company for which the tax rule is being created"},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"},"description":"Unique identifier of the tax rule"}]}""", serverType="platform", rule_id=rule_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3905,9 +3906,9 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         return response
     
     async def deleteTaxVersion(self, rule_id=None, version_id=None, request_headers:Dict={}):
-        """Deletes a tax rule using the provided rule_id. On future/scheduled version can be deleted.
-        :param rule_id : The ID of the tax rule to be deleted. : type string
-        :param version_id : The ID of the tax version to be deleted. : type string
+        """Deletes a tax rule using the provided rule_id. Only future/scheduled version can be deleted.
+        :param rule_id : Unique identifier of the tax rule to be deleted : type string
+        :param version_id : Unique identifier of the tax version to be deleted : type string
         """
         payload = {}
         
@@ -3921,7 +3922,7 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions/{version_id}", """{"required":[{"name":"rule_id","in":"path","required":true,"description":"The ID of the tax rule to be deleted.","schema":{"type":"string"}},{"name":"version_id","in":"path","required":true,"description":"The ID of the tax version to be deleted.","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being updated."}],"optional":[],"query":[],"headers":[],"path":[{"name":"rule_id","in":"path","required":true,"description":"The ID of the tax rule to be deleted.","schema":{"type":"string"}},{"name":"version_id","in":"path","required":true,"description":"The ID of the tax version to be deleted.","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being updated."}]}""", serverType="platform", rule_id=rule_id, version_id=version_id, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions/{version_id}", """{"required":[{"name":"rule_id","in":"path","required":true,"description":"Unique identifier of the tax rule to be deleted","schema":{"type":"string"}},{"name":"version_id","in":"path","required":true,"description":"Unique identifier of the tax version to be deleted","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company for which the tax rule is being deleted"}],"optional":[],"query":[],"headers":[],"path":[{"name":"rule_id","in":"path","required":true,"description":"Unique identifier of the tax rule to be deleted","schema":{"type":"string"}},{"name":"version_id","in":"path","required":true,"description":"Unique identifier of the tax version to be deleted","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company for which the tax rule is being deleted"}]}""", serverType="platform", rule_id=rule_id, version_id=version_id, )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3944,9 +3945,14 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         return response
     
     async def updateTaxVersion(self, rule_id=None, version_id=None, body="", request_headers:Dict={}):
-        """Updates a tax version using the provided rule_id. Scheduled versions support editing of components, applicable dates, and regional overrides while live versions allow limited updates.
-        :param rule_id : The ID of the tax rule to be updated. : type string
-        :param version_id : The ID of the tax version to be updated. : type string
+        """When updating a tax version, the rules differ depending on whether it is a live version (that is, its applicable_date is now or in the past) or a scheduled version (with an applicable_date in the future). 
+For live versions, only the component names may be modified and only when the corresponding _id also matches, while changes to fields such as applicable_date, scope, store_ids, areas, region_type, and any other properties are not allowed. 
+In contrast, for scheduled (future) versions, you may change the applicable_date using an ISO datetime representing the date and time the version takes effect (at the start of the local day); to avoid changing it, simply pass the current applicable_date value. 
+Components can be added, updated, or removed: new components may omit _id, and omitting a known _id from the request will remove that component. The scope (COUNTRY by default, or STORE or REGION) can be set; for STORE scope, store_ids are required—if not specified, the existing store_ids are used. 
+For REGION scope, areas are required and region_type can be provided or will default to the current setting. In all cases, component names are validated, and only one version per rule may exist for each local day.
+
+        :param rule_id : Unique identifier of the tax rule to be updated : type string
+        :param version_id : Unique identifier of the tax version to be updated : type string
         """
         payload = {}
         
@@ -3964,7 +3970,7 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         schema = UpdateTaxVersionRequestBody()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions/{version_id}", """{"required":[{"name":"rule_id","in":"path","required":true,"description":"The ID of the tax rule to be updated.","schema":{"type":"string"}},{"name":"version_id","in":"path","required":true,"description":"The ID of the tax version to be updated.","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being updated."}],"optional":[],"query":[],"headers":[],"path":[{"name":"rule_id","in":"path","required":true,"description":"The ID of the tax rule to be updated.","schema":{"type":"string"}},{"name":"version_id","in":"path","required":true,"description":"The ID of the tax version to be updated.","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the tax rule is being updated."}]}""", serverType="platform", rule_id=rule_id, version_id=version_id, )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions/{version_id}", """{"required":[{"name":"rule_id","in":"path","required":true,"description":"Unique identifier of the tax rule to be updated","schema":{"type":"string"}},{"name":"version_id","in":"path","required":true,"description":"Unique identifier of the tax version to be updated","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company for which the tax rule is being updated"}],"optional":[],"query":[],"headers":[],"path":[{"name":"rule_id","in":"path","required":true,"description":"Unique identifier of the tax rule to be updated","schema":{"type":"string"}},{"name":"version_id","in":"path","required":true,"description":"Unique identifier of the tax version to be updated","schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company for which the tax rule is being updated"}]}""", serverType="platform", rule_id=rule_id, version_id=version_id, )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -3996,13 +4002,13 @@ For arrays of objects (e.g. sizes): match on a unique identifier (seller_identif
         return response
     
     async def getHsCodes(self, page=None, limit=None, type=None, q=None, request_headers:Dict={}):
-        """Retrieve a list of HS (Harmonized System) or SAC (Service Accounting Code) codes for a company.
-HS codes are used for classifying goods in international trade, while SAC codes are used for classifying services for taxation purposes.
+        """Retrieve a list of Harmonized System (HS)) or Service Accounting Code (SAC)) codes for a company.
+HS codes are used to classify goods in international trade, while SAC codes classify services for taxation purposes.
 Supports optional filtering and pagination.
 
         :param page : The page number for pagination. : type integer
         :param limit : The number of items to return per page. : type integer
-        :param type : Filter by HS/SAC code type. : type 
+        :param type : Filter by HS/SAC code type. : type string
         :param q : Search query to filter HS/SAC codes by code or description. : type string
         """
         payload = {}
@@ -4021,7 +4027,7 @@ Supports optional filtering and pagination.
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/hscodes", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which to retrieve HS/SAC codes."}],"optional":[{"in":"query","name":"page","required":false,"schema":{"type":"integer","default":1},"description":"The page number for pagination."},{"in":"query","name":"limit","required":false,"schema":{"type":"integer","default":50},"description":"The number of items to return per page."},{"in":"query","name":"type","required":false,"schema":{"$ref":"#/components/schemas/HsTypeEnum"},"description":"Filter by HS/SAC code type."},{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"Search query to filter HS/SAC codes by code or description."}],"query":[{"in":"query","name":"page","required":false,"schema":{"type":"integer","default":1},"description":"The page number for pagination."},{"in":"query","name":"limit","required":false,"schema":{"type":"integer","default":50},"description":"The number of items to return per page."},{"in":"query","name":"type","required":false,"schema":{"$ref":"#/components/schemas/HsTypeEnum"},"description":"Filter by HS/SAC code type."},{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"Search query to filter HS/SAC codes by code or description."}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which to retrieve HS/SAC codes."}]}""", serverType="platform", page=page, limit=limit, type=type, q=q)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/hscodes", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company for which to retrieve HS/SAC codes."}],"optional":[{"in":"query","name":"page","required":false,"schema":{"type":"integer","default":1},"description":"The page number for pagination."},{"in":"query","name":"limit","required":false,"schema":{"type":"integer","default":50},"description":"The number of items to return per page."},{"in":"query","name":"type","required":false,"schema":{"type":"string","enum":["HS","SAC"]},"description":"Filter by HS/SAC code type."},{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"Search query to filter HS/SAC codes by code or description."}],"query":[{"in":"query","name":"page","required":false,"schema":{"type":"integer","default":1},"description":"The page number for pagination."},{"in":"query","name":"limit","required":false,"schema":{"type":"integer","default":50},"description":"The number of items to return per page."},{"in":"query","name":"type","required":false,"schema":{"type":"string","enum":["HS","SAC"]},"description":"Filter by HS/SAC code type."},{"in":"query","name":"q","required":false,"schema":{"type":"string"},"description":"Search query to filter HS/SAC codes by code or description."}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company for which to retrieve HS/SAC codes."}]}""", serverType="platform", page=page, limit=limit, type=type, q=q)
         query_string = await create_query_string(page=page, limit=limit, type=type, q=q)
         if query_string:
             url_with_params += "?" + query_string
@@ -4053,7 +4059,7 @@ Supports optional filtering and pagination.
         return response
     
     async def createHsCode(self, body="", request_headers:Dict={}):
-        """Create HS/SAC code.
+        """Create a new Harmonized System (HS) or Service Accounting Code (SAC). These codes are used for product and service identification in taxation and compliance processes.
         """
         payload = {}
         
@@ -4067,7 +4073,7 @@ Supports optional filtering and pagination.
         schema = HSCodeItem()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/hscodes", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the HS/SAC code is being created."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the HS/SAC code is being created."}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/hscodes", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company for which the HS/SAC code is being created"}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company for which the HS/SAC code is being created"}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -4117,7 +4123,7 @@ customize the names of tax components according to their local tax regulations a
         schema = CreateTaxComponentNameRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/component-names", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the component names are being created."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the component names are being created."}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/component-names", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company for which tax component names are being defined."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company for which tax component names are being defined."}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -4149,7 +4155,7 @@ customize the names of tax components according to their local tax regulations a
         return response
     
     async def getTaxComponentNames(self, request_headers:Dict={}):
-        """Get component names for a company.
+        """Retrieve the list of all tax component names for a company.
         """
         payload = {}
         
@@ -4159,7 +4165,7 @@ customize the names of tax components according to their local tax regulations a
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/component-names", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the component names are being retrieved."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"The ID of the company for which the component names are being retrieved."}]}""", serverType="platform", )
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/component-names", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company whose tax component names are to be fetched."}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"},"description":"Unique identifier of the company whose tax component names are to be fetched."}]}""", serverType="platform", )
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
