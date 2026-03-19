@@ -36,8 +36,6 @@ from .theme.client import Theme
 
 from .user.client import User
 
-from .webhook.client import Webhook
-
 
 class ApplicationClient:
     def __init__(self, config):
@@ -60,7 +58,6 @@ class ApplicationClient:
         self.share = Share(self.config)
         self.theme = Theme(self.config)
         self.user = User(self.config)
-        self.webhook = Webhook(self.config)
         
 
     def setCookie(self, cookie):

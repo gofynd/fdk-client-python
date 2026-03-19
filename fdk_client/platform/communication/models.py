@@ -1749,6 +1749,8 @@ class SendOtpCommsReqData(BaseSchema):
     
     to = fields.Str(required=False)
     
+    additional_template_variables = fields.Dict(required=False)
+    
 
 
 class SendOtpCommsReqSms(BaseSchema):

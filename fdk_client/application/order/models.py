@@ -1299,6 +1299,8 @@ class Shipments(BaseSchema):
     
     shipment_id = fields.Str(required=False)
     
+    affiliate_shipment_id = fields.Str(required=False)
+    
     fulfilling_store = fields.Nested(FulfillingStore, required=False)
     
     custom_meta = fields.List(fields.Dict(required=False), required=False)
@@ -1510,6 +1512,8 @@ class ShipmentInfo(BaseSchema):
     shipment_created_ts = fields.Str(required=False)
     
     shipment_id = fields.Str(required=False)
+    
+    affiliate_shipment_id = fields.Str(required=False)
     
     shipment_status = fields.Nested(ShipmentStatus, required=False)
     
