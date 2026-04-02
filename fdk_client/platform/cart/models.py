@@ -2273,6 +2273,8 @@ class Article(BaseSchema):
     
     article_index = fields.Int(required=False)
     
+    identifier = fields.Str(required=False)
+    
 
 
 class PriceAdjustmentRestrictions(BaseSchema):

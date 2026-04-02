@@ -6439,6 +6439,10 @@ class Prices(BaseSchema):
     
     loyalty_discount = fields.Float(required=False)
     
+    marketplace_promotion_effective_discount = fields.Float(required=False, allow_none=True)
+    
+    seller_promotion_effective_discount = fields.Float(required=False, allow_none=True)
+    
 
 
 class ChargeDistributionSchema(BaseSchema):

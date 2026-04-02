@@ -32,8 +32,10 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
+        
         
         
         
@@ -258,6 +260,8 @@ class CartValidator:
         
         b = fields.Boolean(required=False)
         
+        include_cart_calculation = fields.Boolean(required=False)
+        
         area_code = fields.Str(required=False)
         
         buy_now = fields.Boolean(required=False)
@@ -278,6 +282,8 @@ class CartValidator:
         i = fields.Boolean(required=False)
         
         b = fields.Boolean(required=False)
+        
+        include_cart_calculation = fields.Boolean(required=False)
         
         area_code = fields.Str(required=False)
         
