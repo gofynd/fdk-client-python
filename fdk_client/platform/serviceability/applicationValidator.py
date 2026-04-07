@@ -173,6 +173,77 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
         
         
         
@@ -194,47 +265,9 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
         
     
     
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
-    
-    
-        
-        
-        
         
         
     
@@ -251,10 +284,8 @@ from ..PlatformModel import BaseSchema
     
         
         
-        
     
     
-        
         
         
     
@@ -571,6 +602,15 @@ class ServiceabilityValidator:
          
         
     
+    class getApplicationCourierPartnersList(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
     class getApplicationConfiguration(BaseSchema):
         
         
@@ -817,6 +857,66 @@ class ServiceabilityValidator:
         application_id = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
+         
+        
+    
+    class createPolygon(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getPolygon(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        page_number = fields.Int(required=False)
+        
+        page_size = fields.Int(required=False)
+         
+        
+    
+    class updatePolygon(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class downloadZoneProductsBulkSampleFile(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class createZoneProductsBulkPatchJob(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getZoneProductsBulkPatchJobStatus(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        batch_id = fields.Str(required=False)
          
         
     

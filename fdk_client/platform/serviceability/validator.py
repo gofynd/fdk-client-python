@@ -36,6 +36,9 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
         
     
     
@@ -214,6 +217,13 @@ class ServiceabilityValidator:
         company_id = fields.Int(required=False)
         
         account_id = fields.Str(required=False)
+         
+        
+    
+    class getCompanyCourierPartnersList(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
          
         
     

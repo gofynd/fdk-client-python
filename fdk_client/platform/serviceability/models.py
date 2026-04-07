@@ -8,6 +8,14 @@ from ..PlatformModel import BaseSchema
 
 
 
+class GenerateShipmentsAndCourierPartnerResult(BaseSchema):
+    pass
+
+
+class CourierPartnerDetails(BaseSchema):
+    pass
+
+
 class PlatformShipmentsRequestSchema(BaseSchema):
     pass
 
@@ -456,6 +464,110 @@ class CompanyConfigurationSchema(BaseSchema):
     pass
 
 
+class StorePolygonServiceabilityRequestBody(BaseSchema):
+    pass
+
+
+class StorePolygonServiceabilityResult(BaseSchema):
+    pass
+
+
+class StorePolygonServiceabilityGetResult(BaseSchema):
+    pass
+
+
+class ZoneProductsBulkPatchDetails(BaseSchema):
+    pass
+
+
+class GetZoneProductsBulkPatchResult(BaseSchema):
+    pass
+
+
+class CourierPartnerToServiceability(BaseSchema):
+    pass
+
+
+class ServiceabilityLocation(BaseSchema):
+    pass
+
+
+class CourierPartnerShipments(BaseSchema):
+    pass
+
+
+class PromiseObject(BaseSchema):
+    pass
+
+
+class PromiseData(BaseSchema):
+    pass
+
+
+class PromiseMeta(BaseSchema):
+    pass
+
+
+class CourierPartnerPromiseData(BaseSchema):
+    pass
+
+
+class DeliveryTat(BaseSchema):
+    pass
+
+
+class DeliveryTatSchema(BaseSchema):
+    pass
+
+
+class CourierPartnerShipmentsMeta(BaseSchema):
+    pass
+
+
+class ShipmentCourierPartnersResult(BaseSchema):
+    pass
+
+
+class AreaCode(BaseSchema):
+    pass
+
+
+class TAT(BaseSchema):
+    pass
+
+
+class LocationDetailsServiceability(BaseSchema):
+    pass
+
+
+class CourierPartnerShipmentsArticles(BaseSchema):
+    pass
+
+
+class CourierPartnerArticlesPromise(BaseSchema):
+    pass
+
+
+class CourierPartnerArticlesReturnReasons(BaseSchema):
+    pass
+
+
+class CourierPartnerArticlesReturnReasonsMeta(BaseSchema):
+    pass
+
+
+class ArticleWeight(BaseSchema):
+    pass
+
+
+class ArticleAttributes(BaseSchema):
+    pass
+
+
+class ArticleDimension(BaseSchema):
+    pass
+
+
 class PlatformLocationArticles(BaseSchema):
     pass
 
@@ -533,14 +645,6 @@ class ShipmentsMeta(BaseSchema):
 
 
 class ShipmentsCourierPartner(BaseSchema):
-    pass
-
-
-class AreaCode(BaseSchema):
-    pass
-
-
-class TAT(BaseSchema):
     pass
 
 
@@ -792,18 +896,6 @@ class ShipmentsArticles(BaseSchema):
     pass
 
 
-class ArticleWeight(BaseSchema):
-    pass
-
-
-class ArticleAttributes(BaseSchema):
-    pass
-
-
-class ArticleDimension(BaseSchema):
-    pass
-
-
 class ArticleSet(BaseSchema):
     pass
 
@@ -936,14 +1028,6 @@ class ArticleAssignment(BaseSchema):
     pass
 
 
-class LocationDetailsServiceability(BaseSchema):
-    pass
-
-
-class ServiceabilityLocation(BaseSchema):
-    pass
-
-
 class OptimalLocationsArticles(BaseSchema):
     pass
 
@@ -1052,7 +1136,89 @@ class HistoryObject(BaseSchema):
     pass
 
 
+class StorePolygonServiceabilityRequestData(BaseSchema):
+    pass
 
+
+class StorePolygonServiceabilityStore(BaseSchema):
+    pass
+
+
+class StorePolygonServiceabilityStoreCoordinates(BaseSchema):
+    pass
+
+
+class StorePolygonServiceabilityConfig(BaseSchema):
+    pass
+
+
+class StorePolygonServiceabilityPolygon(BaseSchema):
+    pass
+
+
+class StorePolygonServiceabilityFeature(BaseSchema):
+    pass
+
+
+class StorePolygonServiceabilityGeometry(BaseSchema):
+    pass
+
+
+class StorePolygonServiceabilityAttributes(BaseSchema):
+    pass
+
+
+class StorePolygonServiceabilityReferenceCoordinates(BaseSchema):
+    pass
+
+
+class StorePolygonServiceabilityStoreSummary(BaseSchema):
+    pass
+
+
+class StorePolygonServiceabilityError(BaseSchema):
+    pass
+
+
+class StorePolygonServiceabilityPagination(BaseSchema):
+    pass
+
+
+
+
+
+class GenerateShipmentsAndCourierPartnerResult(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    journey = fields.Str(required=False)
+    
+    to_serviceability = fields.Nested(CourierPartnerToServiceability, required=False)
+    
+    shipments = fields.List(fields.Nested(CourierPartnerShipments, required=False), required=False)
+    
+    payment_mode = fields.Str(required=False)
+    
+    to_city = fields.Str(required=False)
+    
+    is_cod_available = fields.Boolean(required=False)
+    
+
+
+class CourierPartnerDetails(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    to_serviceability = fields.Nested(LocationDetailsServiceability, required=False)
+    
+    shipments = fields.List(fields.Nested(CourierPartnerShipments, required=False), required=False)
+    
+    journey = fields.Str(required=False)
+    
+    payment_mode = fields.Str(required=False)
+    
+    skip_delivery_rules = fields.Boolean(required=False)
+    
 
 
 class PlatformShipmentsRequestSchema(BaseSchema):
@@ -3011,6 +3177,460 @@ class CompanyConfigurationSchema(BaseSchema):
     
 
 
+class StorePolygonServiceabilityRequestBody(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    data = fields.Nested(StorePolygonServiceabilityRequestData, required=False)
+    
+
+
+class StorePolygonServiceabilityResult(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    data = fields.List(fields.Nested(StorePolygonServiceabilityStoreSummary, required=False), required=False)
+    
+    errors = fields.List(fields.Nested(StorePolygonServiceabilityError, required=False), required=False)
+    
+    identifier = fields.Str(required=False)
+    
+    failed_entries = fields.List(fields.Nested(StorePolygonServiceabilityError, required=False), required=False)
+    
+
+
+class StorePolygonServiceabilityGetResult(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    data = fields.List(fields.Nested(StorePolygonServiceabilityStore, required=False), required=False)
+    
+    errors = fields.List(fields.Nested(StorePolygonServiceabilityError, required=False), required=False)
+    
+    identifier = fields.Str(required=False)
+    
+    failed_entries = fields.List(fields.Nested(StorePolygonServiceabilityError, required=False), required=False)
+    
+    pagination = fields.Nested(StorePolygonServiceabilityPagination, required=False)
+    
+
+
+class ZoneProductsBulkPatchDetails(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    file_url = fields.Str(required=False)
+    
+
+
+class GetZoneProductsBulkPatchResult(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    batch_id = fields.Str(required=False)
+    
+    file_path = fields.Str(required=False, allow_none=True)
+    
+    total = fields.Int(required=False)
+    
+    failed = fields.Int(required=False)
+    
+    error_file_url = fields.Str(required=False, allow_none=True)
+    
+    action = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    updated_by = fields.Str(required=False)
+    
+    type = fields.Str(required=False)
+    
+    company_id = fields.Int(required=False)
+    
+    application_id = fields.Str(required=False)
+    
+    stage = fields.Str(required=False)
+    
+    partial = fields.Int(required=False)
+    
+    result_file_url = fields.Str(required=False, allow_none=True)
+    
+
+
+class CourierPartnerToServiceability(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    location = fields.Nested(ServiceabilityLocation, required=False)
+    
+    pincode = fields.Str(required=False)
+    
+    sector = fields.Str(required=False)
+    
+    country = fields.Str(required=False)
+    
+    country_iso_code = fields.Str(required=False)
+    
+    state = fields.Str(required=False)
+    
+    city = fields.Str(required=False)
+    
+
+
+class ServiceabilityLocation(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    longitude = fields.Str(required=False)
+    
+    latitude = fields.Str(required=False)
+    
+
+
+class CourierPartnerShipments(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    promise = fields.Nested(PromiseObject, required=False)
+    
+    is_cod_available = fields.Boolean(required=False)
+    
+    is_auto_assign = fields.Boolean(required=False)
+    
+    meta = fields.Nested(CourierPartnerShipmentsMeta, required=False)
+    
+    volumetric_weight = fields.Int(required=False)
+    
+    weight = fields.Int(required=False)
+    
+    courier_partners = fields.List(fields.Nested(ShipmentCourierPartnersResult, required=False), required=False)
+    
+    fulfillment_id = fields.Int(required=False)
+    
+    fulfillment_type = fields.Str(required=False)
+    
+    fulfillment_tags = fields.List(fields.Str(required=False), required=False)
+    
+    from_serviceability = fields.Nested(LocationDetailsServiceability, required=False)
+    
+    articles = fields.List(fields.Nested(CourierPartnerShipmentsArticles, required=False), required=False)
+    
+    is_mto = fields.Boolean(required=False)
+    
+    ignore_scheme_ids = fields.List(fields.Str(required=False), required=False)
+    
+    error = fields.Dict(required=False)
+    
+
+
+class PromiseObject(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    min = fields.Str(required=False)
+    
+    max = fields.Str(required=False)
+    
+    customer_promise = fields.Nested(PromiseData, required=False)
+    
+    meta = fields.Nested(PromiseMeta, required=False)
+    
+
+
+class PromiseData(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    min = fields.Str(required=False)
+    
+    max = fields.Str(required=False)
+    
+
+
+class PromiseMeta(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    seller_promise = fields.Nested(PromiseData, required=False)
+    
+    courier_partner_promise = fields.Nested(CourierPartnerPromiseData, required=False)
+    
+    customer_initial_promise = fields.Nested(PromiseData, required=False)
+    
+
+
+class CourierPartnerPromiseData(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    min = fields.Str(required=False, allow_none=True)
+    
+    max = fields.Str(required=False, allow_none=True)
+    
+    attributes = fields.Nested(DeliveryTat, required=False)
+    
+
+
+class DeliveryTat(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    tat = fields.Nested(DeliveryTatSchema, required=False)
+    
+
+
+class DeliveryTatSchema(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    min = fields.Int(required=False)
+    
+    max = fields.Int(required=False)
+    
+
+
+class CourierPartnerShipmentsMeta(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    shipment_cost = fields.Int(required=False)
+    
+
+
+class ShipmentCourierPartnersResult(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    extension_id = fields.Str(required=False)
+    
+    scheme_id = fields.Str(required=False)
+    
+    area_code = fields.Nested(AreaCode, required=False)
+    
+    tat = fields.Nested(TAT, required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    is_qc_enabled = fields.Boolean(required=False)
+    
+    is_self_ship = fields.Boolean(required=False)
+    
+    is_own_account = fields.Boolean(required=False)
+    
+    ndr_attempts = fields.Int(required=False)
+    
+    forward_pickup_cutoff = fields.Str(required=False, allow_none=True)
+    
+    reverse_pickup_cutoff = fields.Str(required=False, allow_none=True)
+    
+    qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
+    
+    non_qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
+    
+    dangerous_goods = fields.Boolean(required=False)
+    
+    restricted_goods = fields.Boolean(required=False)
+    
+    fragile_goods = fields.Boolean(required=False)
+    
+    cold_storage_goods = fields.Boolean(required=False)
+    
+    delivery_type = fields.Str(required=False)
+    
+    is_cod = fields.Boolean(required=False)
+    
+    transport_type = fields.Str(required=False)
+    
+
+
+class AreaCode(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    source = fields.Str(required=False)
+    
+    destination = fields.Str(required=False)
+    
+
+
+class TAT(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    min = fields.Int(required=False)
+    
+    max = fields.Int(required=False)
+    
+
+
+class LocationDetailsServiceability(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    pincode = fields.Str(required=False)
+    
+    sector = fields.Str(required=False)
+    
+    state = fields.Str(required=False)
+    
+    country = fields.Str(required=False)
+    
+    city = fields.Str(required=False)
+    
+    country_iso_code = fields.Str(required=False)
+    
+    location = fields.Nested(ServiceabilityLocation, required=False)
+    
+
+
+class CourierPartnerShipmentsArticles(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    id = fields.Str(required=False)
+    
+    delivery_slots = fields.Dict(required=False)
+    
+    error = fields.Nested(Error, required=False)
+    
+    fulfillment_id = fields.Int(required=False)
+    
+    fulfillment_tags = fields.List(fields.Str(required=False), required=False)
+    
+    fulfillment_type = fields.Str(required=False)
+    
+    group_id = fields.Str(required=False)
+    
+    is_gift = fields.Boolean(required=False)
+    
+    is_mto = fields.Boolean(required=False)
+    
+    is_set = fields.Boolean(required=False)
+    
+    manufacturing_time = fields.Int(required=False)
+    
+    manufacturing_time_unit = fields.Str(required=False)
+    
+    mto_quantity = fields.Int(required=False)
+    
+    sla = fields.Str(required=False)
+    
+    price_marked = fields.Float(required=False)
+    
+    promise = fields.Nested(CourierPartnerArticlesPromise, required=False)
+    
+    set = fields.Dict(required=False)
+    
+    return_reason = fields.Nested(CourierPartnerArticlesReturnReasons, required=False)
+    
+    set_quantity = fields.Int(required=False)
+    
+    quantity = fields.Int(required=False)
+    
+    weight = fields.Nested(ArticleWeight, required=False)
+    
+    attributes = fields.Nested(ArticleAttributes, required=False)
+    
+    category_id = fields.Int(required=False)
+    
+    dimension = fields.Nested(ArticleDimension, required=False)
+    
+    brand_id = fields.Int(required=False)
+    
+    item_id = fields.Int(required=False)
+    
+    size = fields.Str(required=False)
+    
+    tags = fields.List(fields.Str(required=False), required=False)
+    
+    department_id = fields.Int(required=False)
+    
+    price = fields.Float(required=False)
+    
+
+
+class CourierPartnerArticlesPromise(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    min = fields.Str(required=False)
+    
+    max = fields.Str(required=False)
+    
+
+
+class CourierPartnerArticlesReturnReasons(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    id = fields.Int(required=False)
+    
+    meta = fields.Nested(CourierPartnerArticlesReturnReasonsMeta, required=False)
+    
+    qc_type = fields.List(fields.Str(required=False), required=False)
+    
+    reasons = fields.List(fields.Str(required=False), required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    display_name = fields.Str(required=False)
+    
+    question_set = fields.List(fields.Str(required=False), required=False)
+    
+    reason_other_text = fields.Str(required=False)
+    
+
+
+class CourierPartnerArticlesReturnReasonsMeta(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    show_text_area = fields.Boolean(required=False)
+    
+
+
+class ArticleWeight(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    shipping = fields.Int(required=False)
+    
+    unit = fields.Str(required=False)
+    
+    is_default = fields.Boolean(required=False)
+    
+
+
+class ArticleAttributes(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    battery_operated = fields.Str(required=False)
+    
+    is_flammable = fields.Str(required=False)
+    
+
+
+class ArticleDimension(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    height = fields.Float(required=False)
+    
+    is_default = fields.Boolean(required=False)
+    
+    length = fields.Float(required=False)
+    
+    unit = fields.Str(required=False)
+    
+    width = fields.Float(required=False)
+    
+
+
 class PlatformLocationArticles(BaseSchema):
     # Serviceability swagger.json
 
@@ -3356,26 +3976,6 @@ class ShipmentsCourierPartner(BaseSchema):
     qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
     
     non_qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
-    
-
-
-class AreaCode(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    source = fields.Str(required=False)
-    
-    destination = fields.Str(required=False)
-    
-
-
-class TAT(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    min = fields.Int(required=False)
-    
-    max = fields.Int(required=False)
     
 
 
@@ -3786,6 +4386,8 @@ class ProductSchema(BaseSchema):
     type = fields.Str(required=False)
     
     values = fields.List(fields.Raw(required=False), required=False)
+    
+    action = fields.Str(required=False)
     
 
 
@@ -4417,44 +5019,6 @@ class ShipmentsArticles(BaseSchema):
     
 
 
-class ArticleWeight(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    shipping = fields.Int(required=False)
-    
-    unit = fields.Str(required=False)
-    
-    is_default = fields.Boolean(required=False)
-    
-
-
-class ArticleAttributes(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    battery_operated = fields.Str(required=False)
-    
-    is_flammable = fields.Str(required=False)
-    
-
-
-class ArticleDimension(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    height = fields.Float(required=False)
-    
-    is_default = fields.Boolean(required=False)
-    
-    length = fields.Float(required=False)
-    
-    unit = fields.Str(required=False)
-    
-    width = fields.Float(required=False)
-    
-
-
 class ArticleSet(BaseSchema):
     # Serviceability swagger.json
 
@@ -4872,36 +5436,6 @@ class ArticleAssignment(BaseSchema):
     level = fields.Str(required=False)
     
     strategy = fields.Str(required=False)
-    
-
-
-class LocationDetailsServiceability(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    pincode = fields.Str(required=False)
-    
-    sector = fields.Str(required=False)
-    
-    state = fields.Str(required=False)
-    
-    country = fields.Str(required=False)
-    
-    city = fields.Str(required=False)
-    
-    country_iso_code = fields.Str(required=False)
-    
-    location = fields.Nested(ServiceabilityLocation, required=False)
-    
-
-
-class ServiceabilityLocation(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    longitude = fields.Str(required=False)
-    
-    latitude = fields.Str(required=False)
     
 
 
@@ -5340,6 +5874,164 @@ class HistoryObject(BaseSchema):
     total_count = fields.Int(required=False)
     
     total_error_count = fields.Int(required=False)
+    
+
+
+class StorePolygonServiceabilityRequestData(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    stores = fields.List(fields.Nested(StorePolygonServiceabilityStore, required=False), required=False)
+    
+
+
+class StorePolygonServiceabilityStore(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    store_code = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+    address = fields.Str(required=False)
+    
+    area_code = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    coordinates = fields.Nested(StorePolygonServiceabilityStoreCoordinates, required=False)
+    
+    serviceabilities = fields.List(fields.Nested(StorePolygonServiceabilityConfig, required=False), required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+
+
+class StorePolygonServiceabilityStoreCoordinates(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    lng = fields.Float(required=False)
+    
+    lat = fields.Float(required=False)
+    
+
+
+class StorePolygonServiceabilityConfig(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    serviceability_type = fields.Str(required=False)
+    
+    polygon = fields.Nested(StorePolygonServiceabilityPolygon, required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    uid = fields.Str(required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+
+
+class StorePolygonServiceabilityPolygon(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    features = fields.List(fields.Nested(StorePolygonServiceabilityFeature, required=False), required=False)
+    
+    attributes = fields.Nested(StorePolygonServiceabilityAttributes, required=False)
+    
+
+
+class StorePolygonServiceabilityFeature(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    properties = fields.Dict(required=False)
+    
+    geometry = fields.Nested(StorePolygonServiceabilityGeometry, required=False)
+    
+
+
+class StorePolygonServiceabilityGeometry(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    coordinates = fields.List(fields.List(fields.List(fields.Float(required=False), required=False), required=False), required=False)
+    
+
+
+class StorePolygonServiceabilityAttributes(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    contour_type = fields.Str(required=False)
+    
+    travel_distance = fields.Float(required=False)
+    
+    reference_coordinates = fields.Nested(StorePolygonServiceabilityReferenceCoordinates, required=False)
+    
+
+
+class StorePolygonServiceabilityReferenceCoordinates(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    lng = fields.Float(required=False)
+    
+    lat = fields.Float(required=False)
+    
+
+
+class StorePolygonServiceabilityStoreSummary(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    store_code = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+
+
+class StorePolygonServiceabilityError(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    store_code = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+    error_code = fields.Str(required=False)
+    
+
+
+class StorePolygonServiceabilityPagination(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    page_size = fields.Int(required=False)
+    
+    page_number = fields.Int(required=False)
+    
+    has_next = fields.Boolean(required=False)
+    
+    total_records = fields.Int(required=False)
     
 
 

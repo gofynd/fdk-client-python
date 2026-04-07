@@ -217,6 +217,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
 
 class CartValidator:
     
@@ -666,6 +667,8 @@ class CartValidator:
     
     class getProductsByOfferId(BaseSchema):
         
+        
+        offer_code = fields.Str(required=False)
         
         offer_id = fields.Str(required=False)
         

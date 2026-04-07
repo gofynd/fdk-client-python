@@ -1941,14 +1941,17 @@ class Cart:
 
         return response
     
-    async def getProductsByOfferId(self, offer_id=None, page=None, page_size=None, body="", request_headers:Dict={}):
-        """List all products eligible for the given offer id.
+    async def getProductsByOfferId(self, offer_code=None, offer_id=None, page=None, page_size=None, body="", request_headers:Dict={}):
+        """List all products eligible for the given offer. Lookup can be done by offer_code (takes priority) or offer_id. At least one must be provided.
+        :param offer_code : Offer code (takes priority over offer_id when both are provided) : type string
         :param offer_id : The unique identifier of the offer : type string
         :param page : Page number for pagination : type integer
         :param page_size : Number of items per page : type integer
         """
         payload = {}
         
+        if offer_code is not None:
+            payload["offer_code"] = offer_code
         if offer_id is not None:
             payload["offer_id"] = offer_id
         if page is not None:
@@ -1961,8 +1964,8 @@ class Cart:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getProductsByOfferId"], proccessed_params="""{"required":[{"name":"offer_id","in":"query","required":true,"schema":{"type":"string"},"description":"The unique identifier of the offer"}],"optional":[{"name":"page","in":"query","schema":{"type":"integer","default":1},"description":"Page number for pagination"},{"name":"page_size","in":"query","schema":{"type":"integer","default":20},"description":"Number of items per page"}],"query":[{"name":"offer_id","in":"query","required":true,"schema":{"type":"string"},"description":"The unique identifier of the offer"},{"name":"page","in":"query","schema":{"type":"integer","default":1},"description":"Page number for pagination"},{"name":"page_size","in":"query","schema":{"type":"integer","default":20},"description":"Number of items per page"}],"headers":[],"path":[]}""", serverType="application", offer_id=offer_id, page=page, page_size=page_size)
-        query_string = await create_query_string(offer_id=offer_id, page=page, page_size=page_size)
+        url_with_params = await create_url_with_params(api_url=self._urls["getProductsByOfferId"], proccessed_params="""{"required":[],"optional":[{"name":"offer_code","in":"query","required":false,"x-not-enum":true,"schema":{"type":"string","x-not-enum":true},"description":"Offer code (takes priority over offer_id when both are provided)"},{"name":"offer_id","in":"query","required":false,"schema":{"type":"string"},"description":"The unique identifier of the offer"},{"name":"page","in":"query","schema":{"type":"integer","default":1},"description":"Page number for pagination"},{"name":"page_size","in":"query","schema":{"type":"integer","default":20},"description":"Number of items per page"}],"query":[{"name":"offer_code","in":"query","required":false,"x-not-enum":true,"schema":{"type":"string","x-not-enum":true},"description":"Offer code (takes priority over offer_id when both are provided)"},{"name":"offer_id","in":"query","required":false,"schema":{"type":"string"},"description":"The unique identifier of the offer"},{"name":"page","in":"query","schema":{"type":"integer","default":1},"description":"Page number for pagination"},{"name":"page_size","in":"query","schema":{"type":"integer","default":20},"description":"Number of items per page"}],"headers":[],"path":[]}""", serverType="application", offer_code=offer_code, offer_id=offer_id, page=page, page_size=page_size)
+        query_string = await create_query_string(offer_code=offer_code, offer_id=offer_id, page=page, page_size=page_size)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -1980,7 +1983,7 @@ class Cart:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductsByOfferId"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/eligible-offer-products", offer_id=offer_id, page=page, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductsByOfferId"]).netloc, "get", await create_url_without_domain("/service/application/cart/v1.0/eligible-offer-products", offer_code=offer_code, offer_id=offer_id, page=page, page_size=page_size), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import EligibleProductsResult
