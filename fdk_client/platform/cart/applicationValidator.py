@@ -158,8 +158,10 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
+        
         
         
         
@@ -171,6 +173,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -218,6 +221,7 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
@@ -264,8 +268,10 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
+        
         
         
         
@@ -288,8 +294,10 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
+        
         
         
         
@@ -329,8 +337,10 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
+        
         
         
         
@@ -385,6 +395,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -415,6 +426,7 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
@@ -440,8 +452,10 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
+        
         
         
         
@@ -461,6 +475,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -469,8 +484,10 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
+        
         
         
         
@@ -836,6 +853,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__ordering__source__type = fields.Str(required=False)
+        
         x__location__detail = fields.Str(required=False)
         
         x__currency__code = fields.Str(required=False)
@@ -851,6 +870,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__ordering__source__type = fields.Str(required=False)
+        
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
@@ -861,6 +882,8 @@ class CartValidator:
         
         
         x__ordering__source = fields.Str(required=False)
+        
+        x__ordering__source__type = fields.Str(required=False)
         
         x__anonymous__cart = fields.Str(required=False)
         
@@ -976,6 +999,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__ordering__source__type = fields.Str(required=False)
+        
         x__location__detail = fields.Str(required=False)
         
         x__currency__code = fields.Str(required=False)
@@ -1052,6 +1077,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__ordering__source__type = fields.Str(required=False)
+        
         x__anonymous__cart = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
@@ -1079,6 +1106,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__ordering__source__type = fields.Str(required=False)
+        
         x__anonymous__cart = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
@@ -1104,6 +1133,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__ordering__source__type = fields.Str(required=False)
+        
         x__anonymous__cart = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
@@ -1128,6 +1159,8 @@ class CartValidator:
         
         
         x__ordering__source = fields.Str(required=False)
+        
+        x__ordering__source__type = fields.Str(required=False)
         
         x__anonymous__cart = fields.Str(required=False)
         
@@ -1193,6 +1226,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__ordering__source__type = fields.Str(required=False)
+        
         x__anonymous__cart = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
@@ -1215,6 +1250,8 @@ class CartValidator:
         
         
         x__ordering__source = fields.Str(required=False)
+        
+        x__ordering__source__type = fields.Str(required=False)
         
         x__anonymous__cart = fields.Str(required=False)
         
@@ -1314,6 +1351,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__ordering__source__type = fields.Str(required=False)
+        
         x__anonymous__cart = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
@@ -1394,6 +1433,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__ordering__source__type = fields.Str(required=False)
+        
         x__anonymous__cart = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
@@ -1433,6 +1474,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__ordering__source__type = fields.Str(required=False)
+        
         x__anonymous__cart = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
@@ -1451,6 +1494,8 @@ class CartValidator:
         
         
         x__ordering__source = fields.Str(required=False)
+        
+        x__ordering__source__type = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
         
@@ -1477,6 +1522,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__ordering__source__type = fields.Str(required=False)
+        
         x__anonymous__cart = fields.Str(required=False)
         
         x__location__detail = fields.Str(required=False)
@@ -1496,6 +1543,8 @@ class CartValidator:
         
         x__ordering__source = fields.Str(required=False)
         
+        x__ordering__source__type = fields.Str(required=False)
+        
         company_id = fields.Str(required=False)
         
         application_id = fields.Str(required=False)
@@ -1512,6 +1561,8 @@ class CartValidator:
         
         
         x__ordering__source = fields.Str(required=False)
+        
+        x__ordering__source__type = fields.Str(required=False)
         
         company_id = fields.Str(required=False)
         

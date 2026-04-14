@@ -296,6 +296,10 @@ class Google(BaseSchema):
     pass
 
 
+class Apple(BaseSchema):
+    pass
+
+
 class SessionExpiry(BaseSchema):
     pass
 
@@ -1317,6 +1321,8 @@ class SocialTokens(BaseSchema):
     
     google = fields.Nested(Google, required=False)
     
+    apple = fields.Nested(Apple, required=False)
+    
 
 
 class DeleteAccountReasons(BaseSchema):
@@ -1392,6 +1398,16 @@ class Google(BaseSchema):
     app_id = fields.Str(required=False)
     
     app_secret = fields.Str(required=False)
+    
+
+
+class Apple(BaseSchema):
+    # User swagger.json
+
+    
+    app_id = fields.Str(required=False)
+    
+    redirect_uri = fields.Str(required=False)
     
 
 

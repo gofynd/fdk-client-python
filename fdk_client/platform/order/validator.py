@@ -231,6 +231,14 @@ from ..PlatformModel import BaseSchema
     
         
         
+    
+    
+        
+        
+    
+    
+        
+        
         
         
         
@@ -880,6 +888,24 @@ class OrderValidator:
         
     
     class updateShipmentPackages(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        shipment_id = fields.Str(required=False)
+         
+        
+    
+    class requestCourierPartnerForShipment(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        shipment_id = fields.Str(required=False)
+         
+        
+    
+    class saveCourierPartnerPreferenceForShipment(BaseSchema):
         
         
         company_id = fields.Int(required=False)

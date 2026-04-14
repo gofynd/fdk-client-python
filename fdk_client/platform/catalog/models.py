@@ -9685,7 +9685,7 @@ class CreateTaxRequestBody(BaseSchema):
     
     rule = fields.Nested(TaxReqBodyRule, required=False)
     
-    versions = fields.Nested(TaxReqBodyVersion, required=False)
+    versions = fields.List(fields.Nested(TaxReqBodyVersion, required=False), required=False)
     
 
 

@@ -311,10 +311,6 @@ from .models import PageType
     
         
         
-    
-    
-        
-        
         
         
     
@@ -1217,15 +1213,6 @@ class ContentValidator:
         
     
     class updateSupportInformation(BaseSchema):
-        
-        
-        company_id = fields.Str(required=False)
-        
-        application_id = fields.Str(required=False)
-         
-        
-    
-    class updateInjectableTag(BaseSchema):
         
         
         company_id = fields.Str(required=False)

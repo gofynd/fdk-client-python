@@ -164,6 +164,10 @@ class FulfillmentOption(BaseSchema):
     pass
 
 
+class OrderingSources(BaseSchema):
+    pass
+
+
 class AppFeature(BaseSchema):
     pass
 
@@ -903,6 +907,16 @@ class FulfillmentOption(BaseSchema):
     
 
 
+class OrderingSources(BaseSchema):
+    # Configuration swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
+    
+
+
 class AppFeature(BaseSchema):
     # Configuration swagger.json
 
@@ -930,6 +944,8 @@ class AppFeature(BaseSchema):
     fulfillment_option = fields.Nested(FulfillmentOption, required=False)
     
     delivery_strategy = fields.Nested(DeliveryStrategy, required=False)
+    
+    ordering_sources = fields.List(fields.Nested(OrderingSources, required=False), required=False)
     
     price_strategy = fields.Str(required=False)
     

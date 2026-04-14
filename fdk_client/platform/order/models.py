@@ -1120,6 +1120,26 @@ class AccountsList(BaseSchema):
     pass
 
 
+class TATSchema(BaseSchema):
+    pass
+
+
+class ShipmentCourierPartnerPreference(BaseSchema):
+    pass
+
+
+class ShipmentCourierPartnerRequestSchema(BaseSchema):
+    pass
+
+
+class CourierPartnerResponseSchema(BaseSchema):
+    pass
+
+
+class CourierPartnerErrorSchema(BaseSchema):
+    pass
+
+
 class PackageProduct(BaseSchema):
     pass
 
@@ -5871,6 +5891,8 @@ class CPConfigurationSchema(BaseSchema):
     
     shipping_by = fields.Str(required=False)
     
+    logistics_by = fields.Str(required=False)
+    
 
 
 class ShippingDetailsSchema(BaseSchema):
@@ -6100,6 +6122,66 @@ class AccountsList(BaseSchema):
     data = fields.List(fields.Nested(Account, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class TATSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    min = fields.Int(required=False)
+    
+    max = fields.Int(required=False)
+    
+
+
+class ShipmentCourierPartnerPreference(BaseSchema):
+    # Order swagger.json
+
+    
+    scheme_id = fields.Str(required=False)
+    
+    courier_partner_name = fields.Str(required=False)
+    
+    extension_id = fields.Str(required=False)
+    
+    remarks = fields.Str(required=False)
+    
+    tat = fields.Nested(TATSchema, required=False)
+    
+
+
+class ShipmentCourierPartnerRequestSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    scheme_id = fields.Str(required=False)
+    
+    courier_partner_name = fields.Str(required=False)
+    
+    extension_id = fields.Str(required=False)
+    
+    remarks = fields.Str(required=False)
+    
+    tat = fields.Nested(TATSchema, required=False)
+    
+
+
+class CourierPartnerResponseSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+
+
+class CourierPartnerErrorSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    error = fields.Str(required=False)
     
 
 

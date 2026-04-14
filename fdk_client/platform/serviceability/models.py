@@ -648,6 +648,10 @@ class ShipmentsCourierPartner(BaseSchema):
     pass
 
 
+class FulfillmentOptionDefaultFor(BaseSchema):
+    pass
+
+
 class BusinessUnit(BaseSchema):
     pass
 
@@ -1276,6 +1280,8 @@ class FulfillmentOption(BaseSchema):
     type = fields.Str(required=False)
     
     status = fields.Str(required=False)
+    
+    default_for = fields.Nested(FulfillmentOptionDefaultFor, required=False)
     
     business_unit = fields.List(fields.Nested(BusinessUnit, required=False), required=False)
     
@@ -3976,6 +3982,16 @@ class ShipmentsCourierPartner(BaseSchema):
     qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
     
     non_qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
+    
+
+
+class FulfillmentOptionDefaultFor(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    storefront = fields.Boolean(required=False)
+    
+    storeos = fields.Boolean(required=False)
     
 
 

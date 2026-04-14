@@ -572,6 +572,10 @@ class ProductBundleItemsWithSlug(BaseSchema):
     pass
 
 
+class DeliveryPromiseItem(BaseSchema):
+    pass
+
+
 class CurrenciesSchema(BaseSchema):
     pass
 
@@ -1534,6 +1538,8 @@ class ProductListingDetail(BaseSchema):
     is_tryout = fields.Boolean(required=False)
     
     channel = fields.Str(required=False)
+    
+    delivery_promises = fields.List(fields.Nested(DeliveryPromiseItem, required=False), required=False)
     
 
 
@@ -3064,6 +3070,16 @@ class ProductBundleItemsWithSlug(BaseSchema):
     items = fields.List(fields.Nested(BundleItem, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+
+
+class DeliveryPromiseItem(BaseSchema):
+    # Catalog swagger.json
+
+    
+    code = fields.Str(required=False)
+    
+    delivery_promise = fields.Str(required=False, allow_none=True)
     
 
 

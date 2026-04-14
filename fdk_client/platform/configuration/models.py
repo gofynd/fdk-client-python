@@ -24,6 +24,14 @@ class PiiMasking(BaseSchema):
     pass
 
 
+class ChannelCapabilities(BaseSchema):
+    pass
+
+
+class OrderingSources(BaseSchema):
+    pass
+
+
 class FstIdentification(BaseSchema):
     pass
 
@@ -805,6 +813,8 @@ class ApplicationInventory(BaseSchema):
     
     pii_masking = fields.Nested(PiiMasking, required=False)
     
+    channel_capabilities = fields.Nested(ChannelCapabilities, required=False)
+    
     tags = fields.List(fields.Str(required=False), required=False)
     
     __v = fields.Int(required=False)
@@ -836,6 +846,30 @@ class PiiMasking(BaseSchema):
 
     
     enabled = fields.Boolean(required=False)
+    
+
+
+class ChannelCapabilities(BaseSchema):
+    # Configuration swagger.json
+
+    
+    commerce_model = fields.List(fields.Str(required=False), required=False)
+    
+    business_format = fields.List(fields.Str(required=False), required=False)
+    
+    ordering_sources = fields.List(fields.Nested(OrderingSources, required=False), required=False)
+    
+    seller_model = fields.Str(required=False)
+    
+
+
+class OrderingSources(BaseSchema):
+    # Configuration swagger.json
+
+    
+    key = fields.Str(required=False)
+    
+    name = fields.Str(required=False)
     
 
 
@@ -1038,6 +1072,10 @@ class AppCartConfig(BaseSchema):
     revenue_engine_coupon = fields.Boolean(required=False)
     
     pan_card = fields.Nested(PanCardConfig, required=False)
+    
+    engage_enabled = fields.Boolean(required=False)
+    
+    offer_enabled = fields.Boolean(required=False)
     
 
 
@@ -2330,6 +2368,8 @@ class AppFeature(BaseSchema):
     buybox = fields.Nested(BuyboxFeature, required=False)
     
     delivery_strategy = fields.Nested(DeliveryStrategy, required=False)
+    
+    ordering_sources = fields.List(fields.Nested(OrderingSources, required=False), required=False)
     
     price_strategy = fields.Str(required=False)
     
