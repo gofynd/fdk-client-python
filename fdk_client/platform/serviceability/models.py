@@ -780,6 +780,10 @@ class RegionSchema(BaseSchema):
     pass
 
 
+class FoDetails(BaseSchema):
+    pass
+
+
 class ZoneStores(BaseSchema):
     pass
 
@@ -1508,6 +1512,8 @@ class ListViewSchema(BaseSchema):
     items = fields.List(fields.Nested(ListViewItems, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+    fo_details = fields.Nested(FoDetails, required=False)
     
 
 
@@ -3327,6 +3333,10 @@ class CourierPartnerShipments(BaseSchema):
     
     is_mto = fields.Boolean(required=False)
     
+    is_mps = fields.Boolean(required=False)
+    
+    is_b2b = fields.Boolean(required=False)
+    
     ignore_scheme_ids = fields.List(fields.Str(required=False), required=False)
     
     error = fields.Dict(required=False)
@@ -4510,6 +4520,16 @@ class RegionSchema(BaseSchema):
     name = fields.Str(required=False)
     
     count = fields.Int(required=False)
+    
+
+
+class FoDetails(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    serviceability_type = fields.Str(required=False)
+    
+    active_non_default_zone_count = fields.Int(required=False)
     
 
 

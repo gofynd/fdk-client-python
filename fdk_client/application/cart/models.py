@@ -1197,6 +1197,8 @@ class CartProductInfo(BaseSchema):
     
     item_type = fields.Str(required=False)
     
+    added_on = fields.Str(required=False, allow_none=True)
+    
 
 
 class DisplayBreakup(BaseSchema):
@@ -1758,6 +1760,8 @@ class Coupon(BaseSchema):
     sub_title = fields.Str(required=False)
     
     expires_on = fields.Str(required=False)
+    
+    expires_at = fields.Str(required=False, allow_none=True)
     
     message = fields.Str(required=False)
     

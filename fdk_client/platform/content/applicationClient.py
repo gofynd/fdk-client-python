@@ -289,6 +289,178 @@ class Content:
 
         return response
     
+    async def getAppAssociation(self, request_headers:Dict={}):
+        """Fetch the app-association configuration (Apple AASA + Google Asset Links payloads) for this application. Returns 404 if no record exists.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.getAppAssociation()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/app-association", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/app-association", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppAssociationRecord
+            schema = AppAssociationRecord()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getAppAssociation")
+                print(e)
+
+        return response
+    
+    async def createAppAssociation(self, body="", request_headers:Dict={}):
+        """Create-only. Returns 409 if a record already exists for this application (caller should use PUT to update). 422 on shape/size violations. Body fields `ios_payload` (object|null) and `android_payload` (array|null) are both optional and independent.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.createAppAssociation()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import AppAssociationWriteBody
+        schema = AppAssociationWriteBody()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/app-association", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/app-association", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppAssociationRecord
+            schema = AppAssociationRecord()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for createAppAssociation")
+                print(e)
+
+        return response
+    
+    async def updateAppAssociation(self, body="", request_headers:Dict={}):
+        """Update-only. Returns 404 if no record exists (caller should use POST to create). Partial-update semantics: keys present are written (explicit null clears the field); keys absent are no-op.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.updateAppAssociation()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import AppAssociationWriteBody
+        schema = AppAssociationWriteBody()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/app-association", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/app-association", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppAssociationRecord
+            schema = AppAssociationRecord()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateAppAssociation")
+                print(e)
+
+        return response
+    
+    async def deleteAppAssociation(self, request_headers:Dict={}):
+        """Remove the app-association record entirely.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = ContentValidator.deleteAppAssociation()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/app-association", """{"required":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"schema":{"type":"string"}},{"name":"application_id","in":"path","required":true,"schema":{"type":"string"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("DELETE", url_with_params, headers=get_headers_with_signature(self._conf.domain, "delete", await create_url_without_domain(f"/service/platform/content/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/app-association", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import AppAssociationDeleted
+            schema = AppAssociationDeleted()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for deleteAppAssociation")
+                print(e)
+
+        return response
+    
     async def createBlog(self, body="", request_headers:Dict={}):
         """Generate and add a new blog.
         """

@@ -27,6 +27,8 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
+        
     
     
         
@@ -106,6 +108,10 @@ class OrderValidator:
         start_date = fields.Str(required=False)
         
         end_date = fields.Str(required=False)
+        
+        start_datetime = fields.Str(required=False)
+        
+        end_datetime = fields.Str(required=False)
         
         custom_meta = fields.Str(required=False)
         

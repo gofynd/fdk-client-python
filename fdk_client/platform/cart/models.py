@@ -952,10 +952,6 @@ class OfferDateMeta(BaseSchema):
     pass
 
 
-class NextScheduleItems(BaseSchema):
-    pass
-
-
 class OfferSchedule(BaseSchema):
     pass
 
@@ -3185,6 +3181,8 @@ class CartProductInfo(BaseSchema):
     
     charges = fields.List(fields.Nested(ArticleCharges, required=False), required=False)
     
+    added_on = fields.Str(required=False, allow_none=True)
+    
 
 
 class OpenapiCartDetailsResult(BaseSchema):
@@ -4252,6 +4250,8 @@ class Coupon(BaseSchema):
     coupon_type = fields.Str(required=False, allow_none=True)
     
     expires_on = fields.Str(required=False)
+    
+    expires_at = fields.Str(required=False, allow_none=True)
     
     coupon_value = fields.Float(required=False)
     
@@ -5577,16 +5577,6 @@ class OfferDateMeta(BaseSchema):
     
 
 
-class NextScheduleItems(BaseSchema):
-    # Cart swagger.json
-
-    
-    start = fields.Str(required=False)
-    
-    end = fields.Str(required=False)
-    
-
-
 class OfferSchedule(BaseSchema):
     # Cart swagger.json
 
@@ -5594,8 +5584,6 @@ class OfferSchedule(BaseSchema):
     end = fields.Str(required=False)
     
     start = fields.Str(required=False)
-    
-    next_schedule = fields.List(fields.Nested(NextScheduleItems, required=False), required=False)
     
     cron = fields.Str(required=False, allow_none=True)
     

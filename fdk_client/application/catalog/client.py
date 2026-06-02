@@ -210,7 +210,7 @@ class Catalog:
         return response
     
     async def getProductSizesBySlug(self, slug=None, store_id=None, body="", request_headers:Dict={}):
-        """Provides detailed information about a product, including its availability (sellable), available sizes with quantities, dimensions, weight, availability status, price details (marked, effective, selling), minimum order quantity (MOQ).
+        """Provides detailed information about a product, including its availability (sellable), available sizes with quantities, dimensions, weight, availability status, price details (marked, effective, selling), minimum order quantity (MOQ). Each size includes `seller_identifiers` (primary identifiers) and `all_identifiers` (primary and non-primary seller identifiers combined).
         :param slug : A short, human-readable, URL-friendly identifier of a product. You can get slug value from the endpoint /service/application/catalog/v1.0/products/. : type string
         :param store_id : The ID of the store that is selling the product, e.g. 1,2,3. : type integer
         """

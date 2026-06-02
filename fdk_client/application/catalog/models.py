@@ -1023,6 +1023,8 @@ class ProductSize(BaseSchema):
     
     seller_identifiers = fields.List(fields.Str(required=False), required=False)
     
+    all_identifiers = fields.List(fields.Str(required=False), required=False)
+    
     value = fields.Str(required=False)
     
     display = fields.Str(required=False)
