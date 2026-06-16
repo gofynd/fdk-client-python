@@ -140,6 +140,9 @@ from ..PlatformModel import BaseSchema
     
     
         
+    
+    
+        
         
         
         
@@ -718,6 +721,13 @@ class CatalogValidator:
         
     
     class getCompanyDetail(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+         
+        
+    
+    class cbsOnboardGet(BaseSchema):
         
         
         company_id = fields.Int(required=False)

@@ -1121,6 +1121,48 @@ class Catalog:
 
         return response
     
+    async def cbsOnboardGet(self, request_headers:Dict={}):
+        """Retrieves the seller-facing company profile for the specified company. The response includes onboarding metadata, contact and address details, legal documents, and deployment region metadata for the company.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = CatalogValidator.cbsOnboardGet()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/", """{"required":[{"description":"The company id for which the profile needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"description":"The company id for which the profile needs to be retrieved.","in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/", ), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import GetCompanySchema
+            schema = GetCompanySchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for cbsOnboardGet")
+                print(e)
+
+        return response
+    
     async def getCompanyMetrics(self, request_headers:Dict={}):
         """Allows viewing company metrics, including brand and store status, as well as the number of verified and unverified products, company documents, and store documents.
         """

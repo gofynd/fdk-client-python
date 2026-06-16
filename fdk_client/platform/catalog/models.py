@@ -634,6 +634,10 @@ class GetAddressSchema(BaseSchema):
     pass
 
 
+class RegionDetailsSchema(BaseSchema):
+    pass
+
+
 class GetAllSizes(BaseSchema):
     pass
 
@@ -4513,6 +4517,16 @@ class GetAddressSchema(BaseSchema):
     
 
 
+class RegionDetailsSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    slug = fields.Str(required=False)
+    
+    zone = fields.Str(required=False)
+    
+
+
 class GetAllSizes(BaseSchema):
     # Catalog swagger.json
 
@@ -4706,6 +4720,10 @@ class GetCompanySchema(BaseSchema):
     modified_on = fields.Str(required=False)
     
     name = fields.Str(required=False)
+    
+    region = fields.Str(required=False)
+    
+    region_details = fields.Nested(RegionDetailsSchema, required=False)
     
     reject_reason = fields.Str(required=False)
     
