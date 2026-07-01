@@ -25,9 +25,6 @@ from ..PlatformModel import BaseSchema
     
         
         
-    
-    
-        
 
 
 
@@ -65,13 +62,6 @@ class ThemeValidator:
         company_id = fields.Int(required=False)
         
         theme_id = fields.Str(required=False)
-         
-        
-    
-    class getDefaultMarketplaceTheme(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
          
         
     

@@ -1,5 +1,6 @@
 """Application Client."""
 
+from .ApplicationConfig import ApplicationConfig
 from ..common.exceptions import FDKClientValidationError
 from .ApplicationValidator import LocationValidator
 from ..common.custom_request import custom_request
@@ -19,6 +20,8 @@ from .content.client import Content
 
 from .filestorage.client import FileStorage
 
+from .finance.client import Finance
+
 from .lead.client import Lead
 
 from .logistic.client import Logistic
@@ -27,36 +30,34 @@ from .order.client import Order
 
 from .payment.client import Payment
 
-from .rewards.client import Rewards
-
 from .share.client import Share
 
 from .theme.client import Theme
 
 from .user.client import User
 
-from .webhook.client import Webhook
-
 
 class ApplicationClient:
     def __init__(self, config):
-        self.config = config
-        self.cart = Cart(config)
-        self.catalog = Catalog(config)
-        self.common = Common(config)
-        self.communication = Communication(config)
-        self.configuration = Configuration(config)
-        self.content = Content(config)
-        self.fileStorage = FileStorage(config)
-        self.lead = Lead(config)
-        self.logistic = Logistic(config)
-        self.order = Order(config)
-        self.payment = Payment(config)
-        self.rewards = Rewards(config)
-        self.share = Share(config)
-        self.theme = Theme(config)
-        self.user = User(config)
-        self.webhook = Webhook(config)
+        if isinstance(config, ApplicationConfig):
+            self.config = config
+        else:
+            self.config = ApplicationConfig(config)
+        self.cart = Cart(self.config)
+        self.catalog = Catalog(self.config)
+        self.common = Common(self.config)
+        self.communication = Communication(self.config)
+        self.configuration = Configuration(self.config)
+        self.content = Content(self.config)
+        self.fileStorage = FileStorage(self.config)
+        self.finance = Finance(self.config)
+        self.lead = Lead(self.config)
+        self.logistic = Logistic(self.config)
+        self.order = Order(self.config)
+        self.payment = Payment(self.config)
+        self.share = Share(self.config)
+        self.theme = Theme(self.config)
+        self.user = User(self.config)
         
 
     def setCookie(self, cookie):

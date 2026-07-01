@@ -12,7 +12,7 @@ class EventConfig(BaseSchema):
     pass
 
 
-class EventConfigResponse(BaseSchema):
+class EventDetails(BaseSchema):
     pass
 
 
@@ -44,19 +44,19 @@ class TransformEventAssociation(BaseSchema):
     pass
 
 
-class TransformEventRequest(BaseSchema):
+class TransformEventPayload(BaseSchema):
     pass
 
 
-class ValidateSchemaRequest(BaseSchema):
+class ValidateSchemaPayload(BaseSchema):
     pass
 
 
-class ValidateSchemaResponse(BaseSchema):
+class ValidateSchemaResult(BaseSchema):
     pass
 
 
-class TransformEventResponse(BaseSchema):
+class TransformEventResult(BaseSchema):
     pass
 
 
@@ -89,9 +89,15 @@ class EventConfig(BaseSchema):
     
     group = fields.Str(required=False, allow_none=True)
     
+    sunset_date = fields.Str(required=False, allow_none=True)
+    
+    announcement_date = fields.Str(required=False, allow_none=True)
+    
+    support_end_date = fields.Str(required=False, allow_none=True)
+    
 
 
-class EventConfigResponse(BaseSchema):
+class EventDetails(BaseSchema):
     # Webhook swagger.json
 
     
@@ -153,6 +159,8 @@ class TransformEventData(BaseSchema):
     # Webhook swagger.json
 
     
+    region = fields.Str(required=False)
+    
     event = fields.Nested(InternalTransformEvent, required=False)
     
     company_id = fields.Float(required=False)
@@ -179,7 +187,7 @@ class TransformEventAssociation(BaseSchema):
     
 
 
-class TransformEventRequest(BaseSchema):
+class TransformEventPayload(BaseSchema):
     # Webhook swagger.json
 
     
@@ -195,7 +203,7 @@ class TransformEventRequest(BaseSchema):
     
 
 
-class ValidateSchemaRequest(BaseSchema):
+class ValidateSchemaPayload(BaseSchema):
     # Webhook swagger.json
 
     
@@ -213,7 +221,7 @@ class ValidateSchemaRequest(BaseSchema):
     
 
 
-class ValidateSchemaResponse(BaseSchema):
+class ValidateSchemaResult(BaseSchema):
     # Webhook swagger.json
 
     
@@ -223,7 +231,7 @@ class ValidateSchemaResponse(BaseSchema):
     
 
 
-class TransformEventResponse(BaseSchema):
+class TransformEventResult(BaseSchema):
     # Webhook swagger.json
 
     

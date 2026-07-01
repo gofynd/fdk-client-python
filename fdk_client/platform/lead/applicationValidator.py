@@ -17,7 +17,9 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
+                
+from .models import PriorityEnum
+
         
     
     
@@ -66,7 +68,7 @@ from ..PlatformModel import BaseSchema
 class LeadValidator:
     
     
-    class getTickets(BaseSchema):
+    class getNewTickets(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -81,13 +83,13 @@ class LeadValidator:
         
         status = fields.Str(required=False)
         
-        priority = fields.Str(required=False)
+        priority = fields.Nested(PriorityEnum, required=False)
         
         category = fields.Str(required=False)
          
         
     
-    class getTicket(BaseSchema):
+    class getNewTicket(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -98,7 +100,7 @@ class LeadValidator:
          
         
     
-    class editTicket(BaseSchema):
+    class editNewTicket(BaseSchema):
         
         
         company_id = fields.Str(required=False)
@@ -120,7 +122,7 @@ class LeadValidator:
          
         
     
-    class getTicketHistory(BaseSchema):
+    class getNewTicketHistory(BaseSchema):
         
         
         company_id = fields.Str(required=False)

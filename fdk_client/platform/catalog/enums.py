@@ -3,6 +3,49 @@
 from enum import Enum
 
 
+class TaxStatusEnum(Enum):
+    
+    ACTIVE = "ACTIVE"
+    
+    INACTIVE = "INACTIVE"
+    
+    DELETED = "DELETED"
+    
+    @classmethod
+    async def is_valid(cls, value):
+        if value in cls._value2member_map_:
+            return None
+        raise Exception("Invalid TaxStatusEnum type")
+
+
+class TaxVersionScopeEnum(Enum):
+    
+    COUNTRY = "COUNTRY"
+    
+    REGION = "REGION"
+    
+    STORE = "STORE"
+    
+    @classmethod
+    async def is_valid(cls, value):
+        if value in cls._value2member_map_:
+            return None
+        raise Exception("Invalid TaxVersionScopeEnum type")
+
+
+class HsTypeEnum(Enum):
+    
+    HS = "HS"
+    
+    SAC = "SAC"
+    
+    @classmethod
+    async def is_valid(cls, value):
+        if value in cls._value2member_map_:
+            return None
+        raise Exception("Invalid HsTypeEnum type")
+
+
 class PageType(Enum):
     
     ABOUT_US = "about-us"
@@ -61,9 +104,9 @@ class PageType(Enum):
     
     PROFILE_COMPANY = "profile-company"
     
-    PROFILE_EMAILS = "profile-emails"
+    PROFILE_EMAIL = "profile-email"
     
-    PROFILE_PHONES = "profile-phones"
+    PROFILE_PHONE = "profile-phone"
     
     RATE_US = "rate-us"
     
@@ -100,6 +143,12 @@ class PageType(Enum):
     ORDER_STATUS = "order-status"
     
     LOCATE_US = "locate-us"
+    
+    SINGLE_PAGE_CHECKOUT = "single-page-checkout"
+    
+    REQUEST_REATTEMPT = "request-reattempt"
+    
+    FILES = "files"
     
     @classmethod
     async def is_valid(cls, value):

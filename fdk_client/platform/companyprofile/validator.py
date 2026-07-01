@@ -50,7 +50,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
     
     
         
@@ -77,53 +76,53 @@ class CompanyProfileValidator:
     class cbsOnboardGet(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
          
         
     
     class updateCompany(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
          
         
     
     class getCompanyMetrics(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
          
         
     
     class getBrand(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
-        brand_id = fields.Int(required=False)
+        brand_id = fields.Str(required=False)
          
         
     
     class editBrand(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
-        brand_id = fields.Int(required=False)
+        brand_id = fields.Str(required=False)
          
         
     
     class createBrand(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
          
         
     
     class getBrands(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         page_no = fields.Int(required=False)
         
@@ -136,18 +135,16 @@ class CompanyProfileValidator:
     class createCompanyBrandMapping(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
          
         
     
     class getLocations(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
         store_type = fields.Str(required=False)
-        
-        store_codes = fields.List(fields.Str(required=False), required=False)
         
         q = fields.Str(required=False)
         
@@ -168,39 +165,39 @@ class CompanyProfileValidator:
     class createLocation(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
          
         
     
     class getLocationDetail(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
-        location_id = fields.Int(required=False)
+        location_id = fields.Str(required=False)
          
         
     
     class updateLocation(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
         
-        location_id = fields.Int(required=False)
+        location_id = fields.Str(required=False)
          
         
     
     class createLocationBulk(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
          
         
     
     class getLocationTags(BaseSchema):
         
         
-        company_id = fields.Int(required=False)
+        company_id = fields.Str(required=False)
          
         
     

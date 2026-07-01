@@ -19,13 +19,13 @@ from ..ApplicationModel import BaseSchema
         
         
         
-    
+        
     
     
         
     
     
-    
+        
         
 
 class ThemeValidator:
@@ -50,30 +50,24 @@ class ThemeValidator:
         section_preview_hash = fields.Str(required=False)
         
         company = fields.Int(required=False)
+        
+        url_params = fields.Str(required=False)
          
         
     
     class getAppliedTheme(BaseSchema):
         
-        pass 
+        
+        filters = fields.Boolean(required=False)
+         
         
     
     class getThemeForPreview(BaseSchema):
         
         
         theme_id = fields.Str(required=False)
-         
         
-    
-    class getAppliedThemeV1(BaseSchema):
-        
-        pass 
-        
-    
-    class getThemeForPreviewV1(BaseSchema):
-        
-        
-        theme_id = fields.Str(required=False)
+        filters = fields.Boolean(required=False)
          
         
     

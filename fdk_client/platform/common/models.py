@@ -8,7 +8,7 @@ from ..PlatformModel import BaseSchema
 
 
 
-class ApplicationResponse(BaseSchema):
+class ApplicationResponseSchema(BaseSchema):
     pass
 
 
@@ -32,6 +32,10 @@ class ApplicationRedirections(BaseSchema):
     pass
 
 
+class RegionDetails(BaseSchema):
+    pass
+
+
 class ApplicationMeta(BaseSchema):
     pass
 
@@ -48,7 +52,7 @@ class NotFound(BaseSchema):
     pass
 
 
-class BadRequest(BaseSchema):
+class BadRequestSchema(BaseSchema):
     pass
 
 
@@ -71,7 +75,7 @@ class Locations(BaseSchema):
 
 
 
-class ApplicationResponse(BaseSchema):
+class ApplicationResponseSchema(BaseSchema):
     # Common swagger.json
 
     
@@ -148,6 +152,16 @@ class ApplicationRedirections(BaseSchema):
     redirect_to = fields.Str(required=False)
     
     type = fields.Str(required=False)
+    
+
+
+class RegionDetails(BaseSchema):
+    # Common swagger.json
+
+    
+    slug = fields.Str(required=False)
+    
+    zone = fields.Str(required=False)
     
 
 
@@ -233,7 +247,7 @@ class NotFound(BaseSchema):
     
 
 
-class BadRequest(BaseSchema):
+class BadRequestSchema(BaseSchema):
     # Common swagger.json
 
     

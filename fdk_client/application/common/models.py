@@ -8,7 +8,7 @@ from ..ApplicationModel import BaseSchema
 
 
 
-class ApplicationResponse(BaseSchema):
+class ApplicationResponseSchema(BaseSchema):
     pass
 
 
@@ -36,6 +36,10 @@ class ApplicationMeta(BaseSchema):
     pass
 
 
+class RegionDetails(BaseSchema):
+    pass
+
+
 class SecureUrl(BaseSchema):
     pass
 
@@ -48,7 +52,7 @@ class NotFound(BaseSchema):
     pass
 
 
-class BadRequest(BaseSchema):
+class BadRequestSchema(BaseSchema):
     pass
 
 
@@ -71,7 +75,7 @@ class Locations(BaseSchema):
 
 
 
-class ApplicationResponse(BaseSchema):
+class ApplicationResponseSchema(BaseSchema):
     # Common swagger.json
 
     
@@ -142,6 +146,16 @@ class ApplicationMeta(BaseSchema):
     name = fields.Str(required=False)
     
     value = fields.Str(required=False)
+    
+
+
+class RegionDetails(BaseSchema):
+    # Common swagger.json
+
+    
+    slug = fields.Str(required=False)
+    
+    zone = fields.Str(required=False)
     
 
 
@@ -217,7 +231,7 @@ class NotFound(BaseSchema):
     
 
 
-class BadRequest(BaseSchema):
+class BadRequestSchema(BaseSchema):
     # Common swagger.json
 
     

@@ -15,8 +15,8 @@ class Order:
     def __init__(self, config: ApplicationConfig):
         self._conf = config
         self._relativeUrls = {
-            "getShipmentRefundSummary": "/service/application/order-manage/v1.0/shipment/{shipment_id}/refund-summary",
-            "getRefundOptions": "/service/application/order-manage/v1.0/shipment/{shipment_id}/refund-options",
+            "getRefundModes": "/service/application/order-manage/v1.0/shipment/{shipment_id}/refund/modes",
+            "getRefundModesWithPriceBreakup": "/service/application/order-manage/v1.0/shipment/{shipment_id}/refund/modes",
             "getOrders": "/service/application/order/v1.0/orders",
             "getOrderById": "/service/application/order/v1.0/orders/{order_id}",
             "getPosOrderById": "/service/application/order/v1.0/orders/pos-order/{order_id}",
@@ -28,7 +28,8 @@ class Order:
             "verifyOtpShipmentCustomer": "/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/verify/",
             "getShipmentBagReasons": "/service/application/order/v1.0/orders/shipments/{shipment_id}/bags/{bag_id}/reasons",
             "getShipmentReasons": "/service/application/order/v1.0/orders/shipments/{shipment_id}/reasons",
-            "updateShipmentStatus": "/service/application/order/v1.0/orders/shipments/{shipment_id}/status"
+            "updateShipmentStatus": "/service/application/order/v1.0/orders/shipments/{shipment_id}/status",
+            "submitDeliveryReattemptRequest": "/service/application/order/v1.0/shipments/{shipment_id}/delivery-reattempt"
             
         }
         self._urls = {
@@ -38,9 +39,60 @@ class Order:
     async def updateUrls(self, urls):
         self._urls.update(urls)
     
-    async def getShipmentRefundSummary(self, shipment_id=None, body="", request_headers:Dict={}):
-        """Retreives shipment's refund summary using its shipment ID.
-        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
+    async def getRefundModes(self, shipment_id=None, line_numbers=None, body="", request_headers:Dict={}):
+        """Returns a list of available refund options for the given company and shipment.
+
+        :param shipment_id : Numeric identifier of the shipment. : type string
+        :param line_numbers : A comma-separated list of line numbers. : type array
+        """
+        payload = {}
+        
+        if shipment_id is not None:
+            payload["shipment_id"] = shipment_id
+        if line_numbers is not None:
+            payload["line_numbers"] = line_numbers
+
+        # Parameter validation
+        schema = OrderValidator.getRefundModes()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getRefundModes"], proccessed_params="""{"required":[{"name":"shipment_id","in":"path","description":"Numeric identifier of the shipment.","required":true,"schema":{"type":"string"},"example":"17452383364661844036"}],"optional":[{"name":"line_numbers","in":"query","description":"A comma-separated list of line numbers.","required":false,"schema":{"type":"array","items":{"type":"integer"}}}],"query":[{"name":"line_numbers","in":"query","description":"A comma-separated list of line numbers.","required":false,"schema":{"type":"array","items":{"type":"integer"}}}],"headers":[],"path":[{"name":"shipment_id","in":"path","description":"Numeric identifier of the shipment.","required":true,"schema":{"type":"string"},"example":"17452383364661844036"}]}""", serverType="application", shipment_id=shipment_id, line_numbers=line_numbers)
+        query_string = await create_query_string(line_numbers=line_numbers)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getRefundModes"]).netloc, "get", await create_url_without_domain("/service/application/order-manage/v1.0/shipment/{shipment_id}/refund/modes", shipment_id=shipment_id, line_numbers=line_numbers), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import RefundOptions
+            schema = RefundOptions()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getRefundModes")
+                print(e)
+
+        return response
+    
+    async def getRefundModesWithPriceBreakup(self, shipment_id=None, body="", request_headers:Dict={}):
+        """Returns a list of available refund options for the given company and shipment.
+
+        :param shipment_id : Numeric identifier of the shipment. : type string
         """
         payload = {}
         
@@ -48,11 +100,15 @@ class Order:
             payload["shipment_id"] = shipment_id
 
         # Parameter validation
-        schema = OrderValidator.getShipmentRefundSummary()
+        schema = OrderValidator.getRefundModesWithPriceBreakup()
         schema.dump(schema.load(payload))
         
+        # Body validation
+        from .models import RefundModeRequestData
+        schema = RefundModeRequestData()
+        schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentRefundSummary"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getRefundModesWithPriceBreakup"], proccessed_params="""{"required":[{"name":"shipment_id","in":"path","description":"Numeric identifier of the shipment.","required":true,"schema":{"type":"string"},"example":"17452383364661844036"}],"optional":[],"query":[],"headers":[],"path":[{"name":"shipment_id","in":"path","description":"Numeric identifier of the shipment.","required":true,"schema":{"type":"string"},"example":"17452383364661844036"}]}""", serverType="application", shipment_id=shipment_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -71,90 +127,32 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getShipmentRefundSummary"]).netloc, "get", await create_url_without_domain("/service/application/order-manage/v1.0/shipment/{shipment_id}/refund-summary", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getRefundModesWithPriceBreakup"]).netloc, "post", await create_url_without_domain("/service/application/order-manage/v1.0/shipment/{shipment_id}/refund/modes", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentRefundSummaryResponse
-            schema = ShipmentRefundSummaryResponse()
+            from .models import RefundOptions
+            schema = RefundOptions()
             try:
                 schema.load(response["json"])
             except Exception as e:
-                print("Response Validation failed for getShipmentRefundSummary")
+                print("Response Validation failed for getRefundModesWithPriceBreakup")
                 print(e)
 
         return response
     
-    async def getRefundOptions(self, shipment_id=None, bag_ids=None, state=None, optin_app_id=None, optin_company_id=None, status=None, body="", request_headers:Dict={}):
-        """This API can be used for giving the refund amount with available option of MOPs.
-        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
-        :param bag_ids : It is the bag_id of the bags with comma separated. : type string
-        :param state : It is the desired state at which refund amount needs to be calculated. : type string
-        :param optin_app_id : It is affiliate id of the order in case of cross selling. : type string
-        :param optin_company_id : It is company id of the order in case of cross selling. : type integer
-        :param status : It specifies the desired status to which the shipment should be updated. It represents the next step in the shipment's lifecycle,  such as being cancelled by the customer or moved to another status in the shipping process. : type string
-        """
-        payload = {}
-        
-        if shipment_id is not None:
-            payload["shipment_id"] = shipment_id
-        if bag_ids is not None:
-            payload["bag_ids"] = bag_ids
-        if state is not None:
-            payload["state"] = state
-        if optin_app_id is not None:
-            payload["optin_app_id"] = optin_app_id
-        if optin_company_id is not None:
-            payload["optin_company_id"] = optin_company_id
-        if status is not None:
-            payload["status"] = status
-
-        # Parameter validation
-        schema = OrderValidator.getRefundOptions()
-        schema.dump(schema.load(payload))
-        
-
-        url_with_params = await create_url_with_params(api_url=self._urls["getRefundOptions"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","description":"It is the bag_id of the bags with comma separated.","name":"bag_ids","required":false,"schema":{"type":"string"}},{"in":"query","description":"It is the desired state at which refund amount needs to be calculated.","name":"state","required":false,"schema":{"type":"string"}},{"in":"query","description":"It is affiliate id of the order in case of cross selling.","name":"optin_app_id","required":false,"schema":{"type":"string"}},{"in":"query","description":"It is company id of the order in case of cross selling.","name":"optin_company_id","required":false,"schema":{"type":"integer"}},{"in":"query","description":"It specifies the desired status to which the shipment should be updated. It represents the next step in the shipment's lifecycle,  such as being cancelled by the customer or moved to another status in the shipping process.","name":"status","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","description":"It is the bag_id of the bags with comma separated.","name":"bag_ids","required":false,"schema":{"type":"string"}},{"in":"query","description":"It is the desired state at which refund amount needs to be calculated.","name":"state","required":false,"schema":{"type":"string"}},{"in":"query","description":"It is affiliate id of the order in case of cross selling.","name":"optin_app_id","required":false,"schema":{"type":"string"}},{"in":"query","description":"It is company id of the order in case of cross selling.","name":"optin_company_id","required":false,"schema":{"type":"integer"}},{"in":"query","description":"It specifies the desired status to which the shipment should be updated. It represents the next step in the shipment's lifecycle,  such as being cancelled by the customer or moved to another status in the shipping process.","name":"status","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id, bag_ids=bag_ids, state=state, optin_app_id=optin_app_id, optin_company_id=optin_company_id, status=status)
-        query_string = await create_query_string(bag_ids=bag_ids, state=state, optin_app_id=optin_app_id, optin_company_id=optin_company_id, status=status)
-        if query_string:
-            url_with_params += "?" + query_string
-
-        headers={}
-        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
-        if self._conf.locationDetails:
-            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
-        for h in self._conf.extraHeaders:
-            headers.update(h)
-        if request_headers != {}:
-            headers.update(request_headers)
-
-        exclude_headers = []
-        for key, val in headers.items():
-            if not key.startswith("x-fp-"):
-                exclude_headers.append(key)
-
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getRefundOptions"]).netloc, "get", await create_url_without_domain("/service/application/order-manage/v1.0/shipment/{shipment_id}/refund-options", shipment_id=shipment_id, bag_ids=bag_ids, state=state, optin_app_id=optin_app_id, optin_company_id=optin_company_id, status=status), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
-
-        if 200 <= int(response['status_code']) < 300:
-            from .models import RefundOptionsSchemaResponse
-            schema = RefundOptionsSchemaResponse()
-            try:
-                schema.load(response["json"])
-            except Exception as e:
-                print("Response Validation failed for getRefundOptions")
-                print(e)
-
-        return response
-    
-    async def getOrders(self, status=None, page_no=None, page_size=None, from_date=None, to_date=None, start_date=None, end_date=None, custom_meta=None, body="", request_headers:Dict={}):
+    async def getOrders(self, status=None, page_no=None, page_size=None, from_date=None, to_date=None, start_date=None, end_date=None, start_datetime=None, end_datetime=None, custom_meta=None, allow_inactive=None, body="", request_headers:Dict={}):
         """Get all orders associated with a customer account.
         :param status : A filter to retrieve orders by their current status such as 'placed', 'delivered' etc. : type integer
         :param page_no : The page number to navigate through the given set of results. Default value is 1. : type integer
         :param page_size : The number of items to retrieve in each page. Default value is 10. : type integer
-        :param from_date : The date from which the orders should be retrieved. : type string
-        :param to_date : The date till which the orders should be retrieved. : type string
-        :param start_date : Start date in UTC (ISO-8601 format). : type string
-        :param end_date : End date in UTC (ISO-8601 format). : type string
+        :param from_date : Start date for filtering orders. Format: MM-DD-YYYY, e.g. '04-15-2026' for April 15, 2026. : type string
+        :param to_date : End date for filtering orders. Format: MM-DD-YYYY, e.g. '05-15-2026' for May 15, 2026. : type string
+        :param start_date : Start date for filtering orders by UTC creation date. Format: MM-DD-YYYY, e.g. '04-15-2026' for April 15, 2026. : type string
+        :param end_date : End date for filtering orders by UTC creation date. Format: MM-DD-YYYY, e.g. '05-15-2026' for May 15, 2026. : type string
+        :param start_datetime : Start of the order created datetime range. ISO-8601 with an explicit timezone offset (e.g. '2026-04-15T16:00:00Z' or '2026-04-15T16:00:00+08:00'). Must be sent together with end_datetime; date-only or offset-less values are rejected. Use this when timezone-aligned hour-precision filtering is required. : type string
+        :param end_datetime : End of the order created datetime range. ISO-8601 with an explicit timezone offset, same shape as start_datetime. Must be sent together with start_datetime; date-only or offset-less values are rejected. : type string
         :param custom_meta : A filter and retrieve data using special fields included for special use-cases. : type string
+        :param allow_inactive : Flag indicating whether inactive shipments are allowed. : type boolean
         """
         payload = {}
         
@@ -172,16 +170,22 @@ class Order:
             payload["start_date"] = start_date
         if end_date is not None:
             payload["end_date"] = end_date
+        if start_datetime is not None:
+            payload["start_datetime"] = start_datetime
+        if end_datetime is not None:
+            payload["end_datetime"] = end_datetime
         if custom_meta is not None:
             payload["custom_meta"] = custom_meta
+        if allow_inactive is not None:
+            payload["allow_inactive"] = allow_inactive
 
         # Parameter validation
         schema = OrderValidator.getOrders()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getOrders"], proccessed_params="""{"required":[],"optional":[{"in":"query","description":"A filter to retrieve orders by their current status such as 'placed', 'delivered' etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The date from which the orders should be retrieved.","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"The date till which the orders should be retrieved.","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"Start date in UTC (ISO-8601 format).","name":"start_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"End date in UTC (ISO-8601 format).","name":"end_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"A filter and retrieve data using special fields included for special use-cases.","name":"custom_meta","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","description":"A filter to retrieve orders by their current status such as 'placed', 'delivered' etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The date from which the orders should be retrieved.","name":"from_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"The date till which the orders should be retrieved.","name":"to_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"Start date in UTC (ISO-8601 format).","name":"start_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"End date in UTC (ISO-8601 format).","name":"end_date","required":false,"schema":{"type":"string"}},{"in":"query","description":"A filter and retrieve data using special fields included for special use-cases.","name":"custom_meta","required":false,"schema":{"type":"string"}}],"headers":[],"path":[]}""", serverType="application", status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, custom_meta=custom_meta)
-        query_string = await create_query_string(status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, custom_meta=custom_meta)
+        url_with_params = await create_url_with_params(api_url=self._urls["getOrders"], proccessed_params="""{"required":[],"optional":[{"in":"query","description":"A filter to retrieve orders by their current status such as 'placed', 'delivered' etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"Start date for filtering orders. Format: MM-DD-YYYY, e.g. '04-15-2026' for April 15, 2026.","name":"from_date","required":false,"schema":{"type":"string","x-not-date":true,"example":"04-15-2026"}},{"in":"query","description":"End date for filtering orders. Format: MM-DD-YYYY, e.g. '05-15-2026' for May 15, 2026.","name":"to_date","required":false,"schema":{"type":"string","x-not-date":true,"example":"05-15-2026"}},{"in":"query","description":"Start date for filtering orders by UTC creation date. Format: MM-DD-YYYY, e.g. '04-15-2026' for April 15, 2026.","name":"start_date","required":false,"schema":{"type":"string","x-not-date":true,"example":"04-15-2026"}},{"in":"query","description":"End date for filtering orders by UTC creation date. Format: MM-DD-YYYY, e.g. '05-15-2026' for May 15, 2026.","name":"end_date","required":false,"schema":{"type":"string","x-not-date":true,"example":"05-15-2026"}},{"in":"query","description":"Start of the order created datetime range. ISO-8601 with an explicit timezone offset (e.g. '2026-04-15T16:00:00Z' or '2026-04-15T16:00:00+08:00'). Must be sent together with end_datetime; date-only or offset-less values are rejected. Use this when timezone-aligned hour-precision filtering is required.","name":"start_datetime","required":false,"schema":{"type":"string","format":"date-time","example":"2026-04-15T16:00:00Z"}},{"in":"query","description":"End of the order created datetime range. ISO-8601 with an explicit timezone offset, same shape as start_datetime. Must be sent together with start_datetime; date-only or offset-less values are rejected.","name":"end_datetime","required":false,"schema":{"type":"string","format":"date-time","example":"2026-04-16T16:00:00Z"}},{"in":"query","description":"A filter and retrieve data using special fields included for special use-cases.","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed.","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","description":"A filter to retrieve orders by their current status such as 'placed', 'delivered' etc.","name":"status","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The page number to navigate through the given set of results. Default value is 1.","name":"page_no","required":false,"schema":{"type":"integer"}},{"in":"query","description":"The number of items to retrieve in each page. Default value is 10.","name":"page_size","required":false,"schema":{"type":"integer"}},{"in":"query","description":"Start date for filtering orders. Format: MM-DD-YYYY, e.g. '04-15-2026' for April 15, 2026.","name":"from_date","required":false,"schema":{"type":"string","x-not-date":true,"example":"04-15-2026"}},{"in":"query","description":"End date for filtering orders. Format: MM-DD-YYYY, e.g. '05-15-2026' for May 15, 2026.","name":"to_date","required":false,"schema":{"type":"string","x-not-date":true,"example":"05-15-2026"}},{"in":"query","description":"Start date for filtering orders by UTC creation date. Format: MM-DD-YYYY, e.g. '04-15-2026' for April 15, 2026.","name":"start_date","required":false,"schema":{"type":"string","x-not-date":true,"example":"04-15-2026"}},{"in":"query","description":"End date for filtering orders by UTC creation date. Format: MM-DD-YYYY, e.g. '05-15-2026' for May 15, 2026.","name":"end_date","required":false,"schema":{"type":"string","x-not-date":true,"example":"05-15-2026"}},{"in":"query","description":"Start of the order created datetime range. ISO-8601 with an explicit timezone offset (e.g. '2026-04-15T16:00:00Z' or '2026-04-15T16:00:00+08:00'). Must be sent together with end_datetime; date-only or offset-less values are rejected. Use this when timezone-aligned hour-precision filtering is required.","name":"start_datetime","required":false,"schema":{"type":"string","format":"date-time","example":"2026-04-15T16:00:00Z"}},{"in":"query","description":"End of the order created datetime range. ISO-8601 with an explicit timezone offset, same shape as start_datetime. Must be sent together with start_datetime; date-only or offset-less values are rejected.","name":"end_datetime","required":false,"schema":{"type":"string","format":"date-time","example":"2026-04-16T16:00:00Z"}},{"in":"query","description":"A filter and retrieve data using special fields included for special use-cases.","name":"custom_meta","required":false,"schema":{"type":"string","default":"6388422a5ebd6a6cf4a8ede6"}},{"in":"query","name":"allow_inactive","description":"Flag indicating whether inactive shipments are allowed.","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[]}""", serverType="application", status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, start_datetime=start_datetime, end_datetime=end_datetime, custom_meta=custom_meta, allow_inactive=allow_inactive)
+        query_string = await create_query_string(status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, start_datetime=start_datetime, end_datetime=end_datetime, custom_meta=custom_meta, allow_inactive=allow_inactive)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -199,7 +203,7 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrders"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders", status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, custom_meta=custom_meta), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrders"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders", status=status, page_no=page_no, page_size=page_size, from_date=from_date, to_date=to_date, start_date=start_date, end_date=end_date, start_datetime=start_datetime, end_datetime=end_datetime, custom_meta=custom_meta, allow_inactive=allow_inactive), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import OrderList
@@ -229,7 +233,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getOrderById"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking an order.","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments.","required":false,"schema":{"type":"boolean"}}],"query":[{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments.","required":false,"schema":{"type":"boolean"}}],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking an order.","required":true,"schema":{"type":"string"}}]}""", serverType="application", order_id=order_id, allow_inactive=allow_inactive)
+        url_with_params = await create_url_with_params(api_url=self._urls["getOrderById"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking an order.","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments.","required":false,"schema":{"type":"boolean","default":false}}],"query":[{"in":"query","name":"allow_inactive","description":"Flag to allow inactive shipments.","required":false,"schema":{"type":"boolean","default":false}}],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking an order.","required":true,"schema":{"type":"string"}}]}""", serverType="application", order_id=order_id, allow_inactive=allow_inactive)
         query_string = await create_query_string(allow_inactive=allow_inactive)
         if query_string:
             url_with_params += "?" + query_string
@@ -358,7 +362,7 @@ class Order:
     
     async def getInvoiceByShipmentId(self, shipment_id=None, body="", request_headers:Dict={}):
         """Get invoice corresponding to a specific shipment ID.
-        :param shipment_id : ID of the shipment. : type string
+        :param shipment_id : Unique identifier for a shipment. : type string
         """
         payload = {}
         
@@ -370,7 +374,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getInvoiceByShipmentId"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getInvoiceByShipmentId"], proccessed_params="""{"required":[{"in":"path","description":"Unique identifier for a shipment.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"Unique identifier for a shipment.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -416,7 +420,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["trackShipment"], proccessed_params="""{"required":[{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["trackShipment"], proccessed_params="""{"required":[{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16544950215681060915J"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16544950215681060915J"}}]}""", serverType="application", shipment_id=shipment_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -465,7 +469,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCustomerDetailsByShipmentId"], proccessed_params="""{"required":[{"in":"path","description":"A unique number used for identifying and tracking your orders.","name":"order_id","required":true,"schema":{"type":"string"}},{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"A unique number used for identifying and tracking your orders.","name":"order_id","required":true,"schema":{"type":"string"}},{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", order_id=order_id, shipment_id=shipment_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCustomerDetailsByShipmentId"], proccessed_params="""{"required":[{"in":"path","description":"A unique number used for identifying and tracking your orders.","name":"order_id","required":true,"schema":{"type":"string","default":"16544950215681060915J"}},{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"A unique number used for identifying and tracking your orders.","name":"order_id","required":true,"schema":{"type":"string","default":"16544950215681060915J"}},{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}}]}""", serverType="application", order_id=order_id, shipment_id=shipment_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -487,8 +491,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCustomerDetailsByShipmentId"]).netloc, "get", await create_url_without_domain("/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/customer-details", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import CustomerDetailsResponse
-            schema = CustomerDetailsResponse()
+            from .models import CustomerDetailsResponseSchema
+            schema = CustomerDetailsResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -497,10 +501,14 @@ class Order:
 
         return response
     
-    async def sendOtpToShipmentCustomer(self, order_id=None, shipment_id=None, body="", request_headers:Dict={}):
+    async def sendOtpToShipmentCustomer(self, order_id=None, shipment_id=None, event_type=None, body="", request_headers:Dict={}):
         """Send OTP to the customer for shipment verification.
         :param order_id : A unique number used for identifying and tracking your orders. : type string
         :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
+        :param event_type : Type of the event for which the OTP needs to be sent. This determines the context or purpose of OTP verification. Supported values are:
+  - `refund_bank_details`: Used when the customer needs to verify refund bank information.
+  - `customer_ndr`: Used when the customer needs to confirm delivery preferences after a failed delivery attempt (Non-Delivery Report).
+ : type string
         """
         payload = {}
         
@@ -508,14 +516,16 @@ class Order:
             payload["order_id"] = order_id
         if shipment_id is not None:
             payload["shipment_id"] = shipment_id
+        if event_type is not None:
+            payload["event_type"] = event_type
 
         # Parameter validation
         schema = OrderValidator.sendOtpToShipmentCustomer()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["sendOtpToShipmentCustomer"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}}]}""", serverType="application", order_id=order_id, shipment_id=shipment_id)
-        query_string = await create_query_string()
+        url_with_params = await create_url_with_params(api_url=self._urls["sendOtpToShipmentCustomer"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16544950215681060915J"}}],"optional":[{"in":"query","name":"event_type","description":"Type of the event for which the OTP needs to be sent. This determines the context or purpose of OTP verification. Supported values are:\n  - `refund_bank_details`: Used when the customer needs to verify refund bank information.\n  - `customer_ndr`: Used when the customer needs to confirm delivery preferences after a failed delivery attempt (Non-Delivery Report).\n","required":false,"schema":{"type":"string","enum":["refund_bank_details","customer_ndr"],"default":"refund_bank_details"}}],"query":[{"in":"query","name":"event_type","description":"Type of the event for which the OTP needs to be sent. This determines the context or purpose of OTP verification. Supported values are:\n  - `refund_bank_details`: Used when the customer needs to verify refund bank information.\n  - `customer_ndr`: Used when the customer needs to confirm delivery preferences after a failed delivery attempt (Non-Delivery Report).\n","required":false,"schema":{"type":"string","enum":["refund_bank_details","customer_ndr"],"default":"refund_bank_details"}}],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string","default":"FY6299E19701B4EAEFC2"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string","default":"16544950215681060915J"}}]}""", serverType="application", order_id=order_id, shipment_id=shipment_id, event_type=event_type)
+        query_string = await create_query_string(event_type=event_type)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -533,11 +543,11 @@ class Order:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendOtpToShipmentCustomer"]).netloc, "post", await create_url_without_domain("/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/send/", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["sendOtpToShipmentCustomer"]).netloc, "post", await create_url_without_domain("/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/send/", order_id=order_id, shipment_id=shipment_id, event_type=event_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import SendOtpToCustomerResponse
-            schema = SendOtpToCustomerResponse()
+            from .models import SendOtpToCustomerResponseSchema
+            schema = SendOtpToCustomerResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -547,9 +557,9 @@ class Order:
         return response
     
     async def verifyOtpShipmentCustomer(self, order_id=None, shipment_id=None, body="", request_headers:Dict={}):
-        """Verify OTP sent by customer.
-        :param order_id : A unique number used for identifying and tracking your orders. : type string
-        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
+        """Verify OTP for getting shipment details
+        :param order_id : A string that represents the unique identifier assigned to the order. : type string
+        :param shipment_id : The unique identifier for the shipment. : type string
         """
         payload = {}
         
@@ -567,7 +577,7 @@ class Order:
         schema = VerifyOtp()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["verifyOtpShipmentCustomer"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"order_id","description":"A unique number used for identifying and tracking your orders.","required":true,"schema":{"type":"string"}},{"in":"path","name":"shipment_id","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","required":true,"schema":{"type":"string"}}]}""", serverType="application", order_id=order_id, shipment_id=shipment_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["verifyOtpShipmentCustomer"], proccessed_params="""{"required":[{"in":"path","name":"order_id","description":"A string that represents the unique identifier assigned to the order.","required":true,"schema":{"type":"string","default":"FYMP6294545C010B89FD"}},{"in":"path","name":"shipment_id","description":"The unique identifier for the shipment.","required":true,"schema":{"type":"string","default":"16538880933361957252J"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"order_id","description":"A string that represents the unique identifier assigned to the order.","required":true,"schema":{"type":"string","default":"FYMP6294545C010B89FD"}},{"in":"path","name":"shipment_id","description":"The unique identifier for the shipment.","required":true,"schema":{"type":"string","default":"16538880933361957252J"}}]}""", serverType="application", order_id=order_id, shipment_id=shipment_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -589,8 +599,8 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["verifyOtpShipmentCustomer"]).netloc, "post", await create_url_without_domain("/service/application/order/v1.0/orders/{order_id}/shipments/{shipment_id}/otp/verify/", order_id=order_id, shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import VerifyOtpResponse
-            schema = VerifyOtpResponse()
+            from .models import VerifyOtpResponseSchema
+            schema = VerifyOtpResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
@@ -600,9 +610,9 @@ class Order:
         return response
     
     async def getShipmentBagReasons(self, shipment_id=None, bag_id=None, body="", request_headers:Dict={}):
-        """Get reasons to perform full or partial cancellation of a bag.
-        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
-        :param bag_id : ID of the bag. An shipment may contain multiple items and may get divided into one or more bags, each having its own ID. : type string
+        """Allows users to retrieve a comprehensive list of reasons for cancellation  or returning a shipment. It provides both cancellation and return reasons, with an emphasis  on Quality Control (QC) evaluations.
+        :param shipment_id : The unique identifier for the shipment : type string
+        :param bag_id : Identifier for a bag or product. : type string
         """
         payload = {}
         
@@ -616,7 +626,7 @@ class Order:
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentBagReasons"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"path","description":"ID of the bag. An shipment may contain multiple items and may get divided into one or more bags, each having its own ID.","name":"bag_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"path","description":"ID of the bag. An shipment may contain multiple items and may get divided into one or more bags, each having its own ID.","name":"bag_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id, bag_id=bag_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["getShipmentBagReasons"], proccessed_params="""{"required":[{"in":"path","description":"The unique identifier for the shipment","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"path","description":"Identifier for a bag or product.","name":"bag_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"The unique identifier for the shipment","name":"shipment_id","required":true,"schema":{"type":"string"}},{"in":"path","description":"Identifier for a bag or product.","name":"bag_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id, bag_id=bag_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -695,8 +705,8 @@ class Order:
         return response
     
     async def updateShipmentStatus(self, shipment_id=None, body="", request_headers:Dict={}):
-        """Update current status of a specific shipment using its shipment ID. Supports both partial and full transition as per the configured settings.
-        :param shipment_id : ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID. : type string
+        """This operation allows for updating the status and properties of a shipment.  For example, it allows users to initiate a return by providing reasons and  uploading quality check images.
+        :param shipment_id : The unique identifier for the shipment. : type string
         """
         payload = {}
         
@@ -708,11 +718,11 @@ class Order:
         schema.dump(schema.load(payload))
         
         # Body validation
-        from .models import UpdateShipmentStatusRequest
-        schema = UpdateShipmentStatusRequest()
+        from .models import UpdateShipmentStatusRequestSchema
+        schema = UpdateShipmentStatusRequestSchema()
         schema.dump(schema.load(body))
 
-        url_with_params = await create_url_with_params(api_url=self._urls["updateShipmentStatus"], proccessed_params="""{"required":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"ID of the shipment. An order may contain multiple items and may get divided into one or more shipment, each having its own ID.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id)
+        url_with_params = await create_url_with_params(api_url=self._urls["updateShipmentStatus"], proccessed_params="""{"required":[{"in":"path","description":"The unique identifier for the shipment.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"The unique identifier for the shipment.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id)
         query_string = await create_query_string()
         if query_string:
             url_with_params += "?" + query_string
@@ -734,12 +744,62 @@ class Order:
         response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["updateShipmentStatus"]).netloc, "put", await create_url_without_domain("/service/application/order/v1.0/orders/shipments/{shipment_id}/status", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import ShipmentApplicationStatusResponse
-            schema = ShipmentApplicationStatusResponse()
+            from .models import ShipmentApplicationStatusResponseSchema
+            schema = ShipmentApplicationStatusResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for updateShipmentStatus")
+                print(e)
+
+        return response
+    
+    async def submitDeliveryReattemptRequest(self, shipment_id=None, body="", request_headers:Dict={}):
+        """This operation allows customers to submit a request for reattempting the delivery of a specific shipment  with optional address updates and a new delivery date.
+        :param shipment_id : The unique identifier for the shipment. : type string
+        """
+        payload = {}
+        
+        if shipment_id is not None:
+            payload["shipment_id"] = shipment_id
+
+        # Parameter validation
+        schema = OrderValidator.submitDeliveryReattemptRequest()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import DeliveryReattemptRequestSchema
+        schema = DeliveryReattemptRequestSchema()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(api_url=self._urls["submitDeliveryReattemptRequest"], proccessed_params="""{"required":[{"in":"path","description":"The unique identifier for the shipment.","name":"shipment_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","description":"The unique identifier for the shipment.","name":"shipment_id","required":true,"schema":{"type":"string"}}]}""", serverType="application", shipment_id=shipment_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["submitDeliveryReattemptRequest"]).netloc, "put", await create_url_without_domain("/service/application/order/v1.0/shipments/{shipment_id}/delivery-reattempt", shipment_id=shipment_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import DeliveryReattemptSuccessResponseSchema
+            schema = DeliveryReattemptSuccessResponseSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for submitDeliveryReattemptRequest")
                 print(e)
 
         return response

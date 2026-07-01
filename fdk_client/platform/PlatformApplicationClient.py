@@ -27,8 +27,6 @@ from .partner.applicationClient import Partner
 
 from .payment.applicationClient import Payment
 
-from .rewards.applicationClient import Rewards
-
 from .share.applicationClient import Share
 
 from .theme.applicationClient import Theme
@@ -63,8 +61,6 @@ class PlatformApplicationClient:
         self.partner = Partner(config, applicationId)
         
         self.payment = Payment(config, applicationId)
-        
-        self.rewards = Rewards(config, applicationId)
         
         self.share = Share(config, applicationId)
         
