@@ -63,7 +63,8 @@ class Payment:
             "addBeneficiary": "/service/application/payment/v2.0/refund/user/beneficiary",
             "deleteBeneficiary": "/service/application/payment/v1.0/refund/account/{id}",
             "getRefundBeneficiariesUsingOTPSession": "/service/application/payment/v2.0/refund/user/beneficiary-otp",
-            "addRefundBeneficiaryUsingOTPSession": "/service/application/payment/v2.0/refund/user/beneficiary-otp"
+            "addRefundBeneficiaryUsingOTPSession": "/service/application/payment/v2.0/refund/user/beneficiary-otp",
+            "getOrderTransactions": "/service/application/payment/v1.0/orders/{order_id}/transactions"
             
         }
         self._urls = {
@@ -569,7 +570,7 @@ class Payment:
 
         return response
     
-    async def getPosPaymentModeRoutes(self, amount=None, cart_id=None, pincode=None, checkout_mode=None, refresh=None, card_reference=None, order_type=None, fulfillment_option=None, user_details=None, body="", request_headers:Dict={}):
+    async def getPosPaymentModeRoutes(self, amount=None, cart_id=None, pincode=None, checkout_mode=None, refresh=None, card_reference=None, order_type=None, fulfillment_option=None, user_details=None, display_split=None, body="", request_headers:Dict={}):
         """Get available payment methods on the payment page for POS, specifying the aggregator for each option, such as 'CARD powered by Juspay' and 'QR powered by Razorpay'.
         :param amount : Payable amount. : type integer
         :param cart_id : Identifier of the cart. : type string
@@ -580,6 +581,7 @@ class Payment:
         :param order_type : The order type of shipment  HomeDelivery - If the customer wants the order home-delivered  PickAtStore - If the customer wants the handover of an order at the store itself. : type string
         :param fulfillment_option : List of fulfillment option slugs used to filter payment modes. A payment mode is included only if it is not explicitly disabled for any of the provided fulfillment options. : type array
         :param user_details : URLencoded JSON containing details of an anonymous user. : type string
+        :param display_split : Display Split Payment Option or not. : type boolean
         """
         payload = {}
         
@@ -601,14 +603,16 @@ class Payment:
             payload["fulfillment_option"] = fulfillment_option
         if user_details is not None:
             payload["user_details"] = user_details
+        if display_split is not None:
+            payload["display_split"] = display_split
 
         # Parameter validation
         schema = PaymentValidator.getPosPaymentModeRoutes()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getPosPaymentModeRoutes"], proccessed_params="""{"required":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":true,"schema":{"type":"string"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059.","required":true,"schema":{"type":"string"}},{"name":"order_type","in":"query","required":true,"description":"The order type of shipment  HomeDelivery - If the customer wants the order home-delivered  PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"x-not-enum":true,"type":"string"}}],"optional":[{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"},"required":false},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"},"required":false},{"name":"fulfillment_option","in":"query","required":false,"schema":{"type":"array","items":{"type":"string"}},"description":"List of fulfillment option slugs used to filter payment modes. A payment mode is included only if it is not explicitly disabled for any of the provided fulfillment options."},{"name":"user_details","in":"query","description":"URLencoded JSON containing details of an anonymous user.","schema":{"type":"string"},"required":false}],"query":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":true,"schema":{"type":"string"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059.","required":true,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"},"required":false},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"},"required":false},{"name":"order_type","in":"query","required":true,"description":"The order type of shipment  HomeDelivery - If the customer wants the order home-delivered  PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"x-not-enum":true,"type":"string"}},{"name":"fulfillment_option","in":"query","required":false,"schema":{"type":"array","items":{"type":"string"}},"description":"List of fulfillment option slugs used to filter payment modes. A payment mode is included only if it is not explicitly disabled for any of the provided fulfillment options."},{"name":"user_details","in":"query","description":"URLencoded JSON containing details of an anonymous user.","schema":{"type":"string"},"required":false}],"headers":[],"path":[]}""", serverType="application", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, order_type=order_type, fulfillment_option=fulfillment_option, user_details=user_details)
-        query_string = await create_query_string(amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, order_type=order_type, fulfillment_option=fulfillment_option, user_details=user_details)
+        url_with_params = await create_url_with_params(api_url=self._urls["getPosPaymentModeRoutes"], proccessed_params="""{"required":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":true,"schema":{"type":"string"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059.","required":true,"schema":{"type":"string"}},{"name":"order_type","in":"query","required":true,"description":"The order type of shipment  HomeDelivery - If the customer wants the order home-delivered  PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"x-not-enum":true,"type":"string"}}],"optional":[{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"},"required":false},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"},"required":false},{"name":"fulfillment_option","in":"query","required":false,"schema":{"type":"array","items":{"type":"string"}},"description":"List of fulfillment option slugs used to filter payment modes. A payment mode is included only if it is not explicitly disabled for any of the provided fulfillment options."},{"name":"user_details","in":"query","description":"URLencoded JSON containing details of an anonymous user.","schema":{"type":"string"},"required":false},{"name":"display_split","in":"query","description":"Display Split Payment Option or not.","schema":{"type":"boolean"}}],"query":[{"name":"amount","in":"query","description":"Payable amount.","required":true,"schema":{"type":"integer"}},{"name":"cart_id","in":"query","description":"Identifier of the cart.","required":true,"schema":{"type":"string"}},{"name":"pincode","in":"query","description":"The PIN Code of the destination address, e.g. 400059.","required":true,"schema":{"type":"string"}},{"name":"checkout_mode","in":"query","description":"Option to checkout for self or for others.","required":false,"schema":{"type":"string"}},{"name":"refresh","in":"query","description":"Select `true` to remove temporary cache files on payment gateway and replace with the latest one.","schema":{"type":"boolean"},"required":false},{"name":"card_reference","in":"query","description":"Card reference id of user's debit or credit card.","schema":{"type":"string"},"required":false},{"name":"order_type","in":"query","required":true,"description":"The order type of shipment  HomeDelivery - If the customer wants the order home-delivered  PickAtStore - If the customer wants the handover of an order at the store itself.","schema":{"x-not-enum":true,"type":"string"}},{"name":"fulfillment_option","in":"query","required":false,"schema":{"type":"array","items":{"type":"string"}},"description":"List of fulfillment option slugs used to filter payment modes. A payment mode is included only if it is not explicitly disabled for any of the provided fulfillment options."},{"name":"user_details","in":"query","description":"URLencoded JSON containing details of an anonymous user.","schema":{"type":"string"},"required":false},{"name":"display_split","in":"query","description":"Display Split Payment Option or not.","schema":{"type":"boolean"}}],"headers":[],"path":[]}""", serverType="application", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, order_type=order_type, fulfillment_option=fulfillment_option, user_details=user_details, display_split=display_split)
+        query_string = await create_query_string(amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, order_type=order_type, fulfillment_option=fulfillment_option, user_details=user_details, display_split=display_split)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -626,7 +630,7 @@ class Payment:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPosPaymentModeRoutes"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/options/pos", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, order_type=order_type, fulfillment_option=fulfillment_option, user_details=user_details), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getPosPaymentModeRoutes"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/payment/options/pos", amount=amount, cart_id=cart_id, pincode=pincode, checkout_mode=checkout_mode, refresh=refresh, card_reference=card_reference, order_type=order_type, fulfillment_option=fulfillment_option, user_details=user_details, display_split=display_split), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import PaymentModeRouteDetails
@@ -2418,6 +2422,52 @@ class Payment:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for addRefundBeneficiaryUsingOTPSession")
+                print(e)
+
+        return response
+    
+    async def getOrderTransactions(self, order_id=None, body="", request_headers:Dict={}):
+        """Returns all payment transactions for the given order ID, ordered by creation timestamp ascending. Each entry includes merchant transaction ID, payment mode name, logo, amount, latest status, and created_on.
+        :param order_id : Merchant order ID. Example: FY692D2AC45171FB895B : type string
+        """
+        payload = {}
+        
+        if order_id is not None:
+            payload["order_id"] = order_id
+
+        # Parameter validation
+        schema = PaymentValidator.getOrderTransactions()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getOrderTransactions"], proccessed_params="""{"required":[{"name":"order_id","in":"path","required":true,"description":"Merchant order ID. Example: FY692D2AC45171FB895B","schema":{"type":"string","example":"FY692D2AC45171FB895B"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"order_id","in":"path","required":true,"description":"Merchant order ID. Example: FY692D2AC45171FB895B","schema":{"type":"string","example":"FY692D2AC45171FB895B"}}]}""", serverType="application", order_id=order_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getOrderTransactions"]).netloc, "get", await create_url_without_domain("/service/application/payment/v1.0/orders/{order_id}/transactions", order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderTransactionList
+            schema = OrderTransactionList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOrderTransactions")
                 print(e)
 
         return response

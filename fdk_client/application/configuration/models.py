@@ -168,6 +168,10 @@ class OrderingSources(BaseSchema):
     pass
 
 
+class BuyBoxFeature(BaseSchema):
+    pass
+
+
 class AppFeature(BaseSchema):
     pass
 
@@ -917,6 +921,18 @@ class OrderingSources(BaseSchema):
     
 
 
+class BuyBoxFeature(BaseSchema):
+    # Configuration swagger.json
+
+    
+    show_name = fields.Boolean(required=False)
+    
+    enable_selection = fields.Boolean(required=False)
+    
+    is_seller_buybox_enabled = fields.Boolean(required=False)
+    
+
+
 class AppFeature(BaseSchema):
     # Configuration swagger.json
 
@@ -960,6 +976,8 @@ class AppFeature(BaseSchema):
     modified_at = fields.Str(required=False)
     
     __v = fields.Int(required=False)
+    
+    buybox = fields.Nested(BuyBoxFeature, required=False)
     
 
 

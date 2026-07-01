@@ -412,6 +412,10 @@ class ArticleGiftDetail(BaseSchema):
     pass
 
 
+class ShipToGstDetails(BaseSchema):
+    pass
+
+
 class CartMetaCreation(BaseSchema):
     pass
 
@@ -1321,6 +1325,8 @@ class LoyaltyPoints(BaseSchema):
     
     title = fields.Str(required=False)
     
+    meta = fields.Dict(required=False, allow_none=True)
+    
 
 
 class CartBreakup(BaseSchema):
@@ -1471,6 +1477,8 @@ class CartDetailResult(BaseSchema):
     
     gstin = fields.Str(required=False)
     
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
+    
     restrict_checkout = fields.Boolean(required=False)
     
     last_modified = fields.Str(required=False)
@@ -1486,6 +1494,8 @@ class CartDetailResult(BaseSchema):
     pan_config = fields.Dict(required=False)
     
     custom_cart_meta = fields.Dict(required=False)
+    
+    loyalty_meta = fields.Dict(required=False, allow_none=True)
     
     alternate_pickup_person = fields.Nested(AlternatePickupPerson, required=False)
     
@@ -1879,6 +1889,8 @@ class RedeemLoyaltyPoints(BaseSchema):
     
     redeem_points = fields.Boolean(required=False)
     
+    meta = fields.Dict(required=False)
+    
 
 
 class GeoLocation(BaseSchema):
@@ -2113,6 +2125,8 @@ class CartShipmentsResult(BaseSchema):
     
     gstin = fields.Str(required=False)
     
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
+    
     restrict_checkout = fields.Boolean(required=False)
     
     last_modified = fields.Str(required=False)
@@ -2301,6 +2315,8 @@ class CheckCart(BaseSchema):
     
     gstin = fields.Str(required=False)
     
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
+    
     restrict_checkout = fields.Boolean(required=False)
     
     last_modified = fields.Str(required=False)
@@ -2363,6 +2379,16 @@ class ArticleGiftDetail(BaseSchema):
     
 
 
+class ShipToGstDetails(BaseSchema):
+    # Cart swagger.json
+
+    
+    gstin = fields.Str(required=False, allow_none=True)
+    
+    trade_name = fields.Str(required=False, allow_none=True)
+    
+
+
 class CartMetaCreation(BaseSchema):
     # Cart swagger.json
 
@@ -2380,6 +2406,8 @@ class CartMetaCreation(BaseSchema):
     comment = fields.Str(required=False)
     
     gstin = fields.Str(required=False)
+    
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
     
     custom_cart_meta = fields.Dict(required=False)
     
@@ -2466,6 +2494,8 @@ class SharedCart(BaseSchema):
     message = fields.Str(required=False)
     
     gstin = fields.Str(required=False)
+    
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
     
     shared_cart_details = fields.Nested(SharedCartDetails, required=False)
     

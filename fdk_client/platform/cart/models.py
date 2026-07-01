@@ -760,6 +760,10 @@ class UpdateCartShipmentCreation(BaseSchema):
     pass
 
 
+class ShipToGstDetails(BaseSchema):
+    pass
+
+
 class PlatformCartMetaCreation(BaseSchema):
     pass
 
@@ -972,6 +976,8 @@ class RedeemLoyaltyPoints(BaseSchema):
 
     
     redeem_points = fields.Boolean(required=False)
+    
+    meta = fields.Dict(required=False)
     
 
 
@@ -2545,6 +2551,8 @@ class LoyaltyPoints(BaseSchema):
     
     discount_amount = fields.Float(required=False)
     
+    meta = fields.Dict(required=False, allow_none=True)
+    
 
 
 class RawBreakup(BaseSchema):
@@ -3671,11 +3679,15 @@ class CartDetailResult(BaseSchema):
     
     gstin = fields.Str(required=False)
     
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
+    
     applied_promo_details = fields.List(fields.Nested(AppliedPromotion, required=False), required=False)
     
     pan_no = fields.Str(required=False)
     
     custom_cart_meta = fields.Dict(required=False)
+    
+    loyalty_meta = fields.Dict(required=False, allow_none=True)
     
     alternate_pickup_person = fields.Nested(PlatformAlternatePickupPerson, required=False)
     
@@ -4037,6 +4049,8 @@ class SharedCart(BaseSchema):
     
     gstin = fields.Str(required=False)
     
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
+    
     custom_cart_meta = fields.Dict(required=False)
     
 
@@ -4152,6 +4166,8 @@ class UserCartMappingResult(BaseSchema):
     buy_now = fields.Boolean(required=False)
     
     gstin = fields.Str(required=False)
+    
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
     
     custom_cart_meta = fields.Dict(required=False)
     
@@ -4539,6 +4555,8 @@ class PlatformCartShipmentsResult(BaseSchema):
     
     gstin = fields.Str(required=False)
     
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
+    
     applied_promo_details = fields.List(fields.Nested(AppliedPromotion, required=False), required=False)
     
     error = fields.Boolean(required=False)
@@ -4573,11 +4591,23 @@ class UpdateCartShipmentCreation(BaseSchema):
     
 
 
+class ShipToGstDetails(BaseSchema):
+    # Cart swagger.json
+
+    
+    gstin = fields.Str(required=False, allow_none=True)
+    
+    trade_name = fields.Str(required=False, allow_none=True)
+    
+
+
 class PlatformCartMetaCreation(BaseSchema):
     # Cart swagger.json
 
     
     gstin = fields.Str(required=False)
+    
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
     
     pick_up_customer_details = fields.Dict(required=False)
     
@@ -4802,6 +4832,8 @@ class CheckCart(BaseSchema):
     store_emps = fields.List(fields.Dict(required=False), required=False)
     
     gstin = fields.Str(required=False)
+    
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
     
     cod_available = fields.Boolean(required=False)
     

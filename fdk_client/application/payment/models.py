@@ -556,6 +556,14 @@ class DeleteBeneficiaryDetails(BaseSchema):
     pass
 
 
+class OrderTransactionList(BaseSchema):
+    pass
+
+
+class OrderTransactionItem(BaseSchema):
+    pass
+
+
 
 
 
@@ -2850,6 +2858,34 @@ class DeleteBeneficiaryDetails(BaseSchema):
 
     
     message = fields.Str(required=False)
+    
+
+
+class OrderTransactionList(BaseSchema):
+    # Payment swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    items = fields.List(fields.Nested(OrderTransactionItem, required=False), required=False)
+    
+
+
+class OrderTransactionItem(BaseSchema):
+    # Payment swagger.json
+
+    
+    transaction_id = fields.Str(required=False)
+    
+    payment_mode = fields.Str(required=False, allow_none=True)
+    
+    logo = fields.Str(required=False, allow_none=True)
+    
+    amount = fields.Float(required=False, allow_none=True)
+    
+    status = fields.Str(required=False, allow_none=True)
+    
+    created_on = fields.Str(required=False)
     
 
 

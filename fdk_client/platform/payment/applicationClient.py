@@ -1884,6 +1884,54 @@ class Payment:
 
         return response
     
+    async def updateOrderMeta(self, order_id=None, body="", request_headers:Dict={}):
+        """Update metadata associated with a payment order. Use this to set or update PAN (Permanent Account Number) for an order.
+        :param order_id : The unique identifier of the order (merchant_order_id). : type string
+        """
+        payload = {}
+        
+        if order_id is not None:
+            payload["order_id"] = order_id
+
+        # Parameter validation
+        schema = PaymentValidator.updateOrderMeta()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import OrderMetaUpdate
+        schema = OrderMetaUpdate()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/order/meta", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"order_id","in":"query","description":"The unique identifier of the order (merchant_order_id).","schema":{"type":"string"},"required":true}],"optional":[],"query":[{"name":"order_id","in":"query","description":"The unique identifier of the order (merchant_order_id).","schema":{"type":"string"},"required":true}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", order_id=order_id)
+        query_string = await create_query_string(order_id=order_id)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PUT", url_with_params, headers=get_headers_with_signature(self._conf.domain, "put", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/order/meta", order_id=order_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderMetaResult
+            schema = OrderMetaResult()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for updateOrderMeta")
+                print(e)
+
+        return response
+    
     async def getMerchantAggregatorAppVersion(self, aggregator_id=None, business_unit=None, device=None, payment_mode_id=None, sub_payment_mode=None, request_headers:Dict={}):
         """Get app version required for Payment Mode or sub payment mode for an Aggregator.if merchant required any PG payment mode after certain version for mobile app.
         :param aggregator_id : Aggregators Id : type integer
@@ -2083,6 +2131,50 @@ Supported values are:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for saveTokenForAggregator")
+                print(e)
+
+        return response
+    
+    async def getOrderTransactions(self, order_id=None, request_headers:Dict={}):
+        """Returns all payment transactions associated with the given order ID, ordered by creation timestamp ascending. Each entry includes the merchant transaction ID, payment mode name, logo URL (small, falling back to large), transaction amount, latest status, and creation timestamp.
+        :param order_id : Merchant order ID (e.g. FY692D2AC45171FB895B). : type string
+        """
+        payload = {}
+        
+        if order_id is not None:
+            payload["order_id"] = order_id
+
+        # Parameter validation
+        schema = PaymentValidator.getOrderTransactions()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/orders/{order_id}/transactions", """{"required":[{"name":"company_id","in":"path","required":true,"description":"Unique numeric identifier of the company (seller).","schema":{"type":"integer","format":"int64","example":1}},{"name":"application_id","in":"path","required":true,"description":"Unique identifier of the sales channel (application).","schema":{"type":"string","example":"000000000000000000000001"}},{"name":"order_id","in":"path","required":true,"description":"Merchant order ID (e.g. FY692D2AC45171FB895B).","schema":{"type":"string","example":"FY692D2AC45171FB895B"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","required":true,"description":"Unique numeric identifier of the company (seller).","schema":{"type":"integer","format":"int64","example":1}},{"name":"application_id","in":"path","required":true,"description":"Unique identifier of the sales channel (application).","schema":{"type":"string","example":"000000000000000000000001"}},{"name":"order_id","in":"path","required":true,"description":"Merchant order ID (e.g. FY692D2AC45171FB895B).","schema":{"type":"string","example":"FY692D2AC45171FB895B"}}]}""", serverType="platform", order_id=order_id)
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/orders/{order_id}/transactions", order_id=order_id), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import OrderTransactionList
+            schema = OrderTransactionList()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getOrderTransactions")
                 print(e)
 
         return response

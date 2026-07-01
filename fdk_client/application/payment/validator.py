@@ -48,6 +48,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
     
@@ -119,6 +120,9 @@ from ..ApplicationModel import BaseSchema
         
         
     
+    
+    
+        
 
 class PaymentValidator:
     
@@ -221,6 +225,8 @@ class PaymentValidator:
         fulfillment_option = fields.List(fields.Str(required=False), required=False)
         
         user_details = fields.Str(required=False)
+        
+        display_split = fields.Boolean(required=False)
          
         
     
@@ -450,6 +456,13 @@ class PaymentValidator:
     class addRefundBeneficiaryUsingOTPSession(BaseSchema):
         
         pass 
+        
+    
+    class getOrderTransactions(BaseSchema):
+        
+        
+        order_id = fields.Str(required=False)
+         
         
     
     

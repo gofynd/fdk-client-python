@@ -223,6 +223,11 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
         
         
         
@@ -234,6 +239,11 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
+    
+    
+        
         
         
     
@@ -703,6 +713,17 @@ class PaymentValidator:
          
         
     
+    class updateOrderMeta(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        order_id = fields.Str(required=False)
+         
+        
+    
     class getMerchantAggregatorAppVersion(BaseSchema):
         
         
@@ -750,6 +771,17 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
         
         aggregator_id = fields.Str(required=False)
+         
+        
+    
+    class getOrderTransactions(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        order_id = fields.Str(required=False)
          
         
     

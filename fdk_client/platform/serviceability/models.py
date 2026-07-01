@@ -484,6 +484,22 @@ class GetZoneProductsBulkPatchResult(BaseSchema):
     pass
 
 
+class ZoneProductsAtomicPatchItem(BaseSchema):
+    pass
+
+
+class ZoneProductsAtomicPatchDetails(BaseSchema):
+    pass
+
+
+class ZoneProductsAtomicPatchResultItem(BaseSchema):
+    pass
+
+
+class ZoneProductsAtomicPatchResult(BaseSchema):
+    pass
+
+
 class CourierPartnerToServiceability(BaseSchema):
     pass
 
@@ -1189,6 +1205,14 @@ class StorePolygonServiceabilityError(BaseSchema):
 
 
 class StorePolygonServiceabilityPagination(BaseSchema):
+    pass
+
+
+class ZoneProductsAtomicPatchItemError(BaseSchema):
+    pass
+
+
+class ZoneProductsAtomicPatchSummary(BaseSchema):
     pass
 
 
@@ -3270,6 +3294,56 @@ class GetZoneProductsBulkPatchResult(BaseSchema):
     partial = fields.Int(required=False)
     
     result_file_url = fields.Str(required=False, allow_none=True)
+    
+
+
+class ZoneProductsAtomicPatchItem(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    zone_id = fields.Str(required=False)
+    
+    product_type = fields.Str(required=False)
+    
+    values = fields.List(fields.Raw(required=False), required=False)
+    
+    action = fields.Str(required=False)
+    
+
+
+class ZoneProductsAtomicPatchDetails(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    items = fields.List(fields.Nested(ZoneProductsAtomicPatchItem, required=False), required=False)
+    
+
+
+class ZoneProductsAtomicPatchResultItem(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    zone_id = fields.Str(required=False)
+    
+    product_type = fields.Str(required=False)
+    
+    action = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    values_count = fields.Int(required=False)
+    
+    error = fields.List(fields.Nested(ZoneProductsAtomicPatchItemError, required=False), required=False)
+    
+
+
+class ZoneProductsAtomicPatchResult(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    items = fields.List(fields.Nested(ZoneProductsAtomicPatchResultItem, required=False), required=False)
+    
+    summary = fields.Nested(ZoneProductsAtomicPatchSummary, required=False)
     
 
 
@@ -6068,6 +6142,30 @@ class StorePolygonServiceabilityPagination(BaseSchema):
     has_next = fields.Boolean(required=False)
     
     total_records = fields.Int(required=False)
+    
+
+
+class ZoneProductsAtomicPatchItemError(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
+class ZoneProductsAtomicPatchSummary(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    total = fields.Int(required=False)
+    
+    success = fields.Int(required=False)
+    
+    failed = fields.Int(required=False)
     
 
 
