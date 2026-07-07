@@ -28,6 +28,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -71,6 +72,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -497,6 +499,7 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
@@ -578,6 +581,8 @@ class CartValidator:
         review_end_time = fields.Str(required=False)
         
         status = fields.Str(required=False)
+        
+        filter_tags = fields.Str(required=False)
          
         
     
@@ -670,6 +675,8 @@ class CartValidator:
         review_end_time = fields.Str(required=False)
         
         status = fields.Str(required=False)
+        
+        filter_tags = fields.Str(required=False)
          
         
     
@@ -1614,6 +1621,8 @@ class CartValidator:
         code = fields.Str(required=False)
         
         is_public = fields.Boolean(required=False)
+        
+        filter_tags = fields.Str(required=False)
          
         
     

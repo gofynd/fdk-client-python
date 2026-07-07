@@ -1301,6 +1301,8 @@ class CouponAdd(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
+    filter_tags = fields.List(fields.Str(required=False), required=False)
+    
     _schedule = fields.Nested(CouponSchedule, required=False)
     
     rule = fields.List(fields.Nested(Rule, required=False), required=False)
@@ -1394,6 +1396,8 @@ class CouponUpdate(BaseSchema):
     action = fields.Nested(CouponAction, required=False)
     
     tags = fields.List(fields.Str(required=False), required=False)
+    
+    filter_tags = fields.List(fields.Str(required=False), required=False)
     
     _schedule = fields.Nested(CouponSchedule, required=False)
     
@@ -1911,6 +1915,8 @@ class PromotionListItem(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
+    filter_tags = fields.List(fields.Str(required=False), required=False)
+    
     auto_apply = fields.Boolean(required=False)
     
 
@@ -1975,6 +1981,8 @@ class PromotionAdd(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
+    filter_tags = fields.List(fields.Str(required=False), required=False)
+    
     auto_apply = fields.Boolean(required=False)
     
 
@@ -2031,6 +2039,8 @@ class PromotionAddResult(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
+    filter_tags = fields.List(fields.Str(required=False), required=False)
+    
     auto_apply = fields.Boolean(required=False)
     
 
@@ -2086,6 +2096,8 @@ class PromotionUpdate(BaseSchema):
     date_meta = fields.Nested(PromotionDateMeta, required=False)
     
     tags = fields.List(fields.Str(required=False), required=False)
+    
+    filter_tags = fields.List(fields.Str(required=False), required=False)
     
     auto_apply = fields.Boolean(required=False)
     
@@ -2145,6 +2157,8 @@ class PromotionUpdateResult(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
+    filter_tags = fields.List(fields.Str(required=False), required=False)
+    
     auto_apply = fields.Boolean(required=False)
     
 
@@ -2182,6 +2196,8 @@ class ActivePromosResult(BaseSchema):
     subtitle = fields.Str(required=False)
     
     description = fields.Str(required=False)
+    
+    discount_type = fields.Str(required=False)
     
 
 
@@ -5571,6 +5587,8 @@ class OfferSchema(BaseSchema):
     
     is_bank_offer = fields.Boolean(required=False)
     
+    filter_tags = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class OfferPartialUpdate(BaseSchema):
@@ -5642,6 +5660,8 @@ class OfferListItem(BaseSchema):
     date_meta = fields.Nested(OfferDateMeta, required=False)
     
     schedule = fields.Nested(OfferSchedule, required=False)
+    
+    filter_tags = fields.List(fields.Str(required=False), required=False)
     
 
 
