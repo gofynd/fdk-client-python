@@ -3468,8 +3468,8 @@ class Catalog:
         response = await AiohttpHelper().aiohttp_request("POST", url_with_params, headers=get_headers_with_signature(self._conf.domain, "post", await create_url_without_domain(f"/service/platform/catalog/v2.0/company/{self._conf.companyId}/products/{item_id}/inventory/{seller_identifier}", item_id=item_id, seller_identifier=seller_identifier), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
-            from .models import InventoryUpdateResponse
-            schema = InventoryUpdateResponse()
+            from .models import InventoryUpdateResponseSchema
+            schema = InventoryUpdateResponseSchema()
             try:
                 schema.load(response["json"])
             except Exception as e:
