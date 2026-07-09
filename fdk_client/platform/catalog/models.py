@@ -858,6 +858,14 @@ class InventoryUpdateResponse(BaseSchema):
     pass
 
 
+class InventoryUpdateResponseSchema(BaseSchema):
+    pass
+
+
+class InventoryTransaction(BaseSchema):
+    pass
+
+
 class InventoryValidationResponse(BaseSchema):
     pass
 
@@ -4919,15 +4927,29 @@ class InventoryPayload(BaseSchema):
     
     price_marked = fields.Float(required=False)
     
+    price_cost = fields.Float(required=False)
+    
     seller_identifier = fields.Str(required=False)
     
     store_id = fields.Int(required=False)
     
     tags = fields.List(fields.Str(required=False), required=False)
     
+    mode = fields.Str(required=False)
+    
     total_quantity = fields.Int(required=False, allow_none=True)
     
+    damaged_quantity = fields.Int(required=False, allow_none=True)
+    
+    not_available_quantity = fields.Int(required=False, allow_none=True)
+    
     trace_id = fields.Str(required=False)
+    
+    meta = fields.Dict(required=False)
+    
+    transaction_type = fields.Str(required=False, allow_none=True)
+    
+    transaction = fields.Nested(InventoryTransaction, required=False)
     
 
 
@@ -4952,6 +4974,10 @@ class InventoryRequestSchemaV2(BaseSchema):
     meta = fields.Dict(required=False)
     
     payload = fields.List(fields.Nested(InventoryPayload, required=False), required=False)
+    
+    transaction_type = fields.Str(required=False, allow_none=True)
+    
+    transaction = fields.Nested(InventoryTransaction, required=False)
     
 
 
@@ -5124,6 +5150,34 @@ class InventoryUpdateResponse(BaseSchema):
     items = fields.List(fields.Nested(InventoryResponseItem, required=False), required=False)
     
     message = fields.Str(required=False)
+    
+
+
+class InventoryUpdateResponseSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    items = fields.List(fields.Nested(InventoryResponseItem, required=False), required=False)
+    
+    message = fields.Str(required=False)
+    
+    success = fields.Boolean(required=False)
+    
+
+
+class InventoryTransaction(BaseSchema):
+    # Catalog swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    reference_id = fields.Str(required=False)
+    
+    reason = fields.Str(required=False)
+    
+    source = fields.Str(required=False)
+    
+    user_ref = fields.Str(required=False)
     
 
 
