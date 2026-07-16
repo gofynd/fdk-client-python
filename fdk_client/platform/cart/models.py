@@ -1127,6 +1127,8 @@ class Restrictions(BaseSchema):
     
     user_groups = fields.List(fields.Int(required=False), required=False)
     
+    exclude_user_groups = fields.List(fields.Int(required=False), required=False)
+    
     coupon_allowed = fields.Boolean(required=False)
     
     uses = fields.Nested(UsesRestriction, required=False)
@@ -1777,6 +1779,8 @@ class Restrictions1(BaseSchema):
     
     user_groups = fields.List(fields.Int(required=False), required=False)
     
+    exclude_user_groups = fields.List(fields.Int(required=False), required=False)
+    
     order_quantity = fields.Int(required=False)
     
     anonymous_users = fields.Boolean(required=False)
@@ -2329,6 +2333,8 @@ class PriceAdjustmentUpdate(BaseSchema):
     
     article_level_distribution = fields.Boolean(required=False)
     
+    included_in_eligibility_amount = fields.Boolean(required=False)
+    
     collection = fields.Nested(Collection, required=False)
     
     type = fields.Str(required=False)
@@ -2362,6 +2368,8 @@ class PriceAdjustment(BaseSchema):
     restrictions = fields.Nested(PriceAdjustmentRestrictions, required=False)
     
     article_level_distribution = fields.Boolean(required=False)
+    
+    included_in_eligibility_amount = fields.Boolean(required=False)
     
     id = fields.Str(required=False)
     
@@ -2416,6 +2424,8 @@ class PriceAdjustmentAdd(BaseSchema):
     created_by = fields.Str(required=False)
     
     article_level_distribution = fields.Boolean(required=False)
+    
+    included_in_eligibility_amount = fields.Boolean(required=False)
     
     collection = fields.Nested(Collection, required=False)
     
@@ -5308,6 +5318,8 @@ class OfferUser(BaseSchema):
 
     
     groups = fields.List(fields.Int(required=False), required=False)
+    
+    exclude_groups = fields.List(fields.Int(required=False), required=False)
     
     type = fields.Str(required=False)
     
