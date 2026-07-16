@@ -297,7 +297,7 @@ class GetAddressSerializer(BaseSchema):
     
     country_code = fields.Str(required=False)
     
-    pincode = fields.Int(required=False)
+    pincode = fields.Str(required=False)
     
     address_type = fields.Str(required=False)
     
