@@ -128,6 +128,14 @@ class ProductSizes(BaseSchema):
     pass
 
 
+class ProductSizesBySlug(BaseSchema):
+    pass
+
+
+class ProductSizesBySlugsSchema(BaseSchema):
+    pass
+
+
 class MOQ(BaseSchema):
     pass
 
@@ -1156,6 +1164,22 @@ class ProductSizes(BaseSchema):
     no_of_boxes = fields.Int(required=False)
     
     teaser_tag = fields.Dict(required=False)
+    
+
+
+class ProductSizesBySlug(BaseSchema):
+    # Catalog swagger.json
+
+    
+    slug = fields.Str(required=False)
+    
+
+
+class ProductSizesBySlugsSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    items = fields.List(fields.Nested(ProductSizesBySlug, required=False), required=False)
     
 
 

@@ -44,6 +44,7 @@ class Catalog:
             "getStores": "/service/application/catalog/v2.0/locations/",
             "getInStockLocations": "/service/application/catalog/v2.0/in-stock/locations/",
             "getLocationDetailsById": "/service/application/catalog/v2.0/locations/{location_id}/",
+            "getProductSizesBySlugs": "/service/application/catalog/v2.0/products/sizes/",
             "getProductPriceBySlug": "/service/application/catalog/v4.0/products/{slug}/sizes/{size}/price/",
             "getProductSellersBySlug": "/service/application/catalog/v4.0/products/{slug}/sizes/{size}/sellers/",
             "listCountryCurrencyMappings": "/service/application/catalog/v1.0/available-countries/"
@@ -552,7 +553,7 @@ class Catalog:
 
         return response
     
-    async def getProducts(self, q=None, f=None, filters=None, sort_on=None, page_id=None, page_size=None, page_no=None, page_type=None, body="", request_headers:Dict={}):
+    async def getProducts(self, q=None, f=None, filters=None, sort_on=None, page_id=None, page_size=None, page_no=None, page_type=None, show_all_variants=None, body="", request_headers:Dict={}):
         """List all products available in the catalog. It supports filtering based on product name, brand, department, category, collection, and more, while also offering sorting options based on factors like price, ratings, discounts, and other relevant criteria.
         :param q : The search query for entering partial or full name of product, brand, category, or collection. : type string
         :param f : The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter parameter applied as an AND condition. : type string
@@ -562,6 +563,7 @@ class Catalog:
         :param page_size : The number of items to retrieve in each page. : type integer
         :param page_no : The page number to navigate through the given set of results. : type integer
         :param page_type : Available pagination types are cursor or number. : type string
+        :param show_all_variants : When true, return every product variant in the listing response. When false or omitted, each variant group is capped at 5 items (storefront default). : type boolean
         """
         payload = {}
         
@@ -581,14 +583,16 @@ class Catalog:
             payload["page_no"] = page_no
         if page_type is not None:
             payload["page_type"] = page_type
+        if show_all_variants is not None:
+            payload["show_all_variants"] = show_all_variants
 
         # Parameter validation
         schema = CatalogValidator.getProducts()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getProducts"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"q","description":"The search query for entering partial or full name of product, brand, category, or collection.","schema":{"type":"string"},"required":false},{"in":"query","name":"f","description":"The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter parameter applied as an AND condition.","schema":{"type":"string","example":"brand:voi-jeans||reliance:::l3_categories:t-shirts||shirts"},"required":false},{"in":"query","name":"filters","description":"True for fetching all filter parameters and False for disabling the filter parameters.","schema":{"type":"boolean","default":true},"required":false},{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted. Supported values include latest, popular, price_asc, price_dsc, discount_asc, discount_dsc. Custom sort keys configured via listing configuration (e.g., best_selling) are also supported for cohort-based sorting.","schema":{"type":"string","x-not-enum":true},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_type","description":"Available pagination types are cursor or number.","schema":{"type":"string","default":"cursor","enum":["cursor","number"]},"required":false}],"query":[{"in":"query","name":"q","description":"The search query for entering partial or full name of product, brand, category, or collection.","schema":{"type":"string"},"required":false},{"in":"query","name":"f","description":"The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter parameter applied as an AND condition.","schema":{"type":"string","example":"brand:voi-jeans||reliance:::l3_categories:t-shirts||shirts"},"required":false},{"in":"query","name":"filters","description":"True for fetching all filter parameters and False for disabling the filter parameters.","schema":{"type":"boolean","default":true},"required":false},{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted. Supported values include latest, popular, price_asc, price_dsc, discount_asc, discount_dsc. Custom sort keys configured via listing configuration (e.g., best_selling) are also supported for cohort-based sorting.","schema":{"type":"string","x-not-enum":true},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_type","description":"Available pagination types are cursor or number.","schema":{"type":"string","default":"cursor","enum":["cursor","number"]},"required":false}],"headers":[],"path":[]}""", serverType="application", q=q, f=f, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type)
-        query_string = await create_query_string(q=q, f=f, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type)
+        url_with_params = await create_url_with_params(api_url=self._urls["getProducts"], proccessed_params="""{"required":[],"optional":[{"in":"query","name":"q","description":"The search query for entering partial or full name of product, brand, category, or collection.","schema":{"type":"string"},"required":false},{"in":"query","name":"f","description":"The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter parameter applied as an AND condition.","schema":{"type":"string","example":"brand:voi-jeans||reliance:::l3_categories:t-shirts||shirts"},"required":false},{"in":"query","name":"filters","description":"True for fetching all filter parameters and False for disabling the filter parameters.","schema":{"type":"boolean","default":true},"required":false},{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted. Supported values include latest, popular, price_asc, price_dsc, discount_asc, discount_dsc. Custom sort keys configured via listing configuration (e.g., best_selling) are also supported for cohort-based sorting.","schema":{"type":"string","x-not-enum":true},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_type","description":"Available pagination types are cursor or number.","schema":{"type":"string","default":"cursor","enum":["cursor","number"]},"required":false},{"in":"query","name":"show_all_variants","description":"When true, return every product variant in the listing response. When false or omitted, each variant group is capped at 5 items (storefront default).","schema":{"type":"boolean","default":false},"required":false}],"query":[{"in":"query","name":"q","description":"The search query for entering partial or full name of product, brand, category, or collection.","schema":{"type":"string"},"required":false},{"in":"query","name":"f","description":"The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter parameter applied as an AND condition.","schema":{"type":"string","example":"brand:voi-jeans||reliance:::l3_categories:t-shirts||shirts"},"required":false},{"in":"query","name":"filters","description":"True for fetching all filter parameters and False for disabling the filter parameters.","schema":{"type":"boolean","default":true},"required":false},{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted. Supported values include latest, popular, price_asc, price_dsc, discount_asc, discount_dsc. Custom sort keys configured via listing configuration (e.g., best_selling) are also supported for cohort-based sorting.","schema":{"type":"string","x-not-enum":true},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string"},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"page_no","description":"The page number to navigate through the given set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_type","description":"Available pagination types are cursor or number.","schema":{"type":"string","default":"cursor","enum":["cursor","number"]},"required":false},{"in":"query","name":"show_all_variants","description":"When true, return every product variant in the listing response. When false or omitted, each variant group is capped at 5 items (storefront default).","schema":{"type":"boolean","default":false},"required":false}],"headers":[],"path":[]}""", serverType="application", q=q, f=f, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type, show_all_variants=show_all_variants)
+        query_string = await create_query_string(q=q, f=f, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type, show_all_variants=show_all_variants)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -606,7 +610,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProducts"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/", q=q, f=f, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProducts"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/products/", q=q, f=f, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type, show_all_variants=show_all_variants), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ProductListingResponseSchema
@@ -1005,7 +1009,7 @@ class Catalog:
 
         return response
     
-    async def getCollectionItemsBySlug(self, slug=None, f=None, q=None, filters=None, sort_on=None, page_id=None, page_size=None, page_no=None, page_type=None, body="", request_headers:Dict={}):
+    async def getCollectionItemsBySlug(self, slug=None, f=None, q=None, filters=None, sort_on=None, page_id=None, page_size=None, page_no=None, page_type=None, show_all_variants=None, body="", request_headers:Dict={}):
         """Fetch items within a particular collection identified by its slug.
         :param slug : A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/. : type string
         :param f : The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter parameter applied as an AND condition. : type string
@@ -1016,6 +1020,7 @@ class Catalog:
         :param page_size : The number of items to retrieve in each page. : type integer
         :param page_no : Page Number to retrieve next set of results. : type integer
         :param page_type : Page Type to retrieve set of results can be cursor or number. : type string
+        :param show_all_variants : When true, return every product variant in the listing response. When false or omitted, each variant group is capped at 5 items (storefront default). : type boolean
         """
         payload = {}
         
@@ -1037,14 +1042,16 @@ class Catalog:
             payload["page_no"] = page_no
         if page_type is not None:
             payload["page_type"] = page_type
+        if show_all_variants is not None:
+            payload["show_all_variants"] = show_all_variants
 
         # Parameter validation
         schema = CatalogValidator.getCollectionItemsBySlug()
         schema.dump(schema.load(payload))
         
 
-        url_with_params = await create_url_with_params(api_url=self._urls["getCollectionItemsBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"f","description":"The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter parameter applied as an AND condition.","schema":{"type":"string","example":"brand:voi-jeans||reliance:::l3_categories:t-shirts||shirts"},"required":false},{"in":"query","name":"q","description":"The search query for entering partial or full name of product, brand, category, or collection.","schema":{"type":"string","example":"shirts"},"required":false},{"in":"query","name":"filters","description":"True for fetching all filter parameters and False for disabling the filter parameters.","schema":{"type":"boolean","default":true},"required":false},{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted. Supported values include latest, popular, price_asc, price_dsc, discount_asc, discount_dsc. Custom sort keys configured via listing configuration (e.g., best_selling) are also supported for cohort-based sorting.","schema":{"type":"string","x-not-enum":true},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string","default":"1"},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"page_no","description":"Page Number to retrieve next set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_type","description":"Page Type to retrieve set of results can be cursor or number.","schema":{"type":"string","enum":["cursor","number"]},"required":false}],"query":[{"in":"query","name":"f","description":"The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter parameter applied as an AND condition.","schema":{"type":"string","example":"brand:voi-jeans||reliance:::l3_categories:t-shirts||shirts"},"required":false},{"in":"query","name":"q","description":"The search query for entering partial or full name of product, brand, category, or collection.","schema":{"type":"string","example":"shirts"},"required":false},{"in":"query","name":"filters","description":"True for fetching all filter parameters and False for disabling the filter parameters.","schema":{"type":"boolean","default":true},"required":false},{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted. Supported values include latest, popular, price_asc, price_dsc, discount_asc, discount_dsc. Custom sort keys configured via listing configuration (e.g., best_selling) are also supported for cohort-based sorting.","schema":{"type":"string","x-not-enum":true},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string","default":"1"},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"page_no","description":"Page Number to retrieve next set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_type","description":"Page Type to retrieve set of results can be cursor or number.","schema":{"type":"string","enum":["cursor","number"]},"required":false}],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/.","schema":{"type":"string"},"required":true}]}""", serverType="application", slug=slug, f=f, q=q, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type)
-        query_string = await create_query_string(f=f, q=q, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type)
+        url_with_params = await create_url_with_params(api_url=self._urls["getCollectionItemsBySlug"], proccessed_params="""{"required":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/.","schema":{"type":"string"},"required":true}],"optional":[{"in":"query","name":"f","description":"The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter parameter applied as an AND condition.","schema":{"type":"string","example":"brand:voi-jeans||reliance:::l3_categories:t-shirts||shirts"},"required":false},{"in":"query","name":"q","description":"The search query for entering partial or full name of product, brand, category, or collection.","schema":{"type":"string","example":"shirts"},"required":false},{"in":"query","name":"filters","description":"True for fetching all filter parameters and False for disabling the filter parameters.","schema":{"type":"boolean","default":true},"required":false},{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted. Supported values include latest, popular, price_asc, price_dsc, discount_asc, discount_dsc. Custom sort keys configured via listing configuration (e.g., best_selling) are also supported for cohort-based sorting.","schema":{"type":"string","x-not-enum":true},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string","default":"1"},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"page_no","description":"Page Number to retrieve next set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_type","description":"Page Type to retrieve set of results can be cursor or number.","schema":{"type":"string","enum":["cursor","number"]},"required":false},{"in":"query","name":"show_all_variants","description":"When true, return every product variant in the listing response. When false or omitted, each variant group is capped at 5 items (storefront default).","schema":{"type":"boolean","default":false},"required":false}],"query":[{"in":"query","name":"f","description":"The search filter parameters. Filter parameters will be passed in f parameter as shown in the example below. Double Pipe (||) denotes the OR condition, whereas Triple-colon (:::) indicates a new filter parameter applied as an AND condition.","schema":{"type":"string","example":"brand:voi-jeans||reliance:::l3_categories:t-shirts||shirts"},"required":false},{"in":"query","name":"q","description":"The search query for entering partial or full name of product, brand, category, or collection.","schema":{"type":"string","example":"shirts"},"required":false},{"in":"query","name":"filters","description":"True for fetching all filter parameters and False for disabling the filter parameters.","schema":{"type":"boolean","default":true},"required":false},{"in":"query","name":"sort_on","description":"The order in which the list of products should be sorted. Supported values include latest, popular, price_asc, price_dsc, discount_asc, discount_dsc. Custom sort keys configured via listing configuration (e.g., best_selling) are also supported for cohort-based sorting.","schema":{"type":"string","x-not-enum":true},"required":false},{"in":"query","name":"page_id","description":"Page ID to retrieve next set of results.","schema":{"type":"string","default":"1"},"required":false},{"in":"query","name":"page_size","description":"The number of items to retrieve in each page.","schema":{"type":"integer","default":12},"required":false},{"in":"query","name":"page_no","description":"Page Number to retrieve next set of results.","schema":{"type":"integer","default":1},"required":false},{"in":"query","name":"page_type","description":"Page Type to retrieve set of results can be cursor or number.","schema":{"type":"string","enum":["cursor","number"]},"required":false},{"in":"query","name":"show_all_variants","description":"When true, return every product variant in the listing response. When false or omitted, each variant group is capped at 5 items (storefront default).","schema":{"type":"boolean","default":false},"required":false}],"headers":[],"path":[{"in":"path","name":"slug","description":"A short, human-readable, URL-friendly identifier of a collection. You can get slug value from the endpoint /service/application/catalog/v1.0/collections/.","schema":{"type":"string"},"required":true}]}""", serverType="application", slug=slug, f=f, q=q, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type, show_all_variants=show_all_variants)
+        query_string = await create_query_string(f=f, q=q, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type, show_all_variants=show_all_variants)
         if query_string:
             url_with_params += "?" + query_string
 
@@ -1062,7 +1069,7 @@ class Catalog:
             if not key.startswith("x-fp-"):
                 exclude_headers.append(key)
 
-        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCollectionItemsBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/collections/{slug}/items/", slug=slug, f=f, q=q, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getCollectionItemsBySlug"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v1.0/collections/{slug}/items/", slug=slug, f=f, q=q, filters=filters, sort_on=sort_on, page_id=page_id, page_size=page_size, page_no=page_no, page_type=page_type, show_all_variants=show_all_variants), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
 
         if 200 <= int(response['status_code']) < 300:
             from .models import ProductListingResponseSchema
@@ -1539,6 +1546,55 @@ class Catalog:
                 schema.load(response["json"])
             except Exception as e:
                 print("Response Validation failed for getLocationDetailsById")
+                print(e)
+
+        return response
+    
+    async def getProductSizesBySlugs(self, slug=None, store_id=None, body="", request_headers:Dict={}):
+        """Provides detailed size information (availability, quantities, dimensions, weight, price details, seller identifiers) for multiple products in a single request. Pass repeated `slug` query parameters (up to 50) to avoid N+1 per-product size lookups when rendering listings. Each entry in the response is a ProductSizes object annotated with its `slug`.
+        :param slug : Product slugs to fetch sizes for (max. 50 allowed). Pass the parameter multiple times, e.g. `?slug=a&slug=b`. : type array
+        :param store_id : The ID of the store that is selling the products, e.g. 1,2,3. : type integer
+        """
+        payload = {}
+        
+        if slug is not None:
+            payload["slug"] = slug
+        if store_id is not None:
+            payload["store_id"] = store_id
+
+        # Parameter validation
+        schema = CatalogValidator.getProductSizesBySlugs()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(api_url=self._urls["getProductSizesBySlugs"], proccessed_params="""{"required":[{"in":"query","name":"slug","description":"Product slugs to fetch sizes for (max. 50 allowed). Pass the parameter multiple times, e.g. `?slug=a&slug=b`.","schema":{"type":"array","items":{"type":"string"}},"required":true}],"optional":[{"in":"query","name":"store_id","description":"The ID of the store that is selling the products, e.g. 1,2,3.","schema":{"type":"integer"},"required":false}],"query":[{"in":"query","name":"slug","description":"Product slugs to fetch sizes for (max. 50 allowed). Pass the parameter multiple times, e.g. `?slug=a&slug=b`.","schema":{"type":"array","items":{"type":"string"}},"required":true},{"in":"query","name":"store_id","description":"The ID of the store that is selling the products, e.g. 1,2,3.","schema":{"type":"integer"},"required":false}],"headers":[],"path":[]}""", serverType="application", slug=slug, store_id=store_id)
+        query_string = await create_query_string(slug=slug, store_id=store_id)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers={}
+        headers["Authorization"] = f'Bearer {base64.b64encode(f"{self._conf.applicationID}:{self._conf.applicationToken}".encode()).decode()}'
+        if self._conf.locationDetails:
+            headers["x-location-detail"] = ujson.dumps(self._conf.locationDetails)
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(urlparse(self._urls["getProductSizesBySlugs"]).netloc, "get", await create_url_without_domain("/service/application/catalog/v2.0/products/sizes/", slug=slug, store_id=store_id), query_string, headers, body, exclude_headers=exclude_headers), data=body, cookies=self._conf.cookies, debug=(self._conf.logLevel=="DEBUG"))
+
+        if 200 <= int(response['status_code']) < 300:
+            from .models import ProductSizesBySlugsSchema
+            schema = ProductSizesBySlugsSchema()
+            try:
+                schema.load(response["json"])
+            except Exception as e:
+                print("Response Validation failed for getProductSizesBySlugs")
                 print(e)
 
         return response
