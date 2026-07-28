@@ -504,6 +504,14 @@ class OpenApiCartServiceabilityResult(BaseSchema):
     pass
 
 
+class PlatformCartCODServiceabilityCreation(BaseSchema):
+    pass
+
+
+class PlatformCartCODServiceabilityResult(BaseSchema):
+    pass
+
+
 class OpenApiFiles(BaseSchema):
     pass
 
@@ -3308,6 +3316,34 @@ class OpenApiCartServiceabilityResult(BaseSchema):
     message = fields.Str(required=False)
     
     breakup_values = fields.Nested(CartBreakup, required=False)
+    
+
+
+class PlatformCartCODServiceabilityCreation(BaseSchema):
+    # Cart swagger.json
+
+    
+    cart_items = fields.List(fields.Nested(CartItem, required=False), required=False)
+    
+    shipping_address = fields.Nested(ShippingAddress, required=False)
+    
+
+
+class PlatformCartCODServiceabilityResult(BaseSchema):
+    # Cart swagger.json
+
+    
+    is_valid = fields.Boolean(required=False)
+    
+    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
+    
+    delivery_promise = fields.Nested(ShipmentPromise, required=False)
+    
+    message = fields.Str(required=False)
+    
+    breakup_values = fields.Nested(CartBreakup, required=False)
+    
+    is_cod_available = fields.Boolean(required=False)
     
 
 
