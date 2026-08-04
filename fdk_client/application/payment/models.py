@@ -1013,6 +1013,8 @@ class PaymentModeList(BaseSchema):
     
     cod_limit = fields.Float(required=False, allow_none=True)
     
+    is_split_cod_available = fields.Boolean(required=False, allow_none=True)
+    
     intent_flow = fields.Boolean(required=False, allow_none=True)
     
     fynd_vpa = fields.Str(required=False, allow_none=True)

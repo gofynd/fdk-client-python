@@ -67,6 +67,15 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+    
+    
+        
+        
+        
         
         
         
@@ -363,6 +372,26 @@ class PaymentValidator:
         
     
     class setUserCODlimitRoutes(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getDefaultOfferClassification(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        aggregator = fields.Str(required=False)
+         
+        
+    
+    class patchDefaultOfferClassification(BaseSchema):
         
         
         company_id = fields.Int(required=False)

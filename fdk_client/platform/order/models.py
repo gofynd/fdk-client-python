@@ -1088,6 +1088,14 @@ class CreateOrderRequestSchema(BaseSchema):
     pass
 
 
+class CreateOrderChargeSchema(BaseSchema):
+    pass
+
+
+class CreateOrderLineItemChargeSchema(BaseSchema):
+    pass
+
+
 class Page(BaseSchema):
     pass
 
@@ -5721,6 +5729,8 @@ class LineItemSchema(BaseSchema):
     
     bundle_details = fields.Nested(BundleDetailsSchema, required=False)
     
+    charges = fields.List(fields.Nested(CreateOrderLineItemChargeSchema, required=False), required=False)
+    
     meta = fields.Dict(required=False)
     
 
@@ -5987,6 +5997,8 @@ class CreateOrderRequestSchema(BaseSchema):
     
     shipments = fields.List(fields.Nested(CreateOrderShipmentSchema, required=False), required=False)
     
+    charges = fields.List(fields.Nested(CreateOrderChargeSchema, required=False), required=False)
+    
     tags = fields.List(fields.Str(required=False), required=False)
     
     currency_details = fields.Nested(CurrencySchema, required=False)
@@ -6024,6 +6036,36 @@ class CreateOrderRequestSchema(BaseSchema):
     is_offline_order = fields.Boolean(required=False)
     
     meta = fields.Dict(required=False)
+    
+
+
+class CreateOrderChargeSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    amount = fields.Float(required=False)
+    
+    refundable = fields.Boolean(required=False)
+    
+    distribution = fields.Str(required=False)
+    
+    tax_rule_id = fields.Str(required=False)
+    
+
+
+class CreateOrderLineItemChargeSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    amount = fields.Float(required=False)
+    
+    refundable = fields.Boolean(required=False)
+    
+    tax_rule_id = fields.Str(required=False)
     
 
 

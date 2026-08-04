@@ -10,6 +10,11 @@ from datetime import datetime
 from .exceptions import RequiredParametersError
 
 
+def encode_path_param(value):
+    """Encode a single path segment."""
+    return parse.quote(str(value), safe="")
+
+
 async def validate_required_query_params(proccessed_params: Dict, params: Dict, serverType: Text):
     """Checks if required params are present or not."""
     params_to_skip = []
@@ -30,24 +35,34 @@ async def create_url_with_params(domain: Text = "", api_url: Text = "", proccess
     """Creates url with params"""
     params = {}
     final_url = domain + api_url
+    processed_params = json.loads(proccessed_params)
+    path_params = {
+        param["name"] for param in processed_params.get("path", [])
+        if param.get("x-fdk-path-encode") is True
+    }
     for key, value in kwargs.items():
         if value:
             new_key = key.replace("__", "-")
-            params[new_key] = value
+            params[new_key] = encode_path_param(value) if new_key in path_params else value
             if new_key in final_url:
                 final_url.replace(new_key, key)
-    await validate_required_query_params(json.loads(proccessed_params), params, serverType)
+    await validate_required_query_params(processed_params, params, serverType)
     final_url = final_url.format(**params)
     return final_url
 
 
-async def create_url_without_domain(url: Text, **kwargs):
+async def create_url_without_domain(url: Text, proccessed_params: Text = "", **kwargs):
     """Returns url without domain replacing variables."""
     params = {}
+    processed_params = json.loads(proccessed_params) if proccessed_params else {}
+    path_params = {
+        param["name"] for param in processed_params.get("path", [])
+        if param.get("x-fdk-path-encode") is True
+    }
     for key, value in kwargs.items():
         if value:
             new_key = key.replace("__", "-")
-            params[new_key] = value
+            params[new_key] = encode_path_param(value) if new_key in path_params else value
             if new_key in url:
                 url.replace(new_key, key)
     final_url = url.format(**params)

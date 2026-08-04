@@ -478,6 +478,77 @@ class Payment:
 
         return response
     
+    async def getDefaultOfferClassification(self, aggregator=None, request_headers:Dict={}):
+        """Returns the configured default offer_type (bank or brand) for the given aggregator (Sales Channel x payment gateway), or null when none is configured (the hard-coded brand default then applies). Also returns offer_classification_supported — false for internal, non-offer aggregators (store credits, Fynd) so the seller panel hides the control.
+        :param aggregator : Aggregator slug (payment gateway) to read the default for. : type string
+        """
+        payload = {}
+        
+        if aggregator is not None:
+            payload["aggregator"] = aggregator
+
+        # Parameter validation
+        schema = PaymentValidator.getDefaultOfferClassification()
+        schema.dump(schema.load(payload))
+        
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/offer/default-classification", """{"required":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true},{"name":"aggregator","in":"query","description":"Aggregator slug (payment gateway) to read the default for.","required":true,"schema":{"type":"string"}}],"optional":[],"query":[{"name":"aggregator","in":"query","description":"Aggregator slug (payment gateway) to read the default for.","required":true,"schema":{"type":"string"}}],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company Id","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", aggregator=aggregator)
+        query_string = await create_query_string(aggregator=aggregator)
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("GET", url_with_params, headers=get_headers_with_signature(self._conf.domain, "get", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/offer/default-classification", aggregator=aggregator), query_string, headers, "", exclude_headers=exclude_headers), data="", debug=(self._conf.logLevel=="DEBUG"))
+
+        return response
+    
+    async def patchDefaultOfferClassification(self, body="", request_headers:Dict={}):
+        """Sets the default offer_type used to classify offers that arrive without an explicit offer_type, scoped to a single aggregator (Sales Channel x payment gateway). bank => the offer settles as a separate MOP payment leg; brand => the offer settles as a discount. aggregator is required.
+        """
+        payload = {}
+        
+
+        # Parameter validation
+        schema = PaymentValidator.patchDefaultOfferClassification()
+        schema.dump(schema.load(payload))
+        
+        # Body validation
+        from .models import DefaultOfferClassification
+        schema = DefaultOfferClassification()
+        schema.dump(schema.load(body))
+
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/offer/default-classification", """{"required":[{"name":"company_id","in":"path","description":"Company ID","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}],"optional":[],"query":[],"headers":[],"path":[{"name":"company_id","in":"path","description":"Company ID","schema":{"type":"integer"},"required":true},{"name":"application_id","in":"path","description":"Application id","schema":{"type":"string"},"required":true}]}""", serverType="platform", )
+        query_string = await create_query_string()
+        if query_string:
+            url_with_params += "?" + query_string
+
+        headers = {}
+        headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
+        for h in self._conf.extraHeaders:
+            headers.update(h)
+        if request_headers != {}:
+            headers.update(request_headers)
+
+        exclude_headers = []
+        for key, val in headers.items():
+            if not key.startswith("x-fp-"):
+                exclude_headers.append(key)
+
+        response = await AiohttpHelper().aiohttp_request("PATCH", url_with_params, headers=get_headers_with_signature(self._conf.domain, "patch", await create_url_without_domain(f"/service/platform/payment/v1.0/company/{self._conf.companyId}/application/{self.applicationId}/payment/offer/default-classification", ), query_string, headers, body, exclude_headers=exclude_headers), data=body, debug=(self._conf.logLevel=="DEBUG"))
+
+        return response
+    
     async def getPosPaymentModeRoutes(self, x_ordering_source=None, amount=None, cart_id=None, pincode=None, checkout_mode=None, refresh=None, order_id=None, card_reference=None, order_type=None, user_details=None, display_split=None, advance_payment=None, shipment_id=None, customer_id=None, request_headers:Dict={}):
         """Available payment methods on the payment page for POS, specifying the aggregator for each option, such as 'CARD powered by Juspay' and 'QR powered by Razorpay'.
         :param x-ordering-source : Optional header to identify the ordering source used to determine\ applicable payment options for business unit. : type string

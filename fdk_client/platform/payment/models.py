@@ -244,6 +244,10 @@ class SetCODForUserCreation(BaseSchema):
     pass
 
 
+class DefaultOfferClassification(BaseSchema):
+    pass
+
+
 class SetCODOptionDetails(BaseSchema):
     pass
 
@@ -826,6 +830,8 @@ class PaymentModeList(BaseSchema):
     product_cod_data = fields.Nested(ProductCODData, required=False)
     
     cod_limit = fields.Float(required=False, allow_none=True)
+    
+    is_split_cod_available = fields.Boolean(required=False, allow_none=True)
     
     intent_app = fields.List(fields.Nested(IntentApp, required=False), required=False)
     
@@ -1518,6 +1524,16 @@ class SetCODForUserCreation(BaseSchema):
     is_active = fields.Boolean(required=False)
     
     merchant_user_id = fields.Str(required=False)
+    
+
+
+class DefaultOfferClassification(BaseSchema):
+    # Payment swagger.json
+
+    
+    aggregator = fields.Str(required=False)
+    
+    default_offer_type = fields.Str(required=False)
     
 
 

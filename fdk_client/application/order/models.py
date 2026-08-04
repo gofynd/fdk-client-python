@@ -423,6 +423,8 @@ class RefundModeRequestData(BaseSchema):
     
     line_numbers = fields.List(fields.Nested(RefundModeLineNumber, required=False), required=False)
     
+    next_state = fields.Str(required=False)
+    
 
 
 class PriceBreakupValues(BaseSchema):
