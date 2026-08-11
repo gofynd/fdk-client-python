@@ -2315,6 +2315,8 @@ class PriceAdjustmentUpdate(BaseSchema):
     
     included_in_eligibility_amount = fields.Boolean(required=False)
     
+    eligibility_scope = fields.Str(required=False)
+    
     collection = fields.Nested(Collection, required=False)
     
     type = fields.Str(required=False)
@@ -2350,6 +2352,8 @@ class PriceAdjustment(BaseSchema):
     article_level_distribution = fields.Boolean(required=False)
     
     included_in_eligibility_amount = fields.Boolean(required=False)
+    
+    eligibility_scope = fields.Str(required=False)
     
     id = fields.Str(required=False)
     
@@ -2406,6 +2410,8 @@ class PriceAdjustmentAdd(BaseSchema):
     article_level_distribution = fields.Boolean(required=False)
     
     included_in_eligibility_amount = fields.Boolean(required=False)
+    
+    eligibility_scope = fields.Str(required=False)
     
     collection = fields.Nested(Collection, required=False)
     
