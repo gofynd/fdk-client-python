@@ -1156,6 +1156,10 @@ class ValidationError(BaseSchema):
     pass
 
 
+class ListingCountResponseSchema(BaseSchema):
+    pass
+
+
 class BagReasonMeta(BaseSchema):
     pass
 
@@ -5831,6 +5835,8 @@ class CouponSchema(BaseSchema):
     
     is_cancellation_allowed = fields.Boolean(required=False)
     
+    allow_zero_discount = fields.Boolean(required=False)
+    
 
 
 class BillingDetailsSchema(BaseSchema):
@@ -6246,6 +6252,14 @@ class ValidationError(BaseSchema):
     message = fields.Str(required=False)
     
     field = fields.Str(required=False)
+    
+
+
+class ListingCountResponseSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    count = fields.Int(required=False)
     
 
 

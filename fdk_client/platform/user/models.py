@@ -991,6 +991,8 @@ class UserAttributeFilterQuery(BaseSchema):
     
     phone = fields.Str(required=False)
     
+    country_code = fields.Str(required=False)
+    
     definition_ids = fields.List(fields.Str(required=False), required=False)
     
     conditions = fields.List(fields.Nested(UserAttributeFilterRequestConditions, required=False), required=False)
@@ -1006,6 +1008,8 @@ class UserAttributeFilterRequestConditions(BaseSchema):
     type = fields.Str(required=False)
     
     value = fields.Dict(required=False)
+    
+    ignore_year = fields.Boolean(required=False)
     
 
 
