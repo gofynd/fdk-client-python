@@ -1203,6 +1203,8 @@ class CartProductInfo(BaseSchema):
     
     added_on = fields.Str(required=False, allow_none=True)
     
+    returnable = fields.Boolean(required=False)
+    
 
 
 class DisplayBreakup(BaseSchema):
