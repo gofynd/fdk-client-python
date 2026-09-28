@@ -7836,6 +7836,288 @@ class ActionPage(BaseSchema):
     url = fields.Str(required=False)
     
     type = fields.Str(required=False, validate=OneOf([val.value for val in PageType.__members__.values()]))
+
+
+class TaxReqBodyRule(BaseSchema):
+    # Catalog swagger.json
+
+    name = fields.Str(required=False)
+
+    description = fields.Str(required=False)
+
+
+class TaxThreshold(BaseSchema):
+    # Catalog swagger.json
+
+    value = fields.Float(required=False)
+
+    rate = fields.Float(required=False)
+
+
+class TaxComponent(BaseSchema):
+    # Catalog swagger.json
+
+    name = fields.Str(required=False)
+
+    slabs = fields.List(fields.Nested(lambda: TaxThreshold(), required=False), required=False)
+
+
+class TaxComponentResponseSchema(BaseSchema):
+    # Catalog swagger.json
+
+    name = fields.Str(required=False)
+
+    description = fields.Str(required=False)
+
+    slabs = fields.List(fields.Nested(lambda: TaxThreshold(), required=False), required=False)
+
+    _id = fields.Str(required=False)
+
+
+class TaxComponentName(BaseSchema):
+    # Catalog swagger.json
+
+    _id = fields.Str(required=False)
+
+    company_id = fields.Int(required=False)
+
+    name = fields.Str(required=False)
+
+    description = fields.Str(required=False)
+
+    created_on = fields.Str(required=False)
+
+    modified_on = fields.Str(required=False)
+
+
+class TaxGeoArea(BaseSchema):
+    # Catalog swagger.json
+
+    regions = fields.List(fields.Str(required=False), required=False)
+
+    country = fields.Str(required=False)
+
+
+class AreaDetails(BaseSchema):
+    # Catalog swagger.json
+
+    uid = fields.Str(required=False)
+
+    display_name = fields.Str(required=False)
+
+    sub_type = fields.Str(required=False)
+
+    parent_id = fields.List(fields.Str(required=False), required=False)
+
+
+class Country(BaseSchema):
+    # Catalog swagger.json
+
+    uid = fields.Str(required=False)
+
+    display_name = fields.Str(required=False)
+
+
+class Area(BaseSchema):
+    # Catalog swagger.json
+
+    regions = fields.List(fields.Nested(lambda: AreaDetails(), required=False), required=False)
+
+    country = fields.Nested(lambda: Country(), required=False)
+
+
+class RegionReference(BaseSchema):
+    # Catalog swagger.json
+
+    name = fields.Str(required=False)
+
+    slug = fields.Str(required=False)
+
+    areas = fields.List(fields.Nested(lambda: Area(), required=False), required=False)
+
+
+class TaxReqBodyVersion(BaseSchema):
+    # Catalog swagger.json
+
+    scope = fields.Str(required=False)
+
+    components = fields.List(fields.Nested(lambda: TaxComponent(), required=False), required=False)
+
+    applicable_date = fields.Str(required=False)
+
+    region_type = fields.Str(required=False)
+
+    areas = fields.Nested(lambda: TaxGeoArea(), required=False)
+
+    store_ids = fields.List(fields.Int(required=False), required=False)
+
+
+class CreateTaxRequestBody(BaseSchema):
+    # Catalog swagger.json
+
+    rule = fields.Nested(lambda: TaxReqBodyRule(), required=False)
+
+    versions = fields.List(fields.Nested(lambda: TaxReqBodyVersion(), required=False), required=False)
+
+
+class TaxVersion(BaseSchema):
+    # Catalog swagger.json
+
+    _id = fields.Str(required=False)
+
+    rule_id = fields.Str(required=False)
+
+    applicable_date = fields.Str(required=False)
+
+    created_on = fields.Str(required=False)
+
+    modified_on = fields.Str(required=False)
+
+    company_id = fields.Int(required=False)
+
+    status = fields.Str(required=False)
+
+    region_type = fields.Str(required=False)
+
+    areas = fields.Nested(lambda: TaxGeoArea(), required=False)
+
+    store_ids = fields.List(fields.Int(required=False), required=False)
+
+    scope = fields.Str(required=False)
+
+    components = fields.List(fields.Nested(lambda: TaxComponentResponseSchema(), required=False), required=False)
+
+
+class UpdateTaxVersionRequestBody(BaseSchema):
+    # Catalog swagger.json
+
+    components = fields.List(fields.Nested(lambda: TaxComponentResponseSchema(), required=False), required=False)
+
+    applicable_date = fields.Str(required=False)
+
+    region_type = fields.Str(required=False)
+
+    areas = fields.Nested(lambda: TaxGeoArea(), required=False)
+
+    store_ids = fields.List(fields.Int(required=False), required=False)
+
+
+class CreateTaxVersionRequestBody(BaseSchema):
+    # Catalog swagger.json
+
+    scope = fields.Str(required=False)
+
+    components = fields.List(fields.Nested(lambda: TaxComponent(), required=False), required=False)
+
+    applicable_date = fields.Str(required=False)
+
+    region_type = fields.Str(required=False)
+
+    areas = fields.Nested(lambda: TaxGeoArea(), required=False)
+
+    store_ids = fields.List(fields.Int(required=False), required=False)
+
+
+class TaxVersionDetail(BaseSchema):
+    # Catalog swagger.json
+
+    _id = fields.Str(required=False)
+
+    rule_id = fields.Str(required=False)
+
+    applicable_date = fields.Str(required=False)
+
+    created_on = fields.Str(required=False)
+
+    modified_on = fields.Str(required=False)
+
+    company_id = fields.Int(required=False)
+
+    status = fields.Str(required=False)
+
+    region_code = fields.Str(required=False)
+
+    store_ids = fields.List(fields.Int(required=False), required=False)
+
+    region = fields.Nested(lambda: RegionReference(), required=False)
+
+    components = fields.List(fields.Nested(lambda: TaxComponent(), required=False), required=False)
+
+    scope = fields.Str(required=False)
+
+    version_status = fields.Str(required=False)
+
+
+class TaxRule(BaseSchema):
+    # Catalog swagger.json
+
+    _id = fields.Str(required=False)
+
+    name = fields.Str(required=False)
+
+    description = fields.Str(required=False)
+
+    is_default = fields.Boolean(required=False)
+
+    company_id = fields.Int(required=False)
+
+    status = fields.Str(required=False)
+
+    created_on = fields.Str(required=False)
+
+    modified_on = fields.Str(required=False)
+
+
+class UpdateTaxRequestBody(BaseSchema):
+    # Catalog swagger.json
+
+    status = fields.Str(required=False)
+
+    is_default = fields.Boolean(required=False)
+
+    name = fields.Str(required=False)
+
+
+class CreateTax(BaseSchema):
+    # Catalog swagger.json
+
+    rule = fields.Nested(lambda: TaxRule(), required=False)
+
+    versions = fields.Nested(lambda: TaxVersion(), required=False)
+
+
+class TaxRuleItem(BaseSchema):
+    # Catalog swagger.json
+
+    versions = fields.List(fields.Nested(lambda: TaxVersionDetail(), required=False), required=False)
+
+    rule = fields.Nested(lambda: TaxRule(), required=False)
+
+
+class TaxRules(BaseSchema):
+    # Catalog swagger.json
+
+    items = fields.List(fields.Nested(lambda: TaxRuleItem(), required=False), required=False)
+
+    page = fields.Nested(lambda: Page(), required=False)
+
+
+class TaxVersionPastData(BaseSchema):
+    # Catalog swagger.json
+
+    data = fields.List(fields.Nested(lambda: TaxVersion(), required=False), required=False)
+
+    pagination = fields.Nested(lambda: Page(), required=False)
+
+
+class TaxRuleVersion(BaseSchema):
+    # Catalog swagger.json
+
+    items = fields.List(fields.Nested(lambda: TaxVersionDetail(), required=False), required=False)
+
+    rule = fields.Nested(lambda: TaxRule(), required=False)
+
+    page = fields.Nested(lambda: Page(), required=False)
     
 
 
