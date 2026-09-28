@@ -1220,7 +1220,7 @@ class CatalogValidator:
 
         page = fields.Int(required=False)
 
-        limit = fields.Int(required=False)
+        limit = fields.Str(required=False)
 
         version_status = fields.Str(required=False)
 
