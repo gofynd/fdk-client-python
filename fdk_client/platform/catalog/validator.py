@@ -1202,11 +1202,73 @@ class CatalogValidator:
         
     
     class updateMarketplaceOptin(BaseSchema):
-        
-        
+
+
         company_id = fields.Int(required=False)
-        
+
         marketplace_slug = fields.Str(required=False)
+
+    class getAllTaxRules(BaseSchema):
+
+        company_id = fields.Str(required=False)
+
+        q = fields.Str(required=False)
+
+        statuses = fields.Str(required=False)
+
+        page = fields.Int(required=False)
+
+        limit = fields.Int(required=False)
+
+        version_status = fields.Str(required=False)
+
+    class updateTaxRule(BaseSchema):
+
+        company_id = fields.Int(required=False)
+
+        rule_id = fields.Str(required=False)
+
+    class deleteTaxRule(BaseSchema):
+
+        rule_id = fields.Str(required=False)
+
+        company_id = fields.Int(required=False)
+
+    class getTaxVersionDetails(BaseSchema):
+
+        company_id = fields.Int(required=False)
+
+        rule_id = fields.Str(required=False)
+
+        version_status = fields.Str(required=False)
+
+        q = fields.Str(required=False)
+
+        limit = fields.Str(required=False)
+
+        page = fields.Str(required=False)
+
+    class createTaxVersion(BaseSchema):
+
+        company_id = fields.Int(required=False)
+
+        rule_id = fields.Str(required=False)
+
+    class deleteTaxVersion(BaseSchema):
+
+        rule_id = fields.Str(required=False)
+
+        version_id = fields.Str(required=False)
+
+        company_id = fields.Int(required=False)
+
+    class updateTaxVersion(BaseSchema):
+
+        rule_id = fields.Str(required=False)
+
+        version_id = fields.Str(required=False)
+
+        company_id = fields.Int(required=False)
          
         
     
