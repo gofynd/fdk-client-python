@@ -3588,10 +3588,8 @@ class Catalog:
         schema = CatalogValidator.getAllTaxRules()
         schema.dump(schema.load(payload))
 
-        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"},"description":"Unique identifier of the company whose tax rules are being retrieved"}],"optional":[{"in":"query","name":"q","required":false,"schema":{"type":"string"}},{"in":"query","name":"statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"page","required":false,"schema":{"type":"integer"}},{"in":"query","name":"limit","required":false,"schema":{"type":"integer"}},{"in":"query","name":"version_status","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"q","required":false,"schema":{"type":"string"}},{"in":"query","name":"statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"page","required":false,"schema":{"type":"integer"}},{"in":"query","name":"limit","required":false,"schema":{"type":"integer"}},{"in":"query","name":"version_status","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", q=q, statuses=statuses, page=page, limit=limit, version_status=version_status)
+        url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"},"description":"Unique identifier of the company whose tax rules are being retrieved"}],"optional":[{"in":"query","name":"q","required":false,"schema":{"type":"string"}},{"in":"query","name":"statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"page","required":false,"schema":{"type":"integer"}},{"in":"query","name":"limit","required":false,"schema":{"type":"string"}},{"in":"query","name":"version_status","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"q","required":false,"schema":{"type":"string"}},{"in":"query","name":"statuses","required":false,"schema":{"type":"string"}},{"in":"query","name":"page","required":false,"schema":{"type":"integer"}},{"in":"query","name":"limit","required":false,"schema":{"type":"string"}},{"in":"query","name":"version_status","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", q=q, statuses=statuses, page=page, limit=limit, version_status=version_status)
         query_string = await create_query_string(q=q, statuses=statuses, page=page, limit=limit, version_status=version_status)
-        if query_string:
-            url_with_params += "?" + query_string
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -3638,8 +3636,6 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"}}],"optional":[],"query":[],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", rule_id=rule_id)
         query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -3681,8 +3677,6 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}", """{"required":[{"name":"rule_id","in":"path","required":true,"schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}],"optional":[],"query":[],"headers":[],"path":[{"name":"rule_id","in":"path","required":true,"schema":{"type":"string"}},{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}}]}""", serverType="platform", rule_id=rule_id)
         query_string = await create_query_string()
-        if query_string:
-            url_with_params += "?" + query_string
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
@@ -3727,8 +3721,6 @@ class Catalog:
 
         url_with_params = await create_url_with_params(self._conf.domain, f"/service/platform/catalog/v1.0/company/{self._conf.companyId}/taxes/rules/{rule_id}/versions", """{"required":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"}}],"optional":[{"in":"query","name":"version_status","required":false,"schema":{"type":"string"}},{"in":"query","name":"q","required":false,"schema":{"type":"string"}},{"in":"query","name":"limit","required":false,"schema":{"type":"string"}},{"in":"query","name":"page","required":false,"schema":{"type":"string"}}],"query":[{"in":"query","name":"version_status","required":false,"schema":{"type":"string"}},{"in":"query","name":"q","required":false,"schema":{"type":"string"}},{"in":"query","name":"limit","required":false,"schema":{"type":"string"}},{"in":"query","name":"page","required":false,"schema":{"type":"string"}}],"headers":[],"path":[{"in":"path","name":"company_id","required":true,"schema":{"type":"integer"}},{"in":"path","name":"rule_id","required":true,"schema":{"type":"string"}}]}""", serverType="platform", rule_id=rule_id, version_status=version_status, q=q, limit=limit, page=page)
         query_string = await create_query_string(version_status=version_status, q=q, limit=limit, page=page)
-        if query_string:
-            url_with_params += "?" + query_string
 
         headers = {}
         headers["Authorization"] = f"Bearer {await self._conf.getAccessToken()}"
