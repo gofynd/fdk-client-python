@@ -293,6 +293,10 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
 
 class ServiceabilityValidator:
     
@@ -917,6 +921,15 @@ class ServiceabilityValidator:
         application_id = fields.Str(required=False)
         
         batch_id = fields.Str(required=False)
+         
+        
+    
+    class patchZoneProductsAtomic(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
          
         
     

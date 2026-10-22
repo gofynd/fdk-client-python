@@ -412,6 +412,10 @@ class ArticleGiftDetail(BaseSchema):
     pass
 
 
+class ShipToGstDetails(BaseSchema):
+    pass
+
+
 class CartMetaCreation(BaseSchema):
     pass
 
@@ -723,6 +727,10 @@ class BasePrice(BaseSchema):
     
     marked = fields.Float(required=False)
     
+    pre_override_effective = fields.Float(required=False)
+    
+    pre_override_marked = fields.Float(required=False)
+    
     currency_code = fields.Str(required=False)
     
 
@@ -944,6 +952,10 @@ class ProductPrice(BaseSchema):
     effective = fields.Float(required=False)
     
     marked = fields.Float(required=False)
+    
+    pre_override_effective = fields.Float(required=False)
+    
+    pre_override_marked = fields.Float(required=False)
     
     final_price = fields.Float(required=False)
     
@@ -1196,6 +1208,10 @@ class CartProductInfo(BaseSchema):
     promotions_applied = fields.List(fields.Nested(AppliedPromotion, required=False), required=False)
     
     item_type = fields.Str(required=False)
+    
+    added_on = fields.Str(required=False, allow_none=True)
+    
+    returnable = fields.Boolean(required=False)
     
 
 
@@ -1470,6 +1486,8 @@ class CartDetailResult(BaseSchema):
     success = fields.Boolean(required=False)
     
     gstin = fields.Str(required=False)
+    
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
     
     restrict_checkout = fields.Boolean(required=False)
     
@@ -1762,6 +1780,8 @@ class Coupon(BaseSchema):
     sub_title = fields.Str(required=False)
     
     expires_on = fields.Str(required=False)
+    
+    expires_at = fields.Str(required=False, allow_none=True)
     
     message = fields.Str(required=False)
     
@@ -2115,6 +2135,8 @@ class CartShipmentsResult(BaseSchema):
     
     gstin = fields.Str(required=False)
     
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
+    
     restrict_checkout = fields.Boolean(required=False)
     
     last_modified = fields.Str(required=False)
@@ -2303,6 +2325,8 @@ class CheckCart(BaseSchema):
     
     gstin = fields.Str(required=False)
     
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
+    
     restrict_checkout = fields.Boolean(required=False)
     
     last_modified = fields.Str(required=False)
@@ -2365,6 +2389,16 @@ class ArticleGiftDetail(BaseSchema):
     
 
 
+class ShipToGstDetails(BaseSchema):
+    # Cart swagger.json
+
+    
+    gstin = fields.Str(required=False, allow_none=True)
+    
+    trade_name = fields.Str(required=False, allow_none=True)
+    
+
+
 class CartMetaCreation(BaseSchema):
     # Cart swagger.json
 
@@ -2382,6 +2416,8 @@ class CartMetaCreation(BaseSchema):
     comment = fields.Str(required=False)
     
     gstin = fields.Str(required=False)
+    
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
     
     custom_cart_meta = fields.Dict(required=False)
     
@@ -2468,6 +2504,8 @@ class SharedCart(BaseSchema):
     message = fields.Str(required=False)
     
     gstin = fields.Str(required=False)
+    
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
     
     shared_cart_details = fields.Nested(SharedCartDetails, required=False)
     

@@ -100,6 +100,10 @@ class Invoice(BaseSchema):
     pass
 
 
+class CreditNote(BaseSchema):
+    pass
+
+
 class NestedTrackingDetails(BaseSchema):
     pass
 
@@ -419,6 +423,8 @@ class RefundModeRequestData(BaseSchema):
     
     line_numbers = fields.List(fields.Nested(RefundModeLineNumber, required=False), required=False)
     
+    next_state = fields.Str(required=False)
+    
 
 
 class PriceBreakupValues(BaseSchema):
@@ -718,6 +724,16 @@ class Invoice(BaseSchema):
     updated_date = fields.Str(required=False)
     
     label_url = fields.Str(required=False)
+    
+
+
+class CreditNote(BaseSchema):
+    # Order swagger.json
+
+    
+    credit_note_id = fields.Str(required=False, allow_none=True)
+    
+    credit_note_url = fields.Str(required=False, allow_none=True)
     
 
 
@@ -1310,6 +1326,8 @@ class Shipments(BaseSchema):
     comment = fields.Str(required=False)
     
     invoice = fields.Nested(Invoice, required=False)
+    
+    credit_note = fields.Nested(CreditNote, required=False)
     
     show_track_link = fields.Boolean(required=False)
     

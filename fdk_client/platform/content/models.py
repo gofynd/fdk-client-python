@@ -10,6 +10,26 @@ from .enums import *
 
 
 
+class AppAssociationDeleted(BaseSchema):
+    pass
+
+
+class AppAssociationIosPayload(BaseSchema):
+    pass
+
+
+class AppAssociationAndroidStatement(BaseSchema):
+    pass
+
+
+class AppAssociationWriteBody(BaseSchema):
+    pass
+
+
+class AppAssociationRecord(BaseSchema):
+    pass
+
+
 class ValidationError(BaseSchema):
     pass
 
@@ -811,6 +831,68 @@ class OperationResponseSchema(BaseSchema):
 
 
 
+
+
+class AppAssociationDeleted(BaseSchema):
+    # Content swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+    application_id = fields.Str(required=False)
+    
+
+
+class AppAssociationIosPayload(BaseSchema):
+    # Content swagger.json
+
+    
+    applinks = fields.Dict(required=False)
+    
+    appclips = fields.Dict(required=False)
+    
+    webcredentials = fields.Dict(required=False)
+    
+    activitycontinuation = fields.Dict(required=False)
+    
+
+
+class AppAssociationAndroidStatement(BaseSchema):
+    # Content swagger.json
+
+    
+    relation = fields.List(fields.Str(required=False), required=False)
+    
+    target = fields.Dict(required=False)
+    
+
+
+class AppAssociationWriteBody(BaseSchema):
+    # Content swagger.json
+
+    
+    ios_payload = fields.Nested(AppAssociationIosPayload, required=False)
+    
+    android_payload = fields.List(fields.Nested(AppAssociationAndroidStatement, required=False), required=False)
+    
+
+
+class AppAssociationRecord(BaseSchema):
+    # Content swagger.json
+
+    
+    ios_payload = fields.Nested(AppAssociationIosPayload, required=False)
+    
+    android_payload = fields.List(fields.Nested(AppAssociationAndroidStatement, required=False), required=False)
+    
+    created_at = fields.Str(required=False)
+    
+    updated_at = fields.Str(required=False)
+    
+    created_by = fields.Str(required=False)
+    
+    modified_by = fields.Str(required=False)
+    
 
 
 class ValidationError(BaseSchema):

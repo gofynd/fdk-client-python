@@ -244,6 +244,10 @@ class SetCODForUserCreation(BaseSchema):
     pass
 
 
+class DefaultOfferClassification(BaseSchema):
+    pass
+
+
 class SetCODOptionDetails(BaseSchema):
     pass
 
@@ -416,6 +420,18 @@ class OrderDetail(BaseSchema):
     pass
 
 
+class OrderMetaUpdate(BaseSchema):
+    pass
+
+
+class OrderMetaResult(BaseSchema):
+    pass
+
+
+class OrderMetaErrorResult(BaseSchema):
+    pass
+
+
 class AddressDetail(BaseSchema):
     pass
 
@@ -573,6 +589,14 @@ class CreditAccountSummary(BaseSchema):
 
 
 class ValidateCustomerCreditSchema(BaseSchema):
+    pass
+
+
+class OrderTransactionList(BaseSchema):
+    pass
+
+
+class OrderTransactionItem(BaseSchema):
     pass
 
 
@@ -806,6 +830,8 @@ class PaymentModeList(BaseSchema):
     product_cod_data = fields.Nested(ProductCODData, required=False)
     
     cod_limit = fields.Float(required=False, allow_none=True)
+    
+    is_split_cod_available = fields.Boolean(required=False, allow_none=True)
     
     intent_app = fields.List(fields.Nested(IntentApp, required=False), required=False)
     
@@ -1498,6 +1524,16 @@ class SetCODForUserCreation(BaseSchema):
     is_active = fields.Boolean(required=False)
     
     merchant_user_id = fields.Str(required=False)
+    
+
+
+class DefaultOfferClassification(BaseSchema):
+    # Payment swagger.json
+
+    
+    aggregator = fields.Str(required=False)
+    
+    default_offer_type = fields.Str(required=False)
     
 
 
@@ -2219,6 +2255,32 @@ class OrderDetail(BaseSchema):
     
 
 
+class OrderMetaUpdate(BaseSchema):
+    # Payment swagger.json
+
+    
+    pan_no = fields.Str(required=False)
+    
+
+
+class OrderMetaResult(BaseSchema):
+    # Payment swagger.json
+
+    
+    message = fields.Str(required=False)
+    
+
+
+class OrderMetaErrorResult(BaseSchema):
+    # Payment swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
 class AddressDetail(BaseSchema):
     # Payment swagger.json
 
@@ -2904,6 +2966,34 @@ class ValidateCustomerCreditSchema(BaseSchema):
     cart_id = fields.Str(required=False)
     
     account = fields.Nested(CreditAccountSummary, required=False)
+    
+
+
+class OrderTransactionList(BaseSchema):
+    # Payment swagger.json
+
+    
+    success = fields.Boolean(required=False)
+    
+    items = fields.List(fields.Nested(OrderTransactionItem, required=False), required=False)
+    
+
+
+class OrderTransactionItem(BaseSchema):
+    # Payment swagger.json
+
+    
+    transaction_id = fields.Str(required=False)
+    
+    payment_mode = fields.Str(required=False, allow_none=True)
+    
+    logo = fields.Str(required=False, allow_none=True)
+    
+    amount = fields.Float(required=False, allow_none=True)
+    
+    status = fields.Str(required=False, allow_none=True)
+    
+    created_on = fields.Str(required=False)
     
 
 

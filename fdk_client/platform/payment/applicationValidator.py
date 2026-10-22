@@ -67,6 +67,15 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+    
+    
+        
+        
+        
         
         
         
@@ -223,6 +232,11 @@ from ..PlatformModel import BaseSchema
         
         
         
+    
+    
+        
+        
+        
         
         
         
@@ -234,6 +248,11 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
+    
+    
+        
         
         
     
@@ -353,6 +372,26 @@ class PaymentValidator:
         
     
     class setUserCODlimitRoutes(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class getDefaultOfferClassification(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        aggregator = fields.Str(required=False)
+         
+        
+    
+    class patchDefaultOfferClassification(BaseSchema):
         
         
         company_id = fields.Int(required=False)
@@ -703,6 +742,17 @@ class PaymentValidator:
          
         
     
+    class updateOrderMeta(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        order_id = fields.Str(required=False)
+         
+        
+    
     class getMerchantAggregatorAppVersion(BaseSchema):
         
         
@@ -750,6 +800,17 @@ class PaymentValidator:
         application_id = fields.Str(required=False)
         
         aggregator_id = fields.Str(required=False)
+         
+        
+    
+    class getOrderTransactions(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        application_id = fields.Str(required=False)
+        
+        order_id = fields.Str(required=False)
          
         
     

@@ -277,6 +277,16 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
     
     
         
@@ -290,6 +300,22 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
         
@@ -312,8 +338,26 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -996,6 +1040,10 @@ class OrderValidator:
         ordering_source = fields.Str(required=False)
         
         channel_account_id = fields.Str(required=False)
+        
+        include_count = fields.Boolean(required=False)
+        
+        instore_return_lookup = fields.Boolean(required=False)
          
         
     
@@ -1011,6 +1059,8 @@ class OrderValidator:
         fetch_active_shipment = fields.Boolean(required=False)
         
         allow_inactive = fields.Boolean(required=False)
+        
+        instore_return_lookup = fields.Boolean(required=False)
          
         
     
@@ -1024,6 +1074,8 @@ class OrderValidator:
         my_orders = fields.Boolean(required=False)
         
         allow_inactive = fields.Boolean(required=False)
+        
+        instore_return_lookup = fields.Boolean(required=False)
          
         
     
@@ -1132,6 +1184,87 @@ class OrderValidator:
         ordering_source = fields.Str(required=False)
         
         channel_account_id = fields.Str(required=False)
+        
+        include_count = fields.Boolean(required=False)
+        
+        instore_return_lookup = fields.Boolean(required=False)
+         
+        
+    
+    class getListingCount(BaseSchema):
+        
+        
+        company_id = fields.Int(required=False)
+        
+        group_entity = fields.Str(required=False)
+        
+        parent_view_slug = fields.Str(required=False)
+        
+        child_view_slug = fields.Str(required=False)
+        
+        bag_status = fields.Str(required=False)
+        
+        status_assigned = fields.Str(required=False)
+        
+        time_to_dispatch = fields.Int(required=False)
+        
+        search_type = fields.Str(required=False)
+        
+        search_value = fields.Str(required=False)
+        
+        from_date = fields.Str(required=False)
+        
+        to_date = fields.Str(required=False)
+        
+        start_date = fields.Str(required=False)
+        
+        end_date = fields.Str(required=False)
+        
+        status_assigned_start_date = fields.Str(required=False)
+        
+        status_assigned_end_date = fields.Str(required=False)
+        
+        dp_ids = fields.Str(required=False)
+        
+        stores = fields.Str(required=False)
+        
+        sales_channels = fields.Str(required=False)
+        
+        fetch_active_shipment = fields.Boolean(required=False)
+        
+        allow_inactive = fields.Boolean(required=False)
+        
+        exclude_locked_shipments = fields.Boolean(required=False)
+        
+        payment_methods = fields.Str(required=False)
+        
+        channel_shipment_id = fields.Str(required=False)
+        
+        channel_order_id = fields.Str(required=False)
+        
+        company_affiliate_tag = fields.Str(required=False)
+        
+        my_orders = fields.Boolean(required=False)
+        
+        platform_user_id = fields.Str(required=False)
+        
+        show_cross_company_data = fields.Boolean(required=False)
+        
+        tags = fields.Str(required=False)
+        
+        customer_id = fields.Str(required=False)
+        
+        order_type = fields.Str(required=False)
+        
+        enforce_date_filter = fields.Boolean(required=False)
+        
+        fulfillment_type = fields.Str(required=False)
+        
+        ordering_source = fields.Str(required=False)
+        
+        channel_account_id = fields.Str(required=False)
+        
+        instore_return_lookup = fields.Boolean(required=False)
          
         
     

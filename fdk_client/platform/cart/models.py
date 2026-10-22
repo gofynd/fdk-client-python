@@ -504,6 +504,14 @@ class OpenApiCartServiceabilityResult(BaseSchema):
     pass
 
 
+class PlatformCartCODServiceabilityCreation(BaseSchema):
+    pass
+
+
+class PlatformCartCODServiceabilityResult(BaseSchema):
+    pass
+
+
 class OpenApiFiles(BaseSchema):
     pass
 
@@ -760,6 +768,10 @@ class UpdateCartShipmentCreation(BaseSchema):
     pass
 
 
+class ShipToGstDetails(BaseSchema):
+    pass
+
+
 class PlatformCartMetaCreation(BaseSchema):
     pass
 
@@ -952,10 +964,6 @@ class OfferDateMeta(BaseSchema):
     pass
 
 
-class NextScheduleItems(BaseSchema):
-    pass
-
-
 class OfferSchedule(BaseSchema):
     pass
 
@@ -1126,6 +1134,8 @@ class Restrictions(BaseSchema):
     bulk_bundle = fields.Nested(BulkBundleRestriction, required=False)
     
     user_groups = fields.List(fields.Int(required=False), required=False)
+    
+    exclude_user_groups = fields.List(fields.Int(required=False), required=False)
     
     coupon_allowed = fields.Boolean(required=False)
     
@@ -1301,6 +1311,8 @@ class CouponAdd(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
+    filter_tags = fields.List(fields.Str(required=False), required=False)
+    
     _schedule = fields.Nested(CouponSchedule, required=False)
     
     rule = fields.List(fields.Nested(Rule, required=False), required=False)
@@ -1394,6 +1406,8 @@ class CouponUpdate(BaseSchema):
     action = fields.Nested(CouponAction, required=False)
     
     tags = fields.List(fields.Str(required=False), required=False)
+    
+    filter_tags = fields.List(fields.Str(required=False), required=False)
     
     _schedule = fields.Nested(CouponSchedule, required=False)
     
@@ -1773,6 +1787,8 @@ class Restrictions1(BaseSchema):
     
     user_groups = fields.List(fields.Int(required=False), required=False)
     
+    exclude_user_groups = fields.List(fields.Int(required=False), required=False)
+    
     order_quantity = fields.Int(required=False)
     
     anonymous_users = fields.Boolean(required=False)
@@ -1911,6 +1927,8 @@ class PromotionListItem(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
+    filter_tags = fields.List(fields.Str(required=False), required=False)
+    
     auto_apply = fields.Boolean(required=False)
     
 
@@ -1975,6 +1993,8 @@ class PromotionAdd(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
+    filter_tags = fields.List(fields.Str(required=False), required=False)
+    
     auto_apply = fields.Boolean(required=False)
     
 
@@ -2031,6 +2051,8 @@ class PromotionAddResult(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
+    filter_tags = fields.List(fields.Str(required=False), required=False)
+    
     auto_apply = fields.Boolean(required=False)
     
 
@@ -2086,6 +2108,8 @@ class PromotionUpdate(BaseSchema):
     date_meta = fields.Nested(PromotionDateMeta, required=False)
     
     tags = fields.List(fields.Str(required=False), required=False)
+    
+    filter_tags = fields.List(fields.Str(required=False), required=False)
     
     auto_apply = fields.Boolean(required=False)
     
@@ -2145,6 +2169,8 @@ class PromotionUpdateResult(BaseSchema):
     
     tags = fields.List(fields.Str(required=False), required=False)
     
+    filter_tags = fields.List(fields.Str(required=False), required=False)
+    
     auto_apply = fields.Boolean(required=False)
     
 
@@ -2182,6 +2208,8 @@ class ActivePromosResult(BaseSchema):
     subtitle = fields.Str(required=False)
     
     description = fields.Str(required=False)
+    
+    discount_type = fields.Str(required=False)
     
 
 
@@ -2258,6 +2286,10 @@ class Article(BaseSchema):
 
     
     value = fields.Float(required=False)
+    
+    price_effective = fields.Float(required=False)
+    
+    price_marked = fields.Float(required=False)
     
     code = fields.Str(required=False)
     
@@ -2743,6 +2775,10 @@ class BasePrice(BaseSchema):
     
     marked = fields.Float(required=False)
     
+    pre_override_effective = fields.Float(required=False)
+    
+    pre_override_marked = fields.Float(required=False)
+    
 
 
 class ArticlePriceInfo(BaseSchema):
@@ -3027,6 +3063,10 @@ class ProductPrice(BaseSchema):
     
     marked = fields.Float(required=False)
     
+    pre_override_effective = fields.Float(required=False)
+    
+    pre_override_marked = fields.Float(required=False)
+    
     add_on = fields.Float(required=False)
     
     currency_code = fields.Str(required=False)
@@ -3201,6 +3241,10 @@ class CartProductInfo(BaseSchema):
     
     charges = fields.List(fields.Nested(ArticleCharges, required=False), required=False)
     
+    added_on = fields.Str(required=False, allow_none=True)
+    
+    returnable = fields.Boolean(required=False)
+    
 
 
 class OpenapiCartDetailsResult(BaseSchema):
@@ -3292,6 +3336,34 @@ class OpenApiCartServiceabilityResult(BaseSchema):
     message = fields.Str(required=False)
     
     breakup_values = fields.Nested(CartBreakup, required=False)
+    
+
+
+class PlatformCartCODServiceabilityCreation(BaseSchema):
+    # Cart swagger.json
+
+    
+    cart_items = fields.List(fields.Nested(CartItem, required=False), required=False)
+    
+    shipping_address = fields.Nested(ShippingAddress, required=False)
+    
+
+
+class PlatformCartCODServiceabilityResult(BaseSchema):
+    # Cart swagger.json
+
+    
+    is_valid = fields.Boolean(required=False)
+    
+    items = fields.List(fields.Nested(CartProductInfo, required=False), required=False)
+    
+    delivery_promise = fields.Nested(ShipmentPromise, required=False)
+    
+    message = fields.Str(required=False)
+    
+    breakup_values = fields.Nested(CartBreakup, required=False)
+    
+    is_cod_available = fields.Boolean(required=False)
     
 
 
@@ -3689,6 +3761,8 @@ class CartDetailResult(BaseSchema):
     
     gstin = fields.Str(required=False)
     
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
+    
     applied_promo_details = fields.List(fields.Nested(AppliedPromotion, required=False), required=False)
     
     pan_no = fields.Str(required=False)
@@ -4057,6 +4131,8 @@ class SharedCart(BaseSchema):
     
     gstin = fields.Str(required=False)
     
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
+    
     custom_cart_meta = fields.Dict(required=False)
     
 
@@ -4173,6 +4249,8 @@ class UserCartMappingResult(BaseSchema):
     
     gstin = fields.Str(required=False)
     
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
+    
     custom_cart_meta = fields.Dict(required=False)
     
     applied_promo_details = fields.List(fields.Nested(AppliedPromotion, required=False), required=False)
@@ -4270,6 +4348,8 @@ class Coupon(BaseSchema):
     coupon_type = fields.Str(required=False, allow_none=True)
     
     expires_on = fields.Str(required=False)
+    
+    expires_at = fields.Str(required=False, allow_none=True)
     
     coupon_value = fields.Float(required=False)
     
@@ -4557,6 +4637,8 @@ class PlatformCartShipmentsResult(BaseSchema):
     
     gstin = fields.Str(required=False)
     
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
+    
     applied_promo_details = fields.List(fields.Nested(AppliedPromotion, required=False), required=False)
     
     error = fields.Boolean(required=False)
@@ -4591,11 +4673,23 @@ class UpdateCartShipmentCreation(BaseSchema):
     
 
 
+class ShipToGstDetails(BaseSchema):
+    # Cart swagger.json
+
+    
+    gstin = fields.Str(required=False, allow_none=True)
+    
+    trade_name = fields.Str(required=False, allow_none=True)
+    
+
+
 class PlatformCartMetaCreation(BaseSchema):
     # Cart swagger.json
 
     
     gstin = fields.Str(required=False)
+    
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
     
     pick_up_customer_details = fields.Dict(required=False)
     
@@ -4820,6 +4914,8 @@ class CheckCart(BaseSchema):
     store_emps = fields.List(fields.Dict(required=False), required=False)
     
     gstin = fields.Str(required=False)
+    
+    ship_to_gst_details = fields.Nested(ShipToGstDetails, required=False)
     
     cod_available = fields.Boolean(required=False)
     
@@ -5279,6 +5375,8 @@ class OfferUser(BaseSchema):
     
     groups = fields.List(fields.Int(required=False), required=False)
     
+    exclude_groups = fields.List(fields.Int(required=False), required=False)
+    
     type = fields.Str(required=False)
     
     anonymous = fields.Boolean(required=False)
@@ -5557,6 +5655,8 @@ class OfferSchema(BaseSchema):
     
     is_bank_offer = fields.Boolean(required=False)
     
+    filter_tags = fields.List(fields.Str(required=False), required=False)
+    
 
 
 class OfferPartialUpdate(BaseSchema):
@@ -5595,16 +5695,6 @@ class OfferDateMeta(BaseSchema):
     
 
 
-class NextScheduleItems(BaseSchema):
-    # Cart swagger.json
-
-    
-    start = fields.Str(required=False)
-    
-    end = fields.Str(required=False)
-    
-
-
 class OfferSchedule(BaseSchema):
     # Cart swagger.json
 
@@ -5612,8 +5702,6 @@ class OfferSchedule(BaseSchema):
     end = fields.Str(required=False)
     
     start = fields.Str(required=False)
-    
-    next_schedule = fields.List(fields.Nested(NextScheduleItems, required=False), required=False)
     
     cron = fields.Str(required=False, allow_none=True)
     
@@ -5629,6 +5717,8 @@ class OfferListItem(BaseSchema):
     
     type = fields.Str(required=False)
     
+    code = fields.Str(required=False, allow_none=True)
+    
     status = fields.Str(required=False)
     
     published = fields.Boolean(required=False)
@@ -5640,6 +5730,8 @@ class OfferListItem(BaseSchema):
     date_meta = fields.Nested(OfferDateMeta, required=False)
     
     schedule = fields.Nested(OfferSchedule, required=False)
+    
+    filter_tags = fields.List(fields.Str(required=False), required=False)
     
 
 

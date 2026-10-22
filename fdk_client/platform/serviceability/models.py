@@ -484,6 +484,22 @@ class GetZoneProductsBulkPatchResult(BaseSchema):
     pass
 
 
+class ZoneProductsAtomicPatchItem(BaseSchema):
+    pass
+
+
+class ZoneProductsAtomicPatchDetails(BaseSchema):
+    pass
+
+
+class ZoneProductsAtomicPatchResultItem(BaseSchema):
+    pass
+
+
+class ZoneProductsAtomicPatchResult(BaseSchema):
+    pass
+
+
 class CourierPartnerToServiceability(BaseSchema):
     pass
 
@@ -600,6 +616,22 @@ class FulfillmentOptionItem(BaseSchema):
     pass
 
 
+class BusinessUnit(BaseSchema):
+    pass
+
+
+class FulfillmentOptionDefaultFor(BaseSchema):
+    pass
+
+
+class ModifiedBy(BaseSchema):
+    pass
+
+
+class MaxPromiseAllowed(BaseSchema):
+    pass
+
+
 class ShipmentsPromise(BaseSchema):
     pass
 
@@ -645,14 +677,6 @@ class ShipmentsMeta(BaseSchema):
 
 
 class ShipmentsCourierPartner(BaseSchema):
-    pass
-
-
-class FulfillmentOptionDefaultFor(BaseSchema):
-    pass
-
-
-class BusinessUnit(BaseSchema):
     pass
 
 
@@ -756,10 +780,6 @@ class CreatedBy(BaseSchema):
     pass
 
 
-class ModifiedBy(BaseSchema):
-    pass
-
-
 class ListViewItems(BaseSchema):
     pass
 
@@ -777,6 +797,10 @@ class Summary(BaseSchema):
 
 
 class RegionSchema(BaseSchema):
+    pass
+
+
+class FoDetails(BaseSchema):
     pass
 
 
@@ -1188,6 +1212,14 @@ class StorePolygonServiceabilityPagination(BaseSchema):
     pass
 
 
+class ZoneProductsAtomicPatchItemError(BaseSchema):
+    pass
+
+
+class ZoneProductsAtomicPatchSummary(BaseSchema):
+    pass
+
+
 
 
 
@@ -1508,6 +1540,8 @@ class ListViewSchema(BaseSchema):
     items = fields.List(fields.Nested(ListViewItems, required=False), required=False)
     
     page = fields.Nested(Page, required=False)
+    
+    fo_details = fields.Nested(FoDetails, required=False)
     
 
 
@@ -3267,6 +3301,56 @@ class GetZoneProductsBulkPatchResult(BaseSchema):
     
 
 
+class ZoneProductsAtomicPatchItem(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    zone_id = fields.Str(required=False)
+    
+    product_type = fields.Str(required=False)
+    
+    values = fields.List(fields.Raw(required=False), required=False)
+    
+    action = fields.Str(required=False)
+    
+
+
+class ZoneProductsAtomicPatchDetails(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    items = fields.List(fields.Nested(ZoneProductsAtomicPatchItem, required=False), required=False)
+    
+
+
+class ZoneProductsAtomicPatchResultItem(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    zone_id = fields.Str(required=False)
+    
+    product_type = fields.Str(required=False)
+    
+    action = fields.Str(required=False)
+    
+    status = fields.Str(required=False)
+    
+    values_count = fields.Int(required=False)
+    
+    error = fields.List(fields.Nested(ZoneProductsAtomicPatchItemError, required=False), required=False)
+    
+
+
+class ZoneProductsAtomicPatchResult(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    items = fields.List(fields.Nested(ZoneProductsAtomicPatchResultItem, required=False), required=False)
+    
+    summary = fields.Nested(ZoneProductsAtomicPatchSummary, required=False)
+    
+
+
 class CourierPartnerToServiceability(BaseSchema):
     # Serviceability swagger.json
 
@@ -3326,6 +3410,10 @@ class CourierPartnerShipments(BaseSchema):
     articles = fields.List(fields.Nested(CourierPartnerShipmentsArticles, required=False), required=False)
     
     is_mto = fields.Boolean(required=False)
+    
+    is_mps = fields.Boolean(required=False)
+    
+    is_b2b = fields.Boolean(required=False)
     
     ignore_scheme_ids = fields.List(fields.Str(required=False), required=False)
     
@@ -3767,6 +3855,22 @@ class FulfillmentOptionItem(BaseSchema):
     # Serviceability swagger.json
 
     
+    application_id = fields.Str(required=False, allow_none=True)
+    
+    business_unit = fields.List(fields.Nested(BusinessUnit, required=False), required=False)
+    
+    company_id = fields.Int(required=False, allow_none=True)
+    
+    default_for = fields.Nested(FulfillmentOptionDefaultFor, required=False)
+    
+    modified_by = fields.Nested(ModifiedBy, required=False)
+    
+    modified_on = fields.Str(required=False, allow_none=True)
+    
+    serviceability_type = fields.Str(required=False, allow_none=True)
+    
+    status = fields.Str(required=False, allow_none=True)
+    
     slug = fields.Str(required=False)
     
     description = fields.Str(required=False)
@@ -3778,6 +3882,48 @@ class FulfillmentOptionItem(BaseSchema):
     type = fields.Str(required=False)
     
     name = fields.Str(required=False)
+    
+    max_promise_allowed = fields.Nested(MaxPromiseAllowed, required=False)
+    
+
+
+class BusinessUnit(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+
+
+class FulfillmentOptionDefaultFor(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    storefront = fields.Boolean(required=False)
+    
+    storeos = fields.Boolean(required=False)
+    
+
+
+class ModifiedBy(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    id = fields.Str(required=False, allow_none=True)
+    
+
+
+class MaxPromiseAllowed(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    value = fields.Float(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    type = fields.Str(required=False)
     
 
 
@@ -3982,26 +4128,6 @@ class ShipmentsCourierPartner(BaseSchema):
     qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
     
     non_qc_shipment_item_quantity = fields.Int(required=False, allow_none=True)
-    
-
-
-class FulfillmentOptionDefaultFor(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    storefront = fields.Boolean(required=False)
-    
-    storeos = fields.Boolean(required=False)
-    
-
-
-class BusinessUnit(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    name = fields.Str(required=False)
-    
-    is_active = fields.Boolean(required=False)
     
 
 
@@ -4425,14 +4551,6 @@ class CreatedBy(BaseSchema):
     
 
 
-class ModifiedBy(BaseSchema):
-    # Serviceability swagger.json
-
-    
-    id = fields.Str(required=False, allow_none=True)
-    
-
-
 class ListViewItems(BaseSchema):
     # Serviceability swagger.json
 
@@ -4510,6 +4628,16 @@ class RegionSchema(BaseSchema):
     name = fields.Str(required=False)
     
     count = fields.Int(required=False)
+    
+
+
+class FoDetails(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    serviceability_type = fields.Str(required=False)
+    
+    active_non_default_zone_count = fields.Int(required=False)
     
 
 
@@ -6048,6 +6176,30 @@ class StorePolygonServiceabilityPagination(BaseSchema):
     has_next = fields.Boolean(required=False)
     
     total_records = fields.Int(required=False)
+    
+
+
+class ZoneProductsAtomicPatchItemError(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    value = fields.Str(required=False)
+    
+    message = fields.Str(required=False)
+    
+
+
+class ZoneProductsAtomicPatchSummary(BaseSchema):
+    # Serviceability swagger.json
+
+    
+    total = fields.Int(required=False)
+    
+    success = fields.Int(required=False)
+    
+    failed = fields.Int(required=False)
     
 
 

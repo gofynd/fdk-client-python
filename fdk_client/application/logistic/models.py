@@ -72,6 +72,22 @@ class FulfillmentOptionItem(BaseSchema):
     pass
 
 
+class BusinessUnit(BaseSchema):
+    pass
+
+
+class FulfillmentOptionDefaultFor(BaseSchema):
+    pass
+
+
+class ModifiedBy(BaseSchema):
+    pass
+
+
+class MaxPromiseAllowed(BaseSchema):
+    pass
+
+
 class PincodeData(BaseSchema):
     pass
 
@@ -549,6 +565,22 @@ class FulfillmentOptionItem(BaseSchema):
     # Logistic swagger.json
 
     
+    application_id = fields.Str(required=False, allow_none=True)
+    
+    business_unit = fields.List(fields.Nested(BusinessUnit, required=False), required=False)
+    
+    company_id = fields.Int(required=False, allow_none=True)
+    
+    default_for = fields.Nested(FulfillmentOptionDefaultFor, required=False)
+    
+    modified_by = fields.Nested(ModifiedBy, required=False)
+    
+    modified_on = fields.Str(required=False, allow_none=True)
+    
+    serviceability_type = fields.Str(required=False, allow_none=True)
+    
+    status = fields.Str(required=False, allow_none=True)
+    
     slug = fields.Str(required=False)
     
     description = fields.Str(required=False)
@@ -560,6 +592,48 @@ class FulfillmentOptionItem(BaseSchema):
     type = fields.Str(required=False)
     
     name = fields.Str(required=False)
+    
+    max_promise_allowed = fields.Nested(MaxPromiseAllowed, required=False)
+    
+
+
+class BusinessUnit(BaseSchema):
+    # Logistic swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+
+
+class FulfillmentOptionDefaultFor(BaseSchema):
+    # Logistic swagger.json
+
+    
+    storefront = fields.Boolean(required=False)
+    
+    storeos = fields.Boolean(required=False)
+    
+
+
+class ModifiedBy(BaseSchema):
+    # Logistic swagger.json
+
+    
+    id = fields.Str(required=False, allow_none=True)
+    
+
+
+class MaxPromiseAllowed(BaseSchema):
+    # Logistic swagger.json
+
+    
+    value = fields.Float(required=False)
+    
+    is_active = fields.Boolean(required=False)
+    
+    type = fields.Str(required=False)
     
 
 

@@ -3,7 +3,7 @@
 from ..common.exceptions import FDKClientValidationError
 
 
-from .analytics.applicationClient import Analytics
+from .authorization.applicationClient import Authorization
 
 from .cart.applicationClient import Cart
 
@@ -38,7 +38,7 @@ class PlatformApplicationClient:
     def __init__(self, applicationId, config):
         self._conf = config
         
-        self.analytics = Analytics(config, applicationId)
+        self.authorization = Authorization(config, applicationId)
         
         self.cart = Cart(config, applicationId)
         

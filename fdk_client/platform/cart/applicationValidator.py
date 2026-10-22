@@ -28,6 +28,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -71,6 +72,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -161,10 +163,14 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
+    
+    
         
+        
     
     
         
@@ -497,6 +503,7 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
         
         
         
@@ -578,6 +585,8 @@ class CartValidator:
         review_end_time = fields.Str(required=False)
         
         status = fields.Str(required=False)
+        
+        filter_tags = fields.Str(required=False)
          
         
     
@@ -670,6 +679,8 @@ class CartValidator:
         review_end_time = fields.Str(required=False)
         
         status = fields.Str(required=False)
+        
+        filter_tags = fields.Str(required=False)
          
         
     
@@ -871,6 +882,15 @@ class CartValidator:
         x__ordering__source = fields.Str(required=False)
         
         x__ordering__source__type = fields.Str(required=False)
+        
+        company_id = fields.Str(required=False)
+        
+        application_id = fields.Str(required=False)
+         
+        
+    
+    class checkCODServiceability(BaseSchema):
+        
         
         company_id = fields.Str(required=False)
         
@@ -1614,6 +1634,8 @@ class CartValidator:
         code = fields.Str(required=False)
         
         is_public = fields.Boolean(required=False)
+        
+        filter_tags = fields.Str(required=False)
          
         
     

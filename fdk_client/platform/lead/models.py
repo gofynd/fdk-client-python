@@ -82,6 +82,10 @@ class TicketContent(BaseSchema):
     pass
 
 
+class AdditionalInfo(BaseSchema):
+    pass
+
+
 class AddTicketPayload(BaseSchema):
     pass
 
@@ -413,6 +417,18 @@ class TicketContent(BaseSchema):
     
 
 
+class AdditionalInfo(BaseSchema):
+    # Lead swagger.json
+
+    
+    display_name = fields.Str(required=False)
+    
+    display_value = fields.Str(required=False)
+    
+    priority = fields.Int(required=False)
+    
+
+
 class AddTicketPayload(BaseSchema):
     # Lead swagger.json
 
@@ -428,6 +444,8 @@ class AddTicketPayload(BaseSchema):
     content = fields.Nested(TicketContent, required=False)
     
     _custom_json = fields.Dict(required=False)
+    
+    additional_info = fields.List(fields.Nested(AdditionalInfo, required=False), required=False)
     
 
 

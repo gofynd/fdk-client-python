@@ -78,6 +78,8 @@ class PageType(Enum):
     
     PROFILE_PHONE = "profile-phone"
     
+    PROFILE_LOYALTY_REWARDS = "profile-loyalty-rewards"
+    
     RATE_US = "rate-us"
     
     REFER_EARN = "refer-earn"

@@ -39,6 +39,7 @@ from ..ApplicationModel import BaseSchema
         
         
         
+        
     
     
         
@@ -142,6 +143,8 @@ class ConfigurationValidator:
         user = fields.Str(required=False)
         
         user_name = fields.Str(required=False)
+        
+        app_permissions = fields.Str(required=False)
          
         
     

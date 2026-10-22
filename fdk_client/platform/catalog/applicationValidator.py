@@ -166,6 +166,7 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
     
     
         
@@ -817,6 +818,8 @@ class CatalogValidator:
         tags = fields.List(fields.Str(required=False), required=False)
         
         store_types = fields.List(fields.Str(required=False), required=False)
+        
+        opted = fields.Boolean(required=False)
          
         
     

@@ -1088,6 +1088,14 @@ class CreateOrderRequestSchema(BaseSchema):
     pass
 
 
+class CreateOrderChargeSchema(BaseSchema):
+    pass
+
+
+class CreateOrderLineItemChargeSchema(BaseSchema):
+    pass
+
+
 class Page(BaseSchema):
     pass
 
@@ -1145,6 +1153,10 @@ class PackageProduct(BaseSchema):
 
 
 class ValidationError(BaseSchema):
+    pass
+
+
+class ListingCountResponseSchema(BaseSchema):
     pass
 
 
@@ -5721,6 +5733,8 @@ class LineItemSchema(BaseSchema):
     
     bundle_details = fields.Nested(BundleDetailsSchema, required=False)
     
+    charges = fields.List(fields.Nested(CreateOrderLineItemChargeSchema, required=False), required=False)
+    
     meta = fields.Dict(required=False)
     
 
@@ -5820,6 +5834,8 @@ class CouponSchema(BaseSchema):
     is_return_allowed = fields.Boolean(required=False)
     
     is_cancellation_allowed = fields.Boolean(required=False)
+    
+    allow_zero_discount = fields.Boolean(required=False)
     
 
 
@@ -5987,6 +6003,8 @@ class CreateOrderRequestSchema(BaseSchema):
     
     shipments = fields.List(fields.Nested(CreateOrderShipmentSchema, required=False), required=False)
     
+    charges = fields.List(fields.Nested(CreateOrderChargeSchema, required=False), required=False)
+    
     tags = fields.List(fields.Str(required=False), required=False)
     
     currency_details = fields.Nested(CurrencySchema, required=False)
@@ -6024,6 +6042,36 @@ class CreateOrderRequestSchema(BaseSchema):
     is_offline_order = fields.Boolean(required=False)
     
     meta = fields.Dict(required=False)
+    
+
+
+class CreateOrderChargeSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    amount = fields.Float(required=False)
+    
+    refundable = fields.Boolean(required=False)
+    
+    distribution = fields.Str(required=False)
+    
+    tax_rule_id = fields.Str(required=False)
+    
+
+
+class CreateOrderLineItemChargeSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    name = fields.Str(required=False)
+    
+    amount = fields.Float(required=False)
+    
+    refundable = fields.Boolean(required=False)
+    
+    tax_rule_id = fields.Str(required=False)
     
 
 
@@ -6204,6 +6252,14 @@ class ValidationError(BaseSchema):
     message = fields.Str(required=False)
     
     field = fields.Str(required=False)
+    
+
+
+class ListingCountResponseSchema(BaseSchema):
+    # Order swagger.json
+
+    
+    count = fields.Int(required=False)
     
 
 

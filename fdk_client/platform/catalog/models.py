@@ -10,6 +10,10 @@ from .enums import *
 
 
 
+class InventoryTransaction(BaseSchema):
+    pass
+
+
 class Action(BaseSchema):
     pass
 
@@ -631,6 +635,10 @@ class ApplicationLocationAddressSchema(BaseSchema):
 
 
 class GetAddressSchema(BaseSchema):
+    pass
+
+
+class RegionDetailsSchema(BaseSchema):
     pass
 
 
@@ -1923,6 +1931,22 @@ class CustomMeta(BaseSchema):
 
 
 
+
+
+class InventoryTransaction(BaseSchema):
+    # Catalog swagger.json
+
+    
+    type = fields.Str(required=False)
+    
+    reference_id = fields.Str(required=False)
+    
+    reason = fields.Str(required=False)
+    
+    source = fields.Str(required=False)
+    
+    user_ref = fields.Str(required=False)
+    
 
 
 class Action(BaseSchema):
@@ -4513,6 +4537,16 @@ class GetAddressSchema(BaseSchema):
     
 
 
+class RegionDetailsSchema(BaseSchema):
+    # Catalog swagger.json
+
+    
+    slug = fields.Str(required=False)
+    
+    zone = fields.Str(required=False)
+    
+
+
 class GetAllSizes(BaseSchema):
     # Catalog swagger.json
 
@@ -4706,6 +4740,10 @@ class GetCompanySchema(BaseSchema):
     modified_on = fields.Str(required=False)
     
     name = fields.Str(required=False)
+    
+    region = fields.Str(required=False)
+    
+    region_details = fields.Nested(RegionDetailsSchema, required=False)
     
     reject_reason = fields.Str(required=False)
     
@@ -5599,6 +5637,10 @@ class InventoryBulkRequestSchema(BaseSchema):
     
     user = fields.Dict(required=False)
     
+    transaction_type = fields.Str(required=False, allow_none=True)
+    
+    transaction = fields.Nested(InventoryTransaction, required=False)
+    
 
 
 class InventoryConfig(BaseSchema):
@@ -5829,6 +5871,10 @@ class InventoryJobPayload(BaseSchema):
     
     trace_id = fields.Str(required=False, allow_none=True)
     
+    transaction_type = fields.Str(required=False, allow_none=True)
+    
+    transaction = fields.Nested(InventoryTransaction, required=False)
+    
 
 
 class InventoryPage(BaseSchema):
@@ -5865,6 +5911,8 @@ class InventoryPayload(BaseSchema):
     
     price_marked = fields.Float(required=False)
     
+    price_cost = fields.Float(required=False)
+    
     seller_identifier = fields.Str(required=False)
     
     store_id = fields.Int(required=False)
@@ -5883,6 +5931,10 @@ class InventoryPayload(BaseSchema):
     
     meta = fields.Dict(required=False)
     
+    transaction_type = fields.Str(required=False, allow_none=True)
+    
+    transaction = fields.Nested(InventoryTransaction, required=False)
+    
 
 
 class InventoryRequestSchema(BaseSchema):
@@ -5895,6 +5947,10 @@ class InventoryRequestSchema(BaseSchema):
     
     sizes = fields.List(fields.Nested(InvSize, required=False), required=False)
     
+    transaction_type = fields.Str(required=False, allow_none=True)
+    
+    transaction = fields.Nested(InventoryTransaction, required=False)
+    
 
 
 class InventoryRequestSchemaV2(BaseSchema):
@@ -5906,6 +5962,10 @@ class InventoryRequestSchemaV2(BaseSchema):
     meta = fields.Dict(required=False)
     
     payload = fields.List(fields.Nested(InventoryPayload, required=False), required=False)
+    
+    transaction_type = fields.Str(required=False, allow_none=True)
+    
+    transaction = fields.Nested(InventoryTransaction, required=False)
     
 
 
@@ -6635,7 +6695,13 @@ class LocationPriceRequestSchema(BaseSchema):
     
     price_marked = fields.Float(required=False)
     
+    price_cost = fields.Float(required=False)
+    
     tags = fields.List(fields.Str(required=False), required=False)
+    
+    transaction_type = fields.Str(required=False, allow_none=True)
+    
+    transaction = fields.Nested(InventoryTransaction, required=False)
     
 
 
@@ -6652,6 +6718,10 @@ class LocationQuantityRequestSchema(BaseSchema):
     not_available_quantity = fields.Int(required=False)
     
     mode = fields.Str(required=False)
+    
+    transaction_type = fields.Str(required=False, allow_none=True)
+    
+    transaction = fields.Nested(InventoryTransaction, required=False)
     
 
 

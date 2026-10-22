@@ -61,19 +61,6 @@ from ..ApplicationModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-    
-    
-        
-    
-    
-        
-    
-    
         
     
     
@@ -82,24 +69,9 @@ from ..ApplicationModel import BaseSchema
         
     
     
-    
         
     
     
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
         
     
     
@@ -111,17 +83,6 @@ from ..ApplicationModel import BaseSchema
         
     
     
-        
-        
-    
-    
-        
-        
-    
-    
-        
-        
-    
     
         
     
@@ -130,12 +91,11 @@ from ..ApplicationModel import BaseSchema
         
         
         
-        
-        
-        
-        
     
     
+        
+        
+        
         
         
         
@@ -151,10 +111,57 @@ from ..ApplicationModel import BaseSchema
         
         
         
+    
+    
         
         
     
     
+        
+        
+    
+    
+        
+        
+    
+    
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
+    
+    
+        
+        
+    
+    
+        
+        
+        
+        
+        
+    
+    
+        
         
         
         
@@ -278,6 +285,8 @@ class CatalogValidator:
         page_no = fields.Int(required=False)
         
         page_type = fields.Str(required=False)
+        
+        show_all_variants = fields.Boolean(required=False)
          
         
     
@@ -369,6 +378,8 @@ class CatalogValidator:
         page_no = fields.Int(required=False)
         
         page_type = fields.Str(required=False)
+        
+        show_all_variants = fields.Boolean(required=False)
          
         
     
@@ -471,6 +482,15 @@ class CatalogValidator:
          
         
     
+    class getProductSizesBySlugs(BaseSchema):
+        
+        
+        slug = fields.List(fields.Str(required=False), required=False)
+        
+        store_id = fields.Int(required=False)
+         
+        
+    
     class getProductPriceBySlug(BaseSchema):
         
         
@@ -500,6 +520,8 @@ class CatalogValidator:
         page_no = fields.Int(required=False)
         
         page_size = fields.Int(required=False)
+        
+        q = fields.Str(required=False)
          
         
     
