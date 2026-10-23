@@ -326,6 +326,8 @@ from ..PlatformModel import BaseSchema
         
         
         
+        
+        
     
     
         
@@ -1144,6 +1146,10 @@ class CatalogValidator:
         sort_on = fields.Str(required=False)
         
         page_id = fields.Str(required=False)
+        
+        modified_on_gte = fields.Str(required=False)
+        
+        modified_on_lte = fields.Str(required=False)
          
         
     

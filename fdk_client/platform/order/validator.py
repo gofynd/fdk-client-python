@@ -278,35 +278,9 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
-        
-        
         
     
     
-        
-        
-        
-        
-    
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -320,11 +294,8 @@ from ..PlatformModel import BaseSchema
         
         
         
-        
-        
-        
-        
-        
+    
+    
         
         
         
@@ -347,6 +318,40 @@ from ..PlatformModel import BaseSchema
         
     
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+        
         
         
         
@@ -1037,6 +1042,8 @@ class OrderValidator:
         channel_account_id = fields.Str(required=False)
         
         include_count = fields.Boolean(required=False)
+        
+        instore_return_lookup = fields.Boolean(required=False)
          
         
     
@@ -1052,6 +1059,8 @@ class OrderValidator:
         fetch_active_shipment = fields.Boolean(required=False)
         
         allow_inactive = fields.Boolean(required=False)
+        
+        instore_return_lookup = fields.Boolean(required=False)
          
         
     
@@ -1065,6 +1074,8 @@ class OrderValidator:
         my_orders = fields.Boolean(required=False)
         
         allow_inactive = fields.Boolean(required=False)
+        
+        instore_return_lookup = fields.Boolean(required=False)
          
         
     
@@ -1175,6 +1186,8 @@ class OrderValidator:
         channel_account_id = fields.Str(required=False)
         
         include_count = fields.Boolean(required=False)
+        
+        instore_return_lookup = fields.Boolean(required=False)
          
         
     
@@ -1250,6 +1263,8 @@ class OrderValidator:
         ordering_source = fields.Str(required=False)
         
         channel_account_id = fields.Str(required=False)
+        
+        instore_return_lookup = fields.Boolean(required=False)
          
         
     
