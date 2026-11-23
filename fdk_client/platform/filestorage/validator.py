@@ -31,10 +31,6 @@ from ..PlatformModel import BaseSchema
         
         
         
-    
-    
-        
-        
 
 
 
@@ -85,15 +81,6 @@ class FileStorageValidator:
         page = fields.Int(required=False)
         
         limit = fields.Int(required=False)
-         
-        
-    
-    class proxy(BaseSchema):
-        
-        
-        company_id = fields.Int(required=False)
-        
-        url = fields.Str(required=False)
          
         
     

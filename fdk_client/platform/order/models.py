@@ -6035,7 +6035,7 @@ class CreateOrderRequestSchema(BaseSchema):
     
     b2b_gstin_number = fields.Str(required=False)
     
-    channel_company_id = fields.Str(required=False)
+    channel_company_id = fields.Int(required=False)
     
     is_draft = fields.Boolean(required=False)
     

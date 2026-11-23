@@ -26,13 +26,6 @@ from ..PartnerModel import BaseSchema
     
     
         
-        
-    
-    
-        
-    
-    
-        
 
 class FileStorageValidator:
     
@@ -65,22 +58,6 @@ class FileStorageValidator:
         page = fields.Int(required=False)
         
         limit = fields.Int(required=False)
-         
-        
-    
-    class fetchProxy(BaseSchema):
-        
-        
-        organization_id = fields.Str(required=False)
-        
-        url = fields.Str(required=False)
-         
-        
-    
-    class saveProxyDetails(BaseSchema):
-        
-        
-        organization_id = fields.Str(required=False)
          
         
     
